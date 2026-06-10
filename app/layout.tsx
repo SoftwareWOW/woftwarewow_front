@@ -17,7 +17,7 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${satoshi.variable} antialiased`}>
         <Suspense fallback={<div>Loading...</div>}>
           <SmoothScrollProvider>
