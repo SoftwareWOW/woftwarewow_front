@@ -1,0 +1,10 @@
+p {
+  div {
+    @apply text-inherit;
+  }
+}
+
+.font-instrument,
+.font-seasons {
+  @apply bg-brand-gradient bg-clip-text text-transparent;
+}
