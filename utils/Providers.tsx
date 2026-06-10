@@ -5,7 +5,7 @@ export function ThemeModeProvider({ children, ...props }: Readonly<ThemeProvider
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="dark"
       enableSystem
       disableTransitionOnChange
       scriptProps={{ type: 'application/json' }}

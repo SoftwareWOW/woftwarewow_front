@@ -16,33 +16,37 @@ export default {
         '2xl': '1430px',
       },
       fontFamily: {
-        satoshi: ['var(--font-satoshi)'],
-        instrument: ["'Instrument Serif', system-ui"],
+        satoshi: ['var(--font-outfit)'],
+        outfit: ['var(--font-outfit)'],
+        instrument: ['var(--font-seasons)'],
+        seasons: ['var(--font-seasons)'],
       },
       colors: {
-        primary: '#12D8CC',
-        secondary: '#181818',
-        backgroundBody: '#EDF0F5',
-        black: '#181818',
-        colorText: '#181818b3',
+        primary: '#615CCE',
+        accent: '#FF9191',
+        secondary: '#171717',
+        backgroundBody: '#EDEDED',
+        black: '#171717',
+        colorText: '#171717b3',
         dark: {
-          DEFAULT: '#151515',
+          DEFAULT: '#171717',
           100: '#ffffffb3',
-          200: '#212220',
-          300: '#191A17',
-          gradient: '#191917',
+          200: '#1f1f1f',
+          300: '#141414',
+          gradient: '#141414',
         },
       },
       borderColor: {
-        DEFAULT: '#1818181a',
-        dark: '#edf0f51a',
+        DEFAULT: '#1717171a',
+        dark: '#ededed1a',
+      },
+      backgroundImage: {
+        'ai-gradient-bg': "url('/images/ai-transition.png')",
+        'brand-gradient': 'linear-gradient(135deg, #615CCE 0%, #FF9191 100%)',
       },
       cursor: {
         fancy: 'url(/images/cursor.svg), default',
         pause: 'url(/images/pause.png), default',
-      },
-      backgroundImage: {
-        'ai-gradient-bg': "url('/images/ai-transition.png')",
       },
       transitionTimingFunction: {
         'faq-body-transition': 'cubic-bezier(0.165, 0.84, 0.44, 1)',
@@ -52,6 +56,9 @@ export default {
       boxShadow: {
         nav: '0px 0px 30px rgba(0, 0, 0, 0.05)',
         box: ' 0px 5px 50px 0px rgba(0, 0, 0, 0.07)',
+      },
+      borderRadius: {
+        cta: '10px',
       },
     },
   },

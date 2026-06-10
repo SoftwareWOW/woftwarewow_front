@@ -14,18 +14,27 @@ const Footer = () => {
             <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
               Reach Us
             </h5>
+            <p className="mb-2 text-sm text-white">
+              <a href="mailto:hello@wowteam.net" className="text-white hover:text-primary">
+                hello@wowteam.net
+              </a>
+            </p>
             <p className="mb-5 text-sm text-white">
-              Book a quick 15 min meeting where we discuss if our offer <br />
-              would work for your case
+              <a href="tel:+18337638969" className="text-white hover:text-primary">
+                +1 (833) 763-8969
+              </a>
+            </p>
+            <p className="mb-5 text-sm text-white/70">
+              Book a quick 15 min meeting where we discuss if our offer would work for your case.
             </p>
             <div className="group flex max-w-[360px] items-center justify-between gap-4 bg-primary bg-opacity-30 p-4 backdrop-blur-2xl">
-              <Image className="h-[55px] w-auto" src={logo} alt="logo" />
+              <Image className="h-[55px] w-auto" src={logo} alt="WOW Superagency logo" />
               <div>
                 <h6 className="font-satoshi text-sm font-bold text-white">Schedule a Free Meeting</h6>
                 <p className="text-sm text-white">1 spot left this month</p>
               </div>
               <Link href="/contact">
-                <figure className="relative h-[55px] w-[55px] cursor-pointer overflow-hidden bg-primary">
+                <figure className="relative h-[55px] w-[55px] cursor-pointer overflow-hidden rounded-cta bg-primary">
                   <Image
                     src={arrowIcon}
                     alt="Arrow Icon"
@@ -39,6 +48,7 @@ const Footer = () => {
                 </figure>
               </Link>
             </div>
+            <p className="mt-6 text-xs text-white/50">A brand by WOW Superagency · Toronto, Canada</p>
           </div>
 
           {footerData.map((section, index) => (
@@ -64,7 +74,7 @@ const Footer = () => {
 
       <div className="absolute bottom-0 w-full">
         <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[88px] lg:text-[120px] xl:text-[150px] 2xl:text-[170px]">
-          RIVOR AGENCY
+          WOW SUPERAGENCY
         </h5>
       </div>
     </FooterProvider>

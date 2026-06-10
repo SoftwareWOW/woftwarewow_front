@@ -1,7 +1,7 @@
 'use client'
 
-import logoDark from '@/public/images/logo-white.png'
-import logo from '@/public/images/logo.png'
+import logoDark from '@/public/images/logo-wow-white.svg'
+import logo from '@/public/images/logo-wow.svg'
 import { gsap } from 'gsap'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -338,9 +338,14 @@ export default function Navbar() {
         </div>
         <div className="menu-footer fixed bottom-0 w-full border-t border-white border-opacity-10 max-lg:hidden lg:block">
           <div className="menu-footer-content mx-auto flex max-w-[300px] flex-col justify-between py-8 sm:max-w-[400px] md:max-w-[600px] md:flex-row lg:max-w-[900px] xl:max-w-[1130px]">
-            <p className="mb-4 w-full text-sm text-white md:mb-0 md:w-auto">
-              2261 Market Street #5039 San Francisco, CA 94114
-            </p>
+            <div className="mb-4 w-full text-sm text-white md:mb-0 md:w-auto">
+              <a href="mailto:hello@wowteam.net" className="block text-white hover:text-primary">
+                hello@wowteam.net
+              </a>
+              <a href="tel:+18337638969" className="mt-1 block text-white hover:text-primary">
+                +1 (833) 763-8969
+              </a>
+            </div>
             <SocialIcons />
           </div>
         </div>

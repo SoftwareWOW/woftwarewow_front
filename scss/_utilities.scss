@@ -10,7 +10,7 @@
     shape-margin: 1rem;
   }
   .rv-badge {
-    @apply inline-block rounded-[72px] bg-[#18181817] dark:bg-[#edf0f533];
+    @apply inline-block rounded-[72px] bg-[#17171717] dark:bg-[#ededed33];
     &-text {
       @apply inline-block px-[17px] py-2 text-xs font-medium uppercase tracking-[0.96px] text-black dark:text-backgroundBody;
     }

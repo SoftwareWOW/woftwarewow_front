@@ -12,7 +12,9 @@ import ServicesV8 from '@/components/shared/ServicesV8'
 import Video from '@/components/shared/Video'
 
 export const metadata = {
-  title: 'Rivor | Design Agency',
+  title: 'WOW Superagency | Where Ambitions Become Achievements',
+  description:
+    'Integrated web, marketing, AI, applications, content, and infrastructure for small businesses. Clear to understand, fast to launch, built for real-world outcomes.',
 }
 
 const Home = () => {
@@ -27,8 +29,8 @@ const Home = () => {
       <Community />
       <FAQ />
       <Testimonial />
-      <CTA>
-        Let's chat!
+      <CTA buttonText="Book Now">
+        Ready to grow?
         <CtaImageSlider
           slides={[
             { id: '1', img: '/images/agent/01.jpg' },
@@ -36,8 +38,8 @@ const Home = () => {
             { id: '3', img: '/images/agent/03.jpg' },
           ]}
         />
-        with us.
-        <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">A virtual coffee?</i>
+        Let&apos;s talk.
+        <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">Book a free meeting.</i>
       </CTA>
     </LayoutOne>
   )

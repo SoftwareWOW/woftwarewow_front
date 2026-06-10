@@ -636,14 +636,14 @@ html.lenis {
 
 // Footer Gradient text
 .footer-text {
-  background: -webkit-radial-gradient(#fff, #101010);
+  background: -webkit-radial-gradient(#fff, #171717);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .footer-text-v2 {
-  background: linear-gradient(62deg, rgba(24, 24, 24, 0.06) 41.23%, rgba(24, 24, 24, 0.03) 70.09%);
+  background: linear-gradient(62deg, rgba(23, 23, 23, 0.06) 41.23%, rgba(23, 23, 23, 0.03) 70.09%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -651,7 +651,7 @@ html.lenis {
 
 .dark {
   .footer-text-v2 {
-    background: linear-gradient(62deg, rgba(237, 240, 245, 0.06) 41.23%, rgba(237, 240, 245, 0.03) 70.09%);
+    background: linear-gradient(62deg, rgba(237, 237, 237, 0.06) 41.23%, rgba(237, 237, 237, 0.03) 70.09%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

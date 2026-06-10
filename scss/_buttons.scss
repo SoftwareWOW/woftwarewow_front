@@ -1,10 +1,10 @@
 .rv-button {
-  @apply relative overflow-hidden;
+  @apply relative overflow-hidden rounded-cta;
   .rv-button-top,
   .rv-button-bottom {
-    @apply block w-full min-w-[210px] px-[39px] py-[25px] transition duration-500 md:inline-block md:w-auto;
+    @apply block w-full min-w-[210px] rounded-cta px-[39px] py-[25px] transition duration-300 md:inline-block md:w-auto;
     span {
-      @apply inline-block font-normal uppercase tracking-[1.12px] transition duration-500;
+      @apply inline-block font-semibold normal-case tracking-normal transition duration-300;
     }
   }
   .rv-button-top {
@@ -18,7 +18,7 @@
   }
   &:hover {
     .rv-button-top {
-      @apply -translate-y-[101%];
+      @apply -translate-y-[101%] brightness-110;
       span {
         @apply -rotate-12;
       }

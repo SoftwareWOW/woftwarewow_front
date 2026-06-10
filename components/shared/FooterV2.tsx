@@ -6,7 +6,7 @@ const FooterV2 = () => {
     <footer className="w-full overflow-hidden">
       <div className="bg-backgroundBody dark:bg-secondary">
         <h5 className="footer-text-v2 w-full text-nowrap text-center font-satoshi text-[120px] font-medium uppercase leading-[100%] sm:text-[200px] md:text-[258px] lg:text-[300px] xl:text-[350px] 2xl:text-[386px]">
-          Rivor
+          WOW
         </h5>
       </div>
       <div className="-mt-10 bg-backgroundBody py-4 dark:bg-dark sm:-mt-[70px] md:-mt-24 xl:-mt-28">
@@ -16,13 +16,18 @@ const FooterV2 = () => {
             {/* Reach Us Section */}
             <div className="pr-8 max-lg:basis-full">
               <p className="mb-5 max-w-[360px]">
-                Rivor Agency offers global business and technology services, transforming brands with customized
-                solutions for over a decade.
+                WOW Superagency helps small businesses grow faster, smarter, and more confidently through an integrated
+                ecosystem of technology, marketing, and creative services.
               </p>
-              <h5 className="mb-3 font-satoshi text-2xl font-medium leading-[1.1]">Address</h5>
+              <h5 className="mb-3 font-satoshi text-2xl font-medium leading-[1.1]">Contact</h5>
               <p>
-                2261 Market Street #5039 San <br />
-                Francisco, CA 94114
+                <a href="mailto:hello@wowteam.net" className="hover:text-primary">
+                  hello@wowteam.net
+                </a>
+                <br />
+                <a href="tel:+18337638969" className="hover:text-primary">
+                  +1 (833) 763-8969
+                </a>
               </p>
               <div className="mt-7 flex gap-6 md:mt-10">
                 <span>
@@ -276,7 +281,9 @@ const FooterV2 = () => {
               </div>
             ))}
           </div>
-          <p className="mt-10 border-t pt-5 text-center dark:border-dark">All rights Reserved Rivor.agency</p>
+          <p className="mt-10 border-t pt-5 text-center dark:border-dark">
+            All rights reserved WOW Superagency · www.wow.onl
+          </p>
         </div>
       </div>
     </footer>

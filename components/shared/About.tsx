@@ -44,14 +44,12 @@ const About = ({ marquee = false }: AboutProps) => {
         <div className="flex flex-col items-center justify-center lg:items-stretch lg:justify-normal">
           <CircleTextAnimation />
           <h3 className="mx-auto mt-[34px]" ref={revealRef}>
-            We specialize in designing cutting-edge web <br className="hidden sm:block" />
-            experiences that flawlessly blend creativity with <br />
-            innovative technology.
+            We deliver web, marketing, AI, applications, content, and infrastructure <br className="hidden sm:block" />
+            with an approachable, human-centered experience.
             <br />
             <br />
-            We provide customized solutions for <br className="hidden sm:block" />
-            enhancing your existing site or building <br className="hidden sm:block" />a brand-new digital platform from
-            the ground up
+            Our solutions are functional, modern, and user-friendly — built with transparency, <br className="hidden sm:block" />
+            integrity, and quality for small businesses ready to grow.
           </h3>
         </div>
       </div>

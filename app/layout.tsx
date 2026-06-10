@@ -1,14 +1,16 @@
 import CursorPointer from '@/components/animation/CursorPointer'
 import SmoothScrollProvider from '@/components/shared/SmoothScroll'
 import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
-import { satoshi } from '@/utils/fonts'
+import { outfit, seasons } from '@/utils/fonts'
 import { ThemeModeProvider } from '@/utils/Providers'
 import type { Metadata } from 'next'
 import { ReactNode, Suspense } from 'react'
 import '../scss/main.scss'
 
 export const metadata: Metadata = {
-  title: 'Rivor Template',
+  title: 'WOW Superagency',
+  description:
+    'Help small businesses grow faster, smarter, and more confidently through an integrated ecosystem of technology, marketing, and creative services.',
 }
 
 export default function RootLayout({
@@ -18,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${satoshi.variable} antialiased`}>
+      <body className={`${outfit.variable} ${seasons.variable} antialiased`}>
         <Suspense fallback={<div>Loading...</div>}>
           <SmoothScrollProvider>
             <ThemeModeProvider>
