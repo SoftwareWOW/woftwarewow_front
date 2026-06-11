@@ -27,7 +27,7 @@ const Footer = () => {
             <p className="mb-5 text-sm text-white/70">
               Book a quick 15 min meeting where we discuss if our offer would work for your case.
             </p>
-            <div className="group flex max-w-[360px] items-center justify-between gap-4 bg-primary bg-opacity-30 p-4 backdrop-blur-2xl">
+            <div className="card group flex max-w-[360px] items-center justify-between gap-4 bg-primary bg-opacity-30 p-4 backdrop-blur-2xl">
               <Image className="h-[55px] w-auto" src={logo} alt="WOW Superagency logo" />
               <div>
                 <h6 className="font-satoshi text-sm font-bold text-white">Schedule a Free Meeting</h6>

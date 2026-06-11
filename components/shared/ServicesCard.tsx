@@ -66,7 +66,7 @@ const ServicesCard: FC<ServicesCardProps> = ({ servicesData }) => {
         {servicesData.map((service) => (
           <div
             key={service.slug}
-            className="w-[370px] bg-primary bg-opacity-20 p-7 dark:border-backgroundBody dark:bg-secondary md:p-10">
+            className="card w-[370px] bg-primary bg-opacity-20 p-7 dark:border-backgroundBody dark:bg-secondary md:p-10">
             <figure className="mb-5">
               <Image src={service.logo} width={24} height={24} alt="Logo Icon" className="inline-block dark:hidden" />
               <Image src={service.logo} width={24} height={24} alt="Logo Icon" className="hidden dark:inline-block" />

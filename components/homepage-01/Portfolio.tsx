@@ -51,7 +51,7 @@ const Portfolio = () => {
         <div className="grid grid-cols-12 gap-6">
           {projects.slice(0, 4).map((project) => (
             <RevealWrapper
-              className="reveal-me group relative col-span-12 cursor-pointer md:col-span-6"
+              className="card reveal-me group relative col-span-12 cursor-pointer md:col-span-6"
               key={project.slug}>
               <Link href={`/design-agency/${project.slug}`} className="h-full w-full">
                 <figure className="overflow-hidden md:h-[603px]">

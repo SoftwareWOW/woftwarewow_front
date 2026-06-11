@@ -57,7 +57,7 @@ const ServicesV8 = () => {
           <RevealWrapper
             as="a"
             href={`/services/${service.slug}`}
-            className="group relative h-[500px] w-[360px] overflow-hidden"
+            className="card group relative h-[500px] w-[360px]"
             key={service.slug}>
             <div className="absolute flex h-full w-full translate-y-0 items-center justify-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
               <h5>{service.title}</h5>

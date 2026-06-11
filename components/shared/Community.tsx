@@ -41,7 +41,7 @@ const Community = () => {
             </figure>
           </RevealWrapper>
 
-          <RevealWrapper className="col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">
+          <RevealWrapper className="card col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">
             <div className="rv-badge">
               <span className="rv-badge-text">Youtube</span>
             </div>
@@ -62,7 +62,7 @@ const Community = () => {
             </Link>
           </RevealWrapper>
 
-          <RevealWrapper className="col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">
+          <RevealWrapper className="card col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">
             <div className="rv-badge">
               <span className="rv-badge-text">Linkedin</span>
             </div>

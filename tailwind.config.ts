@@ -58,6 +58,7 @@ export default {
         box: ' 0px 5px 50px 0px rgba(0, 0, 0, 0.07)',
       },
       borderRadius: {
+        card: '20px',
         cta: '10px',
       },
     },

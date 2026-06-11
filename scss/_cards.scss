@@ -1,0 +1,23 @@
+@layer components {
+  .card {
+    @apply overflow-hidden rounded-card;
+  }
+
+  // Template-wide bordered card patterns
+  .blog-card,
+  .service-card,
+  .faq-body-transition.border,
+  .reveal-me.border,
+  .group.border {
+    @apply card;
+  }
+
+  // Bordered content blocks used as cards
+  section .border.p-5,
+  section .border.p-6,
+  section .border.p-2\.5,
+  section .border.px-\[30px\],
+  section .border.pb-10 {
+    @apply card;
+  }
+}
