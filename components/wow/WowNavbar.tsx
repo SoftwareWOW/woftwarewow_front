@@ -3,12 +3,116 @@
 import logoDark from '@/public/images/logo-wow-white.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 
 const navItems = ['Company', 'For you', 'Explore', 'More']
 
+const actionBtnClass =
+  'group flex size-[58px] shrink-0 items-center justify-center rounded-[5px] bg-primary text-white transition-all duration-300 ease-out hover:bg-primary/80 sm:size-[79px]'
+
+const iconClass = 'transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
+
 export default function WowNavbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [actionMenuOpen, setActionMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const actionMenuRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  const { systemTheme, theme, setTheme } = useTheme()
+  const currentTheme = theme === 'system' ? systemTheme : theme
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!actionMenuOpen) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (actionMenuRef.current && !actionMenuRef.current.contains(e.target as Node)) {
+        setActionMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [actionMenuOpen])
+
+  // Icons for different actions
+  const mainIcon = (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <path
+        d="M7 17L17 7M17 7H9M17 7V15"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+
+  // const contactIcon = (
+  //   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+  //     <path
+  //       d="M3 8L12 13L21 8M5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7V17C3 18.1 3.9 19 5 19Z"
+  //       stroke="white"
+  //       strokeWidth="2"
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //     />
+  //   </svg>
+  // )
+
+  const darkModeIcon = currentTheme === 'dark' ? (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5" />
+      <path
+        d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  ) : (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <path
+        d="M12 3v2M12 19v2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M3 12h2M19 12h2M5.5 18.5l1.4-1.4M17.1 6.9l1.4-1.4"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5" />
+      <path d="M12 8v8" stroke="white" strokeWidth="1.5" />
+    </svg>
+  )
+
+  const languageIcon = (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="1.5" />
+      <path
+        d="M3 12h18M12 3c-2.5 2.5-2.5 16.5 0 18M12 3c2.5 2.5 2.5 16.5 0 18"
+        stroke="white"
+        strokeWidth="1.5"
+      />
+    </svg>
+  )
+
+  const messagesIcon = (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <path
+        d="M5 8h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2z"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 5h10a2 2 0 0 1 2 2v5"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
 
   return (
     <header className="fixed left-0 right-0 top-0 z-[1000] px-4 pt-4 sm:px-8">
@@ -60,20 +164,38 @@ export default function WowNavbar() {
             </svg>
           </button>
 
-          <Link
-            href="/contact"
-            className="flex size-[58px] shrink-0 items-center justify-center rounded-[5px] bg-primary transition hover:brightness-110 sm:size-[79px]"
-            aria-label="Contact us">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path
-                d="M7 17L17 7M17 7H9M17 7V15"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
+          <div className="relative" ref={actionMenuRef}>
+            <button
+              type="button"
+              onClick={() => setActionMenuOpen((open) => !open)}
+              className={`${actionBtnClass} ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+              aria-label={actionMenuOpen ? 'Close actions menu' : 'Open actions menu'}
+              aria-expanded={actionMenuOpen}>
+              {mainIcon}
+            </button>
+
+            {actionMenuOpen && (
+              <div className="absolute left-0 top-full z-50 mt-1 flex flex-col gap-2 rounded-lg bg-white p-2 shadow-nav dark:bg-dark-200 dark:shadow-none">
+                {mounted && (
+                  <button
+                    type="button"
+                    className={actionBtnClass}
+                    aria-label="Toggle dark mode"
+                    onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}>
+                    {darkModeIcon}
+                  </button>
+                )}
+
+                <button type="button" className={actionBtnClass} aria-label="Change language">
+                  {languageIcon}
+                </button>
+
+                <button type="button" className={actionBtnClass} aria-label="Open messages">
+                  {messagesIcon}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
 

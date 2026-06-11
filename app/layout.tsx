@@ -1,6 +1,5 @@
 import CursorPointer from '@/components/animation/CursorPointer'
 import SmoothScrollProvider from '@/components/shared/SmoothScroll'
-import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
 import { outfit, seasons } from '@/utils/fonts'
 import { ThemeModeProvider } from '@/utils/Providers'
 import type { Metadata } from 'next'
@@ -24,7 +23,6 @@ export default function RootLayout({
         <Suspense fallback={<div>Loading...</div>}>
           <SmoothScrollProvider>
             <ThemeModeProvider>
-              <ThemeSwitcher />
               <CursorPointer />
               {children}
             </ThemeModeProvider>
