@@ -1,4 +1,4 @@
-import { TermsDataType } from '@/app/terms/page'
+import { TermsDataType } from '@/app/[locale]/terms/page'
 import { FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeSlug from 'rehype-slug'

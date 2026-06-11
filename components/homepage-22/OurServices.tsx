@@ -1,6 +1,6 @@
 'use client'
 
-import { ServicesType } from '@/app/home-22/page'
+import { ServicesType } from '@/app/[locale]/home-22/page'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import Image from 'next/image'
 import Link from 'next/link'

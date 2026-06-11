@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "title": "WOW Superagency | Where Ambitions Become Achievements",
+    "description": "Integrated web, marketing, AI, applications, content, and infrastructure for small businesses. Clear to understand, fast to launch, built for real-world outcomes.",
+    "siteName": "WOW Superagency"
+  },
+  "navigation": {
+    "items": [
+      { "id": "company", "label": "Company" },
+      { "id": "forYou", "label": "For you" },
+      { "id": "explore", "label": "Explore" },
+      { "id": "more", "label": "More" }
+    ]
+  },
+  "navbar": {
+    "logoAlt": "WOW",
+    "logoAltDark": "WOW Superagency",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menu": "Menu",
+    "openActions": "Open actions menu",
+    "closeActions": "Close actions menu",
+    "toggleDarkMode": "Toggle dark mode",
+    "changeLanguage": "Change language",
+    "openMessages": "Open messages"
+  },
+  "languageSwitcher": {
+    "title": "Select language",
+    "description": "Choose your preferred language and region. Your selection will be saved for future visits.",
+    "close": "Close",
+    "selected": "Selected",
+    "options": [
+      { "locale": "en-CA", "name": "English (Canada)", "code": "en-CA" },
+      { "locale": "en-US", "name": "English (United States)", "code": "en-US" },
+      { "locale": "en-GB", "name": "English (United Kingdom)", "code": "en-GB" },
+      { "locale": "fr-CA", "name": "French (Canada)", "code": "fr-CA" },
+      { "locale": "ar-SA", "name": "Arabic (Saudi Arabia)", "code": "ar-SA" },
+      { "locale": "ar-AE", "name": "Arabic (UAE)", "code": "ar-AE" }
+    ]
+  },
+  "hero": {
+    "title": "So, you want the tech that gives your business an edge?",
+    "titleHighlight": "Perfect",
+    "description": "We develop intelligent systems and future-ready apps that make your business more productive and more competitive.",
+    "imageAlt": "WOW Superagency technology"
+  },
+  "home": {
+    "cta": {
+      "heading": "Ready to grow?",
+      "headingItalic": "Book a free meeting.",
+      "closing": "Let's talk.",
+      "button": "Book Now"
+    }
+  },
+  "footer": {
+    "description": "WOW Superagency offers global business and technology services, transforming brands with customized solutions for over a decade.",
+    "companyHeading": "Company",
+    "address": {
+      "line1": "90 Burnhamthorpe Rd West, 1400",
+      "line2": "Mississauga, ON L5B 3C3 🇨🇦"
+    },
+    "social": ["Facebook", "YouTube", "Instagram", "LinkedIn"],
+    "sections": [
+      {
+        "id": "company",
+        "title": "Company",
+        "links": [
+          { "id": "about", "label": "About", "href": "/about" },
+          { "id": "about02", "label": "About 02", "href": "/about-02" },
+          { "id": "faq", "label": "FAQ", "href": "/faq" },
+          { "id": "contact", "label": "Contact", "href": "/contact" },
+          { "id": "team", "label": "Team", "href": "/team" },
+          { "id": "teamDetails", "label": "Team Details", "href": "/team" },
+          { "id": "career", "label": "Career", "href": "/career" },
+          { "id": "career02", "label": "Career 02", "href": "/career-02" },
+          { "id": "careerDetails", "label": "Career Details", "href": "/career" }
+        ]
+      },
+      {
+        "id": "resources",
+        "title": "Resources",
+        "links": [
+          { "id": "blog", "label": "Blog", "href": "/ai-blog" },
+          { "id": "blog02", "label": "Blog 02", "href": "/seo-blog" },
+          { "id": "projects", "label": "Projects", "href": "/digital-agency/project" },
+          { "id": "projects02", "label": "Projects 02", "href": "/portfolio-agency/case-study" },
+          { "id": "projects03", "label": "Projects 03", "href": "/agency-projects" },
+          { "id": "pricing", "label": "Pricing", "href": "/pricing" }
+        ]
+      },
+      {
+        "id": "links",
+        "title": "Links",
+        "links": [
+          { "id": "changelog", "label": "Changelog", "href": "/changelog" },
+          { "id": "password", "label": "Password Protected", "href": "/password" },
+          { "id": "terms", "label": "Terms of Service", "href": "/terms" },
+          { "id": "privacy", "label": "Privacy Policy", "href": "/policy" }
+        ]
+      }
+    ],
+    "copyright": "All rights reserved WOW Superagency · www.wow.onl"
+  },
+  "notFound": {
+    "title": "Page not Found",
+    "backHome": "Back to Homepage"
+  },
+  "common": {
+    "loading": "Loading..."
+  }
+}

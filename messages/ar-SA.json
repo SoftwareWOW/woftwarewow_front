@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "title": "WOW Superagency | حيث تتحول الطموحات إلى إنجازات",
+    "description": "ويب وتسويق وذكاء اصطناعي وتطبيقات ومحتوى وبنية تحتية متكاملة للشركات الصغيرة. واضحة وسريعة الإطلاق ومصممة لنتائج حقيقية.",
+    "siteName": "WOW Superagency"
+  },
+  "navigation": {
+    "items": [
+      { "id": "company", "label": "الشركة" },
+      { "id": "forYou", "label": "من أجلك" },
+      { "id": "explore", "label": "استكشف" },
+      { "id": "more", "label": "المزيد" }
+    ]
+  },
+  "navbar": {
+    "logoAlt": "WOW",
+    "logoAltDark": "WOW Superagency",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "menu": "القائمة",
+    "openActions": "فتح قائمة الإجراءات",
+    "closeActions": "إغلاق قائمة الإجراءات",
+    "toggleDarkMode": "تبديل الوضع الداكن",
+    "changeLanguage": "تغيير اللغة",
+    "openMessages": "فتح الرسائل"
+  },
+  "languageSwitcher": {
+    "title": "اختر اللغة",
+    "description": "اختر لغتك ومنطقتك المفضلة. سيتم حفظ اختيارك للزيارات القادمة.",
+    "close": "إغلاق",
+    "selected": "محدد",
+    "options": [
+      { "locale": "en-CA", "name": "الإنجليزية (كندا)", "code": "en-CA" },
+      { "locale": "en-US", "name": "الإنجليزية (الولايات المتحدة)", "code": "en-US" },
+      { "locale": "en-GB", "name": "الإنجليزية (المملكة المتحدة)", "code": "en-GB" },
+      { "locale": "fr-CA", "name": "الفرنسية (كندا)", "code": "fr-CA" },
+      { "locale": "ar-SA", "name": "العربية (المملكة العربية السعودية)", "code": "ar-SA" },
+      { "locale": "ar-AE", "name": "العربية (الإمارات)", "code": "ar-AE" }
+    ]
+  },
+  "hero": {
+    "title": "إذن، تريد التقنية التي تمنح عملك ميزة تنافسية؟",
+    "titleHighlight": "ممتاز",
+    "description": "نطوّر أنظمة ذكية وتطبيقات جاهزة للمستقبل تجعل عملك أكثر إنتاجية وتنافسية.",
+    "imageAlt": "تقنية WOW Superagency"
+  },
+  "home": {
+    "cta": {
+      "heading": "هل أنت مستعد للنمو؟",
+      "headingItalic": "احجز اجتماعًا مجانيًا.",
+      "closing": "لنتحدث.",
+      "button": "احجز الآن"
+    }
+  },
+  "footer": {
+    "description": "تقدم WOW Superagency خدمات أعمال وتقنية عالمية، وتحوّل العلامات التجارية بحلول مخصصة منذ أكثر من عقد.",
+    "companyHeading": "الشركة",
+    "address": {
+      "line1": "90 Burnhamthorpe Rd West, 1400",
+      "line2": "Mississauga, ON L5B 3C3 🇨🇦"
+    },
+    "social": ["Facebook", "YouTube", "Instagram", "LinkedIn"],
+    "sections": [
+      {
+        "id": "company",
+        "title": "الشركة",
+        "links": [
+          { "id": "about", "label": "من نحن", "href": "/about" },
+          { "id": "about02", "label": "من نحن 02", "href": "/about-02" },
+          { "id": "faq", "label": "الأسئلة الشائعة", "href": "/faq" },
+          { "id": "contact", "label": "اتصل بنا", "href": "/contact" },
+          { "id": "team", "label": "الفريق", "href": "/team" },
+          { "id": "teamDetails", "label": "تفاصيل الفريق", "href": "/team" },
+          { "id": "career", "label": "الوظائف", "href": "/career" },
+          { "id": "career02", "label": "الوظائف 02", "href": "/career-02" },
+          { "id": "careerDetails", "label": "تفاصيل الوظائف", "href": "/career" }
+        ]
+      },
+      {
+        "id": "resources",
+        "title": "الموارد",
+        "links": [
+          { "id": "blog", "label": "المدونة", "href": "/ai-blog" },
+          { "id": "blog02", "label": "المدونة 02", "href": "/seo-blog" },
+          { "id": "projects", "label": "المشاريع", "href": "/digital-agency/project" },
+          { "id": "projects02", "label": "المشاريع 02", "href": "/portfolio-agency/case-study" },
+          { "id": "projects03", "label": "المشاريع 03", "href": "/agency-projects" },
+          { "id": "pricing", "label": "الأسعار", "href": "/pricing" }
+        ]
+      },
+      {
+        "id": "links",
+        "title": "روابط",
+        "links": [
+          { "id": "changelog", "label": "سجل التغييرات", "href": "/changelog" },
+          { "id": "password", "label": "محمي بكلمة مرور", "href": "/password" },
+          { "id": "terms", "label": "شروط الخدمة", "href": "/terms" },
+          { "id": "privacy", "label": "سياسة الخصوصية", "href": "/policy" }
+        ]
+      }
+    ],
+    "copyright": "جميع الحقوق محفوظة WOW Superagency · www.wow.onl"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "backHome": "العودة إلى الصفحة الرئيسية"
+  },
+  "common": {
+    "loading": "جارٍ التحميل..."
+  }
+}

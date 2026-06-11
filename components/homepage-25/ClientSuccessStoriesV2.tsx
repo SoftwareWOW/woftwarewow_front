@@ -1,5 +1,5 @@
 'use client'
-import { BlogType } from '@/app/ai-blog/page'
+import { BlogType } from '@/app/[locale]/ai-blog/page'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import Link from 'next/link'
 import { FC } from 'react'

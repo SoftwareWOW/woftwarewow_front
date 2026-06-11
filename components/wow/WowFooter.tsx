@@ -1,12 +1,13 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import { Link } from '@/i18n/navigation'
+import type { Dictionary } from '@/i18n/types'
+import Image from 'next/image'
 
-const companyLinks = ['About', 'About 02', 'FAQ', 'Contact', 'Team', 'Team Details', 'Career', 'Career 02', 'Career Details']
-const resourceLinks = ['Blog', 'Blog 02', 'Projects', 'Projects 02', 'Projects 03', 'Pricing']
-const otherLinks = ['Changelog', 'Password Protected', 'Terms of Service', 'Privacy Policy']
+type WowFooterProps = {
+  footer: Dictionary['footer']
+}
 
-export default function WowFooter() {
+export default function WowFooter({ footer }: WowFooterProps) {
   return (
     <footer className="relative overflow-hidden bg-[#edf0f5] px-4 pb-8 pt-24 dark:bg-dark-300 sm:px-8">
       <div className="pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 opacity-10 dark:opacity-5">
@@ -16,16 +17,13 @@ export default function WowFooter() {
       <div className="relative mx-auto max-w-[1170px]">
         <RevealWrapper className="grid gap-12 lg:grid-cols-[370px_1fr] lg:gap-20">
           <div>
-            <p className="text-lg leading-relaxed text-colorText dark:text-dark-100">
-              WOW Superagency offers global business and technology services, transforming brands with customized
-              solutions for over a decade.
-            </p>
+            <p className="text-lg leading-relaxed text-colorText dark:text-dark-100">{footer.description}</p>
             <div className="mt-6">
-              <p className="text-xl text-secondary dark:text-backgroundBody">Company</p>
+              <p className="text-xl text-secondary dark:text-backgroundBody">{footer.companyHeading}</p>
               <address className="mt-3 not-italic text-lg leading-relaxed text-colorText dark:text-dark-100">
-                90 Burnhamthorpe Rd West, 1400
+                {footer.address.line1}
                 <br />
-                Mississauga, ON L5B 3C3 🇨🇦
+                {footer.address.line2}
                 <br />
                 <a href="tel:+18337638969" className="hover:text-primary">
                   +1 (833) 763-8969
@@ -37,7 +35,7 @@ export default function WowFooter() {
               </address>
             </div>
             <div className="mt-8 flex gap-4 text-primary">
-              {['Facebook', 'YouTube', 'Instagram', 'LinkedIn'].map((name) => (
+              {footer.social.map((name) => (
                 <span
                   key={name}
                   className="flex size-6 items-center justify-center rounded-full border border-primary/30 text-[10px]"
@@ -49,47 +47,25 @@ export default function WowFooter() {
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3">
-            <div>
-              <p className="mb-4 text-xl text-secondary dark:text-backgroundBody">Company</p>
-              <ul className="space-y-2 text-lg text-colorText dark:text-dark-100">
-                {companyLinks.map((link) => (
-                  <li key={link}>
-                    <Link href="/about" className="hover:text-primary">
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="mb-4 text-xl text-secondary dark:text-backgroundBody">Resources</p>
-              <ul className="space-y-2 text-lg text-colorText dark:text-dark-100">
-                {resourceLinks.map((link) => (
-                  <li key={link}>
-                    <Link href="/ai-blog" className="hover:text-primary">
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="mb-4 text-xl text-secondary dark:text-backgroundBody">Links</p>
-              <ul className="space-y-2 text-lg text-colorText dark:text-dark-100">
-                {otherLinks.map((link) => (
-                  <li key={link}>
-                    <Link href="/terms" className="hover:text-primary">
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {footer.sections.map((section) => (
+              <div key={section.id}>
+                <p className="mb-4 text-xl text-secondary dark:text-backgroundBody">{section.title}</p>
+                <ul className="space-y-2 text-lg text-colorText dark:text-dark-100">
+                  {section.links.map((link) => (
+                    <li key={link.id}>
+                      <Link href={link.href} className="hover:text-primary">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </RevealWrapper>
 
         <p className="mt-16 border-t border-secondary/10 pt-6 text-center text-base text-colorText dark:border-dark dark:text-dark-100">
-          All rights reserved WOW Superagency · www.wow.onl
+          {footer.copyright}
         </p>
       </div>
     </footer>
