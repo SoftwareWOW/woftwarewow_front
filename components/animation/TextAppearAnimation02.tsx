@@ -3,7 +3,7 @@
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { cloneElement, createElement, FC, isValidElement, ReactElement, ReactNode, useRef } from 'react'
+import { FC, ReactNode, useEffect, useRef } from 'react'
 import SplitType from 'split-type'
 
 if (typeof window !== 'undefined') {
@@ -15,15 +15,32 @@ interface AnimatedTextProps {
   animationOptions?: Partial<gsap.TweenVars>
 }
 
+const TEXT_TAGS = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'SPAN'])
+
+function getAnimationTarget(wrapper: HTMLElement): HTMLElement {
+  const first = wrapper.firstElementChild
+  if (first instanceof HTMLElement && TEXT_TAGS.has(first.tagName)) {
+    return first
+  }
+  return wrapper
+}
+
 const TextAppearAnimation02: FC<AnimatedTextProps> = ({ children, animationOptions = {} }) => {
-  const elementRef = useRef<HTMLElement>(null)
+  const wrapperRef = useRef<HTMLSpanElement>(null)
   const titleTextRef = useRef<SplitType | null>(null)
   const wordsRef = useRef<SplitType[]>([])
+  const animationOptionsRef = useRef(animationOptions)
+
+  useEffect(() => {
+    animationOptionsRef.current = animationOptions
+  }, [animationOptions])
 
   useGSAP(
     () => {
-      const element = elementRef.current
-      if (!element) return
+      const wrapper = wrapperRef.current
+      if (!wrapper) return
+
+      const element = getAnimationTarget(wrapper)
 
       titleTextRef.current?.revert()
       wordsRef.current.forEach((word) => word.revert())
@@ -80,7 +97,7 @@ const TextAppearAnimation02: FC<AnimatedTextProps> = ({ children, animationOptio
           once: true,
           markers: false,
         },
-        ...animationOptions,
+        ...animationOptionsRef.current,
       })
 
       ScrollTrigger.refresh()
@@ -92,22 +109,13 @@ const TextAppearAnimation02: FC<AnimatedTextProps> = ({ children, animationOptio
         tl?.kill()
       }
     },
-    { dependencies: [animationOptions], scope: elementRef },
+    { scope: wrapperRef },
   )
 
-  if (isValidElement(children)) {
-    return cloneElement(children as ReactElement<any>, {
-      ref: elementRef,
-      className: `${(children as ReactElement<any>).props.className ?? ''}`.trim(),
-    })
-  }
-
-  return createElement(
-    'span',
-    {
-      ref: elementRef,
-    },
-    children,
+  return (
+    <span ref={wrapperRef} className="text-appear contents" suppressHydrationWarning>
+      {children}
+    </span>
   )
 }
 

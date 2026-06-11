@@ -1,15 +1,18 @@
-import Hero from '@/components/homepage-01/Hero'
+
 import Portfolio from '@/components/homepage-01/Portfolio'
 import Testimonial from '@/components/homepage-01/Testimonial'
-import About from '@/components/shared/About'
+
+import CTA from '@/components/shared/CTA'
 import ClientsV3 from '@/components/shared/ClientsV3'
 import Community from '@/components/shared/Community'
-import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import FAQ from '@/components/shared/FAQ'
-import LayoutOne from '@/components/shared/LayoutOne'
 import ServicesV8 from '@/components/shared/ServicesV8'
-import Video from '@/components/shared/Video'
+
+import WowLayout from '@/components/wow/WowLayout'
+
+import WowHero from '@/components/wow/sections/WowHero'
+
 
 export const metadata = {
   title: 'WOW Superagency | Where Ambitions Become Achievements',
@@ -19,13 +22,13 @@ export const metadata = {
 
 const Home = () => {
   return (
-    <LayoutOne>
-      <Hero />
-      <Video />
-      <About />
-      <Portfolio />
-      <ClientsV3 />
+    <WowLayout>
+ 
+      <WowHero />
       <ServicesV8 />
+      {/* <WowProcessSection /> */}
+           <Portfolio />
+      <ClientsV3 />
       <Community />
       <FAQ />
       <Testimonial />
@@ -41,7 +44,17 @@ const Home = () => {
         Let&apos;s talk.
         <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">Book a free meeting.</i>
       </CTA>
-    </LayoutOne>
+       {/* <WowRatingSection /> */}
+      {/* <About /> */}
+      {/* <WowStatistics />
+      <WowServices />
+      <WowBlog />
+      <WowTestimonials />
+      <WowExpertise />
+      <WowFaq />
+      <WowFeaturedWork />
+      <WowCta /> */}
+    </WowLayout>
   )
 }
 

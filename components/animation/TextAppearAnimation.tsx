@@ -2,35 +2,34 @@
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import {
-  cloneElement,
-  createElement,
-  FC,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { FC, ReactNode, useEffect, useRef } from 'react'
 import SplitType from 'split-type'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface AnimatedTextProps {
   children: ReactNode
   animationOptions?: Partial<gsap.TweenVars>
 }
 
+const TEXT_TAGS = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'SPAN'])
+
+function getAnimationTarget(wrapper: HTMLElement): HTMLElement {
+  const first = wrapper.firstElementChild
+  if (first instanceof HTMLElement && TEXT_TAGS.has(first.tagName)) {
+    return first
+  }
+  return wrapper
+}
+
 const TextAppearAnimation: FC<AnimatedTextProps> = ({ children, animationOptions = {} }) => {
-  const [mounted, setMounted] = useState(false)
-  const elementRef = useRef<HTMLElement>(null)
+  const wrapperRef = useRef<HTMLSpanElement>(null)
   const titleTextRef = useRef<SplitType | null>(null)
   const wordSplitRefs = useRef<SplitType[]>([])
   const hasAnimatedRef = useRef(false)
   const animationOptionsRef = useRef(animationOptions)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     animationOptionsRef.current = animationOptions
@@ -38,12 +37,11 @@ const TextAppearAnimation: FC<AnimatedTextProps> = ({ children, animationOptions
 
   useGSAP(
     () => {
-      if (!mounted) return
-
-      const element = elementRef.current
-      if (!element) return
-
+      const wrapper = wrapperRef.current
+      if (!wrapper) return
       if (hasAnimatedRef.current) return
+
+      const element = getAnimationTarget(wrapper)
 
       const setupSplitType = () => {
         titleTextRef.current?.revert()
@@ -54,61 +52,50 @@ const TextAppearAnimation: FC<AnimatedTextProps> = ({ children, animationOptions
         titleTextRef.current = titleText
 
         const lines = titleText.lines ?? []
-        if (!lines.length) {
-          console.warn('SplitType failed to create lines')
-          return null
-        }
+        if (!lines.length) return null
 
         const wordsSplits = lines.map((line) => new SplitType(line, { types: 'words', wordClass: 'word' }))
         wordSplitRefs.current = wordsSplits
 
         const allWords = wordsSplits.flatMap((split) => split.words || [])
-        if (!allWords.length) {
-          console.warn('SplitType failed to create words')
-          return null
-        }
+        if (!allWords.length) return null
 
         return allWords
-      }
-
-      const createAnimation = (words: HTMLElement[]) => {
-        gsap.set(words, { y: 120, rotation: 21, opacity: 0 })
-
-        return gsap.to(words, {
-          y: 0,
-          rotation: 0,
-          opacity: 1,
-          stagger: 0.02,
-          duration: 0.7,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: element,
-            start: 'top 65%',
-            end: 'top 30%',
-            scrub: false,
-            once: true,
-            markers: false,
-            onEnter: () => {
-              hasAnimatedRef.current = true
-            },
-          },
-          ...animationOptionsRef.current,
-        })
       }
 
       const words = setupSplitType()
       if (!words) return
 
-      const timeline = createAnimation(words)
+      gsap.set(words, { y: 120, rotation: 21, opacity: 0 })
+
+      const timeline = gsap.to(words, {
+        y: 0,
+        rotation: 0,
+        opacity: 1,
+        stagger: 0.02,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 65%',
+          end: 'top 30%',
+          scrub: false,
+          once: true,
+          markers: false,
+          onEnter: () => {
+            hasAnimatedRef.current = true
+          },
+        },
+        ...animationOptionsRef.current,
+      })
+
       ScrollTrigger.refresh()
 
       return () => {
-        if (timeline && typeof timeline.kill === 'function') {
-          timeline.kill()
-        }
+        timeline.kill()
       }
     },
-    { scope: elementRef, dependencies: [mounted] },
+    { scope: wrapperRef },
   )
 
   useEffect(() => {
@@ -117,28 +104,23 @@ const TextAppearAnimation: FC<AnimatedTextProps> = ({ children, animationOptions
       wordSplitRefs.current.forEach((split) => split.revert())
       hasAnimatedRef.current = false
 
-      if (elementRef.current) {
-        ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars.trigger === elementRef.current) {
-            trigger.kill()
-          }
-        })
-      }
+      const wrapper = wrapperRef.current
+      if (!wrapper) return
+
+      const element = getAnimationTarget(wrapper)
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === element) {
+          trigger.kill()
+        }
+      })
     }
   }, [])
 
-  if (!mounted) {
-    return children
-  }
-
-  if (isValidElement(children)) {
-    return cloneElement(children as ReactElement, {
-      ref: elementRef,
-      className: `${(children as ReactElement).props.className ?? ''}`.trim(),
-    })
-  }
-
-  return createElement('span', { ref: elementRef }, children)
+  return (
+    <span ref={wrapperRef} className="text-appear contents" suppressHydrationWarning>
+      {children}
+    </span>
+  )
 }
 
 export default TextAppearAnimation

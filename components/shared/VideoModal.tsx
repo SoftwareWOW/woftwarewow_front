@@ -93,13 +93,13 @@ const VideoModal: FC<VideoModalProps> = ({
       <Dialog.Portal>
         <Dialog.Overlay
           ref={overlayRef}
-          className={`fixed inset-0 z-40 h-full w-full bg-black bg-opacity-50 backdrop-blur-xl ${overlayClassName}`}
+          className={`fixed inset-0 z-40 h-full w-full bg-black/50 backdrop-blur-xl dark:bg-black/70 ${overlayClassName}`}
           onClick={handleClose}
         />
 
         <Dialog.Content
           ref={contentRef}
-          className={`fixed left-1/2 top-1/2 z-50 h-full max-h-[500px] w-full max-w-[900px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl shadow-2xl ${contentClassName}`}
+          className={`fixed left-1/2 top-1/2 z-50 h-full max-h-[500px] w-full max-w-[900px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-secondary shadow-2xl dark:bg-dark-200 ${contentClassName}`}
           onEscapeKeyDown={handleClose}>
           <VisuallyHidden>
             <Dialog.Title />

@@ -1,37 +1,48 @@
 'use client'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 const CursorPointer = () => {
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-  })
+  const pointerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    if (window.innerWidth >= 1023) {
-      gsap.to('.pointer', {
-        x: mousePosition.x,
-        y: mousePosition.y,
-        height: '14px',
-        width: '14px',
-      })
-    }
-  }, [mousePosition])
+    const pointer = pointerRef.current
+    if (!pointer || window.innerWidth < 1023) return
 
-  useEffect(() => {
-    const moseMove = (e: any) => {
-      setMousePosition({
+    const setPosition = gsap.quickSetter(pointer, 'css')
+
+    const onMouseMove = (e: MouseEvent) => {
+      setPosition({
         x: e.clientX,
         y: e.clientY,
+        width: '14px',
+        height: '14px',
       })
     }
-    window.addEventListener('mousemove', moseMove)
-    window.addEventListener('keydown', moseMove)
+
+    window.addEventListener('mousemove', onMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+    }
   }, [])
 
-  return <div className="pointer"></div>
+  useEffect(() => {
+    const pointer = pointerRef.current
+    if (!pointer) return
+
+    pointer.style.display = window.innerWidth >= 1023 ? 'block' : 'none'
+
+    const onResize = () => {
+      pointer.style.display = window.innerWidth >= 1023 ? 'block' : 'none'
+    }
+
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  return <div ref={pointerRef} className="pointer" />
 }
 
 export default CursorPointer
