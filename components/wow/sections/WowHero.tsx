@@ -10,7 +10,7 @@ type WowHeroProps = {
 const heroImage = '/images/wow/hero-banner.jpg'
 
 const titleHighlightClass =
-  'font-seasons text-[clamp(2.5rem,5.5vw,4.6875rem)] italic leading-[1.1] !bg-none !bg-clip-border !text-secondary dark:!text-backgroundBody'
+  'font-seasons text-[clamp(2.5rem,5.5vw,4.6875rem)] italic leading-[1.1] !bg-none bg-clip-border !text-secondary dark:!text-backgroundBody'
 
 const descriptionClass =
   'mt-6 max-w-[580px] text-base font-light leading-[1.4] text-[#4B5563] sm:text-lg md:mt-8 md:text-[22px] md:leading-[1.3] dark:text-dark-100'
@@ -25,7 +25,7 @@ export default function WowHero({ hero }: WowHeroProps) {
           </h1>
 
           <div className="wow-hero__stage">
-            <RevealWrapper className="wow-hero__image-layer">
+            <div className="wow-hero__image-layer">
               <Image
                 src={heroImage}
                 alt={hero.imageAlt}
@@ -34,28 +34,44 @@ export default function WowHero({ hero }: WowHeroProps) {
                 priority
                 sizes="(max-width: 1173px) 100vw, 1173px"
               />
-            </RevealWrapper>
+            </div>
 
-            <RevealWrapper className="wow-hero__mobile-row md:hidden">
+            <div className="wow-hero__mobile-row md:hidden">
               <div className="wow-hero__mobile-perfect">
                 <span className={`block ${titleHighlightClass} !text-[clamp(2.75rem,14vw,4.25rem)]`}>
                   {hero.titleHighlight}
                 </span>
-                <span className="wow-hero-scoop wow-hero-scoop--light-br wow-hero-scoop--white-br" aria-hidden />
+                <span
+                  className="wow-hero-image-corner wow-hero-image-corner--tr wow-hero-image-corner--white"
+                  aria-hidden
+                />
+                <span
+                  className="wow-hero-image-corner wow-hero-image-corner--br wow-hero-image-corner--white"
+                  aria-hidden
+                />
+                <span
+                  className="wow-hero-image-corner wow-hero-image-corner--bl wow-hero-image-corner--white"
+                  aria-hidden
+                />
               </div>
-            </RevealWrapper>
+            </div>
 
-            <RevealWrapper className="wow-hero__text hidden md:block">
-              <TextAppearAnimation>
-                <h1 className="text-[clamp(2rem,4.5vw,3.375rem)] font-normal leading-[1.33] text-secondary dark:text-backgroundBody">
-                  {hero.title}{' '}
-                  <span className={titleHighlightClass}>{hero.titleHighlight}</span>
-                </h1>
-              </TextAppearAnimation>
-              <p className={descriptionClass}>{hero.description}</p>
-              <span className="wow-hero-scoop wow-hero-scoop--light-br" aria-hidden />
-              <span className="wow-hero-scoop wow-hero-scoop--light-tr" aria-hidden />
-            </RevealWrapper>
+            <div className="wow-hero__text-wrap">
+              <span className="wow-hero-image-corner wow-hero-image-corner--tr" aria-hidden />
+              <span className="wow-hero-image-corner wow-hero-image-corner--br" aria-hidden />
+              <span className="wow-hero-image-corner wow-hero-image-corner--bl" aria-hidden />
+
+              <div className="wow-hero__text">
+                <TextAppearAnimation>
+                  <h1 className="text-[clamp(2rem,4.5vw,3.375rem)] font-normal leading-[1.33] text-secondary dark:text-backgroundBody">
+                    {hero.title}{' '}
+                    <span className={titleHighlightClass}>{hero.titleHighlight}</span>
+                  </h1>
+                </TextAppearAnimation>
+                <p className={descriptionClass}>{hero.description}</p>
+              </div>
+            </div>
+          
           </div>
 
           <RevealWrapper className="wow-hero__mobile-description md:hidden">

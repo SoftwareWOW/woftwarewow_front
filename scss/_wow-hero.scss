@@ -6,14 +6,13 @@
     position: absolute;
     width: $hero-radius;
     height: $hero-radius;
-    overflow: hidden;
     pointer-events: none;
 
     &::before {
       content: '';
       display: block;
-      width: 200%;
-      height: 200%;
+      width: calc($hero-radius * 2);
+      height: calc($hero-radius * 2);
       position: absolute;
       border-radius: 50%;
     }
@@ -40,8 +39,50 @@
       }
     }
 
+    &--light-bl {
+      bottom: 0;
+      left: 0;
+
+      &::before {
+        bottom: 0;
+        left: 0;
+        box-shadow: (-$hero-radius) $hero-radius 0 0 $hero-bg;
+      }
+    }
+
     &--white-br::before {
       box-shadow: $hero-radius $hero-radius 0 0 #ffffff;
+    }
+  }
+
+  .wow-hero-image-corner {
+    position: absolute;
+    z-index: 5;
+    width: $hero-radius;
+    height: $hero-radius;
+    background: $hero-bg;
+    pointer-events: none;
+
+    &--tr {
+      top: 0;
+      right: 0;
+      border-bottom-left-radius: $hero-radius;
+    }
+
+    &--br {
+      bottom: 0;
+      right: 0;
+      border-top-left-radius: $hero-radius;
+    }
+
+    &--bl {
+      bottom: 0;
+      left: 0;
+      border-top-right-radius: $hero-radius;
+    }
+
+    &--white {
+      background: #ffffff;
     }
   }
 
@@ -75,10 +116,16 @@
       @apply absolute inset-0 overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[32px];
     }
 
+    &__text-wrap {
+      @apply relative z-10 hidden max-w-full md:block md:max-w-[72%];
+
+      .wow-hero-image-corner {
+        z-index: 2;
+      }
+    }
+
     &__text {
-      @apply relative z-10 max-w-full bg-backgroundBody px-6 py-8 sm:px-10 sm:py-10 md:max-w-[72%] md:px-14 md:py-14 lg:px-16 lg:py-16;
-      border-top-right-radius: $hero-radius;
-      border-bottom-right-radius: $hero-radius;
+      @apply relative z-[1] bg-backgroundBody px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14 lg:px-16 lg:py-16;
     }
 
     &__mobile-title {
@@ -91,7 +138,6 @@
 
     &__mobile-perfect {
       @apply relative bg-white px-6 pb-4 pt-1 sm:px-10;
-      border-bottom-right-radius: $hero-radius;
       min-width: min(72%, 320px);
     }
 
