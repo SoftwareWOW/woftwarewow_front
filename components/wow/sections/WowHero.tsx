@@ -1,4 +1,3 @@
-import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import type { Dictionary } from '@/i18n/types'
@@ -8,36 +7,59 @@ type WowHeroProps = {
   hero: Dictionary['hero']
 }
 
+const heroImage = '/images/wow/hero-banner.jpg'
+
+const titleHighlightClass =
+  'font-seasons text-[clamp(2.5rem,5.5vw,4.6875rem)] italic leading-[1.1] !bg-none !bg-clip-border !text-secondary dark:!text-backgroundBody'
+
+const descriptionClass =
+  'mt-6 max-w-[580px] text-base font-light leading-[1.4] text-[#4B5563] sm:text-lg md:mt-8 md:text-[22px] md:leading-[1.3] dark:text-dark-100'
+
 export default function WowHero({ hero }: WowHeroProps) {
   return (
     <section className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-8 md:pt-36">
-      <HeroGradientAnimation />
       <div className="relative mx-auto max-w-[1173px]">
-        <div className="relative">
-          <RevealWrapper className="relative z-10 mb-[-80px] max-w-[900px] sm:mb-[-120px] md:mb-[-180px]">
-            <TextAppearAnimation>
-              <h1 className="text-[clamp(2rem,5vw,3.375rem)] font-light leading-[1.33] text-secondary dark:text-backgroundBody">
-                {hero.title}{' '}
-                <span className="font-instrument text-[clamp(2.5rem,6vw,4.6875rem)] not-italic leading-[1.1]">
+        <div className="wow-hero__shell">
+          <h1 className="wow-hero__mobile-title text-[clamp(1.75rem,7vw,2.25rem)] font-normal leading-[1.33] text-secondary md:hidden dark:text-backgroundBody">
+            <TextAppearAnimation>{hero.title}</TextAppearAnimation>
+          </h1>
+
+          <div className="wow-hero__stage">
+            <RevealWrapper className="wow-hero__image-layer">
+              <Image
+                src={heroImage}
+                alt={hero.imageAlt}
+                fill
+                className="wow-hero__image"
+                priority
+                sizes="(max-width: 1173px) 100vw, 1173px"
+              />
+            </RevealWrapper>
+
+            <RevealWrapper className="wow-hero__mobile-row md:hidden">
+              <div className="wow-hero__mobile-perfect">
+                <span className={`block ${titleHighlightClass} !text-[clamp(2.75rem,14vw,4.25rem)]`}>
                   {hero.titleHighlight}
                 </span>
-              </h1>
-            </TextAppearAnimation>
-            <p className="mt-6 max-w-[759px] text-lg font-light leading-[1.1] text-colorText md:text-[22px] dark:text-dark-100">
-              {hero.description}
-            </p>
-          </RevealWrapper>
+                <span className="wow-hero-scoop wow-hero-scoop--light-br wow-hero-scoop--white-br" aria-hidden />
+              </div>
+            </RevealWrapper>
 
-          <RevealWrapper className="relative h-[280px] overflow-hidden rounded-br-[48px] sm:h-[420px] sm:rounded-br-[80px] md:h-[520px]">
-            <Image
-              src="/images/wow/hero-banner.jpg"
-              alt={hero.imageAlt}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1173px) 100vw, 1173px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-backgroundBody/90 via-transparent to-transparent dark:from-dark/90" />
+            <RevealWrapper className="wow-hero__text hidden md:block">
+              <TextAppearAnimation>
+                <h1 className="text-[clamp(2rem,4.5vw,3.375rem)] font-normal leading-[1.33] text-secondary dark:text-backgroundBody">
+                  {hero.title}{' '}
+                  <span className={titleHighlightClass}>{hero.titleHighlight}</span>
+                </h1>
+              </TextAppearAnimation>
+              <p className={descriptionClass}>{hero.description}</p>
+              <span className="wow-hero-scoop wow-hero-scoop--light-br" aria-hidden />
+              <span className="wow-hero-scoop wow-hero-scoop--light-tr" aria-hidden />
+            </RevealWrapper>
+          </div>
+
+          <RevealWrapper className="wow-hero__mobile-description md:hidden">
+            <p className={descriptionClass}>{hero.description}</p>
           </RevealWrapper>
         </div>
       </div>

@@ -1,0 +1,102 @@
+@layer components {
+  $hero-radius: 32px;
+  $hero-bg: #ededed;
+
+  .wow-hero-scoop {
+    position: absolute;
+    width: $hero-radius;
+    height: $hero-radius;
+    overflow: hidden;
+    pointer-events: none;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 200%;
+      height: 200%;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    &--light-br {
+      bottom: 0;
+      right: 0;
+
+      &::before {
+        bottom: 0;
+        right: 0;
+        box-shadow: $hero-radius $hero-radius 0 0 $hero-bg;
+      }
+    }
+
+    &--light-tr {
+      top: 0;
+      right: 0;
+
+      &::before {
+        top: 0;
+        right: 0;
+        box-shadow: $hero-radius (-$hero-radius) 0 0 $hero-bg;
+      }
+    }
+
+    &--white-br::before {
+      box-shadow: $hero-radius $hero-radius 0 0 #ffffff;
+    }
+  }
+
+  .wow-hero {
+    &__shell {
+      @apply overflow-hidden rounded-[24px] bg-backgroundBody p-3 sm:rounded-[32px] sm:p-4 md:p-5;
+    }
+
+    &__stage {
+      @apply relative;
+      min-height: 360px;
+
+      @media (min-width: 640px) {
+        min-height: 460px;
+      }
+
+      @media (min-width: 768px) {
+        min-height: 620px;
+      }
+
+      @media (min-width: 1024px) {
+        min-height: 680px;
+      }
+    }
+
+    &__image {
+      @apply object-cover object-right;
+    }
+
+    &__image-layer {
+      @apply absolute inset-0 overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[32px];
+    }
+
+    &__text {
+      @apply relative z-10 max-w-full bg-backgroundBody px-6 py-8 sm:px-10 sm:py-10 md:max-w-[72%] md:px-14 md:py-14 lg:px-16 lg:py-16;
+      border-top-right-radius: $hero-radius;
+      border-bottom-right-radius: $hero-radius;
+    }
+
+    &__mobile-title {
+      @apply px-3 pb-4 sm:px-4 md:hidden;
+    }
+
+    &__mobile-row {
+      @apply relative z-10 flex items-stretch;
+    }
+
+    &__mobile-perfect {
+      @apply relative bg-white px-6 pb-4 pt-1 sm:px-10;
+      border-bottom-right-radius: $hero-radius;
+      min-width: min(72%, 320px);
+    }
+
+    &__mobile-description {
+      @apply px-3 pt-4 sm:px-4;
+    }
+  }
+}
