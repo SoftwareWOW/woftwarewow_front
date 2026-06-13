@@ -41,26 +41,10 @@ export default function WowHero({ hero }: WowHeroProps) {
                 <span className={`block ${titleHighlightClass} !text-[clamp(2.75rem,14vw,4.25rem)]`}>
                   {hero.titleHighlight}
                 </span>
-                <span
-                  className="wow-hero-image-corner wow-hero-image-corner--tr wow-hero-image-corner--white"
-                  aria-hidden
-                />
-                <span
-                  className="wow-hero-image-corner wow-hero-image-corner--br wow-hero-image-corner--white"
-                  aria-hidden
-                />
-                <span
-                  className="wow-hero-image-corner wow-hero-image-corner--bl wow-hero-image-corner--white"
-                  aria-hidden
-                />
               </div>
             </div>
 
             <div className="wow-hero__text-wrap">
-              <span className="wow-hero-image-corner wow-hero-image-corner--tr" aria-hidden />
-              <span className="wow-hero-image-corner wow-hero-image-corner--br" aria-hidden />
-              <span className="wow-hero-image-corner wow-hero-image-corner--bl" aria-hidden />
-
               <div className="wow-hero__text">
                 <TextAppearAnimation>
                   <h1 className="text-[clamp(2rem,4.5vw,3.375rem)] font-normal leading-[1.33] text-secondary dark:text-backgroundBody">
@@ -71,7 +55,6 @@ export default function WowHero({ hero }: WowHeroProps) {
                 <p className={descriptionClass}>{hero.description}</p>
               </div>
             </div>
-          
           </div>
 
           <RevealWrapper className="wow-hero__mobile-description md:hidden">

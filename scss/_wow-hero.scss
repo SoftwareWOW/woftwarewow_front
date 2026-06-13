@@ -1,88 +1,29 @@
 @layer components {
   $hero-radius: 32px;
   $hero-bg: #ededed;
+  $hero-mobile-bg: #ffffff;
 
-  .wow-hero-scoop {
+  // Inverted (concave) corner — radial-gradient carves a smooth arc into the image
+  @mixin hero-inverted-corner($corner, $color) {
     position: absolute;
+    z-index: 3;
     width: $hero-radius;
     height: $hero-radius;
     pointer-events: none;
+    content: '';
 
-    &::before {
-      content: '';
-      display: block;
-      width: calc($hero-radius * 2);
-      height: calc($hero-radius * 2);
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    &--light-br {
-      bottom: 0;
-      right: 0;
-
-      &::before {
-        bottom: 0;
-        right: 0;
-        box-shadow: $hero-radius $hero-radius 0 0 $hero-bg;
-      }
-    }
-
-    &--light-tr {
+    @if $corner == 'tr' {
       top: 0;
       right: 0;
-
-      &::before {
-        top: 0;
-        right: 0;
-        box-shadow: $hero-radius (-$hero-radius) 0 0 $hero-bg;
-      }
-    }
-
-    &--light-bl {
-      bottom: 0;
-      left: 0;
-
-      &::before {
-        bottom: 0;
-        left: 0;
-        box-shadow: (-$hero-radius) $hero-radius 0 0 $hero-bg;
-      }
-    }
-
-    &--white-br::before {
-      box-shadow: $hero-radius $hero-radius 0 0 #ffffff;
-    }
-  }
-
-  .wow-hero-image-corner {
-    position: absolute;
-    z-index: 5;
-    width: $hero-radius;
-    height: $hero-radius;
-    background: $hero-bg;
-    pointer-events: none;
-
-    &--tr {
-      top: 0;
-      right: 0;
-      border-bottom-left-radius: $hero-radius;
-    }
-
-    &--br {
+      background: radial-gradient(circle at 0 100%, transparent $hero-radius, $color $hero-radius);
+    } @else if $corner == 'br' {
       bottom: 0;
       right: 0;
-      border-top-left-radius: $hero-radius;
-    }
-
-    &--bl {
+      background: radial-gradient(circle at 0 0, transparent $hero-radius, $color $hero-radius);
+    } @else if $corner == 'bl' {
       bottom: 0;
       left: 0;
-      border-top-right-radius: $hero-radius;
-    }
-
-    &--white {
-      background: #ffffff;
+      background: radial-gradient(circle at 100% 0, transparent $hero-radius, $color $hero-radius);
     }
   }
 
@@ -119,13 +60,21 @@
     &__text-wrap {
       @apply relative z-10 hidden max-w-full md:block md:max-w-[72%];
 
-      .wow-hero-image-corner {
-        z-index: 2;
+      &::before {
+        @include hero-inverted-corner('tr', $hero-bg);
+      }
+
+      &::after {
+        @include hero-inverted-corner('br', $hero-bg);
       }
     }
 
     &__text {
       @apply relative z-[1] bg-backgroundBody px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14 lg:px-16 lg:py-16;
+
+      &::before {
+        @include hero-inverted-corner('bl', $hero-bg);
+      }
     }
 
     &__mobile-title {
@@ -137,8 +86,25 @@
     }
 
     &__mobile-perfect {
-      @apply relative bg-white px-6 pb-4 pt-1 sm:px-10;
+      @apply relative px-6 pb-4 pt-1 sm:px-10;
       min-width: min(72%, 320px);
+      background-color: $hero-mobile-bg;
+      background-image: radial-gradient(
+        circle at 100% 0,
+        transparent $hero-radius,
+        $hero-mobile-bg $hero-radius
+      );
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: $hero-radius $hero-radius;
+
+      &::before {
+        @include hero-inverted-corner('tr', $hero-mobile-bg);
+      }
+
+      &::after {
+        @include hero-inverted-corner('br', $hero-mobile-bg);
+      }
     }
 
     &__mobile-description {
