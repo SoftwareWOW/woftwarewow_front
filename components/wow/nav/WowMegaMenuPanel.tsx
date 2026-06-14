@@ -47,53 +47,52 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
     <div
       role="region"
       aria-label={item.label}
-      className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200"
+      className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-x-auto rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200"
       style={{
         padding: `${desktop.paddingY}px clamp(24px, 4vw, ${desktop.paddingX}px)`,
       }}>
-      <div className="flex flex-col gap-8 2xl:flex-row 2xl:items-start 2xl:justify-between">
-        <div className="flex min-w-0 flex-col gap-8 sm:flex-row sm:items-start sm:gap-6 2xl:gap-[98px]">
-          {desktop.columns.map((column) => (
-            <div key={column.id} className="flex min-w-0 shrink-0 flex-col gap-[7px] sm:w-[220px] 2xl:w-[260px]">
-              {column.title ? (
-                <p className="pl-[10px] text-base font-light leading-none text-[#838383]">{column.title}</p>
-              ) : (
-                <div className="h-4" aria-hidden />
-              )}
+      {/* Figma: 3 direct columns — link col 1, link col 2, detail card — with justify-between */}
+      <div className="flex min-w-[946px] items-start justify-between gap-6 2xl:min-w-0 2xl:gap-0">
+        {desktop.columns.map((column) => (
+          <div key={column.id} className="flex w-[220px] shrink-0 flex-col gap-[7px] 2xl:w-[260px]">
+            {column.title ? (
+              <p className="pl-[10px] text-base font-light leading-none text-[#838383]">{column.title}</p>
+            ) : (
+              <div className="h-4" aria-hidden />
+            )}
 
-              <ul className="flex w-full flex-col gap-[3px]">
-                {column.items.map((entry) => (
-                  <li key={entry.id}>
-                    {entry.type === 'division' ? (
-                      <WowDivisionItem
-                        divisionId={entry.id}
-                        href={entry.href}
-                        active={selectedId === entry.id}
-                        onClick={() => selectItem(entry.id)}
-                        onMouseEnter={() => selectItem(entry.id)}
-                      />
-                    ) : (
-                      <WowMenuItem
-                        iconId={entry.id}
-                        label={entry.label}
-                        description={'description' in entry ? entry.description : undefined}
-                        href={entry.href}
-                        active={selectedId === entry.id}
-                        showChevron
-                        multilineDescription={
-                          'multilineDescription' in entry ? Boolean(entry.multilineDescription) : false
-                        }
-                        tall={entry.id === 'helpSupport'}
-                        onClick={() => selectItem(entry.id)}
-                        onMouseEnter={() => selectItem(entry.id)}
-                      />
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+            <ul className="flex w-full flex-col gap-[3px]">
+              {column.items.map((entry) => (
+                <li key={entry.id}>
+                  {entry.type === 'division' ? (
+                    <WowDivisionItem
+                      divisionId={entry.id}
+                      href={entry.href}
+                      active={selectedId === entry.id}
+                      onClick={() => selectItem(entry.id)}
+                      onMouseEnter={() => selectItem(entry.id)}
+                    />
+                  ) : (
+                    <WowMenuItem
+                      iconId={entry.id}
+                      label={entry.label}
+                      description={'description' in entry ? entry.description : undefined}
+                      href={entry.href}
+                      active={selectedId === entry.id}
+                      showChevron
+                      multilineDescription={
+                        'multilineDescription' in entry ? Boolean(entry.multilineDescription) : false
+                      }
+                      tall={entry.id === 'helpSupport'}
+                      onClick={() => selectItem(entry.id)}
+                      onMouseEnter={() => selectItem(entry.id)}
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
 
         {detailPanel && (
           <WowDetailCard
