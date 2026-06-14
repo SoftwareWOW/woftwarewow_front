@@ -173,14 +173,14 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-[1000] px-[15.5px] pt-4 sm:px-8 lg:px-8 lg:pt-4">
+      <header className="fixed left-0 right-0 top-0 z-[1000] px-[15.5px] pt-2 sm:px-8 lg:px-8 lg:pt-2">
         <div ref={navContainerRef}>
           <nav
             className="mx-auto flex max-w-[1370px] items-center justify-between rounded-[8px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
             aria-label={navbar.mainNavigation}>
             <Link href="/" className="flex shrink-0 items-center ps-5 lg:w-[289px]">
               <Image
-                className="h-[34px] w-auto dark:hidden"
+                className="h-[20px] w-auto dark:hidden"
                 src="/images/wow/wowlogo.png"
                 alt={navbar.logoAlt}
                 width={76}

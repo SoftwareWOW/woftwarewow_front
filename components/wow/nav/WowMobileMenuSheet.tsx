@@ -79,18 +79,15 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
           </div>
         )}
 
-        <div className={`flex-1 overflow-y-auto ${hasMultiplePages ? 'mt-[10px]' : 'mt-[10px]'}`}>
+        <div className="mt-[10px] flex-1 overflow-y-auto">
           <ul className="flex flex-col gap-[3px]">
             {activePage?.items.map((entry) => (
               <li key={entry.id}>
                 {'type' in entry && entry.type === 'division' ? (
-                  <WowDivisionItem
-                    label={entry.label}
-                    href={entry.href}
-                    onClick={onClose}
-                  />
+                  <WowDivisionItem divisionId={entry.id} href={entry.href} onClick={onClose} />
                 ) : (
                   <WowMenuItem
+                    iconId={entry.id}
                     label={entry.label}
                     description={'description' in entry ? entry.description : undefined}
                     href={entry.href}

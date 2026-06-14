@@ -2,8 +2,10 @@
 
 import { Link } from '@/i18n/navigation'
 import { MenuItemIcon } from './MenuItemIcon'
+import { WowDivisionLogo } from './WowDivisionLogo'
 
 type WowMenuItemProps = {
+  iconId: string
   label: string
   description?: string
   href?: string
@@ -16,6 +18,7 @@ type WowMenuItemProps = {
 }
 
 export function WowMenuItem({
+  iconId,
   label,
   description,
   href,
@@ -37,7 +40,7 @@ export function WowMenuItem({
   const content = (
     <>
       <div className="flex size-7 shrink-0 items-center justify-center rounded-[3px] border-[0.5px] border-[#e6e6e6] bg-white p-2 dark:border-dark dark:bg-dark-200">
-        <MenuItemIcon label={label} />
+        <MenuItemIcon iconId={iconId} />
       </div>
       <div className="relative min-w-0 flex-1">
         <p className="text-sm font-light leading-none text-black dark:text-backgroundBody">{label}</p>
@@ -85,23 +88,21 @@ export function WowMenuItem({
 }
 
 type WowDivisionItemProps = {
-  label: string
+  divisionId: string
   href?: string
   onClick?: () => void
   onMouseEnter?: () => void
   active?: boolean
 }
 
-export function WowDivisionItem({ label, href, onClick, onMouseEnter, active = false }: WowDivisionItemProps) {
+export function WowDivisionItem({ divisionId, href, onClick, onMouseEnter, active = false }: WowDivisionItemProps) {
   const className = `flex w-[203px] flex-col items-start justify-center rounded-[3px] px-[10px] py-[15px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
     active
       ? 'bg-black/[0.04] dark:bg-white/[0.06]'
       : 'bg-white hover:bg-black/[0.02] dark:bg-dark-200 dark:hover:bg-white/[0.04]'
   }`
 
-  const content = (
-    <span className="text-sm font-light leading-none tracking-tight text-black dark:text-backgroundBody">{label}</span>
-  )
+  const content = <WowDivisionLogo divisionId={divisionId} />
 
   if (href) {
     return (

@@ -22,9 +22,9 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
   }, [item.id, desktop.defaultSelection])
 
   const selectedItem = allItems.find((entry) => entry.id === selectedId) ?? allItems[0]
-  const panelKey = selectedItem?.detailPanel ?? 'default'
   const detailPanel =
-    panelKey === 'exploreDefault' ? detailPanels.exploreDefault : detailPanels.default
+    (selectedId && detailPanels[selectedId as keyof typeof detailPanels]) ??
+    detailPanels.default
 
   const selectItem = (id: string) => setSelectedId(id)
 
@@ -48,7 +48,7 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
                 <li key={entry.id}>
                   {entry.type === 'division' ? (
                     <WowDivisionItem
-                      label={entry.label}
+                      divisionId={entry.id}
                       href={entry.href}
                       active={selectedId === entry.id}
                       onClick={() => selectItem(entry.id)}
@@ -56,6 +56,7 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
                     />
                   ) : (
                     <WowMenuItem
+                      iconId={entry.id}
                       label={entry.label}
                       description={'description' in entry ? entry.description : undefined}
                       href={entry.href}
