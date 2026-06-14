@@ -47,47 +47,53 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
     <div
       role="region"
       aria-label={item.label}
-      className="animate-mega-menu-in mx-auto mt-2 max-w-[1370px] overflow-hidden rounded-[10px] bg-white dark:bg-dark-200"
-      style={{ padding: `${desktop.paddingY}px ${desktop.paddingX}px` }}>
-      <div className="flex items-start justify-between">
-        {desktop.columns.map((column) => (
-          <div key={column.id} className="flex shrink-0 flex-col gap-[7px]">
-            {column.title ? (
-              <p className="w-[260px] pl-[10px] text-base font-light leading-none text-[#838383]">{column.title}</p>
-            ) : (
-              <div className="h-4 w-[260px]" aria-hidden />
-            )}
+      className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200"
+      style={{
+        padding: `${desktop.paddingY}px clamp(24px, 4vw, ${desktop.paddingX}px)`,
+      }}>
+      <div className="flex flex-col gap-8 2xl:flex-row 2xl:items-start 2xl:justify-between">
+        <div className="flex min-w-0 flex-col gap-8 sm:flex-row sm:items-start sm:gap-6 2xl:gap-[98px]">
+          {desktop.columns.map((column) => (
+            <div key={column.id} className="flex min-w-0 shrink-0 flex-col gap-[7px] sm:w-[220px] 2xl:w-[260px]">
+              {column.title ? (
+                <p className="pl-[10px] text-base font-light leading-none text-[#838383]">{column.title}</p>
+              ) : (
+                <div className="h-4" aria-hidden />
+              )}
 
-            <ul className="flex w-[260px] flex-col gap-[3px]">
-              {column.items.map((entry) => (
-                <li key={entry.id}>
-                  {entry.type === 'division' ? (
-                    <WowDivisionItem
-                      divisionId={entry.id}
-                      href={entry.href}
-                      active={selectedId === entry.id}
-                      onClick={() => selectItem(entry.id)}
-                      onMouseEnter={() => selectItem(entry.id)}
-                    />
-                  ) : (
-                    <WowMenuItem
-                      iconId={entry.id}
-                      label={entry.label}
-                      description={'description' in entry ? entry.description : undefined}
-                      href={entry.href}
-                      active={selectedId === entry.id}
-                      showChevron
-                      multilineDescription={'multilineDescription' in entry ? Boolean(entry.multilineDescription) : false}
-                      tall={entry.id === 'helpSupport'}
-                      onClick={() => selectItem(entry.id)}
-                      onMouseEnter={() => selectItem(entry.id)}
-                    />
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+              <ul className="flex w-full flex-col gap-[3px]">
+                {column.items.map((entry) => (
+                  <li key={entry.id}>
+                    {entry.type === 'division' ? (
+                      <WowDivisionItem
+                        divisionId={entry.id}
+                        href={entry.href}
+                        active={selectedId === entry.id}
+                        onClick={() => selectItem(entry.id)}
+                        onMouseEnter={() => selectItem(entry.id)}
+                      />
+                    ) : (
+                      <WowMenuItem
+                        iconId={entry.id}
+                        label={entry.label}
+                        description={'description' in entry ? entry.description : undefined}
+                        href={entry.href}
+                        active={selectedId === entry.id}
+                        showChevron
+                        multilineDescription={
+                          'multilineDescription' in entry ? Boolean(entry.multilineDescription) : false
+                        }
+                        tall={entry.id === 'helpSupport'}
+                        onClick={() => selectItem(entry.id)}
+                        onMouseEnter={() => selectItem(entry.id)}
+                      />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
         {detailPanel && (
           <WowDetailCard

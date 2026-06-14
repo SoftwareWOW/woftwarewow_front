@@ -25,23 +25,36 @@ export default function WowDetailCard({
     imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
 
   return (
-    <div className="flex w-[426px] shrink-0 flex-col gap-[30px] rounded-[13px] bg-white p-5 dark:bg-dark-200">
-      <div className="relative h-[262px] w-full overflow-hidden rounded-[8px]">
-        <Image src={imageSrcResolved} alt="" fill className="object-cover" sizes="426px" />
+    <div className="flex w-full min-w-0 shrink-0 flex-col gap-[30px] rounded-[13px] bg-white p-5 2xl:w-[426px] dark:bg-dark-200">
+      <div className="relative h-[200px] w-full overflow-hidden rounded-[8px] sm:h-[230px] 2xl:h-[262px]">
+        <Image
+          src={imageSrcResolved}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="(max-width: 1430px) 360px, 426px"
+        />
       </div>
 
       <div className="flex flex-col gap-[13px]">
-        <p className="text-xl font-medium leading-none text-black dark:text-backgroundBody">{title}</p>
+        <p className="text-lg font-medium leading-none text-black 2xl:text-xl dark:text-backgroundBody">{title}</p>
 
-        <div className="text-base font-light leading-none text-black dark:text-backgroundBody">
+        <div className="text-sm font-light leading-none text-black 2xl:text-base dark:text-backgroundBody">
           <p>{description}</p>
           <p className="mt-4">Includes:</p>
         </div>
 
-        <ul className="flex flex-col gap-1.5">
+        <ul className="flex flex-col gap-[6px]">
           {includes.map((item) => (
-            <li key={item} className="flex items-center gap-2.5">
-              <Image src="/images/wow/nav/checkmark.png" alt="" width={12} height={12} className="shrink-0" aria-hidden />
+            <li key={item} className="flex items-center gap-[10px]">
+              <Image
+                src="/images/wow/nav/checkmark.png"
+                alt=""
+                width={12}
+                height={12}
+                className="size-3 shrink-0"
+                aria-hidden
+              />
               <span className="text-sm font-light leading-none text-black dark:text-backgroundBody">{item}</span>
             </li>
           ))}

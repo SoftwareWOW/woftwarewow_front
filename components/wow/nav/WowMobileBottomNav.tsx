@@ -13,7 +13,7 @@ type WowMobileBottomNavProps = {
 export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMobileBottomNavProps) {
   return (
     <nav
-      className="fixed inset-x-[15px] bottom-[calc(16px+env(safe-area-inset-bottom))] z-[1002] flex rounded-[3px] bg-primary p-[5px] lg:hidden"
+      className="fixed inset-x-[15px] bottom-[calc(16px+env(safe-area-inset-bottom))] z-[1002] flex h-[70px] max-w-[410px] rounded-[3px] bg-primary p-[5px] xl:hidden sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2"
       aria-label="Mobile navigation">
       {items.map((item) => {
         const iconSrc = mobileBottomNavIcons[item.id]

@@ -178,7 +178,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           <nav
             className="mx-auto flex max-w-[1370px] items-center justify-between rounded-[8px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
             aria-label={navbar.mainNavigation}>
-            <Link href="/" className="flex shrink-0 items-center ps-5 lg:w-[289px]">
+            <Link href="/" className="flex shrink-0 items-center ps-5 xl:w-[220px] 2xl:w-[289px]">
               <Image
                 className="h-[20px] w-auto dark:hidden"
                 src={navbarBrandLogo.light}
@@ -199,7 +199,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               />
             </Link>
 
-            <ul className="hidden items-center gap-[5px] lg:flex">
+            <ul className="hidden items-center gap-[5px] xl:flex">
               {navigation.items.map((item) => {
                 const isActive = activeMenuId === item.id
 
@@ -211,7 +211,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                     <button
                       type="button"
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`flex items-center gap-[10px] rounded-[40px] p-8 text-sm font-normal uppercase tracking-[2.1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+                      className={`flex items-center gap-[10px] rounded-[40px] px-5 py-6 text-sm font-normal uppercase tracking-[2.1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 2xl:px-8 2xl:py-8 ${
                         isActive
                           ? 'bg-black/[0.04] text-black dark:bg-white/[0.06] dark:text-backgroundBody'
                           : 'text-black/50 hover:bg-black/[0.03] hover:text-black dark:text-dark-100 dark:hover:bg-white/[0.04] dark:hover:text-backgroundBody'
@@ -234,7 +234,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               <button
                 type="button"
                 onClick={() => setActionMenuOpen((open) => !open)}
-                className={`${mobileActionBtnClass} lg:hidden ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                className={`${mobileActionBtnClass} xl:hidden ${actionMenuOpen ? 'bg-primary/80' : ''}`}
                 aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
                 aria-expanded={actionMenuOpen}>
                 {mainIcon}
@@ -243,7 +243,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               <button
                 type="button"
                 onClick={() => setActionMenuOpen((open) => !open)}
-                className={`${desktopActionBtnClass} hidden lg:flex ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                className={`${desktopActionBtnClass} hidden xl:flex ${actionMenuOpen ? 'bg-primary/80' : ''}`}
                 aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
                 aria-expanded={actionMenuOpen}>
                 {mainIcon}
@@ -282,7 +282,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
           {activeItem && (
             <div
-              className="hidden lg:block"
+              className="hidden xl:block"
               onMouseEnter={() => openMegaMenu(activeItem.id)}
               onMouseLeave={scheduleCloseMegaMenu}>
               <WowMegaMenuPanel
