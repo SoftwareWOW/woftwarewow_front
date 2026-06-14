@@ -2,11 +2,11 @@
 
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
-import logoDark from '@/public/images/logo-wow-white.svg'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
+import { navbarBrandLogo } from './nav/nav-brand-assets'
 import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
 import WowMobileBottomNav from './nav/WowMobileBottomNav'
 import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
@@ -181,18 +181,20 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
             <Link href="/" className="flex shrink-0 items-center ps-5 lg:w-[289px]">
               <Image
                 className="h-[20px] w-auto dark:hidden"
-                src="/images/wow/wowlogo.png"
+                src={navbarBrandLogo.light}
                 alt={navbar.logoAlt}
-                width={76}
-                height={21}
+                width={183}
+                height={19}
+                unoptimized
                 priority
               />
               <Image
-                className="hidden h-[34px] w-auto dark:block"
-                src={logoDark}
+                className="hidden h-[20px] w-auto dark:block"
+                src={navbarBrandLogo.dark}
                 alt={navbar.logoAltDark}
-                width={160}
-                height={48}
+                width={183}
+                height={19}
+                unoptimized
                 priority
               />
             </Link>

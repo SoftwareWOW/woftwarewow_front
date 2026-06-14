@@ -1,43 +1,30 @@
 'use client'
 
 import Image from 'next/image'
-import { navDivisionAssets } from './nav-assets'
+import { divisionBrandLogos } from './nav-brand-assets'
 
 type WowDivisionLogoProps = {
   divisionId: string
 }
 
 export function WowDivisionLogo({ divisionId }: WowDivisionLogoProps) {
-  const layers = navDivisionAssets[divisionId]
+  const src = divisionBrandLogos[divisionId]
 
-  if (!layers?.length) {
+  if (!src) {
     return null
   }
 
-  if (divisionId === 'softwareWow') {
-    return (
-      <span className="flex h-[15px] items-center gap-[1px]" aria-hidden>
-        <Image src={layers[0]} alt="" width={88} height={16} className="h-[15.79px] w-auto object-contain" />
-        <span className="relative inline-grid shrink-0">
-          <Image src={layers[1]} alt="" width={62} height={16} className="col-start-1 row-start-1 h-[15.58px] w-auto object-contain" />
-          <Image src={layers[2]} alt="" width={62} height={16} className="col-start-1 row-start-1 h-[15.58px] w-auto object-contain" />
-        </span>
-      </span>
-    )
-  }
-
-  const [wowA, wowB, label, extra] = layers
+  const isSvg = src.endsWith('.svg') || src.includes('.svg')
 
   return (
-    <span className="flex h-[15px] items-center gap-[5px]" aria-hidden>
-      <span className="relative inline-grid shrink-0">
-        <Image src={wowA} alt="" width={55} height={15} className="col-start-1 row-start-1 h-[15px] w-auto object-contain" />
-        {wowB && (
-          <Image src={wowB} alt="" width={55} height={15} className="col-start-1 row-start-1 h-[15px] w-auto object-contain" />
-        )}
-      </span>
-      {label && <Image src={label} alt="" width={100} height={15} className="h-[15px] w-auto object-contain" />}
-      {extra && <Image src={extra} alt="" width={42} height={15} className="h-[15px] w-auto object-contain" />}
-    </span>
+    <Image
+      src={src}
+      alt=""
+      width={203}
+      height={15}
+      unoptimized={isSvg}
+      className="h-[15px] w-auto max-w-[183px] object-contain object-left"
+      aria-hidden
+    />
   )
 }

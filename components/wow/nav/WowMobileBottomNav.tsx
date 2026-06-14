@@ -2,13 +2,7 @@
 
 import Image from 'next/image'
 import type { NavigationMenuItem } from './navigation-types'
-
-const navIcons: Record<string, { src: string; alt: string }> = {
-  company: { src: '/images/wow/nav/icon-company.png', alt: 'Company' },
-  forYou: { src: '/images/wow/nav/icon-for-you.png', alt: 'For you' },
-  explore: { src: '/images/wow/nav/icon-explore.png', alt: 'Explore' },
-  more: { src: '/images/wow/nav/icon-more.png', alt: 'More' },
-}
+import { mobileBottomNavIcons } from './nav-brand-assets'
 
 type WowMobileBottomNavProps = {
   items: NavigationMenuItem[]
@@ -22,7 +16,7 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
       className="fixed inset-x-[15px] bottom-[calc(16px+env(safe-area-inset-bottom))] z-[1002] flex rounded-[3px] bg-primary p-[5px] lg:hidden"
       aria-label="Mobile navigation">
       {items.map((item) => {
-        const icon = navIcons[item.id]
+        const iconSrc = mobileBottomNavIcons[item.id]
         const isActive = activeId === item.id
 
         return (
@@ -35,13 +29,13 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
             }`}
             aria-label={item.label}
             aria-expanded={isActive}>
-            {icon && (
+            {iconSrc && (
               <Image
-                src={icon.src}
+                src={iconSrc}
                 alt=""
                 width={24}
                 height={24}
-                className="size-6 brightness-0 invert"
+                className="h-6 w-auto max-w-[72px] object-contain"
                 aria-hidden
               />
             )}

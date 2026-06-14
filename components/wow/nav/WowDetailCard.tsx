@@ -8,6 +8,7 @@ import { navCardImages } from './nav-assets'
 type WowDetailCardProps = NavigationDetailPanel & {
   href?: string
   onNavigate?: () => void
+  imageSrc?: string
 }
 
 export default function WowDetailCard({
@@ -16,15 +17,17 @@ export default function WowDetailCard({
   includes,
   ctaLabel,
   image,
+  imageSrc,
   href,
   onNavigate,
 }: WowDetailCardProps) {
-  const imageSrc = navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
+  const imageSrcResolved =
+    imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
 
   return (
     <div className="flex w-[426px] shrink-0 flex-col gap-[30px] rounded-[13px] bg-white p-5 dark:bg-dark-200">
       <div className="relative h-[262px] w-full overflow-hidden rounded-[8px]">
-        <Image src={imageSrc} alt="" fill className="object-cover" sizes="426px" />
+        <Image src={imageSrcResolved} alt="" fill className="object-cover" sizes="426px" />
       </div>
 
       <div className="flex flex-col gap-[13px]">
