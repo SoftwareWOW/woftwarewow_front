@@ -16,7 +16,7 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
         navigation={dictionary.navigation}
         languageSwitcher={dictionary.languageSwitcher}
       />
-      <main>{children}</main>
+      <main className="pb-[calc(96px+env(safe-area-inset-bottom))] lg:pb-0">{children}</main>
       <WowFooter footer={dictionary.footer} />
     </div>
   )

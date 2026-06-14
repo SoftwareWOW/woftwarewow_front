@@ -1,9 +1,9 @@
 @layer components {
   $hero-radius: 32px;
+  $hero-mobile-radius: 32px;
   $hero-bg: #ededed;
-  $hero-mobile-bg: #ffffff;
+  $hero-mobile-bg: #ededed;
 
-  // Inverted (concave) corner — radial-gradient carves a smooth arc into the image
   @mixin hero-inverted-corner($corner, $color) {
     position: absolute;
     z-index: 3;
@@ -14,16 +14,20 @@
 
     @if $corner == 'tr' {
       top: 0;
-      right: 0;
-      background: radial-gradient(circle at 0 100%, transparent $hero-radius, $color $hero-radius);
-    } @else if $corner == 'br' {
-      bottom: 0;
-      right: 0;
-      background: radial-gradient(circle at 0 0, transparent $hero-radius, $color $hero-radius);
+      right: -$hero-radius;
+      background: radial-gradient(
+        circle at 100% 100%,
+        transparent $hero-radius,
+        $color calc($hero-radius + 1px)
+      );
     } @else if $corner == 'bl' {
-      bottom: 0;
+      bottom: -$hero-radius;
       left: 0;
-      background: radial-gradient(circle at 100% 0, transparent $hero-radius, $color $hero-radius);
+      background: radial-gradient(
+        circle at 100% 100%,
+        transparent $hero-radius,
+        $color calc($hero-radius + 1px)
+      );
     }
   }
 
@@ -63,14 +67,11 @@
       &::before {
         @include hero-inverted-corner('tr', $hero-bg);
       }
-
-      &::after {
-        @include hero-inverted-corner('br', $hero-bg);
-      }
     }
 
     &__text {
       @apply relative z-[1] bg-backgroundBody px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14 lg:px-16 lg:py-16;
+      border-bottom-right-radius: $hero-radius;
 
       &::before {
         @include hero-inverted-corner('bl', $hero-bg);
@@ -82,29 +83,40 @@
     }
 
     &__mobile-row {
-      @apply relative z-10 flex items-stretch;
-    }
-
-    &__mobile-perfect {
-      @apply relative px-6 pb-4 pt-1 sm:px-10;
-      min-width: min(72%, 320px);
-      background-color: $hero-mobile-bg;
-      background-image: radial-gradient(
-        circle at 100% 0,
-        transparent $hero-radius,
-        $hero-mobile-bg $hero-radius
-      );
-      background-repeat: no-repeat;
-      background-position: left bottom;
-      background-size: $hero-radius $hero-radius;
+      @apply relative z-10 flex items-stretch md:hidden;
 
       &::before {
-        @include hero-inverted-corner('tr', $hero-mobile-bg);
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -$hero-mobile-radius;
+        z-index: 4;
+        width: $hero-mobile-radius;
+        height: $hero-mobile-radius;
+        background: $hero-mobile-bg;
+        border-bottom-right-radius: $hero-mobile-radius;
+        pointer-events: none;
       }
 
       &::after {
-        @include hero-inverted-corner('br', $hero-mobile-bg);
+        content: '';
+        position: absolute;
+        left: min(72%, 320px);
+        top: 0;
+        z-index: 4;
+        width: $hero-mobile-radius;
+        height: $hero-mobile-radius;
+        background: $hero-mobile-bg;
+        border-top-left-radius: $hero-mobile-radius;
+        pointer-events: none;
       }
+    }
+
+    &__mobile-perfect {
+      @apply relative z-[2] px-6 pb-4 pt-1 sm:px-10;
+      min-width: min(72%, 320px);
+      background-color: $hero-mobile-bg;
+      border-bottom-right-radius: $hero-mobile-radius;
     }
 
     &__mobile-description {

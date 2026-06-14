@@ -5,11 +5,17 @@ import type { Dictionary } from '@/i18n/types'
 import logoDark from '@/public/images/logo-wow-white.svg'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import LanguageSwitcher from './LanguageSwitcher'
+import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
+import WowMobileBottomNav from './nav/WowMobileBottomNav'
+import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
 
-const actionBtnClass =
-  'group flex size-[58px] shrink-0 items-center justify-center rounded-[5px] bg-primary text-white transition-all duration-300 ease-out hover:bg-primary/80 sm:size-[79px]'
+const desktopActionBtnClass =
+  'group flex size-[79px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40'
+
+const mobileActionBtnClass =
+  'group flex size-[60px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40'
 
 const iconClass = 'transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
 
@@ -20,17 +26,45 @@ type WowNavbarProps = {
 }
 
 export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowNavbarProps) {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [activeMenuId, setActiveMenuId] = useState<string | null>(null)
+  const [mobileMenuId, setMobileMenuId] = useState<string | null>(null)
   const [actionMenuOpen, setActionMenuOpen] = useState(false)
   const [languageOpen, setLanguageOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const actionMenuRef = useRef<HTMLDivElement>(null)
+  const navContainerRef = useRef<HTMLDivElement>(null)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+  }, [])
+
+  const closeMegaMenu = useCallback(() => {
+    clearCloseTimer()
+    setActiveMenuId(null)
+  }, [clearCloseTimer])
+
+  const openMegaMenu = useCallback(
+    (id: string) => {
+      clearCloseTimer()
+      setActiveMenuId(id)
+    },
+    [clearCloseTimer],
+  )
+
+  const scheduleCloseMegaMenu = useCallback(() => {
+    clearCloseTimer()
+    closeTimerRef.current = setTimeout(() => setActiveMenuId(null), 180)
+  }, [clearCloseTimer])
 
   useEffect(() => {
     if (!actionMenuOpen) return
@@ -42,6 +76,33 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [actionMenuOpen])
+
+  useEffect(() => {
+    if (!activeMenuId) return
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target as Node)) {
+        closeMegaMenu()
+      }
+    }
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMegaMenu()
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [activeMenuId, closeMegaMenu])
+
+  useEffect(() => {
+    return () => clearCloseTimer()
+  }, [clearCloseTimer])
+
+  const handleToggleTheme = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark')
 
   const mainIcon = (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
@@ -107,82 +168,100 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
     </svg>
   )
 
+  const activeItem = navigation.items.find((item) => item.id === activeMenuId)
+  const mobileItem = navigation.items.find((item) => item.id === mobileMenuId) ?? null
+
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-[1000] px-4 pt-4 sm:px-8">
-        <nav className="mx-auto flex max-w-[1370px] items-center justify-between rounded-lg bg-white px-3 py-2.5 shadow-nav dark:bg-dark-200 dark:shadow-none">
-          <Link href="/" className="flex items-center gap-2 pl-3">
-            <Image
-              className="h-[34px] w-auto dark:hidden"
-              src="/images/wow/wowlogo.png"
-              alt={navbar.logoAlt}
-              width={76}
-              height={21}
-              priority
-            />
-            <Image
-              className="hidden h-[34px] w-auto dark:block"
-              src={logoDark}
-              alt={navbar.logoAltDark}
-              width={160}
-              height={48}
-              priority
-            />
-          </Link>
+      <header className="fixed left-0 right-0 top-0 z-[1000] px-[15.5px] pt-4 sm:px-8 lg:px-8 lg:pt-4">
+        <div ref={navContainerRef}>
+          <nav
+            className="mx-auto flex max-w-[1370px] items-center justify-between rounded-[8px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
+            aria-label={navbar.mainNavigation}>
+            <Link href="/" className="flex shrink-0 items-center ps-5 lg:w-[289px]">
+              <Image
+                className="h-[34px] w-auto dark:hidden"
+                src="/images/wow/wowlogo.png"
+                alt={navbar.logoAlt}
+                width={76}
+                height={21}
+                priority
+              />
+              <Image
+                className="hidden h-[34px] w-auto dark:block"
+                src={logoDark}
+                alt={navbar.logoAltDark}
+                width={160}
+                height={48}
+                priority
+              />
+            </Link>
 
-          <ul className="hidden items-center gap-1 lg:flex">
-            {navigation.items.map((item) => (
-              <li key={item.id}>
-                <button
-                  type="button"
-                  className="flex items-center gap-2 rounded-full px-6 py-4 text-xs font-normal uppercase tracking-[2.1px] text-black/50 transition hover:text-black dark:text-dark-100 dark:hover:text-backgroundBody">
-                  {item.label}
-                  <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden>
-                    <path d="M1 1.5L7 6.5L13 1.5" stroke="currentColor" strokeWidth="1.2" />
-                  </svg>
-                </button>
-              </li>
-            ))}
-          </ul>
+            <ul className="hidden items-center gap-[5px] lg:flex">
+              {navigation.items.map((item) => {
+                const isActive = activeMenuId === item.id
 
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="flex size-10 items-center justify-center rounded-md border border-secondary/10 lg:hidden dark:border-dark"
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-label={menuOpen ? navbar.closeMenu : navbar.openMenu}
-              aria-expanded={menuOpen}>
-              <span className="sr-only">{navbar.menu}</span>
-              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden>
-                <path d="M0 1H20M0 7H20M0 13H20" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            </button>
+                return (
+                  <li
+                    key={item.id}
+                    onMouseEnter={() => openMegaMenu(item.id)}
+                    onMouseLeave={scheduleCloseMegaMenu}>
+                    <button
+                      type="button"
+                      onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
+                      className={`flex items-center gap-[10px] rounded-[40px] p-8 text-sm font-normal uppercase tracking-[2.1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+                        isActive
+                          ? 'bg-black/[0.04] text-black dark:bg-white/[0.06] dark:text-backgroundBody'
+                          : 'text-black/50 hover:bg-black/[0.03] hover:text-black dark:text-dark-100 dark:hover:bg-white/[0.04] dark:hover:text-backgroundBody'
+                      }`}
+                      aria-expanded={isActive}
+                      aria-haspopup="true">
+                      {item.label}
+                      <span className={`flex shrink-0 transition-transform duration-300 ${isActive ? '' : 'rotate-180'}`}>
+                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden>
+                          <path d="M1 1.5L7 6.5L13 1.5" stroke="currentColor" strokeWidth="1.2" />
+                        </svg>
+                      </span>
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
 
             <div className="relative" ref={actionMenuRef}>
               <button
                 type="button"
                 onClick={() => setActionMenuOpen((open) => !open)}
-                className={`${actionBtnClass} ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                className={`${mobileActionBtnClass} lg:hidden ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
+                aria-expanded={actionMenuOpen}>
+                {mainIcon}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActionMenuOpen((open) => !open)}
+                className={`${desktopActionBtnClass} hidden lg:flex ${actionMenuOpen ? 'bg-primary/80' : ''}`}
                 aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
                 aria-expanded={actionMenuOpen}>
                 {mainIcon}
               </button>
 
               {actionMenuOpen && (
-                <div className="absolute left-0 top-full z-50 mt-1 flex flex-col gap-2 rounded-lg bg-white p-2 shadow-nav dark:bg-dark-200 dark:shadow-none">
+                <div className="absolute end-0 top-full z-50 mt-1 flex flex-col gap-2 rounded-lg border border-secondary/10 bg-white p-2 shadow-nav dark:border-dark dark:bg-dark-200 dark:shadow-none">
                   {mounted && (
                     <button
                       type="button"
-                      className={actionBtnClass}
+                      className={desktopActionBtnClass}
                       aria-label={navbar.toggleDarkMode}
-                      onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}>
+                      onClick={handleToggleTheme}>
                       {darkModeIcon}
                     </button>
                   )}
 
                   <button
                     type="button"
-                    className={actionBtnClass}
+                    className={desktopActionBtnClass}
                     aria-label={navbar.changeLanguage}
                     onClick={() => {
                       setActionMenuOpen(false)
@@ -191,31 +270,36 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                     {languageIcon}
                   </button>
 
-                  <button type="button" className={actionBtnClass} aria-label={navbar.openMessages}>
+                  <button type="button" className={desktopActionBtnClass} aria-label={navbar.openMessages}>
                     {messagesIcon}
                   </button>
                 </div>
               )}
             </div>
-          </div>
-        </nav>
+          </nav>
 
-        {menuOpen && (
-          <div className="mx-auto mt-2 max-w-[1370px] rounded-lg border border-secondary/10 bg-white p-4 shadow-nav dark:border-dark dark:bg-dark-200 lg:hidden">
-            <ul className="flex flex-col gap-1">
-              {navigation.items.map((item) => (
-                <li key={item.id}>
-                  <button
-                    type="button"
-                    className="w-full rounded-md px-4 py-3 text-left text-sm uppercase tracking-[2px] text-secondary/70 hover:bg-black/5 dark:text-dark-100 dark:hover:bg-white/5">
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+          {activeItem && (
+            <div
+              className="hidden lg:block"
+              onMouseEnter={() => openMegaMenu(activeItem.id)}
+              onMouseLeave={scheduleCloseMegaMenu}>
+              <WowMegaMenuPanel
+                item={activeItem}
+                detailPanels={navigation.detailPanels}
+                onNavigate={closeMegaMenu}
+              />
+            </div>
+          )}
+        </div>
       </header>
+
+      <WowMobileBottomNav
+        items={navigation.items}
+        activeId={mobileMenuId}
+        onSelect={(id) => setMobileMenuId(id || null)}
+      />
+
+      <WowMobileMenuSheet item={mobileItem} navbar={navbar} onClose={() => setMobileMenuId(null)} />
 
       <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />
     </>

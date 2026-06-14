@@ -5,16 +5,981 @@
     "siteName": "WOW Superagency"
   },
   "navigation": {
+    "detailPanels": {
+      "default": {
+        "title": "The All-In-One Engine For Modern Business Growth.",
+        "description": "For businesses seeking complete digital growth under one unified system.",
+        "includes": [
+          "Strategy & consulting",
+          "Website & app development",
+          "Branding & design",
+          "Marketing & growth campaigns",
+          "AI & automation",
+          "Sales & lead systems"
+        ],
+        "ctaLabel": "Learn more"
+      },
+      "exploreDefault": {
+        "title": "Headline",
+        "description": "For companies wanting more visibility and customers.",
+        "includes": [
+          "SEO strategy",
+          "Paid advertising",
+          "Social media campaign",
+          "Lead generation funnels",
+          "Marketing automation"
+        ],
+        "ctaLabel": "Learn more"
+      }
+    },
     "items": [
-      { "id": "company", "label": "Company" },
-      { "id": "forYou", "label": "For you" },
-      { "id": "explore", "label": "Explore" },
-      { "id": "more", "label": "More" }
+      {
+        "id": "company",
+        "label": "Company",
+        "desktop": {
+          "paddingX": 70,
+          "paddingY": 40,
+          "defaultSelection": "softwareWow",
+          "columns": [
+            {
+              "id": "divisions",
+              "title": "Divisions",
+              "items": [
+                {
+                  "id": "softwareWow",
+                  "label": "SoftwareWOW!",
+                  "type": "division",
+                  "href": "/divisions/softwarewow",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowMarketing",
+                  "label": "WOW Marketing",
+                  "type": "division",
+                  "href": "/divisions/wow-marketing",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowDesign",
+                  "label": "WOW Design",
+                  "type": "division",
+                  "href": "/divisions/wow-design",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowIntelligence",
+                  "label": "WOW Intelligence",
+                  "type": "division",
+                  "href": "/divisions/wow-intelligence",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowSocial",
+                  "label": "WOW Social",
+                  "type": "division",
+                  "href": "/divisions/wow-social",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowAccelerate",
+                  "label": "WOW Accelerate",
+                  "type": "division",
+                  "href": "/divisions/wow-accelerate",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowWebsites",
+                  "label": "WOW Websites",
+                  "type": "division",
+                  "href": "/divisions/wow-websites",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowImpact",
+                  "label": "WOW Impact",
+                  "type": "division",
+                  "href": "/divisions/wow-impact",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowHost",
+                  "label": "WOW Host",
+                  "type": "division",
+                  "href": "/divisions/wow-host",
+                  "detailPanel": "default"
+                }
+              ]
+            },
+            {
+              "id": "about",
+              "title": "About",
+              "items": [
+                {
+                  "id": "aboutUs",
+                  "label": "About us",
+                  "description": "Who we are and what we do.",
+                  "type": "link",
+                  "href": "/about",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "strategyCentre",
+                  "label": "Strategy Centre",
+                  "description": "Our strategies, and approach.",
+                  "type": "link",
+                  "href": "/about/strategy-centre",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "teamExperts",
+                  "label": "Team & Experts",
+                  "description": "The people behind our work.",
+                  "type": "link",
+                  "href": "/team",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "whySmbs",
+                  "label": "Why SMBs?",
+                  "description": "Why we focus on growing SMBs.",
+                  "type": "link",
+                  "href": "/about/why-smbs",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "partners",
+                  "label": "Partners",
+                  "description": "Our trusted collaborators.",
+                  "type": "link",
+                  "href": "/about/partners",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "whyUs",
+                  "label": "Why us?",
+                  "description": "What makes us different.",
+                  "type": "link",
+                  "href": "/about/why-us",
+                  "detailPanel": "default"
+                }
+              ]
+            }
+          ]
+        },
+        "mobile": {
+          "pages": [
+            {
+              "id": "divisions",
+              "title": "Divisions",
+              "items": [
+                {
+                  "id": "softwareWow",
+                  "label": "SoftwareWOW!",
+                  "type": "division",
+                  "href": "/divisions/softwarewow"
+                },
+                {
+                  "id": "wowMarketing",
+                  "label": "WOW Marketing",
+                  "type": "division",
+                  "href": "/divisions/wow-marketing"
+                },
+                {
+                  "id": "wowDesign",
+                  "label": "WOW Design",
+                  "type": "division",
+                  "href": "/divisions/wow-design"
+                },
+                {
+                  "id": "wowIntelligence",
+                  "label": "WOW Intelligence",
+                  "type": "division",
+                  "href": "/divisions/wow-intelligence"
+                },
+                {
+                  "id": "wowSocial",
+                  "label": "WOW Social",
+                  "type": "division",
+                  "href": "/divisions/wow-social"
+                },
+                {
+                  "id": "wowAccelerate",
+                  "label": "WOW Accelerate",
+                  "type": "division",
+                  "href": "/divisions/wow-accelerate"
+                },
+                {
+                  "id": "wowWebsites",
+                  "label": "WOW Websites",
+                  "type": "division",
+                  "href": "/divisions/wow-websites"
+                },
+                {
+                  "id": "wowImpact",
+                  "label": "WOW Impact",
+                  "type": "division",
+                  "href": "/divisions/wow-impact"
+                },
+                {
+                  "id": "wowHost",
+                  "label": "WOW Host",
+                  "type": "division",
+                  "href": "/divisions/wow-host"
+                }
+              ]
+            },
+            {
+              "id": "about",
+              "title": "About",
+              "items": [
+                {
+                  "id": "aboutUs",
+                  "label": "About us",
+                  "description": "Who we are and what we do.",
+                  "href": "/about"
+                },
+                {
+                  "id": "strategyCentre",
+                  "label": "Strategy Centre",
+                  "description": "Our strategies, and approach.",
+                  "href": "/about/strategy-centre"
+                },
+                {
+                  "id": "teamExperts",
+                  "label": "Team & Experts",
+                  "description": "The people behind our work.",
+                  "href": "/team"
+                },
+                {
+                  "id": "whySmbs",
+                  "label": "Why SMBs?",
+                  "description": "Why we focus on growing SMBs.",
+                  "href": "/about/why-smbs"
+                },
+                {
+                  "id": "partners",
+                  "label": "Partners",
+                  "description": "Our trusted collaborators.",
+                  "href": "/about/partners"
+                },
+                {
+                  "id": "whyUs",
+                  "label": "Why us?",
+                  "description": "What makes us different.",
+                  "href": "/about/why-us"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "forYou",
+        "label": "For You",
+        "desktop": {
+          "paddingX": 70,
+          "paddingY": 60,
+          "defaultSelection": "buildLaunch",
+          "columns": [
+            {
+              "id": "solutionsForYou",
+              "title": "Solutions For You",
+              "items": [
+                {
+                  "id": "buildLaunch",
+                  "label": "Build & Launch",
+                  "description": "Launch your business or product from idea to market.",
+                  "type": "link",
+                  "href": "/for-you/build-and-launch",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "softwareTechnology",
+                  "label": "Software & Technology",
+                  "description": "Custom software and digital technology solutions.",
+                  "type": "link",
+                  "href": "/for-you/software-and-technology",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "marketingGrowth",
+                  "label": "Marketing & Growth",
+                  "description": "Strategies to attract customers and grow faster.",
+                  "type": "link",
+                  "href": "/for-you/marketing-and-growth",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "socialCommunity",
+                  "label": "Social & Community",
+                  "description": "Build engagement and strong online communities.",
+                  "type": "link",
+                  "href": "/for-you/social-and-community",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "salesRevenue",
+                  "label": "Sales & Revenue",
+                  "description": "Increase conversions and drive more revenue.",
+                  "type": "link",
+                  "href": "/for-you/sales-and-revenue",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "aiAutomation",
+                  "label": "AI & Automation",
+                  "description": "Automate work with intelligent AI systems.",
+                  "type": "link",
+                  "href": "/for-you/ai-and-automation",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "brandingCreative",
+                  "label": "Branding & Creative",
+                  "description": "Create a strong and memorable brand identity.",
+                  "type": "link",
+                  "href": "/for-you/branding-and-creative",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "hostingInfrastructure",
+                  "label": "Hosting & Infrastructure",
+                  "description": "Secure hosting and reliable digital infrastructure.",
+                  "type": "link",
+                  "href": "/for-you/hosting-and-infrastructure",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "learningEvents",
+                  "label": "Learning & Events",
+                  "description": "Training and events for skills and growth.",
+                  "type": "link",
+                  "href": "/for-you/learning-and-events",
+                  "detailPanel": "default"
+                }
+              ]
+            },
+            {
+              "id": "selectYourPackage",
+              "title": "SELECT Your Package",
+              "items": [
+                {
+                  "id": "startupLaunchPackage",
+                  "label": "Startup Launch Package",
+                  "description": "Everything needed to launch a startup.",
+                  "type": "package",
+                  "href": "/packages/startup-launch",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "businessGrowthPackage",
+                  "label": "Business Growth Package",
+                  "description": "Tools and strategies to scale your business.",
+                  "type": "package",
+                  "href": "/packages/business-growth",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "digitalTransformationPackage",
+                  "label": "Digital Transformation Package",
+                  "description": "Modernize your business with digital systems.",
+                  "type": "package",
+                  "href": "/packages/digital-transformation",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "aiAutomationPackage",
+                  "label": "AI Automation Package",
+                  "description": "Smart automation for efficient operations.",
+                  "type": "package",
+                  "href": "/packages/ai-automation",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "saasProductDevelopmentPackage",
+                  "label": "SaaS Product Development Package",
+                  "description": "Build and launch scalable SaaS products.",
+                  "type": "package",
+                  "href": "/packages/saas-product-development",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "brandAuthorityPackage",
+                  "label": "Brand Authority Package",
+                  "description": "For entrepreneurs and companies building reputation.",
+                  "type": "package",
+                  "href": "/packages/brand-authority",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "websiteGrowthEnginePackage",
+                  "label": "Website Growth Engine Package",
+                  "description": "A website designed to attract and convert.",
+                  "type": "package",
+                  "href": "/packages/website-growth-engine",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "salesAccelerationPackage",
+                  "label": "Sales Acceleration Package",
+                  "description": "Systems to increase sales and close deals.",
+                  "type": "package",
+                  "href": "/packages/sales-acceleration",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "enterpriseInfrastructurePackage",
+                  "label": "Enterprise Infrastructure Package",
+                  "description": "For companies needing secure digital infrastructure.",
+                  "type": "package",
+                  "href": "/packages/enterprise-infrastructure",
+                  "detailPanel": "default"
+                }
+              ]
+            }
+          ]
+        },
+        "mobile": {
+          "pages": [
+            {
+              "id": "solutionsForYou",
+              "title": "Solutions For You",
+              "items": [
+                {
+                  "id": "buildLaunch",
+                  "label": "Build & Launch",
+                  "description": "Launch your business or product from idea to market.",
+                  "href": "/for-you/build-and-launch"
+                },
+                {
+                  "id": "softwareTechnology",
+                  "label": "Software & Technology",
+                  "description": "Custom software and digital technology solutions.",
+                  "href": "/for-you/software-and-technology"
+                },
+                {
+                  "id": "marketingGrowth",
+                  "label": "Marketing & Growth",
+                  "description": "Strategies to attract customers and grow faster.",
+                  "href": "/for-you/marketing-and-growth"
+                },
+                {
+                  "id": "socialCommunity",
+                  "label": "Social & Community",
+                  "description": "Build engagement and strong online communities.",
+                  "href": "/for-you/social-and-community"
+                },
+                {
+                  "id": "salesRevenue",
+                  "label": "Sales & Revenue",
+                  "description": "Increase conversions and drive more revenue.",
+                  "href": "/for-you/sales-and-revenue"
+                },
+                {
+                  "id": "aiAutomation",
+                  "label": "AI & Automation",
+                  "description": "Automate work with intelligent AI systems.",
+                  "href": "/for-you/ai-and-automation"
+                },
+                {
+                  "id": "brandingCreative",
+                  "label": "Branding & Creative",
+                  "description": "Create a strong and memorable brand identity.",
+                  "href": "/for-you/branding-and-creative"
+                },
+                {
+                  "id": "hostingInfrastructure",
+                  "label": "Hosting & Infrastructure",
+                  "description": "Secure hosting and reliable digital infrastructure.",
+                  "href": "/for-you/hosting-and-infrastructure"
+                },
+                {
+                  "id": "learningEvents",
+                  "label": "Learning & Events",
+                  "description": "Training and events for skills and growth.",
+                  "href": "/for-you/learning-and-events"
+                }
+              ]
+            },
+            {
+              "id": "selectYourPackage",
+              "title": "SELECT Your Package",
+              "items": [
+                {
+                  "id": "startupLaunchPackage",
+                  "label": "Startup Launch Package",
+                  "description": "Everything needed to launch a startup.",
+                  "href": "/packages/startup-launch"
+                },
+                {
+                  "id": "businessGrowthPackage",
+                  "label": "Business Growth Package",
+                  "description": "Tools and strategies to scale your business.",
+                  "href": "/packages/business-growth"
+                },
+                {
+                  "id": "digitalTransformationPackage",
+                  "label": "Digital Transformation Package",
+                  "description": "Modernize your business with digital systems.",
+                  "href": "/packages/digital-transformation"
+                },
+                {
+                  "id": "aiAutomationPackage",
+                  "label": "AI Automation Package",
+                  "description": "Smart automation for efficient operations.",
+                  "href": "/packages/ai-automation"
+                },
+                {
+                  "id": "saasProductDevelopmentPackage",
+                  "label": "SaaS Product Development Package",
+                  "description": "Build and launch scalable SaaS products.",
+                  "href": "/packages/saas-product-development"
+                },
+                {
+                  "id": "brandAuthorityPackage",
+                  "label": "Brand Authority Package",
+                  "description": "For entrepreneurs and companies building reputation.",
+                  "href": "/packages/brand-authority"
+                },
+                {
+                  "id": "websiteGrowthEnginePackage",
+                  "label": "Website Growth Engine Package",
+                  "description": "A website designed to attract and convert.",
+                  "href": "/packages/website-growth-engine"
+                },
+                {
+                  "id": "salesAccelerationPackage",
+                  "label": "Sales Acceleration Package",
+                  "description": "Systems to increase sales and close deals.",
+                  "href": "/packages/sales-acceleration"
+                },
+                {
+                  "id": "enterpriseInfrastructurePackage",
+                  "label": "Enterprise Infrastructure Package",
+                  "description": "For companies needing secure digital infrastructure.",
+                  "href": "/packages/enterprise-infrastructure"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "explore",
+        "label": "Explore",
+        "desktop": {
+          "paddingX": 70,
+          "paddingY": 60,
+          "defaultSelection": "portfolio",
+          "columns": [
+            {
+              "id": "discover",
+              "title": null,
+              "items": [
+                {
+                  "id": "portfolio",
+                  "label": "Portfolio",
+                  "description": "Showcase of our work",
+                  "type": "link",
+                  "href": "/portfolio",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "recentWorks",
+                  "label": "Recent Works",
+                  "description": "Latest completed projects",
+                  "type": "link",
+                  "href": "/portfolio/recent",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "clients",
+                  "label": "Clients",
+                  "description": "Businesses we've worked with",
+                  "type": "link",
+                  "href": "/clients",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "partnerNetwork",
+                  "label": "Partner Network",
+                  "description": "Our strategic partners",
+                  "type": "link",
+                  "href": "/partners",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "locations",
+                  "label": "Locations",
+                  "description": "Our global presence",
+                  "type": "link",
+                  "href": "/locations",
+                  "detailPanel": "exploreDefault"
+                }
+              ]
+            },
+            {
+              "id": "industries",
+              "title": "Industries",
+              "items": [
+                {
+                  "id": "startupsEntrepreneurs",
+                  "label": "Startups & Entrepreneurs",
+                  "description": "Built for new ventures",
+                  "type": "link",
+                  "href": "/industries/startups-and-entrepreneurs",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "professionalServices",
+                  "label": "Professional Services",
+                  "description": "Solutions for service firms",
+                  "type": "link",
+                  "href": "/industries/professional-services",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "retailEcommerce",
+                  "label": "Retail & eCommerce",
+                  "description": "Growth for online stores",
+                  "type": "link",
+                  "href": "/industries/retail-and-ecommerce",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "healthcareWellness",
+                  "label": "Healthcare & Wellness",
+                  "description": "Digital for health industries",
+                  "type": "link",
+                  "href": "/industries/healthcare-and-wellness",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "hospitalityTourism",
+                  "label": "Hospitality & Tourism",
+                  "description": "Solutions for guest experiences",
+                  "type": "link",
+                  "href": "/industries/hospitality-and-tourism",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "financeRealEstate",
+                  "label": "Finance & Real Estate",
+                  "description": "Tools for financial growth",
+                  "type": "link",
+                  "href": "/industries/finance-and-real-estate",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "organizationsNonprofits",
+                  "label": "Organizations & Nonprofits",
+                  "description": "Support mission-driven teams",
+                  "type": "link",
+                  "href": "/industries/organizations-and-nonprofits",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "educationTraining",
+                  "label": "Education & Training",
+                  "description": "Learning-focused solutions",
+                  "type": "link",
+                  "href": "/industries/education-and-training",
+                  "detailPanel": "exploreDefault"
+                },
+                {
+                  "id": "technologySaas",
+                  "label": "Technology & SaaS",
+                  "description": "Built for tech companies",
+                  "type": "link",
+                  "href": "/industries/technology-and-saas",
+                  "detailPanel": "exploreDefault"
+                }
+              ]
+            }
+          ]
+        },
+        "mobile": {
+          "pages": [
+            {
+              "id": "ourMenu",
+              "title": "Our Menu",
+              "items": [
+                {
+                  "id": "portfolio",
+                  "label": "Portfolio",
+                  "description": "Showcase of our work",
+                  "href": "/portfolio"
+                },
+                {
+                  "id": "recentWorks",
+                  "label": "Recent Works",
+                  "description": "Latest completed projects",
+                  "href": "/portfolio/recent"
+                },
+                {
+                  "id": "clients",
+                  "label": "Clients",
+                  "description": "Businesses we've worked with",
+                  "href": "/clients"
+                },
+                {
+                  "id": "partnerNetwork",
+                  "label": "Partner Network",
+                  "description": "Our strategic partners",
+                  "href": "/partners"
+                },
+                {
+                  "id": "locations",
+                  "label": "Locations",
+                  "description": "Our global presence",
+                  "href": "/locations"
+                }
+              ]
+            },
+            {
+              "id": "industries",
+              "title": "Industries",
+              "items": [
+                {
+                  "id": "startupsEntrepreneurs",
+                  "label": "Startups & Entrepreneurs",
+                  "description": "Built for new ventures",
+                  "href": "/industries/startups-and-entrepreneurs"
+                },
+                {
+                  "id": "professionalServices",
+                  "label": "Professional Services",
+                  "description": "Solutions for service firms",
+                  "href": "/industries/professional-services"
+                },
+                {
+                  "id": "retailEcommerce",
+                  "label": "Retail & eCommerce",
+                  "description": "Growth for online stores",
+                  "href": "/industries/retail-and-ecommerce"
+                },
+                {
+                  "id": "healthcareWellness",
+                  "label": "Healthcare & Wellness",
+                  "description": "Digital for health industries",
+                  "href": "/industries/healthcare-and-wellness"
+                },
+                {
+                  "id": "hospitalityTourism",
+                  "label": "Hospitality & Tourism",
+                  "description": "Solutions for guest experiences",
+                  "href": "/industries/hospitality-and-tourism"
+                },
+                {
+                  "id": "financeRealEstate",
+                  "label": "Finance & Real Estate",
+                  "description": "Tools for financial growth",
+                  "href": "/industries/finance-and-real-estate"
+                },
+                {
+                  "id": "organizationsNonprofits",
+                  "label": "Organizations & Nonprofits",
+                  "description": "Support mission-driven teams",
+                  "href": "/industries/organizations-and-nonprofits"
+                },
+                {
+                  "id": "educationTraining",
+                  "label": "Education & Training",
+                  "description": "Learning-focused solutions",
+                  "href": "/industries/education-and-training"
+                },
+                {
+                  "id": "technologySaas",
+                  "label": "Technology & SaaS",
+                  "description": "Built for tech companies",
+                  "href": "/industries/technology-and-saas"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "more",
+        "label": "More",
+        "desktop": {
+          "paddingX": 70,
+          "paddingY": 60,
+          "defaultSelection": "meet",
+          "columns": [
+            {
+              "id": "resources",
+              "title": null,
+              "items": [
+                {
+                  "id": "meet",
+                  "label": "Meet",
+                  "description": "Connect with our team",
+                  "type": "link",
+                  "href": "/contact",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "thinkTank",
+                  "label": "Think Tank",
+                  "description": "Ideas and strategy hub",
+                  "type": "link",
+                  "href": "/ai-blog",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "quotation",
+                  "label": "Quotation Request",
+                  "description": "Get a project quote",
+                  "type": "link",
+                  "href": "/contact",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "clientPortal",
+                  "label": "Client Portal",
+                  "description": "Access your dashboard",
+                  "type": "link",
+                  "href": "/password",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "whiteLabel",
+                  "label": "White-label",
+                  "description": "Rebrand our services",
+                  "type": "link",
+                  "href": "/services",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "affiliate",
+                  "label": "Affiliate & Referral",
+                  "description": "Earn through referrals",
+                  "type": "link",
+                  "href": "/contact",
+                  "detailPanel": "default"
+                }
+              ]
+            },
+            {
+              "id": "support",
+              "title": null,
+              "items": [
+                {
+                  "id": "insights",
+                  "label": "Insights",
+                  "description": "Articles and insights",
+                  "type": "link",
+                  "href": "/ai-blog",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "careers",
+                  "label": "Careers (We're Hiring)",
+                  "description": "Join our team",
+                  "type": "link",
+                  "href": "/career",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "helpSupport",
+                  "label": "Help & Support",
+                  "description": "• Help Articles\n• Ticket Management\n• Resources & Tools\n• Knowledgebase",
+                  "multilineDescription": true,
+                  "type": "link",
+                  "href": "/faq",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "brandKit",
+                  "label": "Brand Kit",
+                  "description": "Logos and brand assets",
+                  "type": "link",
+                  "href": "/about",
+                  "detailPanel": "default"
+                }
+              ]
+            }
+          ]
+        },
+        "mobile": {
+          "pages": [
+            {
+              "id": "more",
+              "title": "More",
+              "items": [
+                {
+                  "id": "meet",
+                  "label": "Meet",
+                  "description": "Connect with our team",
+                  "href": "/contact"
+                },
+                {
+                  "id": "thinkTank",
+                  "label": "Think Tank",
+                  "description": "Ideas and strategy hub",
+                  "href": "/ai-blog"
+                },
+                {
+                  "id": "quotation",
+                  "label": "Quotation Request",
+                  "description": "Get a project quote",
+                  "href": "/contact"
+                },
+                {
+                  "id": "clientPortal",
+                  "label": "Client Portal",
+                  "description": "Access your dashboard",
+                  "href": "/password"
+                },
+                {
+                  "id": "whiteLabel",
+                  "label": "White-label",
+                  "description": "Rebrand our services",
+                  "href": "/services"
+                },
+                {
+                  "id": "affiliate",
+                  "label": "Affiliate & Referral",
+                  "description": "Earn through referrals",
+                  "href": "/contact"
+                },
+                {
+                  "id": "insights",
+                  "label": "Insights",
+                  "description": "Articles and insights",
+                  "href": "/ai-blog"
+                },
+                {
+                  "id": "careers",
+                  "label": "Careers (We're Hiring)",
+                  "description": "Join our team",
+                  "href": "/career"
+                },
+                {
+                  "id": "helpSupport",
+                  "label": "Help & Support",
+                  "description": "• Help Articles\n• Ticket Management\n• Resources & Tools\n• Knowledgebase",
+                  "multilineDescription": true,
+                  "href": "/faq"
+                },
+                {
+                  "id": "brandKit",
+                  "label": "Brand Kit",
+                  "description": "Logos and brand assets",
+                  "href": "/about"
+                }
+              ]
+            }
+          ]
+        }
+      }
     ]
   },
   "navbar": {
     "logoAlt": "WOW",
     "logoAltDark": "WOW Superagency",
+    "mainNavigation": "Main navigation",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "menu": "Menu",
@@ -30,12 +995,36 @@
     "close": "Close",
     "selected": "Selected",
     "options": [
-      { "locale": "en-CA", "name": "English (Canada)", "code": "en-CA" },
-      { "locale": "en-US", "name": "English (United States)", "code": "en-US" },
-      { "locale": "en-GB", "name": "English (United Kingdom)", "code": "en-GB" },
-      { "locale": "fr-CA", "name": "French (Canada)", "code": "fr-CA" },
-      { "locale": "ar-SA", "name": "Arabic (Saudi Arabia)", "code": "ar-SA" },
-      { "locale": "ar-AE", "name": "Arabic (UAE)", "code": "ar-AE" }
+      {
+        "locale": "en-CA",
+        "name": "English (Canada)",
+        "code": "en-CA"
+      },
+      {
+        "locale": "en-US",
+        "name": "English (United States)",
+        "code": "en-US"
+      },
+      {
+        "locale": "en-GB",
+        "name": "English (United Kingdom)",
+        "code": "en-GB"
+      },
+      {
+        "locale": "fr-CA",
+        "name": "French (Canada)",
+        "code": "fr-CA"
+      },
+      {
+        "locale": "ar-SA",
+        "name": "Arabic (Saudi Arabia)",
+        "code": "ar-SA"
+      },
+      {
+        "locale": "ar-AE",
+        "name": "Arabic (UAE)",
+        "code": "ar-AE"
+      }
     ]
   },
   "hero": {
@@ -59,43 +1048,124 @@
       "line1": "90 Burnhamthorpe Rd West, 1400",
       "line2": "Mississauga, ON L5B 3C3 🇨🇦"
     },
-    "social": ["Facebook", "YouTube", "Instagram", "LinkedIn"],
+    "social": [
+      "Facebook",
+      "YouTube",
+      "Instagram",
+      "LinkedIn"
+    ],
     "sections": [
       {
         "id": "company",
         "title": "Company",
         "links": [
-          { "id": "about", "label": "About", "href": "/about" },
-          { "id": "about02", "label": "About 02", "href": "/about-02" },
-          { "id": "faq", "label": "FAQ", "href": "/faq" },
-          { "id": "contact", "label": "Contact", "href": "/contact" },
-          { "id": "team", "label": "Team", "href": "/team" },
-          { "id": "teamDetails", "label": "Team Details", "href": "/team" },
-          { "id": "career", "label": "Career", "href": "/career" },
-          { "id": "career02", "label": "Career 02", "href": "/career-02" },
-          { "id": "careerDetails", "label": "Career Details", "href": "/career" }
+          {
+            "id": "about",
+            "label": "About",
+            "href": "/about"
+          },
+          {
+            "id": "about02",
+            "label": "About 02",
+            "href": "/about-02"
+          },
+          {
+            "id": "faq",
+            "label": "FAQ",
+            "href": "/faq"
+          },
+          {
+            "id": "contact",
+            "label": "Contact",
+            "href": "/contact"
+          },
+          {
+            "id": "team",
+            "label": "Team",
+            "href": "/team"
+          },
+          {
+            "id": "teamDetails",
+            "label": "Team Details",
+            "href": "/team"
+          },
+          {
+            "id": "career",
+            "label": "Career",
+            "href": "/career"
+          },
+          {
+            "id": "career02",
+            "label": "Career 02",
+            "href": "/career-02"
+          },
+          {
+            "id": "careerDetails",
+            "label": "Career Details",
+            "href": "/career"
+          }
         ]
       },
       {
         "id": "resources",
         "title": "Resources",
         "links": [
-          { "id": "blog", "label": "Blog", "href": "/ai-blog" },
-          { "id": "blog02", "label": "Blog 02", "href": "/seo-blog" },
-          { "id": "projects", "label": "Projects", "href": "/digital-agency/project" },
-          { "id": "projects02", "label": "Projects 02", "href": "/portfolio-agency/case-study" },
-          { "id": "projects03", "label": "Projects 03", "href": "/agency-projects" },
-          { "id": "pricing", "label": "Pricing", "href": "/pricing" }
+          {
+            "id": "blog",
+            "label": "Blog",
+            "href": "/ai-blog"
+          },
+          {
+            "id": "blog02",
+            "label": "Blog 02",
+            "href": "/seo-blog"
+          },
+          {
+            "id": "projects",
+            "label": "Projects",
+            "href": "/digital-agency/project"
+          },
+          {
+            "id": "projects02",
+            "label": "Projects 02",
+            "href": "/portfolio-agency/case-study"
+          },
+          {
+            "id": "projects03",
+            "label": "Projects 03",
+            "href": "/agency-projects"
+          },
+          {
+            "id": "pricing",
+            "label": "Pricing",
+            "href": "/pricing"
+          }
         ]
       },
       {
         "id": "links",
         "title": "Links",
         "links": [
-          { "id": "changelog", "label": "Changelog", "href": "/changelog" },
-          { "id": "password", "label": "Password Protected", "href": "/password" },
-          { "id": "terms", "label": "Terms of Service", "href": "/terms" },
-          { "id": "privacy", "label": "Privacy Policy", "href": "/policy" }
+          {
+            "id": "changelog",
+            "label": "Changelog",
+            "href": "/changelog"
+          },
+          {
+            "id": "password",
+            "label": "Password Protected",
+            "href": "/password"
+          },
+          {
+            "id": "terms",
+            "label": "Terms of Service",
+            "href": "/terms"
+          },
+          {
+            "id": "privacy",
+            "label": "Privacy Policy",
+            "href": "/policy"
+          }
         ]
       }
     ],
