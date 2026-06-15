@@ -10,13 +10,13 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
   const dictionary = await getDictionary(locale)
 
   return (
-    <div className="bg-backgroundBody text-secondary dark:bg-dark dark:text-backgroundBody">
+    <div className="overflow-x-hidden bg-backgroundBody text-secondary dark:bg-dark dark:text-backgroundBody">
       <WowNavbar
         navbar={dictionary.navbar}
         navigation={dictionary.navigation}
         languageSwitcher={dictionary.languageSwitcher}
       />
-      <main className="pb-[calc(96px+env(safe-area-inset-bottom))] lg:pb-0">{children}</main>
+      <main className="pb-[calc(96px+env(safe-area-inset-bottom))] md:pb-0">{children}</main>
       <WowFooter footer={dictionary.footer} />
     </div>
   )

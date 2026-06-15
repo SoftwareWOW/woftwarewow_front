@@ -48,11 +48,4 @@ export const divisionProfilePictures = {
   },
 } as const
 
-export const mobileBottomNavIcons: Record<string, string> = {
-  company: assetPath('PNG', 'Superagency MonoWhite.png'),
-  forYou: assetPath('PNG', 'SoftwareWOW MonoWhite.png'),
-  explore: assetPath('PNG', 'Hub MonoWhite.png'),
-  more: assetPath('PNG', 'Events MonoWhite.png'),
-}
-
 export const divisionIds = new Set(Object.keys(divisionBrandLogos))

@@ -49,13 +49,12 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
       aria-label={item.label}
       className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-x-auto rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200"
       style={{
-          maxHeight: '78vh',
-        padding: `${desktop.paddingY}px clamp(24px, 4vw, ${desktop.paddingX}px)`,
+        maxHeight: '78vh',
+        padding: `${desktop.paddingY}px clamp(16px, 3vw, ${desktop.paddingX}px)`,
       }}>
-      {/* Figma: 3 direct columns — link col 1, link col 2, detail card — with justify-between */}
-      <div className="flex min-w-[946px] items-start justify-between gap-6 2xl:min-w-0 2xl:gap-0">
+      <div className="flex w-max min-w-full items-start justify-between gap-4 lg:gap-6 2xl:w-full 2xl:min-w-0 2xl:gap-0">
         {desktop.columns.map((column) => (
-          <div key={column.id} className="flex w-[220px] shrink-0 flex-col gap-[7px] 2xl:w-[260px]">
+          <div key={column.id} className="flex w-[180px] shrink-0 flex-col gap-[7px] lg:w-[220px] 2xl:w-[260px]">
             {column.title ? (
               <p className="pl-[10px] text-base font-light leading-none text-[#838383]">{column.title}</p>
             ) : (

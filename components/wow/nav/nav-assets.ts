@@ -8,18 +8,21 @@ import {
   Calendar,
   Cloud,
   Code2,
+  Compass,
   FileText,
   FolderOpen,
   GraduationCap,
   Handshake,
+  Heart,
   HeartPulse,
   HelpCircle,
   Landmark,
-  LayoutDashboard,
+  LayoutGrid,
   Lightbulb,
   LineChart,
   MapPin,
   Megaphone,
+  MoreHorizontal,
   Network,
   Newspaper,
   Palette,
@@ -94,7 +97,7 @@ export const navMenuIcons = {
   meet: Calendar,
   thinkTank: Lightbulb,
   quotation: FileText,
-  clientPortal: LayoutDashboard,
+  clientPortal: LayoutGrid,
   whiteLabel: Tag,
   affiliate: Share2,
   insights: Newspaper,
@@ -104,6 +107,16 @@ export const navMenuIcons = {
 } as const satisfies Record<string, LucideIcon>
 
 export type NavMenuIconId = keyof typeof navMenuIcons
+
+/** Lucide icons for mobile bottom navigation tabs */
+export const mobileBottomNavIcons = {
+  company: Building2,
+  forYou: Heart,
+  explore: Compass,
+  more: MoreHorizontal,
+} as const satisfies Record<string, LucideIcon>
+
+export type MobileBottomNavIconId = keyof typeof mobileBottomNavIcons
 
 export const navCardImages = {
   default: '/images/wow/nav/cards/default.jpg',

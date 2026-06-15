@@ -26,7 +26,7 @@ export default function WowDetailCard({
     imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
 
   return (
-    <div className="flex w-[360px] shrink-0 flex-col gap-[30px] rounded-[13px] bg-white p-5 2xl:w-[426px] dark:bg-dark-200">
+    <div className="flex w-[280px] shrink-0 flex-col gap-[30px] rounded-[13px] bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark-200">
     <div className="relative h-[200px] w-full overflow-hidden rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] rounded-tl-none sm:h-[230px] sm:rounded-tr-[24px] sm:rounded-br-[24px] sm:rounded-bl-[24px]">
         <Image
           src={imageSrcResolved}
