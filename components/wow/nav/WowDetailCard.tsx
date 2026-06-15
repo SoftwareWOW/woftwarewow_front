@@ -40,7 +40,7 @@ export default function WowDetailCard({
         <p className="text-lg font-medium leading-none text-black 2xl:text-xl dark:text-backgroundBody">{title}</p>
 
         <div className="text-sm font-light leading-none text-black 2xl:text-base dark:text-backgroundBody">
-          <p>{description}</p>
+          <p className='text-[16px]'>{description}</p>
           <p className="mt-4">Includes:</p>
         </div>
 
@@ -55,7 +55,7 @@ export default function WowDetailCard({
                 className="size-3 shrink-0"
                 aria-hidden
               />
-              <span className="text-sm font-light leading-none text-black dark:text-backgroundBody">{item}</span>
+              <span className="text-[14px] font-light leading-none text-black dark:text-backgroundBody">{item}</span>
             </li>
           ))}
         </ul>

@@ -49,17 +49,19 @@ export function WowMenuItem({
         <div className="flex flex-col gap-[6px]">
           <p className="text-[14px] font-light leading-none text-black dark:text-backgroundBody">{label}</p>
           {description && (
-            <div className="text-[6px] font-outfit leading-[1] text-[#666] dark:text-dark-100">
+            <>
               {multilineDescription ? (
                 description.split('\n').map((line) => (
-                  <p key={line} className="leading-[1.38]">
+                  <p
+                    key={line}
+                    className="text-xs font-light leading-[1.38] text-[#666] dark:text-dark-100">
                     {line}
                   </p>
                 ))
               ) : (
-                <p className="leading-[1.38]">{description}</p>
+                <p className="text-xs font-light leading-[1.38] text-[#666] dark:text-dark-100">{description}</p>
               )}
-            </div>
+            </>
           )}
         </div>
         {showChevron && (
