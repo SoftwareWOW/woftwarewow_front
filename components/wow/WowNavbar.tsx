@@ -2,6 +2,14 @@
 
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Globe,
+  MessageCircle,
+  Moon,
+  Sun,
+} from 'lucide-react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -101,69 +109,18 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
   const handleToggleTheme = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark')
 
-  const mainIcon = (
-    <svg  viewBox="0 0 29 29" fill="none" aria-hidden className={iconClass}>
-      <path
-        d="M7 17L17 7M17 7H9M17 7V15"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
+  const mainIcon = <ArrowUpRight aria-hidden className={iconClass} strokeWidth={2} />
 
   const darkModeIcon =
     currentTheme === 'dark' ? (
-      <svg width="29" height="29" viewBox="0 0 29 29" fill="none" aria-hidden className={iconClass}>
-        <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5" />
-        <path
-          d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
-          stroke="white"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
+      <Sun aria-hidden className={iconClass} strokeWidth={1.5} />
     ) : (
-      <svg width="29" height="29" viewBox="0 0 29 29" fill="none" aria-hidden className={iconClass}>
-        <path
-          d="M12 3v2M12 19v2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M3 12h2M19 12h2M5.5 18.5l1.4-1.4M17.1 6.9l1.4-1.4"
-          stroke="white"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5" />
-        <path d="M12 8v8" stroke="white" strokeWidth="1.5" />
-      </svg>
+      <Moon aria-hidden className={iconClass} strokeWidth={1.5} />
     )
 
-  const languageIcon = (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
-      <circle cx="12" cy="12" r="9" stroke="white" strokeWidth="1.5" />
-      <path
-        d="M3 12h18M12 3c-2.5 2.5-2.5 16.5 0 18M12 3c2.5 2.5 2.5 16.5 0 18"
-        stroke="white"
-        strokeWidth="1.5"
-      />
-    </svg>
-  )
+  const languageIcon = <Globe aria-hidden className={iconClass} strokeWidth={1.5} />
 
-  const messagesIcon = (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
-      <path
-        d="M5 8h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2z"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 5h10a2 2 0 0 1 2 2v5"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
+  const messagesIcon = <MessageCircle aria-hidden className={iconClass} strokeWidth={1.5} />
 
   const activeItem = navigation.items.find((item) => item.id === activeMenuId)
   const mobileItem = navigation.items.find((item) => item.id === mobileMenuId) ?? null
@@ -217,9 +174,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       aria-haspopup="true">
                       {item.label}
                       <span className={`flex shrink-0 transition-transform duration-300 ${isActive ? '' : 'rotate-180'}`}>
-                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" aria-hidden>
-                          <path d="M1 1.5L7 6.5L13 1.5" stroke="currentColor" strokeWidth="1.2" />
-                        </svg>
+                        <ChevronDown aria-hidden className="h-2 w-3.5" strokeWidth={1.2} />
                       </span>
                     </button>
                   </li>

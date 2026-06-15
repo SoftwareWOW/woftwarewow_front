@@ -1,32 +1,20 @@
 'use client'
 
-import Image from 'next/image'
-import { navIconAssets } from './nav-assets'
+import { Circle } from 'lucide-react'
+import { navMenuIcons } from './nav-assets'
+
+const iconClassName = 'size-3 shrink-0 text-black dark:text-backgroundBody'
 
 type MenuItemIconProps = {
   iconId: string
 }
 
 export function MenuItemIcon({ iconId }: MenuItemIconProps) {
-  const asset = navIconAssets[iconId]
+  const Icon = navMenuIcons[iconId as keyof typeof navMenuIcons]
 
-  if (!asset) {
-    return <span className="block size-3" aria-hidden />
+  if (!Icon) {
+    return <Circle aria-hidden className={iconClassName} strokeWidth={1.5} />
   }
 
-  if (Array.isArray(asset)) {
-    return (
-      <span className="relative block size-3" aria-hidden>
-        {asset.map((src) => (
-          <Image key={src} src={src} alt="" fill className="object-contain" sizes="12px" unoptimized />
-        ))}
-      </span>
-    )
-  }
-
-  return (
-    <span className="relative block size-3" aria-hidden>
-      <Image src={asset} alt="" fill className="object-contain" sizes="12px" unoptimized />
-    </span>
-  )
+  return <Icon aria-hidden className={iconClassName} strokeWidth={1.5} />
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
+import { ChevronRight } from 'lucide-react'
 import { MenuItemIcon } from './MenuItemIcon'
 import { WowDivisionLogo } from './WowDivisionLogo'
 
@@ -65,21 +66,11 @@ export function WowMenuItem({
           )}
         </div>
         {showChevron && (
-          <svg
-            width="6"
-            height="12"
-            viewBox="0 0 6 12"
-            fill="none"
+          <ChevronRight
             aria-hidden
-            className="absolute end-[10px] top-[2px] text-black/40 dark:text-dark-100">
-            <path
-              d="M1 1L5 6L1 11"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            className="absolute end-[10px] top-[2px] h-3 w-1.5 text-black/40 dark:text-dark-100"
+            strokeWidth={1.2}
+          />
         )}
       </div>
     </>

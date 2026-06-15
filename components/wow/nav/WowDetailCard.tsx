@@ -1,6 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
+import { ArrowRight, Check } from 'lucide-react'
 import Image from 'next/image'
 import type { NavigationDetailPanel } from './navigation-types'
 import { navCardImages } from './nav-assets'
@@ -47,13 +48,10 @@ export default function WowDetailCard({
         <ul className="flex flex-col gap-[6px]">
           {includes.map((item) => (
             <li key={item} className="flex items-center gap-[10px]">
-              <Image
-                src="/images/wow/nav/checkmark.png"
-                alt=""
-                width={12}
-                height={12}
-                className="size-3 shrink-0"
+              <Check
                 aria-hidden
+                className="size-3 shrink-0 text-black dark:text-backgroundBody"
+                strokeWidth={2}
               />
               <span className="text-[14px] font-light leading-none text-black dark:text-backgroundBody">{item}</span>
             </li>
@@ -66,14 +64,14 @@ export default function WowDetailCard({
           href={href}
           onClick={onNavigate}
           className="flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
-          <Image src="/images/wow/nav/arrow-right.png" alt="" width={36} height={36} aria-hidden />
+          <ArrowRight aria-hidden className="size-9 text-white" strokeWidth={2} />
           <span className="sr-only">{ctaLabel}</span>
         </Link>
       ) : (
         <button
           type="button"
           className="flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40">
-          <Image src="/images/wow/nav/arrow-right.png" alt="" width={36} height={36} aria-hidden />
+          <ArrowRight aria-hidden className="size-9 text-white" strokeWidth={2} />
           <span className="sr-only">{ctaLabel}</span>
         </button>
       )}
