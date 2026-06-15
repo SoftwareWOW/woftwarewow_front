@@ -11,13 +11,10 @@ import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
 import WowMobileBottomNav from './nav/WowMobileBottomNav'
 import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
 
-const desktopActionBtnClass =
-  'group flex size-[79px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40'
-
-const mobileActionBtnClass =
-  'group flex size-[60px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40'
-
-const iconClass = 'transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
+const actionBtnClass =
+  "group flex shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[60px] xl:size-[79px]"
+const iconClass =
+  "w-10 h-10 xl:w-10 xl:h-10 transition-transform duration-300 ease-out group-hover:rotate-[30deg]"
 
 type WowNavbarProps = {
   navbar: Dictionary['navbar']
@@ -105,7 +102,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const handleToggleTheme = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark')
 
   const mainIcon = (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+    <svg  viewBox="0 0 29 29" fill="none" aria-hidden className={iconClass}>
       <path
         d="M7 17L17 7M17 7H9M17 7V15"
         stroke="white"
@@ -118,7 +115,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
   const darkModeIcon =
     currentTheme === 'dark' ? (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <svg width="29" height="29" viewBox="0 0 29 29" fill="none" aria-hidden className={iconClass}>
         <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5" />
         <path
           d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
@@ -128,7 +125,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
         />
       </svg>
     ) : (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden className={iconClass}>
+      <svg width="29" height="29" viewBox="0 0 29 29" fill="none" aria-hidden className={iconClass}>
         <path
           d="M12 3v2M12 19v2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M3 12h2M19 12h2M5.5 18.5l1.4-1.4M17.1 6.9l1.4-1.4"
           stroke="white"
@@ -173,7 +170,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-[1000] px-[15.5px] pt-2 sm:px-8 lg:px-8 lg:pt-2">
+      <header className="fixed left-0 right-0 top-0 z-[1000] px-2 pt-2 sm:px-3 lg:px-2 lg:pt-2">
         <div ref={navContainerRef}>
           <nav
             className="mx-auto flex max-w-[1370px] items-center justify-between rounded-[8px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
@@ -211,7 +208,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                     <button
                       type="button"
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`flex items-center gap-[10px] rounded-[40px] px-5 py-6 text-sm font-normal uppercase tracking-[2.1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 2xl:px-8 2xl:py-8 ${
+                      className={`flex items-center gap-[10px] rounded-[40px] px-5 py-2 text-sm font-normal uppercase tracking-[2.1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 2xl:px-8 2xl:py-4 ${
                         isActive
                           ? 'bg-black/[0.04] text-black dark:bg-white/[0.06] dark:text-backgroundBody'
                           : 'text-black/50 hover:bg-black/[0.03] hover:text-black dark:text-dark-100 dark:hover:bg-white/[0.04] dark:hover:text-backgroundBody'
@@ -234,7 +231,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               <button
                 type="button"
                 onClick={() => setActionMenuOpen((open) => !open)}
-                className={`${mobileActionBtnClass} xl:hidden ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                className={`${actionBtnClass} xl:hidden ${actionMenuOpen ? 'bg-primary/80' : ''}`}
                 aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
                 aria-expanded={actionMenuOpen}>
                 {mainIcon}
@@ -243,40 +240,47 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               <button
                 type="button"
                 onClick={() => setActionMenuOpen((open) => !open)}
-                className={`${desktopActionBtnClass} hidden xl:flex ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                className={`${actionBtnClass} hidden xl:flex ${actionMenuOpen ? 'bg-primary/80' : ''}`}
                 aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
                 aria-expanded={actionMenuOpen}>
                 {mainIcon}
               </button>
+{actionMenuOpen && (
+  <div className="absolute top-full z-50 mt-2 -left-[6px] flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark-200">
 
-              {actionMenuOpen && (
-                <div className="absolute end-0 top-full z-50 mt-1 flex flex-col gap-2 rounded-lg border border-secondary/10 bg-white p-2 shadow-nav dark:border-dark dark:bg-dark-200 dark:shadow-none">
-                  {mounted && (
-                    <button
-                      type="button"
-                      className={desktopActionBtnClass}
-                      aria-label={navbar.toggleDarkMode}
-                      onClick={handleToggleTheme}>
-                      {darkModeIcon}
-                    </button>
-                  )}
+    {mounted && (
+      <button
+        type="button"
+        className={actionBtnClass}
+        aria-label={navbar.toggleDarkMode}
+        onClick={handleToggleTheme}
+      >
+        {darkModeIcon}
+      </button>
+    )}
 
-                  <button
-                    type="button"
-                    className={desktopActionBtnClass}
-                    aria-label={navbar.changeLanguage}
-                    onClick={() => {
-                      setActionMenuOpen(false)
-                      setLanguageOpen(true)
-                    }}>
-                    {languageIcon}
-                  </button>
+    <button
+      type="button"
+      className={actionBtnClass}
+      aria-label={navbar.changeLanguage}
+      onClick={() => {
+        setActionMenuOpen(false)
+        setLanguageOpen(true)
+      }}
+    >
+      {languageIcon}
+    </button>
 
-                  <button type="button" className={desktopActionBtnClass} aria-label={navbar.openMessages}>
-                    {messagesIcon}
-                  </button>
-                </div>
-              )}
+    <button
+      type="button"
+      className={actionBtnClass}
+      aria-label={navbar.openMessages}
+    >
+      {messagesIcon}
+    </button>
+
+  </div>
+)}
             </div>
           </nav>
 

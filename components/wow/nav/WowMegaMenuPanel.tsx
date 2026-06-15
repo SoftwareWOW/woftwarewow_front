@@ -49,6 +49,7 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
       aria-label={item.label}
       className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-x-auto rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200"
       style={{
+          maxHeight: '78vh',
         padding: `${desktop.paddingY}px clamp(24px, 4vw, ${desktop.paddingX}px)`,
       }}>
       {/* Figma: 3 direct columns — link col 1, link col 2, detail card — with justify-between */}
@@ -61,7 +62,7 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
               <div className="h-4" aria-hidden />
             )}
 
-            <ul className="flex w-full flex-col gap-[3px]">
+            <ul className="flex w-full flex-col gap-[2px]">
               {column.items.map((entry) => (
                 <li key={entry.id}>
                   {entry.type === 'division' ? (
