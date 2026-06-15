@@ -24,7 +24,7 @@ export default function WowHero({ hero }: WowHeroProps) {
             <TextAppearAnimation>{hero.title}</TextAppearAnimation>
           </h1>
 
-          <div className="relative min-h-[250px] md:min-h-[500px] md:max-h-[20px]">
+          <div className="relative min-h-[260px] sm:min-h-[320px] md:min-h-[500px]">
             <div className="absolute inset-0 overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[32px]">
               <Image
                 src={heroImage}
@@ -37,22 +37,31 @@ export default function WowHero({ hero }: WowHeroProps) {
             </div>
 
             <div className="relative z-10 flex items-stretch md:hidden">
-              <div className="relative z-[2] min-w-[min(72%,320px)] rounded-br-[20px] bg-[#ededed] px-6 pb-3 pt-1 sm:px-10">
+              <div className="relative z-[2] w-[150px] rounded-br-[20px] bg-[#ededed] px-2 pb-2 pt-0 sm:w-[180px]">
                 <span className={`block ${titleHighlightClass} !text-[clamp(2.5rem,13vw,4rem)]`}>
                   {hero.titleHighlight}
                 </span>
               </div>
-            
-               <div className="pointer-events-none absolute bottom-[-32px] left-0 z-[3] h-8 w-8 bg-[radial-gradient(circle_at_100%_100%,transparent_32px,#ededed_33px)]" />
 
+              <div
+                className="pointer-events-none absolute bottom-[-20px] left-0 z-[3] h-5 w-5"
+                style={{
+                  background:
+                    'radial-gradient(circle at 100% 100%, transparent 20px, #ededed 21px)',
+                }}
+              />
 
-              <div className="pointer-events-none absolute right-[65px] top-0 z-[3] h-8 w-8  bg-[radial-gradient(circle_at_100%_100%,transparent_31px,#ededed_33px)]"  />
-
+              <div
+                className="pointer-events-none absolute left-[150px] top-0 z-[3] h-5 w-5 sm:left-[180px]"
+                style={{
+                  background:
+                    'radial-gradient(circle at 100% 100%, transparent 20px, #ededed 21px)',
+                }}
+              />
             </div>
 
             <div className="relative z-10 hidden max-w-full md:block md:max-w-[72%]">
               <div className="pointer-events-none absolute right-[-32px] top-0 z-[3] h-8 w-8 bg-[radial-gradient(circle_at_100%_100%,transparent_32px,#ededed_33px)]" />
-        
 
               <div className="relative z-[1] rounded-br-[32px] bg-backgroundBody px-8 py-9 sm:px-10 sm:py-10 md:px-11 md:py-10 lg:px-12 lg:py-11">
                 <div className="pointer-events-none absolute bottom-[-32px] left-0 z-[3] h-8 w-8 bg-[radial-gradient(circle_at_100%_100%,transparent_32px,#ededed_33px)]" />
@@ -77,3 +86,4 @@ export default function WowHero({ hero }: WowHeroProps) {
     </section>
   )
 }
+
