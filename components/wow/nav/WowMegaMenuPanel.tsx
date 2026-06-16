@@ -11,14 +11,19 @@ type WowMegaMenuPanelProps = {
   item: NavigationMenuItem
   detailPanels: NavigationData['detailPanels']
   onNavigate?: () => void
+  noOuterShell?: boolean
 }
 
-export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: WowMegaMenuPanelProps) {
+export default function WowMegaMenuPanel({
+  item,
+  detailPanels,
+  onNavigate,
+  noOuterShell = false,
+}: WowMegaMenuPanelProps) {
   const { desktop } = item
   const allItems = useMemo(() => desktop.columns.flatMap((column) => column.items), [desktop.columns])
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-
   const [selectedId, setSelectedId] = useState(desktop.defaultSelection)
 
   useEffect(() => {
@@ -30,12 +35,13 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
   }, [item.id, desktop.defaultSelection])
 
   const selectedItem = allItems.find((entry) => entry.id === selectedId) ?? allItems[0]
+
   const detailPanel =
-    (selectedId && detailPanels[selectedId as keyof typeof detailPanels]) ??
-    detailPanels.default
+    (selectedId && detailPanels[selectedId as keyof typeof detailPanels]) ?? detailPanels.default
 
   const isDark = mounted && resolvedTheme === 'dark'
   const profilePictures = isDark ? divisionProfilePictures.dark : divisionProfilePictures.light
+
   const detailImageSrc =
     selectedId && divisionIds.has(selectedId)
       ? profilePictures[selectedId as keyof typeof profilePictures]
@@ -47,11 +53,16 @@ export default function WowMegaMenuPanel({ item, detailPanels, onNavigate }: Wow
     <div
       role="region"
       aria-label={item.label}
-      className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-x-auto rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200"
+      className={
+        noOuterShell
+          ? 'max-w-full overflow-x-auto'
+          : 'animate-mega-menu-in mx-auto mt-2 max-w-full overflow-x-auto rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200'
+      }
       style={{
         maxHeight: '78vh',
         padding: `${desktop.paddingY}px clamp(16px, 3vw, ${desktop.paddingX}px)`,
-      }}>
+      }}
+    >
       <div className="flex w-max min-w-full items-start justify-between gap-4 lg:gap-6 2xl:w-full 2xl:min-w-0 2xl:gap-0">
         {desktop.columns.map((column) => (
           <div key={column.id} className="flex w-[180px] shrink-0 flex-col gap-[7px] lg:w-[220px] 2xl:w-[260px]">
