@@ -32,7 +32,7 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
             }`}
             aria-label={item.label}
             aria-expanded={isActive}>
-            {Icon && <Icon aria-hidden className="size-6 shrink-0 text-white" strokeWidth={2} />}
+            {Icon && <Icon aria-hidden className="size-6 shrink-0 !text-white !stroke-white" strokeWidth={2} />}
           </button>
         )
       })}

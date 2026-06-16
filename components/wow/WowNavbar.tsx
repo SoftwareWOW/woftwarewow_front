@@ -22,7 +22,7 @@ import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
 const actionBtnClass =
   'group flex shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[60px] md:size-[65px] lg:size-[79px]'
 const iconClass =
-  'size-10 transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
+  'size-10 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
 
 type WowNavbarProps = {
   navbar: Dictionary['navbar']
@@ -191,6 +191,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                 aria-expanded={actionMenuOpen}>
                 {mainIcon}
               </button>
+              
 
               <button
                 type="button"
