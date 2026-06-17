@@ -66,17 +66,20 @@ function ellipsePath(rx: number, ry: number) {
   return `M ${CX - rx},${CY} a ${rx},${ry} 0 1,0 ${rx * 2},0 a ${rx},${ry} 0 1,0 ${-rx * 2},0`
 }
 
+const sectionThemeClass =
+  'bg-backgroundBody text-secondary dark:bg-dark-300 dark:text-backgroundBody [--wow-primary:#615CCE] [--wow-accent:#FF9191] [--wow-mid:#CECCF0] [--wow-grid:rgba(23,23,23,0.06)] [--wow-orbit:rgba(23,23,23,0.08)] [--wow-glow-primary:rgba(97,92,206,0.18)] [--wow-glow-accent:rgba(255,145,145,0.08)] [--wow-glow-fade:rgba(237,237,237,0)] [--wow-card-bg:rgba(255,255,255,0.88)] [--wow-card-border:rgba(23,23,23,0.12)] [--wow-card-overlay:rgba(97,92,206,0.12)] [--wow-card-overlay-accent:rgba(255,145,145,0.08)] [--wow-center-shadow:rgba(97,92,206,0.35)] [--wow-div-shadow:0_4px_20px_-8px_rgba(0,0,0,0.12)] [--wow-div-hover-shadow:0_0_40px_-8px_rgba(97,92,206,0.55),0_0_0_1px_rgba(255,145,145,0.35)_inset] [--wow-particle-1:#615CCE] [--wow-particle-2:#FF9191] dark:[--wow-grid:rgba(255,255,255,0.06)] dark:[--wow-orbit:rgba(255,255,255,0.08)] dark:[--wow-glow-primary:rgba(97,92,206,0.28)] dark:[--wow-glow-accent:rgba(255,145,145,0.10)] dark:[--wow-glow-fade:rgba(0,0,0,0)] dark:[--wow-card-bg:rgba(255,255,255,0.04)] dark:[--wow-card-border:rgba(255,255,255,0.15)] dark:[--wow-card-overlay:rgba(97,92,206,0.25)] dark:[--wow-card-overlay-accent:rgba(255,145,145,0.15)] dark:[--wow-center-shadow:rgba(97,92,206,0.6)] dark:[--wow-div-shadow:0_4px_20px_-8px_rgba(0,0,0,0.6)] dark:[--wow-div-hover-shadow:0_0_40px_-8px_rgba(97,92,206,0.7),0_0_0_1px_rgba(255,145,145,0.4)_inset] dark:[--wow-particle-1:#ffffff] dark:[--wow-particle-2:#FF9191]'
+
 export default function WowSuperagencyDivisions() {
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#050505] py-24 text-white">
+    <section className={`relative w-full overflow-hidden py-24 ${sectionThemeClass}`}>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.18]"
+        className="pointer-events-none absolute inset-0 opacity-[0.18] dark:opacity-[0.18]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
+            'linear-gradient(var(--wow-grid) 1px, transparent 1px), linear-gradient(90deg, var(--wow-grid) 1px, transparent 1px)',
           backgroundSize: '56px 56px',
           maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,0.9) 30%, transparent 75%)',
         }}
@@ -86,19 +89,19 @@ export default function WowSuperagencyDivisions() {
         className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           background:
-            'radial-gradient(circle, rgba(124,108,242,0.28) 0%, rgba(215,141,167,0.10) 35%, transparent 70%)',
+            'radial-gradient(circle, var(--wow-glow-primary) 0%, var(--wow-glow-accent) 35%, transparent 70%)',
           filter: 'blur(40px)',
         }}
       />
 
       <div className="relative mx-auto max-w-7xl px-6 text-center">
-        <h2 className="mx-auto max-w-3xl text-balance text-3xl font-semibold tracking-tight md:text-5xl">
+        <h2 className="mx-auto max-w-3xl text-balance text-3xl font-semibold tracking-tight text-secondary md:text-5xl dark:text-backgroundBody">
           One ecosystem.{' '}
-          <span className="bg-gradient-to-r from-[#7C6CF2] to-[#D78DA7] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Ten powerful divisions.
           </span>
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm text-white/60 md:text-base">
+        <p className="mx-auto mt-4 max-w-xl text-sm text-colorText md:text-base dark:text-dark-100">
           WOW Superagency is the parent organization powering every WOW division through one connected ecosystem.
         </p>
       </div>
@@ -106,17 +109,17 @@ export default function WowSuperagencyDivisions() {
       <div className="relative mx-auto mt-12 block aspect-[1200/760] w-full max-w-[1200px]">
         <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="absolute inset-0 h-full w-full" aria-hidden>
           <defs>
-            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#7C6CF2" stopOpacity="0.55" />
-              <stop offset="60%" stopColor="#D78DA7" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#000" stopOpacity="0" />
+            <radialGradient id="wow-sa-centerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="var(--wow-primary)" stopOpacity="0.55" />
+              <stop offset="60%" stopColor="var(--wow-accent)" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="var(--wow-glow-fade)" stopOpacity="0" />
             </radialGradient>
-            <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0%" stopColor="#7C6CF2" stopOpacity="0" />
-              <stop offset="50%" stopColor="#7C6CF2" stopOpacity="1" />
-              <stop offset="100%" stopColor="#D78DA7" stopOpacity="0" />
+            <linearGradient id="wow-sa-lineGrad" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stopColor="var(--wow-primary)" stopOpacity="0" />
+              <stop offset="50%" stopColor="var(--wow-primary)" stopOpacity="1" />
+              <stop offset="100%" stopColor="var(--wow-accent)" stopOpacity="0" />
             </linearGradient>
-            <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <filter id="wow-sa-softGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
@@ -125,21 +128,21 @@ export default function WowSuperagencyDivisions() {
             </filter>
           </defs>
 
-          <circle cx={CX} cy={CY} r={260} fill="url(#centerGlow)" />
+          <circle cx={CX} cy={CY} r={260} fill="url(#wow-sa-centerGlow)" />
 
           {ORBITS.map((o, i) => {
             const d = ellipsePath(o.rx, o.ry)
             return (
               <g key={i}>
-                <path d={d} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={1} />
+                <path d={d} fill="none" stroke="var(--wow-orbit)" strokeWidth={1} />
                 <path
                   d={d}
                   fill="none"
-                  stroke="url(#lineGrad)"
+                  stroke="url(#wow-sa-lineGrad)"
                   strokeWidth={1.5}
                   strokeDasharray="180 2000"
                   strokeLinecap="round"
-                  filter="url(#softGlow)">
+                  filter="url(#wow-sa-softGlow)">
                   <animate
                     attributeName="stroke-dashoffset"
                     from="0"
@@ -148,10 +151,10 @@ export default function WowSuperagencyDivisions() {
                     repeatCount="indefinite"
                   />
                 </path>
-                <circle r={3} fill="#fff" filter="url(#softGlow)">
+                <circle r={3} fill="var(--wow-particle-1)" filter="url(#wow-sa-softGlow)">
                   <animateMotion dur={`${14 + i * 3}s`} repeatCount="indefinite" path={d} rotate="auto" />
                 </circle>
-                <circle r={2} fill="#D78DA7" filter="url(#softGlow)">
+                <circle r={2} fill="var(--wow-particle-2)" filter="url(#wow-sa-softGlow)">
                   <animateMotion
                     dur={`${18 + i * 3}s`}
                     repeatCount="indefinite"
@@ -170,9 +173,9 @@ export default function WowSuperagencyDivisions() {
               y1={CY}
               x2={PLACED[hovered].x}
               y2={PLACED[hovered].y}
-              stroke="url(#lineGrad)"
+              stroke="url(#wow-sa-lineGrad)"
               strokeWidth={1.5}
-              filter="url(#softGlow)">
+              filter="url(#wow-sa-softGlow)">
               <animate attributeName="stroke-dasharray" from="0 600" to="600 0" dur="0.6s" fill="freeze" />
             </line>
           )}
@@ -183,21 +186,28 @@ export default function WowSuperagencyDivisions() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-          <div className="relative rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 shadow-[0_0_80px_-20px_rgba(124,108,242,0.6)] backdrop-blur-xl md:rounded-3xl md:px-10 md:py-8">
+          <div
+            className="relative rounded-2xl border px-4 py-3 backdrop-blur-xl md:rounded-3xl md:px-10 md:py-8"
+            style={{
+              borderColor: 'var(--wow-card-border)',
+              backgroundColor: 'var(--wow-card-bg)',
+              boxShadow: '0 0 80px -20px var(--wow-center-shadow)',
+            }}>
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-3xl"
               style={{
-                background: 'linear-gradient(135deg, rgba(124,108,242,0.25), rgba(215,141,167,0.15))',
+                background:
+                  'linear-gradient(135deg, var(--wow-card-overlay), var(--wow-card-overlay-accent))',
                 opacity: 0.6,
               }}
             />
             <div className="relative text-center">
-              <p className="text-[8px] uppercase tracking-[0.2em] text-white/50 md:text-xs md:tracking-[0.3em]">
+              <p className="text-[8px] uppercase tracking-[0.2em] text-colorText md:text-xs md:tracking-[0.3em] dark:text-dark-100">
                 Parent Organization
               </p>
-              <h3 className="mt-1 text-sm font-bold tracking-tight md:mt-2 md:text-4xl">
-                <span className="bg-gradient-to-r from-[#7C6CF2] via-[#A57DD0] to-[#D78DA7] bg-clip-text text-transparent">
+              <h3 className="mt-1 text-sm font-bold tracking-tight text-secondary md:mt-2 md:text-4xl dark:text-backgroundBody">
+                <span className="bg-gradient-to-r from-primary via-primary-50 to-accent bg-clip-text text-transparent">
                   WOW
                 </span>{' '}
                 Superagency
@@ -261,15 +271,15 @@ function DivisionCard({
       className="group absolute z-10 -translate-x-1/2 -translate-y-1/2 focus:outline-none"
       aria-label={placed.name}>
       <div
-        className="relative rounded-lg border border-white/15 bg-white/[0.05] px-1.5 py-0.5 backdrop-blur-xl transition-all duration-300 md:rounded-xl md:px-4 md:py-2.5"
+        className="relative rounded-lg border px-1.5 py-0.5 backdrop-blur-xl transition-all duration-300 md:rounded-xl md:px-4 md:py-2.5"
         style={{
-          boxShadow: hovered
-            ? '0 0 40px -8px rgba(124,108,242,0.7), 0 0 0 1px rgba(215,141,167,0.4) inset'
-            : '0 4px 20px -8px rgba(0,0,0,0.6)',
+          borderColor: 'var(--wow-card-border)',
+          backgroundColor: 'var(--wow-card-bg)',
+          boxShadow: hovered ? 'var(--wow-div-hover-shadow)' : 'var(--wow-div-shadow)',
         }}>
         <span className="whitespace-nowrap text-[8px] font-semibold tracking-tight md:text-sm">
-          <span className="bg-gradient-to-r from-[#7C6CF2] to-[#D78DA7] bg-clip-text text-transparent">WOW</span>
-          <span className="text-white">{placed.name.replace('WOW', '')}</span>
+          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">WOW</span>
+          <span className="text-secondary dark:text-backgroundBody">{placed.name.replace('WOW', '')}</span>
         </span>
       </div>
     </motion.button>
