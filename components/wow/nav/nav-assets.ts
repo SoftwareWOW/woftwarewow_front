@@ -119,6 +119,6 @@ export const mobileBottomNavIcons = {
 export type MobileBottomNavIconId = keyof typeof mobileBottomNavIcons
 
 export const navCardImages = {
-  default: '/images/wow/nav/cards/default.jpg',
+  default: '/images/wow/nav/cards/explore-default.jpg',
   exploreDefault: '/images/wow/nav/cards/explore-default.jpg',
 } as const

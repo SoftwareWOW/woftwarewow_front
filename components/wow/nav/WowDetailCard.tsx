@@ -38,11 +38,7 @@ export default function WowDetailCard({
 
         <div className="pointer-events-none absolute left-0 top-0 z-[2] h-[82px] w-[120px] bg-white dark:bg-dark-200 rounded-br-[20px]" />
         <div className="pointer-events-none absolute left-[120px] top-0 z-[3] h-6 w-6 bg-[radial-gradient(circle_at_100%_100%,transparent_24px,white_25px)] dark:bg-[radial-gradient(circle_at_100%_100%,transparent_24px,#1f1f1f_25px)]" />
-        <div
-  className="pointer-events-none absolute left-0 top-[82px] z-[3] h-6 w-6
-  bg-[radial-gradient(circle_at_100%_100%,transparent_24px,white_25px)]
-  dark:bg-[radial-gradient(circle_at_100%_100%,transparent_24px,#1f1f1f_25px)]"
-/>
+        <div className="pointer-events-none absolute left-0 top-[82px] z-[3] h-6 w-6 bg-[radial-gradient(circle_at_100%_100%,transparent_24px,white_25px)] dark:bg-[radial-gradient(circle_at_100%_100%,transparent_24px,#1f1f1f_25px)]" />
       </div>
 
       <div className="flex flex-col gap-[13px]">

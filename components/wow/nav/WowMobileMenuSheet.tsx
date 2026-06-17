@@ -1,10 +1,9 @@
-
-
 'use client'
 
 import { useEffect, useState } from 'react'
 import type { Dictionary } from '@/i18n/types'
 import type { NavigationMenuItem } from './navigation-types'
+import { mobileNavShellClass } from './mobile-nav-shell'
 import { WowDivisionItem, WowMenuItem } from './WowMenuItem'
 
 type WowMobileMenuSheetProps = {
@@ -26,7 +25,6 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
 
     const previousOverflow = document.body.style.overflow
     const previousOverflowX = document.body.style.overflowX
-
     document.body.style.overflow = 'hidden'
     document.body.style.overflowX = 'hidden'
 
@@ -35,7 +33,6 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
     }
 
     document.addEventListener('keydown', handleEscape)
-
     return () => {
       document.body.style.overflow = previousOverflow
       document.body.style.overflowX = previousOverflowX
@@ -57,10 +54,11 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
         onClick={onClose}
       />
 
-      <div className="absolute bottom-[calc(86px+env(safe-area-inset-bottom))] left-2 right-2 mx-auto w-auto max-w-[430px] animate-mobile-sheet-in overflow-hidden rounded-[5px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none">
+      <div
+        className={`absolute bottom-[calc(86px+env(safe-area-inset-bottom))] left-2 right-2 mx-auto w-auto max-w-[430px] animate-mobile-sheet-in overflow-hidden rounded-[5px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none ${mobileNavShellClass}`}>
         <div className="flex max-h-[min(461px,calc(100dvh-180px))] min-w-0 flex-col overflow-hidden">
           {hasMultiplePages && (
-            <div className="grid shrink-0 gap-[6px]" style={{ gridTemplateColumns: `repeat(${item.mobile.pages.length}, minmax(0, 1fr))` }}>
+            <div className="mt-[10px] grid shrink-0 gap-[6px]" style={{ gridTemplateColumns: `repeat(${item.mobile.pages.length}, minmax(0, 1fr))` }}>
               {item.mobile.pages.map((page) => {
                 const isActive = page.id === activePage?.id
 
@@ -69,12 +67,11 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
                     key={page.id}
                     type="button"
                     onClick={() => setActivePageId(page.id)}
-                    className={`h-[46px] min-w-0 rounded-[3px] px-[10px] text-xs font-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+                    className={`h-[46px] min-w-0 rounded-[3px] px-[10px] font-outfit text-xs font-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
                       isActive
                         ? 'bg-black/[0.06] text-black dark:bg-white/[0.08] dark:text-backgroundBody'
                         : 'bg-black/[0.02] text-black/60 hover:bg-black/[0.04] dark:bg-white/[0.04] dark:text-dark-100'
-                    }`}
-                  >
+                    }`}>
                     {page.title}
                   </button>
                 )

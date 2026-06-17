@@ -49,6 +49,8 @@ export const navigation = {
               { id: 'wowWebsites', label: 'WOW Websites', type: 'division', href: '/divisions/wow-websites', detailPanel: 'default' },
               { id: 'wowImpact', label: 'WOW Impact', type: 'division', href: '/divisions/wow-impact', detailPanel: 'default' },
               { id: 'wowHost', label: 'WOW Host', type: 'division', href: '/divisions/wow-host', detailPanel: 'default' },
+              { id: 'wowHub', label: 'WOW Hub', type: 'division', href: '/divisions/wow-hub', detailPanel: 'default' },
+              { id: 'wowEvents', label: 'WOW Events', type: 'division', href: '/divisions/wow-events', detailPanel: 'default' },
             ],
           },
           {
@@ -80,6 +82,8 @@ export const navigation = {
               { id: 'wowWebsites', label: 'WOW Websites', type: 'division', href: '/divisions/wow-websites' },
               { id: 'wowImpact', label: 'WOW Impact', type: 'division', href: '/divisions/wow-impact' },
               { id: 'wowHost', label: 'WOW Host', type: 'division', href: '/divisions/wow-host' },
+              { id: 'wowHub', label: 'WOW Hub', type: 'division', href: '/divisions/wow-hub' },
+              { id: 'wowEvents', label: 'WOW Events', type: 'division', href: '/divisions/wow-events' },
             ],
           },
           {

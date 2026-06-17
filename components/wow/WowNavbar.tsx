@@ -234,9 +234,9 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       onMouseEnter={() => openMegaMenu(item.id)}
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`flex items-center rounded-[10px] px-3 py-2 text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:px-5 lg:text-sm lg:tracking-[2.1px] 2xl:px-8 2xl:py-4 ${
+                      className={`flex items-center rounded-[10px] px-3 py-2 font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:px-5 lg:text-sm lg:tracking-[2.1px] 2xl:px-8 2xl:py-4 ${
                         isActive
-                          ? 'bg-black/[0.04] text-black dark:bg-white/[0.06] dark:text-backgroundBody'
+                          ? 'bg-black/[0.04] text-black dark:bg-white/[0.08] dark:text-backgroundBody'
                           : 'text-black/50 hover:bg-black/[0.03] hover:text-black dark:text-dark-100 dark:hover:bg-white/[0.04] dark:hover:text-backgroundBody'
                       }`}
                       aria-expanded={isActive}

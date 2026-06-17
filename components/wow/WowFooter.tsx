@@ -9,7 +9,7 @@ type WowFooterProps = {
 
 export default function WowFooter({ footer }: WowFooterProps) {
   return (
-    <footer className="relative overflow-hidden bg-[#edf0f5] px-4 pb-8 pt-24 dark:bg-dark-300 sm:px-8">
+    <footer className="relative overflow-hidden bg-backgroundBody px-4 pb-8 pt-24 dark:bg-dark-300 sm:px-8">
       <div className="pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 opacity-10 dark:opacity-5">
         <Image src="/images/wow/footer-watermark.png" alt="" width={1308} height={225} className="h-auto w-[min(90vw,900px)]" />
       </div>

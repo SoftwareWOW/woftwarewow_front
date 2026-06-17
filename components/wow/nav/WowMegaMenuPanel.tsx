@@ -67,7 +67,7 @@ export default function WowMegaMenuPanel({
         {desktop.columns.map((column) => (
           <div key={column.id} className="flex w-[180px] shrink-0 flex-col gap-[7px] lg:w-[220px] 2xl:w-[260px]">
             {column.title ? (
-              <p className="pl-[10px] text-base font-light leading-none text-[#838383]">{column.title}</p>
+              <p className="pl-[10px] font-outfit text-base font-light leading-none text-black/50 dark:text-dark-100">{column.title}</p>
             ) : (
               <div className="h-4" aria-hidden />
             )}

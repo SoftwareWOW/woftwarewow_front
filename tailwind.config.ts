@@ -28,6 +28,7 @@ export default {
         backgroundBody: '#EDEDED',
         black: '#171717',
         colorText: '#171717b3',
+        muted: '#666666',
         dark: {
           DEFAULT: '#171717',
           100: '#ffffffb3',

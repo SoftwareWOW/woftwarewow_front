@@ -7,8 +7,8 @@
   "navigation": {
     "detailPanels": {
       "default": {
-        "title": "The All-In-One Engine For Modern Business Growth.",
-        "description": "For businesses seeking complete digital growth under one unified system.",
+        "title": "This is where ambitions become achievements.",
+        "description": "To help small businesses grow faster, smarter, and more confidently through an integrated ecosystem of technology, marketing, and creative services.",
         "includes": [
           "Strategy & consulting",
           "Website & app development",
@@ -34,22 +34,22 @@
         "image": "exploreDefault"
       },
       "softwareWow": {
-        "title": "Custom Software Built For Your Business.",
-        "description": "For companies needing scalable software that fits their workflows.",
+        "title": "This is where ideas become technologies.",
+        "description": "Build custom software, SaaS, and mobile apps that modernize systems, automate processes, and enable scalable growth.",
         "includes": [
           "Custom app development",
+          "SaaS platforms",
+          "Mobile applications",
           "API integrations",
           "Cloud deployment",
-          "Maintenance & support",
-          "Security & compliance",
-          "Performance optimization"
+          "Maintenance & support"
         ],
         "ctaLabel": "Learn more",
         "image": "default"
       },
       "wowMarketing": {
-        "title": "Marketing That Drives Measurable Growth.",
-        "description": "For businesses ready to attract more customers and increase revenue.",
+        "title": "This is where strategy becomes growth.",
+        "description": "Deliver data-driven marketing that transforms visibility into measurable revenue growth.",
         "includes": [
           "SEO & content strategy",
           "Paid media campaigns",
@@ -62,8 +62,8 @@
         "image": "default"
       },
       "wowDesign": {
-        "title": "Design That Builds Brand Authority.",
-        "description": "For brands that need a memorable visual identity and consistent experience.",
+        "title": "This is where imagination becomes design.",
+        "description": "Craft bold, modern branding and digital design that connect with audiences and inspire trust.",
         "includes": [
           "Brand identity systems",
           "UI/UX design",
@@ -76,53 +76,53 @@
         "image": "default"
       },
       "wowIntelligence": {
-        "title": "Intelligence Systems For Smarter Decisions.",
-        "description": "For organizations turning data into actionable business insights.",
+        "title": "This is where intelligence becomes advantage.",
+        "description": "Design AI assistants, chatbots, and predictive analytics that improve efficiency and customer experience.",
         "includes": [
-          "Data dashboards",
-          "Business intelligence",
+          "AI assistants & chatbots",
           "Predictive analytics",
+          "Business intelligence",
           "Reporting automation",
           "KPI tracking",
-          "AI-powered insights"
+          "Workflow automation"
         ],
         "ctaLabel": "Learn more",
         "image": "default"
       },
       "wowSocial": {
-        "title": "Social & Community Growth Engine.",
-        "description": "For brands building engaged audiences and loyal communities.",
+        "title": "This is where content become community.",
+        "description": "Create social strategies, ads, and influencer campaigns that convert engagement into sales.",
         "includes": [
           "Social strategy",
           "Community management",
           "Content creation",
           "Influencer campaigns",
-          "Engagement analytics",
-          "Brand advocacy programs"
+          "Paid social ads",
+          "Engagement analytics"
         ],
         "ctaLabel": "Learn more",
         "image": "default"
       },
       "wowAccelerate": {
-        "title": "Accelerate Your Digital Transformation.",
-        "description": "For businesses modernizing operations with integrated digital systems.",
+        "title": "This is where sales become scalable.",
+        "description": "Build AI-powered sales funnels and CRM systems that generate leads and scale revenue faster.",
         "includes": [
-          "Process automation",
-          "System integration",
-          "Workflow optimization",
-          "Change management",
-          "Training & adoption",
-          "ROI measurement"
+          "Sales funnel design",
+          "CRM implementation",
+          "Lead generation",
+          "Pipeline automation",
+          "Sales enablement",
+          "Revenue analytics"
         ],
         "ctaLabel": "Learn more",
         "image": "default"
       },
       "wowWebsites": {
-        "title": "Websites Engineered For Growth.",
-        "description": "For companies needing high-performance websites that convert visitors.",
+        "title": "This is where websites become growth engines.",
+        "description": "Build high-performing, SEO-optimized websites and eCommerce platforms that turn visitors into customers.",
         "includes": [
           "Custom web development",
-          "CMS implementation",
+          "eCommerce platforms",
           "SEO-ready architecture",
           "Performance optimization",
           "Accessibility compliance",
@@ -132,29 +132,57 @@
         "image": "default"
       },
       "wowImpact": {
-        "title": "Impact-Driven Digital Solutions.",
-        "description": "For mission-driven organizations maximizing their social impact.",
+        "title": "This is where stories become influence.",
+        "description": "Empower professionals to grow personal brands, authority, and reputation through media and thought leadership.",
         "includes": [
-          "Nonprofit web solutions",
-          "Donor engagement tools",
-          "Impact reporting",
-          "Community platforms",
-          "Fundraising systems",
-          "Volunteer management"
+          "Personal brand strategy",
+          "Thought leadership content",
+          "Media positioning",
+          "Authority building",
+          "Reputation management",
+          "Speaking & visibility"
         ],
         "ctaLabel": "Learn more",
         "image": "default"
       },
       "wowHost": {
-        "title": "Secure Hosting & Infrastructure.",
-        "description": "For businesses needing reliable, secure, and scalable hosting.",
+        "title": "This is where hosting becomes strength.",
+        "description": "Provide dependable hosting, domains, and cloud infrastructure to keep businesses online and protected.",
         "includes": [
           "Cloud hosting",
+          "Domain management",
           "SSL & security",
           "Backup & recovery",
           "CDN & performance",
-          "24/7 monitoring",
-          "Managed infrastructure"
+          "24/7 monitoring"
+        ],
+        "ctaLabel": "Learn more",
+        "image": "default"
+      },
+      "wowHub": {
+        "title": "This is where curiosity becomes mastery.",
+        "description": "Deliver training, resources, and education that empower small businesses to apply growth strategies independently.",
+        "includes": [
+          "Business training programs",
+          "Resource libraries",
+          "Workshops & webinars",
+          "Skill development",
+          "Growth playbooks",
+          "Community learning"
+        ],
+        "ctaLabel": "Learn more",
+        "image": "default"
+      },
+      "wowEvents": {
+        "title": "This is where connections become opportunities.",
+        "description": "Plan and host events that inspire action, strengthen communities, and elevate brands.",
+        "includes": [
+          "Corporate events",
+          "Community gatherings",
+          "Brand activations",
+          "Event strategy",
+          "Venue coordination",
+          "Post-event engagement"
         ],
         "ctaLabel": "Learn more",
         "image": "default"
@@ -907,6 +935,20 @@
                   "type": "division",
                   "href": "/divisions/wow-host",
                   "detailPanel": "default"
+                },
+                {
+                  "id": "wowHub",
+                  "label": "WOW Hub",
+                  "type": "division",
+                  "href": "/divisions/wow-hub",
+                  "detailPanel": "default"
+                },
+                {
+                  "id": "wowEvents",
+                  "label": "WOW Events",
+                  "type": "division",
+                  "href": "/divisions/wow-events",
+                  "detailPanel": "default"
                 }
               ]
             },
@@ -1025,6 +1067,18 @@
                   "label": "WOW Host",
                   "type": "division",
                   "href": "/divisions/wow-host"
+                },
+                {
+                  "id": "wowHub",
+                  "label": "WOW Hub",
+                  "type": "division",
+                  "href": "/divisions/wow-hub"
+                },
+                {
+                  "id": "wowEvents",
+                  "label": "WOW Events",
+                  "type": "division",
+                  "href": "/divisions/wow-events"
                 }
               ]
             },

@@ -21,9 +21,9 @@ type WowMenuItemProps = {
 }
 
 const activeClass =
-  'bg-black/[0.04] dark:bg-white/[0.06]'
+  'bg-black/[0.04] dark:bg-white/[0.08]'
 const inactiveClass =
-  'bg-white hover:bg-black/[0.02] dark:bg-dark-200 dark:hover:bg-white/[0.04]'
+  'bg-white hover:bg-black/[0.02] dark:bg-dark dark:hover:bg-white/[0.04]'
 
 export function WowMenuItem({
   iconId,
@@ -43,7 +43,7 @@ export function WowMenuItem({
 
   const content = (
     <>
-      <div className="flex size-[28px] shrink-0 items-center justify-center rounded-[3px] border-[0.5px] border-[#e6e6e6] bg-white p-[8px] dark:border-dark dark:bg-dark-200">
+      <div className="flex size-[28px] shrink-0 items-center justify-center rounded-[3px] border-[0.5px] border-black/10 bg-white p-[8px] dark:border-dark dark:bg-dark">
         <MenuItemIcon iconId={iconId} />
       </div>
       <div className={`relative min-w-0 flex-1 ${showChevron ? 'pe-[22px]' : ''}`}>
@@ -55,12 +55,12 @@ export function WowMenuItem({
                 description.split('\n').map((line) => (
                   <p
                     key={line}
-                    className="text-xs font-light leading-[1.38] text-[#666] dark:text-dark-100">
+                    className="text-xs font-light leading-[1.38] text-black/60 dark:text-dark-100">
                     {line}
                   </p>
                 ))
               ) : (
-                <p className="text-xs font-light leading-[1.38] text-[#666] dark:text-dark-100">{description}</p>
+                <p className="text-xs font-light leading-[1.38] text-black/60 dark:text-dark-100">{description}</p>
               )}
             </>
           )}

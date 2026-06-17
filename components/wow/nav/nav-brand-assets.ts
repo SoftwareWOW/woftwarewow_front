@@ -11,17 +11,37 @@ export const navbarBrandLogo = {
   dark: assetPath('SVG', 'Superagency White.svg'),
 } as const
 
-export const divisionBrandLogos: Record<string, string> = {
-  softwareWow: assetPath('SVG', 'SoftwareWOW Standard.svg'),
-  wowMarketing: assetPath('PNG', 'Marketing Standard.png'),
-  wowDesign: assetPath('SVG', 'Design Standard.svg'),
-  wowIntelligence: assetPath('SVG', 'Intelligence Standard.svg'),
-  wowSocial: assetPath('SVG', 'Social Standard.svg'),
-  wowAccelerate: assetPath('SVG', 'Accelerate Standard.svg'),
-  wowWebsites: assetPath('SVG', 'Websites Standard.svg'),
-  wowImpact: assetPath('SVG', 'Impact Standard.svg'),
-  wowHost: assetPath('SVG', 'Host Standard.svg'),
-}
+/** Standard on light backgrounds, White on dark backgrounds (brand guideline) */
+export const divisionBrandLogos = {
+  light: {
+    softwareWow: assetPath('SVG', 'SoftwareWOW Standard.svg'),
+    wowMarketing: assetPath('PNG', 'Marketing Standard.png'),
+    wowDesign: assetPath('SVG', 'Design Standard.svg'),
+    wowIntelligence: assetPath('SVG', 'Intelligence Standard.svg'),
+    wowSocial: assetPath('SVG', 'Social Standard.svg'),
+    wowAccelerate: assetPath('SVG', 'Accelerate Standard.svg'),
+    wowWebsites: assetPath('SVG', 'Websites Standard.svg'),
+    wowImpact: assetPath('SVG', 'Impact Standard.svg'),
+    wowHost: assetPath('SVG', 'Host Standard.svg'),
+    wowHub: assetPath('SVG', 'Hub Standard.svg'),
+    wowEvents: assetPath('SVG', 'Events Standard.svg'),
+  },
+  dark: {
+    softwareWow: assetPath('SVG', 'SoftwareWOW White.svg'),
+    wowMarketing: assetPath('PNG', 'Marketing White.png'),
+    wowDesign: assetPath('SVG', 'Design White.svg'),
+    wowIntelligence: assetPath('SVG', 'Intelligence White.svg'),
+    wowSocial: assetPath('SVG', 'Social White.svg'),
+    wowAccelerate: assetPath('SVG', 'Accelerate White.svg'),
+    wowWebsites: assetPath('SVG', 'Websites White.svg'),
+    wowImpact: assetPath('SVG', 'Impact White.svg'),
+    wowHost: assetPath('SVG', 'Host White.svg'),
+    wowHub: assetPath('SVG', 'Hub White.svg'),
+    wowEvents: assetPath('SVG', 'Events White.svg'),
+  },
+} as const
+
+export type DivisionId = keyof typeof divisionBrandLogos.light
 
 export const divisionProfilePictures = {
   light: {
@@ -34,6 +54,8 @@ export const divisionProfilePictures = {
     wowWebsites: assetPath('Profile Picture', 'Light', 'Websites PFP Light.png'),
     wowImpact: assetPath('Profile Picture', 'Light', 'Impact PFP Light.png'),
     wowHost: assetPath('Profile Picture', 'Light', 'Host PFP Light.png'),
+    wowHub: assetPath('Profile Picture', 'Light', 'Hub PFP Light.png'),
+    wowEvents: assetPath('Profile Picture', 'Light', 'Events PFP Light.png'),
   },
   dark: {
     softwareWow: assetPath('Profile Picture', 'Dark', 'SoftwareWOW PFP dark.png'),
@@ -45,7 +67,9 @@ export const divisionProfilePictures = {
     wowWebsites: assetPath('Profile Picture', 'Dark', 'Websites PFP dark.png'),
     wowImpact: assetPath('Profile Picture', 'Dark', 'Impact PFP dark.png'),
     wowHost: assetPath('Profile Picture', 'Dark', 'Host PFP dark.png'),
+    wowHub: assetPath('Profile Picture', 'Dark', 'Hub PFP dark.png'),
+    wowEvents: assetPath('Profile Picture', 'Dark', 'Events PFP dark.png'),
   },
 } as const
 
-export const divisionIds = new Set(Object.keys(divisionBrandLogos))
+export const divisionIds = new Set(Object.keys(divisionBrandLogos.light))
