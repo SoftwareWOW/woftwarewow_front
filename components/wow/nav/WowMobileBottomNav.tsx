@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react'
 import type { NavigationMenuItem } from './navigation-types'
 import { mobileBottomNavIcons } from './nav-assets'
 import { mobileNavShellClass } from './mobile-nav-shell'
+import { navItemActiveClass, navItemHoverClass } from './nav-interaction-styles'
 
 type WowMobileBottomNavProps = {
   items: NavigationMenuItem[]
@@ -28,13 +29,23 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
             key={item.id}
             type="button"
             onClick={() => onSelect(isActive ? '' : item.id)}
-            className={`flex min-h-[60px] min-w-0 flex-1 items-center justify-center rounded-[3px] border-r border-dotted border-white/30 p-[14px] transition-colors last:border-r-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-              isActive ? 'bg-white/15' : 'hover:bg-white/10'
+            className={`group flex min-h-[60px] min-w-0 flex-1 items-center justify-center rounded-[3px] border-r border-dotted border-white/30 p-[14px] transition-colors last:border-r-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+              isActive ? `is-active ${navItemActiveClass}` : navItemHoverClass
             }`}
             aria-label={item.label}
             aria-expanded={isActive}
           >
-            {Icon && <Icon aria-hidden className="size-6 shrink-0 !text-white !stroke-white" strokeWidth={2} />}
+            {Icon && (
+              <Icon
+                aria-hidden
+                className={`size-6 shrink-0 transition-colors ${
+                  isActive
+                    ? 'text-primary'
+                    : 'text-white group-hover:text-primary group-[.is-active]:text-primary'
+                }`}
+                strokeWidth={2}
+              />
+            )}
           </button>
         )
       })}

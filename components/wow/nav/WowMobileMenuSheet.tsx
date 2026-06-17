@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import type { Dictionary } from '@/i18n/types'
 import type { NavigationMenuItem } from './navigation-types'
 import { mobileNavShellClass } from './mobile-nav-shell'
+import { navTabActiveClass, navTabInactiveClass } from './nav-interaction-styles'
 import { WowDivisionItem, WowMenuItem } from './WowMenuItem'
 
 type WowMobileMenuSheetProps = {
@@ -68,9 +69,7 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
                     type="button"
                     onClick={() => setActivePageId(page.id)}
                     className={`h-[46px] min-w-0 rounded-[3px] px-[10px] font-outfit text-xs font-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
-                      isActive
-                        ? 'bg-black/[0.06] text-black dark:bg-white/[0.08] dark:text-backgroundBody'
-                        : 'bg-black/[0.02] text-black/60 hover:bg-black/[0.04] dark:bg-white/[0.04] dark:text-dark-100'
+                      isActive ? navTabActiveClass : navTabInactiveClass
                     }`}>
                     {page.title}
                   </button>

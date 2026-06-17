@@ -22,7 +22,10 @@ export default {
         seasons: ['var(--font-seasons)'],
       },
       colors: {
-        primary: '#615CCE',
+        primary: {
+          DEFAULT: '#615CCE',
+          50: '#CECCF0',
+        },
         accent: '#FF9191',
         secondary: '#171717',
         backgroundBody: '#EDEDED',

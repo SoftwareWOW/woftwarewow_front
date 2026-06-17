@@ -16,6 +16,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import LanguageSwitcher from './LanguageSwitcher'
 import { navbarBrandLogo } from './nav/nav-brand-assets'
+import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-styles'
 import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
 import WowMobileBottomNav from './nav/WowMobileBottomNav'
 import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
@@ -235,9 +236,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
                       className={`flex items-center rounded-[10px] px-3 py-2 font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:px-5 lg:text-sm lg:tracking-[2.1px] 2xl:px-8 2xl:py-4 ${
-                        isActive
-                          ? 'bg-black/[0.04] text-black dark:bg-white/[0.08] dark:text-backgroundBody'
-                          : 'text-black/50 hover:bg-black/[0.03] hover:text-black dark:text-dark-100 dark:hover:bg-white/[0.04] dark:hover:text-backgroundBody'
+                        isActive ? navPillActiveClass : navPillInactiveClass
                       }`}
                       aria-expanded={isActive}
                       aria-haspopup="true"

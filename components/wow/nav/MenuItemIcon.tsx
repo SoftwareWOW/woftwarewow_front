@@ -2,19 +2,19 @@
 
 import { Circle } from 'lucide-react'
 import { navMenuIcons } from './nav-assets'
-
-const iconClassName = 'size-3 shrink-0 text-black dark:text-backgroundBody'
+import { navItemIconClass } from './nav-interaction-styles'
 
 type MenuItemIconProps = {
   iconId: string
+  className?: string
 }
 
-export function MenuItemIcon({ iconId }: MenuItemIconProps) {
+export function MenuItemIcon({ iconId, className = navItemIconClass }: MenuItemIconProps) {
   const Icon = navMenuIcons[iconId as keyof typeof navMenuIcons]
 
   if (!Icon) {
-    return <Circle aria-hidden className={iconClassName} strokeWidth={1.5} />
+    return <Circle aria-hidden className={className} strokeWidth={1.5} />
   }
 
-  return <Icon aria-hidden className={iconClassName} strokeWidth={1.5} />
+  return <Icon aria-hidden className={className} strokeWidth={1.5} />
 }
