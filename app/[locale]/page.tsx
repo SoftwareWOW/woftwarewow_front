@@ -7,8 +7,8 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import FAQ from '@/components/shared/FAQ'
 import ServicesV8 from '@/components/shared/ServicesV8'
 import WowLayout from '@/components/wow/WowLayout'
-import WowDivisions from '@/components/wow/sections/WowDivisions'
 import WowHero from '@/components/wow/sections/WowHero'
+import WowSuperagencyDivisions from '@/components/wow-superagency-divisions'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -37,7 +37,7 @@ const Home = async ({ params }: Props) => {
   return (
     <WowLayout>
       <WowHero hero={dictionary.hero} />
-      <WowDivisions />
+      <WowSuperagencyDivisions />
       <ServicesV8 />
       <Portfolio />
       <ClientsV3 />
