@@ -118,7 +118,70 @@ export const mobileBottomNavIcons = {
 
 export type MobileBottomNavIconId = keyof typeof mobileBottomNavIcons
 
+const cardsBase = '/images/wow/nav/cards'
+
+function cardImage(filename: string) {
+  return `${cardsBase}/${encodeURIComponent(filename)}`
+}
+
 export const navCardImages = {
-  default: '/images/wow/nav/cards/explore-default.jpg',
-  exploreDefault: '/images/wow/nav/cards/explore-default.jpg',
+  default: cardImage('explore-default.jpg'),
+  exploreDefault: cardImage('explore-default.jpg'),
+
+  // Company — Divisions
+  softwareWow: cardImage('Softwaerwow.png'),
+  wowMarketing: cardImage('Marketing.png'),
+  wowDesign: cardImage('Design.png'),
+  wowIntelligence: cardImage('Intelligent.png'),
+  wowSocial: cardImage('Social.png'),
+  wowAccelerate: cardImage('Accelerate.png'),
+  wowWebsites: cardImage('Website.png'),
+  wowImpact: cardImage('Impact.png'),
+  wowHost: cardImage('Host.png'),
+  wowHub: cardImage('Hub.png'),
+  wowEvents: cardImage('Event.png'),
+
+  // For You — Solutions
+  buildLaunch: cardImage('build&lanch.png'),
+  softwareTechnology: cardImage('software&technology.png'),
+  marketingGrowth: cardImage('Marketing.png'),
+  socialCommunity: cardImage('socail&comunity.png'),
+  salesRevenue: cardImage(
+    'sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc 1.png',
+  ),
+  aiAutomation: cardImage('AI and Automation 1.png'),
+  brandingCreative: cardImage('Branding & Creative 1.png'),
+  hostingInfrastructure: cardImage('Host.png'),
+  learningEvents: cardImage('learningevent.png'),
+
+  // For You — Packages
+  startupLaunchPackage: cardImage('Startup laiunch 1.png'),
+  businessGrowthPackage: cardImage('Business growth 1.png'),
+  digitalTransformationPackage: cardImage('digital transofrmation 1.png'),
+  aiAutomationPackage: cardImage('AI Automation 1.png'),
+  saasProductDevelopmentPackage: cardImage('SaaS Dev 1.png'),
+  brandAuthorityPackage: cardImage('social media start 1.png'),
+  websiteGrowthEnginePackage: cardImage('Websit groeh 1.png'),
+  salesAccelerationPackage: cardImage('Sales Acceleration 1.png'),
+  enterpriseInfrastructurePackage: cardImage(
+    'closeup-of-coiled-metal-spring-with-sufficiently-h-2026-01-08-22-22-51-utc 1.png',
+  ),
+
+  // Explore — Discover
+  portfolio: cardImage('pexels-cottonbro-4069290 1.png'),
+  recentWorks: cardImage('pexels-fauxels-3183132 1.png'),
+  clients: cardImage('pexels-akoonie-35088940 1.png'),
+  partnerNetwork: cardImage('pexels-polina-tankilevitch-5386217 1.png'),
+  locations: cardImage('pexels-karola-g-6255984 1.png'),
+
+  // Explore — Industries
+  hospitalityTourism: cardImage('pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png'),
+  retailEcommerce: cardImage('pexels-cottonbro-8088441 1.png'),
+  healthcareWellness: cardImage('pexels-pixabay-35208 1.png'),
 } as const
+
+export type NavCardImageId = keyof typeof navCardImages
+
+export function getNavCardImage(id: string): string {
+  return navCardImages[id as NavCardImageId] ?? navCardImages.default
+}

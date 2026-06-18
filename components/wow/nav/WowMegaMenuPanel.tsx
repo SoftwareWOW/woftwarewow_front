@@ -1,9 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { useTheme } from 'next-themes'
 import type { NavigationData, NavigationMenuItem } from './navigation-types'
-import { divisionIds, divisionProfilePictures } from './nav-brand-assets'
+import { getNavCardImage } from './nav-assets'
 import WowDetailCard from './WowDetailCard'
 import { WowDivisionItem, WowMenuItem } from './WowMenuItem'
 
@@ -22,13 +21,7 @@ export default function WowMegaMenuPanel({
 }: WowMegaMenuPanelProps) {
   const { desktop } = item
   const allItems = useMemo(() => desktop.columns.flatMap((column) => column.items), [desktop.columns])
-  const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const [selectedId, setSelectedId] = useState(desktop.defaultSelection)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     setSelectedId(desktop.defaultSelection)
@@ -39,13 +32,7 @@ export default function WowMegaMenuPanel({
   const detailPanel =
     (selectedId && detailPanels[selectedId as keyof typeof detailPanels]) ?? detailPanels.default
 
-  const isDark = mounted && resolvedTheme === 'dark'
-  const profilePictures = isDark ? divisionProfilePictures.dark : divisionProfilePictures.light
-
-  const detailImageSrc =
-    selectedId && divisionIds.has(selectedId)
-      ? profilePictures[selectedId as keyof typeof profilePictures]
-      : undefined
+  const detailImageSrc = getNavCardImage(selectedId ?? '')
 
   const selectItem = (id: string) => setSelectedId(id)
 
