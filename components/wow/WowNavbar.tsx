@@ -362,7 +362,7 @@ useEffect(() => {
       </motion.header>
 
       <motion.div
-        className="fixed bottom-0 left-0 right-0 z-[1000] px-[15px] pb-[15px] md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-[1003] px-[15px] pb-[15px] md:hidden"
         initial={false}
         animate={{
           y: navbarHidden ? 'calc(100% + 100px)' : '0%',

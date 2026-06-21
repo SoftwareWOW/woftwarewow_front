@@ -35,17 +35,17 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
             aria-label={item.label}
             aria-expanded={isActive}
           >
-            {Icon && (
-              <Icon
-                aria-hidden
-                className={`size-6 shrink-0 transition-colors ${
-                  isActive
-                    ? 'text-primary'
-                    : 'text-white group-hover:text-primary group-[.is-active]:text-primary'
-                }`}
-                strokeWidth={2}
-              />
-            )}
+        {Icon && (
+  <Icon
+    aria-hidden
+    className={`size-6 shrink-0 transition-colors ${
+      isActive
+        ? '!text-black !stroke-black'
+        : '!text-white !stroke-white group-hover:!text-black group-hover:!stroke-black'
+    }`}
+    strokeWidth={2}
+  />
+)}
           </button>
         )
       })}
