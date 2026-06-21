@@ -53,35 +53,33 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
     setMounted(true)
   }, [])
 
+  useEffect(() => {
+    const menuOpen = Boolean(activeMenuId || mobileMenuId)
 
+    if (!menuOpen) return
 
-useEffect(() => {
-  const menuOpen = Boolean(activeMenuId || mobileMenuId)
+    const scrollY = window.scrollY
 
-  if (!menuOpen) return
+    document.documentElement.style.overflowY = 'scroll'
 
-  const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.width = '100%'
 
-  document.documentElement.style.overflowY = 'scroll'
+    return () => {
+      document.documentElement.style.overflowY = ''
 
-  document.body.style.position = 'fixed'
-  document.body.style.top = `-${scrollY}px`
-  document.body.style.left = '0'
-  document.body.style.right = '0'
-  document.body.style.width = '100%'
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.width = ''
 
-  return () => {
-    document.documentElement.style.overflowY = ''
-
-    document.body.style.position = ''
-    document.body.style.top = ''
-    document.body.style.left = ''
-    document.body.style.right = ''
-    document.body.style.width = ''
-
-    window.scrollTo(0, scrollY)
-  }
-}, [activeMenuId, mobileMenuId])
+      window.scrollTo(0, scrollY)
+    }
+  }, [activeMenuId, mobileMenuId])
 
   useEffect(() => {
     lastScrollYRef.current = window.scrollY
@@ -127,6 +125,7 @@ useEffect(() => {
     (id: string) => {
       clearCloseTimer()
       setActiveMenuId(id)
+      setActionMenuOpen(false)
       setNavbarHidden(false)
     },
     [clearCloseTimer],
@@ -136,6 +135,21 @@ useEffect(() => {
     clearCloseTimer()
     closeTimerRef.current = setTimeout(() => setActiveMenuId(null), 350)
   }, [clearCloseTimer])
+
+  const openActionMenuOnDesktop = () => {
+    if (window.innerWidth >= 768) {
+      clearCloseTimer()
+      setActiveMenuId(null)
+      setActionMenuOpen(true)
+      setNavbarHidden(false)
+    }
+  }
+
+  const closeActionMenuOnDesktop = () => {
+    if (window.innerWidth >= 768) {
+      setActionMenuOpen(false)
+    }
+  }
 
   useEffect(() => {
     if (!actionMenuOpen) return
@@ -191,7 +205,6 @@ useEffect(() => {
   const languageIcon = <Globe aria-hidden className={iconClass} strokeWidth={1.5} />
   const messagesIcon = <MessageCircle aria-hidden className={iconClass} strokeWidth={1.5} />
 
-  const activeItem = navigation.items.find((item) => item.id === activeMenuId)
   const mobileItem = navigation.items.find((item) => item.id === mobileMenuId) ?? null
 
   return (
@@ -274,12 +287,19 @@ useEffect(() => {
               })}
             </ul>
 
-            <div className="relative z-[1002]" ref={actionMenuRef}>
+            <div
+              className="relative z-[1002]"
+              ref={actionMenuRef}
+              onMouseEnter={openActionMenuOnDesktop}
+              onMouseLeave={closeActionMenuOnDesktop}
+            >
               <button
                 type="button"
                 onClick={() => {
-                  setActionMenuOpen((open) => !open)
-                  setActiveMenuId(null)
+                  if (window.innerWidth < 768) {
+                    setActionMenuOpen((open) => !open)
+                    setActiveMenuId(null)
+                  }
                 }}
                 className={`${actionBtnClass} ${actionMenuOpen ? 'bg-primary/80' : ''}`}
                 aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
@@ -289,7 +309,7 @@ useEffect(() => {
               </button>
 
               {actionMenuOpen && (
-                <div className="absolute -left-[6px] top-full z-50 mt-2 flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark-200">
+                <div className="absolute -left-[6px] top-full z-50 flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark-200">
                   {mounted && (
                     <button
                       type="button"
@@ -320,44 +340,45 @@ useEffect(() => {
               )}
             </div>
           </nav>
-          {activeMenuId && (
-  <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
-    <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
-      <div className="relative h-[calc(100vh-120px)] overflow-hidden">
-        {navigation.items.map((item) => {
-          const isActive = activeMenuId === item.id
-          const itemIndex = navigation.items.findIndex((i) => i.id === item.id)
-          const activeIndex = navigation.items.findIndex((i) => i.id === activeMenuId)
-          const direction = activeIndex > itemIndex ? 1 : -1
 
-          return (
-            <motion.div
-              key={item.id}
-              className="absolute inset-0"
-              initial={false}
-              animate={{
-                opacity: isActive ? 1 : 0,
-                x: isActive ? 0 : direction > 0 ? 20 : -20,
-                pointerEvents: isActive ? 'auto' : 'none',
-              }}
-              transition={{
-                duration: 0.42,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <WowMegaMenuPanel
-                item={item}
-                detailPanels={navigation.detailPanels}
-                onNavigate={closeMegaMenu}
-                noOuterShell
-              />
-            </motion.div>
-          )
-        })}
-      </div>
-    </div>
-  </div>
-)}
+          {activeMenuId && (
+            <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
+              <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
+                <div className="relative h-[calc(100vh-120px)] overflow-hidden">
+                  {navigation.items.map((item) => {
+                    const isActive = activeMenuId === item.id
+                    const itemIndex = navigation.items.findIndex((i) => i.id === item.id)
+                    const activeIndex = navigation.items.findIndex((i) => i.id === activeMenuId)
+                    const direction = activeIndex > itemIndex ? 1 : -1
+
+                    return (
+                      <motion.div
+                        key={item.id}
+                        className="absolute inset-0"
+                        initial={false}
+                        animate={{
+                          opacity: isActive ? 1 : 0,
+                          x: isActive ? 0 : direction > 0 ? 20 : -20,
+                          pointerEvents: isActive ? 'auto' : 'none',
+                        }}
+                        transition={{
+                          duration: 0.42,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                      >
+                        <WowMegaMenuPanel
+                          item={item}
+                          detailPanels={navigation.detailPanels}
+                          onNavigate={closeMegaMenu}
+                          noOuterShell
+                        />
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </motion.header>
 
