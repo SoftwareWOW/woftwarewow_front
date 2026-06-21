@@ -1,3 +1,4 @@
+
 'use client'
 
 import { Link } from '@/i18n/navigation'
@@ -101,6 +102,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
     (id: string) => {
       clearCloseTimer()
 
+      // Calculate direction based on current active and new id
       const currentIndex = navigation.items.findIndex((item) => item.id === activeMenuId)
       const nextIndex = navigation.items.findIndex((item) => item.id === id)
 
@@ -299,40 +301,41 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
             </div>
           </nav>
 
-          {activeItem && (
+          {/* Mega Menu - Only show when activeMenuId exists */}
+          {activeMenuId && (
             <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
               <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
                 <div className="relative min-h-[520px] overflow-hidden">
-                  <AnimatePresence initial={false} custom={menuDirection}>
-                    <motion.div
-                      key={activeItem.id}
-                      custom={menuDirection}
-                      className="absolute inset-0"
-                      initial={{
-                        x: menuDirection > 0 ? 48 : -48,
-                        opacity: 0,
-                      }}
-                      animate={{
-                        x: 0,
-                        opacity: 1,
-                      }}
-                      exit={{
-                        x: menuDirection > 0 ? -48 : 48,
-                        opacity: 0,
-                      }}
-                      transition={{
-                        duration: 0.42,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                    >
-                      <WowMegaMenuPanel
-                        item={activeItem}
-                        detailPanels={navigation.detailPanels}
-                        onNavigate={closeMegaMenu}
-                        noOuterShell
-                      />
-                    </motion.div>
-                  </AnimatePresence>
+                  {navigation.items.map((item) => {
+                    const isActive = activeMenuId === item.id;
+                    const itemIndex = navigation.items.findIndex(i => i.id === item.id);
+                    const activeIndex = navigation.items.findIndex(i => i.id === activeMenuId);
+                    const direction = activeIndex > itemIndex ? 1 : -1;
+                    
+                    return (
+                      <motion.div
+                        key={item.id}
+                        className="absolute inset-0"
+                        initial={false}
+                        animate={{
+                          opacity: isActive ? 1 : 0,
+                          x: isActive ? 0 : (direction > 0 ? 20 : -20),
+                          pointerEvents: isActive ? 'auto' : 'none',
+                        }}
+                        transition={{
+                          duration: 0.42,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                      >
+                        <WowMegaMenuPanel
+                          item={item}
+                          detailPanels={navigation.detailPanels}
+                          onNavigate={closeMegaMenu}
+                          noOuterShell
+                        />
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -343,10 +346,9 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       <motion.div
         className="fixed bottom-0 left-0 right-0 z-[1000] px-[15px] pb-[15px] md:hidden"
         initial={false}
-      
         animate={{
-  y: navbarHidden ? 'calc(100% + 100px)' : '0%',
-}}
+          y: navbarHidden ? 'calc(100% + 100px)' : '0%',
+        }}
         transition={{
           duration: 0.32,
           ease: [0.16, 1, 0.3, 1],
