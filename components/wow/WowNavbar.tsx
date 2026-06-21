@@ -1,4 +1,3 @@
-
 'use client'
 
 import { Link } from '@/i18n/navigation'
@@ -14,7 +13,7 @@ import {
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import LanguageSwitcher from './LanguageSwitcher'
 import { navbarBrandLogo } from './nav/nav-brand-assets'
 import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-styles'
@@ -40,7 +39,6 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const [actionMenuOpen, setActionMenuOpen] = useState(false)
   const [languageOpen, setLanguageOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [menuDirection, setMenuDirection] = useState(1)
   const [navbarHidden, setNavbarHidden] = useState(false)
 
   const actionMenuRef = useRef<HTMLDivElement>(null)
@@ -55,18 +53,45 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
     setMounted(true)
   }, [])
 
+
+
+useEffect(() => {
+  const menuOpen = Boolean(activeMenuId || mobileMenuId)
+
+  if (!menuOpen) return
+
+  const scrollY = window.scrollY
+
+  document.documentElement.style.overflowY = 'scroll'
+
+  document.body.style.position = 'fixed'
+  document.body.style.top = `-${scrollY}px`
+  document.body.style.left = '0'
+  document.body.style.right = '0'
+  document.body.style.width = '100%'
+
+  return () => {
+    document.documentElement.style.overflowY = ''
+
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.left = ''
+    document.body.style.right = ''
+    document.body.style.width = ''
+
+    window.scrollTo(0, scrollY)
+  }
+}, [activeMenuId, mobileMenuId])
+
   useEffect(() => {
     lastScrollYRef.current = window.scrollY
 
     const handleScroll = () => {
+      if (activeMenuId || mobileMenuId) return
+
       const currentScrollY = window.scrollY
       const scrollingDown = currentScrollY > lastScrollYRef.current
       const scrollingUp = currentScrollY < lastScrollYRef.current
-
-      if (mobileMenuId) {
-        lastScrollYRef.current = currentScrollY
-        return
-      }
 
       if (currentScrollY < 80) {
         setNavbarHidden(false)
@@ -84,7 +109,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [mobileMenuId])
+  }, [activeMenuId, mobileMenuId])
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
@@ -101,19 +126,10 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const openMegaMenu = useCallback(
     (id: string) => {
       clearCloseTimer()
-
-      // Calculate direction based on current active and new id
-      const currentIndex = navigation.items.findIndex((item) => item.id === activeMenuId)
-      const nextIndex = navigation.items.findIndex((item) => item.id === id)
-
-      if (currentIndex !== -1 && nextIndex !== -1 && currentIndex !== nextIndex) {
-        setMenuDirection(nextIndex > currentIndex ? 1 : -1)
-      }
-
       setActiveMenuId(id)
       setNavbarHidden(false)
     },
-    [activeMenuId, clearCloseTimer, navigation.items],
+    [clearCloseTimer],
   )
 
   const scheduleCloseMegaMenu = useCallback(() => {
@@ -245,7 +261,11 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                     >
                       {item.label}
 
-                      <span className={`flex shrink-0 transition-transform duration-300 ${isActive ? '' : 'rotate-180'}`}>
+                      <span
+                        className={`flex shrink-0 transition-transform duration-300 ${
+                          isActive ? '' : 'rotate-180'
+                        }`}
+                      >
                         <ChevronDown aria-hidden className="h-2 w-3.5" strokeWidth={1.2} />
                       </span>
                     </button>
@@ -269,7 +289,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               </button>
 
               {actionMenuOpen && (
-                <div className="absolute top-full z-50 mt-2 -left-[6px] flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark-200">
+                <div className="absolute -left-[6px] top-full z-50 mt-2 flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark-200">
                   {mounted && (
                     <button
                       type="button"
@@ -300,46 +320,44 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               )}
             </div>
           </nav>
-
-          {/* Mega Menu - Only show when activeMenuId exists */}
           {activeMenuId && (
-            <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
-              <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
-                <div className="relative min-h-[520px] overflow-hidden">
-                  {navigation.items.map((item) => {
-                    const isActive = activeMenuId === item.id;
-                    const itemIndex = navigation.items.findIndex(i => i.id === item.id);
-                    const activeIndex = navigation.items.findIndex(i => i.id === activeMenuId);
-                    const direction = activeIndex > itemIndex ? 1 : -1;
-                    
-                    return (
-                      <motion.div
-                        key={item.id}
-                        className="absolute inset-0"
-                        initial={false}
-                        animate={{
-                          opacity: isActive ? 1 : 0,
-                          x: isActive ? 0 : (direction > 0 ? 20 : -20),
-                          pointerEvents: isActive ? 'auto' : 'none',
-                        }}
-                        transition={{
-                          duration: 0.42,
-                          ease: [0.16, 1, 0.3, 1],
-                        }}
-                      >
-                        <WowMegaMenuPanel
-                          item={item}
-                          detailPanels={navigation.detailPanels}
-                          onNavigate={closeMegaMenu}
-                          noOuterShell
-                        />
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          )}
+  <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
+    <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
+      <div className="relative h-[calc(100vh-120px)] overflow-hidden">
+        {navigation.items.map((item) => {
+          const isActive = activeMenuId === item.id
+          const itemIndex = navigation.items.findIndex((i) => i.id === item.id)
+          const activeIndex = navigation.items.findIndex((i) => i.id === activeMenuId)
+          const direction = activeIndex > itemIndex ? 1 : -1
+
+          return (
+            <motion.div
+              key={item.id}
+              className="absolute inset-0"
+              initial={false}
+              animate={{
+                opacity: isActive ? 1 : 0,
+                x: isActive ? 0 : direction > 0 ? 20 : -20,
+                pointerEvents: isActive ? 'auto' : 'none',
+              }}
+              transition={{
+                duration: 0.42,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              <WowMegaMenuPanel
+                item={item}
+                detailPanels={navigation.detailPanels}
+                onNavigate={closeMegaMenu}
+                noOuterShell
+              />
+            </motion.div>
+          )
+        })}
+      </div>
+    </div>
+  </div>
+)}
         </div>
       </motion.header>
 
@@ -364,13 +382,12 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
         />
       </motion.div>
 
-      {/* Mobile Menu Sheet */}
-      <WowMobileMenuSheet 
-        item={mobileItem} 
-        navbar={navbar} 
+      <WowMobileMenuSheet
+        item={mobileItem}
+        navbar={navbar}
         onClose={() => {
           setMobileMenuId(null)
-        }} 
+        }}
       />
 
       <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />

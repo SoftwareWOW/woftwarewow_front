@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { NavigationData, NavigationMenuItem } from './navigation-types'
 import { getNavCardImage } from './nav-assets'
 import WowDetailCard from './WowDetailCard'
@@ -20,7 +20,13 @@ export default function WowMegaMenuPanel({
   noOuterShell = false,
 }: WowMegaMenuPanelProps) {
   const { desktop } = item
-  const allItems = useMemo(() => desktop.columns.flatMap((column) => column.items), [desktop.columns])
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const allItems = useMemo(
+    () => desktop.columns.flatMap((column) => column.items),
+    [desktop.columns],
+  )
+
   const [selectedId, setSelectedId] = useState(desktop.defaultSelection)
 
   useEffect(() => {
@@ -36,25 +42,38 @@ export default function WowMegaMenuPanel({
 
   const selectItem = (id: string) => setSelectedId(id)
 
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const container = scrollRef.current
+    if (!container) return
+
+    container.scrollTop += event.deltaY
+  }
+
   return (
     <div
+      ref={scrollRef}
       role="region"
       aria-label={item.label}
+      onWheel={handleWheel}
       className={
         noOuterShell
-          ? 'max-w-full overflow-x-auto'
-          : 'animate-mega-menu-in mx-auto mt-2 max-w-full overflow-x-auto rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200'
+          ? 'h-full max-h-[calc(100vh-120px)] max-w-full overflow-x-auto overflow-y-auto overscroll-contain'
+          : 'animate-mega-menu-in mx-auto mt-2 max-h-[calc(100vh-120px)] max-w-full overflow-x-auto overflow-y-auto overscroll-contain rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200'
       }
       style={{
-        maxHeight: '78vh',
         padding: `${desktop.paddingY}px clamp(16px, 3vw, ${desktop.paddingX}px)`,
       }}
     >
       <div className="flex w-max min-w-full items-start justify-between gap-4 lg:gap-6 2xl:w-full 2xl:min-w-0 2xl:gap-0">
         {desktop.columns.map((column) => (
-          <div key={column.id} className="flex w-[180px] shrink-0 flex-col gap-[7px] lg:w-[220px] 2xl:w-[260px]">
+          <div
+            key={column.id}
+            className="flex w-[180px] shrink-0 flex-col gap-[7px] lg:w-[220px] 2xl:w-[260px]"
+          >
             {column.title ? (
-              <p className="pl-[10px] font-outfit text-base font-light leading-none text-black/50 dark:text-dark-100">{column.title}</p>
+              <p className="pl-[10px] font-outfit text-base font-light leading-none text-black/50 dark:text-dark-100">
+                {column.title}
+              </p>
             ) : (
               <div className="h-4" aria-hidden />
             )}
@@ -79,7 +98,9 @@ export default function WowMegaMenuPanel({
                       active={selectedId === entry.id}
                       showChevron
                       multilineDescription={
-                        'multilineDescription' in entry ? Boolean(entry.multilineDescription) : false
+                        'multilineDescription' in entry
+                          ? Boolean(entry.multilineDescription)
+                          : false
                       }
                       tall={entry.id === 'helpSupport'}
                       onClick={() => selectItem(entry.id)}
