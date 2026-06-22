@@ -22,6 +22,8 @@ export default {
         seasons: ['var(--font-seasons)'],
       },
       colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
         primary: {
           DEFAULT: '#615CCE',
           50: '#CECCF0',
