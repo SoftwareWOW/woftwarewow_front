@@ -143,7 +143,24 @@ export default function WowEcosystem() {
   }
 
   return (
-    <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background px-2 py-6 text-foreground transition-colors duration-300 sm:px-4 sm:py-12">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-2 py-6 text-foreground transition-colors duration-300 sm:px-4 sm:py-12">
+      {/* Header Section */}
+      <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
+        {/* Main Heading */}
+        <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000]  dark:text-[#F2F2F2]">
+          Because the best teams are{' '}
+          <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
+            organized,
+          </span>{' '}
+          not disconnected
+        </h2>
+
+        {/* Description */}
+        <p className="mx-auto mt-4 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-normal leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-6">
+          Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.
+        </p>
+      </div>
+
       <div
         aria-hidden
         className="absolute inset-0 opacity-40 dark:opacity-40"
