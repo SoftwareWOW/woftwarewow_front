@@ -1882,10 +1882,17 @@
     ]
   },
   "hero": {
-    "title": "Vous voulez la technologie qui donne un avantage à votre entreprise?",
-    "titleHighlight": "Parfait",
-    "description": "Nous développons des systèmes intelligents et des applications prêtes pour l'avenir qui rendent votre entreprise plus productive et plus compétitive.",
-    "imageAlt": "Technologie WOW Superagency"
+    "badge": "LA SUPERAGENCE POUR LA CROISSANCE DES PETITES ENTREPRISES",
+    "headline": {
+      "part1": "C'est ici que les",
+      "highlight1": "ambitions",
+      "part2": "deviennent des",
+      "highlight2": "réalisations."
+    },
+    "servicesLine": "Technologie. Marketing. IA. Sites web. Design. Croissance.",
+    "description": "Tout ce dont votre entreprise a besoin pour croître au sein d'un écosystème coordonné.",
+    "ctaPrimary": "Réserver une consultation gratuite",
+    "ctaSecondary": "Explorer l'écosystème"
   },
   "home": {
     "cta": {

@@ -1,89 +1,71 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import type { Dictionary } from '@/i18n/types'
-import Image from 'next/image'
+import WowButton from '../WowButton'
 
 type WowHeroProps = {
   hero: Dictionary['hero']
 }
 
-const heroImage = '/images/wow/hero-banner.jpg'
-
-const titleHighlightClass =
-  'font-seasons text-[clamp(2.35rem,5vw,4.25rem)] italic leading-[1.05] !bg-none bg-clip-border !text-secondary dark:!text-backgroundBody'
-
-const descriptionClass =
-  'mt-4 max-w-[520px] text-[15px] font-light leading-[1.35] text-[#4B5563] sm:text-base md:mt-5 md:text-[18px] md:leading-[1.3] dark:text-dark-100'
+const highlightClass =
+  'font-seasons text-[clamp(2.25rem,5.5vw,3.78rem)] italic leading-[1.1] !bg-none bg-clip-border text-foreground dark:text-backgroundBody'
 
 export default function WowHero({ hero }: WowHeroProps) {
   return (
-    <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-8 md:pt-28">
-      <div className="relative mx-auto max-w-[1173px]">
-        <div className="overflow-hidden rounded-[24px] bg-backgroundBody p-3 sm:rounded-[32px] sm:p-4 md:p-5">
-          <h1 className="px-3 pb-3 text-[clamp(1.65rem,6.5vw,2.15rem)] font-normal leading-[1.25] text-secondary sm:px-4 md:hidden dark:text-backgroundBody">
-            <TextAppearAnimation>{hero.title}</TextAppearAnimation>
-          </h1>
+    <section className="relative overflow-hidden bg-background px-4 pb-16 pt-12 mt-16 sm:px-8 sm:pb-20 sm:pt-16 md:pt-20 lg:pb-24">
+      {/* Background Decorations for Dark Mode */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl dark:bg-primary/10" />
+        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-secondary/5 blur-3xl dark:bg-secondary/10" />
+        <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-3xl dark:bg-accent/10" />
+      </div>
 
-          <div className="relative min-h-[260px] sm:min-h-[320px] md:min-h-[500px]">
-            <div className="absolute inset-0 overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[32px]">
-              <Image
-                src={heroImage}
-                alt={hero.imageAlt}
-                fill
-                className="object-cover object-right"
-                priority
-                sizes="(max-width: 1173px) 100vw, 1173px"
-              />
-            </div>
-
-            <div className="relative z-10 flex items-stretch md:hidden">
-              <div className="relative z-[2] w-[150px] rounded-br-[20px] bg-[#ededed] px-2 pb-2 pt-0 sm:w-[180px]">
-                <span className={`block ${titleHighlightClass} !text-[clamp(2.5rem,13vw,4rem)]`}>
-                  {hero.titleHighlight}
-                </span>
-              </div>
-
-              <div
-                className="pointer-events-none absolute bottom-[-20px] left-0 z-[3] h-5 w-5"
-                style={{
-                  background:
-                    'radial-gradient(circle at 100% 100%, transparent 20px, #ededed 21px)',
-                }}
-              />
-
-              <div
-                className="pointer-events-none absolute left-[150px] top-0 z-[3] h-5 w-5 sm:left-[180px]"
-                style={{
-                  background:
-                    'radial-gradient(circle at 100% 100%, transparent 20px, #ededed 21px)',
-                }}
-              />
-            </div>
-
-            <div className="relative z-10 hidden max-w-full md:block md:max-w-[72%]">
-              <div className="pointer-events-none absolute right-[-32px] top-0 z-[3] h-8 w-8 bg-[radial-gradient(circle_at_100%_100%,transparent_32px,#ededed_33px)]" />
-
-              <div className="relative z-[1] rounded-br-[32px] bg-backgroundBody px-8 py-9 sm:px-10 sm:py-10 md:px-11 md:py-10 lg:px-12 lg:py-11">
-                <div className="pointer-events-none absolute bottom-[-32px] left-0 z-[3] h-8 w-8 bg-[radial-gradient(circle_at_100%_100%,transparent_32px,#ededed_33px)]" />
-
-                <TextAppearAnimation>
-                  <h1 className="text-[clamp(2rem,4vw,3rem)] font-normal leading-[1.25] text-secondary dark:text-backgroundBody">
-                    {hero.title}{' '}
-                    <span className={titleHighlightClass}>{hero.titleHighlight}</span>
-                  </h1>
-                </TextAppearAnimation>
-
-                <p className={descriptionClass}>{hero.description}</p>
-              </div>
-            </div>
-          </div>
-
-          <RevealWrapper className="px-3 pt-4 sm:px-4 md:hidden">
-            <p className={descriptionClass}>{hero.description}</p>
+      <div className="relative mx-auto flex max-w-[1222px] flex-col items-center gap-16 lg:gap-[107px]">
+        <div className="relative flex w-full flex-col items-center gap-5">
+          <RevealWrapper delay={0.1} className="relative z-10">
+            <p className="rounded-full border border-border/30 bg-background/50 px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.96px] text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:px-6 sm:py-3">
+              {hero.badge}
+            </p>
           </RevealWrapper>
+
+          <div className="relative z-10 flex w-full flex-col items-center gap-8 md:gap-10">
+            <TextAppearAnimation>
+              <h1 className="max-w-[1221px] text-center font-outfit text-[clamp(2rem,5vw,3.375rem)] font-light leading-[1.33] text-foreground dark:text-backgroundBody">
+                {hero.headline.part1}{' '}
+                <span className={highlightClass}>{hero.headline.highlight1}</span>{' '}
+                {hero.headline.part2}{' '}
+                <span className={highlightClass}>{hero.headline.highlight2}</span>
+              </h1>
+            </TextAppearAnimation>
+
+            <RevealWrapper delay={0.2} className="max-w-[759px] text-center">
+              <p className="font-outfit text-lg font-light leading-[1.1] text-muted-foreground dark:text-dark-100 sm:text-xl md:text-[22px]">
+                {hero.servicesLine}
+                <br />
+                {hero.description}
+              </p>
+            </RevealWrapper>
+          </div>
         </div>
+
+        <RevealWrapper delay={0.3} className="relative z-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+          <WowButton
+            href="/contact"
+            className="w-full px-8 py-8 text-sm font-light uppercase tracking-[0.15em] shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30 dark:shadow-primary/30 dark:hover:shadow-primary/40 sm:w-auto"
+          >
+            {hero.ctaPrimary}
+          </WowButton>
+          <WowButton
+            href="/services"
+            variant="dark"
+            className="w-full px-8 py-8 text-sm font-light uppercase tracking-[0.15em] border-2 border-border bg-background/50 text-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-lg dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:w-auto"
+          >
+            {hero.ctaSecondary}
+          </WowButton>
+        </RevealWrapper>
       </div>
     </section>
   )
 }
-

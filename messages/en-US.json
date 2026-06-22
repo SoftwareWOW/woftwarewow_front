@@ -1882,10 +1882,17 @@
     ]
   },
   "hero": {
-    "title": "So, you want the tech that gives your business an edge?",
-    "titleHighlight": "Perfect",
-    "description": "We develop intelligent systems and future-ready apps that make your business more productive and more competitive.",
-    "imageAlt": "WOW Superagency technology"
+    "badge": "THE SUPERAGENCY FOR SMALL BUSINESS GROWTH",
+    "headline": {
+      "part1": "This is Where",
+      "highlight1": "Ambitions",
+      "part2": "Become",
+      "highlight2": "Achievements."
+    },
+    "servicesLine": "Technology. Marketing. AI. Websites. Design. Growth.",
+    "description": "Everything your business needs to grow under one coordinated ecosystem.",
+    "ctaPrimary": "Book a Free Consultation",
+    "ctaSecondary": "Explore the Ecosystem"
   },
   "home": {
     "cta": {
