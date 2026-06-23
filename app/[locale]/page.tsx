@@ -14,8 +14,9 @@ import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
-import AboutV8 from '@/components/homepage-10/AboutV8'
 import Stats from '@/components/wow/LandascapComponets/Stats'
+import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
+import SolutionToChallengesSection from '@/components/wow/LandascapComponets/SolutionToChallenchSection'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -43,11 +44,8 @@ const Home = async ({ params }: Props) => {
       <WowEcosystem ecosystem={dictionary.ecosystem} />
       <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
       <Stats/>
-      <ServicesV8 />
-      <Portfolio />
-      <ClientsV3 />
-      <Community />
-      <FAQ />
+      <DevisionOverview />
+      <SolutionToChallengesSection />
       <Testimonial />
       <CTA buttonText={dictionary.home.cta.button}>
         {dictionary.home.cta.heading}
