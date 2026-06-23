@@ -38,8 +38,8 @@ const Home = async ({ params }: Props) => {
   return (
     <WowLayout>
       <WowHero hero={dictionary.hero} />
-      <WowEcosystem />
-    <WowSuperAgencyClient/>
+      <WowEcosystem ecosystem={dictionary.ecosystem} />
+      <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
       <ServicesV8 />
       <Portfolio />
       <ClientsV3 />

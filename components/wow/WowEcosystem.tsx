@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
+import type { Dictionary } from '@/i18n/types'
 
 type NodeId =
   | 'websites'
@@ -20,13 +21,15 @@ type NodeId =
   | 'boost-profits'
   | 'attract-new'
 
-type Node = {
+type NodeLayout = {
   id: NodeId
-  prefix: string
-  label: string
   x: number
   y: number
   size?: 'sm' | 'md' | 'lg'
+}
+
+type WowEcosystemProps = {
+  ecosystem: Dictionary['ecosystem']
 }
 
 const VB_W = 1200
@@ -37,26 +40,21 @@ const WOW_THEME = {
   gradient: 'linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%)',
 }
 
-const NODES: Node[] = [
-  { id: 'websites', prefix: 'WOW', label: 'Websites', x: 66, y: 30, size: 'md' },
-  { id: 'host', prefix: 'WOW', label: 'Host', x: 36, y: 11, size: 'md' },
-  { id: 'hub', prefix: 'WOW', label: 'Hub', x: 58, y: 14, size: 'lg' },
-  { id: 'impact', prefix: 'WOW', label: 'Impact', x: 82, y: 17, size: 'sm' },
-  { id: 'design', prefix: 'WOW', label: 'Design', x: 20, y: 40, size: 'md' },
-  { id: 'events', prefix: 'WOW', label: 'Events', x: 5, y: 16, size: 'sm' },
-  { id: 'intelligence', prefix: 'WOW', label: 'Intelligence', x: 5, y: 52, size: 'md' },
-  { id: 'accelerate', prefix: 'WOW', label: 'Accelerate', x: 48, y: 52, size: 'md' },
-  { id: 'social', prefix: 'WOW', label: 'Social', x: 80, y: 52, size: 'md' },
-  { id: 'softwarewow', prefix: 'Software', label: 'WOW!', x: 30, y: 70, size: 'md' },
-  { id: 'marketing', prefix: 'WOW', label: 'Marketing', x: 66, y: 70, size: 'lg' },
+const NODE_LAYOUT: NodeLayout[] = [
+  { id: 'websites', x: 66, y: 30, size: 'md' },
+  { id: 'host', x: 36, y: 11, size: 'md' },
+  { id: 'hub', x: 58, y: 14, size: 'lg' },
+  { id: 'impact', x: 82, y: 17, size: 'sm' },
+  { id: 'design', x: 20, y: 40, size: 'md' },
+  { id: 'events', x: 5, y: 16, size: 'sm' },
+  { id: 'intelligence', x: 5, y: 52, size: 'md' },
+  { id: 'accelerate', x: 48, y: 52, size: 'md' },
+  { id: 'social', x: 80, y: 52, size: 'md' },
+  { id: 'softwarewow', x: 30, y: 70, size: 'md' },
+  { id: 'marketing', x: 66, y: 70, size: 'lg' },
 ]
 
-const CTAS: { id: NodeId; label: string }[] = [
-  { id: 'best-app', label: 'THE BEST APP' },
-  { id: 'modern-systems', label: 'MODERN SYSTEMS' },
-  { id: 'boost-profits', label: 'BOOST PROFITS' },
-  { id: 'attract-new', label: 'ATTRACT NEW CUSTOMER' },
-]
+const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
 
 // Updated FLOWS with correct node connections
 const FLOWS: Record<string, NodeId[]> = {
@@ -66,7 +64,7 @@ const FLOWS: Record<string, NodeId[]> = {
   'attract-new': ['attract-new', 'marketing', 'accelerate', 'websites', 'social'],
 }
 
-function nodePos(n: Node) {
+function nodePos(n: NodeLayout) {
   return {
     x: (n.x / 100) * VB_W,
     y: (n.y / 100) * VB_H,
@@ -104,14 +102,14 @@ function buildPath(points: { x: number; y: number }[]) {
   return d
 }
 
-export default function WowEcosystem() {
+export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   const [activeFlow, setActiveFlow] = useState<keyof typeof FLOWS>('best-app')
 
   const activeSet = useMemo(() => new Set(FLOWS[activeFlow]), [activeFlow])
 
   const pathD = useMemo(() => {
     const ids = FLOWS[activeFlow]
-    const ctaIdx = CTAS.findIndex((c) => c.id === ids[0])
+    const ctaIdx = CTA_IDS.findIndex((c) => c === ids[0])
 
     const startPt = {
       x: ctaX(ctaIdx),
@@ -121,7 +119,7 @@ export default function WowEcosystem() {
     const nodePoints = ids
       .slice(1)
       .map((nid) => {
-        const n = NODES.find((nn) => nn.id === nid)
+        const n = NODE_LAYOUT.find((nn) => nn.id === nid)
         if (!n) return null
 
         const p = nodePos(n)
@@ -148,22 +146,22 @@ export default function WowEcosystem() {
       <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
         {/* Main Heading */}
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000]  dark:text-[#F2F2F2]">
-          Because the best teams are{' '}
+          {ecosystem.heading.part1}{' '}
           <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
-            organized,
+            {ecosystem.heading.highlight}
           </span>{' '}
-          not disconnected
+          {ecosystem.heading.part2}
         </h2>
 
         {/* Description */}
         <p className="mx-auto mt-4 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-normal leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-6">
-          Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.
+          {ecosystem.description}
         </p>
       </div>
 
       <div
         aria-hidden
-        className="absolute inset-0 opacity-40 dark:opacity-40"
+        className="absolute inset-0 opacity-0 dark:opacity-40"
         style={{
           backgroundImage:
             'radial-gradient(circle, color-mix(in srgb, currentColor 10%, transparent) 1px, transparent 1px)',
@@ -173,7 +171,7 @@ export default function WowEcosystem() {
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
         style={{
           background:
             'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, var(--background) 0%, rgba(0,0,0,0.55)) 100%)',
@@ -265,8 +263,9 @@ export default function WowEcosystem() {
           </AnimatePresence>
         </svg>
 
-        {NODES.map((n) => {
+        {NODE_LAYOUT.map((n) => {
           const active = activeSet.has(n.id)
+          const nodeCopy = ecosystem.nodes[n.id as keyof typeof ecosystem.nodes]
 
           return (
             <motion.div
@@ -300,9 +299,9 @@ export default function WowEcosystem() {
                     backgroundClip: 'text',
                   }}
                 >
-                  {n.prefix}
+                  {nodeCopy.prefix}
                 </span>{' '}
-                <span className="text-foreground">{n.label}</span>
+                <span className="text-foreground">{nodeCopy.label}</span>
               </span>
 
               {active && (
@@ -341,13 +340,13 @@ export default function WowEcosystem() {
             paddingRight: 'clamp(4px, 1cqw, 16px)',
           }}
         >
-          {CTAS.map((c) => {
-            const active = activeFlow === c.id
+          {CTA_IDS.map((ctaId) => {
+            const active = activeFlow === ctaId
 
             return (
               <button
-                key={c.id}
-                onClick={() => setActiveFlow(c.id)}
+                key={ctaId}
+                onClick={() => setActiveFlow(ctaId)}
                 className="relative rounded-md font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"   
                 style={{
                   fontSize: 'clamp(7px, 1.2cqw, 14px)',
@@ -364,7 +363,7 @@ export default function WowEcosystem() {
                 }}
                 aria-pressed={active}
               >
-                {c.label}
+                {ecosystem.ctas[ctaId as keyof typeof ecosystem.ctas]}
               </button>
             )
           })}

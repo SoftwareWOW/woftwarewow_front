@@ -9,7 +9,7 @@ interface SwiperSlideContentProps {
   title: string
   userName: string
   position: string
-  userImg: StaticImageData
+  userImg: string | StaticImageData
 }
 
 const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({ tags, title, userName, position, userImg }) => {

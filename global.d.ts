@@ -1,7 +1,7 @@
-import type enCA from './messages/en-CA.json'
+import type enUS from './messages/en-US.json'
 import type { routing } from './i18n/routing'
 
-type Messages = typeof enCA
+type Messages = typeof enUS
 
 declare module 'next-intl' {
   interface AppConfig {

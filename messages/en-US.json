@@ -1850,34 +1850,14 @@
     "selected": "Selected",
     "options": [
       {
-        "locale": "en-CA",
-        "name": "English (Canada)",
-        "code": "en-CA"
-      },
-      {
         "locale": "en-US",
         "name": "English (United States)",
         "code": "en-US"
       },
       {
-        "locale": "en-GB",
-        "name": "English (United Kingdom)",
-        "code": "en-GB"
-      },
-      {
         "locale": "fr-CA",
         "name": "French (Canada)",
         "code": "fr-CA"
-      },
-      {
-        "locale": "ar-SA",
-        "name": "Arabic (Saudi Arabia)",
-        "code": "ar-SA"
-      },
-      {
-        "locale": "ar-AE",
-        "name": "Arabic (UAE)",
-        "code": "ar-AE"
       }
     ]
   },
@@ -1893,6 +1873,74 @@
     "description": "Everything your business needs to grow under one coordinated ecosystem.",
     "ctaPrimary": "Book a Free Consultation",
     "ctaSecondary": "Explore the Ecosystem"
+  },
+  "ecosystem": {
+    "heading": {
+      "part1": "Because the best teams are",
+      "highlight": "organized,",
+      "part2": "not disconnected"
+    },
+    "description": "Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.",
+    "nodes": {
+      "websites": { "prefix": "WOW", "label": "Websites" },
+      "host": { "prefix": "WOW", "label": "Host" },
+      "hub": { "prefix": "WOW", "label": "Hub" },
+      "impact": { "prefix": "WOW", "label": "Impact" },
+      "design": { "prefix": "WOW", "label": "Design" },
+      "events": { "prefix": "WOW", "label": "Events" },
+      "intelligence": { "prefix": "WOW", "label": "Intelligence" },
+      "accelerate": { "prefix": "WOW", "label": "Accelerate" },
+      "social": { "prefix": "WOW", "label": "Social" },
+      "softwarewow": { "prefix": "Software", "label": "WOW!" },
+      "marketing": { "prefix": "WOW", "label": "Marketing" }
+    },
+    "ctas": {
+      "best-app": "THE BEST APP",
+      "modern-systems": "MODERN SYSTEMS",
+      "boost-profits": "BOOST PROFITS",
+      "attract-new": "ATTRACT NEW CUSTOMER"
+    }
+  },
+  "superAgencyClient": {
+    "heading": {
+      "part1": "Trusted By Businesses",
+      "highlight": "Focused On Growth"
+    },
+    "aria": {
+      "previousTestimonial": "Previous testimonial",
+      "nextTestimonial": "Next testimonial",
+      "goToTestimonial": "Go to testimonial {index}"
+    },
+    "reviews": [
+      {
+        "id": 1,
+        "tags": "Business Growth & Strategy",
+        "title": "WOW became much more than a service provider. They helped us align our website, marketing, automation, and growth strategy into one cohesive system. Having access to multiple specialists through a single partner made a huge difference.",
+        "userName": "Michael Carter",
+        "position": "Managing Director"
+      },
+      {
+        "id": 2,
+        "tags": "Website & Digital Experience",
+        "title": "The team delivered a modern website that not only looks exceptional but also performs. The attention to user experience, speed, and conversion optimization has significantly improved how customers interact with our business online.",
+        "userName": "Emma Richardson",
+        "position": "Founder & CEO"
+      },
+      {
+        "id": 3,
+        "tags": "AI & Automation",
+        "title": "Their approach to AI was refreshingly practical. Instead of chasing trends, they helped us automate workflows, improve efficiency, and create better customer experiences. The impact was immediate and measurable.",
+        "userName": "Daniel Foster",
+        "position": "Operations Director"
+      },
+      {
+        "id": 4,
+        "tags": "Marketing & Growth",
+        "title": "What impressed us most was how every discipline worked together. From branding and content to marketing and sales systems, everything felt connected. WOW helped us build a stronger foundation for long-term growth.",
+        "userName": "Sophia Bennett",
+        "position": "Business Owner"
+      }
+    ]
   },
   "home": {
     "cta": {

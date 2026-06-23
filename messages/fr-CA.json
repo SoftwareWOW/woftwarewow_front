@@ -1850,34 +1850,14 @@
     "selected": "Sélectionné",
     "options": [
       {
-        "locale": "en-CA",
-        "name": "Anglais (Canada)",
-        "code": "en-CA"
-      },
-      {
         "locale": "en-US",
         "name": "Anglais (États-Unis)",
         "code": "en-US"
       },
       {
-        "locale": "en-GB",
-        "name": "Anglais (Royaume-Uni)",
-        "code": "en-GB"
-      },
-      {
         "locale": "fr-CA",
         "name": "Français (Canada)",
         "code": "fr-CA"
-      },
-      {
-        "locale": "ar-SA",
-        "name": "Arabe (Arabie saoudite)",
-        "code": "ar-SA"
-      },
-      {
-        "locale": "ar-AE",
-        "name": "Arabe (Émirats arabes unis)",
-        "code": "ar-AE"
       }
     ]
   },
@@ -1893,6 +1873,74 @@
     "description": "Tout ce dont votre entreprise a besoin pour croître au sein d'un écosystème coordonné.",
     "ctaPrimary": "Réserver une consultation gratuite",
     "ctaSecondary": "Explorer l'écosystème"
+  },
+  "ecosystem": {
+    "heading": {
+      "part1": "Parce que les meilleures équipes sont",
+      "highlight": "organisées,",
+      "part2": "pas déconnectées"
+    },
+    "description": "Nos solutions marketing stimulent l'engagement et le retour sur investissement grâce à des campagnes ciblées, en améliorant la visibilité de la marque par le SEO et les médias sociaux.",
+    "nodes": {
+      "websites": { "prefix": "WOW", "label": "Sites web" },
+      "host": { "prefix": "WOW", "label": "Hébergement" },
+      "hub": { "prefix": "WOW", "label": "Hub" },
+      "impact": { "prefix": "WOW", "label": "Impact" },
+      "design": { "prefix": "WOW", "label": "Design" },
+      "events": { "prefix": "WOW", "label": "Événements" },
+      "intelligence": { "prefix": "WOW", "label": "Intelligence" },
+      "accelerate": { "prefix": "WOW", "label": "Accélération" },
+      "social": { "prefix": "WOW", "label": "Social" },
+      "softwarewow": { "prefix": "Software", "label": "WOW!" },
+      "marketing": { "prefix": "WOW", "label": "Marketing" }
+    },
+    "ctas": {
+      "best-app": "LA MEILLEURE APP",
+      "modern-systems": "SYSTÈMES MODERNES",
+      "boost-profits": "AUGMENTER LES PROFITS",
+      "attract-new": "ATTIRER DE NOUVEAUX CLIENTS"
+    }
+  },
+  "superAgencyClient": {
+    "heading": {
+      "part1": "Approuvé par des entreprises",
+      "highlight": "axées sur la croissance"
+    },
+    "aria": {
+      "previousTestimonial": "Témoignage précédent",
+      "nextTestimonial": "Témoignage suivant",
+      "goToTestimonial": "Aller au témoignage {index}"
+    },
+    "reviews": [
+      {
+        "id": 1,
+        "tags": "Croissance et stratégie d'affaires",
+        "title": "WOW est devenu bien plus qu'un fournisseur de services. Ils nous ont aidés à aligner notre site web, notre marketing, notre automatisation et notre stratégie de croissance en un seul système cohérent. Avoir accès à plusieurs spécialistes par l'entremise d'un seul partenaire a fait une énorme différence.",
+        "userName": "Michael Carter",
+        "position": "Directeur général"
+      },
+      {
+        "id": 2,
+        "tags": "Site web et expérience numérique",
+        "title": "L'équipe a livré un site web moderne qui non seulement est exceptionnel visuellement, mais qui performe aussi. L'attention portée à l'expérience utilisateur, à la vitesse et à l'optimisation des conversions a considérablement amélioré la façon dont les clients interagissent avec notre entreprise en ligne.",
+        "userName": "Emma Richardson",
+        "position": "Fondatrice et PDG"
+      },
+      {
+        "id": 3,
+        "tags": "IA et automatisation",
+        "title": "Leur approche de l'IA était remarquablement pratique. Au lieu de suivre les tendances, ils nous ont aidés à automatiser les flux de travail, à améliorer l'efficacité et à créer de meilleures expériences client. L'impact a été immédiat et mesurable.",
+        "userName": "Daniel Foster",
+        "position": "Directeur des opérations"
+      },
+      {
+        "id": 4,
+        "tags": "Marketing et croissance",
+        "title": "Ce qui nous a le plus impressionnés, c'est la façon dont chaque discipline travaillait ensemble. De l'image de marque et du contenu aux systèmes de marketing et de vente, tout semblait connecté. WOW nous a aidés à bâtir une base plus solide pour une croissance à long terme.",
+        "userName": "Sophia Bennett",
+        "position": "Propriétaire d'entreprise"
+      }
+    ]
   },
   "home": {
     "cta": {

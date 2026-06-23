@@ -1,6 +1,6 @@
-import type enCA from '@/messages/en-CA.json'
+import type enUS from '@/messages/en-US.json'
 
-export type Dictionary = typeof enCA
+export type Dictionary = typeof enUS
 
 export type NavigationItem = Dictionary['navigation']['items'][number]
 
