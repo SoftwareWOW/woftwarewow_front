@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import SwiperSlideContent from '@/components/homepage-03/SwiperSlideContent'
+
 import userImg1 from '@/public/images/avatar/review-8.png'
 import userImg2 from '@/public/images/avatar/review-6.png'
 import userImg3 from '@/public/images/avatar/review-9.png'
@@ -14,31 +14,43 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-
+import WowSwiperSlideContent from '../LandascapComponets/WowSwiperSlideContent'
 const userReviewData = [
   {
     id: 1,
-    tags: 'The skeleton plan of a website can be broken down into three components',
-    title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level precision.',
+    tags: 'Business Growth & Strategy',
+    title:
+      'WOW became much more than a service provider. They helped us align our website, marketing, automation, and growth strategy into one cohesive system. Having access to multiple specialists through a single partner made a huge difference.',
     userImg: userImg1,
-    userName: 'Kathryn Murphy',
-    position: 'CEO at Vercel',
+    userName: 'Michael Carter',
+    position: 'Managing Director',
   },
   {
     id: 2,
-    tags: 'The skeleton plan of a website can be broken down into three components',
-    title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level precision.',
+    tags: 'Website & Digital Experience',
+    title:
+      'The team delivered a modern website that not only looks exceptional but also performs. The attention to user experience, speed, and conversion optimization has significantly improved how customers interact with our business online.',
     userImg: userImg2,
-    userName: 'Zaks Addision',
-    position: 'CEO at W3',
+    userName: 'Emma Richardson',
+    position: 'Founder & CEO',
   },
   {
     id: 3,
-    tags: 'The skeleton plan of a website can be broken down into three components',
-    title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level precision.',
+    tags: 'AI & Automation',
+    title:
+      'Their approach to AI was refreshingly practical. Instead of chasing trends, they helped us automate workflows, improve efficiency, and create better customer experiences. The impact was immediate and measurable.',
     userImg: userImg3,
-    userName: 'John Dewey',
-    position: 'W3 Dev',
+    userName: 'Daniel Foster',
+    position: 'Operations Director',
+  },
+  {
+    id: 4,
+    tags: 'Marketing & Growth',
+    title:
+      'What impressed us most was how every discipline worked together. From branding and content to marketing and sales systems, everything felt connected. WOW helped us build a stronger foundation for long-term growth.',
+    userImg: userImg1,
+    userName: 'Sophia Bennett',
+    position: 'Business Owner',
   },
 ]
 
@@ -57,7 +69,7 @@ const WowSuperAgencyClient = () => {
       } else {
         api.scrollTo(0)
       }
-    }, 4000) // Change slide every 4 seconds
+    }, 4000)
 
     return () => clearInterval(interval)
   }, [api, isAutoPlay])
@@ -100,24 +112,38 @@ const WowSuperAgencyClient = () => {
       }
     }
 
-    // Restart autoplay after manual navigation
     setTimeout(() => setIsAutoPlay(true), 5000)
   }
 
   return (
-    <section className="relative mb-14 mt-14 overflow-hidden bg-dark py-20 dark:py-0 md:mb-16 md:mt-16 lg:mb-[88px] lg:mt-[88px] lg:py-[120px] dark:lg:py-0 xl:mb-[100px] xl:mt-[100px]">
-      <RevealWrapper className="container pb-6 pt-16 lg:pb-10 lg:pt-[100px]">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative inline-block">
-            <span className="relative z-10">What Our Clients Say</span>
-            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full animate-pulse"></span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Real reviews from real people who use our platform
-          </p>
-        </div>
+    <section className="relative mb-14 mt-14 overflow-hidden bg-background py-20 transition-colors duration-300 md:mb-16 md:mt-16 lg:mb-[88px] lg:mt-[88px] lg:py-[120px] dark:lg:py-0 xl:mb-[100px] xl:mt-[100px]">
+      {/* Background decorative elements - light mode friendly */}
+      <div className="absolute inset-0 opacity-30 dark:opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
+          backgroundSize: '22px 22px',
+        }} />
+      </div>
+      
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
 
+      <RevealWrapper className="relative z-10 container pb-6 pt-16 lg:pb-10 lg:pt-[100px]">
+        {/* Section Header - New Heading */}
+        <div className="text-center mb-4">
+          <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2] mb-4 relative inline-block transition-colors duration-300">
+            Trusted By Businesses{' '}
+            <span className="font-['Ogg_TRIAL'] italic text-[#8b7cff] dark:text-[#b794f4]">
+              Focused On Growth
+            </span>
+            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] rounded-full animate-pulse"></span>
+          </h2>
+        </div>
         {/* Carousel Container */}
         <div
           className="relative w-full mx-auto"
@@ -141,12 +167,12 @@ const WowSuperAgencyClient = () => {
                   <div className="p-1">
                     <div className="relative overflow-hidden rounded-2xl transition-all duration-300">
                       {/* Animated border glow */}
-                      <div className={`absolute -inset-1 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur-xl transition-opacity duration-500 ${
+                      <div className={`absolute -inset-1 bg-gradient-to-r from-[#8b7cff]/20 via-[#b794f4]/20 to-[#f4a8b8]/20 rounded-2xl blur-xl transition-opacity duration-500 ${
                         index === currentIndex ? 'opacity-100' : 'opacity-0'
                       }`}></div>
                       
-                      <div className="relative">
-                        <SwiperSlideContent
+                      <div className="relative bg-white/80 backdrop-blur-sm dark:bg-dark/80 rounded-2xl border border-[#e5e5e5] dark:border-white/5 transition-colors duration-300 shadow-sm dark:shadow-none">
+                        <WowSwiperSlideContent
                           tags={review.tags}
                           title={review.title}
                           userName={review.userName}
@@ -165,10 +191,10 @@ const WowSuperAgencyClient = () => {
           <div className="flex justify-center gap-3 mt-8">
             <button
               onClick={() => handleManualNavigation('prev')}
-              className="bg-white/10 hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-white/10 hover:border-white/30"
+              className="bg-[#f0f0f0] hover:bg-[#e0e0e0] dark:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-[#d0d0d0] dark:border-white/10 hover:border-[#8b7cff] dark:hover:border-white/30"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="text-white w-5 h-5" />
+              <ChevronLeft className="text-[#333333] dark:text-white w-5 h-5 transition-colors duration-300" />
             </button>
 
             {/* Dots */}
@@ -184,8 +210,8 @@ const WowSuperAgencyClient = () => {
                   }}
                   className={`transition-all duration-500 rounded-full ${
                     index === currentIndex
-                      ? 'w-10 h-2.5 bg-gradient-to-r from-primary to-accent shadow-lg shadow-primary/50'
-                      : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/50'
+                      ? 'w-10 h-2.5 bg-gradient-to-r from-[#8b7cff] to-[#b794f4] shadow-lg shadow-[#8b7cff]/30 dark:shadow-[#8b7cff]/50'
+                      : 'w-2.5 h-2.5 bg-[#d0d0d0] dark:bg-white/20 hover:bg-[#8b7cff] dark:hover:bg-white/40'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -194,25 +220,25 @@ const WowSuperAgencyClient = () => {
 
             <button
               onClick={() => handleManualNavigation('next')}
-              className="bg-white/10 hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-white/10 hover:border-white/30"
+              className="bg-[#f0f0f0] hover:bg-[#e0e0e0] dark:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-[#d0d0d0] dark:border-white/10 hover:border-[#8b7cff] dark:hover:border-white/30"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="text-white w-5 h-5" />
+              <ChevronRight className="text-[#333333] dark:text-white w-5 h-5 transition-colors duration-300" />
             </button>
           </div>
 
           {/* Slide Counter */}
           <div className="text-center mt-4">
-            <span className="text-sm text-white/50 font-mono tracking-wider">
+            <span className="text-sm text-[#999999] dark:text-white/40 font-mono tracking-wider transition-colors duration-300">
               {String(currentIndex + 1).padStart(2, '0')} / {String(userReviewData.length).padStart(2, '0')}
             </span>
           </div>
 
-          {/* Progress Bar */}
+          {/* Progress Bar - Fixed for light mode */}
           <div className="mt-4 max-w-xs mx-auto">
-            <div className="relative h-0.5 bg-white/10 rounded-full overflow-hidden">
+            <div className="relative h-1 bg-[#e5e5e5] dark:bg-white/10 rounded-full overflow-hidden">
               <div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-linear"
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] rounded-full transition-all duration-1000 ease-linear"
                 style={{
                   width: `${((currentIndex + 1) / userReviewData.length) * 100}%`,
                 }}
@@ -242,49 +268,29 @@ const WowSuperAgencyClient = () => {
 
 export default WowSuperAgencyClient
 
+
 // 'use client'
 
+// import { useState, useEffect } from 'react'
 // import RevealWrapper from '@/components/animation/RevealWrapper'
 // import SwiperSlideContent from '@/components/homepage-03/SwiperSlideContent'
-// import SectionHeader from '@/components/shared/SectionHeader'
-// import companyClient1 from '@/public/images/icons/company/client-1.svg'
-// import companyClient2 from '@/public/images/icons/company/client-2.svg'
-// import companyClient3 from '@/public/images/icons/company/client-3.svg'
-// import companyClient4 from '@/public/images/icons/company/client-4.svg'
-// import companyClient5 from '@/public/images/icons/company/client-5.svg'
-// import companyClient6 from '@/public/images/icons/company/client-6.svg'
-// import companyClient7 from '@/public/images/icons/company/client-7.svg'
-// import companyClient8 from '@/public/images/icons/company/client-8.svg'
-// import companyClient9 from '@/public/images/icons/company/client-9.svg'
-
-// // ✅ Import your local Swiper CSS instead of the package CSS
-// import '@/scss/vendor/_swiper.min.scss'
-
-// // Use dynamic import for Swiper
-// import dynamic from 'next/dynamic'
-// import { Autoplay, Pagination } from 'swiper/modules'
-
-// // Dynamically import Swiper components with SSR disabled
-// const Swiper = dynamic(
-//   () => import('swiper/react').then((mod) => mod.Swiper),
-//   { ssr: false }
-// )
-
-// const SwiperSlide = dynamic(
-//   () => import('swiper/react').then((mod) => mod.SwiperSlide),
-//   { ssr: false }
-// )
-
-// // Your user data
 // import userImg1 from '@/public/images/avatar/review-8.png'
 // import userImg2 from '@/public/images/avatar/review-6.png'
 // import userImg3 from '@/public/images/avatar/review-9.png'
+
+// import {
+//   Carousel,
+//   CarouselApi,
+//   CarouselContent,
+//   CarouselItem,
+// } from "@/components/ui/carousel"
+// import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // const userReviewData = [
 //   {
 //     id: 1,
 //     tags: 'The skeleton plan of a website can be broken down into three components',
-//     title: 'Exceptional materials. The most durable glass ever in a The Member Reviews section has additional guidelines from the Community',
+//     title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level precision.',
 //     userImg: userImg1,
 //     userName: 'Kathryn Murphy',
 //     position: 'CEO at Vercel',
@@ -292,7 +298,7 @@ export default WowSuperAgencyClient
 //   {
 //     id: 2,
 //     tags: 'The skeleton plan of a website can be broken down into three components',
-//     title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level.',
+//     title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level precision.',
 //     userImg: userImg2,
 //     userName: 'Zaks Addision',
 //     position: 'CEO at W3',
@@ -300,7 +306,7 @@ export default WowSuperAgencyClient
 //   {
 //     id: 3,
 //     tags: 'The skeleton plan of a website can be broken down into three components',
-//     title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level.',
+//     title: 'Exceptional materials. The most durable glass ever in a smartphone. A beautiful new gold finish, achieved with an atomic-level precision.',
 //     userImg: userImg3,
 //     userName: 'John Dewey',
 //     position: 'W3 Dev',
@@ -308,33 +314,233 @@ export default WowSuperAgencyClient
 // ]
 
 // const WowSuperAgencyClient = () => {
+//   const [api, setApi] = useState<CarouselApi>()
+//   const [isAutoPlay, setIsAutoPlay] = useState(true)
+//   const [currentIndex, setCurrentIndex] = useState(0)
+
+//   // Autoplay functionality - slides from right to left
+//   useEffect(() => {
+//     if (!api || !isAutoPlay) return
+
+//     const interval = setInterval(() => {
+//       if (api.canScrollNext()) {
+//         api.scrollNext()
+//       } else {
+//         api.scrollTo(0)
+//       }
+//     }, 4000) // Change slide every 4 seconds
+
+//     return () => clearInterval(interval)
+//   }, [api, isAutoPlay])
+
+//   // Track current slide index
+//   useEffect(() => {
+//     if (!api) return
+
+//     const onSelect = () => {
+//       setCurrentIndex(api.selectedScrollSnap())
+//     }
+
+//     api.on('select', onSelect)
+//     return () => {
+//       api.off('select', onSelect)
+//     }
+//   }, [api])
+
+//   // Pause autoplay on hover
+//   const handleMouseEnter = () => setIsAutoPlay(false)
+//   const handleMouseLeave = () => setIsAutoPlay(true)
+
+//   // Manual navigation with autoplay control
+//   const handleManualNavigation = (direction: 'prev' | 'next') => {
+//     if (!api) return
+
+//     setIsAutoPlay(false)
+
+//     if (direction === 'next') {
+//       if (api.canScrollNext()) {
+//         api.scrollNext()
+//       } else {
+//         api.scrollTo(0)
+//       }
+//     } else {
+//       if (api.canScrollPrev()) {
+//         api.scrollPrev()
+//       } else {
+//         api.scrollTo(userReviewData.length - 1)
+//       }
+//     }
+
+//     // Restart autoplay after manual navigation
+//     setTimeout(() => setIsAutoPlay(true), 5000)
+//   }
+
 //   return (
-//     <section className="relative mb-14 mt-14 overflow-hidden bg-dark py-20 dark:py-0 md:mb-16 md:mt-16 lg:mb-[88px] lg:mt-[88px] lg:py-[120px] dark:lg:py-0 xl:mb-[100px] xl:mt-[100px]">
-//       <RevealWrapper className="container pb-6 pt-16 lg:pb-10 lg:pt-[100px]">
-//         <Swiper
-//           modules={[Autoplay, Pagination]}
-//           spaceBetween={30}
-//           slidesPerView={1}
-//           loop
-//           pagination={{
-//             clickable: true,
-//             el: '.swiper-custom-pagination',
-//           }}
-//           speed={1500}
-//           allowTouchMove
-//           autoplay={{
-//             delay: 3700,
-//             disableOnInteraction: false,
-//           }}
-//           style={{ minHeight: '350px' }}>
-//           {userReviewData.map(({ id, title, tags, userName, position, userImg }) => (
-//             <SwiperSlide key={id}>
-//               <SwiperSlideContent tags={tags} title={title} userName={userName} position={position} userImg={userImg} />
-//             </SwiperSlide>
-//           ))}
-//           <div className="swiper-custom-pagination mt-6 flex justify-center"></div>
-//         </Swiper>
+//     <section className="relative mb-14 mt-14 overflow-hidden bg-background py-20 transition-colors duration-300 dark:bg-dark md:mb-16 md:mt-16 lg:mb-[88px] lg:mt-[88px] lg:py-[120px] dark:lg:py-0 xl:mb-[100px] xl:mt-[100px]">
+//       {/* Background decorative elements */}
+//       <div className="absolute inset-0 opacity-30 dark:opacity-20">
+//         <div className="absolute inset-0" style={{
+//           backgroundImage: 'radial-gradient(circle, color-mix(in srgb, currentColor 10%, transparent) 1px, transparent 1px)',
+//           backgroundSize: '22px 22px',
+//         }} />
+//       </div>
+      
+//       <div
+//         aria-hidden
+//         className="pointer-events-none absolute inset-0"
+//         style={{
+//           background: 'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, var(--background) 0%, rgba(0,0,0,0.35)) 100%)',
+//         }}
+//       />
+
+//       <RevealWrapper className="relative z-10 container pb-6 pt-16 lg:pb-10 lg:pt-[100px]">
+//         {/* Section Header */}
+//         <div className="text-center mb-12">
+//           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 relative inline-block transition-colors duration-300">
+//             <span className="relative z-10">Trusted By Businesses Focused On Growth</span>
+//             <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] rounded-full animate-pulse"></span>
+//           </h2>
+        
+//         </div>
+
+//         {/* Carousel Container */}
+//         <div
+//           className="relative w-full mx-auto"
+//           onMouseEnter={handleMouseEnter}
+//           onMouseLeave={handleMouseLeave}
+//         >
+//           <Carousel
+//             setApi={setApi}
+//             opts={{
+//               align: 'start',
+//               loop: true,
+//             }}
+//             className="w-full"
+//           >
+//             <CarouselContent className="-ml-2 md:-ml-4">
+//               {userReviewData.map((review, index) => (
+//                 <CarouselItem
+//                   key={review.id}
+//                   className="pl-2 md:pl-4 basis-full"
+//                 >
+//                   <div className="p-1">
+//                     <div className="relative overflow-hidden rounded-2xl transition-all duration-300">
+//                       {/* Animated border glow */}
+//                       <div className={`absolute -inset-1 bg-gradient-to-r from-[#8b7cff]/20 via-[#b794f4]/20 to-[#f4a8b8]/20 rounded-2xl blur-xl transition-opacity duration-500 ${
+//                         index === currentIndex ? 'opacity-100' : 'opacity-0'
+//                       }`}></div>
+                      
+//                       <div className="relative bg-background/80 backdrop-blur-sm dark:bg-dark/80 rounded-2xl border border-border/50 dark:border-white/5 transition-colors duration-300">
+//                         <SwiperSlideContent
+//                           tags={review.tags}
+//                           title={review.title}
+//                           userName={review.userName}
+//                           position={review.position}
+//                           userImg={review.userImg}
+//                         />
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </CarouselItem>
+//               ))}
+//             </CarouselContent>
+//           </Carousel>
+
+//           {/* Navigation Buttons */}
+//           <div className="flex justify-center gap-3 mt-8">
+//             <button
+//               onClick={() => handleManualNavigation('prev')}
+//               className="bg-foreground/5 hover:bg-foreground/10 dark:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-border/30 dark:border-white/10 hover:border-foreground/20 dark:hover:border-white/30"
+//               aria-label="Previous testimonial"
+//             >
+//               <ChevronLeft className="text-foreground/70 dark:text-white w-5 h-5 transition-colors duration-300" />
+//             </button>
+
+//             {/* Dots */}
+//             <div className="flex items-center gap-2 mx-4">
+//               {userReviewData.map((_, index) => (
+//                 <button
+//                   key={index}
+//                   onClick={() => {
+//                     if (!api) return
+//                     setIsAutoPlay(false)
+//                     api.scrollTo(index)
+//                     setTimeout(() => setIsAutoPlay(true), 5000)
+//                   }}
+//                   className={`transition-all duration-500 rounded-full ${
+//                     index === currentIndex
+//                       ? 'w-10 h-2.5 bg-gradient-to-r from-[#8b7cff] to-[#b794f4] shadow-lg shadow-[#8b7cff]/30 dark:shadow-[#8b7cff]/50'
+//                       : 'w-2.5 h-2.5 bg-foreground/20 dark:bg-white/20 hover:bg-foreground/40 dark:hover:bg-white/40'
+//                   }`}
+//                   aria-label={`Go to testimonial ${index + 1}`}
+//                 />
+//               ))}
+//             </div>
+
+//             <button
+//               onClick={() => handleManualNavigation('next')}
+//               className="bg-foreground/5 hover:bg-foreground/10 dark:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-border/30 dark:border-white/10 hover:border-foreground/20 dark:hover:border-white/30"
+//               aria-label="Next testimonial"
+//             >
+//               <ChevronRight className="text-foreground/70 dark:text-white w-5 h-5 transition-colors duration-300" />
+//             </button>
+//           </div>
+
+//           {/* Slide Counter */}
+//           <div className="text-center mt-4">
+//             <span className="text-sm text-foreground/40 dark:text-white/40 font-mono tracking-wider transition-colors duration-300">
+//               {String(currentIndex + 1).padStart(2, '0')} / {String(userReviewData.length).padStart(2, '0')}
+//             </span>
+//           </div>
+
+//           {/* Progress Bar */}
+//           <div className="mt-4 max-w-xs mx-auto">
+//             <div className="relative h-0.5 bg-foreground/10 dark:bg-white/10 rounded-full overflow-hidden">
+//               <div
+//                 className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] rounded-full transition-all duration-1000 ease-linear"
+//                 style={{
+//                   width: `${((currentIndex + 1) / userReviewData.length) * 100}%`,
+//                 }}
+//               />
+//             </div>
+//           </div>
+//         </div>
 //       </RevealWrapper>
+
+//       <style jsx>{`
+//         @keyframes pulse {
+//           0%, 100% {
+//             opacity: 0.3;
+//           }
+//           50% {
+//             opacity: 0.6;
+//           }
+//         }
+
+//         @keyframes shimmer {
+//           0% {
+//             background-position: -200% center;
+//           }
+//           100% {
+//             background-position: 200% center;
+//           }
+//         }
+
+//         .animate-pulse {
+//           animation: pulse 2s ease-in-out infinite;
+//         }
+
+//         .animate-shimmer {
+//           background: linear-gradient(
+//             90deg,
+//             transparent 0%,
+//             rgba(139, 124, 255, 0.1) 50%,
+//             transparent 100%
+//           );
+//           background-size: 200% auto;
+//           animation: shimmer 3s ease-in-out infinite;
+//         }
+//       `}</style>
 //     </section>
 //   )
 // }
