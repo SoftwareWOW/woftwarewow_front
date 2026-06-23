@@ -24,12 +24,57 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        // card: {
+        //   DEFAULT: 'var(--card)',
+        //   foreground: 'var(--card-foreground)',
+        // },
+        // popover: {
+        //   DEFAULT: 'var(--popover)',
+        //   foreground: 'var(--popover-foreground)',
+        // },
         primary: {
           DEFAULT: '#615CCE',
+          // foreground: '#ffffff',
           50: '#CECCF0',
         },
-        accent: '#FF9191',
+           accent: '#FF9191',
         secondary: '#171717',
+        // secondary: {
+        //   DEFAULT: '#171717',
+        //   foreground: '#EDEDED',
+        // },
+        // muted: {
+        //   DEFAULT: '#f5f5f5',
+        //   foreground: '#666666',
+        // },
+        // accent: {
+        //   DEFAULT: '#FF9191',
+        //   foreground: '#171717',
+        // },
+        // destructive: {
+        //   DEFAULT: 'var(--destructive)',
+        //   foreground: 'var(--destructive-foreground)',
+        // },
+        // border: 'var(--border)',
+        // input: 'var(--input)',
+        // ring: 'var(--ring)',
+        // chart: {
+        //   1: 'var(--chart-1)',
+        //   2: 'var(--chart-2)',
+        //   3: 'var(--chart-3)',
+        //   4: 'var(--chart-4)',
+        //   5: 'var(--chart-5)',
+        // },
+        // sidebar: {
+        //   DEFAULT: 'var(--sidebar)',
+        //   foreground: 'var(--sidebar-foreground)',
+        //   primary: 'var(--sidebar-primary)',
+        //   'primary-foreground': 'var(--sidebar-primary-foreground)',
+        //   accent: 'var(--sidebar-accent)',
+        //   'accent-foreground': 'var(--sidebar-accent-foreground)',
+        //   border: 'var(--sidebar-border)',
+        //   ring: 'var(--sidebar-ring)',
+        // },
         backgroundBody: '#EDEDED',
         black: '#171717',
         colorText: '#171717b3',
@@ -78,8 +123,14 @@ export default {
         'mobile-sheet-in': 'mobile-sheet-in 280ms cubic-bezier(0.65, 0.05, 0, 1) forwards',
       },
       borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
         card: '20px',
         cta: '10px',
+      },
+      ringWidth: {
+        3: '3px',
       },
     },
   },
