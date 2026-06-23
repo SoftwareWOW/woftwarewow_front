@@ -44,6 +44,9 @@ const useRevealAnimation = (options: Partial<AnimationOptions> = {}) => {
             end: 'top 50%',
             scrub: false,
             once: true,
+            onEnter: () => {
+              element.classList.add('revealed')
+            },
           },
         },
       )
