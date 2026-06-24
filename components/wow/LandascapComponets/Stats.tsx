@@ -127,11 +127,11 @@ const Stats = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative overflow-hidden bg-background transition-colors duration-300 min-h-screen"
+      className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4 min-h-screen"
     >
       {/* Pin container */}
       <div ref={pinRef} className="w-full">
-        <div className="relative py-14 md:py-16 lg:py-[88px] xl:py-[100px]">
+        <div className="relative">
           {/* Background decorative elements */}
           <div className="absolute inset-0 opacity-0 dark:opacity-20">
             <div className="absolute inset-0" style={{
@@ -148,7 +148,7 @@ const Stats = () => {
             }}
           />
 
-          <div className="container relative z-10">
+          <div className="relative z-10 mx-auto max-w-[1320px]">
             {/* Description with animation */}
             <RevealWrapper>
               <h4 
@@ -214,7 +214,7 @@ const Stats = () => {
         </div>
       </div>
 
-      {/* Add custom styles for the scroll-stop effect */}
+      {/* Custom styles for the scroll-stop effect */}
       <style jsx>{`
         .is-pinned .section-description {
           transition: color 0.7s ease;

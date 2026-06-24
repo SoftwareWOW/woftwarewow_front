@@ -71,7 +71,7 @@ const WowProjects = () => {
   const visibleProjects = showAll ? wowProjects : wowProjects.slice(0, INITIAL_VISIBLE_COUNT)
 
   return (
-    <section className="relative overflow-hidden bg-background pb-14 pt-14 transition-colors duration-300 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
@@ -93,7 +93,7 @@ const WowProjects = () => {
         }}
       />
 
-      <div className="container relative z-10">
+      <div className="relative z-10 mx-auto max-w-[1320px]">
         {/* Header */}
         <div className="mb-10 flex flex-col items-center justify-center gap-y-4 md:mb-20 md:flex-row md:justify-between">
           <TextAppearAnimation>
@@ -110,7 +110,6 @@ const WowProjects = () => {
             </div>
           </TextAppearAnimation>
 
-     
           <div>
             <TextAppearAnimation>
               <p className="max-w-md flex-1 text-[#555555] dark:text-[#999999] md:self-end md:text-right">
@@ -118,19 +117,18 @@ const WowProjects = () => {
                 measurable outcomes.
               </p>
             </TextAppearAnimation>
-                         {/* View All Case Studies Button */}
-        <RevealWrapper className="mt-6 flex justify-center md:mt-8">
-          <Link
-            href="/case-studies"
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
-          >
-            <span className="relative z-10 flex items-center gap-2 font-medium uppercase tracking-[0.05em]">
-              View All Case Studies
-            </span>
-          </Link>
-        </RevealWrapper>
+            {/* View All Case Studies Button */}
+            <RevealWrapper className="mt-6 flex justify-center md:mt-8">
+              <Link
+                href="/case-studies"
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+              >
+                <span className="relative z-10 flex items-center gap-2 font-medium uppercase tracking-[0.05em]">
+                  View All Case Studies
+                </span>
+              </Link>
+            </RevealWrapper>
           </div>
-
         </div>
 
         {/* Projects Grid */}
@@ -165,8 +163,6 @@ const WowProjects = () => {
                 </p>
               </div>
 
-
-
               <figure className="absolute right-10 top-10 h-[55px] w-[55px] cursor-pointer overflow-hidden bg-primary max-md:hidden md:block">
                 <Image
                   src={topArrow}
@@ -181,7 +177,7 @@ const WowProjects = () => {
                   className="absolute -translate-x-4 translate-y-12 opacity-0 transition-all duration-500 group-hover:translate-x-[19px] group-hover:translate-y-5 group-hover:opacity-100"
                 />
               </figure>
-                          </RevealWrapper>
+            </RevealWrapper>
           ))}
         </div>
 
@@ -200,8 +196,6 @@ const WowProjects = () => {
             </button>
           </RevealWrapper>
         )}
-
-    
       </div>
     </section>
   )
