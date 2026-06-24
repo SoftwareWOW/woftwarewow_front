@@ -17,7 +17,7 @@ const wowProjects = [
       'A unified website, patient portal, and marketing system that increased appointment bookings by 47% in six months.',
     thumbnail: '/images/portfolio/project-img-01.png',
     alt: 'Healthcare digital transformation project by WOW Superagency',
-    href: '/contact',
+    href: '/case-studies/healthcare-digital-transformation',
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const wowProjects = [
       'Complete rebrand, high-performance website, and lead-generation funnel for a regional construction firm expanding into new markets.',
     thumbnail: '/images/portfolio/project-img-02.png',
     alt: 'Construction brand and website project by WOW Superagency',
-    href: '/contact',
+    href: '/case-studies/construction-brand-overhaul',
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const wowProjects = [
       'Custom AI tools and intake automation that cut manual document processing time by 60% while improving client response speed.',
     thumbnail: '/images/portfolio/project-img-03.png',
     alt: 'Legal firm AI automation project by WOW Superagency',
-    href: '/contact',
+    href: '/case-studies/legal-ai-automation',
   },
   {
     id: 4,
@@ -44,7 +44,7 @@ const wowProjects = [
       'End-to-end booking software, secure hosting, and conversion-focused design for a boutique hotel group across three locations.',
     thumbnail: '/images/portfolio/project-img-04.png',
     alt: 'Hospitality booking platform project by WOW Superagency',
-    href: '/contact',
+    href: '/case-studies/hospitality-booking-platform',
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const wowProjects = [
       'Integrated social, paid media, and email strategy that doubled online revenue for an independent retailer in one holiday season.',
     thumbnail: '/images/home-5/case-study-1.png',
     alt: 'Retail eCommerce growth campaign by WOW Superagency',
-    href: '/contact',
+    href: '/case-studies/retail-ecommerce-growth',
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ const wowProjects = [
       'WOW Hub deployment with CRM integration, team training, and accelerated lead nurturing for a multi-office advisory firm.',
     thumbnail: '/images/home-5/case-study-2.png',
     alt: 'Professional services growth hub project by WOW Superagency',
-    href: '/contact',
+    href: '/case-studies/professional-services-hub',
   },
 ]
 
@@ -72,46 +72,100 @@ const WowProjects = () => {
 
   return (
     <section className="relative overflow-hidden bg-background pb-14 pt-14 transition-colors duration-300 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-0 dark:opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        />
+      </div>
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
+
+      <div className="container relative z-10">
+        {/* Header */}
         <div className="mb-10 flex flex-col items-center justify-center gap-y-4 md:mb-20 md:flex-row md:justify-between">
           <TextAppearAnimation>
-            <h2 className="text-appear flex-1 text-secondary dark:text-backgroundBody">
-              Selected <i className="font-instrument italic text-secondary dark:text-backgroundBody">Projects</i>
-            </h2>
+            <div>
+              <p className="mb-2 text-sm font-medium uppercase tracking-[0.15em] text-[#8b7cff] dark:text-[#b794f4]">
+                Case Studies
+              </p>
+              <h2 className="text-appear flex-1 text-[#000000] dark:text-[#F2F2F2]">
+                Real Challenges.{' '}
+                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                  Real Solutions.
+                </span>
+              </h2>
+            </div>
           </TextAppearAnimation>
+
+     
           <div>
             <TextAppearAnimation>
-              <p className="max-w-md flex-1 text-colorText dark:text-dark-100 md:self-end md:text-right">
-                Real results from businesses that trusted WOW Superagency to unify their technology, marketing, and
-                growth under one coordinated team.
+              <p className="max-w-md flex-1 text-[#555555] dark:text-[#999999] md:self-end md:text-right">
+                See how businesses have leveraged technology, marketing, AI, websites, and growth systems to achieve
+                measurable outcomes.
               </p>
             </TextAppearAnimation>
+                         {/* View All Case Studies Button */}
+        <RevealWrapper className="mt-6 flex justify-center md:mt-8">
+          <Link
+            href="/case-studies"
+            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+          >
+            <span className="relative z-10 flex items-center gap-2 font-medium uppercase tracking-[0.05em]">
+              View All Case Studies
+            </span>
+          </Link>
+        </RevealWrapper>
           </div>
+
         </div>
 
-        <div className="[&>*:not(:last-child)]:mb-[30px]">
+        {/* Projects Grid */}
+        <div className="space-y-6 md:space-y-8">
           {visibleProjects.map((project) => (
-            <RevealWrapper as="article" className="reveal-me underline-hover-effect group relative" key={project.id}>
-              <Link href={project.href} className="block overflow-hidden rounded-lg">
+            <RevealWrapper
+              as="article"
+              className="group relative overflow-hidden rounded-2xl border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#8b7cff]/30 hover:shadow-2xl hover:shadow-[#8b7cff]/10 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/20"
+              key={project.id}
+            >
+              <Link href={project.href} className="block overflow-hidden rounded-t-2xl">
                 <Image
                   width={1330}
                   height={445}
                   src={project.thumbnail}
                   alt={project.alt}
-                  className="transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
+                  className="transition-all duration-700 group-hover:scale-105"
                 />
               </Link>
 
-              <div className="absolute bottom-4 left-4 max-w-96 rounded-sm border border-transparent bg-backgroundBody/95 p-2 backdrop-blur-sm transition-colors duration-300 max-md:right-4 max-md:top-2 dark:border-white/10 dark:bg-dark-200/95 sm:p-3 md:bottom-10 md:left-10 md:max-w-[535px] md:p-[30px]">
-                <div className="project-title mb-2 md:mb-5">
+              {/* Content Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 max-w-[calc(100%-2rem)] rounded-xl border border-white/20 bg-backgroundBody/95 p-3 backdrop-blur-sm transition-all duration-300 hover:bg-backgroundBody/100 dark:border-white/10 dark:bg-dark-200/95 dark:hover:bg-dark-200/100 sm:p-4 md:bottom-8 md:left-8 md:max-w-[535px] md:p-6 lg:bottom-10 lg:left-10 lg:p-8">
+                <div className="project-title mb-2 md:mb-3">
                   <Link href={project.href}>
-                    <h3 className="text-[24px] font-normal text-secondary dark:text-backgroundBody lg:text-5xl lg:leading-[1.2]">
+                    <h3 className="text-base font-bold text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4] sm:text-lg md:text-2xl lg:text-3xl">
                       {project.title}
                     </h3>
                   </Link>
                 </div>
-                <p className="text-colorText dark:text-dark-100 max-sm:text-xs md:text-sm">{project.description}</p>
+                <p className="text-xs text-[#555555] dark:text-[#999999] sm:text-sm md:text-base">
+                  {project.description}
+                </p>
               </div>
+
+
 
               <figure className="absolute right-10 top-10 h-[55px] w-[55px] cursor-pointer overflow-hidden bg-primary max-md:hidden md:block">
                 <Image
@@ -127,26 +181,27 @@ const WowProjects = () => {
                   className="absolute -translate-x-4 translate-y-12 opacity-0 transition-all duration-500 group-hover:translate-x-[19px] group-hover:translate-y-5 group-hover:opacity-100"
                 />
               </figure>
-            </RevealWrapper>
+                          </RevealWrapper>
           ))}
         </div>
 
+        {/* See More / See Less Button */}
         {wowProjects.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="rv-button rv-button-white block md:inline-block"
-              aria-expanded={showAll}>
-              <div className="rv-button-top">
-                <span>{showAll ? 'See Less' : 'See More'}</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>{showAll ? 'See Less' : 'See More'}</span>
-              </div>
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
+              aria-expanded={showAll}
+            >
+              <span className="relative z-10 font-medium">
+                {showAll ? 'See Less' : 'See More'}
+              </span>
             </button>
           </RevealWrapper>
         )}
+
+    
       </div>
     </section>
   )

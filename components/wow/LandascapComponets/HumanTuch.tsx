@@ -1,15 +1,19 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import hero01 from '@/public/images/hero-img/hero-img-01.png'
-import hero02 from '@/public/images/hero-img/hero-img-02.png'
-import hero03 from '@/public/images/hero-img/hero-img-03.png'
-import hero04 from '@/public/images/hero-img/hero-img-04.png'
 import Image from 'next/image'
 
-const HumanTuch = () => {
+import hero01 from '@/public/images/wow/Hero/Human/Rectangle3.png'
+import hero02 from '@/public/images/wow/Hero/Human/Rectangle2.png'
+import hero03 from '@/public/images/wow/Hero/Human/Rectangle1.png'
+import hero04 from '@/public/images/wow/Hero/Human/Rectangle4.png'
+
+const HumanTouch = () => {
   return (
-    <section className="relative overflow-hidden bg-background pb-14 pt-[110px] transition-colors duration-300 md:pb-16 md:pt-[150px] lg:pb-[88px] lg:pt-[190px] xl:pb-[100px]">
+    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
+      {/* Background decorative elements - matching WowSuperAgencyClient */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
           className="absolute inset-0"
@@ -21,53 +25,89 @@ const HumanTuch = () => {
         />
       </div>
 
-      <div className="container relative z-10">
-        <div className="flex flex-col gap-8 max-lg:justify-center lg:flex-row">
-          <div className="w-full flex-1 max-lg:self-center">
-            <TextAppearAnimation>
-              <h2 className="text-appear text-secondary dark:text-backgroundBody xl:text-[85px] xl:leading-[1.22]">
-                Technology with a{' '}
-                <i className="block font-instrument italic text-[#8b7cff] dark:text-[#b794f4]">human touch —</i>
-                the WOW difference
-              </h2>
-            </TextAppearAnimation>
-            <RevealWrapper className="reveal-me mt-10 flex items-center gap-5 pb-10 lg:pb-16 xl:pb-24">
-              <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-[#e5e5e5] dark:border-white/10">
-                <Image
-                  src="/images/wow/hero/client/Michael Carter.png"
-                  alt="WOW Superagency team member"
-                  width={56}
-                  height={56}
-                  className="size-full object-cover"
-                />
-              </div>
-              <figcaption>
-                <span className="text-xs italic text-colorText dark:text-dark-100">
-                  Real people behind every project
-                </span>
-                <p className="font-medium text-secondary dark:text-backgroundBody">WOW Superagency Team</p>
-              </figcaption>
-            </RevealWrapper>
-            <RevealWrapperV2 as="figure" className="reveal-me mb-8 w-full overflow-hidden rounded-lg">
-              <Image src={hero01} alt="WOW Superagency collaborative strategy session" className="w-full" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1320px]">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+          <div className="grid gap-3">
+            <div className="bg-transparent p-0">
+              <TextAppearAnimation>
+                <h2 className="text-appear max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-white sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+                  Technology <br />
+                  Powered.{' '}
+                  <span className="font-instrument italic font-normal tracking-[-0.06em] bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                    Human
+                  </span>
+                  <br />
+                  Led.
+                </h2>
+              </TextAppearAnimation>
+              <RevealWrapper className="mt-7 flex items-center gap-4">
+                <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-[#8b7cff] shadow-lg shadow-[#8b7cff]/20">
+                  <Image
+                    src="/images/wow/hero/client/Michael Carter.png"
+                    alt="Yahya Sadat"
+                    width={48}
+                    height={48}
+                    className="size-full object-contain"
+                  />
+                </div>
+
+                <figcaption>
+                  <p className="text-sm font-medium text-[#1a1a1a] transition-colors duration-300 dark:text-white">
+                    Yahya Sadat
+                  </p>
+                  <span className="text-xs text-[#8b7cff] dark:text-[#b794f4]">
+                    Founder & CEO
+                  </span>
+                  <p className="mt-1 max-w-[360px] text-[11px] leading-4 text-[#555555] transition-colors duration-300 dark:text-white/35">
+                    Leading the WOW vision with strategy, technology, and human-first digital delivery.
+                  </p>
+                </figcaption>
+              </RevealWrapper>
+            </div>
+
+            <RevealWrapperV2 as="figure" className="h-[220px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[300px] lg:h-[310px] xl:h-[340px]">
+              <Image
+                src={hero01}
+                alt="Creative technology visual"
+                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+                priority
+              />
             </RevealWrapperV2>
-            <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-lg">
-              <Image src={hero02} alt="WOW Superagency design and development workspace" className="w-full" />
+
+            <RevealWrapper as="figure" className="h-[220px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[300px] lg:h-[310px] xl:h-[340px]">
+              <Image
+                src={hero02}
+                alt="Modern digital workspace"
+                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+              />
             </RevealWrapper>
           </div>
-          <div className="w-full flex-1 max-lg:self-center">
-            <RevealWrapper className="reveal-me mb-8 max-w-xl">
-              <p className="text-base leading-relaxed text-colorText dark:text-dark-100 md:text-lg">
-                Behind every website, campaign, and software build is a dedicated team that listens first. We combine
-                cutting-edge AI and automation with genuine partnership—so you always know who is guiding your growth
-                and why every decision matters.
-              </p>
+
+          <div className="grid gap-3">
+            <RevealWrapper as="figure" className="h-[420px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[620px] lg:h-[640px] xl:h-[720px]">
+              <Image
+                src={hero03}
+                alt="Technology powered portrait"
+                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+                priority
+              />
             </RevealWrapper>
-            <RevealWrapper as="figure" className="reveal-me mb-8 overflow-hidden rounded-lg">
-              <Image src={hero03} alt="WOW Superagency client consultation" className="w-full" />
-            </RevealWrapper>
-            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-lg">
-              <Image src={hero04} alt="WOW Superagency team delivering results" className="w-full" />
+
+            <RevealWrapper as="figure" className="h-[260px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[340px] lg:h-[330px] xl:h-[370px]">
+              <Image
+                src={hero04}
+                alt="Human led innovation"
+                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+              />
             </RevealWrapper>
           </div>
         </div>
@@ -76,4 +116,4 @@ const HumanTuch = () => {
   )
 }
 
-export default HumanTuch
+export default HumanTouch
