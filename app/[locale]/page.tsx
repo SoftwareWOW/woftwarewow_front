@@ -17,6 +17,12 @@ import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient
 import Stats from '@/components/wow/LandascapComponets/Stats'
 import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import SolutionToChallengesSection from '@/components/wow/LandascapComponets/SolutionToChallenchSection'
+import PersonalProjects from '@/components/homepage-09/PersonalProjects'
+import WowProjects from '@/components/wow/LandascapComponets/WowProjects'
+import HeroV9 from '@/components/homepage-09/HeroV9'
+import HumanTuch from '@/components/wow/LandascapComponets/HumanTuch'
+import FaqV2 from '@/components/shared/FaqV2'
+import Faq from '@/components/wow/LandascapComponets/Faq'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -40,13 +46,16 @@ const Home = async ({ params }: Props) => {
 
   return (
     <WowLayout>
+       
       <WowHero hero={dictionary.hero} />
       <WowEcosystem ecosystem={dictionary.ecosystem} />
       <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
       <Stats/>
       <DevisionOverview />
       <SolutionToChallengesSection />
-      <Testimonial />
+      <WowProjects/>
+      <HumanTuch/>
+       <Faq/>
       <CTA buttonText={dictionary.home.cta.button}>
         {dictionary.home.cta.heading}
         <CtaImageSlider
