@@ -1,4 +1,3 @@
-
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
@@ -92,7 +91,7 @@ const SolutionToChallenges = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background pb-14 pt-14 transition-colors duration-300 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
       {/* Background decorative elements - matching WowSuperAgencyClient */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
@@ -119,7 +118,7 @@ const SolutionToChallenges = () => {
         <Image src={gradientBg} alt="" aria-hidden />
       </div>
 
-      <div className="container relative z-10">
+      <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
             <TextAppearAnimation>
@@ -151,7 +150,7 @@ const SolutionToChallenges = () => {
           </div>
         </div>
 
-        <RevealWrapper className="mx-auto w-full max-w-[1170px] space-y-4">
+        <RevealWrapper className="mx-auto w-full space-y-4">
           {visibleFaqs.map((faq, index) => {
             const isActive = activeIndex === index
 
