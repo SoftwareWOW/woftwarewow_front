@@ -3,6 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 const interestOptions = [
   'UI/UX Design',
@@ -13,11 +14,13 @@ const interestOptions = [
   'Others',
 ]
 
-const budgetOptions = ['$2k-4k', '$4k-6k', '$6k-8k']
+const budgetOptions = ['$2k-4k', '$4k-6k', '$6k-8k', '$8k-10k', '$10k+']
 
 const ContactFormSection = () => {
   const [selectedInterests, setSelectedInterests] = useState<string[]>(['Web-Development', 'Website Creation'])
   const [selectedBudget, setSelectedBudget] = useState('$4k-6k')
+  const [isInterestsOpen, setIsInterestsOpen] = useState(false)
+  const [isBudgetOpen, setIsBudgetOpen] = useState(false)
 
   const toggleInterest = (value: string) => {
     setSelectedInterests((prev) =>
@@ -29,106 +32,229 @@ const ContactFormSection = () => {
     e.preventDefault()
   }
 
-  const tagBaseClass =
-    'rounded-md border px-4 py-3 text-sm font-medium transition-all duration-300 md:px-6 md:py-4 md:text-base'
-  const tagInactiveClass =
-    'border-secondary/15 bg-transparent text-colorText/60 hover:border-secondary/30 hover:text-secondary dark:border-white/15 dark:text-white/50 dark:hover:border-white/30 dark:hover:text-white/70'
-  const tagActiveClass = 'border-[#2E2E63] bg-[#2E2E63] text-white dark:border-[#2E2E63] dark:bg-[#2E2E63]'
-
   return (
-    <section className="overflow-hidden bg-backgroundBody pb-14 pt-14 transition-colors duration-300 dark:bg-[#0B0B0B] md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
-        <div className="mx-auto max-w-[800px] text-center">
-          <RevealWrapper>
-            <span className="rv-badge mb-6 inline-block border border-secondary/10 dark:border-white/10">
-              <span className="rv-badge-text dark:!text-white/80">Inquiry Form</span>
-            </span>
-          </RevealWrapper>
+    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-0 dark:opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        />
+      </div>
 
-          <TextAppearAnimation>
-            <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.15] text-secondary dark:text-white">
-              Let&apos;s Discuss Your <i className="italic">Project</i>
-            </h2>
-          </TextAppearAnimation>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
 
-          <RevealWrapper className="mt-4">
-            <p className="text-base leading-relaxed text-colorText dark:text-white/60 md:text-lg">
-              Tell us about your goals and challenges. We&apos;ll recommend the best path forward.
-            </p>
-          </RevealWrapper>
+      <div className="relative z-10 mx-auto max-w-[1320px]">
+        <div className="mx-auto max-w-[800px]">
+          {/* Card Container */}
+          <div className="rounded-3xl border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-10 transition-all duration-300 hover:border-[#8b7cff]/20 hover:shadow-2xl hover:shadow-[#8b7cff]/5 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/10 md:px-10 md:py-14 lg:px-14 lg:py-16">
+            {/* Decorative gradient line at top */}
+            <div className="absolute left-1/2 top-0 h-1 w-1/3 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] opacity-50" />
 
-          <RevealWrapper
-            as="form"
-            onSubmit={handleSubmit}
-            className="reveal-me mx-auto mt-12 grid max-w-[800px] grid-cols-1 gap-8 text-left md:gap-[30px]">
-            <div className="md:col-span-full">
-              <label htmlFor="name" className="text-lg text-colorText/70 dark:text-white/50 md:text-xl">
-                Your Data
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Name*"
-                required
-                className="mt-3 w-full rounded-md border border-secondary/10 bg-background py-4 pl-5 text-base text-secondary placeholder:text-secondary/30 focus:border-primary/50 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/30 dark:focus:border-[#8b7cff]/50 md:text-lg"
-              />
+            <div className="text-center">
+              <RevealWrapper>
+                <span className="rv-badge mb-6 inline-block border border-[#e5e5e5] px-4 py-1.5 dark:border-white/10">
+                  <span className="rv-badge-text text-sm font-medium uppercase tracking-[0.15em] text-[#8b7cff] dark:text-[#b794f4]">
+                    Inquiry Form
+                  </span>
+                </span>
+              </RevealWrapper>
+
+              <TextAppearAnimation>
+                <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.15] text-[#000000] dark:text-[#F2F2F2]">
+                  Let&apos;s Discuss Your{' '}
+                  <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                    Project
+                  </span>
+                </h2>
+              </TextAppearAnimation>
+
+              <RevealWrapper className="mt-4">
+                <p className="text-base leading-relaxed text-[#555555] dark:text-[#999999] md:text-lg">
+                  Tell us about your goals and challenges. We&apos;ll recommend the best path forward.
+                </p>
+              </RevealWrapper>
             </div>
 
-            <div className="md:col-span-full">
-              <label className="text-lg text-colorText/70 dark:text-white/50 md:text-xl">You are interested in:</label>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {interestOptions.map((option) => (
+            <RevealWrapper
+              as="form"
+              onSubmit={handleSubmit}
+              className="reveal-me mx-auto mt-10 grid max-w-[800px] grid-cols-1 gap-5 text-left md:mt-12 md:gap-6"
+            >
+              {/* Name Field */}
+              <div>
+                <label htmlFor="name" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                  Your Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your full name"
+                  required
+                  className="mt-2 w-full rounded-xl border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] placeholder:text-[#999999] transition-all duration-300 focus:border-[#8b7cff]/50 focus:outline-none focus:ring-4 focus:ring-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:placeholder:text-[#666666] dark:focus:border-[#8b7cff]/50 dark:focus:ring-[#8b7cff]/20"
+                />
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  required
+                  className="mt-2 w-full rounded-xl border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] placeholder:text-[#999999] transition-all duration-300 focus:border-[#8b7cff]/50 focus:outline-none focus:ring-4 focus:ring-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:placeholder:text-[#666666] dark:focus:border-[#8b7cff]/50 dark:focus:ring-[#8b7cff]/20"
+                />
+              </div>
+
+              {/* Interests Dropdown */}
+              <div>
+                <label className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                  You are interested in: *
+                </label>
+                <div className="relative mt-2">
                   <button
-                    key={option}
                     type="button"
-                    onClick={() => toggleInterest(option)}
-                    className={`${tagBaseClass} ${
-                      selectedInterests.includes(option) ? tagActiveClass : tagInactiveClass
-                    }`}>
-                    {option}
+                    onClick={() => setIsInterestsOpen(!isInterestsOpen)}
+                    className="flex w-full items-center justify-between rounded-xl border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
+                  >
+                    <span className="truncate text-[#1a1a1a] dark:text-[#F2F2F2]">
+                      {selectedInterests.length > 0
+                        ? selectedInterests.join(', ')
+                        : 'Select your interests'}
+                    </span>
+                    {isInterestsOpen ? (
+                      <ChevronUp className="h-5 w-5 shrink-0 text-[#8b7cff]" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 shrink-0 text-[#8b7cff]" />
+                    )}
                   </button>
-                ))}
-              </div>
-            </div>
 
-            <div className="md:col-span-full">
-              <label className="text-lg text-colorText/70 dark:text-white/50 md:text-xl">Budget in USD:</label>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {budgetOptions.map((option) => (
+                  {isInterestsOpen && (
+                    <div className="absolute left-0 right-0 top-full z-20 mt-2 max-h-60 overflow-y-auto rounded-xl border border-[#e5e5e5] bg-white/95 p-2 shadow-xl backdrop-blur-sm dark:border-white/10 dark:bg-dark/95">
+                      {interestOptions.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => {
+                            toggleInterest(option)
+                          }}
+                          className={`flex w-full items-center justify-between rounded-lg px-4 py-2.5 text-left text-sm transition-all duration-200 ${
+                            selectedInterests.includes(option)
+                              ? 'bg-[#8b7cff]/10 text-[#8b7cff] dark:bg-[#8b7cff]/20 dark:text-[#b794f4]'
+                              : 'text-[#1a1a1a] hover:bg-[#f5f5f5] dark:text-[#F2F2F2] dark:hover:bg-white/5'
+                          }`}
+                        >
+                          <span>{option}</span>
+                          {selectedInterests.includes(option) && (
+                            <svg className="h-4 w-4 text-[#8b7cff]" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                            </svg>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Budget Dropdown */}
+              <div>
+                <label className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                  Budget in USD: *
+                </label>
+                <div className="relative mt-2">
                   <button
-                    key={option}
                     type="button"
-                    onClick={() => setSelectedBudget(option)}
-                    className={`${tagBaseClass} ${selectedBudget === option ? tagActiveClass : tagInactiveClass}`}>
-                    {option}
+                    onClick={() => setIsBudgetOpen(!isBudgetOpen)}
+                    className="flex w-full items-center justify-between rounded-xl border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
+                  >
+                    <span className="text-[#1a1a1a] dark:text-[#F2F2F2]">{selectedBudget}</span>
+                    {isBudgetOpen ? (
+                      <ChevronUp className="h-5 w-5 shrink-0 text-[#8b7cff]" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 shrink-0 text-[#8b7cff]" />
+                    )}
                   </button>
-                ))}
-              </div>
-            </div>
 
-            <div className="md:col-span-full">
-              <label htmlFor="message" className="text-lg text-colorText/70 dark:text-white/50 md:text-xl">
-                Project Details*
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                placeholder="Tell us more about your project"
-                className="mt-3 min-h-44 w-full rounded-md border border-secondary/10 bg-background py-4 pl-5 text-base text-secondary placeholder:text-secondary/30 focus:border-primary/50 focus:outline-none dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/30 dark:focus:border-[#8b7cff]/50 md:text-lg"
-              />
-            </div>
+                  {isBudgetOpen && (
+                    <div className="absolute left-0 right-0 top-full z-20 mt-2 rounded-xl border border-[#e5e5e5] bg-white/95 p-2 shadow-xl backdrop-blur-sm dark:border-white/10 dark:bg-dark/95">
+                      {budgetOptions.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => {
+                            setSelectedBudget(option)
+                            setIsBudgetOpen(false)
+                          }}
+                          className={`flex w-full items-center justify-between rounded-lg px-4 py-2.5 text-left text-sm transition-all duration-200 ${
+                            selectedBudget === option
+                              ? 'bg-[#8b7cff]/10 text-[#8b7cff] dark:bg-[#8b7cff]/20 dark:text-[#b794f4]'
+                              : 'text-[#1a1a1a] hover:bg-[#f5f5f5] dark:text-[#F2F2F2] dark:hover:bg-white/5'
+                          }`}
+                        >
+                          <span>{option}</span>
+                          {selectedBudget === option && (
+                            <svg className="h-4 w-4 text-[#8b7cff]" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                            </svg>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
 
-            <button type="submit" className="rv-button rv-button-secondary col-span-full !w-full dark:!bg-white">
-              <div className="rv-button-top !w-full !text-center dark:!bg-white dark:!text-secondary">
-                <span className="text-xs font-semibold uppercase tracking-[0.15em]">Request a Consultation</span>
+              {/* Message Field */}
+              <div>
+                <label htmlFor="message" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                  Project Details *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="Tell us more about your project, goals, and challenges"
+                  className="mt-2 min-h-44 w-full rounded-xl border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] placeholder:text-[#999999] transition-all duration-300 focus:border-[#8b7cff]/50 focus:outline-none focus:ring-4 focus:ring-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:placeholder:text-[#666666] dark:focus:border-[#8b7cff]/50 dark:focus:ring-[#8b7cff]/20"
+                />
               </div>
-              <div className="rv-button-bottom !w-full !text-center dark:!bg-white dark:!text-secondary">
-                <span className="text-xs font-semibold uppercase tracking-[0.15em]">Request a Consultation</span>
-              </div>
-            </button>
-          </RevealWrapper>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+              >
+                <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
+                  Request a Consultation
+                  <svg
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </button>
+            </RevealWrapper>
+          </div>
         </div>
       </div>
     </section>

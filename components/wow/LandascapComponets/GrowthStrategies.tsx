@@ -5,6 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const articles = [
   {
@@ -32,41 +33,66 @@ const articles = [
 
 const GrowthStrategies = () => {
   return (
-    <section className="overflow-hidden bg-secondary pb-14 pt-14 transition-colors duration-300 dark:bg-black md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
+    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-0 dark:opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        />
+      </div>
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
           <TextAppearAnimation>
-            <h2 className="text-appear max-w-[640px] text-[clamp(2rem,4vw,3.5rem)] font-normal leading-[1.1] tracking-[-0.02em] text-backgroundBody">
-              Insights, Trends &amp; Growth Strategies
-            </h2>
+            <div>
+              <h2 className="text-appear max-w-[640px] text-[clamp(2rem,4vw,3.5rem)] font-normal leading-[1.1] tracking-[-0.02em] text-[#000000] dark:text-[#F2F2F2]">
+                Insights, Trends &amp;{' '}
+                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                  Growth Strategies
+                </span>
+              </h2>
+            </div>
           </TextAppearAnimation>
 
           <RevealWrapper className="max-w-[420px] lg:text-right">
-            <p className="text-base leading-relaxed text-backgroundBody/70 dark:text-white/60">
+            <p className="text-base leading-relaxed text-[#555555] dark:text-[#999999]">
               Explore practical advice, industry trends, marketing strategies, AI innovations, and business growth
               insights.
             </p>
             <Link
               href="/ai-blog"
-              className="rv-button rv-button-white mt-6 inline-block border border-backgroundBody/30 bg-transparent dark:border-white/30">
-              <div className="rv-button-top !bg-transparent !text-backgroundBody dark:!text-white">
-                <span className="text-xs uppercase tracking-[0.15em]">View All Articles</span>
-              </div>
-              <div className="rv-button-bottom !bg-transparent !text-backgroundBody dark:!text-white">
-                <span className="text-xs uppercase tracking-[0.15em]">View All Articles</span>
-              </div>
+              className="group mt-6 inline-flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white/80 px-6 py-2.5 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff] dark:hover:bg-[#8b7cff] dark:hover:text-white"
+            >
+              <span>View All Articles</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </RevealWrapper>
         </div>
 
-        <div className="divide-y divide-backgroundBody/10 dark:divide-white/10">
+        <div className="divide-y divide-[#e5e5e5] dark:divide-white/10">
           {articles.map((article) => (
             <RevealWrapper
               key={article.id}
-              className="group flex flex-col gap-6 py-10 first:pt-0 last:pb-0 md:flex-row md:items-center md:gap-10 lg:gap-14">
+              className="group flex flex-col gap-6 py-8 first:pt-0 last:pb-0 transition-all duration-300 hover:bg-white/30 hover:px-4 hover:py-8 hover:-mx-4 hover:rounded-2xl dark:hover:bg-dark/30 md:flex-row md:items-center md:gap-10 lg:gap-14"
+            >
               <Link
                 href={article.href}
-                className="block w-full shrink-0 overflow-hidden rounded-lg md:w-[280px] lg:w-[340px]">
+                className="block w-full shrink-0 overflow-hidden rounded-xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none md:w-[280px] lg:w-[340px]"
+              >
                 <Image
                   src={article.thumbnail}
                   alt=""
@@ -77,27 +103,22 @@ const GrowthStrategies = () => {
               </Link>
 
               <div className="flex flex-1 flex-col">
-                <span className="mb-4 inline-flex w-fit rounded-full bg-backgroundBody/10 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-backgroundBody/80 dark:bg-white/10 dark:text-white/70">
+                <span className="mb-3 inline-flex w-fit rounded-full bg-[#f0f0f0] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#555555] dark:bg-white/10 dark:text-[#999999]">
                   {article.date}
                 </span>
 
                 <Link href={article.href}>
-                  <h3 className="mb-6 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-normal leading-[1.25] tracking-[-0.02em] text-backgroundBody transition-colors hover:text-primary dark:hover:text-[#b794f4]">
+                  <h3 className="mb-4 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-normal leading-[1.25] tracking-[-0.02em] text-[#1a1a1a] transition-colors duration-300 hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:hover:text-[#b794f4]">
                     {article.title}
                   </h3>
                 </Link>
 
                 <Link
                   href={article.href}
-                  className="rv-button rv-button-white inline-flex w-fit border border-backgroundBody/30 bg-transparent dark:border-white/30">
-                  <div className="rv-button-top flex items-center !bg-transparent !text-backgroundBody dark:!text-white">
-                    <span className="pr-2 text-xs uppercase tracking-[0.12em]">Read More</span>
-                    <Image src={topArrowDark} alt="" width={14} height={14} aria-hidden />
-                  </div>
-                  <div className="rv-button-bottom flex items-center !bg-transparent !text-backgroundBody dark:!text-white">
-                    <span className="pr-2 text-xs uppercase tracking-[0.12em]">Read More</span>
-                    <Image src={topArrowDark} alt="" width={14} height={14} aria-hidden />
-                  </div>
+                  className="group inline-flex w-fit items-center gap-2 rounded-full border border-[#e5e5e5] bg-white/80 px-5 py-2 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
+                >
+                  <span>Read More</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </RevealWrapper>
