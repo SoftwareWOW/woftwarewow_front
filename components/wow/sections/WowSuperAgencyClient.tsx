@@ -86,7 +86,7 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
   }
 
   return (
-    <section className="relative mb-14 mt-14 overflow-hidden bg-background py-20 transition-colors duration-300 md:mb-16 md:mt-16 lg:mb-[88px] lg:mt-[88px] lg:py-[120px] dark:lg:py-0 xl:mb-[100px] xl:mt-[100px]">
+    <section className="relative overflow-hidden bg-background py-10 transition-colors duration-300 lg:py-[60px] xl:py-[50px]">
       {/* Background decorative elements - light mode friendly */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div className="absolute inset-0" style={{
@@ -237,4 +237,3 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
 }
 
 export default WowSuperAgencyClient
-
