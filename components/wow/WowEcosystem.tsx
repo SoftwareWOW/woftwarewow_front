@@ -48,10 +48,10 @@ const NODE_LAYOUT: NodeLayout[] = [
   { id: 'design', x: 20, y: 40, size: 'md' },
   { id: 'events', x: 5, y: 16, size: 'sm' },
   { id: 'intelligence', x: 5, y: 52, size: 'md' },
-  { id: 'accelerate', x: 48, y: 52, size: 'md' },
+  { id: 'accelerate', x: 44, y: 52, size: 'md' },
   { id: 'social', x: 80, y: 52, size: 'md' },
   { id: 'softwarewow', x: 30, y: 70, size: 'md' },
-  { id: 'marketing', x: 66, y: 70, size: 'lg' },
+  { id: 'marketing', x: 66, y: 65, size: 'lg' },
 ]
 
 const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
@@ -144,8 +144,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-2 py-6 text-foreground transition-colors duration-300 sm:px-4 sm:py-12">
       {/* Header Section */}
       <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
-        {/* Main Heading */}
-        <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000]  dark:text-[#F2F2F2]">
+        <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
           <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
             {ecosystem.heading.highlight}
@@ -153,12 +152,12 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           {ecosystem.heading.part2}
         </h2>
 
-        {/* Description */}
         <p className="mx-auto mt-4 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-normal leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-6">
           {ecosystem.description}
         </p>
       </div>
 
+      {/* Dotted background */}
       <div
         aria-hidden
         className="absolute inset-0 opacity-0 dark:opacity-40"
@@ -169,6 +168,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         }}
       />
 
+      {/* Vignette */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
@@ -178,10 +178,12 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         }}
       />
 
+      {/* Stage */}
       <div
         className="relative aspect-[1200/620] w-full max-w-7xl"
         style={{ containerType: 'inline-size' }}
       >
+        {/* SVG layer for paths */}
         <svg
           viewBox={`0 0 ${VB_W} ${VB_H}`}
           className="absolute inset-0 h-full w-full overflow-visible"
@@ -220,10 +222,10 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 strokeWidth={10}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                opacity={0.3}
+                opacity={0.35}
                 filter="url(#strong-glow)"
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.3 }}
+                animate={{ pathLength: 1, opacity: 0.35 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
               />
@@ -237,7 +239,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 strokeLinejoin="round"
                 filter="url(#glow)"
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.5 }}
+                animate={{ pathLength: 1, opacity: 0.95 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
               />
@@ -263,6 +265,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           </AnimatePresence>
         </svg>
 
+        {/* Nodes layer */}
         {NODE_LAYOUT.map((n) => {
           const active = activeSet.has(n.id)
           const nodeCopy = ecosystem.nodes[n.id as keyof typeof ecosystem.nodes]
@@ -274,21 +277,26 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               style={{
                 left: `${n.x}%`,
                 top: `${n.y}%`,
+                transformOrigin: 'center',
               }}
               animate={{
-                scale: active ? 1.06 : 1,
-                opacity: active ? 1 : 0.45,
+                scale: active ? 1.5 : 0.75,
+                // scale: active ? 1.7 : 0.55,
+                opacity: active ? 1 : 0.5,
+                // opacity: active ? 1 : 0.25,
               }}
               transition={{
-                duration: 0.5,
-                ease: 'easeOut',
+                duration: 0.55,
+                ease: [0.65, 0, 0.35, 1],
               }}
             >
               <span
                 className="font-bold leading-none tracking-tight"
                 style={{
                   fontSize: nodeFontSize(n.size),
-                  filter: active ? 'drop-shadow(0 0 14px rgba(183,148,244,0.55))' : 'none',
+                  filter: active
+                    ? 'drop-shadow(0 0 14px rgba(183,148,244,0.55))'
+                    : 'none',
                 }}
               >
                 <span
@@ -330,6 +338,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           )
         })}
 
+        {/* CTA Buttons */}
         <div
           className="absolute left-0 right-0 grid grid-cols-4"
           style={{
@@ -340,26 +349,37 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
             paddingRight: 'clamp(4px, 1cqw, 16px)',
           }}
         >
-          {CTA_IDS.map((ctaId) => {
+          {CTA_IDS.map((ctaId, index) => {
             const active = activeFlow === ctaId
 
             return (
               <button
                 key={ctaId}
                 onClick={() => setActiveFlow(ctaId)}
-                className="relative rounded-radius-sm font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"   
+                className="relative rounded-md font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"
                 style={{
-                  fontSize: 'clamp(7px, 1.2cqw, 14px)',
+                  fontSize: active
+                    // ? 'clamp(10px, 1.8cqw, 20px)'
+                    // : 'clamp(5px, 0.85cqw, 10px)',
+                        ? 'clamp(10px, 1.8cqw, 20px)'
+                    : 'clamp(5px, 0.95cqw, 14px)',
                   letterSpacing: '0.18em',
                   paddingTop: 'clamp(6px, 1.2cqw, 16px)',
                   paddingBottom: 'clamp(6px, 1.2cqw, 16px)',
                   paddingLeft: 'clamp(4px, 1cqw, 20px)',
                   paddingRight: 'clamp(4px, 1cqw, 20px)',
-                  background: active ? WOW_THEME.gradient : 'rgba(255,255,255,0.08)',
-                  color: active ? '#ffffff' : 'var(--background)',
+                  background: active
+                    ? WOW_THEME.gradient
+                    : 'rgba(255,255,255,0.9)',
+                  color: active ? '#ffffff' : '#1a1530',
+                  opacity: active ? 1 : 0.4,
+                  transform: active ? 'scale(1.1)' : 'scale(0.85)',
+                  // transform: active ? 'scale(1.3)' : 'scale(0.72)',
+                  transformOrigin: 'center',
+                  transition: 'all 0.45s cubic-bezier(0.65, 0, 0.35, 1)',
                   boxShadow: active
                     ? '0 10px 40px -10px rgba(139,124,255,0.7), 0 0 0 1px rgba(255,255,255,0.1)'
-                    : '0 4px 16px -6px rgba(0,0,0,0.25)',
+                    : '0 4px 16px -6px rgba(0,0,0,0.5)',
                 }}
                 aria-pressed={active}
               >
