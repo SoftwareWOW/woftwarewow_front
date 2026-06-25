@@ -34,14 +34,14 @@ export function WowMenuItem({
   multilineDescription = false,
   tall = false,
 }: WowMenuItemProps) {
-  const className = `group flex w-full gap-[8px] rounded-[3px] p-[10px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+  const className = `group flex w-full gap-[8px] rounded-radius-sm p-[10px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
     tall ? 'min-h-[108px]' : ''
   } ${active ? `is-active ${navItemActiveClass}` : navItemInactiveClass}`
 
   const content = (
     <>
       <motion.div 
-        className={`flex size-[28px] shrink-0 items-center justify-center rounded-[3px] border-[0.5px] p-[8px] ${navItemIconBoxClass}`}
+        className={`flex size-[28px] shrink-0 items-center justify-center rounded-radius-sm border-[0.5px] p-[8px] ${navItemIconBoxClass}`}
         whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
@@ -161,7 +161,7 @@ export function WowDivisionItem({
 }: WowDivisionItemProps) {
   const isMobile = variant === 'mobile'
 
-  const className = `group flex flex-col items-start justify-center rounded-[3px] px-[10px] py-[15px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+  const className = `group flex flex-col items-start justify-center rounded-radius-sm px-[10px] py-[15px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
     isMobile ? 'w-full' : 'w-[203px]'
   } ${active ? `is-active ${navItemActiveClass}` : navItemInactiveClass}`
 

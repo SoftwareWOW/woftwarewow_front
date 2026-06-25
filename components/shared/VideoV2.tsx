@@ -19,7 +19,7 @@ const VideoV2: FC<VideoV2Props> = ({ thumbnail }) => {
           <button
             className="absolute inset-0 flex cursor-pointer items-center justify-center transition-all duration-300 group-hover:transform group-hover:[&>div]:scale-110"
             onClick={() => setOpen(true)}>
-            <div className="play-button relative h-14 w-20 rounded-full bg-backgroundBody/40 p-4 bg-blend-lighten transition-transform duration-300 lg:h-[90px] lg:w-[140px] lg:rounded-[241px]">
+            <div className="play-button relative h-14 w-20 rounded-full bg-backgroundBody/40 p-4 bg-blend-lighten transition-transform duration-300 lg:h-[90px] lg:w-[140px] lg:rounded-radius-lg">
               <span className="absolute inset-0 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width={21} height={24} viewBox="0 0 21 24" fill="none">
                   <path

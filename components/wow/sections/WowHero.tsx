@@ -25,7 +25,7 @@ export default function WowHero({ hero }: WowHeroProps) {
       <div className="relative mx-auto flex max-w-[1222px] flex-col items-center gap-16 lg:gap-[107px]">
         <div className="relative flex w-full flex-col items-center gap-5">
           <RevealWrapper delay={0.1} className="relative z-10">
-            <p className="rounded-full border border-border/30 bg-background/50 px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.96px] text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:px-6 sm:py-3">
+            <p className="rounded-radius-sm border border-border/30 bg-background/50 px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.96px] text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:px-6 sm:py-3">
               {hero.badge}
             </p>
           </RevealWrapper>

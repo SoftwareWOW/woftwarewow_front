@@ -7,7 +7,7 @@ export default function WowRatingSection() {
   return (
     <section className="px-4 py-10 sm:px-8">
       <div className="mx-auto max-w-[1260px]">
-        <RevealWrapper className="mb-10 flex flex-col items-center justify-between gap-6 rounded-lg border border-secondary/10 bg-white px-4 py-4 dark:border-dark dark:bg-dark-200 md:flex-row md:px-6">
+        <RevealWrapper className="mb-10 flex flex-col items-center justify-between gap-6 rounded-radius-sm border border-secondary/10 bg-white px-4 py-4 dark:border-dark dark:bg-dark-200 md:flex-row md:px-6">
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-medium uppercase tracking-[2px] text-colorText sm:gap-6 dark:text-dark-100">
             <span>Discuss Your Project</span>
             <span>Ask Question</span>

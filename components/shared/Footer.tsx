@@ -34,7 +34,7 @@ const Footer = () => {
                 <p className="text-sm text-white">1 spot left this month</p>
               </div>
               <Link href="/contact">
-                <figure className="relative h-[55px] w-[55px] cursor-pointer overflow-hidden rounded-cta bg-primary">
+                <figure className="relative h-[55px] w-[55px] cursor-pointer overflow-hidden rounded-radius-sm bg-primary">
                   <Image
                     src={arrowIcon}
                     alt="Arrow Icon"

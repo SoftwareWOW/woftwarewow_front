@@ -347,7 +347,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               <button
                 key={ctaId}
                 onClick={() => setActiveFlow(ctaId)}
-                className="relative rounded-md font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"   
+                className="relative rounded-radius-sm font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"   
                 style={{
                   fontSize: 'clamp(7px, 1.2cqw, 14px)',
                   letterSpacing: '0.18em',

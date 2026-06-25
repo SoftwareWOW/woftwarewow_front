@@ -75,7 +75,7 @@ const GrowthStrategies = () => {
             </p>
             <Link
               href="/ai-blog"
-              className="group mt-6 inline-flex items-center gap-2 rounded-full border border-[#e5e5e5] bg-white/80 px-6 py-2.5 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff] dark:hover:bg-[#8b7cff] dark:hover:text-white"
+              className="group mt-6 inline-flex items-center gap-2 rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-6 py-2.5 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff] dark:hover:bg-[#8b7cff] dark:hover:text-white"
             >
               <span>View All Articles</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -87,11 +87,11 @@ const GrowthStrategies = () => {
           {articles.map((article) => (
             <RevealWrapper
               key={article.id}
-              className="group flex flex-col gap-6 py-8 first:pt-0 last:pb-0 transition-all duration-300 hover:bg-white/30 hover:px-4 hover:py-8 hover:-mx-4 hover:rounded-2xl dark:hover:bg-dark/30 md:flex-row md:items-center md:gap-10 lg:gap-14"
+              className="group flex flex-col gap-6 py-8 first:pt-0 last:pb-0 transition-all duration-300 hover:bg-white/30 hover:px-4 hover:py-8 hover:-mx-4 hover:rounded-radius-md dark:hover:bg-dark/30 md:flex-row md:items-center md:gap-10 lg:gap-14"
             >
               <Link
                 href={article.href}
-                className="block w-full shrink-0 overflow-hidden rounded-xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none md:w-[280px] lg:w-[340px]"
+                className="block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none md:w-[280px] lg:w-[340px]"
               >
                 <Image
                   src={article.thumbnail}
@@ -103,7 +103,7 @@ const GrowthStrategies = () => {
               </Link>
 
               <div className="flex flex-1 flex-col">
-                <span className="mb-3 inline-flex w-fit rounded-full bg-[#f0f0f0] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#555555] dark:bg-white/10 dark:text-[#999999]">
+                <span className="mb-3 inline-flex w-fit rounded-radius-sm bg-[#f0f0f0] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#555555] dark:bg-white/10 dark:text-[#999999]">
                   {article.date}
                 </span>
 
@@ -115,7 +115,7 @@ const GrowthStrategies = () => {
 
                 <Link
                   href={article.href}
-                  className="group inline-flex w-fit items-center gap-2 rounded-full border border-[#e5e5e5] bg-white/80 px-5 py-2 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
+                  className="group inline-flex w-fit items-center gap-2 rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-5 py-2 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
                 >
                   <span>Read More</span>
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

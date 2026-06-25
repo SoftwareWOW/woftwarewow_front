@@ -99,7 +99,7 @@ const VideoModal: FC<VideoModalProps> = ({
 
         <Dialog.Content
           ref={contentRef}
-          className={`fixed left-1/2 top-1/2 z-50 h-full max-h-[500px] w-full max-w-[900px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-secondary shadow-2xl dark:bg-dark-200 ${contentClassName}`}
+          className={`fixed left-1/2 top-1/2 z-50 h-full max-h-[500px] w-full max-w-[900px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-radius-sm bg-secondary shadow-2xl dark:bg-dark-200 ${contentClassName}`}
           onEscapeKeyDown={handleClose}>
           <VisuallyHidden>
             <Dialog.Title />

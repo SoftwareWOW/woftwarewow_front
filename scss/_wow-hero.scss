@@ -1,6 +1,6 @@
 @layer components {
-  $hero-radius: 32px;
-  $hero-mobile-radius: 32px;
+  $hero-radius: var(--radius-md);
+  $hero-mobile-radius: var(--radius-md);
   $hero-bg: #ededed;
   $hero-mobile-bg: #ededed;
 
@@ -33,7 +33,7 @@
 
   .wow-hero {
     &__shell {
-      @apply overflow-hidden rounded-[24px] bg-backgroundBody p-3 sm:rounded-[32px] sm:p-4 md:p-5;
+      @apply overflow-hidden rounded-radius-md bg-backgroundBody p-3 sm:p-4 md:p-5;
     }
 
     &__stage {
@@ -58,7 +58,7 @@
     }
 
     &__image-layer {
-      @apply absolute inset-0 overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[32px];
+      @apply absolute inset-0 overflow-hidden rounded-radius-md;
     }
 
     &__text-wrap {

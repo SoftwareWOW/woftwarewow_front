@@ -121,7 +121,7 @@ const WowProjects = () => {
             <RevealWrapper className="mt-6 flex justify-center md:mt-8">
               <Link
                 href="/case-studies"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-lg bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
               >
                 <span className="relative z-10 flex items-center gap-2 font-medium uppercase tracking-[0.05em]">
                   View All Case Studies
@@ -136,10 +136,10 @@ const WowProjects = () => {
           {visibleProjects.map((project) => (
             <RevealWrapper
               as="article"
-              className="group relative overflow-hidden rounded-2xl border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#8b7cff]/30 hover:shadow-2xl hover:shadow-[#8b7cff]/10 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/20"
+              className="group relative overflow-hidden rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#8b7cff]/30 hover:shadow-2xl hover:shadow-[#8b7cff]/10 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/20"
               key={project.id}
             >
-              <Link href={project.href} className="block overflow-hidden rounded-t-2xl">
+              <Link href={project.href} className="block overflow-hidden rounded-t-radius-md">
                 <Image
                   width={1330}
                   height={445}
@@ -150,7 +150,7 @@ const WowProjects = () => {
               </Link>
 
               {/* Content Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 max-w-[calc(100%-2rem)] rounded-xl border border-white/20 bg-backgroundBody/95 p-3 backdrop-blur-sm transition-all duration-300 hover:bg-backgroundBody/100 dark:border-white/10 dark:bg-dark-200/95 dark:hover:bg-dark-200/100 sm:p-4 md:bottom-8 md:left-8 md:max-w-[535px] md:p-6 lg:bottom-10 lg:left-10 lg:p-8">
+              <div className="absolute bottom-4 left-4 right-4 max-w-[calc(100%-2rem)] rounded-radius-sm border border-white/20 bg-backgroundBody/95 p-3 backdrop-blur-sm transition-all duration-300 hover:bg-backgroundBody/100 dark:border-white/10 dark:bg-dark-200/95 dark:hover:bg-dark-200/100 sm:p-4 md:bottom-8 md:left-8 md:max-w-[535px] md:p-6 lg:bottom-10 lg:left-10 lg:p-8">
                 <div className="project-title mb-2 md:mb-3">
                   <Link href={project.href}>
                     <h3 className="text-base font-bold text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4] sm:text-lg md:text-2xl lg:text-3xl">
@@ -187,7 +187,7 @@ const WowProjects = () => {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-lg border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
               aria-expanded={showAll}
             >
               <span className="relative z-10 font-medium">

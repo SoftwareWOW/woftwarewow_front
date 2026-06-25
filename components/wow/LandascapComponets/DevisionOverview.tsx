@@ -166,7 +166,7 @@ const DevisionOverview = () => {
             <RevealWrapper className="mt-7 md:mt-14">
               <Link
                 href="/services"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-lg bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
                 aria-label="Explore the WOW Superagency ecosystem"
               >
                 <span className="relative z-10 flex items-center gap-2 font-medium">
@@ -194,7 +194,7 @@ const DevisionOverview = () => {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative block w-[78vw] shrink-0 rounded-2xl border transition-all duration-500 cursor-pointer sm:w-[320px] md:w-[360px] lg:w-[390px] focus:outline-none focus:ring-2 focus:ring-[#8b7cff] focus:ring-offset-2"
+              className="group relative block w-[78vw] shrink-0 rounded-radius-md border transition-all duration-500 cursor-pointer sm:w-[320px] md:w-[360px] lg:w-[390px] focus:outline-none focus:ring-2 focus:ring-[#8b7cff] focus:ring-offset-2"
               style={{
                 borderColor: isHovered
                   ? '#8b7cff'
@@ -204,7 +204,7 @@ const DevisionOverview = () => {
               onMouseLeave={() => setHoveredId(null)}
             >
               <article
-                className={`relative h-full min-h-[280px] rounded-2xl bg-white/80 backdrop-blur-sm dark:bg-dark/80 p-6 transition-all duration-500 md:p-8 ${
+                className={`relative h-full min-h-[280px] rounded-radius-md bg-white/80 backdrop-blur-sm dark:bg-dark/80 p-6 transition-all duration-500 md:p-8 ${
                   isHovered
                     ? 'shadow-2xl shadow-[#8b7cff]/20 dark:shadow-[#8b7cff]/30'
                     : 'shadow-sm dark:shadow-none'
@@ -212,19 +212,19 @@ const DevisionOverview = () => {
               >
                 {/* Animated gradient background */}
                 <div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.bgGradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
+                  className={`absolute inset-0 rounded-radius-md bg-gradient-to-br ${item.bgGradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                 />
 
                 {/* Glow effect on hover */}
                 <div
-                  className={`absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30`}
+                  className={`absolute -inset-0.5 rounded-radius-md bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30`}
                 />
 
                 <div className="relative z-10 flex h-full flex-col justify-between">
                   {/* Header with icon and number */}
                   <div className="flex items-start justify-between">
                     <div
-                      className={`rounded-xl p-3 transition-all duration-500 ${
+                      className={`rounded-radius-sm p-3 transition-all duration-500 ${
                         isHovered
                           ? 'bg-gradient-to-br from-[#8b7cff] to-[#b794f4] text-white shadow-lg shadow-[#8b7cff]/30'
                           : 'bg-[#f0f0f0] text-[#8b7cff] dark:bg-white/5 dark:text-[#b794f4]'

@@ -74,7 +74,7 @@ const HumanTouch = () => {
               </RevealWrapper>
             </div>
 
-            <RevealWrapperV2 as="figure" className="h-[220px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[300px] lg:h-[310px] xl:h-[340px]">
+            <RevealWrapperV2 as="figure" className="h-[220px] overflow-hidden rounded-radius-md border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[300px] lg:h-[310px] xl:h-[340px]">
               <Image
                 src={hero01}
                 alt="Creative technology visual"
@@ -83,7 +83,7 @@ const HumanTouch = () => {
               />
             </RevealWrapperV2>
 
-            <RevealWrapper as="figure" className="h-[220px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[300px] lg:h-[310px] xl:h-[340px]">
+            <RevealWrapper as="figure" className="h-[220px] overflow-hidden rounded-radius-md border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[300px] lg:h-[310px] xl:h-[340px]">
               <Image
                 src={hero02}
                 alt="Modern digital workspace"
@@ -93,7 +93,7 @@ const HumanTouch = () => {
           </div>
 
           <div className="grid gap-3">
-            <RevealWrapper as="figure" className="h-[420px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[620px] lg:h-[640px] xl:h-[720px]">
+            <RevealWrapper as="figure" className="h-[420px] overflow-hidden rounded-radius-md border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[620px] lg:h-[640px] xl:h-[720px]">
               <Image
                 src={hero03}
                 alt="Technology powered portrait"
@@ -102,7 +102,7 @@ const HumanTouch = () => {
               />
             </RevealWrapper>
 
-            <RevealWrapper as="figure" className="h-[260px] overflow-hidden rounded-2xl border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[340px] lg:h-[330px] xl:h-[370px]">
+            <RevealWrapper as="figure" className="h-[260px] overflow-hidden rounded-radius-md border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[340px] lg:h-[330px] xl:h-[370px]">
               <Image
                 src={hero04}
                 alt="Human led innovation"

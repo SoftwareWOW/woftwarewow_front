@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --radius-sm: 10px;
+    --radius-md: 20px;
+    --radius-lg: 50px;
+  }
+}
+
 // @layer base {
 //   .theme {
 //     --font-heading: var(--font-sans);

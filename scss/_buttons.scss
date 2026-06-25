@@ -1,8 +1,8 @@
 .rv-button {
-  @apply relative overflow-hidden rounded-cta;
+  @apply relative overflow-hidden rounded-radius-sm;
   .rv-button-top,
   .rv-button-bottom {
-    @apply block w-full min-w-[210px] rounded-cta px-[39px] py-[25px] transition duration-300 md:inline-block md:w-auto;
+    @apply block w-full min-w-[210px] rounded-radius-sm px-[39px] py-[25px] transition duration-300 md:inline-block md:w-auto;
     span {
       @apply inline-block font-semibold normal-case tracking-normal transition duration-300;
     }

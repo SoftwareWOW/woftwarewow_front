@@ -22,7 +22,7 @@ import WowMobileBottomNav from './nav/WowMobileBottomNav'
 import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
 
 const actionBtnClass =
-  'group flex shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[60px] md:size-[65px] lg:size-[79px]'
+  'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[60px] md:size-[65px] lg:size-[79px]'
 
 const iconClass =
   'size-10 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
@@ -227,7 +227,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           onMouseLeave={scheduleCloseMegaMenu}
         >
           <nav
-            className="relative flex items-center justify-between rounded-[8px] bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
+            className="relative flex items-center justify-between rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
             aria-label={navbar.mainNavigation}
           >
             <Link
@@ -266,7 +266,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       onMouseEnter={() => openMegaMenu(item.id)}
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`flex items-center rounded-[10px] px-3 py-2 font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:px-5 lg:text-sm lg:tracking-[2.1px] 2xl:px-8 2xl:py-4 ${
+                      className={`flex items-center rounded-radius-sm px-3 py-2 font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:px-5 lg:text-sm lg:tracking-[2.1px] 2xl:px-8 2xl:py-4 ${
                         isActive ? navPillActiveClass : navPillInactiveClass
                       }`}
                       aria-expanded={isActive}
@@ -343,7 +343,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
           {activeMenuId && (
             <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
-              <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-[10px] bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
+              <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
                 <div className="relative h-[calc(100vh-120px)] overflow-hidden">
                   {navigation.items.map((item) => {
                     const isActive = activeMenuId === item.id

@@ -387,7 +387,7 @@ const DivisionCard = ({
       stiffness: 200,
     }}>
     <motion.div
-      className="relative w-60 overflow-hidden rounded-2xl"
+      className="relative w-60 overflow-hidden rounded-radius-md"
       whileHover={{ scale: 1.08, transition: { type: 'spring', stiffness: 300, damping: 25 } }}
       animate={{
         y: isActive ? 0 : [0, -6, 0],
@@ -438,7 +438,7 @@ const DivisionCard = ({
         </motion.p>
 
         <motion.div
-          className="pointer-events-none absolute inset-0 rounded-2xl"
+          className="pointer-events-none absolute inset-0 rounded-radius-md"
           style={{
             background: `linear-gradient(135deg, ${isActive ? 'rgba(168, 85, 247, 0.2)' : 'rgba(124, 108, 242, 0.05)'}, ${isActive ? 'rgba(236, 72, 153, 0.2)' : 'rgba(215, 141, 167, 0.05)'})`,
             filter: isActive ? 'blur(8px)' : 'blur(4px)',
@@ -451,7 +451,7 @@ const DivisionCard = ({
 
         {isActive && (
           <motion.div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
+            className="pointer-events-none absolute inset-0 rounded-radius-md"
             style={{
               background: 'radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.3), transparent 60%)',
             }}
@@ -590,7 +590,7 @@ export default function WowDivisions() {
             stiffness: 100,
           }}>
           <motion.div
-            className="relative rounded-3xl border border-purple-500/30 p-8 backdrop-blur-2xl sm:p-12 md:p-16"
+            className="relative rounded-radius-md border border-purple-500/30 p-8 backdrop-blur-2xl sm:p-12 md:p-16"
             style={{
               background: 'linear-gradient(135deg, rgba(88, 28, 135, 0.3), rgba(126, 34, 206, 0.2))',
               boxShadow: `
@@ -602,7 +602,7 @@ export default function WowDivisions() {
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 300 }}>
             <motion.div
-              className="absolute inset-0 rounded-3xl"
+              className="absolute inset-0 rounded-radius-md"
               style={{
                 background: 'radial-gradient(ellipse at center, rgba(168, 85, 247, 0.2), transparent 70%)',
               }}
@@ -615,7 +615,7 @@ export default function WowDivisions() {
             />
 
             <div
-              className="pointer-events-none absolute inset-0 rounded-3xl"
+              className="pointer-events-none absolute inset-0 rounded-radius-md"
               style={{
                 background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%)',
               }}
@@ -676,7 +676,7 @@ export default function WowDivisions() {
           </motion.div>
 
           <motion.div
-            className="pointer-events-none absolute inset-0 rounded-3xl"
+            className="pointer-events-none absolute inset-0 rounded-radius-md"
             style={{
               border: '1px solid rgba(168, 85, 247, 0.2)',
               transform: 'scale(1.1)',
@@ -692,7 +692,7 @@ export default function WowDivisions() {
             }}
           />
           <motion.div
-            className="pointer-events-none absolute inset-0 rounded-3xl"
+            className="pointer-events-none absolute inset-0 rounded-radius-md"
             style={{
               border: '1px solid rgba(124, 108, 242, 0.15)',
               transform: 'scale(1.2)',

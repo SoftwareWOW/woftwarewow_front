@@ -166,9 +166,9 @@ const Stats = () => {
             >
               {achievementStats.map((stat, index) => (
                 <div key={stat.label} className="stat-item w-full">
-                  <div className="group relative flex h-full min-h-[280px] flex-col items-center justify-start rounded-2xl border border-[#e5e5e5] dark:border-white/5 bg-white/50 backdrop-blur-sm dark:bg-dark/50 p-6 transition-all duration-300 hover:shadow-lg hover:shadow-[#8b7cff]/5 dark:hover:shadow-[#8b7cff]/10 hover:border-[#8b7cff]/20 dark:hover:border-[#8b7cff]/20 md:p-8">
+                  <div className="group relative flex h-full min-h-[280px] flex-col items-center justify-start rounded-radius-md border border-[#e5e5e5] dark:border-white/5 bg-white/50 backdrop-blur-sm dark:bg-dark/50 p-6 transition-all duration-300 hover:shadow-lg hover:shadow-[#8b7cff]/5 dark:hover:shadow-[#8b7cff]/10 hover:border-[#8b7cff]/20 dark:hover:border-[#8b7cff]/20 md:p-8">
                     {/* Animated gradient border on hover */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#8b7cff]/0 via-[#b794f4]/0 to-[#f4a8b8]/0 transition-all duration-500 group-hover:from-[#8b7cff]/10 group-hover:via-[#b794f4]/10 group-hover:to-[#f4a8b8]/10" />
+                    <div className="absolute inset-0 rounded-radius-md bg-gradient-to-r from-[#8b7cff]/0 via-[#b794f4]/0 to-[#f4a8b8]/0 transition-all duration-500 group-hover:from-[#8b7cff]/10 group-hover:via-[#b794f4]/10 group-hover:to-[#f4a8b8]/10" />
                     
                     {/* Number */}
                     <div className="flex items-baseline gap-1">

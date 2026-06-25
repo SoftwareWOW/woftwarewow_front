@@ -53,17 +53,17 @@ const HeroV16 = () => {
               <div className="my-3 flex [&>*:not(:first-child)]:-ml-4">
                 <img
                   src="/images/avatar/review-19.png"
-                  className="size-12 rounded-[48px] border-2 border-secondary object-cover md:size-[60px] md:rounded-[60px]"
+                  className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px] md:rounded-full"
                   alt="User Review"
                 />
                 <img
                   src="/images/avatar/review-20.png"
-                  className="size-12 rounded-[48px] border-2 border-secondary object-cover md:size-[60px] md:rounded-[60px]"
+                  className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px] md:rounded-full"
                   alt="User Review"
                 />
                 <img
                   src="/images/avatar/review-21.png"
-                  className="size-12 rounded-[48px] border-2 border-secondary object-cover md:size-[60px] md:rounded-[60px]"
+                  className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px] md:rounded-full"
                   alt="User Review"
                 />
                 <Link href="/team">
@@ -80,7 +80,7 @@ const HeroV16 = () => {
             </div>
             <div className="hero-video-container group relative mt-5 h-full w-full cursor-pointer md:mt-[30px]">
               <button onClick={() => setOpen(true)} className="absolute left-[45%] top-[40%] -translate-x-[45%]">
-                <div className="flex size-12 transform items-center justify-center rounded-[48px] bg-secondary transition-transform duration-300 group-hover:scale-105 dark:bg-backgroundBody md:size-[60px] md:rounded-[60px]">
+                <div className="flex size-12 transform items-center justify-center rounded-full bg-secondary transition-transform duration-300 group-hover:scale-105 dark:bg-backgroundBody md:size-[60px] md:rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" width={15} height={18} viewBox="0 0 15 18" fill="none">
                     <path
                       d="M14.4886 8.40229L1.47805 0.667204C1.36852 0.601523 1.24296 0.565438 1.1143 0.562672C0.985649 0.559906 0.858564 0.590558 0.74616 0.651467C0.633755 0.712376 0.540101 0.801336 0.474856 0.90917C0.409612 1.017 0.375142 1.13981 0.375 1.26491V16.7351C0.375142 16.8602 0.409612 16.983 0.474856 17.0908C0.540101 17.1987 0.633755 17.2876 0.74616 17.3485C0.858564 17.4094 0.985649 17.4401 1.1143 17.4373C1.24296 17.4346 1.36852 17.3985 1.47805 17.3328L14.4886 9.59771C14.5954 9.53629 14.684 9.44887 14.7454 9.34406C14.8069 9.23925 14.8393 9.12066 14.8393 9C14.8393 8.87934 14.8069 8.76076 14.7454 8.65594C14.684 8.55113 14.5954 8.46371 14.4886 8.40229V8.40229Z"

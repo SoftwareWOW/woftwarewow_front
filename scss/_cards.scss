@@ -1,6 +1,6 @@
 @layer components {
   .card {
-    @apply overflow-hidden rounded-card;
+    @apply overflow-hidden rounded-radius-md;
   }
 
   // Template-wide bordered card patterns

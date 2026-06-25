@@ -33,7 +33,7 @@ export default function WowServices() {
           {services.map((service) => (
             <RevealWrapper
               key={service.num}
-              className="min-w-[280px] flex-1 rounded-lg border border-secondary/5 bg-white p-6 dark:border-dark dark:bg-dark-200 sm:min-w-[300px] md:min-w-[370px] md:p-8">
+              className="min-w-[280px] flex-1 rounded-radius-sm border border-secondary/5 bg-white p-6 dark:border-dark dark:bg-dark-200 sm:min-w-[300px] md:min-w-[370px] md:p-8">
               <div className="flex gap-5">
                 <span className="text-4xl font-light text-primary md:text-5xl">{service.num}</span>
                 <div>

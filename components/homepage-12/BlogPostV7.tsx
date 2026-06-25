@@ -58,7 +58,7 @@ const BlogPostV7: FC<BlogPostV7Props> = ({ posts }) => {
                     />
                   </figure>
                   <div className="absolute bottom-7 left-7">
-                    <div className="mb-3 inline-block rounded-[72px] bg-backgroundBody/30 text-white">
+                    <div className="mb-3 inline-block rounded-radius-lg bg-backgroundBody/30 text-white">
                       <span className="inline-block px-[17px] py-2 text-xs font-medium uppercase tracking-[0.96px] text-backgroundBody">
                         {item?.badge}
                       </span>

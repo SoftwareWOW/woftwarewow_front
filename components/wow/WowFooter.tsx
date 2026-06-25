@@ -55,7 +55,7 @@ export default function WowFooter({ footer }: WowFooterProps) {
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <RevealWrapper>
-          <div className="rounded-2xl border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-10 transition-colors duration-300 dark:border-white/5 dark:bg-dark/50 dark:backdrop-blur-sm md:px-10 md:py-12 lg:px-14 lg:py-16">
+          <div className="rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-10 transition-colors duration-300 dark:border-white/5 dark:bg-dark/50 dark:backdrop-blur-sm md:px-10 md:py-12 lg:px-14 lg:py-16">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)] lg:gap-16">
               {/* Left Column */}
               <div>

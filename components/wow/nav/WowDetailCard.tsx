@@ -26,7 +26,7 @@ export default function WowDetailCard({
     imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
 
   return (
-    <div className="flex w-[280px] shrink-0 flex-col gap-[30px] rounded-[13px] bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark-200">
+    <div className="flex w-[280px] shrink-0 flex-col gap-[30px] rounded-radius-sm bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark-200">
     <div className="relative h-[200px] w-full overflow-hidden rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] rounded-tl-none sm:h-[230px] sm:rounded-tr-[24px] sm:rounded-br-[24px] sm:rounded-bl-[24px]">
         <Image
           src={imageSrcResolved}
@@ -71,7 +71,7 @@ export default function WowDetailCard({
         <Link
           href={href}
           onClick={onNavigate}
-          className="flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          className="flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-radius-sm bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
         >
           <ArrowRight aria-hidden className="size-9 text-white" strokeWidth={2} />
           <span className="sr-only">{ctaLabel}</span>
@@ -79,7 +79,7 @@ export default function WowDetailCard({
       ) : (
         <button
           type="button"
-          className="flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-[5px] bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+          className="flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-radius-sm bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
         >
           <ArrowRight aria-hidden className="size-9 text-white" strokeWidth={2} />
           <span className="sr-only">{ctaLabel}</span>

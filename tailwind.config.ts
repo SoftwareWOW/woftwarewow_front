@@ -123,11 +123,12 @@ export default {
         'mobile-sheet-in': 'mobile-sheet-in 280ms cubic-bezier(0.65, 0.05, 0, 1) forwards',
       },
       borderRadius: {
-        // lg: 'var(--radius)',
-        // md: 'calc(var(--radius) - 2px)',
-        // sm: 'calc(var(--radius) - 4px)',
-        card: '20px',
-        cta: '10px',
+        'radius-sm': 'var(--radius-sm)',
+        'radius-md': 'var(--radius-md)',
+        'radius-lg': 'var(--radius-lg)',
+        // Legacy aliases — prefer rounded-radius-* utilities
+        card: 'var(--radius-md)',
+        cta: 'var(--radius-sm)',
       },
       // ringWidth: {
       //   3: '3px',
@@ -138,6 +139,11 @@ export default {
     {
       pattern: /scale-/,
     },
+    'rounded-radius-sm',
+    'rounded-radius-md',
+    'rounded-radius-lg',
+    'rounded-t-radius-md',
+    'hover:rounded-radius-md',
   ],
   plugins: [],
 } satisfies Config

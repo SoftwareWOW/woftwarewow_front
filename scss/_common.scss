@@ -148,7 +148,7 @@ html.lenis {
 }
 
 .accordion-header-iconV4 {
-  @apply absolute bottom-7 right-7 h-[24.5px] w-[24.5px] rounded-full border border-[#e5e5e5] duration-[0.4s] ease-faq-body-transition md:h-10 md:w-10;
+  @apply absolute bottom-7 right-7 h-[24.5px] w-[24.5px] rounded-radius-lg border border-[#e5e5e5] duration-[0.4s] ease-faq-body-transition md:h-10 md:w-10;
 
   &::before,
   &::after {
@@ -690,7 +690,7 @@ html.lenis {
 
 // CTA Inline Slider
 .cta-slider-container {
-  @apply mx-auto inline-block h-24 w-60 overflow-hidden rounded-[70px] md:h-[100px] md:w-[250px];
+  @apply mx-auto inline-block h-24 w-60 overflow-hidden rounded-radius-lg md:h-[100px] md:w-[250px];
 
   .cta-inline-slider {
     @apply absolute h-full w-full transition-transform duration-[0.5s] ease-in-out;

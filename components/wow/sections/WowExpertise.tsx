@@ -33,7 +33,7 @@ export default function WowExpertise() {
           {expertise.map((item) => (
             <RevealWrapper
               key={item.title}
-              className={`flex min-h-[280px] flex-col justify-between rounded-lg p-6 sm:min-h-[320px] md:min-h-[400px] md:p-8 ${
+              className={`flex min-h-[280px] flex-col justify-between rounded-radius-sm p-6 sm:min-h-[320px] md:min-h-[400px] md:p-8 ${
                 item.featured
                   ? 'bg-secondary text-white dark:bg-primary'
                   : 'border border-secondary/10 bg-white text-secondary dark:border-dark dark:bg-dark-200'

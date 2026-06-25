@@ -14,7 +14,7 @@ interface SwiperSlideContentProps {
 
 const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({ tags, title, userName, position, userImg }) => {
   return (
-    // Remove rounded-2xl from here - it's handled by the parent
+    // Remove rounded-radius-md from here - it's handled by the parent
     <div className="flex gap-3 p-6 md:p-10">
       <div className="hidden flex-grow-0 md:block">
         <span>
@@ -76,7 +76,7 @@ export default WowSwiperSlideContent
 
 // const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({ tags, title, userName, position, userImg }) => {
 //   return (
-//     <div className="flex gap-3 border border-[#e5e5e5] dark:border-white/5 bg-white/80 backdrop-blur-sm rounded-2xl dark:bg-dark/80 p-6 md:p-10 transition-colors duration-300 shadow-sm dark:shadow-none">
+//     <div className="flex gap-3 border border-[#e5e5e5] dark:border-white/5 bg-white/80 backdrop-blur-sm rounded-radius-md dark:bg-dark/80 p-6 md:p-10 transition-colors duration-300 shadow-sm dark:shadow-none">
 //       <div className="hidden flex-grow-0 md:block">
 //         <span>
 //           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">

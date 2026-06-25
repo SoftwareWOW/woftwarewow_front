@@ -135,13 +135,13 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
                   className="pl-2 md:pl-4 basis-full"
                 >
                   <div className="p-1">
-                    <div className="relative overflow-hidden rounded-2xl transition-all duration-300">
+                    <div className="relative overflow-hidden rounded-radius-md transition-all duration-300">
                       {/* Animated border glow */}
-                      <div className={`absolute -inset-1 bg-gradient-to-r from-[#8b7cff]/20 via-[#b794f4]/20 to-[#f4a8b8]/20 rounded-2xl blur-xl transition-opacity duration-500 ${
+                      <div className={`absolute -inset-1 bg-gradient-to-r from-[#8b7cff]/20 via-[#b794f4]/20 to-[#f4a8b8]/20 rounded-radius-md blur-xl transition-opacity duration-500 ${
                         index === currentIndex ? 'opacity-100' : 'opacity-0'
                       }`}></div>
                       
-                      <div className="relative bg-white/80 backdrop-blur-sm dark:bg-dark/80 rounded-2xl border border-[#e5e5e5] dark:border-white/5 transition-colors duration-300 shadow-sm dark:shadow-none">
+                      <div className="relative bg-white/80 backdrop-blur-sm dark:bg-dark/80 rounded-radius-md border border-[#e5e5e5] dark:border-white/5 transition-colors duration-300 shadow-sm dark:shadow-none">
                         <WowSwiperSlideContent
                           tags={review.tags}
                           title={review.title}

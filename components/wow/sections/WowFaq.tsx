@@ -48,7 +48,7 @@ export default function WowFaq() {
                 as="button"
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                className={`rounded-lg border border-secondary/10 bg-white p-6 text-left transition dark:border-dark dark:bg-dark-200 ${
+                className={`rounded-radius-sm border border-secondary/10 bg-white p-6 text-left transition dark:border-dark dark:bg-dark-200 ${
                   isOpen && faq.answer ? 'sm:col-span-1 lg:row-span-2' : ''
                 }`}>
                 <div className="flex items-start justify-between gap-4">

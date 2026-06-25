@@ -27,7 +27,7 @@ export default function WowTestimonials() {
             {testimonials.map((item) => (
               <RevealWrapper
                 key={item.name}
-                className="rounded-lg border border-secondary/10 bg-white p-6 dark:border-dark dark:bg-dark-200">
+                className="rounded-radius-sm border border-secondary/10 bg-white p-6 dark:border-dark dark:bg-dark-200">
                 <div className="mb-4 flex items-center gap-4 border-b border-secondary/10 pb-4 dark:border-dark">
                   <div className="relative size-14 overflow-hidden rounded-full">
                     <Image src="/images/agent/01.jpg" alt="" fill className="object-cover" sizes="56px" />

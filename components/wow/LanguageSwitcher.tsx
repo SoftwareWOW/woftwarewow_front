@@ -35,7 +35,7 @@ export default function LanguageSwitcher({ open, onOpenChange, dictionary }: Lan
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[1100] bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-[1101] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-nav outline-none dark:bg-dark-200 dark:shadow-none">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-[1101] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-radius-sm bg-white p-6 shadow-nav outline-none dark:bg-dark-200 dark:shadow-none">
           <VisuallyHidden>
             <Dialog.Title>{dictionary.title}</Dialog.Title>
             <Dialog.Description>{dictionary.description}</Dialog.Description>
@@ -49,7 +49,7 @@ export default function LanguageSwitcher({ open, onOpenChange, dictionary }: Lan
             <Dialog.Close asChild>
               <button
                 type="button"
-                className="flex size-9 shrink-0 items-center justify-center rounded-md border border-secondary/10 text-secondary transition hover:bg-black/5 dark:border-dark dark:text-backgroundBody dark:hover:bg-white/5"
+                className="flex size-9 shrink-0 items-center justify-center rounded-radius-sm border border-secondary/10 text-secondary transition hover:bg-black/5 dark:border-dark dark:text-backgroundBody dark:hover:bg-white/5"
                 aria-label={dictionary.close}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                   <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -72,7 +72,7 @@ export default function LanguageSwitcher({ open, onOpenChange, dictionary }: Lan
                   role="radio"
                   aria-checked={isSelected}
                   onClick={() => handleSelect(option.locale as Locale)}
-                  className={`flex w-full items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left transition ${
+                  className={`flex w-full items-center justify-between gap-3 rounded-radius-sm border px-4 py-3 text-left transition ${
                     isSelected
                       ? 'border-primary bg-primary/5 dark:bg-primary/10'
                       : 'border-secondary/10 hover:border-primary/30 hover:bg-black/[0.02] dark:border-dark dark:hover:bg-white/[0.03]'

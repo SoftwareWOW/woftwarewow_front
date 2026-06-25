@@ -4,7 +4,7 @@ import CtaImageSlider from './CtaImageSlider'
 
 const GradientCta = () => {
   const renderForm = () => (
-    <form className="relative mx-auto mt-8 flex w-full max-w-[570px] overflow-hidden rounded-cta bg-secondary text-white dark:bg-dark-200 max-md:max-w-sm md:mt-10">
+    <form className="relative mx-auto mt-8 flex w-full max-w-[570px] overflow-hidden rounded-radius-sm bg-secondary text-white dark:bg-dark-200 max-md:max-w-sm md:mt-10">
       <input
         type="email"
         placeholder="hello@email.com"

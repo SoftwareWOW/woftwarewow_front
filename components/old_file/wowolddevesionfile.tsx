@@ -227,7 +227,7 @@ export default function WowSuperagencyDivisions() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <div
-              className="relative rounded-2xl border px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 lg:px-8 lg:py-3 xl:px-10 xl:py-4 2xl:px-12 2xl:py-5 backdrop-blur-xl md:rounded-3xl"
+              className="relative rounded-radius-md border px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 lg:px-8 lg:py-3 xl:px-10 xl:py-4 2xl:px-12 2xl:py-5 backdrop-blur-xl md:rounded-radius-md"
               style={{
                 borderColor: 'var(--wow-card-border)',
                 backgroundColor: 'var(--wow-card-bg)',
@@ -236,7 +236,7 @@ export default function WowSuperagencyDivisions() {
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-3xl"
+                className="pointer-events-none absolute inset-0 rounded-radius-md"
                 style={{
                   background:
                     'linear-gradient(135deg, var(--wow-card-overlay), var(--wow-card-overlay-accent))',
@@ -323,7 +323,7 @@ function DivisionCard({
         aria-label={placed.name}
       >
         <div
-          className="relative rounded-lg border px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 2xl:px-6 2xl:py-3 backdrop-blur-xl transition-all duration-300 sm:rounded-lg md:rounded-xl"
+          className="relative rounded-radius-sm border px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5 2xl:px-6 2xl:py-3 backdrop-blur-xl transition-all duration-300 sm:rounded-radius-sm md:rounded-radius-sm"
           style={{
             borderColor: 'var(--wow-card-border)',
             backgroundColor: 'var(--wow-card-bg)',

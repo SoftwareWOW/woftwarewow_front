@@ -17,7 +17,7 @@ const variantClasses = {
 }
 
 export default function WowButton({ href, children, variant = 'primary', className = '', onClick }: WowButtonProps) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-[5px] px-6 py-4 text-sm font-semibold tracking-wide transition ${variantClasses[variant]} ${className}`
+  const classes = `inline-flex items-center justify-center gap-2 rounded-radius-lg px-6 py-4 text-sm font-semibold tracking-wide transition ${variantClasses[variant]} ${className}`
 
   if (href) {
     return (

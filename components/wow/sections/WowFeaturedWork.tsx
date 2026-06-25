@@ -31,7 +31,7 @@ export default function WowFeaturedWork() {
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
             <RevealWrapper key={project.title} className="group">
-              <div className="relative mb-6 h-[280px] overflow-hidden rounded-lg sm:h-[320px] md:h-[415px]">
+              <div className="relative mb-6 h-[280px] overflow-hidden rounded-radius-sm sm:h-[320px] md:h-[415px]">
                 <Image
                   src={project.image}
                   alt={project.title}

@@ -45,7 +45,7 @@ export default function WowBlog() {
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => (
             <RevealWrapper key={post.title} className="group">
-              <div className="relative mb-[-60px] h-[240px] overflow-hidden rounded-lg sm:mb-[-80px] sm:h-[280px] md:h-[354px]">
+              <div className="relative mb-[-60px] h-[240px] overflow-hidden rounded-radius-sm sm:mb-[-80px] sm:h-[280px] md:h-[354px]">
                 <Image
                   src={post.image}
                   alt=""
@@ -54,7 +54,7 @@ export default function WowBlog() {
                   sizes="370px"
                 />
               </div>
-              <div className="relative z-10 mx-2 rounded-lg bg-secondary p-6 text-white dark:bg-dark-200">
+              <div className="relative z-10 mx-2 rounded-radius-sm bg-secondary p-6 text-white dark:bg-dark-200">
                 <span className="inline-block rounded bg-white/10 px-3 py-1 text-xs uppercase tracking-wider">{post.tag}</span>
                 <h3 className="mt-4 text-lg font-medium leading-snug">{post.title}</h3>
                 <Link href="/ai-blog" className="mt-6 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white">
