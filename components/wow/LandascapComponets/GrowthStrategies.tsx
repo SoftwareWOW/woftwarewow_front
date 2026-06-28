@@ -14,7 +14,7 @@ const articles = [
     title: 'What Is a Superagency — and Why Growing Businesses Need One in 2026',
     description:
       'Why fragmented vendors slow growth — and how an integrated partner helps you move faster with fewer blind spots.',
-    thumbnail: '/images/wow/Hero/Growth/image (1).png',
+    thumbnail: '/images/wow/Hero/Growth/image (11).png',
     href: '/ai-blog',
   },
   {
@@ -23,7 +23,7 @@ const articles = [
     title: 'How AI Personalization Improves Your Website Without Adding Complexity',
     description:
       'Practical ways to use AI for better content, smarter experiences, and stronger conversions — without rebuilding everything.',
-    thumbnail: '/images/wow/Hero/Growth/image (2).png',
+    thumbnail: '/images/wow/Hero/Growth/image (22).png',
     href: '/ai-blog',
   },
   {
@@ -32,7 +32,7 @@ const articles = [
     title: 'From Social Media to CRM: Building a Sales Funnel That Actually Converts',
     description:
       'How to connect awareness, engagement, and follow-up into one system that turns interest into revenue.',
-    thumbnail: '/images/wow/Hero/Growth/image (2).png',
+    thumbnail: '/images/wow/Hero/Growth/image (22).png',
     href: '/ai-blog',
   },
 ]
