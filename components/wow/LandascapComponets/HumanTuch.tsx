@@ -5,10 +5,10 @@ import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Image from 'next/image'
 
-import hero01 from '@/public/images/wow/Hero/Human/Rectangle3.png'
+import hero01 from '@/public/images/wow/Hero/Human/ali.png'
 import hero02 from '@/public/images/wow/Hero/Human/Rectangle2.png'
-import hero03 from '@/public/images/wow/Hero/Human/Rectangle1.png'
-import hero04 from '@/public/images/wow/Hero/Human/Rectangle4.png'
+import hero03 from '@/public/images/wow/Hero/Human/sadat2.png'
+import hero04 from '@/public/images/wow/Hero/Human/Rectangle3.png'
 
 const HumanTouch = () => {
   return (
@@ -52,7 +52,7 @@ const HumanTouch = () => {
               <RevealWrapper className="mt-7 flex items-center gap-4">
                 <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-[#8b7cff] shadow-lg shadow-[#8b7cff]/20">
                   <Image
-                    src="/images/wow/hero/client/Michael Carter.png"
+                    src="/images/wow/Hero/Human/sadat1.png"
                     alt="Yahya Sadat"
                     width={48}
                     height={48}
@@ -79,7 +79,7 @@ const HumanTouch = () => {
               <Image
                 src={hero01}
                 alt="Creative technology visual"
-                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+                className="size-full object-cover transition-transform duration-700 hover:scale-105"
                 priority
               />
             </RevealWrapperV2>
@@ -88,7 +88,7 @@ const HumanTouch = () => {
               <Image
                 src={hero02}
                 alt="Modern digital workspace"
-                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+                className="size-full object-cover transition-transform duration-700 hover:scale-105"
               />
             </RevealWrapper>
           </div>
@@ -98,7 +98,7 @@ const HumanTouch = () => {
               <Image
                 src={hero03}
                 alt="Technology-powered collaboration"
-                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+                className="size-full object-cover transition-transform duration-700 hover:scale-105"
                 priority
               />
             </RevealWrapper>
@@ -107,7 +107,7 @@ const HumanTouch = () => {
               <Image
                 src={hero04}
                 alt="Human led innovation"
-                className="size-full object-contain transition-transform duration-700 hover:scale-105"
+                className="size-full object-cover transition-transform duration-700 hover:scale-105"
               />
             </RevealWrapper>
           </div>

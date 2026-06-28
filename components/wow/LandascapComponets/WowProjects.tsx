@@ -15,7 +15,7 @@ const wowProjects = [
     title: 'Healthcare Practice Digital Transformation',
     description:
       'A unified website, patient portal, and marketing system that increased appointment bookings by 47% in six months.',
-    thumbnail: '/images/portfolio/project-img-01.png',
+       thumbnail: '/images/wow/Hero/project/Rectangle 10101 (1).png',
     alt: 'Healthcare digital transformation project by WOW Superagency',
     href: '/case-studies/healthcare-digital-transformation',
   },
@@ -24,7 +24,7 @@ const wowProjects = [
     title: 'Construction Brand & Web Overhaul',
     description:
       'Complete rebrand, high-performance website, and lead-generation funnel for a regional construction firm expanding into new markets.',
-    thumbnail: '/images/portfolio/project-img-02.png',
+    thumbnail: '/images/wow/Hero/project/Worls Card (1).png',
     alt: 'Construction brand and website project by WOW Superagency',
     href: '/case-studies/construction-brand-overhaul',
   },
@@ -33,7 +33,7 @@ const wowProjects = [
     title: 'Legal Firm AI Workflow Automation',
     description:
       'Custom AI tools and intake automation that cut manual document processing time by 60% while improving client response speed.',
-    thumbnail: '/images/portfolio/project-img-03.png',
+    thumbnail: '/images/wow/Hero/project/Rectangle 40115 (2).png',
     alt: 'Legal firm AI automation project by WOW Superagency',
     href: '/case-studies/legal-ai-automation',
   },
@@ -42,7 +42,7 @@ const wowProjects = [
     title: 'Hospitality Booking Platform',
     description:
       'End-to-end booking software, secure hosting, and conversion-focused design for a boutique hotel group across three locations.',
-    thumbnail: '/images/portfolio/project-img-04.png',
+    thumbnail: '/images/wow/Hero/project/Rectangle40115(1).png',
     alt: 'Hospitality booking platform project by WOW Superagency',
     href: '/case-studies/hospitality-booking-platform',
   },

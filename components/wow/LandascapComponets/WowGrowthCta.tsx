@@ -66,9 +66,9 @@ const WowGrowthCta = () => {
                 Ready To{' '}
                 <CtaImageSlider
                   slides={[
-                    { id: '1', img: '/images/agent/01.jpg' },
-                    { id: '2', img: '/images/agent/02.jpg' },
-                    { id: '3', img: '/images/agent/03.jpg' },
+                    { id: '1', img: '/images/wow/Hero/Growth/image (3).png' },
+                    { id: '2', img: '/images/wow/Hero/Growth/image (2).png' },
+                    { id: '3', img: '/images/wow/Hero/Growth/image (1).png' },
                   ]}
                 />
                 <span className="font-seasons italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
