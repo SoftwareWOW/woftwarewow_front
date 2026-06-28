@@ -98,9 +98,6 @@ const WowProjects = () => {
         <div className="mb-10 flex flex-col items-center justify-center gap-y-4 md:mb-20 md:flex-row md:justify-between">
           <TextAppearAnimation>
             <div>
-              <p className="mb-2 text-sm font-medium uppercase tracking-[0.15em] text-[#8b7cff] dark:text-[#b794f4]">
-                Case Studies
-              </p>
               <h2 className="text-appear flex-1 text-[#000000] dark:text-[#F2F2F2]">
                 Real Challenges.{' '}
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
