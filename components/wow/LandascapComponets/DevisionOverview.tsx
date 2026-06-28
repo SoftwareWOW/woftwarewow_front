@@ -23,7 +23,7 @@ const divisions = [
   {
     id: 1,
     title: 'SoftwareWOW!',
-    description: 'Custom software, mobile apps, and digital products engineered to scale with your ambitions.',
+    description: 'Custom software, mobile apps, and digital products built to scale with your business — not against it.',
     icon: Code2,
     color: '#8b7cff',
     bgGradient: 'from-[#8b7cff]/20 to-[#b794f4]/20',
@@ -41,7 +41,7 @@ const divisions = [
   {
     id: 3,
     title: 'WOW Design',
-    description: 'Brand identity and visual systems that make your business impossible to forget.',
+    description: 'Brand identity and visual systems that make your business memorable, credible, and impossible to ignore.',
     icon: Palette,
     color: '#b794f4',
     bgGradient: 'from-[#b794f4]/20 to-[#8b7cff]/20',
@@ -50,7 +50,7 @@ const divisions = [
   {
     id: 4,
     title: 'WOW Intelligence',
-    description: 'AI-powered insights and automation that sharpen strategy and accelerate results.',
+    description: 'AI solutions and automation that sharpen decisions, reduce manual work, and accelerate results.',
     icon: Brain,
     color: '#ff9191',
     bgGradient: 'from-[#ff9191]/20 to-[#f4a8b8]/20',
@@ -59,7 +59,7 @@ const divisions = [
   {
     id: 5,
     title: 'WOW Social',
-    description: 'Social strategy and community management that transforms followers into loyal advocates.',
+    description: 'Social strategy and community building that turns followers into customers and customers into advocates.',
     icon: Users,
     color: '#8b7cff',
     bgGradient: 'from-[#8b7cff]/20 to-[#b794f4]/20',
@@ -68,7 +68,7 @@ const divisions = [
   {
     id: 6,
     title: 'WOW Accelerate',
-    description: 'Growth programs and coaching designed to fast-track your business to its next milestone.',
+    description: 'Growth programs and strategic coaching designed to help your business reach its next level — faster.',
     icon: Rocket,
     color: '#f4a8b8',
     bgGradient: 'from-[#f4a8b8]/20 to-[#ff9191]/20',
@@ -77,7 +77,7 @@ const divisions = [
   {
     id: 7,
     title: 'WOW Websites',
-    description: 'High-performance websites built for speed, search visibility, and conversion.',
+    description: 'High-performance websites optimized for speed, search visibility, conversion, and long-term growth.',
     icon: Globe,
     color: '#b794f4',
     bgGradient: 'from-[#b794f4]/20 to-[#8b7cff]/20',
@@ -86,7 +86,7 @@ const divisions = [
   {
     id: 8,
     title: 'WOW Impact',
-    description: 'Purpose-led initiatives and giving programs that amplify your brand and community reach.',
+    description: 'Purpose-led initiatives and community programs that strengthen your brand and expand your reach.',
     icon: Star,
     color: '#ff9191',
     bgGradient: 'from-[#ff9191]/20 to-[#f4a8b8]/20',
@@ -95,7 +95,7 @@ const divisions = [
   {
     id: 9,
     title: 'WOW Host',
-    description: 'Secure, reliable hosting and infrastructure that keeps your business online around the clock.',
+    description: 'Secure, reliable hosting and infrastructure that keeps your business online, fast, and protected.',
     icon: Shield,
     color: '#8b7cff',
     bgGradient: 'from-[#8b7cff]/20 to-[#b794f4]/20',
@@ -104,7 +104,7 @@ const divisions = [
   {
     id: 10,
     title: 'WOW Hub',
-    description: 'A centralized command center for tools, training, and seamless team collaboration.',
+    description: 'Your centralized command center for tools, training, collaboration, and seamless team execution.',
     icon: LayoutDashboard,
     color: '#b794f4',
     bgGradient: 'from-[#b794f4]/20 to-[#8b7cff]/20',
@@ -153,8 +153,8 @@ const DevisionOverview = () => {
                 id="divisions-heading"
                 className="text-appear text-left text-[#000000] dark:text-[#F2F2F2] max-md:text-4xl max-sm:text-3xl"
               >
-                Eleven Divisions. <br />
-                One Growth{' '}
+                Specialized Divisions. <br />
+                One Unified{' '}
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
                   Ecosystem.
                 </span>
@@ -273,7 +273,7 @@ const DevisionOverview = () => {
                         : 'text-[#8b7cff] opacity-0'
                     }`}
                   >
-                    <span>Learn more</span>
+                    <span>Explore Division</span>
                     <ArrowRight
                       className={`h-4 w-4 transition-transform duration-300 ${
                         isHovered ? 'translate-x-1' : ''

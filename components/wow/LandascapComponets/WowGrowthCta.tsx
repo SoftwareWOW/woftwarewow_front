@@ -85,7 +85,7 @@ const WowGrowthCta = () => {
                 aria-label="Book a free consultation"
               >
                 <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
-                  Book a Free Consultation
+                  Book Your Free Consultation
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </Link>

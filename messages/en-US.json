@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "WOW Superagency | Where Ambitions Become Achievements",
-    "description": "Integrated web, marketing, AI, applications, content, and infrastructure for small businesses. Clear to understand, fast to launch, built for real-world outcomes.",
+    "title": "WOW Superagency | Technology, Marketing & AI for Growing Businesses",
+    "description": "One integrated partner for web development, digital marketing, AI automation, branding, and business growth. Built for small and mid-sized companies ready to scale with confidence.",
     "siteName": "WOW Superagency"
   },
   "navigation": {
@@ -1862,25 +1862,25 @@
     ]
   },
   "hero": {
-    "badge": "THE SUPERAGENCY FOR SMALL BUSINESS GROWTH",
+    "badge": "THE SUPERAGENCY FOR AMBITIOUS BUSINESSES",
     "headline": {
-      "part1": "This is Where",
-      "highlight1": "Ambitions",
-      "part2": "Become",
-      "highlight2": "Achievements."
+      "part1": "Where",
+      "highlight1": "Vision",
+      "part2": "Becomes",
+      "highlight2": "Momentum."
     },
-    "servicesLine": "Technology. Marketing. AI. Websites. Design. Growth.",
-    "description": "Everything your business needs to grow under one coordinated ecosystem.",
-    "ctaPrimary": "Book a Free Consultation",
+    "servicesLine": "Software. Websites. Marketing. AI. Design. Strategy. Growth.",
+    "description": "Most businesses don't need another vendor. They need one coordinated team that understands technology, marketing, and growth — working together from day one. WOW Superagency brings custom development, digital marketing, AI automation, branding, and business strategy under one ecosystem — so you move faster, stay aligned, and build something your customers actually notice.",
+    "ctaPrimary": "Book Your Free Consultation",
     "ctaSecondary": "Explore the Ecosystem"
   },
   "ecosystem": {
     "heading": {
-      "part1": "Because the best teams are",
-      "highlight": "organized,",
-      "part2": "not disconnected"
+      "part1": "Because growth works best when everything is",
+      "highlight": "connected,",
+      "part2": "not scattered"
     },
-    "description": "Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.",
+    "description": "When your website, marketing, software, and brand are built by separate teams with separate priorities, progress slows and results get diluted. WOW Superagency works differently — our divisions operate as specialists within one integrated ecosystem, sharing strategy, brand standards, and project visibility so every initiative supports the next.",
     "nodes": {
       "websites": { "prefix": "WOW", "label": "Websites" },
       "host": { "prefix": "WOW", "label": "Host" },
@@ -1895,16 +1895,16 @@
       "marketing": { "prefix": "WOW", "label": "Marketing" }
     },
     "ctas": {
-      "best-app": "THE BEST APP",
-      "modern-systems": "MODERN SYSTEMS",
-      "boost-profits": "BOOST PROFITS",
-      "attract-new": "ATTRACT NEW CUSTOMER"
+      "best-app": "BUILD BETTER SYSTEMS",
+      "modern-systems": "MODERNIZE YOUR STACK",
+      "boost-profits": "DRIVE REAL REVENUE",
+      "attract-new": "WIN MORE CUSTOMERS"
     }
   },
   "superAgencyClient": {
     "heading": {
-      "part1": "Trusted By Businesses",
-      "highlight": "Focused On Growth"
+      "part1": "Trusted by Businesses",
+      "highlight": "Built for Growth"
     },
     "aria": {
       "previousTestimonial": "Previous testimonial",
@@ -1915,28 +1915,28 @@
       {
         "id": 1,
         "tags": "Business Growth & Strategy",
-        "title": "WOW became much more than a service provider. They helped us align our website, marketing, automation, and growth strategy into one cohesive system. Having access to multiple specialists through a single partner made a huge difference.",
+        "title": "WOW didn't feel like an agency — they felt like an extension of our leadership team. They aligned our website, marketing, automation, and growth strategy into one system. Having every specialist under one roof changed how fast we could execute.",
         "userName": "Michael Carter",
         "position": "Managing Director"
       },
       {
         "id": 2,
         "tags": "Website & Digital Experience",
-        "title": "The team delivered a modern website that not only looks exceptional but also performs. The attention to user experience, speed, and conversion optimization has significantly improved how customers interact with our business online.",
+        "title": "Our new website didn't just look better — it performed better. Speed, UX, and conversion were treated as business priorities, not design details. The difference in how customers engage with us online has been significant.",
         "userName": "Emma Richardson",
         "position": "Founder & CEO"
       },
       {
         "id": 3,
         "tags": "AI & Automation",
-        "title": "Their approach to AI was refreshingly practical. Instead of chasing trends, they helped us automate workflows, improve efficiency, and create better customer experiences. The impact was immediate and measurable.",
+        "title": "They approached AI with practicality, not hype. We automated repetitive workflows, improved response times, and created a better client experience — with results we could measure within weeks.",
         "userName": "Daniel Foster",
         "position": "Operations Director"
       },
       {
         "id": 4,
         "tags": "Marketing & Growth",
-        "title": "What impressed us most was how every discipline worked together. From branding and content to marketing and sales systems, everything felt connected. WOW helped us build a stronger foundation for long-term growth.",
+        "title": "What stood out was how connected everything felt — brand, content, campaigns, and sales systems all moving in the same direction. WOW helped us build a foundation we can actually grow on.",
         "userName": "Sophia Bennett",
         "position": "Business Owner"
       }

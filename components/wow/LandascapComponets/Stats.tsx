@@ -14,29 +14,31 @@ if (typeof window !== 'undefined') {
 }
 
 const achievementStats = [
-  { 
-    value: 3000, 
-    label: 'Businesses Reached', 
+  {
+    value: 3000,
+    label: 'Businesses Reached',
     suffix: '+',
-    description: 'Through websites, campaigns, software, content, and growth initiatives.'
+    description:
+      'Through websites, campaigns, software, content, and growth programs designed to create measurable impact.',
   },
-  { 
-    value: 500, 
-    label: 'Projects Delivered', 
+  {
+    value: 500,
+    label: 'Projects Delivered',
     suffix: '+',
-    description: 'Across marketing, technology, design, AI, and growth.'
+    description: 'Across marketing, technology, design, AI, automation, and digital transformation.',
   },
-  { 
-    value: 20, 
-    label: 'Industries Served', 
+  {
+    value: 20,
+    label: 'Industries Served',
     suffix: '+',
-    description: 'Including healthcare, construction, legal, hospitality, retail, professional services, and eCommerce.'
+    description:
+      'Including healthcare, construction, legal, hospitality, retail, professional services, and eCommerce.',
   },
-  { 
-    value: 600, 
-    label: 'Consultations & Strategy Sessions', 
+  {
+    value: 600,
+    label: 'Strategy Sessions Completed',
     suffix: '+',
-    description: 'Helping businesses identify opportunities and accelerate growth.'
+    description: 'Helping business owners identify opportunities, remove bottlenecks, and build smarter growth roadmaps.',
   },
 ]
 
@@ -155,7 +157,7 @@ const Stats = () => {
                 className="section-description mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-normal leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700 is-pinned:dark:text-[#F2F2F2] is-pinned:text-[#1a1a1a]"
                 ref={revealRef}
               >
-                WOW Superagency brings technology, marketing, AI, websites, software, and growth services together under one coordinated ecosystem—helping businesses move faster with less complexity.
+                WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem — helping businesses scale with less complexity and more confidence.
               </h4>
             </RevealWrapper>
 

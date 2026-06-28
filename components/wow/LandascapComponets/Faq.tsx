@@ -12,25 +12,25 @@ const faqData = [
     id: 1,
     question: 'What does it cost to work with WOW Superagency?',
     answer:
-      'Every engagement is scoped to your goals. After a free consultation, we provide a transparent proposal with clear deliverables, timelines, and investment—whether you need a single division or a full ecosystem rollout. No hidden fees, no surprises.',
+      'Every engagement is scoped to your goals. After a free consultation, you receive a transparent proposal with clear deliverables, timelines, and investment — whether you need one division or a full ecosystem rollout.',
   },
   {
     id: 2,
     question: 'Can I start with one service and expand later?',
     answer:
-      'Absolutely. Many clients begin with a website, marketing campaign, or software build and grow into additional divisions as their needs evolve. Our ecosystem model makes scaling seamless without switching agencies.',
+      'Absolutely. Many clients begin with a website, marketing campaign, or software project and expand into additional divisions as their needs grow. Our ecosystem model makes scaling seamless.',
   },
   {
     id: 3,
     question: 'How long does a typical project take?',
     answer:
-      'Timelines vary by scope. A marketing campaign may launch in weeks, while custom software can take several months. We set realistic milestones upfront and keep you updated at every stage through your dedicated account lead.',
+      'Timelines depend on scope. A marketing campaign may launch in weeks; custom software can take several months. We set realistic milestones upfront and keep you informed at every stage.',
   },
   {
     id: 4,
     question: 'Do you work with startups and established businesses?',
     answer:
-      'Yes. WOW Superagency serves ambitious small and mid-sized businesses at every stage—from launching a first website to scaling operations with AI, automation, and multi-channel growth strategies.',
+      'Yes. We partner with ambitious small and mid-sized businesses at every stage — from launching a first website to scaling with AI, automation, and multi-channel growth.',
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const faqData = [
     id: 6,
     question: 'How do you handle communication during a project?',
     answer:
-      'You receive a dedicated point of contact, regular progress updates, and access to WOW Hub for collaboration. We believe clear communication is as important as the work itself.',
+      'You receive a dedicated point of contact, regular progress updates, and access to WOW Hub for collaboration. Clear communication is part of how we deliver.',
   },
   {
     id: 7,
@@ -60,13 +60,13 @@ const faqData = [
     id: 9,
     question: 'What if I am not satisfied with the results?',
     answer:
-      'We build feedback loops into every project phase. If something is not meeting expectations, we address it quickly and adjust course. Our goal is long-term partnership, not one-off transactions.',
+      'We build feedback into every project phase. If something is not meeting expectations, we address it quickly and adjust course. We are building long-term partnerships, not one-off transactions.',
   },
   {
     id: 10,
     question: 'How do I schedule a consultation?',
     answer:
-      'Visit our contact page or book a free consultation directly from this site. We will learn about your business, identify opportunities, and outline how the WOW ecosystem can help you grow.',
+      'Use the form below or book directly from our contact page. We will learn about your business, identify opportunities, and outline how WOW can help you grow.',
   },
 ]
 
@@ -135,7 +135,7 @@ const Faq = () => {
           <div className="self-start md:self-end">
             <TextAppearAnimation>
               <p className="text-appear max-w-96 text-[#555555] dark:text-[#999999] lg:max-w-[470px]">
-                Straight answers to the questions business owners ask most before partnering with WOW Superagency.
+                Straight answers to the questions business owners ask most before choosing a long-term digital partner.
               </p>
             </TextAppearAnimation>
           </div>

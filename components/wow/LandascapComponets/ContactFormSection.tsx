@@ -6,19 +6,22 @@ import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
 const interestOptions = [
-  'UI/UX Design',
-  'Web Design',
-  'Web-Development',
-  'Website Creation',
-  'Animation',
-  'Others',
+  'Web Development & Websites',
+  'Custom Software & Mobile Apps',
+  'UI/UX & Brand Design',
+  'Digital Marketing & SEO',
+  'AI & Business Automation',
+  'Strategy & Consulting',
+  'Other / Not Sure Yet',
 ]
 
-const budgetOptions = ['$2k-4k', '$4k-6k', '$6k-8k', '$8k-10k', '$10k+']
+const budgetOptions = ['Under $5k', '$5k – $15k', '$15k – $30k', '$30k – $75k', '$75k+']
 
 const ContactFormSection = () => {
-  const [selectedInterests, setSelectedInterests] = useState<string[]>(['Web-Development', 'Website Creation'])
-  const [selectedBudget, setSelectedBudget] = useState('$4k-6k')
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([
+    'Web Development & Websites',
+  ])
+  const [selectedBudget, setSelectedBudget] = useState('$5k – $15k')
   const [isInterestsOpen, setIsInterestsOpen] = useState(false)
   const [isBudgetOpen, setIsBudgetOpen] = useState(false)
 
@@ -66,23 +69,24 @@ const ContactFormSection = () => {
               <RevealWrapper>
                 <span className="rv-badge mb-6 inline-block border border-[#e5e5e5] px-4 py-1.5 dark:border-white/10">
                   <span className="rv-badge-text text-sm font-medium uppercase tracking-[0.15em] text-[#8b7cff] dark:text-[#b794f4]">
-                    Inquiry Form
+                    Start the Conversation
                   </span>
                 </span>
               </RevealWrapper>
 
               <TextAppearAnimation>
                 <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.15] text-[#000000] dark:text-[#F2F2F2]">
-                  Let&apos;s Discuss Your{' '}
+                  Let&apos;s Build Something{' '}
                   <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
-                    Project
+                    Great Together
                   </span>
                 </h2>
               </TextAppearAnimation>
 
               <RevealWrapper className="mt-4">
                 <p className="text-base leading-relaxed text-[#555555] dark:text-[#999999] md:text-lg">
-                  Tell us about your goals and challenges. We&apos;ll recommend the best path forward.
+                  Tell us where you are today and where you want to go. We&apos;ll recommend the smartest path forward
+                  — with clarity, not pressure.
                 </p>
               </RevealWrapper>
             </div>
@@ -101,7 +105,7 @@ const ContactFormSection = () => {
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Enter your full name"
+                  placeholder="e.g. Sarah Mitchell"
                   required
                   className="mt-2 w-full rounded-radius-sm border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] placeholder:text-[#999999] transition-all duration-300 focus:border-[#8b7cff]/50 focus:outline-none focus:ring-4 focus:ring-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:placeholder:text-[#666666] dark:focus:border-[#8b7cff]/50 dark:focus:ring-[#8b7cff]/20"
                 />
@@ -116,7 +120,7 @@ const ContactFormSection = () => {
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="Enter your email address"
+                  placeholder="e.g. you@yourcompany.com"
                   required
                   className="mt-2 w-full rounded-radius-sm border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] placeholder:text-[#999999] transition-all duration-300 focus:border-[#8b7cff]/50 focus:outline-none focus:ring-4 focus:ring-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:placeholder:text-[#666666] dark:focus:border-[#8b7cff]/50 dark:focus:ring-[#8b7cff]/20"
                 />
@@ -125,7 +129,7 @@ const ContactFormSection = () => {
               {/* Interests Dropdown */}
               <div>
                 <label className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
-                  You are interested in: *
+                  What are you looking for? *
                 </label>
                 <div className="relative mt-2">
                   <button
@@ -136,7 +140,7 @@ const ContactFormSection = () => {
                     <span className="truncate text-[#1a1a1a] dark:text-[#F2F2F2]">
                       {selectedInterests.length > 0
                         ? selectedInterests.join(', ')
-                        : 'Select your interests'}
+                        : 'Select one or more services'}
                     </span>
                     {isInterestsOpen ? (
                       <ChevronUp className="h-5 w-5 shrink-0 text-[#8b7cff]" />
@@ -176,7 +180,7 @@ const ContactFormSection = () => {
               {/* Budget Dropdown */}
               <div>
                 <label className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
-                  Budget in USD: *
+                  Estimated Budget (USD) *
                 </label>
                 <div className="relative mt-2">
                   <button
@@ -224,13 +228,13 @@ const ContactFormSection = () => {
               {/* Message Field */}
               <div>
                 <label htmlFor="message" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
-                  Project Details *
+                  Tell Us About Your Goals *
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
-                  placeholder="Tell us more about your project, goals, and challenges"
+                  placeholder="Share your goals, challenges, timeline, or anything that helps us prepare for your consultation"
                   className="mt-2 min-h-44 w-full rounded-radius-sm border border-[#e5e5e5] bg-white/50 px-5 py-4 text-base text-[#1a1a1a] placeholder:text-[#999999] transition-all duration-300 focus:border-[#8b7cff]/50 focus:outline-none focus:ring-4 focus:ring-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:placeholder:text-[#666666] dark:focus:border-[#8b7cff]/50 dark:focus:ring-[#8b7cff]/20"
                 />
               </div>
@@ -241,7 +245,7 @@ const ContactFormSection = () => {
                 className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-radius-lg bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
               >
                 <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
-                  Request a Consultation
+                  Request Your Free Consultation
                   <svg
                     className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"
@@ -253,6 +257,10 @@ const ContactFormSection = () => {
                   </svg>
                 </span>
               </button>
+
+              <p className="text-center text-xs leading-relaxed text-[#999999] dark:text-[#666666]">
+                Your information is confidential and will never be shared without your consent.
+              </p>
             </RevealWrapper>
           </div>
         </div>

@@ -15,13 +15,13 @@ const faqData = [
     id: 1,
     question: 'What is WOW Superagency?',
     answer:
-      'WOW Superagency is a full-service growth partner for small and mid-sized businesses. We bring marketing, design, software development, AI, websites, and hosting together under one coordinated team—so you get enterprise-level capabilities without juggling multiple agencies.',
+      'WOW Superagency is a full-service growth partner for small and mid-sized businesses. We bring marketing, design, software development, AI, websites, and hosting together under one coordinated team — so you get enterprise-level capability without managing multiple agencies.',
   },
   {
     id: 2,
     question: 'How is WOW different from a traditional agency?',
     answer:
-      'Instead of offering a single specialty, WOW operates as a connected ecosystem of divisions. Each division is a leader in its field, but they work together under one strategy. That means your brand, technology, and growth initiatives stay aligned from day one.',
+      'Traditional agencies usually specialize in one area. WOW operates as a connected ecosystem of divisions. Each division leads in its field, but they work from one shared strategy — keeping your brand, technology, and growth aligned from day one.',
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const faqData = [
     id: 4,
     question: 'Do I need to work with each division separately?',
     answer:
-      'No. WOW Superagency acts as your single point of contact. We coordinate the right specialists behind the scenes—whether you need a new website, a marketing campaign, custom software, or AI automation—so you experience one seamless partnership.',
+      'No. WOW Superagency is your single point of contact. We coordinate the right specialists behind the scenes — whether you need a new website, a marketing campaign, custom software, or AI automation.',
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const faqData = [
     id: 6,
     question: 'What does onboarding look like?',
     answer:
-      'We start with a free consultation to understand your goals, challenges, and timeline. From there, we recommend the right divisions and build a phased roadmap. You receive a dedicated account lead who keeps every workstream coordinated and transparent.',
+      'We start with a free consultation to understand your goals, challenges, and timeline. From there, we recommend the right divisions and build a phased roadmap. You receive a dedicated lead who keeps every workstream coordinated and transparent.',
   },
   {
     id: 7,
@@ -57,19 +57,19 @@ const faqData = [
     id: 8,
     question: 'Do you offer support after launch?',
     answer:
-      'Absolutely. Whether it is website maintenance through WOW Host, campaign optimization through WOW Marketing, or product updates through SoftwareWOW!, we provide ongoing support to keep your business growing long after the initial launch.',
+      'Yes. Whether it is website maintenance through WOW Host, campaign optimization through WOW Marketing, or product updates through SoftwareWOW!, we provide ongoing support to keep your business growing long after launch.',
   },
   {
     id: 9,
     question: 'Can you work with businesses outside North America?',
     answer:
-      'Yes. WOW Superagency serves clients globally with remote collaboration, flexible time zones, and digital-first delivery. Our teams are experienced in working across borders while maintaining clear communication and consistent quality.',
+      'Yes. WOW Superagency serves clients globally with remote collaboration, flexible time zones, and digital-first delivery — maintaining clear communication and consistent quality across borders.',
   },
   {
     id: 10,
     question: 'How do I get started?',
     answer:
-      'Book a free consultation through our website or contact page. We will learn about your business, identify quick wins and long-term opportunities, and outline how the WOW ecosystem can help you move faster with less complexity.',
+      'Book a free consultation through our website. We will learn about your business, identify quick wins and long-term opportunities, and outline how the WOW ecosystem can help you move faster with less complexity.',
   },
 ]
 
@@ -123,9 +123,9 @@ const SolutionToChallenges = () => {
           <div className="flex-1">
             <TextAppearAnimation>
               <h2 className="text-appear max-lg:leading-[1.33] text-[#000000] dark:text-[#F2F2F2]">
-                Frequently asked{' '}
+                Questions business owners ask{' '}
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent lg:text-[65px]">
-                  questions
+                  before they partner with us
                 </span>
               </h2>
             </TextAppearAnimation>
@@ -133,8 +133,7 @@ const SolutionToChallenges = () => {
           <div className="flex-1 max-md:w-full md:self-end">
             <TextAppearAnimation>
               <p className="text-appear max-w-lg text-[#555555] dark:text-[#999999] md:justify-self-end md:text-right">
-                Everything you need to know about partnering with WOW Superagency—from how our ecosystem works to
-                what you can expect when we build together.
+                Clear answers about how WOW Superagency works — and what working together actually looks like.
               </p>
             </TextAppearAnimation>
             <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
@@ -143,7 +142,7 @@ const SolutionToChallenges = () => {
                   href="/contact"
                   className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-lg bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
                 >
-                  <span className="relative z-10 font-medium">Book a Free Consultation</span>
+                  <span className="relative z-10 font-medium">Book Your Free Consultation</span>
                 </Link>
               </li>
             </RevealWrapper>

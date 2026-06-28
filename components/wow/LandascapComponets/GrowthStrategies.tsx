@@ -11,21 +11,27 @@ const articles = [
   {
     id: 1,
     date: 'JUNE 7, 2026',
-    title: 'What Is a Superagency — and Why Small Businesses Need One in 2026',
+    title: 'What Is a Superagency — and Why Growing Businesses Need One in 2026',
+    description:
+      'Why fragmented vendors slow growth — and how an integrated partner helps you move faster with fewer blind spots.',
     thumbnail: '/images/blog-img/blogV3-img-1.png',
     href: '/ai-blog',
   },
   {
     id: 2,
     date: 'JUNE 7, 2026',
-    title: 'How AI Personalization Can Improve Your Website Experience Without Extra Complexity',
+    title: 'How AI Personalization Improves Your Website Without Adding Complexity',
+    description:
+      'Practical ways to use AI for better content, smarter experiences, and stronger conversions — without rebuilding everything.',
     thumbnail: '/images/blog-img/blogV3-img-2.png',
     href: '/ai-blog',
   },
   {
     id: 3,
     date: 'JUNE 7, 2024',
-    title: 'From Social Media to CRM: Building a Better Sales Funnel for Growing Businesses',
+    title: 'From Social Media to CRM: Building a Sales Funnel That Actually Converts',
+    description:
+      'How to connect awareness, engagement, and follow-up into one system that turns interest into revenue.',
     thumbnail: '/images/blog-img/blogV3-img-3.png',
     href: '/ai-blog',
   },
@@ -70,8 +76,8 @@ const GrowthStrategies = () => {
 
           <RevealWrapper className="max-w-[420px] lg:text-right">
             <p className="text-base leading-relaxed text-[#555555] dark:text-[#999999]">
-              Explore practical advice, industry trends, marketing strategies, AI innovations, and business growth
-              insights.
+              Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
+              not jargon.
             </p>
             <Link
               href="/ai-blog"
@@ -108,10 +114,14 @@ const GrowthStrategies = () => {
                 </span>
 
                 <Link href={article.href}>
-                  <h3 className="mb-4 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-normal leading-[1.25] tracking-[-0.02em] text-[#1a1a1a] transition-colors duration-300 hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:hover:text-[#b794f4]">
+                  <h3 className="mb-2 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-normal leading-[1.25] tracking-[-0.02em] text-[#1a1a1a] transition-colors duration-300 hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:hover:text-[#b794f4]">
                     {article.title}
                   </h3>
                 </Link>
+
+                <p className="mb-4 max-w-3xl text-sm leading-relaxed text-[#555555] dark:text-[#999999] md:text-base">
+                  {article.description}
+                </p>
 
                 <Link
                   href={article.href}

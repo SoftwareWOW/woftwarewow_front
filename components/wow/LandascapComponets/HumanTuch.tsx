@@ -68,7 +68,8 @@ const HumanTouch = () => {
                     Founder & CEO
                   </span>
                   <p className="mt-1 max-w-[360px] text-[11px] leading-4 text-[#555555] transition-colors duration-300 dark:text-white/35">
-                    Leading the WOW vision with strategy, technology, and human-first digital delivery.
+                    Building WOW Superagency with a simple belief: the best digital experiences are powered by advanced
+                    technology — and guided by people who genuinely care about your business.
                   </p>
                 </figcaption>
               </RevealWrapper>
@@ -96,7 +97,7 @@ const HumanTouch = () => {
             <RevealWrapper as="figure" className="h-[420px] overflow-hidden rounded-radius-md border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none sm:h-[620px] lg:h-[640px] xl:h-[720px]">
               <Image
                 src={hero03}
-                alt="Technology powered portrait"
+                alt="Technology-powered collaboration"
                 className="size-full object-contain transition-transform duration-700 hover:scale-105"
                 priority
               />

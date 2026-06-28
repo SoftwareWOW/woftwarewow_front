@@ -104,7 +104,7 @@ const WowProjects = () => {
               <h2 className="text-appear flex-1 text-[#000000] dark:text-[#F2F2F2]">
                 Real Challenges.{' '}
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
-                  Real Solutions.
+                  Real Results.
                 </span>
               </h2>
             </div>
@@ -113,8 +113,8 @@ const WowProjects = () => {
           <div>
             <TextAppearAnimation>
               <p className="max-w-md flex-1 text-[#555555] dark:text-[#999999] md:self-end md:text-right">
-                See how businesses have leveraged technology, marketing, AI, websites, and growth systems to achieve
-                measurable outcomes.
+                See how businesses use technology, marketing, AI, and integrated growth systems to solve problems and
+                drive measurable outcomes.
               </p>
             </TextAppearAnimation>
             {/* View All Case Studies Button */}
