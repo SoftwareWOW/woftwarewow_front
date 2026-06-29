@@ -5,7 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const articles = [
   {
@@ -79,13 +79,11 @@ const GrowthStrategies = () => {
               Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
               not jargon.
             </p>
-            <Link
-              href="/ai-blog"
-              className="group mt-6 inline-flex items-center gap-2 rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-6 py-2.5 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff] dark:hover:bg-[#8b7cff] dark:hover:text-white"
-            >
-              <span>View All Articles</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            <ButtonComponentList className="mt-6 flex justify-center lg:justify-end">
+              <ButtonComponent href="/ai-blog" variant="secondary" size="sm">
+                View All Articles
+              </ButtonComponent>
+            </ButtonComponentList>
           </RevealWrapper>
         </div>
 
@@ -123,13 +121,11 @@ const GrowthStrategies = () => {
                   {article.description}
                 </p>
 
-                <Link
-                  href={article.href}
-                  className="group inline-flex w-fit items-center gap-2 rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-5 py-2 text-sm font-medium text-[#1a1a1a] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
-                >
-                  <span>Read More</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+                <ButtonComponentList className="flex justify-start">
+                  <ButtonComponent href={article.href} variant="secondary" size="sm">
+                    Read More
+                  </ButtonComponent>
+                </ButtonComponentList>
               </div>
             </RevealWrapper>
           ))}

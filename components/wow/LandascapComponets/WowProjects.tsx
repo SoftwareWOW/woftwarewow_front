@@ -5,6 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import topArrow from '@/public/images/icons/arrow-Icon.svg'
 import Image from 'next/image'
 import Link from 'next/link'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
@@ -116,14 +117,11 @@ const WowProjects = () => {
             </TextAppearAnimation>
             {/* View All Case Studies Button */}
             <RevealWrapper className="mt-6 flex justify-center md:mt-8">
-              <Link
-                href="/case-studies"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
-              >
-                <span className="relative z-10 flex items-center gap-2 font-medium uppercase tracking-[0.05em]">
+              <ButtonComponentList>
+                <ButtonComponent href="/case-studies" variant="secondary">
                   View All Case Studies
-                </span>
-              </Link>
+                </ButtonComponent>
+              </ButtonComponentList>
             </RevealWrapper>
           </div>
         </div>
@@ -181,16 +179,16 @@ const WowProjects = () => {
         {/* See More / See Less Button */}
         {wowProjects.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
-            <button
-              type="button"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
-              aria-expanded={showAll}
-            >
-              <span className="relative z-10 font-medium">
+            <ButtonComponentList>
+              <ButtonComponent
+                type="button"
+                variant="secondary"
+                onClick={() => setShowAll((prev) => !prev)}
+                ariaExpanded={showAll}
+              >
                 {showAll ? 'See Less' : 'See More'}
-              </span>
-            </button>
+              </ButtonComponent>
+            </ButtonComponentList>
           </RevealWrapper>
         )}
       </div>

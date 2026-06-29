@@ -3,8 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const WowGrowthCta = () => {
   return (
@@ -79,27 +78,17 @@ const WowGrowthCta = () => {
             </TextAppearAnimation>
 
             <RevealWrapper className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-              <Link
-                href="/contact"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3.5 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
-                aria-label="Book a free consultation"
-              >
-                <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
+              <ButtonComponentList>
+                <ButtonComponent href="/contact" variant="secondary" ariaLabel="Book a free consultation">
                   Book Your Free Consultation
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </Link>
+                </ButtonComponent>
+              </ButtonComponentList>
 
-              <Link
-                href="/services"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-8 py-3.5 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
-                aria-label="Explore our divisions"
-              >
-                <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
+              <ButtonComponentList>
+                <ButtonComponent href="/services" variant="secondary" ariaLabel="Explore our divisions">
                   Explore Our Divisions
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </Link>
+                </ButtonComponent>
+              </ButtonComponentList>
             </RevealWrapper>
 
             {/* Trust indicator */}

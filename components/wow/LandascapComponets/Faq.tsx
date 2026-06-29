@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { useMemo, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const INITIAL_VISIBLE_COUNT = 6
 
@@ -218,16 +219,16 @@ const Faq = () => {
 
         {faqData.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
-            <button
-              type="button"
-              onClick={handleToggleShowAll}
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
-              aria-expanded={showAll}
-            >
-              <span className="relative z-10 font-medium">
+            <ButtonComponentList>
+              <ButtonComponent
+                type="button"
+                variant="secondary"
+                onClick={handleToggleShowAll}
+                ariaExpanded={showAll}
+              >
                 {showAll ? 'See Less' : 'See More'}
-              </span>
-            </button>
+              </ButtonComponent>
+            </ButtonComponentList>
           </RevealWrapper>
         )}
       </div>

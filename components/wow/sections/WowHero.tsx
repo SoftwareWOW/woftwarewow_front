@@ -3,8 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import type { Dictionary } from '@/i18n/types'
-import WowButton from '../WowButton'
-import Link from 'next/link'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 type WowHeroProps = {
   hero: Dictionary['hero']
@@ -50,34 +49,23 @@ export default function WowHero({ hero }: WowHeroProps) {
             </RevealWrapper>
           </div>
         </div>
-<div className="relative z-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
-   <RevealWrapper delay={0.3} as="ul" className="flex justify-center">
-          <li className="mx-auto block max-md:w-full md:ml-auto md:inline-block md:w-auto">
-            <Link href="/design-agency" className="rv-button rv-button-secondary block text-center md:inline-block">
-              <div className="rv-button-top">
-                <span>  {hero.ctaPrimary}</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>  {hero.ctaPrimary}</span>
-              </div>
-            </Link>
-          </li>
-          
-        </RevealWrapper>
-           <RevealWrapper delay={0.3} as="ul" className="flex justify-center">
-          <li className="mx-auto block max-md:w-full md:ml-auto md:inline-block md:w-auto">
-            <Link href="/design-agency" className="rv-button rv-button-secondary block text-center md:inline-block">
-              <div className="rv-button-top">
-                <span>{hero.ctaSecondary}</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>{hero.ctaSecondary}</span>
-              </div>
-            </Link>
-          </li>
-          
-        </RevealWrapper>
-</div>
+
+        <div className="relative z-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+          <RevealWrapper delay={0.3} as="div">
+            <ButtonComponentList>
+              <ButtonComponent href="/contact" variant="primary">
+                {hero.ctaPrimary}
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
+          <RevealWrapper delay={0.3} as="div">
+            <ButtonComponentList>
+              <ButtonComponent href="/services" variant="secondary">
+                {hero.ctaSecondary}
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
+        </div>
       </div>
     </section>
   )

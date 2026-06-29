@@ -18,6 +18,7 @@ import {
   LayoutDashboard,
   ArrowRight,
 } from 'lucide-react'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const divisions = [
   {
@@ -164,16 +165,11 @@ const DevisionOverview = () => {
 
           <div className="col-span-12 lg:col-span-5 lg:text-right">
             <RevealWrapper className="mt-7 md:mt-14">
-              <Link
-                href="/services"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
-                aria-label="Explore the WOW Superagency ecosystem"
-              >
-                <span className="relative z-10 flex items-center gap-2 font-medium">
+              <ButtonComponentList className="flex justify-end">
+                <ButtonComponent href="/services" variant="secondary" ariaLabel="Explore the WOW Superagency ecosystem">
                   Explore the Ecosystem
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </Link>
+                </ButtonComponent>
+              </ButtonComponentList>
             </RevealWrapper>
           </div>
         </div>

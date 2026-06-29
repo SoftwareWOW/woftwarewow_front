@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import ButtonComponent from '../shared/ButtonComponent'
 
 const interestOptions = [
   'Web Development & Websites',
@@ -240,23 +241,9 @@ const ContactFormSection = () => {
               </div>
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-radius-sm bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
-              >
-                <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
-                  Request Your Free Consultation
-                  <svg
-                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-              </button>
+              <ButtonComponent type="submit" variant="secondary" fullWidth>
+                Request Your Free Consultation
+              </ButtonComponent>
 
               <p className="text-center text-xs leading-relaxed text-[#999999] dark:text-[#666666]">
                 Your information is confidential and will never be shared without your consent.
