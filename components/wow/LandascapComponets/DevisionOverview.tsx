@@ -5,9 +5,12 @@ import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 const DIVISION_BG_BASE = '/images/wow/Hero/devision'
+
+/** Viewport X ratio used to pick the focused card (left side, first card on entry). */
+const FOCUS_X_RATIO = 0.22
 
 const divisions = [
   {
@@ -89,8 +92,8 @@ const divisions = [
 const wowGradientClass =
   'bg-gradient-to-r from-[#f4a8b8] via-[#b794f4] to-[#8b7cff] bg-clip-text text-transparent'
 
-function renderDivisionTitle(title: string, isImageActive: boolean) {
-  const wowClass = isImageActive ? wowGradientClass : 'text-[#8b7cff]'
+function renderDivisionTitle(title: string, isActive: boolean) {
+  const wowClass = isActive ? wowGradientClass : 'text-[#8b7cff]'
 
   if (title.startsWith('WOW ')) {
     return (
@@ -116,34 +119,70 @@ function renderDivisionTitle(title: string, isImageActive: boolean) {
 }
 
 const DevisionOverview = () => {
+  const [hoveredId, setHoveredId] = useState<number | null>(null)
+  const [activeCardId, setActiveCardId] = useState<number>(1)
+  const cardRefs = useRef<Record<number, HTMLElement | null>>({})
+
+  const updateActiveCardFromPosition = useCallback(() => {
+    const focusX = window.innerWidth * FOCUS_X_RATIO
+    let closestId = 1
+    let closestDistance = Infinity
+
+    for (const item of divisions) {
+      const el = cardRefs.current[item.id]
+      if (!el) continue
+
+      const rect = el.getBoundingClientRect()
+      const cardCenterX = rect.left + rect.width / 2
+      const distance = Math.abs(cardCenterX - focusX)
+
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestId = item.id
+      }
+    }
+
+    setActiveCardId((prev) => (prev === closestId ? prev : closestId))
+  }, [])
+
+  const handleScrollUpdate = useCallback(() => {
+    updateActiveCardFromPosition()
+  }, [updateActiveCardFromPosition])
+
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 0,
+    onUpdate: handleScrollUpdate,
   })
-  const [hoveredId, setHoveredId] = useState<number | null>(null)
-  const isImageActive = hoveredId !== null
+
+  useEffect(() => {
+    updateActiveCardFromPosition()
+
+    const handleResize = () => updateActiveCardFromPosition()
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [updateActiveCardFromPosition])
+
+  const activeBgId = hoveredId ?? activeCardId
 
   return (
     <section
       ref={triggerRef}
-      className="service-section relative flex min-h-[85vh] flex-col overflow-hidden py-14 transition-colors duration-500 md:py-16 lg:py-[88px] xl:py-[100px]"
+      className="service-section relative flex min-h-[100vh] flex-col overflow-hidden py-14 transition-colors duration-500 md:py-16 lg:min-h-screen lg:py-[88px] xl:py-[100px]"
       aria-labelledby="divisions-heading"
       onMouseLeave={() => setHoveredId(null)}
     >
-      {/* Default lavender background */}
       <div
         aria-hidden
-        className={`absolute inset-0 bg-[#ebe6f4] transition-opacity duration-700 ${
-          isImageActive ? 'opacity-0' : 'opacity-100'
-        }`}
+        className="absolute inset-0 bg-[#ebe6f4] transition-colors duration-500 dark:bg-[#0a0a0a]"
       />
 
-      {/* Division background images */}
       {divisions.map((item) => (
         <div
           key={item.id}
           aria-hidden
           className={`absolute inset-0 transition-opacity duration-700 ${
-            hoveredId === item.id ? 'opacity-100' : 'opacity-0'
+            activeBgId === item.id ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <Image
@@ -157,11 +196,10 @@ const DevisionOverview = () => {
         </div>
       ))}
 
-      {/* Dark overlay when a division image is active */}
       <div
         aria-hidden
-        className={`absolute inset-0 bg-black/55 transition-opacity duration-700 ${
-          isImageActive ? 'opacity-100' : 'opacity-0'
+        className={`absolute inset-0 transition-opacity duration-700 ${
+          activeBgId !== null ? 'bg-black/60' : 'bg-black/40'
         }`}
       />
 
@@ -170,7 +208,7 @@ const DevisionOverview = () => {
           <div className="max-w-3xl">
             <span
               className={`mb-5 inline-flex rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 ${
-                isImageActive
+                activeBgId !== null
                   ? 'bg-white/15 text-white/90'
                   : 'bg-[#1a1a1a] text-white'
               }`}
@@ -182,7 +220,7 @@ const DevisionOverview = () => {
               <h2
                 id="divisions-heading"
                 className={`text-appear text-left transition-colors duration-500 max-md:text-4xl max-sm:text-3xl ${
-                  isImageActive ? 'text-white' : 'text-[#1a1a1a]'
+                  activeBgId !== null ? 'text-white' : 'text-[#1a1a1a] dark:text-[#F2F2F2]'
                 }`}
               >
                 Eleven Divisions. <br />
@@ -190,20 +228,6 @@ const DevisionOverview = () => {
                 <span className="font-instrument italic">Ecosystem.</span>
               </h2>
             </TextAppearAnimation>
-          </div>
-
-          <div
-            className={`relative hidden h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full shadow-lg transition-all duration-500 md:flex lg:h-[88px] lg:w-[88px] ${
-              isImageActive ? 'bg-white/95' : 'bg-white'
-            }`}
-          >
-            <Image
-              src="/images/wow/wowlogo.png"
-              alt="WOW"
-              width={48}
-              height={48}
-              className="h-10 w-10 object-contain lg:h-12 lg:w-12"
-            />
           </div>
         </div>
       </div>
@@ -213,42 +237,58 @@ const DevisionOverview = () => {
         className="service-wrapper relative z-10 mt-12 flex w-max flex-nowrap gap-5 overflow-visible px-5 sm:px-6 md:mt-auto md:gap-6 md:pl-[12%] md:pr-10 lg:pl-[15%]"
         aria-label="WOW Superagency divisions"
       >
-        {divisions.map((item) => (
-          <Link
-            key={item.id}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative block w-[78vw] shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[300px] md:w-[320px] lg:w-[340px]"
-            onMouseEnter={() => setHoveredId(item.id)}
-            onFocus={() => setHoveredId(item.id)}
-            onBlur={() => setHoveredId(null)}
-          >
-            <article
-              className={`relative flex min-h-[300px] flex-col rounded-radius-sm p-7 shadow-md transition-all duration-500 md:min-h-[320px] md:p-8 ${
-                isImageActive
-                  ? 'bg-white text-[#1a1a1a] shadow-xl shadow-black/10'
-                  : 'bg-[#1c1c1c] text-white shadow-lg shadow-black/20'
-              }`}
-            >
-              <h3 className="pr-4 text-2xl font-bold leading-[1.15] tracking-[-0.02em] md:text-[1.65rem]">
-                {renderDivisionTitle(item.title, isImageActive)}
-              </h3>
+        {divisions.map((item) => {
+          const isActive = activeBgId === item.id
 
-              <p
-                className={`mt-4 flex-1 text-sm leading-6 md:text-[15px] ${
-                  isImageActive ? 'text-[#555555]' : 'text-[#b0b0b0]'
+          return (
+            <Link
+              key={item.id}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-[78vw] shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[300px] md:w-[320px] lg:w-[340px]"
+              onMouseEnter={() => setHoveredId(item.id)}
+              onFocus={() => setHoveredId(item.id)}
+              onBlur={() => setHoveredId(null)}
+            >
+              <article
+                ref={(el) => {
+                  cardRefs.current[item.id] = el
+                }}
+                data-card-id={item.id}
+                className={`relative flex min-h-[300px] flex-col rounded-radius-sm p-7 shadow-md transition-all duration-500 md:min-h-[320px] md:p-8 ${
+                  isActive
+                    ? 'bg-white/95 text-[#1a1a1a] shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-[#1a1a1a]/95 dark:text-[#F2F2F2]'
+                    : 'bg-white/60 text-[#1a1a1a] shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-[#1a1a1a]/60 dark:text-[#999999]'
                 }`}
               >
-                {item.description}
-              </p>
+                <h3 className="pr-4 text-2xl font-bold leading-[1.15] tracking-[-0.02em] md:text-[1.65rem]">
+                  {renderDivisionTitle(item.title, isActive)}
+                </h3>
 
-              <div className="absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm bg-[#8b7cff] text-white transition-transform duration-300 group-hover:scale-105">
-                <ArrowUpRight className="h-5 w-5" strokeWidth={2} aria-hidden />
-              </div>
-            </article>
-          </Link>
-        ))}
+                <p
+                  className={`mt-4 flex-1 text-sm leading-6 transition-colors duration-300 md:text-[15px] ${
+                    isActive
+                      ? 'text-[#333333] dark:text-[#CCCCCC]'
+                      : 'text-[#777777] dark:text-[#888888]'
+                  }`}
+                >
+                  {item.description}
+                </p>
+
+                <div
+                  className={`absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm text-white transition-all duration-300 ${
+                    isActive
+                      ? 'scale-110 bg-[#8b7cff] shadow-lg shadow-[#8b7cff]/30'
+                      : 'scale-100 bg-[#8b7cff]/80'
+                  } group-hover:scale-105`}
+                >
+                  <ArrowUpRight className="h-5 w-5" strokeWidth={2} aria-hidden />
+                </div>
+              </article>
+            </Link>
+          )
+        })}
       </div>
     </section>
   )

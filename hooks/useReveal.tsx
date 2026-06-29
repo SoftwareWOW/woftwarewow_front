@@ -14,10 +14,11 @@ const useReveal = () => {
   useGSAP(() => {
     if (revealContent.current.length > 0) {
       const chars = revealContent.current
+      const createdTriggers: ScrollTrigger[] = []
 
       chars?.forEach((char) => {
         const text = new SplitType(char, { types: 'words' })
-        gsap.from(text.words, {
+        const tween = gsap.from(text.words, {
           scrollTrigger: {
             trigger: char,
             start: 'top 34%',
@@ -31,10 +32,14 @@ const useReveal = () => {
           duration: 1,
           ease: 'power2.out',
         })
+
+        if (tween.scrollTrigger) {
+          createdTriggers.push(tween.scrollTrigger)
+        }
       })
 
       return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+        createdTriggers.forEach((trigger) => trigger.kill())
       }
     }
   }, [revealContent.current])

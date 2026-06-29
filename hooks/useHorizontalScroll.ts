@@ -3,7 +3,7 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -17,12 +17,20 @@ interface HorizontalScrollOptions {
   markers?: boolean
   scrub?: number | boolean
   onAnimationCreated?: (animation: gsap.core.Tween, scrollTrigger: ScrollTrigger) => void
+  onUpdate?: (progress: number, scrollTrigger: ScrollTrigger) => void
   extraScroll?: number
 }
 
 const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
   const contentRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
+  const onUpdateRef = useRef(options.onUpdate)
+  const onAnimationCreatedRef = useRef(options.onAnimationCreated)
+
+  useEffect(() => {
+    onUpdateRef.current = options.onUpdate
+    onAnimationCreatedRef.current = options.onAnimationCreated
+  }, [options.onUpdate, options.onAnimationCreated])
 
   const {
     offset = 60,
@@ -31,7 +39,6 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     start = 'top top',
     markers = false,
     scrub = 1,
-    onAnimationCreated,
     extraScroll = 370,
   } = options
 
@@ -58,18 +65,22 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
         start,
         end: () => `+=${Math.abs(getScrollAmount()) + window.innerWidth * 0.1}`,
         pin: true,
+        pinSpacing: true,
         animation,
         scrub,
         invalidateOnRefresh: true,
         markers,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          onUpdateRef.current?.(self.progress, self)
+        },
         onRefresh: () => {
           animation.vars.x = getScrollAmount()
         },
       })
 
-      if (onAnimationCreated) {
-        onAnimationCreated(animation, scrollTrigger)
-      }
+      onUpdateRef.current?.(scrollTrigger.progress, scrollTrigger)
+      onAnimationCreatedRef.current?.(animation, scrollTrigger)
 
       const handleResize = () => {
         ScrollTrigger.refresh()
@@ -84,7 +95,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
       }
     },
     {
-      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, onAnimationCreated],
+      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll],
       scope: triggerRef,
     },
   )
