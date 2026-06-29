@@ -141,7 +141,7 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
                         index === currentIndex ? 'opacity-100' : 'opacity-0'
                       }`}></div>
                       
-                      <div className="relative bg-white/80 backdrop-blur-sm dark:bg-dark/80 rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 transition-colors duration-300 shadow-sm dark:shadow-none">
+                      <div className="relative bg-white backdrop-blur-sm dark:bg-dark rounded-radius-sm transition-colors duration-300 shadow-sm dark:shadow-none">
                         <WowSwiperSlideContent
                           tags={review.tags}
                           title={review.title}
