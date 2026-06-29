@@ -269,7 +269,7 @@ const DevisionOverview = () => {
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[240px] flex-col rounded-radius-sm p-6 shadow-md transition-all duration-500 sm:min-h-[260px] md:min-h-[280px] md:p-7 lg:min-h-[300px] lg:p-8 ${
+                  className={`relative flex min-h-[230px] flex-col rounded-radius-sm p-6 shadow-md transition-all duration-500 sm:min-h-[240px] md:min-h-[245px] md:p-7 lg:min-h-[250px] lg:p-8 ${
                     isActive
                       ? 'bg-white/100 text-[#1a1a1a] shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-[#1a1a1a]/100 dark:text-[#F2F2F2]'
                       : 'bg-white/70 text-[#1a1a1a] shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-[#1a1a1a]/70 dark:text-[#999999]'
