@@ -37,9 +37,9 @@ const Stats = () => {
   const { revealRef } = useReveal()
 
   return (
-    <section className="relative overflow-hidden bg-background py-14 transition-colors duration-300 md:py-16 lg:py-[88px] xl:py-[100px]">
+    <section className="about relative bg-background py-14 transition-colors duration-300 md:py-16 lg:py-[88px] xl:py-[100px]">
       {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
+      <div className="absolute inset-0 overflow-hidden opacity-0 dark:opacity-20">
         <div
           className="absolute inset-0"
           style={{
@@ -62,7 +62,10 @@ const Stats = () => {
       <div className="container relative z-10">
         {/* Description with animation - matching AboutV8 style */}
         <RevealWrapper>
-          <h4 className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-normal leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700" ref={revealRef}>
+          <h4
+            className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-normal leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700"
+            ref={revealRef}
+          >
             WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem — helping businesses scale with less complexity and more confidence.
           </h4>
         </RevealWrapper>
