@@ -22,6 +22,8 @@ interface HorizontalScrollOptions {
   extraScroll?: number
   /** Minimum viewport width (px) to enable horizontal pin. Use 0 to enable on all devices. */
   minWidth?: number
+  /** Keep pinned section width capped and centered on large screens. */
+  maxPinWidth?: number
 }
 
 const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
@@ -44,6 +46,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     scrub = 1,
     extraScroll = 370,
     minWidth = 768,
+    maxPinWidth,
   } = options
 
   useGSAP(
@@ -56,10 +59,35 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
       const mm = gsap.matchMedia()
 
       mm.add(`(min-width: ${minWidth}px)`, () => {
+        const getViewportWidth = () => {
+          if (maxPinWidth) {
+            const parentWidth = trigger.parentElement?.clientWidth ?? window.innerWidth
+            return Math.min(maxPinWidth, parentWidth)
+          }
+          return trigger.clientWidth
+        }
+
         const getScrollAmount = () => {
           const contentWidth = content.scrollWidth
-          const distance = contentWidth - window.innerWidth + offset + extraScroll
+          const distance = contentWidth - getViewportWidth() + offset + extraScroll
           return distance > 0 ? -distance : 0
+        }
+
+        const syncPinnedLayout = (scrollTrigger: ScrollTrigger) => {
+          if (!maxPinWidth || !scrollTrigger.isActive) return
+
+          const parentRect = trigger.parentElement?.getBoundingClientRect()
+          const availableWidth = parentRect?.width ?? window.innerWidth
+          const width = Math.min(maxPinWidth, availableWidth)
+          const left = parentRect
+            ? parentRect.left + (parentRect.width - width) / 2
+            : (window.innerWidth - width) / 2
+
+          gsap.set(trigger, {
+            width,
+            maxWidth: maxPinWidth,
+            left,
+          })
         }
 
         const animation = gsap.to(content, {
@@ -73,7 +101,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
           start,
           end: () => {
             const distance = Math.abs(getScrollAmount())
-            return distance > 0 ? `+=${distance + window.innerWidth * 0.1}` : '+=1'
+            return distance > 0 ? `+=${distance + getViewportWidth() * 0.1}` : '+=1'
           },
           pin: true,
           pinSpacing: true,
@@ -84,9 +112,14 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
           anticipatePin: 1,
           onUpdate: (self) => {
             onUpdateRef.current?.(self.progress, self)
+            syncPinnedLayout(self)
           },
-          onRefresh: () => {
+          onRefresh: (self) => {
             animation.vars.x = getScrollAmount()
+            syncPinnedLayout(self)
+          },
+          onToggle: (self) => {
+            syncPinnedLayout(self)
           },
         })
 
@@ -119,7 +152,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
       }
     },
     {
-      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth],
+      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth, maxPinWidth],
       scope: triggerRef,
     },
   )
