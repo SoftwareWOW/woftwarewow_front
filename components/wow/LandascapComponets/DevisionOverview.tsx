@@ -151,6 +151,7 @@ const DevisionOverview = () => {
 
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 0,
+    minWidth: 0,
     onUpdate: handleScrollUpdate,
   })
 
@@ -168,7 +169,7 @@ const DevisionOverview = () => {
   return (
     <section
       ref={triggerRef}
-      className="service-section relative flex min-h-[100vh] flex-col overflow-hidden py-14 transition-colors duration-500 md:py-16 lg:min-h-screen lg:py-[88px] xl:py-[100px]"
+      className="service-section relative flex h-[580px] flex-col overflow-hidden transition-colors duration-500 sm:h-[620px] md:h-[660px] lg:h-[726px]"
       aria-labelledby="divisions-heading"
       onMouseLeave={() => setHoveredId(null)}
     >
@@ -203,11 +204,11 @@ const DevisionOverview = () => {
         }`}
       />
 
-      <div className="container relative z-10 flex-1">
+      <div className="container relative z-10 flex-1 px-5 pt-8 sm:px-6 md:pt-10 lg:pt-12">
         <div className="flex items-start justify-between gap-6">
           <div className="max-w-3xl">
             <span
-              className={`mb-5 inline-flex rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 ${
+              className={`mb-4 inline-flex rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 md:mb-5 ${
                 activeBgId !== null
                   ? 'bg-white/15 text-white/90'
                   : 'bg-[#1a1a1a] text-white'
@@ -234,7 +235,7 @@ const DevisionOverview = () => {
 
       <div
         ref={contentRef}
-        className="service-wrapper relative z-10 mt-12 flex w-max flex-nowrap gap-5 overflow-visible px-5 sm:px-6 md:mt-auto md:gap-6 md:pl-[12%] md:pr-10 lg:pl-[15%]"
+        className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap gap-4 overflow-visible px-5 pb-6 sm:gap-5 sm:px-6 sm:pb-8 md:gap-6 md:pl-[12%] md:pr-10 lg:pl-[15%] lg:pb-10"
         aria-label="WOW Superagency divisions"
       >
         {divisions.map((item) => {
@@ -256,7 +257,7 @@ const DevisionOverview = () => {
                   cardRefs.current[item.id] = el
                 }}
                 data-card-id={item.id}
-                className={`relative flex min-h-[300px] flex-col rounded-radius-sm p-7 shadow-md transition-all duration-500 md:min-h-[320px] md:p-8 ${
+                className={`relative flex min-h-[240px] flex-col rounded-radius-sm p-6 shadow-md transition-all duration-500 sm:min-h-[260px] md:min-h-[280px] md:p-7 lg:min-h-[300px] lg:p-8 ${
                   isActive
                     ? 'bg-white/95 text-[#1a1a1a] shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-[#1a1a1a]/95 dark:text-[#F2F2F2]'
                     : 'bg-white/60 text-[#1a1a1a] shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-[#1a1a1a]/60 dark:text-[#999999]'
@@ -267,7 +268,7 @@ const DevisionOverview = () => {
                 </h3>
 
                 <p
-                  className={`mt-4 flex-1 text-sm leading-6 transition-colors duration-300 md:text-[15px] ${
+                  className={`mt-4 flex-1 text-sm leading-6 transition-colors duration-300 md:text-[16px] ${
                     isActive
                       ? 'text-[#333333] dark:text-[#CCCCCC]'
                       : 'text-[#777777] dark:text-[#888888]'

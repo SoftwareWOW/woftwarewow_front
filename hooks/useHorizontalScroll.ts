@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
+  ScrollTrigger.config({ ignoreMobileResize: true })
 }
 
 interface HorizontalScrollOptions {
@@ -19,6 +20,8 @@ interface HorizontalScrollOptions {
   onAnimationCreated?: (animation: gsap.core.Tween, scrollTrigger: ScrollTrigger) => void
   onUpdate?: (progress: number, scrollTrigger: ScrollTrigger) => void
   extraScroll?: number
+  /** Minimum viewport width (px) to enable horizontal pin. Use 0 to enable on all devices. */
+  minWidth?: number
 }
 
 const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
@@ -40,6 +43,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     markers = false,
     scrub = 1,
     extraScroll = 370,
+    minWidth = 768,
   } = options
 
   useGSAP(
@@ -47,55 +51,75 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
       const content = contentRef.current
       const trigger = triggerRef.current
 
-      if (!content || !trigger || window.innerWidth < 768) return
+      if (!content || !trigger) return
 
-      const getScrollAmount = () => {
-        const contentWidth = content.scrollWidth
-        return -(contentWidth - window.innerWidth + offset + extraScroll)
-      }
+      const mm = gsap.matchMedia()
 
-      const animation = gsap.to(content, {
-        x: getScrollAmount(),
-        duration,
-        ease,
+      mm.add(`(min-width: ${minWidth}px)`, () => {
+        const getScrollAmount = () => {
+          const contentWidth = content.scrollWidth
+          const distance = contentWidth - window.innerWidth + offset + extraScroll
+          return distance > 0 ? -distance : 0
+        }
+
+        const animation = gsap.to(content, {
+          x: getScrollAmount,
+          duration,
+          ease,
+        })
+
+        const scrollTrigger = ScrollTrigger.create({
+          trigger,
+          start,
+          end: () => {
+            const distance = Math.abs(getScrollAmount())
+            return distance > 0 ? `+=${distance + window.innerWidth * 0.1}` : '+=1'
+          },
+          pin: true,
+          pinSpacing: true,
+          animation,
+          scrub,
+          invalidateOnRefresh: true,
+          markers,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            onUpdateRef.current?.(self.progress, self)
+          },
+          onRefresh: () => {
+            animation.vars.x = getScrollAmount()
+          },
+        })
+
+        onUpdateRef.current?.(scrollTrigger.progress, scrollTrigger)
+        onAnimationCreatedRef.current?.(animation, scrollTrigger)
+
+        const refreshScrollTrigger = () => {
+          ScrollTrigger.refresh()
+        }
+
+        const handleOrientationChange = () => {
+          window.setTimeout(refreshScrollTrigger, 350)
+        }
+
+        window.addEventListener('resize', refreshScrollTrigger)
+        window.addEventListener('orientationchange', handleOrientationChange)
+
+        requestAnimationFrame(refreshScrollTrigger)
+
+        return () => {
+          animation.kill()
+          scrollTrigger.kill()
+          window.removeEventListener('resize', refreshScrollTrigger)
+          window.removeEventListener('orientationchange', handleOrientationChange)
+        }
       })
-
-      const scrollTrigger = ScrollTrigger.create({
-        trigger,
-        start,
-        end: () => `+=${Math.abs(getScrollAmount()) + window.innerWidth * 0.1}`,
-        pin: true,
-        pinSpacing: true,
-        animation,
-        scrub,
-        invalidateOnRefresh: true,
-        markers,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          onUpdateRef.current?.(self.progress, self)
-        },
-        onRefresh: () => {
-          animation.vars.x = getScrollAmount()
-        },
-      })
-
-      onUpdateRef.current?.(scrollTrigger.progress, scrollTrigger)
-      onAnimationCreatedRef.current?.(animation, scrollTrigger)
-
-      const handleResize = () => {
-        ScrollTrigger.refresh()
-      }
-
-      window.addEventListener('resize', handleResize)
 
       return () => {
-        animation.kill()
-        scrollTrigger.kill()
-        window.removeEventListener('resize', handleResize)
+        mm.revert()
       }
     },
     {
-      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll],
+      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth],
       scope: triggerRef,
     },
   )
