@@ -1870,17 +1870,18 @@
       "highlight2": "Momentum."
     },
     "servicesLine": "Software. Websites. Marketing. AI. Design. Strategy. Growth.",
-    "description": "Most businesses don't need another vendor. They need one coordinated team that understands technology, marketing, and growth — working together from day one. WOW Superagency brings custom development, digital marketing, AI automation, branding, and business strategy under one ecosystem — so you move faster, stay aligned, and build something your customers actually notice.",
+    "description": "Everything your business needs to grow under one coordinated ecosystem.",
     "ctaPrimary": "Book Your Free Consultation",
     "ctaSecondary": "Explore the Ecosystem"
   },
   "ecosystem": {
     "heading": {
-      "part1": "Because growth works best when everything is",
-      "highlight": "connected,",
-      "part2": "not scattered"
+      "part1": "Because the best teams are",
+      "highlight": "organized, ",
+      "part2": "not disconnected"
     },
-    "description": "When your website, marketing, software, and brand are built by separate teams with separate priorities, progress slows and results get diluted. WOW Superagency works differently — our divisions operate as specialists within one integrated ecosystem, sharing strategy, brand standards, and project visibility so every initiative supports the next.",
+     
+    "description": "Every division has a dedicated purpose. Together they form one connected ecosystem built to help businesses grow faster, smarter, and with confidence.",
     "nodes": {
       "websites": { "prefix": "WOW", "label": "Websites" },
       "host": { "prefix": "WOW", "label": "Host" },
@@ -1903,8 +1904,8 @@
   },
   "superAgencyClient": {
     "heading": {
-      "part1": "Trusted by Businesses",
-      "highlight": "Built for Growth"
+      "part1": "Trusted By Businesses ",
+      "highlight": "Focused On Growth"
     },
     "aria": {
       "previousTestimonial": "Previous testimonial",

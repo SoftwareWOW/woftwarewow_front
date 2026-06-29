@@ -111,9 +111,9 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
             <span className="font-['Ogg_TRIAL'] italic text-[#8b7cff] dark:text-[#b794f4]">
               {superAgencyClient.heading.highlight}
             </span>
-            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] rounded-full animate-pulse"></span>
           </h2>
         </div>
+
         {/* Carousel Container */}
         <div
           className="relative w-full mx-auto"
@@ -155,83 +155,33 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
                 </CarouselItem>
               ))}
             </CarouselContent>
+
+            {/* Navigation - Moved INSIDE Carousel component with proper positioning */}
+            <div className="flex justify-center gap-3 mt-6 relative z-20">
+              {/* Dots */}
+              <div className="flex items-center gap-2">
+                {superAgencyClient.reviews.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (!api) return
+                      setIsAutoPlay(false)
+                      api.scrollTo(index)
+                      setTimeout(() => setIsAutoPlay(true), 5000)
+                    }}
+                    className={`transition-all duration-500 rounded-full ${
+                      index === currentIndex
+                        ? 'w-10 h-2.5 bg-gradient-to-r from-[#8b7cff] to-[#b794f4] shadow-lg shadow-[#8b7cff]/30 dark:shadow-[#8b7cff]/50'
+                        : 'w-2.5 h-2.5 bg-[#d0d0d0] dark:bg-white/20 hover:bg-[#8b7cff] dark:hover:bg-white/40'
+                    }`}
+                    aria-label={superAgencyClient.aria.goToTestimonial.replace('{index}', String(index + 1))}
+                  />
+                ))}
+              </div>
+            </div>
           </Carousel>
-
-          {/* Navigation Buttons */}
-          <div className="flex justify-center gap-3 mt-8">
-            <button
-              onClick={() => handleManualNavigation('prev')}
-              className="bg-[#f0f0f0] hover:bg-[#e0e0e0] dark:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-[#d0d0d0] dark:border-white/10 hover:border-[#8b7cff] dark:hover:border-white/30"
-              aria-label={superAgencyClient.aria.previousTestimonial}
-            >
-              <ChevronLeft className="text-[#333333] dark:text-white w-5 h-5 transition-colors duration-300" />
-            </button>
-
-            {/* Dots */}
-            <div className="flex items-center gap-2 mx-4">
-              {superAgencyClient.reviews.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    if (!api) return
-                    setIsAutoPlay(false)
-                    api.scrollTo(index)
-                    setTimeout(() => setIsAutoPlay(true), 5000)
-                  }}
-                  className={`transition-all duration-500 rounded-full ${
-                    index === currentIndex
-                      ? 'w-10 h-2.5 bg-gradient-to-r from-[#8b7cff] to-[#b794f4] shadow-lg shadow-[#8b7cff]/30 dark:shadow-[#8b7cff]/50'
-                      : 'w-2.5 h-2.5 bg-[#d0d0d0] dark:bg-white/20 hover:bg-[#8b7cff] dark:hover:bg-white/40'
-                  }`}
-                  aria-label={superAgencyClient.aria.goToTestimonial.replace('{index}', String(index + 1))}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={() => handleManualNavigation('next')}
-              className="bg-[#f0f0f0] hover:bg-[#e0e0e0] dark:bg-white/10 dark:hover:bg-white/20 transition-all duration-300 p-3 rounded-full border border-[#d0d0d0] dark:border-white/10 hover:border-[#8b7cff] dark:hover:border-white/30"
-              aria-label={superAgencyClient.aria.nextTestimonial}
-            >
-              <ChevronRight className="text-[#333333] dark:text-white w-5 h-5 transition-colors duration-300" />
-            </button>
-          </div>
-
-          {/* Slide Counter */}
-          <div className="text-center mt-4">
-            <span className="text-sm text-[#999999] dark:text-white/40 font-mono tracking-wider transition-colors duration-300">
-              {String(currentIndex + 1).padStart(2, '0')} / {String(superAgencyClient.reviews.length).padStart(2, '0')}
-            </span>
-          </div>
-
-          {/* Progress Bar - Fixed for light mode */}
-          <div className="mt-4 max-w-xs mx-auto">
-            <div className="relative h-1 bg-[#e5e5e5] dark:bg-white/10 rounded-full overflow-hidden">
-              <div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] rounded-full transition-all duration-1000 ease-linear"
-                style={{
-                  width: `${((currentIndex + 1) / superAgencyClient.reviews.length) * 100}%`,
-                }}
-              />
-            </div>
-          </div>
         </div>
       </RevealWrapper>
-
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 0.6;
-          }
-        }
-
-        .animate-pulse {
-          animation: pulse 2s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   )
 }

@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import type { Dictionary } from '@/i18n/types'
 import WowButton from '../WowButton'
+import Link from 'next/link'
 
 type WowHeroProps = {
   hero: Dictionary['hero']
@@ -49,22 +50,34 @@ export default function WowHero({ hero }: WowHeroProps) {
             </RevealWrapper>
           </div>
         </div>
-
-        <RevealWrapper delay={0.3} className="relative z-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
-          <WowButton
-            href="/contact"
-            className="w-full px-8 py-8 text-sm font-light uppercase tracking-[0.15em] shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30 dark:shadow-primary/30 dark:hover:shadow-primary/40 sm:w-auto"
-          >
-            {hero.ctaPrimary}
-          </WowButton>
-          <WowButton
-            href="/services"
-            variant="dark"
-            className="w-full px-8 py-8 text-sm font-light uppercase tracking-[0.15em] border-2 border-border bg-background/50 text-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-lg dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:w-auto"
-          >
-            {hero.ctaSecondary}
-          </WowButton>
+<div className="relative z-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+   <RevealWrapper delay={0.3} as="ul" className="flex justify-center">
+          <li className="mx-auto block max-md:w-full md:ml-auto md:inline-block md:w-auto">
+            <Link href="/design-agency" className="rv-button rv-button-secondary block text-center md:inline-block">
+              <div className="rv-button-top">
+                <span>  {hero.ctaPrimary}</span>
+              </div>
+              <div className="rv-button-bottom">
+                <span>  {hero.ctaPrimary}</span>
+              </div>
+            </Link>
+          </li>
+          
         </RevealWrapper>
+           <RevealWrapper delay={0.3} as="ul" className="flex justify-center">
+          <li className="mx-auto block max-md:w-full md:ml-auto md:inline-block md:w-auto">
+            <Link href="/design-agency" className="rv-button rv-button-secondary block text-center md:inline-block">
+              <div className="rv-button-top">
+                <span>{hero.ctaSecondary}</span>
+              </div>
+              <div className="rv-button-bottom">
+                <span>{hero.ctaSecondary}</span>
+              </div>
+            </Link>
+          </li>
+          
+        </RevealWrapper>
+</div>
       </div>
     </section>
   )
