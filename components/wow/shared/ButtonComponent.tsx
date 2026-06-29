@@ -58,11 +58,11 @@ export default function ButtonComponent({
 
   const content = (
     <>
-      <div className={topClass}>
-        <span>{children}</span>
+      <div className={`${topClass} whitespace-nowrap`}>
+        <span className="whitespace-nowrap">{children}</span>
       </div>
-      <div className={bottomClass}>
-        <span>{children}</span>
+      <div className={`${bottomClass} whitespace-nowrap`}>
+        <span className="whitespace-nowrap">{children}</span>
       </div>
     </>
   )
