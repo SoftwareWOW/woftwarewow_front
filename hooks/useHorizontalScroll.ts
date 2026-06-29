@@ -45,7 +45,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     markers = false,
     scrub = 1,
     extraScroll = 370,
-    minWidth = 768,
+    minWidth = 600,
     maxPinWidth,
   } = options
 
