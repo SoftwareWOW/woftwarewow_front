@@ -180,7 +180,7 @@ const DevisionOverview = () => {
     <section className="relative overflow-hidden px-3 py-3 transition-colors duration-300 md:px-4 md:py-4">
       <div
         ref={triggerRef}
-        className="service-section relative z-10 mx-auto flex h-[580px] w-full max-w-[1320px] flex-col overflow-hidden sm:h-[620px] md:h-[660px] lg:h-[726px]"
+        className="service-section relative z-10 mx-auto flex h-[580px] w-full max-w-[1320px] flex-col overflow-hidden sm:h-[620px] md:h-[660px] lg:h-[726px] rounded-radius-sm"
         aria-labelledby="divisions-heading"
         onMouseLeave={() => setHoveredId(null)}
       >
@@ -215,7 +215,8 @@ const DevisionOverview = () => {
           }`}
         />
 
-        <div className="relative z-10 flex-1 pt-8 md:pt-10 lg:pt-12">
+        {/* Header Section - Fixed mobile padding */}
+        <div className="relative z-10 px-5 pt-20 sm:px-40 md:pt-25 md:pl-[12%] md:pr-10 lg:pt-30 lg:pl-[15%]">
           <div className="flex items-start justify-between gap-6">
             <div className="max-w-3xl">
               <span
@@ -246,7 +247,7 @@ const DevisionOverview = () => {
 
         <div
           ref={contentRef}
-          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap gap-4 overflow-visible pb-6 sm:gap-5 sm:pb-8 md:gap-6 md:pl-[12%] md:pr-10 lg:pl-[15%] lg:pb-10"
+          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap gap-4 overflow-visible px-5 pb-6 sm:gap-5 sm:px-6 sm:pb-8 md:gap-6 md:pl-[12%] md:pr-10 lg:pl-[15%] lg:pb-10"
           aria-label="WOW Superagency divisions"
         >
           {divisions.map((item) => {
@@ -270,8 +271,8 @@ const DevisionOverview = () => {
                   data-card-id={item.id}
                   className={`relative flex min-h-[240px] flex-col rounded-radius-sm p-6 shadow-md transition-all duration-500 sm:min-h-[260px] md:min-h-[280px] md:p-7 lg:min-h-[300px] lg:p-8 ${
                     isActive
-                      ? 'bg-white/95 text-[#1a1a1a] shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-[#1a1a1a]/95 dark:text-[#F2F2F2]'
-                      : 'bg-white/60 text-[#1a1a1a] shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-[#1a1a1a]/60 dark:text-[#999999]'
+                      ? 'bg-white/100 text-[#1a1a1a] shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-[#1a1a1a]/100 dark:text-[#F2F2F2]'
+                      : 'bg-white/70 text-[#1a1a1a] shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-[#1a1a1a]/70 dark:text-[#999999]'
                   }`}
                 >
                   <h3 className="pr-4 text-2xl font-bold leading-[1.15] tracking-[-0.02em] md:text-[1.65rem]">
@@ -289,7 +290,7 @@ const DevisionOverview = () => {
                   </p>
 
                   <div
-                    className={`absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm text-white transition-all duration-300 ${
+                    className={`absolute bottom-10 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm text-white transition-all duration-300 ${
                       isActive
                         ? 'scale-110 bg-[#8b7cff] shadow-lg shadow-[#8b7cff]/30'
                         : 'scale-100 bg-[#8b7cff]/80'
