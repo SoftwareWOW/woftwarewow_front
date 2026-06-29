@@ -227,7 +227,7 @@ export default function WowSuperagencyDivisions() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <div
-              className="relative rounded-radius-md border px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 lg:px-8 lg:py-3 xl:px-10 xl:py-4 2xl:px-12 2xl:py-5 backdrop-blur-xl md:rounded-radius-md"
+              className="relative rounded-radius-sm border px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 lg:px-8 lg:py-3 xl:px-10 xl:py-4 2xl:px-12 2xl:py-5 backdrop-blur-xl md:rounded-radius-sm"
               style={{
                 borderColor: 'var(--wow-card-border)',
                 backgroundColor: 'var(--wow-card-bg)',
@@ -236,7 +236,7 @@ export default function WowSuperagencyDivisions() {
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-radius-md"
+                className="pointer-events-none absolute inset-0 rounded-radius-sm"
                 style={{
                   background:
                     'linear-gradient(135deg, var(--wow-card-overlay), var(--wow-card-overlay-accent))',

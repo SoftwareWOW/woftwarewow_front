@@ -118,7 +118,7 @@ const WowProjects = () => {
             <RevealWrapper className="mt-6 flex justify-center md:mt-8">
               <Link
                 href="/case-studies"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-lg bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
               >
                 <span className="relative z-10 flex items-center gap-2 font-medium uppercase tracking-[0.05em]">
                   View All Case Studies
@@ -133,10 +133,10 @@ const WowProjects = () => {
           {visibleProjects.map((project) => (
             <RevealWrapper
               as="article"
-              className="group relative overflow-hidden rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#8b7cff]/30 hover:shadow-2xl hover:shadow-[#8b7cff]/10 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/20"
+              className="group relative overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#8b7cff]/30 hover:shadow-2xl hover:shadow-[#8b7cff]/10 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/20"
               key={project.id}
             >
-              <Link href={project.href} className="block overflow-hidden rounded-t-radius-md">
+              <Link href={project.href} className="block overflow-hidden rounded-t-radius-sm">
                 <Image
                   width={1330}
                   height={445}
@@ -184,7 +184,7 @@ const WowProjects = () => {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-lg border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/80 px-8 py-3 text-[#1a1a1a] transition-all duration-300 hover:scale-105 hover:border-[#8b7cff]/50 hover:shadow-lg hover:shadow-[#8b7cff]/10 dark:border-white/10 dark:bg-dark/50 dark:text-[#F2F2F2] dark:hover:border-[#8b7cff]/30"
               aria-expanded={showAll}
             >
               <span className="relative z-10 font-medium">

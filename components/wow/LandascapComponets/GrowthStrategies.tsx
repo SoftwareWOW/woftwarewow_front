@@ -93,7 +93,7 @@ const GrowthStrategies = () => {
           {articles.map((article) => (
             <RevealWrapper
               key={article.id}
-              className="group flex flex-col gap-6 py-8 first:pt-0 last:pb-0 transition-all duration-300 hover:bg-white/30 hover:px-4 hover:py-8 hover:-mx-4 hover:rounded-radius-md dark:hover:bg-dark/30 md:flex-row md:items-center md:gap-10 lg:gap-14"
+              className="group flex flex-col gap-6 py-8 first:pt-0 last:pb-0 transition-all duration-300 hover:bg-white/30 hover:px-4 hover:py-8 hover:-mx-4 hover:rounded-radius-sm dark:hover:bg-dark/30 md:flex-row md:items-center md:gap-10 lg:gap-14"
             >
               <Link
                 href={article.href}

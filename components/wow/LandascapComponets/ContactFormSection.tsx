@@ -61,7 +61,7 @@ const ContactFormSection = () => {
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mx-auto max-w-[800px]">
           {/* Card Container */}
-          <div className="rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-10 transition-all duration-300 hover:border-[#8b7cff]/20 hover:shadow-2xl hover:shadow-[#8b7cff]/5 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/10 md:px-10 md:py-14 lg:px-14 lg:py-16">
+          <div className="rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-10 transition-all duration-300 hover:border-[#8b7cff]/20 hover:shadow-2xl hover:shadow-[#8b7cff]/5 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/10 md:px-10 md:py-14 lg:px-14 lg:py-16">
             {/* Decorative gradient line at top */}
             <div className="absolute left-1/2 top-0 h-1 w-1/3 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] opacity-50" />
 
@@ -242,7 +242,7 @@ const ContactFormSection = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-radius-lg bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
+                className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-radius-sm bg-gradient-to-r from-[#8b7cff] to-[#b794f4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8b7cff]/30"
               >
                 <span className="relative z-10 flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em]">
                   Request Your Free Consultation

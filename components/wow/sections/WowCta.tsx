@@ -6,7 +6,7 @@ import WowButton from '../WowButton'
 export default function WowCta() {
   return (
     <section className="px-4 py-20 sm:px-8">
-      <RevealWrapper className="mx-auto max-w-[1280px] rounded-radius-md bg-backgroundBody px-6 py-16 text-center dark:bg-dark-200 md:px-12">
+      <RevealWrapper className="mx-auto max-w-[1280px] rounded-radius-sm bg-backgroundBody px-6 py-16 text-center dark:bg-dark-200 md:px-12">
         <TextAppearAnimation>
           <h2 className="text-appear text-[clamp(2rem,5vw,4.5rem)] font-light leading-[1.05]">
             Let&apos;s Create Something
