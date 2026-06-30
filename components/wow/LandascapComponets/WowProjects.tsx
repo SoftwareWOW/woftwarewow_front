@@ -131,7 +131,7 @@ const WowProjects = () => {
           {visibleProjects.map((project) => (
             <RevealWrapper
               as="article"
-              className="group relative overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-[#8b7cff]/30 hover:shadow-2xl hover:shadow-[#8b7cff]/10 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/20"
+              className="group relative overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500  dark:border-white/5 dark:bg-dark/50"
               key={project.id}
             >
               <Link href={project.href} className="block overflow-hidden rounded-t-radius-sm">
@@ -158,7 +158,7 @@ const WowProjects = () => {
                 </p>
               </div>
 
-              <figure className="absolute right-10 top-10 h-[55px] w-[55px] cursor-pointer overflow-hidden bg-primary max-md:hidden md:block">
+              <figure className="absolute right-10 top-10 h-[55px] w-[55px] rounded-radius-sm cursor-pointer overflow-hidden bg-primary max-md:hidden md:block">
                 <Image
                   src={topArrow}
                   alt=""

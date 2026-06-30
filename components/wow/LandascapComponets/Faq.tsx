@@ -2,6 +2,7 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
@@ -10,39 +11,39 @@ const INITIAL_VISIBLE_COUNT = 6
 const faqData = [
   {
     id: 1,
-    question: 'What does it cost to work with WOW Superagency?',
+    question: 'What makes WOW different from a traditional agency?',
     answer:
-      'Every engagement is scoped to your goals. After a free consultation, you receive a transparent proposal with clear deliverables, timelines, and investment — whether you need one division or a full ecosystem rollout.',
+      'Traditional agencies usually specialize in one area. WOW operates as a connected ecosystem of divisions — each leading in its field, but working from one shared strategy to keep your brand, technology, and growth aligned.',
   },
   {
     id: 2,
-    question: 'Can I start with one service and expand later?',
+    question: 'Which division should I start with?',
     answer:
-      'Absolutely. Many clients begin with a website, marketing campaign, or software project and expand into additional divisions as their needs grow. Our ecosystem model makes scaling seamless.',
+      'It depends on your biggest priority right now — visibility, technology, design, or growth. After a free consultation, we recommend the smartest starting point and how other divisions can support you over time.',
   },
   {
     id: 3,
-    question: 'How long does a typical project take?',
+    question: 'Do you work with small businesses?',
     answer:
-      'Timelines depend on scope. A marketing campaign may launch in weeks; custom software can take several months. We set realistic milestones upfront and keep you informed at every stage.',
+      'Yes. We partner with ambitious small and mid-sized businesses at every stage — from launching a first website to scaling with AI, automation, and multi-channel growth programs.',
   },
   {
     id: 4,
-    question: 'Do you work with startups and established businesses?',
+    question: 'Can WOW handle multiple services together?',
     answer:
-      'Yes. We partner with ambitious small and mid-sized businesses at every stage — from launching a first website to scaling with AI, automation, and multi-channel growth.',
+      'Absolutely. WOW Superagency is your single point of contact. We coordinate the right specialists behind the scenes — whether you need a new website, marketing campaign, custom software, or AI automation.',
   },
   {
     id: 5,
-    question: 'What makes your team different from freelancers?',
+    question: 'How do we start?',
     answer:
-      'You get a full agency ecosystem—not a single specialist. Strategists, designers, developers, and marketers collaborate under one roof with shared standards, project management, and accountability.',
+      'Book a free consultation, tell us what you are trying to build or improve, and we will recommend the best next step.',
   },
   {
     id: 6,
-    question: 'How do you handle communication during a project?',
+    question: 'What does it cost to work with WOW Superagency?',
     answer:
-      'You receive a dedicated point of contact, regular progress updates, and access to WOW Hub for collaboration. Clear communication is part of how we deliver.',
+      'Every engagement is scoped to your goals. After a free consultation, you receive a transparent proposal with clear deliverables, timelines, and investment — whether you need one division or a full ecosystem rollout.',
   },
   {
     id: 7,
@@ -66,7 +67,7 @@ const faqData = [
     id: 10,
     question: 'How do I schedule a consultation?',
     answer:
-      'Use the form below or book directly from our contact page. We will learn about your business, identify opportunities, and outline how WOW can help you grow.',
+      'Use our contact form or book directly from our contact page. We will learn about your business, identify opportunities, and outline how WOW can help you grow.',
   },
 ]
 
@@ -99,24 +100,42 @@ const Faq = () => {
   }
 
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container mx-auto max-w-[1320px] px-3 md:px-4">
-        <div className="mb-10 flex flex-col items-start justify-between gap-x-10 gap-y-4 md:mb-20 md:flex-row md:items-end lg:justify-between">
-          <TextAppearAnimation>
-            <h2 className="text-appear text-[#000000] dark:text-[#F2F2F2]">
-              <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
-                People
-              </span>{' '}
-              Asked Us
-            </h2>
-          </TextAppearAnimation>
+    <section className="relative overflow-hidden px-3 py-14 md:px-4 md:py-16 lg:py-[88px] xl:py-[100px]">
+      <div className="relative z-10 mx-auto max-w-[1320px]">
+        <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <RevealWrapper>
+              <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
+                Expertise
+              </span>
+            </RevealWrapper>
 
-          <div className="self-start md:self-end">
             <TextAppearAnimation>
-              <p className="text-appear max-w-96 text-[#555555] dark:text-[#999999] lg:max-w-[470px]">
-                Straight answers to the questions business owners ask most before choosing a long-term digital partner.
+              <h2 className="text-appear text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+                <span className="block font-instrument italic font-normal tracking-[-0.06em]">People</span> <br/>
+                <span className="block font-normal">Asked Us</span>
+              </h2>
+            </TextAppearAnimation>
+          </div>
+
+          <div className="max-w-[420px] lg:text-right">
+            <TextAppearAnimation>
+              <p className="text-appear text-base leading-relaxed text-[#808080] transition-colors duration-300 md:text-lg">
+                Answers to common questions about our services, process, pricing, and how we help businesses grow.
               </p>
             </TextAppearAnimation>
+                <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
+              <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
+                <Link href="/rfq" className="rv-button rv-button-white block md:inline-block">
+                  <div className="rv-button-top">
+                    <span> View All FAQ</span>
+                  </div>
+                  <div className="rv-button-bottom">
+                    <span> View All FAQ</span>
+                  </div>
+                </Link>
+              </li>
+            </RevealWrapper>
           </div>
         </div>
 
@@ -126,7 +145,7 @@ const Faq = () => {
               {faqArray.map((faq) => (
                 <div className="reveal-me" key={faq.id}>
                   <div
-                    className={`accordion-itemV4 faq-body-transition relative w-full border bg-backgroundBody px-6 pb-8 pt-6 duration-300 dark:bg-dark md:px-10 md:pb-[60px] md:pt-10 lg:max-w-[370px] ${
+                    className={`accordion-itemV4 faq-body-transition relative w-full space-y-6 border dark:bg-dark px-6 pb-8 pt-6 duration-300 ${
                       activeAccordion === faq.id
                         ? 'open active border-black dark:border-white/10'
                         : 'border-black/10 dark:border-white/10'
@@ -140,7 +159,7 @@ const Faq = () => {
                       <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
                         {faq.question}
                       </h3>
-                      <div
+        <div
                         className={`accordion-header-iconV4 transition-transform duration-[400ms] dark:border-dark ${
                           activeAccordion === faq.id ? 'open active rotate-180' : ''
                         }`}
@@ -152,7 +171,7 @@ const Faq = () => {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <div className={`accordion-bodyV4 transition-transform duration-[400] ease-in-out`}>
+                        <div className="accordion-bodyV4 transition-transform duration-[400] ease-in-out">
                           <p className="font-[375]">{faq.answer}</p>
                         </div>
                       </div>
@@ -164,7 +183,7 @@ const Faq = () => {
           ))}
         </div>
 
-              {faqData.length > INITIAL_VISIBLE_COUNT && (
+        {faqData.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
             <ButtonComponentList>
               <ButtonComponent
@@ -172,7 +191,7 @@ const Faq = () => {
                 variant="secondary"
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
-              size="sm"
+                size="sm"
               >
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>
