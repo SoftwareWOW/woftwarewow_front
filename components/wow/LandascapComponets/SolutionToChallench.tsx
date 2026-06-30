@@ -5,6 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import { useState } from 'react'
+import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const INITIAL_VISIBLE_COUNT = 3
@@ -91,7 +92,7 @@ const servicesData = [
 ]
 
 const SolutionToChallenges = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(1)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
   const visibleServices = showAll ? servicesData : servicesData.slice(0, INITIAL_VISIBLE_COUNT)
@@ -108,16 +109,37 @@ const SolutionToChallenges = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
-      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
-        <Image src={gradientBg} alt="" aria-hidden />
+    <section className="relative overflow-hidden bg-background pb-14 pt-14 transition-colors duration-300 dark:bg-background md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      {/* Background decorative elements - matching FAQ */}
+      <div className="absolute inset-0 opacity-0 dark:opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1320px] pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
+
+      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
+        <Image src={gradientBg} alt="gradient-bg" />
+      </div>
+
+      <div className="relative z-10 container mx-auto max-w-[1320px] px-3 md:px-4">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
             <TextAppearAnimation>
-              <h2 className="text-appear max-lg:leading-[1.33] text-[#1a1a1a] dark:text-white">
+              <h2 className="text-appear max-lg:leading-[1.33] text-[#1a1a1a] transition-colors duration-300 dark:text-white">
                 Built To Solve Modern Business{' '}
                 <span className="font-instrument italic lg:text-[65px]">Challenges</span>
               </h2>
@@ -125,16 +147,21 @@ const SolutionToChallenges = () => {
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
             <TextAppearAnimation>
-              <p className="text-appear max-w-lg text-[#555555] dark:text-[#ffffff99] md:justify-self-end md:text-right">
+              <p className="text-appear max-w-lg text-[#555555] transition-colors duration-300 dark:text-[#999999] md:justify-self-end md:text-right">
                 In a world where change is the only constant, we ensure your business stays ahead of the curve —
                 with integrated technology, marketing, and growth systems built to deliver real results.
               </p>
             </TextAppearAnimation>
             <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
               <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <ButtonComponent href="/services" variant="white">
-                  Explore Our Solutions
-                </ButtonComponent>
+                <Link href="/services" className="rv-button rv-button-white block md:inline-block">
+                  <div className="rv-button-top">
+                    <span>Explore Our Solutions</span>
+                  </div>
+                  <div className="rv-button-bottom">
+                    <span>Explore Our Solutions</span>
+                  </div>
+                </Link>
               </li>
             </RevealWrapper>
           </div>
@@ -147,14 +174,15 @@ const SolutionToChallenges = () => {
             return (
               <div
                 key={service.id}
-                className={`accordion-item overflow-hidden rounded-radius-sm duration-300 ${
+                className={`accordion-item relative w-full border bg-backgroundBody px-5 py-0 duration-300 dark:bg-dark ${
                   isActive
-                    ? ' bg-white dark:bg-secondary'
-                    : ' bg-white  dark:bg-secondary'
+                    ? 'open active border-black dark:border-white/10'
+                    : 'border-black/10 dark:border-white/10'
                 }`}
+                data-active={isActive ? true : false}
               >
                 <div
-                  className={`accordion-header group relative flex cursor-pointer justify-between px-5 py-[35px] md:px-10 ${
+                  className={`accordion-header group relative flex cursor-pointer justify-between py-[35px] ${
                     isActive ? 'active' : ''
                   }`}
                   onClick={() => toggleAccordion(index)}
@@ -168,9 +196,9 @@ const SolutionToChallenges = () => {
                   }}
                   aria-expanded={isActive}
                 >
-                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-[#1a1a1a] dark:text-white md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-5xl">
+                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-[#1a1a1a] transition-colors duration-300 dark:text-white md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-5xl">
                     <span className="text-inherit">{service.title}</span>
-                    <span className="mt-2 pr-[2px] text-base text-[#666666] dark:text-[#ffffff99] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                    <span className="mt-2 pr-[2px] text-base text-[#555555] transition-colors duration-300 dark:text-[#999999] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                       {service.subtitle}
                     </span>
                   </h3>
@@ -179,22 +207,26 @@ const SolutionToChallenges = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 32 32"
                       fill="none"
-                      className="active-arrow absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 duration-300 ease-faq-body-transition group-hover:rotate-90 md:size-8"
+                      className={`active-arrow absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 duration-300 ease-faq-body-transition group-hover:rotate-90 md:size-8 ${
+                        isActive ? 'open active rotate-90' : ''
+                      }`}
                       aria-hidden
                     >
                       <path
                         d="M5 16H27"
-                        stroke="black"
+                        stroke="currentColor"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        className="text-[#1a1a1a] dark:text-white"
                       />
                       <path
                         d="M18 7L27 16L18 25"
-                        stroke="black"
+                        stroke="currentColor"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        className="text-[#1a1a1a] dark:text-white"
                       />
                     </svg>
                   </div>
@@ -205,12 +237,12 @@ const SolutionToChallenges = () => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="accordion-body ml-2.5 flex flex-col justify-start gap-x-10 px-10 pb-10 duration-300 sm:pt-6 md:ml-6 md:flex-row lg:gap-x-[73px]">
+                    <div className="accordion-body flex flex-col justify-start gap-x-10 pb-10 duration-300 md:flex-row lg:gap-x-[73px]">
                       <ul className="[&>*:not(:last-child)]:mb-1">
                         {service.items.slice(0, Math.ceil(service.items.length / 2)).map((item) => (
                           <li
                             key={item}
-                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] dark:text-backgroundBody/70"
+                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] transition-colors duration-300 dark:text-[#999999]"
                           >
                             {item}
                           </li>
@@ -220,7 +252,7 @@ const SolutionToChallenges = () => {
                         {service.items.slice(Math.ceil(service.items.length / 2)).map((item) => (
                           <li
                             key={item}
-                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] dark:text-backgroundBody/70"
+                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] transition-colors duration-300 dark:text-[#999999]"
                           >
                             {item}
                           </li>

@@ -3,7 +3,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { useMemo, useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const INITIAL_VISIBLE_COUNT = 6
@@ -100,32 +99,11 @@ const Faq = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
-      {/* Background decorative elements - matching WowSuperAgencyClient */}
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      <div className="container mx-auto max-w-[1320px] px-3 md:px-4">
         <div className="mb-10 flex flex-col items-start justify-between gap-x-10 gap-y-4 md:mb-20 md:flex-row md:items-end lg:justify-between">
           <TextAppearAnimation>
-            <h2 className="text-appear flex-1 text-[#000000] dark:text-[#F2F2F2]">
+            <h2 className="text-appear text-[#000000] dark:text-[#F2F2F2]">
               <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
                 People
               </span>{' '}
@@ -142,82 +120,51 @@ const Faq = () => {
           </div>
         </div>
 
-        <div className="mx-auto grid w-full grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid w-full grid-cols-1 items-start gap-7 md:grid-cols-2 lg:grid-cols-3">
           {faqColumns.map((faqArray, index) => (
-            <RevealWrapper key={index} className="space-y-6">
+            <RevealWrapper key={index} className="space-y-[30px]">
               {faqArray.map((faq) => (
-                <div
-                  key={faq.id}
-                  className={`group relative rounded-radius-sm border transition-all duration-300 ${
-                    activeAccordion === faq.id
-                      ? 'border-[#8b7cff]/50 bg-white/80 backdrop-blur-sm shadow-lg shadow-[#8b7cff]/10 dark:bg-dark/80 dark:shadow-[#8b7cff]/20'
-                      : 'border-[#e5e5e5] bg-white/50 backdrop-blur-sm hover:border-[#8b7cff]/20 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20'
-                  }`}
-                >
+                <div className="reveal-me" key={faq.id}>
                   <div
-                    className="flex cursor-pointer items-start justify-between gap-4 p-6 transition-colors duration-300 md:p-8"
-                    onClick={() => toggleAccordion(faq.id)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        toggleAccordion(faq.id)
-                      }
-                    }}
-                    aria-expanded={activeAccordion === faq.id}
-                  >
-                    <h3
-                      className={`text-lg font-medium leading-[1.3] transition-colors duration-300 md:text-xl ${
-                        activeAccordion === faq.id
-                          ? 'text-[#1a1a1a] dark:text-[#F2F2F2]'
-                          : 'text-[#333333] dark:text-[#CCCCCC]'
-                      }`}
-                    >
-                      {faq.question}
-                    </h3>
-                    <div
-                      className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                        activeAccordion === faq.id
-                          ? 'bg-gradient-to-r from-[#8b7cff] to-[#b794f4] text-white shadow-lg shadow-[#8b7cff]/30'
-                          : 'bg-[#f0f0f0] text-[#8b7cff] dark:bg-white/5 dark:text-[#b794f4]'
-                      }`}
-                    >
-                      {activeAccordion === faq.id ? (
-                        <ChevronUp className="h-5 w-5" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5" />
-                      )}
-                    </div>
-                  </div>
-
-                  <div
-                    className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
-                      activeAccordion === faq.id ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    className={`accordion-itemV4 faq-body-transition relative w-full border bg-backgroundBody px-6 pb-8 pt-6 duration-300 dark:bg-dark md:px-10 md:pb-[60px] md:pt-10 lg:max-w-[370px] ${
+                      activeAccordion === faq.id
+                        ? 'open active border-black dark:border-white/10'
+                        : 'border-black/10 dark:border-white/10'
                     }`}
+                    data-active={activeAccordion === faq.id ? true : false}
                   >
-                    <div className="overflow-hidden">
-                      <div className="px-6 pb-6 md:px-8 md:pb-8">
-                        <p className="text-[15px] leading-[1.7] text-[#555555] dark:text-[#999999] md:text-[16px]">
-                          {faq.answer}
-                        </p>
+                    <div
+                      className="accordion-headerV4 flex cursor-pointer items-center justify-between"
+                      onClick={() => toggleAccordion(faq.id)}
+                    >
+                      <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
+                        {faq.question}
+                      </h3>
+                      <div
+                        className={`accordion-header-iconV4 transition-transform duration-[400ms] dark:border-dark ${
+                          activeAccordion === faq.id ? 'open active rotate-180' : ''
+                        }`}
+                      />
+                    </div>
+                    <div
+                      className={`grid transition-all duration-[400ms] ease-in-out ${
+                        activeAccordion === faq.id ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className={`accordion-bodyV4 transition-transform duration-[400] ease-in-out`}>
+                          <p className="font-[375]">{faq.answer}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  {/* Decorative bottom line */}
-                  <div
-                    className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] transition-all duration-500 ${
-                      activeAccordion === faq.id ? 'w-2/3' : 'w-0'
-                    }`}
-                  />
                 </div>
               ))}
             </RevealWrapper>
           ))}
         </div>
 
-        {faqData.length > INITIAL_VISIBLE_COUNT && (
+              {faqData.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
             <ButtonComponentList>
               <ButtonComponent
