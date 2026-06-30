@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import { useContactDialogOptional } from './ContactDialogProvider'
 
 type ButtonComponentVariant = 'primary' | 'secondary' | 'white' | 'primary2'
 type ButtonComponentSize = 'default' | 'sm' | 'sm-v2'
@@ -30,6 +33,8 @@ const sizeClasses: Record<ButtonComponentSize, string> = {
   'sm-v2': 'rv-button-sm-v2',
 }
 
+const isContactHref = (href?: string) => href === '/contact' || href?.endsWith('/contact')
+
 export default function ButtonComponent({
   href,
   onClick,
@@ -42,6 +47,8 @@ export default function ButtonComponent({
   ariaExpanded,
   children,
 }: ButtonComponentProps) {
+  const contactDialog = useContactDialogOptional()
+
   const classes = [
     'rv-button',
     variantClasses[variant],
@@ -66,6 +73,19 @@ export default function ButtonComponent({
       </div>
     </>
   )
+
+  if (href && isContactHref(href) && contactDialog) {
+    return (
+      <button
+        type="button"
+        onClick={() => contactDialog.open()}
+        className={classes}
+        aria-label={ariaLabel}
+      >
+        {content}
+      </button>
+    )
+  }
 
   if (href) {
     return (

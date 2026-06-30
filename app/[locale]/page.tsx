@@ -13,7 +13,6 @@ import WowProjects from '@/components/wow/LandascapComponets/WowProjects'
 import HumanTuch from '@/components/wow/LandascapComponets/HumanTuch'
 import Faq from '@/components/wow/LandascapComponets/Faq'
 import GrowthStrategies from '@/components/wow/LandascapComponets/GrowthStrategies'
-import ContactFormSection from '@/components/wow/LandascapComponets/ContactFormSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
 type Props = {
@@ -48,7 +47,6 @@ const Home = async ({ params }: Props) => {
       <HumanTuch/>
       <Faq />
       <GrowthStrategies />
-      <ContactFormSection />
       <WowGrowthCta />
     </WowLayout>
   )
