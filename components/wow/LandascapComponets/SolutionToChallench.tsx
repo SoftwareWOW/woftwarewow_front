@@ -4,80 +4,97 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
-import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
-const INITIAL_VISIBLE_COUNT = 5
+const INITIAL_VISIBLE_COUNT = 3
 
-const faqData = [
+const servicesData = [
   {
     id: 1,
-    question: 'What is WOW Superagency?',
-    answer:
-      'WOW Superagency is a full-service growth partner for small and mid-sized businesses. We bring marketing, design, software development, AI, websites, and hosting together under one coordinated team — so you get enterprise-level capability without managing multiple agencies.',
+    title: 'Branding From A To Z',
+    subtitle: 'Clarity, identity, and positioning that set your business up for long-term growth.',
+    items: [
+      'Brand Strategy & Positioning',
+      'Visual Identity Systems',
+      'Logo & Mark Design',
+      'Brand Guidelines & Standards',
+      'Messaging & Voice Development',
+      'Collateral & Launch Assets',
+    ],
   },
   {
     id: 2,
-    question: 'How is WOW different from a traditional agency?',
-    answer:
-      'Traditional agencies usually specialize in one area. WOW operates as a connected ecosystem of divisions. Each division leads in its field, but they work from one shared strategy — keeping your brand, technology, and growth aligned from day one.',
+    title: 'Sales Funnels & Revenue Systems',
+    subtitle: 'Systems that turn visitors into leads and leads into paying customers.',
+    items: [
+      'User Research & Market Analysis',
+      'Concept Ideation',
+      'Prototyping',
+      'Sketching & Wireframing',
+      'Funnel Architecture & Mapping',
+      'Conversion Optimization & A/B Testing',
+    ],
   },
   {
     id: 3,
-    question: 'Which industries do you serve?',
-    answer:
-      'We partner with businesses across healthcare, construction, legal, hospitality, retail, professional services, eCommerce, nonprofits, and technology. Our division structure lets us tailor solutions to your industry while drawing on cross-sector expertise.',
+    title: 'High-Performance Websites',
+    subtitle: 'Fast, reliable websites designed to convert visitors into paying customers.',
+    items: [
+      'UX Strategy & Information Architecture',
+      'Custom Web Design',
+      'Next.js & Headless Development',
+      'SEO & Core Web Vitals Optimization',
+      'CMS Integration & Training',
+      'Ongoing Maintenance & Support',
+    ],
   },
   {
     id: 4,
-    question: 'Do I need to work with each division separately?',
-    answer:
-      'No. WOW Superagency is your single point of contact. We coordinate the right specialists behind the scenes — whether you need a new website, a marketing campaign, custom software, or AI automation.',
+    title: 'Custom Software & Automation',
+    subtitle: 'Digital products and workflows that remove bottlenecks and scale operations.',
+    items: [
+      'SaaS & Web Application Development',
+      'Mobile App Development',
+      'API Integrations & Middleware',
+      'AI-Powered Automation',
+      'Legacy System Modernization',
+      'Product Roadmapping & Delivery',
+    ],
   },
   {
     id: 5,
-    question: 'How does the WOW ecosystem work in practice?',
-    answer:
-      'Think of it as a hub-and-spoke model. WOW Hub centralizes your tools and collaboration, while divisions like WOW Marketing, WOW Design, WOW Websites, and SoftwareWOW! deliver specialized work. Everything connects through shared strategy, brand standards, and project management.',
+    title: 'Marketing & Growth Campaigns',
+    subtitle: 'Performance-driven campaigns that attract qualified leads and measurable ROI.',
+    items: [
+      'Paid Media & PPC Management',
+      'SEO & Content Strategy',
+      'Email Marketing & Nurture Flows',
+      'Social Media Strategy',
+      'Analytics & Attribution',
+      'Growth Experimentation',
+    ],
   },
   {
     id: 6,
-    question: 'What does onboarding look like?',
-    answer:
-      'We start with a free consultation to understand your goals, challenges, and timeline. From there, we recommend the right divisions and build a phased roadmap. You receive a dedicated lead who keeps every workstream coordinated and transparent.',
-  },
-  {
-    id: 7,
-    question: 'How are projects priced?',
-    answer:
-      'Pricing depends on scope, timeline, and which divisions are involved. We offer project-based engagements, retainers, and ongoing support packages. After your consultation, you receive a clear proposal with deliverables, milestones, and investment—no hidden fees.',
-  },
-  {
-    id: 8,
-    question: 'Do you offer support after launch?',
-    answer:
-      'Yes. Whether it is website maintenance through WOW Host, campaign optimization through WOW Marketing, or product updates through SoftwareWOW!, we provide ongoing support to keep your business growing long after launch.',
-  },
-  {
-    id: 9,
-    question: 'Can you work with businesses outside North America?',
-    answer:
-      'Yes. WOW Superagency serves clients globally with remote collaboration, flexible time zones, and digital-first delivery — maintaining clear communication and consistent quality across borders.',
-  },
-  {
-    id: 10,
-    question: 'How do I get started?',
-    answer:
-      'Book a free consultation through our website. We will learn about your business, identify quick wins and long-term opportunities, and outline how the WOW ecosystem can help you move faster with less complexity.',
+    title: 'AI & Intelligence Solutions',
+    subtitle: 'Smart tools that sharpen decisions, reduce manual work, and accelerate results.',
+    items: [
+      'AI Strategy & Use-Case Discovery',
+      'Chatbots & Virtual Assistants',
+      'Predictive Analytics',
+      'Process Automation',
+      'Data Pipelines & Dashboards',
+      'Team Training & Adoption',
+    ],
   },
 ]
 
 const SolutionToChallenges = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [activeIndex, setActiveIndex] = useState<number | null>(1)
   const [showAll, setShowAll] = useState(false)
 
-  const visibleFaqs = showAll ? faqData : faqData.slice(0, INITIAL_VISIBLE_COUNT)
+  const visibleServices = showAll ? servicesData : servicesData.slice(0, INITIAL_VISIBLE_COUNT)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
@@ -92,76 +109,53 @@ const SolutionToChallenges = () => {
 
   return (
     <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
-      {/* Background decorative elements - matching WowSuperAgencyClient */}
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
-        }}
-      />
-
-      {/* Gradient background image - preserved */}
-      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-80 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
+      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
         <Image src={gradientBg} alt="" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+      <div className="relative z-10 mx-auto max-w-[1320px] pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
             <TextAppearAnimation>
-              <h2 className="text-appear max-lg:leading-[1.33] text-[#000000] dark:text-[#F2F2F2]">
-                Questions business owners ask{' '}
-                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent lg:text-[65px]">
-                  before they partner with us
-                </span>
+              <h2 className="text-appear max-lg:leading-[1.33] text-[#1a1a1a] dark:text-white">
+                Built To Solve Modern Business{' '}
+                <span className="font-instrument italic lg:text-[65px]">Challenges</span>
               </h2>
             </TextAppearAnimation>
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
             <TextAppearAnimation>
-              <p className="text-appear max-w-lg text-[#555555] dark:text-[#999999] md:justify-self-end md:text-right">
-                Clear answers about how WOW Superagency works — and what working together actually looks like.
+              <p className="text-appear max-w-lg text-[#555555] dark:text-[#ffffff99] md:justify-self-end md:text-right">
+                In a world where change is the only constant, we ensure your business stays ahead of the curve —
+                with integrated technology, marketing, and growth systems built to deliver real results.
               </p>
             </TextAppearAnimation>
             <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
               <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <ButtonComponent href="/contact" variant="secondary">
-                  Book Your Free Consultation
+                <ButtonComponent href="/services" variant="white">
+                  Explore Our Solutions
                 </ButtonComponent>
               </li>
             </RevealWrapper>
           </div>
         </div>
 
-        <RevealWrapper className="mx-auto w-full space-y-4">
-          {visibleFaqs.map((faq, index) => {
+        <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
+          {visibleServices.map((service, index) => {
             const isActive = activeIndex === index
 
             return (
               <div
-                key={faq.id}
-                className={`overflow-hidden rounded-radius-sm border transition-all duration-300 ${
+                key={service.id}
+                className={`accordion-item overflow-hidden rounded-radius-sm duration-300 ${
                   isActive
-                    ? 'border-[#8b7cff]/50 bg-white/80 backdrop-blur-sm dark:bg-dark/80 shadow-lg shadow-[#8b7cff]/10 dark:shadow-[#8b7cff]/20'
-                    : 'border-[#e5e5e5] bg-white/50 backdrop-blur-sm dark:border-white/5 dark:bg-dark/50 hover:border-[#8b7cff]/20 dark:hover:border-[#8b7cff]/20'
+                    ? ' bg-white dark:bg-secondary'
+                    : ' bg-white  dark:bg-secondary'
                 }`}
               >
                 <div
-                  className={`flex cursor-pointer items-center justify-between p-6 transition-colors duration-300 md:p-8 ${
-                    isActive ? 'pb-4' : ''
+                  className={`accordion-header group relative flex cursor-pointer justify-between px-5 py-[35px] md:px-10 ${
+                    isActive ? 'active' : ''
                   }`}
                   onClick={() => toggleAccordion(index)}
                   role="button"
@@ -174,40 +168,64 @@ const SolutionToChallenges = () => {
                   }}
                   aria-expanded={isActive}
                 >
-                  <h3
-                    className={`pr-4 text-lg font-medium transition-colors duration-300 md:text-xl lg:text-2xl ${
-                      isActive
-                        ? 'text-[#1a1a1a] dark:text-[#F2F2F2]'
-                        : 'text-[#333333] dark:text-[#CCCCCC]'
-                    }`}
-                  >
-                    {faq.question}
+                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-[#1a1a1a] dark:text-white md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-5xl">
+                    <span className="text-inherit">{service.title}</span>
+                    <span className="mt-2 pr-[2px] text-base text-[#666666] dark:text-[#ffffff99] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                      {service.subtitle}
+                    </span>
                   </h3>
-                  <div
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                      isActive
-                        ? 'bg-gradient-to-r from-[#8b7cff] to-[#b794f4] text-white'
-                        : 'bg-[#f0f0f0] text-[#8b7cff] dark:bg-white/5 dark:text-[#b794f4]'
-                    }`}
-                  >
-                    {isActive ? (
-                      <ChevronUp className="h-5 w-5" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5" />
-                    )}
+                  <div className="accordion-header-iconV3 shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      className="active-arrow absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 duration-300 ease-faq-body-transition group-hover:rotate-90 md:size-8"
+                      aria-hidden
+                    >
+                      <path
+                        d="M5 16H27"
+                        stroke="black"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M18 7L27 16L18 25"
+                        stroke="black"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </div>
                 </div>
-
                 <div
-                  className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
+                  className={`grid transition-all duration-300 ease-in-out ${
                     isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-6 pb-6 md:px-8 md:pb-8">
-                      <p className="max-w-3xl text-[15px] leading-[1.7] tracking-[0.01em] text-[#555555] dark:text-[#999999] md:text-[16px]">
-                        {faq.answer}
-                      </p>
+                    <div className="accordion-body ml-2.5 flex flex-col justify-start gap-x-10 px-10 pb-10 duration-300 sm:pt-6 md:ml-6 md:flex-row lg:gap-x-[73px]">
+                      <ul className="[&>*:not(:last-child)]:mb-1">
+                        {service.items.slice(0, Math.ceil(service.items.length / 2)).map((item) => (
+                          <li
+                            key={item}
+                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] dark:text-backgroundBody/70"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <ul className="[&>*:not(:last-child)]:mb-1">
+                        {service.items.slice(Math.ceil(service.items.length / 2)).map((item) => (
+                          <li
+                            key={item}
+                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] dark:text-backgroundBody/70"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -216,20 +234,26 @@ const SolutionToChallenges = () => {
           })}
         </RevealWrapper>
 
-        {faqData.length > INITIAL_VISIBLE_COUNT && (
-          <RevealWrapper className="mx-auto mt-10 flex justify-center">
+        <RevealWrapper className="mx-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-14">
+          {servicesData.length > INITIAL_VISIBLE_COUNT && (
             <ButtonComponentList>
               <ButtonComponent
                 type="button"
-                variant="secondary"
+                variant="white"
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
+                className="min-w-[200px]"
               >
-                {showAll ? 'See Less' : 'See More'}
+                {showAll ? 'Show Less' : 'Load More'}
               </ButtonComponent>
             </ButtonComponentList>
-          </RevealWrapper>
-        )}
+          )}
+          <ButtonComponentList>
+            <ButtonComponent href="/contact" variant="secondary" className="min-w-[200px]">
+              Start Now
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
       </div>
     </section>
   )
