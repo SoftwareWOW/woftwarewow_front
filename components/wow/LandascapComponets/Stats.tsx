@@ -63,7 +63,7 @@ const Stats = () => {
         {/* Description with animation - matching AboutV8 style */}
         <RevealWrapper>
           <h4
-            className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-normal leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700"
+            className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-[300px] leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700"
             ref={revealRef}
           >
             WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem — helping businesses scale with less complexity and more confidence.
@@ -77,21 +77,16 @@ const Stats = () => {
             >
               {achievementStats.map((stat, index) => (
                 <div key={stat.label} className="stat-item w-full">
-                  <div className="relative flex h-full min-h-[280px] flex-col items-center justify-start rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 bg-white/50 backdrop-blur-sm dark:bg-dark/50 p-6 transition-colors duration-300 md:p-8">
+                  <div className="relative flex h-full min-h-[280px] flex-col items-center justify-start p-6 transition-colors duration-300 md:p-8">
                     {/* Number */}
                     <div className="flex items-baseline gap-1">
-                      <h2 className="font-['Outfit'] text-[clamp(36px,5vw,56px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#1a1a1a] dark:text-white transition-colors duration-300">
-                        <CounterAnimation number={stat.value} />
+                      <h2 className="font-['Outfit'] text-[clamp(36px,5vw,56px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
+                        <CounterAnimation number={stat.value} />  {stat.suffix}
                       </h2>
-                      {stat.suffix && (
-                        <span className="font-['Outfit'] text-[clamp(24px,3vw,40px)] font-bold text-[#8b7cff]">
-                          {stat.suffix}
-                        </span>
-                      )}
                     </div>
 
                     {/* Label */}
-                    <p className="mt-2 text-center font-['Outfit'] text-[clamp(14px,1.2vw,18px)] font-semibold text-[#1a1a1a] dark:text-[#F2F2F2] transition-colors duration-300">
+                    <p className="mt-2 text-center font-['Outfit'] text-[clamp(14px,1.2vw,18px)] font-normal text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
                       {stat.label}
                     </p>
 

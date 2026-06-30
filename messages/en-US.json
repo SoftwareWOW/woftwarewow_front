@@ -1905,7 +1905,8 @@
   "superAgencyClient": {
     "heading": {
       "part1": "Trusted By Businesses ",
-      "highlight": "Focused On Growth"
+      "part2": "Focused On",
+      "highlight": " Growth"
     },
     "aria": {
       "previousTestimonial": "Previous testimonial",

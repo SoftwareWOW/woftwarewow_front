@@ -37,7 +37,7 @@ const HumanTouch = () => {
         <div className="flex flex-col gap-8 max-lg:justify-center lg:flex-row">
           <div className="w-full flex-1 max-lg:self-center">
             <TextAppearAnimation>
-              <h2 className="text-appear max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-white sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+              <h2 className="text-appear max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
                 Technology <br />
                 Powered.{' '}
                 <span className="bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text font-instrument italic font-normal tracking-[-0.06em] text-transparent">
@@ -60,13 +60,13 @@ const HumanTouch = () => {
               </div>
 
               <figcaption>
-                <p className="text-sm font-medium text-[#1a1a1a] transition-colors duration-300 dark:text-white">
+                <p className="text-sm font-medium text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                   Yahya Sadat
                 </p>
                 <span className="text-xs text-[#8b7cff] dark:text-[#b794f4]">
                   Founder & CEO
                 </span>
-                <p className="mt-1 max-w-[360px] text-[11px] leading-4 text-[#555555] transition-colors duration-300 dark:text-white/35">
+                <p className="mt-1 max-w-[360px] text-[11px] leading-4 text-[#555555] transition-colors duration-300 dark:text-[#F2F2F2]/35">
                   Technology powered. People focused.
                 </p>
               </figcaption>

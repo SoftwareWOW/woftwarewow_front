@@ -99,8 +99,8 @@ const WowProjects = () => {
         <div className="mb-10 flex flex-col items-center justify-center gap-y-4 md:mb-20 md:flex-row md:justify-between">
           <TextAppearAnimation>
             <div>
-              <h2 className="text-appear flex-1 text-[#000000] dark:text-[#F2F2F2]">
-                Real Challenges.{' '}
+              <h2 className="text-appear flex-1 text-[#0D0D0D] dark:text-[#F2F2F2]">
+                Real Challenges. <br/>
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
                   Real Results.
                 </span>
@@ -110,7 +110,7 @@ const WowProjects = () => {
 
           <div>
             <TextAppearAnimation>
-              <p className="max-w-md flex-1 text-[#555555] dark:text-[#999999] md:self-end md:text-right">
+              <p className="max-w-md flex-1 text-[#808080]  md:self-end md:text-right">
                 See how businesses use technology, marketing, AI, and integrated growth systems to solve problems and
                 drive measurable outcomes.
               </p>
@@ -148,12 +148,12 @@ const WowProjects = () => {
               <div className="absolute bottom-4 left-4 right-4 max-w-[calc(100%-2rem)] rounded-radius-sm border border-white/20 bg-backgroundBody/95 p-3 backdrop-blur-sm transition-all duration-300 hover:bg-backgroundBody/100 dark:border-white/10 dark:bg-dark-200/95 dark:hover:bg-dark-200/100 sm:p-4 md:bottom-8 md:left-8 md:max-w-[535px] md:p-6 lg:bottom-10 lg:left-10 lg:p-8">
                 <div className="project-title mb-2 md:mb-3">
                   <Link href={project.href}>
-                    <h3 className="text-base font-bold text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4] sm:text-lg md:text-2xl lg:text-3xl">
+                    <h3 className="text-base font-normal text-[#0D0D0D] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4] sm:text-lg md:text-3xl lg:text-4xl">
                       {project.title}
                     </h3>
                   </Link>
                 </div>
-                <p className="text-xs text-[#555555] dark:text-[#999999] sm:text-sm md:text-base">
+                <p className="text-xs text-[#808080] sm:text-sm md:text-base">
                   {project.description}
                 </p>
               </div>

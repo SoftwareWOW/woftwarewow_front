@@ -107,10 +107,14 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
         {/* Section Header - New Heading */}
         <div className="text-center mb-4">
           <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2] mb-4 relative inline-block transition-colors duration-300">
-            {superAgencyClient.heading.part1}{' '}
-            <span className="font-['Ogg_TRIAL'] italic text-[#8b7cff] dark:text-[#b794f4]">
+            {superAgencyClient.heading.part1}<br/>
+            <span className='pt-[70px]'>
+              {superAgencyClient.heading.part2}
+              <span className="font-instrument">
               {superAgencyClient.heading.highlight}
             </span>
+            </span>
+            
           </h2>
         </div>
 
@@ -135,21 +139,15 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
                   className="pl-2 md:pl-4 basis-full"
                 >
                   <div className="p-1">
-                    <div className="relative overflow-hidden rounded-radius-sm transition-all duration-300">
-                      {/* Animated border glow */}
-                      <div className={`absolute -inset-1 bg-gradient-to-r from-[#8b7cff]/20 via-[#b794f4]/20 to-[#f4a8b8]/20 rounded-radius-sm blur-xl transition-opacity duration-500 ${
-                        index === currentIndex ? 'opacity-100' : 'opacity-0'
-                      }`}></div>
-                      
-                      <div className="relative bg-white backdrop-blur-sm dark:bg-dark rounded-radius-sm transition-colors duration-300 shadow-sm dark:shadow-none">
-                        <WowSwiperSlideContent
-                          tags={review.tags}
-                          title={review.title}
-                          userName={review.userName}
-                          position={review.position}
-                          userImg={CLIENT_IMAGES[review.userName]}
-                        />
-                      </div>
+                    {/* Single border container - removed the nested duplicate */}
+                    <div className="relative rounded-radius-md border border-[#1515151A] dark:border-[#EDF0F51A] shadow-sm dark:shadow-none transition-all duration-300">
+                      <WowSwiperSlideContent
+                        tags={review.tags}
+                        title={review.title}
+                        userName={review.userName}
+                        position={review.position}
+                        userImg={CLIENT_IMAGES[review.userName]}
+                      />
                     </div>
                   </div>
                 </CarouselItem>

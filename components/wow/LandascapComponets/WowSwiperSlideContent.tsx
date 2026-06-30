@@ -28,7 +28,7 @@ const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({ tags, title, userN
         </span>
       </div>
       <div className="flex-1">
-        <p className="mb-6 text-base italic text-[#666666] dark:text-white/70 md:mb-[30px] md:text-xl md:leading-[1.5] transition-colors duration-300">{tags}</p>
+        <p className="mb-6 text-base italic text-[#666666] dark:text-[#808080] md:mb-[30px] md:text-xl md:leading-[1.5] transition-colors duration-300">{tags}</p>
         <h3 className="mb-7 text-xl text-[#1a1a1a] dark:text-white md:mb-10 md:text-[30px] md:leading-9 transition-colors duration-300">{title}</h3>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">

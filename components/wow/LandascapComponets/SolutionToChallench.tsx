@@ -139,7 +139,7 @@ const SolutionToChallenges = () => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
             <TextAppearAnimation>
-              <h2 className="text-appear max-lg:leading-[1.33] text-[#1a1a1a] transition-colors duration-300 dark:text-white">
+              <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 Built To Solve Modern Business{' '}
                 <span className="font-instrument italic lg:text-[65px]">Challenges</span>
               </h2>
@@ -147,7 +147,7 @@ const SolutionToChallenges = () => {
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
             <TextAppearAnimation>
-              <p className="text-appear max-w-lg text-[#555555] transition-colors duration-300 dark:text-[#999999] md:justify-self-end md:text-right">
+              <p className="text-appear max-w-lg text-[#808080] transition-colors duration-300 dark:text-[#808080] md:justify-self-end md:text-right">
                 In a world where change is the only constant, we ensure your business stays ahead of the curve —
                 with integrated technology, marketing, and growth systems built to deliver real results.
               </p>
@@ -196,9 +196,9 @@ const SolutionToChallenges = () => {
                   }}
                   aria-expanded={isActive}
                 >
-                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-[#1a1a1a] transition-colors duration-300 dark:text-white md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-5xl">
-                    <span className="text-inherit">{service.title}</span>
-                    <span className="mt-2 pr-[2px] text-base text-[#555555] transition-colors duration-300 dark:text-[#999999] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal font-outfit leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-5xl">
+                    <span>{service.title}</span>
+                    <span className="mt-2 pr-[2px] text-base text-[#808080] transition-colors duration-300  md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                       {service.subtitle}
                     </span>
                   </h3>
@@ -218,7 +218,7 @@ const SolutionToChallenges = () => {
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="text-[#1a1a1a] dark:text-white"
+                        className="text-[#1a1a1a] dark:text-[#F2F2F2]"
                       />
                       <path
                         d="M18 7L27 16L18 25"
@@ -226,7 +226,7 @@ const SolutionToChallenges = () => {
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="text-[#1a1a1a] dark:text-white"
+                        className="text-[#1a1a1a] dark:text-[#F2F2F2]"
                       />
                     </svg>
                   </div>
