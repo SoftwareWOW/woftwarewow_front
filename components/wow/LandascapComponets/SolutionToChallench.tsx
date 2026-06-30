@@ -174,7 +174,7 @@ const SolutionToChallenges = () => {
             return (
               <div
                 key={service.id}
-                className={`accordion-item relative w-full border bg-backgroundBody px-5 py-0 duration-300 dark:bg-dark ${
+                className={`accordion-item relative w-full border bg-backgroundBody px-5 py-0 duration-300 rounded-radius-sm dark:bg-dark ${
                   isActive
                     ? 'open active border-black dark:border-white/10'
                     : 'border-black/10 dark:border-white/10'
@@ -202,7 +202,7 @@ const SolutionToChallenges = () => {
                       {service.subtitle}
                     </span>
                   </h3>
-                  <div className="accordion-header-iconV3 shrink-0">
+                  <div className="accordion-header-iconV3 shrink-0 rounded-radius-sm">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 32 32"

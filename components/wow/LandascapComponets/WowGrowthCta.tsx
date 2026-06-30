@@ -32,9 +32,6 @@ const WowGrowthCta = () => {
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="relative rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-12 transition-all duration-300 hover:border-[#8b7cff]/20 hover:shadow-2xl hover:shadow-[#8b7cff]/5 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/10 md:px-10 md:py-16 lg:px-14 lg:py-20">
-          {/* Decorative gradient line at top */}
-          <div className="absolute left-1/2 top-0 h-1 w-1/3 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] opacity-50" />
-
           <RevealWrapper className="mx-auto max-w-[900px] text-center">
             <TextAppearAnimation>
               <h2 className="text-appear text-[clamp(2rem,5.5vw,4.5rem)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
