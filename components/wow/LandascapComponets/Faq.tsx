@@ -172,6 +172,7 @@ const Faq = () => {
                 variant="secondary"
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
+              size="sm"
               >
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>

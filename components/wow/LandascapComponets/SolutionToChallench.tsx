@@ -274,14 +274,14 @@ const SolutionToChallenges = () => {
                 variant="white"
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
-                className="min-w-[200px]"
+            size="sm"
               >
-                {showAll ? 'Show Less' : 'Load More'}
+                {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>
             </ButtonComponentList>
           )}
           <ButtonComponentList>
-            <ButtonComponent href="/contact" variant="secondary" className="min-w-[200px]">
+            <ButtonComponent href="/contact" variant="secondary" size="sm">
               Start Now
             </ButtonComponent>
           </ButtonComponentList>

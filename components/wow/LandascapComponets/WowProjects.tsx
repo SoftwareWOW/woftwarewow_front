@@ -185,6 +185,7 @@ const WowProjects = () => {
                 variant="secondary"
                 onClick={() => setShowAll((prev) => !prev)}
                 ariaExpanded={showAll}
+                size="sm"
               >
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>
