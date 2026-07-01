@@ -39,6 +39,10 @@ body {
 
 // Lenis Smooth Scroll
 // ------------------
+html {
+  scrollbar-gutter: stable;
+}
+
 html.lenis {
   @apply h-auto;
 }
@@ -53,12 +57,21 @@ html.lenis {
   }
 
   &.lenis-stopped {
-    @apply overflow-hidden;
+    overflow-y: scroll !important;
+    overflow-x: hidden;
   }
 
   &.lenis-scrolling iframe {
     @apply pointer-events-none;
   }
+}
+
+// Keep scrollbar gutter when Radix/react-remove-scroll locks the body
+html body[data-scroll-locked] {
+  overflow-y: scroll !important;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+  --removed-body-scroll-bar-size: 0px !important;
 }
 
 // Animations

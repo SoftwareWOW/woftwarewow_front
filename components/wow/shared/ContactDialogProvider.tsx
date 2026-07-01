@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useLenis } from 'lenis/react'
-import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import WowContactForm from './WowContactForm'
 
 type ContactDialogContextValue = {
@@ -33,6 +33,7 @@ export function useContactDialogOptional() {
 export function ContactDialogProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
   const lenis = useLenis()
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const value = useMemo(
     () => ({
@@ -49,15 +50,25 @@ export function ContactDialogProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!open) return
 
-    const previousOverflow = document.body.style.overflow
-    const previousOverflowX = document.body.style.overflowX
-    document.body.style.overflow = 'hidden'
-    document.body.style.overflowX = 'hidden'
+    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
+      const target = event.target as Node | null
+      const scrollContainer = scrollContainerRef.current
+
+      if (scrollContainer && target && scrollContainer.contains(target)) {
+        return
+      }
+
+      event.preventDefault()
+    }
+
     lenis?.stop()
 
+    document.addEventListener('wheel', preventBackgroundScroll, { passive: false })
+    document.addEventListener('touchmove', preventBackgroundScroll, { passive: false })
+
     return () => {
-      document.body.style.overflow = previousOverflow
-      document.body.style.overflowX = previousOverflowX
+      document.removeEventListener('wheel', preventBackgroundScroll)
+      document.removeEventListener('touchmove', preventBackgroundScroll)
       lenis?.start()
     }
   }, [open, lenis])
@@ -79,6 +90,8 @@ export function ContactDialogProvider({ children }: { children: ReactNode }) {
           </DialogHeader>
 
           <div
+            ref={scrollContainerRef}
+            data-contact-dialog-scroll
             data-lenis-prevent
             className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 sm:px-8 sm:pb-8 [-webkit-overflow-scrolling:touch]"
           >

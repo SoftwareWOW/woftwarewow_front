@@ -47,7 +47,7 @@ const WowContactForm = ({ className = '', onSubmitted }: WowContactFormProps) =>
           value={formData.name}
           onChange={handleChange}
           placeholder="Enter your full name"
-          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
           required
         />
       </div>
@@ -66,7 +66,7 @@ const WowContactForm = ({ className = '', onSubmitted }: WowContactFormProps) =>
           value={formData.email}
           onChange={handleChange}
           placeholder="name@company.com"
-          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
           required
         />
       </div>
@@ -83,7 +83,7 @@ const WowContactForm = ({ className = '', onSubmitted }: WowContactFormProps) =>
           name="service"
           value={formData.service}
           onChange={handleChange}
-          className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+          className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
           required
         >
           <option value="UI/UX">UX Design</option>
@@ -141,7 +141,7 @@ const WowContactForm = ({ className = '', onSubmitted }: WowContactFormProps) =>
           name="budget"
           value={formData.budget}
           onChange={handleChange}
-          className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+          className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
           required
         >
           <option value="40k">$10k - $25k</option>
@@ -186,7 +186,7 @@ const WowContactForm = ({ className = '', onSubmitted }: WowContactFormProps) =>
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us about your project goals and timeline"
-          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
           required
         />
       </div>
