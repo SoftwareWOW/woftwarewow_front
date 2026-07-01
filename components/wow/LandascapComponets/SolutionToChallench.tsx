@@ -1,7 +1,6 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -138,20 +137,20 @@ const SolutionToChallenges = () => {
       <div className="relative z-10 container mx-auto max-w-[1320px] px-3 md:px-4">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
-            <TextAppearAnimation>
+           
               <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 Built To Solve Modern Business{' '}
                 <span className="font-instrument italic lg:text-[65px]">Challenges</span>
               </h2>
-            </TextAppearAnimation>
+         
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
-            <TextAppearAnimation>
+           
               <p className="text-appear max-w-lg text-[#808080] transition-colors duration-300 dark:text-[#808080] md:justify-self-end md:text-right">
                 In a world where change is the only constant, we ensure your business stays ahead of the curve —
                 with integrated technology, marketing, and growth systems built to deliver real results.
               </p>
-            </TextAppearAnimation>
+            
             <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
               <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
                 <Link href="/services" className="rv-button rv-button-white block md:inline-block">
