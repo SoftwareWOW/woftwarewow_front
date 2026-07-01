@@ -63,17 +63,23 @@ const GrowthStrategies = () => {
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
-          <TextAppearAnimation>
             <div>
+            <RevealWrapper>
+                                    <span className="mb-5 inline-block rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
+                                    Insights
+                                    </span>
+                                  </RevealWrapper>
+          <TextAppearAnimation>
+          
               <h2 className="text-appear max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 Insights, Trends &amp;{' '}
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
                   Growth Strategies
                 </span>
               </h2>
-            </div>
+           
           </TextAppearAnimation>
-
+ </div>
           <RevealWrapper className="max-w-[420px] lg:text-right">
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">
               Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,

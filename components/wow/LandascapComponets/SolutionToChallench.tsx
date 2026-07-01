@@ -137,7 +137,11 @@ const SolutionToChallenges = () => {
       <div className="relative z-10 container mx-auto max-w-[1320px] px-3 md:px-4">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
-           
+                <RevealWrapper>
+                            <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
+                              Solutions to chellenges.
+                            </span>
+                          </RevealWrapper>
               <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 Built To Solve Modern Business{' '}
                 <span className="font-instrument italic lg:text-[65px]">Challenges</span>

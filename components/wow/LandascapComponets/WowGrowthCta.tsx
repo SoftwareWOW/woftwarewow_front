@@ -31,7 +31,7 @@ const WowGrowthCta = () => {
 
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="relative rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-12 transition-all duration-300 hover:border-[#8b7cff]/20 hover:shadow-2xl hover:shadow-[#8b7cff]/5 dark:border-white/5 dark:bg-dark/50 dark:hover:border-[#8b7cff]/20 dark:hover:shadow-[#8b7cff]/10 md:px-10 md:py-16 lg:px-14 lg:py-20">
+        <div className="relative rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-12 transition-all duration-300  dark:border-white/5 dark:bg-dark/50 md:px-10 md:py-16 lg:px-14 lg:py-20">
           <RevealWrapper className="mx-auto max-w-[900px] text-center">
             <TextAppearAnimation>
               <h2 className="text-appear font-normal leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
@@ -52,7 +52,7 @@ const WowGrowthCta = () => {
 
             <RevealWrapper className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
               <ButtonComponentList>
-                <ButtonComponent href="/contact" variant="secondary" ariaLabel="Book a free consultation">
+                <ButtonComponent href="/contact" variant="secondary" ariaLabel="Book a free consultation" size="sm">
                   Book Your Free Consultation
                 </ButtonComponent>
               </ButtonComponentList>

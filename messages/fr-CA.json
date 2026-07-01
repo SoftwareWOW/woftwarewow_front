@@ -1902,10 +1902,11 @@
     }
   },
   "superAgencyClient": {
-    "heading": {
-      "part1": "Approuvé par des entreprises",
-      "highlight": "axées sur la croissance"
-    },
+     "heading": {
+    "part1": "Approuvé par des entreprises",
+    "part2": "axées sur la",
+    "highlight": "croissance"
+  },
     "aria": {
       "previousTestimonial": "Témoignage précédent",
       "nextTestimonial": "Témoignage suivant",

@@ -36,6 +36,12 @@ const HumanTouch = () => {
       <div className="relative z-10 mx-auto max-w-screen-xl px-3 max-lg:px-5">
         <div className="flex flex-col gap-8 max-lg:justify-center lg:flex-row">
           <div className="w-full flex-1 max-lg:self-center">
+                
+                        <RevealWrapper>
+                          <span className="mb-5 inline-block rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
+                           Human Touch
+                          </span>
+                        </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
                 Technology <br />

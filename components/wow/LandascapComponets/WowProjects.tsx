@@ -16,7 +16,7 @@ const wowProjects = [
     title: 'Healthcare Practice Digital Transformation',
     description:
       'A unified website, patient portal, and marketing system that increased appointment bookings by 47% in six months.',
-       thumbnail: '/images/wow/Hero/project/Rectangle 10101 (1).png',
+    thumbnail: '/images/wow/Hero/project/Rectangle 10101 (1).png',
     alt: 'Healthcare digital transformation project by WOW Superagency',
     href: '/case-studies/healthcare-digital-transformation',
   },
@@ -97,20 +97,27 @@ const WowProjects = () => {
       <div className="relative z-10 mx-auto max-w-[1320px]">
         {/* Header */}
         <div className="mb-10 flex flex-col items-center justify-center gap-y-4 md:mb-20 md:flex-row md:justify-between">
-          <TextAppearAnimation>
-            <div>
+          <div>
+           
+            <RevealWrapper>
+              <span className="mb-3 inline-block rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
+                Case Studies
+              </span>
+            </RevealWrapper>
+
+            <TextAppearAnimation>
               <h2 className="text-appear flex-1 text-[#0D0D0D] dark:text-[#F2F2F2]">
                 Real Challenges. <br/>
                 <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
                   Real Results.
                 </span>
               </h2>
-            </div>
-          </TextAppearAnimation>
+            </TextAppearAnimation>
+          </div>
 
           <div>
             <TextAppearAnimation>
-              <p className="max-w-md flex-1 text-[#808080]  md:self-end md:text-right">
+              <p className="max-w-md flex-1 text-[#808080] md:self-end md:text-right">
                 See how businesses use technology, marketing, AI, and integrated growth systems to solve problems and
                 drive measurable outcomes.
               </p>
@@ -131,7 +138,7 @@ const WowProjects = () => {
           {visibleProjects.map((project) => (
             <RevealWrapper
               as="article"
-              className="group relative overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500  dark:border-white/5 dark:bg-dark/50"
+              className="group relative overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-500 dark:border-white/5 dark:bg-dark/50"
               key={project.id}
             >
               <Link href={project.href} className="block overflow-hidden rounded-t-radius-sm">
