@@ -177,7 +177,7 @@ const DevisionOverview = () => {
   const activeBgId = hoveredId ?? activeCardId
 
   return (
-    <section className="relative overflow-hidden px-3 py-3 transition-colors duration-300 md:px-4 md:py-4">
+    <section className="relative overflow-hidden px-3 transition-colors duration-300 md:px-4">
       <div
         ref={triggerRef}
         className="service-section relative z-10 mx-auto flex h-[520px] w-full max-w-[1320px] flex-col overflow-hidden sm:h-[540px] md:h-[570px] lg:h-[600px] rounded-radius-sm"

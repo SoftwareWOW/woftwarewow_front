@@ -141,7 +141,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   }
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-2 py-6 text-foreground transition-colors duration-300 sm:px-4 sm:py-12">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-2 text-foreground transition-colors duration-300 sm:px-4">
       {/* Header Section */}
       <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">

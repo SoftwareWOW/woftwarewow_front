@@ -109,7 +109,7 @@ const SolutionToChallenges = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background pb-14 pt-14 transition-colors duration-300 dark:bg-background md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
       {/* Background decorative elements - matching FAQ */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div

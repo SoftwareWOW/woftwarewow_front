@@ -37,7 +37,7 @@ const Stats = () => {
   const { revealRef } = useReveal()
 
   return (
-    <section className="about relative bg-background py-14 transition-colors duration-300 md:py-16 lg:py-[88px] xl:py-[100px]">
+    <section className="about relative bg-background transition-colors duration-300">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden opacity-0 dark:opacity-20">
         <div

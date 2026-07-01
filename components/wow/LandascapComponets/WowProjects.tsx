@@ -72,7 +72,7 @@ const WowProjects = () => {
   const visibleProjects = showAll ? wowProjects : wowProjects.slice(0, INITIAL_VISIBLE_COUNT)
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 py-3 transition-colors duration-300 dark:bg-background md:px-4 md:py-4">
+    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div

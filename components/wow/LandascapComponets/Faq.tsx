@@ -100,7 +100,7 @@ const Faq = () => {
   }
 
   return (
-    <section className="relative overflow-hidden px-3 py-14 md:px-4 md:py-16 lg:py-[88px] xl:py-[100px]">
+    <section className="relative overflow-hidden px-3 md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>

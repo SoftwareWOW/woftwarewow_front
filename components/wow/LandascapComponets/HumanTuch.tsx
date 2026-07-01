@@ -12,7 +12,7 @@ import hero04 from '@/public/images/wow/Hero/Human/Rectangle3.png'
 
 const HumanTouch = () => {
   return (
-    <section className="relative overflow-hidden bg-background pb-14 pt-[110px] transition-colors duration-300 dark:bg-background md:pb-16 md:pt-[150px] lg:pb-[88px] lg:pt-[190px] xl:pb-[100px]">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
           className="absolute inset-0"

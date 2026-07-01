@@ -14,7 +14,7 @@ const highlightClass =
 
 export default function WowHero({ hero }: WowHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-background px-4 pb-16 pt-12 mt-16 sm:px-8 sm:pb-20 sm:pt-16 md:pt-20 lg:pb-24">
+    <section className="relative mt-16 overflow-hidden bg-background px-4 pt-12 sm:px-8 sm:pt-16 md:pt-20">
       {/* Background Decorations for Dark Mode */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl dark:bg-primary/10" />
