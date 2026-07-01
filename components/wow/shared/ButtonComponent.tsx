@@ -54,7 +54,7 @@ export default function ButtonComponent({
     variantClasses[variant],
     sizeClasses[size],
     'block text-center md:inline-block',
-    fullWidth ? '!w-full max-md:w-full' : '',
+    fullWidth ? '!w-full max-md:w-full' : 'w-auto',
     className,
   ]
     .filter(Boolean)
@@ -76,14 +76,17 @@ export default function ButtonComponent({
 
   if (href && isContactHref(href) && contactDialog) {
     return (
-      <button
-        type="button"
-        onClick={() => contactDialog.open()}
+      <Link
+        href={href}
         className={classes}
         aria-label={ariaLabel}
+        onClick={(event) => {
+          event.preventDefault()
+          contactDialog.open()
+        }}
       >
         {content}
-      </button>
+      </Link>
     )
   }
 

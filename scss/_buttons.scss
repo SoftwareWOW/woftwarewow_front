@@ -1,5 +1,12 @@
 .rv-button {
-  @apply relative overflow-hidden rounded-radius-sm;
+  @apply relative m-0 box-border overflow-hidden rounded-radius-sm border-0 bg-transparent p-0 text-inherit leading-normal no-underline appearance-none cursor-pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  vertical-align: baseline;
   .rv-button-top,
   .rv-button-bottom {
     @apply block w-full min-w-[210px] rounded-radius-sm px-[39px] py-[25px] transition duration-300 md:inline-block md:w-auto;
@@ -111,5 +118,9 @@
     .rv-button-bottom {
       @apply min-w-[150px] px-5 py-4 md:min-w-[180px] md:px-[30px] md:py-[19px];
     }
+  }
+
+  &:is(button)::-moz-focus-inner {
+    @apply border-0 p-0;
   }
 }

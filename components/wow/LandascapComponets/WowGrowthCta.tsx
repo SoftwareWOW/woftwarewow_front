@@ -52,7 +52,7 @@ const WowGrowthCta = () => {
 
             <RevealWrapper className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
               <ButtonComponentList>
-                <ButtonComponent href="/contact" variant="secondary" ariaLabel="Book a free consultation" size="sm">
+                <ButtonComponent href="/contact" variant="secondary" ariaLabel="Book a free consultation">
                   Book Your Free Consultation
                 </ButtonComponent>
               </ButtonComponentList>

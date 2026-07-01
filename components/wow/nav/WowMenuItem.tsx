@@ -2,7 +2,6 @@
 
 import { Link } from '@/i18n/navigation'
 import { ChevronRight } from 'lucide-react'
-import { motion } from 'framer-motion'
 import { MenuItemIcon } from './MenuItemIcon'
 import { WowDivisionLogo } from './WowDivisionLogo'
 import { navItemActiveClass, navItemDescriptionClass, navItemIconBoxClass, navItemIconClass, navItemInactiveClass, navItemLabelClass } from './nav-interaction-styles'
@@ -40,105 +39,51 @@ export function WowMenuItem({
 
   const content = (
     <>
-      <motion.div 
-        className={`flex size-[28px] shrink-0 items-center justify-center rounded-radius-sm border-[0.5px] p-[8px] ${navItemIconBoxClass}`}
-        whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-      >
+      <div className={`flex size-[28px] shrink-0 items-center justify-center rounded-radius-sm border-[0.5px] p-[8px] ${navItemIconBoxClass}`}>
         <MenuItemIcon iconId={iconId} className={navItemIconClass} />
-      </motion.div>
+      </div>
       <div className={`relative min-w-0 flex-1 ${showChevron ? 'pe-[22px]' : ''}`}>
         <div className="flex flex-col gap-[6px]">
-          <motion.p 
-            className={`text-[14px] font-light leading-none ${navItemLabelClass}`}
-            whileHover={{ x: 2 }}
-            transition={{ duration: 0.2 }}
-          >
-            {label}
-          </motion.p>
+          <p className={`text-[14px] font-light leading-none ${navItemLabelClass}`}>{label}</p>
           {description && (
             <>
               {multilineDescription ? (
                 description.split('\n').map((line) => (
-                  <motion.p
+                  <p
                     key={line}
-                    className={`text-xs font-light leading-[1.38] ${navItemDescriptionClass}`}
-                    whileHover={{ x: 2 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                    className={`text-xs font-light leading-[1.38] ${navItemDescriptionClass}`}>
                     {line}
-                  </motion.p>
+                  </p>
                 ))
               ) : (
-                <motion.p 
-                  className={`text-xs font-light leading-[1.38] ${navItemDescriptionClass}`}
-                  whileHover={{ x: 2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {description}
-                </motion.p>
+                <p className={`text-xs font-light leading-[1.38] ${navItemDescriptionClass}`}>{description}</p>
               )}
             </>
           )}
         </div>
         {showChevron && (
-          <motion.div
-            animate={{
-              x: active ? 4 : 0,
-              opacity: active ? 1 : 0.4,
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <ChevronRight
-              aria-hidden
-              className={`absolute end-[10px] top-[2px] h-3 w-1.5 ${navItemLabelClass}`}
-              strokeWidth={1.2}
-            />
-          </motion.div>
+          <ChevronRight
+            aria-hidden
+            className={`absolute end-[10px] top-[2px] h-3 w-1.5 opacity-40 ${navItemLabelClass}`}
+            strokeWidth={1.2}
+          />
         )}
       </div>
     </>
   )
 
-  const MotionLink = motion(Link)
-  const MotionButton = motion.button
-
   if (href) {
     return (
-      <MotionLink
-        href={href}
-        onClick={onClick}
-        onMouseEnter={onMouseEnter}
-        className={className}
-        whileHover={{ 
-          scale: 1.02,
-          x: 4,
-          transition: { duration: 0.2, ease: "easeOut" }
-        }}
-        whileTap={{ scale: 0.97 }}
-        transition={{ duration: 0.15 }}
-      >
+      <Link href={href} onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
         {content}
-      </MotionLink>
+      </Link>
     )
   }
 
   return (
-    <MotionButton
-      type="button"
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      className={className}
-      whileHover={{ 
-        scale: 1.02,
-        x: 4,
-        transition: { duration: 0.2, ease: "easeOut" }
-      }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ duration: 0.15 }}
-    >
+    <button type="button" onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
       {content}
-    </MotionButton>
+    </button>
   )
 }
 
@@ -161,58 +106,23 @@ export function WowDivisionItem({
 }: WowDivisionItemProps) {
   const isMobile = variant === 'mobile'
 
-  const className = `group flex flex-col items-start justify-center rounded-radius-sm px-[10px] py-[15px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+  const className = `group flex flex-col items-start justify-center rounded-[3px] px-[10px] py-[15px] text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
     isMobile ? 'w-full' : 'w-[203px]'
   } ${active ? `is-active ${navItemActiveClass}` : navItemInactiveClass}`
 
-  const content = (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-    >
-      <WowDivisionLogo divisionId={divisionId} variant="menu" />
-    </motion.div>
-  )
-
-  const MotionLink = motion(Link)
-  const MotionButton = motion.button
+  const content = <WowDivisionLogo divisionId={divisionId} variant="menu" />
 
   if (href) {
     return (
-      <MotionLink
-        href={href}
-        onClick={onClick}
-        onMouseEnter={onMouseEnter}
-        className={className}
-        whileHover={{ 
-          scale: 1.03,
-          x: 4,
-          transition: { duration: 0.2, ease: "easeOut" }
-        }}
-        whileTap={{ scale: 0.97 }}
-        transition={{ duration: 0.15 }}
-      >
+      <Link href={href} onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
         {content}
-      </MotionLink>
+      </Link>
     )
   }
 
   return (
-    <MotionButton
-      type="button"
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      className={className}
-      whileHover={{ 
-        scale: 1.03,
-        x: 4,
-        transition: { duration: 0.2, ease: "easeOut" }
-      }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ duration: 0.15 }}
-    >
+    <button type="button" onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
       {content}
-    </MotionButton>
+    </button>
   )
 }
