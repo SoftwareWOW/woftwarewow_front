@@ -317,29 +317,6 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 </span>{' '}
                 <span className="text-foreground">{nodeCopy.label}</span>
               </span>
-
-              {active && (
-                <motion.span
-                  aria-hidden
-                  className="absolute inset-0 rounded-full"
-                  initial={{
-                    opacity: 0.4,
-                    scale: 1,
-                  }}
-                  animate={{
-                    opacity: 0,
-                    scale: 1.6,
-                  }}
-                  transition={{
-                    duration: 1.6,
-                    repeat: Infinity,
-                    ease: 'easeOut',
-                  }}
-                  style={{
-                    boxShadow: '0 0 30px 8px rgba(139,124,255,0.35)',
-                  }}
-                />
-              )}
             </motion.div>
           )
         })}
