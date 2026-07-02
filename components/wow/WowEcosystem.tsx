@@ -144,11 +144,12 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-2 text-foreground transition-colors duration-300 sm:px-4">
       {/* Header Section */}
-           <RevealWrapper>
-                    <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-                      OUR ECOSYSTEM
-                    </span>
-                  </RevealWrapper>
+      <RevealWrapper>
+        <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
+          OUR ECOSYSTEM
+        </span>
+      </RevealWrapper>
+      
       <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
@@ -201,59 +202,29 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               <stop offset="50%" stopColor="#b794f4" />
               <stop offset="100%" stopColor="#f4a8b8" />
             </linearGradient>
-
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="6" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
-            <filter id="strong-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="14" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
           </defs>
 
           <AnimatePresence mode="wait">
             <motion.g key={activeFlow}>
+              {/* Single path - gradient color */}
               <motion.path
                 d={pathD}
                 fill="none"
                 stroke="url(#wow-gradient)"
-                strokeWidth={10}
+                strokeWidth={3}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                opacity={0.35}
-                filter="url(#strong-glow)"
+                opacity={0.8}
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.35 }}
+                animate={{ pathLength: 1, opacity: 0.8 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
               />
 
-              <motion.path
-                d={pathD}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                filter="url(#glow)"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.95 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
-              />
-
+              {/* Moving particle */}
               <motion.circle
-                r={5}
-                fill="currentColor"
-                filter="url(#strong-glow)"
+                r={4}
+                fill="#8b7cff"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -287,9 +258,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               }}
               animate={{
                 scale: active ? 1.5 : 0.75,
-                // scale: active ? 1.7 : 0.55,
                 opacity: active ? 1 : 0.5,
-                // opacity: active ? 1 : 0.25,
               }}
               transition={{
                 duration: 0.55,
@@ -300,9 +269,6 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 className="font-bold leading-none tracking-tight"
                 style={{
                   fontSize: nodeFontSize(n.size),
-                  filter: active
-                    ? 'drop-shadow(0 0 14px rgba(183,148,244,0.55))'
-                    : 'none',
                 }}
               >
                 <span
@@ -342,9 +308,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 className="relative rounded-md font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"
                 style={{
                   fontSize: active
-                    // ? 'clamp(10px, 1.8cqw, 20px)'
-                    // : 'clamp(5px, 0.85cqw, 10px)',
-                        ? 'clamp(10px, 1.8cqw, 20px)'
+                    ? 'clamp(10px, 1.8cqw, 20px)'
                     : 'clamp(5px, 0.95cqw, 14px)',
                   letterSpacing: '0.18em',
                   paddingTop: 'clamp(6px, 1.2cqw, 16px)',
@@ -357,7 +321,6 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                   color: active ? '#ffffff' : '#1a1530',
                   opacity: active ? 1 : 0.4,
                   transform: active ? 'scale(1.1)' : 'scale(0.85)',
-                  // transform: active ? 'scale(1.3)' : 'scale(0.72)',
                   transformOrigin: 'center',
                   transition: 'all 0.45s cubic-bezier(0.65, 0, 0.35, 1)',
                   boxShadow: active
