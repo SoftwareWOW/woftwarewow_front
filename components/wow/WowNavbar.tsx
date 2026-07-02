@@ -227,7 +227,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           onMouseLeave={scheduleCloseMegaMenu}
         >
           <nav
-            className="relative flex items-center justify-between rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none"
+            className="relative flex items-center justify-between rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-dark dark:shadow-none"
             aria-label={navbar.mainNavigation}
           >
             <Link
@@ -309,7 +309,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               </button>
 
               {actionMenuOpen && (
-                <div className="absolute -left-[6px] top-full z-50 flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark-200">
+                <div className="absolute -left-[6px] top-full z-50 flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark">
                   {mounted && (
                     <button
                       type="button"
@@ -343,7 +343,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
           {activeMenuId && (
             <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
-              <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark-200">
+              <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark">
                 <div className="relative h-[calc(100vh-120px)] overflow-hidden">
                   {navigation.items.map((item) => {
                     const isActive = activeMenuId === item.id

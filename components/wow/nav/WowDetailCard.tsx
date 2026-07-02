@@ -26,7 +26,7 @@ export default function WowDetailCard({
     imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
 
   return (
-    <div className="flex w-[280px] shrink-0 flex-col gap-[30px] rounded-radius-sm bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark-200">
+    <div className="flex w-[280px] shrink-0 flex-col gap-[30px] rounded-radius-sm bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark">
     <div className="relative h-[200px] w-full overflow-hidden rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] rounded-tl-none sm:h-[230px] sm:rounded-tr-[24px] sm:rounded-br-[24px] sm:rounded-bl-[24px]">
         <Image
           src={imageSrcResolved}
@@ -36,7 +36,7 @@ export default function WowDetailCard({
           sizes="(max-width: 1430px) 360px, 426px"
         />
 
-        <div className="pointer-events-none absolute left-0 top-0 z-[2] h-[82px] w-[120px] bg-white dark:bg-dark-200 rounded-br-[20px]" />
+        <div className="pointer-events-none absolute left-0 top-0 z-[2] h-[82px] w-[120px] rounded-br-[20px] bg-white dark:bg-dark" />
         <div className="pointer-events-none absolute left-[120px] top-0 z-[3] h-6 w-6 bg-[radial-gradient(circle_at_100%_100%,transparent_24px,white_25px)] dark:bg-[radial-gradient(circle_at_100%_100%,transparent_24px,#1f1f1f_25px)]" />
         <div className="pointer-events-none absolute left-0 top-[82px] z-[3] h-6 w-6 bg-[radial-gradient(circle_at_100%_100%,transparent_24px,white_25px)] dark:bg-[radial-gradient(circle_at_100%_100%,transparent_24px,#1f1f1f_25px)]" />
       </div>
