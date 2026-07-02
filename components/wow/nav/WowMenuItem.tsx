@@ -64,7 +64,7 @@ export function WowMenuItem({
         {showChevron && (
           <ChevronRight
             aria-hidden
-            className={`absolute end-[10px] top-[2px] h-3 w-1.5 opacity-40 ${navItemLabelClass}`}
+            className={`absolute end-[10px] top-1/2 h-3 w-5 -translate-y-1/2 stroke-current text-current opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 group-[.is-active]:opacity-100 ${navItemLabelClass}`}
             strokeWidth={1.2}
           />
         )}

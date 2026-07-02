@@ -1,205 +1,174 @@
 'use client'
 
 import React, { useState } from 'react'
+import ButtonComponent from './ButtonComponent'
+
+const interestData = [
+  { id: 'uiux', value: 'UI/UX Design' },
+  { id: 'webdesign', value: 'Web Design' },
+  { id: 'webdev', value: 'Web-Development' },
+  { id: 'website', value: 'Website Creation' },
+  { id: 'animation', value: 'Animation' },
+  { id: 'others', value: 'Others' },
+]
+
+const budgetData = [
+  { id: 'budget1', value: '$2k-4k' },
+  { id: 'budget2', value: '$4k-6k' },
+  { id: 'budget3', value: '$6k-8k' },
+]
 
 type WowContactFormProps = {
   className?: string
   onSubmitted?: () => void
+  showHeader?: boolean
 }
 
-const WowContactForm = ({ className = '', onSubmitted }: WowContactFormProps) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    service: 'UI/UX',
-    budget: '40k',
-    message: '',
-  })
+const labelClassName =
+  'text-lg font-normal leading-[1.2] tracking-[-0.02em] text-[#666666] dark:text-dark-100 md:text-xl'
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+const inputClassName =
+  'w-full rounded-radius-sm border border-[#1515151A] bg-backgroundBody px-5 py-4 text-base leading-[1.4] tracking-[0.02em] text-secondary placeholder:text-[#808080] focus:border-[#1515151A] focus:outline-none focus:bg-[#D9D8F3] dark:focus:bg-[#1F1F1F] dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody dark:placeholder:text-dark-100 md:text-lg'
+
+const chipClassName = (selected: boolean) =>
+  [
+    'inline-flex cursor-pointer items-center justify-center rounded-radius-sm border border-[#1515151A] px-4 py-3 text-sm font-medium transition-all duration-300 dark:border-[#EDF0F51A] md:px-8 md:py-4 md:text-base',
+    selected
+      ? 'border-transparent bg-[#9592DE] text-white dark:border-transparent dark:bg-[#292757] dark:text-white'
+      : 'bg-backgroundBody text-secondary hover:border-primary/30 dark:bg-dark dark:text-backgroundBody dark:hover:border-[#EDF0F533]',
+  ].join(' ')
+
+const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowContactFormProps) => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [interests, setInterests] = useState<string[]>([])
+  const [budget, setBudget] = useState('')
+  const [message, setMessage] = useState('')
+
+  const toggleInterest = (value: string) => {
+    setInterests((prev) =>
+      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value],
+    )
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Form Data Submitted:', formData)
-    alert(`${formData.name} Your Data Has Been Submited`)
+    console.log('Form Data Submitted:', { name, email, interests, budget, message })
+    alert(`${name}, your request has been submitted.`)
     onSubmitted?.()
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className={`mx-auto grid max-w-[800px] grid-cols-1 gap-[30px] md:grid-cols-2 ${className}`}
+      className={`mx-auto grid max-w-[800px] grid-cols-1 gap-8 md:gap-10 ${className}`}
     >
-      <div>
-      <label
-          htmlFor="wow-contact-name"
-          className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100"
-        >
-          Full Name
-        </label>
-        <input
-          type="text"
-          id="wow-contact-name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter your full name"
-          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
-          required
-        />
-      </div>
+      {showHeader && (
+        <div className="text-center md:col-span-full">
+          <h2 className="font-instrument text-[clamp(28px,5vw,40px)] font-normal leading-[1.15] tracking-[-0.02em] text-secondary dark:text-backgroundBody">
+            Let&apos;s Discuss Your <span className="italic">Project</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-[540px] text-base leading-[1.6] text-[#808080] dark:text-dark-100 md:text-lg">
+            Tell us about your goals and challenges. We&apos;ll recommend the best path forward.
+          </p>
+        </div>
+      )}
 
-      <div>
-        <label
-          htmlFor="wow-contact-email"
-          className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100"
-        >
-          Work Email
+      <div className="md:col-span-full">
+        <label htmlFor="wow-contact-name" className={labelClassName}>
+          Your Data
         </label>
-        <input
-          type="email"
-          id="wow-contact-email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="name@company.com"
-          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
-          required
-        />
-      </div>
-
-      <div className="relative">
-        <label
-          htmlFor="wow-contact-service"
-          className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100"
-        >
-          Service Type
-        </label>
-        <select
-          id="wow-contact-service"
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
-          required
-        >
-          <option value="UI/UX">UX Design</option>
-          <option value="Web design">Product Design</option>
-          <option value="Web development">Brand Identity</option>
-          <option value="Design System">Design System</option>
-        </select>
-        <span className="pointer-events-none absolute right-5 top-1/2 translate-y-1/3">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="inline dark:hidden"
-            aria-hidden
-          >
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="black"
-              strokeOpacity="0.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            className="hidden dark:inline"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="white"
-              strokeOpacity="0.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-      </div>
-
-      <div className="relative">
-        <label
-          htmlFor="wow-contact-budget"
-          className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100"
-        >
-          Project Budget
-        </label>
-        <select
-          id="wow-contact-budget"
-          name="budget"
-          value={formData.budget}
-          onChange={handleChange}
-          className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
-          required
-        >
-          <option value="40k">$10k - $25k</option>
-          <option value="55k">$25k - $50k</option>
-          <option value="90k">$50k - $100k</option>
-          <option value="100k+">$100k+</option>
-        </select>
-        <span className="pointer-events-none absolute right-5 top-1/2 inline translate-y-1/3 dark:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="black"
-              strokeOpacity="0.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-        <span className="pointer-events-none absolute right-5 top-1/2 hidden translate-y-1/3 dark:inline">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="white"
-              strokeOpacity="0.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+          <input
+            type="text"
+            id="wow-contact-name"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name*"
+            className={inputClassName}
+            required
+          />
+          <input
+            type="email"
+            id="wow-contact-email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email*"
+            className={inputClassName}
+            required
+          />
+        </div>
       </div>
 
       <div className="md:col-span-full">
-        <label
-          htmlFor="wow-contact-message"
-          className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100"
-        >
-          Project Brief
+        <p className={labelClassName}>You are interested in</p>
+        <div className="mt-3 flex flex-wrap gap-3 md:gap-4">
+          {interestData.map((item) => {
+            const selected = interests.includes(item.value)
+
+            return (
+              <button
+                key={item.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => toggleInterest(item.value)}
+                className={chipClassName(selected)}
+              >
+                {item.value}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className="md:col-span-full">
+        <p className={labelClassName}>Budget in USD:</p>
+        <div className="mt-3 flex flex-wrap gap-3 md:gap-4">
+          {budgetData.map((item) => {
+            const selected = budget === item.value
+
+            return (
+              <button
+                key={item.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => setBudget(item.value)}
+                className={chipClassName(selected)}
+              >
+                {item.value}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className="md:col-span-full">
+        <label htmlFor="wow-contact-message" className={labelClassName}>
+          Project Details*
         </label>
         <textarea
           id="wow-contact-message"
           name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Tell us about your project goals and timeline"
-          className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#1515151A] dark:border-[#EDF0F51A] focus:outline-none  dark:bg-dark"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Tell us more about your project"
+          rows={6}
+          className={`${inputClassName} mt-3 min-h-44`}
           required
         />
       </div>
 
-      <div className="col-span-full sm:mt-14 md:mx-auto">
-        <button type="submit" className="rv-button rv-button-primary block w-full md:inline-block md:w-auto">
-          <div className="rv-button-top">
-            <span>Send Message</span>
-          </div>
-          <div className="rv-button-bottom">
-            <span className="text-nowrap">Send Message</span>
-          </div>
-        </button>
+      <div className="md:col-span-full">
+        <ButtonComponent
+          type="submit"
+          variant="secondary"
+          fullWidth
+          className="!w-full [&_.rv-button-bottom_span]:uppercase [&_.rv-button-top_span]:uppercase [&_span]:text-sm [&_span]:tracking-[0.18em] md:[&_span]:text-base"
+        >
+          Request a Consultation
+        </ButtonComponent>
       </div>
     </form>
   )

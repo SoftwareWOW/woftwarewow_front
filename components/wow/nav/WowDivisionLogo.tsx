@@ -38,11 +38,11 @@ export function WowDivisionLogo({ divisionId, variant = 'theme' }: WowDivisionLo
       <>
         <DivisionLogoImage
           src={lightSrc}
-          className="block dark:hidden dark:group-hover:block dark:group-[.is-active]:block"
+          className="block group-hover:block group-[.is-active]:block dark:hidden dark:group-hover:block dark:group-[.is-active]:block"
         />
         <DivisionLogoImage
           src={darkSrc}
-          className="hidden dark:block dark:group-hover:hidden dark:group-[.is-active]:hidden"
+          className="hidden group-hover:hidden group-[.is-active]:hidden dark:block dark:group-hover:hidden dark:group-[.is-active]:hidden"
         />
       </>
     )

@@ -4,7 +4,7 @@ import type { LucideIcon } from 'lucide-react'
 import type { NavigationMenuItem } from './navigation-types'
 import { mobileBottomNavIcons } from './nav-assets'
 import { mobileNavShellClass } from './mobile-nav-shell'
-import { navItemActiveClass, navItemHoverClass } from './nav-interaction-styles'
+import { mobileBottomNavActiveClass, mobileBottomNavInactiveClass } from './nav-interaction-styles'
 
 type WowMobileBottomNavProps = {
   items: NavigationMenuItem[]
@@ -30,7 +30,7 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
             type="button"
             onClick={() => onSelect(isActive ? '' : item.id)}
             className={`group flex min-h-[60px] min-w-0 flex-1 items-center justify-center rounded-radius-sm border-r border-dotted border-white/30 p-[14px] transition-colors last:border-r-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-              isActive ? `is-active ${navItemActiveClass}` : navItemHoverClass
+              isActive ? mobileBottomNavActiveClass : mobileBottomNavInactiveClass
             }`}
             aria-label={item.label}
             aria-expanded={isActive}
