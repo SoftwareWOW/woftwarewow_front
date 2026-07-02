@@ -223,14 +223,15 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   }
 
   return (
-    <div className="wow-ecosystem relative flex w-full flex-col items-center bg-backgroundBody px-2 text-foreground transition-colors duration-300 dark:bg-dark max-md:justify-start md:min-h-screen md:justify-center sm:px-4">
+    <section className="wow-ecosystem relative flex w-full flex-col items-center bg-background px-2 text-foreground transition-colors duration-300 dark:bg-background max-md:justify-start md:min-h-screen md:justify-center sm:px-4">
+      <div className="relative z-10 flex w-full flex-col items-center">
       <RevealWrapper>
         <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
           OUR ECOSYSTEM
         </span>
       </RevealWrapper>
 
-      <div className="relative z-10 mb-8 w-full max-w-4xl text-center max-md:mb-5 sm:mb-12 lg:mb-16">
+      <div className="mb-8 w-full max-w-4xl text-center max-md:mb-5 sm:mb-12 lg:mb-16">
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
           <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
@@ -243,25 +244,6 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           {ecosystem.description}
         </p>
       </div>
-
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-0 dark:opacity-40"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, color-mix(in srgb, currentColor 10%, transparent) 1px, transparent 1px)',
-          backgroundSize: '22px 22px',
-        }}
-      />
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, var(--background) 0%, rgba(0,0,0,0.55)) 100%)',
-        }}
-      />
 
       <div
         className="relative aspect-[1200/620] w-full max-w-7xl max-md:aspect-[390/980] max-md:w-full max-md:max-w-[390px]"
@@ -347,7 +329,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               }}
             >
               <span
-                className="inline-block rounded-md bg-backgroundBody px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-dark"
+                className="inline-block rounded-md bg-background px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-background"
                 style={{
                   fontSize: nodeFontSize(n.size, isMobile),
                 }}
@@ -441,6 +423,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           })}
         </div>
       </div>
-    </div>
+      </div>
+    </section>
   )
 }
