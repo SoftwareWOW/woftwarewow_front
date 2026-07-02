@@ -1,7 +1,12 @@
 @layer components {
   .wow-ecosystem {
-    --background: oklch(0.16 0.015 270);
-    --foreground: oklch(0.98 0.003 247);
+    --background: #ededed;
+    --foreground: #171717;
     --gradient-wow: linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%);
+  }
+
+  :is(.dark) .wow-ecosystem {
+    --background: #171717;
+    --foreground: #ededed;
   }
 }

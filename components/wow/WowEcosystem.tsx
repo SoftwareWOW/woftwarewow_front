@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Dictionary } from '@/i18n/types'
 import RevealWrapper from '../animation/RevealWrapper'
 
@@ -35,7 +35,9 @@ type WowEcosystemProps = {
 
 const VB_W = 1200
 const VB_H = 620
+const MOBILE_VB_H = 820
 const CTA_Y = 580
+const MOBILE_CTA_Y = 762
 
 const WOW_THEME = {
   gradient: 'linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%)',
@@ -55,20 +57,33 @@ const NODE_LAYOUT: NodeLayout[] = [
   { id: 'marketing', x: 66, y: 65, size: 'lg' },
 ]
 
+const MOBILE_NODE_LAYOUT: NodeLayout[] = [
+  { id: 'events', x: 14, y: 7, size: 'sm' },
+  { id: 'host', x: 40, y: 9, size: 'md' },
+  { id: 'hub', x: 58, y: 8, size: 'lg' },
+  { id: 'impact', x: 84, y: 7, size: 'sm' },
+  { id: 'design', x: 20, y: 20, size: 'md' },
+  { id: 'websites', x: 74, y: 19, size: 'md' },
+  { id: 'intelligence', x: 24, y: 34, size: 'md' },
+  { id: 'accelerate', x: 52, y: 36, size: 'md' },
+  { id: 'social', x: 80, y: 34, size: 'md' },
+  { id: 'softwarewow', x: 32, y: 50, size: 'md' },
+  { id: 'marketing', x: 70, y: 52, size: 'lg' },
+]
+
 const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
 
-// Updated FLOWS with correct node connections
 const FLOWS: Record<string, NodeId[]> = {
   'best-app': ['best-app', 'softwarewow', 'intelligence', 'design'],
   'modern-systems': ['modern-systems', 'softwarewow', 'intelligence', 'host'],
-  'boost-profits': ['boost-profits', 'marketing', 'accelerate','intelligence', 'design',  'websites', 'social' ],
+  'boost-profits': ['boost-profits', 'marketing', 'accelerate', 'intelligence', 'design', 'websites', 'social'],
   'attract-new': ['attract-new', 'marketing', 'accelerate', 'websites', 'social'],
 }
 
-function nodePos(n: NodeLayout) {
+function nodePos(n: NodeLayout, viewHeight = VB_H) {
   return {
     x: (n.x / 100) * VB_W,
-    y: (n.y / 100) * VB_H,
+    y: (n.y / 100) * viewHeight,
   }
 }
 
@@ -79,25 +94,56 @@ function ctaX(idx: number) {
   return ((startPct + step * idx) / 100) * VB_W
 }
 
-function buildPath(points: { x: number; y: number }[]) {
+function buildCleanPath(points: { x: number; y: number }[], cornerRadius = 18) {
   if (points.length < 2) return ''
 
-  const r = 28
-  let d = `M ${points[0].x} ${points[0].y}`
+  let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`
 
   for (let i = 1; i < points.length; i++) {
-    const prev = points[i - 1]
-    const curr = points[i]
+    const a = points[i - 1]
+    const b = points[i]
+    const dx = b.x - a.x
+    const dy = b.y - a.y
 
-    const midY = (prev.y + curr.y) / 2
-    const dirX = Math.sign(curr.x - prev.x) || 1
-    const dirY = Math.sign(curr.y - prev.y) || 1
+    if (Math.abs(dx) < 1.5 && Math.abs(dy) < 1.5) continue
 
-    d += ` L ${prev.x} ${midY - r * dirY}`
-    d += ` Q ${prev.x} ${midY} ${prev.x + r * dirX} ${midY}`
-    d += ` L ${curr.x - r * dirX} ${midY}`
-    d += ` Q ${curr.x} ${midY} ${curr.x} ${midY + r * dirY}`
-    d += ` L ${curr.x} ${curr.y}`
+    if (Math.abs(dx) < 1.5) {
+      d += ` L ${b.x.toFixed(1)} ${b.y.toFixed(1)}`
+      continue
+    }
+
+    if (Math.abs(dy) < 1.5) {
+      d += ` L ${b.x.toFixed(1)} ${b.y.toFixed(1)}`
+      continue
+    }
+
+    const r = Math.min(cornerRadius, Math.abs(dx) / 2, Math.abs(dy) / 2)
+    const sx = Math.sign(dx)
+    const sy = Math.sign(dy)
+
+    if (Math.abs(dx) >= Math.abs(dy)) {
+      const cornerX = b.x
+      const cornerY = a.y
+
+      if (r <= 1) {
+        d += ` L ${cornerX.toFixed(1)} ${cornerY.toFixed(1)} L ${b.x.toFixed(1)} ${b.y.toFixed(1)}`
+      } else {
+        d += ` L ${(cornerX - sx * r).toFixed(1)} ${cornerY.toFixed(1)}`
+        d += ` Q ${cornerX.toFixed(1)} ${cornerY.toFixed(1)} ${cornerX.toFixed(1)} ${(cornerY + sy * r).toFixed(1)}`
+        d += ` L ${b.x.toFixed(1)} ${b.y.toFixed(1)}`
+      }
+    } else {
+      const cornerX = a.x
+      const cornerY = b.y
+
+      if (r <= 1) {
+        d += ` L ${cornerX.toFixed(1)} ${cornerY.toFixed(1)} L ${b.x.toFixed(1)} ${b.y.toFixed(1)}`
+      } else {
+        d += ` L ${cornerX.toFixed(1)} ${(cornerY - sy * r).toFixed(1)}`
+        d += ` Q ${cornerX.toFixed(1)} ${cornerY.toFixed(1)} ${(cornerX + sx * r).toFixed(1)} ${cornerY.toFixed(1)}`
+        d += ` L ${b.x.toFixed(1)} ${b.y.toFixed(1)}`
+      }
+    }
   }
 
   return d
@@ -105,6 +151,20 @@ function buildPath(points: { x: number; y: number }[]) {
 
 export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   const [activeFlow, setActiveFlow] = useState<keyof typeof FLOWS>('best-app')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
+    const update = () => setIsMobile(mediaQuery.matches)
+
+    update()
+    mediaQuery.addEventListener('change', update)
+    return () => mediaQuery.removeEventListener('change', update)
+  }, [])
+
+  const currentLayout = isMobile ? MOBILE_NODE_LAYOUT : NODE_LAYOUT
+  const viewHeight = isMobile ? MOBILE_VB_H : VB_H
+  const ctaY = isMobile ? MOBILE_CTA_Y : CTA_Y
 
   const activeSet = useMemo(() => new Set(FLOWS[activeFlow]), [activeFlow])
 
@@ -114,42 +174,42 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
 
     const startPt = {
       x: ctaX(ctaIdx),
-      y: CTA_Y - 30,
+      y: ctaY - (isMobile ? 26 : 32),
     }
 
     const nodePoints = ids
       .slice(1)
       .map((nid) => {
-        const n = NODE_LAYOUT.find((nn) => nn.id === nid)
+        const n = currentLayout.find((nn) => nn.id === nid)
         if (!n) return null
 
-        const p = nodePos(n)
-
-        return {
-          x: p.x,
-          y: p.y + 14,
-        }
+        return nodePos(n, viewHeight)
       })
       .filter(Boolean) as { x: number; y: number }[]
 
-    return buildPath([startPt, ...nodePoints])
-  }, [activeFlow])
+    return buildCleanPath([startPt, ...nodePoints], isMobile ? 14 : 18)
+  }, [activeFlow, currentLayout, ctaY, isMobile, viewHeight])
 
-  const nodeFontSize = (s?: 'sm' | 'md' | 'lg') => {
+  const nodeFontSize = (s?: 'sm' | 'md' | 'lg', mobile = false) => {
+    if (mobile) {
+      if (s === 'lg') return 'clamp(14px, 3.6cqw, 24px)'
+      if (s === 'sm') return 'clamp(11px, 2.8cqw, 16px)'
+      return 'clamp(12px, 3.1cqw, 20px)'
+    }
+
     if (s === 'lg') return 'clamp(14px, 3.4cqw, 38px)'
     if (s === 'sm') return 'clamp(9px, 2cqw, 22px)'
     return 'clamp(11px, 2.6cqw, 30px)'
   }
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-2 text-foreground transition-colors duration-300 sm:px-4">
-      {/* Header Section */}
+    <div className="wow-ecosystem relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-backgroundBody px-2 text-foreground transition-colors duration-300 dark:bg-dark sm:px-4">
       <RevealWrapper>
         <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
           OUR ECOSYSTEM
         </span>
       </RevealWrapper>
-      
+
       <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
@@ -164,7 +224,6 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         </p>
       </div>
 
-      {/* Dotted background */}
       <div
         aria-hidden
         className="absolute inset-0 opacity-0 dark:opacity-40"
@@ -175,7 +234,6 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         }}
       />
 
-      {/* Vignette */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
@@ -185,16 +243,15 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         }}
       />
 
-      {/* Stage */}
       <div
-        className="relative aspect-[1200/620] w-full max-w-7xl"
+        className="relative aspect-[1200/620] w-full max-w-7xl max-md:aspect-[400/820] max-md:max-w-[440px]"
         style={{ containerType: 'inline-size' }}
       >
-        {/* SVG layer for paths */}
         <svg
-          viewBox={`0 0 ${VB_W} ${VB_H}`}
+          viewBox={`0 0 ${VB_W} ${viewHeight}`}
           className="absolute inset-0 h-full w-full overflow-visible"
           preserveAspectRatio="xMidYMid meet"
+          style={{ zIndex: 1 }}
         >
           <defs>
             <linearGradient id="wow-gradient" x1="0" y1="0" x2="1" y2="0">
@@ -206,24 +263,22 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
 
           <AnimatePresence mode="wait">
             <motion.g key={activeFlow}>
-              {/* Single path - gradient color */}
               <motion.path
                 d={pathD}
                 fill="none"
                 stroke="url(#wow-gradient)"
-                strokeWidth={3}
+                strokeWidth={isMobile ? 2.5 : 3}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                opacity={0.8}
+                opacity={0.6}
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.8 }}
+                animate={{ pathLength: 1, opacity: 0.6 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
               />
 
-              {/* Moving particle */}
               <motion.circle
-                r={4}
+                r={isMobile ? 3 : 4}
                 fill="#8b7cff"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -242,8 +297,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           </AnimatePresence>
         </svg>
 
-        {/* Nodes layer */}
-        {NODE_LAYOUT.map((n) => {
+        {currentLayout.map((n) => {
           const active = activeSet.has(n.id)
           const nodeCopy = ecosystem.nodes[n.id as keyof typeof ecosystem.nodes]
 
@@ -255,9 +309,10 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 left: `${n.x}%`,
                 top: `${n.y}%`,
                 transformOrigin: 'center',
+                zIndex: 3,
               }}
               animate={{
-                scale: active ? 1.5 : 0.75,
+                scale: active ? (isMobile ? 1.12 : 1.5) : isMobile ? 0.9 : 0.75,
                 opacity: active ? 1 : 0.5,
               }}
               transition={{
@@ -266,9 +321,9 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               }}
             >
               <span
-                className="font-bold leading-none tracking-tight"
+                className="inline-block rounded-md bg-backgroundBody px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-dark max-md:px-2 max-md:py-1"
                 style={{
-                  fontSize: nodeFontSize(n.size),
+                  fontSize: nodeFontSize(n.size, isMobile),
                 }}
               >
                 <span
@@ -287,50 +342,72 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           )
         })}
 
-        {/* CTA Buttons */}
         <div
-          className="absolute left-0 right-0 grid grid-cols-4"
+          className="absolute left-0 right-0 flex items-stretch justify-center gap-1 px-1 sm:gap-2 sm:px-2 md:gap-3"
           style={{
-            top: `${(CTA_Y / VB_H) * 100}%`,
+            top: `${(ctaY / viewHeight) * 100}%`,
             transform: 'translateY(-50%)',
-            gap: 'clamp(4px, 1cqw, 20px)',
-            paddingLeft: 'clamp(4px, 1cqw, 16px)',
-            paddingRight: 'clamp(4px, 1cqw, 16px)',
+            zIndex: 4,
           }}
         >
-          {CTA_IDS.map((ctaId, index) => {
+          {CTA_IDS.map((ctaId) => {
             const active = activeFlow === ctaId
+            const label = ecosystem.ctas[ctaId as keyof typeof ecosystem.ctas]
 
             return (
-              <button
+              <motion.button
                 key={ctaId}
+                layout
+                type="button"
                 onClick={() => setActiveFlow(ctaId)}
-                className="relative rounded-md font-medium leading-tight outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary/60"
-                style={{
-                  fontSize: active
-                    ? 'clamp(10px, 1.8cqw, 20px)'
-                    : 'clamp(5px, 0.95cqw, 14px)',
-                  letterSpacing: '0.18em',
-                  paddingTop: 'clamp(6px, 1.2cqw, 16px)',
-                  paddingBottom: 'clamp(6px, 1.2cqw, 16px)',
-                  paddingLeft: 'clamp(4px, 1cqw, 20px)',
-                  paddingRight: 'clamp(4px, 1cqw, 20px)',
-                  background: active
-                    ? WOW_THEME.gradient
-                    : 'rgba(255,255,255,0.9)',
-                  color: active ? '#ffffff' : '#1a1530',
-                  opacity: active ? 1 : 0.4,
-                  transform: active ? 'scale(1.1)' : 'scale(0.85)',
-                  transformOrigin: 'center',
-                  transition: 'all 0.45s cubic-bezier(0.65, 0, 0.35, 1)',
-                  boxShadow: active
-                    ? '0 10px 40px -10px rgba(139,124,255,0.7), 0 0 0 1px rgba(255,255,255,0.1)'
-                    : '0 4px 16px -6px rgba(0,0,0,0.5)',
-                }}
+                onMouseEnter={() => setActiveFlow(ctaId)}
                 aria-pressed={active}
+                aria-label={label}
+                transition={{
+                  layout: { type: 'spring', stiffness: 420, damping: 34 },
+                }}
+                className={`relative flex min-h-[34px] items-center justify-center overflow-hidden rounded-md font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary/60 sm:min-h-[44px] md:min-h-[52px] ${
+                  active
+                    ? 'text-white shadow-[0_10px_40px_-10px_rgba(139,124,255,0.7)]'
+                    : 'bg-white/90 text-[#1a1530]/45 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.12)] dark:bg-dark-200/90 dark:text-backgroundBody/35'
+                }`}
+                style={{
+                  flex: active ? 2.4 : 0.65,
+                  background: active ? WOW_THEME.gradient : undefined,
+                }}
               >
-                {ecosystem.ctas[ctaId as keyof typeof ecosystem.ctas]}
-              </button>
+                <AnimatePresence mode="popLayout" initial={false}>
+                  {active ? (
+                    <motion.span
+                      key={`${ctaId}-label`}
+                      initial={{ opacity: 0, scale: 0.92 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.92 }}
+                      transition={{ duration: 0.28, ease: [0.65, 0, 0.35, 1] }}
+                      className="whitespace-nowrap px-2 uppercase tracking-[0.18em] sm:px-3 md:px-4"
+                      style={{
+                        fontSize: isMobile
+                          ? 'clamp(7px, 1.45cqw, 10px)'
+                          : 'clamp(10px, 1.8cqw, 20px)',
+                      }}
+                    >
+                      {label}
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key={`${ctaId}-plus`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.28, ease: [0.65, 0, 0.35, 1] }}
+                      className="flex size-full items-center justify-center text-base font-light sm:text-lg"
+                      aria-hidden
+                    >
+                      +
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             )
           })}
         </div>
