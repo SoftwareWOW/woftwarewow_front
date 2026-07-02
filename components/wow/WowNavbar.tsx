@@ -255,7 +255,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               />
             </Link>
 
-            <ul className="hidden items-center gap-[3px] md:flex lg:gap-[5px]">
+            <ul className="hidden items-center md:flex">
               {navigation.items.map((item) => {
                 const isActive = activeMenuId === item.id
 
@@ -266,7 +266,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       onMouseEnter={() => openMegaMenu(item.id)}
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`flex items-center rounded-radius-sm px-3 py-2 font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:px-5 lg:text-sm lg:tracking-[2.1px] 2xl:px-8 2xl:py-4 ${
+                      className={`flex items-center justify-center gap-[6px] rounded-radius-sm px-8 py-[24px] font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:text-sm lg:tracking-[2.1px] ${
                         isActive ? navPillActiveClass : navPillInactiveClass
                       }`}
                       aria-expanded={isActive}
@@ -279,7 +279,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                           isActive ? '' : 'rotate-180'
                         }`}
                       >
-                        <ChevronDown aria-hidden className="h-2 w-3.5" strokeWidth={1.2} />
+                        <ChevronDown aria-hidden className="h-3 w-5  text-black dark:hover:text-black dark:text-black" strokeWidth={1.2} />
                       </span>
                     </button>
                   </li>

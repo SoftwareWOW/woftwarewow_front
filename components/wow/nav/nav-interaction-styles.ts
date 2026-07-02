@@ -20,7 +20,7 @@ export const navItemIconClass =
   'stroke-black text-black group-hover:!stroke-white group-hover:!text-white group-[.is-active]:!stroke-white group-[.is-active]:!text-white dark:stroke-white dark:text-white dark:group-hover:!stroke-white dark:group-hover:!text-white dark:group-[.is-active]:!stroke-white dark:group-[.is-active]:!text-white'
 
 export const navPillActiveClass =
-  'bg-primary-50 text-white dark:bg-primary-50 dark:text-white'
+  'bg-primary-50 hover:text-black dark:bg-primary-50  dark:hover:text-black dark:text-black'
 
 export const navPillInactiveClass =
   'bg-transparent text-black/50 dark:bg-transparent dark:text-dark-100 hover:bg-primary-50 hover:text-black dark:hover:bg-primary-50 dark:hover:text-black'
