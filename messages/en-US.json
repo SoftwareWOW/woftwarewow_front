@@ -1895,12 +1895,12 @@
       "softwarewow": { "prefix": "Software", "label": "WOW!" },
       "marketing": { "prefix": "WOW", "label": "Marketing" }
     },
-    "ctas": {
-      "best-app": "BUILD BETTER SYSTEMS",
-      "modern-systems": "MODERNIZE YOUR STACK",
-      "boost-profits": "DRIVE REAL REVENUE",
-      "attract-new": "WIN MORE CUSTOMERS"
-    }
+   "ctas": {
+  "best-app": "THE BEST APP",
+  "modern-systems": "MODERN SYSTEMS",
+  "boost-profits": "BOOST PROFITS",
+  "attract-new": "ATTRACT NEW CUSTOMER"
+}
   },
   "superAgencyClient": {
     "heading": {

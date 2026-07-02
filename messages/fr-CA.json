@@ -1894,12 +1894,12 @@
       "softwarewow": { "prefix": "Software", "label": "WOW!" },
       "marketing": { "prefix": "WOW", "label": "Marketing" }
     },
-    "ctas": {
-      "best-app": "LA MEILLEURE APP",
-      "modern-systems": "SYSTÈMES MODERNES",
-      "boost-profits": "AUGMENTER LES PROFITS",
-      "attract-new": "ATTIRER DE NOUVEAUX CLIENTS"
-    }
+"ctas": {
+  "best-app": "LA MEILLEURE APP",
+  "modern-systems": "SYSTÈMES MODERNES",
+  "boost-profits": "AUGMENTER LES PROFITS",
+  "attract-new": "ATTIRER DE NOUVEAUX CLIENTS"
+}
   },
   "superAgencyClient": {
      "heading": {
