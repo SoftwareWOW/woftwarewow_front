@@ -35,9 +35,10 @@ type WowEcosystemProps = {
 
 const VB_W = 1200
 const VB_H = 620
-const MOBILE_VB_H = 820
-const CTA_Y = 580
-const MOBILE_CTA_Y = 762
+const MOBILE_VB_W = 390
+const MOBILE_VB_H = 980
+const CTA_Y = 620
+const MOBILE_CTA_Y = 630
 
 const WOW_THEME = {
   gradient: 'linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%)',
@@ -48,27 +49,28 @@ const NODE_LAYOUT: NodeLayout[] = [
   { id: 'host', x: 36, y: 11, size: 'md' },
   { id: 'hub', x: 58, y: 14, size: 'lg' },
   { id: 'impact', x: 82, y: 17, size: 'sm' },
-  { id: 'design', x: 20, y: 40, size: 'md' },
+  { id: 'design', x: 20, y: 30, size: 'md' },
   { id: 'events', x: 5, y: 16, size: 'sm' },
   { id: 'intelligence', x: 5, y: 52, size: 'md' },
   { id: 'accelerate', x: 44, y: 52, size: 'md' },
   { id: 'social', x: 80, y: 52, size: 'md' },
-  { id: 'softwarewow', x: 30, y: 70, size: 'md' },
-  { id: 'marketing', x: 66, y: 65, size: 'lg' },
+  { id: 'softwarewow', x: 25, y: 75, size: 'md' },
+  { id: 'marketing', x: 66, y: 75, size: 'lg' },
 ]
 
+// Mobile: same ecosystem map as desktop — extra vertical spacing, edge nodes pulled inward
 const MOBILE_NODE_LAYOUT: NodeLayout[] = [
-  { id: 'events', x: 14, y: 7, size: 'sm' },
-  { id: 'host', x: 40, y: 9, size: 'md' },
-  { id: 'hub', x: 58, y: 8, size: 'lg' },
-  { id: 'impact', x: 84, y: 7, size: 'sm' },
-  { id: 'design', x: 20, y: 20, size: 'md' },
-  { id: 'websites', x: 74, y: 19, size: 'md' },
-  { id: 'intelligence', x: 24, y: 34, size: 'md' },
-  { id: 'accelerate', x: 52, y: 36, size: 'md' },
-  { id: 'social', x: 80, y: 34, size: 'md' },
-  { id: 'softwarewow', x: 32, y: 50, size: 'md' },
-  { id: 'marketing', x: 70, y: 52, size: 'lg' },
+  { id: 'events', x: 2, y: 10, size: 'sm' },
+  { id: 'design', x: 10, y: 18, size: 'md' },
+  { id: 'hub', x: 40, y: 8, size: 'lg' },
+  { id: 'impact', x: 75, y: 10, size: 'sm' },
+  { id: 'websites', x: 64, y: 18, size: 'md' },
+  { id: 'host', x: 40, y: 26, size: 'md' },
+  { id: 'intelligence', x: 8, y: 34, size: 'md' },
+  { id: 'accelerate', x: 40, y: 44, size: 'md' },
+  { id: 'social', x: 76, y: 34, size: 'md' },
+  { id: 'softwarewow', x: 8, y: 52, size: 'md' },
+  { id: 'marketing', x: 65, y: 52, size: 'lg' },
 ]
 
 const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
@@ -80,18 +82,18 @@ const FLOWS: Record<string, NodeId[]> = {
   'attract-new': ['attract-new', 'marketing', 'accelerate', 'websites', 'social'],
 }
 
-function nodePos(n: NodeLayout, viewHeight = VB_H) {
+function nodePos(n: NodeLayout, viewHeight = VB_H, viewWidth = VB_W) {
   return {
-    x: (n.x / 100) * VB_W,
+    x: (n.x / 100) * viewWidth,
     y: (n.y / 100) * viewHeight,
   }
 }
 
-function ctaX(idx: number) {
+function ctaX(idx: number, viewWidth = VB_W) {
   const startPct = 12
   const endPct = 88
   const step = (endPct - startPct) / 3
-  return ((startPct + step * idx) / 100) * VB_W
+  return ((startPct + step * idx) / 100) * viewWidth
 }
 
 function buildCleanPath(points: { x: number; y: number }[], cornerRadius = 18) {
@@ -163,8 +165,8 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   }, [])
 
   const currentLayout = isMobile ? MOBILE_NODE_LAYOUT : NODE_LAYOUT
+  const viewWidth = isMobile ? MOBILE_VB_W : VB_W
   const viewHeight = isMobile ? MOBILE_VB_H : VB_H
-  const ctaY = isMobile ? MOBILE_CTA_Y : CTA_Y
 
   const activeSet = useMemo(() => new Set(FLOWS[activeFlow]), [activeFlow])
 
@@ -172,29 +174,48 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
     const ids = FLOWS[activeFlow]
     const ctaIdx = CTA_IDS.findIndex((c) => c === ids[0])
 
+    if (isMobile) {
+      const startPt = {
+        x: ctaX(ctaIdx, MOBILE_VB_W),
+        y: MOBILE_CTA_Y - 32,
+      }
+
+      const nodePoints = ids
+        .slice(1)
+        .map((nid) => {
+          const n = MOBILE_NODE_LAYOUT.find((nn) => nn.id === nid)
+          if (!n) return null
+
+          return nodePos(n, MOBILE_VB_H, MOBILE_VB_W)
+        })
+        .filter(Boolean) as { x: number; y: number }[]
+
+      return buildCleanPath([startPt, ...nodePoints], 14)
+    }
+
     const startPt = {
       x: ctaX(ctaIdx),
-      y: ctaY - (isMobile ? 26 : 32),
+      y: CTA_Y - 32,
     }
 
     const nodePoints = ids
       .slice(1)
       .map((nid) => {
-        const n = currentLayout.find((nn) => nn.id === nid)
+        const n = NODE_LAYOUT.find((nn) => nn.id === nid)
         if (!n) return null
 
-        return nodePos(n, viewHeight)
+        return nodePos(n, VB_H)
       })
       .filter(Boolean) as { x: number; y: number }[]
 
-    return buildCleanPath([startPt, ...nodePoints], isMobile ? 14 : 18)
-  }, [activeFlow, currentLayout, ctaY, isMobile, viewHeight])
+    return buildCleanPath([startPt, ...nodePoints], 18)
+  }, [activeFlow, isMobile])
 
   const nodeFontSize = (s?: 'sm' | 'md' | 'lg', mobile = false) => {
     if (mobile) {
-      if (s === 'lg') return 'clamp(14px, 3.6cqw, 24px)'
-      if (s === 'sm') return 'clamp(11px, 2.8cqw, 16px)'
-      return 'clamp(12px, 3.1cqw, 20px)'
+      if (s === 'lg') return 'clamp(12px, 3.2cqw, 20px)'
+      if (s === 'sm') return 'clamp(10px, 2.4cqw, 15px)'
+      return 'clamp(11px, 2.8cqw, 17px)'
     }
 
     if (s === 'lg') return 'clamp(14px, 3.4cqw, 38px)'
@@ -203,14 +224,14 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   }
 
   return (
-    <div className="wow-ecosystem relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-backgroundBody px-2 text-foreground transition-colors duration-300 dark:bg-dark sm:px-4">
+    <div className="wow-ecosystem relative flex w-full flex-col items-center bg-backgroundBody px-2 text-foreground transition-colors duration-300 dark:bg-dark max-md:justify-start md:min-h-screen md:justify-center sm:px-4">
       <RevealWrapper>
         <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
           OUR ECOSYSTEM
         </span>
       </RevealWrapper>
 
-      <div className="relative z-10 mb-8 w-full max-w-4xl text-center sm:mb-12 lg:mb-16">
+      <div className="relative z-10 mb-8 w-full max-w-4xl text-center max-md:mb-5 sm:mb-12 lg:mb-16">
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
           <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
@@ -244,11 +265,11 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
       />
 
       <div
-        className="relative aspect-[1200/620] w-full max-w-7xl max-md:aspect-[400/820] max-md:max-w-[440px]"
+        className="relative aspect-[1200/620] w-full max-w-7xl max-md:aspect-[390/980] max-md:w-full max-md:max-w-[390px]"
         style={{ containerType: 'inline-size' }}
       >
         <svg
-          viewBox={`0 0 ${VB_W} ${viewHeight}`}
+          viewBox={`0 0 ${viewWidth} ${viewHeight}`}
           className="absolute inset-0 h-full w-full overflow-visible"
           preserveAspectRatio="xMidYMid meet"
           style={{ zIndex: 1 }}
@@ -312,7 +333,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 zIndex: 3,
               }}
               animate={{
-                scale: active ? (isMobile ? 1.12 : 1.5) : isMobile ? 0.9 : 0.75,
+                scale: active ? (isMobile ? 1.28 : 1.5) : isMobile ? 0.78 : 0.75,
                 opacity: active ? 1 : 0.5,
               }}
               transition={{
@@ -321,7 +342,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               }}
             >
               <span
-                className="inline-block rounded-md bg-backgroundBody px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-dark max-md:px-2 max-md:py-1"
+                className="inline-block rounded-md bg-backgroundBody px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-dark"
                 style={{
                   fontSize: nodeFontSize(n.size, isMobile),
                 }}
@@ -345,7 +366,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         <div
           className="absolute left-0 right-0 flex items-stretch justify-center gap-1 px-1 sm:gap-2 sm:px-2 md:gap-3"
           style={{
-            top: `${(ctaY / viewHeight) * 100}%`,
+            top: isMobile ? `${(MOBILE_CTA_Y / MOBILE_VB_H) * 100}%` : `${(CTA_Y / VB_H) * 100}%`,
             transform: 'translateY(-50%)',
             zIndex: 4,
           }}
@@ -366,7 +387,9 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 transition={{
                   layout: { type: 'spring', stiffness: 420, damping: 34 },
                 }}
-                className={`relative flex min-h-[34px] items-center justify-center overflow-hidden rounded-md font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary/60 sm:min-h-[44px] md:min-h-[52px] ${
+                className={`relative flex items-center justify-center overflow-hidden rounded-md font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                  isMobile ? 'min-h-[36px]' : 'min-h-[34px] sm:min-h-[44px] md:min-h-[52px]'
+                } ${
                   active
                     ? 'text-white shadow-[0_10px_40px_-10px_rgba(139,124,255,0.7)]'
                     : 'bg-white/90 text-[#1a1530]/45 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.12)] dark:bg-dark-200/90 dark:text-backgroundBody/35'
@@ -386,9 +409,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                       transition={{ duration: 0.28, ease: [0.65, 0, 0.35, 1] }}
                       className="whitespace-nowrap px-2 uppercase tracking-[0.18em] sm:px-3 md:px-4"
                       style={{
-                        fontSize: isMobile
-                          ? 'clamp(7px, 1.45cqw, 10px)'
-                          : 'clamp(10px, 1.8cqw, 20px)',
+                        fontSize: isMobile ? '9px' : 'clamp(10px, 1.8cqw, 20px)',
                       }}
                     >
                       {label}
