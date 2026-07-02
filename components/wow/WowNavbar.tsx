@@ -266,7 +266,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       onMouseEnter={() => openMegaMenu(item.id)}
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`flex items-center justify-center gap-[6px] rounded-radius-sm px-8 py-[24px] font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:text-sm lg:tracking-[2.1px] ${
+                      className={`group/nav-pill flex items-center justify-center gap-[6px] rounded-radius-sm px-8 py-[24px] font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:text-sm lg:tracking-[2.1px] ${
                         isActive ? navPillActiveClass : navPillInactiveClass
                       }`}
                       aria-expanded={isActive}
@@ -279,7 +279,15 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                           isActive ? '' : 'rotate-180'
                         }`}
                       >
-                        <ChevronDown aria-hidden className="h-3 w-5  text-black dark:hover:text-black dark:text-black" strokeWidth={1.2} />
+                        <ChevronDown
+                          aria-hidden
+                          className={`h-3 w-5 shrink-0 transition-colors duration-300 ${
+                            isActive
+                              ? 'stroke-black text-black'
+                              : 'stroke-current text-current dark:stroke-dark-100 dark:text-dark-100 dark:group-hover/nav-pill:stroke-black dark:group-hover/nav-pill:text-black'
+                          }`}
+                          strokeWidth={1.2}
+                        />
                       </span>
                     </button>
                   </li>
