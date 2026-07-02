@@ -116,6 +116,7 @@ export default function WowMegaMenuPanel({
         {detailPanel && (
           <WowDetailCard
             {...detailPanel}
+            contentKey={selectedId ?? 'default'}
             imageSrc={detailImageSrc}
             href={selectedItem?.href}
             onNavigate={onNavigate}
