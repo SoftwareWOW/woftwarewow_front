@@ -58,7 +58,6 @@ const NODE_LAYOUT: NodeLayout[] = [
   { id: 'marketing', x: 66, y: 75, size: 'lg' },
 ]
 
-// Mobile: same ecosystem map as desktop — extra vertical spacing, edge nodes pulled inward
 const MOBILE_NODE_LAYOUT: NodeLayout[] = [
   { id: 'events', x: 2, y: 10, size: 'sm' },
   { id: 'design', x: 10, y: 18, size: 'md' },
@@ -282,9 +281,10 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
             </linearGradient>
           </defs>
 
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.g key={activeFlow}>
               <motion.path
+                key={`path-${activeFlow}`}
                 d={pathD}
                 fill="none"
                 stroke="url(#wow-gradient)"
@@ -294,8 +294,11 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 opacity={0.6}
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 0.6 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+                exit={{ pathLength: 0, opacity: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.65, 0, 0.35, 1],
+                }}
               />
 
               <motion.circle
@@ -304,7 +307,9 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ delay: 0.4 }}
+                transition={{
+                  duration: 0.2,
+                }}
               >
                 <animateMotion
                   key={`${activeFlow}-particle`}
@@ -337,7 +342,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 opacity: active ? 1 : 0.5,
               }}
               transition={{
-                duration: 0.55,
+                duration: 0.4,
                 ease: [0.65, 0, 0.35, 1],
               }}
             >
@@ -406,7 +411,10 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                       initial={{ opacity: 0, scale: 0.92 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.92 }}
-                      transition={{ duration: 0.28, ease: [0.65, 0, 0.35, 1] }}
+                      transition={{
+                        duration: 0.2,
+                        ease: [0.65, 0, 0.35, 1],
+                      }}
                       className="whitespace-nowrap px-2 uppercase tracking-[0.18em] sm:px-3 md:px-4"
                       style={{
                         fontSize: isMobile ? '9px' : 'clamp(10px, 1.8cqw, 20px)',
@@ -420,7 +428,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.28, ease: [0.65, 0, 0.35, 1] }}
+                      transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
                       className="flex size-full items-center justify-center text-base font-light sm:text-lg"
                       aria-hidden
                     >
