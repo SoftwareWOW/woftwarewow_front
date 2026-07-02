@@ -38,7 +38,7 @@ const VB_H = 620
 const MOBILE_VB_W = 390
 const MOBILE_VB_H = 980
 const CTA_Y = 620
-const MOBILE_CTA_Y = 630
+const MOBILE_CTA_Y = 600
 
 const WOW_THEME = {
   gradient: 'linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%)',
@@ -60,16 +60,16 @@ const NODE_LAYOUT: NodeLayout[] = [
 
 const MOBILE_NODE_LAYOUT: NodeLayout[] = [
   { id: 'events', x: 2, y: 10, size: 'sm' },
-  { id: 'design', x: 10, y: 18, size: 'md' },
+  { id: 'design', x: 10, y: 16, size: 'md' },
   { id: 'hub', x: 40, y: 8, size: 'lg' },
   { id: 'impact', x: 75, y: 10, size: 'sm' },
-  { id: 'websites', x: 64, y: 18, size: 'md' },
-  { id: 'host', x: 40, y: 26, size: 'md' },
-  { id: 'intelligence', x: 8, y: 34, size: 'md' },
-  { id: 'accelerate', x: 40, y: 44, size: 'md' },
-  { id: 'social', x: 76, y: 34, size: 'md' },
-  { id: 'softwarewow', x: 8, y: 52, size: 'md' },
-  { id: 'marketing', x: 65, y: 52, size: 'lg' },
+  { id: 'websites', x: 64, y: 16, size: 'md' },
+  { id: 'host', x: 40, y: 24, size: 'md' },
+  { id: 'intelligence', x: 8, y: 32, size: 'md' },
+  { id: 'accelerate', x: 40, y: 42, size: 'md' },
+  { id: 'social', x: 65, y: 32, size: 'md' },
+  { id: 'softwarewow', x: 8, y: 50, size: 'md' },
+  { id: 'marketing', x: 58, y: 50, size: 'lg' },
 ]
 
 const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
@@ -78,7 +78,7 @@ const FLOWS: Record<string, NodeId[]> = {
   'best-app': ['best-app', 'softwarewow', 'intelligence', 'design'],
   'modern-systems': ['modern-systems', 'softwarewow', 'intelligence', 'host'],
   'boost-profits': ['boost-profits', 'marketing', 'accelerate', 'intelligence', 'design', 'websites', 'social'],
-  'attract-new': ['attract-new', 'marketing', 'accelerate', 'websites', 'social'],
+  'attract-new': ['attract-new', 'marketing', 'accelerate', 'social','websites'],
 }
 
 function nodePos(n: NodeLayout, viewHeight = VB_H, viewWidth = VB_W) {
@@ -212,9 +212,10 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
 
   const nodeFontSize = (s?: 'sm' | 'md' | 'lg', mobile = false) => {
     if (mobile) {
-      if (s === 'lg') return 'clamp(12px, 3.2cqw, 20px)'
-      if (s === 'sm') return 'clamp(10px, 2.4cqw, 15px)'
-      return 'clamp(11px, 2.8cqw, 17px)'
+      // 🔥 INCREASED MOBILE FONT SIZES
+      if (s === 'lg') return 'clamp(14px, 3.8cqw, 26px)'
+      if (s === 'sm') return 'clamp(12px, 3cqw, 18px)'
+      return 'clamp(13px, 3.4cqw, 22px)'
     }
 
     if (s === 'lg') return 'clamp(14px, 3.4cqw, 38px)'
@@ -320,7 +321,8 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 zIndex: 3,
               }}
               animate={{
-                scale: active ? (isMobile ? 1.28 : 1.5) : isMobile ? 0.78 : 0.75,
+                // 🔥 INCREASED MOBILE SCALE VALUES
+                scale: active ? (isMobile ? 1.5 : 1.5) : isMobile ? 0.9 : 0.75,
                 opacity: active ? 1 : 0.5,
               }}
               transition={{
