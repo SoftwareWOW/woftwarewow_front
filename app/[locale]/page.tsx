@@ -37,7 +37,7 @@ const Home = async ({ params }: Props) => {
 
   return (
     <WowLayout>
-      <div className="flex flex-col gap-[72px] pb-[72px] sm:gap-[96px] sm:pb-[96px] md:gap-[128px] md:pb-[128px] lg:gap-[160px] lg:pb-[160px] xl:gap-[200px] xl:pb-[200px]">
+      <div className="flex flex-col gap-12 pb-12 sm:gap-16 sm:pb-16 md:gap-24 md:pb-24 lg:gap-32 lg:pb-32 xl:gap-40 xl:pb-40 2xl:gap-[200px] 2xl:pb-[200px]">
         <WowHero hero={dictionary.hero} />
         <WowEcosystem ecosystem={dictionary.ecosystem} />
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
