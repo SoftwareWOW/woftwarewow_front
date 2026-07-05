@@ -224,7 +224,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   }
 
   return (
-    <section className="wow-ecosystem relative flex w-full flex-col items-center bg-background px-2 text-foreground transition-colors duration-300 dark:bg-background max-md:justify-start md:min-h-screen md:justify-center sm:px-4">
+    <section className="wow-ecosystem relative flex w-full flex-col items-center bg-background px-2 text-foreground transition-colors duration-300 dark:bg-background max-md:justify-start sm:px-4">
       <div className="relative z-10 flex w-full flex-col items-center">
       <RevealWrapper>
         <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
@@ -247,7 +247,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
       </div>
 
       <div
-        className="relative aspect-[1200/620] w-full max-w-7xl max-md:aspect-[390/980] max-md:w-full max-md:max-w-[390px]"
+        className="relative aspect-[1200/620] w-full max-w-7xl max-md:aspect-[390/680] max-md:w-full max-md:max-w-[390px]"
         style={{ containerType: 'inline-size' }}
       >
         <svg

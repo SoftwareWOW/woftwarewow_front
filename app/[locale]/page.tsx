@@ -37,10 +37,12 @@ const Home = async ({ params }: Props) => {
 
   return (
     <WowLayout>
-      <div className="flex flex-col gap-[72px] pb-[72px] sm:gap-[96px] sm:pb-[96px] md:gap-[128px] md:pb-[128px] lg:gap-[160px] lg:pb-[160px] xl:gap-[200px] xl:pb-[200px]">
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <WowHero hero={dictionary.hero} />
-        <WowEcosystem ecosystem={dictionary.ecosystem} />
+     <div className="flex flex-col gap-0 lg:contents">
+         <WowEcosystem ecosystem={dictionary.ecosystem} />
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+     </div>
         <Stats />
         <DevisionOverview />
         <SolutionToChallengesSection />
@@ -48,7 +50,9 @@ const Home = async ({ params }: Props) => {
         <HumanTuch />
         <Faq />
         <GrowthStrategies />
-        <WowGrowthCta />
+        <div className="mb-3">
+          <WowGrowthCta />
+        </div>
       </div>
     </WowLayout>
   )

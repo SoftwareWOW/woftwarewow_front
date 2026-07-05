@@ -92,10 +92,10 @@ const divisions = [
 ]
 
 const wowGradientClass =
-  'bg-gradient-to-r from-[#f4a8b8] via-[#b794f4] to-[#8b7cff] bg-clip-text text-transparent'
+  'bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent'
 
-function renderDivisionTitle(title: string, isActive: boolean) {
-  const wowClass = isActive ? wowGradientClass : 'text-[#8b7cff]'
+function renderDivisionTitle(title: string) {
+  const wowClass = wowGradientClass
 
   if (title.startsWith('WOW ')) {
     return (
@@ -269,34 +269,35 @@ const DevisionOverview = () => {
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[210px] flex-col rounded-radius-sm p-6 shadow-md transition-all duration-500 sm:min-h-[220px] md:min-h-[230px] md:p-7 lg:min-h-[240px] lg:p-8 ${
+                  className={`relative flex min-h-[210px] flex-col overflow-hidden rounded-radius-sm p-6 transition-all duration-500 sm:min-h-[220px] md:min-h-[230px] md:p-7 lg:min-h-[240px] lg:p-8 ${
                     isActive
-                      ? 'bg-white/100 text-[#1a1a1a] shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-[#1a1a1a]/100 dark:text-[#F2F2F2]'
-                      : 'bg-white/70 text-[#1a1a1a] shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-[#1a1a1a]/70 dark:text-[#999999]'
+                      ? 'bg-white dark:bg-[#121212]'
+                      : 'bg-white/80 dark:bg-[#121212]/90'
                   }`}
                 >
-                  <h3 className="pr-4 text-2xl font-bold leading-[1.15] tracking-[-0.02em] md:text-[1.65rem]">
-                    {renderDivisionTitle(item.title, isActive)}
+                  <span
+                    aria-hidden
+                    className={`pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-black transition-opacity duration-300 dark:bg-white ${
+                      isActive ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  />
+                  <h3 className="pr-4 text-2xl font-bold leading-[1.15] tracking-[-0.02em] text-[#1a1a1a] md:text-[1.65rem] dark:text-white">
+                    {renderDivisionTitle(item.title)}
                   </h3>
 
-                  <p
-                    className={`mt-4 flex-1 text-sm leading-6 transition-colors duration-300 md:text-[16px] ${
-                      isActive
-                        ? 'text-[#333333] dark:text-[#CCCCCC]'
-                        : 'text-[#777777] dark:text-[#888888]'
-                    }`}
-                  >
+                  <p className="mt-4 flex-1 text-sm leading-6 text-[#777777] md:text-[16px] dark:text-[#888888]">
                     {item.description}
                   </p>
 
                   <div
-                    className={`absolute bottom-10 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm text-white transition-all duration-300 ${
+                    className={`absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm bg-[#8b7cff] !text-white transition-all duration-300 ${
                       isActive
-                        ? 'scale-110 bg-[#8b7cff] shadow-lg shadow-[#8b7cff]/30'
-                        : 'scale-100 bg-[#8b7cff]/80'
-                    } group-hover:scale-105`}
+                        ? 'scale-100 opacity-100'
+                        : 'pointer-events-none scale-90 opacity-0'
+                    }`}
+                    aria-hidden={!isActive}
                   >
-                    <ArrowUpRight className="h-5 w-5" strokeWidth={2} aria-hidden />
+                    <ArrowUpRight className="h-5 w-5 shrink-0 stroke-white text-white" strokeWidth={2} color="#ffffff" />
                   </div>
                 </article>
               </Link>

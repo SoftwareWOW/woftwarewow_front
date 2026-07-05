@@ -53,15 +53,18 @@ export default function ButtonComponent({
     'rv-button',
     variantClasses[variant],
     sizeClasses[size],
-    'block text-center md:inline-block',
-    fullWidth ? '!w-full max-md:w-full' : 'w-auto',
+    fullWidth ? '!inline-flex !w-full max-md:!w-full' : 'inline-flex w-fit max-w-full',
     className,
   ]
     .filter(Boolean)
     .join(' ')
 
-  const topClass = fullWidth ? 'rv-button-top !w-full !text-center' : 'rv-button-top'
-  const bottomClass = fullWidth ? 'rv-button-bottom !w-full !text-center' : 'rv-button-bottom'
+  const topClass = fullWidth
+    ? 'rv-button-top !inline-flex !w-full !justify-center !text-center'
+    : 'rv-button-top'
+  const bottomClass = fullWidth
+    ? 'rv-button-bottom !inline-flex !w-full !justify-center !text-center'
+    : 'rv-button-bottom'
 
   const content = (
     <>

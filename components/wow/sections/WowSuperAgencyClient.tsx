@@ -103,7 +103,7 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
         }}
       />
 
-      <RevealWrapper className="relative z-10 container pb-6 pt-16 lg:pb-10 lg:pt-[100px]">
+      <RevealWrapper className="relative z-10 container">
                    
         {/* Section Header - New Heading */}
         <div className="text-center mb-4">
@@ -112,15 +112,13 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
                               TRUSTED BY BUSINESSES
                             </span>
                           </RevealWrapper>
-          <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2] mb-4 relative inline-block transition-colors duration-300">
-            {superAgencyClient.heading.part1}<br/>
-            <span className='pt-[70px]'>
+          <h2 className="relative mb-4 inline-block font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2]">
+            {superAgencyClient.heading.part1}
+            <br />
+            <span className="block">
               {superAgencyClient.heading.part2}
-              <span className="font-instrument">
-              {superAgencyClient.heading.highlight}
+              <span className="font-instrument">{superAgencyClient.heading.highlight}</span>
             </span>
-            </span>
-            
           </h2>
         </div>
 

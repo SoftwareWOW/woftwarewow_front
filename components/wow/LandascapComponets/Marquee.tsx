@@ -7,7 +7,7 @@ const bottomContent = ['Since 1993', 'Based in New York', 'Award-Winning Agency'
 
 const Marquess = () => {
   return (
-    <section className="overflow-hidden pt-10 md:pt-14 lg:pt-16">
+    <section className="overflow-hidden">
       <RevealWrapper>
         <Marquee pauseOnHover>
           <div className="flex items-center justify-between py-2.5 pb-5">
