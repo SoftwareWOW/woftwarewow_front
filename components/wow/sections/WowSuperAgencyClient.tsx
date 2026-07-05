@@ -14,10 +14,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import WowSwiperSlideContent from '../LandascapComponets/WowSwiperSlideContent'
 
 const CLIENT_IMAGES: Record<string, string> = {
-  'Michael Carter': '/images/wow/hero/client/Michael Carter.png',
-  'Emma Richardson': '/images/wow/hero/client/Emma Richardson.jpg',
-  'Daniel Foster': '/images/wow/hero/client/Daniel Foster.png',
-  'Sophia Bennett': '/images/wow/hero/client/Sophia Bennett.png',
+  'Michael Carter': '/images/wow/Hero/client/Michael Carter.png',
+  'Emma Richardson': '/images/wow/Hero/client/Emma Richardson.jpg',
+  'Daniel Foster': '/images/wow/Hero/client/Daniel Foster.png',
+  'Sophia Bennett': '/images/wow/Hero/client/Sophia Bennett.png',
 }
 
 type WowSuperAgencyClientProps = {
