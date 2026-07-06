@@ -123,7 +123,7 @@ const WowProjects = () => {
               </p>
             </TextAppearAnimation>
             {/* View All Case Studies Button */}
-            <RevealWrapper className="mt-6 flex justify-center md:mt-8">
+            <RevealWrapper className="mt-6 flex justify-end md:mt-8">
               <ButtonComponentList>
                 <ButtonComponent href="/case-studies" variant="secondary">
                   View All Case Studies
@@ -192,7 +192,6 @@ const WowProjects = () => {
                 variant="secondary"
                 onClick={() => setShowAll((prev) => !prev)}
                 ariaExpanded={showAll}
-                size="sm"
               >
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>

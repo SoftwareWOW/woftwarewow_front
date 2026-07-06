@@ -124,18 +124,13 @@ const Faq = () => {
                 Answers to common questions about our services, process, pricing, and how we help businesses grow.
               </p>
             </TextAppearAnimation>
-                <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
-              <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <Link href="/rfq" className="rv-button rv-button-white block md:inline-block">
-                  <div className="rv-button-top">
-                    <span> View All FAQ</span>
-                  </div>
-                  <div className="rv-button-bottom">
-                    <span> View All FAQ</span>
-                  </div>
-                </Link>
-              </li>
-            </RevealWrapper>
+                  <RevealWrapper className="mt-6 flex justify-end md:mt-8">
+                          <ButtonComponentList>
+                            <ButtonComponent href="/rfq"   variant="white">
+                        View All FAQ
+                            </ButtonComponent>
+                          </ButtonComponentList>
+                        </RevealWrapper>
           </div>
         </div>
 
@@ -160,7 +155,7 @@ const Faq = () => {
                         {faq.question}
                       </h3>
         <div
-                        className={`accordion-header-iconV4 transition-transform duration-[400ms] dark:border-dark ${
+                        className={`accordion-header-iconV4 transition-transform duration-[400ms] rounded-full dark:border-dark ${
                           activeAccordion === faq.id ? 'open active rotate-180' : ''
                         }`}
                       />
@@ -191,7 +186,6 @@ const Faq = () => {
                 variant="secondary"
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
-                size="sm"
               >
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>

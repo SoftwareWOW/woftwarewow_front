@@ -62,13 +62,14 @@ const GrowthStrategies = () => {
       />
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-            <RevealWrapper>
+           <RevealWrapper>
                                     <span className="mb-5 inline-block rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
                                     Insights
                                     </span>
                                   </RevealWrapper>
+        <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+         
           <TextAppearAnimation>
           
               <h2 className="text-appear max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
@@ -85,11 +86,12 @@ const GrowthStrategies = () => {
               Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
               not jargon.
             </p>
-            <ButtonComponentList className="mt-6 flex justify-center lg:justify-end">
-              <ButtonComponent href="/ai-blog" variant="secondary" size="sm">
+       
+              <div className="mt-6 flex justify-end md:mt-8">
+                <ButtonComponent href="/ai-blog" variant="secondary" >
                 View All Articles
               </ButtonComponent>
-            </ButtonComponentList>
+              </div>
           </RevealWrapper>
         </div>
 
@@ -127,11 +129,13 @@ const GrowthStrategies = () => {
                   {article.description}
                 </p>
 
-                <ButtonComponentList className="flex justify-start">
-                  <ButtonComponent href={article.href} variant="secondary" size="sm">
+             
+             <div className="flex justify-start">
+                   <ButtonComponent href={article.href} variant="secondary">
                     Read More
                   </ButtonComponent>
-                </ButtonComponentList>
+             </div>
+               
               </div>
             </RevealWrapper>
           ))}

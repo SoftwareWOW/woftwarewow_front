@@ -161,11 +161,11 @@ html body[data-scroll-locked] {
 }
 
 .accordion-header-iconV4 {
-  @apply absolute bottom-7 right-7 h-[24.5px] w-[24.5px] rounded-radius-lg border border-[#e5e5e5] duration-[0.4s] ease-faq-body-transition md:h-10 md:w-10;
+  @apply absolute bottom-7 right-7 h-[24.5px] w-[24.5px] rounded-full border border-[#e5e5e5] duration-[0.4s] ease-faq-body-transition md:h-10 md:w-10;
 
   &::before,
   &::after {
-    @apply absolute left-1/2 top-1/2 h-3.5 w-[1px] -translate-x-1/2 -translate-y-1/2 bg-secondary duration-[0.4s] ease-faq-body-transition content-[''] dark:bg-backgroundBody md:h-5;
+    @apply absolute left-1/2 top-1/2 h-3.5 w-[1px] rounded-full -translate-x-1/2 -translate-y-1/2 bg-secondary duration-[0.4s] ease-faq-body-transition content-[''] dark:bg-white md:h-5;
   }
 
   &::after {
@@ -216,7 +216,7 @@ html body[data-scroll-locked] {
   }
 
   .accordion-header-iconV4 {
-    @apply border border-secondary bg-secondary dark:border-primary dark:bg-primary;
+    @apply border border-secondary bg-secondary dark:border-primary dark:bg-white;
 
     &::before,
     &::after {
@@ -703,7 +703,7 @@ html body[data-scroll-locked] {
 
 // CTA Inline Slider
 .cta-slider-container {
-  @apply mx-auto inline-block h-24 w-60 overflow-hidden rounded-radius-lg md:h-[100px] md:w-[250px];
+  @apply mx-auto inline-block h-24 w-60 overflow-hidden rounded-full md:h-[100px] md:w-[250px];
 
   .cta-inline-slider {
     @apply absolute h-full w-full transition-transform duration-[0.5s] ease-in-out;

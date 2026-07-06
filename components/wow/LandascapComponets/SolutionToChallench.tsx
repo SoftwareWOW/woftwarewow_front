@@ -154,8 +154,14 @@ const SolutionToChallenges = () => {
                 In a world where change is the only constant, we ensure your business stays ahead of the curve —
                 with integrated technology, marketing, and growth systems built to deliver real results.
               </p>
-            
-            <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
+             <RevealWrapper className="mt-6 flex justify-end md:mt-8">
+              <ButtonComponentList>
+                <ButtonComponent href="/services"   variant="white">
+               Explore Our Solutions
+                </ButtonComponent>
+              </ButtonComponentList>
+            </RevealWrapper>
+            {/* <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
               <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
                 <Link href="/services" className="rv-button rv-button-white block md:inline-block">
                   <div className="rv-button-top">
@@ -166,7 +172,7 @@ const SolutionToChallenges = () => {
                   </div>
                 </Link>
               </li>
-            </RevealWrapper>
+            </RevealWrapper> */}
           </div>
         </div>
 
@@ -277,14 +283,13 @@ const SolutionToChallenges = () => {
                 variant="white"
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
-            size="sm"
               >
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>
             </ButtonComponentList>
           )}
           <ButtonComponentList>
-            <ButtonComponent href="/contact" variant="secondary" size="sm">
+            <ButtonComponent href="/contact" variant="secondary" >
               Start Now
             </ButtonComponent>
           </ButtonComponentList>
