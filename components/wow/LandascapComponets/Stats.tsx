@@ -70,34 +70,29 @@ const Stats = () => {
           </h4>
         </RevealWrapper>
 
-        {/* Stats Grid - matching AboutV8 grid style */}
-
-         <div 
-              className="mt-12 grid grid-cols-1 gap-6 md:mt-16 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-6"
-            >
-              {achievementStats.map((stat, index) => (
-                <div key={stat.label} className="stat-item w-full">
-                  <div className="relative flex h-full min-h-[280px] flex-col items-center justify-start p-6 transition-colors duration-300 md:p-8">
-                    {/* Number */}
-                    <div className="flex items-baseline gap-1">
-                      <h2 className="font-['Outfit'] text-[clamp(36px,5vw,56px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
-                        <CounterAnimation number={stat.value} />  {stat.suffix}
-                      </h2>
-                    </div>
-
-                    {/* Label */}
-                    <p className="mt-2 text-center font-['Outfit'] text-[clamp(14px,1.2vw,18px)] font-normal text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
-                      {stat.label}
-                    </p>
-
-                    {/* Description */}
-                    <p className="mt-3 line-clamp-3 text-center font-['Outfit'] text-[clamp(11px,0.9vw,14px)] font-normal leading-[1.5] text-[#666666] dark:text-[#888888] transition-colors duration-300">
-                      {stat.description}
-                    </p>
-                  </div>
+        {/* Stats Grid - Reduced gap on small devices */}
+        <div className="mt-8 grid grid-cols-1 gap-1 sm:mt-12 sm:grid-cols-2 sm:gap-2 md:mt-16 md:gap-6 lg:grid-cols-4 lg:gap-6">
+          {achievementStats.map((stat, index) => (
+            <div key={stat.label} className="stat-item w-full">
+              <div className="relative flex h-full min-h-[200px] flex-col items-center justify-start p-4 transition-colors duration-300 sm:min-h-[240px] sm:p-6 md:min-h-[280px] md:p-8">
+               
+                <div className="flex items-baseline gap-1">
+                  <h2 className="font-['Outfit'] text-[clamp(32px,4vw,56px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
+                    <CounterAnimation number={stat.value} /> {stat.suffix}
+                  </h2>
                 </div>
-              ))}
+
+                <p className="mt-2 text-center font-['Outfit'] text-[clamp(13px,1.2vw,18px)] font-normal text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
+                  {stat.label}
+                </p>
+
+                <p className="mt-2 line-clamp-3 text-center font-['Outfit'] text-[clamp(10px,0.9vw,14px)] font-normal leading-[1.5] text-[#666666] dark:text-[#888888] transition-colors duration-300 sm:mt-3">
+                  {stat.description}
+                </p>
+              </div>
             </div>
+          ))}
+        </div>
       </div>
     </section>
   )
