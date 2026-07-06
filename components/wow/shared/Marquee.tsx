@@ -18,32 +18,38 @@ const Marquee: React.FC = () => {
   }
 
   return (
-    <section className="relative mx-auto w-full max-w-[1920px] max-md:pt-0.5">
-        <div className="overflow-hidden">
-          <RevealWrapper as="p" className=" mb-10 text-wrap text-center lg:mb-20">
-            Trusted By Businesses, Partners & Communities
-          </RevealWrapper>
+    <section className="relative overflow-hidden px-3 md:px-4">
+      <div className="relative z-10 mx-auto max-w-[1320px]">
+        <RevealWrapper as="p" className="mb-10 text-wrap text-center lg:mb-20">
+          Trusted By Businesses, Partners & Communities
+        </RevealWrapper>
 
-          <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="relative">
-            <div ref={marqueeRef} className="z-50 flex w-fit flex-nowrap gap-2.5 whitespace-nowrap">
-              {data.map((item) => (
-                <div
-                  key={item.id}
-                  className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark">
-                  <img src={item.logo} alt={item.alt} className="inline-block dark:hidden" />
-                  <img src={item.darkLogo} alt={item.alt} className="hidden dark:inline-block" />
-                </div>
-              ))}
-            </div>
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="relative overflow-hidden"
+        >
+          <div ref={marqueeRef} className="z-50 flex w-fit flex-nowrap gap-2.5 whitespace-nowrap">
+            {data.map((item) => (
+              <div
+                key={item.id}
+                className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark"
+              >
+                <img src={item.logo} alt={item.alt} className="inline-block dark:hidden" />
+                <img src={item.darkLogo} alt={item.alt} className="hidden dark:inline-block" />
+              </div>
+            ))}
           </div>
-              <RevealWrapper className="mt-7 flex justify-center md:mt-14">
-                        <ButtonComponentList>
-                          <ButtonComponent href="/solutions" variant="white">
-                          Explore Our Solutions
-                          </ButtonComponent>
-                        </ButtonComponentList>
-                      </RevealWrapper>
         </div>
+
+        <RevealWrapper className="mt-7 flex justify-center md:mt-14">
+          <ButtonComponentList>
+            <ButtonComponent href="/solutions" variant="white">
+              Explore Our Solutions
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
+      </div>
     </section>
   )
 }
