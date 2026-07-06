@@ -5,6 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import SectionLabel from '../shared/SectionLabel'
 
 const INITIAL_VISIBLE_COUNT = 6
 
@@ -105,9 +106,7 @@ const Faq = () => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
-              <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-                Expertise
-              </span>
+              <SectionLabel className="mb-5">Expertise</SectionLabel>
             </RevealWrapper>
 
             <TextAppearAnimation>

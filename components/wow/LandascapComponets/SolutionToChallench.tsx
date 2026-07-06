@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import SectionLabel from '../shared/SectionLabel'
 
 const INITIAL_VISIBLE_COUNT = 3
 
@@ -138,9 +139,7 @@ const SolutionToChallenges = () => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
                 <RevealWrapper>
-                            <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-                              Solutions to chellenges.
-                            </span>
+            <SectionLabel className="mb-5">Solutions to chellenges.</SectionLabel>
                           </RevealWrapper>
               <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 Built To Solve Modern Business{' '}

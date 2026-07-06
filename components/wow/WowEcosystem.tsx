@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import type { Dictionary } from '@/i18n/types'
 import RevealWrapper from '../animation/RevealWrapper'
+import SectionLabel from './shared/SectionLabel'
 
 type NodeId =
   | 'websites'
@@ -227,9 +228,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
     <section className="wow-ecosystem relative flex w-full flex-col items-center bg-background px-2 text-foreground transition-colors duration-300 dark:bg-background max-md:justify-start sm:px-4">
       <div className="relative z-10 flex w-full flex-col items-center">
       <RevealWrapper>
-        <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-          OUR ECOSYSTEM
-        </span>
+        <SectionLabel className="mb-5">OUR ECOSYSTEM</SectionLabel>
       </RevealWrapper>
 
       <div className="mb-8 w-full max-w-4xl text-center max-md:mb-5 sm:mb-12 lg:mb-16">

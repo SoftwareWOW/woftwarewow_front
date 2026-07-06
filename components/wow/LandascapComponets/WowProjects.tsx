@@ -6,6 +6,7 @@ import topArrow from '@/public/images/icons/arrow-Icon.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import SectionLabel from '../shared/SectionLabel'
 import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
@@ -100,9 +101,7 @@ const WowProjects = () => {
           <div>
            
             <RevealWrapper>
-              <span className="mb-3 inline-block rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-                Case Studies
-              </span>
+              <SectionLabel className="mb-3">Case Studies</SectionLabel>
             </RevealWrapper>
 
             <TextAppearAnimation>

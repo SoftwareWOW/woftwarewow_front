@@ -6,6 +6,7 @@ import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import SectionLabel from '../shared/SectionLabel'
 
 const articles = [
   {
@@ -63,9 +64,7 @@ const GrowthStrategies = () => {
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
            <RevealWrapper>
-                                    <span className="mb-5 inline-block rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-                                    Insights
-                                    </span>
+              <SectionLabel className="mb-5">Insights</SectionLabel>
                                   </RevealWrapper>
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
             <div>
@@ -115,9 +114,7 @@ const GrowthStrategies = () => {
               </Link>
 
               <div className="flex flex-1 flex-col">
-                <span className="mb-3 inline-flex w-fit rounded-full bg-[#15151533] px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#0D0D0D] dark:bg-[#EDF0F533] dark:text-[#F2F2F2]">
-                  {article.date}
-                </span>
+                <SectionLabel className="mb-3">{article.date}</SectionLabel>
 
                 <Link href={article.href}>
                   <h3 className="mb-2 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-normal leading-[1.25] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:hover:text-[#b794f4]">

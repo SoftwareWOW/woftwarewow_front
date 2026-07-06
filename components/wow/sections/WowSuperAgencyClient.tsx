@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/carousel"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import WowSwiperSlideContent from '../LandascapComponets/WowSwiperSlideContent'
+import SectionLabel from '../shared/SectionLabel'
 
 const CLIENT_IMAGES: Record<string, string> = {
   'Michael Carter': '/images/wow/Hero/client/Michael Carter.png',
@@ -126,9 +127,7 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
         {/* Section Header - New Heading */}
         <div className="text-center mb-4">
           <RevealWrapper>
-                            <span className="mb-5 inline-flex rounded-full bg-[#E8E8E8] px-4 py-1.5 text-[12px] font-[300px] uppercase tracking-[0.14em] text-[#0D0D0D] dark:bg-white/10 dark:text-[#F2F2F2]">
-                              TRUSTED BY BUSINESSES
-                            </span>
+            <SectionLabel className="mb-5">TRUSTED BY BUSINESSES</SectionLabel>
                           </RevealWrapper>
           <h2 className="relative mb-4 inline-block font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2]">
             {superAgencyClient.heading.part1}
