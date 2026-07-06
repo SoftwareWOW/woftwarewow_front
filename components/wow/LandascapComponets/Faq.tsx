@@ -140,29 +140,20 @@ const Faq = () => {
               {faqArray.map((faq) => (
                 <div className="reveal-me" key={faq.id}>
                   <div
-                    className={`accordion-itemV4 faq-body-transition relative w-full space-y-6 border dark:bg-dark px-6 pb-8 pt-6 duration-300 ${
+                    className={`accordion-itemV4 faq-body-transition relative flex w-full cursor-pointer flex-col border dark:bg-dark px-6 pb-6 pt-6 duration-300 ${
                       activeAccordion === faq.id
-                        ? 'open active border-black dark:border-white/10'
+                        ? 'open active border-black dark:border-white'
                         : 'border-black/10 dark:border-white/10'
                     }`}
                     data-active={activeAccordion === faq.id ? true : false}
+                    onClick={() => toggleAccordion(faq.id)}
                   >
-                    <div
-                      className="accordion-headerV4 flex cursor-pointer items-center justify-between"
-                      onClick={() => toggleAccordion(faq.id)}
-                    >
-                      <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
-                        {faq.question}
-                      </h3>
-        <div
-                        className={`accordion-header-iconV4 transition-transform duration-[400ms] rounded-full dark:border-dark ${
-                          activeAccordion === faq.id ? 'open active rotate-180' : ''
-                        }`}
-                      />
-                    </div>
+                    <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
+                      {faq.question}
+                    </h3>
                     <div
                       className={`grid transition-all duration-[400ms] ease-in-out ${
-                        activeAccordion === faq.id ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                        activeAccordion === faq.id ? 'mt-6 grid-rows-[1fr]' : 'grid-rows-[0fr]'
                       }`}
                     >
                       <div className="overflow-hidden">
@@ -170,6 +161,14 @@ const Faq = () => {
                           <p className="font-[375]">{faq.answer}</p>
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-auto flex justify-end pt-6">
+                      <div
+                        className={`accordion-header-iconV4 !relative !bottom-auto !right-auto aspect-square shrink-0 !rounded-full transition-transform duration-[400ms] dark:border-dark ${
+                          activeAccordion === faq.id ? 'rotate-180' : ''
+                        }`}
+                        aria-hidden="true"
+                      />
                     </div>
                   </div>
                 </div>
