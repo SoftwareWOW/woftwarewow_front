@@ -2,7 +2,7 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import topArrow from '@/public/images/icons/arrow-Icon.svg'
+import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
@@ -164,18 +164,11 @@ const WowProjects = () => {
                 </p>
               </div>
 
-              <figure className="absolute right-10 top-10 h-[55px] w-[55px] rounded-radius-sm cursor-pointer overflow-hidden bg-primary max-md:hidden md:block">
-                <Image
-                  src={topArrow}
-                  alt=""
+              <figure className="group absolute right-10 top-10 flex size-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-radius-sm bg-primary max-md:hidden md:size-[65px] md:block lg:size-[79px]">
+                <ArrowUpRight
                   aria-hidden
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0"
-                />
-                <Image
-                  src={topArrow}
-                  alt=""
-                  aria-hidden
-                  className="absolute -translate-x-4 translate-y-12 opacity-0 transition-all duration-500 group-hover:translate-x-[19px] group-hover:translate-y-5 group-hover:opacity-100"
+                  className="size-10 !stroke-white !text-white transition-transform duration-300 ease-out group-hover:rotate-[30deg]"
+                  strokeWidth={2}
                 />
               </figure>
             </RevealWrapper>

@@ -5,6 +5,7 @@ import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import SectionLabel from '../shared/SectionLabel'
 
@@ -210,33 +211,14 @@ const SolutionToChallenges = () => {
                       {service.subtitle}
                     </span>
                   </h3>
-                  <div className="accordion-header-iconV3 shrink-0 rounded-radius-sm">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 32 32"
-                      fill="none"
-                      className={`active-arrow absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 duration-300 ease-faq-body-transition group-hover:rotate-90 md:size-8 ${
-                        isActive ? 'open active rotate-90' : ''
-                      }`}
+                  <div className="group flex size-[60px] shrink-0 items-center justify-center rounded-radius-sm bg-primary md:size-[65px] lg:size-[79px]">
+                    <ArrowRight
                       aria-hidden
-                    >
-                      <path
-                        d="M5 16H27"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-[#1a1a1a] dark:text-[#F2F2F2]"
-                      />
-                      <path
-                        d="M18 7L27 16L18 25"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-[#1a1a1a] dark:text-[#F2F2F2]"
-                      />
-                    </svg>
+                      className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out group-hover:rotate-[90deg] ${
+                        isActive ? 'rotate-90 ' : ''
+                      }`}
+                      strokeWidth={2}
+                    />
                   </div>
                 </div>
                 <div
