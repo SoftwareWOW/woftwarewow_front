@@ -14,6 +14,9 @@ import HumanTuch from '@/components/wow/LandascapComponets/HumanTuch'
 import Faq from '@/components/wow/LandascapComponets/Faq'
 import GrowthStrategies from '@/components/wow/LandascapComponets/GrowthStrategies'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import Marquee from '@/components/wow/shared/Marquee'
+
+
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -47,6 +50,7 @@ const Home = async ({ params }: Props) => {
         <DevisionOverview />
         <SolutionToChallengesSection />
         <WowProjects />
+           <Marquee />
         <HumanTuch />
         <Faq />
         <GrowthStrategies />
