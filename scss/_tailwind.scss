@@ -8,5 +8,10 @@
     --radius-sm: 5px;
     --radius-md: 10px;
     --radius-lg: 20px;
+    --background: #ededed;
+  }
+
+  :is(.dark) {
+    --background: #171717;
   }
 }

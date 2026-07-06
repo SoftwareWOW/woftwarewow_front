@@ -64,7 +64,7 @@ const MOBILE_NODE_LAYOUT: NodeLayout[] = [
   { id: 'hub', x: 40, y: 8, size: 'lg' },
   { id: 'impact', x: 75, y: 10, size: 'sm' },
   { id: 'websites', x: 64, y: 16, size: 'md' },
-  { id: 'host', x: 40, y: 24, size: 'md' },
+  { id: 'host', x: 35, y: 24, size: 'md' },
   { id: 'intelligence', x: 8, y: 32, size: 'md' },
   { id: 'accelerate', x: 40, y: 42, size: 'md' },
   { id: 'social', x: 65, y: 32, size: 'md' },

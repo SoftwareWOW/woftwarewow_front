@@ -6,7 +6,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 
 const achievementStats = [
   {
-    value: 3000,
+    value: 300,
     label: 'Businesses Reached',
     suffix: '+',
     description:

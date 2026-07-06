@@ -20,6 +20,24 @@ const CLIENT_IMAGES: Record<string, string> = {
   'Sophia Bennett': '/images/wow/Hero/client/Sophia Bennett.png',
 }
 
+type CarouselGridIndicatorProps = {
+  isActive: boolean
+  onClick: () => void
+  ariaLabel: string
+}
+
+const CarouselGridIndicator = ({ isActive, onClick, ariaLabel }: CarouselGridIndicatorProps) => (
+  <button
+    type="button"
+    onClick={onClick}
+    aria-label={ariaLabel}
+    aria-current={isActive}
+    className={`h-[2px] w-[10px] shrink-0 rounded-none border-0 p-0 transition-colors duration-300 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff]/40 ${
+      isActive ? 'bg-[#8b7cff]' : 'bg-black dark:bg-[#E8E8E8]'
+    }`}
+  />
+)
+
 type WowSuperAgencyClientProps = {
   superAgencyClient: Dictionary['superAgencyClient']
 }
@@ -158,25 +176,19 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
               ))}
             </CarouselContent>
 
-            {/* Navigation - Moved INSIDE Carousel component with proper positioning */}
-            <div className="flex justify-center gap-3 mt-6 relative z-20">
-              {/* Dots */}
-              <div className="flex items-center gap-2">
+            <div className="relative z-20 mt-6 flex justify-center">
+              <div className="flex items-center gap-1">
                 {superAgencyClient.reviews.map((_, index) => (
-                  <button
+                  <CarouselGridIndicator
                     key={index}
+                    isActive={index === currentIndex}
                     onClick={() => {
                       if (!api) return
                       setIsAutoPlay(false)
                       api.scrollTo(index)
                       setTimeout(() => setIsAutoPlay(true), 5000)
                     }}
-                    className={`transition-all duration-500 rounded-full ${
-                      index === currentIndex
-                        ? 'w-10 h-2.5 bg-gradient-to-r from-[#8b7cff] to-[#b794f4] shadow-lg shadow-[#8b7cff]/30 dark:shadow-[#8b7cff]/50'
-                        : 'w-2.5 h-2.5 bg-[#d0d0d0] dark:bg-white/20 hover:bg-[#8b7cff] dark:hover:bg-white/40'
-                    }`}
-                    aria-label={superAgencyClient.aria.goToTestimonial.replace('{index}', String(index + 1))}
+                    ariaLabel={superAgencyClient.aria.goToTestimonial.replace('{index}', String(index + 1))}
                   />
                 ))}
               </div>

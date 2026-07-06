@@ -14,18 +14,13 @@ const highlightClass =
 
 export default function WowHero({ hero }: WowHeroProps) {
   return (
-    <section className="relative mt-16 overflow-hidden bg-background px-4 pt-6 sm:px-8 sm:pt-8">
-      {/* Background Decorations for Dark Mode */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl dark:bg-primary/10" />
-        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-secondary/5 blur-3xl dark:bg-secondary/10" />
-        <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-3xl dark:bg-accent/10" />
-      </div>
+    <section className="relative mt-16 overflow-hidden bg-background px-3 pt-20 transition-colors duration-300 dark:bg-background md:px-4 md:pt-30">
 
-      <div className="relative mx-auto flex max-w-[1222px] flex-col items-center gap-16 lg:gap-[107px]">
+
+      <div className="relative z-10 mx-auto flex max-w-[1222px] flex-col items-center gap-16 lg:gap-[107px]">
         <div className="relative flex w-full flex-col items-center gap-5">
           <RevealWrapper delay={0.1} className="relative z-10">
-            <p className="rounded-radius-sm border border-border/30 bg-background/50 px-5 py-2.5 text-center text-xs font-medium uppercase tracking-[0.96px] text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:px-6 sm:py-3">
+            <p className="rounded-full border border-border/30 bg-background/50 px-5 py-2.5 text-center text-xs font-[300px] uppercase tracking-[0.96px] text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:border-primary/40 dark:hover:bg-primary/10 sm:px-6 sm:py-3">
               {hero.badge}
             </p>
           </RevealWrapper>
