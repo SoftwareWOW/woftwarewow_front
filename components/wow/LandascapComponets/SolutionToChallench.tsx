@@ -5,7 +5,7 @@ import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import SectionLabel from '../shared/SectionLabel'
 
@@ -211,11 +211,15 @@ const SolutionToChallenges = () => {
                       {service.subtitle}
                     </span>
                   </h3>
-                  <div className="group flex size-[60px] shrink-0 items-center justify-center rounded-radius-sm bg-primary md:size-[65px] lg:size-[79px]">
+                  <div
+                    className={`flex size-[60px] shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-colors duration-300 group-hover:bg-primary/50 dark:group-hover:bg-[#1F1F1F] md:size-[65px] lg:size-[79px] ${
+                      isActive ? 'bg-primary/50 dark:bg-[#1F1F1F]' : ''
+                    }`}
+                  >
                     <ArrowRight
                       aria-hidden
-                      className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out group-hover:rotate-[90deg] ${
-                        isActive ? 'rotate-90 ' : ''
+                      className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out ${
+                        isActive ? 'rotate-90' : ''
                       }`}
                       strokeWidth={2}
                     />

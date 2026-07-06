@@ -164,10 +164,15 @@ const WowProjects = () => {
                 </p>
               </div>
 
-              <figure className="group absolute right-10 top-10 flex size-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-radius-sm bg-primary max-md:hidden md:size-[65px] md:block lg:size-[79px]">
+              <figure className="absolute right-10 top-10 size-[60px] cursor-pointer overflow-hidden rounded-radius-sm bg-primary max-md:hidden md:size-[65px] md:block lg:size-[79px]">
                 <ArrowUpRight
                   aria-hidden
-                  className="size-10 !stroke-white !text-white transition-transform duration-300 ease-out group-hover:rotate-[30deg]"
+                  className="absolute left-1/2 top-1/2 size-10 -translate-x-1/2 -translate-y-1/2 !stroke-white !text-white opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0"
+                  strokeWidth={2}
+                />
+                <ArrowUpRight
+                  aria-hidden
+                  className="absolute size-10 -translate-x-4 translate-y-12 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[19px] group-hover:translate-y-5 group-hover:opacity-100"
                   strokeWidth={2}
                 />
               </figure>
