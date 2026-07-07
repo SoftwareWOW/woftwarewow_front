@@ -334,10 +334,21 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                   fontSize: nodeFontSize(n.size, isMobile),
                 }}
               >
-                <WowText className="font-bold leading-none tracking-tight">
-                  {nodeCopy.prefix}
-                </WowText>{' '}
-                <span className="text-foreground">{nodeCopy.label}</span>
+                {n.id === 'softwarewow' ? (
+                  <>
+                    <span className="text-foreground">{nodeCopy.prefix}</span>{' '}
+                    <WowText className="font-bold leading-none tracking-tight">
+                      {nodeCopy.label}
+                    </WowText>
+                  </>
+                ) : (
+                  <>
+                    <WowText className="font-bold leading-none tracking-tight">
+                      {nodeCopy.prefix}
+                    </WowText>{' '}
+                    <span className="text-foreground">{nodeCopy.label}</span>
+                  </>
+                )}
               </span>
             </motion.div>
           )
@@ -371,8 +382,8 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                   isMobile ? 'min-h-[36px]' : 'min-h-[34px] sm:min-h-[44px] md:min-h-[52px]'
                 } ${
                   active
-                    ? 'text-white shadow-[0_10px_40px_-10px_rgba(139,124,255,0.7)]'
-                    : 'bg-white/90 text-[#1a1530]/45 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.12)] dark:bg-dark-200/90 dark:text-backgroundBody/35'
+                    ? 'text-white dark:text-white '
+                    : 'bg-white/90 text-[#1a1530]/45'
                 }`}
                 style={{
                   flex: active ? 2.4 : 0.65,
@@ -390,7 +401,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                         duration: 0.2,
                         ease: [0.65, 0, 0.35, 1],
                       }}
-                      className="whitespace-nowrap px-2 uppercase tracking-[0.18em] sm:px-3 md:px-4"
+                      className="whitespace-nowrap px-2 uppercase tracking-[0.18em] text-white dark:text-white sm:px-3 md:px-4"
                       style={{
                         fontSize: isMobile ? '9px' : 'clamp(10px, 1.8cqw, 20px)',
                       }}
