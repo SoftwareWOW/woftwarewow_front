@@ -146,7 +146,7 @@ export default function WowFooter({ footer }: WowFooterProps) {
         {/* Background WOW Text */}
         <div
           aria-hidden
-          className="pointer-events-none mt-6 select-none text-center text-[clamp(3rem,12vw,8rem)] font-semibold leading-none tracking-[-0.04em]"
+          className="pointer-events-none mt-6 select-none whitespace-nowrap text-center text-[clamp(1.75rem,10vw,8rem)] font-semibold leading-none tracking-[-0.04em]"
         >
           <span className="bg-gradient-to-r from-[#8b7cff]/20 via-[#b794f4]/15 to-[#f4a8b8]/20 bg-clip-text text-transparent dark:from-[#8b7cff]/10 dark:via-[#b794f4]/8 dark:to-[#f4a8b8]/10">
             WOW

@@ -39,7 +39,7 @@ const VB_H = 620
 const MOBILE_VB_W = 390
 const MOBILE_VB_H = 980
 const CTA_Y = 620
-const MOBILE_CTA_Y = 600
+const MOBILE_CTA_Y = 770
 
 const WOW_THEME = {
   gradient: 'linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%)',
@@ -60,17 +60,17 @@ const NODE_LAYOUT: NodeLayout[] = [
 ]
 
 const MOBILE_NODE_LAYOUT: NodeLayout[] = [
-  { id: 'events', x: 2, y: 10, size: 'sm' },
-  { id: 'design', x: 10, y: 16, size: 'md' },
+  { id: 'events', x: 2, y: 12, size: 'sm' },
+  { id: 'design', x: 10, y: 21, size: 'md' },
   { id: 'hub', x: 40, y: 8, size: 'lg' },
-  { id: 'impact', x: 75, y: 10, size: 'sm' },
-  { id: 'websites', x: 64, y: 16, size: 'md' },
-  { id: 'host', x: 35, y: 24, size: 'md' },
-  { id: 'intelligence', x: 8, y: 32, size: 'md' },
-  { id: 'accelerate', x: 40, y: 42, size: 'md' },
-  { id: 'social', x: 65, y: 32, size: 'md' },
-  { id: 'softwarewow', x: 8, y: 50, size: 'md' },
-  { id: 'marketing', x: 58, y: 50, size: 'lg' },
+  { id: 'impact', x: 75, y: 12, size: 'sm' },
+  { id: 'websites', x: 64, y: 21, size: 'md' },
+  { id: 'host', x: 35, y: 31, size: 'md' },
+  { id: 'intelligence', x: 8, y: 41, size: 'md' },
+  { id: 'accelerate', x: 40, y: 53, size: 'md' },
+  { id: 'social', x: 65, y: 41, size: 'md' },
+  { id: 'softwarewow', x: 8, y: 63, size: 'md' },
+  { id: 'marketing', x: 58, y: 63, size: 'lg' },
 ]
 
 const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
@@ -240,7 +240,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           {ecosystem.heading.part2}
         </h2>
 
-        <p className="mx-auto mt-4 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-normal leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-6">
+        <p className="mx-auto mt-8 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-normal leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-8">
           {ecosystem.description}
         </p>
       </div>

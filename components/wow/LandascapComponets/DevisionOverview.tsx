@@ -17,7 +17,7 @@ const FOCUS_X_RATIO = 0.22
 const divisions = [
   {
     id: 1,
-    title: 'SoftwareWOW!',
+    title: 'SoftwareWOW',
     description:
       'Custom software, mobile apps, and digital products built to scale with your business — not against it.',
     bgImage: `${DIVISION_BG_BASE}/Mockup 2 Dark.png`,
@@ -111,7 +111,7 @@ function renderDivisionTitle(title: string) {
     return (
       <>
         {title.slice(0, wowIndex)}
-        <span className={wowClass}>WOW</span>
+        <span className={wowClass}>WOW!</span>
         {title.slice(wowIndex + 3)}
       </>
     )
