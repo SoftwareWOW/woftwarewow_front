@@ -99,7 +99,7 @@
 
   &-white {
     .rv-button-top {
-      @apply z-10 border border-secondary bg-backgroundBody dark:border-dark dark:bg-dark;
+      @apply z-10 border border-[#1515151A] bg-backgroundBody dark:border-[#EDF0F51A] dark:bg-dark;
 
       span {
         @apply text-secondary dark:text-backgroundBody;
@@ -120,7 +120,7 @@
       @apply z-10 border border-transparent bg-primary;
 
       span {
-        @apply text-secondary;
+        @apply text-white;
       }
     }
 

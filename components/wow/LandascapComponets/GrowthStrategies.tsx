@@ -98,18 +98,18 @@ const GrowthStrategies = () => {
           {articles.map((article) => (
             <RevealWrapper
               key={article.id}
-              className="group flex flex-col gap-6 py-8 first:pt-0 last:pb-0 transition-all duration-300 border-b border-[#1515151A] md:flex-row md:items-center md:gap-10 lg:gap-14"
+              className="group grid grid-cols-1 gap-6 border-b border-[#1515151A] py-8 transition-all duration-300 first:pt-0 last:pb-0 md:grid-cols-[auto_1fr] md:items-stretch md:gap-10 lg:gap-14"
             >
               <Link
                 href={article.href}
-                className="block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none md:w-[280px] lg:w-[340px]"
+                className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none md:h-full md:w-auto md:self-stretch"
               >
                 <Image
                   src={article.thumbnail}
                   alt=""
                   width={340}
                   height={220}
-                  className="aspect-[340/220] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="aspect-[340/220] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-full md:w-auto md:max-w-none"
                 />
               </Link>
 
