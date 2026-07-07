@@ -71,7 +71,7 @@
     }
 
     .rv-button-bottom {
-      @apply z-[9] border border-secondary bg-backgroundBody dark:border-colorText dark:bg-secondary;
+      @apply z-[9] border border-secondary  bg-backgroundBody dark:border-colorText dark:bg-secondary;
 
       span {
         @apply text-secondary dark:text-backgroundBody;
@@ -99,7 +99,7 @@
 
   &-white {
     .rv-button-top {
-      @apply z-10 border border-secondary bg-backgroundBody dark:border-dark dark:bg-dark;
+      @apply z-10 border border-[#1515151A] bg-backgroundBody dark:border-[#EDF0F51A] dark:bg-dark;
 
       span {
         @apply text-secondary dark:text-backgroundBody;
@@ -107,7 +107,7 @@
     }
 
     .rv-button-bottom {
-      @apply z-[9] border border-secondary bg-secondary dark:border-backgroundBody dark:bg-backgroundBody;
+      @apply z-[9] border border-[#1515151A] bg-secondary dark:border-[#EDF0F51A] dark:bg-backgroundBody;
 
       span {
         @apply text-backgroundBody dark:text-secondary;
@@ -120,7 +120,7 @@
       @apply z-10 border border-transparent bg-primary;
 
       span {
-        @apply text-secondary;
+        @apply text-white;
       }
     }
 
@@ -128,7 +128,7 @@
       @apply z-[9] border border-secondary bg-secondary;
 
       span {
-        @apply text-backgroundBody;
+        @apply text-white;
       }
     }
   }
