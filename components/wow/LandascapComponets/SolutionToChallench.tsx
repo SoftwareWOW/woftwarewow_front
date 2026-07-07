@@ -110,7 +110,7 @@ const SolutionToChallenges = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
+    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       {/* Background decorative elements - matching FAQ */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
@@ -136,7 +136,7 @@ const SolutionToChallenges = () => {
         <Image src={gradientBg} alt="gradient-bg" />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-[1320px] px-3 md:px-4">
+      <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
                 <RevealWrapper>
@@ -161,22 +161,10 @@ const SolutionToChallenges = () => {
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapper>
-            {/* <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
-              <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <Link href="/services" className="rv-button rv-button-white block md:inline-block">
-                  <div className="rv-button-top">
-                    <span>Explore Our Solutions</span>
-                  </div>
-                  <div className="rv-button-bottom">
-                    <span>Explore Our Solutions</span>
-                  </div>
-                </Link>
-              </li>
-            </RevealWrapper> */}
           </div>
         </div>
 
-        <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
+        <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
           {visibleServices.map((service, index) => {
             const isActive = activeIndex === index
 
@@ -205,9 +193,9 @@ const SolutionToChallenges = () => {
                   }}
                   aria-expanded={isActive}
                 >
-                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal font-outfit leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-3xl">
+                  <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-[500px] font-outfit leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-3xl">
                     <span>{service.title}</span>
-                    <span className="mt-2 pr-[2px] text-base text-[#808080] transition-colors duration-300  md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                    <span className="mt-2 pr-[2px] font-normal text-base text-[#808080] transition-colors duration-300  md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                       {service.subtitle}
                     </span>
                   </h3>
