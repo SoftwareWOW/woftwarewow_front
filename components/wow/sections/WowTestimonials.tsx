@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import WowText from '@/components/wow/shared/WowText'
 import Image from 'next/image'
 
 const testimonials = [
@@ -39,7 +40,7 @@ export default function WowTestimonials() {
                 </div>
                 <p className="text-sm leading-relaxed text-colorText dark:text-dark-100">&ldquo;{item.quote}&rdquo;</p>
                 <div className="mt-4 flex items-center justify-between border-t border-secondary/10 pt-4 text-xs text-colorText dark:border-dark dark:text-dark-100">
-                  <span className="font-semibold text-primary">WOW</span>
+                  <WowText className="text-xs font-semibold" />
                   <span>Feb 03, 2026</span>
                 </div>
               </RevealWrapper>

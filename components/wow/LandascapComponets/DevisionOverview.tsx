@@ -1,6 +1,7 @@
 'use client'
 
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import { renderWowInTitle } from '@/components/wow/shared/WowText'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
@@ -91,33 +92,8 @@ const divisions = [
   },
 ]
 
-const wowGradientClass =
-  'bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent'
-
 function renderDivisionTitle(title: string) {
-  const wowClass = wowGradientClass
-
-  if (title.startsWith('WOW ')) {
-    return (
-      <>
-        <span className={wowClass}>WOW</span>
-        <span> {title.slice(4)}</span>
-      </>
-    )
-  }
-
-  const wowIndex = title.indexOf('WOW')
-  if (wowIndex !== -1) {
-    return (
-      <>
-        {title.slice(0, wowIndex)}
-        <span className={wowClass}>WOW!</span>
-        {title.slice(wowIndex + 3)}
-      </>
-    )
-  }
-
-  return title
+  return renderWowInTitle(title)
 }
 
 const DevisionOverview = () => {

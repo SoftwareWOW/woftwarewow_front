@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import WowText, { renderWowInTitle } from '@/components/wow/shared/WowText'
 
 interface Division {
   id: string
@@ -420,10 +421,8 @@ const DivisionCard = ({
           {division.icon}
         </motion.div>
 
-        <h3 className="mb-2 text-lg font-bold">
-          <span className="bg-gradient-to-r from-purple-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
-            {division.name}
-          </span>
+        <h3 className="mb-2 text-lg font-bold text-white">
+          {renderWowInTitle(division.name, 'text-lg')}
         </h3>
 
         <motion.p
@@ -636,9 +635,7 @@ export default function WowDivisions() {
                   duration: 3,
                   repeat: Infinity,
                 }}>
-                <span className="bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
-                  WOW
-                </span>
+                <WowText className="text-5xl sm:text-6xl md:text-7xl" />
               </motion.h2>
 
               <motion.h3

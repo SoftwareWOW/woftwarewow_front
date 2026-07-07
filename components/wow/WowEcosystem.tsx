@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import type { Dictionary } from '@/i18n/types'
 import RevealWrapper from '../animation/RevealWrapper'
 import SectionLabel from './shared/SectionLabel'
+import WowText, { WOW_GRADIENT } from './shared/WowText'
 
 type NodeId =
   | 'websites'
@@ -40,10 +41,6 @@ const MOBILE_VB_W = 390
 const MOBILE_VB_H = 980
 const CTA_Y = 620
 const MOBILE_CTA_Y = 770
-
-const WOW_THEME = {
-  gradient: 'linear-gradient(135deg, #8b7cff 0%, #b794f4 50%, #f4a8b8 100%)',
-}
 
 const NODE_LAYOUT: NodeLayout[] = [
   { id: 'websites', x: 66, y: 30, size: 'md' },
@@ -257,9 +254,11 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
         >
           <defs>
             <linearGradient id="wow-gradient" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#8b7cff" />
-              <stop offset="50%" stopColor="#b794f4" />
-              <stop offset="100%" stopColor="#f4a8b8" />
+              <stop offset="0%" stopColor="#615CC7" />
+              <stop offset="25%" stopColor="#6F62BF" />
+              <stop offset="50%" stopColor="#9671AC" />
+              <stop offset="75%" stopColor="#D38B8E" />
+              <stop offset="100%" stopColor="#DB8E8B" />
             </linearGradient>
           </defs>
 
@@ -335,16 +334,9 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                   fontSize: nodeFontSize(n.size, isMobile),
                 }}
               >
-                <span
-                  style={{
-                    background: WOW_THEME.gradient,
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
+                <WowText className="font-bold leading-none tracking-tight">
                   {nodeCopy.prefix}
-                </span>{' '}
+                </WowText>{' '}
                 <span className="text-foreground">{nodeCopy.label}</span>
               </span>
             </motion.div>
@@ -384,7 +376,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 }`}
                 style={{
                   flex: active ? 2.4 : 0.65,
-                  background: active ? WOW_THEME.gradient : undefined,
+                  background: active ? WOW_GRADIENT : undefined,
                 }}
               >
                 <AnimatePresence mode="popLayout" initial={false}>

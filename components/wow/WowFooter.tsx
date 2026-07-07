@@ -1,6 +1,7 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import WowText from '@/components/wow/shared/WowText'
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import {
@@ -28,9 +29,6 @@ const legalLinks = [
   { label: 'Terms of Service', href: '/terms' },
   { label: 'Cookies Settings', href: '/policy' },
 ]
-
-const wowGradient =
-  'linear-gradient(90deg, #615CC7 0%, #6F62BF 25%, #9671AC 50%, #D38B8E 75%, #DB8E8B 100%)'
 
 export default function WowFooter({ footer }: WowFooterProps) {
   return (
@@ -62,18 +60,7 @@ export default function WowFooter({ footer }: WowFooterProps) {
               <div>
                 <Link href="/" className="inline-block">
                   <p className="text-2xl font-semibold leading-none md:text-3xl">
-                    <span
-                      className="inline-block font-['Outfit'] font-extrabold leading-[0.85] tracking-[-0.08em] transition-transform duration-300 hover:scale-[1.02]"
-                      style={{
-                        background: wowGradient,
-                        WebkitBackgroundClip: 'text',
-                        backgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        color: 'transparent',
-                      }}
-                    >
-                      WOW
-                    </span>
+                    <WowText />
                     <span className="ml-2 text-[#1a1a1a] dark:text-[#F2F2F2]">
                       Superagency
                     </span>
@@ -158,18 +145,7 @@ export default function WowFooter({ footer }: WowFooterProps) {
           aria-hidden
           className="pointer-events-none mt-6 select-none whitespace-nowrap text-center text-[clamp(1.75rem,10vw,8rem)] font-semibold leading-none tracking-[-0.04em]"
         >
-          <span
-            className="inline-block opacity-20 dark:opacity-10"
-            style={{
-              background: wowGradient,
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              color: 'transparent',
-            }}
-          >
-            WOW
-          </span>
+          <WowText variant="watermark" />
           <span className="ml-4 text-white dark:text-white/[0.04]">
             Superagency
           </span>
