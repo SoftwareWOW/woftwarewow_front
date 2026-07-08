@@ -1,19 +1,11 @@
-import { Fragment, ReactNode } from 'react'
-import Footer from './Footer'
-import Navbar from './Navbar'
+import { ReactNode } from 'react'
 
 const LayoutOne = ({
   children,
 }: Readonly<{
   children: ReactNode
 }>) => {
-  return (
-    <Fragment>
-      <Navbar />
-      <main className="relative z-10 bg-backgroundBody dark:bg-dark lg:mb-[600px]">{children}</main>
-      <Footer />
-    </Fragment>
-  )
+  return <>{children}</>
 }
 
 export default LayoutOne

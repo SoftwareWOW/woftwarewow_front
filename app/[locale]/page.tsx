@@ -1,4 +1,3 @@
-import WowLayout from '@/components/wow/WowLayout'
 import WowHero from '@/components/wow/sections/WowHero'
 import WowEcosystem from '@/components/wow/WowEcosystem'
 import { getDictionary } from '@/i18n/dictionary'
@@ -39,9 +38,8 @@ const Home = async ({ params }: Props) => {
   const dictionary = await getDictionary(locale as Locale)
 
   return (
-    <WowLayout>
-      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* <WowHero hero={dictionary.hero} />
+    <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <WowHero hero={dictionary.hero} />
      <div className="flex flex-col gap-0 lg:contents">
          <WowEcosystem ecosystem={dictionary.ecosystem} />
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
@@ -53,12 +51,11 @@ const Home = async ({ params }: Props) => {
            <Marquee />
         <HumanTuch />
         <Faq />
-        <GrowthStrategies /> */}
+        <GrowthStrategies />
         <div className="mb-3">
           <WowGrowthCta />
         </div>
       </div>
-    </WowLayout>
   )
 }
 
