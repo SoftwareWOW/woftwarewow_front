@@ -4,9 +4,14 @@ import About from '@/components/shared/About'
 import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
-import Marquee from '@/components/shared/Marquee'
-import PageHero from '@/components/shared/PageHero'
+// import Marquee from '@/components/shared/Marquee'
+import Marquee from '@/components/wow/shared/Marquee'
 import Video from '@/components/shared/Video'
+import PageHero from './_components/PageHero'
+import HeroAbout from '@/components/homepage-07/HeroAbout'
+import SkewMarquee from '@/components/shared/SkewMarquee'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
 
 export const metadata = {
   title: 'About',
@@ -17,16 +22,20 @@ const AboutPage = () => {
     <LayoutOne>
       <PageHero
         badgeTitle="About"
-        title="Digital Solution "
-        italicTitle="Agency"
-        description="As a agency we are working on client projects, official Webflow Templates and cloneables for the Webflow community."
+        title="WOW"
+        italicTitle="Superagency"
+       description="Get to know the team, vision, and ecosystem helping businesses grow through technology, design, marketing, and AI."
       />
-      <Video />
-      <About />
+      {/* <About /> */}
+        <HeroAbout spacingTop="pt-10 sm:pt-16 md:pt-[100px] mb-10 lg:mb-20" />
+        <SkewMarquee />
       <Team />
-      <Marquee withBorder={true} />
-      <AwardsV2 />
-      <CTA>
+      <Marquee />
+      {/* <AwardsV2 /> */}
+          <SolutionToChallenges/>
+       <WowGrowthCta />
+     
+      {/* <CTA>
         Let's chat!
         <CtaImageSlider
           slides={[
@@ -37,7 +46,7 @@ const AboutPage = () => {
         />
         with us.
         <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">A virtual coffee?</i>
-      </CTA>
+      </CTA> */}
     </LayoutOne>
   )
 }

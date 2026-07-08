@@ -14,8 +14,8 @@ const wowGradientStyle = {
 
 const variantClasses = {
   brand:
-    "inline-block font-['Outfit'] font-extrabold leading-[0.85] tracking-[-0.08em] transition-transform duration-300 hover:scale-[1.02]",
-  watermark: 'inline-block opacity-20 dark:opacity-10',
+    "inline-block overflow-visible pr-[0.12em] font-['Outfit'] font-extrabold leading-[0.95] tracking-[-0.06em] transition-transform duration-300 hover:scale-[1.02]",
+  watermark: 'inline-block overflow-visible opacity-20 dark:opacity-10',
 } as const
 
 type WowTextProps = {

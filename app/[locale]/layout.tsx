@@ -1,5 +1,6 @@
 import CursorPointer from '@/components/animation/CursorPointer'
 import SmoothScrollProvider from '@/components/shared/SmoothScroll'
+import WowLayout from '@/components/wow/WowLayout'
 import { isRtlLocale, type Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionary'
 import { routing } from '@/i18n/routing'
@@ -53,7 +54,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <SmoothScrollProvider>
               <ThemeModeProvider>
                 <CursorPointer />
-                {children}
+                <WowLayout>{children}</WowLayout>
               </ThemeModeProvider>
             </SmoothScrollProvider>
           </NextIntlClientProvider>

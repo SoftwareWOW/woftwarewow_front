@@ -1976,14 +1976,14 @@
             "href": "/about"
           },
           {
-            "id": "about02",
-            "label": "About 02",
-            "href": "/about-02"
+            "id": "services",
+            "label": "Services",
+            "href": "/services"
           },
           {
-            "id": "faq",
-            "label": "FAQ",
-            "href": "/faq"
+            "id": "caseStudies",
+            "label": "Case Studies",
+            "href": "/portfolio-agency/case-study"
           },
           {
             "id": "contact",
@@ -1998,7 +1998,7 @@
           {
             "id": "teamDetails",
             "label": "Team Details",
-            "href": "/team"
+            "href": "/team/1"
           },
           {
             "id": "career",
@@ -2009,11 +2009,6 @@
             "id": "career02",
             "label": "Career 02",
             "href": "/career-02"
-          },
-          {
-            "id": "careerDetails",
-            "label": "Career Details",
-            "href": "/career"
           }
         ]
       },
