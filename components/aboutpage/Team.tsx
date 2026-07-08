@@ -10,6 +10,7 @@ import facebookLogo from '@/public/images/icons/facebook.svg'
 import facebookDarkLogo from '@/public/images/icons/facebook-dark.svg'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
+import TeamGallery from '../aboutpage-02/TeamGallery'
 
 interface TeamMember {
   id: string
@@ -115,9 +116,9 @@ const Team = () => {
             </div>
           </div>
         </div>
-
+   <TeamGallery />
         {/* Team member tabs */}
-        <div className="mt-[30px] flex justify-center gap-6 max-xl:flex-wrap">
+        {/* <div className="mt-[30px] flex justify-center gap-6 max-xl:flex-wrap">
           {teamMembers.map((member) => (
             <div
               key={member.id}
@@ -134,7 +135,7 @@ const Team = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </RevealWrapper>
     </section>
   )

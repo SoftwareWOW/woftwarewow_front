@@ -12,15 +12,15 @@ const HeroAbout = ({ spacingTop }: PropsTypes) => {
   return spacingTop ? (
     <RevealWrapper className={`${spacingTop} container`}>
       <h3 ref={revealRef} className="reveal-text-2 text-secondary dark:text-backgroundBody">
-        Rivor Agency: Shaping the Future of Digital Innovation. We are dedicated to empowering blockchain pioneers and
-        transforming the realm of digital ownership for today and beyond. images
+        WOW Superagency is a connected ecosystem of technology, design, marketing, AI, websites, hosting, and growth
+        divisions built to help businesses modernize, scale, and stand out in a competitive digital world.
       </h3>
     </RevealWrapper>
   ) : (
     <RevealWrapper as="section" className="container">
       <h3 ref={revealRef}>
-        We specialize in designing cutting-edge web experiences that flawlessly blend creativity with innovative
-        technology.
+         We combine strategy, creativity, technology, and AI to build digital experiences that look impressive, work
+        efficiently, and help businesses grow with confidence.
       </h3>
     </RevealWrapper>
   )

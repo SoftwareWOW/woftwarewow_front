@@ -134,7 +134,7 @@ export default function HeroTypingTitle({
 
   return (
     <h1 className="mb-4 mt-3.5 text-[clamp(2.75rem,12vw,6rem)] font-normal leading-[1.05] tracking-[-0.04em] sm:tracking-[-0.06em] xl:leading-[1.1] xl:tracking-[-2.88px]">
-      <span className="inline-flex flex-wrap items-baseline justify-center gap-x-[0.2em] overflow-visible">
+      <span className="inline-flex max-w-full flex-nowrap items-baseline justify-center gap-x-[0.2em] overflow-visible whitespace-nowrap">
         {primaryDisplay ? (
           <WowText className="align-baseline text-[1em]">{primaryDisplay}</WowText>
         ) : null}
