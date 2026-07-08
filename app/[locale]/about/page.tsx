@@ -5,8 +5,9 @@ import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquee from '@/components/shared/Marquee'
-import PageHero from '@/components/shared/PageHero'
+
 import Video from '@/components/shared/Video'
+import PageHero from './_components/PageHero'
 
 export const metadata = {
   title: 'About',
