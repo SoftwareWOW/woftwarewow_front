@@ -1,6 +1,6 @@
-import RevealWrapper from "@/components/animation/RevealWrapper"
-import HeroGradientAnimation from "@/components/shared/HeroGradientAnimation"
-
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
+import HeroTypingTitle from './HeroTypingTitle'
 
 interface PropsType {
   badgeTitle?: string
@@ -23,10 +23,14 @@ const PageHero = ({ badgeTitle, title, description, italicTitle, spacing, scale 
               <span className="rv-badge-text">{badgeTitle}</span>
             </div>
           )}
-          {title && (
-            <h1 className="mb-4 mt-3.5">
-              {title} <i className="font-instrument italic">{italicTitle}</i>
-            </h1>
+          {title && italicTitle ? (
+            <HeroTypingTitle primaryText={title} secondaryText={italicTitle} />
+          ) : (
+            title && (
+              <h1 className="mb-4 mt-3.5">
+                {title} {italicTitle && <i className="font-instrument italic">{italicTitle}</i>}
+              </h1>
+            )
           )}
           {description && <p className="text-appear mx-auto max-w-[470px] md:max-w-[750px]">{description}</p>}
         </RevealWrapper>

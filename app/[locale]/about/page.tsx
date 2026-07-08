@@ -18,8 +18,8 @@ const AboutPage = () => {
     <LayoutOne>
       <PageHero
         badgeTitle="About"
-        title="Digital Solution "
-        italicTitle="Agency"
+        title="WOW"
+        italicTitle="Superagency"
         description="As a agency we are working on client projects, official Webflow Templates and cloneables for the Webflow community."
       />
       <Video />
