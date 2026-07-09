@@ -10,6 +10,7 @@ import Video from '@/components/shared/Video'
 import PageHero from './_components/PageHero'
 import HeroAbout from '@/components/homepage-07/HeroAbout'
 import SkewMarquee from '@/components/shared/SkewMarquee'
+import TechStack from './_components/TechStack'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
 
@@ -29,6 +30,7 @@ const AboutPage = () => {
       {/* <About /> */}
         <HeroAbout spacingTop="pt-10 sm:pt-16 md:pt-[100px] mb-10 lg:mb-20" />
         <SkewMarquee />
+        <TechStack />
       <Team />
       <Marquee />
       {/* <AwardsV2 /> */}
