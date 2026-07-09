@@ -1985,6 +1985,11 @@
             "href": "/portfolio-agency/case-study"
           },
           {
+            "id": "industries",
+            "label": "Industries",
+            "href": "/industries/professional-services"
+          },
+          {
             "id": "contact",
             "label": "Contact",
             "href": "/contact"
@@ -1995,19 +2000,9 @@
             "href": "/team"
           },
           {
-            "id": "teamDetails",
-            "label": "Détails de l'équipe",
-            "href": "/team/1"
-          },
-          {
             "id": "career",
             "label": "Carrières",
             "href": "/career"
-          },
-          {
-            "id": "career02",
-            "label": "Carrières 02",
-            "href": "/career-02"
           }
         ]
       },
@@ -2021,29 +2016,9 @@
             "href": "/ai-blog"
           },
           {
-            "id": "blog02",
-            "label": "Blogue 02",
-            "href": "/seo-blog"
-          },
-          {
-            "id": "projects",
-            "label": "Projets",
-            "href": "/digital-agency/project"
-          },
-          {
-            "id": "projects02",
-            "label": "Projets 02",
-            "href": "/portfolio-agency/case-study"
-          },
-          {
-            "id": "projects03",
-            "label": "Projets 03",
-            "href": "/agency-projects"
-          },
-          {
-            "id": "pricing",
-            "label": "Tarification",
-            "href": "/pricing"
+            "id": "faq",
+            "label": "FAQ",
+            "href": "/faq"
           }
         ]
       },
@@ -2052,24 +2027,24 @@
         "title": "Liens",
         "links": [
           {
-            "id": "changelog",
-            "label": "Journal des modifications",
-            "href": "/changelog"
+            "id": "page1",
+            "label": "[page ici]",
+            "href": "#"
           },
           {
-            "id": "password",
-            "label": "Protégé par mot de passe",
-            "href": "/password"
+            "id": "page2",
+            "label": "[page ici]",
+            "href": "#"
           },
           {
-            "id": "terms",
-            "label": "Conditions d'utilisation",
-            "href": "/terms"
+            "id": "page3",
+            "label": "[page ici]",
+            "href": "#"
           },
           {
-            "id": "privacy",
-            "label": "Politique de confidentialité",
-            "href": "/policy"
+            "id": "page4",
+            "label": "[page ici]",
+            "href": "#"
           }
         ]
       }

@@ -14,9 +14,9 @@ export interface ITeamMember {
 
 const TeamGallery = () => {
   return (
-    <section className="flex items-center justify-center overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="flex items-center justify-center overflow-hidden pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container w-full">
-        <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row md:items-center lg:justify-between">
+        {/* <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row md:items-center lg:justify-between">
           <SectionHeader
             italicTitle="Team"
             headingTitle="Members"
@@ -24,7 +24,7 @@ const TeamGallery = () => {
               member in an engaging and professional 
               way."
           />
-        </div>
+        </div> */}
 
         <RevealWrapper className="max-lg:hidden lg:block">
           <Teams team={teamMemberV2} />

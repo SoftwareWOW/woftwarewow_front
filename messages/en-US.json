@@ -1986,6 +1986,11 @@
             "href": "/portfolio-agency/case-study"
           },
           {
+            "id": "industries",
+            "label": "Industries",
+            "href": "/industries/professional-services"
+          },
+          {
             "id": "contact",
             "label": "Contact",
             "href": "/contact"
@@ -1996,19 +2001,9 @@
             "href": "/team"
           },
           {
-            "id": "teamDetails",
-            "label": "Team Details",
-            "href": "/team/1"
-          },
-          {
             "id": "career",
             "label": "Career",
             "href": "/career"
-          },
-          {
-            "id": "career02",
-            "label": "Career 02",
-            "href": "/career-02"
           }
         ]
       },
@@ -2022,29 +2017,9 @@
             "href": "/ai-blog"
           },
           {
-            "id": "blog02",
-            "label": "Blog 02",
-            "href": "/seo-blog"
-          },
-          {
-            "id": "projects",
-            "label": "Projects",
-            "href": "/digital-agency/project"
-          },
-          {
-            "id": "projects02",
-            "label": "Projects 02",
-            "href": "/portfolio-agency/case-study"
-          },
-          {
-            "id": "projects03",
-            "label": "Projects 03",
-            "href": "/agency-projects"
-          },
-          {
-            "id": "pricing",
-            "label": "Pricing",
-            "href": "/pricing"
+            "id": "faq",
+            "label": "FAQ",
+            "href": "/faq"
           }
         ]
       },
@@ -2053,24 +2028,24 @@
         "title": "Links",
         "links": [
           {
-            "id": "changelog",
-            "label": "Changelog",
-            "href": "/changelog"
+            "id": "page1",
+            "label": "[page here]",
+            "href": "#"
           },
           {
-            "id": "password",
-            "label": "Password Protected",
-            "href": "/password"
+            "id": "page2",
+            "label": "[page here]",
+            "href": "#"
           },
           {
-            "id": "terms",
-            "label": "Terms of Service",
-            "href": "/terms"
+            "id": "page3",
+            "label": "[page here]",
+            "href": "#"
           },
           {
-            "id": "privacy",
-            "label": "Privacy Policy",
-            "href": "/policy"
+            "id": "page4",
+            "label": "[page here]",
+            "href": "#"
           }
         ]
       }
