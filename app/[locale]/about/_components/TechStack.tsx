@@ -14,65 +14,84 @@ import {
   Briefcase,
   CreditCard,
   MessagesSquare,
-  Forward,
-  Atom,
-  Braces,
-  Wind,
-  Move3d,
-  Clapperboard,
-  Hexagon,
-  Bird,
-  Rocket,
-  Network,
-  Webhook,
-  Bot,
-  Brain,
-  Gem,
-  Link2,
-  Workflow,
-  CircuitBoard,
-  Table,
-  Leaf,
-  Zap,
-  Layers,
-  Blocks,
-  LayoutList,
-  FileStack,
-  Newspaper,
-  Triangle,
-  CloudCog,
-  Droplet,
-  Container,
-  FolderGit2,
-  PenTool,
-  Spline,
-  Image,
-  Film,
-  Video,
-  LineChart,
-  Tags,
-  Search,
-  Megaphone,
-  Target,
-  Users,
-  Radar,
-  Building2,
-  Kanban,
-  Wallet,
-  ShoppingBag,
-  Store,
-  Hash,
-  Mail,
-  Monitor,
-  ScreenShare,
-  Phone,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import type { IconType } from 'react-icons'
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiFramer,
+  SiGreensock,
+  SiNodedotjs,
+  SiNestjs,
+  SiExpress,
+  SiGraphql,
+  SiOpenai,
+  SiAnthropic,
+  SiGooglegemini,
+  SiLangchain,
+  SiN8N,
+  SiModelcontextprotocol,
+  SiPostgresql,
+  SiMysql,
+  SiMongodb,
+  SiRedis,
+  SiPrisma,
+  SiSanity,
+  SiStrapi,
+  SiContentful,
+  SiWordpress,
+  SiVercel,
+  SiCloudflare,
+  SiDigitalocean,
+  SiDocker,
+  SiGithub,
+  SiFigma,
+  SiGoogleanalytics,
+  SiGoogletagmanager,
+  SiGooglesearchconsole,
+  SiMeta,
+  SiGoogleads,
+  SiHubspot,
+  SiSalesforce,
+  SiZoho,
+  SiStripe,
+  SiPaypal,
+  SiShopify,
+  SiWoocommerce,
+  SiSlack,
+  SiGoogle,
+  SiZoom,
+  SiWhatsapp,
+} from 'react-icons/si'
+import { FaAws, FaLinkedin, FaMicrosoft } from 'react-icons/fa6'
+import {
+  TbApi,
+  TbBrandAdobeIllustrator,
+  TbBrandAdobePhotoshop,
+  TbBrandAdobeAfterEffect,
+  TbBrandAdobePremier,
+} from 'react-icons/tb'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { WOW_GRADIENT } from '@/components/wow/shared/WowText'
 
-type Tech = { name: string; hint?: string; icon: LucideIcon }
+type Tech = {
+  name: string
+  hint?: string
+  icon: IconType
+  color?: string
+  monochrome?: boolean
+}
+
 type Category = { id: string; label: string; icon: LucideIcon; items: Tech[] }
+
+const PipedriveIcon: IconType = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+    <path d="M12.3 4.2c-3.7 0-6.7 3-6.7 6.7 0 3.7 3 6.7 6.7 6.7 1.2 0 2.3-.3 3.3-.8l3.4 3.4 1.4-1.4-3.3-3.3c.6-1 .9-2.1.9-3.4 0-3.7-3-6.7-6.7-6.7zm0 2.2c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5-4.5-2-4.5-4.5 2-4.5 4.5-4.5z" />
+  </svg>
+)
 
 const categories: Category[] = [
   {
@@ -80,12 +99,12 @@ const categories: Category[] = [
     label: 'Frontend',
     icon: Code2,
     items: [
-      { name: 'Next.js', hint: 'React framework', icon: Forward },
-      { name: 'React', hint: 'UI library', icon: Atom },
-      { name: 'TypeScript', hint: 'Type safety', icon: Braces },
-      { name: 'Tailwind CSS', hint: 'Utility styling', icon: Wind },
-      { name: 'Framer Motion', hint: 'Motion system', icon: Move3d },
-      { name: 'GSAP', hint: 'Timeline animation', icon: Clapperboard },
+      { name: 'Next.js', hint: 'React framework', icon: SiNextdotjs, monochrome: true },
+      { name: 'React', hint: 'UI library', icon: SiReact, color: '#61DAFB' },
+      { name: 'TypeScript', hint: 'Type safety', icon: SiTypescript, color: '#3178C6' },
+      { name: 'Tailwind CSS', hint: 'Utility styling', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Framer Motion', hint: 'Motion system', icon: SiFramer, color: '#0055FF' },
+      { name: 'GSAP', hint: 'Timeline animation', icon: SiGreensock, color: '#88CE02' },
     ],
   },
   {
@@ -93,11 +112,11 @@ const categories: Category[] = [
     label: 'Backend',
     icon: Server,
     items: [
-      { name: 'Node.js', hint: 'Runtime', icon: Hexagon },
-      { name: 'NestJS', hint: 'Enterprise framework', icon: Bird },
-      { name: 'Express.js', hint: 'Minimal server', icon: Rocket },
-      { name: 'GraphQL', hint: 'Typed API layer', icon: Network },
-      { name: 'REST API', hint: 'Standard interfaces', icon: Webhook },
+      { name: 'Node.js', hint: 'Runtime', icon: SiNodedotjs, color: '#339933' },
+      { name: 'NestJS', hint: 'Enterprise framework', icon: SiNestjs, color: '#E0234E' },
+      { name: 'Express.js', hint: 'Minimal server', icon: SiExpress, monochrome: true },
+      { name: 'GraphQL', hint: 'Typed API layer', icon: SiGraphql, color: '#E10098' },
+      { name: 'REST API', hint: 'Standard interfaces', icon: TbApi, color: '#2563EB' },
     ],
   },
   {
@@ -105,12 +124,12 @@ const categories: Category[] = [
     label: 'AI & Automation',
     icon: Sparkles,
     items: [
-      { name: 'OpenAI', hint: 'GPT models', icon: Bot },
-      { name: 'Anthropic', hint: 'Claude models', icon: Brain },
-      { name: 'Google Gemini', hint: 'Multimodal AI', icon: Gem },
-      { name: 'LangChain', hint: 'LLM orchestration', icon: Link2 },
-      { name: 'n8n', hint: 'Workflow automation', icon: Workflow },
-      { name: 'MCP', hint: 'Model Context Protocol', icon: CircuitBoard },
+      { name: 'OpenAI', hint: 'GPT models', icon: SiOpenai, color: '#10A37F' },
+      { name: 'Anthropic', hint: 'Claude models', icon: SiAnthropic, monochrome: true },
+      { name: 'Google Gemini', hint: 'Multimodal AI', icon: SiGooglegemini, color: '#8E75B2' },
+      { name: 'LangChain', hint: 'LLM orchestration', icon: SiLangchain, color: '#1C3C3C' },
+      { name: 'n8n', hint: 'Workflow automation', icon: SiN8N, color: '#EA4B71' },
+      { name: 'MCP', hint: 'Model Context Protocol', icon: SiModelcontextprotocol, color: '#7C3AED' },
     ],
   },
   {
@@ -118,11 +137,11 @@ const categories: Category[] = [
     label: 'Database',
     icon: Database,
     items: [
-      { name: 'PostgreSQL', hint: 'Relational', icon: Database },
-      { name: 'MySQL', hint: 'Relational', icon: Table },
-      { name: 'MongoDB', hint: 'Document', icon: Leaf },
-      { name: 'Redis', hint: 'In-memory', icon: Zap },
-      { name: 'Prisma ORM', hint: 'Typed ORM', icon: Layers },
+      { name: 'PostgreSQL', hint: 'Relational', icon: SiPostgresql, color: '#4169E1' },
+      { name: 'MySQL', hint: 'Relational', icon: SiMysql, color: '#4479A1' },
+      { name: 'MongoDB', hint: 'Document', icon: SiMongodb, color: '#47A248' },
+      { name: 'Redis', hint: 'In-memory', icon: SiRedis, color: '#DC382D' },
+      { name: 'Prisma ORM', hint: 'Typed ORM', icon: SiPrisma, color: '#2D3748' },
     ],
   },
   {
@@ -130,10 +149,10 @@ const categories: Category[] = [
     label: 'CMS & Content',
     icon: FileText,
     items: [
-      { name: 'Sanity', hint: 'Structured content', icon: Blocks },
-      { name: 'Strapi', hint: 'Headless CMS', icon: LayoutList },
-      { name: 'Contentful', hint: 'Enterprise CMS', icon: FileStack },
-      { name: 'Headless WordPress', hint: 'Familiar authoring', icon: Newspaper },
+      { name: 'Sanity', hint: 'Structured content', icon: SiSanity, color: '#F03E2F' },
+      { name: 'Strapi', hint: 'Headless CMS', icon: SiStrapi, color: '#4945FF' },
+      { name: 'Contentful', hint: 'Enterprise CMS', icon: SiContentful, color: '#2478CC' },
+      { name: 'Headless WordPress', hint: 'Familiar authoring', icon: SiWordpress, color: '#21759B' },
     ],
   },
   {
@@ -141,12 +160,12 @@ const categories: Category[] = [
     label: 'Cloud & Infra',
     icon: Cloud,
     items: [
-      { name: 'Vercel', hint: 'Edge hosting', icon: Triangle },
-      { name: 'Cloudflare', hint: 'Edge network', icon: Cloud },
-      { name: 'AWS', hint: 'Cloud platform', icon: CloudCog },
-      { name: 'DigitalOcean', hint: 'Cloud VMs', icon: Droplet },
-      { name: 'Docker', hint: 'Containers', icon: Container },
-      { name: 'GitHub', hint: 'Source & CI', icon: FolderGit2 },
+      { name: 'Vercel', hint: 'Edge hosting', icon: SiVercel, monochrome: true },
+      { name: 'Cloudflare', hint: 'Edge network', icon: SiCloudflare, color: '#F38020' },
+      { name: 'AWS', hint: 'Cloud platform', icon: FaAws, color: '#FF9900' },
+      { name: 'DigitalOcean', hint: 'Cloud VMs', icon: SiDigitalocean, color: '#0080FF' },
+      { name: 'Docker', hint: 'Containers', icon: SiDocker, color: '#2496ED' },
+      { name: 'GitHub', hint: 'Source & CI', icon: SiGithub, monochrome: true },
     ],
   },
   {
@@ -154,11 +173,11 @@ const categories: Category[] = [
     label: 'Design',
     icon: Palette,
     items: [
-      { name: 'Figma', hint: 'Product design', icon: PenTool },
-      { name: 'Illustrator', hint: 'Vector', icon: Spline },
-      { name: 'Photoshop', hint: 'Raster', icon: Image },
-      { name: 'After Effects', hint: 'Motion graphics', icon: Film },
-      { name: 'Premiere Pro', hint: 'Video edit', icon: Video },
+      { name: 'Figma', hint: 'Product design', icon: SiFigma, color: '#F24E1E' },
+      { name: 'Illustrator', hint: 'Vector', icon: TbBrandAdobeIllustrator, color: '#FF9A00' },
+      { name: 'Photoshop', hint: 'Raster', icon: TbBrandAdobePhotoshop, color: '#31A8FF' },
+      { name: 'After Effects', hint: 'Motion graphics', icon: TbBrandAdobeAfterEffect, color: '#9999FF' },
+      { name: 'Premiere Pro', hint: 'Video edit', icon: TbBrandAdobePremier, color: '#9999FF' },
     ],
   },
   {
@@ -166,12 +185,12 @@ const categories: Category[] = [
     label: 'Marketing',
     icon: BarChart3,
     items: [
-      { name: 'Google Analytics', hint: 'Insights', icon: LineChart },
-      { name: 'Tag Manager', hint: 'Tag ops', icon: Tags },
-      { name: 'Search Console', hint: 'SEO', icon: Search },
-      { name: 'Meta Ads', hint: 'Paid social', icon: Megaphone },
-      { name: 'Google Ads', hint: 'Paid search', icon: Target },
-      { name: 'LinkedIn Ads', hint: 'B2B', icon: Users },
+      { name: 'Google Analytics', hint: 'Insights', icon: SiGoogleanalytics, color: '#E37400' },
+      { name: 'Tag Manager', hint: 'Tag ops', icon: SiGoogletagmanager, color: '#246FDB' },
+      { name: 'Search Console', hint: 'SEO', icon: SiGooglesearchconsole, color: '#458CF5' },
+      { name: 'Meta Ads', hint: 'Paid social', icon: SiMeta, color: '#0081FB' },
+      { name: 'Google Ads', hint: 'Paid search', icon: SiGoogleads, color: '#4285F4' },
+      { name: 'LinkedIn Ads', hint: 'B2B', icon: FaLinkedin, color: '#0A66C2' },
     ],
   },
   {
@@ -179,10 +198,10 @@ const categories: Category[] = [
     label: 'CRM & Business',
     icon: Briefcase,
     items: [
-      { name: 'HubSpot', hint: 'Full stack CRM', icon: Radar },
-      { name: 'Salesforce', hint: 'Enterprise CRM', icon: Cloud },
-      { name: 'Zoho CRM', hint: 'SMB CRM', icon: Building2 },
-      { name: 'Pipedrive', hint: 'Sales pipeline', icon: Kanban },
+      { name: 'HubSpot', hint: 'Full stack CRM', icon: SiHubspot, color: '#FF7A59' },
+      { name: 'Salesforce', hint: 'Enterprise CRM', icon: SiSalesforce, color: '#00A1E0' },
+      { name: 'Zoho CRM', hint: 'SMB CRM', icon: SiZoho, color: '#E42527' },
+      { name: 'Pipedrive', hint: 'Sales pipeline', icon: PipedriveIcon, color: '#017737' },
     ],
   },
   {
@@ -190,10 +209,10 @@ const categories: Category[] = [
     label: 'Commerce',
     icon: CreditCard,
     items: [
-      { name: 'Stripe', hint: 'Payments', icon: CreditCard },
-      { name: 'PayPal', hint: 'Payments', icon: Wallet },
-      { name: 'Shopify', hint: 'Storefront', icon: ShoppingBag },
-      { name: 'WooCommerce', hint: 'WordPress commerce', icon: Store },
+      { name: 'Stripe', hint: 'Payments', icon: SiStripe, color: '#635BFF' },
+      { name: 'PayPal', hint: 'Payments', icon: SiPaypal, color: '#00457C' },
+      { name: 'Shopify', hint: 'Storefront', icon: SiShopify, color: '#7AB55C' },
+      { name: 'WooCommerce', hint: 'WordPress commerce', icon: SiWoocommerce, color: '#96588A' },
     ],
   },
   {
@@ -201,11 +220,11 @@ const categories: Category[] = [
     label: 'Communication',
     icon: MessagesSquare,
     items: [
-      { name: 'Slack', hint: 'Team chat', icon: Hash },
-      { name: 'Google Workspace', hint: 'Gmail & Docs', icon: Mail },
-      { name: 'Microsoft 365', hint: 'Productivity', icon: Monitor },
-      { name: 'Zoom', hint: 'Video calls', icon: ScreenShare },
-      { name: 'WhatsApp Business', hint: 'Client comms', icon: Phone },
+      { name: 'Slack', hint: 'Team chat', icon: SiSlack, color: '#4A154B' },
+      { name: 'Google Workspace', hint: 'Gmail & Docs', icon: SiGoogle, color: '#4285F4' },
+      { name: 'Microsoft 365', hint: 'Productivity', icon: FaMicrosoft, color: '#5E5E5E' },
+      { name: 'Zoom', hint: 'Video calls', icon: SiZoom, color: '#0B5CFF' },
+      { name: 'WhatsApp Business', hint: 'Client comms', icon: SiWhatsapp, color: '#25D366' },
     ],
   },
 ]
@@ -330,7 +349,13 @@ const TechStack = () => {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
-                  <TechCard name={item.name} hint={item.hint} icon={item.icon} />
+                  <TechCard
+                    name={item.name}
+                    hint={item.hint}
+                    icon={item.icon}
+                    color={item.color}
+                    monochrome={item.monochrome}
+                  />
                 </motion.li>
               ))}
             </motion.ul>
@@ -341,7 +366,19 @@ const TechStack = () => {
   )
 }
 
-function TechCard({ name, hint, icon: Icon }: { name: string; hint?: string; icon: LucideIcon }) {
+function TechCard({
+  name,
+  hint,
+  icon,
+  color,
+  monochrome,
+}: {
+  name: string
+  hint?: string
+  icon: IconType
+  color?: string
+  monochrome?: boolean
+}) {
   return (
     <div
       tabIndex={0}
@@ -356,7 +393,7 @@ function TechCard({ name, hint, icon: Icon }: { name: string; hint?: string; ico
         }}
       />
       <div className="relative flex items-center gap-3">
-        <TechIcon icon={Icon} />
+        <TechIcon icon={icon} color={color} monochrome={monochrome} />
         <span className="truncate text-sm font-semibold text-secondary transition-colors duration-300 dark:text-[#F2F2F2] sm:text-base">
           {name}
         </span>
@@ -368,17 +405,30 @@ function TechCard({ name, hint, icon: Icon }: { name: string; hint?: string; ico
   )
 }
 
-function TechIcon({ icon: Icon }: { icon: LucideIcon }) {
+function TechIcon({
+  icon: Icon,
+  color,
+  monochrome,
+}: {
+  icon: IconType
+  color?: string
+  monochrome?: boolean
+}) {
   return (
     <span
       aria-hidden
-      className="relative grid h-9 w-9 shrink-0 place-items-center rounded-radius-sm border border-black/10 bg-background text-muted transition-all duration-300 group-hover:scale-105 group-hover:border-transparent group-hover:text-white dark:border-white/10 dark:bg-[#0D0D0D] dark:text-[#808080]"
+      className="relative grid h-9 w-9 shrink-0 place-items-center rounded-radius-sm border border-black/10 bg-white transition-all duration-300 group-hover:scale-105 group-hover:border-transparent dark:border-white/10 dark:bg-[#0D0D0D]"
     >
       <span
         className="absolute inset-0 rounded-radius-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: WOW_GRADIENT }}
       />
-      <Icon className="relative h-4 w-4" strokeWidth={2} />
+      <Icon
+        className={`relative h-[18px] w-[18px] transition-colors duration-300 group-hover:text-white ${
+          monochrome ? 'text-secondary dark:text-[#F2F2F2]' : ''
+        }`}
+        style={!monochrome && color ? { color } : undefined}
+      />
     </span>
   )
 }
