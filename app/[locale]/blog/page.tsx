@@ -21,7 +21,7 @@ const featuredBlog = loadedBlogs.find((blog) => blog.slug === 'the-new-era-of-di
 const BlogPage = () => {
   return (
     <LayoutOne>
-      <BlogHero blog={featuredBlog} />
+      {/* <BlogHero blog={featuredBlog} /> */}
       <PageHero
         badgeTitle="Blog"
         title="What we got to say"
