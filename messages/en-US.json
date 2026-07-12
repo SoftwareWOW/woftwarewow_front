@@ -730,7 +730,7 @@
           "Flexible scheduling",
           "No obligation"
         ],
-        "ctaLabel": "Learn more",
+        "ctaLabel": "Schedule a Meeting",
         "image": "default"
       },
       "thinkTank": {
@@ -1667,10 +1667,10 @@
               "items": [
                 {
                   "id": "meet",
-                  "label": "Meet",
+                  "label": "Schedule a Meeting",
                   "description": "Connect with our team",
                   "type": "link",
-                  "href": "/contact",
+                  "href": "/meet",
                   "detailPanel": "default"
                 },
                 {
@@ -1764,9 +1764,9 @@
               "items": [
                 {
                   "id": "meet",
-                  "label": "Meet",
+                  "label": "Schedule a Meeting",
                   "description": "Connect with our team",
-                  "href": "/contact"
+                  "href": "/meet"
                 },
                 {
                   "id": "thinkTank",
@@ -1841,7 +1841,8 @@
     "toggleDarkMode": "Toggle dark mode",
     "changeLanguage": "Change language",
     "openMessages": "Open messages",
-    "mainNavigation": "Main navigation"
+    "mainNavigation": "Main navigation",
+    "scheduleMeeting": "Schedule a Meeting"
   },
   "languageSwitcher": {
     "title": "Select language",
@@ -2028,9 +2029,9 @@
         "title": "Links",
         "links": [
           {
-            "id": "page1",
-            "label": "[page here]",
-            "href": "#"
+            "id": "scheduleMeeting",
+            "label": "Schedule a Meeting",
+            "href": "/meet"
           },
           {
             "id": "page2",

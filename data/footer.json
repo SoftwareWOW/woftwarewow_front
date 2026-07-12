@@ -21,7 +21,7 @@
   {
     "title": "Links",
     "links": [
-      { "href": "#", "label": "[page here]" },
+      { "href": "/meet", "label": "Schedule a Meeting" },
       { "href": "#", "label": "[page here]" },
       { "href": "#", "label": "[page here]" },
       { "href": "#", "label": "[page here]" }
