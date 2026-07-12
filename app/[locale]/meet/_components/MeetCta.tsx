@@ -1,10 +1,13 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
 const MeetCta = () => (
-  <section className="relative overflow-hidden bg-background px-3 pb-24 pt-8 transition-colors duration-300 dark:bg-background md:px-4 md:pb-32">
-    <div className="relative z-10 mx-auto max-w-[1320px]">
+  <section
+    className={`${meetSectionClass} bg-background transition-colors duration-300 dark:bg-background`}
+  >
+    <div className={meetSectionInnerClass}>
       <div className="rounded-radius-md border border-[#e5e5e5] bg-white/50 px-6 py-12 backdrop-blur-sm transition-all duration-300 dark:border-white/5 dark:bg-dark/50 md:px-10 md:py-16 lg:px-14 lg:py-20">
         <RevealWrapper className="mx-auto max-w-[900px] text-center">
           <SectionLabel className="mb-5">Get Started</SectionLabel>

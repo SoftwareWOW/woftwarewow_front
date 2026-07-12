@@ -2,50 +2,46 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useMemo, useState } from 'react'
-import { InlineWidget } from 'react-calendly'
+import { InlineWidget, useCalendlyEventListener } from 'react-calendly'
 
 type CalendlyEmbedProps = {
   url: string
 }
 
-function getCalendlyHeight(width: number) {
-  if (width >= 1536) return '1400px'
-  if (width >= 1280) return '1250px'
-  if (width >= 1024) return '1100px'
-  if (width >= 768) return '900px'
-  return '750px'
-}
+const MIN_HEIGHT = 660
 
 const calendlyTheme = {
   light: {
     backgroundColor: 'ededed',
     textColor: '171717',
+    wrapperClass: 'bg-backgroundBody',
   },
   dark: {
     backgroundColor: '1f1f1f',
     textColor: 'f2f2f2',
+    wrapperClass: 'bg-dark-200',
   },
 } as const
 
 export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
-  const [height, setHeight] = useState('750px')
+  const [height, setHeight] = useState(MIN_HEIGHT)
   const [mounted, setMounted] = useState(false)
   const { resolvedTheme } = useTheme()
 
   const isDark = mounted && resolvedTheme === 'dark'
   const theme = isDark ? calendlyTheme.dark : calendlyTheme.light
 
+  // useCalendlyEventListener({
+  //   onPageHeightResize: (event) => {
+  //     const reportedHeight = event.data.payload.height
+  //     if (reportedHeight > 0) {
+  //       setHeight(Math.max(MIN_HEIGHT, reportedHeight))
+  //     }
+  //   },
+  // })
+
   useEffect(() => {
     setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    const updateHeight = () => setHeight(getCalendlyHeight(window.innerWidth))
-
-    updateHeight()
-    window.addEventListener('resize', updateHeight)
-
-    return () => window.removeEventListener('resize', updateHeight)
   }, [])
 
   const pageSettings = useMemo(
@@ -53,6 +49,7 @@ export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
       backgroundColor: theme.backgroundColor,
       hideEventTypeDetails: false,
       hideLandingPageDetails: false,
+      hideGdprBanner: true,
       primaryColor: '615CCE',
       textColor: theme.textColor,
     }),
@@ -60,30 +57,21 @@ export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   )
 
   return (
-    <div
-      className={`w-full overflow-hidden rounded-radius-md transition-colors duration-300 ${
-        isDark ? 'bg-dark-200' : 'bg-backgroundBody'
-      } [&_.calendly-inline-widget]:!w-full [&_.calendly-inline-widget]:!max-w-none [&_iframe]:!w-full`}
-    >
-     
-      
+    <div className={`w-full transition-colors duration-300 ${theme.wrapperClass}`}>
       {mounted ? (
         <InlineWidget
-          key={`${url}-${isDark ? 'dark' : 'light'}`}
+          key={isDark ? 'dark' : 'light'}
           url={url}
+          className="!min-h-0 !w-full"
           styles={{
-            height,
+            height: `${height}px`,
             minWidth: '100%',
             width: '100%',
           }}
           pageSettings={pageSettings}
         />
       ) : (
-        <div
-          className="w-full bg-backgroundBody dark:bg-dark-200"
-          style={{ height }}
-          aria-hidden
-        />
+        <div className={`w-full ${theme.wrapperClass}`} style={{ height: MIN_HEIGHT }} aria-hidden />
       )}
     </div>
   )

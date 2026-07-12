@@ -3,6 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useState } from 'react'
+import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
 const faqItems = [
   {
@@ -35,8 +36,8 @@ export default function MeetFaq() {
   const [activeId, setActiveId] = useState<number | null>(1)
 
   return (
-    <section className="relative overflow-hidden px-3 md:px-4" aria-labelledby="meet-faq-heading">
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+    <section className={meetSectionClass} aria-labelledby="meet-faq-heading">
+      <div className={meetSectionInnerClass}>
         <RevealWrapper className="mb-10 text-center md:mb-14">
           <SectionLabel className="mb-5">FAQ</SectionLabel>
           <h2

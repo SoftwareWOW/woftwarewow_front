@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { Gift, MessageSquare, Route, Sparkles } from 'lucide-react'
+import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
 const whyMeetItems = [
   {
@@ -26,8 +27,8 @@ const whyMeetItems = [
 ]
 
 const WhyMeetWithUs = () => (
-  <section className="relative overflow-hidden px-3 pb-16 md:px-4 md:pb-24">
-    <div className="relative z-10 mx-auto max-w-[1320px]">
+  <section className={meetSectionClass}>
+    <div className={meetSectionInnerClass}>
       <RevealWrapper className="mb-10 text-center md:mb-14">
         <SectionLabel className="mb-5">Why Meet With Us</SectionLabel>
         <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
