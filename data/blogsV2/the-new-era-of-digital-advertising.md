@@ -2,8 +2,16 @@
 thumbnail: '/images/blog-img/blog-img-5.png'
 featureImage: '/images/blog-img/blog-details-img-1.png'
 title: 'The New Era of Digital Advertising'
-description: 'Explore how consumer expectations, technologies, and platforms are reshaping digital advertising in 2024.'
-date: 'february 05, 2024'
+description: 'It emphasizes professionalism and the depth of experience across various services or specialties, from strategy and design to development and growth.'
+date: '10 April 2026'
+tags:
+  - Ecommerce
+  - Technology
+  - Artificial Intelligence
+  - Design
+author:
+  name: Frankie Dejong
+  avatar: '/images/agent/01.jpg'
 ---
 
 ### Get to Know the Project – Overview & Highlights
