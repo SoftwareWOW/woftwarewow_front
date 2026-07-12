@@ -10,10 +10,10 @@ type CalendlySectionProps = {
 const CalendlySection = ({ calendlyUrl }: CalendlySectionProps) => (
   <section
     id="schedule"
-    className="relative overflow-hidden px-3 pb-20 md:px-4 md:pb-28"
+    // className="relative overflow-hidden bg-background px-3 pb-20 transition-colors duration-300 dark:bg-background md:px-4 md:pb-28 lg:px-6 xl:px-8"
     aria-labelledby="calendly-heading"
   >
-    <div className="relative z-10 mx-auto w-full max-w-[1320px] xl:max-w-[1440px] 2xl:max-w-[1600px]">
+    {/* <div className="relative z-10 mx-auto w-full max-w-[1320px] lg:max-w-[1500px] xl:max-w-[1720px] 2xl:max-w-[1920px]"> */}
       <RevealWrapper className="mb-8 text-center md:mb-12">
         <SectionLabel className="mb-5">Book Your Time</SectionLabel>
         <h2
@@ -27,11 +27,10 @@ const CalendlySection = ({ calendlyUrl }: CalendlySectionProps) => (
           details.
         </p>
       </RevealWrapper>
-
-      <RevealWrapper>
+       <RevealWrapper>
         {calendlyUrl ? <CalendlyEmbed url={calendlyUrl} /> : <CalendlyUnavailable />}
-      </RevealWrapper>
-    </div>
+        </RevealWrapper>
+    {/* </div> */}
   </section>
 )
 

@@ -4,7 +4,7 @@ import { Globe } from 'lucide-react'
 const CalendlyUnavailable = () => (
   <div
     role="status"
-    className="rounded-radius-md border border-dashed border-black/20 bg-backgroundBody px-6 py-16 text-center dark:border-white/20 dark:bg-dark-200 lg:py-20"
+    className="rounded-radius-md bg-backgroundBody px-6 py-16 text-center transition-colors duration-300 dark:bg-dark-200 lg:py-20"
   >
     <Globe className="mx-auto mb-4 size-8 text-primary" aria-hidden />
     <h3 className="mb-3 text-xl font-medium text-secondary dark:text-[#F2F2F2]">
