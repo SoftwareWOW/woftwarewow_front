@@ -27,7 +27,7 @@ const BlogPostsV4 = () => {
           </div>
           <RevealWrapper as="ul" className="max-md:w-full max-md:flex-1 md:w-auto md:self-end">
             <li className="mx-auto block max-md:w-full md:inline-block md:w-auto">
-              <Link href="/ai-blog" className="rv-button rv-button-white block text-center md:inline-block">
+              <Link href="/blog" className="rv-button rv-button-white block text-center md:inline-block">
                 <div className="rv-button-top">
                   <span>View Blog</span>
                 </div>

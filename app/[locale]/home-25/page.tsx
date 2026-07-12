@@ -11,7 +11,7 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutTwo from '@/components/shared/LayoutTwo'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import { Metadata } from 'next'
-import { BlogType } from '../ai-blog/page'
+import { BlogType } from '../blog/page'
 
 export const metadata: Metadata = {
   title: 'PR & Communications Agency - Rivor',

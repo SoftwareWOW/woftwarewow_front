@@ -14,7 +14,7 @@
   {
     "title": "Resources",
     "links": [
-      { "href": "/ai-blog", "label": "Blog" },
+      { "href": "/blog", "label": "Blog" },
       { "href": "/faq", "label": "FAQ" }
     ]
   },

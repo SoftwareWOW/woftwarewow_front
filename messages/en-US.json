@@ -1678,7 +1678,7 @@
                   "label": "Think Tank",
                   "description": "Ideas and strategy hub",
                   "type": "link",
-                  "href": "/ai-blog",
+                  "href": "/blog",
                   "detailPanel": "default"
                 },
                 {
@@ -1724,7 +1724,7 @@
                   "label": "Insights",
                   "description": "Articles and insights",
                   "type": "link",
-                  "href": "/ai-blog",
+                  "href": "/blog",
                   "detailPanel": "default"
                 },
                 {
@@ -1772,7 +1772,7 @@
                   "id": "thinkTank",
                   "label": "Think Tank",
                   "description": "Ideas and strategy hub",
-                  "href": "/ai-blog"
+                  "href": "/blog"
                 },
                 {
                   "id": "quotation",
@@ -1802,7 +1802,7 @@
                   "id": "insights",
                   "label": "Insights",
                   "description": "Articles and insights",
-                  "href": "/ai-blog"
+                  "href": "/blog"
                 },
                 {
                   "id": "careers",
@@ -2015,7 +2015,7 @@
           {
             "id": "blog",
             "label": "Blog",
-            "href": "/ai-blog"
+            "href": "/blog"
           },
           {
             "id": "faq",

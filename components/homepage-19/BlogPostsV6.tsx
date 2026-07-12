@@ -71,7 +71,7 @@ const BlogPostsV6 = () => {
         </div>
         <RevealWrapper as="ul" className="reveal-me mx-auto mt-[56px] flex list-none justify-center">
           <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/ai-blog" className="rv-button rv-button-white block md:inline-block">
+            <Link href="/blog" className="rv-button rv-button-white block md:inline-block">
               <div className="rv-button-top">
                 <span>Explore Our Blog</span>
               </div>

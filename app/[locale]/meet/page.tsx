@@ -6,6 +6,8 @@ import MeetFaq from './_components/MeetFaq'
 import MeetHero from './_components/MeetHero'
 import MeetingInformation from './_components/MeetingInformation'
 import WhyMeetWithUs from './_components/WhyMeetWithUs'
+import Faq from '@/components/wow/LandascapComponets/Faq'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
 export const metadata: Metadata = {
   title: 'Schedule a Meeting',
@@ -27,8 +29,10 @@ const MeetPage = async ({ params }: MeetPageProps) => {
       <WhyMeetWithUs />
       <MeetingInformation />
       <CalendlySection calendlyUrl={calendlyUrl} />
-      <MeetFaq />
-      <MeetCta />
+        <Faq />
+        <WowGrowthCta />  
+      {/* <MeetFaq /> */}
+      {/* <MeetCta /> */}
     </LayoutOne>
   )
 }

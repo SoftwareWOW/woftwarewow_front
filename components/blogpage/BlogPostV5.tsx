@@ -1,5 +1,5 @@
 'use client'
-import { BlogType } from '@/app/[locale]/ai-blog/page'
+import { BlogType } from '@/app/[locale]/blog/page'
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import topArrow from '@/public/images/icons/top-arrow.svg'
 import Image from 'next/image'
@@ -44,7 +44,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
         <RevealWrapper className="grid grid-cols-1 items-center justify-items-center gap-x-6 gap-y-[60px] md:grid-cols-2 md:items-start xl:grid-cols-3">
           {currentPageData?.slice(0, 3)?.map((blog) => (
             <div key={blog.slug} className="underline-hover-effect group max-w-[370px]">
-              <Link href={`/ai-blog/${blog.slug}`} className="block">
+              <Link href={`/blog/${blog.slug}`} className="block">
                 <figure className="h-[388px] overflow-hidden xl:min-w-[360px]">
                   <Image
                     width={360}
@@ -58,7 +58,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
               <p className="font-poppins mb-5 mt-[30px] text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
                 {blog.date}
               </p>
-              <Link href={`/ai-blog/${blog.slug}`}>
+              <Link href={`/blog/${blog.slug}`}>
                 <div className="blog-title mb-9">
                   <h3 className="text[25px] md:text-3xl lg:text-4xl lg:leading-[1.2] lg:tracking-[-0.72px]">
                     {blog.title}
@@ -67,7 +67,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
               </Link>
 
               <Link
-                href={`/ai-blog/${blog.slug}`}
+                href={`/blog/${blog.slug}`}
                 className="rv-button rv-button-primary2 block w-full md:inline-block md:w-auto">
                 <div className="rv-button-top flex items-center text-center">
                   <span className="pr-2">3 minute read</span>
@@ -92,13 +92,13 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                 <p className="font-poppins text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
                   {blog.date}
                 </p>
-                <Link href={`/ai-blog/${blog.slug}`}>
+                <Link href={`/blog/${blog.slug}`}>
                   <div className="blog-title mb-6 mt-5 lg:mb-10">
                     <h3 className="text[27px] md:text-4xl md:leading-[1.2] md:tracking-[-0.72px]">{blog.title}</h3>
                   </div>
                 </Link>
 
-                <Link href={`/ai-blog/${blog.slug}`} className="rv-button rv-button-primary2">
+                <Link href={`/blog/${blog.slug}`} className="rv-button rv-button-primary2">
                   <div className="rv-button-top flex items-center text-center">
                     <span className="pr-2">3 minute read</span>
                     <Image className="inline dark:hidden" src={topArrow} alt="Arrow Icon" />
@@ -111,7 +111,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                 </Link>
               </div>
 
-              <Link href={`/ai-blog/${blog.slug}`} className="max-lg:w-full">
+              <Link href={`/blog/${blog.slug}`} className="max-lg:w-full">
                 <figure className="h-96 w-full overflow-hidden lg:h-[190px] lg:w-[464px] lg:flex-1">
                   <Image
                     src={blog.thumbnail}

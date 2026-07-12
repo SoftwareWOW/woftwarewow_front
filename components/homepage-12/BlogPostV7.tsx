@@ -1,5 +1,5 @@
 'use client'
-import { BlogType } from '@/app/[locale]/ai-blog/page'
+import { BlogType } from '@/app/[locale]/blog/page'
 import Link from 'next/link'
 import { FC } from 'react'
 import 'swiper/css'

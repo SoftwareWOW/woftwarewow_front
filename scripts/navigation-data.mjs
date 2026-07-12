@@ -256,7 +256,7 @@ export const navigation = {
             title: null,
             items: [
               { id: 'meet', label: 'Meet', description: 'Connect with our team', type: 'link', href: '/contact', detailPanel: 'default' },
-              { id: 'thinkTank', label: 'Think Tank', description: 'Ideas and strategy hub', type: 'link', href: '/ai-blog', detailPanel: 'default' },
+              { id: 'thinkTank', label: 'Think Tank', description: 'Ideas and strategy hub', type: 'link', href: '/blog', detailPanel: 'default' },
               { id: 'quotation', label: 'Quotation Request', description: 'Get a project quote', type: 'link', href: '/contact', detailPanel: 'default' },
               { id: 'clientPortal', label: 'Client Portal', description: 'Access your dashboard', type: 'link', href: '/password', detailPanel: 'default' },
               { id: 'whiteLabel', label: 'White-label', description: 'Rebrand our services', type: 'link', href: '/services', detailPanel: 'default' },
@@ -267,7 +267,7 @@ export const navigation = {
             id: 'support',
             title: null,
             items: [
-              { id: 'insights', label: 'Insights', description: 'Articles and insights', type: 'link', href: '/ai-blog', detailPanel: 'default' },
+              { id: 'insights', label: 'Insights', description: 'Articles and insights', type: 'link', href: '/blog', detailPanel: 'default' },
               { id: 'careers', label: "Careers (We're Hiring)", description: 'Join our team', type: 'link', href: '/career', detailPanel: 'default' },
               {
                 id: 'helpSupport',
@@ -290,12 +290,12 @@ export const navigation = {
             title: 'More',
             items: [
               { id: 'meet', label: 'Meet', description: 'Connect with our team', href: '/contact' },
-              { id: 'thinkTank', label: 'Think Tank', description: 'Ideas and strategy hub', href: '/ai-blog' },
+              { id: 'thinkTank', label: 'Think Tank', description: 'Ideas and strategy hub', href: '/blog' },
               { id: 'quotation', label: 'Quotation Request', description: 'Get a project quote', href: '/contact' },
               { id: 'clientPortal', label: 'Client Portal', description: 'Access your dashboard', href: '/password' },
               { id: 'whiteLabel', label: 'White-label', description: 'Rebrand our services', href: '/services' },
               { id: 'affiliate', label: 'Affiliate & Referral', description: 'Earn through referrals', href: '/contact' },
-              { id: 'insights', label: 'Insights', description: 'Articles and insights', href: '/ai-blog' },
+              { id: 'insights', label: 'Insights', description: 'Articles and insights', href: '/blog' },
               { id: 'careers', label: "Careers (We're Hiring)", description: 'Join our team', href: '/career' },
               {
                 id: 'helpSupport',

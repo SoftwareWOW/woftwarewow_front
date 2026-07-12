@@ -34,7 +34,7 @@ const MarketingBlog = () => {
             </TextAppearAnimation>
             <RevealWrapper as="ul" className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
               <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <Link href="/ai-blog" className="rv-button rv-button-white block !bg-[#DDF3EC] md:inline-block">
+                <Link href="/blog" className="rv-button rv-button-white block !bg-[#DDF3EC] md:inline-block">
                   <div className="rv-button-top !bg-[#DDF3EC] dark:!border-secondary/30">
                     <span className="!text-secondary">Read More Articles</span>
                   </div>

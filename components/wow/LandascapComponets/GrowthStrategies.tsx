@@ -16,7 +16,7 @@ const articles = [
     description:
       'Why fragmented vendors slow growth — and how an integrated partner helps you move faster with fewer blind spots.',
     thumbnail: '/images/wow/Hero/Growth/image (1).png',
-    href: '/ai-blog',
+    href: '/blog',
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const articles = [
     description:
       'Practical ways to use AI for better content, smarter experiences, and stronger conversions — without rebuilding everything.',
     thumbnail: '/images/wow/Hero/Growth/image (2).png',
-    href: '/ai-blog',
+    href: '/blog',
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const articles = [
     description:
       'How to connect awareness, engagement, and follow-up into one system that turns interest into revenue.',
     thumbnail: '/images/wow/Hero/Growth/image (2).png',
-    href: '/ai-blog',
+    href: '/blog',
   },
 ]
 
@@ -87,7 +87,7 @@ const GrowthStrategies = () => {
             </p>
        
               <div className="mt-6 flex justify-end md:mt-8">
-                <ButtonComponent href="/ai-blog" variant="secondary" >
+                <ButtonComponent href="/blog" variant="secondary" >
                 View All Articles
               </ButtonComponent>
               </div>

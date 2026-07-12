@@ -64,7 +64,7 @@ const menuItems: MenuItemProps[] = [
     title: 'Blog',
     url: '#',
     items: [
-      { title: 'AI Blog', url: '/ai-blog' },
+      { title: 'AI Blog', url: '/blog' },
       { title: 'SEO Blog', url: '/seo-blog' },
       { title: 'Blog Details', url: '/seo-blog/the-evolution-of-minimalist-design' },
     ],

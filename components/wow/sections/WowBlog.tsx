@@ -36,7 +36,7 @@ export default function WowBlog() {
             <p className="text-base text-colorText dark:text-dark-100">
               Discover key trends and insights to elevate your organization.
             </p>
-            <WowButton href="/ai-blog" className="mt-6">
+            <WowButton href="/blog" className="mt-6">
               View All Blogs
             </WowButton>
           </RevealWrapper>
@@ -57,7 +57,7 @@ export default function WowBlog() {
               <div className="relative z-10 mx-2 rounded-radius-sm bg-secondary p-6 text-white dark:bg-dark-200">
                 <span className="inline-block rounded bg-white/10 px-3 py-1 text-xs uppercase tracking-wider">{post.tag}</span>
                 <h3 className="mt-4 text-lg font-medium leading-snug">{post.title}</h3>
-                <Link href="/ai-blog" className="mt-6 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white">
+                <Link href="/blog" className="mt-6 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white">
                   Read more
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                     <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
