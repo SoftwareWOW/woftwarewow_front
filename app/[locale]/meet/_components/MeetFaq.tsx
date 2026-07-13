@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
 import { useMemo, useState } from 'react'
 
@@ -101,8 +102,8 @@ const MeetFaq = () => {
   }
 
   return (
-    <section className="relative overflow-hidden px-3 md:px-4">
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+    <section className={meetSectionClass}>
+      <div className={meetSectionInnerClass}>
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
