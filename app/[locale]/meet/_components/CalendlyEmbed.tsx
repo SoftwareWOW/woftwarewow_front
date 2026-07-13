@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useMemo, useState } from 'react'
-import { InlineWidget, useCalendlyEventListener } from 'react-calendly'
+import { InlineWidget } from 'react-calendly'
 
 type CalendlyEmbedProps = {
   url: string
@@ -31,25 +31,20 @@ export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   const isDark = mounted && resolvedTheme === 'dark'
   const theme = isDark ? calendlyTheme.dark : calendlyTheme.light
 
-  // useCalendlyEventListener({
-  //   onPageHeightResize: (event) => {
-  //     const reportedHeight = event.data.payload.height
-  //     if (reportedHeight > 0) {
-  //       setHeight(Math.max(MIN_HEIGHT, reportedHeight))
-  //     }
-  //   },
-  // })
-
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  
+  const calendlyUrl = useMemo(() => {
+    return url.split('?')[0] 
+  }, [url])
 
   const pageSettings = useMemo(
     () => ({
       backgroundColor: theme.backgroundColor,
       hideEventTypeDetails: false,
       hideLandingPageDetails: false,
-      hideGdprBanner: true,
       primaryColor: '615CCE',
       textColor: theme.textColor,
     }),
@@ -61,7 +56,7 @@ export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
       {mounted ? (
         <InlineWidget
           key={isDark ? 'dark' : 'light'}
-          url={url}
+          url={calendlyUrl}
           className="!min-h-0 !w-full"
           styles={{
             height: `${height}px`,
