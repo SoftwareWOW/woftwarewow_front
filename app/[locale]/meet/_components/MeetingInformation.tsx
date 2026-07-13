@@ -26,7 +26,7 @@ const MeetingInformation = () => (
 
           return (
             <RevealWrapper key={item.label}>
-              <div className="rounded-radius-md border border-black/10 bg-white/50 px-6 py-5 backdrop-blur-sm dark:border-white/10 dark:bg-dark/50">
+              <div className="rounded-radius-md border border-black/10 bg-backgroundBody px-6 py-5 transition-colors duration-300 dark:border-white/10 dark:bg-background">
                 <div className="mb-3 flex items-center gap-3">
                   <span className="inline-flex size-10 items-center justify-center rounded-radius-sm bg-primary/10 text-primary">
                     <Icon className="size-4" aria-hidden />

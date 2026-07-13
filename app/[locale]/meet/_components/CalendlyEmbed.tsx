@@ -14,12 +14,12 @@ const calendlyTheme = {
   light: {
     backgroundColor: 'ededed',
     textColor: '171717',
-    wrapperClass: 'bg-backgroundBody',
+    wrapperClass: 'bg-background',
   },
   dark: {
-    backgroundColor: '1f1f1f',
+    backgroundColor: '171717',
     textColor: 'f2f2f2',
-    wrapperClass: 'bg-dark-200',
+    wrapperClass: 'bg-background',
   },
 } as const
 
