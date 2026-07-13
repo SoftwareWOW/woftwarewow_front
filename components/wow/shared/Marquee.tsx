@@ -5,6 +5,7 @@ import useScrollingMarquee from '@/hooks/useScrollingMarquee'
 
 import React from 'react'
 import ButtonComponent, { ButtonComponentList } from './ButtonComponent'
+import SectionLabel from './SectionLabel'
 
 const Marquee: React.FC = () => {
   const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
@@ -20,8 +21,8 @@ const Marquee: React.FC = () => {
   return (
     <section className="relative overflow-hidden px-3 md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
-        <RevealWrapper as="p" className="mb-10 text-wrap text-center lg:mb-20">
-          Trusted By Businesses, Partners & Communities
+        <RevealWrapper className="mb-10 flex justify-center lg:mb-20">
+          <SectionLabel>Trusted By Businesses, Partners & Communities</SectionLabel>
         </RevealWrapper>
 
         <div

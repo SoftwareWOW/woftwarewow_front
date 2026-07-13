@@ -1,12 +1,11 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Metadata } from 'next'
 import CalendlySection from './_components/CalendlySection'
-import MeetCta from './_components/MeetCta'
 import MeetFaq from './_components/MeetFaq'
 import MeetHero from './_components/MeetHero'
 import MeetingInformation from './_components/MeetingInformation'
 import WhyMeetWithUs from './_components/WhyMeetWithUs'
-import Faq from '@/components/wow/LandascapComponets/Faq'
+
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
 export const metadata: Metadata = {
@@ -29,10 +28,8 @@ const MeetPage = async ({ params }: MeetPageProps) => {
       <WhyMeetWithUs />
       <MeetingInformation />
       <CalendlySection calendlyUrl={calendlyUrl} />
-        <Faq />
+         <MeetFaq />
         <WowGrowthCta />  
-      {/* <MeetFaq /> */}
-      {/* <MeetCta /> */}
     </LayoutOne>
   )
 }

@@ -1,7 +1,10 @@
 'use client'
 
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { renderWowInTitle } from '@/components/wow/shared/WowText'
+import { cn } from '@/lib/utils'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
@@ -195,15 +198,16 @@ const DevisionOverview = () => {
         <div className="relative z-10 px-5 pt-20 sm:px-40 md:pt-10 md:pl-[12%] md:pr-10 lg:pt-10 lg:pl-[15%]">
           <div className="flex items-start justify-between gap-6">
             <div className="max-w-3xl">
-              <span
-                className={`mb-4 inline-flex rounded-full px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-500 md:mb-5 ${
-                  activeBgId !== null
-                    ? 'bg-white/15 text-white/90'
-                    : 'bg-[#1a1a1a] text-white'
-                }`}
-              >
-                Divisions Overview
-              </span>
+              <RevealWrapper>
+                <SectionLabel
+                  className={cn(
+                    'mb-4 transition-colors duration-500 md:mb-5',
+                    activeBgId !== null && '!bg-white/15 !text-white/90',
+                  )}
+                >
+                  Divisions Overview
+                </SectionLabel>
+              </RevealWrapper>
 
               <TextAppearAnimation>
                 <h2
