@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import CalendlyEmbed from './CalendlyEmbed'
 import CalendlyUnavailable from './CalendlyUnavailable'
-import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
+import { meetCalendlySectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
 type CalendlySectionProps = {
   calendlyUrl?: string
@@ -11,7 +11,7 @@ type CalendlySectionProps = {
 const CalendlySection = ({ calendlyUrl }: CalendlySectionProps) => (
   <section
     id="schedule"
-    className={`${meetSectionClass} bg-background transition-colors duration-300 dark:bg-background`}
+    className={`${meetCalendlySectionClass} bg-background transition-colors duration-300 dark:bg-background`}
     aria-labelledby="calendly-heading"
   >
     <div className={meetSectionInnerClass}>
