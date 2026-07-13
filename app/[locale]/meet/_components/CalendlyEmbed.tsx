@@ -25,12 +25,10 @@ const calendlyTheme = {
   light: {
     backgroundColor: 'ededed',
     textColor: '171717',
-    wrapperClass: 'bg-background',
   },
   dark: {
     backgroundColor: '171717',
     textColor: 'f2f2f2',
-    wrapperClass: 'bg-background',
   },
 } as const
 
@@ -91,30 +89,26 @@ export default function CalendlyEmbed({ url }: CalendlyEmbedProps) {
   )
 
   return (
-    <div ref={containerRef} className="w-full">
-      <div
-        className={`overflow-hidden rounded-radius-md border border-black/10 transition-colors duration-300 dark:border-white/10 ${isSmallLayout ? 'mx-auto max-w-[420px]' : 'w-full'} ${theme.wrapperClass}`}
-      >
-        {mounted ? (
-          <InlineWidget
-            key={`${isDark ? 'dark' : 'light'}-${layout}`}
-            url={calendlyUrl}
-            className="!min-h-0 !w-full"
-            styles={{
-              height: `${height}px`,
-              minWidth: isSmallLayout ? '320px' : '100%',
-              width: '100%',
-            }}
-            pageSettings={pageSettings}
-          />
-        ) : (
-          <div
-            className={`w-full ${theme.wrapperClass}`}
-            style={{ height: EMBED_HEIGHT.large }}
-            aria-hidden
-          />
-        )}
-      </div>
+    <div
+      ref={containerRef}
+      className={`calendly-embed w-full ${isSmallLayout ? 'mx-auto max-w-[420px]' : ''}`}
+    >
+      {mounted ? (
+        <InlineWidget
+          key={`${isDark ? 'dark' : 'light'}-${layout}`}
+          url={calendlyUrl}
+          className="calendly-inline-widget !w-full"
+          styles={{
+            height: `${height}px`,
+            minHeight: `${height}px`,
+            minWidth: isSmallLayout ? '320px' : '320px',
+            width: '100%',
+          }}
+          pageSettings={pageSettings}
+        />
+      ) : (
+        <div aria-hidden style={{ height: EMBED_HEIGHT.large }} />
+      )}
     </div>
   )
 }

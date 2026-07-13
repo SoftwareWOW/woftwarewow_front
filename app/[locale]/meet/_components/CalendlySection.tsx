@@ -11,7 +11,7 @@ type CalendlySectionProps = {
 const CalendlySection = ({ calendlyUrl }: CalendlySectionProps) => (
   <section
     id="schedule"
-    className={`${meetCalendlySectionClass} bg-background transition-colors duration-300 dark:bg-background`}
+    className={meetCalendlySectionClass}
     aria-labelledby="calendly-heading"
   >
     <div className={meetSectionInnerClass}>
