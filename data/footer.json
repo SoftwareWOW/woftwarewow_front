@@ -5,7 +5,7 @@
       { "href": "/about", "label": "About" },
       { "href": "/services", "label": "Services" },
       { "href": "/portfolio-agency/case-study", "label": "Case Studies" },
-      { "href": "/industries/professional-services", "label": "Industries" },
+      { "href": "/industries", "label": "Industries" },
       { "href": "/contact", "label": "Contact" },
       { "href": "/team", "label": "Team" },
       { "href": "/career", "label": "Career" }
