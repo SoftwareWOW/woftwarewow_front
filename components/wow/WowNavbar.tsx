@@ -227,7 +227,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           onMouseLeave={scheduleCloseMegaMenu}
         >
           <nav
-            className="relative flex items-center justify-between rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-dark dark:shadow-none"
+            className="relative flex items-center justify-between rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-[#1F1F1F] dark:shadow-none"
             aria-label={navbar.mainNavigation}
           >
             <Link

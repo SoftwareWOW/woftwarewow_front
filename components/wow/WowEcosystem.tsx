@@ -415,7 +415,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
-                      className="flex size-full items-center justify-center text-base font-light sm:text-lg"
+                      className="flex size-full items-center justify-center text-base text-black font-light sm:text-lg"
                       aria-hidden
                     >
                       +
