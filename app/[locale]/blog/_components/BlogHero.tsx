@@ -86,7 +86,7 @@ export default function BlogHero({ blog }: BlogHeroProps) {
           </p>
         </RevealWrapper>
 
-        <RevealWrapper className="mt-10 flex flex-col gap-8 border-t border-secondary/10 pt-8 dark:border-dark sm:flex-row sm:items-end sm:justify-between lg:mt-12">
+        <RevealWrapper className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between lg:mt-12">
           <div>
             <p className="mb-3 text-sm text-muted dark:text-dark-100">Written by</p>
             <div className="flex items-center gap-3">

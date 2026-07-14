@@ -41,7 +41,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
-        <RevealWrapper className="grid grid-cols-1 items-center justify-items-center gap-x-6 gap-y-[60px] md:grid-cols-2 md:items-start xl:grid-cols-3">
+        {/* <RevealWrapper className="grid grid-cols-1 items-center justify-items-center gap-x-6 gap-y-[60px] md:grid-cols-2 md:items-start xl:grid-cols-3">
           {currentPageData?.slice(0, 3)?.map((blog) => (
             <div key={blog.slug} className="underline-hover-effect group max-w-[370px]">
               <Link href={`/blog/${blog.slug}`} className="block">
@@ -81,7 +81,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
               </Link>
             </div>
           ))}
-        </RevealWrapper>
+        </RevealWrapper> */}
 
         <article className="mt-12 md:mt-[70px] [&>*:not(last-child)]:mb-10">
           {currentPageData?.slice(3)?.map((blog) => (
