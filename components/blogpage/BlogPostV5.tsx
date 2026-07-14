@@ -128,11 +128,6 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
           </div>
 
           <RevealWrapper className="relative max-w-[420px] lg:pb-2 lg:text-right">
-            <span
-              aria-hidden
-              className="absolute -right-1 -top-8 inline-flex size-10 items-center justify-center rounded-full bg-[#615CCE] shadow-lg lg:-right-2 lg:-top-10 lg:size-12">
-              <WowText className="!text-[10px] !leading-none lg:!text-[11px]">WOW!</WowText>
-            </span>
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">
               Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
               not jargon.
@@ -145,7 +140,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
           <div
             role="tablist"
             aria-label="Blog categories"
-            className="flex w-full flex-wrap overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm dark:border-white/10 dark:bg-dark/50 sm:flex-nowrap">
+            className="flex w-full flex-wrap overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-[#f5f5f5] dark:border-white/10 dark:bg-dark/50 sm:flex-nowrap">
             {CATEGORIES.map((category, index) => {
               const isActive = activeCategory === category
               return (
@@ -158,8 +153,8 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                   className={`relative flex-1 px-3 py-3.5 text-center text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 sm:px-4 sm:py-4 sm:text-xs md:text-[13px] ${
                     isActive
                       ? 'bg-primary text-white'
-                      : 'bg-transparent text-[#0D0D0D] hover:bg-[#8b7cff]/10 dark:text-[#F2F2F2] dark:hover:bg-white/5'
-                  } ${index > 0 ? 'border-l border-[#e5e5e5] dark:border-white/10' : ''}`}>
+                      : 'bg-background text-[#0D0D0D] hover:bg-[#8b7cff]/10 dark:text-[#F2F2F2] dark:hover:bg-white/5'
+                  } ${index > 0 ? 'border-l border-[#1515151A] dark:border-[#EDF0F51A]' : ''}`}>
                   {category}
                 </button>
               )
@@ -171,7 +166,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
         <div className="flex flex-col gap-5 md:gap-6">
           {visibleBlogs.map((blog) => (
             <RevealWrapper key={blog.slug}>
-              <article className="group overflow-hidden rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:bg-dark/50 dark:hover:shadow-none">
+              <article className="group overflow-hidden rounded-radius-md border border-[#1515151A] bg-background transition-colors duration-300 dark:border-[#EDF0F51A] dark:bg-background">
                 <div className="flex flex-col-reverse gap-6 p-5 sm:p-6 lg:flex-row lg:items-stretch lg:gap-10 lg:p-8 xl:p-10">
                   <div className="flex flex-1 flex-col justify-between gap-8">
                     <div>
@@ -186,7 +181,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                     </div>
 
                     <div>
-                      <ButtonComponent href={`/blog/${blog.slug}`} variant="white" size="sm">
+                      <ButtonComponent href={`/blog/${blog.slug}`} variant="white" >
                         3 Minute Read
                       </ButtonComponent>
                     </div>
@@ -200,7 +195,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                       alt={blog.title}
                       width={480}
                       height={280}
-                      className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="aspect-[16/10] h-full w-full rounded-radius-sm object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </Link>
                 </div>
