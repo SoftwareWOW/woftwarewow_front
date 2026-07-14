@@ -53,7 +53,7 @@ const wowProjects = [
     title: 'Retail eCommerce Growth Campaign',
     description:
       'Integrated social, paid media, and email strategy that doubled online revenue for an independent retailer in one holiday season.',
-    thumbnail: '/images/home-5/case-study-1.png',
+    thumbnail: '/images/wow/Hero/project/Rectangle 10101 (1).png',
     alt: 'Retail eCommerce growth campaign by WOW Superagency',
     href: '/case-studies/retail-ecommerce-growth',
   },
@@ -62,7 +62,7 @@ const wowProjects = [
     title: 'Professional Services Growth Hub',
     description:
       'WOW Hub deployment with CRM integration, team training, and accelerated lead nurturing for a multi-office advisory firm.',
-    thumbnail: '/images/home-5/case-study-2.png',
+    thumbnail: '/images/wow/Hero/project/Worls Card (1).png',
     alt: 'Professional services growth hub project by WOW Superagency',
     href: '/case-studies/professional-services-hub',
   },
