@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const IndustriesHero = () => {
   return (
-    <section className="relative overflow-hidden pb-7 pt-32 md:pb-16 lg:pb-[88px] lg:pt-[140px] xl:pb-[100px] xl:pt-[180px]">
+    <section className="relative overflow-hidden pt-32 lg:pt-[140px] xl:pt-[180px]">
       <RevealWrapper className="flex flex-col items-center justify-center gap-y-8 pl-10 md:justify-between xl:flex-row">
         <div className="container max-sm:!-ml-[5%] lg:!ml-[10%] xl:!ml-[7%]">
           <p className="font-poppins flex items-center gap-5 text-sm font-normal uppercase leading-6 tracking-[3px] max-md:justify-center">
