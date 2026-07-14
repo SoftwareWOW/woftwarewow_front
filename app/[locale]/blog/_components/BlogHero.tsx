@@ -57,7 +57,11 @@ export default function BlogHero({ blog }: BlogHeroProps) {
 
               <div className="absolute bottom-0 right-0 bg-backgroundBody p-3 transition-colors duration-300 dark:bg-dark sm:p-4">
                 <div className="flex size-14 items-center justify-center bg-primary transition-transform duration-300 group-hover:scale-105 sm:size-16 lg:size-[72px]">
-                  <ArrowDownRight className="size-6 text-white sm:size-7" strokeWidth={1.75} />
+                  <ArrowDownRight
+                    className="size-6 !stroke-white !text-white sm:size-7"
+                    strokeWidth={1.75}
+                    color="#ffffff"
+                  />
                 </div>
               </div>
             </figure>
