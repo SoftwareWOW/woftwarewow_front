@@ -1,27 +1,23 @@
 import RevealWrapper from "@/components/animation/RevealWrapper"
 import TextAppearAnimation from "@/components/animation/TextAppearAnimation"
 
-
-
 const OurIndustries = () => {
   return (
     <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="rv-badge reveal-me">
-            <span className="rv-badge-text">Our Industries</span>
+            <span className="rv-badge-text">CASE STUDIES</span>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3">
-              Filmmaking that goes
-              <i className="font-instrument"> beyond </i>
-              <br className="hidden md:block" />
-              <i className="font-instrument">expectations</i>
+              Industries
+              <i className="font-instrument"> we serve</i>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear">
-              Each project reflects our dedication to excellence, creativity, and innovation.
+              Our success comes from a skilled team driving the future of Design solutions.
             </p>
           </TextAppearAnimation>
         </div>
@@ -46,8 +42,8 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">Award-Winning visual excellence</h5>
-              <p>Celebrated for our video storytelling.</p>
+              <h5 className="mb-2.5 mt-5">AI-Driven Innovation</h5>
+              <p>Harness cutting-edge AI to enhance automation &amp; user engagement.</p>
             </div>
             <div className="flex-1 border px-[30px] py-10 dark:border-dark">
               <span>
@@ -64,8 +60,8 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">End-to-End production expertise</h5>
-              <p>From script to screen, we handle it all.</p>
+              <h5 className="mb-2.5 mt-5">App Development</h5>
+              <p>Tailor-made solutions for startups, SMEs, and enterprises.</p>
             </div>
             <div className="flex-1 border px-[30px] py-10 dark:border-dark">
               <span>
@@ -87,8 +83,8 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">Cutting-Edge technology</h5>
-              <p>Cutting-Edge technology</p>
+              <h5 className="mb-2.5 mt-5">Scalable &amp; Secure</h5>
+              <p>Apps built for growth, high performance &amp; security.</p>
             </div>
           </RevealWrapper>
           <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row">
@@ -102,10 +98,9 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">Strategic &amp; Results approach</h5>
-              <p>Videos that engage, convert, and inspire action.</p>
+              <h5 className="mb-2.5 mt-5">Seamless UI/UX</h5>
+              <p>Engaging, intuitive, and conversion-focused interfaces.</p>
             </div>
-            {/*  */}
             <div className="reveal-me min-h-[322px] flex-1 border px-[30px] py-20 dark:border-dark">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none">
@@ -142,11 +137,11 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">Collaborative &amp; Client-Focused</h5>
-              <p>Your vision, our expertise – a perfect synergy.</p>
+              <h5 className="mb-2.5 mt-5">Cross-Platform Development</h5>
+              <p>Web, iOS, and Android compatibility.</p>
             </div>
           </RevealWrapper>
-            <RevealWrapper className="reveal-me mt-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
+          <RevealWrapper className="reveal-me mt-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
             <div className="flex-1 border px-[30px] py-10 dark:border-dark">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none">
@@ -166,8 +161,8 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">Award-Winning visual excellence</h5>
-              <p>Celebrated for our video storytelling.</p>
+              <h5 className="mb-2.5 mt-5">AI-Driven Innovation</h5>
+              <p>Harness cutting-edge AI to enhance automation &amp; user engagement.</p>
             </div>
             <div className="flex-1 border px-[30px] py-10 dark:border-dark">
               <span>
@@ -184,8 +179,8 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">End-to-End production expertise</h5>
-              <p>From script to screen, we handle it all.</p>
+              <h5 className="mb-2.5 mt-5">App Development</h5>
+              <p>Tailor-made solutions for startups, SMEs, and enterprises.</p>
             </div>
             <div className="flex-1 border px-[30px] py-10 dark:border-dark">
               <span>
@@ -207,8 +202,8 @@ const OurIndustries = () => {
                   />
                 </svg>
               </span>
-              <h5 className="mb-2.5 mt-5">Cutting-Edge technology</h5>
-              <p>Cutting-Edge technology</p>
+              <h5 className="mb-2.5 mt-5">Scalable &amp; Secure</h5>
+              <p>Apps built for growth, high performance &amp; security.</p>
             </div>
           </RevealWrapper>
         </article>

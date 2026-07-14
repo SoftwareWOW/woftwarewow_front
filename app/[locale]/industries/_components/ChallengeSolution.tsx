@@ -267,9 +267,8 @@ const ChallengeSolution = () => {
               className="absolute -right-6 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center rounded-radius-sm bg-[#EDF0F5] opacity-50 p-2 sm:p-3 md:p-4 lg:p-5 text-white transition-colors duration-300 hover:opacity-70 dark:bg-[#151515]"
             >
               <ChevronRight
-                className="size-9 !stroke-white !text-white sm:size-10"
+                className="size-9 text-white sm:size-10"
                 strokeWidth={1.5}
-                color="#ffffff"
               />
             </button>
 

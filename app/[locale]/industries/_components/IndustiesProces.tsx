@@ -2,31 +2,30 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Link from 'next/link'
 
-
 const data = [
   {
     id: 1,
-    step: 'Step 01',
-    title: 'Strategy Session',
-    description: 'Understanding your brand’s goals and target audience.',
+    step: 'STEP 01',
+    title: 'Understand',
+    description: 'Research your market and audience.',
   },
   {
     id: 2,
-    step: 'Step 02',
-    title: 'Content Creation',
-    description: 'Designing high-impact posts, reels, and videos.',
+    step: 'STEP 02',
+    title: 'Design',
+    description: 'Create experiences that fit your customers.',
   },
   {
     id: 3,
-    step: 'Step 03',
-    title: 'Execution',
-    description: 'Creating engaging brand and digital experiences.',
+    step: 'STEP 03',
+    title: 'Build',
+    description: 'Develop scalable digital products.',
   },
   {
     id: 4,
-    step: 'Step 04',
-    title: 'Optimization',
-    description: 'Analyzing and refining strategies for maximum results.',
+    step: 'STEP 04',
+    title: 'Grow',
+    description: 'Market, optimize, and improve results.',
   },
 ]
 
@@ -36,12 +35,12 @@ const IndustriesProcess = () => {
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="rv-badge mb-3">
-            <span className="rv-badge-text">Process</span>
+            <span className="rv-badge-text">PROCESS</span>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
-              From strategy to execution Our-
-              <i className="font-instrument"> Winning formula</i>
+              A proven framework
+              <i className="font-instrument"> for startup success</i>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
@@ -69,10 +68,10 @@ const IndustriesProcess = () => {
           <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
             <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
               <div className="rv-button-top">
-                <span>Start Your Journey</span>
+                <span>START YOUR JOURNEY</span>
               </div>
               <div className="rv-button-bottom text-nowrap">
-                <span>Start Your Journey</span>
+                <span>START YOUR JOURNEY</span>
               </div>
             </Link>
           </li>
