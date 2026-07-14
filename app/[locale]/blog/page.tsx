@@ -23,11 +23,13 @@ const featuredBlog = loadedBlogs.find((blog) => blog.slug === 'the-new-era-of-di
 const BlogPage = () => {
   return (
     <LayoutOne>
+    <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <BlogHero blog={featuredBlog} />
       <Marquess/>
       <BlogPostV5 Blogs={loadedBlogs} />
       <BlogCaseStudies blogs={loadedBlogs} />
       <WowGrowthCta />
+      </div>
     </LayoutOne>
   )
 }

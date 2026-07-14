@@ -39,7 +39,7 @@ export default function BlogHero({ blog }: BlogHeroProps) {
   const imageSrc = blog.featureImage ?? blog.thumbnail ?? '/images/blog-img/blog-details-img-1.png'
 
   return (
-    <section className="bg-backgroundBody px-4 pb-12 pt-28 transition-colors duration-300 dark:bg-dark sm:px-8 sm:pb-16 sm:pt-32 md:px-16 lg:px-[200px] lg:pb-20 lg:pt-36">
+    <section className="bg-backgroundBody px-4  transition-colors duration-300 dark:bg-dark sm:px-8 sm:pt-32 md:px-16 lg:px-[200px] lg:pt-36">
       <div className="mx-auto w-full max-w-[1320px]">
         <RevealWrapper>
           <Link href={`/blog/${blog.slug}`} className="group block">

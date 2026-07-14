@@ -85,7 +85,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 pb-14 transition-colors duration-300 dark:bg-background md:px-4 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+    <section className="relative overflow-hidden bg-background px-3  transition-colors duration-300 dark:bg-background md:px-4">
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
           className="absolute inset-0"
