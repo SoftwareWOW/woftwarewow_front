@@ -1,29 +1,30 @@
-import RevealWrapper from "@/components/animation/RevealWrapper"
-import TextAppearAnimation from "@/components/animation/TextAppearAnimation"
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const OurIndustries = () => {
   return (
-    <section className="relative overflow-hidden">
-      <div className="container">
+    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
+      <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-8 text-center md:mb-14">
-          <RevealWrapper className="rv-badge reveal-me">
-            <span className="rv-badge-text">CASE STUDIES</span>
+          <RevealWrapper className="mb-3 flex justify-center">
+            <SectionLabel>Case Studies</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear my-3">
+            <h2 className="text-appear my-3 text-[#0D0D0D] dark:text-[#F2F2F2]">
               Industries
-              <i className="font-instrument"> we serve</i>
+              <span className="font-instrument italic"> we serve</span>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear">
+            <p className="text-appear mx-auto max-w-2xl text-[#808080]">
               Our success comes from a skilled team driving the future of Design solutions.
             </p>
           </TextAppearAnimation>
         </div>
         <article>
-          <RevealWrapper className="reveal-me mb-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            <div className="flex-1 border px-[30px] py-10 dark:border-dark">
+          <RevealWrapper className="reveal-me mb-[30px] flex flex-col gap-5 max-lg:flex-wrap sm:gap-[30px] md:flex-row">
+            <div className="flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-8 transition-colors duration-300 dark:border-white/10 sm:px-[30px] sm:py-10">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none">
                   <rect width={60} height={60} className="fill-backgroundBody dark:fill-secondary" />
@@ -45,7 +46,7 @@ const OurIndustries = () => {
               <h5 className="mb-2.5 mt-5">AI-Driven Innovation</h5>
               <p>Harness cutting-edge AI to enhance automation &amp; user engagement.</p>
             </div>
-            <div className="flex-1 border px-[30px] py-10 dark:border-dark">
+            <div className="flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-8 transition-colors duration-300 dark:border-white/10 sm:px-[30px] sm:py-10">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none">
                   <rect
@@ -63,7 +64,7 @@ const OurIndustries = () => {
               <h5 className="mb-2.5 mt-5">App Development</h5>
               <p>Tailor-made solutions for startups, SMEs, and enterprises.</p>
             </div>
-            <div className="flex-1 border px-[30px] py-10 dark:border-dark">
+            <div className="flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-8 transition-colors duration-300 dark:border-white/10 sm:px-[30px] sm:py-10">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none">
                   <rect
@@ -87,8 +88,8 @@ const OurIndustries = () => {
               <p>Apps built for growth, high performance &amp; security.</p>
             </div>
           </RevealWrapper>
-          <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row">
-            <div className="reveal-me min-h-[322px] flex-1 border px-[30px] py-20 dark:border-dark">
+          <RevealWrapper className="reveal-me flex flex-col gap-5 sm:gap-[30px] md:flex-row">
+            <div className="reveal-me min-h-[280px] flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-12 transition-colors duration-300 dark:border-white/10 sm:min-h-[322px] sm:px-[30px] sm:py-20">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none">
                   <rect width={60} height={60} className="fill-backgroundBody dark:fill-secondary" />
@@ -101,7 +102,7 @@ const OurIndustries = () => {
               <h5 className="mb-2.5 mt-5">Seamless UI/UX</h5>
               <p>Engaging, intuitive, and conversion-focused interfaces.</p>
             </div>
-            <div className="reveal-me min-h-[322px] flex-1 border px-[30px] py-20 dark:border-dark">
+            <div className="reveal-me min-h-[280px] flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-12 transition-colors duration-300 dark:border-white/10 sm:min-h-[322px] sm:px-[30px] sm:py-20">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none">
                   <rect width={60} height={60} className="fill-backgroundBody dark:fill-secondary" />
@@ -141,8 +142,8 @@ const OurIndustries = () => {
               <p>Web, iOS, and Android compatibility.</p>
             </div>
           </RevealWrapper>
-          <RevealWrapper className="reveal-me mt-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            <div className="flex-1 border px-[30px] py-10 dark:border-dark">
+          <RevealWrapper className="reveal-me mt-5 flex flex-col gap-5 max-lg:flex-wrap sm:mt-[30px] sm:gap-[30px] md:flex-row">
+            <div className="flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-8 transition-colors duration-300 dark:border-white/10 sm:px-[30px] sm:py-10">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none">
                   <rect width={60} height={60} className="fill-backgroundBody dark:fill-secondary" />
@@ -164,7 +165,7 @@ const OurIndustries = () => {
               <h5 className="mb-2.5 mt-5">AI-Driven Innovation</h5>
               <p>Harness cutting-edge AI to enhance automation &amp; user engagement.</p>
             </div>
-            <div className="flex-1 border px-[30px] py-10 dark:border-dark">
+            <div className="flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-8 transition-colors duration-300 dark:border-white/10 sm:px-[30px] sm:py-10">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none">
                   <rect
@@ -182,7 +183,7 @@ const OurIndustries = () => {
               <h5 className="mb-2.5 mt-5">App Development</h5>
               <p>Tailor-made solutions for startups, SMEs, and enterprises.</p>
             </div>
-            <div className="flex-1 border px-[30px] py-10 dark:border-dark">
+            <div className="flex-1 rounded-radius-sm border border-[#e5e5e5] px-5 py-8 transition-colors duration-300 dark:border-white/10 sm:px-[30px] sm:py-10">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none">
                   <rect
