@@ -1,132 +1,225 @@
 'use client'
+
 import { BlogType } from '@/app/[locale]/blog/page'
-import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
-import topArrow from '@/public/images/icons/top-arrow.svg'
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import WowText from '@/components/wow/shared/WowText'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
-import RevealWrapper from '../animation/RevealWrapper'
-import Pagination from './Pagination'
+import { FC, useMemo, useState } from 'react'
 
 interface BlogsProps {
   Blogs: BlogType[]
 }
 
+const CATEGORIES = ['ALL', 'NEWS', 'CASE STUDY', 'TECHNOLOGY', 'EVENT'] as const
+type Category = (typeof CATEGORIES)[number]
+
+const INITIAL_COUNT = 4
+const LOAD_MORE_COUNT = 4
+
+function getBlogTags(blog: BlogType): string[] {
+  if (!blog.tags) return []
+  if (Array.isArray(blog.tags)) return blog.tags.map(String)
+  return String(blog.tags)
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean)
+}
+
+function resolveCategory(blog: BlogType): Exclude<Category, 'ALL'> {
+  const haystack = `${blog.title} ${blog.description ?? ''} ${getBlogTags(blog).join(' ')}`.toLowerCase()
+
+  if (
+    /ai|artificial|automation|blockchain|voice|technology|tech|software|personalization|email|video/.test(
+      haystack,
+    )
+  ) {
+    return 'TECHNOLOGY'
+  }
+
+  if (/event|podcast|conference|webinar/.test(haystack)) {
+    return 'EVENT'
+  }
+
+  if (/case|project|study|transformation|shift|era|evolution|dynamics/.test(haystack)) {
+    return 'CASE STUDY'
+  }
+
+  return 'NEWS'
+}
+
+function formatDate(date: string) {
+  return date?.toUpperCase?.() ?? date
+}
+
 const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 7
-  const totalPage = Math.ceil(Blogs.length / itemsPerPage)
+  const [activeCategory, setActiveCategory] = useState<Category>('ALL')
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
 
-  const paginateData = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage
-    const endIndex = startIndex + itemsPerPage
-    return Blogs.slice(startIndex, endIndex)
-  }
-  const currentPageData = paginateData()
+  const categorizedBlogs = useMemo(
+    () =>
+      Blogs.map((blog) => ({
+        ...blog,
+        category: resolveCategory(blog),
+      })),
+    [Blogs],
+  )
 
-  const goToNextPage = () => {
-    setCurrentPage((nextPage) => nextPage + 1)
+  const filteredBlogs = useMemo(() => {
+    if (activeCategory === 'ALL') return categorizedBlogs
+    return categorizedBlogs.filter((blog) => blog.category === activeCategory)
+  }, [activeCategory, categorizedBlogs])
+
+  const visibleBlogs = filteredBlogs.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredBlogs.length
+
+  const handleCategoryChange = (category: Category) => {
+    setActiveCategory(category)
+    setVisibleCount(INITIAL_COUNT)
   }
-  const goToPreviousPage = () => {
-    setCurrentPage((prevPage) => prevPage - 1)
-  }
-  const paginateFunction = {
-    totalPage,
-    currentPage,
-    setCurrentPage,
-    goToNextPage,
-    goToPreviousPage,
+
+  const handleLoadMore = () => {
+    setVisibleCount((count) => count + LOAD_MORE_COUNT)
   }
 
   return (
-    <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
-      <div className="container">
-        {/* <RevealWrapper className="grid grid-cols-1 items-center justify-items-center gap-x-6 gap-y-[60px] md:grid-cols-2 md:items-start xl:grid-cols-3">
-          {currentPageData?.slice(0, 3)?.map((blog) => (
-            <div key={blog.slug} className="underline-hover-effect group max-w-[370px]">
-              <Link href={`/blog/${blog.slug}`} className="block">
-                <figure className="h-[388px] overflow-hidden xl:min-w-[360px]">
-                  <Image
-                    width={360}
-                    height={388}
-                    src={blog.thumbnail}
-                    className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
-                    alt="Blog Images"
-                  />
-                </figure>
-              </Link>
-              <p className="font-poppins mb-5 mt-[30px] text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
-                {blog.date}
-              </p>
-              <Link href={`/blog/${blog.slug}`}>
-                <div className="blog-title mb-9">
-                  <h3 className="text[25px] md:text-3xl lg:text-4xl lg:leading-[1.2] lg:tracking-[-0.72px]">
-                    {blog.title}
-                  </h3>
-                </div>
-              </Link>
+    <section className="relative overflow-hidden bg-background px-3 pb-14 transition-colors duration-300 dark:bg-background md:px-4 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+      <div className="absolute inset-0 opacity-0 dark:opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        />
+      </div>
 
-              <Link
-                href={`/blog/${blog.slug}`}
-                className="rv-button rv-button-primary2 block w-full md:inline-block md:w-auto">
-                <div className="rv-button-top flex items-center text-center">
-                  <span className="pr-2">3 minute read</span>
-                  <Image className="hidden dark:inline" src={topArrowDark} alt="Arrow Icon" />
-                  <Image className="inline dark:hidden" src={topArrow} alt="Arrow Icon" />
-                </div>
-                <div className="rv-button-bottom flex items-center text-center">
-                  <span className="pr-2">3 minute read</span>
-                  <Image className="inline" src={topArrow} alt="Arrow Icon" />
-                </div>
-              </Link>
-            </div>
-          ))}
-        </RevealWrapper> */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
+        }}
+      />
 
-        <article className="mt-12 md:mt-[70px] [&>*:not(last-child)]:mb-10">
-          {currentPageData?.slice(3)?.map((blog) => (
-            <RevealWrapper
-              key={blog.slug}
-              className="underline-hover-effect group flex flex-col-reverse items-center justify-center gap-x-6 gap-y-10 border dark:border-dark md:justify-normal lg:flex-row lg:p-10">
-              <div className="flex-1 max-lg:self-center max-lg:px-7 max-lg:pb-7">
-                <p className="font-poppins text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
-                  {blog.date}
-                </p>
-                <Link href={`/blog/${blog.slug}`}>
-                  <div className="blog-title mb-6 mt-5 lg:mb-10">
-                    <h3 className="text[27px] md:text-4xl md:leading-[1.2] md:tracking-[-0.72px]">{blog.title}</h3>
+      <div className="relative z-10 mx-auto max-w-[1320px]">
+        {/* Insights header */}
+        <div className="mb-10 flex flex-col gap-8 lg:mb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+          <div className="relative max-w-[560px]">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -left-10 -top-16 h-48 w-64 rounded-full opacity-70 blur-3xl dark:opacity-90"
+              style={{
+                background:
+                  'radial-gradient(circle, rgba(139,124,255,0.45) 0%, rgba(183,148,244,0.25) 40%, rgba(244,168,184,0.2) 70%, transparent 100%)',
+              }}
+            />
+            <TextAppearAnimation>
+              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+                <span className="font-instrument italic">Insights</span>
+                <br />
+                <span>we share</span>
+              </h2>
+            </TextAppearAnimation>
+          </div>
+
+          <RevealWrapper className="relative max-w-[420px] lg:pb-2 lg:text-right">
+            <span
+              aria-hidden
+              className="absolute -right-1 -top-8 inline-flex size-10 items-center justify-center rounded-full bg-[#615CCE] shadow-lg lg:-right-2 lg:-top-10 lg:size-12">
+              <WowText className="!text-[10px] !leading-none lg:!text-[11px]">WOW!</WowText>
+            </span>
+            <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">
+              Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
+              not jargon.
+            </p>
+          </RevealWrapper>
+        </div>
+
+        {/* Category filter */}
+        <RevealWrapper className="mb-8 md:mb-10">
+          <div
+            role="tablist"
+            aria-label="Blog categories"
+            className="flex w-full flex-wrap overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white/50 backdrop-blur-sm dark:border-white/10 dark:bg-dark/50 sm:flex-nowrap">
+            {CATEGORIES.map((category, index) => {
+              const isActive = activeCategory === category
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => handleCategoryChange(category)}
+                  className={`relative flex-1 px-3 py-3.5 text-center text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 sm:px-4 sm:py-4 sm:text-xs md:text-[13px] ${
+                    isActive
+                      ? 'bg-primary text-white'
+                      : 'bg-transparent text-[#0D0D0D] hover:bg-[#8b7cff]/10 dark:text-[#F2F2F2] dark:hover:bg-white/5'
+                  } ${index > 0 ? 'border-l border-[#e5e5e5] dark:border-white/10' : ''}`}>
+                  {category}
+                </button>
+              )
+            })}
+          </div>
+        </RevealWrapper>
+
+        {/* Blog cards */}
+        <div className="flex flex-col gap-5 md:gap-6">
+          {visibleBlogs.map((blog) => (
+            <RevealWrapper key={blog.slug}>
+              <article className="group overflow-hidden rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:bg-dark/50 dark:hover:shadow-none">
+                <div className="flex flex-col-reverse gap-6 p-5 sm:p-6 lg:flex-row lg:items-stretch lg:gap-10 lg:p-8 xl:p-10">
+                  <div className="flex flex-1 flex-col justify-between gap-8">
+                    <div>
+                      <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.14em] text-[#808080] sm:text-xs">
+                        {formatDate(blog.date)}
+                      </p>
+                      <Link href={`/blog/${blog.slug}`}>
+                        <h3 className="max-w-2xl text-[clamp(1.35rem,2.8vw,2.15rem)] font-normal leading-[1.2] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4]">
+                          {blog.title}
+                        </h3>
+                      </Link>
+                    </div>
+
+                    <div>
+                      <ButtonComponent href={`/blog/${blog.slug}`} variant="white" size="sm">
+                        3 Minute Read
+                      </ButtonComponent>
+                    </div>
                   </div>
-                </Link>
 
-                <Link href={`/blog/${blog.slug}`} className="rv-button rv-button-primary2">
-                  <div className="rv-button-top flex items-center text-center">
-                    <span className="pr-2">3 minute read</span>
-                    <Image className="inline dark:hidden" src={topArrow} alt="Arrow Icon" />
-                    <Image className="hidden dark:inline" src={topArrowDark} alt="Arrow Icon" />
-                  </div>
-                  <div className="rv-button-bottom flex items-center text-center">
-                    <span className="pr-2">3 minute read</span>
-                    <Image className="inline" src={topArrow} alt="Arrow Icon" />
-                  </div>
-                </Link>
-              </div>
-
-              <Link href={`/blog/${blog.slug}`} className="max-lg:w-full">
-                <figure className="h-96 w-full overflow-hidden lg:h-[190px] lg:w-[464px] lg:flex-1">
-                  <Image
-                    src={blog.thumbnail}
-                    width={464}
-                    height={190}
-                    className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
-                    alt="Blog Images"
-                  />
-                </figure>
-              </Link>
+                  <Link
+                    href={`/blog/${blog.slug}`}
+                    className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 lg:w-[42%] lg:max-w-[480px]">
+                    <Image
+                      src={blog.thumbnail}
+                      alt={blog.title}
+                      width={480}
+                      height={280}
+                      className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+                </div>
+              </article>
             </RevealWrapper>
           ))}
-        </article>
+        </div>
 
-        <Pagination paginateFunction={paginateFunction} />
+        {filteredBlogs.length === 0 && (
+          <p className="py-16 text-center text-base text-[#808080]">No articles in this category yet.</p>
+        )}
+
+        {hasMore && (
+          <div className="mt-10 flex justify-center md:mt-14">
+            <ButtonComponent variant="white" onClick={handleLoadMore}>
+              Load More
+            </ButtonComponent>
+          </div>
+        )}
       </div>
     </section>
   )
