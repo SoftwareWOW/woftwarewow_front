@@ -167,10 +167,10 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
                         className="relative mb-5 block overflow-hidden rounded-radius-md border border-[#e5e5e5] dark:border-white/5"
                       >
                         <Image
-                          src={blog.thumbnail}
+                          src={blog.thumbnail || blog.featureImage || '/images/blog-img/blog-img-5.png'}
                           width={420}
                           height={320}
-                          alt={blog.title}
+                          alt={blog.title ?? 'Case study'}
                           className="aspect-[420/320] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </Link>
@@ -181,7 +181,7 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
 
                       <Link href={`/blog/${blog.slug}`}>
                         <h3 className="mb-5 text-[clamp(1.15rem,2vw,1.5rem)] font-normal leading-[1.25] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4]">
-                          {blog.title}
+                          {blog.title ?? 'Untitled'}
                         </h3>
                       </Link>
 

@@ -1,5 +1,4 @@
-import BlogHero from '@/app/[locale]/blog/_components/BlogHero'
-
+import BlogHero, { type BlogHeroPost } from '@/app/[locale]/blog/_components/BlogHero'
 import BlogPostV5 from '@/components/blogpage/BlogPostV5'
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
@@ -14,21 +13,32 @@ export const metadata = {
 export interface BlogType {
   slug: string
   content: string
+  title?: string
+  description?: string
+  date?: string
+  thumbnail?: string
+  featureImage?: string
+  tags?: string | string[]
+  author?: {
+    name: string
+    avatar: string
+  }
   [key: string]: any
 }
 
-const loadedBlogs: BlogType[] = getMarkDownData('data/blogsV2')
-const featuredBlog = loadedBlogs.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ?? loadedBlogs[0]
+const loadedBlogs: BlogType[] = getMarkDownData('data/blogsV2') as BlogType[]
+const featuredBlog = (loadedBlogs.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ??
+  loadedBlogs[0]) as unknown as BlogHeroPost
 
 const BlogPage = () => {
   return (
     <LayoutOne>
-    <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-      <BlogHero blog={featuredBlog} />
-      <Marquess/>
-      <BlogPostV5 Blogs={loadedBlogs} />
-      <BlogCaseStudies blogs={loadedBlogs} />
-      <WowGrowthCta />
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <BlogHero blog={featuredBlog} />
+        <Marquess />
+        <BlogPostV5 Blogs={loadedBlogs} />
+        <BlogCaseStudies blogs={loadedBlogs} />
+        <WowGrowthCta />
       </div>
     </LayoutOne>
   )

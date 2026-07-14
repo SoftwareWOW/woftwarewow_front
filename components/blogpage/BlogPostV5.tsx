@@ -50,15 +50,17 @@ function resolveCategory(blog: BlogType): Exclude<Category, 'ALL'> {
   return 'NEWS'
 }
 
-function formatDate(date: string) {
-  return date?.toUpperCase?.() ?? date
+function formatDate(date?: string) {
+  return date?.toUpperCase?.() ?? date ?? ''
 }
+
+type CategorizedBlog = BlogType & { category: Exclude<Category, 'ALL'> }
 
 const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
   const [activeCategory, setActiveCategory] = useState<Category>('ALL')
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
 
-  const categorizedBlogs = useMemo(
+  const categorizedBlogs = useMemo<CategorizedBlog[]>(
     () =>
       Blogs.map((blog) => ({
         ...blog,
@@ -175,7 +177,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                       </p>
                       <Link href={`/blog/${blog.slug}`}>
                         <h3 className="max-w-2xl text-[clamp(1.35rem,2.8vw,2.15rem)] font-normal leading-[1.2] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4]">
-                          {blog.title}
+                          {blog.title ?? 'Untitled'}
                         </h3>
                       </Link>
                     </div>
@@ -191,8 +193,8 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
                     href={`/blog/${blog.slug}`}
                     className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 lg:w-[42%] lg:max-w-[480px]">
                     <Image
-                      src={blog.thumbnail}
-                      alt={blog.title}
+                      src={blog.thumbnail || blog.featureImage || '/images/blog-img/blog-img-5.png'}
+                      alt={blog.title ?? 'Blog post'}
                       width={480}
                       height={280}
                       className="aspect-[16/10] h-full w-full rounded-radius-sm object-cover transition-transform duration-500 group-hover:scale-105"
