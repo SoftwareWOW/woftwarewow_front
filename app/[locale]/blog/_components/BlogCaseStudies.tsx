@@ -189,7 +189,6 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
                         <ButtonComponent
                           href={`/blog/${blog.slug}`}
                           variant={isFeatured ? 'primary' : 'white'}
-                          size="sm"
                         >
                           3 Minute Read
                         </ButtonComponent>

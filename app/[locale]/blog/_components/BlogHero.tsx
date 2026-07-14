@@ -43,7 +43,7 @@ export default function BlogHero({ blog }: BlogHeroProps) {
       <div className="mx-auto w-full max-w-[1320px]">
         <RevealWrapper>
           <Link href={`/blog/${blog.slug}`} className="group block">
-            <figure className="relative overflow-hidden rounded-2xl lg:rounded-3xl">
+            <figure className="relative overflow-hidden rounded-radius-md">
               <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[1320/523]">
                 <Image
                   src={imageSrc}
@@ -74,7 +74,7 @@ export default function BlogHero({ blog }: BlogHeroProps) {
               {tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-full border border-secondary/15 bg-white/70 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-secondary/70 dark:border-dark dark:bg-dark-200 dark:text-dark-100">
+                  className="rounded-full border border-secondary/15 bg-background px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-secondary/70 dark:border-dark dark:bg-background dark:text-dark-100">
                   {tag}
                 </li>
               ))}

@@ -88,38 +88,11 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
 
   return (
     <section className="relative overflow-hidden bg-background px-3  transition-colors duration-300 dark:bg-background md:px-4">
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
-        }}
-      />
-
       <div className="relative z-10 mx-auto max-w-[1320px]">
         {/* Insights header */}
         <div className="mb-10 flex flex-col gap-8 lg:mb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="relative max-w-[560px]">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -left-10 -top-16 h-48 w-64 rounded-full opacity-70 blur-3xl dark:opacity-90"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(139,124,255,0.45) 0%, rgba(183,148,244,0.25) 40%, rgba(244,168,184,0.2) 70%, transparent 100%)',
-              }}
-            />
+           
             <TextAppearAnimation>
               <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 <span className="font-instrument italic">Insights</span>
