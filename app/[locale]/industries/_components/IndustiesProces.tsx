@@ -53,15 +53,19 @@ const IndustriesProcess = () => {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-[30px]">
           {data.map((item) => (
-            <RevealWrapper key={item.id} className="reveal-me w-full pt-5">
-              <div className="relative mx-auto grid min-h-[260px] grid-cols-1 content-between rounded-radius-sm border border-[#e5e5e5] px-5 pb-10 pt-12 text-center transition-colors duration-300 dark:border-white/10 sm:min-h-[280px] md:min-h-[300px] md:pb-[42px]">
-                <div className="absolute -top-4 left-1/2  -translate-x-1/2">
+            <RevealWrapper key={item.id} className="w-full">
+              <div className="relative pt-4">
+                {/* Label sits outside the bordered card so global `.card { overflow:hidden }` cannot clip it */}
+                <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2">
                   <SectionLabel>{item.step}</SectionLabel>
                 </div>
-                <h6 className="text-xl font-normal leading-[1.1] text-[#0D0D0D] dark:text-[#F2F2F2] sm:text-2xl">
-                  {item.title}
-                </h6>
-                <p className="text-sm font-normal leading-[1.3] text-[#808080] md:text-base">{item.description}</p>
+
+                <div className="mx-auto grid min-h-[260px] grid-cols-1 content-between rounded-radius-sm border border-[#e5e5e5] px-5 pb-11 pt-14 text-center transition-colors duration-300 dark:border-white/10 sm:min-h-[280px] md:min-h-[300px] md:pb-12">
+                  <h6 className="text-xl font-normal leading-[1.1] text-[#0D0D0D] dark:text-[#F2F2F2] sm:text-2xl">
+                    {item.title}
+                  </h6>
+                  <p className="text-sm font-normal leading-[1.3] text-[#808080] md:text-base">{item.description}</p>
+                </div>
               </div>
             </RevealWrapper>
           ))}
