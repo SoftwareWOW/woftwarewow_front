@@ -1,11 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { divisionBrandLogos } from './nav-brand-assets'
+import { divisionBrandLogos, type DivisionId } from './nav-brand-assets'
 
 type WowDivisionLogoProps = {
   divisionId: string
-  /** Menu items: swap to Standard logo on light hover/active surfaces in dark mode */
+  /** Menu items: keep Standard logos in light mode, White logos in dark mode (incl. dark hover) */
   variant?: 'theme' | 'menu'
 }
 
@@ -25,29 +25,16 @@ function DivisionLogoImage({ src, className }: { src: string; className?: string
   )
 }
 
-export function WowDivisionLogo({ divisionId, variant = 'theme' }: WowDivisionLogoProps) {
-  const lightSrc = divisionBrandLogos.light[divisionId as keyof typeof divisionBrandLogos.light]
-  const darkSrc = divisionBrandLogos.dark[divisionId as keyof typeof divisionBrandLogos.dark]
+export function WowDivisionLogo({ divisionId, variant: _variant = 'theme' }: WowDivisionLogoProps) {
+  const lightSrc = divisionBrandLogos.light[divisionId as DivisionId]
+  const darkSrc = divisionBrandLogos.dark[divisionId as DivisionId]
 
   if (!lightSrc || !darkSrc) {
     return null
   }
 
-  if (variant === 'menu') {
-    return (
-      <>
-        <DivisionLogoImage
-          src={lightSrc}
-          className="block group-hover:block group-[.is-active]:block dark:hidden dark:group-hover:block dark:group-[.is-active]:block"
-        />
-        <DivisionLogoImage
-          src={darkSrc}
-          className="hidden group-hover:hidden group-[.is-active]:hidden dark:block dark:group-hover:hidden dark:group-[.is-active]:hidden"
-        />
-      </>
-    )
-  }
-
+  // Light mode + light hover (primary-50): Standard logos
+  // Dark mode + dark navy hover: White logos stay readable
   return (
     <>
       <DivisionLogoImage src={lightSrc} className="dark:hidden" />

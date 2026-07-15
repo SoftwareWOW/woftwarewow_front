@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation'
 import { ChevronRight } from 'lucide-react'
 import { MenuItemIcon } from './MenuItemIcon'
 import { WowDivisionLogo } from './WowDivisionLogo'
-import { navItemActiveClass, navItemDescriptionClass, navItemIconBoxClass, navItemIconClass, navItemInactiveClass, navItemLabelClass } from './nav-interaction-styles'
+import { navItemActiveClass, navItemChevronClass, navItemDescriptionClass, navItemIconBoxClass, navItemIconClass, navItemInactiveClass, navItemLabelClass } from './nav-interaction-styles'
 
 type MenuVariant = 'desktop' | 'mobile'
 
@@ -64,7 +64,7 @@ export function WowMenuItem({
         {showChevron && (
           <ChevronRight
             aria-hidden
-            className={`absolute end-[10px] top-1/2 h-3 w-5 -translate-y-1/2 stroke-current text-current opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 group-[.is-active]:opacity-100 ${navItemLabelClass}`}
+            className={`absolute end-[10px] top-1/2 h-3 w-5 -translate-y-1/2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 group-[.is-active]:opacity-100 ${navItemChevronClass}`}
             strokeWidth={1.2}
           />
         )}

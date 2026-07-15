@@ -283,8 +283,8 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                           aria-hidden
                           className={`h-3 w-5 shrink-0 transition-colors duration-300 ${
                             isActive
-                              ? 'stroke-black text-black'
-                              : 'stroke-current text-current dark:stroke-dark-100 dark:text-dark-100 dark:group-hover/nav-pill:stroke-black dark:group-hover/nav-pill:text-black'
+                              ? 'stroke-black text-black dark:stroke-white dark:text-white'
+                              : 'stroke-current text-current dark:stroke-dark-100 dark:text-dark-100 dark:group-hover/nav-pill:stroke-white dark:group-hover/nav-pill:text-white'
                           }`}
                           strokeWidth={1.2}
                         />
