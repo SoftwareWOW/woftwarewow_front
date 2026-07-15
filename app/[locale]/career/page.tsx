@@ -1,13 +1,14 @@
 import Benefits from '@/components/careerpage/Benefits'
-import CareerHero from '@/components/careerpage/CareerHero'
 import CompanyGallery from '@/components/careerpage/CompanyGallery'
-import Jobs from '@/components/careerpage/Jobs'
 import Community from '@/components/shared/Community'
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import Faq from '@/components/wow/LandascapComponets/Faq'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import CareerHeroPage from './_components/CareerHero'
+import BenefitsCareer from './_components/BenefitsCareer'
+import Jobs from './_components/Jobs'
+import Communities from './_components/Comunities'
+import CareerRfq from './_components/CareerRfq'
 
 export const metadata = {
   title: 'CareerPage',
@@ -16,12 +17,12 @@ export const metadata = {
 const CareerPage = () => {
   return (
     <LayoutOne>
-      <CareerHero />
+      <CareerHeroPage />
       <CompanyGallery />
-      <Benefits />
+      <BenefitsCareer/>
       <Jobs />
-      <Community />
-        <Faq />
+      <Communities />
+        <CareerRfq />
     <WowGrowthCta />
     </LayoutOne>
   )
