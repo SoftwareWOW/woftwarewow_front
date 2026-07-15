@@ -1,5 +1,6 @@
-import RevealWrapper from "@/components/animation/RevealWrapper"
-import TextAppearAnimation from "@/components/animation/TextAppearAnimation"
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const benefitsData = [
   { id: 1, title: 'Hybrid Work Environment' },
@@ -15,8 +16,11 @@ const benefitsData = [
 
 const BenefitsCareer = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden">
       <div className="container">
+        <RevealWrapper className="mb-3 flex justify-center">
+          <SectionLabel>Benefits</SectionLabel>
+        </RevealWrapper>
         <TextAppearAnimation>
           <h2 className="text-appear mb-4 text-center lg:mb-8">Why Join Our Team</h2>
         </TextAppearAnimation>
@@ -27,7 +31,6 @@ const BenefitsCareer = () => {
           </p>
         </RevealWrapper>
 
-        {/* Benefits Grid */}
         <div className="mt-10 grid grid-cols-1 items-center justify-center gap-[30px] sm:grid-cols-2 md:mt-[60px] lg:grid-cols-3">
           {benefitsData.map((benefit) => (
             <RevealWrapper key={benefit.id} className="border p-[30px] text-center dark:border-dark">

@@ -31,7 +31,7 @@ const galleryData = [
 
 const CompanyGallery = () => {
   return (
-    <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden">
       <div className="mx-auto max-w-[1440px] max-lg:px-4">
         <div className="relative grid grid-cols-1 max-lg:gap-6 md:grid-cols-2 lg:grid-cols-4">
           {galleryData.map((image) => (

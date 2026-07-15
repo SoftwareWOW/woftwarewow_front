@@ -1,15 +1,18 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import communityImg from '@/public/images/community-image.jpg'
 import Image from 'next/image'
-import Link from 'next/link'
-
 
 const Communities = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden">
       <div className="container">
         <div className="text-center">
+          <RevealWrapper className="mb-3 flex justify-center">
+            <SectionLabel>Community</SectionLabel>
+          </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-12 md:mb-20">
               Growing <span className="font-instrument italic">together.</span> <br />
@@ -25,17 +28,13 @@ const Communities = () => {
                 Join Our Community of <br />
                 500+ Designers
               </h3>
-              <Link
-                href="https://discord.com/invite/Y8n8ST6a"
-                target="_blank"
-                className="rv-button rv-button-secondary block w-full text-center max-md:mx-auto md:inline-block md:w-auto">
-                <div className="rv-button-top">
-                  <span>Join Discord</span>
-                </div>
-                <div className="rv-button-bottom">
-                  <span>Join Discord</span>
-                </div>
-              </Link>
+              <ButtonComponentList
+                className="flex max-md:w-full"
+                itemClassName="max-md:w-full md:inline-block md:w-auto">
+                <ButtonComponent href="https://discord.com/invite/Y8n8ST6a" variant="secondary" fullWidth>
+                  Join Discord
+                </ButtonComponent>
+              </ButtonComponentList>
             </div>
             <figure className="max-md:w-full">
               <Image src={communityImg} alt="Community Discussion" className="max-md:w-full" />
@@ -43,45 +42,33 @@ const Communities = () => {
           </RevealWrapper>
 
           <RevealWrapper className="card col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">
-            <div className="rv-badge">
-              <span className="rv-badge-text">Youtube</span>
+            <div className="mb-3 flex justify-center">
+              <SectionLabel>Youtube</SectionLabel>
             </div>
             <h3 className="my-5 text-[25px] leading-[1.2] tracking-[-1.08px] md:my-8 lg:text-4xl">
               Design Tips & <br className="hidden md:block" />
               Tutorial Videos
             </h3>
-            <Link
-              href="https://youtu.be/JGLfyTDgfDc?si=0-iUKu3hv8uewpxg"
-              target="_blank"
-              className="rv-button rv-button-secondary block w-[90%] max-md:mx-auto md:inline-block md:w-auto">
-              <div className="rv-button-top">
-                <span>Subscribe Now</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>Subscribe Now</span>
-              </div>
-            </Link>
+            <ButtonComponentList className="flex justify-center">
+              <ButtonComponent href="https://youtu.be/JGLfyTDgfDc?si=0-iUKu3hv8uewpxg" variant="secondary">
+                Subscribe Now
+              </ButtonComponent>
+            </ButtonComponentList>
           </RevealWrapper>
 
           <RevealWrapper className="card col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">
-            <div className="rv-badge">
-              <span className="rv-badge-text">Linkedin</span>
+            <div className="mb-3 flex justify-center">
+              <SectionLabel>Linkedin</SectionLabel>
             </div>
             <h3 className="my-5 text-[25px] leading-[1.2] tracking-[-1.08px] md:my-8 lg:text-4xl">
               Stay Updated On <br />
               Latest Design Trends
             </h3>
-            <Link
-              href="https://www.linkedin.com/company/staticmania"
-              target="_blank"
-              className="rv-button rv-button-secondary block w-[90%] max-md:mx-auto md:inline-block md:w-auto">
-              <div className="rv-button-top">
-                <span>Follow Now</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>Follow Now</span>
-              </div>
-            </Link>
+            <ButtonComponentList className="flex justify-center">
+              <ButtonComponent href="https://www.linkedin.com/company/staticmania" variant="secondary">
+                Follow Now
+              </ButtonComponent>
+            </ButtonComponentList>
           </RevealWrapper>
         </div>
       </div>

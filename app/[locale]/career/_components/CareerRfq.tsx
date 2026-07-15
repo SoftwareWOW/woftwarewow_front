@@ -4,7 +4,6 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 6
@@ -12,63 +11,63 @@ const INITIAL_VISIBLE_COUNT = 6
 const faqData = [
   {
     id: 1,
-    question: 'What makes WOW different from a traditional agency?',
+    question: 'How do I apply for a role at WOW Superagency?',
     answer:
-      'Traditional agencies usually specialize in one area. WOW operates as a connected ecosystem of divisions — each leading in its field, but working from one shared strategy to keep your brand, technology, and growth aligned.',
+      'Browse our open positions below, open the role that fits you, and submit your application with your resume and portfolio (when relevant). Our talent team reviews every application and reaches out if there is a match.',
   },
   {
     id: 2,
-    question: 'Which division should I start with?',
+    question: 'What is the hiring process like?',
     answer:
-      'It depends on your biggest priority right now — visibility, technology, design, or growth. After a free consultation, we recommend the smartest starting point and how other divisions can support you over time.',
+      'Most roles follow a short process: application review, an intro call, a skills or portfolio conversation, and a final culture fit chat with the team. We keep timelines clear so you always know what comes next.',
   },
   {
     id: 3,
-    question: 'Do you work with small businesses?',
+    question: 'Do you offer remote or hybrid work?',
     answer:
-      'Yes. We partner with ambitious small and mid-sized businesses at every stage — from launching a first website to scaling with AI, automation, and multi-channel growth programs.',
+      'Yes. Depending on the role, we offer hybrid and remote-friendly setups. We prioritize collaboration and outcomes — whether you are in the office a few days a week or working remotely.',
   },
   {
     id: 4,
-    question: 'Can WOW handle multiple services together?',
+    question: 'What benefits do team members receive?',
     answer:
-      'Absolutely. WOW Superagency is your single point of contact. We coordinate the right specialists behind the scenes — whether you need a new website, marketing campaign, custom software, or AI automation.',
+      'We offer competitive health benefits, learning & development support, performance bonuses, mental health resources, modern tools, and generous time off. Exact benefits can vary by location and role.',
   },
   {
     id: 5,
-    question: 'How do we start?',
+    question: 'I do not see a role that fits. Can I still apply?',
     answer:
-      'Book a free consultation, tell us what you are trying to build or improve, and we will recommend the best next step.',
+      'Absolutely. Send an open application through our contact page with your resume and a short note about the kind of work you want to do. We keep strong candidates in mind as new roles open.',
   },
   {
     id: 6,
-    question: 'What does it cost to work with WOW Superagency?',
+    question: 'What kind of experience do you look for?',
     answer:
-      'Every engagement is scoped to your goals. After a free consultation, you receive a transparent proposal with clear deliverables, timelines, and investment — whether you need one division or a full ecosystem rollout.',
+      'We care about craft, curiosity, and collaboration. Relevant experience helps, but we also value portfolios, side projects, and people who learn quickly and communicate well across disciplines.',
   },
   {
     id: 7,
-    question: 'Do you sign NDAs and protect client data?',
+    question: 'Is there room to grow inside WOW?',
     answer:
-      'Yes. We treat every client relationship with confidentiality and follow industry best practices for data security—especially for healthcare, legal, and finance clients with compliance requirements.',
+      'Yes. Because WOW is a connected ecosystem of divisions, you can deepen expertise in your lane or grow across design, marketing, technology, and AI — with mentorship and real client work.',
   },
   {
     id: 8,
-    question: 'Can you redesign an existing website without losing SEO?',
+    question: 'Do you hire internationally?',
     answer:
-      'Yes. WOW Websites specializes in migrations and redesigns that preserve search rankings while improving performance, conversion, and brand presentation.',
+      'We hire where we can support strong collaboration and compliance. Availability depends on the role, so check the job listing or ask our team during the intro call.',
   },
   {
     id: 9,
-    question: 'What if I am not satisfied with the results?',
+    question: 'How long does it take to hear back after applying?',
     answer:
-      'We build feedback into every project phase. If something is not meeting expectations, we address it quickly and adjust course. We are building long-term partnerships, not one-off transactions.',
+      'We aim to respond within one to two weeks. If a role is a strong fit, you will hear sooner. High volume periods can take a little longer, but every application is reviewed.',
   },
   {
     id: 10,
-    question: 'How do I schedule a consultation?',
+    question: 'Who can I contact with career questions?',
     answer:
-      'Use our contact form or book directly from our contact page. We will learn about your business, identify opportunities, and outline how WOW can help you grow.',
+      'Reach out through our contact form or book a conversation from the careers page. Mention the role you are interested in and we will connect you with the right person on the talent team.',
   },
 ]
 
@@ -106,12 +105,12 @@ const CareerRfq = () => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
-              <SectionLabel className="mb-5">Expertise</SectionLabel>
+              <SectionLabel className="mb-5">Careers FAQ</SectionLabel>
             </RevealWrapper>
 
             <TextAppearAnimation>
               <h2 className="text-appear text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-                <span className="block font-instrument italic font-normal tracking-[-0.06em]">People</span> <br/>
+                <span className="block font-instrument italic font-normal tracking-[-0.06em]">People</span> <br />
                 <span className="block font-normal">Asked Us</span>
               </h2>
             </TextAppearAnimation>
@@ -120,16 +119,17 @@ const CareerRfq = () => {
           <div className="max-w-[420px] lg:text-right">
             <TextAppearAnimation>
               <p className="text-appear text-base leading-relaxed text-[#808080] transition-colors duration-300 md:text-lg">
-                Answers to common questions about our services, process, pricing, and how we help businesses grow.
+                Answers to common questions about hiring, benefits, remote work, and growing your career at WOW
+                Superagency.
               </p>
             </TextAppearAnimation>
-                  <RevealWrapper className="mt-6 flex justify-end md:mt-8">
-                          <ButtonComponentList>
-                            <ButtonComponent href="/rfq"   variant="white">
-                        View All FAQ
-                            </ButtonComponent>
-                          </ButtonComponentList>
-                        </RevealWrapper>
+            <RevealWrapper className="mt-6 flex justify-end md:mt-8">
+              <ButtonComponentList>
+                <ButtonComponent href="/faq" variant="white">
+                  View All FAQ
+                </ButtonComponent>
+              </ButtonComponentList>
+            </RevealWrapper>
           </div>
         </div>
 
@@ -145,16 +145,14 @@ const CareerRfq = () => {
                         : 'border-black/10 dark:border-white/10'
                     }`}
                     data-active={activeAccordion === faq.id ? true : false}
-                    onClick={() => toggleAccordion(faq.id)}
-                  >
+                    onClick={() => toggleAccordion(faq.id)}>
                     <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
                       {faq.question}
                     </h3>
                     <div
                       className={`grid transition-all duration-[400ms] ease-in-out ${
                         activeAccordion === faq.id ? 'mt-6 grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                      }`}
-                    >
+                      }`}>
                       <div className="overflow-hidden">
                         <div className="accordion-bodyV4 transition-transform duration-[400] ease-in-out">
                           <p className="font-[375]">{faq.answer}</p>
@@ -179,12 +177,7 @@ const CareerRfq = () => {
         {faqData.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
             <ButtonComponentList>
-              <ButtonComponent
-                type="button"
-                variant="secondary"
-                onClick={handleToggleShowAll}
-                ariaExpanded={showAll}
-              >
+              <ButtonComponent type="button" variant="secondary" onClick={handleToggleShowAll} ariaExpanded={showAll}>
                 {showAll ? 'See Less' : 'See More'}
               </ButtonComponent>
             </ButtonComponentList>
