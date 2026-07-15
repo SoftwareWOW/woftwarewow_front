@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { FC, useState } from 'react'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { ITeamMember } from './TeamGallery'
 import Link from 'next/link'
 
@@ -34,7 +35,7 @@ const Teams: FC<TeamsProps> = ({ team }) => {
                 <h3 className="text-4xl leading-tight tracking-tight dark:text-secondary">{member.title}</h3>
               </div>
             </Link>
-            <p className="text-lg font-light leading-5 text-black/70 dark:text-secondary">{member.position}</p>
+            <SectionLabel className="mt-2 bg-white/30 dark:bg-secondary/10">{member.position}</SectionLabel>
           </div>
         </div>
       ))}

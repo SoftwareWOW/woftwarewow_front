@@ -9,6 +9,8 @@ import youtubeDarkLogo from '@/public/images/icons/youtube-dark.svg'
 import facebookLogo from '@/public/images/icons/facebook.svg'
 import facebookDarkLogo from '@/public/images/icons/facebook-dark.svg'
 import Link from 'next/link'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import RevealWrapper from '../animation/RevealWrapper'
 import TeamGallery from '../aboutpage-02/TeamGallery'
 
@@ -40,7 +42,7 @@ const Team = () => {
   }
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="relative overflow-hidden">
       <RevealWrapper className="container">
         {/* Main profile card */}
         <div
@@ -59,7 +61,7 @@ const Team = () => {
             <div className="mb-5 flex flex-col justify-between gap-y-10 md:flex-row lg:mb-10">
               <div>
                 <h2 className="mb-3 lg:text-4xl lg:leading-[1.2] lg:-tracking-[1.08px]">{selectedMember.name}</h2>
-                <p className="text-lg font-light leading-[20px]">{selectedMember.role}</p>
+                <SectionLabel>{selectedMember.role}</SectionLabel>
               </div>
 
               <ul className="flex gap-5">
@@ -116,26 +118,14 @@ const Team = () => {
             </div>
           </div>
         </div>
-   <TeamGallery />
-        {/* Team member tabs */}
-        {/* <div className="mt-[30px] flex justify-center gap-6 max-xl:flex-wrap">
-          {teamMembers.map((member) => (
-            <div
-              key={member.id}
-              onClick={() => handleMemberChange(member)}
-              className={`tab-member flex h-auto max-w-[350px] items-center gap-5 border p-5 dark:border-dark 2xl:max-w-[370px] ${
-                selectedMember.id === member.id ? 'tab-active' : ''
-              }`}>
-              <figure className="relative h-[130px] w-[130px]">
-                <Image src={member.image} alt={member.name} fill className="object-cover" sizes="130px" />
-              </figure>
-              <div className="text-left">
-                <h3 className="mb-3 text-nowrap text-2xl leading-[1.2] tracking-[-0.72px]">{member.name}</h3>
-                <p>{member.role}</p>
-              </div>
-            </div>
-          ))}
-        </div> */}
+        <TeamGallery />
+        <RevealWrapper className="mt-10 flex justify-center md:mt-14">
+          <ButtonComponentList>
+            <ButtonComponent href="/career" variant="primary">
+              Join Our Team
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
       </RevealWrapper>
     </section>
   )

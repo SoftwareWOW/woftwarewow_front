@@ -1,8 +1,8 @@
 import teamMemberV2 from '@/data/teamMemberV2.json'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
-import SectionHeader from '../shared/SectionHeader'
 import Teams from './Teams'
 
 export interface ITeamMember {
@@ -14,7 +14,7 @@ export interface ITeamMember {
 
 const TeamGallery = () => {
   return (
-    <section className="flex items-center justify-center overflow-hidden pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+    <section className="mt-10 flex items-center justify-center overflow-hidden md:mt-14">
       <div className="container w-full">
         {/* <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row md:items-center lg:justify-between">
           <SectionHeader
@@ -49,7 +49,7 @@ const TeamGallery = () => {
                       </h3>
                     </div>
                   </Link>
-                  <p className="text-lg font-light leading-5 text-black/70 dark:text-secondary">{teamM.position}</p>
+                  <SectionLabel className="mt-2 bg-white/30 dark:bg-secondary/10">{teamM.position}</SectionLabel>
                 </div>
               </RevealWrapper>
             ))}
