@@ -25,8 +25,11 @@ const MainServices = () => {
         </RevealWrapperV2>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            Marketing solutions designed for <br />
-            <i className="font-instrument"> maximum impact</i>
+        Marketing solutions designed for <br />
+           <span>
+             <span className="font-instrument "> maximum </span>
+            impact
+           </span>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
@@ -98,13 +101,6 @@ const MainServices = () => {
           </RevealWrapper>
         ))}
       </div>
-      <RevealWrapper className="mx-auto mt-7 flex justify-center max-md:w-full max-md:px-4 md:mt-14">
-        <ButtonComponentList>
-          <ButtonComponent href="/services" variant="white">
-            Explore Our Services
-          </ButtonComponent>
-        </ButtonComponentList>
-      </RevealWrapper>
     </section>
   )
 }

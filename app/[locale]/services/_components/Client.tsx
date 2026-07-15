@@ -14,8 +14,7 @@ const Client = () => {
         </RevealWrapper>
         <TextAppearAnimation>
           <h2 className="text-appear mb-10 text-center lg:mb-20">
-            Read what our amazing past <br className="hidden md:block" />
-            clients say
+         What our clients say about us
           </h2>
         </TextAppearAnimation>
       </div>
