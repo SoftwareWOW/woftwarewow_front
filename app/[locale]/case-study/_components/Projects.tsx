@@ -1,4 +1,6 @@
+import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import getMarkDownData from '@/utils/GetMarkDownData'
 
 export interface ProjectsDataType {
@@ -12,7 +14,7 @@ let sortedProjects = projects.toSorted((a, b) => a.year - b.year)
 
 const Projects = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden">
       <div className="container grid gap-20 max-md:gap-y-16 md:grid-cols-2 xl:gap-16">
         {sortedProjects?.map((project) => (
           <RevealWrapperV2
@@ -28,7 +30,7 @@ const Projects = () => {
               />
             </figure>
             <div className="project-item-content">
-              <p className="text-xs font-normal uppercase leading-3 tracking-[5px] text-secondary dark:text-backgroundBody md:leading-6 md:tracking-[8px]">
+                <p className="text-xs font-normal uppercase leading-3 tracking-[5px] text-secondary dark:text-backgroundBody md:leading-6 md:tracking-[8px]">
                 {project.category}
               </p>
               <div className="blog-title mb-2 mt-3 md:mt-4 lg:mb-4 lg:mt-5 xl:mt-7">
@@ -43,6 +45,14 @@ const Projects = () => {
           </RevealWrapperV2>
         ))}
       </div>
+
+      <RevealWrapper className="mt-10 flex justify-center md:mt-14">
+        <ButtonComponentList>
+          <ButtonComponent href="/projects/all" variant="primary">
+          View all
+          </ButtonComponent>
+        </ButtonComponentList>
+      </RevealWrapper>
     </section>
   )
 }

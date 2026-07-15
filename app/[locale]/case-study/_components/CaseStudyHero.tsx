@@ -1,20 +1,16 @@
-import RevealWrapper from "@/components/animation/RevealWrapper"
-
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const CaseStudyHero = () => {
   return (
-    <section className="overflow-hidden pb-14 pt-[130px] md:pb-16 md:pt-36 lg:pb-[88px] lg:pt-44 xl:pb-[100px] xl:pt-[180px]">
+    <section className="relative overflow-hidden bg-background px-3 pt-28 transition-colors duration-300 dark:bg-background sm:pt-32 md:px-4 lg:pt-[140px] xl:pt-[160px]">
       <RevealWrapper className="container">
-        <p className="font-poppins flex items-center justify-center gap-2 text-sm font-normal uppercase leading-6 tracking-[3px] md:gap-5">
-          <span className="max-sm:whitespace-nowrap">Design Agency</span>
+        <div className="mb-5 flex items-center justify-center gap-2 md:mb-6 md:gap-5 md:mt-3 xl:mt-0">
+          <SectionLabel>Case Studies</SectionLabel>
+        </div>
 
-          <span className="inline-block h-[1px] w-[150px] bg-dark dark:bg-[#ffffffb3]"></span>
-
-          <span>Palermo</span>
-        </p>
-
-        <h1 className="mt-5 text-center sm:mt-6 md:mt-9 xl:text-nowrap">
-          Crafting Tomorrow's
+        <h1 className="text-center xl:text-nowrap">
+          Crafting Tomorrow&apos;s
           <span className="ml-5 inline-block font-instrument italic max-sm:mr-3">Solutions,</span>
           <br className="hidden xl:block" />
           Today

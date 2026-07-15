@@ -1,10 +1,7 @@
-import PortfolioItems from "@/components/projectpage-02/PortfolioItems";
-import ProjectHeroV2 from "@/components/projectpage-02/ProjectHeroV2";
-import GradientCta from "@/components/shared/GradientCta";
-import LayoutOne from "@/components/shared/LayoutOne";
-import WowGrowthCta from "@/components/wow/LandascapComponets/WowGrowthCta";
-import CaseStudyHero from "./_components/CaseStudyHero";
-import Projects from "./_components/Projects";
+import LayoutOne from '@/components/shared/LayoutOne'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import CaseStudyHero from './_components/CaseStudyHero'
+import Projects from './_components/Projects'
 
 export const metadata = {
   title: 'Case Study',
@@ -13,11 +10,13 @@ export const metadata = {
 const CaseStudyPage = () => {
   return (
     <LayoutOne>
-     <CaseStudyHero />
-      <Projects/>
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <CaseStudyHero />
+        <Projects />
         <WowGrowthCta />
+      </div>
     </LayoutOne>
   )
 }
 
-export default CaseStudyPage;
+export default CaseStudyPage
