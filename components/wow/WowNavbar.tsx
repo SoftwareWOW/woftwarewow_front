@@ -22,10 +22,10 @@ import WowMobileBottomNav from './nav/WowMobileBottomNav'
 import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
 
 const actionBtnClass =
-  'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-5 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[60px] md:size-[65px] lg:size-[79px]'
+  'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-4 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px] md:p-4 lg:p-5'
 
 const iconClass =
-  'size-10 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[30deg]'
+  'size-7 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[30deg] md:size-8 lg:size-9 xl:size-10'
 
 type WowNavbarProps = {
   navbar: Dictionary['navbar']
@@ -232,7 +232,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           >
             <Link
               href="/"
-              className="flex shrink-0 items-center ps-2 md:w-[160px] md:ps-5 lg:w-[200px] 2xl:w-[289px]"
+              className="flex shrink-0 items-center ps-2 md:w-[130px] md:ps-3 lg:w-[180px] lg:ps-5 xl:w-[200px] 2xl:w-[289px]"
             >
               <Image
                 className="h-[20px] w-auto dark:hidden"
@@ -255,18 +255,18 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               />
             </Link>
 
-            <ul className="hidden items-center md:flex">
+            <ul className="hidden min-w-0 flex-1 items-center justify-center md:flex md:gap-0 lg:gap-1 xl:gap-0">
               {navigation.items.map((item) => {
                 const isActive = activeMenuId === item.id
 
                 return (
-                  <li key={item.id}>
+                  <li key={item.id} className="shrink">
                     <button
                       type="button"
                       onMouseEnter={() => openMegaMenu(item.id)}
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`group/nav-pill flex items-center justify-center gap-[6px] rounded-radius-sm px-8 py-[24px] font-outfit text-xs font-normal uppercase tracking-[1.4px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 lg:text-sm lg:tracking-[2.1px] ${
+                      className={`group/nav-pill flex items-center justify-center gap-1 whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-normal uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:gap-[6px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-8 xl:py-[24px] xl:text-sm xl:tracking-[2.1px] ${
                         isActive ? navPillActiveClass : navPillInactiveClass
                       }`}
                       aria-expanded={isActive}
