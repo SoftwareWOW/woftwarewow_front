@@ -3,6 +3,8 @@ import ProjectHeroV2 from "@/components/projectpage-02/ProjectHeroV2";
 import GradientCta from "@/components/shared/GradientCta";
 import LayoutOne from "@/components/shared/LayoutOne";
 import WowGrowthCta from "@/components/wow/LandascapComponets/WowGrowthCta";
+import CaseStudyHero from "./_components/CaseStudyHero";
+import Projects from "./_components/Projects";
 
 export const metadata = {
   title: 'Case Study',
@@ -11,8 +13,8 @@ export const metadata = {
 const CaseStudyPage = () => {
   return (
     <LayoutOne>
-     <ProjectHeroV2 />
-      <PortfolioItems />
+     <CaseStudyHero />
+      <Projects/>
         <WowGrowthCta />
     </LayoutOne>
   )
