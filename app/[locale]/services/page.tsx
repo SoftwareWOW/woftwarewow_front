@@ -1,10 +1,4 @@
-import ClientsV2 from '@/components/homepage-05/ClientsV2'
-import ServicesV14 from '@/components/homepage-16/ServicesV14'
-import Process from '@/components/services-page/Process'
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
-
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import ServiceHero from './_components/ServiceHeroPage'
 import MainServices from './_components/MainServices'
@@ -18,18 +12,19 @@ export const metadata = {
 const ServicesPage = () => {
   return (
     <LayoutOne>
-      <ServiceHero
-        badgeTitle="Services"
-        title="Services "
-        italicTitle=""
-        scale
-        description="Explore our innovative cutting-edge no-code websites designed to captivate and engage your visitors effortlessly"
-        spacing="max-md:pt-44 max-sm:pb-10 max-md:pb-16 md:py-44 lg:py-[200px] relative overflow-hidden"
-      />
-     <MainServices/>
-      <ServiceProces />
-      <Client/>
-      <WowGrowthCta />
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <ServiceHero
+          badgeTitle="Services"
+          title="Services "
+          italicTitle=""
+          scale
+          description="Explore our innovative cutting-edge no-code websites designed to captivate and engage your visitors effortlessly"
+        />
+        <MainServices />
+        <ServiceProces />
+        <Client />
+        <WowGrowthCta />
+      </div>
     </LayoutOne>
   )
 }

@@ -1,12 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import Process from '@/components/services-page/Process'
-import Link from 'next/link'
-
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 
 const ServiceProces = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section>
       <div className="container">
         <TextAppearAnimation>
           <h3 className="text-appear lg:text[56px] mb-20 text-center max-md:text-3xl md:text-6xl lg:leading-[1.2] lg:tracking-[-1.68px]">
@@ -66,18 +64,13 @@ const ServiceProces = () => {
           </div>
         </RevealWrapper>
 
-        <div className="reveal-me mt-7 flex list-none items-center justify-center md:mt-14">
-          <div className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/contact" className="rv-button rv-button-sm rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>Lets Starts</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span className="text-nowrap">Lets Starts</span>
-              </div>
-            </Link>
-          </div>
-        </div>
+        <RevealWrapper className="mt-7 flex justify-center md:mt-14">
+          <ButtonComponentList>
+            <ButtonComponent href="/contact" variant="primary">
+              Lets Starts
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
       </div>
     </section>
   )

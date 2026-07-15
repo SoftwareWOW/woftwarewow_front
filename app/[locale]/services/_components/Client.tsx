@@ -1,19 +1,19 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import testimonialData from '@/data/testimonials/testimonialV2.json'
 import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
 
-
 const Client = () => {
   return (
-    <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden">
       <div className="container">
-        <RevealWrapper as="p" className="reveal-me text-center text-sm font-normal uppercase leading-6 tracking-[3px]">
-          Testimonials
+        <RevealWrapper className="mb-3 flex justify-center">
+          <SectionLabel>Testimonials</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mb-10 mt-3 text-center lg:mb-20">
+          <h2 className="text-appear mb-10 text-center lg:mb-20">
             Read what our amazing past <br className="hidden md:block" />
             clients say
           </h2>

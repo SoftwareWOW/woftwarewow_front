@@ -2,11 +2,11 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
-import ServicesV14 from '@/components/homepage-16/ServicesV14'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import Link from 'next/link'
-
 
 interface WorkType {
   slug: string
@@ -18,10 +18,10 @@ const services: WorkType[] = getMarkDownData('data/servicesV3')
 
 const MainServices = () => {
   return (
-    <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden">
       <div className="mb-8 text-center md:mb-16">
-        <RevealWrapperV2 className="rv-badge reveal-me mb-3">
-          <span className="rv-badge-text">Services</span>
+        <RevealWrapperV2 className="reveal-me mb-3 flex justify-center">
+          <SectionLabel>Services</SectionLabel>
         </RevealWrapperV2>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
@@ -98,17 +98,12 @@ const MainServices = () => {
           </RevealWrapper>
         ))}
       </div>
-      <RevealWrapper as="ul" className="mx-auto mt-7 flex justify-center max-md:w-full max-md:px-4 md:mt-14">
-        <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-          <Link href="/services" className="rv-button rv-button-white block md:inline-block">
-            <div className="rv-button-top">
-              <span>Explore Our Services</span>
-            </div>
-            <div className="rv-button-bottom">
-              <span>Explore Our Services</span>
-            </div>
-          </Link>
-        </li>
+      <RevealWrapper className="mx-auto mt-7 flex justify-center max-md:w-full max-md:px-4 md:mt-14">
+        <ButtonComponentList>
+          <ButtonComponent href="/services" variant="white">
+            Explore Our Services
+          </ButtonComponent>
+        </ButtonComponentList>
       </RevealWrapper>
     </section>
   )
