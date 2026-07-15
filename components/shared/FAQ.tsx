@@ -26,22 +26,26 @@ const FAQ = ({ bigTitleWithBadge = false }: FaqProps) => {
       </div>
       <div className="container">
         {bigTitleWithBadge ? (
-          <>
-            <div className="text-center">
-              <RevealWrapper className="rv-badge mb-4 lg:mb-6">
-                <span className="rv-badge-text">Faq</span>
-              </RevealWrapper>
-            </div>
+          <div className="mb-10 flex flex-col items-center text-center md:mb-20">
+            <RevealWrapper className="rv-badge mb-4 lg:mb-6">
+              <span className="rv-badge-text">Faq</span>
+            </RevealWrapper>
             <TextAppearAnimation>
-              <h1 className="text-appear mb-10 text-center md:mb-20">
-                Frequently Asked <i className="font-instrument italic">Questions</i>
+              <h1 className="text-appear text-center">
+                Frequently Asked{' '}
+                <span className="font-instrument italic ">
+                  Questions
+                </span>
               </h1>
             </TextAppearAnimation>
-          </>
+          </div>
         ) : (
           <TextAppearAnimation>
             <h2 className="text-appear mb-10 text-center md:mb-20">
-              Frequently Asked <i className="font-instrument italic">Questions</i>
+              Frequently Asked{' '}
+              <span className="font-instrument italic">
+                Questions
+              </span>
             </h2>
           </TextAppearAnimation>
         )}
