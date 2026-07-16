@@ -1,4 +1,7 @@
-import { sendContactEmail } from '@/lib/brevo/send-contact-email'
+import {
+  sendContactAutoReplyEmail,
+  sendContactNotificationEmail,
+} from '@/lib/brevo/send-contact-email'
 import { NextResponse } from 'next/server'
 
 type ContactRequestBody = {
@@ -61,21 +64,33 @@ export async function POST(request: Request) {
     )
   }
 
-  const result = await sendContactEmail({
+  const payload = {
     name,
     email,
     interests,
     budget,
     message,
-  })
+  }
 
-  if (!result.ok) {
-    console.error('[contact] Brevo send failed:', result.error)
+  const notificationResult = await sendContactNotificationEmail(payload)
+
+  if (!notificationResult.ok) {
+    console.error('[contact] Brevo notification failed:', notificationResult.error)
     return NextResponse.json(
       { error: 'Unable to send your message right now. Please try again shortly.' },
       { status: 500 },
     )
   }
 
-  return NextResponse.json({ success: true, messageId: result.messageId })
+  const autoReplyResult = await sendContactAutoReplyEmail(payload)
+
+  if (!autoReplyResult.ok) {
+    console.error('[contact] Brevo auto-reply failed:', autoReplyResult.error)
+  }
+
+  return NextResponse.json({
+    success: true,
+    messageId: notificationResult.messageId,
+    autoReplySent: autoReplyResult.ok,
+  })
 }

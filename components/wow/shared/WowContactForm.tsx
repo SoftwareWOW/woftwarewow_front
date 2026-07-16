@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import ButtonComponent from './ButtonComponent'
+import { useToast } from './ToastProvider'
 
 const interestData = [
   { id: 'uiux', value: 'UI/UX Design' },
@@ -24,8 +25,6 @@ type WowContactFormProps = {
   showHeader?: boolean
 }
 
-type SubmitStatus = 'idle' | 'loading' | 'success' | 'error'
-
 const labelClassName =
   'text-lg font-normal leading-[1.2] tracking-[-0.02em] text-[#666666] dark:text-dark-100 md:text-xl'
 
@@ -41,13 +40,13 @@ const chipClassName = (selected: boolean) =>
   ].join(' ')
 
 const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowContactFormProps) => {
+  const { showToast } = useToast()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [interests, setInterests] = useState<string[]>([])
   const [budget, setBudget] = useState('')
   const [message, setMessage] = useState('')
-  const [status, setStatus] = useState<SubmitStatus>('idle')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const toggleInterest = (value: string) => {
     setInterests((prev) =>
@@ -65,8 +64,7 @@ const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowC
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setStatus('loading')
-    setErrorMessage('')
+    setIsSubmitting(true)
 
     try {
       const response = await fetch('/api/contact', {
@@ -89,18 +87,21 @@ const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowC
         throw new Error(data.error ?? 'Unable to send your message. Please try again.')
       }
 
-      setStatus('success')
+      showToast(
+        'Thank you! Your request was sent. Check your email for a confirmation — we will reply as soon as possible.',
+        'success',
+      )
       resetForm()
       onSubmitted?.()
     } catch (error) {
-      setStatus('error')
-      setErrorMessage(
+      showToast(
         error instanceof Error ? error.message : 'Unable to send your message. Please try again.',
+        'error',
       )
+    } finally {
+      setIsSubmitting(false)
     }
   }
-
-  const isSubmitting = status === 'loading'
 
   return (
     <form
@@ -115,24 +116,6 @@ const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowC
           <p className="mx-auto mt-4 max-w-[540px] text-base leading-[1.6] text-[#808080] dark:text-dark-100 md:text-lg">
             Tell us about your goals and challenges. We&apos;ll recommend the best path forward.
           </p>
-        </div>
-      )}
-
-      {status === 'success' && (
-        <div
-          role="status"
-          className="rounded-radius-sm border border-[#9592DE33] bg-[#9592DE14] px-5 py-4 text-base leading-[1.5] text-secondary dark:border-[#292757] dark:bg-[#29275733] dark:text-backgroundBody md:col-span-full"
-        >
-          Thank you. Your consultation request has been sent. We&apos;ll get back to you soon.
-        </div>
-      )}
-
-      {status === 'error' && (
-        <div
-          role="alert"
-          className="rounded-radius-sm border border-red-200 bg-red-50 px-5 py-4 text-base leading-[1.5] text-red-700 dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-200 md:col-span-full"
-        >
-          {errorMessage}
         </div>
       )}
 
