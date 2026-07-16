@@ -15,6 +15,7 @@ type ButtonComponentProps = {
   size?: ButtonComponentSize
   className?: string
   fullWidth?: boolean
+  disabled?: boolean
   ariaLabel?: string
   ariaExpanded?: boolean
   children: ReactNode
@@ -43,6 +44,7 @@ export default function ButtonComponent({
   size = 'default',
   className = '',
   fullWidth = false,
+  disabled = false,
   ariaLabel,
   ariaExpanded,
   children,
@@ -105,7 +107,8 @@ export default function ButtonComponent({
     <button
       type={type}
       onClick={onClick}
-      className={classes}
+      disabled={disabled}
+      className={`${classes}${disabled ? ' pointer-events-none opacity-60' : ''}`}
       aria-label={ariaLabel}
       aria-expanded={ariaExpanded}
     >
