@@ -2,6 +2,7 @@
 
 import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
+import { useLenis } from 'lenis/react'
 import { useEffect, useRef } from 'react'
 import AIInput from './AIInput'
 import AIMessage from './AIMessage'
@@ -18,7 +19,9 @@ const FOCUSABLE_SELECTOR =
 
 export default function AIChatWindow({ onClose }: AIChatWindowProps) {
   const windowRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const lenis = useLenis()
   const {
     messages,
     errorMessage,
@@ -30,8 +33,15 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
     showTypingIndicator,
   } = useAIChat()
 
+  // Scroll only the chat messages panel — never the page body
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    const container = messagesContainerRef.current
+    if (!container) return
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: 'smooth',
+    })
   }, [messages, showTypingIndicator, errorMessage])
 
   useEffect(() => {
@@ -62,6 +72,36 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
       document.removeEventListener('mousedown', handlePointerDown)
     }
   }, [onClose])
+
+  // Keep body scrollbar visible, but stop page/Lenis scroll while chat is open.
+  // Wheel/touch over the messages area scrolls the chat; elsewhere is blocked.
+  useEffect(() => {
+    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
+      const messagesContainer = messagesContainerRef.current
+      const target = event.target
+
+      if (
+        messagesContainer &&
+        target instanceof Node &&
+        messagesContainer.contains(target)
+      ) {
+        return
+      }
+
+      event.preventDefault()
+    }
+
+    lenis?.stop()
+
+    document.addEventListener('wheel', preventBackgroundScroll, { passive: false })
+    document.addEventListener('touchmove', preventBackgroundScroll, { passive: false })
+
+    return () => {
+      document.removeEventListener('wheel', preventBackgroundScroll)
+      document.removeEventListener('touchmove', preventBackgroundScroll)
+      lenis?.start()
+    }
+  }, [lenis])
 
   useEffect(() => {
     const container = windowRef.current
@@ -119,11 +159,9 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           'fixed z-[1200] flex flex-col overflow-hidden border border-[#1515151A] bg-backgroundBody shadow-box dark:border-[#EDF0F51A] dark:bg-dark',
-          // Mobile: sit above bottom nav and never exceed the visible viewport
           'inset-x-3 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] top-auto',
           'h-[min(72dvh,650px)] max-h-[calc(100dvh-6.75rem-env(safe-area-inset-bottom))]',
           'w-auto rounded-radius-md',
-          // Laptop/desktop: floating panel that always fits within the viewport
           'md:inset-x-auto md:bottom-6 md:right-6 md:top-auto',
           'md:h-[min(650px,calc(100dvh-3rem))] md:max-h-[calc(100dvh-3rem)]',
           'md:w-[min(400px,calc(100vw-3rem))]',
@@ -132,7 +170,11 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
       >
         <ChatHeader onClose={onClose} />
 
-        <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 [-webkit-overflow-scrolling:touch]">
+        <div
+          ref={messagesContainerRef}
+          data-lenis-prevent
+          className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [-webkit-overflow-scrolling:touch]"
+        >
           {messages
             .filter((message) => message.content.length > 0)
             .map((message) => (
