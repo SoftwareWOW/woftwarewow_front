@@ -66,12 +66,12 @@ export default function AIMessage({ message }: AIMessageProps) {
         className={cn(
           'max-w-[88%] text-sm leading-relaxed md:text-[15px]',
           isUser
-            ? 'rounded-radius-md rounded-br-sm bg-primary px-4 py-3 text-white shadow-sm shadow-primary/20'
+            ? 'rounded-radius-md rounded-br-sm bg-primary px-4 py-3 text-white shadow-sm shadow-primary/20 dark:bg-primary dark:text-white'
             : 'rounded-radius-md rounded-bl-sm border border-[#1515151A] bg-backgroundBody px-4 py-3 text-secondary dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody',
         )}
       >
         {isUser ? (
-          <p className="whitespace-pre-wrap">{message.content}</p>
+          <p className="whitespace-pre-wrap text-white dark:text-white">{message.content}</p>
         ) : (
           <div className="prose-ai">
             <ReactMarkdown components={markdownComponents}>{message.content}</ReactMarkdown>

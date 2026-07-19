@@ -63,11 +63,9 @@ export default function AIInput({
           onClick={onSubmit}
           disabled={disabled || !value.trim()}
           aria-label="Send message"
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white shadow-sm shadow-primary/25 transition-all hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white shadow-sm shadow-primary/25 transition-all hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-primary dark:text-white dark:hover:bg-primary/90"
         >
-          <SendHorizontal className="h-4 w-4"
-        color='white'
-          />
+          <SendHorizontal className="h-4 w-4 text-white dark:text-white" />
         </button>
       </div>
 
