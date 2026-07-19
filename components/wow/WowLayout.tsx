@@ -1,3 +1,4 @@
+import AIAssistant from '@/components/ai/AIAssistant'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import { getLocale } from 'next-intl/server'
@@ -26,6 +27,7 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
           </main>
 
           <WowFooter footer={dictionary.footer} />
+          <AIAssistant />
         </div>
       </ContactDialogProvider>
     </ToastProvider>
