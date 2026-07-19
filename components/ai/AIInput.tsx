@@ -26,7 +26,9 @@ export default function AIInput({
     if (!textarea) return
 
     textarea.style.height = 'auto'
-    textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`
+    const nextHeight = Math.min(textarea.scrollHeight, 120)
+    textarea.style.height = `${nextHeight}px`
+    textarea.style.overflowY = textarea.scrollHeight > 120 ? 'auto' : 'hidden'
   }, [value])
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -51,7 +53,8 @@ export default function AIInput({
           rows={1}
           aria-label="Message the AI assistant"
           className={cn(
-            'max-h-[120px] min-h-[44px] flex-1 resize-none rounded-radius-sm border border-[#1515151A] bg-white px-4 py-3 text-sm leading-relaxed text-secondary placeholder:text-[#808080] focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-[#EDF0F51A] dark:bg-[#1F1F1F] dark:text-backgroundBody dark:placeholder:text-dark-100 dark:focus:border-primary/40',
+            'max-h-[120px] min-h-[44px] flex-1 resize-none overflow-hidden rounded-radius-sm border border-[#1515151A] bg-white px-4 py-3 text-sm leading-relaxed text-secondary placeholder:text-[#808080] focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 disabled:cursor-not-allowed disabled:opacity-60 dark:border-[#EDF0F51A] dark:bg-[#1F1F1F] dark:text-backgroundBody dark:placeholder:text-dark-100 dark:focus:border-primary/40',
+            '[&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#15151533]',
           )}
         />
 
@@ -62,7 +65,9 @@ export default function AIInput({
           aria-label="Send message"
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white shadow-sm shadow-primary/25 transition-all hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <SendHorizontal className="h-4 w-4" />
+          <SendHorizontal className="h-4 w-4"
+        color='white'
+          />
         </button>
       </div>
 

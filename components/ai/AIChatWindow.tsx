@@ -119,8 +119,14 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
           'fixed z-[1200] flex flex-col overflow-hidden border border-[#1515151A] bg-backgroundBody shadow-box dark:border-[#EDF0F51A] dark:bg-dark',
-          'inset-x-3 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] top-auto h-[min(72vh,650px)] rounded-radius-md',
-          'md:inset-auto md:bottom-6 md:right-6 md:h-[650px] md:w-[400px] md:rounded-radius-md',
+          // Mobile: sit above bottom nav and never exceed the visible viewport
+          'inset-x-3 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] top-auto',
+          'h-[min(72dvh,650px)] max-h-[calc(100dvh-6.75rem-env(safe-area-inset-bottom))]',
+          'w-auto rounded-radius-md',
+          // Laptop/desktop: floating panel that always fits within the viewport
+          'md:inset-x-auto md:bottom-6 md:right-6 md:top-auto',
+          'md:h-[min(650px,calc(100dvh-3rem))] md:max-h-[calc(100dvh-3rem)]',
+          'md:w-[min(400px,calc(100vw-3rem))]',
         )}
         onMouseDown={(event) => event.stopPropagation()}
       >
