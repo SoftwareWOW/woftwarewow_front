@@ -29,7 +29,11 @@ export default function AIChatButton({ onClick, isOpen = false }: AIChatButtonPr
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-backgroundBody dark:focus-visible:ring-offset-dark',
       )}
     >
-      <MessageCircle className="h-6 w-6" strokeWidth={1.75} />
+      <MessageCircle
+        className="h-6 w-6 !text-white !stroke-white"
+        stroke="currentColor"
+        strokeWidth={1.75}
+      />
     </motion.button>
   )
 }
