@@ -1,27 +1,29 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
 
 export default function TypingIndicator() {
   return (
     <div
-      className="flex items-center gap-1.5 rounded-radius-sm bg-[#1515150A] px-4 py-3 dark:bg-white/5"
-      aria-label="Assistant is typing"
+      className="inline-flex items-center gap-3 rounded-radius-md border border-[#1515151A] bg-white px-4 py-3 shadow-sm dark:border-[#EDF0F51A] dark:bg-dark"
+      aria-label="Assistant is thinking"
       role="status"
     >
-      {[0, 1, 2].map((index) => (
-        <motion.span
-          key={index}
-          className="h-2 w-2 rounded-full bg-primary/70 dark:bg-primary-50"
-          animate={{ opacity: [0.35, 1, 0.35], y: [0, -3, 0] }}
-          transition={{
-            duration: 0.9,
-            repeat: Infinity,
-            delay: index * 0.15,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
+      <motion.span
+        className="inline-flex h-5 w-5 shrink-0 items-center justify-center text-[#615CCE]"
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 0.85,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
+        aria-hidden
+      >
+        <Loader2 className="h-5 w-5" strokeWidth={2.25} />
+      </motion.span>
+
+      <span className="text-sm font-normal text-[#666666] dark:text-dark-100">Thinking...</span>
     </div>
   )
 }

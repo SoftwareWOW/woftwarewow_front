@@ -93,10 +93,13 @@ export function useAIChat() {
     setStatus('loading')
 
     try {
-      setStatus('streaming')
       let streamedContent = ''
 
       await streamChatResponse(nextMessages, (delta) => {
+        if (streamedContent.length === 0) {
+          setStatus('streaming')
+        }
+
         streamedContent += delta
         setMessages((current) =>
           current.map((message) =>
@@ -151,6 +154,11 @@ export function useAIChat() {
   }, [input, sendMessage])
 
   const isBusy = status === 'loading' || status === 'streaming'
+  const lastMessage = messages[messages.length - 1]
+  const isWaitingForReply =
+    isBusy &&
+    (status === 'loading' ||
+      (lastMessage?.role === 'assistant' && lastMessage.content.trim().length === 0))
 
   return {
     messages,
@@ -162,6 +170,6 @@ export function useAIChat() {
     submitInput,
     retryLastMessage,
     isBusy,
-    showTypingIndicator: status === 'loading',
+    showTypingIndicator: isWaitingForReply,
   }
 }
