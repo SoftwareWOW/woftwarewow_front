@@ -13,55 +13,55 @@ const faqData = [
     id: 1,
     question: 'How do I apply for a role at WOW Superagency?',
     answer:
-      'Browse our open positions below, open the role that fits you, and submit your application with your resume and portfolio (when relevant). Our talent team reviews every application and reaches out if there is a match.',
+      'Browse the open roles on this page, choose the position that fits you, and click Apply Now. Submit your resume and portfolio when relevant — our talent team reviews every application and follows up if there is a match.',
   },
   {
     id: 2,
     question: 'What is the hiring process like?',
     answer:
-      'Most roles follow a short process: application review, an intro call, a skills or portfolio conversation, and a final culture fit chat with the team. We keep timelines clear so you always know what comes next.',
+      'Most roles follow a clear path: application review, an intro call, a skills or portfolio conversation, then a final culture-fit chat with the team. We keep timelines transparent so you always know what comes next.',
   },
   {
     id: 3,
-    question: 'Do you offer remote or hybrid work?',
+    question: 'Do you offer flexible or hybrid schedules?',
     answer:
-      'Yes. Depending on the role, we offer hybrid and remote-friendly setups. We prioritize collaboration and outcomes — whether you are in the office a few days a week or working remotely.',
+      'Yes. We support flexible scheduling options and work-life balance so you can do your best work. Exact arrangements depend on the role — details are shared during the interview process.',
   },
   {
     id: 4,
-    question: 'What benefits do team members receive?',
+    question: 'What will I love about working here?',
     answer:
-      'We offer competitive health benefits, learning & development support, performance bonuses, mental health resources, modern tools, and generous time off. Exact benefits can vary by location and role.',
+      'Team members get career development, modern tools & technology, recognition & rewards, continuous learning, and a collaborative culture focused on innovation and meaningful impact.',
   },
   {
     id: 5,
     question: 'I do not see a role that fits. Can I still apply?',
     answer:
-      'Absolutely. Send an open application through our contact page with your resume and a short note about the kind of work you want to do. We keep strong candidates in mind as new roles open.',
+      'Absolutely. Send an open application through our contact page with your resume and a short note about the work you want to do. We keep strong candidates in mind as new roles open.',
   },
   {
     id: 6,
     question: 'What kind of experience do you look for?',
     answer:
-      'We care about craft, curiosity, and collaboration. Relevant experience helps, but we also value portfolios, side projects, and people who learn quickly and communicate well across disciplines.',
+      'We value craft, curiosity, and collaboration. Relevant experience helps, but portfolios, side projects, and people who learn quickly and communicate well across design, tech, and marketing stand out too.',
   },
   {
     id: 7,
     question: 'Is there room to grow inside WOW?',
     answer:
-      'Yes. Because WOW is a connected ecosystem of divisions, you can deepen expertise in your lane or grow across design, marketing, technology, and AI — with mentorship and real client work.',
+      'Yes. WOW is a connected ecosystem of divisions — you can deepen expertise in your lane or grow across branding, software, AI, websites, marketing, and business growth with real client work and mentorship.',
   },
   {
     id: 8,
-    question: 'Do you hire internationally?',
+    question: 'How can I join the WOW community before applying?',
     answer:
-      'We hire where we can support strong collaboration and compliance. Availability depends on the role, so check the job listing or ask our team during the intro call.',
+      'Explore our community for educational content and networking, watch tutorials on YouTube, and follow WOW on LinkedIn for updates and future opportunities — all linked in the Communities section above.',
   },
   {
     id: 9,
     question: 'How long does it take to hear back after applying?',
     answer:
-      'We aim to respond within one to two weeks. If a role is a strong fit, you will hear sooner. High volume periods can take a little longer, but every application is reviewed.',
+      'We aim to respond within one to two weeks. Strong matches often hear sooner. High-volume periods can take a little longer, but every application is reviewed carefully.',
   },
   {
     id: 10,
@@ -102,35 +102,19 @@ const CareerRfq = () => {
   return (
     <section className="relative overflow-hidden px-3 md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-10 flex flex-col items-center justify-center gap-x-10 gap-y-4 md:mb-20">
           <div>
             <RevealWrapper>
-              <SectionLabel className="mb-5">Careers FAQ</SectionLabel>
+           <div className='text-center'>   <SectionLabel className="mb-5">Careers FAQ</SectionLabel></div>
             </RevealWrapper>
 
             <TextAppearAnimation>
-              <h2 className="text-appear text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-                <span className="block font-instrument italic font-normal tracking-[-0.06em]">People</span> <br />
-                <span className="block font-normal">Asked Us</span>
+              <h2 className="text-appear text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[40px] md:text-[50px] lg:text-[58px] xl:text-[64px]">
+                <span className="block font-outfit font-[300px]">Frequently Asked Questions</span> 
               </h2>
             </TextAppearAnimation>
           </div>
 
-          <div className="max-w-[420px] lg:text-right">
-            <TextAppearAnimation>
-              <p className="text-appear text-base leading-relaxed text-[#808080] transition-colors duration-300 md:text-lg">
-                Answers to common questions about hiring, benefits, remote work, and growing your career at WOW
-                Superagency.
-              </p>
-            </TextAppearAnimation>
-            <RevealWrapper className="mt-6 flex justify-end md:mt-8">
-              <ButtonComponentList>
-                <ButtonComponent href="/faq" variant="white">
-                  View All FAQ
-                </ButtonComponent>
-              </ButtonComponentList>
-            </RevealWrapper>
-          </div>
         </div>
 
         <div className="mx-auto grid w-full grid-cols-1 items-start gap-7 md:grid-cols-2 lg:grid-cols-3">

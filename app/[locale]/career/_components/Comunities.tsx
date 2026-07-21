@@ -22,7 +22,7 @@ const Communities = () => {
         <div className="text-center">
           <TextAppearAnimation>
             <h2 className="text-appear mb-12 md:mb-20">
-              Learn, Connect & <span className="font-instrument  italic !bg-none !bg-clip-border !text-inherit">Grow With WOW</span>
+              Learn, Connect & Grow With WOW
             </h2>
           </TextAppearAnimation>
         </div>
