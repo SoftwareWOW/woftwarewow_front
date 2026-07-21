@@ -8,17 +8,14 @@ const CaseStudyHero = () => {
         <div className="mb-5 flex items-center justify-center gap-2 md:mb-6 md:gap-5 md:mt-3 xl:mt-0">
           <SectionLabel>Case Studies</SectionLabel>
         </div>
-
         <h1 className="text-center xl:text-nowrap">
-          Crafting Tomorrow&apos;s
-          <span className="ml-5 inline-block font-instrument italic max-sm:mr-3">Solutions,</span>
+           Real Projects.
           <br className="hidden xl:block" />
-          Today
+         Real <span className="font-instrument  italic !bg-none !bg-clip-border !text-inherit">Partnerships.</span>
         </h1>
 
         <p className="mt-3 text-center md:mt-7">
-          With years of industry expertise, our team of visionaries, storytellers, and design <br />
-          virtuosos come together here for you to see.
+          Explore how we've helped businesses solve challenges through technology, websites, <br /> branding, marketing, AI, and digital innovation.
         </p>
       </RevealWrapper>
     </section>
