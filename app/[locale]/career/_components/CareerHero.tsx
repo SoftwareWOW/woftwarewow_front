@@ -14,11 +14,10 @@ const CareerHeroPage = () => {
             <SectionLabel>Career</SectionLabel>
           </div>
           <h1 className="mb-5 font-medium md:mb-8">
-            Start building your <i className="font-instrument italic">future</i> here
+           Build the Future of Small Business Growth <i className="font-instrument  italic !bg-none !bg-clip-border !text-inherit">Growth</i>
           </h1>
           <p className="mx-auto max-w-md lg:max-w-[754px]">
-            We provide a wide range of growth opportunities, a collaborative work culture, and a supportive team focused
-            on your success.
+          Join a team of creators, strategists, developers, marketers, and innovators building technology and digital solutions that help businesses grow.
           </p>
         </div>
 

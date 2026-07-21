@@ -3,15 +3,15 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const benefitsData = [
-  { id: 1, title: 'Hybrid Work Environment' },
-  { id: 2, title: 'Competitive Health Benefits' },
-  { id: 3, title: 'Learning & Development Fund' },
-  { id: 4, title: 'Performance Bonuses' },
-  { id: 5, title: 'Mental Health Support' },
-  { id: 6, title: 'Team Building Events' },
-  { id: 7, title: 'Professional Certifications' },
-  { id: 8, title: 'Modern Tech Stack' },
-  { id: 9, title: 'Unlimited PTO Policy' },
+  { id: 1, title: 'Flexible scheduling options' },
+  { id: 2, title: 'Career development' },
+  { id: 3, title: 'Work-life balance' },
+  { id: 4, title: 'Recognition & rewards' },
+  { id: 5, title: 'Modern tools & technology' },
+  { id: 6, title: 'Collaborative culture' },
+  { id: 7, title: 'Innovation first' },
+  { id: 8, title: 'Continuous learning' },
+  { id: 9, title: 'Meaningful impact' },
 ]
 
 const BenefitsCareer = () => {
@@ -22,12 +22,12 @@ const BenefitsCareer = () => {
           <SectionLabel>Benefits</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mb-4 text-center lg:mb-8">Why Join Our Team</h2>
+          <h2 className="text-appear mb-4 text-center lg:mb-8">Why You'll Love Working Here</h2>
         </TextAppearAnimation>
         <RevealWrapper>
           <p className="text-appear mx-auto max-w-[750px] text-left max-lg:px-5 md:text-center">
-            Join a dynamic workspace where innovation meets well-being. We provide comprehensive benefits and a
-            supportive environment designed to help you thrive both professionally and personally.
+            We believe great work happens when talented people have the freedom, tools, and opportunities to do their
+            best every day.
           </p>
         </RevealWrapper>
 
