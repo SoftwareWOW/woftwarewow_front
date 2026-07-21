@@ -8,7 +8,7 @@ const ServiceProces = () => {
       <div className="container">
         <TextAppearAnimation>
           <h3 className="text-appear lg:text[56px] mb-20 text-center max-md:text-3xl md:text-6xl lg:leading-[1.2] lg:tracking-[-1.68px]">
-            How do we do it?
+            How We Work
           </h3>
         </TextAppearAnimation>
 
@@ -19,10 +19,10 @@ const ServiceProces = () => {
                 01
               </span>
               <h3 className="mb-5 mt-16 max-md:text-3xl md:leading-[1.2] md:tracking-[-1.68px] md:text-[56PX]">
-                Request
+                Discover
               </h3>
               <p className="text-base leading-[1.4] tracking-[0.32px]">
-                We mostly work on a fixed-bid basis for our projects, focusing on a select few clients at a time.
+                Learn about your business, goals, audience, and opportunities.
               </p>
             </RevealWrapper>
 
@@ -31,10 +31,10 @@ const ServiceProces = () => {
                 02
               </span>
               <h3 className="mb-5 mt-16 max-md:text-3xl md:leading-[1.2] md:tracking-[-1.68px] md:text-[56PX]">
-                Approve
+                Strategize
               </h3>
               <p className="text-base leading-[1.4] tracking-[0.32px]">
-                We mostly work on a fixed-bid basis for our projects, focusing on a select few clients at a time.
+                Create a tailored roadmap with the right divisions and solutions.
               </p>
             </RevealWrapper>
 
@@ -43,10 +43,10 @@ const ServiceProces = () => {
                 03
               </span>
               <h3 className="mb-5 mt-16 max-md:text-3xl md:leading-[1.2] md:tracking-[-1.68px] md:text-[56PX]">
-                Develop
+                Build
               </h3>
               <p className="text-base leading-[1.4] tracking-[0.32px]">
-                We mostly work on a fixed-bid basis for our projects, focusing on a select few clients at a time.
+                Design, develop, launch, and connect everything into one ecosystem.
               </p>
             </RevealWrapper>
 
@@ -55,10 +55,10 @@ const ServiceProces = () => {
                 04
               </span>
               <h3 className="mb-5 mt-16 max-md:text-3xl md:leading-[1.2] md:tracking-[-1.68px] md:text-[56PX]">
-                Deliver
+                Grow
               </h3>
               <p className="text-base leading-[1.4] tracking-[0.32px]">
-                We mostly work on a fixed-bid basis for our projects, focusing on a select few clients at a time.
+                Optimize, measure, and continuously improve long-term performance.
               </p>
             </RevealWrapper>
           </div>
@@ -67,7 +67,7 @@ const ServiceProces = () => {
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Lets Starts
+              Start Your Project
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>
