@@ -65,7 +65,7 @@ const MainServices = () => {
     <section className="overflow-hidden">
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapperV2 className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Services</SectionLabel>
+          <SectionLabel>OUR CAPABILITIES</SectionLabel>
         </RevealWrapperV2>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">

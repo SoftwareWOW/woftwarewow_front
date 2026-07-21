@@ -15,10 +15,10 @@ const ServicesPage = () => {
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <ServiceHero
           badgeTitle="Services"
-          title="Services "
-          italicTitle=""
+          title="Everything Your Business Needs to"
+          italicTitle=" Grow"
           scale
-          description="Explore our innovative cutting-edge no-code websites designed to captivate and engage your visitors effortlessly"
+          description="From strategy and branding to software, AI, websites, marketing, and growth—we deliver connected solutions through one coordinated ecosystem."
         />
         <MainServices />
         <ServiceProces />

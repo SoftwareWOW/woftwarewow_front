@@ -31,14 +31,15 @@ const ServiceHero = ({ badgeTitle, title, description, italicTitle, spacing, sca
           )}
           {title && (
             <h1 className="mb-4">
-              {title} <i className="font-instrument italic">{italicTitle}</i>
+              {title}{' '}
+              <span className="font-instrument  italic !bg-none !bg-clip-border !text-inherit">{italicTitle}</span>
             </h1>
           )}
           {description && <p className="text-appear mx-auto max-w-[470px] md:max-w-[750px]">{description}</p>}
         </RevealWrapper>
        <div className="flex justify-center mt-2 sm:mt-3 md:mt-3 lg:mt-10">
             <ButtonComponent href="/contact" variant="primary">
-                      Get a free Consultation
+                   Explore Our Solutions
                     </ButtonComponent>
        </div>
       </div>
