@@ -60,6 +60,7 @@ type CategorizedBlog = BlogType & { category: Exclude<Category, 'ALL'> }
 const BlogInsight: FC<BlogsProps> = ({ Blogs }) => {
   const [activeCategory, setActiveCategory] = useState<Category>('ALL')
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
+  const [isCollapsing, setIsCollapsing] = useState(false)
 
   const categorizedBlogs = useMemo<CategorizedBlog[]>(
     () =>
@@ -77,14 +78,26 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs }) => {
 
   const visibleBlogs = filteredBlogs.slice(0, visibleCount)
   const hasMore = visibleCount < filteredBlogs.length
+  const canToggle = filteredBlogs.length > INITIAL_COUNT
+  const showSeeLess = isCollapsing || !hasMore
 
   const handleCategoryChange = (category: Category) => {
     setActiveCategory(category)
     setVisibleCount(INITIAL_COUNT)
+    setIsCollapsing(false)
   }
 
-  const handleLoadMore = () => {
-    setVisibleCount((count) => count + LOAD_MORE_COUNT)
+  const handleSeeMoreToggle = () => {
+    if (showSeeLess) {
+      const nextCount = Math.max(visibleCount - LOAD_MORE_COUNT, INITIAL_COUNT)
+      setVisibleCount(nextCount)
+      if (nextCount <= INITIAL_COUNT) setIsCollapsing(false)
+      return
+    }
+
+    const nextCount = Math.min(visibleCount + LOAD_MORE_COUNT, filteredBlogs.length)
+    setVisibleCount(nextCount)
+    if (nextCount >= filteredBlogs.length) setIsCollapsing(true)
   }
 
   return (
@@ -95,18 +108,18 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs }) => {
           <div className="relative max-w-[560px]">
            
             <TextAppearAnimation>
-              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-normal leading-[1.2] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 <span className="font-instrument italic">Insights</span>
+                That Help
                 <br />
-                <span>we share</span>
+                <span>Businesses Grow</span>
               </h2>
             </TextAppearAnimation>
           </div>
 
           <RevealWrapper className="relative max-w-[420px] lg:pb-2 lg:text-right">
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">
-              Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
-              not jargon.
+              Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.
             </p>
           </RevealWrapper>
         </div>
@@ -184,10 +197,10 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs }) => {
           <p className="py-16 text-center text-base text-[#808080]">No articles in this category yet.</p>
         )}
 
-        {hasMore && (
+        {canToggle && (
           <div className="mt-10 flex justify-center md:mt-14">
-            <ButtonComponent variant="white" onClick={handleLoadMore}>
-              Load More
+            <ButtonComponent variant="white" onClick={handleSeeMoreToggle} ariaExpanded={showSeeLess}>
+              {showSeeLess ? 'See Less' : 'See More'}
             </ButtonComponent>
           </div>
         )}
