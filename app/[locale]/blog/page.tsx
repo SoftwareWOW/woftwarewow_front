@@ -1,10 +1,11 @@
 import BlogHero, { type BlogHeroPost } from '@/app/[locale]/blog/_components/BlogHero'
-import BlogPostV5 from '@/components/blogpage/BlogPostV5'
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import BlogCaseStudies from './_components/BlogCaseStudies'
+import BlogInsight from './_components/BlogInsight'
 
 export const metadata = {
   title: 'AI Blog',
@@ -36,7 +37,7 @@ const BlogPage = () => {
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <BlogHero blog={featuredBlog} />
         <Marquess />
-        <BlogPostV5 Blogs={loadedBlogs} />
+        <BlogInsight Blogs={loadedBlogs} />
         <BlogCaseStudies blogs={loadedBlogs} />
         <WowGrowthCta />
       </div>

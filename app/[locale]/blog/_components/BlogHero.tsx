@@ -24,7 +24,7 @@ type BlogHeroProps = {
 const DEFAULT_TAGS = ['Ecommerce', 'Technology', 'Artificial Intelligence', 'Design']
 const DEFAULT_AUTHOR = {
   name: 'Frankie Dejong',
-  avatar: '/images/agent/01.jpg',
+  avatar: '/images/wow/Hero/career/team/Avatar wrap-3.png',
 }
 
 function normalizeTags(tags?: string | string[]) {
@@ -35,11 +35,11 @@ function normalizeTags(tags?: string | string[]) {
 
 export default function BlogHero({ blog }: BlogHeroProps) {
   const tags = normalizeTags(blog.tags)
-  const author = blog.author ?? DEFAULT_AUTHOR
-  const imageSrc = blog.featureImage ?? blog.thumbnail ?? '/images/blog-img/blog-details-img-1.png'
+  const author =  DEFAULT_AUTHOR
+  const imageSrc = '/images/wow/blog/blogheroimage.jpg'
 
   return (
-    <section className="bg-backgroundBody px-4  transition-colors duration-300 dark:bg-dark sm:px-8 sm:pt-32 md:px-16 lg:px-[200px] lg:pt-36">
+    <section className="bg-backgroundBody px-4 pt-28 transition-colors duration-300 dark:bg-dark sm:px-8 sm:pt-32 md:px-16 lg:px-[200px] lg:pt-36">
       <div className="mx-auto w-full max-w-[1320px]">
         <RevealWrapper>
           <Link href={`/blog/${blog.slug}`} className="group block">
