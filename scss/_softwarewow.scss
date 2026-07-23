@@ -1,0 +1,142 @@
+@layer components {
+  .softwarewow-ecosystem {
+    --wow-1: #615cce;
+    --wow-2: #9671ac;
+    --wow-3: #ff9191;
+    --wow-gradient: linear-gradient(135deg, #615cce 0%, #9671ac 50%, #ff9191 100%);
+    --sw-cube-size: 168px;
+    --sw-animation-duration: 15s;
+    --sw-shadow-color: color-mix(in oklab, #171717 30%, transparent);
+  }
+
+  :is(.dark) .softwarewow-ecosystem {
+    --sw-shadow-color: color-mix(in oklab, #000 45%, transparent);
+  }
+
+  .wow-orbit-rotate {
+    animation: wow-orbit-spin 120s linear infinite;
+  }
+
+  .wow-orbit-counter {
+    animation: wow-orbit-spin 120s linear infinite reverse;
+  }
+
+  @keyframes wow-orbit-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .wow-dash {
+    transform-origin: center;
+    animation: wow-dash-rotate 30s linear infinite;
+  }
+
+  @keyframes wow-dash-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .wow-pulse {
+    animation: wow-pulse-glow 4s ease-in-out infinite;
+  }
+
+  @keyframes wow-pulse-glow {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+      opacity: 0.9;
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+  }
+
+  .sw-cube-scene {
+    position: relative;
+    perspective: 1000px;
+    animation: sw-cube-float 4s ease-in-out infinite;
+  }
+
+  @keyframes sw-cube-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .sw-cube {
+    position: relative;
+    width: var(--sw-cube-size);
+    height: var(--sw-cube-size);
+    transform-style: preserve-3d;
+    animation: sw-cube-rotate var(--sw-animation-duration) infinite linear;
+  }
+
+  @keyframes sw-cube-rotate {
+    0% {
+      transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+      transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+  }
+
+  .sw-cube-face {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    backface-visibility: visible;
+    border: 1px solid color-mix(in oklab, var(--wow-1) 22%, transparent);
+    background: color-mix(in oklab, #ededed 94%, var(--wow-1) 6%);
+    box-shadow: inset 0 0 24px color-mix(in oklab, var(--wow-1) 10%, transparent);
+  }
+
+  :is(.dark) .sw-cube-face {
+    background: color-mix(in oklab, #171717 88%, var(--wow-1) 12%);
+  }
+
+  .sw-cube-shadow {
+    position: absolute;
+    left: 50%;
+    width: var(--sw-cube-size);
+    height: var(--sw-cube-size);
+    background: var(--sw-shadow-color);
+    filter: blur(20px);
+    transform: translateX(-50%) translateY(calc(var(--sw-cube-size) * 0.75)) rotateX(90deg);
+    animation: sw-cube-shadow var(--sw-animation-duration) infinite linear;
+  }
+
+  @keyframes sw-cube-shadow {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: translateX(-50%) translateY(calc(var(--sw-cube-size) * 0.75)) rotateX(90deg)
+        scale(0.8);
+    }
+
+    50% {
+      opacity: 0.35;
+      transform: translateX(-50%) translateY(calc(var(--sw-cube-size) * 0.75)) rotateX(90deg)
+        scale(0.6);
+    }
+  }
+}
