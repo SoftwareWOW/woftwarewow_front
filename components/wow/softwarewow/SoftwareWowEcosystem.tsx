@@ -1,100 +1,75 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  Code2,
-  BrainCircuit,
-  Globe,
-  Smartphone,
-  Palette,
-  Cloud,
-  Plug,
-  Workflow,
-  Rocket,
-  BarChart3,
-  LifeBuoy,
-  ShieldCheck,
-  Sparkles,
-  type LucideIcon,
-} from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
 import RotatingCube from './RotatingCube'
 
 type Service = {
   title: string
   description: string
-  icon: LucideIcon
 }
 
 const SERVICES: Service[] = [
-  { title: 'Custom Software', description: 'Bespoke systems engineered end-to-end.', icon: Code2 },
-  { title: 'AI & Intelligence', description: 'LLMs, agents & smart automations.', icon: BrainCircuit },
-  { title: 'Web Development', description: 'Fast, scalable modern web apps.', icon: Globe },
-  { title: 'Mobile Apps', description: 'Native-grade iOS & Android products.', icon: Smartphone },
-  { title: 'UI / UX Design', description: 'Interfaces that convert and delight.', icon: Palette },
-  { title: 'Cloud & Infra', description: 'Elastic, resilient cloud architecture.', icon: Cloud },
-  { title: 'API & Integrations', description: 'Connect any tool, any platform.', icon: Plug },
-  { title: 'Automation', description: 'Workflows that run your business.', icon: Workflow },
-  { title: 'DevOps & Deploy', description: 'CI/CD pipelines built for speed.', icon: Rocket },
-  { title: 'Data & Analytics', description: 'Turn raw data into decisions.', icon: BarChart3 },
-  { title: 'Maintenance', description: 'Reliable support, always on.', icon: LifeBuoy },
-  { title: 'Cybersecurity', description: 'Defense-grade protection by design.', icon: ShieldCheck },
+  { title: 'Custom Software', description: 'Bespoke systems engineered end-to-end.' },
+  { title: 'AI & Intelligence', description: 'LLMs, agents & smart automations.' },
+  { title: 'Web Development', description: 'Fast, scalable modern web apps.' },
+  { title: 'Mobile Apps', description: 'Native-grade iOS & Android products.' },
+  { title: 'UI / UX Design', description: 'Interfaces that convert and delight.' },
+  { title: 'Cloud & Infra', description: 'Elastic, resilient cloud architecture.' },
+  { title: 'API & Integrations', description: 'Connect any tool, any platform.' },
+  { title: 'Automation', description: 'Workflows that run your business.' },
+  { title: 'DevOps & Deploy', description: 'CI/CD pipelines built for speed.' },
+  { title: 'Data & Analytics', description: 'Turn raw data into decisions.' },
+  { title: 'Maintenance', description: 'Reliable support, always on.' },
+  { title: 'Cybersecurity', description: 'Defense-grade protection by design.' },
 ]
 
 type OrbitLayout = {
   radius: number
   cubeSize: number
-  cardWidth: number
-  iconSize: number
+  labelWidth: number
   mounted: boolean
 }
 
 const FALLBACK_LAYOUT: Omit<OrbitLayout, 'mounted'> = {
   radius: 200,
   cubeSize: 120,
-  cardWidth: 108,
-  iconSize: 16,
+  labelWidth: 88,
 }
 
 function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<OrbitLayout, 'mounted'> {
   if (containerWidth <= 0) return FALLBACK_LAYOUT
 
-  let cardWidth: number
+  let labelWidth: number
   let cubeSize: number
-  let iconSize: number
 
   if (containerWidth < 360) {
-    cardWidth = 82
+    labelWidth = 72
     cubeSize = 72
-    iconSize = 14
   } else if (containerWidth < 480) {
-    cardWidth = 92
+    labelWidth = 80
     cubeSize = 84
-    iconSize = 14
   } else if (containerWidth < 640) {
-    cardWidth = 102
+    labelWidth = 88
     cubeSize = 96
-    iconSize = 15
   } else if (containerWidth < 900) {
-    cardWidth = 112
+    labelWidth = 96
     cubeSize = 112
-    iconSize = 16
   } else if (isHero && containerWidth < 1120) {
-    cardWidth = 118
+    labelWidth = 104
     cubeSize = 128
-    iconSize = 16
   } else {
-    cardWidth = isHero ? 128 : 168
+    labelWidth = isHero ? 112 : 120
     cubeSize = isHero ? 148 : 168
-    iconSize = 18
   }
 
   const padding = 12
-  const maxRadius = Math.floor((containerWidth - cardWidth - padding * 2) / 2)
+  const maxRadius = Math.floor((containerWidth - labelWidth - padding * 2) / 2)
   const targetRadius = Math.floor(containerWidth * (isHero ? 0.34 : 0.4))
   const radius = Math.max(68, Math.min(maxRadius, targetRadius))
 
-  return { radius, cubeSize, cardWidth, iconSize }
+  return { radius, cubeSize, labelWidth }
 }
 
 function orbitPosition(index: number, total: number, radius: number) {
@@ -133,7 +108,7 @@ type SoftwareWowEcosystemProps = {
 
 export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosystemProps) {
   const isHero = variant === 'hero'
-  const { containerRef, radius, cubeSize, cardWidth, iconSize, mounted } = useOrbitLayout(isHero)
+  const { containerRef, radius, cubeSize, labelWidth, mounted } = useOrbitLayout(isHero)
   const layoutRadius = mounted ? radius : FALLBACK_LAYOUT.radius
   const layoutCubeSize = mounted ? cubeSize : FALLBACK_LAYOUT.cubeSize
   const orbitPadding = Math.max(72, Math.round(layoutCubeSize * 0.55))
@@ -237,12 +212,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
                   style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
                 >
                   <div className="wow-orbit-counter">
-                    <ServiceCard
-                      service={s}
-                      compact={isHero}
-                      cardWidth={cardWidth}
-                      iconSize={iconSize}
-                    />
+                    <ServiceLabel service={s} labelWidth={labelWidth} />
                   </div>
                 </div>
               )
@@ -258,59 +228,15 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
   )
 }
 
-function ServiceCard({
-  service,
-  compact,
-  cardWidth,
-  iconSize,
-}: {
-  service: Service
-  compact?: boolean
-  cardWidth: number
-  iconSize: number
-}) {
-  const Icon = service.icon
-  const iconBox = Math.max(28, iconSize + 14)
-
+function ServiceLabel({ service, labelWidth }: { service: Service; labelWidth: number }) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.06, y: -2 }}
+    <motion.p
+      whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className="group relative flex cursor-pointer flex-col items-start gap-1.5 rounded-xl border bg-white/90 p-2 shadow-sm backdrop-blur-md transition-colors dark:bg-dark-200/90 sm:gap-2 sm:rounded-2xl sm:p-3"
-      style={{
-        width: cardWidth,
-        maxWidth: cardWidth,
-        borderColor: 'color-mix(in oklab, var(--wow-1) 18%, rgba(23, 23, 23, 0.1))',
-        boxShadow: '0 8px 24px -12px color-mix(in oklab, var(--wow-1) 25%, transparent)',
-      }}
+      className="cursor-default select-none text-center text-[10px] font-semibold leading-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-xs"
+      style={{ width: labelWidth, maxWidth: labelWidth }}
     >
-      <span
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:rounded-2xl"
-        style={{
-          background:
-            'linear-gradient(135deg, color-mix(in oklab, var(--wow-1) 25%, transparent), transparent 60%)',
-        }}
-      />
-      <div
-        className="flex items-center justify-center rounded-lg text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 sm:rounded-xl"
-        style={{
-          width: iconBox,
-          height: iconBox,
-          backgroundImage: 'var(--wow-gradient)',
-        }}
-      >
-        <Icon size={iconSize} />
-      </div>
-      <div className="relative min-w-0">
-        <p className="truncate text-[10px] font-semibold leading-tight text-secondary dark:text-backgroundBody sm:text-xs">
-          {service.title}
-        </p>
-        {!compact && (
-          <p className="mt-0.5 hidden text-[10px] leading-snug text-colorText dark:text-dark-100 sm:block">
-            {service.description}
-          </p>
-        )}
-      </div>
-    </motion.div>
+      {service.title}
+    </motion.p>
   )
 }
