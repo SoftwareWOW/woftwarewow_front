@@ -85,7 +85,20 @@
     width: var(--sw-cube-size);
     height: var(--sw-cube-size);
     transform-style: preserve-3d;
-    animation: sw-cube-rotate var(--sw-animation-duration) infinite linear;
+  }
+
+  .sw-cube-y-spin {
+    animation: sw-cube-y-spin var(--sw-animation-duration) infinite linear;
+  }
+
+  @keyframes sw-cube-y-spin {
+    0% {
+      transform: rotateX(-18deg) rotateY(0deg);
+    }
+
+    100% {
+      transform: rotateX(-18deg) rotateY(360deg);
+    }
   }
 
   @keyframes sw-cube-rotate {

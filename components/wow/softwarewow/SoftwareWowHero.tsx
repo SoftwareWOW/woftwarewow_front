@@ -17,9 +17,9 @@ const AVATARS = [
 
 export default function SoftwareWowHero() {
   return (
-    <section className="softwarewow-ecosystem relative overflow-hidden bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28">
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-10 lg:flex-row lg:items-center lg:gap-8 xl:gap-12">
-        <div className="flex w-full flex-col items-center text-center lg:w-[45%] lg:items-start lg:text-left xl:w-[42%]">
+    <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28">
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-8 sm:gap-10 xl:flex-row xl:items-center xl:gap-10 2xl:gap-14">
+        <div className="flex w-full shrink-0 flex-col items-center text-center xl:w-[44%] xl:items-start xl:text-left 2xl:w-[42%]">
           <RevealWrapper>
             <span
               className="mb-5 inline-flex rounded-full border px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-primary sm:text-[11px]"
@@ -51,26 +51,23 @@ export default function SoftwareWowHero() {
             </p>
           </RevealWrapper>
 
-          <RevealWrapper delay={0.2} className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
-            <ButtonComponent
+         <div  className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center xl:justify-start" >
+      <ButtonComponent
               href="/services"
               variant="primary"
-              className="!rounded-radius-md !border-0 !bg-brand-gradient !px-6 !py-3.5 !text-white hover:!opacity-95"
-            >
-              <span className="inline-flex items-center gap-2">
-                Explore the Ecosystem
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </ButtonComponent>
-            <ButtonComponent href="/meet" variant="secondary" className="!rounded-radius-md !px-6 !py-3.5">
-              <span className="inline-flex items-center gap-2">
-                How We Help You Grow
-                <CirclePlay className="h-4 w-4" />
-              </span>
-            </ButtonComponent>
-          </RevealWrapper>
 
-          <RevealWrapper delay={0.25} className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:items-center">
+            >
+                Explore the Ecosystem
+        
+            </ButtonComponent>
+            <ButtonComponent href="/meet" variant="secondary" >
+                How We Help You Grow   
+            </ButtonComponent>
+         </div>
+      
+
+
+          <RevealWrapper delay={0.25} className="mt-8 flex flex-col items-center gap-3 sm:flex-row xl:items-center">
             <div className="flex items-center">
               {AVATARS.map((src, i) => (
                 <div
@@ -88,8 +85,10 @@ export default function SoftwareWowHero() {
           </RevealWrapper>
         </div>
 
-        <div className="flex w-full min-w-0 flex-1 items-center justify-center lg:justify-end">
-          <SoftwareWowEcosystem variant="hero" />
+        <div className="flex w-full min-w-0 flex-1 items-center justify-center xl:justify-end">
+          <div className="w-full max-w-[min(100%,720px)] xl:max-w-none">
+            <SoftwareWowEcosystem variant="hero" />
+          </div>
         </div>
       </div>
     </section>

@@ -17,7 +17,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import RotatingCube from './RotatingCube'
 
 type Service = {
@@ -41,14 +41,60 @@ const SERVICES: Service[] = [
   { title: 'Cybersecurity', description: 'Defense-grade protection by design.', icon: ShieldCheck },
 ]
 
-const DEFAULT_ORBIT_RADIUS = 320
+type OrbitLayout = {
+  radius: number
+  cubeSize: number
+  cardWidth: number
+  iconSize: number
+  mounted: boolean
+}
 
-function computeOrbitRadius(width: number) {
-  if (width < 480) return 140
-  if (width < 720) return 200
-  if (width < 1024) return 260
-  if (width < 1280) return 300
-  return 340
+const FALLBACK_LAYOUT: Omit<OrbitLayout, 'mounted'> = {
+  radius: 200,
+  cubeSize: 120,
+  cardWidth: 108,
+  iconSize: 16,
+}
+
+function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<OrbitLayout, 'mounted'> {
+  if (containerWidth <= 0) return FALLBACK_LAYOUT
+
+  let cardWidth: number
+  let cubeSize: number
+  let iconSize: number
+
+  if (containerWidth < 360) {
+    cardWidth = 82
+    cubeSize = 72
+    iconSize = 14
+  } else if (containerWidth < 480) {
+    cardWidth = 92
+    cubeSize = 84
+    iconSize = 14
+  } else if (containerWidth < 640) {
+    cardWidth = 102
+    cubeSize = 96
+    iconSize = 15
+  } else if (containerWidth < 900) {
+    cardWidth = 112
+    cubeSize = 112
+    iconSize = 16
+  } else if (isHero && containerWidth < 1120) {
+    cardWidth = 118
+    cubeSize = 128
+    iconSize = 16
+  } else {
+    cardWidth = isHero ? 128 : 168
+    cubeSize = isHero ? 148 : 168
+    iconSize = 18
+  }
+
+  const padding = 12
+  const maxRadius = Math.floor((containerWidth - cardWidth - padding * 2) / 2)
+  const targetRadius = Math.floor(containerWidth * (isHero ? 0.34 : 0.4))
+  const radius = Math.max(68, Math.min(maxRadius, targetRadius))
+
+  return { radius, cubeSize, cardWidth, iconSize }
 }
 
 function orbitPosition(index: number, total: number, radius: number) {
@@ -59,20 +105,26 @@ function orbitPosition(index: number, total: number, radius: number) {
   }
 }
 
-function useOrbitRadius() {
-  const [radius, setRadius] = useState(DEFAULT_ORBIT_RADIUS)
-  const [mounted, setMounted] = useState(false)
+function useOrbitLayout(isHero: boolean) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [layout, setLayout] = useState<OrbitLayout>({ ...FALLBACK_LAYOUT, mounted: false })
 
   useEffect(() => {
-    const compute = () => setRadius(computeOrbitRadius(window.innerWidth))
+    const node = containerRef.current
+    if (!node) return
 
-    compute()
-    setMounted(true)
-    window.addEventListener('resize', compute)
-    return () => window.removeEventListener('resize', compute)
-  }, [])
+    const update = () => {
+      const width = node.getBoundingClientRect().width
+      setLayout({ ...computeOrbitLayout(width, isHero), mounted: true })
+    }
 
-  return { radius, mounted }
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [isHero])
+
+  return { containerRef, ...layout }
 }
 
 type SoftwareWowEcosystemProps = {
@@ -80,15 +132,18 @@ type SoftwareWowEcosystemProps = {
 }
 
 export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosystemProps) {
-  const { radius, mounted } = useOrbitRadius()
-  const layoutRadius = mounted ? radius : DEFAULT_ORBIT_RADIUS
-  const size = layoutRadius * 2 + 200
   const isHero = variant === 'hero'
+  const { containerRef, radius, cubeSize, cardWidth, iconSize, mounted } = useOrbitLayout(isHero)
+  const layoutRadius = mounted ? radius : FALLBACK_LAYOUT.radius
+  const layoutCubeSize = mounted ? cubeSize : FALLBACK_LAYOUT.cubeSize
+  const orbitPadding = Math.max(72, Math.round(layoutCubeSize * 0.55))
+  const size = layoutRadius * 2 + orbitPadding * 2
+  const gradientId = useId().replace(/:/g, '')
 
   return (
     <section
-      className={`softwarewow-ecosystem relative w-full overflow-hidden ${
-        isHero ? 'py-8 sm:py-10 lg:py-0' : 'py-24 sm:py-32'
+      className={`softwarewow-ecosystem relative w-full max-w-full overflow-x-clip ${
+        isHero ? 'py-4 sm:py-6 xl:py-0' : 'py-16 sm:py-24 lg:py-32'
       }`}
     >
       {!isHero && (
@@ -121,37 +176,39 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
       )}
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.92 }}
+        ref={containerRef}
+        initial={{ opacity: 0, scale: 0.96 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.9, ease: 'easeOut' }}
-        className={`relative mx-auto flex items-center justify-center ${
-          isHero ? 'mt-0' : 'mt-16'
+        className={`relative mx-auto flex w-full max-w-full items-center justify-center ${
+          isHero ? 'mt-0 min-h-[280px] sm:min-h-[320px]' : 'mt-10 sm:mt-16'
         }`}
-        style={{ height: size, width: '100%', maxWidth: size }}
+        style={{ height: size, maxWidth: '100%' }}
       >
         <svg
-          className="pointer-events-none absolute inset-0 h-full w-full"
+          className="pointer-events-none absolute inset-0 mx-auto h-full w-full max-w-full"
           viewBox={`-${size / 2} -${size / 2} ${size} ${size}`}
+          preserveAspectRatio="xMidYMid meet"
           aria-hidden
         >
           <defs>
-            <linearGradient id="wow-ring" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id={`wow-ring-${gradientId}`} x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="var(--wow-1)" stopOpacity="0.7" />
               <stop offset="50%" stopColor="var(--wow-2)" stopOpacity="0.15" />
               <stop offset="100%" stopColor="var(--wow-3)" stopOpacity="0.7" />
             </linearGradient>
-            <radialGradient id="wow-center-glow">
+            <radialGradient id={`wow-center-glow-${gradientId}`}>
               <stop offset="0%" stopColor="var(--wow-1)" stopOpacity="0.45" />
               <stop offset="70%" stopColor="var(--wow-2)" stopOpacity="0" />
             </radialGradient>
           </defs>
-          <circle r={Math.round(layoutRadius * 1.15)} fill="url(#wow-center-glow)" />
-          <circle r={layoutRadius} fill="none" stroke="url(#wow-ring)" strokeWidth="1" />
+          <circle r={Math.round(layoutRadius * 1.15)} fill={`url(#wow-center-glow-${gradientId})`} />
+          <circle r={layoutRadius} fill="none" stroke={`url(#wow-ring-${gradientId})`} strokeWidth="1" />
           <circle
             r={Math.round(layoutRadius * 0.72)}
             fill="none"
-            stroke="url(#wow-ring)"
+            stroke={`url(#wow-ring-${gradientId})`}
             strokeWidth="1"
             strokeDasharray="2 8"
             opacity="0.5"
@@ -180,7 +237,12 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
                   style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
                 >
                   <div className="wow-orbit-counter">
-                    <ServiceCard service={s} compact={isHero} />
+                    <ServiceCard
+                      service={s}
+                      compact={isHero}
+                      cardWidth={cardWidth}
+                      iconSize={iconSize}
+                    />
                   </div>
                 </div>
               )
@@ -189,43 +251,58 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
         )}
 
         <div className="relative z-10">
-          <RotatingCube />
+          <RotatingCube size={layoutCubeSize} />
         </div>
       </motion.div>
     </section>
   )
 }
 
-function ServiceCard({ service, compact }: { service: Service; compact?: boolean }) {
+function ServiceCard({
+  service,
+  compact,
+  cardWidth,
+  iconSize,
+}: {
+  service: Service
+  compact?: boolean
+  cardWidth: number
+  iconSize: number
+}) {
   const Icon = service.icon
+  const iconBox = Math.max(28, iconSize + 14)
 
   return (
     <motion.div
-      whileHover={{ scale: 1.08, y: -2 }}
+      whileHover={{ scale: 1.06, y: -2 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className={`group relative flex cursor-pointer flex-col items-start gap-2 rounded-2xl border bg-white/90 p-3 shadow-sm backdrop-blur-md transition-colors dark:bg-dark-200/90 sm:p-4 ${
-        compact ? 'w-[130px] sm:w-[150px]' : 'w-[150px] sm:w-[180px]'
-      }`}
+      className="group relative flex cursor-pointer flex-col items-start gap-1.5 rounded-xl border bg-white/90 p-2 shadow-sm backdrop-blur-md transition-colors dark:bg-dark-200/90 sm:gap-2 sm:rounded-2xl sm:p-3"
       style={{
+        width: cardWidth,
+        maxWidth: cardWidth,
         borderColor: 'color-mix(in oklab, var(--wow-1) 18%, rgba(23, 23, 23, 0.1))',
         boxShadow: '0 8px 24px -12px color-mix(in oklab, var(--wow-1) 25%, transparent)',
       }}
     >
       <span
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:rounded-2xl"
         style={{
           background:
             'linear-gradient(135deg, color-mix(in oklab, var(--wow-1) 25%, transparent), transparent 60%)',
         }}
       />
       <div
-        className="flex h-9 w-9 items-center justify-center rounded-xl text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
-        style={{ backgroundImage: 'var(--wow-gradient)' }}
+        className="flex items-center justify-center rounded-lg text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 sm:rounded-xl"
+        style={{
+          width: iconBox,
+          height: iconBox,
+          backgroundImage: 'var(--wow-gradient)',
+        }}
       >
-        <Icon size={18} />
+        <Icon size={iconSize} />
       </div>
-      <div className="relative">
-        <p className="text-xs font-semibold leading-tight text-secondary dark:text-backgroundBody sm:text-sm">
+      <div className="relative min-w-0">
+        <p className="truncate text-[10px] font-semibold leading-tight text-secondary dark:text-backgroundBody sm:text-xs">
           {service.title}
         </p>
         {!compact && (
