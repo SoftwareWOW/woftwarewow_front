@@ -1,10 +1,35 @@
 'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { WOW_GRADIENT } from '@/components/wow/shared/WowText'
 
 type RotatingCubeProps = {
   size?: number
+}
+
+function CubeFaceBrand({ size }: { size: number }) {
+  const fontSize = Math.max(7, Math.min(size * 0.112, (size * 0.9) / 6.5))
+
+  return (
+    <p
+      className="flex items-baseline justify-center whitespace-nowrap font-outfit font-bold leading-none tracking-[-0.04em]"
+      style={{ fontSize }}
+    >
+      <span className="text-secondary dark:text-backgroundBody">Software</span>
+      <span
+        className="font-extrabold"
+        style={{
+          background: WOW_GRADIENT,
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          color: 'transparent',
+        }}
+      >
+        WOW!
+      </span>
+    </p>
+  )
 }
 
 export default function RotatingCube({ size = 148 }: RotatingCubeProps) {
@@ -15,6 +40,15 @@ export default function RotatingCube({ size = 148 }: RotatingCubeProps) {
     height: size,
     transform,
   })
+
+  const faces = [
+    `translateZ(${half}px)`,
+    `rotateY(180deg) translateZ(${half}px)`,
+    `rotateY(90deg) translateZ(${half}px)`,
+    `rotateY(-90deg) translateZ(${half}px)`,
+    `rotateX(90deg) translateZ(${half}px)`,
+    `rotateX(-90deg) translateZ(${half}px)`,
+  ]
 
   return (
     <motion.div
@@ -35,43 +69,14 @@ export default function RotatingCube({ size = 148 }: RotatingCubeProps) {
         }}
       />
 
-      <div
-        className="sw-cube-scene"
-        style={{ width: size, height: size }}
-        aria-hidden
-      >
+      <div className="sw-cube-scene" style={{ width: size, height: size }} aria-hidden>
         <div className="sw-cube-shadow" />
         <div className="sw-cube sw-cube-y-spin">
-          <div className="sw-cube-face" style={faceStyle(`translateZ(${half}px)`)}>
-            <Image
-              src="/images/wow/nav/SVG/SoftwareWOW Standard.svg"
-              alt=""
-              width={120}
-              height={120}
-              className="h-[72%] w-[72%] object-contain"
-            />
-          </div>
-          <div className="sw-cube-face" style={faceStyle(`rotateY(180deg) translateZ(${half}px)`)} />
-          <div
-            className="sw-cube-face flex-col gap-0.5 px-2 text-center sm:px-3"
-            style={faceStyle(`rotateY(90deg) translateZ(${half}px)`)}
-          >
-            <span
-              className="font-extrabold tracking-tight text-secondary dark:text-backgroundBody"
-              style={{ fontSize: Math.max(12, size * 0.11) }}
-            >
-              WOW
-            </span>
-            <span
-              className="font-semibold uppercase tracking-[0.16em] text-colorText dark:text-dark-100"
-              style={{ fontSize: Math.max(7, size * 0.05) }}
-            >
-              Superagency
-            </span>
-          </div>
-          <div className="sw-cube-face" style={faceStyle(`rotateY(-90deg) translateZ(${half}px)`)} />
-          <div className="sw-cube-face" style={faceStyle(`rotateX(90deg) translateZ(${half}px)`)} />
-          <div className="sw-cube-face" style={faceStyle(`rotateX(-90deg) translateZ(${half}px)`)} />
+          {faces.map((transform) => (
+            <div key={transform} className="sw-cube-face" style={faceStyle(transform)}>
+              <CubeFaceBrand size={size} />
+            </div>
+          ))}
         </div>
       </div>
 

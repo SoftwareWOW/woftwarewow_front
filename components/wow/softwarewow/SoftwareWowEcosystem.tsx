@@ -35,7 +35,7 @@ type OrbitLayout = {
 const FALLBACK_LAYOUT: Omit<OrbitLayout, 'mounted'> = {
   radius: 200,
   cubeSize: 120,
-  labelWidth: 88,
+  labelWidth: 110,
 }
 
 function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<OrbitLayout, 'mounted'> {
@@ -45,29 +45,31 @@ function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<Orbit
   let cubeSize: number
 
   if (containerWidth < 360) {
-    labelWidth = 72
+    labelWidth = 100
     cubeSize = 72
   } else if (containerWidth < 480) {
-    labelWidth = 80
+    labelWidth = 108
     cubeSize = 84
   } else if (containerWidth < 640) {
-    labelWidth = 88
+    labelWidth = 118
     cubeSize = 96
   } else if (containerWidth < 900) {
-    labelWidth = 96
+    labelWidth = 128
     cubeSize = 112
-  } else if (isHero && containerWidth < 1120) {
-    labelWidth = 104
-    cubeSize = 128
+  } else if (containerWidth < 1280) {
+    labelWidth = 142
+    cubeSize = isHero ? 128 : 140
   } else {
-    labelWidth = isHero ? 112 : 120
+    labelWidth = isHero ? 152 : 160
     cubeSize = isHero ? 148 : 168
   }
 
-  const padding = 12
+  const padding = 16
   const maxRadius = Math.floor((containerWidth - labelWidth - padding * 2) / 2)
-  const targetRadius = Math.floor(containerWidth * (isHero ? 0.34 : 0.4))
-  const radius = Math.max(68, Math.min(maxRadius, targetRadius))
+  const targetRatio =
+    containerWidth < 640 ? 0.32 : containerWidth < 1024 ? 0.36 : isHero ? 0.39 : 0.42
+  const targetRadius = Math.floor(containerWidth * targetRatio)
+  const radius = Math.max(72, Math.min(maxRadius, targetRadius))
 
   return { radius, cubeSize, labelWidth }
 }
@@ -108,7 +110,7 @@ type SoftwareWowEcosystemProps = {
 
 export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosystemProps) {
   const isHero = variant === 'hero'
-  const { containerRef, radius, cubeSize, labelWidth, mounted } = useOrbitLayout(isHero)
+  const { containerRef, radius, cubeSize, mounted } = useOrbitLayout(isHero)
   const layoutRadius = mounted ? radius : FALLBACK_LAYOUT.radius
   const layoutCubeSize = mounted ? cubeSize : FALLBACK_LAYOUT.cubeSize
   const orbitPadding = Math.max(72, Math.round(layoutCubeSize * 0.55))
@@ -212,7 +214,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
                   style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
                 >
                   <div className="wow-orbit-counter">
-                    <ServiceLabel service={s} labelWidth={labelWidth} />
+                    <ServiceLabel service={s} />
                   </div>
                 </div>
               )
@@ -228,13 +230,12 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
   )
 }
 
-function ServiceLabel({ service, labelWidth }: { service: Service; labelWidth: number }) {
+function ServiceLabel({ service }: { service: Service }) {
   return (
     <motion.p
       whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className="cursor-default select-none text-center text-[10px] font-semibold leading-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-xs"
-      style={{ width: labelWidth, maxWidth: labelWidth }}
+      className="cursor-default select-none whitespace-nowrap text-center text-[10px] font-semibold leading-none tracking-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-[11px] md:text-sm md:font-bold lg:text-base"
     >
       {service.title}
     </motion.p>

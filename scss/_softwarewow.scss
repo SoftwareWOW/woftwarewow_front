@@ -117,6 +117,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: 6px;
     backface-visibility: visible;
     border: 1px solid color-mix(in oklab, var(--wow-1) 22%, transparent);
     background: color-mix(in oklab, #ededed 94%, var(--wow-1) 6%);
