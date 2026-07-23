@@ -12,7 +12,8 @@ const AVATARS = [
   '/images/wow/Hero/client/Avatar.png',
   '/images/wow/Hero/client/Avatar (1).png',
   '/images/wow/Hero/client/Avatar (2).png',
-  '/images/agent/01.jpg',
+  '/images/wow/Hero/client/Michael Carter.png',
+  
 ]
 
 export default function SoftwareWowHero() {
@@ -20,17 +21,6 @@ export default function SoftwareWowHero() {
     <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28">
       <div className="mx-auto flex max-w-[1320px] flex-col gap-8 sm:gap-10 xl:flex-row xl:items-center xl:gap-10 2xl:gap-14">
         <div className="flex w-full shrink-0 flex-col items-center text-center xl:w-[44%] xl:items-start xl:text-left 2xl:w-[42%]">
-          <RevealWrapper>
-            <span
-              className="mb-5 inline-flex rounded-full border px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-primary sm:text-[11px]"
-              style={{
-                borderColor: 'color-mix(in oklab, var(--wow-1) 35%, transparent)',
-                background: 'color-mix(in oklab, var(--wow-1) 8%, transparent)',
-              }}
-            >
-              The Superagency for Small Business Growth
-            </span>
-          </RevealWrapper>
 
           <TextAppearAnimation>
             <h1 className="max-w-xl text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
