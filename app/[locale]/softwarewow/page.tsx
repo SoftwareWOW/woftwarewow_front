@@ -1,4 +1,7 @@
+
+import SoftwareServices from '@/components/wow/softwarewow/SoftwareServices'
 import SoftwareWowHero from '@/components/wow/softwarewow/SoftwareWowHero'
+import TrustedTechnologies from '@/components/wow/softwarewow/TrustedTechnologies'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -24,5 +27,12 @@ export default async function SoftwareWowPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  return <SoftwareWowHero />
+  return ( <div>
+      <SoftwareWowHero />
+          {/* <TrustedTechnologies /> */}
+          <SoftwareServices/>
+  </div>
+  )
+  
+
 }
