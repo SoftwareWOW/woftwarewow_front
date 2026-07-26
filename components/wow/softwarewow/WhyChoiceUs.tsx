@@ -5,18 +5,18 @@ import Link from 'next/link'
 
 const WhyChoiceUs = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
+    <section className="px-3 md:px-4">
+      <div className="mx-auto max-w-[1320px]">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <TextAppearAnimation>
             <h2 className="text-appear lg:leading-[1.1]">
               Why choose
-              <span className="font-instrument italic"> rivor? </span>
+              <span className="font-instrument italic"> SoftwareWOW! </span>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mt-3 text-lg font-normal text-black/70 dark:text-backgroundBody/70">
-              At Rivor, we don’t just plan events; we create experiences. Here’s why our clients trust us
+              We engineer custom software, apps, and digital products built to scale with your business — not against it.
             </p>
           </TextAppearAnimation>
         </div>
@@ -37,9 +37,9 @@ const WhyChoiceUs = () => {
                 />
               </svg>
             </span>
-            <h5 className="mb-3 mt-6">Industry experts</h5>
+            <h5 className="mb-3 mt-6">Engineering-first team</h5>
             <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
-              Years of experience in business consulting
+              Senior developers building reliable, scalable software from the ground up.
             </p>
           </div>
           <div className="col-span-12 flex-1 border px-[30px] py-10 dark:border-dark lg:col-span-6">
@@ -62,9 +62,9 @@ const WhyChoiceUs = () => {
                 />
               </svg>
             </span>
-            <h5 className="mb-3 mt-6">Proven results</h5>
+            <h5 className="mb-3 mt-6">Full-stack delivery</h5>
             <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
-              Data-driven strategies that work
+              From discovery and design to development, deployment, and ongoing support.
             </p>
           </div>
           <div className="col-span-12 flex-1 border px-[30px] py-10 dark:border-dark lg:col-span-6">
@@ -82,9 +82,9 @@ const WhyChoiceUs = () => {
                 />
               </svg>
             </span>
-            <h5 className="mb-3 mt-6">Customized solutions</h5>
+            <h5 className="mb-3 mt-6">Built to scale</h5>
             <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
-              Tailored approaches for every business
+              Architecture and code designed to grow with your business, not hold it back.
             </p>
           </div>
           <div className="col-span-12 flex-1 border px-[30px] py-10 dark:border-dark lg:col-span-6">
@@ -128,9 +128,9 @@ const WhyChoiceUs = () => {
                 />
               </svg>
             </span>
-            <h5 className="mb-3 mt-6">End to end support</h5>
+            <h5 className="mb-3 mt-6">Connected ecosystem</h5>
             <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
-              From planning to execution
+              Twelve capabilities — AI, cloud, mobile, DevOps, and more — under one roof.
             </p>
           </div>
         </RevealWrapper>

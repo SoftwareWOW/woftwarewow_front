@@ -11,8 +11,8 @@ const SoftwareServices = () => {
   const { marqueeRef, pauseMarquee, resumeMarquee, goPrev, goNext } = useScrollingSoftwareServices()
 
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
+    <section>
+      <div className="mx-auto max-w-[1320px] px-3 md:px-4">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-6 sm:items-center md:mb-20 md:flex-row lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="rv-badge mb-3 md:mb-4">

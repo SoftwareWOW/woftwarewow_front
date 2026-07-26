@@ -12,10 +12,10 @@ interface CaseStudyType {
 
 const caseStudies: CaseStudyType[] = getMarkDownData('data/management-consulting/project')
 
-const SoftwareWoW = () => {
+const SoftwareWoWProjects = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
+    <section className="px-3 md:px-4">
+      <div className="mx-auto max-w-[1320px]">
         <div className="mb-10 text-center lg:mb-20">
           <TextAppearAnimation>
             <h2 className="text-appear">
@@ -83,4 +83,4 @@ const SoftwareWoW = () => {
   )
 }
 
-export default SoftwareWoW
+export default SoftwareWoWProjects
