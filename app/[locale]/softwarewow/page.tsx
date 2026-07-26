@@ -1,7 +1,12 @@
 
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import SoftwareServices from '@/components/wow/softwarewow/SoftwareServices'
+import SoftwareWoW from '@/components/wow/softwarewow/SoftwareWoW'
 import SoftwareWowHero from '@/components/wow/softwarewow/SoftwareWowHero'
+import SoftwareWoWIndustry from '@/components/wow/softwarewow/SoftwareWoWIndustry'
 import TrustedTechnologies from '@/components/wow/softwarewow/TrustedTechnologies'
+import WhyChoiceUs from '@/components/wow/softwarewow/WhyChoiceUs'
+import WoWProces from '@/components/wow/softwarewow/WoWProces'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -31,6 +36,13 @@ export default async function SoftwareWowPage({ params }: Props) {
       <SoftwareWowHero />
           {/* <TrustedTechnologies /> */}
           <SoftwareServices/>
+          <WhyChoiceUs/>
+          <SoftwareWoW/>
+          <WoWProces/>
+          <SoftwareWoWIndustry/>
+             <div className="mb-3">
+                    <WowGrowthCta />
+                  </div>
   </div>
   )
   
