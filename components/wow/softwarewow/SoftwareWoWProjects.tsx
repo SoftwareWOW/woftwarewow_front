@@ -1,7 +1,10 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Link from 'next/link'
+import { useState } from 'react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 interface CaseStudyType {
@@ -10,9 +13,14 @@ interface CaseStudyType {
   [key: string]: any
 }
 
+const INITIAL_VISIBLE_COUNT = 1
+
 const caseStudies: CaseStudyType[] = getMarkDownData('data/management-consulting/project')
 
 const SoftwareWoWProjects = () => {
+  const [showAll, setShowAll] = useState(false)
+  const visibleCaseStudies = showAll ? caseStudies : caseStudies.slice(0, INITIAL_VISIBLE_COUNT)
+
   return (
     <section className="px-3 md:px-4">
       <div className="mx-auto max-w-[1320px]">
@@ -25,10 +33,11 @@ const SoftwareWoWProjects = () => {
         </div>
 
         <div className="mb-[60px] space-y-[30px]">
-          {caseStudies.map((item) => (
+          {visibleCaseStudies.map((item) => (
             <RevealWrapper
               key={item.slug}
-              className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row">
+              className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row"
+            >
               <figure className="-z-30 max-w-[870px] overflow-hidden">
                 <Link href={`/management-consulting/project/${item.slug}`} className="block">
                   <img
@@ -57,13 +66,23 @@ const SoftwareWoWProjects = () => {
             </RevealWrapper>
           ))}
         </div>
-        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/portfolio-agency/case-study" variant="white" fullWidth>
-              Read More Case Studies
-            </ButtonComponent>
-          </ButtonComponentList>
-        </RevealWrapper>      </div>
+
+        {caseStudies.length > INITIAL_VISIBLE_COUNT && (
+          <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+            <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+              <ButtonComponent
+                type="button"
+                variant="white"
+                fullWidth
+                onClick={() => setShowAll((prev) => !prev)}
+                ariaExpanded={showAll}
+              >
+                {showAll ? 'See Less' : 'Load More'}
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
+        )}
+      </div>
     </section>
   )
 }

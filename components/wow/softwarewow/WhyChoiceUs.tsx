@@ -135,7 +135,7 @@ const WhyChoiceUs = () => {
         </RevealWrapper>
         <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/contact" variant="primary" fullWidth>
+            <ButtonComponent href="/meet" variant="primary" fullWidth>
               Schedule a Free Call
             </ButtonComponent>
           </ButtonComponentList>
