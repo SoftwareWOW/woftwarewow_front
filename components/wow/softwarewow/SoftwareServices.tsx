@@ -6,6 +6,7 @@ import { SOFTWARE_WOW_SERVICES } from '@/data/softwareWowServices'
 import useScrollingSoftwareServices from '@/hooks/useScrollingSoftwareServices'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const SoftwareServices = () => {
   const { marqueeRef, pauseMarquee, resumeMarquee, goPrev, goNext } = useScrollingSoftwareServices()
@@ -33,17 +34,12 @@ const SoftwareServices = () => {
               </p>
             </TextAppearAnimation>
 
-            <RevealWrapper as="ul" className="mt-5 justify-self-end max-md:w-full md:mt-10">
-              <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <Link href="/contact" className="rv-button rv-button-white block md:inline-block">
-                  <div className="rv-button-top">
-                    <span>Get Free Quotes</span>
-                  </div>
-                  <div className="rv-button-bottom">
-                    <span>Get Free Quotes</span>
-                  </div>
-                </Link>
-              </li>
+            <RevealWrapper className="mt-5 justify-self-end max-md:w-full md:mt-10">
+              <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+                <ButtonComponent href="/contact" variant="white" fullWidth>
+                  Get Free Quotes
+                </ButtonComponent>
+              </ButtonComponentList>
             </RevealWrapper>
           </div>
         </div>

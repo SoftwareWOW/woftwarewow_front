@@ -1,7 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import Link from 'next/link'
-
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const WhyChoiceUs = () => {
   return (
@@ -134,19 +133,13 @@ const WhyChoiceUs = () => {
             </p>
           </div>
         </RevealWrapper>
-        <RevealWrapper as="ul" className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-          <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>Schedule a Free Call</span>
-              </div>
-              <div className="rv-button-bottom text-nowrap">
-                <span>Schedule a Free Call</span>
-              </div>
-            </Link>
-          </li>
-        </RevealWrapper>
-      </div>
+        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent href="/contact" variant="primary" fullWidth>
+              Schedule a Free Call
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>      </div>
     </section>
   )
 }

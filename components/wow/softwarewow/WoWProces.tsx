@@ -1,7 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import Link from 'next/link'
-
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const WoWProces = () => {
   return (
@@ -36,19 +35,13 @@ const WoWProces = () => {
             <p className="text-center">Agile development, rigorous testing, deployment, and continuous improvement.</p>
           </RevealWrapper>
         </div>
-        <RevealWrapper as="ul" className="mt-14 flex list-none justify-center">
-          <li className="block w-full text-center md:inline-block md:w-auto">
-            <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>Let’s Start Your Project</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span className="text-nowrap">Let’s Start Your Project</span>
-              </div>
-            </Link>
-          </li>
-        </RevealWrapper>
-      </div>
+        <RevealWrapper className="mt-14 flex justify-center">
+          <ButtonComponentList itemClassName="block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent href="/contact" variant="primary" fullWidth>
+              Let&apos;s Start Your Project
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>      </div>
     </section>
   )
 }

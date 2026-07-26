@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Link from 'next/link'
-
+import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 interface CaseStudyType {
   slug: string
@@ -50,35 +50,20 @@ const SoftwareWoWProjects = () => {
                     </h3>
                   </Link>
                 </div>
-                <Link href={`/management-consulting/project/${item.slug}`} className="rv-button rv-button-white">
-                  <div className="rv-button-top text-center">
-                    <span className="mr-2">Read Case Study</span>
-                    <img className="inline dark:hidden" src="/images/icons/top-arrow.svg" alt="Arrow Icon" />
-                    <img className="hidden dark:inline" src="/images/icons/top-arrow-dark.svg" alt="Arrow Icon" />
-                  </div>
-                  <div className="rv-button-bottom text-center">
-                    <span className="mr-2">Read Case Study</span>
-                    <img className="hidden dark:inline" src="/images/icons/top-arrow.svg" alt="Arrow Icon" />
-                    <img className="inline dark:hidden" src="/images/icons/top-arrow-dark.svg" alt="Arrow Icon" />
-                  </div>
-                </Link>
+                <ButtonComponent href={`/management-consulting/project/${item.slug}`} variant="white">
+                  Read Case Study
+                </ButtonComponent>
               </div>
             </RevealWrapper>
           ))}
         </div>
-        <RevealWrapper as="ul" className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-          <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/portfolio-agency/case-study" className="rv-button rv-button-white block md:inline-block">
-              <div className="rv-button-top">
-                <span>Read More Case Studies</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>Read More Case Studies</span>
-              </div>
-            </Link>
-          </li>
-        </RevealWrapper>
-      </div>
+        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent href="/portfolio-agency/case-study" variant="white" fullWidth>
+              Read More Case Studies
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>      </div>
     </section>
   )
 }
