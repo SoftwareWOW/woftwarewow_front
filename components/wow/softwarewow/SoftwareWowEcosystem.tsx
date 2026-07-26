@@ -33,15 +33,23 @@ type OrbitLayout = {
   mounted: boolean
 }
 
-const FALLBACK_LAYOUT: Omit<OrbitLayout, 'mounted'> = {
+type OrbitMetrics = Pick<OrbitLayout, 'radius' | 'cubeSize' | 'labelWidth'>
+
+const FALLBACK_LAYOUT: OrbitMetrics & { boxSize: number } = {
   radius: 200,
   cubeSize: 120,
   labelWidth: 110,
   boxSize: 360,
 }
 
-function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<OrbitLayout, 'mounted'> {
-  if (containerWidth <= 0) return FALLBACK_LAYOUT
+function computeOrbitLayout(containerWidth: number, isHero: boolean): OrbitMetrics {
+  if (containerWidth <= 0) {
+    return {
+      radius: FALLBACK_LAYOUT.radius,
+      cubeSize: FALLBACK_LAYOUT.cubeSize,
+      labelWidth: FALLBACK_LAYOUT.labelWidth,
+    }
+  }
 
   const isMobile = containerWidth < 640
 
