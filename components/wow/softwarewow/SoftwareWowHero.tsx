@@ -4,7 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import { WOW_GRADIENT } from '@/components/wow/shared/WowText'
-import { ArrowRight, CirclePlay } from 'lucide-react'
+
 import Image from 'next/image'
 import { SoftwareWowEcosystem } from './SoftwareWowEcosystem'
 

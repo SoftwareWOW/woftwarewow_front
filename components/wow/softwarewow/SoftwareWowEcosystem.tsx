@@ -29,6 +29,7 @@ type OrbitLayout = {
   radius: number
   cubeSize: number
   labelWidth: number
+  boxSize: number
   mounted: boolean
 }
 
@@ -36,10 +37,13 @@ const FALLBACK_LAYOUT: Omit<OrbitLayout, 'mounted'> = {
   radius: 200,
   cubeSize: 120,
   labelWidth: 110,
+  boxSize: 360,
 }
 
 function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<OrbitLayout, 'mounted'> {
   if (containerWidth <= 0) return FALLBACK_LAYOUT
+
+  const isMobile = containerWidth < 640
 
   let labelWidth: number
   let cubeSize: number
@@ -64,12 +68,21 @@ function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<Orbit
     cubeSize = isHero ? 148 : 168
   }
 
-  const padding = 16
-  const maxRadius = Math.floor((containerWidth - labelWidth - padding * 2) / 2)
-  const targetRatio =
-    containerWidth < 640 ? 0.32 : containerWidth < 1024 ? 0.36 : isHero ? 0.39 : 0.42
+  // Mobile only: expand the orbit ring so services sit farther from the cube.
+  const edgeReserve = isMobile ? 68 : labelWidth
+  const padding = isMobile ? 6 : 16
+  const maxRadius = Math.floor((containerWidth - edgeReserve - padding * 2) / 2)
+  const targetRatio = isMobile
+    ? containerWidth < 480
+      ? 0.46
+      : 0.44
+    : containerWidth < 1024
+      ? 0.36
+      : isHero
+        ? 0.39
+        : 0.42
   const targetRadius = Math.floor(containerWidth * targetRatio)
-  const radius = Math.max(72, Math.min(maxRadius, targetRadius))
+  const radius = Math.max(isMobile ? 88 : 72, Math.min(maxRadius, targetRadius))
 
   return { radius, cubeSize, labelWidth }
 }
@@ -91,8 +104,8 @@ function useOrbitLayout(isHero: boolean) {
     if (!node) return
 
     const update = () => {
-      const width = node.getBoundingClientRect().width
-      setLayout({ ...computeOrbitLayout(width, isHero), mounted: true })
+      const side = node.getBoundingClientRect().width
+      setLayout({ ...computeOrbitLayout(side, isHero), boxSize: side, mounted: true })
     }
 
     update()
@@ -110,11 +123,10 @@ type SoftwareWowEcosystemProps = {
 
 export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosystemProps) {
   const isHero = variant === 'hero'
-  const { containerRef, radius, cubeSize, mounted } = useOrbitLayout(isHero)
-  const layoutRadius = mounted ? radius : FALLBACK_LAYOUT.radius
+  const { containerRef, radius, cubeSize, boxSize, mounted } = useOrbitLayout(isHero)
+  const orbitRadius = mounted ? radius : FALLBACK_LAYOUT.radius
   const layoutCubeSize = mounted ? cubeSize : FALLBACK_LAYOUT.cubeSize
-  const orbitPadding = Math.max(72, Math.round(layoutCubeSize * 0.55))
-  const size = layoutRadius * 2 + orbitPadding * 2
+  const layoutBoxSize = mounted ? boxSize : FALLBACK_LAYOUT.boxSize
   const gradientId = useId().replace(/:/g, '')
 
   return (
@@ -158,14 +170,13 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.9, ease: 'easeOut' }}
-        className={`relative mx-auto flex w-full max-w-full items-center justify-center ${
-          isHero ? 'mt-0 min-h-[280px] sm:min-h-[320px]' : 'mt-10 sm:mt-16'
+        className={`relative mx-auto flex aspect-square w-full items-center justify-center ${
+          isHero ? 'mt-0 min-h-[300px] sm:min-h-[340px] xl:min-h-0' : 'mt-10 sm:mt-16'
         }`}
-        style={{ height: size, maxWidth: '100%' }}
       >
         <svg
-          className="pointer-events-none absolute inset-0 mx-auto h-full w-full max-w-full"
-          viewBox={`-${size / 2} -${size / 2} ${size} ${size}`}
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          viewBox={`-${layoutBoxSize / 2} -${layoutBoxSize / 2} ${layoutBoxSize} ${layoutBoxSize}`}
           preserveAspectRatio="xMidYMid meet"
           aria-hidden
         >
@@ -180,10 +191,10 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
               <stop offset="70%" stopColor="var(--wow-2)" stopOpacity="0" />
             </radialGradient>
           </defs>
-          <circle r={Math.round(layoutRadius * 1.15)} fill={`url(#wow-center-glow-${gradientId})`} />
-          <circle r={layoutRadius} fill="none" stroke={`url(#wow-ring-${gradientId})`} strokeWidth="1" />
+          <circle r={Math.round(orbitRadius * 1.15)} fill={`url(#wow-center-glow-${gradientId})`} />
+          <circle r={orbitRadius} fill="none" stroke={`url(#wow-ring-${gradientId})`} strokeWidth="1" />
           <circle
-            r={Math.round(layoutRadius * 0.72)}
+            r={Math.round(orbitRadius * 0.72)}
             fill="none"
             stroke={`url(#wow-ring-${gradientId})`}
             strokeWidth="1"
@@ -191,7 +202,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
             opacity="0.5"
           />
           <circle
-            r={layoutRadius}
+            r={orbitRadius}
             fill="none"
             stroke="var(--wow-1)"
             strokeWidth="1.5"
@@ -203,9 +214,9 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
         </svg>
 
         {mounted && (
-          <div className="wow-orbit-rotate absolute inset-0">
+          <div className="wow-orbit-rotate absolute inset-0 flex items-center justify-center">
             {SERVICES.map((s, i) => {
-              const { x, y } = orbitPosition(i, SERVICES.length, radius)
+              const { x, y } = orbitPosition(i, SERVICES.length, orbitRadius)
 
               return (
                 <div
