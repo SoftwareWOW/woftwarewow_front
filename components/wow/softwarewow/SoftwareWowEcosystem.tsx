@@ -132,7 +132,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
   return (
     <section
       className={`softwarewow-ecosystem relative w-full max-w-full overflow-x-clip ${
-        isHero ? 'py-4 sm:py-6 xl:py-0' : 'py-16 sm:py-24 lg:py-32'
+        isHero ? 'py-4 sm:py-6 lg:py-0' : 'py-16 sm:py-24 lg:py-32'
       }`}
     >
       {!isHero && (
@@ -171,7 +171,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.9, ease: 'easeOut' }}
         className={`relative mx-auto flex aspect-square w-full items-center justify-center ${
-          isHero ? 'mt-0 min-h-[300px] sm:min-h-[340px] xl:min-h-0' : 'mt-10 sm:mt-16'
+          isHero ? 'mt-0 min-h-[300px] sm:min-h-[340px] lg:min-h-0' : 'mt-10 sm:mt-16'
         }`}
       >
         <svg

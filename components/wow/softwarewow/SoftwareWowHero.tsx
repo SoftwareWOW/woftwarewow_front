@@ -19,9 +19,8 @@ const AVATARS = [
 export default function SoftwareWowHero() {
   return (
     <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28">
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-8 sm:gap-10 xl:flex-row xl:items-center xl:gap-10 2xl:gap-14">
-        <div className="flex w-full shrink-0 flex-col items-center text-center xl:w-[44%] xl:items-start xl:text-left 2xl:w-[42%]">
-
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-10 sm:gap-12 lg:flex-row lg:items-center lg:gap-8 xl:gap-10 2xl:gap-14">
+        <div className="flex w-full shrink-0 flex-col items-center gap-8 text-center sm:gap-10 lg:w-[44%] lg:items-start lg:gap-12 lg:text-left 2xl:w-[42%]">
           <TextAppearAnimation>
             <h1 className="max-w-xl text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
               This is where ambitions become{' '}
@@ -34,30 +33,23 @@ export default function SoftwareWowHero() {
             </h1>
           </TextAppearAnimation>
 
-          <RevealWrapper delay={0.15} className="mt-5 max-w-lg">
+          <RevealWrapper delay={0.15} className="max-w-lg">
             <p className="text-base leading-relaxed text-colorText dark:text-dark-100 sm:text-lg">
               Technology. Marketing. AI. Design. Growth. Everything your business needs under one
               connected ecosystem.
             </p>
           </RevealWrapper>
 
-         <div  className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center xl:justify-start" >
-      <ButtonComponent
-              href="/services"
-              variant="primary"
-
-            >
-                Explore the Ecosystem
-        
+          <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
+            <ButtonComponent href="/services" variant="primary">
+              Explore the Ecosystem
             </ButtonComponent>
-            <ButtonComponent href="/meet" variant="secondary" >
-                How We Help You Grow   
+            <ButtonComponent href="/meet" variant="secondary">
+              How We Help You Grow
             </ButtonComponent>
-         </div>
-      
+          </div>
 
-
-          <RevealWrapper delay={0.25} className="mt-8 flex flex-col items-center gap-3 sm:flex-row xl:items-center">
+          <RevealWrapper delay={0.25} className="flex flex-col items-center gap-3 sm:flex-row lg:items-center">
             <div className="flex items-center">
               {AVATARS.map((src, i) => (
                 <div
@@ -75,8 +67,8 @@ export default function SoftwareWowHero() {
           </RevealWrapper>
         </div>
 
-        <div className="flex w-full min-w-0 flex-1 items-center justify-center xl:justify-end">
-          <div className="w-full max-w-[min(100%,720px)] xl:max-w-none">
+        <div className="flex w-full min-w-0 flex-1 items-center justify-center lg:justify-end">
+          <div className="w-full max-w-[min(100%,720px)] lg:max-w-none">
             <SoftwareWowEcosystem variant="hero" />
           </div>
         </div>
