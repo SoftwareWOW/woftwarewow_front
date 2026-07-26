@@ -48,43 +48,66 @@ function computeOrbitLayout(containerWidth: number, isHero: boolean): Omit<Orbit
   let labelWidth: number
   let cubeSize: number
 
-  if (containerWidth < 360) {
-    labelWidth = 100
-    cubeSize = 72
-  } else if (containerWidth < 480) {
-    labelWidth = 108
-    cubeSize = 84
-  } else if (containerWidth < 640) {
-    labelWidth = 118
-    cubeSize = 96
-  } else if (containerWidth < 900) {
-    labelWidth = 128
-    cubeSize = 112
-  } else if (containerWidth < 1280) {
-    labelWidth = 142
-    cubeSize = isHero ? 128 : 140
-  } else {
-    labelWidth = isHero ? 152 : 160
-    cubeSize = isHero ? 148 : 168
+  if (isMobile) {
+    if (containerWidth < 360) {
+      labelWidth = 100
+      cubeSize = 72
+    } else if (containerWidth < 480) {
+      labelWidth = 108
+      cubeSize = 84
+    } else {
+      labelWidth = 118
+      cubeSize = 96
+    }
+
+    const edgeReserve = 68
+    const padding = 6
+    const maxRadius = Math.floor((containerWidth - edgeReserve - padding * 2) / 2)
+    const targetRatio = containerWidth < 480 ? 0.46 : 0.44
+    const targetRadius = Math.floor(containerWidth * targetRatio)
+    const radius = Math.max(88, Math.min(maxRadius, targetRadius))
+
+    return { radius, cubeSize, labelWidth }
   }
 
-  // Mobile only: expand the orbit ring so services sit farther from the cube.
-  const edgeReserve = isMobile ? 68 : labelWidth
-  const padding = isMobile ? 6 : 16
-  const maxRadius = Math.floor((containerWidth - edgeReserve - padding * 2) / 2)
-  const targetRatio = isMobile
-    ? containerWidth < 480
-      ? 0.46
-      : 0.44
-    : containerWidth < 1024
-      ? 0.36
-      : isHero
-        ? 0.39
-        : 0.42
-  const targetRadius = Math.floor(containerWidth * targetRatio)
-  const radius = Math.max(isMobile ? 88 : 72, Math.min(maxRadius, targetRadius))
+  if (containerWidth < 900) {
+    labelWidth = 118
+    cubeSize = isHero ? 96 : 112
+  } else if (containerWidth < 1280) {
+    labelWidth = 128
+    cubeSize = isHero ? 108 : 128
+  } else {
+    labelWidth = 136
+    cubeSize = isHero ? 116 : 148
+  }
 
-  return { radius, cubeSize, labelWidth }
+  const labelOverflow = Math.ceil(labelWidth / 2) + 10
+  const verticalOverflow = isHero ? 22 : 16
+  const padding = isHero ? 14 : 16
+  const half = containerWidth / 2
+
+  const maxRadius = Math.min(
+    Math.floor(half - labelOverflow - padding),
+    Math.floor(half - verticalOverflow - padding),
+  )
+
+  let targetRatio: number
+  if (containerWidth < 1024) {
+    targetRatio = isHero ? 0.3 : 0.34
+  } else if (isHero) {
+    targetRatio = containerWidth < 1280 ? 0.27 : 0.25
+  } else {
+    targetRatio = 0.36
+  }
+
+  const targetRadius = Math.floor(containerWidth * targetRatio)
+  const minRadius = isHero ? 52 : 72
+  const radius = Math.max(minRadius, Math.min(maxRadius, targetRadius))
+  const fittedCubeSize = isHero
+    ? Math.min(cubeSize, Math.max(72, Math.floor(radius * 0.72)))
+    : cubeSize
+
+  return { radius, cubeSize: fittedCubeSize, labelWidth }
 }
 
 function orbitPosition(index: number, total: number, radius: number) {
@@ -131,8 +154,8 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
 
   return (
     <section
-      className={`softwarewow-ecosystem relative w-full max-w-full overflow-x-clip ${
-        isHero ? 'pb-4 pt-0 sm:pb-6 sm:pt-0 lg:py-0' : 'py-16 sm:py-24 lg:py-32'
+      className={`softwarewow-ecosystem relative w-full max-w-full ${
+        isHero ? 'overflow-x-clip pb-4 pt-0 sm:pb-6 sm:pt-0 lg:overflow-visible lg:py-0' : 'overflow-x-clip py-16 sm:py-24 lg:py-32'
       }`}
     >
       {!isHero && (
@@ -170,7 +193,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.9, ease: 'easeOut' }}
-        className={`relative mx-auto flex aspect-square w-full items-center justify-center ${
+        className={`relative mx-auto flex aspect-square w-full max-w-full items-center justify-center ${
           isHero ? 'mt-0 min-h-[300px] sm:min-h-[340px] lg:min-h-0' : 'mt-10 sm:mt-16'
         }`}
       >
@@ -225,7 +248,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
                   style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
                 >
                   <div className="wow-orbit-counter">
-                    <ServiceLabel service={s} />
+                    <ServiceLabel service={s} isHero={isHero} />
                   </div>
                 </div>
               )
@@ -241,12 +264,14 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
   )
 }
 
-function ServiceLabel({ service }: { service: Service }) {
+function ServiceLabel({ service, isHero = false }: { service: Service; isHero?: boolean }) {
   return (
     <motion.p
       whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className="cursor-default select-none whitespace-nowrap text-center text-[10px] font-semibold leading-none tracking-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-[11px] md:text-sm md:font-bold lg:text-base"
+      className={`cursor-default select-none whitespace-nowrap text-center text-[10px] font-semibold leading-none tracking-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-[11px] ${
+        isHero ? 'md:text-xs lg:text-sm' : 'md:text-sm md:font-bold lg:text-base'
+      }`}
     >
       {service.title}
     </motion.p>

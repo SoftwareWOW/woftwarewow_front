@@ -40,9 +40,9 @@ export default async function SoftwareWowPage({ params }: Props) {
           <SoftwareWoW/>
           <WoWProces/>
           <SoftwareWoWIndustry/>
-             <div className="mb-3">
-                    <WowGrowthCta />
-                  </div>
+          <div className="mb-3">
+            <WowGrowthCta />
+          </div>
   </div>
   )
   

@@ -18,9 +18,9 @@ const AVATARS = [
 
 export default function SoftwareWowHero() {
   return (
-    <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28">
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-1 lg:flex-row lg:items-center lg:gap-8 xl:gap-10 2xl:gap-14">
-        <div className="flex w-full shrink-0 flex-col items-center gap-8 text-center sm:gap-10 lg:w-[44%] lg:items-start lg:gap-12 lg:text-left 2xl:w-[42%]">
+    <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28 lg:overflow-visible lg:px-6 lg:pt-32">
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-4 sm:gap-10 lg:flex-row lg:items-center lg:gap-6 xl:gap-10 2xl:gap-12">
+        <div className="flex w-full shrink-0 flex-col items-center gap-8 text-center sm:gap-10 lg:w-[46%] lg:items-start lg:gap-10 lg:text-left xl:w-[44%] 2xl:w-[42%] 2xl:gap-12">
           <TextAppearAnimation>
             <h1 className="max-w-xl text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
               This is where ambitions become{' '}
@@ -68,7 +68,7 @@ export default function SoftwareWowHero() {
         </div>
 
         <div className="flex w-full min-w-0 flex-1 items-center justify-center lg:justify-end">
-          <div className="w-full max-w-[min(100%,720px)] lg:max-w-none">
+          <div className="w-full max-w-[min(100%,720px)] lg:mx-0 lg:max-w-[min(100%,500px)] xl:max-w-[min(100%,560px)] 2xl:max-w-[min(100%,620px)]">
             <SoftwareWowEcosystem variant="hero" />
           </div>
         </div>
