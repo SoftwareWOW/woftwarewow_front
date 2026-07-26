@@ -132,7 +132,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
   return (
     <section
       className={`softwarewow-ecosystem relative w-full max-w-full overflow-x-clip ${
-        isHero ? 'py-4 sm:py-6 lg:py-0' : 'py-16 sm:py-24 lg:py-32'
+        isHero ? 'pb-4 pt-0 sm:pb-6 sm:pt-0 lg:py-0' : 'py-16 sm:py-24 lg:py-32'
       }`}
     >
       {!isHero && (

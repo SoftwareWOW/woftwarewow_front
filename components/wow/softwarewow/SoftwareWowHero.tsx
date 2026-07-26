@@ -19,7 +19,7 @@ const AVATARS = [
 export default function SoftwareWowHero() {
   return (
     <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-24 transition-colors duration-300 dark:bg-dark md:px-4 md:pt-28">
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-10 sm:gap-12 lg:flex-row lg:items-center lg:gap-8 xl:gap-10 2xl:gap-14">
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-1 lg:flex-row lg:items-center lg:gap-8 xl:gap-10 2xl:gap-14">
         <div className="flex w-full shrink-0 flex-col items-center gap-8 text-center sm:gap-10 lg:w-[44%] lg:items-start lg:gap-12 lg:text-left 2xl:w-[42%]">
           <TextAppearAnimation>
             <h1 className="max-w-xl text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
