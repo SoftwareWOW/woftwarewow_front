@@ -1,25 +1,25 @@
 'use client'
 
 import gsap from 'gsap'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
+
+const CARD_STEP = 360
 
 interface UseScrollingSoftwareServicesOptions {
   duration?: number
-  repeat?: number
+  step?: number
   delay?: number
 }
 
 const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptions = {}) => {
-  const { duration = 30, repeat = -1, delay = 100 } = options
+  const { duration = 200, step = CARD_STEP, delay = 100 } = options
 
   const marqueeRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<gsap.core.Tween | null>(null)
-  const currentScrollRef = useRef<number>(0)
-  const scrollTimeoutRef = useRef<number | null>(null)
   const resizeTimeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
-    const initScrollingMarquee = () => {
+    const initSlider = () => {
       const marqueeInner = marqueeRef.current
       if (!marqueeInner) return
 
@@ -32,25 +32,11 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
         x: -contentWidth * 2,
         duration,
         ease: 'none',
-        repeat,
+        repeat: -1,
         onRepeat: () => {
           gsap.set(marqueeInner, { x: -contentWidth })
         },
       })
-
-      const handleScroll = () => {
-        if (scrollTimeoutRef.current) {
-          window.cancelAnimationFrame(scrollTimeoutRef.current)
-        }
-
-        scrollTimeoutRef.current = window.requestAnimationFrame(() => {
-          const newScroll = window.pageYOffset
-          if (Math.abs(newScroll - currentScrollRef.current) > 1 && animationRef.current) {
-            animationRef.current.timeScale(newScroll > currentScrollRef.current ? 1 : -1)
-            currentScrollRef.current = newScroll
-          }
-        })
-      }
 
       const handleResize = () => {
         if (resizeTimeoutRef.current) {
@@ -68,77 +54,71 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
         })
       }
 
-      window.addEventListener('scroll', handleScroll)
       window.addEventListener('resize', handleResize)
 
       return () => {
-        window.removeEventListener('scroll', handleScroll)
         window.removeEventListener('resize', handleResize)
-        if (animationRef.current) {
-          animationRef.current.kill()
-        }
+        animationRef.current?.kill()
       }
     }
 
     const timer = setTimeout(() => {
-      const cleanup = initScrollingMarquee()
+      const cleanup = initSlider()
       return () => {
-        if (cleanup) cleanup()
+        cleanup?.()
       }
     }, delay)
 
     return () => {
       clearTimeout(timer)
-      if (scrollTimeoutRef.current) {
-        window.cancelAnimationFrame(scrollTimeoutRef.current)
-      }
       if (resizeTimeoutRef.current) {
         window.cancelAnimationFrame(resizeTimeoutRef.current)
       }
     }
-  }, [duration, repeat, delay])
+  }, [duration, delay])
 
-  const pauseMarquee = () => {
-    if (animationRef.current) {
-      animationRef.current.pause()
-    }
-  }
+  const pauseMarquee = useCallback(() => {
+    animationRef.current?.pause()
+  }, [])
 
-  const resumeMarquee = () => {
-    if (animationRef.current) {
-      animationRef.current.play()
-    }
-  }
+  const resumeMarquee = useCallback(() => {
+    animationRef.current?.play()
+  }, [])
 
-  const reverseMarquee = () => {
-    if (animationRef.current) {
-      animationRef.current.reversed(!animationRef.current.reversed())
-    }
-  }
+  const stepMarquee = useCallback(
+    (direction: 'next' | 'prev') => {
+      const marqueeInner = marqueeRef.current
+      if (!marqueeInner || !animationRef.current || step <= 0) return
 
-  const stepMarquee = (direction: 'next' | 'prev', step: number) => {
-    const marqueeInner = marqueeRef.current
-    if (!marqueeInner || !animationRef.current || step <= 0) return
+      const animation = animationRef.current
+      animation.pause()
 
-    const animation = animationRef.current
-    animation.pause()
+      gsap.to(marqueeInner, {
+        x: direction === 'next' ? `-=${step}` : `+=${step}`,
+        duration: 0.65,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          animation.play()
+        },
+      })
+    },
+    [step],
+  )
 
-    gsap.to(marqueeInner, {
-      x: direction === 'next' ? `-=${step}` : `+=${step}`,
-      duration: 0.65,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        animation.play()
-      },
-    })
-  }
+  const goPrev = useCallback(() => {
+    stepMarquee('prev')
+  }, [stepMarquee])
+
+  const goNext = useCallback(() => {
+    stepMarquee('next')
+  }, [stepMarquee])
 
   return {
     marqueeRef,
     pauseMarquee,
     resumeMarquee,
-    reverseMarquee,
-    stepMarquee,
+    goPrev,
+    goNext,
   }
 }
 
