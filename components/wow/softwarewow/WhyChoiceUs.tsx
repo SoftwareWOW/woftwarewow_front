@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import { renderWowInTitle } from '../shared/WowText'
 
 const WhyChoiceUs = () => {
   return (
@@ -8,9 +9,8 @@ const WhyChoiceUs = () => {
       <div className="mx-auto max-w-[1320px]">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">
-              Why choose
-              <span className="font-instrument italic"> SoftwareWOW! </span>
+            <h2 className="text-appear">
+              Why choose Software{renderWowInTitle('WOW')}
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>

@@ -89,7 +89,7 @@ const SoftwareRfq = () => {
             <SectionLabel className="mb-5">Software FAQ</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear ">
+            <h2 className="text-appear">
               Frequently Asked <span className="font-instrument italic">Questions</span>
             </h2>
           </TextAppearAnimation>
