@@ -198,7 +198,7 @@ const categories: Category[] = [
       { name: 'Slack', hint: 'Team chat', icon: 'logos:slack-icon' },
       { name: 'Google Workspace', hint: 'Gmail & Docs', icon: 'logos:google-icon' },
       { name: 'Microsoft 365', hint: 'Productivity', icon: 'logos:microsoft-icon' },
-      { name: 'Zoom', hint: 'Video calls', icon: 'logos:zoom-icon' },
+      { name: 'Google Meet', hint: 'Video calls', icon: 'logos:google-meet' },
       { name: 'WhatsApp Business', hint: 'Client comms', icon: 'logos:whatsapp-icon' },
     ],
   },
