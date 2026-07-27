@@ -277,7 +277,7 @@ const Technologies = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-6"
+              className="flex flex-wrap justify-center gap-3 sm:gap-4"
             >
               {active.items.map((item, i) => (
                 <motion.li
@@ -289,6 +289,7 @@ const Technologies = () => {
                     delay: i * 0.04,
                     ease: [0.22, 1, 0.36, 1],
                   }}
+                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.667rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(16.666%-0.833rem)]"
                 >
                   <TechCard
                     name={item.name}
