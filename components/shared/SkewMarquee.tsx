@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -23,7 +24,11 @@ const MARQUEE_IMAGES = [
   { id: 12, src: '/images/marquee-img/hero-marquee-06.png' },
 ]
 
-const SkewMarquee = () => {
+type SkewMarqueeProps = {
+  className?: string
+}
+
+const SkewMarquee = ({ className }: SkewMarqueeProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
 
@@ -68,14 +73,15 @@ const SkewMarquee = () => {
   )
 
   return (
-    <section className="relative w-full pb-16 pt-24 lg:pb-48">
+    <section className={cn('relative w-full pb-16 pt-24 lg:pb-48', className)}>
       <div
         ref={containerRef}
         style={{
           transform:
             'translate3d(-200px, 0px, 0px) scale3d(1, 1, 1) rotateX(30deg) rotateY(17deg) rotateZ(342deg) skew(7deg, 359deg)',
           transformStyle: 'preserve-3d',
-        }}>
+        }}
+      >
         <div ref={marqueeRef} className="flex flex-nowrap gap-5">
           {MARQUEE_IMAGES.map((img) => (
             <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">

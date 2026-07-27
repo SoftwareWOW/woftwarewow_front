@@ -17,7 +17,7 @@ const TechStack = () => {
   return (
     <section
       aria-labelledby="tech-heading"
-      className="relative overflow-hidden bg-background py-24 transition-colors duration-300 dark:border-white/10 dark:bg-background sm:py-32"
+      className="relative overflow-hidden bg-background transition-colors duration-300 dark:border-white/10 dark:bg-background"
     >
       <div
         aria-hidden

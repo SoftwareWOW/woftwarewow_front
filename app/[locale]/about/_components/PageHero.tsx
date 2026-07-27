@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import HeroTypingTitle from './HeroTypingTitle'
 
 interface PropsType {
@@ -13,16 +14,12 @@ interface PropsType {
 
 const PageHero = ({ badgeTitle, title, description, italicTitle, spacing, scale }: PropsType) => {
   return (
-    <section className={`${spacing ?? 'relative overflow-hidden py-32 md:py-40 lg:py-[185px]'} `}>
+    <section className={spacing ?? 'relative overflow-hidden pt-32 md:pt-40 lg:pt-[185px]'}>
       <HeroGradientAnimation scale={scale} />
 
       <div className="container">
-        <RevealWrapper className="text-center">
-          {badgeTitle && (
-            <div className="rv-badge">
-              <span className="rv-badge-text">{badgeTitle}</span>
-            </div>
-          )}
+        <RevealWrapper className="flex flex-col items-center text-center">
+          {badgeTitle && <SectionLabel className="mb-4">{badgeTitle}</SectionLabel>}
           {title && italicTitle ? (
             <HeroTypingTitle primaryText={title} secondaryText={italicTitle} />
           ) : (
