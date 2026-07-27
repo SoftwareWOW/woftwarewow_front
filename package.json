@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@iconify-json/devicon": "^1.2.62",
+    "@iconify-json/simple-icons": "^1.2.92",
+    "@iconify/react": "^6.0.2",
     "@radix-ui/react-dialog": "^1.1.10",
     "@radix-ui/react-visually-hidden": "^1.2.0",
     "@types/matter-js": "^0.19.8",
