@@ -1,18 +1,22 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
-import { renderWowInTitle } from '../shared/WowText'
+import WowText from '../shared/WowText'
 
 const WhyChoiceUs = () => {
   return (
     <section className="px-3 md:px-4">
       <div className="mx-auto max-w-[1320px]">
-        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
-          <TextAppearAnimation>
-            <h2 className="text-appear">
-              Why choose Software{renderWowInTitle('WOW')}
+        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16 lg:max-w-5xl">
+          <RevealWrapper>
+            <h2 className="text-center lg:leading-[1.1]">
+              <span className="inline">Why choose </span>
+              <span className=" whitespace-nowrap">
+                Software
+                <WowText>WOW!</WowText>
+              </span>
             </h2>
-          </TextAppearAnimation>
+          </RevealWrapper>
           <TextAppearAnimation>
             <p className="text-appear mt-3 text-lg font-normal text-black/70 dark:text-backgroundBody/70">
               We engineer custom software, apps, and digital products built to scale with your business — not against it.
