@@ -74,20 +74,27 @@ const SkewMarquee = ({ className }: SkewMarqueeProps) => {
 
   return (
     <section className={cn('relative w-full pb-16 pt-24 lg:pb-48', className)}>
-      <div
-        ref={containerRef}
-        style={{
-          transform:
-            'translate3d(-200px, 0px, 0px) scale3d(1, 1, 1) rotateX(30deg) rotateY(17deg) rotateZ(342deg) skew(7deg, 359deg)',
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        <div ref={marqueeRef} className="flex flex-nowrap gap-5">
-          {MARQUEE_IMAGES.map((img) => (
-            <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
-              <Image width={370} height={400} src={img.src} alt={`Marquee ${img.id}`} />
-            </figure>
-          ))}
+      {/*
+        Contain 3D transform bleed so it cannot widen the document (which breaks
+        fixed header/footer + Lenis scroll). Clip horizontally only so the ribbon
+        is not cropped top/bottom.
+      */}
+      <div className="w-full overflow-x-clip overflow-y-visible">
+        <div
+          ref={containerRef}
+          style={{
+            transform:
+              'translate3d(-200px, 0px, 0px) scale3d(1, 1, 1) rotateX(30deg) rotateY(17deg) rotateZ(342deg) skew(7deg, 359deg)',
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <div ref={marqueeRef} className="flex flex-nowrap gap-5">
+            {MARQUEE_IMAGES.map((img) => (
+              <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
+                <Image width={370} height={400} src={img.src} alt={`Marquee ${img.id}`} />
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>

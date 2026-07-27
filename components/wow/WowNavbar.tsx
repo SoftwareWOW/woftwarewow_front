@@ -11,6 +11,7 @@ import {
   Sun,
 } from 'lucide-react'
 import Image from 'next/image'
+import { useLenis } from 'lenis/react'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -48,6 +49,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
+  const lenis = useLenis()
 
   useEffect(() => {
     setMounted(true)
@@ -58,7 +60,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
     if (!menuOpen) return
 
-    const scrollY = window.scrollY
+    const scrollY = lenis?.scroll ?? window.scrollY
 
     document.documentElement.style.overflowY = 'scroll'
 
@@ -77,17 +79,21 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       document.body.style.right = ''
       document.body.style.width = ''
 
-      window.scrollTo(0, scrollY)
+      if (lenis) {
+        lenis.scrollTo(scrollY, { immediate: true })
+      } else {
+        window.scrollTo(0, scrollY)
+      }
     }
-  }, [activeMenuId, mobileMenuId])
+  }, [activeMenuId, mobileMenuId, lenis])
 
   useEffect(() => {
-    lastScrollYRef.current = window.scrollY
+    const getScrollY = () => lenis?.scroll ?? window.scrollY
+    lastScrollYRef.current = getScrollY()
 
-    const handleScroll = () => {
+    const handleScroll = (currentScrollY: number) => {
       if (activeMenuId || mobileMenuId) return
 
-      const currentScrollY = window.scrollY
       const scrollingDown = currentScrollY > lastScrollYRef.current
       const scrollingUp = currentScrollY < lastScrollYRef.current
 
@@ -104,10 +110,22 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       lastScrollYRef.current = currentScrollY
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    if (lenis) {
+      const onLenisScroll = ({ scroll }: { scroll: number }) => handleScroll(scroll)
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [activeMenuId, mobileMenuId])
+      lenis.on('scroll', onLenisScroll)
+
+      return () => {
+        lenis.off('scroll', onLenisScroll)
+      }
+    }
+
+    const onWindowScroll = () => handleScroll(window.scrollY)
+
+    window.addEventListener('scroll', onWindowScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', onWindowScroll)
+  }, [activeMenuId, mobileMenuId, lenis])
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
