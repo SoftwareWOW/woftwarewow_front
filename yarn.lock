@@ -393,6 +393,13 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/logos@^1.2.11":
+  version "1.2.11"
+  resolved "https://registry.npmjs.org/@iconify-json/logos/-/logos-1.2.11.tgz"
+  integrity sha512-fOo4pGEatuyuCFNL+cwquYMa2Im0oJHRHV7lt/Qqs5Ode/lPImHCQcfTtPzZj7qYMPb/h8YHN3TG54uEowrjNQ==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/simple-icons@^1.2.92":
   version "1.2.92"
   resolved "https://registry.npmjs.org/@iconify-json/simple-icons/-/simple-icons-1.2.92.tgz"
