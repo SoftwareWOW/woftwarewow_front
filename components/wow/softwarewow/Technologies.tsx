@@ -229,7 +229,7 @@ const categories: Category[] = [
   },
 ]
 
-const TechStack = () => {
+const Technologies = () => {
   const [activeId, setActiveId] = useState(categories[0].id)
   const active = categories.find((c) => c.id === activeId) ?? categories[0]
   const tabsId = useId()
@@ -237,22 +237,9 @@ const TechStack = () => {
   return (
     <section
       aria-labelledby="tech-heading"
-      className="relative overflow-hidden bg-background py-24 transition-colors duration-300 dark:border-white/10 dark:bg-background sm:py-32"
+      className="relative overflow-hidden bg-background transition-colors duration-300 dark:border-white/10 dark:bg-background"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-20 dark:opacity-30"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-          backgroundSize: '22px 22px',
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full opacity-20 blur-3xl dark:opacity-25"
-        style={{ background: WOW_GRADIENT }}
-      />
+  
 
       <div className="container relative">
         <motion.div
@@ -262,28 +249,9 @@ const TechStack = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <SectionLabel className="mb-6">Our Stack</SectionLabel>
-          <h2
-            id="tech-heading"
-            className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
-          >
-            Powered by industry-leading{' '}
-            <span
-              className="font-instrument italic"
-              style={{
-                background: WOW_GRADIENT,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
-            >
-              technology
-            </span>
-          </h2>
+          <SectionLabel className="mb-6">Technologies We Use</SectionLabel>
           <p className="mt-5 text-base leading-relaxed text-[#808080] transition-colors duration-300 sm:text-lg">
-            We choose proven, modern tools to ship secure, scalable, and high-performance solutions —
-            engineered for businesses that expect world-class digital experiences.
+            Modern tools and freamwork for powerful solutions
           </p>
         </motion.div>
 
@@ -433,4 +401,4 @@ function TechIcon({
   )
 }
 
-export default TechStack
+export default Technologies

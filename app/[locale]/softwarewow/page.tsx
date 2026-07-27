@@ -11,6 +11,7 @@ import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import SoftwareWoWProjects from '@/components/wow/softwarewow/SoftwareWoWProjects'
+import Technologies from '@/components/wow/softwarewow/Technologies'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -42,6 +43,7 @@ export default async function SoftwareWowPage({ params }: Props) {
       <SoftwareWoWProjects />
       <WoWProces />
       <SoftwareWoWIndustry />
+      <Technologies/>
       <div className="mb-3">
         <WowGrowthCta />
       </div>
