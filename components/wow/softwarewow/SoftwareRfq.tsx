@@ -8,6 +8,8 @@ import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'
 import { useState } from 'react'
 
+const INITIAL_VISIBLE_COUNT = 4
+
 const faqData = [
   {
     id: 1,
@@ -61,9 +63,19 @@ const faqData = [
 
 const SoftwareRfq = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [showAll, setShowAll] = useState(false)
+
+  const visibleFaqs = showAll ? faqData : faqData.slice(0, INITIAL_VISIBLE_COUNT)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
+  }
+
+  const handleToggleShowAll = () => {
+    if (showAll && activeIndex !== null && activeIndex >= INITIAL_VISIBLE_COUNT) {
+      setActiveIndex(null)
+    }
+    setShowAll((prev) => !prev)
   }
 
   return (
@@ -77,8 +89,8 @@ const SoftwareRfq = () => {
             <SectionLabel className="mb-5">Software FAQ</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear">
-              Frequently Asked <i className="font-instrument italic">Questions</i>
+            <h2 className="text-appear ">
+              Frequently Asked <span className="font-instrument italic">Questions</span>
             </h2>
           </TextAppearAnimation>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#808080] sm:text-lg">
@@ -87,7 +99,7 @@ const SoftwareRfq = () => {
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[900px] [&>*:not(:last-child)]:mb-6">
-          {faqData.map((item, index) => (
+          {visibleFaqs.map((item, index) => (
             <div
               key={item.id}
               className={`faq-body-transition overflow-hidden border bg-backgroundBody duration-[400ms] dark:bg-dark ${
@@ -127,13 +139,15 @@ const SoftwareRfq = () => {
           ))}
         </RevealWrapper>
 
-        <RevealWrapper className="mt-10 flex justify-center md:mt-14">
-          <ButtonComponentList>
-            <ButtonComponent href="/contact" variant="primary">
-              Still have questions? Contact us
-            </ButtonComponent>
-          </ButtonComponentList>
-        </RevealWrapper>
+        {faqData.length > INITIAL_VISIBLE_COUNT && (
+          <RevealWrapper className="mt-10 flex justify-center md:mt-14">
+            <ButtonComponentList>
+              <ButtonComponent type="button" variant="secondary" onClick={handleToggleShowAll} ariaExpanded={showAll}>
+                {showAll ? 'See Less' : 'See More'}
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
+        )}
       </div>
     </section>
   )
