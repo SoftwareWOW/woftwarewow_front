@@ -387,7 +387,7 @@ html body[data-scroll-locked] {
   }
 
   img {
-    @apply my-9 lg:my-[60px];
+    @apply my-9 rounded-radius-md lg:my-[60px];
   }
   strong {
     @apply font-medium;

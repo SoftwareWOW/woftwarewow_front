@@ -24,13 +24,13 @@ const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
-        <RevealWrapper as="figure" className="reveal-me w-full 2xl:max-h-[523px] rounded-radius-md">
+        <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]">
           <Image
             src={blog?.data?.thumbnail || blog?.data?.featureImage || '/images/blog-img/blog-img-5.png'}
             width={1280}
             height={523}
             alt={blog?.data?.title || 'Blog Details'}
-            className="w-full object-cover"
+            className="w-full rounded-radius-md object-cover"
           />
         </RevealWrapper>
 
