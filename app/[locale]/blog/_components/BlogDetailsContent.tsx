@@ -2,12 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TableOfContent from '@/components/shared/TableOfContent'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
-import Link from 'next/link'
-import { type IconType } from 'react-icons'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok, FaXTwitter } from 'react-icons/fa6'
 import ReactMarkdown from 'react-markdown'
 import rehypeSlug from 'rehype-slug'
 import BlogDetailsList from './BlogDetailsList'
+import BlogShareButtons from './BlogShareButtons'
 
 interface RestOfTheBlogType {
   slug: string
@@ -16,14 +14,6 @@ interface RestOfTheBlogType {
 }
 
 const blogs: RestOfTheBlogType[] = getMarkDownData('data/blogsV2')
-
-const shareLinks: { name: string; href: string; icon: IconType }[] = [
-  { name: 'Facebook', href: 'https://www.facebook.com/', icon: FaFacebookF },
-  { name: 'TikTok', href: 'https://www.tiktok.com/', icon: FaTiktok },
-  { name: 'Instagram', href: 'https://www.instagram.com/', icon: FaInstagram },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/', icon: FaLinkedinIn },
-  { name: 'Twitter', href: 'https://x.com/', icon: FaXTwitter },
-]
 
 const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
   const currentSlug = slug ?? blog?.data?.slug
@@ -51,20 +41,10 @@ const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
                 <div className="mb-7 mt-10 lg:mt-16 xl:mt-20">
                   <h6>Share This Post</h6>
                 </div>
-                <ul className="flex items-center gap-2">
-                  {shareLinks.map(({ name, href, icon: Icon }) => (
-                    <li key={name}>
-                      <Link
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Share on ${name}`}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-secondary text-secondary transition-colors duration-300 hover:bg-primary hover:text-secondary dark:border-dark dark:text-backgroundBody dark:hover:bg-primary dark:hover:text-white">
-                        <Icon className="size-5" aria-hidden />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <BlogShareButtons
+                  title={blog?.data?.title || 'Blog post'}
+                  description={blog?.data?.description}
+                />
               </TableOfContent>
             </div>
           </aside>
