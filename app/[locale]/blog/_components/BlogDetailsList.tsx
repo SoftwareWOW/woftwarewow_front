@@ -21,7 +21,7 @@ const BlogDetailsList: FC<BlogListProps> = ({ blogData }) => {
       {blogData.map((item) => (
         <RevealWrapper key={item.slug} className="group mx-auto flex w-full flex-col xl:max-w-[370px]">
           <Link href={`/blog/${item.slug}`}>
-            <figure className="mb-6 overflow-hidden xl:aspect-[370/399]">
+            <figure className="mb-6 overflow-hidden xl:aspect-[370/399] rounded-radius-sm">
               <img
                 src={item.thumbnail || item.featureImage || '/images/blog-img/blog-img-5.png'}
                 alt={item.title ?? 'Blog post'}
