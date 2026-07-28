@@ -1,6 +1,6 @@
-import RevealWrapper from "@/components/animation/RevealWrapper"
-import HeroGradientAnimation from "@/components/shared/HeroGradientAnimation"
-
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 interface PropsType {
   badgeTitle?: string
@@ -19,12 +19,12 @@ const BlogDetailsHero = ({ badgeTitle, title, description, italicTitle, spacing,
       <div className="container">
         <RevealWrapper className="text-center">
           {badgeTitle && (
-            <div className="rv-badge">
-              <span className="rv-badge-text">{badgeTitle}</span>
+            <div className="mb-3.5 flex justify-center">
+              <SectionLabel>{badgeTitle}</SectionLabel>
             </div>
           )}
           {title && (
-            <h1 className="mb-4 mt-3.5">
+            <h1 className="mb-4">
               {title} <i className="font-instrument italic">{italicTitle}</i>
             </h1>
           )}

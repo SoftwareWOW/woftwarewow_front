@@ -1,6 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-
 import TableOfContent from '@/components/shared/TableOfContent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,10 +14,11 @@ interface RestOfTheBlogType {
   [key: string]: any
 }
 
-const blogs: RestOfTheBlogType[] = getMarkDownData('data/blogs')
-const RestBlogData = blogs.filter((blog) => blog.featured === false).slice(0, 3)
+const blogs: RestOfTheBlogType[] = getMarkDownData('data/blogsV2')
 
-const BlogContent = ({ blog }: any) => {
+const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
+  const currentSlug = slug ?? blog?.data?.slug
+  const RestBlogData = blogs.filter((item) => item.slug !== currentSlug).slice(0, 3)
   const headings = blog.content.match(/### .+/g) ?? []
   const tableOfContents = headings.map((heading: string) => heading.replace('### ', ''))
   return (
@@ -25,10 +26,10 @@ const BlogContent = ({ blog }: any) => {
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
         <RevealWrapper as="figure" className="reveal-me w-full 2xl:max-h-[523px]">
           <Image
-            src={blog?.data?.thumbnail}
+            src={blog?.data?.thumbnail || blog?.data?.featureImage || '/images/blog-img/blog-img-5.png'}
             width={1280}
             height={523}
-            alt="Blog Details"
+            alt={blog?.data?.title || 'Blog Details'}
             className="w-full object-cover"
           />
         </RevealWrapper>
@@ -37,7 +38,9 @@ const BlogContent = ({ blog }: any) => {
           <aside className="min-w-[275px] flex-1">
             <div className="sticky top-24 max-md:mb-10">
               <TableOfContent tableOfContents={tableOfContents}>
-                <h3 className="mb-7 mt-10 text-3xl md:text-4xl lg:mt-16 xl:mt-20">Share</h3>
+                <div className="mb-7 mt-10 lg:mt-16 xl:mt-20">
+                  <SectionLabel>Share</SectionLabel>
+                </div>
                 <ul className="flex items-center gap-5">
                   <li className="relative inline-block h-10 w-10 rounded-full border-2 border-secondary duration-300 hover:bg-primary dark:border-dark">
                     <Link href="https://discord.gg/fSxDJyvJmr" target="_blank">
@@ -152,4 +155,4 @@ const BlogContent = ({ blog }: any) => {
   )
 }
 
-export default BlogContent
+export default BlogDetailsContent
