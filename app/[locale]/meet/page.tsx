@@ -1,6 +1,6 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Metadata } from 'next'
-import CalendlySection from './_components/CalendlySection'
+import CalComSection from './_components/CalComSection'
 import MeetFaq from './_components/MeetFaq'
 import MeetHero from './_components/MeetHero'
 import MeetingInformation from './_components/MeetingInformation'
@@ -18,9 +18,11 @@ type MeetPageProps = {
   params: Promise<{ locale: string }>
 }
 
+const DEFAULT_CAL_LINK = 'https://cal.com/ali-nexon-piqav5/ali'
+
 const MeetPage = async ({ params }: MeetPageProps) => {
   await params
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL
+  const calLink = process.env.NEXT_PUBLIC_CAL_URL || DEFAULT_CAL_LINK
 
   return (
     <LayoutOne>
@@ -28,7 +30,7 @@ const MeetPage = async ({ params }: MeetPageProps) => {
         <MeetHero />
         <WhyMeetWithUs />
         <MeetingInformation />
-        <CalendlySection calendlyUrl={calendlyUrl} />
+        <CalComSection calLink={calLink} />
         <MeetFaq />
         <WowGrowthCta />
       </div>
