@@ -1,4 +1,4 @@
-import { CAL_API_VERSION, getCalComConfig } from '@/lib/calcom/config'
+import { CAL_API_VERSION, getCalComConfig, getValidCalApiKey } from '@/lib/calcom/config'
 import type { CalSlotsByDate } from '@/lib/calcom/types'
 import { NextResponse } from 'next/server'
 
@@ -19,13 +19,6 @@ function extractSlots(data: unknown): CalSlotsByDate {
   return directSlots as CalSlotsByDate
 }
 
-function getValidCalApiKey() {
-  const raw = process.env.CALCOM_API_KEY?.trim()
-  if (!raw) return null
-  if (/^cal_(live_|test_)?[a-zA-Z0-9_]+$/.test(raw)) return raw
-  return null
-}
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const start = searchParams.get('start')
@@ -36,9 +29,12 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'start and end are required.' }, { status: 400 })
   }
 
-  const config = getCalComConfig(process.env.NEXT_PUBLIC_CAL_URL)
+  const config = getCalComConfig()
   if (!config) {
-    return NextResponse.json({ error: 'Cal.com is not configured.' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Cal.com is not configured. Set NEXT_PUBLIC_CAL_URL or CALCOM_URL in your environment.' },
+      { status: 500 },
+    )
   }
 
   const url = new URL('https://api.cal.com/v2/slots')

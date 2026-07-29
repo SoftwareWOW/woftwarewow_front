@@ -1,4 +1,4 @@
-import { CAL_BOOK_API_VERSION, getCalComConfig } from '@/lib/calcom/config'
+import { CAL_BOOK_API_VERSION, getCalComConfig, getValidCalApiKey } from '@/lib/calcom/config'
 import { NextResponse } from 'next/server'
 
 type BookRequestBody = {
@@ -12,13 +12,6 @@ type BookRequestBody = {
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function getValidCalApiKey() {
-  const raw = process.env.CALCOM_API_KEY?.trim()
-  if (!raw) return null
-  if (/^cal_(live_|test_)?[a-zA-Z0-9_]+$/.test(raw)) return raw
-  return null
-}
 
 function getCalErrorMessage(payload: unknown): string | undefined {
   if (!payload || typeof payload !== 'object') return undefined
@@ -53,9 +46,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 })
   }
 
-  const config = getCalComConfig(process.env.NEXT_PUBLIC_CAL_URL)
+  const config = getCalComConfig()
   if (!config) {
-    return NextResponse.json({ error: 'Cal.com is not configured.' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Cal.com is not configured. Set NEXT_PUBLIC_CAL_URL or CALCOM_URL in your environment.' },
+      { status: 500 },
+    )
   }
 
   const bookingPayload = {

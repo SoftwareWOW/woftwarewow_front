@@ -3,6 +3,22 @@ export type CalComConfig = {
   eventTypeSlug: string
 }
 
+/** Booking page URL from env — update NEXT_PUBLIC_CAL_URL or CALCOM_URL to change scheduling everywhere. */
+export function getCalComUrl(): string | null {
+  const candidates = [
+    process.env.NEXT_PUBLIC_CAL_URL,
+    process.env.CALCOM_URL,
+    process.env.CALCOM_BOOKING_URL,
+  ]
+
+  for (const value of candidates) {
+    const trimmed = value?.trim()
+    if (trimmed) return trimmed
+  }
+
+  return null
+}
+
 export function parseCalLink(value: string): CalComConfig | null {
   const trimmed = value.trim()
   if (!trimmed) return null
@@ -25,25 +41,33 @@ export function parseCalLink(value: string): CalComConfig | null {
   }
 }
 
-export function getCalComConfig(calLink?: string): CalComConfig | null {
-  const fromEnv =
-    process.env.CALCOM_USERNAME && process.env.CALCOM_EVENT_SLUG
-      ? {
-          username: process.env.CALCOM_USERNAME,
-          eventTypeSlug: process.env.CALCOM_EVENT_SLUG,
-        }
-      : null
-
-  if (calLink) {
-    return parseCalLink(calLink) ?? fromEnv
+export function getCalComConfig(): CalComConfig | null {
+  const calUrl = getCalComUrl()
+  if (calUrl) {
+    const parsed = parseCalLink(calUrl)
+    if (parsed) return parsed
   }
 
-  if (fromEnv) return fromEnv
+  const username = process.env.CALCOM_USERNAME?.trim()
+  const eventTypeSlug = process.env.CALCOM_EVENT_SLUG?.trim()
 
-  return parseCalLink('https://cal.com/ali-nexon-piqav5/ali')
+  if (username && eventTypeSlug) {
+    return { username, eventTypeSlug }
+  }
+
+  return null
+}
+
+/** Real Cal.com API keys only (cal_live_… / cal_test_…). URLs in CALCOM_API_KEY are ignored. */
+export function getValidCalApiKey(): string | null {
+  const raw = process.env.CALCOM_API_KEY?.trim()
+  if (!raw) return null
+  if (raw.startsWith('http') || raw.includes('cal.com/')) return null
+  if (/^cal_(live_|test_)?[a-zA-Z0-9_]+$/.test(raw)) return raw
+  return null
 }
 
 export const CAL_API_VERSION = '2024-09-04'
 export const CAL_BOOK_API_VERSION = '2024-08-13'
 
-export const CAL_HELP_PHONE = process.env.NEXT_PUBLIC_CAL_HELP_PHONE ?? '(+1) 301 305 6187'
+export const CAL_HELP_PHONE =  '(+1) 777 777 7777'

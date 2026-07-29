@@ -1,4 +1,5 @@
 import LayoutOne from '@/components/shared/LayoutOne'
+import { getCalComUrl } from '@/lib/calcom/config'
 import type { Metadata } from 'next'
 import CalComSection from './_components/CalComSection'
 import MeetFaq from './_components/MeetFaq'
@@ -18,11 +19,9 @@ type MeetPageProps = {
   params: Promise<{ locale: string }>
 }
 
-const DEFAULT_CAL_LINK = 'https://cal.com/ali-nexon-piqav5/ali'
-
 const MeetPage = async ({ params }: MeetPageProps) => {
   await params
-  const calLink = process.env.NEXT_PUBLIC_CAL_URL || DEFAULT_CAL_LINK
+  const calLink = getCalComUrl() ?? undefined
 
   return (
     <LayoutOne>
