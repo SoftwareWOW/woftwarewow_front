@@ -2,6 +2,23 @@ import { CAL_API_VERSION, getCalComConfig } from '@/lib/calcom/config'
 import type { CalSlotsByDate } from '@/lib/calcom/types'
 import { NextResponse } from 'next/server'
 
+function extractSlots(data: unknown): CalSlotsByDate {
+  if (!data || typeof data !== 'object') return {}
+
+  const record = data as Record<string, unknown>
+
+  if (record.slots && typeof record.slots === 'object' && !Array.isArray(record.slots)) {
+    return record.slots as CalSlotsByDate
+  }
+
+  const dateKeyPattern = /^\d{4}-\d{2}-\d{2}$/
+  const directSlots = Object.fromEntries(
+    Object.entries(record).filter(([key, value]) => dateKeyPattern.test(key) && Array.isArray(value)),
+  )
+
+  return directSlots as CalSlotsByDate
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const start = searchParams.get('start')
@@ -47,7 +64,7 @@ export async function GET(request: Request) {
       )
     }
 
-    return NextResponse.json({ slots: payload.data?.slots ?? {} })
+    return NextResponse.json({ slots: extractSlots(payload.data) })
   } catch {
     return NextResponse.json({ error: 'Unable to load availability.' }, { status: 502 })
   }

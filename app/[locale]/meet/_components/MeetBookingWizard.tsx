@@ -304,21 +304,24 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                           const isToday = dateKey === todayKey
                           const isPast = dateKey < todayKey
 
+                          const isClickable = inMonth && hasSlots && !isPast
+
                           return (
                             <button
                               key={dateKey + inMonth}
                               type="button"
-                              disabled={!inMonth || !hasSlots || isPast}
-                              onClick={() => handleDateSelect(dateKey, hasSlots && !isPast)}
+                              disabled={!isClickable}
+                              onClick={() => handleDateSelect(dateKey, isClickable)}
                               className={[
                                 'relative flex h-14 flex-col items-center justify-center border-r border-b border-[#1515150D] text-sm transition-colors last:border-r-0 dark:border-[#EDF0F50D]',
                                 !inMonth ? 'bg-[#FAFAFA] text-[#CCCCCC] dark:bg-[#121212] dark:text-[#555]' : '',
-                                inMonth && !hasSlots ? 'text-[#CCCCCC] dark:text-[#555]' : '',
-                                inMonth && hasSlots && !isSelected
-                                  ? 'text-secondary hover:bg-primary/5 dark:text-backgroundBody'
+                                inMonth && !hasSlots ? 'cursor-not-allowed text-[#CCCCCC] dark:text-[#555]' : '',
+                                isClickable && !isSelected
+                                  ? 'cursor-pointer text-secondary hover:bg-primary/5 dark:text-backgroundBody'
                                   : '',
-                                isSelected ? 'bg-primary text-white' : '',
+                                isSelected ? 'cursor-pointer bg-primary text-white' : '',
                                 isToday && !isSelected ? 'bg-[#FFF9E6] dark:bg-[#2a2618]' : '',
+                                !isClickable && inMonth ? 'cursor-not-allowed opacity-60' : '',
                               ]
                                 .filter(Boolean)
                                 .join(' ')}>
