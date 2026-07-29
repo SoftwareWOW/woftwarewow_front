@@ -32,7 +32,7 @@ function BulletList({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="relative pl-5 text-base leading-relaxed text-muted before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary lg:text-[20px]">
+          className="relative pl-5 text-base leading-relaxed text-muted before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary lg:text-[18px] xl:text-[20px]">
           {item}
         </li>
       ))}
@@ -54,19 +54,19 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
   return (
     <section className={careerSectionClass}>
       <div className={careerSectionInnerClass}>
-        <div className="grid grid-cols-1 gap-10 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-12 2xl:grid-cols-[minmax(0,1fr)_392px] 2xl:gap-16">
+        <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(240px,30%)] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_320px] xl:gap-12 2xl:grid-cols-[minmax(0,1fr)_360px] 2xl:gap-16">
           <RevealWrapper className="min-w-0">
-            <h2 className="text-[28px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:text-[32px] lg:text-[36px]">
+            <h2 className="text-[24px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:text-[28px] md:text-[32px] lg:text-[34px] xl:text-[36px]">
               Job Overview
             </h2>
 
-            <div className="mt-10 space-y-12 lg:mt-12 lg:space-y-14">
+            <div className="mt-8 space-y-10 sm:mt-10 lg:space-y-12 xl:space-y-14">
               <section>
-                <h3 className="text-xl font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+                <h3 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-xl lg:text-[22px] xl:text-[24px]">
                   About the Role
                 </h3>
                 {parsed.aboutTheRole.intro ? (
-                  <p className="mt-4 text-base leading-relaxed text-muted lg:text-[20px]">
+                  <p className="mt-4 text-base leading-relaxed text-muted lg:text-[18px] xl:text-[20px]">
                     {parsed.aboutTheRole.intro}
                   </p>
                 ) : null}
@@ -74,11 +74,11 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
 
               {parsed.responsibilities.items.length > 0 ? (
                 <section>
-                  <h3 className="text-xl font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+                  <h3 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-xl lg:text-[22px] xl:text-[24px]">
                     Responsibilities
                   </h3>
                   {parsed.responsibilities.intro ? (
-                    <p className="mt-4 text-base leading-relaxed text-muted lg:text-[20px]">
+                    <p className="mt-4 text-base leading-relaxed text-muted lg:text-[18px] xl:text-[20px]">
                       {parsed.responsibilities.intro}
                     </p>
                   ) : null}
@@ -88,13 +88,13 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
 
               {parsed.requirements.required.length > 0 || parsed.requirements.niceToHave.length > 0 ? (
                 <section>
-                  <h3 className="text-xl font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+                  <h3 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-xl lg:text-[22px] xl:text-[24px]">
                     Requirements
                   </h3>
 
                   {parsed.requirements.required.length > 0 ? (
                     <div className="mt-6">
-                      <h4 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+                      <h4 className="text-base font-normal text-secondary dark:text-backgroundBody sm:text-lg lg:text-[20px] xl:text-[24px]">
                         Required Qualifications
                       </h4>
                       <BulletList items={parsed.requirements.required} />
@@ -103,7 +103,7 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
 
                   {parsed.requirements.niceToHave.length > 0 ? (
                     <div className="mt-8">
-                      <h4 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+                      <h4 className="text-base font-normal text-secondary dark:text-backgroundBody sm:text-lg lg:text-[20px] xl:text-[24px]">
                         Nice to Have
                       </h4>
                       <BulletList items={parsed.requirements.niceToHave} />
@@ -114,11 +114,11 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
 
               {parsed.benefits.items.length > 0 ? (
                 <section>
-                  <h3 className="text-xl font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+                  <h3 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-xl lg:text-[22px] xl:text-[24px]">
                     Benefits
                   </h3>
                   {parsed.benefits.intro ? (
-                    <p className="mt-4 text-base leading-relaxed text-muted lg:text-[20px]">
+                    <p className="mt-4 text-base leading-relaxed text-muted lg:text-[18px] xl:text-[20px]">
                       {parsed.benefits.intro}
                     </p>
                   ) : null}
@@ -128,8 +128,8 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
             </div>
           </RevealWrapper>
 
-          <aside className="space-y-6 xl:sticky xl:top-28 xl:self-start">
-            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-6 dark:border-white/10 dark:bg-dark-300 sm:p-8 lg:p-10">
+          <aside className="min-w-0 space-y-6 lg:sticky lg:top-28 lg:self-start">
+            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-5 dark:border-white/10 dark:bg-dark-300 sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
               <MetaRow label="Department" value={meta.department} />
               <MetaRow label="Employment" value={meta.employment} />
               <MetaRow label="Location" value={meta.location} />
@@ -138,7 +138,7 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
               <MetaRow label="Posted" value={meta.posted} />
             </RevealWrapper>
 
-            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-6 dark:border-white/10 dark:bg-dark-300 sm:p-8 lg:p-10">
+            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-5 dark:border-white/10 dark:bg-dark-300 sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
               <div className="mb-4 flex items-center gap-1 text-2xl font-medium text-secondary dark:text-backgroundBody">
                 <WowText className="text-[1.15em]">WOW</WowText>
                 <span>{meta.division.replace(/^WOW\s*/i, '')}</span>
@@ -177,8 +177,8 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
 
             <RevealWrapper
               id="apply"
-              className="scroll-mt-28 rounded-[10px] border border-black/10 bg-backgroundBody p-6 dark:border-white/10 dark:bg-dark-300 sm:p-8 lg:p-10">
-              <h3 className="text-xl font-normal text-secondary dark:text-backgroundBody sm:text-[24px]">
+              className="scroll-mt-28 rounded-[10px] border border-black/10 bg-backgroundBody p-5 dark:border-white/10 dark:bg-dark-300 sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
+              <h3 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-xl lg:text-[20px] xl:text-[24px]">
                 Interested in joining our team?
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">

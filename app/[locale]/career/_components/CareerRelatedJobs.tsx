@@ -36,11 +36,11 @@ const CareerRelatedJobs = ({ jobs, currentSlug }: CareerRelatedJobsProps) => {
           </h2>
         </RevealWrapper>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:gap-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-6 xl:gap-8">
           {visibleJobs.map((job) => (
             <RevealWrapper
               key={job.slug}
-              className="flex min-h-[320px] flex-col justify-between rounded-[10px] border border-black/10 bg-backgroundBody p-8 dark:border-white/10 dark:bg-dark-300 sm:min-h-[360px] lg:min-h-[406px] lg:p-10">
+              className="flex min-h-[300px] flex-col justify-between rounded-[10px] border border-black/10 bg-backgroundBody p-6 dark:border-white/10 dark:bg-dark-300 sm:min-h-[320px] sm:p-8 lg:min-h-[340px] lg:p-8 xl:min-h-[406px] xl:p-10">
               <div>
                 <div className="flex flex-wrap gap-2">
                   {job.tags.slice(0, 3).map((tag) => (
@@ -49,10 +49,10 @@ const CareerRelatedJobs = ({ jobs, currentSlug }: CareerRelatedJobsProps) => {
                     </SectionLabel>
                   ))}
                 </div>
-                <h3 className="mt-6 text-[24px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:text-[28px] lg:text-[32px]">
+                <h3 className="mt-5 text-[22px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:mt-6 sm:text-[24px] lg:text-[26px] xl:text-[32px]">
                   {job.title}
                 </h3>
-                <p className="mt-4 line-clamp-3 text-base leading-relaxed text-muted lg:text-[20px]">
+                <p className="mt-3 line-clamp-3 text-base leading-relaxed text-muted sm:mt-4 lg:text-[18px] xl:text-[20px]">
                   {job.description}
                 </p>
               </div>
