@@ -129,7 +129,7 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
           </RevealWrapper>
 
           <aside className="min-w-0 space-y-6 lg:sticky lg:top-28 lg:self-start">
-            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-5 dark:border-white/10 dark:bg-dark-300 sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
+            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-5 transition-colors duration-300 dark:border-white/10 dark:bg-dark sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
               <MetaRow label="Department" value={meta.department} />
               <MetaRow label="Employment" value={meta.employment} />
               <MetaRow label="Location" value={meta.location} />
@@ -138,7 +138,7 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
               <MetaRow label="Posted" value={meta.posted} />
             </RevealWrapper>
 
-            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-5 dark:border-white/10 dark:bg-dark-300 sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
+            <RevealWrapper className="rounded-[10px] border border-black/10 bg-backgroundBody p-5 transition-colors duration-300 dark:border-white/10 dark:bg-dark sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
               <div className="mb-4 flex items-center gap-1 text-2xl font-medium text-secondary dark:text-backgroundBody">
                 <WowText className="text-[1.15em]">WOW</WowText>
                 <span>{meta.division.replace(/^WOW\s*/i, '')}</span>
@@ -177,7 +177,7 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
 
             <RevealWrapper
               id="apply"
-              className="scroll-mt-28 rounded-[10px] border border-black/10 bg-backgroundBody p-5 dark:border-white/10 dark:bg-dark-300 sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
+              className="scroll-mt-28 rounded-[10px] border border-black/10 bg-backgroundBody p-5 transition-colors duration-300 dark:border-white/10 dark:bg-dark sm:p-6 lg:p-7 xl:p-8 2xl:p-10">
               <h3 className="text-lg font-normal text-secondary dark:text-backgroundBody sm:text-xl lg:text-[20px] xl:text-[24px]">
                 Interested in joining our team?
               </h3>
@@ -191,20 +191,20 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
                   name="name"
                   required
                   placeholder="Full Name*"
-                  className="w-full rounded-radius-sm border border-black/10 bg-background px-4 py-3 text-sm text-secondary placeholder:text-muted focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 dark:border-white/10 dark:bg-dark dark:text-backgroundBody"
+                  className="w-full rounded-radius-sm border border-black/10 bg-backgroundBody px-4 py-3 text-sm text-secondary placeholder:text-muted focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 dark:border-white/10 dark:bg-dark dark:text-backgroundBody"
                 />
                 <input
                   type="email"
                   name="email"
                   required
                   placeholder="Email Address*"
-                  className="w-full rounded-radius-sm border border-black/10 bg-background px-4 py-3 text-sm text-secondary placeholder:text-muted focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 dark:border-white/10 dark:bg-dark dark:text-backgroundBody"
+                  className="w-full rounded-radius-sm border border-black/10 bg-backgroundBody px-4 py-3 text-sm text-secondary placeholder:text-muted focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 dark:border-white/10 dark:bg-dark dark:text-backgroundBody"
                 />
                 <input
                   type="file"
                   name="resume"
                   accept=".pdf,.doc,.docx"
-                  className="w-full rounded-radius-sm border border-dashed border-black/10 bg-background px-4 py-3 text-sm text-muted file:mr-3 file:rounded-radius-sm file:border-0 file:bg-primary/10 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-primary dark:border-white/10 dark:bg-dark"
+                  className="w-full rounded-radius-sm border border-dashed border-black/10 bg-backgroundBody px-4 py-3 text-sm text-muted file:mr-3 file:rounded-radius-sm file:border-0 file:bg-primary/10 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-primary dark:border-white/10 dark:bg-dark"
                 />
 
                 <div className="flex min-w-0 flex-col gap-3 pt-2 sm:flex-row sm:items-stretch">

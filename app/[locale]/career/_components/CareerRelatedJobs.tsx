@@ -40,7 +40,7 @@ const CareerRelatedJobs = ({ jobs, currentSlug }: CareerRelatedJobsProps) => {
           {visibleJobs.map((job) => (
             <RevealWrapper
               key={job.slug}
-              className="flex min-h-[300px] flex-col justify-between rounded-[10px] border border-black/10 bg-backgroundBody p-6 dark:border-white/10 dark:bg-dark-300 sm:min-h-[320px] sm:p-8 lg:min-h-[340px] lg:p-8 xl:min-h-[406px] xl:p-10">
+              className="flex min-h-[300px] flex-col justify-between rounded-[10px] border border-black/10 bg-backgroundBody p-6 transition-colors duration-300 dark:border-white/10 dark:bg-dark sm:min-h-[320px] sm:p-8 lg:min-h-[340px] lg:p-8 xl:min-h-[406px] xl:p-10">
               <div>
                 <div className="flex flex-wrap gap-2">
                   {job.tags.slice(0, 3).map((tag) => (
