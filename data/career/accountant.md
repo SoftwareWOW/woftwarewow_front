@@ -1,16 +1,29 @@
 ---
 title: 'Accountant'
-tags: ['Accounting', 'San Francisco, California', 'Full-Time']
-description: 'Manages financial records, prepares reports, and ensures compliance with financial regulations and standards.'
+tags: ['FINANCE', 'MISSISSAUGA / REMOTE', 'FULL-TIME']
+description: 'Support financial operations, reporting, and compliance for a fast-growing creative and technology agency.'
+department: Finance
+employment: Full-Time
+location: Mississauga / Remote
+experience: 3-5 Years
+salary: $60,000 - $78,000
+posted: Jul 30, 2026
+division: Superagency
+divisionDescription: 'A Brand by WOW Superagency. We help businesses grow through technology, design, marketing, and operational excellence.'
+industry: Creative & Digital Agency
+companySize: 20+ Team Members
+companyLocation: Mississauga, Ontario (Remote Friendly)
+phone: (+1) 301 305 6187
+website: www.softwarewow.ca
 ---
 
 ### Job Description
 
-We are looking for a detail-oriented **Accountant** to join our finance team. This role requires strong analytical skills, knowledge of accounting principles, and the ability to manage financial data effectively. You will be responsible for maintaining accurate financial records, preparing reports, and ensuring compliance with regulatory requirements.
+We are looking for a detail-oriented Accountant to join our finance team. This role requires strong analytical skills, knowledge of accounting principles, and the ability to manage financial data effectively. You will be responsible for maintaining accurate financial records, preparing reports, and ensuring compliance with regulatory requirements.
 
 ### Responsibilities
 
-As an **Accountant**, you will be responsible for:
+As an Accountant, you will be responsible for:
 
 - Preparing and maintaining financial records, reports, and statements.
 - Ensuring accuracy in financial documents, including tax filings and audits.
@@ -23,7 +36,7 @@ As an **Accountant**, you will be responsible for:
 
 ### Requirements
 
-The ideal candidate should have:
+#### Required Qualifications
 
 - Bachelor's degree in Accounting, Finance, or a related field.
 - 3+ years of experience in accounting or financial management.
@@ -33,6 +46,11 @@ The ideal candidate should have:
 - Strong attention to detail and accuracy in financial reporting.
 - Knowledge of tax regulations and compliance requirements.
 - Ability to work independently and as part of a team.
+
+#### Nice to Have
+
+- CPA designation or progress toward certification.
+- Experience supporting agency or professional services businesses.
 
 ### Your Benefits
 

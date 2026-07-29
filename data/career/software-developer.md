@@ -1,16 +1,29 @@
 ---
 title: 'Software Developer'
-tags: ['Software Development', 'San Francisco, California', 'Full-Time']
-description: 'Designs, develops, and maintains software applications and systems to drive business solutions and innovation.'
+tags: ['TECHNOLOGY', 'MISSISSAUGA / REMOTE', 'FULL-TIME']
+description: 'Build modern web applications, software platforms, and AI-powered business solutions for growing companies.'
+department: Technology
+employment: Full-Time
+location: Mississauga / Remote
+experience: 3-5 Years
+salary: $85,000 - $110,000
+posted: Aug 28, 2026
+division: Superagency
+divisionDescription: 'A Brand by WOW Superagency. We build scalable software, automation, and AI-powered products that help businesses grow faster.'
+industry: Creative & Digital Agency
+companySize: 20+ Team Members
+companyLocation: Mississauga, Ontario (Remote Friendly)
+phone: (+1) 301 305 6187
+website: www.softwarewow.ca
 ---
 
 ### Job Description
 
-We are seeking a highly skilled **Software Developer** to join our dynamic engineering team. This role requires a strong technical background, problem-solving abilities, and a passion for developing scalable and efficient software solutions. You will collaborate with cross-functional teams to design, implement, and optimize applications that meet business and user needs.
+We are seeking a highly skilled Software Developer to join our dynamic engineering team. This role requires a strong technical background, problem-solving abilities, and a passion for developing scalable and efficient software solutions. You will collaborate with cross-functional teams to design, implement, and optimize applications that meet business and user needs.
 
 ### Responsibilities
 
-As a **Software Developer**, you will be responsible for:
+As a Software Developer, you will be responsible for:
 
 - Designing, developing, and deploying high-quality software solutions.
 - Writing clean, maintainable, and efficient code following industry best practices.
@@ -22,7 +35,7 @@ As a **Software Developer**, you will be responsible for:
 
 ### Requirements
 
-The ideal candidate should have:
+#### Required Qualifications
 
 - 3+ years of professional software development experience.
 - Proficiency in programming languages such as JavaScript, Python, Java, or C#.
@@ -31,6 +44,11 @@ The ideal candidate should have:
 - Familiarity with databases such as PostgreSQL, MySQL, or MongoDB.
 - Knowledge of version control systems like Git and CI/CD pipelines.
 - Strong problem-solving skills and ability to work independently or as part of a team.
+
+#### Nice to Have
+
+- Experience with cloud platforms such as AWS, Azure, or Google Cloud.
+- Familiarity with AI integrations and automation workflows.
 
 ### Your Benefits
 
