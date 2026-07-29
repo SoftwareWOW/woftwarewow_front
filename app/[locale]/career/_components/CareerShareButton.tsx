@@ -2,15 +2,13 @@
 
 import { useToastOptional } from '@/components/wow/shared/ToastProvider'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
-import { Share2 } from 'lucide-react'
 
 type CareerShareButtonProps = {
   title: string
   description?: string
-  className?: string
 }
 
-export default function CareerShareButton({ title, description, className = '' }: CareerShareButtonProps) {
+export default function CareerShareButton({ title, description }: CareerShareButtonProps) {
   const toast = useToastOptional()
 
   const handleShare = async () => {
@@ -38,7 +36,7 @@ export default function CareerShareButton({ title, description, className = '' }
   }
 
   return (
-    <ButtonComponent type="button" onClick={handleShare} variant="secondary" className={className}>
+    <ButtonComponent type="button" onClick={handleShare} variant="secondary" fullWidth>
       Share To
     </ButtonComponent>
   )
@@ -72,12 +70,8 @@ export function CareerShareIconButton({ title, description }: CareerShareButtonP
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleShare}
-      aria-label="Share this position"
-      className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm border border-black/10 bg-backgroundBody text-secondary transition-colors hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-dark dark:text-backgroundBody dark:hover:bg-primary/10">
-      <Share2 className="size-4" aria-hidden />
-    </button>
+    <ButtonComponent type="button" onClick={handleShare} variant="secondary" ariaLabel="Share this position">
+      Share
+    </ButtonComponent>
   )
 }

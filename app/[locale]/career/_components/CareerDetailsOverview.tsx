@@ -207,17 +207,20 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
                   className="w-full rounded-radius-sm border border-dashed border-black/10 bg-background px-4 py-3 text-sm text-muted file:mr-3 file:rounded-radius-sm file:border-0 file:bg-primary/10 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-primary dark:border-white/10 dark:bg-dark"
                 />
 
-                <div className="flex items-center gap-3 pt-2">
-                  <ButtonComponentList className="flex-1" itemClassName="w-full">
+                <div className="flex min-w-0 flex-col gap-3 pt-2 sm:flex-row sm:items-stretch">
+                  <ButtonComponentList className="min-w-0 flex-1" itemClassName="w-full">
                     <ButtonComponent
                       type="submit"
                       variant="primary"
+                      fullWidth
                       disabled={submitting}
-                      className="w-full [&_span]:!text-white">
-                      {submitting ? 'Submitting...' : 'Apply for this position'}
+                      className="[&_span]:!text-white">
+                      {submitting ? 'Submitting...' : 'Apply'}
                     </ButtonComponent>
                   </ButtonComponentList>
-                  <CareerShareIconButton title={career.title} description={career.description} />
+                  <ButtonComponentList className="shrink-0 sm:w-auto" itemClassName="w-full sm:w-auto">
+                    <CareerShareIconButton title={career.title} description={career.description} />
+                  </ButtonComponentList>
                 </div>
               </form>
             </RevealWrapper>

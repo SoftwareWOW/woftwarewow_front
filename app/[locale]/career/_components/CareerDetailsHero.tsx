@@ -9,6 +9,9 @@ type CareerDetailsHeroProps = {
   career: CareerPostData
 }
 
+const heroButtonListClass = 'w-full'
+const heroButtonItemClass = 'w-full'
+
 const CareerDetailsHero = ({ career }: CareerDetailsHeroProps) => (
   <section className={careerHeroClass}>
     <RevealWrapper className={careerSectionInnerClass}>
@@ -30,17 +33,15 @@ const CareerDetailsHero = ({ career }: CareerDetailsHeroProps) => (
             </div>
           </div>
 
-          <div className="flex w-full shrink-0 flex-col gap-3 lg:w-auto lg:min-w-[180px] xl:min-w-[220px] lg:pt-2">
-            <ButtonComponentList className="w-full lg:w-auto" itemClassName="w-full lg:w-auto">
-              <ButtonComponent href="#apply" variant="primary" className="w-full lg:min-w-[180px] xl:min-w-[220px] [&_span]:!text-white">
+          <div className="flex w-full shrink-0 flex-col gap-3 lg:w-[240px] xl:w-[260px]">
+            <ButtonComponentList className={heroButtonListClass} itemClassName={heroButtonItemClass}>
+              <ButtonComponent href="#apply" variant="primary" fullWidth className="[&_span]:!text-white">
                 Apply Now
               </ButtonComponent>
             </ButtonComponentList>
-            <CareerShareButton
-              title={career.title}
-              description={career.description}
-              className="w-full lg:min-w-[180px] xl:min-w-[220px]"
-            />
+            <ButtonComponentList className={heroButtonListClass} itemClassName={heroButtonItemClass}>
+              <CareerShareButton title={career.title} description={career.description} />
+            </ButtonComponentList>
           </div>
         </div>
       </div>
