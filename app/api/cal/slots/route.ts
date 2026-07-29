@@ -19,6 +19,13 @@ function extractSlots(data: unknown): CalSlotsByDate {
   return directSlots as CalSlotsByDate
 }
 
+function getValidCalApiKey() {
+  const raw = process.env.CALCOM_API_KEY?.trim()
+  if (!raw) return null
+  if (/^cal_(live_|test_)?[a-zA-Z0-9_]+$/.test(raw)) return raw
+  return null
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const start = searchParams.get('start')
@@ -45,8 +52,9 @@ export async function GET(request: Request) {
     'cal-api-version': CAL_API_VERSION,
   }
 
-  if (process.env.CALCOM_API_KEY) {
-    headers.Authorization = `Bearer ${process.env.CALCOM_API_KEY}`
+  const apiKey = getValidCalApiKey()
+  if (apiKey) {
+    headers.Authorization = `Bearer ${apiKey}`
   }
 
   try {

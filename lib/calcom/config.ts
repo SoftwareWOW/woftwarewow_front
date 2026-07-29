@@ -44,6 +44,6 @@ export function getCalComConfig(calLink?: string): CalComConfig | null {
 }
 
 export const CAL_API_VERSION = '2024-09-04'
-export const CAL_BOOK_API_VERSION = '2026-02-25'
+export const CAL_BOOK_API_VERSION = '2024-08-13'
 
 export const CAL_HELP_PHONE = process.env.NEXT_PUBLIC_CAL_HELP_PHONE ?? '(+1) 301 305 6187'

@@ -13,15 +13,25 @@ type BookRequestBody = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export async function POST(request: Request) {
-  const apiKey = process.env.CALCOM_API_KEY
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: 'Booking is not configured. Please add CALCOM_API_KEY to your environment.' },
-      { status: 503 },
-    )
-  }
+function getValidCalApiKey() {
+  const raw = process.env.CALCOM_API_KEY?.trim()
+  if (!raw) return null
+  if (/^cal_(live_|test_)?[a-zA-Z0-9_]+$/.test(raw)) return raw
+  return null
+}
 
+function getCalErrorMessage(payload: unknown): string | undefined {
+  if (!payload || typeof payload !== 'object') return undefined
+  const record = payload as Record<string, unknown>
+  if (record.error && typeof record.error === 'object') {
+    const error = record.error as Record<string, unknown>
+    if (typeof error.message === 'string') return error.message
+  }
+  if (typeof record.message === 'string') return record.message
+  return undefined
+}
+
+export async function POST(request: Request) {
   let body: BookRequestBody
   try {
     body = (await request.json()) as BookRequestBody
@@ -59,29 +69,34 @@ export async function POST(request: Request) {
       language: 'en',
       ...(body.phone?.trim() ? { phoneNumber: body.phone.trim() } : {}),
     },
-    metadata: body.comments?.trim() ? { notes: body.comments.trim() } : undefined,
+    ...(body.comments?.trim() ? { metadata: { notes: body.comments.trim() } } : {}),
+  }
+
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+    'cal-api-version': CAL_BOOK_API_VERSION,
+  }
+
+  const apiKey = getValidCalApiKey()
+  if (apiKey) {
+    headers.Authorization = `Bearer ${apiKey}`
   }
 
   try {
     const response = await fetch('https://api.cal.com/v2/bookings', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-        'cal-api-version': CAL_BOOK_API_VERSION,
-      },
+      headers,
       body: JSON.stringify(bookingPayload),
     })
 
     const payload = (await response.json()) as {
       status?: string
-      data?: { uid?: string; id?: number }
-      error?: { message?: string }
+      data?: { uid?: string; id?: number; meetingUrl?: string }
     }
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: payload.error?.message ?? 'Unable to create booking.' },
+        { error: getCalErrorMessage(payload) ?? 'Unable to create booking.' },
         { status: response.status },
       )
     }
