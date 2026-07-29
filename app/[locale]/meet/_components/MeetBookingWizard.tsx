@@ -22,7 +22,7 @@ type MeetBookingWizardProps = {
 const WEEKDAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
 const inputClassName =
-  'w-full rounded-radius-sm border border-[#1515151A] bg-backgroundBody px-4 py-3 text-base text-secondary placeholder:text-[#808080] focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody'
+  'w-full rounded-radius-sm border border-black/10 bg-backgroundBody px-4 py-3 text-base text-secondary placeholder:text-muted focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15 dark:border-white/10 dark:bg-dark dark:text-backgroundBody'
 
 function formatMonthYear(date: Date) {
   return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
@@ -205,14 +205,14 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
 
   if (step === 'success') {
     return (
-      <div className="flex min-h-[520px] flex-col items-center justify-center rounded-radius-md border border-[#1515151A] bg-backgroundBody px-6 py-16 text-center dark:border-[#EDF0F51A] dark:bg-dark">
+      <div className="flex min-h-[520px] flex-col items-center justify-center rounded-radius-md border border-black/10 bg-backgroundBody px-6 py-16 text-center dark:border-white/10 dark:bg-dark">
         <span className="mb-4 inline-flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
           <CalendarDays className="size-7" aria-hidden />
         </span>
-        <h3 className="text-2xl text-secondary dark:text-[#F2F2F2]">
-          Booking <span className="font-instrument italic">confirmed</span>
+        <h3 className="text-2xl text-secondary dark:text-backgroundBody">
+          Booking confirmed
         </h3>
-        <p className="mt-3 max-w-md text-base leading-relaxed text-[#808080]">
+        <p className="mt-3 max-w-md text-base leading-relaxed text-muted">
           Thank you, {firstName}! Your consultation is scheduled
           {selectedDate && selectedSlot
             ? ` for ${formatDisplayDate(selectedDate)} at ${formatTime(selectedSlot, timeZone)}`
@@ -224,21 +224,21 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-radius-md border border-[#1515151A] bg-backgroundBody dark:border-[#EDF0F51A] dark:bg-dark">
+    <div className="overflow-hidden rounded-radius-md border border-black/10 bg-backgroundBody dark:border-white/10 dark:bg-dark">
       <div className="grid min-h-[560px] grid-cols-1 lg:grid-cols-[280px_1fr]">
-        <aside className="flex flex-col border-b border-[#1515150D] bg-[#F5F5F5] px-6 py-8 dark:border-[#EDF0F50D] dark:bg-[#141414] lg:border-b-0 lg:border-r">
+        <aside className="flex flex-col border-b border-black/5 bg-background px-6 py-8 dark:border-white/5 dark:bg-dark-300 lg:border-b-0 lg:border-r">
           <div className="mx-auto max-w-[220px] text-center lg:mx-0">
             <span className="mx-auto mb-5 inline-flex size-16 items-center justify-center rounded-radius-sm bg-primary/10 text-primary lg:mx-0">
               <SidebarIcon className="size-7" strokeWidth={1.5} aria-hidden />
             </span>
-            <h3 className="text-xl leading-snug text-secondary dark:text-[#F2F2F2] md:text-2xl">
+            <h3 className="text-xl leading-snug text-secondary dark:text-backgroundBody md:text-2xl">
               {sidebarContent.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#808080]">{sidebarContent.description}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{sidebarContent.description}</p>
           </div>
 
-          <div className="mt-auto hidden pt-10 text-center text-sm text-[#808080] lg:block">
-            <p className="font-medium text-secondary dark:text-[#F2F2F2]">Questions?</p>
+          <div className="mt-auto hidden pt-10 text-center text-sm text-muted lg:block">
+            <p className="font-medium text-secondary dark:text-backgroundBody">Questions?</p>
             <p className="mt-1 flex items-center justify-center gap-1.5">
               <Phone className="size-3.5" aria-hidden />
               Call {CAL_HELP_PHONE} for help
@@ -247,8 +247,8 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
         </aside>
 
         <div className="flex min-w-0 flex-col bg-backgroundBody dark:bg-dark">
-          <div className="border-b border-[#1515150D] px-5 py-4 dark:border-[#EDF0F50D] sm:px-8">
-            <h4 className="text-lg text-secondary dark:text-[#F2F2F2] md:text-xl">
+          <div className="border-b border-black/5 px-5 py-4 dark:border-white/5 sm:px-8">
+            <h4 className="text-lg text-secondary dark:text-backgroundBody md:text-xl">
               {step === 'details' ? 'Customer Information' : 'Date & Time Selection'}
             </h4>
           </div>
@@ -258,21 +258,21 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
               <div className="space-y-8">
                 <div>
                   <div className="mb-4 flex items-center justify-between">
-                    <p className="text-base font-medium text-secondary dark:text-[#F2F2F2]">
+                    <p className="text-base font-medium text-secondary dark:text-backgroundBody">
                       {formatMonthYear(viewDate)}
                     </p>
                     <div className="flex gap-1">
                       <button
                         type="button"
                         onClick={() => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))}
-                        className="inline-flex size-9 items-center justify-center rounded-radius-sm border border-[#1515151A] text-secondary transition-colors hover:bg-primary/10 dark:border-[#EDF0F51A] dark:text-backgroundBody"
+                        className="inline-flex size-9 items-center justify-center rounded-radius-sm border border-black/10 text-secondary transition-colors hover:bg-primary/10 dark:border-white/10 dark:text-backgroundBody"
                         aria-label="Previous month">
                         <ChevronLeft className="size-4" />
                       </button>
                       <button
                         type="button"
                         onClick={() => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))}
-                        className="inline-flex size-9 items-center justify-center rounded-radius-sm border border-[#1515151A] text-secondary transition-colors hover:bg-primary/10 dark:border-[#EDF0F51A] dark:text-backgroundBody"
+                        className="inline-flex size-9 items-center justify-center rounded-radius-sm border border-black/10 text-secondary transition-colors hover:bg-primary/10 dark:border-white/10 dark:text-backgroundBody"
                         aria-label="Next month">
                         <ChevronRight className="size-4" />
                       </button>
@@ -285,17 +285,17 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                     </div>
                   ) : (
                     <>
-                      <div className="grid grid-cols-7 border border-[#1515150D] bg-[#F8F8F8] dark:border-[#EDF0F50D] dark:bg-[#1a1a1a]">
+                      <div className="grid grid-cols-7 border border-black/5 bg-background dark:border-white/5 dark:bg-dark-200">
                         {WEEKDAYS.map((day, index) => (
                           <div
                             key={`${day}-${index}`}
-                            className="border-r border-[#1515150D] py-2 text-center text-xs font-medium text-[#808080] last:border-r-0 dark:border-[#EDF0F50D]">
+                            className="border-r border-black/5 py-2 text-center text-xs font-medium text-muted last:border-r-0 dark:border-white/5">
                             {day}
                           </div>
                         ))}
                       </div>
 
-                      <div className="grid grid-cols-7 border-x border-b border-[#1515150D] dark:border-[#EDF0F50D]">
+                      <div className="grid grid-cols-7 border-x border-b border-black/5 dark:border-white/5">
                         {calendarDays.map(({ date, inMonth }) => {
                           const dateKey = formatDateKey(date)
                           const daySlots = slots[dateKey] ?? []
@@ -313,21 +313,21 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                               disabled={!isClickable}
                               onClick={() => handleDateSelect(dateKey, isClickable)}
                               className={[
-                                'relative flex h-14 flex-col items-center justify-center border-r border-b border-[#1515150D] text-sm transition-colors last:border-r-0 dark:border-[#EDF0F50D]',
-                                !inMonth ? 'bg-[#FAFAFA] text-[#CCCCCC] dark:bg-[#121212] dark:text-[#555]' : '',
-                                inMonth && !hasSlots ? 'cursor-not-allowed text-[#CCCCCC] dark:text-[#555]' : '',
+                                'relative flex h-14 flex-col items-center justify-center border-r border-b border-black/5 text-sm transition-colors last:border-r-0 dark:border-white/5',
+                                !inMonth ? 'bg-backgroundBody/60 text-muted/40 dark:bg-dark-300 dark:text-muted/40' : '',
+                                inMonth && !hasSlots ? 'cursor-not-allowed text-muted/40' : '',
                                 isClickable && !isSelected
                                   ? 'cursor-pointer text-secondary hover:bg-primary/5 dark:text-backgroundBody'
                                   : '',
                                 isSelected ? 'cursor-pointer bg-primary text-white' : '',
-                                isToday && !isSelected ? 'bg-[#FFF9E6] dark:bg-[#2a2618]' : '',
+                                isToday && !isSelected ? 'bg-primary/10' : '',
                                 !isClickable && inMonth ? 'cursor-not-allowed opacity-60' : '',
                               ]
                                 .filter(Boolean)
                                 .join(' ')}>
                               {inMonth ? date.getDate() : ''}
                               {inMonth && hasSlots && !isSelected && (
-                                <span className="absolute bottom-1.5 h-0.5 w-5 rounded-full bg-[#22c55e]" />
+                                <span className="absolute bottom-1.5 h-0.5 w-5 rounded-full bg-primary" />
                               )}
                               {isSelected && (
                                 <span className="absolute bottom-1.5 h-0.5 w-5 rounded-full bg-white/90" />
@@ -343,16 +343,16 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                 {selectedDate && (
                   <div>
                     <div className="relative mb-5 flex items-center">
-                      <div className="h-px flex-1 bg-[#1515151A] dark:bg-[#EDF0F51A]" />
-                      <p className="px-4 text-sm text-[#808080]">
+                      <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+                      <p className="px-4 text-sm text-muted">
                         Pick a slot for{' '}
                         <span className="font-medium text-primary">{formatDisplayDate(selectedDate)}</span>
                       </p>
-                      <div className="h-px flex-1 bg-[#1515151A] dark:bg-[#EDF0F51A]" />
+                      <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
                     </div>
 
                     {slotsForSelectedDate.length === 0 ? (
-                      <p className="text-center text-sm text-[#808080]">No times available for this date.</p>
+                      <p className="text-center text-sm text-muted">No times available for this date.</p>
                     ) : (
                       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
                         {slotsForSelectedDate.map((slot) => {
@@ -367,7 +367,7 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                                 'rounded-radius-sm border px-3 py-3 text-sm font-medium transition-colors',
                                 isActive
                                   ? 'border-primary bg-primary text-white'
-                                  : 'border-[#bbf7d0] bg-[#ecfdf3] text-secondary hover:border-primary/40 dark:border-[#166534] dark:bg-[#14532d33] dark:text-backgroundBody',
+                                  : 'border-black/10 bg-primary/5 text-secondary hover:border-primary/40 dark:border-white/10 dark:bg-primary/10 dark:text-backgroundBody',
                               ].join(' ')}>
                               {formatTime(slot.start, timeZone)}
                             </button>
@@ -433,7 +433,7 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                 />
 
                 {selectedDate && selectedSlot && (
-                  <p className="text-sm text-[#808080]">
+                  <p className="text-sm text-muted">
                     Selected: {formatDisplayDate(selectedDate)} at {formatTime(selectedSlot, timeZone)} (
                     {timeZone})
                   </p>
@@ -442,12 +442,12 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
             )}
           </div>
 
-          <div className="flex items-center justify-between border-t border-[#1515150D] px-5 py-4 dark:border-[#EDF0F50D] sm:px-8">
+          <div className="flex items-center justify-between border-t border-black/5 px-5 py-4 dark:border-white/5 sm:px-8">
             {step === 'details' ? (
               <button
                 type="button"
                 onClick={handleBack}
-                className="inline-flex items-center gap-1 text-sm font-medium text-[#808080] transition-colors hover:text-secondary dark:hover:text-backgroundBody">
+                className="inline-flex items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-secondary dark:hover:text-backgroundBody">
                 <ChevronLeft className="size-4" />
                 Back
               </button>
@@ -459,9 +459,9 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
               <button
                 type="button"
                 onClick={handleContinueToDetails}
-                className="ml-auto inline-flex items-center gap-2 rounded-radius-sm bg-primary px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90">
+                className="ml-auto inline-flex items-center gap-2 rounded-radius-sm bg-primary px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 [&_svg]:stroke-white">
                 Next
-                <ChevronRight className="size-4" />
+                <ChevronRight className="size-4" aria-hidden />
               </button>
             )}
 
@@ -470,7 +470,7 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                 type="submit"
                 form="meet-booking-form"
                 disabled={submitting}
-                className="inline-flex items-center gap-2 rounded-radius-sm bg-primary px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60">
+                className="inline-flex items-center gap-2 rounded-radius-sm bg-primary px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-60 [&_svg]:stroke-white">
                 {submitting ? (
                   <>
                     <Loader2 className="size-4 animate-spin" aria-hidden />
@@ -479,7 +479,7 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
                 ) : (
                   <>
                     Confirm Booking
-                    <ChevronRight className="size-4" />
+                    <ChevronRight className="size-4" aria-hidden />
                   </>
                 )}
               </button>

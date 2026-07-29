@@ -13,10 +13,10 @@ const CalComSection = ({ calLink }: CalComSectionProps) => (
     <div className={meetSectionInnerClass}>
       <RevealWrapper className="mb-8 text-center md:mb-12">
         <SectionLabel className="mb-5">Book Your Time</SectionLabel>
-        <h2 id="cal-heading" className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-          Choose a time that <span className="font-instrument italic">works for you</span>
+        <h2 id="cal-heading" className="text-secondary transition-colors duration-300 dark:text-backgroundBody">
+          Choose a time that works for you
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#808080] md:text-lg">
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
           Select a date, pick a time slot, and confirm your details to schedule your free consultation.
         </p>
       </RevealWrapper>
