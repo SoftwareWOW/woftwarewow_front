@@ -14,7 +14,7 @@ const metricValueSizeClass =
 
 function MetricDescriptions({ lines }: { lines: string[] }) {
   return (
-    <div className="space-y-0.5 text-center">
+    <div className="space-y-0.5 text-center lg:text-inherit">
       {lines.map((line) => (
         <p key={line} className={cn('text-sm leading-snug sm:text-base', textColorClass)}>
           {line}
@@ -44,9 +44,11 @@ function RowDivider({ side }: { side: 'left' | 'right' }) {
 
 function SuccessMetricItem({
   metric,
+  columnIndex,
   withSideBorders = false,
 }: {
   metric: CaseStudySuccessMetric
+  columnIndex: number
   withSideBorders?: boolean
 }) {
   const isCenter = metric.variant === 'center'
@@ -55,6 +57,9 @@ function SuccessMetricItem({
     <div
       className={cn(
         'relative flex min-h-[120px] items-center justify-center px-4 py-8 text-center sm:min-h-[140px] sm:px-6 lg:py-10',
+        columnIndex === 0 && 'lg:justify-start lg:px-0 lg:text-left',
+        columnIndex === 1 && 'lg:justify-center lg:px-4 lg:text-center',
+        columnIndex === 2 && 'lg:justify-end lg:px-0 lg:text-right',
         isCenter ? 'flex-col gap-2' : 'flex-col gap-2 sm:flex-row sm:gap-4 lg:gap-6',
       )}>
       {withSideBorders ? (
@@ -79,6 +84,7 @@ function MetricsRow({ metrics }: { metrics: CaseStudySuccessMetric[] }) {
         <SuccessMetricItem
           key={`${metric.value}-${index}`}
           metric={metric}
+          columnIndex={index}
           withSideBorders={index === 1}
         />
       ))}
