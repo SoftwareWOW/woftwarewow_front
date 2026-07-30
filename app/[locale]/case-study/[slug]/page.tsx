@@ -27,7 +27,7 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 pb-12 sm:gap-16 sm:pb-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px] 2xl:pb-[200px]">
-        <CaseStudyDetailsHero study={study} />
+        {/* <CaseStudyDetailsHero study={study} />
         <CaseStudyAboutClient paragraphs={study.aboutClient} />
         <CaseStudyChallenge paragraphs={study.challengeParagraphs} />
         <CaseStudyApproach
@@ -36,8 +36,8 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
           paragraphs={study.approachParagraphs}
         />
         <CaseStudyBusinessGoals goals={study.businessGoals} />
-        <CaseStudyTargetAudience audiences={study.targetAudience} />
-        <CaseStudyHighlights testimonial={study.testimonial} />
+        <CaseStudyTargetAudience audiences={study.targetAudience} /> */}
+        <CaseStudyHighlights/>
         <WowGrowthCta />
       </div>
     </LayoutOne>
