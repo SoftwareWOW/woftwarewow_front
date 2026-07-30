@@ -12,9 +12,9 @@ const textColorClass = '!text-secondary dark:!text-backgroundBody'
 const metricValueSizeClass =
   'font-seasons text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] !bg-none bg-clip-border lg:text-[56px]'
 
-function MetricDescriptions({ lines, centered }: { lines: string[]; centered?: boolean }) {
+function MetricDescriptions({ lines }: { lines: string[] }) {
   return (
-    <div className={centered ? 'mt-2 space-y-0.5 text-center' : 'space-y-0.5'}>
+    <div className="space-y-0.5 text-center">
       {lines.map((line) => (
         <p key={line} className={cn('text-sm leading-snug sm:text-base', textColorClass)}>
           {line}
@@ -29,9 +29,41 @@ function MetricValue({ value, italic = true }: { value: string; italic?: boolean
     <p className={cn(metricValueSizeClass, textColorClass, italic && 'italic')}>{value}</p>
   )
 }
-function SideMetricItem({ metric }: { metric: CaseStudySuccessMetric }) {
+
+function RowDivider({ side }: { side: 'left' | 'right' }) {
   return (
-    <div className="flex min-h-[120px] items-center gap-4 px-4 py-8 sm:min-h-[140px] sm:gap-6 sm:px-6 lg:py-10">
+    <span
+      className={cn(
+        'pointer-events-none absolute top-1/2 hidden h-[48%] w-px -translate-y-1/2 bg-black/10 lg:block dark:bg-white/10',
+        side === 'left' ? 'left-0' : 'right-0',
+      )}
+      aria-hidden="true"
+    />
+  )
+}
+
+function SuccessMetricItem({
+  metric,
+  withSideBorders = false,
+}: {
+  metric: CaseStudySuccessMetric
+  withSideBorders?: boolean
+}) {
+  const isCenter = metric.variant === 'center'
+
+  return (
+    <div
+      className={cn(
+        'relative flex min-h-[120px] items-center justify-center px-4 py-8 text-center sm:min-h-[140px] sm:px-6 lg:py-10',
+        isCenter ? 'flex-col gap-2' : 'flex-col gap-2 sm:flex-row sm:gap-4 lg:gap-6',
+      )}>
+      {withSideBorders ? (
+        <>
+          <RowDivider side="left" />
+          <RowDivider side="right" />
+        </>
+      ) : null}
+
       <div className="shrink-0">
         <MetricValue value={metric.value} italic={metric.italic} />
       </div>
@@ -40,58 +72,39 @@ function SideMetricItem({ metric }: { metric: CaseStudySuccessMetric }) {
   )
 }
 
-function CenterMetricItem({ metric }: { metric: CaseStudySuccessMetric }) {
+function MetricsRow({ metrics }: { metrics: CaseStudySuccessMetric[] }) {
   return (
-    <div className="flex min-h-[120px] flex-col items-center justify-center px-4 py-8 text-center sm:min-h-[140px] sm:px-6 lg:py-10">
-      <MetricValue value={metric.value} italic={metric.italic} />
-      <MetricDescriptions lines={metric.descriptions} centered />
-    </div>
-  )
-}
-
-function MetricColumn({
-  metrics,
-  bordered = false,
-}: {
-  metrics: CaseStudySuccessMetric[]
-  bordered?: boolean
-}) {
-  return (
-    <div
-      className={cn(
-        'flex flex-col',
-        bordered && 'border-black/10 lg:border-x dark:border-white/10',
-      )}>
+    <div className="grid grid-cols-1 lg:grid-cols-3">
       {metrics.map((metric, index) => (
-        <div key={`${metric.value}-${index}`}>
-          {metric.variant === 'center' ? (
-            <CenterMetricItem metric={metric} />
-          ) : (
-            <SideMetricItem metric={metric} />
-          )}
-        </div>
+        <SuccessMetricItem
+          key={`${metric.value}-${index}`}
+          metric={metric}
+          withSideBorders={index === 1}
+        />
       ))}
     </div>
   )
 }
 
 const CaseStudySuccessMetrics = ({ metrics }: CaseStudySuccessMetricsProps) => {
-  const leftColumn = [metrics[0], metrics[3]].filter(Boolean)
-  const centerColumn = [metrics[1], metrics[4]].filter(Boolean)
-  const rightColumn = [metrics[2], metrics[5]].filter(Boolean)
+  const topRow = metrics.slice(0, 3)
+  const bottomRow = metrics.slice(3, 6)
 
   return (
     <section className={caseStudySectionClass}>
       <div className={caseStudySectionInnerClass}>
         <RevealWrapper>
-          <h2 className={cn('text-[28px] font-normal leading-tight sm:text-[32px] lg:text-[36px]', textColorClass)}>
+          <h2
+            className={cn(
+              'text-center text-[28px] font-normal leading-tight sm:text-[32px] lg:text-left lg:text-[36px]',
+              textColorClass,
+            )}>
             Success Metrics
           </h2>
 
-          <div className="mt-8 flex flex-col divide-y divide-black/10 lg:mt-10 lg:grid lg:grid-cols-3 lg:divide-y-0 dark:divide-white/10">
-            <MetricColumn metrics={leftColumn} />
-            <MetricColumn metrics={centerColumn} bordered />
-            <MetricColumn metrics={rightColumn} />
+          <div className="mt-8 flex flex-col divide-y divide-black/10 lg:mt-10 dark:divide-white/10 lg:divide-y-0">
+            <MetricsRow metrics={topRow} />
+            <MetricsRow metrics={bottomRow} />
           </div>
         </RevealWrapper>
       </div>
