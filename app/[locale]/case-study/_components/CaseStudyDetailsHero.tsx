@@ -54,18 +54,6 @@ const CaseStudyDetailsHero = ({ study }: CaseStudyDetailsHeroProps) => {
 
             <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
               <div className="flex max-w-2xl flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-5 sm:text-left">
-                {study.image ? (
-                  <div className="relative size-12 shrink-0 overflow-hidden rounded-radius-sm sm:size-14">
-                    <Image
-                      src={study.image}
-                      alt=""
-                      width={56}
-                      height={56}
-                      className="size-full object-cover"
-                      aria-hidden
-                    />
-                  </div>
-                ) : null}
                 <div>
                   <h2 className="text-2xl font-medium text-white sm:text-3xl lg:text-4xl">{study.title}</h2>
                   <p className="mt-1 text-sm text-white/80 sm:text-base">{study.tagline}</p>
@@ -81,14 +69,14 @@ const CaseStudyDetailsHero = ({ study }: CaseStudyDetailsHeroProps) => {
           </figure>
 
           {study.image ? (
-            <div className="absolute bottom-0 left-4 z-10 translate-y-1/2 sm:left-6 lg:left-8">
-              <div className="flex size-[72px] items-center justify-center overflow-hidden rounded-radius-md border-[6px] border-backgroundBody bg-white p-2 dark:border-dark sm:size-[88px] sm:p-2.5 lg:size-[112px] lg:p-3">
+            <div className="absolute bottom-10 left-4 z-10 translate-y-1/2 sm:left-6 lg:left-20">
+              <div className="flex size-[72px] items-center justify-center overflow-hidden rounded-radius-md border-[6px] border-backgroundBody bg-white  dark:border-dark sm:size-[88px] lg:size-[112px] ">
                 <Image
                   src={study.image}
                   alt={`${study.title} logo`}
                   width={112}
                   height={112}
-                  className="size-full object-contain"
+                  className="size-full object-cover"
                 />
               </div>
             </div>
