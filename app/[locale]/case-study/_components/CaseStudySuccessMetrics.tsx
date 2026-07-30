@@ -10,13 +10,16 @@ type CaseStudySuccessMetricsProps = {
 const textColorClass = '!text-secondary dark:!text-backgroundBody'
 
 const metricValueSizeClass =
-  'font-seasons text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] !bg-none bg-clip-border lg:text-[56px]'
+  'font-seasons text-[28px] leading-[1.05] !bg-none bg-clip-border sm:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[64px]'
+
+const metricDescriptionSizeClass =
+  'text-[14px] leading-snug sm:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px]'
 
 function MetricDescriptions({ lines }: { lines: string[] }) {
   return (
     <div className="space-y-0.5 text-center lg:text-inherit">
       {lines.map((line) => (
-        <p key={line} className={cn('text-sm leading-snug sm:text-base', textColorClass)}>
+        <p key={line} className={cn(metricDescriptionSizeClass, textColorClass)}>
           {line}
         </p>
       ))}
