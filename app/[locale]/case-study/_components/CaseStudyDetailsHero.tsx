@@ -29,7 +29,7 @@ const heroIconLinkClass =
   'group inline-flex shrink-0 items-center justify-center rounded-radius-sm border border-black/10 bg-backgroundBody text-secondary transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 dark:border-white/10 dark:bg-dark dark:text-backgroundBody dark:hover:bg-primary/10 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px]'
 
 const heroIconClass =
-  'size-7 transition-transform duration-300 ease-out group-hover:rotate-[30deg] md:size-8 lg:size-9 xl:size-10'
+  'size-7 transition-transform duration-300 ease-out group-hover:rotate-[130deg] md:size-8 lg:size-9 xl:size-10'
 
 /*
  * These curves connect the logo card to the page background.
@@ -141,7 +141,7 @@ const CaseStudyDetailsHero = ({
               </div>
 
               {study.website ? (
-                <p className="absolute bottom-5 left-0 right-0 text-sm text-white/70 sm:bottom-6">
+                <p className="absolute bottom-5 left-0 right-0 text-[10px] leading-none text-white/70 sm:bottom-6 sm:text-xs md:text-sm">
                   {study.website}
                 </p>
               ) : null}
@@ -177,7 +177,7 @@ const CaseStudyDetailsHero = ({
               }
               className={heroIconLinkClass}
             >
-              <ArrowUpRight className={heroIconClass} strokeWidth={2} aria-hidden="true" />
+              <ArrowUpRight className={`${heroIconClass} rotate-90`} strokeWidth={2} aria-hidden="true" />
             </a>
 
             <ButtonComponentList className="w-auto" itemClassName="w-auto">
