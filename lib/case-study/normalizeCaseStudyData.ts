@@ -33,7 +33,8 @@ function asSuccessMetrics(value: unknown): CaseStudySuccessMetric[] {
       if (!item || typeof item !== 'object') return null
       const record = item as Record<string, unknown>
       const metricValue = asString(record.value)
-      const variant = record.variant === 'center' ? 'center' : 'side'
+      const variant: CaseStudySuccessMetric['variant'] =
+        record.variant === 'center' ? 'center' : 'side'
       const descriptions = asStringArray(record.descriptions)
       const singleDescription = asString(record.description)
 
@@ -46,12 +47,13 @@ function asSuccessMetrics(value: unknown): CaseStudySuccessMetric[] {
 
       if (!metricValue || resolvedDescriptions.length === 0) return null
 
-      return {
+      const metric: CaseStudySuccessMetric = {
         value: metricValue,
         descriptions: resolvedDescriptions,
         variant,
         italic: record.italic === false ? false : true,
       }
+      return metric
     })
     .filter((item): item is CaseStudySuccessMetric => item !== null)
 }
