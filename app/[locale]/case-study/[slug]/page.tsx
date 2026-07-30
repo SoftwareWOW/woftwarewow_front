@@ -37,7 +37,7 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
         />
         <CaseStudyBusinessGoals goals={study.businessGoals} />
         <CaseStudyTargetAudience audiences={study.targetAudience} /> */}
-        <CaseStudyHighlights/>
+        <CaseStudyHighlights testimonial={study.testimonial} />
         <WowGrowthCta />
       </div>
     </LayoutOne>
