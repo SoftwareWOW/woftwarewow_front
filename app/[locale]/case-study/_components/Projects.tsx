@@ -60,7 +60,7 @@ const Projects = () => {
         {projects.map((project) => (
           <RevealWrapperV2
             as="a"
-            href={`/digital-agency/project/${project.slug}`}
+            href={`/case-study/${project.slug}`}
             key={project.slug}
             className="reveal-me project-item underline-hover-effect group col-span-full flex flex-col gap-x-10 gap-y-6 lg:items-center">
             <figure className="overflow-hidden max-lg:w-full">
