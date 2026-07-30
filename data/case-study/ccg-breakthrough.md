@@ -50,8 +50,7 @@ successMetrics:
     variant: center
   - value: 90+
     descriptions:
-      - Performance Score
-      - SEO
+      - Performance Score SEO
     variant: side
     italic: false
   - value: SEO
