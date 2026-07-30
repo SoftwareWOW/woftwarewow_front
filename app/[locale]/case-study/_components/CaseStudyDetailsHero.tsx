@@ -69,7 +69,7 @@ const CaseStudyDetailsHero = ({ study }: CaseStudyDetailsHeroProps) => {
           </figure>
 
           {study.image ? (
-            <div className="absolute bottom-10 left-4 z-10 translate-y-1/2 sm:left-6 lg:left-20">
+            <div className="absolute bottom-12 left-4 z-10 translate-y-1/2 sm:left-6 lg:left-20">
               <div className="flex size-[72px] items-center justify-center overflow-hidden rounded-radius-md border-[6px] border-backgroundBody bg-white  dark:border-dark sm:size-[88px] lg:size-[112px] ">
                 <Image
                   src={study.image}
