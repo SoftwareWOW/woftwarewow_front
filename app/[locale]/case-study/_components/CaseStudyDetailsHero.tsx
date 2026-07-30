@@ -23,8 +23,13 @@ type CaseStudyHeroLogoProps = {
 type MetaColumnProps = {
   label: string
   children: ReactNode
-  withBorder?: boolean
 }
+
+const heroIconLinkClass =
+  'group inline-flex shrink-0 items-center justify-center rounded-radius-sm border border-black/10 bg-backgroundBody text-secondary transition-colors hover:border-primary/30 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 dark:border-white/10 dark:bg-dark dark:text-backgroundBody dark:hover:bg-primary/10 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px]'
+
+const heroIconClass =
+  'size-7 transition-transform duration-300 ease-out group-hover:rotate-[30deg] md:size-8 lg:size-9 xl:size-10'
 
 /*
  * These curves connect the logo card to the page background.
@@ -83,27 +88,11 @@ function CaseStudyHeroLogo({
   )
 }
 
-function MetaColumn({
-  label,
-  children,
-  withBorder = true,
-}: MetaColumnProps) {
+function MetaColumn({ label, children }: MetaColumnProps) {
   return (
-    <div
-      className={[
-        'min-w-0 py-6 lg:py-0',
-        withBorder
-          ? 'border-black/10 dark:border-white/10 lg:border-l lg:border-t-0 lg:pl-8'
-          : '',
-      ].join(' ')}
-    >
-      <p className="text-sm font-medium text-secondary dark:text-backgroundBody">
-        {label}
-      </p>
-
-      <div className="mt-3 text-sm leading-relaxed text-muted">
-        {children}
-      </div>
+    <div className="flex min-h-[120px] flex-col items-center justify-center rounded-radius-md border border-black/10 bg-backgroundBody px-4 py-8 text-center sm:px-6 lg:min-h-[140px] lg:py-10 dark:border-white/10 dark:bg-dark">
+      <p className="text-sm font-medium text-secondary dark:text-backgroundBody">{label}</p>
+      <div className="mt-3 text-sm leading-relaxed text-muted">{children}</div>
     </div>
   )
 }
@@ -167,8 +156,8 @@ const CaseStudyDetailsHero = ({
           ) : null}
         </div>
 
-        <div className="mt-8 flex flex-col gap-8 lg:mt-10 lg:flex-row lg:items-end lg:justify-between">
-          <div className="min-w-0 max-w-3xl pl-[calc(1rem+72px+0.5rem)] sm:pl-[124px] lg:pl-[160px]">
+        <div className="mt-8 flex flex-col md:flex-row items-start justify-center md:justify-between gap-6 lg:mt-10">
+          <div className="">
             <h1 className="text-[32px] font-light leading-[1.1] tracking-[-0.03em] text-secondary dark:text-backgroundBody sm:text-[40px] lg:text-[48px] xl:text-[56px]">
               {study.title}
             </h1>
@@ -178,55 +167,31 @@ const CaseStudyDetailsHero = ({
             </p>
           </div>
 
-          <div className="flex shrink-0 items-center gap-3 self-start lg:self-auto">
+          <div className="flex shrink-0 items-center gap-3">
             <a
               href={websiteUrl ?? '#highlights'}
               target={websiteUrl ? '_blank' : undefined}
               rel={websiteUrl ? 'noopener noreferrer' : undefined}
               aria-label={
-                websiteUrl
-                  ? `Visit ${study.title} website`
-                  : 'View project highlights'
+                websiteUrl ? `Visit ${study.title} website` : 'View project highlights'
               }
-              className="inline-flex size-12 items-center justify-center rounded-radius-sm border border-black/10 bg-backgroundBody text-secondary transition-colors hover:border-primary/30 hover:bg-primary/5 dark:border-white/10 dark:bg-dark dark:text-backgroundBody dark:hover:bg-primary/10 sm:size-14"
+              className={heroIconLinkClass}
             >
-              <ArrowUpRight
-                className="size-5"
-                aria-hidden="true"
-              />
+              <ArrowUpRight className={heroIconClass} strokeWidth={2} aria-hidden="true" />
             </a>
 
-            <ButtonComponentList
-              className="w-auto"
-              itemClassName="w-auto"
-            >
-              <ButtonComponent
-                href="/contact"
-                variant="primary"
-                className="[&_span]:!text-white"
-              >
+            <ButtonComponentList className="w-auto" itemClassName="w-auto">
+              <ButtonComponent href="/contact" variant="primary" className="[&_span]:!text-white">
                 Book a similar project
               </ButtonComponent>
             </ButtonComponentList>
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-0 border-t border-black/10 dark:border-white/10 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4">
-          <MetaColumn
-            label="Company Size"
-            withBorder={false}
-          >
-            {study.companySize}
-          </MetaColumn>
-
-          <MetaColumn label="Date">
-            {study.date}
-          </MetaColumn>
-
-          <MetaColumn label="Project Duration">
-            {study.projectDuration}
-          </MetaColumn>
-
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-6">
+          <MetaColumn label="Company Size">{study.companySize}</MetaColumn>
+          <MetaColumn label="Date">{study.date}</MetaColumn>
+          <MetaColumn label="Project Duration">{study.projectDuration}</MetaColumn>
           <MetaColumn label="Services">
             <ul className="space-y-1">
               {study.services.map((service) => (
