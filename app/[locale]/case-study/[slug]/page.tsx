@@ -1,5 +1,8 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
+import type { Locale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionary'
 import { normalizeCaseStudyData } from '@/lib/case-study/normalizeCaseStudyData'
 import type { CaseStudyItem } from '@/lib/case-study/types'
 import getMarkDownContent from '@/utils/GetMarkDownContent'
@@ -20,15 +23,16 @@ export async function generateStaticParams() {
   }))
 }
 
-const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const slug = (await params).slug
+const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string; locale: string }> }) => {
+  const { slug, locale } = await params
+  const dictionary = await getDictionary(locale as Locale)
   const studyFile = getMarkDownContent('data/case-study/', slug)
   const study = normalizeCaseStudyData(studyFile.data as Record<string, unknown>, slug)
 
   return (
     <LayoutOne>
-      <div className="flex flex-col gap-12 pb-12 sm:gap-16 sm:pb-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px] 2xl:pb-[200px]">
-        {/* <CaseStudyDetailsHero study={study} />
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <CaseStudyDetailsHero study={study} />
         <CaseStudyAboutClient paragraphs={study.aboutClient} />
         <CaseStudyChallenge paragraphs={study.challengeParagraphs} />
         <CaseStudyApproach
@@ -37,10 +41,13 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
           paragraphs={study.approachParagraphs}
         />
         <CaseStudyBusinessGoals goals={study.businessGoals} />
-        <CaseStudyTargetAudience audiences={study.targetAudience} /> */}
+        <CaseStudyTargetAudience audiences={study.targetAudience} />
         <CaseStudyHighlights testimonial={study.testimonial} />
         <CaseStudySuccessMetrics metrics={study.successMetrics} />
-        <WowGrowthCta />
+        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        <div className="mb-3">
+          <WowGrowthCta />
+        </div>
       </div>
     </LayoutOne>
   )
