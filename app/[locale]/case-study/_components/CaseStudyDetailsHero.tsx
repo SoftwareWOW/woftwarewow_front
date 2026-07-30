@@ -9,6 +9,36 @@ type CaseStudyDetailsHeroProps = {
   study: CaseStudyData
 }
 
+const LOGO_CONCAVE_LEFT =
+  'bg-[radial-gradient(circle_at_0_0,transparent_32px,#EDEDED_33px)] dark:bg-[radial-gradient(circle_at_0_0,transparent_32px,#171717_33px)]'
+const LOGO_CONCAVE_RIGHT =
+  'bg-[radial-gradient(circle_at_100%_0,transparent_32px,#EDEDED_33px)] dark:bg-[radial-gradient(circle_at_100%_0,transparent_32px,#171717_33px)]'
+
+function CaseStudyHeroLogo({ image, title }: { image: string; title: string }) {
+  return (
+    <div className="pointer-events-none absolute bottom-0 left-4 z-20 sm:left-6 lg:left-8">
+      <div className="relative w-[72px] sm:w-[88px] lg:w-[112px]">
+        <div className="relative z-[2] rounded-t-radius-md bg-backgroundBody px-[6px] pt-[6px] dark:bg-dark">
+          <div className="relative aspect-square w-full overflow-hidden bg-white">
+            <Image src={image} alt={`${title} logo`} fill className="object-cover" sizes="112px" />
+          </div>
+        </div>
+
+        <div
+          className={`pointer-events-none absolute -bottom-[6px] -left-7 z-[3] size-8 ${LOGO_CONCAVE_LEFT}`}
+          aria-hidden
+        />
+        <div
+          className={`pointer-events-none absolute -bottom-[6px] -right-7 z-[3] size-8 ${LOGO_CONCAVE_RIGHT}`}
+          aria-hidden
+        />
+
+        <div className="absolute bottom-0 left-8 right-8 z-[1] h-[6px] bg-backgroundBody dark:bg-dark" aria-hidden />
+      </div>
+    </div>
+  )
+}
+
 function MetaColumn({
   label,
   children,
@@ -68,23 +98,11 @@ const CaseStudyDetailsHero = ({ study }: CaseStudyDetailsHeroProps) => {
             </div>
           </figure>
 
-          {study.image ? (
-            <div className="absolute bottom-12 left-4 z-10 translate-y-1/2 sm:left-6 lg:left-20">
-              <div className="flex size-[72px] items-center justify-center overflow-hidden rounded-radius-md border-[6px] border-backgroundBody bg-white  dark:border-dark sm:size-[88px] lg:size-[112px] ">
-                <Image
-                  src={study.image}
-                  alt={`${study.title} logo`}
-                  width={112}
-                  height={112}
-                  className="size-full object-cover"
-                />
-              </div>
-            </div>
-          ) : null}
+          {study.image ? <CaseStudyHeroLogo image={study.image} title={study.title} /> : null}
         </div>
 
-        <div className="mt-12 flex flex-col gap-8 pt-6 sm:mt-14 sm:pt-8 lg:mt-16 lg:flex-row lg:items-end lg:justify-between lg:pt-10">
-          <div className="min-w-0 max-w-3xl pl-0 sm:pl-[104px] lg:pl-[136px]">
+        <div className="mt-8 flex flex-col gap-8 lg:mt-10 lg:flex-row lg:items-end lg:justify-between">
+          <div className="min-w-0 max-w-3xl pl-[calc(1rem+72px+0.5rem)] sm:pl-[124px] lg:pl-[160px]">
             <h1 className="text-[32px] font-light leading-[1.1] tracking-[-0.03em] text-secondary dark:text-backgroundBody sm:text-[40px] lg:text-[48px] xl:text-[56px]">
               {study.title}
             </h1>
