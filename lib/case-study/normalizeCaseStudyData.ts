@@ -1,5 +1,6 @@
-import type { CaseStudyAudience, CaseStudyData, CaseStudyTestimonial } from './types'
+import type { CaseStudyAudience, CaseStudyData, CaseStudySuccessMetric, CaseStudyTestimonial } from './types'
 import { getCaseStudyImage } from './caseStudyImages'
+import { DEFAULT_SUCCESS_METRICS } from './defaultSuccessMetrics'
 
 function asString(value: unknown, fallback = '') {
   return typeof value === 'string' ? value : fallback
@@ -22,6 +23,37 @@ function asAudience(value: unknown): CaseStudyAudience[] {
       return { label, description }
     })
     .filter((item): item is CaseStudyAudience => item !== null)
+}
+
+function asSuccessMetrics(value: unknown): CaseStudySuccessMetric[] {
+  if (!Array.isArray(value) || value.length === 0) return DEFAULT_SUCCESS_METRICS
+
+  return value
+    .map((item) => {
+      if (!item || typeof item !== 'object') return null
+      const record = item as Record<string, unknown>
+      const metricValue = asString(record.value)
+      const variant = record.variant === 'center' ? 'center' : 'side'
+      const descriptions = asStringArray(record.descriptions)
+      const singleDescription = asString(record.description)
+
+      const resolvedDescriptions =
+        descriptions.length > 0
+          ? descriptions
+          : singleDescription
+            ? [singleDescription]
+            : []
+
+      if (!metricValue || resolvedDescriptions.length === 0) return null
+
+      return {
+        value: metricValue,
+        descriptions: resolvedDescriptions,
+        variant,
+        italic: record.italic === false ? false : true,
+      }
+    })
+    .filter((item): item is CaseStudySuccessMetric => item !== null)
 }
 
 function asTestimonial(value: unknown): CaseStudyTestimonial | undefined {
@@ -59,5 +91,6 @@ export function normalizeCaseStudyData(
     businessGoals: asStringArray(data.businessGoals),
     targetAudience: asAudience(data.targetAudience),
     testimonial: asTestimonial(data.testimonial),
+    successMetrics: asSuccessMetrics(data.successMetrics),
   }
 }

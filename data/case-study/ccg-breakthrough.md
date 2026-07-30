@@ -39,4 +39,32 @@ targetAudience:
 testimonial:
   quote: Coaching helped me trust my decisions and lead with confidence instead of doubt.
   author: Alisha
+successMetrics:
+  - value: 100%
+    descriptions:
+      - Custom Design
+    variant: side
+  - value: Responsive
+    descriptions:
+      - Across All Devices
+    variant: center
+  - value: 90+
+    descriptions:
+      - Performance Score
+      - SEO
+    variant: side
+    italic: false
+  - value: SEO
+    descriptions:
+      - Ready Foundation
+    variant: side
+  - value: WCAG
+    descriptions:
+      - Accessibility Improvements
+    variant: center
+    italic: false
+  - value: Fast
+    descriptions:
+      - Optimized Loading
+    variant: side
 ---

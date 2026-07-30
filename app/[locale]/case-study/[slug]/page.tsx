@@ -10,6 +10,7 @@ import CaseStudyBusinessGoals from '../_components/CaseStudyBusinessGoals'
 import CaseStudyChallenge from '../_components/CaseStudyChallenge'
 import CaseStudyDetailsHero from '../_components/CaseStudyDetailsHero'
 import CaseStudyHighlights from '../_components/CaseStudyHighlights'
+import CaseStudySuccessMetrics from '../_components/CaseStudySuccessMetrics'
 import CaseStudyTargetAudience from '../_components/CaseStudyTargetAudience'
 
 export async function generateStaticParams() {
@@ -38,6 +39,7 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
         <CaseStudyBusinessGoals goals={study.businessGoals} />
         <CaseStudyTargetAudience audiences={study.targetAudience} /> */}
         <CaseStudyHighlights testimonial={study.testimonial} />
+        <CaseStudySuccessMetrics metrics={study.successMetrics} />
         <WowGrowthCta />
       </div>
     </LayoutOne>

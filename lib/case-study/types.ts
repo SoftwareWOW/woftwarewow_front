@@ -1,3 +1,10 @@
+export type CaseStudySuccessMetric = {
+  value: string
+  descriptions: string[]
+  variant: 'center' | 'side'
+  italic?: boolean
+}
+
 export type CaseStudyAudience = {
   label: string
   description: string
@@ -28,6 +35,7 @@ export type CaseStudyData = {
   businessGoals: string[]
   targetAudience: CaseStudyAudience[]
   testimonial?: CaseStudyTestimonial
+  successMetrics: CaseStudySuccessMetric[]
 }
 
 export type CaseStudyItem = CaseStudyData & {
