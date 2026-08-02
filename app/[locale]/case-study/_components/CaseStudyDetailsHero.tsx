@@ -87,7 +87,6 @@ function CaseStudyHeroLogo({
     </div>
   )
 }
-
 function MetaColumn({ label, children }: MetaColumnProps) {
   return (
     <div className="flex min-h-[120px] flex-col items-center justify-center rounded-radius-md border border-black/10 bg-backgroundBody px-4 py-8 text-center sm:px-6 lg:min-h-[140px] lg:py-10 dark:border-white/10 dark:bg-dark">
@@ -96,7 +95,6 @@ function MetaColumn({ label, children }: MetaColumnProps) {
     </div>
   )
 }
-
 const CaseStudyDetailsHero = ({
   study,
 }: CaseStudyDetailsHeroProps) => {
