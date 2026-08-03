@@ -2,6 +2,7 @@ import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import SoftwareRfq from '@/components/wow/softwarewow/SoftwareRfq'
 import BusinessProblems from '@/components/wow/wowintelligence/BusinessProblems'
+import IntelligenceFlowHero from '@/components/wow/wowintelligence/IntelligenceFlowHero'
 import OrderProcess from '@/components/wow/wowintelligence/OrderProcess'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -31,6 +32,7 @@ export default async function WowIntelligencePage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <IntelligenceFlowHero />
         <BusinessProblems />
         <OrderProcess />
         <SoftwareRfq />
