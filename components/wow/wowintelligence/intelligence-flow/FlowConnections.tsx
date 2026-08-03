@@ -1,15 +1,86 @@
-const LEFT_Y = [150, 290, 430, 570]
-const RIGHT_Y = [60, 145, 230, 315, 400, 485, 570, 655]
+'use client'
+
+import { useCallback, useEffect, useState } from 'react'
+import type { RefObject } from 'react'
+
+type Point = { x: number; y: number }
+
+type Props = {
+  containerRef: RefObject<HTMLDivElement | null>
+  coreRef: RefObject<HTMLDivElement | null>
+  inputRefs: RefObject<(HTMLDivElement | null)[]>
+  outputRefs: RefObject<(HTMLDivElement | null)[]>
+}
+
 const STROKES = ['url(#g-violet)', 'url(#g-blue)', 'url(#g-pink)']
 
-export function FlowConnections() {
-  const leftPaths = LEFT_Y.map((y) => `M300,${y} C420,${y} 430,360 498,360`)
-  const rightPaths = RIGHT_Y.map((y) => `M502,360 C580,360 590,${y} 700,${y}`)
-  const all = [...leftPaths, ...rightPaths]
+function anchor(rect: DOMRect, container: DOMRect, edge: 'left' | 'right'): Point {
+  return {
+    x: edge === 'left' ? rect.left - container.left : rect.right - container.left,
+    y: rect.top + rect.height / 2 - container.top,
+  }
+}
+
+function curve(from: Point, to: Point): string {
+  const bend = Math.min(Math.abs(to.x - from.x) * 0.55, 140)
+  const cp1x = from.x + (to.x > from.x ? bend : -bend)
+  const cp2x = to.x + (to.x > from.x ? -bend : bend)
+  return `M${from.x},${from.y} C${cp1x},${from.y} ${cp2x},${to.y} ${to.x},${to.y}`
+}
+
+export function FlowConnections({ containerRef, coreRef, inputRefs, outputRefs }: Props) {
+  const [paths, setPaths] = useState<string[]>([])
+  const [size, setSize] = useState({ w: 0, h: 0 })
+
+  const update = useCallback(() => {
+    const container = containerRef.current
+    const core = coreRef.current
+    if (!container || !core) return
+
+    const cRect = container.getBoundingClientRect()
+    if (cRect.width === 0 || cRect.height === 0) return
+
+    const coreRect = core.getBoundingClientRect()
+    setSize({ w: cRect.width, h: cRect.height })
+
+    const coreLeft = anchor(coreRect, cRect, 'left')
+    const coreRight = anchor(coreRect, cRect, 'right')
+
+    const leftPaths = (inputRefs.current ?? [])
+      .filter((el): el is HTMLDivElement => el !== null)
+      .map((el) => curve(coreLeft, anchor(el.getBoundingClientRect(), cRect, 'right')))
+
+    const rightPaths = (outputRefs.current ?? [])
+      .filter((el): el is HTMLDivElement => el !== null)
+      .map((el) => curve(coreRight, anchor(el.getBoundingClientRect(), cRect, 'left')))
+
+    setPaths([...leftPaths, ...rightPaths])
+  }, [containerRef, coreRef, inputRefs, outputRefs])
+
+  useEffect(() => {
+    update()
+
+    const ro = new ResizeObserver(update)
+    if (containerRef.current) ro.observe(containerRef.current)
+
+    window.addEventListener('resize', update)
+
+    const t1 = window.setTimeout(update, 150)
+    const t2 = window.setTimeout(update, 700)
+
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', update)
+      window.clearTimeout(t1)
+      window.clearTimeout(t2)
+    }
+  }, [update, containerRef])
+
+  if (size.w === 0 || paths.length === 0) return null
 
   return (
     <svg
-      viewBox="0 0 1000 720"
+      viewBox={`0 0 ${size.w} ${size.h}`}
       preserveAspectRatio="none"
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 hidden size-full lg:block"
@@ -32,8 +103,8 @@ export function FlowConnections() {
         </linearGradient>
       </defs>
 
-      {all.map((d, i) => (
-        <g key={d}>
+      {paths.map((d, i) => (
+        <g key={`${d}-${i}`}>
           <path
             d={d}
             fill="none"

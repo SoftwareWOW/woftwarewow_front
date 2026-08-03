@@ -1,5 +1,6 @@
 'use client'
 
+import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 import type { CSSProperties } from 'react'
 import type { LucideIcon } from 'lucide-react'
@@ -21,16 +22,13 @@ export const accentVar: Record<Accent, string> = {
   pink: 'var(--neon-pink)',
 }
 
-export function FlowCard({
-  icon: Icon,
-  title,
-  description,
-  accent,
-  align = 'left',
-  index,
-}: Props) {
+export const FlowCard = forwardRef<HTMLDivElement, Props>(function FlowCard(
+  { icon: Icon, title, description, accent, align = 'left', index },
+  ref,
+) {
   return (
     <motion.div
+      ref={ref}
       style={{ '--glow': accentVar[accent] } as CSSProperties}
       initial={{ opacity: 0, x: align === 'left' ? -32 : 32, filter: 'blur(6px)' }}
       whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
@@ -52,4 +50,4 @@ export function FlowCard({
       </span>
     </motion.div>
   )
-}
+})

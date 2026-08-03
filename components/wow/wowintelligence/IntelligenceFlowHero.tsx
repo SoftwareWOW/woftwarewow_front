@@ -1,5 +1,6 @@
 'use client'
 
+import { useRef } from 'react'
 import {
   MessageSquare,
   Target,
@@ -102,12 +103,17 @@ function FlowRail({ className }: { className?: string }) {
 }
 
 const IntelligenceFlowHero = () => {
+  const flowRef = useRef<HTMLDivElement>(null)
+  const coreRef = useRef<HTMLDivElement>(null)
+  const inputRefs = useRef<(HTMLDivElement | null)[]>([])
+  const outputRefs = useRef<(HTMLDivElement | null)[]>([])
+
   return (
     <section className="relative isolate overflow-hidden px-5 pt-24 pb-20 [--neon-blue:#7b6fd4] [--neon-pink:#ff9191] [--neon-violet:#615cce] sm:px-8 sm:pt-28 lg:py-28">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgb(23_23_23/0.04)_1px,transparent_1px),linear-gradient(90deg,rgb(23_23_23/0.04)_1px,transparent_1px)] bg-[length:48px_48px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_45%,black_20%,transparent_75%)] dark:bg-[linear-gradient(rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255/0.05)_1px,transparent_1px)]"
-      />
+      /> 
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-[-8%] left-[15%] h-80 w-[420px] rounded-full bg-[color-mix(in_oklab,var(--neon-violet)_35%,transparent)] opacity-45 blur-[80px]"
@@ -137,8 +143,13 @@ const IntelligenceFlowHero = () => {
           </p>
         </motion.header>
 
-        <div className="relative mt-12 lg:mt-24">
-          <FlowConnections />
+        <div ref={flowRef} className="relative mt-12 lg:mt-24">
+          <FlowConnections
+            containerRef={flowRef}
+            coreRef={coreRef}
+            inputRefs={inputRefs}
+            outputRefs={outputRefs}
+          />
 
           <div className="relative grid gap-6 lg:grid-cols-[1fr_minmax(280px,340px)_1fr] lg:items-center lg:gap-6">
             <div className="order-1 flex flex-col gap-4 lg:order-1">
@@ -147,7 +158,15 @@ const IntelligenceFlowHero = () => {
               </p>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 {inputs.map((item, i) => (
-                  <FlowCard key={item.title} {...item} align="left" index={i} />
+                  <FlowCard
+                    key={item.title}
+                    ref={(el) => {
+                      inputRefs.current[i] = el
+                    }}
+                    {...item}
+                    align="left"
+                    index={i}
+                  />
                 ))}
               </div>
             </div>
@@ -155,7 +174,7 @@ const IntelligenceFlowHero = () => {
             <FlowRail className="order-2" />
 
             <div className="order-3 lg:order-2">
-              <IntelligenceCore />
+              <IntelligenceCore ref={coreRef} />
             </div>
 
             <FlowRail className="order-4" />
@@ -166,7 +185,15 @@ const IntelligenceFlowHero = () => {
               </p>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 {outputs.map((item, i) => (
-                  <FlowCard key={item.title} {...item} align="right" index={i} />
+                  <FlowCard
+                    key={item.title}
+                    ref={(el) => {
+                      outputRefs.current[i] = el
+                    }}
+                    {...item}
+                    align="right"
+                    index={i}
+                  />
                 ))}
               </div>
             </div>
