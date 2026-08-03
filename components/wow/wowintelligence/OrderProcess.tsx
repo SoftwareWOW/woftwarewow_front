@@ -123,24 +123,18 @@ function Node({
     >
       <div className="relative">
         <span
-          className="absolute -inset-3 animate-ring-spin rounded-full border border-dashed border-border opacity-60 transition-opacity group-hover:opacity-100 dark:border-white/10"
+          className="absolute -inset-3 animate-ring-spin rounded-radius-sm border border-dashed border-border opacity-60 transition-opacity group-hover:opacity-100 dark:border-white/10"
           aria-hidden="true"
         />
         <div
-          className={[
-            "relative flex h-[74px] w-[74px] items-center justify-center rounded-full bg-card transition-transform duration-300 group-hover:scale-110 dark:bg-dark",
-            accent
-              ? "shadow-[0_8px_32px_rgba(255,145,145,0.22)]"
-              : "animate-node-pulse shadow-[0_8px_32px_rgba(97,92,206,0.18)]",
-          ].join(" ")}
-          style={{ animationDelay: `${index * 0.25}s` }}
+          className="relative flex h-[74px] w-[74px] items-center justify-center rounded-radius-sm bg-card transition-transform duration-300 group-hover:scale-110 dark:bg-dark"
         >
           <Icon
             className={accent ? "h-8 w-8 text-accent" : "h-8 w-8 text-primary"}
             strokeWidth={1.5}
           />
         </div>
-        <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[11px] font-semibold text-primary-foreground">
+        <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-radius-sm bg-primary text-[11px] font-semibold text-primary-foreground">
           {index + 1}
         </span>
       </div>
@@ -195,20 +189,10 @@ export default function OrderProcess() {
       </div>
 
       <div ref={ref} className="relative mx-auto mt-16 max-w-5xl">
-        {rows.map((row, rowIndex) => {
-          const reversed = rowIndex % 2 === 1;
-          const direction = reversed ? "left" : "right";
-          const ordered = reversed ? [...row].reverse() : row;
-
-          return (
+        {rows.map((row, rowIndex) => (
             <div key={rowIndex}>
-              <div
-                className={[
-                  "flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-4",
-                  reversed ? "md:flex-row-reverse" : "",
-                ].join(" ")}
-              >
-                {ordered.map((step, i) => {
+              <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-4">
+                {row.map((step, i) => {
                   const stepIndex = steps.indexOf(step);
                   return (
                     <div
@@ -216,18 +200,17 @@ export default function OrderProcess() {
                       className="flex w-full flex-col items-center md:contents"
                     >
                       <Node step={step} index={stepIndex} shown={visible.has(stepIndex)} />
-                      {i < ordered.length - 1 && <Connector direction={direction} />}
+                      {i < row.length - 1 && <Connector direction="right" />}
                     </div>
                   );
                 })}
               </div>
               {rowIndex < rows.length - 1 && <RowLink />}
             </div>
-          );
-        })}
+          ))}
 
         <div className="mt-14 flex justify-center">
-          <div className="flex items-center gap-3 rounded-2xl border border-border bg-card/70 px-6 py-4 shadow-[0_4px_24px_rgba(23,23,23,0.08)] backdrop-blur transition-shadow hover:shadow-[0_8px_32px_rgba(97,92,206,0.14)] dark:border-white/10 dark:bg-dark/70 dark:shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+          <div className="flex items-center gap-3 rounded-radius-sm border border-border bg-card/70 px-6 py-4 backdrop-blur dark:border-white/10 dark:bg-dark/70">
             <CheckCircle2 className="h-6 w-6 text-primary" strokeWidth={1.6} />
             <p className="text-base font-semibold text-foreground dark:text-backgroundBody">
               Workflow <span className="text-accent">Completed</span>
