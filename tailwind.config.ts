@@ -93,6 +93,10 @@ export default {
           '0%': { backgroundPosition: '0 0' },
           '100%': { backgroundPosition: '14px 0' },
         },
+        'flow-dash-march-left': {
+          '0%': { backgroundPosition: '14px 0' },
+          '100%': { backgroundPosition: '0 0' },
+        },
         'flow-dash-march-y': {
           '0%': { backgroundPosition: '0 0' },
           '100%': { backgroundPosition: '0 14px' },
@@ -116,6 +120,7 @@ export default {
         'ring-spin': 'ring-spin 14s linear infinite',
         'node-pulse': 'node-pulse 3.2s ease-in-out infinite',
         'flow-dash-march': 'flow-dash-march 1.2s linear infinite',
+        'flow-dash-march-left': 'flow-dash-march-left 1.2s linear infinite',
         'flow-dash-march-y': 'flow-dash-march-y 1.2s linear infinite',
         'arrow-slide-down': 'arrow-slide-down 1.2s ease-in-out infinite',
         'arrow-slide-left': 'arrow-slide-left 1.2s ease-in-out infinite',

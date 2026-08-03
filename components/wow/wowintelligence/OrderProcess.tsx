@@ -169,7 +169,10 @@ function Connector({
 }) {
   const line = (
     <span
-      className="h-[2px] min-w-0 flex-1 animate-flow-dash-march bg-[repeating-linear-gradient(90deg,#615CCE_0_8px,transparent_8px_14px)] bg-[length:14px_2px]"
+      className={[
+        "h-[2px] min-w-0 flex-1 bg-[repeating-linear-gradient(90deg,#615CCE_0_8px,transparent_8px_14px)] bg-[length:14px_2px]",
+        direction === "left" ? "animate-flow-dash-march-left" : "animate-flow-dash-march",
+      ].join(" ")}
       style={{ animationDelay: `${delay}ms` }}
     />
   );
