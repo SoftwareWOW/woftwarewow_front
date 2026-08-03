@@ -158,6 +158,8 @@ function Node({
   );
 }
 
+const FLOW_COLOR = "#615CCE";
+
 function Connector({
   delay = 0,
   direction = "right",
@@ -172,23 +174,20 @@ function Connector({
     />
   );
 
+  const arrowClass =
+    "h-3.5 w-3.5 shrink-0 text-[#615CCE] sm:h-4 sm:w-4";
+
   return (
     <div
       className="hidden w-full min-w-0 max-w-none flex-1 items-center self-start pt-7 sm:pt-8 lg:pt-[37px] md:flex"
       aria-hidden="true"
     >
       {direction === "left" && (
-        <ArrowLeft
-          className="mr-0.5 h-3.5 w-3.5 shrink-0 animate-arrow-slide-left text-primary sm:h-4 sm:w-4"
-          style={{ animationDelay: `${delay}ms` }}
-        />
+        <ArrowLeft className={`mr-0.5 ${arrowClass}`} color={FLOW_COLOR} />
       )}
       {line}
       {direction === "right" && (
-        <ArrowRight
-          className="ml-0.5 h-3.5 w-3.5 shrink-0 animate-arrow-slide-right text-primary sm:h-4 sm:w-4"
-          style={{ animationDelay: `${delay}ms` }}
-        />
+        <ArrowRight className={`ml-0.5 ${arrowClass}`} color={FLOW_COLOR} />
       )}
     </div>
   );
@@ -208,8 +207,8 @@ function RowTurn({
         style={{ animationDelay: `${delay}ms` }}
       />
       <ArrowDown
-        className="-mt-px h-3.5 w-3.5 shrink-0 animate-arrow-slide-down text-primary sm:h-4 sm:w-4"
-        style={{ animationDelay: `${delay}ms` }}
+        className="-mt-px h-3.5 w-3.5 shrink-0 text-[#615CCE] sm:h-4 sm:w-4"
+        color={FLOW_COLOR}
       />
     </div>
   );
@@ -242,8 +241,8 @@ function MobileConnector({ delay = 0 }: { delay?: number }) {
         style={{ animationDelay: `${delay}ms` }}
       />
       <ArrowDown
-        className="-mt-px h-3.5 w-3.5 shrink-0 animate-arrow-slide-down text-primary"
-        style={{ animationDelay: `${delay}ms` }}
+        className="-mt-px h-3.5 w-3.5 shrink-0 text-[#615CCE]"
+        color={FLOW_COLOR}
       />
     </div>
   );
