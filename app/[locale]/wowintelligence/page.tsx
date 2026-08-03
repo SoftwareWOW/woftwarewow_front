@@ -5,11 +5,10 @@ import IntelligenceFlowHero from '@/components/wow/wowintelligence/IntelligenceF
 import IntelligenceClients from '@/components/wow/wowintelligence/IntelligenceClients'
 import IntelligenceProcess from '@/components/wow/wowintelligence/IntelligenceProcess'
 import OrderProcess from '@/components/wow/wowintelligence/OrderProcess'
+import IntelligenceRfq from '@/components/wow/wowintelligence/IntelligenceRfq'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import IntelligenceRfq from '@/components/wow/wowintelligence/IntelligenceRfq'
-
 type Props = {
   params: Promise<{ locale: string }>
 }
@@ -40,10 +39,7 @@ export default async function WowIntelligencePage({ params }: Props) {
         <IntelligenceProcess />
         <IntelligenceClients />
         <IntelligenceRfq />
-        <div className="mb-3">
-          <WowGrowthCta />
-        </div>
-      </div>
-    </LayoutOne>
+        <WowGrowthCta />
+      </div>    </LayoutOne>
   )
 }

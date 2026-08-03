@@ -255,9 +255,7 @@ export default function OrderProcess() {
   const { ref, visible } = useReveal<HTMLDivElement>();
 
   return (
-    <section className="relative overflow-hidden px-4 py-12 sm:px-5 sm:py-14 md:py-16 lg:py-20">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(97,92,206,0.12),transparent_70%)] opacity-40 dark:opacity-25" />
-
+    <section className="relative overflow-hidden px-3 md:px-4">
       <div className="relative mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-medium tracking-[0.22em] text-muted-foreground uppercase backdrop-blur dark:border-white/10 dark:bg-dark/60 dark:text-dark-100">
           AI Workflow

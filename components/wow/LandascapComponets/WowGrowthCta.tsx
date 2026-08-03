@@ -3,11 +3,21 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
+import { cn } from '@/lib/utils'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
-const WowGrowthCta = () => {
+type WowGrowthCtaProps = {
+  className?: string
+}
+
+const WowGrowthCta = ({ className }: WowGrowthCtaProps) => {
   return (
-    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
+    <section
+      className={cn(
+        'relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4',
+        className,
+      )}
+    >
       {/* Background decorative elements - matching design system */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div

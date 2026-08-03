@@ -109,7 +109,7 @@ const IntelligenceFlowHero = () => {
   const outputRefs = useRef<(HTMLDivElement | null)[]>([])
 
   return (
-    <section className="relative px-5 pt-24 pb-20 [--neon-blue:#7b6fd4] [--neon-violet:#615cce] sm:px-8 sm:pt-28 lg:py-28">
+    <section className="relative px-3 pt-24 [--neon-blue:#7b6fd4] [--neon-violet:#615cce] md:px-4 md:pt-28 lg:pt-32">
       <div className="relative mx-auto max-w-6xl">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
