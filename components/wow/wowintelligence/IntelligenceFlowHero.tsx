@@ -118,9 +118,6 @@ const IntelligenceFlowHero = () => {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="inline-flex items-center rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_25%,transparent)] bg-[color-mix(in_oklab,var(--neon-violet)_8%,transparent)] px-3.5 py-1.5 text-[0.6875rem] font-semibold tracking-[0.18em] text-primary uppercase">
-            The intelligence layer
-          </span>
           <h1 className="font-display mt-5 text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">
             Every business signal in. Intelligent action out.
           </h1>
@@ -130,7 +127,7 @@ const IntelligenceFlowHero = () => {
           </p>
         </motion.header>
 
-        <div ref={flowRef} className="relative mt-12 lg:mt-24">
+        <div ref={flowRef} className="relative mt-4">
           <FlowConnections
             containerRef={flowRef}
             coreRef={coreRef}
