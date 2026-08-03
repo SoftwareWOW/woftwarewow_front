@@ -12,7 +12,7 @@ type Props = {
   outputRefs: RefObject<(HTMLDivElement | null)[]>
 }
 
-const STROKES = ['url(#g-violet)', 'url(#g-blue)', 'url(#g-pink)']
+const STROKES = ['url(#g-violet)', 'url(#g-blue)', 'url(#g-violet)']
 
 function anchor(rect: DOMRect, container: DOMRect, edge: 'left' | 'right'): Point {
   return {
@@ -96,11 +96,6 @@ export function FlowConnections({ containerRef, coreRef, inputRefs, outputRefs }
           <stop offset="50%" stopColor="var(--neon-blue)" stopOpacity="0.7" />
           <stop offset="100%" stopColor="var(--neon-violet)" stopOpacity="0.15" />
         </linearGradient>
-        <linearGradient id="g-pink" x1="0" x2="1">
-          <stop offset="0%" stopColor="var(--neon-pink)" stopOpacity="0.05" />
-          <stop offset="50%" stopColor="var(--neon-pink)" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="var(--neon-violet)" stopOpacity="0.15" />
-        </linearGradient>
       </defs>
 
       {paths.map((d, i) => (
@@ -122,7 +117,7 @@ export function FlowConnections({ containerRef, coreRef, inputRefs, outputRefs }
             vectorEffect="non-scaling-stroke"
             style={{ animationDelay: `${(i % 6) * -1.1}s` }}
           />
-          <circle r={2.6} fill="var(--neon-pink)" opacity={0.9}>
+          <circle r={2.6} fill="var(--neon-violet)" opacity={0.9}>
             <animateMotion dur={`${5 + (i % 4)}s`} repeatCount="indefinite" path={d} />
           </circle>
         </g>

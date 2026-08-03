@@ -19,7 +19,7 @@ type Props = {
 export const accentVar: Record<Accent, string> = {
   violet: 'var(--neon-violet)',
   blue: 'var(--neon-blue)',
-  pink: 'var(--neon-pink)',
+  pink: 'var(--neon-blue)',
 }
 
 export const FlowCard = forwardRef<HTMLDivElement, Props>(function FlowCard(
@@ -35,7 +35,7 @@ export const FlowCard = forwardRef<HTMLDivElement, Props>(function FlowCard(
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4, scale: 1.02 }}
-      className="group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-radius-md border border-[color-mix(in_oklab,var(--glow)_22%,transparent)] bg-backgroundBody/88 px-4 py-3.5 shadow-[0_0_0_1px_color-mix(in_oklab,var(--glow)_6%,transparent),0_10px_36px_color-mix(in_oklab,var(--glow)_10%,transparent)] backdrop-blur-[14px] transition-[box-shadow,border-color] duration-300 hover:border-[color-mix(in_oklab,var(--glow)_35%,transparent)] hover:shadow-[0_0_0_1px_color-mix(in_oklab,var(--glow)_14%,transparent),0_16px_44px_color-mix(in_oklab,var(--glow)_16%,transparent)] dark:bg-dark/88 sm:flex sm:items-center"
+      className="group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-radius-md border border-[color-mix(in_oklab,var(--glow)_22%,transparent)] bg-backgroundBody/88 px-4 py-3.5 transition-[border-color] duration-300 hover:border-[color-mix(in_oklab,var(--glow)_35%,transparent)] dark:bg-dark/88 sm:flex sm:items-center"
     >
       <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-[0.625rem] border border-[color-mix(in_oklab,var(--glow)_24%,transparent)] bg-[color-mix(in_oklab,var(--glow)_12%,transparent)] text-[var(--glow)]">
         <Icon className="size-[18px]" strokeWidth={1.75} />

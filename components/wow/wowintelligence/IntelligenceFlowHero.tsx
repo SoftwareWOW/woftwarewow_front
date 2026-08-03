@@ -109,20 +109,7 @@ const IntelligenceFlowHero = () => {
   const outputRefs = useRef<(HTMLDivElement | null)[]>([])
 
   return (
-    <section className="relative isolate overflow-hidden px-5 pt-24 pb-20 [--neon-blue:#7b6fd4] [--neon-pink:#ff9191] [--neon-violet:#615cce] sm:px-8 sm:pt-28 lg:py-28">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgb(23_23_23/0.04)_1px,transparent_1px),linear-gradient(90deg,rgb(23_23_23/0.04)_1px,transparent_1px)] bg-[length:48px_48px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_45%,black_20%,transparent_75%)] dark:bg-[linear-gradient(rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255/0.05)_1px,transparent_1px)]"
-      /> 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-[-8%] left-[15%] h-80 w-[420px] rounded-full bg-[color-mix(in_oklab,var(--neon-violet)_35%,transparent)] opacity-45 blur-[80px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[10%] bottom-0 h-[280px] w-[380px] rounded-full bg-[color-mix(in_oklab,var(--neon-pink)_30%,transparent)] opacity-35 blur-[80px]"
-      />
-
+    <section className="relative px-5 pt-24 pb-20 [--neon-blue:#7b6fd4] [--neon-violet:#615cce] sm:px-8 sm:pt-28 lg:py-28">
       <div className="relative mx-auto max-w-6xl">
         <motion.header
           initial={{ opacity: 0, y: 20 }}

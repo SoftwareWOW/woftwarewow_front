@@ -3,6 +3,7 @@
 import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 import { BrainCircuit } from 'lucide-react'
+import WowText from '@/components/wow/shared/WowText'
 
 const ORBIT_R = 46
 const ORBIT_PATH = `M 50,${50 - ORBIT_R} A ${ORBIT_R},${ORBIT_R} 0 1,1 49.9,${50 - ORBIT_R}`
@@ -15,16 +16,14 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto flex w-full max-w-[280px] items-center justify-center py-10 sm:max-w-[320px] sm:py-6 lg:py-0"
+      className="relative mx-auto flex w-full max-w-[280px] items-center justify-center py-6 sm:max-w-[320px] sm:py-4 lg:py-0"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[130%] max-w-[340px] -translate-x-1/2 -translate-y-1/2"
       >
-        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--neon-violet)_28%,transparent)_0%,transparent_68%)] blur-[24px]" />
-
         <div className="absolute inset-[10%] animate-[ring-spin_18s_linear_infinite] rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_22%,transparent)]" />
-        <div className="absolute inset-[2%] animate-[ring-spin_26s_linear_infinite_reverse] rounded-full border border-[color-mix(in_oklab,var(--neon-pink)_18%,transparent)]" />
+        <div className="absolute inset-[2%] animate-[ring-spin_26s_linear_infinite_reverse] rounded-full border border-[color-mix(in_oklab,var(--neon-blue)_18%,transparent)]" />
 
         <svg
           viewBox="0 0 100 100"
@@ -54,7 +53,7 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
             cy="50"
             r="38"
             fill="none"
-            stroke="var(--neon-pink)"
+            stroke="var(--neon-blue)"
             strokeOpacity="0.3"
             strokeWidth="0.5"
             strokeDasharray="3 8"
@@ -64,7 +63,12 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
 
         <svg viewBox="0 0 100 100" aria-hidden="true" className="absolute inset-0 size-full">
           {[0, 1, 2, 3, 4, 5].map((i) => (
-            <circle key={i} r="1.8" fill="var(--neon-pink)" opacity={0.85}>
+            <circle
+              key={i}
+              r="1.8"
+              fill={i % 2 === 0 ? 'var(--neon-violet)' : 'var(--neon-blue)'}
+              opacity={0.85}
+            >
               <animateMotion
                 dur={`${7 + (i % 3)}s`}
                 repeatCount="indefinite"
@@ -79,13 +83,14 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative z-10 flex w-full flex-col items-center gap-3 rounded-[calc(var(--radius-md)+4px)] border border-[color-mix(in_oklab,var(--neon-violet)_28%,transparent)] bg-backgroundBody/92 px-6 py-8 text-center shadow-[0_0_0_1px_color-mix(in_oklab,var(--neon-violet)_8%,transparent),0_24px_64px_color-mix(in_oklab,var(--neon-violet)_14%,transparent)] backdrop-blur-[18px] dark:bg-dark/92 sm:px-8 sm:py-10"
+        className="relative z-10 flex w-full flex-col items-center gap-2 rounded-radius-md border border-[color-mix(in_oklab,var(--neon-violet)_22%,transparent)] bg-backgroundBody/90 px-4 py-4 text-center dark:bg-dark/90 sm:px-5 sm:py-5"
       >
-        <span className="inline-flex size-14 items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] bg-[linear-gradient(135deg,color-mix(in_oklab,var(--neon-violet)_18%,transparent),color-mix(in_oklab,var(--neon-pink)_12%,transparent))] text-primary">
-          <BrainCircuit className="size-7" strokeWidth={1.5} />
+        <span className="inline-flex size-12 items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_24%,transparent)] bg-[color-mix(in_oklab,var(--neon-violet)_10%,transparent)] text-primary">
+          <BrainCircuit className="size-6" strokeWidth={1.5} />
         </span>
-        <h3 className="font-display text-lg font-semibold tracking-tight text-foreground sm:text-xl">
-          WOW Intelligence
+        <h3 className="font-display flex items-baseline gap-1 text-base font-semibold tracking-tight text-foreground sm:text-lg">
+          <WowText className="text-base sm:text-lg">WOW</WowText>
+          <span>Intelligence</span>
         </h3>
       </motion.div>
     </motion.div>
