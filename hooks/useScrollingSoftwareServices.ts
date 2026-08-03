@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { useCallback, useEffect, useRef } from 'react'
 
 const CARD_STEP = 360
+const STEP_DURATION = 0.45
 
 interface UseScrollingSoftwareServicesOptions {
   duration?: number
@@ -12,7 +13,7 @@ interface UseScrollingSoftwareServicesOptions {
 }
 
 const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptions = {}) => {
-  const { duration = 200, step = CARD_STEP, delay = 100 } = options
+  const { duration = 70, step = CARD_STEP, delay = 100 } = options
 
   const marqueeRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<gsap.core.Tween | null>(null)
@@ -37,11 +38,10 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
     return { contentWidth, currentX }
   }
 
-  const createInfiniteAnimation = useCallback(
-    (marqueeInner: HTMLDivElement, contentWidth: number, startX: number, autoPlay: boolean) => {
+  const startMarqueeLoop = useCallback(
+    (marqueeInner: HTMLDivElement, contentWidth: number, autoPlay: boolean) => {
       animationRef.current?.kill()
-
-      gsap.set(marqueeInner, { x: startX })
+      gsap.set(marqueeInner, { x: -contentWidth })
 
       animationRef.current = gsap.to(marqueeInner, {
         x: -contentWidth * 2,
@@ -60,6 +60,37 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
     [duration],
   )
 
+  const createInfiniteAnimation = useCallback(
+    (marqueeInner: HTMLDivElement, contentWidth: number, startX: number, autoPlay: boolean) => {
+      animationRef.current?.kill()
+      gsap.set(marqueeInner, { x: startX })
+
+      const endX = -contentWidth * 2
+      const remaining = Math.abs(endX - startX)
+
+      if (remaining <= 1) {
+        startMarqueeLoop(marqueeInner, contentWidth, autoPlay)
+        return
+      }
+
+      const segmentDuration = duration * (remaining / contentWidth)
+
+      animationRef.current = gsap.to(marqueeInner, {
+        x: endX,
+        duration: segmentDuration,
+        ease: 'none',
+        onComplete: () => {
+          startMarqueeLoop(marqueeInner, contentWidth, autoPlay)
+        },
+      })
+
+      if (!autoPlay) {
+        animationRef.current.pause()
+      }
+    },
+    [duration, startMarqueeLoop],
+  )
+
   useEffect(() => {
     let cleanup: (() => void) | undefined
 
@@ -71,7 +102,7 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
       marqueeInner.innerHTML = originalContent + originalContent + originalContent
 
       const contentWidth = getContentWidth(marqueeInner)
-      createInfiniteAnimation(marqueeInner, contentWidth, -contentWidth, true)
+      startMarqueeLoop(marqueeInner, contentWidth, true)
 
       const handleResize = () => {
         if (resizeTimeoutRef.current) {
@@ -109,7 +140,7 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
       stepTweenRef.current?.kill()
       animationRef.current?.kill()
     }
-  }, [createInfiniteAnimation, delay])
+  }, [createInfiniteAnimation, delay, startMarqueeLoop])
 
   const pauseMarquee = useCallback(() => {
     isHoveredRef.current = true
@@ -131,8 +162,8 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
 
       stepTweenRef.current = gsap.to(marqueeInner, {
         x: direction === 'next' ? `-=${step}` : `+=${step}`,
-        duration: 0.65,
-        ease: 'power2.inOut',
+        duration: STEP_DURATION,
+        ease: 'power2.out',
         onComplete: () => {
           stepTweenRef.current = null
           const { contentWidth, currentX } = normalizeX(marqueeInner)
