@@ -16,17 +16,32 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
 
   const marqueeRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<gsap.core.Tween | null>(null)
+  const stepTweenRef = useRef<gsap.core.Tween | null>(null)
   const resizeTimeoutRef = useRef<number | null>(null)
+  const isHoveredRef = useRef(false)
 
-  useEffect(() => {
-    const initSlider = () => {
-      const marqueeInner = marqueeRef.current
-      if (!marqueeInner) return
+  const getContentWidth = (marqueeInner: HTMLDivElement) => marqueeInner.offsetWidth / 3
 
-      const originalContent = marqueeInner.innerHTML
-      marqueeInner.innerHTML = originalContent + originalContent + originalContent
+  const normalizeX = (marqueeInner: HTMLDivElement) => {
+    const contentWidth = getContentWidth(marqueeInner)
+    let currentX = gsap.getProperty(marqueeInner, 'x') as number
 
-      const contentWidth = marqueeInner.offsetWidth / 3
+    while (currentX <= -contentWidth * 2) {
+      currentX += contentWidth
+    }
+    while (currentX > -contentWidth) {
+      currentX -= contentWidth
+    }
+
+    gsap.set(marqueeInner, { x: currentX })
+    return { contentWidth, currentX }
+  }
+
+  const createInfiniteAnimation = useCallback(
+    (marqueeInner: HTMLDivElement, contentWidth: number, startX: number, autoPlay: boolean) => {
+      animationRef.current?.kill()
+
+      gsap.set(marqueeInner, { x: startX })
 
       animationRef.current = gsap.to(marqueeInner, {
         x: -contentWidth * 2,
@@ -38,19 +53,37 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
         },
       })
 
+      if (!autoPlay) {
+        animationRef.current.pause()
+      }
+    },
+    [duration],
+  )
+
+  useEffect(() => {
+    let cleanup: (() => void) | undefined
+
+    const initSlider = () => {
+      const marqueeInner = marqueeRef.current
+      if (!marqueeInner) return
+
+      const originalContent = marqueeInner.innerHTML
+      marqueeInner.innerHTML = originalContent + originalContent + originalContent
+
+      const contentWidth = getContentWidth(marqueeInner)
+      createInfiniteAnimation(marqueeInner, contentWidth, -contentWidth, true)
+
       const handleResize = () => {
         if (resizeTimeoutRef.current) {
           window.cancelAnimationFrame(resizeTimeoutRef.current)
         }
 
         resizeTimeoutRef.current = window.requestAnimationFrame(() => {
-          if (!marqueeInner || !animationRef.current) return
+          if (!marqueeInner) return
 
-          const newContentWidth = marqueeInner.offsetWidth / 3
-
-          animationRef.current.vars.x = -newContentWidth * 2
-          gsap.set(marqueeInner, { x: -newContentWidth })
-          animationRef.current.invalidate().restart()
+          stepTweenRef.current?.kill()
+          const { contentWidth: newContentWidth, currentX } = normalizeX(marqueeInner)
+          createInfiniteAnimation(marqueeInner, newContentWidth, currentX, !isHoveredRef.current)
         })
       }
 
@@ -58,51 +91,56 @@ const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptio
 
       return () => {
         window.removeEventListener('resize', handleResize)
+        stepTweenRef.current?.kill()
         animationRef.current?.kill()
       }
     }
 
     const timer = setTimeout(() => {
-      const cleanup = initSlider()
-      return () => {
-        cleanup?.()
-      }
+      cleanup = initSlider()
     }, delay)
 
     return () => {
       clearTimeout(timer)
+      cleanup?.()
       if (resizeTimeoutRef.current) {
         window.cancelAnimationFrame(resizeTimeoutRef.current)
       }
+      stepTweenRef.current?.kill()
+      animationRef.current?.kill()
     }
-  }, [duration, delay])
+  }, [createInfiniteAnimation, delay])
 
   const pauseMarquee = useCallback(() => {
+    isHoveredRef.current = true
     animationRef.current?.pause()
   }, [])
 
   const resumeMarquee = useCallback(() => {
+    isHoveredRef.current = false
     animationRef.current?.play()
   }, [])
 
   const stepMarquee = useCallback(
     (direction: 'next' | 'prev') => {
       const marqueeInner = marqueeRef.current
-      if (!marqueeInner || !animationRef.current || step <= 0) return
+      if (!marqueeInner || step <= 0) return
 
-      const animation = animationRef.current
-      animation.pause()
+      stepTweenRef.current?.kill()
+      animationRef.current?.pause()
 
-      gsap.to(marqueeInner, {
+      stepTweenRef.current = gsap.to(marqueeInner, {
         x: direction === 'next' ? `-=${step}` : `+=${step}`,
         duration: 0.65,
         ease: 'power2.inOut',
         onComplete: () => {
-          animation.play()
+          stepTweenRef.current = null
+          const { contentWidth, currentX } = normalizeX(marqueeInner)
+          createInfiniteAnimation(marqueeInner, contentWidth, currentX, !isHoveredRef.current)
         },
       })
     },
-    [step],
+    [createInfiniteAnimation, step],
   )
 
   const goPrev = useCallback(() => {
