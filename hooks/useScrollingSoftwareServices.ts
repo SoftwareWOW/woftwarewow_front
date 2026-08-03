@@ -6,6 +6,12 @@ import { useCallback, useEffect, useRef } from 'react'
 const CARD_STEP = 360
 const STEP_DURATION = 0.45
 
+export const SCROLLING_SERVICE_CARDS_OPTIONS = {
+  duration: 70,
+  step: CARD_STEP,
+  delay: 100,
+} as const
+
 interface UseScrollingSoftwareServicesOptions {
   duration?: number
   step?: number
@@ -13,7 +19,7 @@ interface UseScrollingSoftwareServicesOptions {
 }
 
 const useScrollingSoftwareServices = (options: UseScrollingSoftwareServicesOptions = {}) => {
-  const { duration = 70, step = CARD_STEP, delay = 100 } = options
+  const { duration = SCROLLING_SERVICE_CARDS_OPTIONS.duration, step = SCROLLING_SERVICE_CARDS_OPTIONS.step, delay = SCROLLING_SERVICE_CARDS_OPTIONS.delay } = options
 
   const marqueeRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<gsap.core.Tween | null>(null)
