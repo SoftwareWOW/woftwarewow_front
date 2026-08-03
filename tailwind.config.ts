@@ -20,65 +20,29 @@ export default {
         outfit: ['var(--font-outfit)'],
         instrument: ['var(--font-seasons)'],
         seasons: ['var(--font-seasons)'],
+        display: ['var(--font-outfit)'],
       },
       colors: {
         background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        // card: {
-        //   DEFAULT: 'var(--card)',
-        //   foreground: 'var(--card-foreground)',
-        // },
-        // popover: {
-        //   DEFAULT: 'var(--popover)',
-        //   foreground: 'var(--popover-foreground)',
-        // },
+        foreground: '#171717',
+        card: {
+          DEFAULT: '#EDEDED',
+        },
+        border: 'rgba(23, 23, 23, 0.1)',
         primary: {
           DEFAULT: '#615CCE',
-          // foreground: '#ffffff',
+          foreground: '#ffffff',
           50: '#CECCF0',
         },
-           accent: '#FF9191',
+        accent: '#FF9191',
         secondary: '#171717',
-        // secondary: {
-        //   DEFAULT: '#171717',
-        //   foreground: '#EDEDED',
-        // },
-        // muted: {
-        //   DEFAULT: '#f5f5f5',
-        //   foreground: '#666666',
-        // },
-        // accent: {
-        //   DEFAULT: '#FF9191',
-        //   foreground: '#171717',
-        // },
-        // destructive: {
-        //   DEFAULT: 'var(--destructive)',
-        //   foreground: 'var(--destructive-foreground)',
-        // },
-        // border: 'var(--border)',
-        // input: 'var(--input)',
-        // ring: 'var(--ring)',
-        // chart: {
-        //   1: 'var(--chart-1)',
-        //   2: 'var(--chart-2)',
-        //   3: 'var(--chart-3)',
-        //   4: 'var(--chart-4)',
-        //   5: 'var(--chart-5)',
-        // },
-        // sidebar: {
-        //   DEFAULT: 'var(--sidebar)',
-        //   foreground: 'var(--sidebar-foreground)',
-        //   primary: 'var(--sidebar-primary)',
-        //   'primary-foreground': 'var(--sidebar-primary-foreground)',
-        //   accent: 'var(--sidebar-accent)',
-        //   'accent-foreground': 'var(--sidebar-accent-foreground)',
-        //   border: 'var(--sidebar-border)',
-        //   ring: 'var(--sidebar-ring)',
-        // },
+        muted: {
+          DEFAULT: '#666666',
+          foreground: '#666666',
+        },
         backgroundBody: '#EDEDED',
         black: '#171717',
         colorText: '#171717b3',
-        muted: '#666666',
         dark: {
           DEFAULT: '#171717',
           100: '#ffffffb3',
@@ -117,10 +81,20 @@ export default {
           from: { opacity: '0', transform: 'translateY(24px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        'ring-spin': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        'node-pulse': {
+          '0%, 100%': { boxShadow: '0 8px 32px rgba(97, 92, 206, 0.18)' },
+          '50%': { boxShadow: '0 12px 40px rgba(97, 92, 206, 0.28)' },
+        },
       },
       animation: {
         'mega-menu-in': 'mega-menu-in 220ms cubic-bezier(0.65, 0.05, 0, 1) forwards',
         'mobile-sheet-in': 'mobile-sheet-in 280ms cubic-bezier(0.65, 0.05, 0, 1) forwards',
+        'ring-spin': 'ring-spin 14s linear infinite',
+        'node-pulse': 'node-pulse 3.2s ease-in-out infinite',
       },
       borderRadius: {
         'radius-sm': 'var(--radius-sm)',
