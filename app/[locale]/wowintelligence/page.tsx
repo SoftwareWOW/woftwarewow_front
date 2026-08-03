@@ -1,6 +1,5 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import SoftwareRfq from '@/components/wow/softwarewow/SoftwareRfq'
 import BusinessProblems from '@/components/wow/wowintelligence/BusinessProblems'
 import IntelligenceFlowHero from '@/components/wow/wowintelligence/IntelligenceFlowHero'
 import IntelligenceClients from '@/components/wow/wowintelligence/IntelligenceClients'
@@ -9,6 +8,7 @@ import OrderProcess from '@/components/wow/wowintelligence/OrderProcess'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
+import IntelligenceRfq from '@/components/wow/wowintelligence/IntelligenceRfq'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -39,7 +39,7 @@ export default async function WowIntelligencePage({ params }: Props) {
         <OrderProcess />
         <IntelligenceProcess />
         <IntelligenceClients />
-        <SoftwareRfq />
+        <IntelligenceRfq />
         <div className="mb-3">
           <WowGrowthCta />
         </div>

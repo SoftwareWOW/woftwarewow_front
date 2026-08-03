@@ -3,7 +3,6 @@
 import { cn } from '@/utils/cn'
 import Marquee from 'react-fast-marquee'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 
 const clients = [
   {
@@ -71,14 +70,14 @@ const IntelligenceClients = () => {
         <RevealWrapper className="rv-badge">
           <span className="rv-badge-text">Testimonial</span>
         </RevealWrapper>
-        <TextAppearAnimation>
-          <h2 className="text-appear my-3">
-            Our respected happy
-            <i className="font-instrument"> clients </i>
+        <RevealWrapper>
+          <h2 className="my-3 text-foreground dark:text-backgroundBody">
+            Our respected happy{' '}
+            <span className="font-instrument italic">clients</span>
             <br />
-            <i className="font-instrument">say</i>
+            <span className="font-instrument italic">say</span>
           </h2>
-        </TextAppearAnimation>
+        </RevealWrapper>
       </div>
       <RevealWrapper>
         <div className="flex items-center gap-4 md:gap-[30px]">
@@ -87,23 +86,31 @@ const IntelligenceClients = () => {
               <div
                 key={item.id}
                 className={cn(
-                  'relative min-h-[237px] w-96 border p-[30px] first:ml-[30px] dark:border-dark',
+                  'mr-[30px] flex w-96 flex-col border p-[30px] dark:border-dark',
                 )}
               >
-                <div className="mb-5 flex items-center gap-1">
+                <div className="mb-5 flex shrink-0 items-center gap-1">
                   {Array.from({ length: item.rating }).map((_, idx) => (
                     <span key={idx}>
                       <StarIcon />
                     </span>
                   ))}
                 </div>
-                <p className="mb-4 h-auto w-full text-wrap text-[17px] leading-[1.6]">{item.reviewText}</p>
-                <figcaption className="absolute bottom-8 left-8 right-8 flex items-center justify-between">
-                  <div>
-                    <h6 className="text-[22px] leading-[1.2]">{item.authorName}</h6>
-                    <p className="text-[15px] leading-[1.6] text-secondary/30">{item.authorRole}</p>
+                <p className="mb-6 flex-1 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
+                  {item.reviewText}
+                </p>
+                <figcaption className="flex shrink-0 items-center justify-between gap-4 border-t border-border/40 pt-5 dark:border-white/10">
+                  <div className="min-w-0">
+                    <h6 className="text-[22px] leading-[1.2] text-foreground dark:text-backgroundBody">
+                      {item.authorName}
+                    </h6>
+                    <p className="text-[15px] leading-[1.6] text-muted-foreground">{item.authorRole}</p>
                   </div>
-                  <img src={item.authorImage} alt={item.authorName} className="size-12 rounded-full object-cover" />
+                  <img
+                    src={item.authorImage}
+                    alt={item.authorName}
+                    className="size-12 shrink-0 rounded-full object-cover"
+                  />
                 </figcaption>
               </div>
             ))}
