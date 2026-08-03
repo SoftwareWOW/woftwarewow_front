@@ -42,7 +42,7 @@ export function FlowConnections() {
             vectorEffect="non-scaling-stroke"
           />
           <path
-            className="flow-dash"
+            className="animate-if-flow-dash [stroke-dasharray:5_9]"
             d={d}
             fill="none"
             stroke={STROKES[i % 3]}

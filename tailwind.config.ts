@@ -113,6 +113,13 @@ export default {
           '0%, 100%': { transform: 'translateX(0)', opacity: '0.55' },
           '50%': { transform: 'translateX(5px)', opacity: '1' },
         },
+        'if-flow-dash': {
+          to: { strokeDashoffset: '-28' },
+        },
+        'if-core-particle': {
+          '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '0.35' },
+          '50%': { transform: 'translateY(-18px) scale(1.15)', opacity: '0.95' },
+        },
       },
       animation: {
         'mega-menu-in': 'mega-menu-in 220ms cubic-bezier(0.65, 0.05, 0, 1) forwards',
@@ -125,6 +132,8 @@ export default {
         'arrow-slide-down': 'arrow-slide-down 1.2s ease-in-out infinite',
         'arrow-slide-left': 'arrow-slide-left 1.2s ease-in-out infinite',
         'arrow-slide-right': 'arrow-slide-right 1.8s ease-in-out infinite',
+        'if-flow-dash': 'if-flow-dash 2.2s linear infinite',
+        'if-core-particle': 'if-core-particle 4.5s ease-in-out infinite',
       },
       borderRadius: {
         'radius-sm': 'var(--radius-sm)',
