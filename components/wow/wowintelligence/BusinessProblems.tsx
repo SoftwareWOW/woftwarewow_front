@@ -61,8 +61,8 @@ const BusinessProblems = () => {
                 className="card group relative h-[500px] w-[360px] flex-shrink-0"
                 key={problem.slug}
               >
-                <div className="absolute flex h-full w-full translate-y-0 items-center justify-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
-                  <h5>{problem.title}</h5>
+                <div className="absolute inset-0 flex items-center justify-center p-8 text-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+                  <h5 className="text-center">{problem.title}</h5>
                 </div>
                 <div className="absolute z-10 h-full w-full translate-y-full border-t border-primary bg-secondary p-8 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-secondary">
                   <div className="mb-[55px] flex items-center justify-between gap-1">
