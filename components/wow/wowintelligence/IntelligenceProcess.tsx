@@ -3,6 +3,33 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import SectionLabel from '../shared/SectionLabel'
 
+const steps = [
+  {
+    title: 'Discovery & Strategy',
+    description: 'We clarify your business goals and define where AI can create measurable value.',
+  },
+  {
+    title: 'Data Audit',
+    description: 'We review your CRM records, documents, channels, and reports to understand what data is available.',
+  },
+  {
+    title: 'Workflow Mapping',
+    description: 'We map how inquiries, leads, support requests, and internal tasks move through your team today.',
+  },
+  {
+    title: 'AI Architecture',
+    description: 'We design the assistants, automations, and analytics your business needs.',
+  },
+  {
+    title: 'Integration',
+    description: 'We connect the intelligence layer to your CRM, email, chat, and existing business tools.',
+  },
+  {
+    title: 'Deploy & Optimize',
+    description: 'We launch, monitor results, and refine models and workflows as usage grows.',
+  },
+] as const
+
 const IntelligenceProcess = () => {
   return (
     <section className="px-3 md:px-4">
@@ -17,33 +44,17 @@ const IntelligenceProcess = () => {
             </h2>
           </TextAppearAnimation>
         </div>
-        <div className="service-item-wrapper flex justify-center gap-[30px] max-md:flex-wrap">
-          <RevealWrapper className="relative flex flex-col items-center justify-center pt-[100px]">
-            <div className="service-item-number"></div>
-            <h5 className="mb-5">Discovery & AI Audit</h5>
-            <p className="text-center">
-              We map your goals, data sources, and workflows to uncover the highest-impact AI
-              opportunities for your business.
-            </p>
-          </RevealWrapper>
-
-          <RevealWrapper className="relative flex flex-col items-center justify-center pt-[100px]">
-            <div className="service-item-number"></div>
-            <h5 className="mb-5">Design & Integration</h5>
-            <p className="text-center">
-              We architect AI assistants, automations, and analytics pipelines connected to your CRM,
-              tools, and existing systems.
-            </p>
-          </RevealWrapper>
-
-          <RevealWrapper className="relative flex flex-col items-center justify-center pt-[100px]">
-            <div className="service-item-number"></div>
-            <h5 className="mb-5">Deploy, Learn & Scale</h5>
-            <p className="text-center">
-              We launch your intelligence layer, monitor performance, and continuously refine models
-              and workflows as your business grows.
-            </p>
-          </RevealWrapper>
+        <div className="service-item-wrapper flex flex-wrap justify-center gap-x-[30px] gap-y-12">
+          {steps.map((step) => (
+            <RevealWrapper
+              key={step.title}
+              className="relative flex w-full max-w-[340px] flex-col items-center justify-center pt-[100px] sm:w-[calc(50%-15px)] lg:w-[calc(33.333%-20px)]"
+            >
+              <div className="service-item-number"></div>
+              <h5 className="mb-5">{step.title}</h5>
+              <p className="text-center">{step.description}</p>
+            </RevealWrapper>
+          ))}
         </div>
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList itemClassName="block w-full text-center md:inline-block md:w-auto">
