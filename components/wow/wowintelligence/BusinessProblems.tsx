@@ -18,7 +18,7 @@ const BusinessProblems = () => {
             <TextAppearAnimation>
               <h2 className="text-appear">
                 Challenges We Help <br />
-                <span className="font-instrument italic">You Overcome</span>
+                <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">You Overcome</span>
               </h2>
             </TextAppearAnimation>
           </div>

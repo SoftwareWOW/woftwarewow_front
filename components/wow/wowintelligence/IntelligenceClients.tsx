@@ -73,9 +73,9 @@ const IntelligenceClients = () => {
         <RevealWrapper>
           <h2 className="my-3 text-foreground dark:text-backgroundBody">
             Our respected happy{' '}
-            <span className="font-instrument italic">clients</span>
+            <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">clients</span>
             <br />
-            <span className="font-instrument italic">say</span>
+            <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">say</span>
           </h2>
         </RevealWrapper>
       </div>

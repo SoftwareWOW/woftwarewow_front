@@ -8,6 +8,7 @@ import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 type WowGrowthCtaProps = {
   className?: string
+
 }
 
 const WowGrowthCta = ({ className }: WowGrowthCtaProps) => {
@@ -53,9 +54,9 @@ const WowGrowthCta = ({ className }: WowGrowthCtaProps) => {
                     { id: '3', img: '/images/wow/Hero/Growth/image (1).png' },
                   ]}
                 />
-                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
-                  Accelerate
-                </span>{' '}
+                  <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">
+                    Accelerate
+                  </span>
                 Your Growth?
               </h2>
             </TextAppearAnimation>

@@ -40,7 +40,8 @@ const IntelligenceProcess = () => {
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear">
-              From data to intelligence, <span className="font-instrument italic">seamlessly</span>
+              From data to intelligence,{' '}
+              <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">seamlessly</span>
             </h2>
           </TextAppearAnimation>
         </div>

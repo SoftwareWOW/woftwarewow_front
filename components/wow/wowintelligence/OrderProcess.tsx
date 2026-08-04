@@ -261,10 +261,8 @@ export default function OrderProcess() {
           AI Workflow
         </span>
         <h1 className="mt-4 font-display text-3xl leading-[1.08] tracking-tight text-foreground dark:text-backgroundBody sm:mt-5 sm:text-4xl lg:text-5xl xl:text-6xl">
-          From customer request to{" "}
-          <span className="bg-[linear-gradient(90deg,#615cc7_0%,#6f62bf_25%,#9671ac_50%,#d38b8e_75%,#db8e8b_100%)] bg-clip-text text-transparent">
-            business growth
-          </span>
+          From customer request to{' '}
+          <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">business growth</span>
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-dark-100 sm:mt-4 md:text-base">
           Nine automated steps showing how AI supports the entire delivery process —

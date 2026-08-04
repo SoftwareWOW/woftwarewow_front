@@ -90,7 +90,8 @@ const IntelligenceRfq = () => {
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear text-foreground dark:text-backgroundBody">
-              Frequently Asked <span className="font-instrument italic">Questions</span>
+              Frequently Asked{' '}
+              <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">Questions</span>
             </h2>
           </TextAppearAnimation>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#808080] sm:text-lg">
