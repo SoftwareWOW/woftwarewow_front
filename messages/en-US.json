@@ -730,7 +730,7 @@
           "Flexible scheduling",
           "No obligation"
         ],
-        "ctaLabel": "Schedule a Meeting",
+        "ctaLabel": "Learn more",
         "image": "default"
       },
       "thinkTank": {
@@ -905,7 +905,7 @@
                   "id": "wowSocial",
                   "label": "WOW Social",
                   "type": "division",
-                  "href": "/divisions/wow-social",
+                  "href": "/wowsocial",
                   "detailPanel": "default"
                 },
                 {
@@ -1042,7 +1042,7 @@
                   "id": "wowSocial",
                   "label": "WOW Social",
                   "type": "division",
-                  "href": "/divisions/wow-social"
+                  "href": "/wowsocial"
                 },
                 {
                   "id": "wowAccelerate",
@@ -1667,10 +1667,10 @@
               "items": [
                 {
                   "id": "meet",
-                  "label": "Schedule a Meeting",
+                  "label": "Meet",
                   "description": "Connect with our team",
                   "type": "link",
-                  "href": "/meet",
+                  "href": "/contact",
                   "detailPanel": "default"
                 },
                 {
@@ -1764,9 +1764,9 @@
               "items": [
                 {
                   "id": "meet",
-                  "label": "Schedule a Meeting",
+                  "label": "Meet",
                   "description": "Connect with our team",
-                  "href": "/meet"
+                  "href": "/contact"
                 },
                 {
                   "id": "thinkTank",
@@ -1881,27 +1881,59 @@
       "highlight": "organized, ",
       "part2": "not disconnected"
     },
-     
     "description": "Every division has a dedicated purpose. Together they form one connected ecosystem built to help businesses grow faster, smarter, and with confidence.",
     "nodes": {
-      "websites": { "prefix": "WOW", "label": "Websites" },
-      "host": { "prefix": "WOW", "label": "Host" },
-      "hub": { "prefix": "WOW", "label": "Hub" },
-      "impact": { "prefix": "WOW", "label": "Impact" },
-      "design": { "prefix": "WOW", "label": "Design" },
-      "events": { "prefix": "WOW", "label": "Events" },
-      "intelligence": { "prefix": "WOW", "label": "Intelligence" },
-      "accelerate": { "prefix": "WOW", "label": "Accelerate" },
-      "social": { "prefix": "WOW", "label": "Social" },
-      "softwarewow": { "prefix": "Software", "label": "WOW!" },
-      "marketing": { "prefix": "WOW", "label": "Marketing" }
+      "websites": {
+        "prefix": "WOW",
+        "label": "Websites"
+      },
+      "host": {
+        "prefix": "WOW",
+        "label": "Host"
+      },
+      "hub": {
+        "prefix": "WOW",
+        "label": "Hub"
+      },
+      "impact": {
+        "prefix": "WOW",
+        "label": "Impact"
+      },
+      "design": {
+        "prefix": "WOW",
+        "label": "Design"
+      },
+      "events": {
+        "prefix": "WOW",
+        "label": "Events"
+      },
+      "intelligence": {
+        "prefix": "WOW",
+        "label": "Intelligence"
+      },
+      "accelerate": {
+        "prefix": "WOW",
+        "label": "Accelerate"
+      },
+      "social": {
+        "prefix": "WOW",
+        "label": "Social"
+      },
+      "softwarewow": {
+        "prefix": "Software",
+        "label": "WOW!"
+      },
+      "marketing": {
+        "prefix": "WOW",
+        "label": "Marketing"
+      }
     },
-   "ctas": {
-  "best-app": "THE BEST APP",
-  "modern-systems": "MODERN SYSTEMS",
-  "boost-profits": "BOOST PROFITS",
-  "attract-new": "ATTRACT NEW CUSTOMER"
-}
+    "ctas": {
+      "best-app": "THE BEST APP",
+      "modern-systems": "MODERN SYSTEMS",
+      "boost-profits": "BOOST PROFITS",
+      "attract-new": "ATTRACT NEW CUSTOMER"
+    }
   },
   "superAgencyClient": {
     "heading": {

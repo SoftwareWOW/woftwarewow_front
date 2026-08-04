@@ -730,7 +730,7 @@
           "Flexible scheduling",
           "No obligation"
         ],
-        "ctaLabel": "Planifier une rencontre",
+        "ctaLabel": "Learn more",
         "image": "default"
       },
       "thinkTank": {
@@ -905,7 +905,7 @@
                   "id": "wowSocial",
                   "label": "WOW Social",
                   "type": "division",
-                  "href": "/divisions/wow-social",
+                  "href": "/wowsocial",
                   "detailPanel": "default"
                 },
                 {
@@ -1042,7 +1042,7 @@
                   "id": "wowSocial",
                   "label": "WOW Social",
                   "type": "division",
-                  "href": "/divisions/wow-social"
+                  "href": "/wowsocial"
                 },
                 {
                   "id": "wowAccelerate",
@@ -1667,10 +1667,10 @@
               "items": [
                 {
                   "id": "meet",
-                  "label": "Planifier une rencontre",
-                  "description": "Connectez-vous avec notre équipe",
+                  "label": "Meet",
+                  "description": "Connect with our team",
                   "type": "link",
-                  "href": "/meet",
+                  "href": "/contact",
                   "detailPanel": "default"
                 },
                 {
@@ -1764,9 +1764,9 @@
               "items": [
                 {
                   "id": "meet",
-                  "label": "Planifier une rencontre",
-                  "description": "Connectez-vous avec notre équipe",
-                  "href": "/meet"
+                  "label": "Meet",
+                  "description": "Connect with our team",
+                  "href": "/contact"
                 },
                 {
                   "id": "thinkTank",
@@ -1883,31 +1883,64 @@
     },
     "description": "Nos solutions marketing stimulent l'engagement et le retour sur investissement grâce à des campagnes ciblées, en améliorant la visibilité de la marque par le SEO et les médias sociaux.",
     "nodes": {
-      "websites": { "prefix": "WOW", "label": "Sites web" },
-      "host": { "prefix": "WOW", "label": "Hébergement" },
-      "hub": { "prefix": "WOW", "label": "Hub" },
-      "impact": { "prefix": "WOW", "label": "Impact" },
-      "design": { "prefix": "WOW", "label": "Design" },
-      "events": { "prefix": "WOW", "label": "Événements" },
-      "intelligence": { "prefix": "WOW", "label": "Intelligence" },
-      "accelerate": { "prefix": "WOW", "label": "Accélération" },
-      "social": { "prefix": "WOW", "label": "Social" },
-      "softwarewow": { "prefix": "Software", "label": "WOW!" },
-      "marketing": { "prefix": "WOW", "label": "Marketing" }
+      "websites": {
+        "prefix": "WOW",
+        "label": "Sites web"
+      },
+      "host": {
+        "prefix": "WOW",
+        "label": "Hébergement"
+      },
+      "hub": {
+        "prefix": "WOW",
+        "label": "Hub"
+      },
+      "impact": {
+        "prefix": "WOW",
+        "label": "Impact"
+      },
+      "design": {
+        "prefix": "WOW",
+        "label": "Design"
+      },
+      "events": {
+        "prefix": "WOW",
+        "label": "Événements"
+      },
+      "intelligence": {
+        "prefix": "WOW",
+        "label": "Intelligence"
+      },
+      "accelerate": {
+        "prefix": "WOW",
+        "label": "Accélération"
+      },
+      "social": {
+        "prefix": "WOW",
+        "label": "Social"
+      },
+      "softwarewow": {
+        "prefix": "Software",
+        "label": "WOW!"
+      },
+      "marketing": {
+        "prefix": "WOW",
+        "label": "Marketing"
+      }
     },
-"ctas": {
-  "best-app": "LA MEILLEURE APP",
-  "modern-systems": "SYSTÈMES MODERNES",
-  "boost-profits": "AUGMENTER LES PROFITS",
-  "attract-new": "ATTIRER DE NOUVEAUX CLIENTS"
-}
+    "ctas": {
+      "best-app": "LA MEILLEURE APP",
+      "modern-systems": "SYSTÈMES MODERNES",
+      "boost-profits": "AUGMENTER LES PROFITS",
+      "attract-new": "ATTIRER DE NOUVEAUX CLIENTS"
+    }
   },
   "superAgencyClient": {
-     "heading": {
-    "part1": "Approuvé par des entreprises",
-    "part2": "axées sur la",
-    "highlight": "croissance"
-  },
+    "heading": {
+      "part1": "Approuvé par des entreprises",
+      "part2": "axées sur la",
+      "highlight": "croissance"
+    },
     "aria": {
       "previousTestimonial": "Témoignage précédent",
       "nextTestimonial": "Témoignage suivant",

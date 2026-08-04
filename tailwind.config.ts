@@ -34,6 +34,11 @@ export default {
           foreground: '#ffffff',
           50: '#CECCF0',
         },
+        brand: {
+          DEFAULT: '#615CCE',
+          glow: '#9671ac',
+          ink: '#171717',
+        },
         accent: '#FF9191',
         secondary: '#171717',
         muted: {
