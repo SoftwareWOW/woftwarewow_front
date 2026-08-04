@@ -125,6 +125,14 @@ export default {
           '0%, 100%': { transform: 'translateY(0) scale(1)', opacity: '0.35' },
           '50%': { transform: 'translateY(-18px) scale(1.15)', opacity: '0.95' },
         },
+        'social-orbit': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        'social-float': {
+          '0%, 100%': { transform: 'translate(-50%, -50%) translateY(0)' },
+          '50%': { transform: 'translate(-50%, -50%) translateY(-6px)' },
+        },
       },
       animation: {
         'mega-menu-in': 'mega-menu-in 220ms cubic-bezier(0.65, 0.05, 0, 1) forwards',
@@ -139,6 +147,9 @@ export default {
         'arrow-slide-right': 'arrow-slide-right 1.8s ease-in-out infinite',
         'if-flow-dash': 'if-flow-dash 2.2s linear infinite',
         'if-core-particle': 'if-core-particle 4.5s ease-in-out infinite',
+        'social-orbit': 'social-orbit 24s linear infinite',
+        'social-orbit-slow': 'social-orbit 36s linear infinite reverse',
+        'social-float': 'social-float 5s ease-in-out infinite',
       },
       borderRadius: {
         'radius-sm': 'var(--radius-sm)',
