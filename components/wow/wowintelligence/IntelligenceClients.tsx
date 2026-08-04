@@ -86,7 +86,7 @@ const IntelligenceClients = () => {
               <div
                 key={item.id}
                 className={cn(
-                  'mr-[30px] flex w-96 flex-col border p-[30px] dark:border-dark',
+                  'mr-[30px] flex w-96 flex-col rounded-radius-sm border p-[30px] shadow-none dark:border-dark',
                 )}
               >
                 <div className="mb-5 flex shrink-0 items-center gap-1">
@@ -99,7 +99,7 @@ const IntelligenceClients = () => {
                 <p className="mb-6 flex-1 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
                   {item.reviewText}
                 </p>
-                <figcaption className="flex shrink-0 items-center justify-between gap-4 border-t border-border/40 pt-5 dark:border-white/10">
+                <figcaption className="flex shrink-0 items-center justify-between gap-4">
                   <div className="min-w-0">
                     <h6 className="text-[22px] leading-[1.2] text-foreground dark:text-backgroundBody">
                       {item.authorName}

@@ -5,7 +5,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useState } from 'react'
-
+import gradientBg from '@/public/images/gradient-bg.png'
+import Image from 'next/image'
 const INITIAL_VISIBLE_COUNT = 4
 
 const faqData = [
@@ -78,6 +79,10 @@ const IntelligenceRfq = () => {
 
   return (
     <section className="relative overflow-hidden px-3 md:px-4">
+         <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]">
+        <Image src={gradientBg} alt="" aria-hidden />
+
+      </div>
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper>
