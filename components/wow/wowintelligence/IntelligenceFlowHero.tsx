@@ -157,7 +157,7 @@ const IntelligenceFlowHero = () => {
 
             <FlowRail className="order-2" />
 
-            <div className="order-3 lg:order-2">
+            <div className="order-3 overflow-visible py-2 lg:order-2">
               <IntelligenceCore ref={coreRef} />
             </div>
 

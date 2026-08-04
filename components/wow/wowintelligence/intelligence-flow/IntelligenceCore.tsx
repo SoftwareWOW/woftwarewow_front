@@ -16,11 +16,11 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto flex w-full max-w-[min(100%,320px)] items-center justify-center overflow-hidden py-6 sm:max-w-[320px] sm:py-4 lg:max-w-[340px] lg:overflow-visible lg:py-0"
+      className="relative mx-auto flex w-full max-w-[320px] items-center justify-center overflow-visible py-10 sm:max-w-[340px] sm:py-8 lg:py-0"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-full max-w-[280px] -translate-x-1/2 -translate-y-1/2 sm:max-w-[300px] lg:w-[130%] lg:max-w-[340px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[min(340px,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 sm:w-[130%] sm:max-w-[340px]"
       >
         <div className="absolute inset-[10%] animate-[ring-spin_18s_linear_infinite] rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_22%,transparent)]" />
         <div className="absolute inset-[2%] animate-[ring-spin_26s_linear_infinite_reverse] rounded-full border border-[color-mix(in_oklab,var(--neon-blue)_18%,transparent)]" />
@@ -83,7 +83,7 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative z-10 flex w-full flex-col items-center gap-2 rounded-radius-md border border-[color-mix(in_oklab,var(--neon-violet)_22%,transparent)] bg-backgroundBody/90 px-4 py-4 text-center dark:bg-dark/90 sm:px-5 sm:py-5"
+        className="relative z-10 mx-auto flex w-[78%] max-w-[220px] flex-col items-center gap-2 rounded-radius-md border border-[color-mix(in_oklab,var(--neon-violet)_22%,transparent)] bg-backgroundBody/90 px-4 py-4 text-center dark:bg-dark/90 sm:w-[72%] sm:max-w-[240px] sm:px-5 sm:py-5"
       >
         <span className="inline-flex size-12 items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_24%,transparent)] bg-[color-mix(in_oklab,var(--neon-violet)_10%,transparent)] text-primary">
           <BrainCircuit className="size-6" strokeWidth={1.5} />
