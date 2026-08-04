@@ -32,8 +32,8 @@ const steps = [
 
 const IntelligenceProcess = () => {
   return (
-    <section className="px-3 md:px-4">
-      <div className="mx-auto max-w-[1320px]">
+    <section className="w-full overflow-x-clip px-3 md:px-4">
+      <div className="mx-auto w-full min-w-0 max-w-[1320px]">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">
             <SectionLabel>How we deliver</SectionLabel>

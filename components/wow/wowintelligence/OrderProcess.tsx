@@ -148,7 +148,7 @@ function Node({
         </span>
       </div>
 
-      <p className="mt-2 whitespace-nowrap text-[11px] font-semibold leading-tight text-foreground dark:text-backgroundBody sm:mt-2.5 sm:text-xs lg:text-sm">
+      <p className="mt-2 text-[11px] font-semibold leading-tight text-foreground dark:text-backgroundBody sm:mt-2.5 sm:text-xs sm:whitespace-nowrap lg:text-sm">
         {step.label}
       </p>
       <p className="mt-0.5 line-clamp-2 text-[10px] leading-snug text-muted-foreground dark:text-dark-100 sm:text-[11px]">

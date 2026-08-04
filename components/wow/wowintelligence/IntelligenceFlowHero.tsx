@@ -109,8 +109,8 @@ const IntelligenceFlowHero = () => {
   const outputRefs = useRef<(HTMLDivElement | null)[]>([])
 
   return (
-    <section className="relative px-3 pt-24 [--neon-blue:#7b6fd4] [--neon-violet:#615cce] md:px-4 md:pt-28 lg:pt-32">
-      <div className="relative mx-auto max-w-6xl">
+    <section className="relative w-full overflow-x-clip px-3 pt-24 [--neon-blue:#7b6fd4] [--neon-violet:#615cce] md:px-4 md:pt-28 lg:pt-32">
+      <div className="relative mx-auto w-full min-w-0 max-w-6xl">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ const IntelligenceFlowHero = () => {
           </p>
         </motion.header>
 
-        <div ref={flowRef} className="relative mt-4">
+        <div ref={flowRef} className="relative mt-4 w-full min-w-0">
           <FlowConnections
             containerRef={flowRef}
             coreRef={coreRef}
@@ -135,12 +135,12 @@ const IntelligenceFlowHero = () => {
             outputRefs={outputRefs}
           />
 
-          <div className="relative grid gap-6 lg:grid-cols-[1fr_minmax(280px,340px)_1fr] lg:items-center lg:gap-6">
-            <div className="order-1 flex flex-col gap-4 lg:order-1">
-              <p className="mb-1 text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase lg:text-left">
+          <div className="relative grid w-full min-w-0 gap-4 sm:gap-6 lg:grid-cols-[1fr_minmax(280px,340px)_1fr] lg:items-center lg:gap-6">
+            <div className="order-1 flex w-full min-w-0 flex-col gap-4 lg:order-1">
+              <p className="mb-1 text-center text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase lg:text-left">
                 Business inputs
               </p>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="grid w-full min-w-0 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-1">
                 {inputs.map((item, i) => (
                   <FlowCard
                     key={item.title}
@@ -163,11 +163,11 @@ const IntelligenceFlowHero = () => {
 
             <FlowRail className="order-4" />
 
-            <div className="order-5 flex flex-col gap-4 lg:order-3">
-              <p className="mb-1 text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase lg:text-right">
+            <div className="order-5 flex w-full min-w-0 flex-col gap-4 lg:order-3">
+              <p className="mb-1 text-center text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase lg:text-right">
                 AI outputs
               </p>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="grid w-full min-w-0 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-1">
                 {outputs.map((item, i) => (
                   <FlowCard
                     key={item.title}

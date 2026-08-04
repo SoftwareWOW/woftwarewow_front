@@ -85,7 +85,7 @@ const IntelligenceClients = () => {
               <div
                 key={item.id}
                 className={cn(
-                  'mr-[30px] flex w-96 flex-col rounded-radius-sm border p-[30px] shadow-none dark:border-dark',
+                  'mr-[30px] flex w-[min(24rem,calc(100vw-2rem))] max-w-full flex-col rounded-radius-sm border p-[30px] shadow-none dark:border-dark',
                 )}
               >
                 <div className="mb-5 flex shrink-0 items-center gap-1">
