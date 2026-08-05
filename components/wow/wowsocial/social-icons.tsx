@@ -1,17 +1,23 @@
+'use client'
+
+import { useId } from 'react'
+
 type IconProps = { className?: string }
 
 export function InstagramIcon({ className }: IconProps) {
+  const gradientId = useId()
+
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="ig-grad" x1="0" y1="1" x2="1" y2="0">
+        <linearGradient id={gradientId} x1="0" y1="1" x2="1" y2="0">
           <stop offset="0%" stopColor="#FEDA75" />
           <stop offset="35%" stopColor="#FA7E1E" />
           <stop offset="65%" stopColor="#D62976" />
           <stop offset="100%" stopColor="#962FBF" />
         </linearGradient>
       </defs>
-      <rect x="1" y="1" width="22" height="22" rx="6" fill="url(#ig-grad)" />
+      <rect x="1" y="1" width="22" height="22" rx="6" fill={`url(#${gradientId})`} />
       <rect
         x="5.5"
         y="5.5"

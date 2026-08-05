@@ -20,21 +20,21 @@ type Node = {
 }
 
 const DESKTOP_NODES: Node[] = [
-  { name: 'Instagram', tagline: 'Grow Your Community', Icon: InstagramIcon, x: 22, y: 13, delay: '0s' },
-  { name: 'TikTok', tagline: 'Viral Short Videos', Icon: TikTokIcon, x: 78, y: 10, delay: '0.8s' },
-  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 12, y: 38, delay: '1.6s' },
-  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 88, y: 38, delay: '2.4s' },
-  { name: 'YouTube', tagline: 'Long Form Impact', Icon: YouTubeIcon, x: 20, y: 87, delay: '3.2s' },
-  { name: 'X (Twitter)', tagline: 'Real-time Engagement', Icon: XIcon, x: 80, y: 90, delay: '4s' },
+  { name: 'Instagram', tagline: 'Grow Your Community', Icon: InstagramIcon, x: 24, y: 12, delay: '0s' },
+  { name: 'TikTok', tagline: 'Viral Short Videos', Icon: TikTokIcon, x: 76, y: 12, delay: '0.8s' },
+  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 24, y: 38, delay: '1.6s' },
+  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 76, y: 38, delay: '2.4s' },
+  { name: 'YouTube', tagline: 'Long Form Impact', Icon: YouTubeIcon, x: 24, y: 86, delay: '3.2s' },
+  { name: 'X (Twitter)', tagline: 'Real-time Engagement', Icon: XIcon, x: 76, y: 86, delay: '4s' },
 ]
 
 const MOBILE_NODES: Node[] = [
-  { name: 'Instagram', tagline: 'Grow Your Community', Icon: InstagramIcon, x: 26, y: 16, delay: '0s' },
-  { name: 'TikTok', tagline: 'Viral Short Videos', Icon: TikTokIcon, x: 74, y: 14, delay: '0.8s' },
-  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 16, y: 28, delay: '1.6s' },
-  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 84, y: 28, delay: '2.4s' },
-  { name: 'YouTube', tagline: 'Long Form Impact', Icon: YouTubeIcon, x: 24, y: 84, delay: '3.2s' },
-  { name: 'X (Twitter)', tagline: 'Real-time Engagement', Icon: XIcon, x: 76, y: 84, delay: '4s' },
+  { name: 'Instagram', tagline: 'Grow Your Community', Icon: InstagramIcon, x: 28, y: 14, delay: '0s' },
+  { name: 'TikTok', tagline: 'Viral Short Videos', Icon: TikTokIcon, x: 72, y: 14, delay: '0.8s' },
+  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 28, y: 42, delay: '1.6s' },
+  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 72, y: 42, delay: '2.4s' },
+  { name: 'YouTube', tagline: 'Long Form Impact', Icon: YouTubeIcon, x: 28, y: 84, delay: '3.2s' },
+  { name: 'X (Twitter)', tagline: 'Real-time Engagement', Icon: XIcon, x: 72, y: 84, delay: '4s' },
 ]
 
 type Spark = {
@@ -47,18 +47,21 @@ type Spark = {
 }
 
 const DESKTOP_SPARKS: Spark[] = [
-  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 6, y: 30, delay: '0.4s' },
-  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 94, y: 28, delay: '1.2s' },
+  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 8, y: 22, delay: '0.4s' },
+  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 92, y: 22, delay: '1.2s' },
   { id: 'trend', Icon: TrendingUp, tone: 'text-emerald-500', x: 50, y: 1, delay: '2s' },
-  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 93, y: 74, delay: '2.8s' },
+  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 92, y: 74, delay: '2.8s' },
 ]
 
 const MOBILE_SPARKS: Spark[] = [
-  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 12, y: 32, delay: '0.4s' },
-  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 88, y: 30, delay: '1.2s' },
+  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 10, y: 26, delay: '0.4s' },
+  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 90, y: 26, delay: '1.2s' },
   { id: 'trend', Icon: TrendingUp, tone: 'text-emerald-500', x: 50, y: 4, delay: '2s' },
-  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 88, y: 72, delay: '2.8s' },
+  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 90, y: 72, delay: '2.8s' },
 ]
+
+const NODE_SURFACE =
+  'border border-border bg-backgroundBody dark:border-white/10 dark:bg-dark-200'
 
 function OrbitLinks({ nodes, id }: { nodes: Node[]; id: string }) {
   return (
@@ -117,7 +120,7 @@ function OrbitNodes({
           style={{ left: `${n.x}%`, top: `${n.y}%`, animationDelay: n.delay }}
         >
           <div
-            className={`flex items-center rounded-radius-sm border border-border bg-backgroundBody transition-transform duration-300 hover:-translate-y-0.5 dark:border-white/10 dark:bg-dark-200 ${
+            className={`flex items-center rounded-radius-sm transition-transform duration-300 hover:-translate-y-0.5 ${NODE_SURFACE} ${
               compact ? 'gap-1.5 px-2 py-1.5' : 'gap-2.5 px-3 py-2.5'
             }`}
           >
@@ -151,7 +154,7 @@ function OrbitSparks({ sparks, compact }: { sparks: Spark[]; compact?: boolean }
       {sparks.map((s) => (
         <div
           key={s.id}
-          className={`animate-social-float absolute z-[3] grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-radius-sm border border-border bg-backgroundBody dark:border-white/10 dark:bg-dark-200 ${
+          className={`animate-social-float absolute z-[3] grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-radius-sm ${NODE_SURFACE} ${
             compact ? 'size-6' : 'size-9'
           }`}
           style={{
@@ -183,18 +186,20 @@ export function SocialOrbit() {
         <OrbitLinks nodes={DESKTOP_NODES} id="wow-social-link-desktop" />
       </div>
 
-      <div className="pointer-events-none absolute left-1/2 top-1/2 z-[2] aspect-square w-[46%] -translate-x-1/2 -translate-y-1/2 sm:w-[44%]">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-[2] aspect-square w-[36%] -translate-x-1/2 -translate-y-1/2 sm:w-[34%]">
         <div className="absolute inset-0 animate-social-orbit rounded-full border border-dashed border-primary/25 dark:border-primary/35">
           <span className="absolute -top-[5px] left-1/2 size-2.5 -translate-x-1/2 rounded-full bg-primary" />
           <span className="absolute -bottom-[5px] left-1/2 size-2 -translate-x-1/2 rounded-full bg-primary/60" />
         </div>
-        <div className="absolute -inset-[8%] animate-social-orbit-slow rounded-full border border-primary/15 dark:border-primary/25 sm:-inset-[14%]">
+        <div className="absolute -inset-[5%] animate-social-orbit-slow rounded-full border border-primary/15 dark:border-primary/25 sm:-inset-[8%]">
           <span className="absolute left-0 top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary/50" />
           <span className="absolute right-0 top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary/70" />
         </div>
       </div>
 
-      <div className="absolute left-1/2 top-1/2 z-20 flex aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-backgroundBody px-2 text-center dark:border-white/10 dark:bg-dark-200 sm:w-[24%] sm:px-3">
+      <div
+        className={`absolute left-1/2 top-1/2 z-20 flex aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full px-2 text-center sm:w-[24%] sm:px-3 ${NODE_SURFACE}`}
+      >
         <h3 className="flex items-baseline justify-center gap-1 whitespace-nowrap text-[clamp(0.75rem,2.4vw,1.15rem)] font-semibold leading-none tracking-tight">
           <WowText className="text-[clamp(0.75rem,2.4vw,1.15rem)]">WOW</WowText>
           <span className="text-foreground dark:text-backgroundBody">Social</span>
