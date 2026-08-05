@@ -22,8 +22,8 @@ type Node = {
 const DESKTOP_NODES: Node[] = [
   { name: 'Instagram', tagline: 'Grow Your Community', Icon: InstagramIcon, x: 24, y: 12, delay: '0s' },
   { name: 'TikTok', tagline: 'Viral Short Videos', Icon: TikTokIcon, x: 76, y: 12, delay: '0.8s' },
-  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 24, y: 38, delay: '1.6s' },
-  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 76, y: 38, delay: '2.4s' },
+  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 16, y: 47, delay: '1.6s' },
+  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 84, y: 47, delay: '2.4s' },
   { name: 'YouTube', tagline: 'Long Form Impact', Icon: YouTubeIcon, x: 24, y: 86, delay: '3.2s' },
   { name: 'X (Twitter)', tagline: 'Real-time Engagement', Icon: XIcon, x: 76, y: 86, delay: '4s' },
 ]
@@ -31,8 +31,8 @@ const DESKTOP_NODES: Node[] = [
 const MOBILE_NODES: Node[] = [
   { name: 'Instagram', tagline: 'Grow Your Community', Icon: InstagramIcon, x: 28, y: 14, delay: '0s' },
   { name: 'TikTok', tagline: 'Viral Short Videos', Icon: TikTokIcon, x: 72, y: 14, delay: '0.8s' },
-  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 28, y: 42, delay: '1.6s' },
-  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 72, y: 42, delay: '2.4s' },
+  { name: 'Facebook', tagline: 'Engage More Fans', Icon: FacebookIcon, x: 17, y: 45, delay: '1.6s' },
+  { name: 'LinkedIn', tagline: 'Build Authority', Icon: LinkedInIcon, x: 83, y: 45, delay: '2.4s' },
   { name: 'YouTube', tagline: 'Long Form Impact', Icon: YouTubeIcon, x: 28, y: 84, delay: '3.2s' },
   { name: 'X (Twitter)', tagline: 'Real-time Engagement', Icon: XIcon, x: 72, y: 84, delay: '4s' },
 ]
@@ -47,17 +47,17 @@ type Spark = {
 }
 
 const DESKTOP_SPARKS: Spark[] = [
-  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 8, y: 22, delay: '0.4s' },
-  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 92, y: 22, delay: '1.2s' },
-  { id: 'trend', Icon: TrendingUp, tone: 'text-emerald-500', x: 50, y: 1, delay: '2s' },
-  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 92, y: 74, delay: '2.8s' },
+  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 20, y: 30, delay: '0.4s' },
+  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 85, y: 30, delay: '1.2s' },
+  { id: 'trend', Icon: TrendingUp, tone: 'text-emerald-500', x: 50, y: 3, delay: '2s' },
+  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 80, y: 67, delay: '2.8s' },
 ]
 
 const MOBILE_SPARKS: Spark[] = [
-  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 10, y: 26, delay: '0.4s' },
-  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 90, y: 26, delay: '1.2s' },
-  { id: 'trend', Icon: TrendingUp, tone: 'text-emerald-500', x: 50, y: 4, delay: '2s' },
-  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 90, y: 72, delay: '2.8s' },
+  { id: 'heart-l', Icon: Heart, tone: 'text-pink-500', x: 15, y: 30, delay: '0.4s' },
+  { id: 'heart-r', Icon: Sparkles, tone: 'text-primary', x: 85, y: 30, delay: '1.2s' },
+  { id: 'trend', Icon: TrendingUp, tone: 'text-emerald-500', x: 50, y: 2, delay: '2s' },
+  { id: 'like', Icon: ThumbsUp, tone: 'text-blue-500', x: 80, y: 65, delay: '2.8s' },
 ]
 
 const NODE_SURFACE =
