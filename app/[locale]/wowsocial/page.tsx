@@ -1,4 +1,5 @@
 import LayoutOne from '@/components/shared/LayoutOne'
+import Marquee from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import SocialHero from '@/components/wow/wowsocial/SocialHero'
 import type { Locale } from '@/i18n/config'
@@ -30,7 +31,8 @@ export default async function WowSocialPage({ params }: Props) {
     <LayoutOne>
       <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <SocialHero />
-        <WowGrowthCta plainAccent />
+         <Marquee />
+        <WowGrowthCta/>
       </div>
     </LayoutOne>
   )

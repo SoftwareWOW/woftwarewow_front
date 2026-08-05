@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react'
+import type { ComponentType, ReactNode } from 'react'
 import { Heart, Sparkles, ThumbsUp, TrendingUp } from 'lucide-react'
 import WowText from '@/components/wow/shared/WowText'
 import {
@@ -61,7 +61,27 @@ const MOBILE_SPARKS: Spark[] = [
 ]
 
 const NODE_SURFACE =
-  'border border-border bg-backgroundBody dark:border-white/10 dark:bg-dark-200'
+  'border border-border bg-background dark:border-white/10 dark:bg-dark-200'
+
+function SocialNodeCard({
+  children,
+  className,
+  shape = 'card',
+}: {
+  children: ReactNode
+  className?: string
+  shape?: 'card' | 'circle'
+}) {
+  return (
+    <div
+      className={`flex items-center ${NODE_SURFACE} ${
+        shape === 'circle' ? 'justify-center rounded-full' : 'rounded-radius-sm'
+      } ${className ?? ''}`}
+    >
+      {children}
+    </div>
+  )
+}
 
 function OrbitLinks({ nodes, id }: { nodes: Node[]; id: string }) {
   return (
@@ -119,8 +139,9 @@ function OrbitNodes({
           className={`animate-social-float absolute z-10 -translate-x-1/2 -translate-y-1/2 ${compact ? 'w-[32%]' : 'w-[26%]'}`}
           style={{ left: `${n.x}%`, top: `${n.y}%`, animationDelay: n.delay }}
         >
-          <div
-            className={`flex items-center rounded-radius-sm transition-transform duration-300 hover:-translate-y-0.5 ${NODE_SURFACE} ${
+          <SocialNodeCard
+            shape="card"
+            className={`transition-transform duration-300 hover:-translate-y-0.5 ${
               compact ? 'gap-1.5 px-2 py-1.5' : 'gap-2.5 px-3 py-2.5'
             }`}
           >
@@ -141,7 +162,7 @@ function OrbitNodes({
                 {n.tagline}
               </p>
             </div>
-          </div>
+          </SocialNodeCard>
         </div>
       ))}
     </>
@@ -154,9 +175,7 @@ function OrbitSparks({ sparks, compact }: { sparks: Spark[]; compact?: boolean }
       {sparks.map((s) => (
         <div
           key={s.id}
-          className={`animate-social-float absolute z-[3] grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-radius-sm ${NODE_SURFACE} ${
-            compact ? 'size-6' : 'size-9'
-          }`}
+          className="animate-social-float absolute z-[3] -translate-x-1/2 -translate-y-1/2"
           style={{
             left: `${s.x}%`,
             top: `${s.y}%`,
@@ -164,7 +183,12 @@ function OrbitSparks({ sparks, compact }: { sparks: Spark[]; compact?: boolean }
           }}
           aria-hidden="true"
         >
-          <s.Icon className={`${compact ? 'size-3' : 'size-4'} ${s.tone}`} strokeWidth={2.5} />
+          <SocialNodeCard
+            shape="card"
+            className={`grid place-items-center ${compact ? 'size-6' : 'size-9'}`}
+          >
+            <s.Icon className={`${compact ? 'size-3' : 'size-4'} ${s.tone}`} strokeWidth={2.5} />
+          </SocialNodeCard>
         </div>
       ))}
     </>
@@ -176,7 +200,7 @@ export function SocialOrbit() {
     <div className="relative mx-auto aspect-[4/5] w-full min-w-0 max-w-[560px] overflow-hidden sm:aspect-[7/5] sm:max-w-[880px] sm:overflow-visible">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(97,92,206,0.12)_0%,transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(97,92,206,0.2)_0%,transparent_70%)]"
+        className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(97,92,206,0.12)_40%,transparent_72%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(97,92,206,0.2)_40%,transparent_72%)]"
       />
 
       <div className="absolute inset-0 sm:hidden">
@@ -197,13 +221,13 @@ export function SocialOrbit() {
         </div>
       </div>
 
-      <div
-        className={`absolute left-1/2 top-1/2 z-20 flex aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full px-2 text-center sm:w-[24%] sm:px-3 ${NODE_SURFACE}`}
-      >
-        <h3 className="flex items-baseline justify-center gap-1 whitespace-nowrap text-[clamp(0.75rem,2.4vw,1.15rem)] font-semibold leading-none tracking-tight">
-          <WowText className="text-[clamp(0.75rem,2.4vw,1.15rem)]">WOW</WowText>
-          <span className="text-foreground dark:text-backgroundBody">Social</span>
-        </h3>
+      <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 sm:w-[24%]">
+        <SocialNodeCard shape="circle" className="size-full px-2 text-center sm:px-3">
+          <h3 className="flex items-baseline justify-center gap-1 whitespace-nowrap text-[clamp(0.75rem,2.4vw,1.15rem)] font-semibold leading-none tracking-tight">
+            <WowText className="text-[clamp(0.75rem,2.4vw,1.15rem)]">WOW</WowText>
+            <span className="text-foreground dark:text-backgroundBody">Social</span>
+          </h3>
+        </SocialNodeCard>
       </div>
 
       <div className="absolute inset-0 sm:hidden">
