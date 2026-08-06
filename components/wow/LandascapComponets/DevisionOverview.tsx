@@ -249,7 +249,7 @@ const DevisionOverview = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block w-[88vw] max-w-[440px] shrink-0 overflow-hidden rounded-radius-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px]"
+                className="group relative block w-[88vw] max-w-[440px] shrink-0 overflow-visible rounded-radius-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px]"
                 onMouseEnter={() => setHoveredId(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
@@ -261,10 +261,16 @@ const DevisionOverview = () => {
                   data-card-id={item.id}
                   className={`relative flex min-h-[260px] flex-col overflow-hidden rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
                     isActive
-                      ? 'scale-[1.02] border-t border-white bg-white dark:bg-[#121212]'
-                      : 'scale-100 border-t border-transparent bg-white/80 dark:bg-[#121212]/90'
+                      ? 'scale-[1.02] bg-white dark:bg-[#121212]'
+                      : 'scale-100 bg-white/80 dark:bg-[#121212]/90'
                   }`}
                 >
+                  <span
+                    aria-hidden
+                    className={`pointer-events-none absolute inset-x-0 top-0 z-20 h-0.5 rounded-t-[var(--radius-sm)] bg-white transition-opacity duration-300 ${
+                      isActive ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
                   <h3 className="pr-2 text-[1.625rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a1a1a] sm:pr-4 sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] dark:text-white ">
                     {renderDivisionTitle(item.title)}
                   </h3>
@@ -274,7 +280,7 @@ const DevisionOverview = () => {
                   </p>
 
                   <div
-                    className={` flex justify-end transition-all duration-300 ${
+                    className={`flex justify-end transition-all duration-300 ${
                       isActive
                         ? 'scale-100 opacity-100'
                         : 'pointer-events-none scale-90 opacity-0'
