@@ -19,6 +19,7 @@ interface HorizontalScrollOptions {
   scrub?: number | boolean
   onAnimationCreated?: (animation: gsap.core.Tween, scrollTrigger: ScrollTrigger) => void
   onUpdate?: (progress: number, scrollTrigger: ScrollTrigger) => void
+  onPinReady?: () => void
   extraScroll?: number
   /** Minimum viewport width (px) to enable horizontal pin. Use 0 to enable on all devices. */
   minWidth?: number
@@ -35,11 +36,13 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
   const triggerRef = useRef<HTMLDivElement>(null)
   const onUpdateRef = useRef(options.onUpdate)
   const onAnimationCreatedRef = useRef(options.onAnimationCreated)
+  const onPinReadyRef = useRef(options.onPinReady)
 
   useEffect(() => {
     onUpdateRef.current = options.onUpdate
     onAnimationCreatedRef.current = options.onAnimationCreated
-  }, [options.onUpdate, options.onAnimationCreated])
+    onPinReadyRef.current = options.onPinReady
+  }, [options.onUpdate, options.onAnimationCreated, options.onPinReady])
 
   const {
     offset = 60,
@@ -156,18 +159,24 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
             onUpdateRef.current?.(self.progress, self)
             syncPinnedLayout(self)
           },
+          onRefreshInit: () => {
+            onPinReadyRef.current?.()
+          },
           onRefresh: (self) => {
             gsap.set(content, { x: getStartX() })
             animation.vars.x = getEndX()
             syncPinnedLayout(self)
+            onPinReadyRef.current?.()
           },
           onToggle: (self) => {
             syncPinnedLayout(self)
+            onPinReadyRef.current?.()
           },
         })
 
         onUpdateRef.current?.(scrollTrigger.progress, scrollTrigger)
         onAnimationCreatedRef.current?.(animation, scrollTrigger)
+        onPinReadyRef.current?.()
 
         const refreshScrollTrigger = () => {
           ScrollTrigger.refresh()

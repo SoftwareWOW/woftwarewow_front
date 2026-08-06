@@ -40,7 +40,12 @@ body {
 // Lenis Smooth Scroll
 // ------------------
 html {
+  overflow-x: hidden;
   scrollbar-gutter: stable;
+
+  @media (max-width: 767px) {
+    scrollbar-gutter: auto;
+  }
 }
 
 html.lenis {

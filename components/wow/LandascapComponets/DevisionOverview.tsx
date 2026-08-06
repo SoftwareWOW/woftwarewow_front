@@ -111,15 +111,16 @@ const DevisionOverview = () => {
     onUpdate: () => {
       scrollUpdateRef.current()
     },
-    onAnimationCreated: () => {
+    onPinReady: () => {
       const trigger = triggerRef.current
       if (!trigger) return
 
-      trigger.style.overflow = 'visible'
+      trigger.style.overflowX = 'clip'
 
       const pinSpacer = trigger.parentElement
       if (pinSpacer?.classList.contains('pin-spacer')) {
-        pinSpacer.style.overflow = 'visible'
+        pinSpacer.style.overflowX = 'clip'
+        pinSpacer.style.maxWidth = '100%'
       }
     },
   })
@@ -166,10 +167,10 @@ const DevisionOverview = () => {
   const activeBgId = hoveredId ?? activeCardId
 
   return (
-    <section className="relative w-full overflow-visible">
+    <section className="relative w-full max-w-full overflow-x-clip">
       <div
         ref={triggerRef}
-        className="service-section relative z-10 flex min-h-[100svh] w-full flex-col overflow-visible"
+        className="service-section relative z-10 flex min-h-[100svh] w-full max-w-full flex-col overflow-x-clip"
         aria-labelledby="divisions-heading"
         onMouseLeave={() => setHoveredId(null)}
       >
@@ -237,7 +238,7 @@ const DevisionOverview = () => {
 
         <div
           ref={contentRef}
-          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 overflow-visible px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
+          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
           aria-label="WOW Superagency divisions"
         >
           {divisions.map((item) => {
@@ -249,7 +250,9 @@ const DevisionOverview = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block w-[88vw] max-w-[440px] shrink-0 overflow-visible rounded-radius-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px]"
+                className={`group relative block w-[min(88vw,calc(100vw-2.5rem))] max-w-[440px] shrink-0 rounded-radius-sm border-t-2 transition-transform duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px] ${
+                  isActive ? 'scale-[1.02] border-white' : 'scale-100 border-transparent'
+                }`}
                 onMouseEnter={() => setHoveredId(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
@@ -259,19 +262,13 @@ const DevisionOverview = () => {
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[260px] flex-col overflow-hidden rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
+                  className={`relative flex min-h-[260px] flex-col overflow-hidden rounded-radius-sm p-6 transition-colors duration-500 sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
                     isActive
-                      ? 'scale-[1.02] bg-white dark:bg-[#121212]'
-                      : 'scale-100 bg-white/80 dark:bg-[#121212]/90'
+                      ? 'bg-white dark:bg-[#121212]'
+                      : 'bg-white/80 dark:bg-[#121212]/90'
                   }`}
                 >
-                  <span
-                    aria-hidden
-                    className={`pointer-events-none absolute inset-x-0 top-0 z-20 h-0.5 rounded-t-[var(--radius-sm)] bg-white transition-opacity duration-300 ${
-                      isActive ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  />
-                  <h3 className="pr-2 text-[1.625rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a1a1a] sm:pr-4 sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] dark:text-white ">
+                  <h3 className="pr-2 text-[1.625rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a1a1a] sm:pr-4 sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] dark:text-white">
                     {renderDivisionTitle(item.title)}
                   </h3>
 

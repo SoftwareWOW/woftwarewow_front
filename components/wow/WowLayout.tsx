@@ -15,14 +15,14 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
   return (
     <ToastProvider>
       <ContactDialogProvider>
-        <div className="relative">
+        <div className="relative w-full max-w-full overflow-x-clip">
           <WowNavbar
             navbar={dictionary.navbar}
             navigation={dictionary.navigation}
             languageSwitcher={dictionary.languageSwitcher}
           />
 
-          <main className="relative z-10 bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[720px]">
+          <main className="relative z-10 w-full max-w-full overflow-x-clip bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[720px]">
             {children}
           </main>
 

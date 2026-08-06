@@ -31,7 +31,7 @@ const legalLinks = [
 
 export default function WowFooter({ footer }: WowFooterProps) {
   return (
-    <footer className="relative z-0 w-full lg:fixed lg:inset-x-0 lg:bottom-0">
+    <footer className="relative z-0 w-full max-w-full overflow-x-clip lg:fixed lg:inset-x-0 lg:bottom-0">
       <div className="relative bg-background px-3 py-3 transition-colors duration-300 dark:bg-dark md:px-4 md:py-4">
         <div className="absolute inset-0 opacity-0 dark:opacity-20">
           <div

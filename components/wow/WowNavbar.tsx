@@ -228,7 +228,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   return (
     <>
       <motion.header
-        className="fixed left-0 right-0 top-0 z-[1000] overflow-visible px-[15px] pt-2 md:px-4 lg:px-8"
+        className="fixed inset-x-0 top-0 z-[1000] w-full max-w-full overflow-x-clip px-[15px] pt-2 md:px-4 lg:px-8"
         initial={false}
         animate={{
           y: navbarHidden ? '-120%' : '0%',
@@ -240,20 +240,20 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       >
         <div
           ref={navContainerRef}
-          className="mx-auto max-w-[1370px]"
+          className="mx-auto w-full max-w-[1370px] min-w-0"
           onMouseEnter={clearCloseTimer}
           onMouseLeave={scheduleCloseMegaMenu}
         >
           <nav
-            className="relative flex items-center justify-between rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-[#1F1F1F] dark:shadow-none"
+            className="relative flex w-full min-w-0 items-center justify-between gap-2 rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-[#1F1F1F] dark:shadow-none"
             aria-label={navbar.mainNavigation}
           >
             <Link
               href="/"
-              className="flex shrink-0 items-center ps-2 md:w-[130px] md:ps-3 lg:w-[180px] lg:ps-5 xl:w-[200px] 2xl:w-[289px]"
+              className="flex min-w-0 shrink items-center ps-2 md:w-[130px] md:ps-3 lg:w-[180px] lg:ps-5 xl:w-[200px] 2xl:w-[289px]"
             >
               <Image
-                className="h-[20px] w-auto dark:hidden"
+                className="h-[20px] w-auto max-w-[calc(100vw-96px)] dark:hidden"
                 src={navbarBrandLogo.light}
                 alt={navbar.logoAlt}
                 width={183}
@@ -263,7 +263,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               />
 
               <Image
-                className="hidden h-[20px] w-auto dark:block"
+                className="hidden h-[20px] w-auto max-w-[calc(100vw-96px)] dark:block"
                 src={navbarBrandLogo.dark}
                 alt={navbar.logoAltDark}
                 width={183}
@@ -408,7 +408,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       </motion.header>
 
       <motion.div
-        className="fixed bottom-0 left-0 right-0 z-[1003] px-[15px] pb-[15px] md:hidden"
+        className="fixed inset-x-0 bottom-0 z-[1003] w-full max-w-full overflow-x-clip px-[15px] pb-[15px] md:hidden"
         initial={false}
         animate={{
           y: navbarHidden ? 'calc(100% + 100px)' : '0%',
