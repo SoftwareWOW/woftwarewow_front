@@ -23,7 +23,11 @@ const ServicesPage = () => {
         <MainServices />
         <ServiceProces />
         <Client />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

@@ -29,7 +29,11 @@ const BlogDetails = async ({ params }: { params: Promise<{ slug: string }> }) =>
         spacing="pt-32 md:pt-44 lg:pt-[200px] pb-10 md:pb-16 lg:pb-[88px] xl:pb-[100px] relative overflow-hidden"
       />
       <BlogDetailsContent blog={blog} slug={slug} />
-      <WowGrowthCta />
+      <WowGrowthCta
+        accentText="Ready to"
+        mainText="Grow?"
+        ariaLabel="Contact WOW Superagency"
+      />
     </LayoutOne>
   )
 }

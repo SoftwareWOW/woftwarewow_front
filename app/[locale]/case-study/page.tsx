@@ -13,7 +13,11 @@ const CaseStudyPage = () => {
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <CaseStudyHero />
         <Projects />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

@@ -39,7 +39,11 @@ const BlogPage = () => {
         <Marquess />
         <BlogInsight Blogs={loadedBlogs} />
         <BlogCaseStudies blogs={loadedBlogs} />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

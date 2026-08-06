@@ -39,7 +39,11 @@ export default async function WowIntelligencePage({ params }: Props) {
         <IntelligenceProcess />
         <IntelligenceClients />
         <IntelligenceRfq />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>    </LayoutOne>
   )
 }

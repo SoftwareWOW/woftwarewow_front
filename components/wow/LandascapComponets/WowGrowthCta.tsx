@@ -1,22 +1,27 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import bigArrowDarkIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
-import bigArrowIcon from '@/public/images/icons/big-arrow-Icon.svg'
+import bigArrowIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useContactDialogOptional } from '../shared/ContactDialogProvider'
 
 interface WowGrowthCtaProps {
   accentText?: string
   mainText?: string
-  href?: string
   ariaLabel?: string
 }
 
 const WowGrowthCta = ({
   accentText = 'Ready to',
   mainText = 'Grow?',
-  href = '/contact',
   ariaLabel = 'Contact WOW Superagency',
 }: WowGrowthCtaProps) => {
+  const contactDialog = useContactDialogOptional()
+
+  const handleOpenContact = () => {
+    contactDialog?.open()
+  }
+
   return (
     <section className="mt-14 bg-backgroundBody pb-20 pt-16 dark:bg-secondary md:mt-16 md:pb-36 lg:mt-[88px] lg:pt-[100px] xl:mt-[100px]">
       <div className="container flex flex-col justify-center gap-y-10 max-md:items-center sm:justify-between md:flex-row">
@@ -33,39 +38,30 @@ const WowGrowthCta = ({
           {mainText}
         </RevealWrapper>
 
-        <Link href={href} aria-label={ariaLabel}>
-          <RevealWrapper className="reveal-me group h-44 w-44 bg-secondary p-5 dark:bg-primary lg:h-[230px] lg:w-[230px]">
-            <figure className="relative h-full w-full bg-primary dark:bg-secondary text-white">
+        <button
+          type="button"
+          onClick={handleOpenContact}
+          aria-label={ariaLabel}
+          className="cursor-pointer border-0 bg-transparent p-0"
+        >
+          <RevealWrapper className="reveal-me group h-44 w-44 overflow-hidden rounded-radius-sm bg-secondary p-5 dark:bg-primary lg:h-[230px] lg:w-[230px]">
+            <figure className="relative h-full w-full rounded-radius-sm bg-primary dark:bg-secondary">
               <Image
                 src={bigArrowIcon}
                 alt=""
                 aria-hidden="true"
-                className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-28 group-hover:translate-x-9 group-hover:opacity-0 dark:hidden max-lg:scale-75"
-              />
-
-              <Image
-                src={bigArrowDarkIcon}
-                alt=""
-                aria-hidden="true"
-                className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-28 group-hover:translate-x-9 group-hover:opacity-0 dark:inline max-lg:scale-75"
+                className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-28 group-hover:translate-x-9 group-hover:opacity-0 max-lg:scale-75"
               />
 
               <Image
                 src={bigArrowIcon}
                 alt=""
                 aria-hidden="true"
-                className="absolute -left-2 top-full inline -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:-translate-y-[105px] group-hover:translate-x-[48%] group-hover:opacity-100 dark:hidden max-lg:scale-75 md:group-hover:-translate-y-32 md:group-hover:translate-x-[80%]"
-              />
-
-              <Image
-                src={bigArrowDarkIcon}
-                alt=""
-                aria-hidden="true"
-                className="absolute -left-2 top-full hidden -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:-translate-y-[105px] group-hover:translate-x-[48%] group-hover:opacity-100 dark:inline max-lg:scale-75 md:group-hover:-translate-y-32 md:group-hover:translate-x-[80%]"
+                className="absolute -left-2 top-full inline -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:-translate-y-[105px] group-hover:translate-x-[48%] group-hover:opacity-100 max-lg:scale-75 md:group-hover:-translate-y-32 md:group-hover:translate-x-[80%]"
               />
             </figure>
           </RevealWrapper>
-        </Link>
+        </button>
       </div>
     </section>
   )

@@ -47,7 +47,11 @@ export default async function SoftwareWowPage({ params }: Props) {
       <Technologies/>
       <SoftwareRfq/>
       <div className="mb-3">
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </div>
   )

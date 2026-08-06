@@ -57,11 +57,10 @@ const Home = async ({ params }: Props) => {
         <GrowthStrategies /> */}
         <div className="mb-3">
           <WowGrowthCta
-  accentText="Ready to"
-  mainText="Grow?"
-  href="/contact"
-  ariaLabel="Contact WOW Superagency"
-/>
+            accentText="Ready to"
+            mainText="Grow?"
+            ariaLabel="Contact WOW Superagency"
+          />
         </div>
       </div>
   )

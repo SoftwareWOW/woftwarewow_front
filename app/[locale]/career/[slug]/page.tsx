@@ -27,7 +27,11 @@ const CareerDetailsPage = async ({ params }: { params: Promise<{ slug: string }>
         <CareerDetailsHero career={postCareer} />
         <CareerDetailsOverview career={postCareer} content={careerContent} />
         <CareerRelatedJobs jobs={allCareers} currentSlug={slug} />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

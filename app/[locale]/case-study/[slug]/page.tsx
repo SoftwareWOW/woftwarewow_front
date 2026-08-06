@@ -46,7 +46,11 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
         <CaseStudySuccessMetrics metrics={study.successMetrics} />
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
         <div className="mb-3">
-          <WowGrowthCta />
+          <WowGrowthCta
+            accentText="Ready to"
+            mainText="Grow?"
+            ariaLabel="Contact WOW Superagency"
+          />
         </div>
       </div>
     </LayoutOne>

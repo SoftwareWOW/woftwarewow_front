@@ -12,7 +12,11 @@ const FAQPage = () => {
   return (
     <LayoutOne>
       <FAQ bigTitleWithBadge={true} />
-       <WowGrowthCta />
+       <WowGrowthCta
+         accentText="Ready to"
+         mainText="Grow?"
+         ariaLabel="Contact WOW Superagency"
+       />
     </LayoutOne>
   )
 }

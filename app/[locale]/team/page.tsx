@@ -45,7 +45,11 @@ const TeamPage = () => {
           scale
         />
         <Team />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

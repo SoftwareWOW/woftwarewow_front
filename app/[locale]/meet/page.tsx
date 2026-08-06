@@ -31,7 +31,11 @@ const MeetPage = async ({ params }: MeetPageProps) => {
         <MeetingInformation />
         <CalComSection calLink={calLink} />
         <MeetFaq />
-        <WowGrowthCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Grow?"
+          ariaLabel="Contact WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

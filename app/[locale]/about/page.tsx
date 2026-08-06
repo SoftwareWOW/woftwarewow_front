@@ -29,7 +29,11 @@ const AboutPage = () => {
         <Marquee />
         <SolutionToChallenges />
         <div className="mb-3">
-          <WowGrowthCta />
+          <WowGrowthCta
+            accentText="Ready to"
+            mainText="Grow?"
+            ariaLabel="Contact WOW Superagency"
+          />
         </div>
       </div>
     </LayoutOne>
