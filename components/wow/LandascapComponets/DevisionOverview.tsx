@@ -102,14 +102,41 @@ const DevisionOverview = () => {
   const [activeCardId, setActiveCardId] = useState<number>(1)
   const cardRefs = useRef<Record<number, HTMLElement | null>>({})
   const scrollUpdateRef = useRef<() => void>(() => {})
+  const lastScrollProgressRef = useRef<number | null>(null)
+  const isScrollAnimatingRef = useRef(false)
+  const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 80,
     minWidth: 0,
     firstItemFocusRatio: FOCUS_X_RATIO,
     lastItemFocusRatio: FOCUS_X_RATIO,
-    onUpdate: () => {
+    onUpdate: (progress, scrollTrigger) => {
       scrollUpdateRef.current()
+
+      if (!scrollTrigger.isActive) {
+        isScrollAnimatingRef.current = false
+        lastScrollProgressRef.current = progress
+        return
+      }
+
+      const previousProgress = lastScrollProgressRef.current
+      lastScrollProgressRef.current = progress
+
+      if (previousProgress === null || Math.abs(progress - previousProgress) <= 0.0001) {
+        return
+      }
+
+      isScrollAnimatingRef.current = true
+      setHoveredId(null)
+
+      if (scrollIdleTimerRef.current) {
+        clearTimeout(scrollIdleTimerRef.current)
+      }
+
+      scrollIdleTimerRef.current = setTimeout(() => {
+        isScrollAnimatingRef.current = false
+      }, 150)
     },
     onPinReady: () => {
       const trigger = triggerRef.current
@@ -151,6 +178,22 @@ const DevisionOverview = () => {
     setActiveCardId((prev) => (prev === closestId ? prev : closestId))
   }, [triggerRef])
 
+  const handleCardPointerMove = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
+    if (isScrollAnimatingRef.current) return
+
+    const card = (event.target as Element).closest('[data-card-id]')
+    if (!card) return
+
+    const id = Number((card as HTMLElement).dataset.cardId)
+    if (!Number.isNaN(id)) {
+      setHoveredId((current) => (current === id ? current : id))
+    }
+  }, [])
+
+  const handleCardPointerLeave = useCallback(() => {
+    setHoveredId(null)
+  }, [])
+
   useEffect(() => {
     scrollUpdateRef.current = updateActiveCardFromPosition
   }, [updateActiveCardFromPosition])
@@ -161,7 +204,12 @@ const DevisionOverview = () => {
     const handleResize = () => updateActiveCardFromPosition()
     window.addEventListener('resize', handleResize, { passive: true })
 
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      if (scrollIdleTimerRef.current) {
+        clearTimeout(scrollIdleTimerRef.current)
+      }
+    }
   }, [updateActiveCardFromPosition])
 
   const activeBgId = hoveredId ?? activeCardId
@@ -172,7 +220,6 @@ const DevisionOverview = () => {
         ref={triggerRef}
         className="service-section relative z-10 flex min-h-[100svh] w-full max-w-full flex-col overflow-x-clip"
         aria-labelledby="divisions-heading"
-        onMouseLeave={() => setHoveredId(null)}
       >
         <div
           aria-hidden
@@ -240,6 +287,8 @@ const DevisionOverview = () => {
           ref={contentRef}
           className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
           aria-label="WOW Superagency divisions"
+          onPointerMove={handleCardPointerMove}
+          onPointerLeave={handleCardPointerLeave}
         >
           {divisions.map((item) => {
             const isActive = activeBgId === item.id
@@ -251,9 +300,8 @@ const DevisionOverview = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group relative block w-[min(88vw,calc(100vw-2.5rem))] max-w-[440px] shrink-0 rounded-radius-sm border-t-2 transition-transform duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px] ${
-                  isActive ? 'scale-[1.02] border-white' : 'scale-100 border-transparent'
+                  isActive ? 'z-10 scale-[1.02] border-white' : 'z-0 scale-100 border-transparent'
                 }`}
-                onMouseEnter={() => setHoveredId(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
               >
