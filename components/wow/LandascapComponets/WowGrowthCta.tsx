@@ -23,7 +23,7 @@ const WowGrowthCta = ({
   }
 
   return (
-    <section className="mt-14 bg-backgroundBody pb-20 pt-16 dark:bg-secondary md:mt-16 md:pb-36 lg:mt-[88px] lg:pt-[100px] xl:mt-[100px]">
+    <section className="bg-backgroundBody pb-5 sm:pb-10 md:pb-15 lg:pb-20 dark:bg-secondary">
       <div className="container flex flex-col justify-center gap-y-10 max-md:items-center sm:justify-between md:flex-row">
         <RevealWrapper
           as="h2"

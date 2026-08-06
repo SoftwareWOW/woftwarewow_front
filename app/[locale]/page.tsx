@@ -15,7 +15,7 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import Marquee from '@/components/wow/shared/Marquee'
 import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
-import CtaV2 from '@/components/shared/CtaV2'
+
 
 
 
@@ -41,7 +41,7 @@ const Home = async ({ params }: Props) => {
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* <WowHero hero={dictionary.hero} />
+        <WowHero hero={dictionary.hero} />
      <div className="flex flex-col gap-0 lg:contents">
          <WowEcosystem ecosystem={dictionary.ecosystem} />
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
@@ -54,7 +54,7 @@ const Home = async ({ params }: Props) => {
            <Marquee />
         <HumanTuch />
         <Faq />
-        <GrowthStrategies /> */}
+        <GrowthStrategies />
         <div className="mb-3">
           <WowGrowthCta
             accentText="Ready to"
