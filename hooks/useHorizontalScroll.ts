@@ -26,6 +26,8 @@ interface HorizontalScrollOptions {
   maxPinWidth?: number
   /** Scroll until the last item's center reaches this viewport width ratio (0–1). */
   lastItemFocusRatio?: number
+  /** Align the first item's center to this viewport width ratio (0–1) at scroll start. */
+  firstItemFocusRatio?: number
 }
 
 const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
@@ -50,6 +52,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     minWidth = 600,
     maxPinWidth,
     lastItemFocusRatio,
+    firstItemFocusRatio,
   } = options
 
   useGSAP(
@@ -70,7 +73,21 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
           return trigger.clientWidth
         }
 
-        const getScrollAmount = () => {
+        const getFocusX = (ratio: number, viewportWidth: number) => viewportWidth * ratio
+
+        const getStartX = () => {
+          const viewportWidth = getViewportWidth()
+          const firstChild = content.firstElementChild as HTMLElement | null
+
+          if (firstChild && firstItemFocusRatio != null) {
+            const firstCenter = firstChild.offsetLeft + firstChild.offsetWidth / 2
+            return getFocusX(firstItemFocusRatio, viewportWidth) - firstCenter
+          }
+
+          return 0
+        }
+
+        const getEndX = () => {
           const contentWidth = content.scrollWidth
           const viewportWidth = getViewportWidth()
           let distance = contentWidth - viewportWidth
@@ -80,15 +97,17 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
 
             if (lastChild) {
               const lastCenter = lastChild.offsetLeft + lastChild.offsetWidth / 2
-              const focusX = viewportWidth * lastItemFocusRatio
+              const focusX = getFocusX(lastItemFocusRatio, viewportWidth)
               distance = Math.max(distance, lastCenter - focusX)
             }
           }
 
           distance += offset + extraScroll
 
-          return distance > 0 ? -distance : 0
+          return distance > 0 ? -(distance) : getStartX()
         }
+
+        const getScrollDistance = () => Math.abs(getEndX() - getStartX())
 
         const syncPinnedLayout = (scrollTrigger: ScrollTrigger) => {
           if (!maxPinWidth || !scrollTrigger.isActive) return
@@ -107,17 +126,23 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
           })
         }
 
-        const animation = gsap.to(content, {
-          x: getScrollAmount,
-          duration,
-          ease,
-        })
+        const animation = gsap.fromTo(
+          content,
+          { x: getStartX },
+          {
+            x: getEndX,
+            duration,
+            ease,
+          },
+        )
+
+        gsap.set(content, { x: getStartX() })
 
         const scrollTrigger = ScrollTrigger.create({
           trigger,
           start,
           end: () => {
-            const distance = Math.abs(getScrollAmount())
+            const distance = getScrollDistance()
             return distance > 0 ? `+=${distance + getViewportWidth() * 0.1}` : '+=1'
           },
           pin: true,
@@ -132,7 +157,8 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
             syncPinnedLayout(self)
           },
           onRefresh: (self) => {
-            animation.vars.x = getScrollAmount()
+            gsap.set(content, { x: getStartX() })
+            animation.vars.x = getEndX()
             syncPinnedLayout(self)
           },
           onToggle: (self) => {
@@ -169,7 +195,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
       }
     },
     {
-      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth, maxPinWidth, lastItemFocusRatio],
+      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth, maxPinWidth, lastItemFocusRatio, firstItemFocusRatio],
       scope: triggerRef,
     },
   )

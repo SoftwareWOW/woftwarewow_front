@@ -106,6 +106,7 @@ const DevisionOverview = () => {
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 80,
     minWidth: 0,
+    firstItemFocusRatio: FOCUS_X_RATIO,
     lastItemFocusRatio: FOCUS_X_RATIO,
     onUpdate: () => {
       scrollUpdateRef.current()
