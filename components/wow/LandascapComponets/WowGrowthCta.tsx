@@ -1,81 +1,71 @@
-'use client'
-
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
-import { cn } from '@/lib/utils'
-import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import bigArrowDarkIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
+import bigArrowIcon from '@/public/images/icons/big-arrow-Icon.svg'
+import Image from 'next/image'
+import Link from 'next/link'
 
-type WowGrowthCtaProps = {
-  className?: string
-
+interface WowGrowthCtaProps {
+  accentText?: string
+  mainText?: string
+  href?: string
+  ariaLabel?: string
 }
 
-const WowGrowthCta = ({ className }: WowGrowthCtaProps) => {
+const WowGrowthCta = ({
+  accentText = 'Ready to',
+  mainText = 'Grow?',
+  href = '/contact',
+  ariaLabel = 'Contact WOW Superagency',
+}: WowGrowthCtaProps) => {
   return (
-    <section
-      className={cn(
-        'relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4',
-        className,
-      )}
-    >
-      {/* Background decorative elements - matching design system */}
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-      </div>
+    <section className="mt-14 bg-backgroundBody pb-20 pt-16 dark:bg-secondary md:mt-16 md:pb-36 lg:mt-[88px] lg:pt-[100px] xl:mt-[100px]">
+      <div className="container flex flex-col justify-center gap-y-10 max-md:items-center sm:justify-between md:flex-row">
+        <RevealWrapper
+          as="h2"
+          className="reveal-me text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
+        >
+          <span className="font-instrument italic max-md:mr-4 lg:text-[100px]">
+            {accentText}
+          </span>
 
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
-        }}
-      />
+          <br className="hidden md:block" />
 
+          {mainText}
+        </RevealWrapper>
 
-      <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="relative rounded-radius-md border border-[#e5e5e5] bg-white/50 backdrop-blur-sm px-6 py-12 transition-all duration-300  dark:border-white/5 dark:bg-dark/50 md:px-10 md:py-16 lg:px-14 lg:py-20">
-          <RevealWrapper className="mx-auto max-w-[900px] text-center">
-            <TextAppearAnimation>
-              <h2 className="text-appear font-normal leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-                Ready To{' '}
-                <CtaImageSlider
-                  slides={[
-                    { id: '1', img: '/images/wow/Hero/Growth/image (3).png' },
-                    { id: '2', img: '/images/wow/Hero/Growth/image (2).png' },
-                    { id: '3', img: '/images/wow/Hero/Growth/image (1).png' },
-                  ]}
-                />
-                  <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">
-                    Accelerate
-                  </span>
-                Your Growth?
-              </h2>
-            </TextAppearAnimation>
+        <Link href={href} aria-label={ariaLabel}>
+          <RevealWrapper className="reveal-me group h-44 w-44 bg-secondary p-5 dark:bg-primary lg:h-[230px] lg:w-[230px]">
+            <figure className="relative h-full w-full bg-primary dark:bg-secondary text-white">
+              <Image
+                src={bigArrowIcon}
+                alt=""
+                aria-hidden="true"
+                className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-28 group-hover:translate-x-9 group-hover:opacity-0 dark:hidden max-lg:scale-75"
+              />
 
-            <RevealWrapper className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-              <ButtonComponentList>
-                <ButtonComponent href="/contact" variant="primary" ariaLabel="Book a free consultation" className="[&_span]:!text-white">
-                  Book Your Free Consultation
-                </ButtonComponent>
-              </ButtonComponentList>
+              <Image
+                src={bigArrowDarkIcon}
+                alt=""
+                aria-hidden="true"
+                className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-28 group-hover:translate-x-9 group-hover:opacity-0 dark:inline max-lg:scale-75"
+              />
 
-              <ButtonComponentList>
-                <ButtonComponent href="/services" variant="secondary" ariaLabel="Explore our divisions">
-                  Explore Our Divisions
-                </ButtonComponent>
-              </ButtonComponentList>
-            </RevealWrapper>
+              <Image
+                src={bigArrowIcon}
+                alt=""
+                aria-hidden="true"
+                className="absolute -left-2 top-full inline -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:-translate-y-[105px] group-hover:translate-x-[48%] group-hover:opacity-100 dark:hidden max-lg:scale-75 md:group-hover:-translate-y-32 md:group-hover:translate-x-[80%]"
+              />
+
+              <Image
+                src={bigArrowDarkIcon}
+                alt=""
+                aria-hidden="true"
+                className="absolute -left-2 top-full hidden -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:-translate-y-[105px] group-hover:translate-x-[48%] group-hover:opacity-100 dark:inline max-lg:scale-75 md:group-hover:-translate-y-32 md:group-hover:translate-x-[80%]"
+              />
+            </figure>
           </RevealWrapper>
-        </div>
+        </Link>
       </div>
     </section>
   )
