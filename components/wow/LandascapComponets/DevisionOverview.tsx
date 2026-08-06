@@ -104,8 +104,9 @@ const DevisionOverview = () => {
   const scrollUpdateRef = useRef<() => void>(() => {})
 
   const { contentRef, triggerRef } = useHorizontalScroll({
-    extraScroll: 0,
+    extraScroll: 80,
     minWidth: 0,
+    lastItemFocusRatio: FOCUS_X_RATIO,
     onUpdate: () => {
       scrollUpdateRef.current()
     },
@@ -235,7 +236,7 @@ const DevisionOverview = () => {
 
         <div
           ref={contentRef}
-          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 overflow-visible px-5 pb-8 pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
+          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 overflow-visible px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
           aria-label="WOW Superagency divisions"
         >
           {divisions.map((item) => {

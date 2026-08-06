@@ -24,6 +24,8 @@ interface HorizontalScrollOptions {
   minWidth?: number
   /** Keep pinned section width capped and centered on large screens. */
   maxPinWidth?: number
+  /** Scroll until the last item's center reaches this viewport width ratio (0–1). */
+  lastItemFocusRatio?: number
 }
 
 const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
@@ -47,6 +49,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     extraScroll = 370,
     minWidth = 600,
     maxPinWidth,
+    lastItemFocusRatio,
   } = options
 
   useGSAP(
@@ -69,7 +72,21 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
 
         const getScrollAmount = () => {
           const contentWidth = content.scrollWidth
-          const distance = contentWidth - getViewportWidth() + offset + extraScroll
+          const viewportWidth = getViewportWidth()
+          let distance = contentWidth - viewportWidth
+
+          if (lastItemFocusRatio != null) {
+            const lastChild = content.lastElementChild as HTMLElement | null
+
+            if (lastChild) {
+              const lastCenter = lastChild.offsetLeft + lastChild.offsetWidth / 2
+              const focusX = viewportWidth * lastItemFocusRatio
+              distance = Math.max(distance, lastCenter - focusX)
+            }
+          }
+
+          distance += offset + extraScroll
+
           return distance > 0 ? -distance : 0
         }
 
@@ -152,7 +169,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
       }
     },
     {
-      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth, maxPinWidth],
+      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth, maxPinWidth, lastItemFocusRatio],
       scope: triggerRef,
     },
   )
