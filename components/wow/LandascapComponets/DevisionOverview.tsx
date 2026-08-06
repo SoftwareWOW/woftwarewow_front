@@ -249,7 +249,7 @@ const DevisionOverview = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block w-[82vw] shrink-0 overflow-visible focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[320px] md:w-[340px] lg:w-[360px]"
+                className="group relative block w-[88vw] max-w-[440px] shrink-0 overflow-visible focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px] rounded-radius-sm"
                 onMouseEnter={() => setHoveredId(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
@@ -259,7 +259,7 @@ const DevisionOverview = () => {
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[220px] flex-col overflow-visible rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[240px] md:min-h-[260px] md:p-7 lg:min-h-[280px] lg:p-8 ${
+                  className={`relative flex min-h-[260px] flex-col overflow-visible rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
                     isActive
                       ? 'scale-[1.02] bg-white dark:bg-[#121212]'
                       : 'scale-100 bg-white/80 dark:bg-[#121212]/90'
@@ -271,23 +271,29 @@ const DevisionOverview = () => {
                       isActive ? 'opacity-0' : 'opacity-100'
                     }`}
                   />
-                  <h3 className="pr-4 text-2xl font-bold leading-[1.15] tracking-[-0.02em] text-[#1a1a1a] md:text-[1.65rem] dark:text-white">
+                  <h3 className="pr-2 text-[1.625rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a1a1a] sm:pr-4 sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] dark:text-white ">
                     {renderDivisionTitle(item.title)}
                   </h3>
 
-                  <p className="mt-4 flex-1 text-sm leading-6 text-[#777777] md:text-[16px] dark:text-[#888888]">
+                  <p className="mt-3 flex-1 text-[15px] leading-[1.6] text-[#777777] sm:mt-4 sm:text-base md:text-[17px] md:leading-[1.65] lg:text-xl xl:text-2xl dark:text-[#888888]">
                     {item.description}
                   </p>
 
                   <div
-                    className={`absolute bottom-6 right-6 flex h-11 w-11 items-center justify-center rounded-radius-sm bg-[#8b7cff] !text-white transition-all duration-300 ${
+                    className={` flex justify-end transition-all duration-300 ${
                       isActive
                         ? 'scale-100 opacity-100'
                         : 'pointer-events-none scale-90 opacity-0'
                     }`}
                     aria-hidden={!isActive}
                   >
-                    <ArrowUpRight className="h-5 w-5 shrink-0 stroke-white text-white" strokeWidth={2} color="#ffffff" />
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-[#8b7cff] !text-white sm:size-[52px] md:size-[58px] lg:size-16">
+                      <ArrowUpRight
+                        className="size-5 shrink-0 stroke-white text-white sm:size-6 md:size-7 lg:size-8"
+                        strokeWidth={2}
+                        color="#ffffff"
+                      />
+                    </span>
                   </div>
                 </article>
               </Link>
