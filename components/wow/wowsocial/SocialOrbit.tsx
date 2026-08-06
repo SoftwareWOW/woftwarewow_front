@@ -1,5 +1,5 @@
 import type { ComponentType, ReactNode } from 'react'
-import { Heart, Sparkles, ThumbsUp, TrendingUp } from 'lucide-react'
+import { Heart, Sparkles, ThumbsUp, TrendingUp, type LucideIcon } from 'lucide-react'
 import WowText from '@/components/wow/shared/WowText'
 import {
   FacebookIcon,
@@ -39,7 +39,7 @@ const MOBILE_NODES: Node[] = [
 
 type Spark = {
   id: string
-  Icon: ComponentType<{ className?: string; strokeWidth?: number }>
+  Icon: LucideIcon
   tone: string
   x: number
   y: number
