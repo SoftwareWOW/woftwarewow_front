@@ -12,8 +12,6 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const DIVISION_BG_BASE = '/images/wow/Hero/devision'
-/** Match WowProjects content max width */
-const SECTION_MAX_WIDTH = 1320
 
 /** Viewport X ratio used to pick the focused card (left side, first card on entry). */
 const FOCUS_X_RATIO = 0.22
@@ -108,9 +106,19 @@ const DevisionOverview = () => {
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 0,
     minWidth: 0,
-    maxPinWidth: SECTION_MAX_WIDTH,
     onUpdate: () => {
       scrollUpdateRef.current()
+    },
+    onAnimationCreated: () => {
+      const trigger = triggerRef.current
+      if (!trigger) return
+
+      trigger.style.overflow = 'visible'
+
+      const pinSpacer = trigger.parentElement
+      if (pinSpacer?.classList.contains('pin-spacer')) {
+        pinSpacer.style.overflow = 'visible'
+      }
     },
   })
 
@@ -156,10 +164,10 @@ const DevisionOverview = () => {
   const activeBgId = hoveredId ?? activeCardId
 
   return (
-    <section className="relative overflow-hidden px-3 transition-colors duration-300 md:px-4">
+    <section className="relative w-full overflow-visible">
       <div
         ref={triggerRef}
-        className="service-section relative z-10 mx-auto flex h-[520px] w-full max-w-[1320px] flex-col overflow-hidden sm:h-[540px] md:h-[570px] lg:h-[600px] rounded-radius-sm"
+        className="service-section relative z-10 flex min-h-[100svh] w-full flex-col overflow-visible"
         aria-labelledby="divisions-heading"
         onMouseLeave={() => setHoveredId(null)}
       >
@@ -181,7 +189,7 @@ const DevisionOverview = () => {
               alt=""
               fill
               className="object-cover"
-              sizes="(max-width: 1320px) 100vw, 1320px"
+              sizes="100vw"
               priority={item.id <= 2}
             />
           </div>
@@ -194,9 +202,9 @@ const DevisionOverview = () => {
           }`}
         />
 
-        {/* Header Section - Fixed mobile padding */}
-        <div className="relative z-10 px-5 pt-20 sm:px-40 md:pt-10 md:pl-[12%] md:pr-10 lg:pt-10 lg:pl-[15%]">
-          <div className="flex items-start justify-between gap-6">
+        {/* Header Section */}
+        <div className="relative z-10 px-5 pt-24 sm:px-10 md:px-16 md:pt-28 lg:px-20 lg:pt-32">
+          <div className="mx-auto flex w-full max-w-[1320px] items-start justify-between gap-6">
             <div className="max-w-3xl">
               <RevealWrapper>
                 <SectionLabel
@@ -227,7 +235,7 @@ const DevisionOverview = () => {
 
         <div
           ref={contentRef}
-          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap gap-4 overflow-visible px-5 pb-5 sm:gap-5 sm:px-6 sm:pb-6 md:gap-6 md:pl-[12%] md:pr-10 lg:pl-[15%] lg:pb-8"
+          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 overflow-visible px-5 pb-8 pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
           aria-label="WOW Superagency divisions"
         >
           {divisions.map((item) => {
@@ -239,7 +247,7 @@ const DevisionOverview = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block w-[78vw] shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[300px] md:w-[320px] lg:w-[340px]"
+                className="group relative block w-[82vw] shrink-0 overflow-visible focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[320px] md:w-[340px] lg:w-[360px]"
                 onMouseEnter={() => setHoveredId(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
@@ -249,10 +257,10 @@ const DevisionOverview = () => {
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[210px] flex-col overflow-hidden rounded-radius-sm p-6 transition-all duration-500 sm:min-h-[220px] md:min-h-[230px] md:p-7 lg:min-h-[240px] lg:p-8 ${
+                  className={`relative flex min-h-[220px] flex-col overflow-visible rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[240px] md:min-h-[260px] md:p-7 lg:min-h-[280px] lg:p-8 ${
                     isActive
-                      ? 'bg-white dark:bg-[#121212]'
-                      : 'bg-white/80 dark:bg-[#121212]/90'
+                      ? 'scale-[1.02] bg-white dark:bg-[#121212]'
+                      : 'scale-100 bg-white/80 dark:bg-[#121212]/90'
                   }`}
                 >
                   <span
