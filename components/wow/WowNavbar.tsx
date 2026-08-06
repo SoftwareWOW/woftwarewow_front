@@ -1,6 +1,6 @@
 'use client'
 
-import { Link } from '@/i18n/navigation'
+import { Link, usePathname } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import {
   ArrowDown,
@@ -50,6 +50,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
   const lenis = useLenis()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -137,6 +138,14 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const closeMegaMenu = useCallback(() => {
     clearCloseTimer()
     setActiveMenuId(null)
+    setActionMenuOpen(false)
+  }, [clearCloseTimer])
+
+  const closeAllMenus = useCallback(() => {
+    clearCloseTimer()
+    setActiveMenuId(null)
+    setMobileMenuId(null)
+    setActionMenuOpen(false)
   }, [clearCloseTimer])
 
   const openMegaMenu = useCallback(
@@ -208,6 +217,10 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   useEffect(() => {
     return () => clearCloseTimer()
   }, [clearCloseTimer])
+
+  useEffect(() => {
+    closeAllMenus()
+  }, [pathname, closeAllMenus])
 
   const handleToggleTheme = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark')
 
@@ -396,6 +409,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                           item={item}
                           detailPanels={navigation.detailPanels}
                           noOuterShell
+                          onNavigate={closeMegaMenu}
                         />
                       </motion.div>
                     )

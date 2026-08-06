@@ -3,6 +3,7 @@
 import { Link } from '@/i18n/navigation'
 import { ChevronRight } from 'lucide-react'
 import { MenuItemIcon } from './MenuItemIcon'
+import { divisionHrefs, type DivisionId } from './nav-brand-assets'
 import { WowDivisionLogo } from './WowDivisionLogo'
 import { navItemActiveClass, navItemChevronClass, navItemDescriptionClass, navItemIconBoxClass, navItemIconClass, navItemInactiveClass, navItemLabelClass } from './nav-interaction-styles'
 
@@ -111,10 +112,21 @@ export function WowDivisionItem({
   } ${active ? `is-active ${navItemActiveClass}` : navItemInactiveClass}`
 
   const content = <WowDivisionLogo divisionId={divisionId} variant="menu" />
+  const resolvedHref =
+    divisionId in divisionHrefs
+      ? divisionHrefs[divisionId as DivisionId]
+      : href
 
-  if (href) {
+  if (resolvedHref) {
     return (
-      <Link href={href} onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
+      <Link
+        href={resolvedHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        className={className}
+      >
         {content}
       </Link>
     )

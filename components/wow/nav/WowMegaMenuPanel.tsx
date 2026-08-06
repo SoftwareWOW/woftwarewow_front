@@ -10,12 +10,14 @@ type WowMegaMenuPanelProps = {
   item: NavigationMenuItem
   detailPanels: NavigationData['detailPanels']
   noOuterShell?: boolean
+  onNavigate?: () => void
 }
 
 export default function WowMegaMenuPanel({
   item,
   detailPanels,
   noOuterShell = false,
+  onNavigate,
 }: WowMegaMenuPanelProps) {
   const { desktop } = item
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -32,6 +34,15 @@ export default function WowMegaMenuPanel({
   const detailImageSrc = getNavCardImage(selectedId ?? '')
 
   const selectItem = (id: string) => setSelectedId(id)
+
+  const handleItemClick = (entry: { id: string; href?: string }) => {
+    if (entry.href) {
+      onNavigate?.()
+      return
+    }
+
+    selectItem(entry.id)
+  }
 
   const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
     const container = scrollRef.current
@@ -77,7 +88,7 @@ export default function WowMegaMenuPanel({
                       divisionId={entry.id}
                       href={entry.href}
                       active={selectedId === entry.id}
-                      onClick={() => selectItem(entry.id)}
+                      onClick={() => handleItemClick(entry)}
                       onMouseEnter={() => selectItem(entry.id)}
                     />
                   ) : (
@@ -94,7 +105,7 @@ export default function WowMegaMenuPanel({
                           : false
                       }
                       tall={entry.id === 'helpSupport'}
-                      onClick={() => selectItem(entry.id)}
+                      onClick={() => handleItemClick(entry)}
                       onMouseEnter={() => selectItem(entry.id)}
                     />
                   )}

@@ -43,6 +43,21 @@ export const divisionBrandLogos = {
 
 export type DivisionId = keyof typeof divisionBrandLogos.light
 
+/** Canonical division routes — domain/name only, no /divisions prefix */
+export const divisionHrefs: Record<DivisionId, string> = {
+  softwareWow: '/softwarewow',
+  wowMarketing: '/wowmarketing',
+  wowDesign: '/wowdesign',
+  wowIntelligence: '/wowintelligence',
+  wowSocial: '/wowsocial',
+  wowAccelerate: '/wowaccelerate',
+  wowWebsites: '/wowwebsites',
+  wowImpact: '/wowimpact',
+  wowHost: '/wowhost',
+  wowHub: '/wowhub',
+  wowEvents: '/wowevents',
+}
+
 export const divisionProfilePictures = {
   light: {
     softwareWow: assetPath('Profile Picture', 'Light', 'SoftwareWOW PFP Light.png'),
