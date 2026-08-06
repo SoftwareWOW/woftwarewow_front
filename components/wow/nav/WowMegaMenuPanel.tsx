@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { NavigationData, NavigationMenuItem } from './navigation-types'
 import { getNavCardImage } from './nav-assets'
 import WowDetailCard from './WowDetailCard'
@@ -9,31 +9,22 @@ import { WowDivisionItem, WowMenuItem } from './WowMenuItem'
 type WowMegaMenuPanelProps = {
   item: NavigationMenuItem
   detailPanels: NavigationData['detailPanels']
-  onNavigate?: () => void
   noOuterShell?: boolean
 }
 
 export default function WowMegaMenuPanel({
   item,
   detailPanels,
-  onNavigate,
   noOuterShell = false,
 }: WowMegaMenuPanelProps) {
   const { desktop } = item
   const scrollRef = useRef<HTMLDivElement>(null)
-
-  const allItems = useMemo(
-    () => desktop.columns.flatMap((column) => column.items),
-    [desktop.columns],
-  )
 
   const [selectedId, setSelectedId] = useState(desktop.defaultSelection)
 
   useEffect(() => {
     setSelectedId(desktop.defaultSelection)
   }, [item.id, desktop.defaultSelection])
-
-  const selectedItem = allItems.find((entry) => entry.id === selectedId) ?? allItems[0]
 
   const detailPanel =
     (selectedId && detailPanels[selectedId as keyof typeof detailPanels]) ?? detailPanels.default
@@ -118,8 +109,6 @@ export default function WowMegaMenuPanel({
             {...detailPanel}
             contentKey={selectedId ?? 'default'}
             imageSrc={detailImageSrc}
-            href={selectedItem?.href}
-            onNavigate={onNavigate}
           />
         )}
       </div>

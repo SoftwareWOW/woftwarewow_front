@@ -395,7 +395,6 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                         <WowMegaMenuPanel
                           item={item}
                           detailPanels={navigation.detailPanels}
-                          onNavigate={closeMegaMenu}
                           noOuterShell
                         />
                       </motion.div>

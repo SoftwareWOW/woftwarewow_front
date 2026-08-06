@@ -1,15 +1,12 @@
 'use client'
 
-import { Link } from '@/i18n/navigation'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import Image from 'next/image'
 import type { NavigationDetailPanel } from './navigation-types'
 import { navCardImages } from './nav-assets'
 
 type WowDetailCardProps = NavigationDetailPanel & {
-  href?: string
-  onNavigate?: () => void
   imageSrc?: string
   contentKey?: string
 }
@@ -19,37 +16,16 @@ const contentTransition = {
   ease: [0.16, 1, 0.3, 1] as const,
 }
 
-const detailCtaBtnClass =
-  'flex h-[60px] w-[88px] shrink-0 items-center justify-center rounded-radius-sm bg-primary p-5 transition-colors hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40'
-
-const detailCtaIconClass =
-  'size-10 shrink-0 !stroke-white !text-white transition-transform duration-300 ease-out group-hover/detail-card:-rotate-90'
-
 export default function WowDetailCard({
   title,
   description,
   includes,
-  ctaLabel,
   image,
   imageSrc,
-  href,
-  onNavigate,
   contentKey = 'default',
 }: WowDetailCardProps) {
   const imageSrcResolved =
     imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
-
-  const ctaButton = href ? (
-    <Link href={href} onClick={onNavigate} className={detailCtaBtnClass}>
-      <ArrowUpRight aria-hidden className={detailCtaIconClass} strokeWidth={2} />
-      <span className="sr-only">{ctaLabel}</span>
-    </Link>
-  ) : (
-    <button type="button" className={detailCtaBtnClass}>
-      <ArrowUpRight aria-hidden className={detailCtaIconClass} strokeWidth={2} />
-      <span className="sr-only">{ctaLabel}</span>
-    </button>
-  )
 
   return (
     <div className="group/detail-card relative w-[280px] shrink-0 rounded-radius-sm bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark">
@@ -99,8 +75,6 @@ export default function WowDetailCard({
               ))}
             </ul>
           </div>
-
-          {ctaButton}
       </motion.div>
     </div>
   )
