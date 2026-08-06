@@ -15,7 +15,7 @@ export const navbarBrandLogo = {
 export const divisionBrandLogos = {
   light: {
     softwareWow: assetPath('SVG', 'SoftwareWOW Standard.svg'),
-    wowMarketing: assetPath('PNG', 'Marketing Standard.png'),
+    wowMarketing: assetPath('SVG', 'Marketing Standard.svg'),
     wowDesign: assetPath('SVG', 'Design Standard.svg'),
     wowIntelligence: assetPath('SVG', 'Intelligence Standard.svg'),
     wowSocial: assetPath('SVG', 'Social Standard.svg'),
@@ -28,7 +28,7 @@ export const divisionBrandLogos = {
   },
   dark: {
     softwareWow: assetPath('SVG', 'SoftwareWOW White.svg'),
-    wowMarketing: assetPath('PNG', 'Marketing White.png'),
+    wowMarketing: assetPath('SVG', 'Marketing White.svg'),
     wowDesign: assetPath('SVG', 'Design White.svg'),
     wowIntelligence: assetPath('SVG', 'Intelligence White.svg'),
     wowSocial: assetPath('SVG', 'Social White.svg'),
