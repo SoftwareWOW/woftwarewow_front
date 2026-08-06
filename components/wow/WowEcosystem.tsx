@@ -28,7 +28,6 @@ type NodeLayout = {
   id: NodeId
   x: number
   y: number
-  size?: 'sm' | 'md' | 'lg'
 }
 
 type WowEcosystemProps = {
@@ -43,31 +42,31 @@ const CTA_Y = 620
 const MOBILE_CTA_Y = 770
 
 const NODE_LAYOUT: NodeLayout[] = [
-  { id: 'websites', x: 66, y: 30, size: 'md' },
-  { id: 'host', x: 36, y: 11, size: 'md' },
-  { id: 'hub', x: 58, y: 14, size: 'lg' },
-  { id: 'impact', x: 82, y: 17, size: 'sm' },
-  { id: 'design', x: 20, y: 30, size: 'md' },
-  { id: 'events', x: 5, y: 16, size: 'sm' },
-  { id: 'intelligence', x: 5, y: 52, size: 'md' },
-  { id: 'accelerate', x: 44, y: 52, size: 'md' },
-  { id: 'social', x: 80, y: 52, size: 'md' },
-  { id: 'softwarewow', x: 25, y: 75, size: 'md' },
-  { id: 'marketing', x: 66, y: 75, size: 'lg' },
+  { id: 'websites', x: 66, y: 30 },
+  { id: 'host', x: 36, y: 11 },
+  { id: 'hub', x: 58, y: 14 },
+  { id: 'impact', x: 82, y: 17 },
+  { id: 'design', x: 20, y: 30 },
+  { id: 'events', x: 5, y: 16 },
+  { id: 'intelligence', x: 5, y: 52 },
+  { id: 'accelerate', x: 44, y: 52 },
+  { id: 'social', x: 80, y: 52 },
+  { id: 'softwarewow', x: 25, y: 75 },
+  { id: 'marketing', x: 66, y: 75 },
 ]
 
 const MOBILE_NODE_LAYOUT: NodeLayout[] = [
-  { id: 'events', x: 2, y: 12, size: 'sm' },
-  { id: 'design', x: 10, y: 21, size: 'md' },
-  { id: 'hub', x: 40, y: 8, size: 'lg' },
-  { id: 'impact', x: 75, y: 12, size: 'sm' },
-  { id: 'websites', x: 64, y: 21, size: 'md' },
-  { id: 'host', x: 35, y: 31, size: 'md' },
-  { id: 'intelligence', x: 8, y: 41, size: 'md' },
-  { id: 'accelerate', x: 40, y: 53, size: 'md' },
-  { id: 'social', x: 65, y: 41, size: 'md' },
-  { id: 'softwarewow', x: 8, y: 63, size: 'md' },
-  { id: 'marketing', x: 58, y: 63, size: 'lg' },
+  { id: 'events', x: 2, y: 12 },
+  { id: 'design', x: 10, y: 21 },
+  { id: 'hub', x: 40, y: 8 },
+  { id: 'impact', x: 75, y: 12 },
+  { id: 'websites', x: 64, y: 21 },
+  { id: 'host', x: 35, y: 31 },
+  { id: 'intelligence', x: 8, y: 41 },
+  { id: 'accelerate', x: 40, y: 53 },
+  { id: 'social', x: 65, y: 41 },
+  { id: 'softwarewow', x: 8, y: 63 },
+  { id: 'marketing', x: 58, y: 63 },
 ]
 
 const CTA_IDS: NodeId[] = ['best-app', 'modern-systems', 'boost-profits', 'attract-new']
@@ -208,17 +207,12 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
     return buildCleanPath([startPt, ...nodePoints], 18)
   }, [activeFlow, isMobile])
 
-  const nodeFontSize = (s?: 'sm' | 'md' | 'lg', mobile = false) => {
+  const nodeFontSize = (active: boolean, mobile = false) => {
     if (mobile) {
-      // 🔥 INCREASED MOBILE FONT SIZES
-      if (s === 'lg') return 'clamp(14px, 3.8cqw, 26px)'
-      if (s === 'sm') return 'clamp(12px, 3cqw, 18px)'
-      return 'clamp(13px, 3.4cqw, 22px)'
+      return active ? 'clamp(14px, 3.6cqw, 24px)' : 'clamp(12px, 3cqw, 18px)'
     }
 
-    if (s === 'lg') return 'clamp(14px, 3.4cqw, 38px)'
-    if (s === 'sm') return 'clamp(9px, 2cqw, 22px)'
-    return 'clamp(11px, 2.6cqw, 30px)'
+    return active ? 'clamp(13px, 2.8cqw, 32px)' : 'clamp(10px, 2.2cqw, 22px)'
   }
 
   return (
@@ -319,8 +313,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 zIndex: 3,
               }}
               animate={{
-                // 🔥 INCREASED MOBILE SCALE VALUES
-                scale: active ? (isMobile ? 1.5 : 1.5) : isMobile ? 0.9 : 0.75,
+                scale: 1,
                 opacity: active ? 1 : 0.5,
               }}
               transition={{
@@ -331,7 +324,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               <span
                 className="inline-block rounded-md bg-background px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-background"
                 style={{
-                  fontSize: nodeFontSize(n.size, isMobile),
+                  fontSize: nodeFontSize(active, isMobile),
                 }}
               >
                 {n.id === 'softwarewow' ? (
