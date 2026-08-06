@@ -4,8 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import { useState } from 'react'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowDown} from 'lucide-react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import SectionLabel from '../shared/SectionLabel'
 
@@ -204,10 +203,9 @@ const SolutionToChallenges = () => {
                       isActive ? 'bg-primary/50 dark:bg-[#1F1F1F]' : ''
                     }`}
                   >
-                    <ArrowRight
-                      aria-hidden
+                    <ArrowDown                      aria-hidden
                       className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out ${
-                        isActive ? 'rotate-90' : ''
+                        isActive ? 'rotate-180' : ''
                       }`}
                       strokeWidth={2}
                     />

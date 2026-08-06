@@ -3,7 +3,7 @@
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import {
-  ArrowUpRight,
+  ArrowDown,
   ChevronDown,
   Globe,
   MessageCircle,
@@ -26,7 +26,7 @@ const actionBtnClass =
   'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-4 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px] md:p-4 lg:p-5'
 
 const iconClass =
-  'size-7 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[30deg] md:size-8 lg:size-9 xl:size-10'
+  'size-7 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[180deg] md:size-8 lg:size-9 xl:size-10'
 
 type WowNavbarProps = {
   navbar: Dictionary['navbar']
@@ -211,7 +211,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
   const handleToggleTheme = () => setTheme(currentTheme === 'dark' ? 'light' : 'dark')
 
-  const mainIcon = <ArrowUpRight aria-hidden className={iconClass} strokeWidth={2} />
+  const mainIcon = <ArrowDown aria-hidden className={iconClass} strokeWidth={2} />
 
   const darkModeIcon =
     currentTheme === 'dark' ? (
