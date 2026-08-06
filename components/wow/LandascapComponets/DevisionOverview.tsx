@@ -249,7 +249,7 @@ const DevisionOverview = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block w-[88vw] max-w-[440px] shrink-0 overflow-visible focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px] rounded-radius-sm"
+                className="group relative block w-[88vw] max-w-[440px] shrink-0 overflow-hidden rounded-radius-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px]"
                 onMouseEnter={() => setHoveredId(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
@@ -259,18 +259,12 @@ const DevisionOverview = () => {
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[260px] flex-col overflow-visible rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
+                  className={`relative flex min-h-[260px] flex-col overflow-hidden rounded-radius-sm p-6 transition-all duration-500 will-change-transform sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
                     isActive
-                      ? 'scale-[1.02] bg-white dark:bg-[#121212]'
-                      : 'scale-100 bg-white/80 dark:bg-[#121212]/90'
+                      ? 'scale-[1.02] border-t border-white bg-white dark:bg-[#121212]'
+                      : 'scale-100 border-t border-transparent bg-white/80 dark:bg-[#121212]/90'
                   }`}
                 >
-                  <span
-                    aria-hidden
-                    className={`pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-black transition-opacity duration-300 dark:bg-white ${
-                      isActive ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  />
                   <h3 className="pr-2 text-[1.625rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#1a1a1a] sm:pr-4 sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] dark:text-white ">
                     {renderDivisionTitle(item.title)}
                   </h3>
@@ -287,9 +281,9 @@ const DevisionOverview = () => {
                     }`}
                     aria-hidden={!isActive}
                   >
-                    <span className="flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-[#8b7cff] !text-white sm:size-[52px] md:size-[58px] lg:size-16">
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-[#8b7cff] !text-white sm:size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px]">
                       <ArrowUpRight
-                        className="size-5 shrink-0 stroke-white text-white sm:size-6 md:size-7 lg:size-8"
+                        className="size-7 shrink-0 stroke-white text-white md:size-8 lg:size-9 xl:size-10"
                         strokeWidth={2}
                         color="#ffffff"
                       />
