@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import WowText from '@/components/wow/shared/WowText'
 
 const ways = [
   {
@@ -38,7 +39,7 @@ const WaysToPartner = () => {
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>
-                Ways to partner with <InstrumentText>WOW</InstrumentText>
+                Ways to partner with <WowText>WOW</WowText> 
               </h2>
             </RevealWrapper>
           </div>

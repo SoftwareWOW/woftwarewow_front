@@ -8,11 +8,11 @@ import Marquee from 'react-fast-marquee'
 
 /** Platforms in our ecosystem — not claimed co-branded partner logos. */
 const rowOne: Tech[] = [
-  { name: 'OpenAI', icon: 'simple-icons:openai', color: '#412991' },
+  { name: 'OpenAI', icon: 'simple-icons:openai', invertInDark: true },
   { name: 'Next.js', icon: 'simple-icons:nextdotjs', invertInDark: true },
   { name: 'React', icon: 'logos:react' },
-  { name: 'HubSpot', icon: 'logos:hubspot' },
-  { name: 'AWS', icon: 'logos:aws' },
+  { name: 'HubSpot', icon: 'simple-icons:hubspot', color: '#FF7A59' },
+  { name: 'AWS', icon: 'simple-icons:amazonaws', color: '#FF9900' },
   { name: 'Figma', icon: 'logos:figma' },
   { name: 'Shopify', icon: 'simple-icons:shopify', color: '#96BF48' },
   { name: 'Stripe', icon: 'logos:stripe' },

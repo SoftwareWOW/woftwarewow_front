@@ -237,9 +237,14 @@ function TechIcon({
   color?: string
   invertInDark?: boolean
 }) {
-  const sizeClass = `h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12${
-    invertInDark ? ' dark:invert' : ''
-  }`
+  // Force black currentColor so dark:invert reliably becomes white on dark cards.
+  // Without this, inherited light text in dark mode inverts back to black (invisible).
+  const sizeClass = [
+    'h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12',
+    invertInDark ? 'text-black dark:invert' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   if (icon === 'custom:pipedrive') {
     return <PipedriveSvg className={sizeClass} />
@@ -251,15 +256,20 @@ function TechIcon({
 
   return (
     <span
-      className="inline-flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12"
-      style={color ? { color } : undefined}
+      className={[
+        'inline-flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12',
+        invertInDark ? 'text-black dark:invert' : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      style={color && !invertInDark ? { color } : undefined}
     >
       <Icon
         icon={icon}
         width="100%"
         height="100%"
         className={sizeClass}
-        style={color ? { color } : undefined}
+        style={color && !invertInDark ? { color } : undefined}
         aria-hidden
       />
     </span>
