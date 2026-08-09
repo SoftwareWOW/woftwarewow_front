@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { useContactDialogOptional } from './ContactDialogProvider'
+import { useMeetDialogOptional } from './MeetDialogProvider'
 
 type ButtonComponentVariant = 'primary' | 'secondary' | 'white' | 'primary2'
 type ButtonComponentSize = 'default' | 'sm' | 'sm-v2'
@@ -35,6 +36,7 @@ const sizeClasses: Record<ButtonComponentSize, string> = {
 }
 
 const isContactHref = (href?: string) => href === '/contact' || href?.endsWith('/contact')
+const isMeetHref = (href?: string) => href === '/meet' || href?.endsWith('/meet')
 
 export default function ButtonComponent({
   href,
@@ -50,6 +52,7 @@ export default function ButtonComponent({
   children,
 }: ButtonComponentProps) {
   const contactDialog = useContactDialogOptional()
+  const meetDialog = useMeetDialogOptional()
 
   const classes = [
     'rv-button',
@@ -88,6 +91,22 @@ export default function ButtonComponent({
         onClick={(event) => {
           event.preventDefault()
           contactDialog.open()
+        }}
+      >
+        {content}
+      </Link>
+    )
+  }
+
+  if (href && isMeetHref(href) && meetDialog) {
+    return (
+      <Link
+        href={href}
+        className={classes}
+        aria-label={ariaLabel}
+        onClick={(event) => {
+          event.preventDefault()
+          meetDialog.open()
         }}
       >
         {content}

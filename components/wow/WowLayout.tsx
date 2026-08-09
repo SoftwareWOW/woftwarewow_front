@@ -4,6 +4,7 @@ import type { Locale } from '@/i18n/config'
 import { getLocale } from 'next-intl/server'
 import { ReactNode } from 'react'
 import { ContactDialogProvider } from './shared/ContactDialogProvider'
+import { MeetDialogProvider } from './shared/MeetDialogProvider'
 import { ToastProvider } from './shared/ToastProvider'
 import WowFooter from './WowFooter'
 import WowNavbar from './WowNavbar'
@@ -15,20 +16,22 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
   return (
     <ToastProvider>
       <ContactDialogProvider>
-        <div className="relative w-full max-w-full overflow-x-clip">
-          <WowNavbar
-            navbar={dictionary.navbar}
-            navigation={dictionary.navigation}
-            languageSwitcher={dictionary.languageSwitcher}
-          />
+        <MeetDialogProvider>
+          <div className="relative w-full max-w-full overflow-x-clip">
+            <WowNavbar
+              navbar={dictionary.navbar}
+              navigation={dictionary.navigation}
+              languageSwitcher={dictionary.languageSwitcher}
+            />
 
-          <main className="relative z-10 w-full max-w-full overflow-x-clip bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[720px]">
-            {children}
-          </main>
+            <main className="relative z-10 w-full max-w-full overflow-x-clip bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[720px]">
+              {children}
+            </main>
 
-          <WowFooter footer={dictionary.footer} />
-          <AIAssistant />
-        </div>
+            <WowFooter footer={dictionary.footer} />
+            <AIAssistant />
+          </div>
+        </MeetDialogProvider>
       </ContactDialogProvider>
     </ToastProvider>
   )
