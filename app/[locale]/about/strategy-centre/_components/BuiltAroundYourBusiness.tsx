@@ -60,7 +60,7 @@ const BuiltAroundYourBusiness = () => {
         </div>
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList>
-            <ButtonComponent href="/meet" variant="primary" size="sm">
+            <ButtonComponent href="/meet" variant="primary">
               Book a Strategy Session
             </ButtonComponent>
           </ButtonComponentList>

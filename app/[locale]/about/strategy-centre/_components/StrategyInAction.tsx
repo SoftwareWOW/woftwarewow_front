@@ -63,7 +63,7 @@ const StrategyInAction = () => {
         </div>
         <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/case-study" variant="white" fullWidth>
+            <ButtonComponent href="/case-study" variant="white">
               Read More Case Studies
             </ButtonComponent>
           </ButtonComponentList>
