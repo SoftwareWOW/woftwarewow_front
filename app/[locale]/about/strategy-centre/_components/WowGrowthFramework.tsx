@@ -40,7 +40,7 @@ const WowGrowthFramework = () => {
   return (
     <section
       id="growth-framework"
-      className="relative mx-auto max-w-[1600px] px-5 pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]"
+      className="relative mx-auto max-w-[1600px] px-5"
     >
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <div className="">

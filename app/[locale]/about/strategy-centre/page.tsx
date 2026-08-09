@@ -71,13 +71,11 @@ export default async function StrategyCentrePage({ params }: Props) {
         {/* 7. Strategy in Action — Home-24 ProjectCaseStudies */}
         <StrategyInAction />
         {/* 8. Build Your Growth Strategy — WOW WowGrowthCta */}
-        <div className="mb-3">
-          <WowGrowthCta
-            accentText="Ready to turn your ambitions into a"
-            mainText="clear growth plan?"
-            ariaLabel="Book a Strategy Session with WOW Superagency"
-          />
-        </div>
+        <WowGrowthCta
+          accentText="Ready to turn your ambitions into a"
+          mainText="clear growth plan?"
+          ariaLabel="Book a Strategy Session with WOW Superagency"
+        />
       </div>
     </LayoutOne>
   )

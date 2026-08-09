@@ -27,7 +27,7 @@ const points = [
 
 const BuiltAroundYourBusiness = () => {
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="relative overflow-hidden">
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <TextAppearAnimation>
