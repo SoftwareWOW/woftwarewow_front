@@ -2,6 +2,8 @@ import getMarkDownData from '@/utils/GetMarkDownData'
 import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 interface CaseStudyType {
   slug: string
@@ -16,6 +18,9 @@ const StrategyInAction = () => {
     <section>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
+          <RevealWrapper className="mb-5 flex justify-center">
+            <SectionLabel>Strategy in Action</SectionLabel>
+          </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear">
               Challenge to results, <span className="font-instrument italic">proven</span>
@@ -49,33 +54,19 @@ const StrategyInAction = () => {
                     </h3>
                   </Link>
                 </div>
-                <Link href={`/management-consulting/project/${item.slug}`} className="rv-button rv-button-white">
-                  <div className="rv-button-top text-center">
-                    <span className="mr-2">Read Case Study</span>
-                    <img className="inline dark:hidden" src="/images/icons/top-arrow.svg" alt="Arrow Icon" />
-                    <img className="hidden dark:inline" src="/images/icons/top-arrow-dark.svg" alt="Arrow Icon" />
-                  </div>
-                  <div className="rv-button-bottom text-center">
-                    <span className="mr-2">Read Case Study</span>
-                    <img className="hidden dark:inline" src="/images/icons/top-arrow.svg" alt="Arrow Icon" />
-                    <img className="inline dark:hidden" src="/images/icons/top-arrow-dark.svg" alt="Arrow Icon" />
-                  </div>
-                </Link>
+                <ButtonComponent href={`/management-consulting/project/${item.slug}`} variant="white">
+                  Read Case Study
+                </ButtonComponent>
               </div>
             </RevealWrapper>
           ))}
         </div>
-        <RevealWrapper as="ul" className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-          <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/case-study" className="rv-button rv-button-white block md:inline-block">
-              <div className="rv-button-top">
-                <span>Read More Case Studies</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>Read More Case Studies</span>
-              </div>
-            </Link>
-          </li>
+        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent href="/case-study" variant="white" fullWidth>
+              Read More Case Studies
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

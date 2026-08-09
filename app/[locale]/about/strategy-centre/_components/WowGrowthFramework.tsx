@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const steps = [
   {
@@ -45,6 +46,9 @@ const WowGrowthFramework = () => {
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <div className="">
           <HeroGradientAnimation />
+          <RevealWrapper className="mb-5">
+            <SectionLabel>Framework</SectionLabel>
+          </RevealWrapper>
           <TextAppearAnimation02>
             <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
               The WOW Growth
@@ -57,14 +61,11 @@ const WowGrowthFramework = () => {
             </p>
           </TextAppearAnimation02>
 
-          <Link href="/meet" className="rv-button rv-button-white mt-7 md:mt-14">
-            <div className="rv-button-top text-center">
-              <span className="font-normal">Book a Strategy Session</span>
-            </div>
-            <div className="rv-button-bottom text-center">
-              <span className="font-normal">Book a Strategy Session</span>
-            </div>
-          </Link>
+          <div className="mt-7 md:mt-14">
+            <ButtonComponent href="/meet" variant="white">
+              Book a Strategy Session
+            </ButtonComponent>
+          </div>
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-y-[26px] lg:mt-0">

@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import Link from 'next/link'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const StrategyHero = () => {
   return (
@@ -18,6 +19,9 @@ const StrategyHero = () => {
       </video>
       {/* Hero Content */}
       <RevealWrapper className="reveal-me container absolute left-1/3 top-1/2 z-40 -translate-x-1/3 -translate-y-1/2">
+        <SectionLabel className="mb-5 bg-white/15 text-backgroundBody dark:bg-white/15 dark:text-backgroundBody">
+          Strategy Centre
+        </SectionLabel>
         <h1 className="mb-3 text-backgroundBody max-md:leading-none max-sm:text-4xl">
           Strategy That Drives <br className="hidden md:block" />
           Growth –<br className="hidden md:block" />
@@ -27,29 +31,14 @@ const StrategyHero = () => {
           Discover how WOW plans, executes, and measures digital growth for SMBs — with clarity, measurable outcomes,
           and a coordinated roadmap across every division.
         </p>
-        {/* Primary CTA Button */}
-        <ul className="mt-7 flex list-none flex-col justify-start gap-4 sm:flex-row lg:mt-14">
-          <li className="block w-full text-center md:inline-block md:w-auto">
-            <Link href="#growth-framework" className="rv-button rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>Explore Our Approach</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span className="text-nowrap">Explore Our Approach</span>
-              </div>
-            </Link>
-          </li>
-          <li className="block w-full text-center md:inline-block md:w-auto">
-            <Link href="/meet" className="rv-button rv-button-white block md:inline-block">
-              <div className="rv-button-top">
-                <span>Book a Strategy Session</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span className="text-nowrap">Book a Strategy Session</span>
-              </div>
-            </Link>
-          </li>
-        </ul>
+        <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row lg:mt-14">
+          <ButtonComponent href="#growth-framework" variant="primary" fullWidth>
+            Explore Our Approach
+          </ButtonComponent>
+          <ButtonComponent href="/meet" variant="white" fullWidth>
+            Book a Strategy Session
+          </ButtonComponent>
+        </div>
       </RevealWrapper>
     </section>
   )

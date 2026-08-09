@@ -1,6 +1,7 @@
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const processSteps = [
   {
@@ -30,8 +31,8 @@ const HowWeBuildStrategy = () => {
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
-          <RevealWrapper className="rv-badge reveal-me mb-3">
-            <span className="rv-badge-text">Process</span>
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
+            <SectionLabel>Process</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
@@ -59,17 +60,12 @@ const HowWeBuildStrategy = () => {
           ))}
         </div>
 
-        <RevealWrapper as="ul" className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-          <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/meet" className="rv-button rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>Start Your Journey</span>
-              </div>
-              <div className="rv-button-bottom text-nowrap">
-                <span>Start Your Journey</span>
-              </div>
-            </Link>
-          </li>
+        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent href="/meet" variant="primary" fullWidth>
+              Start Your Journey
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

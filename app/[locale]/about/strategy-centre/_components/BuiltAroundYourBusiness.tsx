@@ -1,6 +1,7 @@
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const points = [
   {
@@ -30,6 +31,9 @@ const BuiltAroundYourBusiness = () => {
     <section className="relative overflow-hidden">
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
+          <RevealWrapper className="mb-3 flex justify-center">
+            <SectionLabel>Built Around You</SectionLabel>
+          </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mt-3">
               Strategies built around <i className="font-instrument">your business</i>
@@ -54,17 +58,12 @@ const BuiltAroundYourBusiness = () => {
             <img src="/images/home-5/why-rivor.png" alt="Strategies built around your business" className="h-full w-full" />
           </RevealWrapper>
         </div>
-        <RevealWrapper as="ul" className="mt-14 flex justify-center">
-          <li>
-            <Link href="/meet" className="rv-button rv-button-sm rv-button-primary">
-              <div className="rv-button-top">
-                <span>Book a Strategy Session</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>Book a Strategy Session</span>
-              </div>
-            </Link>
-          </li>
+        <RevealWrapper className="mt-14 flex justify-center">
+          <ButtonComponentList>
+            <ButtonComponent href="/meet" variant="primary" size="sm">
+              Book a Strategy Session
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

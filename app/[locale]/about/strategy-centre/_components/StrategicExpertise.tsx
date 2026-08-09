@@ -6,9 +6,10 @@ import {
   ScalableSolutionsIcon,
   SeoStrategyIcon,
 } from '@/components/homepage-18/Icons'
-import Link from 'next/link'
 import React, { FC } from 'react'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 interface ExpertiseCardProps {
   id: string
@@ -69,8 +70,8 @@ const StrategicExpertise: FC = () => {
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
           <div className="md:w-[60%] md:self-start">
-            <RevealWrapper className="rv-badge reveal-me mb-2">
-              <span className="rv-badge-text">Strategic Expertise</span>
+            <RevealWrapper className="reveal-me mb-2">
+              <SectionLabel>Strategic Expertise</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear lg:leading-[1.1]">
@@ -85,17 +86,15 @@ const StrategicExpertise: FC = () => {
                 Five strategic areas that shape every roadmap — before specialist divisions execute the work.
               </p>
             </TextAppearAnimation>
-            <RevealWrapper as="ul" className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
-              <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <Link href="/meet" className="rv-button rv-button-primary rv-button-sm block md:inline-block">
-                  <div className="rv-button-top">
-                    <span>Let&apos;s Talk</span>
-                  </div>
-                  <div className="rv-button-bottom">
-                    <span>Let&apos;s Talk</span>
-                  </div>
-                </Link>
-              </li>
+            <RevealWrapper className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
+              <ButtonComponentList
+                className="flex justify-end max-md:justify-center"
+                itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto"
+              >
+                <ButtonComponent href="/meet" variant="primary" size="sm" fullWidth>
+                  Let&apos;s Talk
+                </ButtonComponent>
+              </ButtonComponentList>
             </RevealWrapper>
           </div>
         </div>
