@@ -1,6 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const processSteps = [
@@ -34,12 +34,11 @@ const HowWeBuildStrategy = () => {
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>Process</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mb-3">
-              How we build your
-              <i className="font-instrument"> strategy</i>
-            </h2>
-          </TextAppearAnimation>
+          <HeadingWithInstrument
+            className="mb-3"
+            before="How we build your"
+            accent="strategy"
+          />
         </div>
 
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">

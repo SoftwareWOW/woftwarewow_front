@@ -5,6 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import InstrumentText from '../shared/InstrumentText'
 import SectionLabel from '../shared/SectionLabel'
 
 const INITIAL_VISIBLE_COUNT = 6
@@ -109,12 +110,13 @@ const Faq = () => {
               <SectionLabel className="mb-5">Expertise</SectionLabel>
             </RevealWrapper>
 
-            <TextAppearAnimation>
-              <h2 className="text-appear text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-                <span className="block font-instrument italic font-normal tracking-[-0.06em]">People</span> <br/>
-                <span className="block font-normal">Asked Us</span>
-              </h2>
-            </TextAppearAnimation>
+            <h2 className="text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+              <InstrumentText className="block font-normal tracking-[-0.06em]">People</InstrumentText>
+              <br />
+              <TextAppearAnimation>
+                <span className="text-appear block font-normal">Asked Us</span>
+              </TextAppearAnimation>
+            </h2>
           </div>
 
           <div className="max-w-[420px] lg:text-right">

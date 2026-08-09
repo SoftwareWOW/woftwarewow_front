@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const points = [
@@ -34,11 +35,11 @@ const BuiltAroundYourBusiness = () => {
           <RevealWrapper className="mb-3 flex justify-center">
             <SectionLabel>Built Around You</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mt-3">
-              Strategies built around <i className="font-instrument">your business</i>
-            </h2>
-          </TextAppearAnimation>
+          <HeadingWithInstrument
+            className="mt-3"
+            before="Strategies built around"
+            accent="your business"
+          />
           <TextAppearAnimation>
             <p className="text-appear">
               Tailored by goals, industry, market, customer, maturity, and budget

@@ -6,6 +6,7 @@ import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import HeadingWithInstrument from '../shared/HeadingWithInstrument'
 import SectionLabel from '../shared/SectionLabel'
 import { useState } from 'react'
 
@@ -104,14 +105,16 @@ const WowProjects = () => {
               <SectionLabel className="mb-3">Case Studies</SectionLabel>
             </RevealWrapper>
 
-            <TextAppearAnimation>
-              <h2 className="text-appear flex-1 text-[#0D0D0D] dark:text-[#F2F2F2]">
-                Real Challenges. <br/>
-                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
-                  Real Results.
-                </span>
-              </h2>
-            </TextAppearAnimation>
+            <HeadingWithInstrument
+              className="flex-1 text-[#0D0D0D] dark:text-[#F2F2F2]"
+              before={
+                <>
+                  Real Challenges.
+                  <br />
+                </>
+              }
+              accent="Real Results."
+            />
           </div>
 
           <div>

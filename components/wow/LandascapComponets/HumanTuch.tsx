@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Image from 'next/image'
+import InstrumentText from '../shared/InstrumentText'
 import SectionLabel from '../shared/SectionLabel'
 
 import hero01 from '@/public/images/wow/Hero/Human/ali.png'
@@ -41,17 +42,21 @@ const HumanTouch = () => {
                         <RevealWrapper>
                           <SectionLabel className="mb-5">Human Touch</SectionLabel>
                         </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className="text-appear max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-                Technology <br />
-                Powered.{' '}
-                <span className="bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text font-instrument italic font-normal tracking-[-0.06em] text-transparent">
-                  Human
+            <h2 className="max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+              <TextAppearAnimation>
+                <span className="text-appear">
+                  Technology <br />
+                  Powered.{' '}
                 </span>
-                <br />
-                Led.
-              </h2>
-            </TextAppearAnimation>
+              </TextAppearAnimation>
+              <InstrumentText className="font-normal tracking-[-0.06em]">Human</InstrumentText>
+              <TextAppearAnimation>
+                <span className="text-appear">
+                  <br />
+                  Led.
+                </span>
+              </TextAppearAnimation>
+            </h2>
 
             <RevealWrapper className="reveal-me mt-8 flex items-center gap-5 pb-8">
               <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-[#8b7cff] shadow-lg shadow-[#8b7cff]/20">

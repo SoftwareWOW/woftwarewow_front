@@ -9,6 +9,7 @@ import {
 import React, { FC } from 'react'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 interface ExpertiseCardProps {
@@ -73,12 +74,11 @@ const StrategicExpertise: FC = () => {
             <RevealWrapper className="reveal-me mb-2">
               <SectionLabel>Strategic Expertise</SectionLabel>
             </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className="text-appear lg:leading-[1.1]">
-                Our strategic
-                <i className="font-instrument"> expertise </i>
-              </h2>
-            </TextAppearAnimation>
+            <HeadingWithInstrument
+              className="lg:leading-[1.1]"
+              before="Our strategic"
+              accent="expertise"
+            />
           </div>
           <div className="w-full md:w-[40%] md:max-w-72 md:self-end lg:max-w-[470px]">
             <TextAppearAnimation>
@@ -91,7 +91,7 @@ const StrategicExpertise: FC = () => {
                 className="flex justify-end max-md:justify-center"
                 itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto"
               >
-                <ButtonComponent href="/meet" variant="primary" size="sm" fullWidth>
+                <ButtonComponent href="/meet" variant="primary">
                   Let&apos;s Talk
                 </ButtonComponent>
               </ButtonComponentList>

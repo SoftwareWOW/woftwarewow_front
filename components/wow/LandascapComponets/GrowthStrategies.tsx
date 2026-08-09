@@ -1,11 +1,10 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
+import ButtonComponent from '../shared/ButtonComponent'
+import HeadingWithInstrument from '../shared/HeadingWithInstrument'
 import SectionLabel from '../shared/SectionLabel'
 
 const articles = [
@@ -69,16 +68,11 @@ const GrowthStrategies = () => {
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
             <div>
          
-          <TextAppearAnimation>
-          
-              <h2 className="text-appear max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-                Insights, Trends &amp;{' '}
-                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
-                  Growth Strategies
-                </span>
-              </h2>
-           
-          </TextAppearAnimation>
+          <HeadingWithInstrument
+            className="max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
+            before="Insights, Trends &"
+            accent="Growth Strategies"
+          />
  </div>
           <RevealWrapper className="max-w-[420px] lg:text-right">
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">

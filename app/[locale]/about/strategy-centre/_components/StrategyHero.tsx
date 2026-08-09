@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 
@@ -27,7 +28,7 @@ const StrategyHero = () => {
             <br className="hidden sm:block" />
             Growth –{' '}
             <br className="hidden md:block" />
-            <i className="font-instrument text-inherit">Clear. Measurable. Built to scale.</i>
+            <InstrumentText>Clear. Measurable. Built to scale.</InstrumentText>
           </h1>
 
           <p className="max-w-xl text-sm leading-relaxed text-backgroundBody/70 sm:max-w-2xl sm:text-base md:max-w-3xl md:text-lg">

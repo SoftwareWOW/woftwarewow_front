@@ -1,8 +1,8 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -66,14 +66,11 @@ const StrategyPlaybooks = () => {
         </RevealWrapper>
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <TextAppearAnimation>
-              <h2 className="text-appear max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-                Strategy playbooks &amp;{' '}
-                <span className="bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text font-instrument italic text-transparent">
-                  growth insights
-                </span>
-              </h2>
-            </TextAppearAnimation>
+            <HeadingWithInstrument
+              className="max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
+              before="Strategy playbooks &"
+              accent="growth insights"
+            />
           </div>
           <RevealWrapper className="max-w-[420px] lg:text-right">
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">

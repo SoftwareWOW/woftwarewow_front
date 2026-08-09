@@ -1,8 +1,8 @@
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 interface CaseStudyType {
@@ -21,11 +21,7 @@ const StrategyInAction = () => {
           <RevealWrapper className="mb-5 flex justify-center">
             <SectionLabel>Strategy in Action</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear">
-              Challenge to results, <span className="font-instrument italic">proven</span>
-            </h2>
-          </TextAppearAnimation>
+          <HeadingWithInstrument before="Challenge to results," accent="proven" />
         </div>
 
         <div className="mb-[60px] space-y-[30px]">

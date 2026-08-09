@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const steps = [
@@ -49,12 +50,11 @@ const WowGrowthFramework = () => {
           <RevealWrapper className="mb-5">
             <SectionLabel>Framework</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation02>
-            <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
-              The WOW Growth
-              <i className="font-instrument"> Framework</i>
-            </h2>
-          </TextAppearAnimation02>
+          <HeadingWithInstrument
+            className="max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]"
+            before="The WOW Growth"
+            accent="Framework"
+          />
           <TextAppearAnimation02>
             <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">
               Discover → Strategize → Implement → Measure → Optimize → Scale
