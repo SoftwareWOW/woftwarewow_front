@@ -58,7 +58,7 @@ export default async function PartnersPage({ params }: Props) {
         <PartnersHero />
         {/* 2. Our Partner Ecosystem — Home-03 Clients (dual marquee) */}
         <PartnerEcosystem />
-        {/* 3. Technology & Platform Partners — Home-16 ServicesV14 */}
+        {/* 3. Technology & Platform Partners — Home-13 WhyChooseUsV2 */}
         <PartnerCategories />
         {/* 4. Why We Partner — Home-23 WhyChooseUsV7 */}
         <WhyWePartner />
