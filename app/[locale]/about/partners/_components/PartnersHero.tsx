@@ -18,8 +18,7 @@ const PartnersHero = () => {
         <SectionLabel className="mb-3">Partners</SectionLabel>
 
         <h1 id="partners-hero-heading" className="xl:leading-[1.1]">
-          Better{' '}
-          <InstrumentText>Together</InstrumentText>
+          Better <InstrumentText>Together</InstrumentText>
           <CtaImageSlider
             slides={[
               { id: '1', img: '/images/wow/Hero/client/Avatar.png' },

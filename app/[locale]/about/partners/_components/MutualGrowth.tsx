@@ -1,6 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
-import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const gains = [
@@ -10,7 +10,7 @@ const gains = [
   'Joint growth initiatives — co-marketing, referrals, and shared offers',
 ]
 
-/** Layout: Home-25 WhatWeOffer — image + list (not Strategy Centre BrandingProcess). */
+/** Layout: Home-25 WhatWeOffer — image + list. */
 const MutualGrowth = () => {
   return (
     <section>
@@ -27,7 +27,9 @@ const MutualGrowth = () => {
           <RevealWrapper className="col-span-12 space-y-7 lg:col-span-6">
             <div className="space-y-3">
               <SectionLabel>Mutual Growth</SectionLabel>
-              <HeadingWithInstrument before="Built for mutual" accent="growth" />
+              <h2>
+                Built for mutual <InstrumentText>growth</InstrumentText>
+              </h2>
               <p className="text-lg font-normal leading-[28.8px] tracking-[0.36px] text-black/70 dark:text-backgroundBody/70">
                 Partnerships that expand reach, deepen delivery, and create shared opportunity.
               </p>

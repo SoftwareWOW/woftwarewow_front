@@ -1,8 +1,7 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { TechCard, type Tech } from '@/components/wow/shared/TechStackShared'
 import Marquee from 'react-fast-marquee'
@@ -57,16 +56,19 @@ const PartnerEcosystem = () => {
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
           <SectionLabel>Ecosystem</SectionLabel>
         </RevealWrapper>
-        <HeadingWithInstrument className="mb-3 text-center" before="Our partner" accent="ecosystem" />
-        <TextAppearAnimation>
-          <p className="text-appear mx-auto max-w-2xl text-center">
+        <RevealWrapper className="reveal-me mb-3 text-center">
+          <h2>
+            Our partner <InstrumentText>ecosystem</InstrumentText>
+          </h2>
+        </RevealWrapper>
+        <RevealWrapper className="reveal-me">
+          <p className="mx-auto max-w-2xl text-center text-base leading-relaxed text-[#808080]">
             Platforms across technology, marketing, infrastructure, and creative that strengthen how we deliver.
           </p>
-        </TextAppearAnimation>
+        </RevealWrapper>
       </div>
 
       <div className="relative">
-        {/* Soft edge fades so cards aren’t harshly clipped */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-backgroundBody to-transparent dark:from-dark sm:w-20"

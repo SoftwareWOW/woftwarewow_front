@@ -1,7 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
-import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const partnerTypes = [
@@ -33,15 +32,19 @@ const PartnerCategories = () => {
             <RevealWrapper className="reveal-me mb-3">
               <SectionLabel>Categories</SectionLabel>
             </RevealWrapper>
-            <HeadingWithInstrument before="Technology & platform" accent="partners" />
+            <RevealWrapper className="reveal-me">
+              <h2>
+                Technology & platform <InstrumentText>partners</InstrumentText>
+              </h2>
+            </RevealWrapper>
           </div>
 
           <div className="w-full md:max-w-80 md:self-end lg:max-w-[470px]">
-            <TextAppearAnimation>
-              <p className="text-appear max-w-lg md:place-self-end md:text-right">
+            <RevealWrapper className="reveal-me">
+              <p className="max-w-lg text-base leading-relaxed text-[#808080] md:place-self-end md:text-right">
                 Broad categories that span WOW divisions — from AI and cloud to marketing and creative.
               </p>
-            </TextAppearAnimation>
+            </RevealWrapper>
             <RevealWrapper className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
               <ButtonComponentList
                 className="flex justify-end max-md:justify-center"

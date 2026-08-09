@@ -1,6 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const benefits = [
@@ -22,7 +22,7 @@ const benefits = [
   },
 ]
 
-/** Layout: Home-23 WhyChooseUsV7 — 2×2 bordered grid (not Strategy Centre ProcessV10). */
+/** Layout: Home-23 WhyChooseUsV7 — 2×2 bordered grid. */
 const WhyWePartner = () => {
   return (
     <section>
@@ -31,12 +31,16 @@ const WhyWePartner = () => {
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>Why Partner</SectionLabel>
           </RevealWrapper>
-          <HeadingWithInstrument className="lg:leading-[1.1]" before="Why we" accent="partner" />
-          <TextAppearAnimation>
-            <p className="text-appear mt-4 font-normal text-black/70 dark:text-backgroundBody/70">
+          <RevealWrapper className="reveal-me">
+            <h2 className="lg:leading-[1.1]">
+              Why we <InstrumentText>partner</InstrumentText>
+            </h2>
+          </RevealWrapper>
+          <RevealWrapper className="reveal-me mt-4">
+            <p className="font-normal text-black/70 dark:text-backgroundBody/70">
               Partnerships that raise quality, speed, and client value across the WOW ecosystem.
             </p>
-          </TextAppearAnimation>
+          </RevealWrapper>
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
@@ -51,6 +55,14 @@ const WhyWePartner = () => {
               </p>
             </div>
           ))}
+        </RevealWrapper>
+
+        <RevealWrapper className="reveal-me mt-10 flex justify-center md:mt-14">
+          <ButtonComponentList>
+            <ButtonComponent href="/contact" variant="primary">
+              Become a Partner
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

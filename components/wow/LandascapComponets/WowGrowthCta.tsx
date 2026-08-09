@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import bigArrowIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
 import Image from 'next/image'
 import { useContactDialogOptional } from '../shared/ContactDialogProvider'
+import InstrumentText from '../shared/InstrumentText'
 
 interface WowGrowthCtaProps {
   accentText?: string
@@ -29,9 +30,7 @@ const WowGrowthCta = ({
           as="h2"
           className="reveal-me text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
         >
-          <span className="font-instrument italic max-md:mr-4 lg:text-[100px]">
-            {accentText}
-          </span>
+          <InstrumentText className="max-md:mr-4 lg:text-[100px]">{accentText}</InstrumentText>
 
           <br className="hidden md:block" />
 
