@@ -35,7 +35,7 @@ const HowWeBuildStrategy = () => {
             <SectionLabel>Process</SectionLabel>
           </RevealWrapper>
           <HeadingWithInstrument
-            className="mb-3"
+            className="mb-3 text-center"
             before="How we build your"
             accent="strategy"
           />

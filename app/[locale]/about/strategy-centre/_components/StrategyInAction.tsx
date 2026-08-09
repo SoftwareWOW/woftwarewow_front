@@ -21,7 +21,7 @@ const StrategyInAction = () => {
           <RevealWrapper className="mb-5 flex justify-center">
             <SectionLabel>Strategy in Action</SectionLabel>
           </RevealWrapper>
-          <HeadingWithInstrument before="Challenge to results," accent="proven" />
+          <HeadingWithInstrument className="text-center" before="Challenge to results," accent="proven" />
         </div>
 
         <div className="mb-[60px] space-y-[30px]">

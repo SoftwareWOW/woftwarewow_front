@@ -3,7 +3,10 @@
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { cn } from '@/lib/utils'
 import type { ElementType, ReactNode } from 'react'
-import InstrumentText from './InstrumentText'
+import {
+  instrumentAccentGradientClassName,
+  instrumentAccentSolidClassName,
+} from './InstrumentText'
 
 type HeadingWithInstrumentProps = {
   /** Plain title text before the italic accent */
@@ -17,9 +20,7 @@ type HeadingWithInstrumentProps = {
 }
 
 /**
- * Animated heading that keeps Instrument italic gradient visible.
- * TextAppearAnimation/SplitType must NOT wrap InstrumentText — it strips
- * nested text nodes and breaks bg-clip-text. Accent sits outside the split.
+ * Animated heading: plain text + Instrument accent share the same TextAppearAnimation.
  */
 export default function HeadingWithInstrument({
   before,
@@ -30,13 +31,18 @@ export default function HeadingWithInstrument({
   variant = 'gradient',
 }: HeadingWithInstrumentProps) {
   return (
-    <Tag className={cn(className)}>
-      <TextAppearAnimation>
-        <span className="text-appear">{before} </span>
-      </TextAppearAnimation>
-      <InstrumentText variant={variant} className={accentClassName}>
-        {accent}
-      </InstrumentText>
-    </Tag>
+    <TextAppearAnimation>
+      <Tag className={cn('text-appear [&_.line]:!overflow-visible', className)}>
+        {before}{' '}
+        <span
+          className={cn(
+            variant === 'gradient' ? instrumentAccentGradientClassName : instrumentAccentSolidClassName,
+            accentClassName,
+          )}
+        >
+          {accent}
+        </span>
+      </Tag>
+    </TextAppearAnimation>
   )
 }

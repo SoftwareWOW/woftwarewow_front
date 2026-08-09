@@ -36,7 +36,7 @@ const BuiltAroundYourBusiness = () => {
             <SectionLabel>Built Around You</SectionLabel>
           </RevealWrapper>
           <HeadingWithInstrument
-            className="mt-3"
+            className="mt-3 text-center"
             before="Strategies built around"
             accent="your business"
           />
