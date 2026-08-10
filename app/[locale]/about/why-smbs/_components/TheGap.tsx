@@ -19,7 +19,7 @@ const aligned = [
 ]
 
 const CrossIcon = () => (
-  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-secondary/30 dark:border-backgroundBody/30">
+  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-secondary/40 dark:border-backgroundBody/40">
     <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none" aria-hidden>
       <path
         d="M9 3L3 9M3 3L9 9"
@@ -32,7 +32,7 @@ const CrossIcon = () => (
 )
 
 const CheckIcon = () => (
-  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-secondary/30 dark:border-backgroundBody/30">
+  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-secondary/40 dark:border-backgroundBody/40">
     <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none" aria-hidden>
       <path
         d="M2.5 6.5L4.5 8.5L9.5 3.5"
@@ -44,6 +44,9 @@ const CheckIcon = () => (
     </svg>
   </span>
 )
+
+const cardClassName =
+  'relative rounded-radius-md border border-secondary/15 px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 md:pt-16'
 
 /** Layout: Home-23 PricingV5 — two bordered comparison columns (no pricing chrome). */
 const TheGap = () => {
@@ -68,7 +71,7 @@ const TheGap = () => {
         </div>
 
         <RevealWrapper className="reveal-me mt-10 grid justify-center gap-x-10 gap-y-10 md:mt-16 lg:grid-cols-2">
-          <div className="relative border border-secondary/20 px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/20 md:pt-16">
+          <div className={cardClassName}>
             <div>
               <h6 className="mb-8 text-sm font-normal uppercase tracking-[0.08em] max-md:text-base">
                 When work is fragmented
@@ -77,17 +80,17 @@ const TheGap = () => {
                 {fragmented.map((item) => (
                   <li
                     key={item}
-                    className="flex list-none items-center gap-[12px] text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
+                    className="flex list-none items-center gap-4 text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
                   >
                     <CrossIcon />
-                    {item}
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="relative border border-secondary px-[30px] pb-[30px] pt-8 dark:border-backgroundBody md:pt-16">
+          <div className={cardClassName}>
             <div>
               <h6 className="mb-8 text-sm font-normal uppercase tracking-[0.08em] max-md:text-base">
                 When work is aligned
@@ -96,10 +99,10 @@ const TheGap = () => {
                 {aligned.map((item) => (
                   <li
                     key={item}
-                    className="flex list-none items-center gap-[12px] text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
+                    className="flex list-none items-center gap-4 text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
                   >
                     <CheckIcon />
-                    {item}
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
