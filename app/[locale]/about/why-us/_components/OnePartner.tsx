@@ -4,11 +4,22 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import CounterAnimation from '@/utils/CounterAnimation'
 
 const points = [
-  { number: 1, suffix: '', label: 'Unified partner' },
-  { number: 6, suffix: '+', label: 'Specialist capabilities' },
-  { number: 100, suffix: '%', label: 'Connected delivery' },
+  {
+    number: 1,
+    suffix: '',
+    label: 'Unified partner',
+  },
+  {
+    number: 11,
+    suffix: '',
+    label: 'Specialist divisions',
+  },
+  {
+    number: 5,
+    suffix: '',
+    label: 'Ways to engage',
+  },
 ]
-
 /** Layout: Home-09 OurAchievement — short headline + compact stats (minimal copy). */
 const OnePartner = () => {
   return (
