@@ -158,11 +158,11 @@ const SmbGallery = () => {
                   onMouseEnter={handleSlideMouseEnter}
                   onMouseLeave={handleSlideMouseLeave}
                 >
-                  <figure className="group relative overflow-hidden shadow-lg">
+                  <figure className="group relative overflow-hidden rounded-radius-md shadow-lg">
                     <img
                       src={item.image}
                       alt={`SMB work gallery ${item.id}`}
-                      className="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      className="h-full w-full rounded-radius-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                     />
                     <a
                       href={item.link}
