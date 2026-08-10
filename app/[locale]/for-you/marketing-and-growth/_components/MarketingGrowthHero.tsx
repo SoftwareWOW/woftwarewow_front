@@ -37,24 +37,18 @@ const MarketingGrowthHero = () => {
               <h1 id="marketing-growth-heading">
                 Turn attention into
                 <br className="hidden lg:block" />
-                <InstrumentText> sustainable growth.</InstrumentText>
+                sustainable growth.
               </h1>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-3">
               <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-                Connect strategy, marketing, content, sales and automation to attract the right customers and create
-                measurable growth.
-              </p>
+  Attract more customers, convert more opportunities, and grow smarter.
+</p>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
               <ButtonComponentList className="flex" itemClassName="block">
                 <ButtonComponent href="/contact" variant="primary">
                   Talk to a Growth Expert
-                </ButtonComponent>
-              </ButtonComponentList>
-              <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="#growth-solutions" variant="secondary">
-                  Explore Growth Solutions
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapper>
