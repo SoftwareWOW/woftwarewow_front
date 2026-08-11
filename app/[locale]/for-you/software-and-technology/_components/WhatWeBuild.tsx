@@ -1,4 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'

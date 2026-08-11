@@ -3,7 +3,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimationV2 from '@/components/shared/HeroGradientAnimationV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
-import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gsap from 'gsap'
 import { useEffect, useRef, useState } from 'react'
@@ -99,8 +98,11 @@ const SoftwareTechHero = () => {
           <SectionLabel>Software &amp; Technology</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
-          <h1 id="software-tech-heading" className="text-center 2xl:leading-[1.21]">
-          Technology built around your business.
+          <h1
+            id="software-tech-heading"
+            className="text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em]"
+          >
+            Technology built around your business.
           </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">

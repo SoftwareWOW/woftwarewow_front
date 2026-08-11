@@ -1,4 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
@@ -44,12 +45,12 @@ const BuiltForTheFit = () => {
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto mb-5 max-w-3xl md:mb-8">
-              Your business shouldn&apos;t have to work around its <InstrumentText>software.</InstrumentText>
+           Your business shouldn't have to work around its software.
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              Sometimes existing tools work perfectly. Sometimes they create more work than they remove.
+           Sometimes existing tools work perfectly. Sometimes they create more work than they remove.
             </p>
           </RevealWrapper>
         </div>
