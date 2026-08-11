@@ -1,6 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
-import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const needCustom = [
@@ -32,7 +31,7 @@ const CheckIcon = () => (
 )
 
 const cardClassName =
-  'relative rounded-radius-md border border-secondary/15 px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 md:pt-16'
+  'relative rounded-radius-md border px-[30px] pb-[30px] pt-8 shadow-none dark:border-dark md:pt-16'
 
 /** Layout: Why SMBs TheGap — dual bordered columns with checks on both sides. */
 const BuiltForTheFit = () => {
@@ -44,8 +43,8 @@ const BuiltForTheFit = () => {
             <SectionLabel>Built for the Fit</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 max-w-3xl md:mb-8">
-           Your business shouldn't have to work around its software.
+            <h2 className="mx-auto mb-5 md:mb-8">
+              Your business shouldn&apos;t have to work around its software.
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
