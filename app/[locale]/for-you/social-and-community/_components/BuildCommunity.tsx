@@ -4,24 +4,28 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const steps = [
   {
+    number: '1',
     title: 'Listen',
     description: 'Understand what your audience cares about.',
   },
   {
+    number: '2',
     title: 'Engage',
     description: 'Create reasons for people to interact.',
   },
   {
+    number: '3',
     title: 'Respond',
     description: 'Keep conversations active and human.',
   },
   {
+    number: '4',
     title: 'Strengthen',
     description: 'Turn repeated interaction into lasting connection.',
   },
 ]
 
-/** Layout: SoftwareWOW WoWProces — numbered community-building steps. */
+/** Layout: SoftwareWOW WoWProces — numbered community steps, responsive. */
 const BuildCommunity = () => {
   return (
     <section>
@@ -39,15 +43,22 @@ const BuildCommunity = () => {
           </RevealWrapper>
         </div>
 
-        <div className="service-item-wrapper flex justify-center gap-[30px] max-md:flex-wrap">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:gap-x-10 xl:grid-cols-4">
           {steps.map((step) => (
             <RevealWrapper
               key={step.title}
-              className="relative flex flex-1 flex-col items-center justify-center pt-[100px]"
+              className="relative flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24"
             >
-              <div className="service-item-number" />
-              <h5 className="mb-5 text-center">{step.title}</h5>
-              <p className="text-center text-base leading-relaxed text-[#808080]">{step.description}</p>
+              <span
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-0 z-0 -translate-x-1/2 select-none bg-gradient-to-b from-[#86858599] to-white bg-clip-text font-black leading-none text-transparent dark:to-[#15151599] text-[clamp(5rem,22vw,11.25rem)]"
+              >
+                {step.number}
+              </span>
+              <h5 className="relative z-10 mb-3 text-center sm:mb-5">{step.title}</h5>
+              <p className="relative z-10 max-w-[280px] text-center text-base leading-relaxed text-[#808080]">
+                {step.description}
+              </p>
             </RevealWrapper>
           ))}
         </div>
