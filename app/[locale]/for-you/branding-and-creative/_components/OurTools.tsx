@@ -1,6 +1,7 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { Icon, addCollection } from '@iconify/react'
 import logos from '@iconify-json/logos/icons.json'
@@ -25,9 +26,11 @@ const OurTools = () => {
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
-          <RevealWrapper className="reveal-me mb-5">
-            <h2 className="mx-auto max-w-3xl">Not just an identity. A working system for your brand.</h2>
-          </RevealWrapper>
+          <TextAppearAnimation>
+            <h2 className="text-appear mx-auto mb-5 max-w-3xl">
+              Not just an identity. A working system for your brand.
+            </h2>
+          </TextAppearAnimation>
           <RevealWrapper className="reveal-me flex justify-center">
             <SectionLabel>Our Tools</SectionLabel>
           </RevealWrapper>

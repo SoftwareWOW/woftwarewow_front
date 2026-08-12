@@ -62,7 +62,7 @@ const BrandVisibility = () => {
           {qualities.map((item, index) => (
             <RevealWrapper
               key={item.title}
-              className={`px-[30px] py-[50px] dark:border-dark ${
+              className={`reveal-me px-[30px] py-[50px] dark:border-dark ${
                 index % 2 === 0 ? 'sm:border-r' : ''
               } ${index < 2 ? 'border-b dark:border-b-dark' : ''}`}
             >

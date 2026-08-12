@@ -80,11 +80,6 @@ const BrandCapabilities = () => {
               Get Started
             </ButtonComponent>
           </ButtonComponentList>
-          <ButtonComponentList className="flex" itemClassName="block">
-            <ButtonComponent href="/contact" variant="white">
-              Explore All
-            </ButtonComponent>
-          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>
