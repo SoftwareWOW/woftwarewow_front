@@ -96,9 +96,8 @@ const HostingThatFits = () => {
             </p>
           </TextAppearAnimation>
         </div>
-      </div>
 
-      <div className="mx-auto flex max-w-[1600px] items-stretch justify-center gap-[30px] max-2xl:flex-wrap max-sm:px-5">
+        <div className="grid grid-cols-1 items-stretch gap-[30px] md:grid-cols-2 xl:grid-cols-3">
         {pricingPlans.map((plan) => {
           const {
             title,
@@ -114,7 +113,7 @@ const HostingThatFits = () => {
           return (
             <RevealWrapper
               key={id}
-              className="reveal-me relative flex min-h-[510px] min-w-full flex-col border bg-backgroundBody px-[30px] pb-28 pt-[30px] dark:border-dark dark:bg-dark sm:min-w-[416px]"
+              className="reveal-me relative flex min-h-[510px] w-full flex-col border bg-backgroundBody px-[30px] pb-28 pt-[30px] dark:border-dark dark:bg-dark"
             >
               {isFeatured && (
                 <div
@@ -164,6 +163,7 @@ const HostingThatFits = () => {
             </RevealWrapper>
           )
         })}
+        </div>
       </div>
     </section>
   )
