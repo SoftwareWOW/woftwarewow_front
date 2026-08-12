@@ -142,7 +142,7 @@ const StartWithTheWork = () => {
             <SectionLabel>Start with the work</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 max-w-3xl md:mb-8">
+            <h2 className="mx-auto mb-5 w-full md:mb-8">
               What would you <InstrumentText>stop</InstrumentText> doing manually?
             </h2>
           </RevealWrapper>
@@ -169,7 +169,7 @@ const StartWithTheWork = () => {
                 data-active={isActive ? true : false}
               >
                 <div
-                  className={`accordion-header group relative flex cursor-pointer justify-between py-[35px] ${
+                  className={`accordion-header group relative flex w-full cursor-pointer items-start justify-between gap-4 py-[35px] ${
                     isActive ? 'active' : ''
                   }`}
                   onClick={() => toggleAccordion(index)}
@@ -183,9 +183,9 @@ const StartWithTheWork = () => {
                   }}
                   aria-expanded={isActive}
                 >
-                  <h3 className="flex flex-col gap-x-10 gap-y-3 font-outfit text-[25px] font-[500px] leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-3xl">
-                    <span>{service.title}</span>
-                    <span className="mt-2 pr-[2px] text-base font-normal text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                  <h3 className="flex min-w-0 flex-1 flex-col gap-y-3 font-outfit text-[25px] font-[500px] leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:font-medium md:leading-[1.2] lg:text-3xl">
+                    <span className="block w-full">{service.title}</span>
+                    <span className="block w-full pr-[2px] text-base font-normal text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                       {service.subtitle}
                     </span>
                   </h3>

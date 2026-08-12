@@ -112,11 +112,17 @@ const AiAutomationHero = () => {
           </p>
         </RevealWrapper>
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
-          <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <ButtonComponentList>
+          <div
+            className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="primary">
                 Explore AI Opportunities
               </ButtonComponent>
+            </ButtonComponentList>
+            <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="secondary">
                 See What We Automate
               </ButtonComponent>

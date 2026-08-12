@@ -1,12 +1,12 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import Marquee from '@/components/wow/shared/Marquee'
+
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 5. Automation in action — Why SMBs TheGap
 import AutomationInAction from './_components/AutomationInAction'
-// 4. AI Capabilities — Home-13 WhyChooseUsV2
+// 4. AI Capabilities — Home-13 ServicesV12
 import AiCapabilities from './_components/AiCapabilities'
 // 3. Gallery — Home-13 AboutHoverImages
 import AiGallery from './_components/AiGallery'
@@ -16,6 +16,7 @@ import AiAutomationHero from './_components/AiAutomationHero'
 import AiWithPurpose from './_components/AiWithPurpose'
 // 2. Start with the work — SolutionToChallenges
 import StartWithTheWork from './_components/StartWithTheWork'
+import Marquee from '@/components/wow/LandascapComponets/Marquee'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -61,12 +62,12 @@ export default async function AiAndAutomationPage({ params }: Props) {
         <StartWithTheWork />
         {/* 3. Gallery — Home-13 AboutHoverImages */}
         <AiGallery />
-        {/* 4. AI Capabilities — Home-13 WhyChooseUsV2 */}
+        {/* 4. AI Capabilities — Home-13 ServicesV12 */}
         <AiCapabilities />
         {/* 5. Automation in action — TheGap */}
         <AutomationInAction />
         {/* 6. Trusted logos — shared Marquee */}
-        <Marquee />
+         <Marquee />
         {/* 7. AI with a purpose — BuildCommunity */}
         <AiWithPurpose />
         {/* 8. Ready to automate — WowGrowthCta */}
