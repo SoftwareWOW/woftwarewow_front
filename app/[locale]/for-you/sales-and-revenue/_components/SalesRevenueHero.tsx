@@ -14,7 +14,7 @@ const SalesRevenueHero = () => {
 
   return (
     <section className="video-section relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover object-center pt-[107px] dark:bg-none md:pt-[100px] xl:pt-[120px]">
-      <div className="hero-video-container mx-auto max-w-[1600px] px-4 pb-14 md:px-[30px] md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+      <div className="hero-video-container mx-auto max-w-[1600px] px-4 md:px-[30px]">
         <div className="flex flex-col items-center gap-x-20 gap-y-14 lg:flex-row lg:items-stretch">
           <RevealWrapper className="reveal-me group relative w-full lg:flex lg:w-1/2 lg:flex-col">
             <div
