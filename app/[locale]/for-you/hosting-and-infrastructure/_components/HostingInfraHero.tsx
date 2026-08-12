@@ -28,7 +28,7 @@ const HostingInfraHero = () => {
           <RevealWrapper className="reveal-me">
             <h1
               id="hosting-infra-heading"
-              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+              className="text-[clamp(2rem,4.571vw,5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
             >
               Keep your
               <br className="hidden lg:block" />

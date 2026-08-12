@@ -53,26 +53,41 @@ const pricingPlans: Plan[] = [
   {
     id: 1,
     title: 'Shared Hosting',
-    tagline: 'For straightforward websites.',
-    description: 'A practical starting point for smaller websites and everyday business needs.',
-    features: ['Business websites', 'Landing sites', 'Lower-complexity projects'],
+    tagline: 'Simple, reliable hosting.',
+    description:
+      'Reliable hosting for small business websites with straightforward needs.',
+    features: [
+      'Business websites',
+      'Landing pages',
+      'Small web projects',
+    ],
     ctaVariant: 'white',
   },
   {
     id: 2,
     title: 'VPS Hosting',
-    tagline: 'More resources and control.',
-    description: 'Dedicated virtual resources for businesses requiring greater flexibility and performance.',
-    features: ['Growing websites', 'eCommerce', 'Higher-demand applications'],
+    tagline: 'More power to grow.',
+    description:
+      'Flexible hosting with greater resources, performance, and control.',
+    features: [
+      'Growing websites',
+      'eCommerce stores',
+      'Business applications',
+    ],
     ctaVariant: 'primary',
     isFeatured: pricingBg,
   },
   {
     id: 3,
     title: 'Dedicated Hosting',
-    tagline: 'Infrastructure built around demanding requirements.',
-    description: 'Dedicated server resources for businesses with more advanced infrastructure needs.',
-    features: ['High-demand platforms', 'Custom applications', 'Advanced requirements'],
+    tagline: 'Maximum power and control.',
+    description:
+      'Dedicated infrastructure for demanding websites and applications.',
+    features: [
+      'High-traffic platforms',
+      'Custom applications',
+      'Advanced infrastructure',
+    ],
     ctaVariant: 'white',
   },
 ]
