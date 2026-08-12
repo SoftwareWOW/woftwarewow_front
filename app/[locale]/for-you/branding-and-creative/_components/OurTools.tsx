@@ -27,7 +27,7 @@ const OurTools = () => {
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto mb-5 max-w-3xl">
+            <h2 className="text-appear mx-auto mb-5">
               Not just an identity. A working system for your brand.
             </h2>
           </TextAppearAnimation>

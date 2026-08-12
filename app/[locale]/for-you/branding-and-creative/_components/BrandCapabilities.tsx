@@ -67,9 +67,9 @@ const BrandCapabilities = () => {
 
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
-              src="/images/home-5/why-rivor.png"
+              src="/images/wow/nav/cards/Branding%20%26%20Creative%201.png"
               alt="Brand strategy and creative identity"
-              className="h-full w-full object-cover"
+              className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
             />
           </RevealWrapper>
         </div>
