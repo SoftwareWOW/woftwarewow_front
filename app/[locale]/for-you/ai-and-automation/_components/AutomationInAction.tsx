@@ -22,13 +22,13 @@ const afterSteps = [
 ]
 
 const cardClassName =
-  'relative rounded-radius-md border border-secondary/15 bg-secondary/[0.04] px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-[#111111] md:pt-12'
+  'relative rounded-radius-md border border-secondary/15 bg-background px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-background md:pt-12'
 
 const WorkflowSteps = ({ steps }: { steps: string[] }) => (
   <div className="flex flex-col items-start text-left">
     {steps.map((step, index) => (
       <div key={step} className="w-full">
-        <p className="text-base leading-[1.5] text-secondary/70 dark:text-backgroundBody/70 md:text-[17px]">
+        <p className="text-base leading-[1.5] text-secondary/70  md:text-[17px]">
           {step}
         </p>
         {index < steps.length - 1 && (
@@ -49,7 +49,7 @@ const AutomationInAction = () => {
             <SectionLabel>Automation in action</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 max-w-3xl md:mb-8">
+            <h2 className="mx-auto mb-5  md:mb-8">
               Turn repetitive processes into smarter <InstrumentText>workflows.</InstrumentText>
             </h2>
           </RevealWrapper>

@@ -31,12 +31,12 @@ const AiWithPurpose = () => {
             <SectionLabel>AI with a purpose</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto max-w-3xl">
+            <h2 className="mx-auto ">
               Automate what makes sense. Keep people where they matter.
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me mt-5">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
+            <p className="mx-auto  text-base leading-relaxed text-[#808080]">
               AI should make the business work better—not add another layer of complexity.
             </p>
           </RevealWrapper>

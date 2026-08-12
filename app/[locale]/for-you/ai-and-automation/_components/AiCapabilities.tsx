@@ -1,7 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
-import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
@@ -150,36 +148,18 @@ const FlipCard = ({ service }: { service: AiService }) => (
   </RevealWrapper>
 )
 
-/** Layout: Home-13 ServicesV12 — split header + hover-flip service cards (3+3 grid). */
+/** Layout: Home-13 ServicesV12 — centered header + hover-flip service cards (3+3 grid). */
 const AiCapabilities = () => {
   return (
     <section>
       <div className="container">
-        <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
-          <div className="flex-1 md:self-start">
-            <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>AI Capabilities</SectionLabel>
-            </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className="text-appear lg:leading-[1.20]">
-                Practical AI. Built for <InstrumentText>real work.</InstrumentText>
-              </h2>
-            </TextAppearAnimation>
-          </div>
-          <div className="w-full md:max-w-72 md:self-end lg:max-w-[470px]">
-            <TextAppearAnimation>
-              <p className="text-appear max-w-lg text-[#808080] md:place-self-end md:text-right">
-                Smart tools that sharpen decisions, reduce manual work, and help teams move faster with confidence.
-              </p>
-            </TextAppearAnimation>
-            <RevealWrapper className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
-              <ButtonComponentList className="flex justify-end max-md:justify-center">
-                <ButtonComponent href="/contact" variant="white">
-                  Explore AI Services
-                </ButtonComponent>
-              </ButtonComponentList>
-            </RevealWrapper>
-          </div>
+        <div className="mb-16 text-center md:mb-24">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
+            <SectionLabel>AI Capabilities</SectionLabel>
+          </RevealWrapper>
+          <TextAppearAnimation>
+            <h2 className="text-appear lg:leading-[1.20]">Practical AI. Built for real work.</h2>
+          </TextAppearAnimation>
         </div>
       </div>
 
