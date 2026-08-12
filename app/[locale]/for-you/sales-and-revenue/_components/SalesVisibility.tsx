@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 /** Layout: Home-15 BrandingProcess — split heading + 2×2 numbered grid. */
@@ -27,14 +27,13 @@ const SalesVisibility = () => {
             </p>
           </TextAppearAnimation02>
 
-          <Link href="/contact" className="rv-button rv-button-white mt-7 md:mt-14">
-            <div className="rv-button-top text-center">
-              <span className="font-normal">Start Now</span>
-            </div>
-            <div className="rv-button-bottom text-center">
-              <span className="font-normal">Start Now</span>
-            </div>
-          </Link>
+          <RevealWrapper className="reveal-me mt-7 md:mt-14">
+            <ButtonComponentList className="flex justify-start">
+              <ButtonComponent href="/contact" variant="white">
+                Start Now
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
         </div>
 
         <div className="grid grid-cols-2 gap-y-[26px]">

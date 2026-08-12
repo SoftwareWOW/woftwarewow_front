@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const processSteps = [
@@ -71,17 +71,12 @@ const LeadToCustomer = () => {
           ))}
         </div>
 
-        <RevealWrapper as="ul" className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-          <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>Accelerate Your Sales</span>
-              </div>
-              <div className="rv-button-bottom text-nowrap">
-                <span>Accelerate Your Sales</span>
-              </div>
-            </Link>
-          </li>
+        <RevealWrapper className="reveal-me mt-7 flex justify-center md:mt-14">
+          <ButtonComponentList>
+            <ButtonComponent href="/contact" variant="primary">
+              Accelerate Your Sales
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

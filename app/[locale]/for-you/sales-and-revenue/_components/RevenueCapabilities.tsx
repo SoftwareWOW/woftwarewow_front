@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
@@ -8,29 +7,15 @@ type CapabilityCard = {
   title: string
   headline: string
   description: string
-  href: string
-  featured?: boolean
   icon: ReactNode
   backIcon: ReactNode
 }
-
-const LearnMoreArrow = ({ front = false }: { front?: boolean }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={13} height={12} viewBox="0 0 13 12" fill="none" aria-hidden>
-    <path
-      d="M1 12.5L13 0.5M13 0.5H3.25M13 0.5V10.25"
-      className={front ? 'stroke-backgroundBody dark:stroke-secondary' : 'stroke-secondary dark:stroke-backgroundBody'}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-)
 
 const topRowCards: CapabilityCard[] = [
   {
     title: 'Lead Generation',
     headline: 'Create more opportunities.',
     description: 'Build targeted inbound and outbound systems for reaching potential customers.',
-    href: '/contact',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width={42} height={50} viewBox="0 0 42 50" fill="none" aria-hidden>
         <path
@@ -52,13 +37,11 @@ const topRowCards: CapabilityCard[] = [
     title: 'CRM & Pipeline',
     headline: 'Create a clearer path to conversion.',
     description: 'Design and optimize journeys that move prospects toward action.',
-    href: '/contact',
-    featured: true,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width={50} height={50} viewBox="0 0 50 50" fill="none" aria-hidden>
         <path
           d="M44.7917 31.25H23.9583C21.0875 31.25 18.75 33.5854 18.75 36.4583V40.625C18.75 43.4979 21.0875 45.8333 23.9583 45.8333H44.7917C47.6646 45.8333 50 43.4979 50 40.625V36.4583C50 33.5854 47.6646 31.25 44.7917 31.25ZM29.1667 43.75H23.9583C22.2354 43.75 20.8333 42.3479 20.8333 40.625V36.4583C20.8333 34.7354 22.2354 33.3333 23.9583 33.3333H29.1667V43.75ZM47.9167 40.625C47.9167 42.3479 46.5146 43.75 44.7917 43.75H31.25V33.3333H44.7917C46.5146 33.3333 47.9167 34.7354 47.9167 36.4583V40.625ZM44.7917 4.16667H23.9583C21.0875 4.16667 18.75 6.50208 18.75 9.375V13.5417C18.75 16.4146 21.0875 18.75 23.9583 18.75H44.7917C47.6646 18.75 50 16.4146 50 13.5417V9.375C50 6.50208 47.6646 4.16667 44.7917 4.16667ZM37.5 16.6667H23.9583C22.2354 16.6667 20.8333 15.2646 20.8333 13.5417V9.375C20.8333 7.65208 22.2354 6.25 23.9583 6.25H37.5V16.6667ZM47.9167 13.5417C47.9167 15.2646 46.5146 16.6667 44.7917 16.6667H39.5833V6.25H44.7917C46.5146 6.25 47.9167 7.65208 47.9167 9.375V13.5417ZM8.33333 12.5C11.7792 12.5 14.5833 9.69583 14.5833 6.25C14.5833 2.80417 11.7792 0 8.33333 0C4.8875 0 2.08333 2.80417 2.08333 6.25C2.08333 9.69583 4.8875 12.5 8.33333 12.5Z"
-          className="fill-secondary"
+          className="fill-secondary dark:fill-backgroundBody"
         />
       </svg>
     ),
@@ -75,7 +58,6 @@ const topRowCards: CapabilityCard[] = [
     title: 'Sales Automation',
     headline: 'Reduce repetitive sales work.',
     description: 'Automate follow-ups, lead routing, notifications and routine workflows.',
-    href: '/contact',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width={50} height={50} viewBox="0 0 50 50" fill="none" aria-hidden>
         <path
@@ -100,7 +82,6 @@ const bottomRowCards: CapabilityCard[] = [
     title: 'Outbound Sales',
     headline: 'Reach the right prospects proactively.',
     description: 'Build structured outreach campaigns around defined audiences and offers.',
-    href: '/contact',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width={58} height={51} viewBox="0 0 58 51" fill="none" aria-hidden>
         <path
@@ -122,7 +103,6 @@ const bottomRowCards: CapabilityCard[] = [
     title: 'Conversion Optimization',
     headline: 'Get more from existing opportunities.',
     description: 'Identify friction and improve the steps that influence conversion.',
-    href: '/contact',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width={49} height={50} viewBox="0 0 49 50" fill="none" aria-hidden>
         <path
@@ -154,14 +134,11 @@ const FlipCard = ({
 }) => (
   <RevealWrapper className={`reveal-me group relative min-h-[410px] w-full overflow-hidden ${widthClass}`}>
     <div>
-      <div
-        className={`absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0 ${
-          card.featured ? 'bg-white text-secondary dark:bg-backgroundBody dark:text-secondary' : ''
-        }`}>
+      <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
         <span>{card.icon}</span>
         <h5 className="mb-4 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] max-sm:text-2xl">{card.title}</h5>
         <p className="mb-2 text-lg font-normal leading-snug">{card.headline}</p>
-        <p className={card.featured ? 'text-secondary/70' : ''}>{card.description}</p>
+        <p>{card.description}</p>
       </div>
 
       <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-12 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
@@ -170,21 +147,7 @@ const FlipCard = ({
           {card.title}
         </h5>
         <p className="mb-2 text-lg text-backgroundBody dark:text-secondary">{card.headline}</p>
-        <p className="mb-10 text-backgroundBody dark:text-secondary">{card.description}</p>
-        <Link href={card.href} className="rv-button rv-button-sm-v2 rv-button-secondary-v2">
-          <div className="rv-button-top flex items-center gap-2">
-            <span className="text-nowrap">Learn More</span>
-            <span>
-              <LearnMoreArrow front />
-            </span>
-          </div>
-          <div className="rv-button-bottom flex items-center">
-            <span className="text-nowrap">Learn More</span>
-            <span>
-              <LearnMoreArrow />
-            </span>
-          </div>
-        </Link>
+        <p className="text-backgroundBody dark:text-secondary">{card.description}</p>
       </div>
     </div>
   </RevealWrapper>
