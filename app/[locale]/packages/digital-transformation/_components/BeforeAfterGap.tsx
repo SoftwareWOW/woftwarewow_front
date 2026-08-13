@@ -19,8 +19,7 @@ const afterSteps = [
   'Technology that supports the work',
 ]
 
-const cardClassName =
-  'relative rounded-radius-md border border-secondary/15 bg-background px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-background md:pt-12'
+const cardClassName = 'relative bg-background px-[30px] pb-[30px] pt-8 dark:bg-background md:pt-12'
 
 const CloseIcon = () => (
   <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary/20 dark:bg-backgroundBody/20">
@@ -83,15 +82,15 @@ const BeforeAfterGap = () => {
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="reveal-me mt-10 grid justify-center gap-6 md:mt-16 lg:grid-cols-2 lg:gap-8">
-          <div className={cardClassName}>
+        <RevealWrapper className="reveal-me mt-10 grid justify-center md:mt-16 lg:grid-cols-2">
+          <div className={`${cardClassName} lg:border-r lg:border-[#e5e5e5] lg:pr-8 dark:lg:border-white/10`}>
             <h6 className="mb-8 text-2xl font-normal uppercase tracking-[0.04em] text-secondary dark:text-white md:mb-10 md:text-3xl">
               Before
             </h6>
             <ComparisonList steps={beforeSteps} variant="before" />
           </div>
 
-          <div className={cardClassName}>
+          <div className={`${cardClassName} border-0 lg:pl-8`}>
             <h6 className="mb-8 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-2xl font-normal uppercase tracking-[0.04em] text-transparent md:mb-10 md:text-3xl">
               After
             </h6>

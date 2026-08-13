@@ -1,8 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 type CapabilityCard = {
@@ -130,15 +130,25 @@ const TransformationPlan = () => {
       </div>
 
       <div className="container">
-        <RevealWrapper className="mt-14 flex flex-col items-center justify-between gap-6 md:flex-row">
-          <p className="text-2xl md:text-[32px]">
+        <RevealWrapper className="mt-14 flex items-center justify-center gap-4 md:justify-start">
+          <p className="font-instrument text-2xl italic md:text-[32px]">
             Build My <InstrumentText>Transformation Plan</InstrumentText>
           </p>
-          <ButtonComponentList>
-            <ButtonComponent href="/contact" variant="primary">
-              Get Started
-            </ButtonComponent>
-          </ButtonComponentList>
+          <Link
+            href="/contact"
+            aria-label="Build my transformation plan"
+            className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-opacity hover:opacity-90 md:size-14"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18" fill="none" aria-hidden>
+              <path
+                d="M4 14L14 4M14 4H6M14 4V12"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </RevealWrapper>
       </div>
     </section>

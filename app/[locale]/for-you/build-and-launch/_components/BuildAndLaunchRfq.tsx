@@ -2,10 +2,12 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
@@ -250,6 +252,27 @@ const BuildAndLaunchRfq = () => {
               Start Now
             </ButtonComponent>
           </ButtonComponentList>
+        </RevealWrapper>
+
+        <RevealWrapper className="mt-10 flex items-center justify-center gap-4 md:mt-14">
+          <p className="font-instrument text-2xl italic md:text-[32px]">
+            Build My <InstrumentText>Launch Plan</InstrumentText>
+          </p>
+          <Link
+            href="/contact"
+            aria-label="Build my launch plan"
+            className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-opacity hover:opacity-90 md:size-14"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18" fill="none" aria-hidden>
+              <path
+                d="M4 14L14 4M14 4H6M14 4V12"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </RevealWrapper>
       </div>
     </section>

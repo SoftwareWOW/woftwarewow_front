@@ -111,7 +111,7 @@ const DigitalTransformationHero = () => {
         <img
           src={HERO_IMAGES[0]}
           alt=""
-          className="h-[110px] w-[85px] rounded-radius-sm object-cover shadow-sm lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
+          className="h-[110px] w-[85px] rounded-radius-sm object-cover  lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
           ref={setImageRef(0)}
         />
       </figure>
@@ -119,7 +119,7 @@ const DigitalTransformationHero = () => {
         <img
           src={HERO_IMAGES[1]}
           alt=""
-          className="h-[100px] w-[82px] rounded-radius-sm object-cover shadow-sm lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
+          className="h-[100px] w-[82px] rounded-radius-sm object-cover lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
           ref={setImageRef(1)}
         />
       </figure>
@@ -163,8 +163,7 @@ const DigitalTransformationHero = () => {
         <RevealWrapper className="reveal-me">
           <h1 className="mx-auto max-w-[18ch] text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em] md:max-w-[16ch]">
             Modernize how your business
-            <br />
-            <InstrumentText>works.</InstrumentText>
+            works.
           </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
