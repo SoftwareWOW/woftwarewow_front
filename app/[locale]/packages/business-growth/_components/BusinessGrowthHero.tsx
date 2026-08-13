@@ -33,7 +33,7 @@ const BusinessGrowthHero = () => {
             >
               Turn growth
               <br className="hidden lg:block" />
-              <InstrumentText>into a system.</InstrumentText>
+               into a system.
             </h1>
           </RevealWrapper>
 
