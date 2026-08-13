@@ -15,7 +15,7 @@ const avatars = [
 const LearningEventsHero = () => {
   return (
     <section
-      className="relative overflow-hidden pb-7 pt-28 md:pb-16 md:pt-[160px] lg:pb-[88px] xl:pb-[100px] xl:pt-[180px]"
+      className="relative overflow-hidden pt-28 md:pt-[160px] xl:pt-[180px]"
       aria-labelledby="learning-events-heading"
     >
       <div className="pointer-events-none absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0">
