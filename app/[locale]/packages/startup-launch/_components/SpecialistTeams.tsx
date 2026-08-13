@@ -4,14 +4,15 @@ import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import WowText from '@/components/wow/shared/WowText'
 
 const teams = [
-  { id: 1, title: 'WOW Design', description: 'Branding' },
-  { id: 2, title: 'WOW Websites', description: 'Website' },
-  { id: 3, title: 'WOW Marketing', description: 'Marketing' },
-  { id: 4, title: 'WOW Social', description: 'Social' },
-  { id: 5, title: 'WOW Host', description: 'Hosting' },
-  { id: 6, title: 'WOW Intelligence', description: 'Technology & AI' },
+  { id: 1, name: 'Design', description: 'Branding' },
+  { id: 2, name: 'Websites', description: 'Website' },
+  { id: 3, name: 'Marketing', description: 'Marketing' },
+  { id: 4, name: 'Social', description: 'Social' },
+  { id: 5, name: 'Host', description: 'Hosting' },
+  { id: 6, name: 'Intelligence', description: 'Technology & AI' },
 ]
 
 /** Home-15 — ElevateBrand: split header + large numbered hover rows. */
@@ -58,7 +59,8 @@ const SpecialistTeams = () => {
                 0{item.id}
               </span>
               <h3 className="mt-2 text-nowrap text-2xl font-normal leading-tight tracking-[-2px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody sm:text-[55px] md:w-[730px] md:text-[67px] lg:text-[84px] xl:text-[88px] xl:leading-[1.15] xl:tracking-[-2.88px]">
-                {item.title}
+                <WowText className="mr-2 align-middle text-[clamp(1.25rem,3.5vw,2.75rem)]">WOW</WowText>
+                {item.name}
               </h3>
               <p className="ml-2.5 self-center text-xs text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[370px] md:text-base md:leading-[1.6] md:tracking-[0.32px]">
                 {item.description}

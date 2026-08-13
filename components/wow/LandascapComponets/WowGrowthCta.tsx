@@ -25,10 +25,10 @@ const WowGrowthCta = ({
 
   return (
     <section className="bg-backgroundBody pb-5 sm:pb-10 md:pb-15 lg:pb-20 dark:bg-secondary">
-      <div className="container flex flex-col justify-center gap-y-10 max-md:items-center sm:justify-between md:flex-row">
+      <div className="container flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20">
         <RevealWrapper
           as="h2"
-          className="reveal-me text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
+          className="reveal-me min-w-0 flex-1 text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
         >
           <InstrumentText className="max-md:mr-4 lg:text-[100px]">{accentText}</InstrumentText>
 
@@ -41,7 +41,7 @@ const WowGrowthCta = ({
           type="button"
           onClick={handleOpenContact}
           aria-label={ariaLabel}
-          className="cursor-pointer border-0 bg-transparent p-0"
+          className="shrink-0 cursor-pointer border-0 bg-transparent p-0"
         >
           <RevealWrapper className="reveal-me group h-44 w-44 overflow-hidden rounded-radius-sm bg-secondary p-5 dark:bg-primary lg:h-[230px] lg:w-[230px]">
             <figure className="relative h-full w-full rounded-radius-sm bg-primary dark:bg-secondary">

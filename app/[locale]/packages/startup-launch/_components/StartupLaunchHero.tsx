@@ -55,18 +55,18 @@ const StartupLaunchHero = () => {
 
         {/* Home-19 HeroV19 dual figures */}
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
-          <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
+          <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
             <img
               src="/images/wow/nav/cards/Startup%20laiunch%201.png"
               alt="Startup launch foundations and collaboration"
-              className="max-sm:w-full"
+              className="max-sm:w-full rounded-radius-sm"
             />
           </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me">
+          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
             <img
               src="/images/wow/nav/cards/build%26lanch.png"
               alt="Building and launching a new business"
-              className="max-sm:w-full"
+              className="max-sm:w-full rounded-radius-sm"
             />
           </RevealWrapper>
         </div>

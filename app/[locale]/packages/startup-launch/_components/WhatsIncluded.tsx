@@ -59,11 +59,11 @@ const WhatsIncluded = () => {
             ))}
           </div>
 
-          <RevealWrapper as="figure" className="reveal-me md:w-1/2">
+          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm md:w-1/2">
             <img
               src="/images/wow/nav/cards/Startup%20laiunch%201.png"
               alt="Startup launch package essentials"
-              className="h-full w-full object-cover"
+              className="h-full w-full rounded-radius-sm object-cover"
             />
           </RevealWrapper>
         </div>
