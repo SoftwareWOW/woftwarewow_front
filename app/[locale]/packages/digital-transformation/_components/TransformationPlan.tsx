@@ -130,16 +130,22 @@ const TransformationPlan = () => {
       </div>
 
       <div className="container">
-        <RevealWrapper className="mt-14 flex items-center justify-center gap-4 md:justify-start">
+        <RevealWrapper className="mt-14 flex items-center justify-center gap-4 md:gap-5">
           <p className="font-instrument text-2xl italic md:text-[32px]">
             Build My <InstrumentText>Transformation Plan</InstrumentText>
           </p>
           <Link
             href="/contact"
             aria-label="Build my transformation plan"
-            className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-opacity hover:opacity-90 md:size-14"
+            className="inline-flex size-[52px] shrink-0 items-center justify-center rounded-radius-sm bg-primary p-4 text-white transition-all duration-300 ease-out hover:bg-primary/80 md:size-[56px] md:p-4 lg:size-[65px] lg:p-5 xl:size-[79px]"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18" fill="none" aria-hidden>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 18 18"
+              fill="none"
+              aria-hidden
+              className="size-7 md:size-8 lg:size-9 xl:size-10"
+            >
               <path
                 d="M4 14L14 4M14 4H6M14 4V12"
                 stroke="white"
