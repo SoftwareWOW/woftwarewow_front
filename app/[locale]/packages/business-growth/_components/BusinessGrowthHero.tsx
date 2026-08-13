@@ -7,7 +7,7 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 const BusinessGrowthHero = () => {
   return (
     <section
-      className="relative overflow-hidden pt-[137px] md:pt-[160px] xl:pt-[180px]"
+      className="relative overflow-hidden pt-[100px] md:pt-[110px] xl:pt-[130px]"
       aria-labelledby="business-growth-heading"
     >
       {/* Home-19 HeroV19 gradient */}
