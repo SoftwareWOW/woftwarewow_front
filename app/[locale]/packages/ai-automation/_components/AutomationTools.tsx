@@ -2,6 +2,7 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { Icon, addCollection } from '@iconify/react'
 import logos from '@iconify-json/logos/icons.json'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
@@ -25,10 +26,12 @@ const AutomationTools = () => {
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
+            <SectionLabel>Our Tools</SectionLabel>
+          </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto mb-5 max-w-7xl text-[clamp(1rem,1.714vw,1.75rem)] font-normal leading-relaxed">
-              Where appropriate, we connect workflows with the platforms your business already depends on—helping
-              information and actions move between them automatically.
+            <h2 className="text-appear mx-auto mb-5 max-w-5xl text-[clamp(1rem,1.714vw,1.75rem)] font-normal leading-relaxed">
+              Where appropriate, we connect workflows with the platforms your business already depends on—helping information and actions move between them automatically.
             </h2>
           </TextAppearAnimation>
         </div>

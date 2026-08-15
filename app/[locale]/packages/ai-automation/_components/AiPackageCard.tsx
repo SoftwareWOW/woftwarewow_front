@@ -1,8 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import pricingBg from '@/public/images/pricing-gradient.png'
-import Link from 'next/link'
 
 const included = [
   'Automation & process audit',
@@ -14,8 +14,8 @@ const included = [
 ]
 
 const CheckmarkIcon = () => (
-  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-backgroundBody">
-    <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none" aria-hidden>
+  <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-backgroundBody">
+    <svg xmlns="http://www.w3.org/2000/svg" width={11} height={11} viewBox="0 0 12 12" fill="none" aria-hidden>
       <path
         d="M2.5 6.5L4.5 8.5L9.5 3.5"
         className="stroke-backgroundBody dark:stroke-secondary"
@@ -48,51 +48,42 @@ const AiPackageCard = () => {
             </TextAppearAnimation>
           </div>
 
-          <RevealWrapper className="reveal-me relative flex w-full max-w-md flex-col overflow-hidden border bg-backgroundBody pt-[30px] dark:border-dark dark:bg-dark lg:max-w-[420px]">
+          <RevealWrapper className="reveal-me relative flex w-full max-w-md flex-col overflow-hidden rounded-radius-sm border bg-backgroundBody p-[30px] dark:border-dark dark:bg-dark lg:max-w-[420px]">
             <div
-              className="absolute inset-0 h-full w-full bg-cover bg-no-repeat"
+              className="pointer-events-none absolute inset-0 h-full w-full bg-cover bg-no-repeat"
               style={{ backgroundImage: `url(${pricingBg.src})` }}
+              aria-hidden
             />
 
-            <div className="relative px-[30px]">
-              <h3 className="mb-6 text-xl font-normal uppercase tracking-[0.04em] md:text-2xl">
+            <div className="relative flex flex-1 flex-col">
+              <h3 className="mb-5 text-lg font-normal uppercase tracking-[0.06em] md:text-xl">
                 AI Automation Package
               </h3>
 
-              <p className="mb-2 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
-                Investment starting from
-              </p>
-              <p className="mb-8 text-4xl font-normal leading-none md:text-5xl">$1,399</p>
+              <SectionLabel className="mb-3">Investment starting from</SectionLabel>
+              <p className="mb-8 text-[42px] font-normal leading-none tracking-[-0.02em] md:text-5xl">$1,399</p>
 
-              <p className="mb-3 text-sm font-medium uppercase tracking-wide text-secondary dark:text-backgroundBody">
-                What&apos;s included
-              </p>
-              <ul className="[&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-3">
+              <p className="mb-4 text-sm font-medium uppercase tracking-[0.08em]">What&apos;s included</p>
+              <ul className="mb-6 [&>*:not(:last-child)]:mb-3">
                 {included.map((item) => (
-                  <li
-                    key={item}
-                    className="flex list-none items-start gap-[10px] text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
-                  >
+                  <li key={item} className="flex list-none items-center gap-3 text-[16px] leading-[1.5]">
                     <CheckmarkIcon />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
 
-              <p className="mb-8 mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
+              <p className="mb-8 text-sm font-medium uppercase tracking-[0.08em] text-[#808080]">
                 Typical timeline: 1-2 Weeks
               </p>
-            </div>
 
-            <div className="relative mt-auto w-full">
-              <Link href="/contact" className="rv-button rv-button-primary !block w-full !rounded-none">
-                <div className="rv-button-top !w-full !text-center">
-                  <span className="font-normal">Get the Package</span>
-                </div>
-                <div className="rv-button-bottom !w-full !text-center">
-                  <span className="font-normal">Get the Package</span>
-                </div>
-              </Link>
+              <div className="mt-auto w-full">
+                <ButtonComponentList className="flex w-full" itemClassName="block w-full">
+                  <ButtonComponent href="/contact" variant="primary" fullWidth>
+                    Get the Package
+                  </ButtonComponent>
+                </ButtonComponentList>
+              </div>
             </div>
           </RevealWrapper>
         </div>
