@@ -24,7 +24,7 @@ const AiAutomationHero = () => {
       <div className="container">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
           <RevealWrapper className="reveal-me w-full min-w-0 flex-1">
-            <h1 className="mb-6 mt-5 border-y border-secondary/40 py-6 dark:border-backgroundBody/40 sm:mt-10 md:mb-10 lg:py-10 xl:leading-[1.1]">
+            <h1 className="mb-6 mt-5 text-[clamp(1.75rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em] sm:mt-10 md:mb-10">
               Less manual work. More time for what <InstrumentText>matters.</InstrumentText>
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[#808080] md:max-w-[670px] md:text-lg">

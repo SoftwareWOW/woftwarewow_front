@@ -26,18 +26,18 @@ const AutomationTools = () => {
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto mb-5 max-w-4xl">
+            <h2 className="text-appear mx-auto mb-5 max-w-7xl text-[clamp(1rem,1.714vw,1.75rem)] font-normal leading-relaxed">
               Where appropriate, we connect workflows with the platforms your business already depends on—helping
               information and actions move between them automatically.
             </h2>
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="mx-auto flex max-w-5xl flex-wrap justify-center border-x border-t dark:border-dark [&>*:nth-child(7)]:border-r-0 max-md:[&>*:nth-child(even)]:border-r-0 [&>*]:border-b [&>*]:border-r dark:[&>*]:border-dark">
+        <RevealWrapper className="mx-auto grid w-fit grid-cols-2 border-l border-t dark:border-dark sm:grid-cols-4 lg:grid-cols-7">
           {tools.map((tool) => (
             <figure
               key={tool.name}
-              className="flex size-[110px] items-center justify-center sm:size-[120px] md:size-[130px]"
+              className="flex size-[110px] items-center justify-center border-b border-r dark:border-dark sm:size-[120px] md:size-[130px]"
             >
               <Icon
                 icon={tool.icon}

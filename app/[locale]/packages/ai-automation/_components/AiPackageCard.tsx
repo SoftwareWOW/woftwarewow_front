@@ -48,42 +48,44 @@ const AiPackageCard = () => {
             </TextAppearAnimation>
           </div>
 
-          <RevealWrapper className="reveal-me relative flex w-full max-w-md flex-col border bg-backgroundBody px-[30px] pb-28 pt-[30px] dark:border-dark dark:bg-dark lg:max-w-[420px]">
+          <RevealWrapper className="reveal-me relative flex w-full max-w-md flex-col overflow-hidden border bg-backgroundBody pt-[30px] dark:border-dark dark:bg-dark lg:max-w-[420px]">
             <div
               className="absolute inset-0 h-full w-full bg-cover bg-no-repeat"
               style={{ backgroundImage: `url(${pricingBg.src})` }}
             />
 
-            <h3 className="relative mb-6 text-xl font-normal uppercase tracking-[0.04em] md:text-2xl">
-              AI Automation Package
-            </h3>
+            <div className="relative px-[30px]">
+              <h3 className="mb-6 text-xl font-normal uppercase tracking-[0.04em] md:text-2xl">
+                AI Automation Package
+              </h3>
 
-            <p className="relative mb-2 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
-              Investment starting from
-            </p>
-            <p className="relative mb-8 text-4xl font-normal leading-none md:text-5xl">$1,399</p>
+              <p className="mb-2 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
+                Investment starting from
+              </p>
+              <p className="mb-8 text-4xl font-normal leading-none md:text-5xl">$1,399</p>
 
-            <p className="relative mb-3 text-sm font-medium uppercase tracking-wide text-secondary dark:text-backgroundBody">
-              What&apos;s included
-            </p>
-            <ul className="relative [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-3">
-              {included.map((item) => (
-                <li
-                  key={item}
-                  className="flex list-none items-start gap-[10px] text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
-                >
-                  <CheckmarkIcon />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+              <p className="mb-3 text-sm font-medium uppercase tracking-wide text-secondary dark:text-backgroundBody">
+                What&apos;s included
+              </p>
+              <ul className="[&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-3">
+                {included.map((item) => (
+                  <li
+                    key={item}
+                    className="flex list-none items-start gap-[10px] text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
+                  >
+                    <CheckmarkIcon />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
 
-            <p className="relative mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
-              Typical timeline: 1-2 Weeks
-            </p>
+              <p className="mb-8 mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
+                Typical timeline: 1-2 Weeks
+              </p>
+            </div>
 
-            <div className="absolute bottom-8 w-[calc(100%-60px)]">
-              <Link href="/contact" className="rv-button rv-button-primary w-full">
+            <div className="relative mt-auto w-full">
+              <Link href="/contact" className="rv-button rv-button-primary !block w-full !rounded-none">
                 <div className="rv-button-top !w-full !text-center">
                   <span className="font-normal">Get the Package</span>
                 </div>
