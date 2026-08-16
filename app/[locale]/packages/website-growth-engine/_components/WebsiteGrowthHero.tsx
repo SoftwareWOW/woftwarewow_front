@@ -115,14 +115,14 @@ const WebsiteGrowthHero = () => {
           ref={setImageRef(0)}
         />
       </figure>
-      <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
+      <figure className="pointer-events-none absolute right-[2%] top-[15%] z-0 hidden md:block lg:right-[6%] lg:top-[16%] xl:right-[10%]">
         <img
           src={HERO_IMAGES[1]}
           alt=""
           className="h-[100px] w-[82px] rounded-radius-sm object-cover lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
           ref={setImageRef(1)}
         />
-      </figure>
+      </figure> 
       <figure className="pointer-events-none absolute left-[1%] top-[46%] z-0 hidden lg:block xl:left-[3%]">
         <img
           src={HERO_IMAGES[2]}
@@ -162,7 +162,7 @@ const WebsiteGrowthHero = () => {
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h1 className="mx-auto max-w-[18ch] text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em] md:max-w-[16ch]">
-            Build a website that <InstrumentText>works harder.</InstrumentText>
+            Build a website that works harder.
           </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
