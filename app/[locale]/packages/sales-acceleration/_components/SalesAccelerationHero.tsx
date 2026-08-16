@@ -27,7 +27,7 @@ const SalesAccelerationHero = () => {
           <RevealWrapper className="reveal-me w-full min-w-0 flex-1">
             <SectionLabel className="mb-4">Sales Acceleration</SectionLabel>
             <h1 className="mb-6 mt-5 text-[clamp(1.75rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em] sm:mt-10 md:mb-10">
-              Turn more opportunities into <InstrumentText>revenue.</InstrumentText>
+              Turn more opportunities into revenue.
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[#808080] md:max-w-[670px] md:text-lg">
               Build a smarter sales system for generating leads, improving follow-up, and increasing conversion.
