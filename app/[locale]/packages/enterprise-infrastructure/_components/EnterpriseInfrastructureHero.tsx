@@ -8,7 +8,7 @@ import HeroHoverImages from './HeroHoverImages'
 const EnterpriseInfrastructureHero = () => {
   return (
     <section
-      className="overflow-hidden pb-14 pt-[120px] sm:pt-[135px] md:pb-16 md:pt-[150px] lg:pb-[88px] lg:pt-44 xl:pb-[100px] xl:pt-48"
+      className="overflow-hidden pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-48"
       aria-labelledby="enterprise-infrastructure-heading"
     >
       <div className="relative">
