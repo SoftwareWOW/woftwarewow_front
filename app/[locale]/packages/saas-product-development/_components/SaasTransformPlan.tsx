@@ -3,86 +3,114 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { ReactNode } from 'react'
 
-const cards = [
+type IconVariant = 'default' | 'inverted'
+
+const iconRectClass = (variant: IconVariant) =>
+  variant === 'inverted'
+    ? 'fill-secondary dark:fill-backgroundBody'
+    : 'fill-backgroundBody dark:fill-secondary'
+
+const iconStrokeClass = (variant: IconVariant) =>
+  variant === 'inverted'
+    ? 'stroke-backgroundBody dark:stroke-secondary'
+    : 'stroke-secondary dark:stroke-backgroundBody'
+
+const ProductIcon = ({ variant }: { variant: IconVariant }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
+    <rect width={48} height={48} className={iconRectClass(variant)} />
+    <path
+      d="M14 30V18h8v4h4v-4h8v12h-8v-4h-4v4H14Z"
+      className={iconStrokeClass(variant)}
+      strokeWidth="1.5"
+      fill="none"
+    />
+  </svg>
+)
+
+const BuildIcon = ({ variant }: { variant: IconVariant }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
+    <rect width={48} height={48} className={iconRectClass(variant)} />
+    <path
+      d="M14 34h20M16 34V22h4v12M24 34V18h4v16M32 34V26h4v8"
+      className={iconStrokeClass(variant)}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+)
+
+const ExperienceIcon = ({ variant }: { variant: IconVariant }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
+    <rect width={48} height={48} className={iconRectClass(variant)} />
+    <circle cx={24} cy={22} r={6} className={iconStrokeClass(variant)} strokeWidth="1.5" fill="none" />
+    <path
+      d="M14 36c2-5 6-8 10-8s8 3 10 8"
+      className={iconStrokeClass(variant)}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      fill="none"
+    />
+  </svg>
+)
+
+const LaunchIcon = ({ variant }: { variant: IconVariant }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
+    <rect width={48} height={48} className={iconRectClass(variant)} />
+    <path
+      d="M24 34V16M24 16l-6 6M24 16l6 6"
+      className={iconStrokeClass(variant)}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
+
+const cards: {
+  title: string
+  items: string[]
+  icon: (variant: IconVariant) => ReactNode
+}[] = [
   {
     title: 'Product',
     items: ['Product discovery', 'Requirements & scope', 'Feature prioritization'],
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
-        <rect width={48} height={48} className="fill-backgroundBody transition-colors duration-300 group-hover:fill-secondary dark:fill-secondary dark:group-hover:fill-backgroundBody" />
-        <path
-          d="M14 30V18h8v4h4v-4h8v12h-8v-4h-4v4H14Z"
-          className="stroke-secondary transition-colors duration-300 group-hover:stroke-backgroundBody dark:stroke-backgroundBody dark:group-hover:stroke-secondary"
-          strokeWidth="1.5"
-          fill="none"
-        />
-      </svg>
-    ),
+    icon: (variant) => <ProductIcon variant={variant} />,
   },
   {
     title: 'Build',
     items: ['Development', 'Integrations', 'Testing'],
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
-        <rect width={48} height={48} className="fill-backgroundBody transition-colors duration-300 group-hover:fill-secondary dark:fill-secondary dark:group-hover:fill-backgroundBody" />
-        <path
-          d="M14 34h20M16 34V22h4v12M24 34V18h4v16M32 34V26h4v8"
-          className="stroke-secondary transition-colors duration-300 group-hover:stroke-backgroundBody dark:stroke-backgroundBody dark:group-hover:stroke-secondary"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    icon: (variant) => <BuildIcon variant={variant} />,
   },
   {
     title: 'Experience',
     items: ['UX / user journeys', 'UI design', 'Prototype'],
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
-        <rect width={48} height={48} className="fill-backgroundBody transition-colors duration-300 group-hover:fill-secondary dark:fill-secondary dark:group-hover:fill-backgroundBody" />
-        <circle
-          cx={24}
-          cy={22}
-          r={6}
-          className="stroke-secondary transition-colors duration-300 group-hover:stroke-backgroundBody dark:stroke-backgroundBody dark:group-hover:stroke-secondary"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <path
-          d="M14 36c2-5 6-8 10-8s8 3 10 8"
-          className="stroke-secondary transition-colors duration-300 group-hover:stroke-backgroundBody dark:stroke-backgroundBody dark:group-hover:stroke-secondary"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          fill="none"
-        />
-      </svg>
-    ),
+    icon: (variant) => <ExperienceIcon variant={variant} />,
   },
   {
     title: 'Launch',
     items: ['Deployment', 'Analytics', 'Go-live setup'],
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none" aria-hidden>
-        <rect width={48} height={48} className="fill-backgroundBody transition-colors duration-300 group-hover:fill-secondary dark:fill-secondary dark:group-hover:fill-backgroundBody" />
-        <path
-          d="M24 34V16M24 16l-6 6M24 16l6 6"
-          className="stroke-secondary transition-colors duration-300 group-hover:stroke-backgroundBody dark:stroke-backgroundBody dark:group-hover:stroke-secondary"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    icon: (variant) => <LaunchIcon variant={variant} />,
   },
 ]
 
-const CheckmarkIcon = () => (
-  <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary transition-colors duration-300 group-hover:bg-backgroundBody dark:bg-backgroundBody dark:group-hover:bg-secondary">
+const CheckmarkIcon = ({ inverted = false }: { inverted?: boolean }) => (
+  <span
+    className={`inline-flex size-5 shrink-0 items-center justify-center rounded-full ${
+      inverted
+        ? 'bg-backgroundBody dark:bg-secondary'
+        : 'bg-secondary dark:bg-backgroundBody'
+    }`}
+  >
     <svg xmlns="http://www.w3.org/2000/svg" width={11} height={11} viewBox="0 0 12 12" fill="none" aria-hidden>
       <path
         d="M2.5 6.5L4.5 8.5L9.5 3.5"
-        className="stroke-backgroundBody transition-colors duration-300 group-hover:stroke-secondary dark:stroke-secondary dark:group-hover:stroke-backgroundBody"
+        className={
+          inverted
+            ? 'stroke-secondary dark:stroke-backgroundBody'
+            : 'stroke-backgroundBody dark:stroke-secondary'
+        }
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -91,7 +119,36 @@ const CheckmarkIcon = () => (
   </span>
 )
 
-/** Layout: Home-23 WhyChooseUsV7 — 2×2 grid with hover-to-white. */
+type CardPanelProps = {
+  title: string
+  items: string[]
+  icon: ReactNode
+  inverted?: boolean
+}
+
+const CardPanel = ({ title, items, icon, inverted = false }: CardPanelProps) => (
+  <>
+    <span>{icon}</span>
+    <h5 className={`mb-4 mt-5 uppercase ${inverted ? 'text-backgroundBody dark:text-secondary' : ''}`}>
+      {title}
+    </h5>
+    <ul className="[&>*:not(:last-child)]:mb-2.5">
+      {items.map((item) => (
+        <li
+          key={item}
+          className={`flex list-none items-center gap-3 text-base ${
+            inverted ? 'text-backgroundBody/80 dark:text-secondary/80' : 'text-[#808080]'
+          }`}
+        >
+          <CheckmarkIcon inverted={inverted} />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </>
+)
+
+/** Layout: WhyChooseUsV7 + ServicesV11 slide hover. */
 const SaasTransformPlan = () => {
   return (
     <section>
@@ -116,23 +173,16 @@ const SaasTransformPlan = () => {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="group col-span-12 flex-1 rounded-radius-sm border px-[30px] py-10 transition-colors duration-300 hover:bg-white dark:border-dark dark:hover:bg-backgroundBody lg:col-span-6"
+              className="group relative col-span-12 min-h-[280px] overflow-hidden rounded-radius-sm border dark:border-dark lg:col-span-6"
             >
-              <span>{card.icon}</span>
-              <h5 className="mb-4 mt-5 uppercase transition-colors duration-300 group-hover:text-secondary dark:group-hover:text-secondary">
-                {card.title}
-              </h5>
-              <ul className="[&>*:not(:last-child)]:mb-2.5">
-                {card.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex list-none items-center gap-3 text-base text-[#808080] transition-colors duration-300 group-hover:text-secondary/70"
-                  >
-                    <CheckmarkIcon />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Front */}
+              <div className="absolute inset-0 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+                <CardPanel title={card.title} items={card.items} icon={card.icon('default')} />
+              </div>
+              {/* Back — ServicesV11 invert */}
+              <div className="absolute inset-0 z-10 translate-y-full bg-secondary px-[30px] py-10 transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody">
+                <CardPanel title={card.title} items={card.items} icon={card.icon('inverted')} inverted />
+              </div>
             </div>
           ))}
         </RevealWrapper>

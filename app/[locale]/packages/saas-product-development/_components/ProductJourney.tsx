@@ -1,5 +1,3 @@
-import processImg from '@/public/images/process-img-01.png'
-import Image from 'next/image'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
@@ -9,31 +7,31 @@ const steps = [
   {
     number: '01',
     title: 'Discover',
-    description: 'Clarify the idea, audience, problem and what success looks like.',
+    description: 'Define the problem, users, goals and product requirements.',
   },
   {
     number: '02',
     title: 'Scope',
-    description: 'Define the first release, priorities and what can wait.',
+    description: 'Prioritize functionality and define the first release.',
   },
   {
     number: '03',
     title: 'Design',
-    description: 'Shape journeys, screens and the experience people will use.',
+    description: 'Create user journeys, UX, interface and prototype.',
   },
   {
     number: '04',
     title: 'Build',
-    description: 'Develop, integrate and test the product foundation.',
+    description: 'Develop, integrate and test the product.',
   },
   {
     number: '05',
     title: 'Launch',
-    description: 'Deploy, measure and prepare the product for real users.',
+    description: 'Deploy the product and prepare it for real users.',
   },
 ]
 
-/** Layout: Home-07 ProcessV4 — image + numbered vertical journey. */
+/** Layout: Home-07 ProcessV4 — image height matches steps; centered CTA. */
 const ProductJourney = () => {
   return (
     <section>
@@ -52,12 +50,12 @@ const ProductJourney = () => {
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:gap-20">
-          <figure className="shrink-0 overflow-hidden rounded-radius-sm">
-            <Image
-              src={processImg}
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
+          <figure className="relative w-full overflow-hidden rounded-radius-md md:w-[min(100%,420px)] md:shrink-0">
+            <img
+              src="/images/wow/nav/cards/Softwaerwow.png"
               alt="Product journey from concept to launch"
-              className="rounded-radius-sm"
+              className="h-full min-h-[280px] w-full rounded-radius-md object-cover md:absolute md:inset-0 md:min-h-0"
             />
           </figure>
 
@@ -85,15 +83,15 @@ const ProductJourney = () => {
                 </li>
               ))}
             </ul>
-
-            <RevealWrapper className="mt-10 md:ml-10">
-              <ButtonComponentList>
-                <ButtonComponent href="/contact" variant="white">
-                  Discuss My Product Idea
-                </ButtonComponent>
-              </ButtonComponentList>
-            </RevealWrapper>
           </div>
+        </RevealWrapper>
+
+        <RevealWrapper className="mt-10 flex justify-center md:mt-14">
+          <ButtonComponentList>
+            <ButtonComponent href="/contact" variant="white">
+              Discuss My Product Idea
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

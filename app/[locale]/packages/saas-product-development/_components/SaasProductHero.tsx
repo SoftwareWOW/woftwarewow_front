@@ -25,7 +25,7 @@ const SaasProductHero = () => {
           <RevealWrapper
             as="h1"
             id="saas-hero-heading"
-            className="reveal-me text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            className="reveal-me text-[clamp(2rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
           >
             Turn your SaaS
             <br className="hidden md:block" />
@@ -52,20 +52,20 @@ const SaasProductHero = () => {
           </RevealWrapper>
         </div>
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="SaaS product development imagery">
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
+          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/SaaS Dev 1.png"
+              src="/images/wow/nav/cards/SaaS%20Dev%201.png"
               alt="Team collaborating on a SaaS product"
-              className="h-auto w-full rounded-radius-sm object-cover md:h-[540px] md:w-[410px]"
+              className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
               height={540}
             />
           </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
+          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/hero-img/business-hero-2.png"
+              src="/images/wow/nav/cards/Softwaerwow.png"
               alt="Product team reviewing launch readiness"
-              className="h-auto w-full rounded-radius-sm object-cover md:h-[540px] md:w-[410px]"
+              className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
               height={540}
             />

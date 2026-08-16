@@ -24,7 +24,45 @@ const cards = [
   },
 ]
 
-/** Layout: Home-19 OurExpertiseV2 — 3 cards with hover-to-white. */
+type CardContentProps = {
+  card: (typeof cards)[number]
+  inverted?: boolean
+}
+
+const CardContent = ({ card, inverted = false }: CardContentProps) => (
+  <>
+    <span
+      className={`font-instrument text-4xl italic md:text-5xl ${
+        inverted ? 'text-backgroundBody dark:text-secondary' : 'text-secondary dark:text-backgroundBody'
+      }`}
+    >
+      {card.number}
+    </span>
+    <h5
+      className={`mb-2.5 mt-6 uppercase ${
+        inverted ? 'text-backgroundBody dark:text-secondary' : ''
+      }`}
+    >
+      {card.title}
+    </h5>
+    <p
+      className={`mb-3 text-base ${
+        inverted ? 'text-backgroundBody/80 dark:text-secondary/80' : 'text-[#808080]'
+      }`}
+    >
+      {card.subtitle}
+    </p>
+    <p
+      className={`text-base leading-relaxed ${
+        inverted ? 'text-backgroundBody/80 dark:text-secondary/80' : 'text-[#808080]'
+      }`}
+    >
+      {card.description}
+    </p>
+  </>
+)
+
+/** Layout: OurExpertiseV2 + ServicesV11 slide hover. */
 const FromIdeaToProduct = () => {
   return (
     <section>
@@ -44,20 +82,16 @@ const FromIdeaToProduct = () => {
           {cards.map((card) => (
             <div
               key={card.number}
-              className="group flex-1 rounded-radius-sm border px-[30px] py-16 transition-colors duration-300 hover:bg-white dark:border-dark dark:hover:bg-backgroundBody"
+              className="group relative min-h-[360px] flex-1 overflow-hidden rounded-radius-sm border dark:border-dark"
             >
-              <span className="font-instrument text-4xl italic text-secondary transition-colors duration-300 group-hover:text-secondary dark:text-backgroundBody dark:group-hover:text-secondary md:text-5xl">
-                {card.number}
-              </span>
-              <h5 className="mb-2.5 mt-6 uppercase transition-colors duration-300 group-hover:text-secondary dark:group-hover:text-secondary">
-                {card.title}
-              </h5>
-              <p className="mb-3 text-base text-[#808080] transition-colors duration-300 group-hover:text-secondary/70">
-                {card.subtitle}
-              </p>
-              <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300 group-hover:text-secondary/70">
-                {card.description}
-              </p>
+              {/* Front */}
+              <div className="absolute inset-0 translate-y-0 px-[30px] py-16 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+                <CardContent card={card} />
+              </div>
+              {/* Back — ServicesV11 invert */}
+              <div className="absolute inset-0 z-10 translate-y-full bg-secondary px-[30px] py-16 transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody">
+                <CardContent card={card} inverted />
+              </div>
             </div>
           ))}
         </RevealWrapper>
