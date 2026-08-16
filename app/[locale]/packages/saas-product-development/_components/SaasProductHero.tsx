@@ -8,7 +8,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 const SaasProductHero = () => {
   return (
     <section
-      className="relative overflow-hidden pb-14 pt-[137px] md:pb-16 md:pt-[160px] lg:pb-[88px] xl:pb-[112px] xl:pt-[220px]"
+      className="relative overflow-hidden pb-14 pt-[80px] md:pb-16 md:pt-[90px] lg:pb-[88px] xl:pb-[112px] xl:pt-[130px]"
       aria-labelledby="saas-hero-heading"
     >
       <div id="hero-gradient-wrapper" className="absolute left-0 top-0 -z-10 blur-[65px]" aria-hidden="true">
@@ -30,8 +30,8 @@ const SaasProductHero = () => {
             Turn your SaaS
             <br className="hidden md:block" />
             idea into
-            <br className="hidden md:block" />
-            <InstrumentText>real product.</InstrumentText>
+       
+            real product.
           </RevealWrapper>
           <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
             From product strategy and UX/UI to development and launch, we bring the pieces together to turn your

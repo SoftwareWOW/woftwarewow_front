@@ -14,7 +14,7 @@ const iconRectClass = (variant: IconVariant) =>
 
 const iconStrokeClass = (variant: IconVariant) =>
   variant === 'inverted'
-    ? 'stroke-backgroundBody dark:stroke-secondary'
+    ? 'stroke-white dark:stroke-secondary'
     : 'stroke-secondary dark:stroke-backgroundBody'
 
 const ProductIcon = ({ variant }: { variant: IconVariant }) => (
@@ -98,18 +98,14 @@ const cards: {
 const CheckmarkIcon = ({ inverted = false }: { inverted?: boolean }) => (
   <span
     className={`inline-flex size-5 shrink-0 items-center justify-center rounded-full ${
-      inverted
-        ? 'bg-backgroundBody dark:bg-secondary'
-        : 'bg-secondary dark:bg-backgroundBody'
+      inverted ? 'bg-white dark:bg-secondary' : 'bg-secondary dark:bg-backgroundBody'
     }`}
   >
     <svg xmlns="http://www.w3.org/2000/svg" width={11} height={11} viewBox="0 0 12 12" fill="none" aria-hidden>
       <path
         d="M2.5 6.5L4.5 8.5L9.5 3.5"
         className={
-          inverted
-            ? 'stroke-secondary dark:stroke-backgroundBody'
-            : 'stroke-backgroundBody dark:stroke-secondary'
+          inverted ? 'stroke-secondary dark:stroke-backgroundBody' : 'stroke-backgroundBody dark:stroke-secondary'
         }
         strokeWidth="1.5"
         strokeLinecap="round"
@@ -129,19 +125,17 @@ type CardPanelProps = {
 const CardPanel = ({ title, items, icon, inverted = false }: CardPanelProps) => (
   <>
     <span>{icon}</span>
-    <h5 className={`mb-4 mt-5 uppercase ${inverted ? 'text-backgroundBody dark:text-secondary' : ''}`}>
-      {title}
-    </h5>
-    <ul className="[&>*:not(:last-child)]:mb-2.5">
+    <h5 className={`mb-4 mt-5 uppercase ${inverted ? 'text-white dark:text-secondary' : ''}`}>{title}</h5>
+    <ul className="space-y-2.5">
       {items.map((item) => (
         <li
           key={item}
-          className={`flex list-none items-center gap-3 text-base ${
-            inverted ? 'text-backgroundBody/80 dark:text-secondary/80' : 'text-[#808080]'
+          className={`flex list-none items-center gap-3 text-base leading-normal ${
+            inverted ? 'text-white dark:text-secondary' : 'text-[#808080]'
           }`}
         >
           <CheckmarkIcon inverted={inverted} />
-          <span>{item}</span>
+          <span className={inverted ? 'text-white dark:text-secondary' : undefined}>{item}</span>
         </li>
       ))}
     </ul>
@@ -173,14 +167,14 @@ const SaasTransformPlan = () => {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="group relative col-span-12 min-h-[280px] overflow-hidden rounded-radius-sm border dark:border-dark lg:col-span-6"
+              className="group relative col-span-12 overflow-hidden rounded-radius-sm border dark:border-dark lg:col-span-6"
             >
-              {/* Front */}
-              <div className="absolute inset-0 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+              {/* Front — in-flow so padding + height follow content */}
+              <div className="relative z-0 box-border translate-y-0 px-8 py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0 md:px-10 md:py-12">
                 <CardPanel title={card.title} items={card.items} icon={card.icon('default')} />
               </div>
-              {/* Back — ServicesV11 invert */}
-              <div className="absolute inset-0 z-10 translate-y-full bg-secondary px-[30px] py-10 transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody">
+              {/* Back — ServicesV11 invert; explicit white text so list stays visible */}
+              <div className="absolute inset-0 z-10 box-border translate-y-full bg-secondary px-8 py-10 transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody md:px-10 md:py-12">
                 <CardPanel title={card.title} items={card.items} icon={card.icon('inverted')} inverted />
               </div>
             </div>

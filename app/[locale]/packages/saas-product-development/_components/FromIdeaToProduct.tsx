@@ -33,30 +33,22 @@ const CardContent = ({ card, inverted = false }: CardContentProps) => (
   <>
     <span
       className={`font-instrument text-4xl italic md:text-5xl ${
-        inverted ? 'text-backgroundBody dark:text-secondary' : 'text-secondary dark:text-backgroundBody'
+        inverted ? 'text-white dark:text-secondary' : 'text-secondary dark:text-backgroundBody'
       }`}
     >
       {card.number}
     </span>
     <h5
-      className={`mb-2.5 mt-6 uppercase ${
-        inverted ? 'text-backgroundBody dark:text-secondary' : ''
+      className={`mb-2.5 mt-6 break-words uppercase ${
+        inverted ? 'text-white dark:text-secondary' : ''
       }`}
     >
       {card.title}
     </h5>
-    <p
-      className={`mb-3 text-base ${
-        inverted ? 'text-backgroundBody/80 dark:text-secondary/80' : 'text-[#808080]'
-      }`}
-    >
+    <p className={`mb-3 text-base ${inverted ? 'text-white/80 dark:text-secondary/80' : 'text-[#808080]'}`}>
       {card.subtitle}
     </p>
-    <p
-      className={`text-base leading-relaxed ${
-        inverted ? 'text-backgroundBody/80 dark:text-secondary/80' : 'text-[#808080]'
-      }`}
-    >
+    <p className={`text-base leading-relaxed ${inverted ? 'text-white/80 dark:text-secondary/80' : 'text-[#808080]'}`}>
       {card.description}
     </p>
   </>
@@ -78,18 +70,18 @@ const FromIdeaToProduct = () => {
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row">
+        <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row md:items-stretch">
           {cards.map((card) => (
             <div
               key={card.number}
-              className="group relative min-h-[360px] flex-1 overflow-hidden rounded-radius-sm border dark:border-dark"
+              className="group relative flex-1 overflow-hidden rounded-radius-sm border dark:border-dark"
             >
-              {/* Front */}
-              <div className="absolute inset-0 translate-y-0 px-[30px] py-16 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+              {/* Front — in-flow so padding + height follow content */}
+              <div className="relative z-0 box-border translate-y-0 px-8 py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0 md:px-10 md:py-12">
                 <CardContent card={card} />
               </div>
               {/* Back — ServicesV11 invert */}
-              <div className="absolute inset-0 z-10 translate-y-full bg-secondary px-[30px] py-16 transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody">
+              <div className="absolute inset-0 z-10 box-border translate-y-full bg-secondary px-8 py-10 transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody md:px-10 md:py-12">
                 <CardContent card={card} inverted />
               </div>
             </div>
