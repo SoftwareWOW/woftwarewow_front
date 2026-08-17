@@ -1,24 +1,25 @@
 'use client'
 
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
+import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 
 const images = [
   {
-    src: '/images/hero-img/about-hero-1.png',
-    alt: 'About Hero 1',
+    src: '/images/wow/nav/cards/pexels-fauxels-3183132 1.png',
+    alt: 'Professional services team collaboration',
   },
   {
-    src: '/images/hero-img/about-hero-2.png',
-    alt: 'About Hero 2',
+    src: '/images/wow/nav/cards/Business growth 1.png',
+    alt: 'Business growth for professional firms',
   },
   {
-    src: '/images/hero-img/about-hero-3.png',
-    alt: 'About Hero 3',
+    src: '/images/wow/nav/cards/Hub.png',
+    alt: 'Connected professional services ecosystem',
   },
 ]
 
-/** Layout: Home-13 AboutHoverImages — three hover-expand figures. Template images unchanged. */
+/** Layout: Home-13 AboutHoverImages — three hover-expand figures. */
 const HeroHoverImages = () => {
   const galleryRef = useRef<HTMLDivElement>(null)
 
@@ -47,11 +48,17 @@ const HeroHoverImages = () => {
         {images.map((image, index) => (
           <figure
             key={image.src}
-            className={`about-image h-[450px] cursor-pointer overflow-hidden rounded-radius-md lg:min-h-[660px] ${
+            className={`about-image relative h-[450px] cursor-pointer overflow-hidden rounded-radius-md lg:min-h-[660px] ${
               index === 0 ? 'about-active-image' : ''
             }`}
           >
-            <img src={image.src} alt={image.alt} className="h-full w-full rounded-radius-md object-cover" />
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="rounded-radius-md object-cover"
+            />
           </figure>
         ))}
       </RevealWrapperV2>

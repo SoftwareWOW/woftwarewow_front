@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import Image from 'next/image'
 
 const points = [
   {
@@ -45,7 +46,7 @@ const WhatMattersMost = () => {
           </TextAppearAnimation>
         </div>
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
-          <div className="md:w-1/2 [&>*:not(:last-child)]:border-b">
+          <div className="md:w-1/2 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-[#e5e5e5] dark:[&>*:not(:last-child)]:border-white/10">
             {points.map((point) => (
               <RevealWrapper key={point.title} className="py-3.5 pr-[30px] lg:py-[30px]">
                 <h5>{point.title}</h5>
@@ -53,11 +54,13 @@ const WhatMattersMost = () => {
               </RevealWrapper>
             ))}
           </div>
-          <RevealWrapper as="figure" className="overflow-hidden rounded-radius-md md:w-1/2">
-            <img
-              src="/images/home-5/why-rivor.png"
+          <RevealWrapper as="figure" className="relative min-h-[320px] overflow-hidden rounded-radius-md md:min-h-[480px] md:w-1/2 lg:min-h-[560px]">
+            <Image
+              src="/images/wow/nav/cards/pexels-polina-tankilevitch-5386217 1.png"
               alt="Professional services growth"
-              className="h-full w-full rounded-radius-md object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="rounded-radius-md object-cover"
             />
           </RevealWrapper>
         </div>

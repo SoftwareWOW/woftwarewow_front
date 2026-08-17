@@ -130,7 +130,7 @@ const ProfessionalServiceSolutions = () => {
           {solutions.map((item) => (
             <div
               key={item.title}
-              className="col-span-12 flex-1 rounded-radius-sm border px-[30px] py-10 dark:border-dark lg:col-span-6"
+              className="col-span-12 flex-1 rounded-radius-sm border border-[#e5e5e5] px-[30px] py-10 dark:border-white/10 lg:col-span-6"
             >
               <span>{item.icon}</span>
               <h5 className="mb-2.5 mt-5">{item.title}</h5>

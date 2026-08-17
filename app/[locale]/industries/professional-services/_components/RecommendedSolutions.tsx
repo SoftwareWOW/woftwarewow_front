@@ -2,9 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { navItemIconBoxClass, navItemIconClass } from '@/components/wow/nav/nav-interaction-styles'
-import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 const packages = [
   {
@@ -27,7 +26,7 @@ const packages = [
   },
 ]
 
-/** Layout: Home-19 OurExpertiseV2 — 3-card row. Default unstyled; hover border + header-sized arrow. */
+/** Layout: Home-19 OurExpertiseV2 — 3-card row with WowProjects arrow on hover. */
 const RecommendedSolutions = () => {
   return (
     <section>
@@ -54,17 +53,24 @@ const RecommendedSolutions = () => {
               <Link
                 key={item.number}
                 href={item.href}
-                className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-transparent px-[30px] py-10 transition-colors duration-300 hover:border-secondary dark:hover:border-dark"
+                className="group relative flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 transition-all duration-300 dark:border-white/10"
               >
                 <span className="font-instrument text-5xl italic leading-none">{item.number}</span>
                 <h5 className="mb-2.5 mt-8">{item.title}</h5>
-                <p className="text-[#808080]">{item.description}</p>
-                <span
-                  className={`mt-8 flex size-[28px] shrink-0 items-center justify-center self-end rounded-radius-sm border-[0.5px] p-[8px] ${navItemIconBoxClass}`}
-                  aria-hidden
-                >
-                  <ArrowUpRight className={`size-full ${navItemIconClass}`} strokeWidth={1.5} />
-                </span>
+                <p className="max-w-[90%] text-[#808080]">{item.description}</p>
+
+                <figure className="absolute bottom-8 right-8 size-[60px] cursor-pointer overflow-hidden rounded-radius-sm bg-primary md:size-[65px] lg:size-[79px]">
+                  <ArrowUpRight
+                    aria-hidden
+                    className="absolute left-1/2 top-1/2 size-10 -translate-x-1/2 -translate-y-1/2 !stroke-white !text-white opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0"
+                    strokeWidth={2}
+                  />
+                  <ArrowUpRight
+                    aria-hidden
+                    className="absolute size-10 -translate-x-4 translate-y-12 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[19px] group-hover:translate-y-5 group-hover:opacity-100"
+                    strokeWidth={2}
+                  />
+                </figure>
               </Link>
             ))}
           </RevealWrapper>
