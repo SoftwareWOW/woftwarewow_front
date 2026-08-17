@@ -4,14 +4,11 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import SkewMarquee from '@/components/shared/SkewMarquee'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import useReveal from '@/hooks/useReveal'
 
-/** Layout: Home-07 HeroV7 — heading, origin SkewMarquee, HeroAbout paragraph. */
+/** Layout: Home-07 HeroV7 — heading + origin SkewMarquee. */
 const RetailEcommerceHero = () => {
-  const { revealRef } = useReveal()
-
   return (
-    <section className="about relative" aria-labelledby="retail-ecommerce-heading">
+    <section className="relative" aria-labelledby="retail-ecommerce-heading">
       <div className="absolute left-[12%] top-40 -z-10 h-2/6 w-2/6 blur-[35px] md:blur-[60px]">
         <HeroGradientAnimation />
       </div>
@@ -30,16 +27,6 @@ const RetailEcommerceHero = () => {
       </div>
 
       <SkewMarquee />
-
-      <RevealWrapper as="div" className="container">
-        <h3
-          ref={revealRef}
-          className="reveal-text-2 mx-auto max-w-5xl text-center text-secondary dark:text-backgroundBody"
-        >
-          Retail is no longer just about selling products. We help brands connect commerce, marketing, technology, and
-          customer experience to drive stronger growth.
-        </h3>
-      </RevealWrapper>
     </section>
   )
 }

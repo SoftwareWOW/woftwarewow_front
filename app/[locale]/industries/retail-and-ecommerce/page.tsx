@@ -10,6 +10,7 @@ import DevisionOverview from './_components/DevisionOverview'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import RetailEcommerceHero from './_components/RetailEcommerceHero'
 import RetailGrowthPillars from './_components/RetailGrowthPillars'
+import RetailHeroAbout from './_components/RetailHeroAbout'
 import SocialGallery from './_components/SocialGallery'
 
 type Props = {
@@ -49,8 +50,11 @@ export default async function RetailAndEcommercePage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        {/* 1–2. Hero — HeroAbout + SkewMarquee */}
-        <RetailEcommerceHero />
+        {/* 1. Hero — heading + SkewMarquee */}
+      <div>
+          <RetailEcommerceHero />
+        <RetailHeroAbout />
+      </div>
         {/* 3. ProcessV2 — four hover columns */}
         <RetailGrowthPillars />
         {/* 4. Commerce Solutions — ProfessionalServiceSolutions / Home-23 WhyChooseUsV7 */}
