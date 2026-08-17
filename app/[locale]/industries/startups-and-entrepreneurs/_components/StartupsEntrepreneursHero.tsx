@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import AnimatedHeroImage from './AnimatedHeroImage'
 
 /** Layout: Home-06 HeroV6 — centered headline + dual CTAs + scroll-scale image. */
@@ -11,6 +12,9 @@ const StartupsEntrepreneursHero = () => {
       <div className="relative overflow-hidden pb-10 pt-28 md:pt-36 lg:pt-[220px]">
         <HeroGradientAnimation />
         <div className="container">
+          <RevealWrapper className="mb-4 flex justify-center">
+            <SectionLabel>Startups & Entrepreneurs</SectionLabel>
+          </RevealWrapper>
           <RevealWrapper className="text-center">
             <h1 className="font-semibold">
               Build What&apos;s <InstrumentText>Next.</InstrumentText>

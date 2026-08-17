@@ -80,7 +80,7 @@ const gridRowClass =
   'flex flex-wrap justify-center px-5 max-xl:justify-start max-lg:gap-5 xl:px-5 max-xl:[&>*:first-child]:border-r dark:max-xl:[&>*:first-child]:border-dark [&>*:last-child]:border-x dark:[&>*:last-child]:border-x-dark [&>*:not(:last-child)]:border-l dark:[&>*:not(:last-child)]:border-l-dark max-xl:[&>*:nth-child(2)]:border-r dark:max-xl:[&>*:nth-child(2)]:border-dark max-2xl:[&>*:nth-child(3)]:border-r dark:max-2xl:[&>*:nth-child(3)]:border-dark [&>*]:border-y dark:[&>*]:border-y-dark'
 
 const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: string }) => (
-  <RevealWrapper className={`reveal-me group relative min-h-[410px] w-full overflow-hidden ${widthClass}`}>
+  <RevealWrapper className={`reveal-me group relative min-h-[410px] w-full overflow-hidden rounded-radius-md ${widthClass}`}>
     <div>
       <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
         <span className="inline-flex [&_path]:fill-secondary [&_path]:dark:fill-backgroundBody">{card.icon}</span>

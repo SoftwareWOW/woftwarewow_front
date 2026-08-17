@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
@@ -35,7 +36,7 @@ const packages = [
   },
 ]
 
-/** Layout: Home-20 PortfolioV6 — overlapping image + card rows. Startup copy only; origin chrome unchanged. */
+/** Layout: Home-20 PortfolioV6 — overlapping image + card rows. Bottom CTA omitted. */
 const StartupPackages = () => {
   return (
     <section aria-labelledby="startup-packages-heading">
@@ -57,25 +58,25 @@ const StartupPackages = () => {
           </TextAppearAnimation>
         </div>
 
-        <div className="mb-[60px] space-y-[30px] ">
+        <div className="mb-[60px] space-y-[30px]">
           {packages.map((item) => (
             <RevealWrapper
               key={item.href}
               className="underline-hover-effect reveal-me group relative flex w-full flex-col items-center lg:flex-row"
             >
-              <figure className="-z-30 w-full max-w-[870px] overflow-hidden">
+              <figure className="-z-30 w-full max-w-[870px] overflow-hidden rounded-radius-md">
                 <Link href={item.href} className="block" aria-label={`View ${item.title}`}>
                   <Image
                     src={item.image}
                     width={870}
                     height={580}
-                    className="h-full w-full transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
+                    className="h-full w-full rounded-radius-md transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                     alt={item.title}
                   />
                 </Link>
               </figure>
 
-              <div className="z-30 w-full border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
+              <div className="z-30 w-full rounded-radius-sm border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
                 <p className="mb-3.5 text-sm font-normal uppercase leading-6 tracking-[3px] text-black dark:text-white">
                   {item.index}
                 </p>
@@ -90,46 +91,11 @@ const StartupPackages = () => {
                   {item.description}
                 </p>
 
-                <Link href={item.href} className="rv-button rv-button-white" aria-label={item.button}>
-                  <div className="rv-button-top text-center">
-                    <span className="mr-2">{item.button}</span>
-                    <Image
-                      className="inline dark:hidden"
-                      src="/images/icons/top-arrow.svg"
-                      width={16}
-                      height={16}
-                      alt=""
-                      aria-hidden
-                    />
-                    <Image
-                      className="hidden dark:inline"
-                      src="/images/icons/top-arrow-dark.svg"
-                      width={16}
-                      height={16}
-                      alt=""
-                      aria-hidden
-                    />
-                  </div>
-                  <div className="rv-button-bottom text-center">
-                    <span className="mr-2">{item.button}</span>
-                    <Image
-                      className="hidden dark:inline"
-                      src="/images/icons/top-arrow.svg"
-                      width={16}
-                      height={16}
-                      alt=""
-                      aria-hidden
-                    />
-                    <Image
-                      className="inline dark:hidden"
-                      src="/images/icons/top-arrow-dark.svg"
-                      width={16}
-                      height={16}
-                      alt=""
-                      aria-hidden
-                    />
-                  </div>
-                </Link>
+                <ButtonComponentList className="flex" itemClassName="block">
+                  <ButtonComponent href={item.href} variant="white" ariaLabel={item.button}>
+                    {item.button}
+                  </ButtonComponent>
+                </ButtonComponentList>
               </div>
             </RevealWrapper>
           ))}
