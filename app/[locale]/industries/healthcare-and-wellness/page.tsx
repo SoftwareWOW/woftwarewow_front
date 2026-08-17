@@ -49,7 +49,13 @@ export default async function HealthcareAndWellnessPage({ params }: Props) {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1–2. Hero — SaasProductHero + HeroAbout */}
-        <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
+        <div className="relative flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
+          <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+            <div className="absolute left-0 top-0 blur-[65px]">
+              <img src="/images/hero-gradient-background.png" alt="" className="left-0 top-0" />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-backgroundBody dark:to-secondary" />
+          </div>
           <HealthcareHero />
           <HealthcareHeroAbout />
         </div>
