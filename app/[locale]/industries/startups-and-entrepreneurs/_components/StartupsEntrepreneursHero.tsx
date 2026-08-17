@@ -9,7 +9,7 @@ import AnimatedHeroImage from './AnimatedHeroImage'
 const StartupsEntrepreneursHero = () => {
   return (
     <RevealWrapper as="section" className="relative overflow-hidden">
-      <div className="relative overflow-hidden pb-10 pt-28 md:pt-36 lg:pt-[220px]">
+      <div className="relative overflow-hidden pb-10 pt-28 md:pt-32 lg:pt-[120px]">
         <HeroGradientAnimation />
         <div className="container">
           <RevealWrapper className="mb-4 flex justify-center">
