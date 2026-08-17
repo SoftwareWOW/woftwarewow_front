@@ -1489,7 +1489,7 @@
                   "label": "Professional Services",
                   "description": "Solutions for service firms",
                   "type": "link",
-                  "href": "/industries",
+                  "href": "/industries/professional-services",
                   "detailPanel": "exploreDefault"
                 },
                 {
@@ -1604,7 +1604,7 @@
                   "id": "professionalServices",
                   "label": "Professional Services",
                   "description": "Solutions for service firms",
-                  "href": "/industries"
+                  "href": "/industries/professional-services"
                 },
                 {
                   "id": "retailEcommerce",

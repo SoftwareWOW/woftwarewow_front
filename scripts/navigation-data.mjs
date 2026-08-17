@@ -200,7 +200,7 @@ export const navigation = {
             title: 'Industries',
             items: [
               { id: 'startupsEntrepreneurs', label: 'Startups & Entrepreneurs', description: 'Built for new ventures', type: 'link', href: '/industries/startups-and-entrepreneurs', detailPanel: 'exploreDefault' },
-              { id: 'professionalServices', label: 'Professional Services', description: 'Solutions for service firms', type: 'link', href: '/industries', detailPanel: 'exploreDefault' },
+              { id: 'professionalServices', label: 'Professional Services', description: 'Solutions for service firms', type: 'link', href: '/industries/professional-services', detailPanel: 'exploreDefault' },
               { id: 'retailEcommerce', label: 'Retail & eCommerce', description: 'Growth for online stores', type: 'link', href: '/industries/retail-and-ecommerce', detailPanel: 'exploreDefault' },
               { id: 'healthcareWellness', label: 'Healthcare & Wellness', description: 'Digital for health industries', type: 'link', href: '/industries/healthcare-and-wellness', detailPanel: 'exploreDefault' },
               { id: 'hospitalityTourism', label: 'Hospitality & Tourism', description: 'Solutions for guest experiences', type: 'link', href: '/industries/hospitality-and-tourism', detailPanel: 'exploreDefault' },
@@ -230,7 +230,7 @@ export const navigation = {
             title: 'Industries',
             items: [
               { id: 'startupsEntrepreneurs', label: 'Startups & Entrepreneurs', description: 'Built for new ventures', href: '/industries/startups-and-entrepreneurs' },
-              { id: 'professionalServices', label: 'Professional Services', description: 'Solutions for service firms', href: '/industries' },
+              { id: 'professionalServices', label: 'Professional Services', description: 'Solutions for service firms', href: '/industries/professional-services' },
               { id: 'retailEcommerce', label: 'Retail & eCommerce', description: 'Growth for online stores', href: '/industries/retail-and-ecommerce' },
               { id: 'healthcareWellness', label: 'Healthcare & Wellness', description: 'Digital for health industries', href: '/industries/healthcare-and-wellness' },
               { id: 'hospitalityTourism', label: 'Hospitality & Tourism', description: 'Solutions for guest experiences', href: '/industries/hospitality-and-tourism' },
