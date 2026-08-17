@@ -3,6 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import Image from 'next/image'
 
 /** Layout: SaaS SaasProductHero / Home-24 HeroV24 — split headline + dual tall images. */
 const HealthcareHero = () => {
@@ -50,8 +51,8 @@ const HealthcareHero = () => {
         </div>
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="Healthcare and wellness imagery">
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src="/images/wow/nav/cards/pexels-fauxels-3183132%201.png"
+            <Image
+              src="/images/wow/nav/cards/pexels-fauxels-3183132 1.png"
               alt="Healthcare and wellness team collaborating"
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
@@ -59,8 +60,8 @@ const HealthcareHero = () => {
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src="/images/wow/nav/cards/pexels-cottonbro-4069290%201.png"
+            <Image
+              src="/images/wow/nav/cards/pexels-cottonbro-4069290 1.png"
               alt="Wellness professionals reviewing a care plan"
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}

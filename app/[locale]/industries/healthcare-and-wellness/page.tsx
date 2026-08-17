@@ -49,7 +49,7 @@ export default async function HealthcareAndWellnessPage({ params }: Props) {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1–2. Hero — SaasProductHero + HeroAbout */}
-        <div>
+        <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
           <HealthcareHero />
           <HealthcareHeroAbout />
         </div>
