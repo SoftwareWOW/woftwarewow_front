@@ -53,7 +53,7 @@ const RecommendedSolutions = () => {
               <Link
                 key={item.number}
                 href={item.href}
-                className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-transparent px-[30px] py-10 transition-colors duration-300 hover:border-[#e5e5e5] dark:hover:border-white/10"
+                className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border px-[30px] py-10 dark:border-dark"
               >
                 <span className="font-instrument text-5xl italic leading-none">{item.number}</span>
                 <h5 className="mb-2.5 mt-8">{item.title}</h5>
