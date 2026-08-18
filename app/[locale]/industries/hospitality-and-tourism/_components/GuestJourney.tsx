@@ -9,21 +9,18 @@ const topRow = [
     title: 'Discover',
     tagline: 'Be Found',
     description: 'Search, social, content, campaigns, and destination visibility.',
-    highlighted: false,
   },
   {
     number: '02',
     title: 'Explore',
     tagline: 'Create Desire',
     description: 'Strong visuals, storytelling, reviews, offers, and engaging digital experiences.',
-    highlighted: true,
   },
   {
     number: '03',
     title: 'Book',
     tagline: 'Remove the Friction',
     description: 'Clear information, intuitive booking journeys, inquiries, and reservations.',
-    highlighted: false,
   },
 ]
 
@@ -33,14 +30,12 @@ const bottomRow = [
     title: 'Experience',
     tagline: 'Stay Connected',
     description: 'Communication, digital touchpoints, support, and smarter guest interactions.',
-    highlighted: false,
   },
   {
     number: '05',
     title: 'Return',
     tagline: 'Build Loyalty',
     description: 'Reviews, CRM, remarketing, email, and ongoing engagement.',
-    highlighted: false,
   },
 ]
 
@@ -49,43 +44,20 @@ type JourneyCard = {
   title: string
   tagline: string
   description: string
-  highlighted: boolean
 }
 
-const JourneyCard = ({ card }: { card: JourneyCard }) => (
-  <RevealWrapper
-    className={`flex-1 rounded-radius-sm border px-[30px] py-10 ${
-      card.highlighted
-        ? 'border-transparent bg-backgroundBody dark:border-white/10 dark:bg-backgroundBody'
-        : 'border-[#e5e5e5] dark:border-white/10'
-    }`}
-  >
-    <span
-      className={`font-instrument text-5xl italic leading-none ${
-        card.highlighted ? 'text-secondary dark:text-secondary' : 'text-secondary dark:text-backgroundBody'
-      }`}
-    >
+const JourneyCard = ({ card, tall = false }: { card: JourneyCard; tall?: boolean }) => (
+  <div className={`flex-1 border px-[30px] py-10 dark:border-dark ${tall ? 'min-h-[322px] py-20' : ''}`}>
+    <span className="font-instrument text-5xl italic leading-none text-secondary dark:text-backgroundBody">
       {card.number}
     </span>
-    <h5 className={`mb-1 mt-5 ${card.highlighted ? 'text-secondary dark:text-secondary' : ''}`}>{card.title}</h5>
-    <p
-      className={`text-sm font-medium md:text-base ${
-        card.highlighted ? 'text-secondary/80 dark:text-secondary/80' : 'text-[#808080]'
-      }`}
-    >
-      {card.tagline}
-    </p>
-    <p
-      className={`mt-3 text-base leading-[1.6] ${
-        card.highlighted ? 'text-secondary/70 dark:text-secondary/70' : 'text-[#808080]'
-      }`}
-    >
-      {card.description}
-    </p>
-  </RevealWrapper>
+    <h5 className="mb-1 mt-5">{card.title}</h5>
+    <p className="text-sm font-medium text-[#808080] md:text-base">{card.tagline}</p>
+    <p className="mt-3 text-base leading-[1.6] text-[#808080]">{card.description}</p>
+  </div>
 )
 
-/** Layout: Home-14 WhyChooseUsV3 — 3+2 numbered cards, card 02 inverted, ghost CTA. */
+/** Layout: Home-14 WhyChooseUsV3 — 3+2 bordered cards. */
 const GuestJourney = () => {
   return (
     <section>
@@ -105,14 +77,16 @@ const GuestJourney = () => {
           </TextAppearAnimation>
         </div>
 
-        <article className="space-y-[30px]">
-          <RevealWrapper className="flex flex-col gap-[30px] md:flex-row">
-            {topRow.map((card) => <JourneyCard key={card.number} card={card} />)}
+        <article>
+          <RevealWrapper className="mb-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
+            {topRow.map((card) => (
+              <JourneyCard key={card.number} card={card} />
+            ))}
           </RevealWrapper>
           <RevealWrapper className="flex flex-col gap-[30px] md:flex-row md:justify-center">
             {bottomRow.map((card) => (
               <div key={card.number} className="md:max-w-[calc(50%-15px)] md:flex-1 lg:max-w-[calc(33.333%-20px)]">
-                <JourneyCard card={card} />
+                <JourneyCard card={card} tall />
               </div>
             ))}
           </RevealWrapper>
