@@ -17,10 +17,10 @@ const EducationHero = () => {
   return (
     <RevealWrapper
       as="section"
-      className="relative overflow-x-hidden pb-10 pt-[120px] after:absolute after:bottom-0 after:h-[1px] after:w-full after:bg-secondary/20 after:content-[''] dark:after:bg-backgroundBody/20 sm:pt-[135px] md:pb-14 md:pt-[150px] lg:pt-44 xl:pb-16 xl:pt-48"
+      className="relative overflow-x-hidden pb-10 pt-[100px] after:absolute after:bottom-0 after:h-[1px] after:w-full after:bg-secondary/20 after:content-[''] dark:after:bg-backgroundBody/20 sm:pt-[110px] md:pb-14 md:pt-[120px] lg:pt-32 xl:pb-16 xl:pt-36"
       aria-labelledby="education-hero-heading"
     >
-      <div className="relative before:content-none lg:before:absolute lg:before:-top-40 lg:before:left-[58%] lg:before:z-10 lg:before:h-full lg:before:w-[1px] lg:before:bg-secondary/20 lg:before:content-[''] lg:dark:before:bg-backgroundBody/20 xl:before:left-[52%] 2xl:before:left-[54.7%]">
+      <div className="relative">
         <div className="mx-auto flex max-w-[1600px] flex-col items-stretch justify-between gap-y-10 px-4 md:px-[30px] lg:flex-row lg:items-center lg:gap-x-12 xl:gap-x-16">
           <div className="flex w-full min-w-0 flex-col lg:max-w-[50%] xl:max-w-[610px]">
             <div className="relative mb-3">
@@ -30,8 +30,7 @@ const EducationHero = () => {
                   id="education-hero-heading"
                   className="text-appear text-[clamp(2rem,4.8vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.02em]"
                 >
-                  Turn Your Mission Into
-                  <i className="font-instrument"> Momentum.</i>
+                  Turn Your Mission Into Momentum.
                 </h1>
               </TextAppearAnimation>
             </div>
