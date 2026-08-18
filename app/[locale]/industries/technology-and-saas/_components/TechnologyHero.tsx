@@ -116,7 +116,7 @@ const TechnologyHero = () => {
           ref={setImageRef(0)}
         />
       </figure>
-      <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
+      <figure className="pointer-events-none absolute right-[2%] top-[14%] z-0 hidden md:block lg:right-[6%] lg:top-[16%] xl:right-[10%]">
         <img
           src={HERO_IMAGES[1]}
           alt=""
@@ -166,8 +166,7 @@ const TechnologyHero = () => {
             id="technology-hero-heading"
             className="mx-auto max-w-[18ch] text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em] md:max-w-[16ch]"
           >
-            Build Products People
-            <InstrumentText> Keep Using.</InstrumentText>
+            Build Products People Keep Using.
           </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
