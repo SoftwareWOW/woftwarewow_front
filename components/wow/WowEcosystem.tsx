@@ -336,7 +336,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
               >
                 {n.id === 'softwarewow' ? (
                   <>
-                    <span className="text-foreground">{nodeCopy.prefix}</span>{' '}
+                    <span className="text-black dark:text-[#F2F2F2]">{nodeCopy.prefix}</span>{' '}
                     <WowText className="font-bold leading-none tracking-tight">
                       {nodeCopy.label}
                     </WowText>
@@ -346,7 +346,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                     <WowText className="font-bold leading-none tracking-tight">
                       {nodeCopy.prefix}
                     </WowText>{' '}
-                    <span className="text-foreground">{nodeCopy.label}</span>
+                    <span className="text-black dark:text-[#F2F2F2]">{nodeCopy.label}</span>
                   </>
                 )}
               </span>
