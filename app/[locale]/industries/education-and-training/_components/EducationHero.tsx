@@ -17,7 +17,7 @@ const EducationHero = () => {
   return (
     <RevealWrapper
       as="section"
-      className="relative overflow-x-hidden pb-10 pt-[100px] after:absolute after:bottom-0 after:h-[1px] after:w-full after:bg-secondary/20 after:content-[''] dark:after:bg-backgroundBody/20 sm:pt-[110px] md:pb-14 md:pt-[120px] lg:pt-32 xl:pb-16 xl:pt-36"
+      className="relative overflow-x-hidden pb-10 pt-[100px] sm:pt-[110px] md:pb-14 md:pt-[120px] lg:pt-32 xl:pb-16 xl:pt-36"
       aria-labelledby="education-hero-heading"
     >
       <div className="relative">

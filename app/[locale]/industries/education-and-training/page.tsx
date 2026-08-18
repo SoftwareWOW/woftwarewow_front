@@ -48,8 +48,10 @@ export default async function EducationAndTrainingPage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        <EducationHero />
+     <div>
+         <EducationHero />
         <EducationHeroAbout />
+     </div>
         <SocialGallery />
         <CareJourney />
         <MissionSolutions />
