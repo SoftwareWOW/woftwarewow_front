@@ -14,11 +14,15 @@ interface JourneyItem {
   img: string
 }
 
+const card = (file: string) => `/images/wow/nav/cards/${encodeURIComponent(file)}`
+
 const hoverImages = [
-  '/images/portfolio/portfolio-list-hover-img-01.png',
-  '/images/portfolio/portfolio-list-hover-img-02.png',
-  '/images/portfolio/portfolio-list-hover-img-03.png',
-  '/images/portfolio/portfolio-list-hover-img-04.png',
+  '/images/wow/Hero/devision/Education.jpg',
+  card('learningevent.png'),
+  card('pexels-fauxels-3183132 1.png'),
+  card('pexels-cottonbro-4069290 1.png'),
+  card('pexels-karola-g-6255984 1.png'),
+  card('pexels-cottonbro-8088441 1.png'),
 ]
 
 const data: JourneyItem[] = [
@@ -55,14 +59,14 @@ const data: JourneyItem[] = [
     index: '05',
     title: 'Simplify Operations',
     description: 'Automate communication, enrollment, administration, and repetitive workflows.',
-    img: hoverImages[0],
+    img: hoverImages[4],
   },
   {
     id: 6,
     index: '06',
     title: 'Grow Your Programs',
     description: 'Build the marketing, technology, and infrastructure needed to scale.',
-    img: hoverImages[1],
+    img: hoverImages[5],
   },
 ]
 
@@ -133,28 +137,28 @@ const CareJourney = () => {
       >
         <img
           ref={previewImgRef}
-          src="/images/portfolio/portfolio-list-hover-img-01.png"
+          src="/images/wow/Hero/devision/Education.jpg"
           alt=""
           className="h-full w-full object-cover"
         />
       </div>
 
-      <div className="reveal-me mx-auto border-t text-sm max-xl:overflow-auto max-md:px-5 lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1380px]">
+      <div className="reveal-me mx-auto border-t text-sm max-md:px-5 lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1380px]">
         {data.map((item) => (
           <div
             key={item.id}
-            className="row group flex min-h-[138px] cursor-pointer items-center justify-start border-b py-4"
+            className="row group flex min-h-[110px] cursor-pointer flex-col justify-center gap-2 border-b py-5 sm:min-h-[138px] sm:flex-row sm:items-center sm:justify-start sm:gap-0 sm:py-4"
             onMouseEnter={() => showPreview(item.img)}
             onMouseMove={movePreview}
             onMouseLeave={hidePreview}
           >
-            <div className="-mt-5 w-16 shrink-0 text-nowrap font-instrument text-lg italic leading-[22px]">
+            <div className="w-12 shrink-0 font-instrument text-lg italic leading-[22px] sm:-mt-5 sm:w-16 sm:text-nowrap">
               {item.index}
             </div>
-            <div className="ml-11 w-72 text-nowrap text-3xl md:w-96 md:text-4xl lg:w-80 lg:leading-[1.1] 2xl:w-[470px] 2xl:text-5xl">
+            <div className="min-w-0 text-2xl leading-tight sm:ml-8 sm:w-64 md:ml-11 md:w-80 md:text-3xl lg:w-80 lg:leading-[1.1] xl:text-4xl 2xl:ml-11 2xl:w-[470px] 2xl:text-5xl">
               {item.title}
             </div>
-            <div className="ml-16 min-w-0 flex-1 text-base leading-[1.6] text-[#808080] xl:ml-40 2xl:ml-[150px] 2xl:text-2xl">
+            <div className="min-w-0 flex-1 text-sm leading-[1.6] text-[#808080] sm:ml-8 md:ml-12 md:text-base xl:ml-24 2xl:ml-[150px] 2xl:text-2xl">
               {item.description}
             </div>
           </div>

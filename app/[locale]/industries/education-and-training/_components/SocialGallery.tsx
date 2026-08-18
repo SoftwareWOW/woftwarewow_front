@@ -11,47 +11,17 @@ type GalleryItem = {
   link: string
 }
 
+const card = (file: string) => `/images/wow/nav/cards/${encodeURIComponent(file)}`
+
 const data: GalleryItem[] = [
-  {
-    id: 1,
-    image: '/images/testimonial/testimonial-1.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 2,
-    image: '/images/testimonial/testimonial-2.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 3,
-    image: '/images/testimonial/testimonial-3.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 4,
-    image: '/images/testimonial/testimonial-4.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 5,
-    image: '/images/testimonial/testimonial-5.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 6,
-    image: '/images/testimonial/testimonial-1.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 7,
-    image: '/images/testimonial/testimonial-2.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 8,
-    image: '/images/testimonial/testimonial-3.png',
-    link: 'https://www.instagram.com/',
-  },
+  { id: 1, image: '/images/wow/Hero/devision/Education.jpg', link: 'https://www.instagram.com/' },
+  { id: 2, image: card('learningevent.png'), link: 'https://www.instagram.com/' },
+  { id: 3, image: card('pexels-fauxels-3183132 1.png'), link: 'https://www.instagram.com/' },
+  { id: 4, image: card('pexels-cottonbro-4069290 1.png'), link: 'https://www.instagram.com/' },
+  { id: 5, image: card('pexels-cottonbro-8088441 1.png'), link: 'https://www.instagram.com/' },
+  { id: 6, image: card('pexels-karola-g-6255984 1.png'), link: 'https://www.instagram.com/' },
+  { id: 7, image: '/images/wow/Hero/Human/office.png', link: 'https://www.instagram.com/' },
+  { id: 8, image: card('pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png'), link: 'https://www.instagram.com/' },
 ]
 
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
@@ -133,7 +103,7 @@ const SocialGallery = () => {
       </div>
 
       <div className="relative overflow-hidden" ref={sliderRef}>
-        <div className="flex h-[500px] items-center justify-center">
+        <div className="flex h-[320px] items-center justify-center sm:h-[400px] md:h-[500px]">
           <div className="instagram-slider-container perspective-[1000px] relative flex w-full items-center justify-center">
             <div
               className="slides-wrapper relative flex h-full w-full items-center justify-center"
@@ -145,7 +115,7 @@ const SocialGallery = () => {
                   ref={(el) => {
                     if (el) slideRefs.current[index] = el
                   }}
-                  className="slide absolute w-[320px] cursor-pointer transition-all duration-500 md:w-[400px]"
+                  className="slide absolute w-[220px] cursor-pointer transition-all duration-500 sm:w-[280px] md:w-[320px] lg:w-[400px]"
                   onMouseEnter={stopSlider}
                   onMouseLeave={startSlider}
                 >
@@ -153,7 +123,7 @@ const SocialGallery = () => {
                     <img
                       src={item.image}
                       alt={`Social gallery ${item.id}`}
-                      className="h-full w-full rounded-radius-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      className="h-[200px] w-full rounded-radius-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 sm:h-[240px] md:h-[280px] lg:h-[320px]"
                     />
                     <a
                       href={item.link}

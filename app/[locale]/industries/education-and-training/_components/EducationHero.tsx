@@ -7,35 +7,40 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import Marquee from 'react-fast-marquee'
 
+const HERO_IMAGES = [
+  '/images/wow/Hero/devision/Education.jpg',
+  `/images/wow/nav/cards/${encodeURIComponent('learningevent.png')}`,
+]
+
 /** Layout: Home-15 HeroV15 — split headline + stacked mockups + marquee. */
 const EducationHero = () => {
   return (
     <RevealWrapper
       as="section"
-      className="relative overflow-hidden pb-4 pt-32 after:absolute after:bottom-0 after:h-[1px] after:w-full after:bg-secondary/20 after:content-[''] dark:after:bg-backgroundBody/20 md:pt-16 lg:pt-[110px] xl:pt-[120px]"
+      className="relative overflow-x-hidden pb-10 pt-[120px] after:absolute after:bottom-0 after:h-[1px] after:w-full after:bg-secondary/20 after:content-[''] dark:after:bg-backgroundBody/20 sm:pt-[135px] md:pb-14 md:pt-[150px] lg:pt-44 xl:pb-16 xl:pt-48"
       aria-labelledby="education-hero-heading"
     >
-      <div className="relative before:content-none lg:before:absolute lg:before:-top-40 lg:before:left-[61%] lg:before:z-[999999999999] lg:before:h-[136.4%] lg:before:w-[1px] lg:before:bg-secondary/20 lg:before:content-[''] lg:after:absolute lg:after:bottom-[120px] lg:after:h-[1px] lg:after:w-[61vw] lg:after:bg-secondary/20 lg:after:content-[''] lg:dark:before:bg-backgroundBody/20 lg:dark:after:bg-backgroundBody/20 xl:before:-top-40 xl:before:left-[49%] xl:before:h-[119.7%] xl:after:w-[49vw] 2xl:before:left-[54.7%] 2xl:after:bottom-[180px] 2xl:after:w-[54.3vw]">
-        <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-y-10 px-4 md:px-[30px] lg:flex-row">
-          <div className="max-w-full lg:max-w-[610px]">
+      <div className="relative before:content-none lg:before:absolute lg:before:-top-40 lg:before:left-[58%] lg:before:z-10 lg:before:h-full lg:before:w-[1px] lg:before:bg-secondary/20 lg:before:content-[''] lg:dark:before:bg-backgroundBody/20 xl:before:left-[52%] 2xl:before:left-[54.7%]">
+        <div className="mx-auto flex max-w-[1600px] flex-col items-stretch justify-between gap-y-10 px-4 md:px-[30px] lg:flex-row lg:items-center lg:gap-x-12 xl:gap-x-16">
+          <div className="flex w-full min-w-0 flex-col lg:max-w-[50%] xl:max-w-[610px]">
             <div className="relative mb-3">
               <HeroGradientAnimation />
               <TextAppearAnimation>
                 <h1
                   id="education-hero-heading"
-                  className="text-appear text-5xl font-normal leading-[1.18] tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[74px] xl:mt-14 xl:text-8xl xl:leading-[1.20] xl:tracking-[-2.88px]"
+                  className="text-appear text-[clamp(2rem,4.8vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.02em]"
                 >
                   Turn Your Mission Into
-                  <i className="font-instrument xl:block"> Momentum.</i>
+                  <i className="font-instrument"> Momentum.</i>
                 </h1>
               </TextAppearAnimation>
             </div>
-            <RevealWrapper as="p" className="reveal-me text-[#808080]">
+            <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
               We help organizations strengthen their presence, reach more people, simplify operations, and build the
               digital systems behind lasting impact.
             </RevealWrapper>
 
-            <RevealWrapperV2 className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-14 lg:mt-7 xl:mt-14">
+            <RevealWrapperV2 className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-9 lg:mt-10">
               <ButtonComponentList className="flex" itemClassName="block">
                 <ButtonComponent href="/contact" variant="primary">
                   Strengthen Your Impact
@@ -47,24 +52,29 @@ const EducationHero = () => {
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapperV2>
-            <div className="relative max-md:mt-7 lg:absolute lg:bottom-0 lg:w-[45%]">
+            <div className="relative mt-8 w-full xl:mt-12">
               <div className="absolute left-0 top-0 z-40 h-full w-[5%] bg-gradient-to-r from-backgroundBody to-transparent dark:from-dark-gradient" />
-              <div className="marquee-container -z-10">
+              <div className="marquee-container">
                 <Marquee>
-                  <h1 className="text-stroke reveal-me text-nowrap py-7 pr-3 font-instrument italic lg:py-1 2xl:py-7">
+                  <h2 className="text-stroke text-nowrap py-4 pr-3 font-instrument italic lg:py-6">
                     We Build Brands That Resonate
-                  </h1>
+                  </h2>
                 </Marquee>
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-x-2.5 gap-y-4 max-lg:w-full">
-            <RevealWrapper as="figure" className="w-full">
-              <img src="/images/hero-img/branding-mockup-1.png" alt="Education brand mockup" className="max-lg:w-full" />
-            </RevealWrapper>
-            <RevealWrapper as="figure" className="w-full">
-              <img src="/images/hero-img/branding-mockup-2.png" alt="Education brand mockup" className="max-lg:w-full" />
-            </RevealWrapper>
+          <div className="flex w-full min-w-0 flex-col gap-4 lg:w-[42%] xl:w-[46%]">
+            {HERO_IMAGES.map((src) => (
+              <RevealWrapper as="figure" key={src} className="w-full overflow-hidden rounded-radius-md">
+                <img
+                  src={src}
+                  alt="Education and training brand work"
+                  className="h-auto w-full object-cover sm:max-h-[280px] lg:max-h-[320px] xl:max-h-[380px]"
+                  width={665}
+                  height={440}
+                />
+              </RevealWrapper>
+            ))}
           </div>
         </div>
       </div>
