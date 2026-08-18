@@ -55,9 +55,9 @@ const LeadToCustomer = () => {
 
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
           {processSteps.map(({ step, title, description }) => (
-            <RevealWrapper key={step} className="reveal-me w-full grow !overflow-visible pt-8 sm:w-[48%] xl:grow">
-              <div className="group relative mx-auto grid min-h-[300px] grid-cols-1 content-between overflow-visible border px-5 pb-[42px] pt-10 text-center transition-colors duration-300 hover:bg-primary dark:border-dark">
-                <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 transition-colors duration-300 group-hover:bg-white/20 dark:bg-backgroundBody dark:group-hover:bg-white/20">
+            <RevealWrapper key={step} className="w-full grow pt-8 sm:w-[48%] xl:grow">
+              <div className="group relative mx-auto grid min-h-[300px] grid-cols-1 content-between !overflow-visible border px-5 pb-[42px] pt-10 text-center transition-colors duration-300 hover:bg-primary dark:border-dark">
+                <div className="absolute -top-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 transition-colors duration-300 group-hover:bg-white/20 dark:bg-backgroundBody dark:group-hover:bg-white/20">
                   <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody transition-colors duration-300 group-hover:text-white dark:text-secondary dark:group-hover:text-white">
                     {step}
                   </span>
