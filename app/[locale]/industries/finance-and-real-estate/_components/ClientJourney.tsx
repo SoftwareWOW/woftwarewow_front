@@ -30,7 +30,7 @@ const steps = [
   },
 ]
 
-/** Layout: Home-07 ProcessV4 — image height matches steps. Hover fill is hover-only. */
+/** Layout: Home-07 ProcessV4 — image height matches steps. */
 const ClientJourney = () => {
   return (
     <section>
@@ -62,17 +62,14 @@ const ClientJourney = () => {
           <div className="min-w-0 flex-1">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
               {steps.map((step, index) => (
-                <li
-                  key={step.number}
-                  className="group relative max-w-max px-10 py-4 transition-colors duration-300 hover:bg-primary"
-                >
+                <li key={step.number} className="relative max-w-max px-10">
                   <div
-                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white transition-colors duration-300 group-hover:border-white/40 group-hover:bg-white/20 dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
+                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
                       index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
                     }`}
                   >
                     <span
-                      className={`inline-block bg-gradient-to-r bg-clip-text text-xl font-semibold text-black text-transparent transition-colors duration-300 group-hover:bg-none group-hover:text-white dark:bg-gradient-to-r dark:from-white dark:to-[#BDBDBD] dark:bg-clip-text dark:text-[#FFF] dark:text-transparent dark:group-hover:text-white ${
+                      className={`inline-block bg-gradient-to-r bg-clip-text text-xl font-semibold text-black text-transparent dark:bg-gradient-to-r dark:from-white dark:to-[#BDBDBD] dark:bg-clip-text dark:text-[#FFF] dark:text-transparent ${
                         index === 0 ? 'from-backgroundBody to-gray-400' : 'from-white to-gray-400'
                       }`}
                     >
@@ -80,10 +77,8 @@ const ClientJourney = () => {
                     </span>
                   </div>
                   <div className="ml-[30px]">
-                    <h3 className="transition-colors duration-300 group-hover:text-white">{step.title}</h3>
-                    <p className="mt-3 max-w-[483px] text-[#808080] transition-colors duration-300 group-hover:text-white">
-                      {step.description}
-                    </p>
+                    <h3>{step.title}</h3>
+                    <p className="mt-3 max-w-[483px] text-[#808080]">{step.description}</p>
                   </div>
                 </li>
               ))}

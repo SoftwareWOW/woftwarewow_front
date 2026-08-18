@@ -49,8 +49,10 @@ export default async function FinanceAndRealEstatePage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        <FinanceHero />
+       <div>
+         <FinanceHero />
         <FinanceHeroAbout />
+       </div>
         <ExperiencePillars />
         <SocialGallery />
         <GuestSolutions />

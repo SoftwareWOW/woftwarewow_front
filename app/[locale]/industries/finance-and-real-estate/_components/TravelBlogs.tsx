@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import Link from 'next/link'
 
 const packages = [
   {
@@ -30,7 +31,7 @@ const packages = [
   },
 ]
 
-/** Layout: Home-13 TravelBlogs — 3 overlapping content panels. Hover fill is hover-only. */
+/** Layout: Home-13 TravelBlogs — 3 overlapping content panels. Title underline on hover. */
 const TravelBlogs = () => {
   return (
     <section className="relative overflow-visible pb-28 md:pb-40 lg:pb-48">
@@ -62,22 +63,22 @@ const TravelBlogs = () => {
 
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
           {packages.map((item) => (
-            <div key={item.number} className="group relative">
+            <div key={item.number} className="relative">
               <RevealWrapper as="figure" className="reveal-me w-full">
                 <img src={item.image} alt={item.title} className="h-auto w-full rounded-radius-md object-cover" />
               </RevealWrapper>
-              <RevealWrapper className="reveal-me absolute inset-x-[5px] top-[22%] mx-auto max-w-[calc(100%-10px)] bg-backgroundBody px-6 pb-8 pt-6 transition-colors duration-300 group-hover:bg-primary dark:bg-dark sm:top-[38%] md:top-1/2 lg:top-3/4">
+              <RevealWrapper className="reveal-me absolute inset-x-[5px] top-[22%] mx-auto max-w-[calc(100%-10px)] bg-backgroundBody px-6 pb-8 pt-6 dark:bg-dark sm:top-[38%] md:top-1/2 lg:top-3/4">
                 <div className="mb-4 flex items-center justify-center gap-3">
-                  <span className="font-instrument text-2xl italic leading-none transition-colors duration-300 group-hover:text-white">
-                    {item.number}
-                  </span>
-                  <h3 className="text-center text-[28px] font-normal lg:text-[34px] lg:leading-[1.05]">
-                    <span className="transition-colors duration-300 group-hover:text-white">{item.title}</span>
-                  </h3>
+                  <span className="font-instrument text-2xl italic leading-none">{item.number}</span>
+                  <div className="blog-title">
+                    <Link href={item.href}>
+                      <h3 className="text-center text-[28px] font-normal lg:text-[34px] lg:leading-[1.05]">
+                        {item.title}
+                      </h3>
+                    </Link>
+                  </div>
                 </div>
-                <p className="mb-7 text-center text-[#808080] transition-colors duration-300 group-hover:text-white">
-                  {item.description}
-                </p>
+                <p className="mb-7 text-center text-[#808080]">{item.description}</p>
                 <div className="flex justify-center">
                   <ButtonComponent href={item.href} variant="white" size="sm-v2">
                     Explore
