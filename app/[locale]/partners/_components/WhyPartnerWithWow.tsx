@@ -7,9 +7,9 @@ import { partnerBenefits } from '../_data/partners'
 /** Layout: Home-12 WhyChooseUs — 5 stacked benefit rows + image. */
 const WhyPartnerWithWow = () => {
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section>
       <div className="container">
-        <div className="mb-8 text-center md:mb-14">
+        <div className="mb-8 text-center md:mb-10">
           <RevealWrapper className="reveal-me mb-4 flex justify-center md:mb-5">
             <SectionLabel>WHY WOW</SectionLabel>
           </RevealWrapper>
@@ -36,7 +36,7 @@ const WhyPartnerWithWow = () => {
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="reveal-me mt-10 flex justify-center md:mt-14">
+        <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-10">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
               Become a Partner

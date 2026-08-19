@@ -3,18 +3,40 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { TechCard } from '@/components/wow/shared/TechStackShared'
+import { TechCard, type Tech } from '@/components/wow/shared/TechStackShared'
+import useScrollingMarquee from '@/hooks/useScrollingMarquee'
 import { partnerCategories } from '../_data/partners'
 
-/** Layout: Home-21 ClientsV4 — bordered logo grid per partner category. */
+/** Layout: wow/shared/Marquee — one scrolling row per partner category. */
+function CategoryMarquee({ partners }: { partners: Tech[] }) {
+  const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
+
+  return (
+    <div onMouseEnter={pauseMarquee} onMouseLeave={resumeMarquee} className="relative overflow-hidden">
+      <div ref={marqueeRef} className="z-50 flex w-fit flex-nowrap gap-2.5 whitespace-nowrap">
+        {partners.map((partner) => (
+          <div
+            key={partner.name}
+            className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark"
+          >
+            <TechCard
+              name={partner.name}
+              icon={partner.icon}
+              color={partner.color}
+              invertInDark={partner.invertInDark}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const PartnerNetwork = () => {
   return (
-    <section
-      id="partner-network"
-      className="scroll-mt-28 pb-14 sm:scroll-mt-32 md:pb-16 lg:scroll-mt-36 lg:pb-[88px] xl:pb-[100px]"
-    >
+    <section id="partner-network" className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36">
       <div className="container">
-        <div className="mb-10 text-center md:mb-16">
+        <div className="mb-8 text-center md:mb-10">
           <div className="mb-4 flex justify-center md:mb-5">
             <SectionLabel>PARTNER NETWORK</SectionLabel>
           </div>
@@ -28,26 +50,14 @@ const PartnerNetwork = () => {
           </TextAppearAnimation>
         </div>
 
-        <div className="flex flex-col gap-12 md:gap-16">
+        <div className="flex flex-col gap-8 md:gap-10">
           {partnerCategories.map((category) => (
             <RevealWrapper key={category.title} className="reveal-me">
-              <div className="mb-6 md:mb-8">
+              <div className="mb-4 md:mb-5">
                 <h3 className="text-xl md:text-2xl">{category.title}</h3>
                 <p className="mt-2 max-w-2xl text-base text-[#808080]">{category.description}</p>
               </div>
-
-              <div className="mx-auto grid max-w-4xl border-x border-t dark:border-dark max-md:grid-cols-2 md:grid-cols-4 max-md:[&>*:nth-child(2)]:border-r-0 [&>*:nth-child(4)]:border-r-0 [&>*]:border-b [&>*]:border-r dark:[&>*]:border-dark">
-                {category.partners.map((partner) => (
-                  <div key={partner.name} className="flex items-center justify-center px-6 py-6 md:px-8 md:py-8">
-                    <TechCard
-                      name={partner.name}
-                      icon={partner.icon}
-                      color={partner.color}
-                      invertInDark={partner.invertInDark}
-                    />
-                  </div>
-                ))}
-              </div>
+              <CategoryMarquee partners={category.partners} />
             </RevealWrapper>
           ))}
         </div>
