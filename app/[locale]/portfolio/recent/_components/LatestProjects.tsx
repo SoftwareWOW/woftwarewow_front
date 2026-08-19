@@ -32,7 +32,7 @@ const LatestProjects = ({ projects }: LatestProjectsProps) => {
             {projectsByYear[year].map((project) => (
               <RevealWrapperV2
                 key={project.slug}
-                className="reveal-me group flex h-full flex-col overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:border-[#333] dark:bg-[#121212]"
+                className="reveal-me group flex h-full flex-col overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-backgroundBody transition-all duration-300 dark:border-[#333] dark:bg-secondary"
               >
                 <Link href={`/case-study/${project.slug}`} className="block overflow-hidden">
                   <figure className="overflow-hidden">
@@ -55,7 +55,12 @@ const LatestProjects = ({ projects }: LatestProjectsProps) => {
                   </p>
                   <p className="mt-4 flex-1 text-base leading-relaxed text-[#808080]">{project.description}</p>
                   <div className="mt-6">
-                    <ButtonComponent href={`/case-study/${project.slug}`} variant="secondary" size="sm">
+                    <ButtonComponent
+                      href={`/case-study/${project.slug}`}
+                      variant="secondary"
+                      size="sm"
+                      fullWidth
+                    >
                       View Project
                     </ButtonComponent>
                   </div>

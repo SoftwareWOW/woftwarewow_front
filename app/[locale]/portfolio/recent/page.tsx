@@ -2,7 +2,6 @@ import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import MoreFromPortfolio from './_components/MoreFromPortfolio'
 import RecentWorkCta from './_components/RecentWorkCta'
 import RecentWorkExplorer from './_components/RecentWorkExplorer'
 import RecentWorkHero from './_components/RecentWorkHero'
@@ -46,9 +45,7 @@ export default async function RecentWorkPage({ params }: Props) {
         <RecentWorkHero />
         {/* 2. Latest Projects + 3. Explore by Expertise — portfolio/ExploreWork + case-study/Projects */}
         <RecentWorkExplorer />
-        {/* 4. More From Our Portfolio — local bridge CTA */}
-        <MoreFromPortfolio />
-        {/* 5. Start Your Project — WowGrowthCta-inspired local CTA */}
+        {/* 4. Start Your Project — shared WowGrowthCta */}
         <RecentWorkCta />
       </div>
     </LayoutOne>

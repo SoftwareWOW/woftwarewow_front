@@ -1,6 +1,7 @@
 'use client'
 
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
 import {
   PORTFOLIO_FILTERS,
@@ -23,6 +24,9 @@ const RecentWorkExplorer = () => {
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-14">
+          <div className="mb-4 flex justify-center md:mb-5">
+            <SectionLabel>EXPLORE BY EXPERTISE</SectionLabel>
+          </div>
           <TextAppearAnimation>
             <h2 className="text-appear">Fresh from WOW.</h2>
           </TextAppearAnimation>
