@@ -1,10 +1,10 @@
 import LayoutOne from '@/components/shared/LayoutOne'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import HowWePartner from './_components/HowWePartner'
 import PartnerNetwork from './_components/PartnerNetwork'
-import PartnersCta from './_components/PartnersCta'
 import PartnersHero from './_components/PartnersHero'
 import WhyPartnerWithWow from './_components/WhyPartnerWithWow'
 
@@ -54,8 +54,11 @@ export default async function PartnersPage({ params }: Props) {
         <HowWePartner />
         {/* 4. Why Partner With WOW — Home-12 WhyChooseUs */}
         <WhyPartnerWithWow />
-        {/* 5. Global CTA — WowGrowthCta */}
-        <PartnersCta />
+        <WowGrowthCta
+          accentText="Ready to"
+          mainText="Partner?"
+          ariaLabel="Become a WOW Partner — contact our team"
+        />
       </div>
     </LayoutOne>
   )
