@@ -4,6 +4,7 @@ import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Link from 'next/link'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
 import { PORTFOLIO_FILTERS, portfolioProjects, type PortfolioFilter } from '../_data/projects'
 
@@ -20,6 +21,9 @@ const ExploreWork = () => {
   return (
     <section id="work" className="scroll-mt-28 overflow-hidden sm:scroll-mt-32 lg:scroll-mt-36">
       <div className="container mb-10 text-center md:mb-14">
+        <div className="mb-4 flex justify-center md:mb-5">
+          <SectionLabel>EXPLORE BY EXPERTISE</SectionLabel>
+        </div>
         <TextAppearAnimation>
           <h2 className="text-appear">Explore Our Work</h2>
         </TextAppearAnimation>
@@ -62,7 +66,7 @@ const ExploreWork = () => {
           {filteredProjects.map((project) => (
             <RevealWrapperV2
               key={project.slug}
-              className="reveal-me group flex h-full flex-col overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] dark:border-[#333] dark:bg-[#121212]"
+              className="reveal-me group flex h-full flex-col overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-backgroundBody transition-all duration-300 dark:border-[#333] dark:bg-secondary"
             >
               <Link href={`/case-study/${project.slug}`} className="block overflow-hidden">
                 <figure className="overflow-hidden">
@@ -85,7 +89,12 @@ const ExploreWork = () => {
                 </p>
                 <p className="mt-4 flex-1 text-base leading-relaxed text-[#808080]">{project.description}</p>
                 <div className="mt-6">
-                  <ButtonComponent href={`/case-study/${project.slug}`} variant="secondary" size="sm">
+                  <ButtonComponent
+                    href={`/case-study/${project.slug}`}
+                    variant="secondary"
+                    size="sm"
+                    fullWidth
+                  >
                     View Project
                   </ButtonComponent>
                 </div>
