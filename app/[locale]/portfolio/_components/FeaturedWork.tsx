@@ -1,7 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import { ArrowUpRight } from 'lucide-react'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import Link from 'next/link'
 import { featuredProjects } from '../_data/projects'
 
@@ -52,13 +52,11 @@ const FeaturedWork = () => {
                 ))}
               </p>
               <p className="mt-4 text-base leading-relaxed text-[#808080] md:text-lg">{project.tagline}</p>
-              <Link
-                href={`/case-study/${project.slug}`}
-                className="mt-6 inline-flex items-center gap-2 font-medium transition-opacity hover:opacity-70"
-              >
-                View Case Study
-                <ArrowUpRight aria-hidden className="size-5" strokeWidth={2} />
-              </Link>
+              <div className="mt-6">
+                <ButtonComponent href={`/case-study/${project.slug}`} variant="secondary" size="sm">
+                  View Case Study
+                </ButtonComponent>
+              </div>
             </div>
           </RevealWrapperV2>
         ))}
