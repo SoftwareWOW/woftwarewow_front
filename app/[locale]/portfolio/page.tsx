@@ -48,11 +48,17 @@ export default async function PortfolioPage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
+        {/* 1. Hero — case-study/CaseStudyHero */}
         <PortfolioHero />
+        {/* 2. Featured Work — case-study/Projects (alternating layout) */}
         <FeaturedWork />
+        {/* 3. Explore Our Work — case-study/Projects card hover + new filter grid */}
         <ExploreWork />
+        {/* 4. How We Create Impact — packages/business-growth/HowItWorks (4-col, no CTA) */}
         <HowWeCreateImpact />
+        {/* 5. Expertise Behind the Work — technology-and-saas/ConnectedExpertise (Home-19 ElevateBrandV2, compact grid) */}
         <ExpertiseBehindWork />
+        {/* 6. CTA — local compact section (not WowGrowthCta) */}
         <PortfolioCta />
       </div>
     </LayoutOne>

@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { featuredProjects } from '../_data/projects'
 
-/** Layout: CaseStudy Projects — alternating large project cards. */
+/** Layout: case-study/_components/Projects.tsx — alternating lg:flex-row layout, featured subset. */
 const FeaturedWork = () => {
   return (
     <section>

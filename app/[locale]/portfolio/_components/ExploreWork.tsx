@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { PORTFOLIO_FILTERS, portfolioProjects, type PortfolioFilter } from '../_data/projects'
 
-/** Filter tabs + project grid with case-study card hover styling. */
+/** Layout: case-study/_components/Projects.tsx — underline-hover-effect card styling + new filter tabs. */
 const ExploreWork = () => {
   const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All')
 

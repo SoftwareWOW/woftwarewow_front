@@ -24,7 +24,7 @@ const steps = [
   },
 ]
 
-/** Layout: HowItWorks — four numbered columns with faded background numbers. */
+/** Layout: packages/business-growth/_components/HowItWorks.tsx — 4 steps, no SectionLabel/CTA. */
 const HowWeCreateImpact = () => {
   return (
     <section>

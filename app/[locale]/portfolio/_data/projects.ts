@@ -1,3 +1,4 @@
+/** Project data mapped from data/case-study/*.md + lib/case-study/caseStudyImages.ts */
 export type PortfolioFilter =
   | 'All'
   | 'Websites'

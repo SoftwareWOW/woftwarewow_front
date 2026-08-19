@@ -83,7 +83,7 @@ const divisions: {
   },
 ]
 
-/** Layout: ConnectedExpertise — compact 2×4 division name grid with links. */
+/** Layout: industries/technology-and-saas/_components/ConnectedExpertise.tsx (Home-19 ElevateBrandV2) — simplified 2×4 link grid. */
 const ExpertiseBehindWork = () => {
   return (
     <section>

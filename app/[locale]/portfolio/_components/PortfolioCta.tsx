@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
-/** Local compact CTA — Start a Project + Talk to an Expert. */
+/** Local section — compact bordered CTA; WowGrowthCta split layout omitted. */
 const PortfolioCta = () => {
   return (
     <section>

@@ -3,7 +3,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
-/** Layout: CaseStudyHero — centered intro + primary CTA. */
+/** Layout: case-study/_components/CaseStudyHero.tsx — adds InstrumentText h1 + #work CTA. */
 const PortfolioHero = () => {
   return (
     <section
