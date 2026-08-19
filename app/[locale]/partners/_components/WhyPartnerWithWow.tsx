@@ -27,11 +27,11 @@ const WhyPartnerWithWow = () => {
               </RevealWrapper>
             ))}
           </div>
-          <RevealWrapper as="figure" className="reveal-me md:w-1/2">
+          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
               src="/images/wow/Hero/devision/Accelerate.jpg"
               alt="WOW partner ecosystem"
-              className="h-full w-full object-cover"
+              className="h-full w-full rounded-radius-md object-cover"
             />
           </RevealWrapper>
         </div>
