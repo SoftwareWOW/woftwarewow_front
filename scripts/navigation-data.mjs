@@ -189,7 +189,7 @@ export const navigation = {
             title: null,
             items: [
               { id: 'portfolio', label: 'Portfolio', description: 'Showcase of our work', type: 'link', href: '/portfolio', detailPanel: 'exploreDefault' },
-              { id: 'recentWorks', label: 'Recent Works', description: 'Latest completed projects', type: 'link', href: '/portfolio/recent', detailPanel: 'exploreDefault' },
+              { id: 'recentWorks', label: 'Recent Work', description: 'See our latest completed projects.', type: 'link', href: '/portfolio/recent', detailPanel: 'exploreDefault' },
               { id: 'clients', label: 'Clients', description: "Businesses we've worked with", type: 'link', href: '/clients', detailPanel: 'exploreDefault' },
               { id: 'partnerNetwork', label: 'Partner Network', description: 'Our strategic partners', type: 'link', href: '/partners', detailPanel: 'exploreDefault' },
               { id: 'locations', label: 'Locations', description: 'Our global presence', type: 'link', href: '/locations', detailPanel: 'exploreDefault' },
@@ -219,7 +219,7 @@ export const navigation = {
             title: 'Our Menu',
             items: [
               { id: 'portfolio', label: 'Portfolio', description: 'Showcase of our work', href: '/portfolio' },
-              { id: 'recentWorks', label: 'Recent Works', description: 'Latest completed projects', href: '/portfolio/recent' },
+              { id: 'recentWorks', label: 'Recent Work', description: 'See our latest completed projects.', href: '/portfolio/recent' },
               { id: 'clients', label: 'Clients', description: "Businesses we've worked with", href: '/clients' },
               { id: 'partnerNetwork', label: 'Partner Network', description: 'Our strategic partners', href: '/partners' },
               { id: 'locations', label: 'Locations', description: 'Our global presence', href: '/locations' },

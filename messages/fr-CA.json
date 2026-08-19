@@ -538,7 +538,7 @@
       },
       "recentWorks": {
         "title": "Latest Completed Projects.",
-        "description": "See our most recent deliverables and client outcomes.",
+        "description": "See our latest completed projects.",
         "includes": [
           "Recent launches",
           "Live demos",
@@ -1439,8 +1439,8 @@
                 },
                 {
                   "id": "recentWorks",
-                  "label": "Recent Works",
-                  "description": "Latest completed projects",
+                  "label": "Recent Work",
+                  "description": "See our latest completed projects.",
                   "type": "link",
                   "href": "/portfolio/recent",
                   "detailPanel": "exploreDefault"
@@ -1565,8 +1565,8 @@
                 },
                 {
                   "id": "recentWorks",
-                  "label": "Recent Works",
-                  "description": "Latest completed projects",
+                  "label": "Recent Work",
+                  "description": "See our latest completed projects.",
                   "href": "/portfolio/recent"
                 },
                 {
