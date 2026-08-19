@@ -525,12 +525,11 @@
       },
       "portfolio": {
         "title": "Showcase Of Our Work.",
-        "description": "Explore selected projects across web, apps, marketing, and design.",
+        "description": "Explore selected work across technology, marketing, design, and growth.",
         "includes": [
           "Case studies",
           "Client testimonials",
           "Industry diversity",
-          "Award-winning work",
           "Before & after results",
           "Project highlights"
         ],
