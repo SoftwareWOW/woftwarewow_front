@@ -2,6 +2,7 @@
 
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import WowText from '@/components/wow/shared/WowText'
 import { useMemo, useState } from 'react'
 import {
   PORTFOLIO_FILTERS,
@@ -28,7 +29,9 @@ const RecentWorkExplorer = () => {
             <SectionLabel>EXPLORE BY EXPERTISE</SectionLabel>
           </div>
           <TextAppearAnimation>
-            <h2 className="text-appear">Fresh from WOW.</h2>
+            <h2 className="text-appear">
+              Fresh from <WowText>WOW</WowText>.
+            </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
