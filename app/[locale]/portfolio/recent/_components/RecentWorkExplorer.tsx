@@ -28,11 +28,9 @@ const RecentWorkExplorer = () => {
           <div className="mb-4 flex justify-center md:mb-5">
             <SectionLabel>EXPLORE BY EXPERTISE</SectionLabel>
           </div>
-          <TextAppearAnimation>
-            <h2 className="text-appear">
-              Fresh from <WowText>WOW</WowText>.
-            </h2>
-          </TextAppearAnimation>
+          <h2 className="text-appear text-center">
+            Fresh from <WowText>WOW</WowText>
+          </h2>
           <TextAppearAnimation>
             <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
               Browse our newest completed projects and filter by the expertise behind each one.
