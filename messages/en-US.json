@@ -1669,7 +1669,7 @@
                   "label": "Meet",
                   "description": "Connect with our team",
                   "type": "link",
-                  "href": "/contact",
+                  "href": "/meet",
                   "detailPanel": "default"
                 },
                 {
@@ -1677,7 +1677,7 @@
                   "label": "Think Tank",
                   "description": "Ideas and strategy hub",
                   "type": "link",
-                  "href": "/blog",
+                  "href": "/thinktank",
                   "detailPanel": "default"
                 },
                 {
@@ -1685,7 +1685,7 @@
                   "label": "Quotation Request",
                   "description": "Get a project quote",
                   "type": "link",
-                  "href": "/contact",
+                  "href": "/quotation",
                   "detailPanel": "default"
                 },
                 {
@@ -1693,7 +1693,7 @@
                   "label": "Client Portal",
                   "description": "Access your dashboard",
                   "type": "link",
-                  "href": "/password",
+                  "href": "/clientportal",
                   "detailPanel": "default"
                 },
                 {
@@ -1701,7 +1701,7 @@
                   "label": "White-label",
                   "description": "Rebrand our services",
                   "type": "link",
-                  "href": "/services",
+                  "href": "/whitelabel",
                   "detailPanel": "default"
                 },
                 {
@@ -1709,7 +1709,7 @@
                   "label": "Affiliate & Referral",
                   "description": "Earn through referrals",
                   "type": "link",
-                  "href": "/contact",
+                  "href": "/affiliate",
                   "detailPanel": "default"
                 }
               ]
@@ -1740,7 +1740,7 @@
                   "description": "• Help Articles\n• Ticket Management\n• Resources & Tools\n• Knowledgebase",
                   "multilineDescription": true,
                   "type": "link",
-                  "href": "/faq",
+                  "href": "/helpsupport",
                   "detailPanel": "default"
                 },
                 {
@@ -1748,7 +1748,7 @@
                   "label": "Brand Kit",
                   "description": "Logos and brand assets",
                   "type": "link",
-                  "href": "/about",
+                  "href": "/brandkit",
                   "detailPanel": "default"
                 }
               ]
@@ -1765,7 +1765,7 @@
                   "id": "meet",
                   "label": "Meet",
                   "description": "Connect with our team",
-                  "href": "/contact"
+                  "href": "/meet"
                 },
                 {
                   "id": "thinkTank",
