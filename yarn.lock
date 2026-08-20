@@ -518,6 +518,11 @@
   dependencies:
     fast-glob "3.3.1"
 
+"@next/swc-wasm-nodejs@^16.2.7":
+  version "16.2.7"
+  resolved "https://registry.npmjs.org/@next/swc-wasm-nodejs/-/swc-wasm-nodejs-16.2.7.tgz"
+  integrity sha512-cnrWR8F2M2L6CFs8k15j6r9ePYXR7xmcNfgP/IozonOdT0cJvEmyATWU+i4QBDUyLu6maPSBbHBG08JMC+1cJw==
+
 "@next/swc-win32-x64-msvc@16.2.7":
   version "16.2.7"
   resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-16.2.7.tgz"

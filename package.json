@@ -17,6 +17,7 @@
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/simple-icons": "^1.2.92",
     "@iconify/react": "^6.0.2",
+    "@next/swc-wasm-nodejs": "^16.2.7",
     "@radix-ui/react-dialog": "^1.1.10",
     "@radix-ui/react-visually-hidden": "^1.2.0",
     "@types/matter-js": "^0.19.8",
