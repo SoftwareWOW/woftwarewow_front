@@ -1777,7 +1777,7 @@
                   "id": "quotation",
                   "label": "Quotation Request",
                   "description": "Get a project quote",
-                  "href": "/contact"
+                  "href": "/quotation"
                 },
                 {
                   "id": "clientPortal",

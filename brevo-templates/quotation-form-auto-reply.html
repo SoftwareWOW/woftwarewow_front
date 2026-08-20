@@ -1,0 +1,113 @@
+<!--
+  WOW Superagency — Brevo Quotation Auto-Reply Template (sent to the person who submitted the form)
+
+  How to use:
+  1. Open https://app.brevo.com/ → Transactional → Templates → New template
+  2. Choose "Code your own"
+  3. Subject line: We received your quotation request, {{ params.name }}
+  4. Paste this HTML into the template body
+  5. Save and activate the template
+  6. Copy the template ID into .env.local as BREVO_QUOTATION_AUTO_REPLY_TEMPLATE_ID
+
+  Required template params:
+  - params.name
+  - params.services
+  - params.budget
+  - params.timeline
+  - params.projectStage
+  - params.submittedAt
+  - params.senderName
+
+  Style reference: brevo-templates/quotation-form.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We Received Your Quotation Request</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f3fb;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #151515;
+    "
+  >
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td align="center" style="padding: 32px 16px">
+          <table
+            role="presentation"
+            width="600"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden"
+          >
+            <tr>
+              <td style="background: linear-gradient(135deg, #9592de 0%, #292757 100%); padding: 28px 32px">
+                <p style="margin: 0 0 8px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #ffffff; opacity: 0.85">
+                  {{ params.senderName }}
+                </p>
+                <h1 style="margin: 0; font-size: 28px; line-height: 1.2; color: #ffffff; font-weight: 400">
+                  Thank You, {{ params.name }}
+                </h1>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 32px">
+                <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #666666">
+                  We received your quotation request and our team is reviewing it now.
+                </p>
+                <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: #666666">
+                  We will reply as soon as possible — usually within one business day — with next steps or a short conversation if we need more context.
+                </p>
+
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 24px">
+                  <tr>
+                    <td style="padding: 16px 18px; background-color: #f8f8fc; border-radius: 8px; border: 1px solid #ececf5">
+                      <p style="margin: 0 0 10px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #808080">
+                        Your submission summary
+                      </p>
+                      <p style="margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: #151515">
+                        <strong>Services:</strong> {{ params.services }}
+                      </p>
+                      <p style="margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: #151515">
+                        <strong>Stage:</strong> {{ params.projectStage }}
+                      </p>
+                      <p style="margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: #151515">
+                        <strong>Budget:</strong> {{ params.budget }}
+                      </p>
+                      <p style="margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: #151515">
+                        <strong>Timeline:</strong> {{ params.timeline }}
+                      </p>
+                      <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #808080">
+                        Submitted on {{ params.submittedAt }} (UTC)
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #666666">
+                  If you have additional details to share, simply reply to this email.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 20px 32px 28px; border-top: 1px solid #ececf5; background-color: #fafafa">
+                <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #999999; text-align: center">
+                  {{ params.senderName }} · This is an automated confirmation email.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
