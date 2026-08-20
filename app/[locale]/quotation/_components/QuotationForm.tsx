@@ -2,7 +2,8 @@
 
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import { useToast } from '@/components/wow/shared/ToastProvider'
-import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import {
   budgetOptions,
   projectStageOptions,
@@ -16,8 +17,11 @@ const sectionTitleClassName =
 const labelClassName =
   'text-lg font-normal leading-[1.2] tracking-[-0.02em] text-[#666666] dark:text-dark-100 md:text-xl'
 
+const fieldSurfaceClassName =
+  'rounded-radius-sm border border-[#1515151A] bg-backgroundBody text-secondary dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody'
+
 const inputClassName =
-  'w-full rounded-radius-sm border border-[#1515151A] bg-backgroundBody px-5 py-4 text-base leading-[1.4] tracking-[0.02em] text-secondary placeholder:text-[#808080] focus:border-[#1515151A] focus:outline-none focus:bg-[#D9D8F3] dark:focus:bg-[#1F1F1F] dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody dark:placeholder:text-dark-100 md:text-lg'
+  `w-full ${fieldSurfaceClassName} px-5 py-4 text-base leading-[1.4] tracking-[0.02em] placeholder:text-[#808080] focus:border-[#1515151A] focus:outline-none focus:bg-[#D9D8F3] dark:focus:bg-[#1F1F1F] dark:placeholder:text-dark-100 md:text-lg`
 
 const chipClassName = (selected: boolean) =>
   [
@@ -40,7 +44,9 @@ const QuotationForm = () => {
   const [projectStage, setProjectStage] = useState('')
   const [budget, setBudget] = useState('')
   const [timeline, setTimeline] = useState('')
+  const [isBudgetOpen, setIsBudgetOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const budgetMenuRef = useRef<HTMLDivElement>(null)
 
   const toggleService = (value: string) => {
     setServices((prev) => (prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]))
@@ -58,7 +64,21 @@ const QuotationForm = () => {
     setProjectStage('')
     setBudget('')
     setTimeline('')
+    setIsBudgetOpen(false)
   }
+
+  useEffect(() => {
+    if (!isBudgetOpen) return
+
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!budgetMenuRef.current?.contains(event.target as Node)) {
+        setIsBudgetOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    return () => document.removeEventListener('mousedown', handlePointerDown)
+  }, [isBudgetOpen])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -279,24 +299,61 @@ const QuotationForm = () => {
         </div>
 
         <div className="md:col-span-full">
-          <label htmlFor="quotation-budget" className={sectionTitleClassName}>
+          <p id="quotation-budget-label" className={sectionTitleClassName}>
             5. Budget Range
-          </label>
-          <select
-            id="quotation-budget"
-            name="budget"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            className={`${inputClassName} mt-4 appearance-none bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 viewBox=%220 0 12 8%22 fill=%22none%22%3E%3Cpath d=%22M1 1.5L6 6.5L11 1.5%22 stroke=%22%23808080%22 stroke-width=%221.5%22 stroke-linecap=%22round%22/%3E%3C/svg%3E')] bg-[length:12px_8px] bg-[right_1.25rem_center] bg-no-repeat pr-12`}
-            disabled={isSubmitting}
-          >
-            <option value="">Select Range</option>
-            {budgetOptions.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+          </p>
+          <div ref={budgetMenuRef} className="relative mt-4">
+            <button
+              type="button"
+              id="quotation-budget"
+              aria-haspopup="listbox"
+              aria-expanded={isBudgetOpen}
+              aria-labelledby="quotation-budget-label quotation-budget"
+              onClick={() => setIsBudgetOpen((open) => !open)}
+              disabled={isSubmitting}
+              className={`flex w-full items-center justify-between px-5 py-4 text-left text-base leading-[1.4] tracking-[0.02em] focus:outline-none md:text-lg ${fieldSurfaceClassName}`}
+            >
+              <span className={budget ? '' : 'text-[#808080] dark:text-dark-100'}>
+                {budget || 'Select Range'}
+              </span>
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 text-[#808080] transition-transform ${isBudgetOpen ? 'rotate-180' : ''}`}
+                aria-hidden
+              />
+            </button>
+
+            {isBudgetOpen && (
+              <ul
+                role="listbox"
+                aria-labelledby="quotation-budget-label"
+                className={`absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden py-1 ${fieldSurfaceClassName}`}
+              >
+                {budgetOptions.map((item) => {
+                  const selected = budget === item
+
+                  return (
+                    <li key={item} role="option" aria-selected={selected}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setBudget(item)
+                          setIsBudgetOpen(false)
+                        }}
+                        disabled={isSubmitting}
+                        className={
+                          selected
+                            ? 'flex w-full px-5 py-3 text-left text-base bg-primary text-white'
+                            : 'flex w-full px-5 py-3 text-left text-base text-secondary hover:bg-primary/10 dark:text-backgroundBody dark:hover:bg-primary/20'
+                        }
+                      >
+                        {item}
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+          </div>
         </div>
 
         <div className="md:col-span-full">
