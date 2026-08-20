@@ -68,8 +68,8 @@ const LocationsPresence = () => {
                   onClick={() => setActiveId(office.id)}
                   className={
                     isActive
-                      ? 'shrink-0 snap-start rounded-full bg-[#15151533] px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-[#0D0D0D] dark:bg-[#EDF0F533] dark:text-[#F2F2F2] sm:text-[11px] xl:text-[12px]'
-                      : 'shrink-0 snap-start rounded-full border border-black/10 px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-[#808080] transition-colors hover:text-secondary dark:border-white/10 dark:hover:text-[#F2F2F2] sm:text-[11px] xl:text-[12px]'
+                      ? 'shrink-0 snap-start rounded-radius-sm bg-[#15151533] px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-[#0D0D0D] dark:bg-[#EDF0F533] dark:text-[#F2F2F2] sm:text-[11px] xl:text-[12px]'
+                      : 'shrink-0 snap-start rounded-radius-sm border border-black/10 px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-[#808080] transition-colors hover:text-secondary dark:border-white/10 dark:hover:text-[#F2F2F2] sm:text-[11px] xl:text-[12px]'
                   }
                 >
                   {office.city}
@@ -105,7 +105,7 @@ const LocationsPresence = () => {
             </RevealWrapper>
 
             <RevealWrapper className="reveal-me mt-8">
-              <ButtonComponentList className="flex justify-start" itemClassName="block">
+              <ButtonComponentList className="flex justify-start rounded-radius-sm" itemClassName="block">
                 <ButtonComponent variant="primary" onClick={openMaps} ariaLabel={active.ctaLabel}>
                   {active.ctaLabel}
                 </ButtonComponent>
