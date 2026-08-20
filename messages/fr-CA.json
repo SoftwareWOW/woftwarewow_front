@@ -1783,7 +1783,7 @@
                   "id": "clientPortal",
                   "label": "Client Portal",
                   "description": "Access your dashboard",
-                  "href": "/password"
+                  "href": "/clientportal"
                 },
                 {
                   "id": "whiteLabel",
