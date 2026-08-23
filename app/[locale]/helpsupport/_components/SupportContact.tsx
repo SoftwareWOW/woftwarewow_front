@@ -27,7 +27,7 @@ const cards = [
 const SupportContact = () => {
   return (
     <section>
-      <div className="container">
+      <div className="container pb-5 sm:pb-10 md:pb-15 lg:pb-20">
         <div className="mb-16 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center">
             <SectionLabel>CONTACT SUPPORT</SectionLabel>
