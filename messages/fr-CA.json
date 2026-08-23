@@ -1814,7 +1814,7 @@
                   "label": "Help & Support",
                   "description": "• Help Articles\n• Ticket Management\n• Resources & Tools\n• Knowledgebase",
                   "multilineDescription": true,
-                  "href": "/faq"
+                  "href": "/helpsupport"
                 },
                 {
                   "id": "brandKit",
