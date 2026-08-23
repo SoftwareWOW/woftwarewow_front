@@ -209,7 +209,7 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
         <span className="mb-4 inline-flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
           <CalendarDays className="size-7" aria-hidden />
         </span>
-        <h3 className="text-2xl text-secondary dark:text-backgroundBody">
+        <h3 className="text-2xl tracking-normal text-secondary dark:text-backgroundBody">
           Booking confirmed
         </h3>
         <p className="mt-3 max-w-md text-base leading-relaxed text-muted">
@@ -231,7 +231,7 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
             <span className="mx-auto mb-5 inline-flex size-16 items-center justify-center rounded-radius-sm bg-primary/10 text-primary lg:mx-0">
               <SidebarIcon className="size-7" strokeWidth={1.5} aria-hidden />
             </span>
-            <h3 className="text-xl leading-snug text-secondary dark:text-backgroundBody md:text-2xl">
+            <h3 className="text-xl leading-snug tracking-normal text-secondary dark:text-backgroundBody md:text-2xl">
               {sidebarContent.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">{sidebarContent.description}</p>

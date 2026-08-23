@@ -48,7 +48,7 @@ const WhyMeetWithUs = () => (
                   <span className="inline-flex size-10 items-center justify-center rounded-radius-sm bg-primary/10 text-primary">
                     <Icon className="size-4" aria-hidden />
                   </span>
-                  <h3 className="text-lg font-medium text-secondary dark:text-[#F2F2F2]">
+                  <h3 className="text-lg font-medium tracking-normal text-secondary dark:text-[#F2F2F2]">
                     {item.title}
                   </h3>
                 </div>

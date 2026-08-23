@@ -8,7 +8,7 @@ const CalComUnavailable = () => (
     <span className="mb-4 inline-flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
       <CalendarX className="size-6" aria-hidden />
     </span>
-    <h3 className="mb-3 text-xl font-medium text-secondary dark:text-[#F2F2F2]">
+    <h3 className="mb-3 text-xl font-medium tracking-normal text-secondary dark:text-[#F2F2F2]">
       Scheduling is temporarily unavailable
     </h3>
     <p className="mx-auto max-w-md text-base leading-relaxed text-[#808080]">
