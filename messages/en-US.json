@@ -1795,7 +1795,7 @@
                   "id": "affiliate",
                   "label": "Affiliate & Referral",
                   "description": "Earn through referrals",
-                  "href": "/contact"
+                  "href": "/affiliate"
                 },
                 {
                   "id": "insights",
