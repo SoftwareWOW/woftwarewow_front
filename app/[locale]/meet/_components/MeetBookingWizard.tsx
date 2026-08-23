@@ -235,14 +235,13 @@ export default function MeetBookingWizard({ calLink }: MeetBookingWizardProps) {
               {sidebarContent.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">{sidebarContent.description}</p>
-          </div>
-
-          <div className="mt-auto hidden pt-10 text-center text-sm text-muted lg:block">
-            <p className="font-medium text-secondary dark:text-backgroundBody">Questions?</p>
-            <p className="mt-1 flex items-center justify-center gap-1.5">
-              <Phone className="size-3.5" aria-hidden />
-              Call {CAL_HELP_PHONE} for help
-            </p>
+            <div className="mt-6 text-sm text-muted">
+              <p className="font-medium text-secondary dark:text-backgroundBody">Questions?</p>
+              <p className="mt-1 flex items-center justify-center gap-1.5 lg:justify-start">
+                <Phone className="size-3.5 shrink-0" aria-hidden />
+                Call {CAL_HELP_PHONE} for help
+              </p>
+            </div>
           </div>
         </aside>
 
