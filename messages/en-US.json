@@ -1789,7 +1789,7 @@
                   "id": "whiteLabel",
                   "label": "White-label",
                   "description": "Rebrand our services",
-                  "href": "/services"
+                  "href": "/whitelabel"
                 },
                 {
                   "id": "affiliate",
