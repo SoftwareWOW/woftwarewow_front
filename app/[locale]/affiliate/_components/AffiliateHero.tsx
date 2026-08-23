@@ -40,28 +40,27 @@ const AffiliateHero = () => {
                 JOIN THE PROGRAM
               </ButtonComponent>
             </ButtonComponentList>
-            <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="white">
-                REFER SOMEONE
-              </ButtonComponent>
-            </ButtonComponentList>
           </RevealWrapperV2>
         </div>
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
-          <figure className="relative mt-[78px]">
+          <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-md sm:mt-[78px]">
             <img
-              src="/images/hero-img/startup-hero-1.jpg"
-              alt="Team collaborating in a modern workspace"
-              className="rounded-radius-md max-sm:w-full"
+              src="/images/wow/Hero/career/career%20(2).png"
+              alt="Professionals collaborating as WOW referral partners"
+              className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
+              width={410}
+              height={540}
             />
-          </figure>
-          <figure>
+          </RevealWrapper>
+          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/hero-img/startup-hero-2.jpg"
+              src="/images/wow/Hero/career/career%20(1).png"
               alt="Professional working at a desk"
-              className="rounded-radius-md max-sm:w-full"
+              className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
+              width={410}
+              height={540}
             />
-          </figure>
+          </RevealWrapper>
         </div>
       </div>
     </section>
