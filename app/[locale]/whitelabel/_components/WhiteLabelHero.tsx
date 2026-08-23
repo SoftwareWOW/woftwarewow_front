@@ -69,8 +69,8 @@ const WhiteLabelHero = () => {
                 </ButtonComponent>
               </ButtonComponentList>
               <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="#capabilities" variant="secondary">
-                  EXPLORE CAPABILITIES
+                <ButtonComponent href="/contact" variant="secondary">
+                  TALK TO OUR TEAM
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapperV2>

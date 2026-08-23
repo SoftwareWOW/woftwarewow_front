@@ -19,31 +19,13 @@ const PartnerBenefits = () => {
         </div>
 
         <RevealWrapper className="reveal-me flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-          {partnerBenefits.map((item, index) => (
+          {partnerBenefits.map((item) => (
             <article
               key={item.title}
-              className={
-                index === 0
-                  ? 'flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-primary bg-primary px-[30px] py-10'
-                  : 'group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 transition-colors duration-300 hover:border-primary hover:bg-primary dark:border-dark'
-              }
+              className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 transition-colors duration-300 hover:border-primary hover:bg-primary dark:border-dark"
             >
-              <h5
-                className={
-                  index === 0
-                    ? 'mb-2.5 text-white'
-                    : 'mb-2.5 transition-colors duration-300 group-hover:text-white'
-                }
-              >
-                {item.title}
-              </h5>
-              <p
-                className={
-                  index === 0
-                    ? 'text-white/85'
-                    : 'text-[#808080] transition-colors duration-300 group-hover:text-white/85'
-                }
-              >
+              <h5 className="mb-2.5 transition-colors duration-300 group-hover:text-white">{item.title}</h5>
+              <p className="text-[#808080] transition-colors duration-300 group-hover:text-white/85">
                 {item.description}
               </p>
             </article>
