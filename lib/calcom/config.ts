@@ -41,21 +41,62 @@ export function parseCalLink(value: string): CalComConfig | null {
   }
 }
 
-export function getCalComConfig(): CalComConfig | null {
-  const calUrl = getCalComUrl()
-  if (calUrl) {
-    const parsed = parseCalLink(calUrl)
+function getCalComConfigFromEnv(
+  urlCandidates: Array<string | undefined>,
+  usernameEnv: string | undefined,
+  eventSlugEnv: string | undefined,
+): CalComConfig | null {
+  for (const value of urlCandidates) {
+    const trimmed = value?.trim()
+    if (!trimmed) continue
+    const parsed = parseCalLink(trimmed)
     if (parsed) return parsed
   }
 
-  const username = process.env.CALCOM_USERNAME?.trim()
-  const eventTypeSlug = process.env.CALCOM_EVENT_SLUG?.trim()
+  const username = usernameEnv?.trim()
+  const eventTypeSlug = eventSlugEnv?.trim()
 
   if (username && eventTypeSlug) {
     return { username, eventTypeSlug }
   }
 
   return null
+}
+
+export function getCalComConfig(): CalComConfig | null {
+  return getCalComConfigFromEnv(
+    [process.env.NEXT_PUBLIC_CAL_URL, process.env.CALCOM_URL, process.env.CALCOM_BOOKING_URL],
+    process.env.CALCOM_USERNAME,
+    process.env.CALCOM_EVENT_SLUG,
+  )
+}
+
+/** Think Tank booking page URL — separate Cal.com event from Meet. */
+export function getThinkTankCalComUrl(): string | null {
+  const candidates = [process.env.NEXT_PUBLIC_CAL_THINKTANK_URL, process.env.CALCOM_THINKTANK_URL]
+
+  for (const value of candidates) {
+    const trimmed = value?.trim()
+    if (trimmed) return trimmed
+  }
+
+  return null
+}
+
+export function getThinkTankCalComConfig(): CalComConfig | null {
+  return getCalComConfigFromEnv(
+    [process.env.NEXT_PUBLIC_CAL_THINKTANK_URL, process.env.CALCOM_THINKTANK_URL],
+    process.env.CALCOM_THINKTANK_USERNAME,
+    process.env.CALCOM_THINKTANK_EVENT_SLUG,
+  )
+}
+
+/** Minimum hours before a Think Tank slot can be booked (default 24). */
+export function getThinkTankMinNoticeHours(): number {
+  const raw = process.env.THINKTANK_MIN_NOTICE_HOURS?.trim()
+  if (!raw) return 24
+  const parsed = Number.parseInt(raw, 10)
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : 24
 }
 
 /** Real Cal.com API keys only (cal_live_… / cal_test_…). URLs in CALCOM_API_KEY are ignored. */

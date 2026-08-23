@@ -47,7 +47,7 @@ export default function WowHero({ hero }: WowHeroProps) {
         <div className="relative z-10 flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
           <RevealWrapper delay={0.3} as="div">
             <ButtonComponentList>
-              <ButtonComponent href="/contact" variant="primary">
+              <ButtonComponent href="/meet" variant="primary">
                 {hero.ctaPrimary}
               </ButtonComponent>
             </ButtonComponentList>
