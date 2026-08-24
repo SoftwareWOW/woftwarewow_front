@@ -64,3 +64,40 @@
     @apply inline-block text-sm font-medium leading-[1.1] text-black dark:text-backgroundBody;
   }
 }
+
+/* Unlayered so it beats @layer base * { color } on footer social glyphs */
+.footer-social-link {
+  color: #555555 !important;
+
+  svg,
+  svg * {
+    color: inherit !important;
+    fill: currentColor !important;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: #ffffff !important;
+
+    svg,
+    svg * {
+      color: #ffffff !important;
+      fill: #ffffff !important;
+    }
+  }
+
+  :is(.dark &) {
+    color: #999999 !important;
+
+    &:hover,
+    &:focus-visible {
+      color: #ffffff !important;
+
+      svg,
+      svg * {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+      }
+    }
+  }
+}

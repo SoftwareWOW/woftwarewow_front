@@ -1,7 +1,7 @@
 'use client'
 
 import WowText from '@/components/wow/shared/WowText'
-import { stickyFooterClass } from '@/components/wow/footer-layout'
+import { footerSocialLinkClass, stickyFooterClass } from '@/components/wow/footer-layout'
 import { useStickyFooterHeight } from '@/components/wow/useStickyFooterHeight'
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
@@ -91,9 +91,9 @@ export default function WowFooter({ footer }: WowFooterProps) {
                       key={name}
                       href={href}
                       aria-label={name}
-                      className="group flex size-9 items-center justify-center rounded-full border border-[#e5e5e5] text-[#555555] transition-colors duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white sm:size-10 dark:border-white/10 dark:text-[#999999] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
+                      className={footerSocialLinkClass}
                     >
-                      <Icon className="size-3.5 text-current sm:size-4 group-hover:!text-white" />
+                      <Icon className="size-3.5 sm:size-4" aria-hidden />
                     </a>
                   ))}
                 </div>
