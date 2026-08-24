@@ -3,6 +3,7 @@
 import type { DivisionSiteConfig } from '@/components/wow/divisions/division-site-config'
 import WowText from '@/components/wow/shared/WowText'
 import { stickyFooterClass } from '@/components/wow/footer-layout'
+import { useStickyFooterHeight } from '@/components/wow/useStickyFooterHeight'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import {
@@ -32,8 +33,10 @@ const legalLinks = [
 ]
 
 export default function DivisionFooter({ config }: DivisionFooterProps) {
+  const footerRef = useStickyFooterHeight<HTMLElement>()
+
   return (
-    <footer className={stickyFooterClass}>
+    <footer ref={footerRef} className={stickyFooterClass}>
       <div className="relative bg-background px-3 py-3 transition-colors duration-300 dark:bg-dark sm:px-4 sm:py-4 md:px-5 md:py-5">
         <div className="absolute inset-0 opacity-0 dark:opacity-20">
           <div
