@@ -428,7 +428,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       </motion.header>
 
       <motion.div
-        className="fixed inset-x-0 bottom-0 z-[1003] w-full max-w-full overflow-x-clip px-[15px] pb-[15px] md:hidden"
+        className="fixed inset-x-0 bottom-0 z-[1003] w-full max-w-full overflow-x-clip px-[15px] pb-[calc(15px+env(safe-area-inset-bottom))] md:hidden"
         initial={false}
         animate={{
           y: navbarHidden ? 'calc(100% + 100px)' : '0%',

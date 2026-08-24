@@ -15,7 +15,7 @@ type WowMobileBottomNavProps = {
 export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMobileBottomNavProps) {
   return (
     <nav
-         className={`fixed bottom-[calc(16px+env(safe-area-inset-bottom))] z-[1002] flex h-[70px] rounded-radius-sm border border-primary bg-primary p-[5px] md:hidden ${mobileNavShellClass}`}
+      className={`relative flex h-[70px] rounded-radius-sm border border-primary bg-primary p-[5px] md:hidden ${mobileNavShellClass}`}
       aria-label="Mobile navigation"
     >
       {items.map((item) => {
@@ -35,17 +35,17 @@ export default function WowMobileBottomNav({ items, activeId, onSelect }: WowMob
             aria-label={item.label}
             aria-expanded={isActive}
           >
-        {Icon && (
-  <Icon
-    aria-hidden
-    className={`size-6 shrink-0 transition-colors ${
-      isActive
-        ? '!text-black !stroke-black'
-        : '!text-white !stroke-white group-hover:!text-black group-hover:!stroke-black'
-    }`}
-    strokeWidth={2}
-  />
-)}
+            {Icon && (
+              <Icon
+                aria-hidden
+                className={`size-6 shrink-0 transition-colors ${
+                  isActive
+                    ? '!text-black !stroke-black'
+                    : '!text-white !stroke-white group-hover:!text-black group-hover:!stroke-black'
+                }`}
+                strokeWidth={2}
+              />
+            )}
           </button>
         )
       })}

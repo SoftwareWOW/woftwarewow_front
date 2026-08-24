@@ -20,7 +20,12 @@ export default async function DivisionSiteLayout({ divisionId, children }: Divis
 
   return (
     <div className="relative w-full max-w-full overflow-x-clip">
-      <DivisionNavbar config={config} navbar={dictionary.navbar} languageSwitcher={dictionary.languageSwitcher} />
+      <DivisionNavbar
+        config={config}
+        navbar={dictionary.navbar}
+        navigation={dictionary.navigation}
+        languageSwitcher={dictionary.languageSwitcher}
+      />
       <main className={stickyFooterMainClass}>{children}</main>
       <DivisionFooter config={config} />
     </div>

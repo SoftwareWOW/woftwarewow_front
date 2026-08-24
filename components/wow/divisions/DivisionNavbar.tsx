@@ -3,6 +3,8 @@
 import type { DivisionSiteConfig } from '@/components/wow/divisions/division-site-config'
 import LanguageSwitcher from '@/components/wow/LanguageSwitcher'
 import { navPillInactiveClass } from '@/components/wow/nav/nav-interaction-styles'
+import WowMobileBottomNav from '@/components/wow/nav/WowMobileBottomNav'
+import WowMobileMenuSheet from '@/components/wow/nav/WowMobileMenuSheet'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
@@ -21,12 +23,19 @@ const iconClass =
 type DivisionNavbarProps = {
   config: DivisionSiteConfig
   navbar: Dictionary['navbar']
+  navigation: Dictionary['navigation']
   languageSwitcher: Dictionary['languageSwitcher']
 }
 
-export default function DivisionNavbar({ config, navbar, languageSwitcher }: DivisionNavbarProps) {
+export default function DivisionNavbar({
+  config,
+  navbar,
+  navigation,
+  languageSwitcher,
+}: DivisionNavbarProps) {
   const [mounted, setMounted] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileMenuId, setMobileMenuId] = useState<string | null>(null)
   const [navbarHidden, setNavbarHidden] = useState(false)
   const [actionMenuOpen, setActionMenuOpen] = useState(false)
   const [languageOpen, setLanguageOpen] = useState(false)
@@ -36,6 +45,8 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
   const currentTheme = theme === 'system' ? systemTheme : theme
   const contactDialog = useContactDialogOptional()
 
+  const mobileItem = navigation.items.find((item) => item.id === mobileMenuId) ?? null
+
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -43,7 +54,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
-      if (actionMenuOpen || mobileOpen) return
+      if (actionMenuOpen || mobileOpen || mobileMenuId) return
 
       const docHeight = document.documentElement.scrollHeight
       const nearBottom = y + window.innerHeight >= docHeight - 120
@@ -64,7 +75,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [actionMenuOpen, mobileOpen])
+  }, [actionMenuOpen, mobileOpen, mobileMenuId])
 
   useEffect(() => {
     if (!actionMenuOpen) return
@@ -162,6 +173,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
                 onClick={() => {
                   setMobileOpen((open) => !open)
                   setActionMenuOpen(false)
+                  setMobileMenuId(null)
                 }}
               >
                 {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -179,6 +191,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
                     if (window.innerWidth < 768) {
                       setActionMenuOpen((open) => !open)
                       setMobileOpen(false)
+                      setMobileMenuId(null)
                     }
                   }}
                   className={`${actionBtnClass} ${actionMenuOpen ? 'bg-primary/80' : ''}`}
@@ -250,6 +263,38 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
         </div>
       </motion.header>
       <div className="h-[72px] md:h-[84px]" aria-hidden />
+
+      <motion.div
+        className="fixed inset-x-0 bottom-0 z-[1003] w-full max-w-full overflow-x-clip px-[15px] pb-[calc(15px+env(safe-area-inset-bottom))] md:hidden"
+        initial={false}
+        animate={{
+          y: navbarHidden ? 'calc(100% + 100px)' : '0%',
+        }}
+        transition={{
+          duration: 0.32,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+      >
+        <WowMobileBottomNav
+          items={navigation.items}
+          activeId={mobileMenuId}
+          onSelect={(id) => {
+            setMobileMenuId(id || null)
+            setMobileOpen(false)
+            setActionMenuOpen(false)
+            setNavbarHidden(false)
+          }}
+        />
+      </motion.div>
+
+      <WowMobileMenuSheet
+        item={mobileItem}
+        navbar={navbar}
+        onClose={() => {
+          setMobileMenuId(null)
+        }}
+      />
+
       <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />
     </>
   )

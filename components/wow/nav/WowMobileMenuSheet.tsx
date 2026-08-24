@@ -56,7 +56,7 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
       />
 
       <div
-        className={`absolute bottom-[calc(86px+env(safe-area-inset-bottom))] left-2 right-2 mx-auto w-auto max-w-[430px] animate-mobile-sheet-in overflow-hidden rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none ${mobileNavShellClass}`}>
+        className={`absolute bottom-[calc(100px+env(safe-area-inset-bottom))] left-2 right-2 mx-auto w-auto max-w-[430px] animate-mobile-sheet-in overflow-hidden rounded-radius-sm bg-white p-[10px] shadow-nav dark:bg-dark-200 dark:shadow-none ${mobileNavShellClass}`}>
         <div className="flex max-h-[min(461px,calc(100dvh-180px))] min-w-0 flex-col overflow-hidden">
           {hasMultiplePages && (
             <div className="mt-[10px] grid shrink-0 gap-[6px]" style={{ gridTemplateColumns: `repeat(${item.mobile.pages.length}, minmax(0, 1fr))` }}>
