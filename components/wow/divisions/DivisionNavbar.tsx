@@ -5,6 +5,7 @@ import LanguageSwitcher from '@/components/wow/LanguageSwitcher'
 import { navPillInactiveClass } from '@/components/wow/nav/nav-interaction-styles'
 import WowMobileBottomNav from '@/components/wow/nav/WowMobileBottomNav'
 import WowMobileMenuSheet from '@/components/wow/nav/WowMobileMenuSheet'
+import { mobileNavInsetClass } from '@/components/wow/nav/mobile-nav-shell'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
@@ -265,7 +266,7 @@ export default function DivisionNavbar({
       <div className="h-[72px] md:h-[84px]" aria-hidden />
 
       <motion.div
-        className="fixed inset-x-0 bottom-0 z-[1003] w-full max-w-full overflow-x-clip px-[15px] pb-[calc(15px+env(safe-area-inset-bottom))] md:hidden"
+        className={`fixed bottom-0 z-[1003] w-full max-w-full overflow-x-clip pb-[calc(15px+env(safe-area-inset-bottom))] md:hidden ${mobileNavInsetClass}`}
         initial={false}
         animate={{
           y: navbarHidden ? 'calc(100% + 100px)' : '0%',

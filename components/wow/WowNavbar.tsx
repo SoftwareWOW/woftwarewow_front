@@ -21,6 +21,7 @@ import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-
 import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
 import WowMobileBottomNav from './nav/WowMobileBottomNav'
 import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
+import { mobileNavInsetClass } from './nav/mobile-nav-shell'
 
 const actionBtnClass =
   'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-4 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px] md:p-4 lg:p-5'
@@ -428,7 +429,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
       </motion.header>
 
       <motion.div
-        className="fixed inset-x-0 bottom-0 z-[1003] w-full max-w-full overflow-x-clip px-[15px] pb-[calc(15px+env(safe-area-inset-bottom))] md:hidden"
+        className={`fixed bottom-0 z-[1003] w-full max-w-full overflow-x-clip pb-[calc(15px+env(safe-area-inset-bottom))] md:hidden ${mobileNavInsetClass}`}
         initial={false}
         animate={{
           y: navbarHidden ? 'calc(100% + 100px)' : '0%',
