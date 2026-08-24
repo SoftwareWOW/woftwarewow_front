@@ -91,9 +91,9 @@ export default function WowFooter({ footer }: WowFooterProps) {
                       key={name}
                       href={href}
                       aria-label={name}
-                      className="flex size-9 items-center justify-center rounded-full border border-[#e5e5e5] text-[#555555] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 sm:size-10 dark:border-white/10 dark:text-[#999999] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white dark:hover:shadow-[#b794f4]/30"
+                      className="group flex size-9 items-center justify-center rounded-full border border-[#e5e5e5] text-[#555555] transition-colors duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white sm:size-10 dark:border-white/10 dark:text-[#999999] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
                     >
-                      <Icon className="size-3.5 sm:size-4" strokeWidth={1.5} />
+                      <Icon className="size-3.5 text-current sm:size-4 group-hover:!text-white" />
                     </a>
                   ))}
                 </div>
@@ -143,10 +143,10 @@ export default function WowFooter({ footer }: WowFooterProps) {
 
           <div
             aria-hidden
-            className="pointer-events-none mt-4 max-w-full overflow-hidden select-none whitespace-nowrap pb-4 text-center text-[clamp(1.5rem,8vw,8rem)] font-semibold leading-none tracking-[-0.04em] sm:mt-6 sm:pb-6"
+            className="pointer-events-none mt-3 max-w-full overflow-hidden select-none whitespace-nowrap pb-3 text-center text-[clamp(0.95rem,4.2vw,3.75rem)] font-semibold leading-none tracking-[-0.04em] sm:mt-4 sm:pb-4 md:text-[clamp(1.1rem,3.6vw,4.25rem)]"
           >
             <WowText variant="watermark" />
-            <span className="ml-3 text-[#1a1a1a]/[0.04] dark:text-white/[0.04] sm:ml-4">Superagency</span>
+            <span className="ml-2 text-[#1a1a1a]/[0.04] dark:text-white/[0.04] sm:ml-3">Superagency</span>
           </div>
         </div>
       </div>
