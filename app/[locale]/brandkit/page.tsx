@@ -4,10 +4,10 @@ import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import BrandKitHero from './_components/BrandKitHero'
-
 import BrandSystem from './_components/BrandSystem'
 import BrandUsageGuidelines from './_components/BrandUsageGuidelines'
 import BrandVisualStyle from './_components/BrandVisualStyle'
+import BrandKitLogos from './_components/BrandKitLogo'
 
 type Props = {
   params: Promise<{ locale: string }>
