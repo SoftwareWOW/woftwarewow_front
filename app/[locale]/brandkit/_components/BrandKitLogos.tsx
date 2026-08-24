@@ -3,6 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { divisionBrandLogos, type DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 const navBase = '/images/wow/nav'
 
@@ -10,57 +11,107 @@ function assetPath(...segments: string[]) {
   return `${navBase}/${segments.map((segment) => encodeURIComponent(segment)).join('/')}`
 }
 
-const logoCards = [
+const exclamationMarks = {
+  white: '/images/wow/Exclamation%20Mark%20White_1%202.png',
+  black: '/images/wow/Exclamation%20Mark%20Black_1%202.png',
+  gradient: '/images/wow/Exclamation%20Mark%20Gradient_1%202.png',
+} as const
+
+type LogoCard = {
+  id: string
+  title: string
+  description: string
+  previewBg: string
+  svgHref: string
+  pngHref: string
+  showDivisionLink: boolean
+  preview: ReactNode
+}
+
+const logoCards: LogoCard[] = [
   {
     id: 'primary',
     title: 'Primary Logo',
     description: 'Standard WOW Superagency logo for light backgrounds.',
-    previewBg: 'bg-white',
-    previewSrc: assetPath('SVG', 'Superagency Standard.svg'),
-    previewAlt: 'WOW Superagency primary logo',
-    previewClassName: 'max-h-16 w-auto max-w-full object-contain',
+    previewBg: 'bg-white dark:bg-[#EDEAF8]',
     svgHref: assetPath('SVG', 'Superagency Standard.svg'),
     pngHref: assetPath('PNG', 'Superagency Standard.png'),
     showDivisionLink: true,
+    preview: (
+      <img
+        src={assetPath('PNG', 'Superagency Standard.png')}
+        alt="WOW Superagency primary logo"
+        className="max-h-16 w-auto max-w-full object-contain"
+      />
+    ),
   },
   {
     id: 'light',
     title: 'Light Logo',
     description: 'For dark backgrounds.',
     previewBg: 'bg-[#1A1A1A]',
-    previewSrc: assetPath('SVG', 'Superagency White.svg'),
-    previewAlt: 'WOW Superagency light logo',
-    previewClassName: 'max-h-16 w-auto max-w-full object-contain',
     svgHref: assetPath('SVG', 'Superagency White.svg'),
     pngHref: assetPath('PNG', 'Superagency White.png'),
     showDivisionLink: false,
+    preview: (
+      <img
+        src={assetPath('PNG', 'Superagency White.png')}
+        alt="WOW Superagency light logo"
+        className="max-h-16 w-auto max-w-full object-contain"
+      />
+    ),
   },
   {
     id: 'icon',
     title: 'Icon / Symbol',
     description: 'Compact brand mark for small spaces, avatars, and applications.',
     previewBg: 'bg-[#1A1A1A]',
-    previewSrc: assetPath('Profile Picture', 'Dark', 'Superagency PFP dark.png'),
-    previewAlt: 'WOW Superagency icon symbol',
-    previewClassName: 'h-24 w-24 object-contain',
-    svgHref: assetPath('Profile Picture', 'Dark', 'Superagency PFP dark.png'),
-    pngHref: assetPath('Profile Picture', 'Light', 'Superagency PFP Light.png'),
+    svgHref: exclamationMarks.gradient,
+    pngHref: exclamationMarks.white,
     showDivisionLink: false,
+    preview: (
+      <div className="flex items-center justify-center gap-3" aria-hidden>
+        <img src={exclamationMarks.white} alt="" className="h-16 w-auto object-contain sm:h-20" />
+        <img
+          src={exclamationMarks.black}
+          alt=""
+          className="h-16 w-auto object-contain opacity-45 sm:h-20"
+        />
+        <img src={exclamationMarks.gradient} alt="" className="h-16 w-auto object-contain sm:h-20" />
+      </div>
+    ),
   },
   {
     id: 'mono',
     title: 'Monochrome Logo',
     description: 'For situations where full color is not suitable.',
     previewBg: 'bg-[#1A1A1A]',
-    previewSrc: assetPath('SVG', 'Superagency Mono.svg'),
-    previewAlt: 'WOW Superagency monochrome logo',
-    previewClassName: 'max-h-16 w-auto max-w-full object-contain',
     svgHref: assetPath('SVG', 'Superagency Mono.svg'),
     pngHref: assetPath('PNG', 'Superagency MonoWhite.png'),
     showDivisionLink: false,
+    preview: (
+      <img
+        src={assetPath('PNG', 'Superagency MonoWhite.png')}
+        alt="WOW Superagency monochrome logo"
+        className="max-h-16 w-auto max-w-full object-contain"
+      />
+    ),
   },
-] as const
+]
 
+const divisionLabels: Record<DivisionId, string> = {
+  softwareWow: 'SoftwareWOW',
+  wowMarketing: 'WOW Marketing',
+  wowDesign: 'WOW Design',
+  wowIntelligence: 'WOW Intelligence',
+  wowSocial: 'WOW Social',
+  wowAccelerate: 'WOW Accelerate',
+  wowWebsites: 'WOW Websites',
+  wowImpact: 'WOW Impact',
+  wowHost: 'WOW Host',
+  wowHub: 'WOW Hub',
+  wowEvents: 'WOW Events',
+}
 
 const downloadButtonClass =
   'inline-flex items-center justify-center rounded-radius-sm border border-black/15 px-4 py-2.5 text-xs font-medium uppercase tracking-[0.06em] text-secondary transition-colors hover:border-primary hover:text-primary dark:border-white/20 dark:text-backgroundBody dark:hover:border-primary dark:hover:text-primary'
@@ -89,11 +140,7 @@ const BrandKitLogos = () => (
               <div
                 className={`mb-6 flex min-h-[180px] items-center justify-center rounded-radius-sm px-8 py-10 ${card.previewBg}`}
               >
-                <img
-                  src={card.previewSrc}
-                  alt={card.previewAlt}
-                  className={card.previewClassName}
-                />
+                {card.preview}
               </div>
               <h3 className="text-xl font-medium tracking-normal text-secondary dark:text-backgroundBody md:text-2xl">
                 {card.title}
@@ -118,6 +165,33 @@ const BrandKitLogos = () => (
             </article>
           </RevealWrapper>
         ))}
+      </div>
+
+      <div id="division-assets" className="mt-14 scroll-mt-28 md:mt-20">
+        <RevealWrapper>
+          <h3 className="mb-6 text-center text-2xl font-medium tracking-normal text-secondary dark:text-backgroundBody md:text-3xl">
+            Division Assets
+          </h3>
+        </RevealWrapper>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {(Object.keys(divisionBrandLogos.light) as DivisionId[]).map((id) => (
+            <RevealWrapper key={id}>
+              <div className="rounded-radius-md border border-black/10 bg-backgroundBody px-5 py-4 dark:border-white/10 dark:bg-dark">
+                <p className="mb-3 font-medium tracking-normal text-secondary dark:text-backgroundBody">
+                  {divisionLabels[id]}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <a href={divisionBrandLogos.light[id]} download className={downloadButtonClass}>
+                    Standard SVG
+                  </a>
+                  <a href={divisionBrandLogos.dark[id]} download className={downloadButtonClass}>
+                    White SVG
+                  </a>
+                </div>
+              </div>
+            </RevealWrapper>
+          ))}
+        </div>
       </div>
     </div>
   </section>

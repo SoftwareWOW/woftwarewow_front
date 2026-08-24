@@ -24,7 +24,7 @@ const BrandVisualStyle = () => {
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
+        <RevealWrapper className="mx-auto flex max-w-5xl flex-col items-center gap-12 md:flex-row md:items-stretch md:justify-center md:gap-16 lg:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md bg-[#1A1A1A] md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
             <img
               src="/images/wow/nav/cards/software%26technology.png"
@@ -33,7 +33,7 @@ const BrandVisualStyle = () => {
             />
           </figure>
 
-          <div className="min-w-0 flex-1">
+          <div className="flex w-full min-w-0 max-w-md justify-center md:w-auto md:justify-start">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
               {steps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">
