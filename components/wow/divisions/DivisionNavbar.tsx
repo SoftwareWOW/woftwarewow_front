@@ -44,7 +44,14 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
     const onScroll = () => {
       const y = window.scrollY
       if (actionMenuOpen || mobileOpen) return
-      if (y < 80) {
+
+      const docHeight = document.documentElement.scrollHeight
+      const nearBottom = y + window.innerHeight >= docHeight - 120
+
+      if (nearBottom) {
+        setNavbarHidden(true)
+        setActionMenuOpen(false)
+      } else if (y < 80) {
         setNavbarHidden(false)
       } else if (y > lastScrollYRef.current) {
         setNavbarHidden(true)

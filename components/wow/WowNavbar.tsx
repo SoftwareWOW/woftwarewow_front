@@ -97,8 +97,14 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
       const scrollingDown = currentScrollY > lastScrollYRef.current
       const scrollingUp = currentScrollY < lastScrollYRef.current
+      const docHeight = document.documentElement.scrollHeight
+      const nearBottom = currentScrollY + window.innerHeight >= docHeight - 120
 
-      if (currentScrollY < 80) {
+      if (nearBottom) {
+        setNavbarHidden(true)
+        setActiveMenuId(null)
+        setActionMenuOpen(false)
+      } else if (currentScrollY < 80) {
         setNavbarHidden(false)
       } else if (scrollingDown) {
         setNavbarHidden(true)

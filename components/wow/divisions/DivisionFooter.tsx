@@ -2,6 +2,7 @@
 
 import type { DivisionSiteConfig } from '@/components/wow/divisions/division-site-config'
 import WowText from '@/components/wow/shared/WowText'
+import { stickyFooterClass } from '@/components/wow/footer-layout'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import {
@@ -29,10 +30,6 @@ const legalLinks = [
   { label: 'Terms of Service', href: '/terms' },
   { label: 'Cookies Settings', href: '/policy' },
 ]
-
-/** Sticky reveal only on large + tall viewports so laptop heights stay in normal document flow. */
-const stickyFooterClass =
-  'relative z-0 w-full max-w-full overflow-x-clip [@media(min-width:1280px)_and_(min-height:900px)]:fixed [@media(min-width:1280px)_and_(min-height:900px)]:inset-x-0 [@media(min-width:1280px)_and_(min-height:900px)]:bottom-0'
 
 export default function DivisionFooter({ config }: DivisionFooterProps) {
   return (
