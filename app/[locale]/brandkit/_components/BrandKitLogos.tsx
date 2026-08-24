@@ -99,19 +99,6 @@ const logoCards: LogoCard[] = [
   },
 ]
 
-const divisionLabels: Record<DivisionId, string> = {
-  softwareWow: 'SoftwareWOW',
-  wowMarketing: 'WOW Marketing',
-  wowDesign: 'WOW Design',
-  wowIntelligence: 'WOW Intelligence',
-  wowSocial: 'WOW Social',
-  wowAccelerate: 'WOW Accelerate',
-  wowWebsites: 'WOW Websites',
-  wowImpact: 'WOW Impact',
-  wowHost: 'WOW Host',
-  wowHub: 'WOW Hub',
-  wowEvents: 'WOW Events',
-}
 
 const downloadButtonClass =
   'inline-flex items-center justify-center rounded-radius-sm border border-black/15 px-4 py-2.5 text-xs font-medium uppercase tracking-[0.06em] text-secondary transition-colors hover:border-primary hover:text-primary dark:border-white/20 dark:text-backgroundBody dark:hover:border-primary dark:hover:text-primary'
@@ -165,33 +152,6 @@ const BrandKitLogos = () => (
             </article>
           </RevealWrapper>
         ))}
-      </div>
-
-      <div id="division-assets" className="mt-14 scroll-mt-28 md:mt-20">
-        <RevealWrapper>
-          <h3 className="mb-6 text-center text-2xl font-medium tracking-normal text-secondary dark:text-backgroundBody md:text-3xl">
-            Division Assets
-          </h3>
-        </RevealWrapper>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {(Object.keys(divisionBrandLogos.light) as DivisionId[]).map((id) => (
-            <RevealWrapper key={id}>
-              <div className="rounded-radius-md border border-black/10 bg-backgroundBody px-5 py-4 dark:border-white/10 dark:bg-dark">
-                <p className="mb-3 font-medium tracking-normal text-secondary dark:text-backgroundBody">
-                  {divisionLabels[id]}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <a href={divisionBrandLogos.light[id]} download className={downloadButtonClass}>
-                    Standard SVG
-                  </a>
-                  <a href={divisionBrandLogos.dark[id]} download className={downloadButtonClass}>
-                    White SVG
-                  </a>
-                </div>
-              </div>
-            </RevealWrapper>
-          ))}
-        </div>
       </div>
     </div>
   </section>
