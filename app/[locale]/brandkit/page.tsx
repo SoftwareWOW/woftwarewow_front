@@ -4,7 +4,7 @@ import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import BrandKitHero from './_components/BrandKitHero'
-import BrandKitLogos from './_components/BrandKitLogos'
+
 import BrandSystem from './_components/BrandSystem'
 import BrandUsageGuidelines from './_components/BrandUsageGuidelines'
 import BrandVisualStyle from './_components/BrandVisualStyle'

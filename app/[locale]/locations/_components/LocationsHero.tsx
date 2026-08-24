@@ -14,12 +14,12 @@ interface Translation {
 }
 
 const HERO_IMAGES = [
-  '/images/wow/locations/landmarks/colosseum.svg',
-  '/images/wow/locations/landmarks/eiffel.svg',
-  '/images/wow/locations/landmarks/liberty.svg',
-  '/images/wow/locations/landmarks/big-ben.svg',
-  '/images/wow/locations/landmarks/burj.svg',
-  '/images/wow/locations/landmarks/opera-house.svg',
+  '/images/wow/locations/landmarks/NYC.png',
+  '/images/wow/locations/landmarks/Paros.png',
+  '/images/wow/locations/landmarks/Rio.png',
+  '/images/wow/locations/landmarks/Rome.png',
+  '/images/wow/locations/landmarks/Sydney.png',
+  '/images/wow/locations/landmarks/UK.png',
 ] as const
 
 /** Layout: industries/technology-and-saas/TechnologyHero — centered hero + 6 floating decorative images. */
