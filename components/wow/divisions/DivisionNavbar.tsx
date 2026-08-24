@@ -1,26 +1,40 @@
 'use client'
 
-import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import type { DivisionSiteConfig } from '@/components/wow/divisions/division-site-config'
-import { Link } from '@/i18n/navigation'
+import LanguageSwitcher from '@/components/wow/LanguageSwitcher'
 import { navPillInactiveClass } from '@/components/wow/nav/nav-interaction-styles'
-import { Menu, Moon, Sun, X } from 'lucide-react'
-import Image from 'next/image'
-import { useTheme } from 'next-themes'
-import { useEffect, useRef, useState } from 'react'
+import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
+import { Link } from '@/i18n/navigation'
+import type { Dictionary } from '@/i18n/types'
 import { motion } from 'framer-motion'
+import { ArrowDown, Globe, Menu, MessageCircle, Moon, Sun, X } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import Image from 'next/image'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+const actionBtnClass =
+  'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-4 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px] md:p-4 lg:p-5'
+
+const iconClass =
+  'size-7 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[180deg] md:size-8 lg:size-9 xl:size-10'
 
 type DivisionNavbarProps = {
   config: DivisionSiteConfig
+  navbar: Dictionary['navbar']
+  languageSwitcher: Dictionary['languageSwitcher']
 }
 
-export default function DivisionNavbar({ config }: DivisionNavbarProps) {
+export default function DivisionNavbar({ config, navbar, languageSwitcher }: DivisionNavbarProps) {
   const [mounted, setMounted] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [navbarHidden, setNavbarHidden] = useState(false)
+  const [actionMenuOpen, setActionMenuOpen] = useState(false)
+  const [languageOpen, setLanguageOpen] = useState(false)
   const lastScrollYRef = useRef(0)
+  const actionMenuRef = useRef<HTMLDivElement>(null)
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
+  const contactDialog = useContactDialogOptional()
 
   useEffect(() => {
     setMounted(true)
@@ -29,11 +43,13 @@ export default function DivisionNavbar({ config }: DivisionNavbarProps) {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
+      if (actionMenuOpen || mobileOpen) return
       if (y < 80) {
         setNavbarHidden(false)
       } else if (y > lastScrollYRef.current) {
         setNavbarHidden(true)
         setMobileOpen(false)
+        setActionMenuOpen(false)
       } else if (y < lastScrollYRef.current) {
         setNavbarHidden(false)
       }
@@ -41,7 +57,44 @@ export default function DivisionNavbar({ config }: DivisionNavbarProps) {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [actionMenuOpen, mobileOpen])
+
+  useEffect(() => {
+    if (!actionMenuOpen) return
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (actionMenuRef.current && !actionMenuRef.current.contains(e.target as Node)) {
+        setActionMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [actionMenuOpen])
+
+  const openActionMenuOnDesktop = () => {
+    if (window.innerWidth >= 768) {
+      setActionMenuOpen(true)
+      setNavbarHidden(false)
+    }
+  }
+
+  const closeActionMenuOnDesktop = () => {
+    if (window.innerWidth >= 768) {
+      setActionMenuOpen(false)
+    }
+  }
+
+  const handleToggleTheme = useCallback(() => {
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark')
+  }, [currentTheme, setTheme])
+
+  const darkModeIcon =
+    currentTheme === 'dark' ? (
+      <Sun aria-hidden className={iconClass} strokeWidth={1.5} />
+    ) : (
+      <Moon aria-hidden className={iconClass} strokeWidth={1.5} />
+    )
 
   return (
     <>
@@ -94,34 +147,79 @@ export default function DivisionNavbar({ config }: DivisionNavbarProps) {
             </ul>
 
             <div className="flex shrink-0 items-center gap-2">
-              {mounted && (
-                <button
-                  type="button"
-                  onClick={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')}
-                  className="hidden size-11 items-center justify-center rounded-radius-sm bg-primary/10 text-primary transition hover:bg-primary/20 md:inline-flex"
-                  aria-label="Toggle theme"
-                >
-                  {currentTheme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
-                </button>
-              )}
-
-              <div className="hidden md:block">
-                <ButtonComponentList className="flex" itemClassName="block">
-                  <ButtonComponent href={config.cta.href} variant="primary" size="sm">
-                    {config.cta.label}
-                  </ButtonComponent>
-                </ButtonComponentList>
-              </div>
-
               <button
                 type="button"
                 className="inline-flex size-11 items-center justify-center rounded-radius-sm bg-primary text-white md:hidden"
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobileOpen}
-                onClick={() => setMobileOpen((open) => !open)}
+                onClick={() => {
+                  setMobileOpen((open) => !open)
+                  setActionMenuOpen(false)
+                }}
               >
                 {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
               </button>
+
+              <div
+                className="relative z-[1002]"
+                ref={actionMenuRef}
+                onMouseEnter={openActionMenuOnDesktop}
+                onMouseLeave={closeActionMenuOnDesktop}
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (window.innerWidth < 768) {
+                      setActionMenuOpen((open) => !open)
+                      setMobileOpen(false)
+                    }
+                  }}
+                  className={`${actionBtnClass} ${actionMenuOpen ? 'bg-primary/80' : ''}`}
+                  aria-label={actionMenuOpen ? navbar.closeActions : navbar.openActions}
+                  aria-expanded={actionMenuOpen}
+                >
+                  <ArrowDown aria-hidden className={iconClass} strokeWidth={2} />
+                </button>
+
+                {actionMenuOpen && (
+                  <div className="absolute -left-[6px] top-full z-50 flex flex-col gap-2 rounded-bl-lg rounded-br-lg bg-white p-2 dark:bg-dark">
+                    {mounted && (
+                      <button
+                        type="button"
+                        className={actionBtnClass}
+                        aria-label={navbar.toggleDarkMode}
+                        onClick={handleToggleTheme}
+                      >
+                        {darkModeIcon}
+                      </button>
+                    )}
+
+                    <button
+                      type="button"
+                      className={actionBtnClass}
+                      aria-label={navbar.changeLanguage}
+                      onClick={() => {
+                        setActionMenuOpen(false)
+                        setLanguageOpen(true)
+                      }}
+                    >
+                      <Globe aria-hidden className={iconClass} strokeWidth={1.5} />
+                    </button>
+
+                    <button
+                      type="button"
+                      className={actionBtnClass}
+                      aria-label={navbar.openMessages}
+                      onClick={() => {
+                        setActionMenuOpen(false)
+                        contactDialog?.open()
+                      }}
+                    >
+                      <MessageCircle aria-hidden className={iconClass} strokeWidth={1.5} />
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </nav>
 
@@ -133,25 +231,19 @@ export default function DivisionNavbar({ config }: DivisionNavbarProps) {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block rounded-radius-sm bg-primary-50 px-4 py-3 text-sm uppercase tracking-[0.08em] text-black dark:bg-[#2D2B52] dark:text-white"
+                      className="block rounded-radius-sm px-4 py-3 text-sm uppercase tracking-[0.08em] text-black hover:bg-primary-50 dark:text-white dark:hover:bg-[#2D2B52]"
                     >
                       {item.label}
                     </Link>
                   </li>
                 ))}
               </ul>
-              <div className="mt-4">
-                <ButtonComponentList className="flex w-full" itemClassName="block w-full">
-                  <ButtonComponent href={config.cta.href} variant="primary" fullWidth>
-                    {config.cta.label}
-                  </ButtonComponent>
-                </ButtonComponentList>
-              </div>
             </div>
           )}
         </div>
       </motion.header>
       <div className="h-[72px] md:h-[84px]" aria-hidden />
+      <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />
     </>
   )
 }

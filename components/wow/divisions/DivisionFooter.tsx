@@ -91,9 +91,9 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
                       key={name}
                       href={href}
                       aria-label={name}
-                      className="flex size-10 items-center justify-center rounded-full border border-[#e5e5e5] text-[#555555] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] hover:text-white hover:shadow-lg hover:shadow-[#8b7cff]/30 dark:border-white/10 dark:text-[#999999] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white dark:hover:shadow-[#b794f4]/30"
+                      className="flex size-10 items-center justify-center rounded-full bg-[#1a1a1a] text-white transition-all duration-300 hover:bg-[#8b7cff] dark:bg-white dark:text-[#1a1a1a] dark:hover:bg-[#b794f4] dark:hover:text-white"
                     >
-                      <Icon className="size-4" strokeWidth={1.5} />
+                      <Icon className="size-4" />
                     </a>
                   ))}
                 </div>
@@ -102,9 +102,6 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
               <div className="grid gap-10 sm:grid-cols-3">
                 {config.footerSections.map((section) => (
                   <div key={section.id}>
-                    <p className="mb-4 text-base font-medium text-[#1a1a1a] dark:text-[#F2F2F2] md:text-lg">
-                      {section.title}
-                    </p>
                     <ul className="space-y-2.5 text-sm text-[#555555] dark:text-[#999999] md:text-base">
                       {section.links.map((link) => (
                         <li key={link.id}>
