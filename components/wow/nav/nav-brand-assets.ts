@@ -88,3 +88,45 @@ export const divisionProfilePictures = {
 } as const
 
 export const divisionIds = new Set(Object.keys(divisionBrandLogos.light))
+
+/** Slugs used by DevisionOverview (excludes Events). */
+export const DIVISION_SITE_SLUGS = [
+  'softwarewow',
+  'wowmarketing',
+  'wowdesign',
+  'wowintelligence',
+  'wowsocial',
+  'wowaccelerate',
+  'wowwebsites',
+  'wowimpact',
+  'wowhost',
+  'wowhub',
+] as const
+
+export type DivisionSiteSlug = (typeof DIVISION_SITE_SLUGS)[number]
+
+export const divisionIdBySlug: Record<DivisionSiteSlug, DivisionId> = {
+  softwarewow: 'softwareWow',
+  wowmarketing: 'wowMarketing',
+  wowdesign: 'wowDesign',
+  wowintelligence: 'wowIntelligence',
+  wowsocial: 'wowSocial',
+  wowaccelerate: 'wowAccelerate',
+  wowwebsites: 'wowWebsites',
+  wowimpact: 'wowImpact',
+  wowhost: 'wowHost',
+  wowhub: 'wowHub',
+}
+
+export function getDivisionSlugFromPathname(pathname: string): DivisionSiteSlug | null {
+  const segments = pathname.split('/').filter(Boolean)
+  // With localePrefix: 'always' → /en-US/softwarewow or sometimes /softwarewow
+  const candidate = segments.find((segment) =>
+    (DIVISION_SITE_SLUGS as readonly string[]).includes(segment),
+  )
+  return (candidate as DivisionSiteSlug | undefined) ?? null
+}
+
+export function isDivisionSitePathname(pathname: string): boolean {
+  return getDivisionSlugFromPathname(pathname) !== null
+}

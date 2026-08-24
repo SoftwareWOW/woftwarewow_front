@@ -1,4 +1,5 @@
 import AIAssistant from '@/components/ai/AIAssistant'
+import SuperagencyChrome from '@/components/wow/SuperagencyChrome'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import { getLocale } from 'next-intl/server'
@@ -6,8 +7,6 @@ import { ReactNode } from 'react'
 import { ContactDialogProvider } from './shared/ContactDialogProvider'
 import { MeetDialogProvider } from './shared/MeetDialogProvider'
 import { ToastProvider } from './shared/ToastProvider'
-import WowFooter from './WowFooter'
-import WowNavbar from './WowNavbar'
 
 export default async function WowLayout({ children }: { children: ReactNode }) {
   const locale = (await getLocale()) as Locale
@@ -18,17 +17,14 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
       <ContactDialogProvider>
         <MeetDialogProvider>
           <div className="relative w-full max-w-full overflow-x-clip">
-            <WowNavbar
+            <SuperagencyChrome
               navbar={dictionary.navbar}
               navigation={dictionary.navigation}
               languageSwitcher={dictionary.languageSwitcher}
-            />
-
-            <main className="relative z-10 w-full max-w-full overflow-x-clip bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[720px]">
+              footer={dictionary.footer}
+            >
               {children}
-            </main>
-
-            <WowFooter footer={dictionary.footer} />
+            </SuperagencyChrome>
             <AIAssistant />
           </div>
         </MeetDialogProvider>
