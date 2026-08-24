@@ -23,7 +23,6 @@ export default async function DivisionSiteLayout({ divisionId, children }: Divis
       <DivisionNavbar
         config={config}
         navbar={dictionary.navbar}
-        navigation={dictionary.navigation}
         languageSwitcher={dictionary.languageSwitcher}
       />
       <main className={stickyFooterMainClass}>{children}</main>

@@ -1,16 +1,15 @@
 'use client'
 
 import type { DivisionSiteConfig } from '@/components/wow/divisions/division-site-config'
+import DivisionMobileBottomNav from '@/components/wow/divisions/DivisionMobileBottomNav'
 import LanguageSwitcher from '@/components/wow/LanguageSwitcher'
-import { navPillInactiveClass } from '@/components/wow/nav/nav-interaction-styles'
-import WowMobileBottomNav from '@/components/wow/nav/WowMobileBottomNav'
-import WowMobileMenuSheet from '@/components/wow/nav/WowMobileMenuSheet'
 import { mobileNavInsetClass } from '@/components/wow/nav/mobile-nav-shell'
+import { navPillInactiveClass } from '@/components/wow/nav/nav-interaction-styles'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import { motion } from 'framer-motion'
-import { ArrowDown, Globe, Menu, MessageCircle, Moon, Sun, X } from 'lucide-react'
+import { ArrowDown, Globe, MessageCircle, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -24,19 +23,11 @@ const iconClass =
 type DivisionNavbarProps = {
   config: DivisionSiteConfig
   navbar: Dictionary['navbar']
-  navigation: Dictionary['navigation']
   languageSwitcher: Dictionary['languageSwitcher']
 }
 
-export default function DivisionNavbar({
-  config,
-  navbar,
-  navigation,
-  languageSwitcher,
-}: DivisionNavbarProps) {
+export default function DivisionNavbar({ config, navbar, languageSwitcher }: DivisionNavbarProps) {
   const [mounted, setMounted] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [mobileMenuId, setMobileMenuId] = useState<string | null>(null)
   const [navbarHidden, setNavbarHidden] = useState(false)
   const [actionMenuOpen, setActionMenuOpen] = useState(false)
   const [languageOpen, setLanguageOpen] = useState(false)
@@ -46,8 +37,6 @@ export default function DivisionNavbar({
   const currentTheme = theme === 'system' ? systemTheme : theme
   const contactDialog = useContactDialogOptional()
 
-  const mobileItem = navigation.items.find((item) => item.id === mobileMenuId) ?? null
-
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -55,7 +44,7 @@ export default function DivisionNavbar({
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
-      if (actionMenuOpen || mobileOpen || mobileMenuId) return
+      if (actionMenuOpen) return
 
       const docHeight = document.documentElement.scrollHeight
       const nearBottom = y + window.innerHeight >= docHeight - 120
@@ -67,7 +56,6 @@ export default function DivisionNavbar({
         setNavbarHidden(false)
       } else if (y > lastScrollYRef.current) {
         setNavbarHidden(true)
-        setMobileOpen(false)
         setActionMenuOpen(false)
       } else if (y < lastScrollYRef.current) {
         setNavbarHidden(false)
@@ -76,7 +64,7 @@ export default function DivisionNavbar({
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [actionMenuOpen, mobileOpen, mobileMenuId])
+  }, [actionMenuOpen])
 
   useEffect(() => {
     if (!actionMenuOpen) return
@@ -133,7 +121,7 @@ export default function DivisionNavbar({
               className="flex min-w-0 shrink items-center ps-2 md:w-[150px] md:ps-3 lg:w-[200px] lg:ps-5"
             >
               <Image
-                className="h-[20px] w-auto max-w-[calc(100vw-120px)] dark:hidden"
+                className="h-[20px] w-auto max-w-[calc(100vw-96px)] dark:hidden"
                 src={config.logo.light}
                 alt={config.logoAlt}
                 width={200}
@@ -142,7 +130,7 @@ export default function DivisionNavbar({
                 priority
               />
               <Image
-                className="hidden h-[20px] w-auto max-w-[calc(100vw-120px)] dark:block"
+                className="hidden h-[20px] w-auto max-w-[calc(100vw-96px)] dark:block"
                 src={config.logo.dark}
                 alt={config.logoAlt}
                 width={200}
@@ -166,20 +154,6 @@ export default function DivisionNavbar({
             </ul>
 
             <div className="flex shrink-0 items-center gap-2">
-              <button
-                type="button"
-                className="inline-flex size-11 items-center justify-center rounded-radius-sm bg-primary text-white md:hidden"
-                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={mobileOpen}
-                onClick={() => {
-                  setMobileOpen((open) => !open)
-                  setActionMenuOpen(false)
-                  setMobileMenuId(null)
-                }}
-              >
-                {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-              </button>
-
               <div
                 className="relative z-[1002]"
                 ref={actionMenuRef}
@@ -191,8 +165,6 @@ export default function DivisionNavbar({
                   onClick={() => {
                     if (window.innerWidth < 768) {
                       setActionMenuOpen((open) => !open)
-                      setMobileOpen(false)
-                      setMobileMenuId(null)
                     }
                   }}
                   className={`${actionBtnClass} ${actionMenuOpen ? 'bg-primary/80' : ''}`}
@@ -243,24 +215,6 @@ export default function DivisionNavbar({
               </div>
             </div>
           </nav>
-
-          {mobileOpen && (
-            <div className="mt-2 rounded-radius-sm border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-[#1F1F1F] md:hidden">
-              <ul className="space-y-1">
-                {config.navItems.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block rounded-radius-sm px-4 py-3 text-sm uppercase tracking-[0.08em] text-black hover:bg-primary-50 dark:text-white dark:hover:bg-[#2D2B52]"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
       </motion.header>
       <div className="h-[72px] md:h-[84px]" aria-hidden />
@@ -276,25 +230,8 @@ export default function DivisionNavbar({
           ease: [0.16, 1, 0.3, 1],
         }}
       >
-        <WowMobileBottomNav
-          items={navigation.items}
-          activeId={mobileMenuId}
-          onSelect={(id) => {
-            setMobileMenuId(id || null)
-            setMobileOpen(false)
-            setActionMenuOpen(false)
-            setNavbarHidden(false)
-          }}
-        />
+        <DivisionMobileBottomNav items={config.navItems} />
       </motion.div>
-
-      <WowMobileMenuSheet
-        item={mobileItem}
-        navbar={navbar}
-        onClose={() => {
-          setMobileMenuId(null)
-        }}
-      />
 
       <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />
     </>
