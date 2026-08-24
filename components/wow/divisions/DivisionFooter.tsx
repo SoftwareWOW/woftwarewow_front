@@ -95,9 +95,9 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
                       key={name}
                       href={href}
                       aria-label={name}
-                      className="flex size-9 items-center justify-center rounded-full bg-[#1a1a1a] text-white transition-all duration-300 hover:bg-[#8b7cff] sm:size-10 dark:bg-white dark:text-[#1a1a1a] dark:hover:bg-[#b794f4] dark:hover:text-white"
+                      className="flex size-9 items-center justify-center rounded-full border border-[#e5e5e5] text-[#555555] transition-all duration-300 hover:border-[#8b7cff] hover:bg-[#8b7cff] !hover:text-white  sm:size-10 dark:border-white/10 dark:text-[#999999] dark:hover:border-[#b794f4] dark:hover:bg-[#b794f4] dark:hover:text-white"
                     >
-                      <Icon className="size-3.5 sm:size-4" />
+                      <Icon className="size-3.5 sm:size-4" strokeWidth={1.5} />
                     </a>
                   ))}
                 </div>
