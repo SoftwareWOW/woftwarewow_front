@@ -1,5 +1,6 @@
 'use client'
 
+import { stickyFooterMainClass } from '@/components/wow/footer-layout'
 import { isDivisionSitePathname } from '@/components/wow/nav/nav-brand-assets'
 import type { Dictionary } from '@/i18n/types'
 import { usePathname } from '@/i18n/navigation'
@@ -33,9 +34,7 @@ export default function SuperagencyChrome({
   return (
     <>
       <WowNavbar navbar={navbar} navigation={navigation} languageSwitcher={languageSwitcher} />
-      <main className="relative z-10 w-full max-w-full overflow-x-clip bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[720px]">
-        {children}
-      </main>
+      <main className={stickyFooterMainClass}>{children}</main>
       <WowFooter footer={footer} />
     </>
   )

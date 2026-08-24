@@ -30,10 +30,14 @@ const legalLinks = [
   { label: 'Cookies Settings', href: '/policy' },
 ]
 
+/** Sticky reveal only on large + tall viewports so laptop heights stay in normal document flow. */
+const stickyFooterClass =
+  'relative z-0 w-full max-w-full overflow-x-clip [@media(min-width:1280px)_and_(min-height:900px)]:fixed [@media(min-width:1280px)_and_(min-height:900px)]:inset-x-0 [@media(min-width:1280px)_and_(min-height:900px)]:bottom-0'
+
 export default function DivisionFooter({ config }: DivisionFooterProps) {
   return (
-    <footer className="relative z-0 w-full max-w-full overflow-x-clip lg:fixed lg:inset-x-0 lg:bottom-0">
-      <div className="relative bg-background px-3 py-3 transition-colors duration-300 dark:bg-dark md:px-4 md:py-4">
+    <footer className={stickyFooterClass}>
+      <div className="relative bg-background px-3 py-3 transition-colors duration-300 dark:bg-dark sm:px-4 sm:py-4 md:px-5 md:py-5">
         <div className="absolute inset-0 opacity-0 dark:opacity-20">
           <div
             className="absolute inset-0"
@@ -46,12 +50,12 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1320px]">
-          <div className="rounded-radius-sm border border-[#e5e5e5] bg-white/50 px-6 py-10 backdrop-blur-sm transition-colors duration-300 dark:border-white/5 dark:bg-dark/50 dark:backdrop-blur-sm md:px-10 md:py-12 lg:px-14 lg:py-16">
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)] lg:gap-16">
-              <div>
-                <Link href={config.homeHref} className="inline-block">
+          <div className="rounded-radius-sm border border-[#e5e5e5] bg-white/50 px-5 py-8 backdrop-blur-sm transition-colors duration-300 dark:border-white/5 dark:bg-dark/50 dark:backdrop-blur-sm sm:px-6 sm:py-10 md:px-10 md:py-12 lg:px-14 lg:py-16">
+            <div className="grid gap-10 md:gap-12 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)] xl:gap-16">
+              <div className="min-w-0">
+                <Link href={config.homeHref} className="inline-block max-w-full">
                   <Image
-                    className="h-7 w-auto dark:hidden"
+                    className="h-6 w-auto max-w-full dark:hidden sm:h-7"
                     src={config.logo.light}
                     alt={config.logoAlt}
                     width={220}
@@ -59,7 +63,7 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
                     unoptimized
                   />
                   <Image
-                    className="hidden h-7 w-auto dark:block"
+                    className="hidden h-6 w-auto max-w-full dark:block sm:h-7"
                     src={config.logo.dark}
                     alt={config.logoAlt}
                     width={220}
@@ -68,11 +72,11 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
                   />
                 </Link>
 
-                <p className="mt-4 max-w-sm text-base leading-relaxed text-[#555555] dark:text-[#999999]">
+                <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#555555] dark:text-[#999999] sm:text-base">
                   {config.tagline}
                 </p>
 
-                <address className="mt-6 not-italic text-sm leading-relaxed text-[#555555] dark:text-[#999999] md:text-base">
+                <address className="mt-5 not-italic text-sm leading-relaxed text-[#555555] dark:text-[#999999] sm:mt-6 md:text-base">
                   {config.addressLines[0]}
                   <br />
                   {config.addressLines[1]}
@@ -85,29 +89,29 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
                   </a>
                 </address>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
                   {socialLinks.map(({ name, icon: Icon, href }) => (
                     <a
                       key={name}
                       href={href}
                       aria-label={name}
-                      className="flex size-10 items-center justify-center rounded-full bg-[#1a1a1a] text-white transition-all duration-300 hover:bg-[#8b7cff] dark:bg-white dark:text-[#1a1a1a] dark:hover:bg-[#b794f4] dark:hover:text-white"
+                      className="flex size-9 items-center justify-center rounded-full bg-[#1a1a1a] text-white transition-all duration-300 hover:bg-[#8b7cff] sm:size-10 dark:bg-white dark:text-[#1a1a1a] dark:hover:bg-[#b794f4] dark:hover:text-white"
                     >
-                      <Icon className="size-4" />
+                      <Icon className="size-3.5 sm:size-4" />
                     </a>
                   ))}
                 </div>
               </div>
 
-              <div className="grid gap-10 sm:grid-cols-3">
+              <div className="grid min-w-0 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8 lg:gap-10">
                 {config.footerSections.map((section) => (
-                  <div key={section.id}>
+                  <div key={section.id} className="min-w-0">
                     <ul className="space-y-2.5 text-sm text-[#555555] dark:text-[#999999] md:text-base">
                       {section.links.map((link) => (
-                        <li key={link.id}>
+                        <li key={link.id} className="min-w-0">
                           <Link
                             href={link.href}
-                            className="transition-colors duration-300 hover:text-[#8b7cff] dark:hover:text-[#b794f4]"
+                            className="break-words transition-colors duration-300 hover:text-[#8b7cff] dark:hover:text-[#b794f4]"
                           >
                             {link.label}
                           </Link>
@@ -119,15 +123,15 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
               </div>
             </div>
 
-            <div className="mt-12 flex flex-col gap-4 border-t border-[#e5e5e5] pt-6 dark:border-white/10 md:flex-row md:items-center md:justify-between">
-              <p className="text-sm text-[#555555] dark:text-[#666666]">{config.copyright}</p>
+            <div className="mt-8 flex flex-col gap-4 border-t border-[#e5e5e5] pt-5 dark:border-white/10 sm:mt-10 sm:pt-6 md:mt-12 md:flex-row md:items-center md:justify-between">
+              <p className="text-xs text-[#555555] dark:text-[#666666] sm:text-sm">{config.copyright}</p>
 
-              <div className="flex flex-wrap gap-x-6 gap-y-2">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 sm:gap-x-6">
                 {legalLinks.map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-[#555555] underline underline-offset-4 transition-colors hover:text-[#8b7cff] dark:text-[#666666] dark:hover:text-[#b794f4]"
+                    className="text-xs text-[#555555] underline underline-offset-4 transition-colors hover:text-[#8b7cff] dark:text-[#666666] dark:hover:text-[#b794f4] sm:text-sm"
                   >
                     {link.label}
                   </Link>
@@ -138,10 +142,10 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
 
           <div
             aria-hidden
-            className="pointer-events-none mt-6 select-none whitespace-nowrap pb-6 text-center text-[clamp(1.75rem,10vw,8rem)] font-semibold leading-none tracking-[-0.04em]"
+            className="pointer-events-none mt-4 max-w-full overflow-hidden select-none whitespace-nowrap pb-4 text-center text-[clamp(1.5rem,8vw,8rem)] font-semibold leading-none tracking-[-0.04em] sm:mt-6 sm:pb-6"
           >
             <WowText variant="watermark" />
-            <span className="ml-4 text-[#1a1a1a]/[0.04] dark:text-white/[0.04]">{config.name}</span>
+            <span className="ml-3 text-[#1a1a1a]/[0.04] dark:text-white/[0.04] sm:ml-4">{config.name}</span>
           </div>
         </div>
       </div>
