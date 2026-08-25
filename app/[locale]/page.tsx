@@ -40,18 +40,19 @@ const Home = async ({ params }: Props) => {
   const dictionary = await getDictionary(locale as Locale)
 
   return (
-    <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <WowHero hero={dictionary.hero} />
-     <div className="flex flex-col gap-0 lg:contents">
-         <WowEcosystem ecosystem={dictionary.ecosystem} />
-        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
-     </div>
+    <>
+      <WowHero hero={dictionary.hero} />
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        <div className="flex flex-col gap-0 lg:contents">
+          <WowEcosystem ecosystem={dictionary.ecosystem} />
+          <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        </div>
         <Stats />
         <DevisionOverview />
-        <SolutionToChallenges/>
-            <Marquess/>
+        <SolutionToChallenges />
+        <Marquess />
         <WowProjects />
-           <Marquee />
+        <Marquee />
         <HumanTuch />
         <Faq />
         <GrowthStrategies />
@@ -63,6 +64,7 @@ const Home = async ({ params }: Props) => {
           />
         </div>
       </div>
+    </>
   )
 }
 
