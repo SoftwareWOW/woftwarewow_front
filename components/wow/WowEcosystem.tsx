@@ -222,7 +222,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
   }
 
   return (
-    <section className="wow-ecosystem relative flex w-full max-w-full flex-col items-center overflow-x-clip bg-background px-2 text-foreground transition-colors duration-300 dark:bg-background max-md:justify-start sm:px-4">
+    <section className="wow-ecosystem relative flex w-full max-w-full pt-10 sm:pt-12 md:pt-15 lg:pt-20 flex-col items-center overflow-x-clip bg-background px-2 text-foreground transition-colors duration-300 dark:bg-background max-md:justify-start sm:px-4">
       <div className="relative z-10 flex w-full flex-col items-center">
       <RevealWrapper>
         <SectionLabel className="mb-5">OUR ECOSYSTEM</SectionLabel>
