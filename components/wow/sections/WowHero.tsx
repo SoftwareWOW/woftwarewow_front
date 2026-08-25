@@ -11,33 +11,27 @@ type WowHeroProps = {
   hero: Dictionary['hero']
 }
 
-const lerp = (a: number, b: number, t: number) => {
-  return a + (b - a) * t
-}
-
 const HERO_COPY = {
   badge: 'The Superagency for business growth',
-  headline:
-    'Why work with an agency when you can work with a Superagency?',
-  lead:
-    "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
-  body:
-    'Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.',
+  headline: 'Why work with an agency when you can work with a Superagency?',
+  lead: "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
+  body: 'Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.',
   ctaPrimary: 'Start a conversation',
   ctaSecondary: 'Explore what we do',
 } as const
+
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
 const stageBgClass =
   'bg-backgroundBody transition-colors duration-300 dark:bg-dark'
 
 /* =========================================================
-   SCROLL / SHRINK PROGRESS
+   SCROLL PROGRESS
 ========================================================= */
 
 function useShrinkProgress() {
   const ref = useRef<HTMLElement>(null)
   const [progress, setProgress] = useState(0)
-
   const lenis = useLenis()
 
   useEffect(() => {
@@ -56,91 +50,55 @@ function useShrinkProgress() {
       frame = 0
 
       const element = ref.current
-
       if (!element) return
 
-      const travel =
-        element.offsetHeight - window.innerHeight
+      const travel = element.offsetHeight - window.innerHeight
 
       if (travel <= 0) {
         setProgress(0)
         return
       }
 
-      const scrollY =
-        lenis?.scroll ?? window.scrollY
+      const scrollY = lenis?.scroll ?? window.scrollY
 
       const sectionStart =
-        element.getBoundingClientRect().top +
-        scrollY
+        element.getBoundingClientRect().top + scrollY
 
-      const next =
-        (scrollY - sectionStart) / travel
+      const next = (scrollY - sectionStart) / travel
 
-      setProgress(
-        Math.min(
-          1,
-          Math.max(0, next),
-        ),
-      )
+      setProgress(Math.min(1, Math.max(0, next)))
     }
 
     const onScroll = () => {
       if (frame) return
-
-      frame =
-        requestAnimationFrame(update)
+      frame = requestAnimationFrame(update)
     }
 
     update()
 
-    window.addEventListener(
-      'scroll',
-      onScroll,
-      {
-        passive: true,
-      },
-    )
+    window.addEventListener('scroll', onScroll, {
+      passive: true,
+    })
 
-    window.addEventListener(
-      'resize',
-      onScroll,
-    )
+    window.addEventListener('resize', onScroll)
 
-    let removeLenisListener:
-      | (() => void)
-      | undefined
+    let removeLenisListener: (() => void) | undefined
 
     if (lenis) {
-      lenis.on(
-        'scroll',
-        onScroll,
-      )
+      lenis.on('scroll', onScroll)
 
       removeLenisListener = () => {
-        lenis.off(
-          'scroll',
-          onScroll,
-        )
+        lenis.off('scroll', onScroll)
       }
     }
 
     return () => {
       if (frame) {
-        cancelAnimationFrame(
-          frame,
-        )
+        cancelAnimationFrame(frame)
       }
 
-      window.removeEventListener(
-        'scroll',
-        onScroll,
-      )
-
-      window.removeEventListener(
-        'resize',
-        onScroll,
-      )
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
 
       removeLenisListener?.()
     }
@@ -158,12 +116,12 @@ function useShrinkProgress() {
 
 const pillBase = `
   relative
-  z-[4]
+  z-[5]
   inline-flex
   items-center
   justify-center
   whitespace-nowrap
-  rounded-2xl
+  rounded-[10px]
   px-8
   py-5
   text-[11px]
@@ -180,47 +138,38 @@ const pillBase = `
 `
 
 /* =========================================================
-   COMPONENT
+   HERO
 ========================================================= */
 
 export default function WowHero({
   hero: _hero,
 }: WowHeroProps) {
-  const {
-    ref,
-    progress,
-  } = useShrinkProgress()
+  const { ref, progress } = useShrinkProgress()
 
-  const meetDialog =
-    useMeetDialogOptional()
+  const meetDialog = useMeetDialogOptional()
 
-  /*
-   * Smoothstep easing
-   */
+  /* Smoothstep easing */
   const eased =
     progress *
     progress *
     (3 - 2 * progress)
 
-  const pinned =
-    progress < 1
+  const pinned = progress < 1
 
   /* =======================================================
      OPACITY
   ======================================================= */
 
   const introOpacity =
-    1 -
-    Math.min(
-      1,
-      eased * 1.6,
-    )
+    1 - Math.min(1, eased * 1.6)
 
   const dockedOpacity =
     Math.max(
       0,
-      (eased - 0.35) /
-        0.4,
+      Math.min(
+        1,
+        (eased - 0.35) / 0.4,
+      ),
     )
 
   const ctaOpacity =
@@ -228,8 +177,7 @@ export default function WowHero({
       0,
       Math.min(
         1,
-        (eased - 0.5) /
-          0.35,
+        (eased - 0.5) / 0.35,
       ),
     )
 
@@ -237,56 +185,34 @@ export default function WowHero({
     eased > 0.6
 
   /* =======================================================
-     IMAGE POSITION
+     IMAGE ANIMATION
   ======================================================= */
 
   const imageTop =
-    lerp(
-      0,
-      46,
-      eased,
-    )
+    lerp(0, 46, eased)
 
   const imageSide =
-    lerp(
-      0,
-      4,
-      eased,
-    )
+    lerp(0, 4, eased)
 
   const imageBottom =
-    lerp(
-      0,
-      10,
-      eased,
-    )
+    lerp(0, 10, eased)
 
+  /*
+   * Image corners:
+   * 0px while full screen
+   * 10px when docked
+   */
   const imageRadius =
-    lerp(
-      0,
-      24,
-      eased,
-    )
+    lerp(0, 10, eased)
 
   return (
     <section
       ref={ref}
       aria-label="Hero"
-      className={`
-        relative
-        z-0
-        h-[240vh]
-        ${stageBgClass}
-      `}
+      className={`relative z-0 h-[240vh] ${stageBgClass}`}
     >
       {/* ==================================================
-          FIXED HERO VIEWPORT
-
-          --hero-corner-bg is used by the radial-gradient
-          corners below.
-
-          Change these two colors if your backgroundBody
-          / dark colors are different.
+          FIXED / PINNED HERO
       ================================================== */}
 
       <div
@@ -295,26 +221,17 @@ export default function WowHero({
           w-full
           overflow-hidden
 
-          [--hero-corner-bg:#ededed]
-
-          dark:[--hero-corner-bg:#0D0D0D]
+          [--hero-bg:#ededed]
+          dark:[--hero-bg:#0D0D0D]
 
           ${stageBgClass}
         `}
         style={{
-          position:
-            pinned
-              ? 'fixed'
-              : 'absolute',
-
-          top:
-            pinned
-              ? 0
-              : 'auto',
-
+          position: pinned ? 'fixed' : 'absolute',
+          top: pinned ? 0 : 'auto',
+          right: 0,
           bottom: 0,
           left: 0,
-          right: 0,
         }}
       >
         {/* ==================================================
@@ -322,15 +239,12 @@ export default function WowHero({
         ================================================== */}
 
         <div
-          className="
-            absolute
-            overflow-hidden
-          "
+          className="absolute overflow-hidden"
           style={{
             top: `${imageTop}vh`,
-            left: `${imageSide}vw`,
             right: `${imageSide}vw`,
             bottom: `${imageBottom}vh`,
+            left: `${imageSide}vw`,
             borderRadius: `${imageRadius}px`,
           }}
         >
@@ -340,15 +254,12 @@ export default function WowHero({
             fill
             priority
             sizes="100vw"
-            className="
-              object-cover
-              object-center
-            "
+            className="object-cover object-center"
           />
         </div>
 
         {/* ==================================================
-            FULL IMAGE INTRO
+            FULL SCREEN INTRO
         ================================================== */}
 
         <div
@@ -363,8 +274,7 @@ export default function WowHero({
             px-[6vw]
           "
           style={{
-            opacity:
-              introOpacity,
+            opacity: introOpacity,
           }}
         >
           <span
@@ -396,9 +306,7 @@ export default function WowHero({
               text-white
             "
           >
-            {
-              HERO_COPY.headline
-            }
+            {HERO_COPY.headline}
           </h1>
 
           <p
@@ -412,14 +320,12 @@ export default function WowHero({
               md:text-lg
             "
           >
-            {
-              HERO_COPY.lead
-            }
+            {HERO_COPY.lead}
           </p>
         </div>
 
         {/* ==================================================
-            DOCKED TEXT
+            DOCKED COPY
         ================================================== */}
 
         <div
@@ -431,9 +337,7 @@ export default function WowHero({
             pt-[max(5.5rem,6vh)]
           "
           style={{
-            opacity:
-              dockedOpacity,
-
+            opacity: dockedOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
@@ -452,14 +356,11 @@ export default function WowHero({
               uppercase
               tracking-[0.18em]
               text-[#0D0D0D]
-
               dark:bg-[#EDF0F533]
               dark:text-[#F2F2F2]
             "
           >
-            {
-              HERO_COPY.badge
-            }
+            {HERO_COPY.badge}
           </span>
 
           <h2
@@ -472,13 +373,10 @@ export default function WowHero({
               leading-[1.08]
               tracking-tight
               text-secondary
-
               dark:text-backgroundBody
             "
           >
-            {
-              HERO_COPY.headline
-            }
+            {HERO_COPY.headline}
           </h2>
 
           <p
@@ -489,15 +387,11 @@ export default function WowHero({
               text-sm
               font-light
               text-secondary/85
-
               dark:text-backgroundBody/85
-
               md:text-base
             "
           >
-            {
-              HERO_COPY.lead
-            }
+            {HERO_COPY.lead}
           </p>
 
           <p
@@ -508,135 +402,80 @@ export default function WowHero({
               text-sm
               font-light
               text-muted-foreground
-
               dark:text-dark-100
-
               md:text-base
             "
           >
-            {
-              HERO_COPY.body
-            }
+            {HERO_COPY.body}
           </p>
         </div>
 
         {/* ==================================================
-            TOP RIGHT CTA
+            TOP-RIGHT CTA
 
-            This uses the SAME technique as:
-
-            radial-gradient(
-              circle at 100% 100%,
-              transparent 20px,
-              #ededed 21px
-            )
-
-            but mirrored horizontally because this
-            CTA is attached to the TOP-RIGHT.
+            10px main corner
+            10px left fillet
+            10px bottom fillet
         ================================================== */}
 
         <div
-          className="
-            absolute
-            z-[5]
-          "
+          className="absolute z-[10]"
           style={{
             top: `${imageTop}vh`,
             right: `${imageSide}vw`,
-
-            opacity:
-              ctaOpacity,
-
+            opacity: ctaOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
                 : 'none',
           }}
         >
-          {/* Main background shape */}
-
           <div
             className="
               relative
               z-[2]
-
-              rounded-bl-[28px]
-
+              rounded-bl-[10px]
               bg-backgroundBody
-
-              pb-5
-              pl-5
-
-              sm:rounded-bl-[32px]
-              sm:pb-7
-              sm:pl-7
-
+              pb-7
+              pl-7
               dark:bg-dark
             "
           >
-            {/* =============================================
-                TOP-RIGHT CORNER - LEFT CURVE
+            {/* LEFT INVERTED CORNER */}
 
-                Equivalent to the second corner in your
-                original working component, but mirrored.
-
-                It sits LEFT of the CTA at the top.
-            ============================================= */}
-
-            <div
-              aria-hidden="true"
+            <span
+              aria-hidden
               className="
                 pointer-events-none
-
                 absolute
-
-                left-[-28px]
+                left-[-10px]
                 top-0
-
                 z-[3]
-
-                h-7
-                w-7
-
-                sm:left-[-32px]
-                sm:h-8
-                sm:w-8
+                h-[10px]
+                w-[10px]
               "
               style={{
                 background:
-                  'radial-gradient(circle at 0% 100%, transparent 28px, var(--hero-corner-bg) 29px)',
+                  'radial-gradient(circle at 0% 100%, transparent 10px, var(--hero-bg) 10.5px)',
               }}
             />
 
-            {/* =============================================
-                TOP-RIGHT CORNER - BOTTOM CURVE
+            {/* BOTTOM INVERTED CORNER */}
 
-                This sits directly BELOW the CTA on its
-                right-hand side.
-            ============================================= */}
-
-            <div
-              aria-hidden="true"
+            <span
+              aria-hidden
               className="
                 pointer-events-none
-
                 absolute
-
-                bottom-[-28px]
+                bottom-[-10px]
                 right-0
-
                 z-[3]
-
-                h-7
-                w-7
-
-                sm:bottom-[-32px]
-                sm:h-8
-                sm:w-8
+                h-[10px]
+                w-[10px]
               "
               style={{
                 background:
-                  'radial-gradient(circle at 0% 100%, transparent 28px, var(--hero-corner-bg) 29px)',
+                  'radial-gradient(circle at 0% 100%, transparent 10px, var(--hero-bg) 10.5px)',
               }}
             />
 
@@ -644,143 +483,88 @@ export default function WowHero({
               href="/meet"
               className={`
                 ${pillBase}
-
                 bg-secondary
                 text-backgroundBody
-
                 dark:bg-backgroundBody
                 dark:text-secondary
               `}
-              onClick={(
-                event,
-              ) => {
-                if (
-                  !meetDialog
-                ) {
-                  return
-                }
+              onClick={(event) => {
+                if (!meetDialog) return
 
                 event.preventDefault()
-
                 meetDialog.open()
               }}
             >
-              {
-                HERO_COPY.ctaPrimary
-              }
+              {HERO_COPY.ctaPrimary}
             </Link>
           </div>
         </div>
 
         {/* ==================================================
-            BOTTOM LEFT CTA
+            BOTTOM-LEFT CTA
 
-            Same radial-gradient technique again,
-            but rotated vertically.
-
-            Main shape is rounded on TOP-RIGHT.
+            Exact opposite/mirror of top-right.
+            All corners = 10px.
         ================================================== */}
 
         <div
-          className="
-            absolute
-            z-[5]
-          "
+          className="absolute z-[10]"
           style={{
             left: `${imageSide}vw`,
             bottom: `${imageBottom}vh`,
-
-            opacity:
-              ctaOpacity,
-
+            opacity: ctaOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
                 : 'none',
           }}
         >
-          {/* Main background shape */}
-
           <div
             className="
               relative
               z-[2]
-
-              rounded-tr-[28px]
-
+              rounded-tr-[10px]
               bg-backgroundBody
-
-              pr-5
-              pt-5
-
-              sm:rounded-tr-[32px]
-              sm:pr-7
-              sm:pt-7
-
+              pr-7
+              pt-7
               dark:bg-dark
             "
           >
-            {/* =============================================
-                BOTTOM-LEFT CORNER - TOP CURVE
+            {/* TOP INVERTED CORNER */}
 
-                This sits directly ABOVE the left side
-                of the CTA.
-            ============================================= */}
-
-            <div
-              aria-hidden="true"
+            <span
+              aria-hidden
               className="
                 pointer-events-none
-
                 absolute
-
                 left-0
-                top-[-28px]
-
+                top-[-10px]
                 z-[3]
-
-                h-7
-                w-7
-
-                sm:top-[-32px]
-                sm:h-8
-                sm:w-8
+                h-[10px]
+                w-[10px]
               "
               style={{
                 background:
-                  'radial-gradient(circle at 100% 0%, transparent 28px, var(--hero-corner-bg) 29px)',
+                  'radial-gradient(circle at 100% 0%, transparent 10px, var(--hero-bg) 10.5px)',
               }}
             />
 
-            {/* =============================================
-                BOTTOM-LEFT CORNER - RIGHT CURVE
+            {/* RIGHT INVERTED CORNER */}
 
-                This sits directly RIGHT of the CTA on
-                the bottom edge of the image.
-            ============================================= */}
-
-            <div
-              aria-hidden="true"
+            <span
+              aria-hidden
               className="
                 pointer-events-none
-
                 absolute
-
                 bottom-0
-                right-[-28px]
-
+                right-[-10px]
                 z-[3]
-
-                h-7
-                w-7
-
-                sm:right-[-32px]
-                sm:h-8
-                sm:w-8
+                h-[10px]
+                w-[10px]
               "
               style={{
                 background:
-                  'radial-gradient(circle at 100% 0%, transparent 28px, var(--hero-corner-bg) 29px)',
+                  'radial-gradient(circle at 100% 0%, transparent 10px, var(--hero-bg) 10.5px)',
               }}
             />
 
@@ -788,14 +572,11 @@ export default function WowHero({
               href="/services"
               className={`
                 ${pillBase}
-
                 bg-primary
                 text-white
               `}
             >
-              {
-                HERO_COPY.ctaSecondary
-              }
+              {HERO_COPY.ctaSecondary}
             </Link>
           </div>
         </div>
