@@ -631,8 +631,8 @@ export default function WowHero({
               z-[2]
               rounded-bl-[10px]
               bg-backgroundBody
-              pb-7
-              pl-7
+              pb-2
+              pl-2
               dark:bg-dark
             "
           >
@@ -729,8 +729,8 @@ export default function WowHero({
               z-[2]
               rounded-tr-[10px]
               bg-backgroundBody
-              pr-7
-              pt-7
+              pr-2
+              pt-2
               dark:bg-dark
             "
           >
