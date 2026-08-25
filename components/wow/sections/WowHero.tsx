@@ -13,8 +13,6 @@ type WowHeroProps = {
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
-const STAGE = '#0a0a0a'
-
 const HERO_COPY = {
   badge: 'The Superagency for business growth',
   headline: 'Why work with an agency when you can work with a Superagency?',
@@ -23,6 +21,8 @@ const HERO_COPY = {
   ctaPrimary: 'Start a conversation',
   ctaSecondary: 'Explore what we do',
 } as const
+
+const stageBgClass = 'bg-backgroundBody transition-colors duration-300 dark:bg-dark'
 
 function Fillet({
   corner,
@@ -34,9 +34,8 @@ function Fillet({
   return (
     <span
       aria-hidden
-      className={`pointer-events-none absolute h-7 w-7 ${className}`}
+      className={`pointer-events-none absolute h-7 w-7 bg-backgroundBody dark:bg-dark ${className}`}
       style={{
-        backgroundColor: STAGE,
         maskImage: `radial-gradient(circle 28px at ${corner}, transparent 99%, #000 100%)`,
         WebkitMaskImage: `radial-gradient(circle 28px at ${corner}, transparent 99%, #000 100%)`,
       }}
@@ -123,14 +122,12 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
   return (
     <section
       ref={ref}
-      className="relative z-0 h-[240vh]"
-      style={{ backgroundColor: STAGE }}
+      className={`relative z-0 h-[240vh] ${stageBgClass}`}
       aria-label="Hero"
     >
       <div
-        className="h-screen w-full overflow-hidden"
+        className={`h-screen w-full overflow-hidden ${stageBgClass}`}
         style={{
-          backgroundColor: STAGE,
           position: pinned ? 'fixed' : 'absolute',
           top: pinned ? 0 : 'auto',
           bottom: pinned ? 0 : 0,
@@ -158,11 +155,12 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
           />
         </div>
 
+        {/* Intro sits on the full-bleed photo — keep light text for contrast */}
         <div
           className="pointer-events-none absolute inset-0 z-[1] flex flex-col justify-center px-[6vw]"
           style={{ opacity: introOpacity }}
         >
-          <span className="w-fit rounded-full bg-white/10 px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/80">
+          <span className="w-fit rounded-full bg-white/15 px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/90">
             {HERO_COPY.badge}
           </span>
           <h1 className="mt-8 max-w-4xl font-outfit text-[clamp(2.25rem,6vw,4.5rem)] font-light leading-[1.05] tracking-tight text-white">
@@ -173,6 +171,7 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
           </p>
         </div>
 
+        {/* Docked copy sits on page background — theme-aware like other sections */}
         <div
           className="absolute inset-0 z-[1] px-[6vw] pt-[max(5.5rem,6vh)]"
           style={{
@@ -180,16 +179,16 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
             pointerEvents: dockedInteractive ? 'auto' : 'none',
           }}
         >
-          <span className="inline-block w-fit rounded-full bg-white/10 px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/80">
+          <span className="inline-block w-fit rounded-full bg-[#15151533] px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-[#0D0D0D] dark:bg-[#EDF0F533] dark:text-[#F2F2F2]">
             {HERO_COPY.badge}
           </span>
-          <h2 className="mt-6 max-w-3xl font-outfit text-[clamp(1.75rem,4.2vw,3.15rem)] font-light leading-[1.08] tracking-tight text-white">
+          <h2 className="mt-6 max-w-3xl font-outfit text-[clamp(1.75rem,4.2vw,3.15rem)] font-light leading-[1.08] tracking-tight text-secondary dark:text-backgroundBody">
             {HERO_COPY.headline}
           </h2>
-          <p className="mt-5 max-w-xl font-outfit text-sm font-light text-white/85 md:text-base">
+          <p className="mt-5 max-w-xl font-outfit text-sm font-light text-secondary/85 dark:text-backgroundBody/85 md:text-base">
             {HERO_COPY.lead}
           </p>
-          <p className="mt-4 max-w-xl font-outfit text-sm font-light text-white/55 md:text-base">
+          <p className="mt-4 max-w-xl font-outfit text-sm font-light text-muted-foreground dark:text-dark-100 md:text-base">
             {HERO_COPY.body}
           </p>
         </div>
@@ -203,14 +202,14 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
           }}
         >
           <div
-            className="absolute right-0 bottom-[-36px] p-5 sm:bottom-[-40px] sm:p-7"
-            style={{ backgroundColor: STAGE, paddingRight: 0 }}
+            className={`absolute right-0 bottom-[-36px] p-5 sm:bottom-[-40px] sm:p-7 ${stageBgClass}`}
+            style={{ paddingRight: 0 }}
           >
             <Fillet corner="bottom left" className="bottom-[10px] left-[-28px] sm:bottom-[12px]" />
             <Fillet corner="bottom left" className="bottom-[-28px] right-0" />
             <Link
               href="/meet"
-              className={`${pillBase} bg-[#ededed] text-[#171717]`}
+              className={`${pillBase} bg-secondary text-backgroundBody dark:bg-backgroundBody dark:text-secondary`}
               onClick={(event) => {
                 if (!meetDialog) return
                 event.preventDefault()
@@ -232,8 +231,8 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
           }}
         >
           <div
-            className="absolute left-0 top-[-36px] p-5 sm:top-[-40px] sm:p-7"
-            style={{ backgroundColor: STAGE, paddingLeft: 0 }}
+            className={`absolute left-0 top-[-36px] p-5 sm:top-[-40px] sm:p-7 ${stageBgClass}`}
+            style={{ paddingLeft: 0 }}
           >
             <Fillet corner="top right" className="right-[-28px] top-[10px] sm:top-[12px]" />
             <Fillet corner="top right" className="left-0 top-[-28px]" />
