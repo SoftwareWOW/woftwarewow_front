@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import { useLenis } from 'lenis/react'
 import Image from 'next/image'
+import type { CSSProperties } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 type WowHeroProps = {
@@ -197,6 +198,14 @@ export default function WowHero({
   const imageBottom =
     lerp(0, 10, eased)
 
+  /* Mobile docked image stays centered so the order becomes:
+     top button -> image shape -> bottom button. */
+  const mobileImageTop =
+    lerp(0, 28, eased)
+
+  const mobileImageBottom =
+    lerp(0, 28, eased)
+
   /*
    * Image corners:
    * 0px while full screen
@@ -239,14 +248,24 @@ export default function WowHero({
         ================================================== */}
 
         <div
-          className="absolute overflow-hidden"
+          className="
+            absolute
+            overflow-hidden
+            top-[var(--image-top-mobile)]
+            right-[var(--image-side)]
+            bottom-[var(--image-bottom-mobile)]
+            left-[var(--image-side)]
+            md:top-[var(--image-top-desktop)]
+            md:bottom-[var(--image-bottom-desktop)]
+          "
           style={{
-            top: `${imageTop}vh`,
-            right: `${imageSide}vw`,
-            bottom: `${imageBottom}vh`,
-            left: `${imageSide}vw`,
+            '--image-top-mobile': `${mobileImageTop}vh`,
+            '--image-bottom-mobile': `${mobileImageBottom}vh`,
+            '--image-top-desktop': `${imageTop}vh`,
+            '--image-bottom-desktop': `${imageBottom}vh`,
+            '--image-side': `${imageSide}vw`,
             borderRadius: `${imageRadius}px`,
-          }}
+          } as CSSProperties}
         >
           <Image
             src="/images/wow/hero-banner.jpg"
@@ -419,16 +438,25 @@ export default function WowHero({
         ================================================== */}
 
         <div
-          className="absolute z-[10]"
+          className="
+            absolute
+            z-[10]
+            top-[var(--cta-top-mobile)]
+            right-[var(--cta-side)]
+            -translate-y-full
+            md:top-[var(--cta-top-desktop)]
+            md:translate-y-0
+          "
           style={{
-            top: `${imageTop}vh`,
-            right: `${imageSide}vw`,
+            '--cta-top-mobile': `${mobileImageTop}vh`,
+            '--cta-top-desktop': `${imageTop}vh`,
+            '--cta-side': `${imageSide}vw`,
             opacity: ctaOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
                 : 'none',
-          }}
+          } as CSSProperties}
         >
           <div
             className="
@@ -508,16 +536,25 @@ export default function WowHero({
         ================================================== */}
 
         <div
-          className="absolute z-[10]"
+          className="
+            absolute
+            z-[10]
+            left-[var(--cta-side)]
+            bottom-[var(--cta-bottom-mobile)]
+            translate-y-full
+            md:bottom-[var(--cta-bottom-desktop)]
+            md:translate-y-0
+          "
           style={{
-            left: `${imageSide}vw`,
-            bottom: `${imageBottom}vh`,
+            '--cta-side': `${imageSide}vw`,
+            '--cta-bottom-mobile': `${mobileImageBottom}vh`,
+            '--cta-bottom-desktop': `${imageBottom}vh`,
             opacity: ctaOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
                 : 'none',
-          }}
+          } as CSSProperties}
         >
           <div
             className="
