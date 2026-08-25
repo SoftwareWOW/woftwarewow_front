@@ -13,7 +13,6 @@ type WowHeroProps = {
 }
 
 const HERO_COPY = {
-  badge: 'The Superagency for business growth',
   headline: 'Why work with an agency when you can work with a Superagency?',
   lead: "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
   body: 'Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.',
@@ -189,6 +188,10 @@ export default function WowHero({
      IMAGE ANIMATION
   ======================================================= */
 
+  /*
+   * LARGE DESKTOP
+   * xl and above
+   */
   const imageTop =
     lerp(0, 40, eased)
 
@@ -198,13 +201,28 @@ export default function WowHero({
   const imageBottom =
     lerp(0, 1, eased)
 
-  /* Mobile docked image stays centered so the order becomes:
-     top button -> image shape -> bottom button. */
+  /*
+   * MOBILE
+   * Below md
+   */
   const mobileImageTop =
     lerp(0, 28, eased)
 
   const mobileImageBottom =
     lerp(0, 15, eased)
+
+  /*
+   * TABLET
+   * md -> xl
+   *
+   * Tablet text wraps onto more lines, so the image needs to
+   * begin lower than it does on large desktop.
+   */
+  const tabletImageTop =
+    lerp(0, 48, eased)
+
+  const tabletImageBottom =
+    lerp(0, 1, eased)
 
   /*
    * Image corners:
@@ -253,18 +271,28 @@ export default function WowHero({
             absolute
             z-0
             overflow-hidden
+
             top-[var(--image-top-mobile)]
             right-[var(--image-side)]
             bottom-[var(--image-bottom-mobile)]
             left-[var(--image-side)]
-            md:top-[var(--image-top-desktop)]
-            md:bottom-[var(--image-bottom-desktop)]
+
+            md:top-[var(--image-top-tablet)]
+            md:bottom-[var(--image-bottom-tablet)]
+
+            xl:top-[var(--image-top-desktop)]
+            xl:bottom-[var(--image-bottom-desktop)]
           "
           style={{
             '--image-top-mobile': `${mobileImageTop}vh`,
             '--image-bottom-mobile': `${mobileImageBottom}vh`,
+
+            '--image-top-tablet': `${tabletImageTop}vh`,
+            '--image-bottom-tablet': `${tabletImageBottom}vh`,
+
             '--image-top-desktop': `${imageTop}vh`,
             '--image-bottom-desktop': `${imageBottom}vh`,
+
             '--image-side': `${imageSide}vw`,
             borderRadius: `${imageRadius}px`,
           } as CSSProperties}
@@ -298,26 +326,8 @@ export default function WowHero({
             opacity: introOpacity,
           }}
         >
-          <span
-            className="
-              w-fit
-              rounded-full
-              bg-white/15
-              px-4
-              py-1.5
-              text-[11px]
-              uppercase
-              tracking-[0.18em]
-              text-white/90
-              backdrop-blur-sm
-            "
-          >
-            {HERO_COPY.badge}
-          </span>
-
           <h1
             className="
-              mt-8
               max-w-4xl
               font-outfit
               text-[clamp(2.25rem,6vw,4.5rem)]
@@ -347,6 +357,9 @@ export default function WowHero({
 
         {/* ==================================================
             DOCKED COPY
+
+            Mobile keeps the position you already fixed.
+            Tablet/desktop use the original desktop padding.
         ================================================== */}
 
         <div
@@ -355,6 +368,7 @@ export default function WowHero({
             inset-0
             z-[20]
             px-[6vw]
+
             pt-[9rem]
             md:pt-[max(5.5rem,6vh)]
           "
@@ -366,11 +380,8 @@ export default function WowHero({
                 : 'none',
           }}
         >
-  
-
           <h2
             className="
-              mt-6
               max-w-3xl
               font-outfit
               text-[clamp(1.75rem,4.2vw,3.15rem)]
@@ -416,16 +427,13 @@ export default function WowHero({
         </div>
 
         {/* ==================================================
-            DOCKED COPY — IMAGE OVERLAY
+            MOBILE IMAGE OVERLAP TEXT
 
-            Keep the original dark copy on the page background,
-            then paint the same copy in white ONLY where the image
-            passes underneath it. This keeps the text readable on
-            both desktop and mobile without moving/changing the
-            existing layout.
+            Kept for mobile only.
+            It uses exactly the same mobile top padding as the
+            normal docked text, so there is no duplicate offset.
         ================================================== */}
 
-        {/* Mobile image overlap text */}
         <div
           aria-hidden="true"
           className="
@@ -434,7 +442,7 @@ export default function WowHero({
             inset-0
             z-[21]
             px-[6vw]
-            pt-[9rem] md:pt-[max(5.5rem,6vh)]
+            pt-[9rem]
             md:hidden
           "
           style={{
@@ -442,10 +450,8 @@ export default function WowHero({
             clipPath: `inset(${mobileImageTop}vh ${imageSide}vw ${mobileImageBottom}vh ${imageSide}vw round ${imageRadius}px)`,
           }}
         >
-
           <h2
             className="
-              mt-6
               max-w-3xl
               font-outfit
               text-[clamp(1.75rem,4.2vw,3.15rem)]
@@ -485,7 +491,15 @@ export default function WowHero({
           </p>
         </div>
 
-        {/* Desktop image overlap text */}
+        {/* ==================================================
+            LARGE DESKTOP IMAGE OVERLAP TEXT
+
+            IMPORTANT:
+            Starts only at xl now.
+            It is intentionally disabled on tablet so tablet
+            text cannot be clipped by the desktop image mask.
+        ================================================== */}
+
         <div
           aria-hidden="true"
           className="
@@ -496,17 +510,15 @@ export default function WowHero({
             hidden
             px-[6vw]
             pt-[max(5.5rem,6vh)]
-            md:block
+            xl:block
           "
           style={{
             opacity: dockedOpacity,
             clipPath: `inset(${imageTop}vh ${imageSide}vw ${imageBottom}vh ${imageSide}vw round ${imageRadius}px)`,
           }}
         >
-
           <h2
             className="
-              mt-6
               max-w-3xl
               font-outfit
               text-[clamp(1.75rem,4.2vw,3.15rem)]
@@ -551,23 +563,28 @@ export default function WowHero({
         {/* ==================================================
             TOP-RIGHT CTA
 
-            10px main corner
-            10px left fillet
-            10px bottom fillet
+            Mobile: above image.
+            Tablet: follows tablet image top.
+            Desktop: keeps original desktop image top.
         ================================================== */}
 
         <div
           className="
             absolute
             z-[30]
+
             top-[var(--cta-top-mobile)]
             right-[var(--cta-side)]
             -translate-y-full
-            md:top-[var(--cta-top-desktop)]
+
+            md:top-[var(--cta-top-tablet)]
             md:translate-y-0
+
+            xl:top-[var(--cta-top-desktop)]
           "
           style={{
             '--cta-top-mobile': `${mobileImageTop}vh`,
+            '--cta-top-tablet': `${tabletImageTop}vh`,
             '--cta-top-desktop': `${imageTop}vh`,
             '--cta-side': `${imageSide}vw`,
             opacity: ctaOpacity,
@@ -650,23 +667,29 @@ export default function WowHero({
         {/* ==================================================
             BOTTOM-LEFT CTA
 
-            Exact opposite/mirror of top-right.
-            All corners = 10px.
+            Mobile keeps the mobile bottom.
+            Tablet gets its own bottom.
+            Large desktop keeps the desktop bottom.
         ================================================== */}
 
         <div
           className="
             absolute
             z-[30]
+
             left-[var(--cta-side)]
             bottom-[var(--cta-bottom-mobile)]
             translate-y-full
-            md:bottom-[var(--cta-bottom-desktop)]
+
+            md:bottom-[var(--cta-bottom-tablet)]
             md:translate-y-0
+
+            xl:bottom-[var(--cta-bottom-desktop)]
           "
           style={{
             '--cta-side': `${imageSide}vw`,
             '--cta-bottom-mobile': `${mobileImageBottom}vh`,
+            '--cta-bottom-tablet': `${tabletImageBottom}vh`,
             '--cta-bottom-desktop': `${imageBottom}vh`,
             opacity: ctaOpacity,
             pointerEvents:
