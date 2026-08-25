@@ -190,13 +190,13 @@ export default function WowHero({
   ======================================================= */
 
   const imageTop =
-    lerp(0, 46, eased)
+    lerp(0, 40, eased)
 
   const imageSide =
     lerp(0, 4, eased)
 
   const imageBottom =
-    lerp(0, 10, eased)
+    lerp(0, 1, eased)
 
   /* Mobile docked image stays centered so the order becomes:
      top button -> image shape -> bottom button. */
@@ -204,7 +204,7 @@ export default function WowHero({
     lerp(0, 28, eased)
 
   const mobileImageBottom =
-    lerp(0, 28, eased)
+    lerp(0, 15, eased)
 
   /*
    * Image corners:
@@ -355,7 +355,7 @@ export default function WowHero({
             inset-0
             z-[20]
             px-[6vw]
-            pt-[max(5.5rem,6vh)]
+            // pt-[max(5.5rem,6vh)]
           "
           style={{
             opacity: dockedOpacity,
@@ -365,24 +365,7 @@ export default function WowHero({
                 : 'none',
           }}
         >
-          <span
-            className="
-              inline-block
-              w-fit
-              rounded-full
-              bg-[#15151533]
-              px-4
-              py-1.5
-              text-[11px]
-              uppercase
-              tracking-[0.18em]
-              text-[#0D0D0D]
-              dark:bg-[#EDF0F533]
-              dark:text-[#F2F2F2]
-            "
-          >
-            {HERO_COPY.badge}
-          </span>
+  
 
           <h2
             className="
@@ -450,7 +433,7 @@ export default function WowHero({
             inset-0
             z-[21]
             px-[6vw]
-            pt-[max(5.5rem,6vh)]
+            pt-[9rem] md:pt-[max(5.5rem,6vh)]
             md:hidden
           "
           style={{
@@ -458,22 +441,6 @@ export default function WowHero({
             clipPath: `inset(${mobileImageTop}vh ${imageSide}vw ${mobileImageBottom}vh ${imageSide}vw round ${imageRadius}px)`,
           }}
         >
-          <span
-            className="
-              inline-block
-              w-fit
-              rounded-full
-              bg-white/15
-              px-4
-              py-1.5
-              text-[11px]
-              uppercase
-              tracking-[0.18em]
-              text-white
-            "
-          >
-            {HERO_COPY.badge}
-          </span>
 
           <h2
             className="
@@ -535,22 +502,6 @@ export default function WowHero({
             clipPath: `inset(${imageTop}vh ${imageSide}vw ${imageBottom}vh ${imageSide}vw round ${imageRadius}px)`,
           }}
         >
-          <span
-            className="
-              inline-block
-              w-fit
-              rounded-full
-              bg-white/15
-              px-4
-              py-1.5
-              text-[11px]
-              uppercase
-              tracking-[0.18em]
-              text-white
-            "
-          >
-            {HERO_COPY.badge}
-          </span>
 
           <h2
             className="
