@@ -11,47 +11,41 @@ type WowHeroProps = {
   hero: Dictionary['hero']
 }
 
-const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+const lerp = (a: number, b: number, t: number) => {
+  return a + (b - a) * t
+}
 
 const HERO_COPY = {
   badge: 'The Superagency for business growth',
-  headline: 'Why work with an agency when you can work with a Superagency?',
-  lead: "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
-  body: 'Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.',
+  headline:
+    'Why work with an agency when you can work with a Superagency?',
+  lead:
+    "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
+  body:
+    'Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.',
   ctaPrimary: 'Start a conversation',
   ctaSecondary: 'Explore what we do',
 } as const
 
-const stageBgClass = 'bg-backgroundBody transition-colors duration-300 dark:bg-dark'
+const stageBgClass =
+  'bg-backgroundBody transition-colors duration-300 dark:bg-dark'
 
-function Fillet({
-  corner,
-  className = '',
-}: {
-  corner: 'top left' | 'top right' | 'bottom left' | 'bottom right'
-  className?: string
-}) {
-  return (
-    <span
-      aria-hidden
-      className={`pointer-events-none absolute h-7 w-7 bg-backgroundBody dark:bg-dark ${className}`}
-      style={{
-        maskImage: `radial-gradient(circle 28px at ${corner}, transparent 99%, #000 100%)`,
-        WebkitMaskImage: `radial-gradient(circle 28px at ${corner}, transparent 99%, #000 100%)`,
-      }}
-    />
-  )
-}
+/* =========================================================
+   SCROLL / SHRINK PROGRESS
+========================================================= */
 
-/** 0 = full-screen image, 1 = image docked into the layout card. */
 function useShrinkProgress() {
   const ref = useRef<HTMLElement>(null)
   const [progress, setProgress] = useState(0)
+
   const lenis = useLenis()
 
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) {
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    if (reducedMotion) {
       setProgress(1)
       return
     }
@@ -60,83 +54,278 @@ function useShrinkProgress() {
 
     const update = () => {
       frame = 0
-      const el = ref.current
-      if (!el) return
 
-      const travel = el.offsetHeight - window.innerHeight
+      const element = ref.current
+
+      if (!element) return
+
+      const travel =
+        element.offsetHeight - window.innerHeight
+
       if (travel <= 0) {
         setProgress(0)
         return
       }
 
-      const scrollY = lenis?.scroll ?? window.scrollY
-      const start = el.getBoundingClientRect().top + scrollY
-      const next = (scrollY - start) / travel
-      setProgress(Math.min(1, Math.max(0, next)))
+      const scrollY =
+        lenis?.scroll ?? window.scrollY
+
+      const sectionStart =
+        element.getBoundingClientRect().top +
+        scrollY
+
+      const next =
+        (scrollY - sectionStart) / travel
+
+      setProgress(
+        Math.min(
+          1,
+          Math.max(0, next),
+        ),
+      )
     }
 
     const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update)
+      if (frame) return
+
+      frame =
+        requestAnimationFrame(update)
     }
 
     update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
 
-    let offLenis: (() => void) | undefined
+    window.addEventListener(
+      'scroll',
+      onScroll,
+      {
+        passive: true,
+      },
+    )
+
+    window.addEventListener(
+      'resize',
+      onScroll,
+    )
+
+    let removeLenisListener:
+      | (() => void)
+      | undefined
+
     if (lenis) {
-      lenis.on('scroll', onScroll)
-      offLenis = () => lenis.off('scroll', onScroll)
+      lenis.on(
+        'scroll',
+        onScroll,
+      )
+
+      removeLenisListener = () => {
+        lenis.off(
+          'scroll',
+          onScroll,
+        )
+      }
     }
 
     return () => {
-      if (frame) cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-      offLenis?.()
+      if (frame) {
+        cancelAnimationFrame(
+          frame,
+        )
+      }
+
+      window.removeEventListener(
+        'scroll',
+        onScroll,
+      )
+
+      window.removeEventListener(
+        'resize',
+        onScroll,
+      )
+
+      removeLenisListener?.()
     }
   }, [lenis])
 
-  return { ref, progress }
+  return {
+    ref,
+    progress,
+  }
 }
 
-const pillBase =
-  'relative inline-flex items-center justify-center rounded-2xl px-8 py-5 text-[11px] font-medium uppercase tracking-[0.22em] whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:px-12 sm:py-6'
+/* =========================================================
+   BUTTON STYLE
+========================================================= */
 
-export default function WowHero({ hero: _hero }: WowHeroProps) {
-  const { ref, progress } = useShrinkProgress()
-  const eased = progress * progress * (3 - 2 * progress)
-  const meetDialog = useMeetDialogOptional()
-  const pinned = progress < 1
+const pillBase = `
+  relative
+  z-[4]
+  inline-flex
+  items-center
+  justify-center
+  whitespace-nowrap
+  rounded-2xl
+  px-8
+  py-5
+  text-[11px]
+  font-medium
+  uppercase
+  tracking-[0.22em]
+  transition-opacity
+  hover:opacity-85
+  focus-visible:outline-none
+  focus-visible:ring-2
+  focus-visible:ring-white/40
+  sm:px-12
+  sm:py-6
+`
 
-  const introOpacity = 1 - Math.min(1, eased * 1.6)
-  const dockedOpacity = Math.max(0, (eased - 0.35) / 0.4)
-  const ctaOpacity = Math.max(0, (eased - 0.5) / 0.35)
-  const dockedInteractive = eased > 0.6
+/* =========================================================
+   COMPONENT
+========================================================= */
 
-  const imageTop = lerp(0, 46, eased)
-  const imageSide = lerp(0, 4, eased)
-  const imageBottom = lerp(0, 10, eased)
-  const imageRadius = lerp(0, 18, eased)
+export default function WowHero({
+  hero: _hero,
+}: WowHeroProps) {
+  const {
+    ref,
+    progress,
+  } = useShrinkProgress()
+
+  const meetDialog =
+    useMeetDialogOptional()
+
+  /*
+   * Smoothstep easing
+   */
+  const eased =
+    progress *
+    progress *
+    (3 - 2 * progress)
+
+  const pinned =
+    progress < 1
+
+  /* =======================================================
+     OPACITY
+  ======================================================= */
+
+  const introOpacity =
+    1 -
+    Math.min(
+      1,
+      eased * 1.6,
+    )
+
+  const dockedOpacity =
+    Math.max(
+      0,
+      (eased - 0.35) /
+        0.4,
+    )
+
+  const ctaOpacity =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        (eased - 0.5) /
+          0.35,
+      ),
+    )
+
+  const dockedInteractive =
+    eased > 0.6
+
+  /* =======================================================
+     IMAGE POSITION
+  ======================================================= */
+
+  const imageTop =
+    lerp(
+      0,
+      46,
+      eased,
+    )
+
+  const imageSide =
+    lerp(
+      0,
+      4,
+      eased,
+    )
+
+  const imageBottom =
+    lerp(
+      0,
+      10,
+      eased,
+    )
+
+  const imageRadius =
+    lerp(
+      0,
+      24,
+      eased,
+    )
 
   return (
     <section
       ref={ref}
-      className={`relative z-0 h-[240vh] ${stageBgClass}`}
       aria-label="Hero"
+      className={`
+        relative
+        z-0
+        h-[240vh]
+        ${stageBgClass}
+      `}
     >
+      {/* ==================================================
+          FIXED HERO VIEWPORT
+
+          --hero-corner-bg is used by the radial-gradient
+          corners below.
+
+          Change these two colors if your backgroundBody
+          / dark colors are different.
+      ================================================== */}
+
       <div
-        className={`h-screen w-full overflow-hidden ${stageBgClass}`}
+        className={`
+          h-screen
+          w-full
+          overflow-hidden
+
+          [--hero-corner-bg:#ededed]
+
+          dark:[--hero-corner-bg:#0D0D0D]
+
+          ${stageBgClass}
+        `}
         style={{
-          position: pinned ? 'fixed' : 'absolute',
-          top: pinned ? 0 : 'auto',
-          bottom: pinned ? 0 : 0,
+          position:
+            pinned
+              ? 'fixed'
+              : 'absolute',
+
+          top:
+            pinned
+              ? 0
+              : 'auto',
+
+          bottom: 0,
           left: 0,
           right: 0,
         }}
       >
+        {/* ==================================================
+            IMAGE
+        ================================================== */}
+
         <div
-          className="absolute overflow-hidden"
+          className="
+            absolute
+            overflow-hidden
+          "
           style={{
             top: `${imageTop}vh`,
             left: `${imageSide}vw`,
@@ -151,93 +340,462 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="
+              object-cover
+              object-center
+            "
           />
         </div>
 
-        {/* Intro sits on the full-bleed photo — keep light text for contrast */}
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] flex flex-col justify-center px-[6vw]"
-          style={{ opacity: introOpacity }}
-        >
-          <span className="w-fit rounded-full bg-white/15 px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/90">
-            {HERO_COPY.badge}
-          </span>
-          <h1 className="mt-8 max-w-4xl font-outfit text-[clamp(2.25rem,6vw,4.5rem)] font-light leading-[1.05] tracking-tight text-white">
-            {HERO_COPY.headline}
-          </h1>
-          <p className="mt-8 max-w-xl font-outfit text-base font-light text-white/85 md:text-lg">
-            {HERO_COPY.lead}
-          </p>
-        </div>
-
-        {/* Docked copy sits on page background — theme-aware like other sections */}
-        <div
-          className="absolute inset-0 z-[1] px-[6vw] pt-[max(5.5rem,6vh)]"
-          style={{
-            opacity: dockedOpacity,
-            pointerEvents: dockedInteractive ? 'auto' : 'none',
-          }}
-        >
-          <span className="inline-block w-fit rounded-full bg-[#15151533] px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-[#0D0D0D] dark:bg-[#EDF0F533] dark:text-[#F2F2F2]">
-            {HERO_COPY.badge}
-          </span>
-          <h2 className="mt-6 max-w-3xl font-outfit text-[clamp(1.75rem,4.2vw,3.15rem)] font-light leading-[1.08] tracking-tight text-secondary dark:text-backgroundBody">
-            {HERO_COPY.headline}
-          </h2>
-          <p className="mt-5 max-w-xl font-outfit text-sm font-light text-secondary/85 dark:text-backgroundBody/85 md:text-base">
-            {HERO_COPY.lead}
-          </p>
-          <p className="mt-4 max-w-xl font-outfit text-sm font-light text-muted-foreground dark:text-dark-100 md:text-base">
-            {HERO_COPY.body}
-          </p>
-        </div>
+        {/* ==================================================
+            FULL IMAGE INTRO
+        ================================================== */}
 
         <div
-          className="absolute z-[2] max-md:bottom-[22vh] max-md:right-[6vw] md:right-[4vw]"
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            z-[1]
+            flex
+            flex-col
+            justify-center
+            px-[6vw]
+          "
           style={{
-            top: `calc(${imageTop}vh)`,
-            opacity: ctaOpacity,
-            pointerEvents: dockedInteractive ? 'auto' : 'none',
+            opacity:
+              introOpacity,
           }}
         >
-          <div
-            className={`absolute right-0 bottom-[-36px] p-5 sm:bottom-[-40px] sm:p-7 ${stageBgClass}`}
-            style={{ paddingRight: 0 }}
+          <span
+            className="
+              w-fit
+              rounded-full
+              bg-white/15
+              px-4
+              py-1.5
+              text-[11px]
+              uppercase
+              tracking-[0.18em]
+              text-white/90
+              backdrop-blur-sm
+            "
           >
-            <Fillet corner="bottom left" className="bottom-[10px] left-[-28px] sm:bottom-[12px]" />
-            <Fillet corner="bottom left" className="bottom-[-28px] right-0" />
+            {HERO_COPY.badge}
+          </span>
+
+          <h1
+            className="
+              mt-8
+              max-w-4xl
+              font-outfit
+              text-[clamp(2.25rem,6vw,4.5rem)]
+              font-light
+              leading-[1.05]
+              tracking-tight
+              text-white
+            "
+          >
+            {
+              HERO_COPY.headline
+            }
+          </h1>
+
+          <p
+            className="
+              mt-8
+              max-w-xl
+              font-outfit
+              text-base
+              font-light
+              text-white/85
+              md:text-lg
+            "
+          >
+            {
+              HERO_COPY.lead
+            }
+          </p>
+        </div>
+
+        {/* ==================================================
+            DOCKED TEXT
+        ================================================== */}
+
+        <div
+          className="
+            absolute
+            inset-0
+            z-[1]
+            px-[6vw]
+            pt-[max(5.5rem,6vh)]
+          "
+          style={{
+            opacity:
+              dockedOpacity,
+
+            pointerEvents:
+              dockedInteractive
+                ? 'auto'
+                : 'none',
+          }}
+        >
+          <span
+            className="
+              inline-block
+              w-fit
+              rounded-full
+              bg-[#15151533]
+              px-4
+              py-1.5
+              text-[11px]
+              uppercase
+              tracking-[0.18em]
+              text-[#0D0D0D]
+
+              dark:bg-[#EDF0F533]
+              dark:text-[#F2F2F2]
+            "
+          >
+            {
+              HERO_COPY.badge
+            }
+          </span>
+
+          <h2
+            className="
+              mt-6
+              max-w-3xl
+              font-outfit
+              text-[clamp(1.75rem,4.2vw,3.15rem)]
+              font-light
+              leading-[1.08]
+              tracking-tight
+              text-secondary
+
+              dark:text-backgroundBody
+            "
+          >
+            {
+              HERO_COPY.headline
+            }
+          </h2>
+
+          <p
+            className="
+              mt-5
+              max-w-xl
+              font-outfit
+              text-sm
+              font-light
+              text-secondary/85
+
+              dark:text-backgroundBody/85
+
+              md:text-base
+            "
+          >
+            {
+              HERO_COPY.lead
+            }
+          </p>
+
+          <p
+            className="
+              mt-4
+              max-w-xl
+              font-outfit
+              text-sm
+              font-light
+              text-muted-foreground
+
+              dark:text-dark-100
+
+              md:text-base
+            "
+          >
+            {
+              HERO_COPY.body
+            }
+          </p>
+        </div>
+
+        {/* ==================================================
+            TOP RIGHT CTA
+
+            This uses the SAME technique as:
+
+            radial-gradient(
+              circle at 100% 100%,
+              transparent 20px,
+              #ededed 21px
+            )
+
+            but mirrored horizontally because this
+            CTA is attached to the TOP-RIGHT.
+        ================================================== */}
+
+        <div
+          className="
+            absolute
+            z-[5]
+          "
+          style={{
+            top: `${imageTop}vh`,
+            right: `${imageSide}vw`,
+
+            opacity:
+              ctaOpacity,
+
+            pointerEvents:
+              dockedInteractive
+                ? 'auto'
+                : 'none',
+          }}
+        >
+          {/* Main background shape */}
+
+          <div
+            className="
+              relative
+              z-[2]
+
+              rounded-bl-[28px]
+
+              bg-backgroundBody
+
+              pb-5
+              pl-5
+
+              sm:rounded-bl-[32px]
+              sm:pb-7
+              sm:pl-7
+
+              dark:bg-dark
+            "
+          >
+            {/* =============================================
+                TOP-RIGHT CORNER - LEFT CURVE
+
+                Equivalent to the second corner in your
+                original working component, but mirrored.
+
+                It sits LEFT of the CTA at the top.
+            ============================================= */}
+
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+
+                absolute
+
+                left-[-28px]
+                top-0
+
+                z-[3]
+
+                h-7
+                w-7
+
+                sm:left-[-32px]
+                sm:h-8
+                sm:w-8
+              "
+              style={{
+                background:
+                  'radial-gradient(circle at 0% 100%, transparent 28px, var(--hero-corner-bg) 29px)',
+              }}
+            />
+
+            {/* =============================================
+                TOP-RIGHT CORNER - BOTTOM CURVE
+
+                This sits directly BELOW the CTA on its
+                right-hand side.
+            ============================================= */}
+
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+
+                absolute
+
+                bottom-[-28px]
+                right-0
+
+                z-[3]
+
+                h-7
+                w-7
+
+                sm:bottom-[-32px]
+                sm:h-8
+                sm:w-8
+              "
+              style={{
+                background:
+                  'radial-gradient(circle at 0% 100%, transparent 28px, var(--hero-corner-bg) 29px)',
+              }}
+            />
+
             <Link
               href="/meet"
-              className={`${pillBase} bg-secondary text-backgroundBody dark:bg-backgroundBody dark:text-secondary`}
-              onClick={(event) => {
-                if (!meetDialog) return
+              className={`
+                ${pillBase}
+
+                bg-secondary
+                text-backgroundBody
+
+                dark:bg-backgroundBody
+                dark:text-secondary
+              `}
+              onClick={(
+                event,
+              ) => {
+                if (
+                  !meetDialog
+                ) {
+                  return
+                }
+
                 event.preventDefault()
+
                 meetDialog.open()
               }}
             >
-              {HERO_COPY.ctaPrimary}
+              {
+                HERO_COPY.ctaPrimary
+              }
             </Link>
           </div>
         </div>
 
+        {/* ==================================================
+            BOTTOM LEFT CTA
+
+            Same radial-gradient technique again,
+            but rotated vertically.
+
+            Main shape is rounded on TOP-RIGHT.
+        ================================================== */}
+
         <div
-          className="absolute z-[2] max-md:bottom-[8vh] max-md:left-[6vw]"
+          className="
+            absolute
+            z-[5]
+          "
           style={{
             left: `${imageSide}vw`,
             bottom: `${imageBottom}vh`,
-            opacity: ctaOpacity,
-            pointerEvents: dockedInteractive ? 'auto' : 'none',
+
+            opacity:
+              ctaOpacity,
+
+            pointerEvents:
+              dockedInteractive
+                ? 'auto'
+                : 'none',
           }}
         >
+          {/* Main background shape */}
+
           <div
-            className={`absolute left-0 top-[-36px] p-5 sm:top-[-40px] sm:p-7 ${stageBgClass}`}
-            style={{ paddingLeft: 0 }}
+            className="
+              relative
+              z-[2]
+
+              rounded-tr-[28px]
+
+              bg-backgroundBody
+
+              pr-5
+              pt-5
+
+              sm:rounded-tr-[32px]
+              sm:pr-7
+              sm:pt-7
+
+              dark:bg-dark
+            "
           >
-            <Fillet corner="top right" className="right-[-28px] top-[10px] sm:top-[12px]" />
-            <Fillet corner="top right" className="left-0 top-[-28px]" />
-            <Link href="/services" className={`${pillBase} bg-primary text-white`}>
-              {HERO_COPY.ctaSecondary}
+            {/* =============================================
+                BOTTOM-LEFT CORNER - TOP CURVE
+
+                This sits directly ABOVE the left side
+                of the CTA.
+            ============================================= */}
+
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+
+                absolute
+
+                left-0
+                top-[-28px]
+
+                z-[3]
+
+                h-7
+                w-7
+
+                sm:top-[-32px]
+                sm:h-8
+                sm:w-8
+              "
+              style={{
+                background:
+                  'radial-gradient(circle at 100% 0%, transparent 28px, var(--hero-corner-bg) 29px)',
+              }}
+            />
+
+            {/* =============================================
+                BOTTOM-LEFT CORNER - RIGHT CURVE
+
+                This sits directly RIGHT of the CTA on
+                the bottom edge of the image.
+            ============================================= */}
+
+            <div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+
+                absolute
+
+                bottom-0
+                right-[-28px]
+
+                z-[3]
+
+                h-7
+                w-7
+
+                sm:right-[-32px]
+                sm:h-8
+                sm:w-8
+              "
+              style={{
+                background:
+                  'radial-gradient(circle at 100% 0%, transparent 28px, var(--hero-corner-bg) 29px)',
+              }}
+            />
+
+            <Link
+              href="/services"
+              className={`
+                ${pillBase}
+
+                bg-primary
+                text-white
+              `}
+            >
+              {
+                HERO_COPY.ctaSecondary
+              }
             </Link>
           </div>
         </div>
@@ -245,3 +803,251 @@ export default function WowHero({ hero: _hero }: WowHeroProps) {
     </section>
   )
 }
+
+// 'use client'
+
+// import { useMeetDialogOptional } from '@/components/wow/shared/MeetDialogProvider'
+// import { Link } from '@/i18n/navigation'
+// import type { Dictionary } from '@/i18n/types'
+// import { useLenis } from 'lenis/react'
+// import Image from 'next/image'
+// import { useEffect, useRef, useState } from 'react'
+
+// type WowHeroProps = {
+//   hero: Dictionary['hero']
+// }
+
+// const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+
+// const HERO_COPY = {
+//   badge: 'The Superagency for business growth',
+//   headline: 'Why work with an agency when you can work with a Superagency?',
+//   lead: "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
+//   body: 'Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.',
+//   ctaPrimary: 'Start a conversation',
+//   ctaSecondary: 'Explore what we do',
+// } as const
+
+// const stageBgClass = 'bg-backgroundBody transition-colors duration-300 dark:bg-dark'
+
+// function Fillet({
+//   corner,
+//   className = '',
+// }: {
+//   corner: 'top left' | 'top right' | 'bottom left' | 'bottom right'
+//   className?: string
+// }) {
+//   return (
+//     <span
+//       aria-hidden
+//       className={`pointer-events-none absolute h-7 w-7 bg-backgroundBody dark:bg-dark ${className}`}
+//       style={{
+//         maskImage: `radial-gradient(circle 28px at ${corner}, transparent 99%, #000 100%)`,
+//         WebkitMaskImage: `radial-gradient(circle 28px at ${corner}, transparent 99%, #000 100%)`,
+//       }}
+//     />
+//   )
+// }
+
+// /** 0 = full-screen image, 1 = image docked into the layout card. */
+// function useShrinkProgress() {
+//   const ref = useRef<HTMLElement>(null)
+//   const [progress, setProgress] = useState(0)
+//   const lenis = useLenis()
+
+//   useEffect(() => {
+//     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+//     if (reduced) {
+//       setProgress(1)
+//       return
+//     }
+
+//     let frame = 0
+
+//     const update = () => {
+//       frame = 0
+//       const el = ref.current
+//       if (!el) return
+
+//       const travel = el.offsetHeight - window.innerHeight
+//       if (travel <= 0) {
+//         setProgress(0)
+//         return
+//       }
+
+//       const scrollY = lenis?.scroll ?? window.scrollY
+//       const start = el.getBoundingClientRect().top + scrollY
+//       const next = (scrollY - start) / travel
+//       setProgress(Math.min(1, Math.max(0, next)))
+//     }
+
+//     const onScroll = () => {
+//       if (!frame) frame = requestAnimationFrame(update)
+//     }
+
+//     update()
+//     window.addEventListener('scroll', onScroll, { passive: true })
+//     window.addEventListener('resize', onScroll)
+
+//     let offLenis: (() => void) | undefined
+//     if (lenis) {
+//       lenis.on('scroll', onScroll)
+//       offLenis = () => lenis.off('scroll', onScroll)
+//     }
+
+//     return () => {
+//       if (frame) cancelAnimationFrame(frame)
+//       window.removeEventListener('scroll', onScroll)
+//       window.removeEventListener('resize', onScroll)
+//       offLenis?.()
+//     }
+//   }, [lenis])
+
+//   return { ref, progress }
+// }
+
+// const pillBase =
+//   'relative inline-flex items-center justify-center rounded-2xl px-8 py-5 text-[11px] font-medium uppercase tracking-[0.22em] whitespace-nowrap transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:px-12 sm:py-6'
+
+// export default function WowHero({ hero: _hero }: WowHeroProps) {
+//   const { ref, progress } = useShrinkProgress()
+//   const eased = progress * progress * (3 - 2 * progress)
+//   const meetDialog = useMeetDialogOptional()
+//   const pinned = progress < 1
+
+//   const introOpacity = 1 - Math.min(1, eased * 1.6)
+//   const dockedOpacity = Math.max(0, (eased - 0.35) / 0.4)
+//   const ctaOpacity = Math.max(0, (eased - 0.5) / 0.35)
+//   const dockedInteractive = eased > 0.6
+
+//   const imageTop = lerp(0, 46, eased)
+//   const imageSide = lerp(0, 4, eased)
+//   const imageBottom = lerp(0, 10, eased)
+//   const imageRadius = lerp(0, 18, eased)
+
+//   return (
+//     <section
+//       ref={ref}
+//       className={`relative z-0 h-[240vh] ${stageBgClass}`}
+//       aria-label="Hero"
+//     >
+//       <div
+//         className={`h-screen w-full overflow-hidden ${stageBgClass}`}
+//         style={{
+//           position: pinned ? 'fixed' : 'absolute',
+//           top: pinned ? 0 : 'auto',
+//           bottom: pinned ? 0 : 0,
+//           left: 0,
+//           right: 0,
+//         }}
+//       >
+//         <div
+//           className="absolute overflow-hidden"
+//           style={{
+//             top: `${imageTop}vh`,
+//             left: `${imageSide}vw`,
+//             right: `${imageSide}vw`,
+//             bottom: `${imageBottom}vh`,
+//             borderRadius: `${imageRadius}px`,
+//           }}
+//         >
+//           <Image
+//             src="/images/wow/hero-banner.jpg"
+//             alt=""
+//             fill
+//             priority
+//             sizes="100vw"
+//             className="object-cover"
+//           />
+//         </div>
+
+//         {/* Intro sits on the full-bleed photo — keep light text for contrast */}
+//         <div
+//           className="pointer-events-none absolute inset-0 z-[1] flex flex-col justify-center px-[6vw]"
+//           style={{ opacity: introOpacity }}
+//         >
+//           <span className="w-fit rounded-full bg-white/15 px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/90">
+//             {HERO_COPY.badge}
+//           </span>
+//           <h1 className="mt-8 max-w-4xl font-outfit text-[clamp(2.25rem,6vw,4.5rem)] font-light leading-[1.05] tracking-tight text-white">
+//             {HERO_COPY.headline}
+//           </h1>
+//           <p className="mt-8 max-w-xl font-outfit text-base font-light text-white/85 md:text-lg">
+//             {HERO_COPY.lead}
+//           </p>
+//         </div>
+
+//         {/* Docked copy sits on page background — theme-aware like other sections */}
+//         <div
+//           className="absolute inset-0 z-[1] px-[6vw] pt-[max(5.5rem,6vh)]"
+//           style={{
+//             opacity: dockedOpacity,
+//             pointerEvents: dockedInteractive ? 'auto' : 'none',
+//           }}
+//         >
+//           <span className="inline-block w-fit rounded-full bg-[#15151533] px-4 py-1.5 text-[11px] uppercase tracking-[0.18em] text-[#0D0D0D] dark:bg-[#EDF0F533] dark:text-[#F2F2F2]">
+//             {HERO_COPY.badge}
+//           </span>
+//           <h2 className="mt-6 max-w-3xl font-outfit text-[clamp(1.75rem,4.2vw,3.15rem)] font-light leading-[1.08] tracking-tight text-secondary dark:text-backgroundBody">
+//             {HERO_COPY.headline}
+//           </h2>
+//           <p className="mt-5 max-w-xl font-outfit text-sm font-light text-secondary/85 dark:text-backgroundBody/85 md:text-base">
+//             {HERO_COPY.lead}
+//           </p>
+//           <p className="mt-4 max-w-xl font-outfit text-sm font-light text-muted-foreground dark:text-dark-100 md:text-base">
+//             {HERO_COPY.body}
+//           </p>
+//         </div>
+
+//         <div
+//           className="absolute z-[2] max-md:bottom-[22vh] max-md:right-[6vw] md:right-[4vw]"
+//           style={{
+//             top: `calc(${imageTop}vh)`,
+//             opacity: ctaOpacity,
+//             pointerEvents: dockedInteractive ? 'auto' : 'none',
+//           }}
+//         >
+//           <div
+//             className={`absolute right-0 bottom-[-36px] p-5 sm:bottom-[-40px] sm:p-7 ${stageBgClass}`}
+//             style={{ paddingRight: 0 }}
+//           >
+//             <Fillet corner="bottom left" className="bottom-[10px] left-[-28px] sm:bottom-[12px]" />
+//             <Fillet corner="bottom left" className="bottom-[-28px] right-0" />
+//             <Link
+//               href="/meet"
+//               className={`${pillBase} bg-secondary text-backgroundBody dark:bg-backgroundBody dark:text-secondary`}
+//               onClick={(event) => {
+//                 if (!meetDialog) return
+//                 event.preventDefault()
+//                 meetDialog.open()
+//               }}
+//             >
+//               {HERO_COPY.ctaPrimary}
+//             </Link>
+//           </div>
+//         </div>
+
+//         <div
+//           className="absolute z-[2] max-md:bottom-[8vh] max-md:left-[6vw]"
+//           style={{
+//             left: `${imageSide}vw`,
+//             bottom: `${imageBottom}vh`,
+//             opacity: ctaOpacity,
+//             pointerEvents: dockedInteractive ? 'auto' : 'none',
+//           }}
+//         >
+//           <div
+//             className={`absolute left-0 top-[-36px] p-5 sm:top-[-40px] sm:p-7 ${stageBgClass}`}
+//             style={{ paddingLeft: 0 }}
+//           >
+//             <Fillet corner="top right" className="right-[-28px] top-[10px] sm:top-[12px]" />
+//             <Fillet corner="top right" className="left-0 top-[-28px]" />
+//             <Link href="/services" className={`${pillBase} bg-primary text-white`}>
+//               {HERO_COPY.ctaSecondary}
+//             </Link>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
