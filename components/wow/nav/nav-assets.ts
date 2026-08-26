@@ -9,6 +9,7 @@ import {
   Cloud,
   Code2,
   Compass,
+  Cpu,
   FileText,
   FolderOpen,
   GraduationCap,
@@ -20,6 +21,7 @@ import {
   LayoutGrid,
   Lightbulb,
   LineChart,
+  Mail,
   MapPin,
   Megaphone,
   MoreHorizontal,
@@ -28,10 +30,12 @@ import {
   Palette,
   Plane,
   Receipt,
+  RefreshCw,
   Rocket,
   Server,
   Share2,
   ShoppingBag,
+  Smartphone,
   Sparkles,
   Store,
   SwatchBook,
@@ -40,6 +44,7 @@ import {
   TrendingUp,
   Users,
   UsersRound,
+  Workflow,
   Zap,
 } from 'lucide-react'
 
@@ -47,11 +52,31 @@ import {
 export const navMenuIcons = {
   // Company — About
   aboutUs: Building2,
+  about: Building2,
   strategyCentre: Target,
   teamExperts: Users,
   whySmbs: Store,
   partners: Handshake,
   whyUs: Sparkles,
+  ourProcess: Workflow,
+  contact: Mail,
+
+  // SoftwareWOW — Services
+  customSoftware: Code2,
+  saasDevelopment: Cloud,
+  webApplications: LayoutGrid,
+  mobileApps: Smartphone,
+  modernizationIntegrations: RefreshCw,
+
+  // SoftwareWOW — Solutions
+  startupMvp: Rocket,
+  businessSystems: Briefcase,
+  saasProducts: Cloud,
+  digitalTransformation: Zap,
+  aiSolutions: Cpu,
+
+  // SoftwareWOW — Work
+  caseStudies: FileText,
 
   // For You — Solutions
   buildLaunch: Rocket,
@@ -114,6 +139,10 @@ export const mobileBottomNavIcons = {
   forYou: Heart,
   explore: Compass,
   more: MoreHorizontal,
+  // SoftwareWOW division
+  services: Code2,
+  solutions: Rocket,
+  work: FolderOpen,
 } as const satisfies Record<string, LucideIcon>
 
 export type MobileBottomNavIconId = keyof typeof mobileBottomNavIcons

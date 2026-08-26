@@ -1,8 +1,10 @@
+import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import {
   divisionBrandLogos,
   divisionHrefs,
   type DivisionId,
 } from '@/components/wow/nav/nav-brand-assets'
+import type { NavigationData } from '@/components/wow/nav/navigation-types'
 
 export type DivisionNavItem = {
   id: string
@@ -33,6 +35,8 @@ export type DivisionSiteConfig = {
   phoneHref: string
   addressLines: [string, string]
   navItems: DivisionNavItem[]
+  /** Parent-shaped mega-nav. When set, DivisionNavbar uses pills + mega panel + mobile sheet. */
+  navigation?: NavigationData
   cta: { label: string; href: string }
   footerSections: DivisionFooterSection[]
   copyright: string
@@ -76,47 +80,50 @@ function baseConfig(
 }
 
 export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
-  softwareWow: baseConfig(
-    'softwareWow',
-    'SoftwareWOW',
-    'Custom software, apps, and digital products built to scale with your business.',
-    [
-      { id: 'services', label: 'Services', href: '/softwarewow#services' },
-      { id: 'process', label: 'Process', href: '/softwarewow#process' },
-      { id: 'projects', label: 'Projects', href: '/softwarewow#projects' },
-      { id: 'tech', label: 'Technologies', href: '/softwarewow#technologies' },
-    ],
-    [
-      {
-        id: 'services',
-        title: 'Services',
-        links: [
-          { id: 'custom', label: 'Custom Software', href: '/softwarewow#services' },
-          { id: 'apps', label: 'Mobile Apps', href: '/softwarewow#services' },
-          { id: 'products', label: 'Digital Products', href: '/softwarewow#services' },
-        ],
-      },
-      {
-        id: 'company',
-        title: 'Company',
-        links: [
-          { id: 'about', label: 'About Superagency', href: '/about' },
-          { id: 'locations', label: 'Locations', href: '/locations' },
-          { id: 'careers', label: 'Careers', href: '/career' },
-        ],
-      },
-      {
-        id: 'connect',
-        title: 'Connect',
-        links: [
-          { id: 'contact', label: 'Contact', href: '/contact' },
-          { id: 'meet', label: 'Book a Meeting', href: '/meet' },
-          { id: 'rfq', label: 'Request a Quote', href: '/quotation' },
-        ],
-      },
-    ],
-    'Start a Project',
-  ),
+  softwareWow: {
+    ...baseConfig(
+      'softwareWow',
+      'SoftwareWOW',
+      'Custom software, apps, and digital products built to scale with your business.',
+      [
+        { id: 'services', label: 'Services', href: '/softwarewow#services' },
+        { id: 'solutions', label: 'Solutions', href: '/softwarewow#solutions' },
+        { id: 'work', label: 'Work', href: '/portfolio' },
+        { id: 'company', label: 'Company', href: '/about' },
+      ],
+      [
+        {
+          id: 'services',
+          title: 'Services',
+          links: [
+            { id: 'custom', label: 'Custom Software', href: '/softwarewow#services' },
+            { id: 'apps', label: 'Mobile Apps', href: '/softwarewow#services' },
+            { id: 'products', label: 'Digital Products', href: '/softwarewow#services' },
+          ],
+        },
+        {
+          id: 'company',
+          title: 'Company',
+          links: [
+            { id: 'about', label: 'About Superagency', href: '/about' },
+            { id: 'locations', label: 'Locations', href: '/locations' },
+            { id: 'careers', label: 'Careers', href: '/career' },
+          ],
+        },
+        {
+          id: 'connect',
+          title: 'Connect',
+          links: [
+            { id: 'contact', label: 'Contact', href: '/contact' },
+            { id: 'meet', label: 'Book a Meeting', href: '/meet' },
+            { id: 'rfq', label: 'Request a Quote', href: '/quotation' },
+          ],
+        },
+      ],
+      'Start a Project',
+    ),
+    navigation: softwareWowNavigation,
+  },
   wowMarketing: baseConfig(
     'wowMarketing',
     'WOW Marketing',
