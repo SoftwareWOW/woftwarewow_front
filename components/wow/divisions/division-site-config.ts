@@ -96,23 +96,26 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
           id: 'services',
           title: 'Services',
           links: [
-            { id: 'custom', label: 'Custom Software', href: '/softwarewow#services' },
-            { id: 'apps', label: 'Mobile Apps', href: '/softwarewow#services' },
-            { id: 'products', label: 'Digital Products', href: '/softwarewow#services' },
+            { id: 'customSoftware', label: 'Custom Software', href: '/softwarewow#services' },
+            { id: 'saasDevelopment', label: 'SaaS Development', href: '/softwarewow#services' },
+            { id: 'webApplications', label: 'Web Applications', href: '/softwarewow#services' },
+            { id: 'mobileApps', label: 'Mobile Apps', href: '/softwarewow#services' },
+            { id: 'aiAutomation', label: 'AI & Automation', href: '/softwarewow#services' },
           ],
         },
         {
           id: 'company',
           title: 'Company',
           links: [
-            { id: 'about', label: 'About Superagency', href: '/about' },
-            { id: 'locations', label: 'Locations', href: '/locations' },
-            { id: 'careers', label: 'Careers', href: '/career' },
+            { id: 'about', label: 'About SoftwareWOW', href: '/about' },
+            { id: 'whyUs', label: 'Why Us', href: '/about/why-us' },
+            { id: 'ourProcess', label: 'Our Process', href: '/softwarewow#process' },
+            { id: 'superagency', label: 'WOW Superagency ↗', href: '/' },
           ],
         },
         {
-          id: 'connect',
-          title: 'Connect',
+          id: 'getStarted',
+          title: 'Get Started',
           links: [
             { id: 'contact', label: 'Contact', href: '/contact' },
             { id: 'meet', label: 'Book a Meeting', href: '/meet' },
@@ -123,6 +126,7 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
       'Start a Project',
     ),
     navigation: softwareWowNavigation,
+    copyright: `© ${new Date().getFullYear()} SoftwareWOW. A brand by WOW Superagency.`,
   },
   wowMarketing: baseConfig(
     'wowMarketing',

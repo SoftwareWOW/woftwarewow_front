@@ -29,7 +29,7 @@ const socialLinks = [
 const legalLinks = [
   { label: 'Privacy Policy', href: '/policy' },
   { label: 'Terms of Service', href: '/terms' },
-  { label: 'Cookies Settings', href: '/policy' },
+  { label: 'Cookie Settings', href: '/policy' },
 ]
 
 export default function DivisionFooter({ config }: DivisionFooterProps) {
@@ -106,6 +106,9 @@ export default function DivisionFooter({ config }: DivisionFooterProps) {
               <div className="grid min-w-0 grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8 lg:gap-10">
                 {config.footerSections.map((section) => (
                   <div key={section.id} className="min-w-0">
+                    <p className="mb-3 font-outfit text-[11px] font-normal uppercase tracking-[1.4px] text-black/45 dark:text-dark-100 sm:mb-4 sm:text-xs">
+                      {section.title}
+                    </p>
                     <ul className="space-y-2.5 text-sm text-[#555555] dark:text-[#999999] md:text-base">
                       {section.links.map((link) => (
                         <li key={link.id} className="min-w-0">
