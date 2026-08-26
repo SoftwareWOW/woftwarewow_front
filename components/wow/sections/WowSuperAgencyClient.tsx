@@ -105,7 +105,7 @@ const WowSuperAgencyClient = ({ superAgencyClient }: WowSuperAgencyClientProps) 
   }
 
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300">
+    <section className="relative  pt-10 sm:pt-12 md:pt-15 lg:pt-20 overflow-hidden bg-background transition-colors duration-300">
       {/* Background decorative elements - light mode friendly */}
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div className="absolute inset-0" style={{
