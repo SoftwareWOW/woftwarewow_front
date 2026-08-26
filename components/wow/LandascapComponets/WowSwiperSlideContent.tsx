@@ -77,7 +77,7 @@ const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        <figure className="absolute bottom-4 left-4 flex size-[52px] cursor-pointer items-center justify-center overflow-hidden rounded-radius-sm bg-primary md:bottom-5 md:left-5 md:size-[56px] lg:size-[65px] xl:size-[79px]">
+        <figure className="absolute bottom-4 left-4 size-[52px] cursor-pointer overflow-hidden rounded-radius-sm bg-primary md:bottom-5 md:left-5 md:size-[56px] lg:size-[65px] xl:size-[79px]">
           <ArrowUpRight
             aria-hidden
             className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2 !stroke-white !text-white opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 md:size-8 lg:size-9 xl:size-10"
@@ -85,7 +85,7 @@ const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({
           />
           <ArrowUpRight
             aria-hidden
-            className="absolute size-7 -translate-x-4 translate-y-12 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[14px] group-hover:translate-y-4 group-hover:opacity-100 md:size-8 md:group-hover:translate-x-[16px] md:group-hover:translate-y-[18px] lg:size-9 lg:group-hover:translate-x-[18px] lg:group-hover:translate-y-5 xl:size-10 xl:group-hover:translate-x-[19px]"
+            className="absolute size-7 -translate-x-4 translate-y-12 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[19px] group-hover:translate-y-5 group-hover:opacity-100 md:size-8 lg:size-9 xl:size-10"
             strokeWidth={2}
           />
         </figure>
