@@ -1,68 +1,95 @@
 'use client'
 
-import Image, { StaticImageData } from 'next/image'
-import { FC } from 'react'
+import { Link } from '@/i18n/navigation'
+import { ArrowUpRight } from 'lucide-react'
+import Image, { type StaticImageData } from 'next/image'
+import type { FC } from 'react'
 
 interface SwiperSlideContentProps {
-  tags: string
   title: string
   userName: string
   position: string
   userImg: string | StaticImageData
+  href: string
+  mediaSrc: string
+  mediaAlt: string
 }
 
-const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({ tags, title, userName, position, userImg }) => {
+const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({
+  title,
+  userName,
+  position,
+  userImg,
+  href,
+  mediaSrc,
+  mediaAlt,
+}) => {
   return (
-    <div className="flex gap-3 p-6 md:p-10">
-      <div className="hidden flex-grow-0 md:block">
-        <span>
+    <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-2 md:items-stretch md:gap-8 md:p-8 lg:gap-10 lg:p-10">
+      <div className="flex min-w-0 flex-col">
+        <span aria-hidden className="mb-4 inline-flex text-secondary/20 dark:text-backgroundBody/20 md:mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
             <path
               fillRule="evenodd"
               clipRule="evenodd"
               d="M23.8286 6V16.9714C21.3264 16.9714 16.9186 17.1793 16.9184 27.1958V32.4H27.6V54H6V32.4V27.1958C6 19.3208 8.03795 13.4729 12.4905 9.81413C15.5705 7.28323 19.2195 6 23.8286 6ZM50.229 6V16.9714C47.7268 16.9714 43.319 17.1793 43.3187 27.1958V32.4H54.0004V54H32.4004V32.4V27.1958C32.4004 19.3208 34.4383 13.4729 38.8909 9.81413C41.9709 7.28323 45.6199 6 50.229 6Z"
               fill="currentColor"
-              fillOpacity="0.08"
             />
           </svg>
         </span>
-      </div>
-      <div className="flex-1">
-        <p className="mb-6 text-base italic text-[#666666] dark:text-[#808080] md:mb-[30px] md:text-xl md:leading-[1.5] transition-colors duration-300">{tags}</p>
-        <h3 className="mb-7 text-xl text-[#1a1a1a] dark:text-white md:mb-10 md:text-[30px] md:leading-9 transition-colors duration-300">{title}</h3>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-           
-            <div className="relative h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full">
-              <Image
-                src={userImg}
-                alt="Avatar Img"
-                width={60}
-                height={60}
-                quality={100}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div>
-              <h4 className="text-lg text-[#1a1a1a] dark:text-white md:text-2xl md:leading-[1.2] transition-colors duration-300">{userName}</h4>
-              <p className="text-sm font-light leading-5 text-[#666666] dark:text-white/60 transition-colors duration-300">{position}</p>
-            </div>
+
+        <p className="mb-8 flex-1 font-outfit text-base font-normal leading-[1.5] text-[#1a1a1a] transition-colors duration-300 dark:text-white md:mb-10 md:text-xl lg:text-[22px]">
+          {title}
+        </p>
+
+        <div className="mt-auto flex items-center gap-3">
+          <div className="relative size-[52px] shrink-0 overflow-hidden rounded-full md:size-[60px]">
+            <Image
+              src={userImg}
+              alt={userName}
+              width={60}
+              height={60}
+              quality={100}
+              className="h-full w-full object-cover"
+            />
           </div>
-          <div className="max-xs:hidden self-end">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M36.1714 54L36.1714 43.0286C38.6736 43.0286 43.0814 42.8207 43.0816 32.8042L43.0816 27.6L32.4 27.6L32.4 6L54 6L54 27.6L54 32.8042C54 40.6792 51.9621 46.5271 47.5095 50.1859C44.4295 52.7168 40.7805 54 36.1714 54ZM9.77104 54L9.77104 43.0286C12.2732 43.0286 16.681 42.8207 16.6812 32.8042L16.6812 27.6L5.99961 27.6L5.99961 6L27.5996 6L27.5996 27.6L27.5996 32.8042C27.5996 40.6792 25.5617 46.5271 21.1091 50.1859C18.0291 52.7168 14.3801 54 9.77104 54Z"
-                  fill="currentColor"
-                  fillOpacity="0.08"
-                />
-              </svg>
-            </span>
+          <div className="min-w-0">
+            <h4 className="truncate font-outfit text-lg text-[#1a1a1a] transition-colors duration-300 dark:text-white md:text-2xl md:leading-[1.2]">
+              {userName}
+            </h4>
+            <p className="truncate text-sm font-light leading-5 text-[#666666] transition-colors duration-300 dark:text-white/60">
+              {position}
+            </p>
           </div>
         </div>
       </div>
+
+      <Link
+        href={href}
+        className="group relative block min-h-[220px] overflow-hidden rounded-radius-md sm:min-h-[260px] md:min-h-full"
+        aria-label={`View case study for ${userName}`}
+      >
+        <Image
+          src={mediaSrc}
+          alt={mediaAlt}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+
+        <figure className="absolute bottom-4 left-4 flex size-[52px] cursor-pointer items-center justify-center overflow-hidden rounded-radius-sm bg-primary md:bottom-5 md:left-5 md:size-[56px] lg:size-[65px] xl:size-[79px]">
+          <ArrowUpRight
+            aria-hidden
+            className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2 !stroke-white !text-white opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 md:size-8 lg:size-9 xl:size-10"
+            strokeWidth={2}
+          />
+          <ArrowUpRight
+            aria-hidden
+            className="absolute size-7 -translate-x-4 translate-y-12 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[14px] group-hover:translate-y-4 group-hover:opacity-100 md:size-8 md:group-hover:translate-x-[16px] md:group-hover:translate-y-[18px] lg:size-9 lg:group-hover:translate-x-[18px] lg:group-hover:translate-y-5 xl:size-10 xl:group-hover:translate-x-[19px]"
+            strokeWidth={2}
+          />
+        </figure>
+      </Link>
     </div>
   )
 }
