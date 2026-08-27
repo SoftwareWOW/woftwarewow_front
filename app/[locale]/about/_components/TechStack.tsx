@@ -89,7 +89,7 @@ const TechStack = () => {
                   {isActive && (
                     <motion.span
                       layoutId={`${tabsId}-pill`}
-                      className="absolute inset-0 rounded-full border border-black/10 bg-backgroundBody shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-[#1F1F1F] dark:shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+                      className="absolute inset-0 rounded-full border border-black/10 bg-backgroundBody dark:border-white/10 dark:bg-[#1F1F1F]"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
