@@ -3,11 +3,11 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import TechStack from '@/app/[locale]/about/_components/TechStack'
 import BuiltForYourBusiness from './_components/BuiltForYourBusiness'
 import Capabilities from './_components/Capabilities'
 import OurProcess from './_components/OurProcess'
 import SelectedWork from './_components/SelectedWork'
+import TechStack from './_components/TechStack'
 import WebApplicationsHero from './_components/WebApplicationsHero'
 import WhatWeBuild from './_components/WhatWeBuild'
 
@@ -63,7 +63,7 @@ export default async function WebApplicationsServicePage({ params }: Props) {
         {/* 5. Capabilities — packages/website-growth-engine/BuiltToPerform (Home-24) — commit b406900 */}
         <Capabilities />
 
-        {/* 6. Technology — about/TechStack (shared TechStackShared) */}
+        {/* 6. Technology — about/TechStack layout, software-only categories (local) */}
         <TechStack />
 
         {/* 7. Selected Work — portfolio/FeaturedWork + Load More — commits 9739ed3, f663f92 */}
