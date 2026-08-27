@@ -13,7 +13,9 @@ type Props = {
 }
 
 export function generateStaticParams() {
-  return SOFTWARE_WOW_NAV_SERVICE_SLUGS.map((slug) => ({ slug }))
+  return SOFTWARE_WOW_NAV_SERVICE_SLUGS.filter((slug) => slug !== 'web-applications').map((slug) => ({
+    slug,
+  }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
