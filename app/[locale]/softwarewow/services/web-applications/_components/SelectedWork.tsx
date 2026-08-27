@@ -1,18 +1,32 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { portfolioProjects } from '@/app/[locale]/portfolio/_data/projects'
+import {
+  publishedPortfolioProjects,
+  type PortfolioProject,
+} from '@/app/[locale]/portfolio/_data/projects'
 import Link from 'next/link'
+import { useState } from 'react'
 
-const selectedProjects = portfolioProjects
-  .filter((project) => project.categories.includes('Software') && project.status === 'published')
-  .slice(0, 3)
+const INITIAL_VISIBLE_COUNT = 2
 
-/** Layout: portfolio/FeaturedWork (case-study/Projects) — commits 9739ed3, f663f92 */
+const projects: PortfolioProject[] = [...publishedPortfolioProjects].sort((a, b) => {
+  const aSoftware = a.categories.includes('Software') ? 0 : 1
+  const bSoftware = b.categories.includes('Software') ? 0 : 1
+  return aSoftware - bSoftware
+})
+
+/** Layout: portfolio/FeaturedWork + SoftwareWoWProjectsClient Load More — commits 9739ed3, f663f92 */
 const SelectedWork = () => {
+  const [showAll, setShowAll] = useState(false)
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_VISIBLE_COUNT)
+  const hasMore = projects.length > INITIAL_VISIBLE_COUNT
+
   return (
     <section>
       <div className="container mb-10 text-center md:mb-16">
@@ -27,7 +41,7 @@ const SelectedWork = () => {
       </div>
 
       <div className="container flex flex-col gap-16 md:gap-20 lg:gap-24">
-        {selectedProjects.map((project, index) => (
+        {visibleProjects.map((project, index) => (
           <RevealWrapperV2
             key={project.slug}
             className={`reveal-me group flex flex-col gap-8 lg:items-center lg:gap-10 ${
@@ -65,13 +79,21 @@ const SelectedWork = () => {
         ))}
       </div>
 
-      <RevealWrapper className="mt-12 flex justify-center md:mt-16">
-        <ButtonComponentList>
-          <ButtonComponent href="/portfolio" variant="primary">
-            View All Work
-          </ButtonComponent>
-        </ButtonComponentList>
-      </RevealWrapper>
+      {hasMore && (
+        <RevealWrapper className="mt-12 flex justify-center md:mt-16">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent
+              type="button"
+              variant="primary"
+              fullWidth
+              onClick={() => setShowAll((prev) => !prev)}
+              ariaExpanded={showAll}
+            >
+              {showAll ? 'See Less' : 'Load More'}
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
+      )}
     </section>
   )
 }

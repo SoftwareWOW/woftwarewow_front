@@ -51,13 +51,14 @@ type Solution = {
   title: string
   description: string
   icon: ReactNode
-  href?: string
+  href: string
 }
 
 const solutions: Solution[] = [
   {
     title: 'Business Platforms',
     description: 'Custom systems for managing teams, workflows, and operations.',
+    href: '/contact',
     icon: (
       <IconFrame>
         <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -73,6 +74,7 @@ const solutions: Solution[] = [
   {
     title: 'Customer Portals',
     description: 'Secure digital experiences for customers, members, and partners.',
+    href: '/contact',
     icon: (
       <IconFrame>
         <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -107,6 +109,7 @@ const solutions: Solution[] = [
   {
     title: 'Dashboards & Tools',
     description: 'Interfaces that turn business data into useful actions.',
+    href: '/contact',
     icon: (
       <IconFrame>
         <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -123,6 +126,7 @@ const solutions: Solution[] = [
   {
     title: 'Internal Applications',
     description: 'Tools that simplify processes and reduce manual work.',
+    href: '/contact',
     icon: (
       <IconFrame>
         <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -163,30 +167,19 @@ const WhatWeBuild = () => {
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {solutions.map((item) =>
-          item.href ? (
-            <RevealWrapper
-              key={item.title}
-              className="reveal-me group rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
-            >
-              <Link href={item.href} className="block">
-                {item.icon}
-                <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{item.title}</h5>
-                <p className="mb-10 text-base leading-relaxed text-[#808080] lg:mb-14">{item.description}</p>
-                <ArrowButton />
-              </Link>
-            </RevealWrapper>
-          ) : (
-            <RevealWrapper
-              key={item.title}
-              className="reveal-me rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
-            >
+        {solutions.map((item) => (
+          <RevealWrapper
+            key={item.title}
+            className="reveal-me group rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
+          >
+            <Link href={item.href} className="block">
               {item.icon}
               <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{item.title}</h5>
-              <p className="text-base leading-relaxed text-[#808080]">{item.description}</p>
-            </RevealWrapper>
-          ),
-        )}
+              <p className="mb-10 text-base leading-relaxed text-[#808080] lg:mb-14">{item.description}</p>
+              <ArrowButton />
+            </Link>
+          </RevealWrapper>
+        ))}
       </div>
     </section>
   )

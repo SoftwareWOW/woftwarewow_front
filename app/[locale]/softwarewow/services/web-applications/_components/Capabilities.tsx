@@ -4,11 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { Icon, addCollection } from '@iconify/react'
-import logos from '@iconify-json/logos/icons.json'
 import type { ReactNode } from 'react'
-
-addCollection(logos)
 
 type CapabilityCard = {
   title: string
@@ -107,16 +103,6 @@ const bottomRowCards: CapabilityCard[] = [
   },
 ]
 
-const tools = [
-  { name: 'React', icon: 'logos:react' },
-  { name: 'Next.js', icon: 'logos:nextjs-icon' },
-  { name: 'Node.js', icon: 'logos:nodejs-icon' },
-  { name: 'TypeScript', icon: 'logos:typescript-icon' },
-  { name: 'PostgreSQL', icon: 'logos:postgresql' },
-  { name: 'AWS', icon: 'logos:aws' },
-  { name: 'Docker', icon: 'logos:docker-icon' },
-]
-
 const gridRowClass =
   'flex flex-wrap justify-center px-5 max-xl:justify-start max-lg:gap-5 xl:px-5 max-xl:[&>*:first-child]:border-r dark:max-xl:[&>*:first-child]:border-dark [&>*:last-child]:border-x dark:[&>*:last-child]:border-x-dark [&>*:not(:last-child)]:border-l dark:[&>*:not(:last-child)]:border-l-dark max-xl:[&>*:nth-child(2)]:border-r dark:max-xl:[&>*:nth-child(2)]:border-dark max-2xl:[&>*:nth-child(3)]:border-r dark:max-2xl:[&>*:nth-child(3)]:border-dark [&>*]:border-y dark:[&>*]:border-y-dark'
 
@@ -142,7 +128,7 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
 
-/** Layout: packages/website-growth-engine/BuiltToPerform (Home-24) + AutomationTools (Home-06 ClientV4) — commits b406900, fb75787 */
+/** Layout: packages/website-growth-engine/BuiltToPerform (Home-24 ServicesV16) — commit b406900 */
 const Capabilities = () => {
   return (
     <section>
@@ -169,25 +155,6 @@ const Capabilities = () => {
         {bottomRowCards.map((card) => (
           <FlipCard key={card.title} card={card} widthClass={cardWidth} />
         ))}
-      </div>
-
-      <div className="container mt-14 md:mt-20">
-        <RevealWrapper className="mx-auto grid w-fit grid-cols-2 border-l border-t dark:border-dark sm:grid-cols-4 lg:grid-cols-7">
-          {tools.map((tool) => (
-            <figure
-              key={tool.name}
-              className="flex size-[110px] items-center justify-center border-b border-r dark:border-dark sm:size-[120px] md:size-[130px]"
-            >
-              <Icon
-                icon={tool.icon}
-                width={48}
-                height={48}
-                aria-label={tool.name}
-                className="text-secondary dark:text-backgroundBody"
-              />
-            </figure>
-          ))}
-        </RevealWrapper>
       </div>
     </section>
   )

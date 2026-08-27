@@ -3,6 +3,7 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
+import TechStack from '@/app/[locale]/about/_components/TechStack'
 import BuiltForYourBusiness from './_components/BuiltForYourBusiness'
 import Capabilities from './_components/Capabilities'
 import OurProcess from './_components/OurProcess'
@@ -59,13 +60,16 @@ export default async function WebApplicationsServicePage({ params }: Props) {
         {/* 4. Our Process — for-you/software-and-technology/TechLaunchPath (LaunchPath) — commit b5ae9d5 */}
         <OurProcess />
 
-        {/* 5. Capabilities — packages/website-growth-engine/BuiltToPerform (Home-24) + AutomationTools (Home-06 ClientV4) — commits b406900, fb75787 */}
+        {/* 5. Capabilities — packages/website-growth-engine/BuiltToPerform (Home-24) — commit b406900 */}
         <Capabilities />
 
-        {/* 6. Selected Work — portfolio/FeaturedWork (case-study/Projects) — commits 9739ed3, f663f92 */}
+        {/* 6. Technology — about/TechStack (shared TechStackShared) */}
+        <TechStack />
+
+        {/* 7. Selected Work — portfolio/FeaturedWork + Load More — commits 9739ed3, f663f92 */}
         <SelectedWork />
 
-        {/* 7. Ready to Build? — shared WowGrowthCta */}
+        {/* 8. Ready to Build? — shared WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to"
           mainText="Build?"
