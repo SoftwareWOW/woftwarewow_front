@@ -25,7 +25,7 @@ const steps = [
   },
 ]
 
-/** Layout: Build & Launch LaunchPath / TechLaunchPath — numbered timeline + CTA. */
+/** Layout: for-you/software-and-technology/TechLaunchPath (LaunchPath) — commit b5ae9d5 */
 const OurProcess = () => {
   return (
     <section>

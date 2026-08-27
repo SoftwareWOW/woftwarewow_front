@@ -142,7 +142,7 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
 
-/** Layout: BuiltToPerform / Home-24 ServicesV16 flip cards + Home-06 ClientV4 tech logos. */
+/** Layout: packages/website-growth-engine/BuiltToPerform (Home-24) + AutomationTools (Home-06 ClientV4) — commits b406900, fb75787 */
 const Capabilities = () => {
   return (
     <section>

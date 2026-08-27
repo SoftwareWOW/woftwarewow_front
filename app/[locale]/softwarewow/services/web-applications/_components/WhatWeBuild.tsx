@@ -142,7 +142,7 @@ const solutions: Solution[] = [
   },
 ]
 
-/** Layout: Home-16 ServicesV14 — bordered cards; SaaS card links to dedicated service page. */
+/** Layout: for-you/software-and-technology/WhatWeBuild (Home-16 ServicesV14) — commit b5ae9d5 */
 const WhatWeBuild = () => {
   return (
     <section>

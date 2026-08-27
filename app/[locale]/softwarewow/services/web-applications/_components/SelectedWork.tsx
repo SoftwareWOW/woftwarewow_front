@@ -11,7 +11,7 @@ const selectedProjects = portfolioProjects
   .filter((project) => project.categories.includes('Software') && project.status === 'published')
   .slice(0, 3)
 
-/** Layout: portfolio FeaturedWork — alternating image/copy project cards. */
+/** Layout: portfolio/FeaturedWork (case-study/Projects) — commits 9739ed3, f663f92 */
 const SelectedWork = () => {
   return (
     <section>

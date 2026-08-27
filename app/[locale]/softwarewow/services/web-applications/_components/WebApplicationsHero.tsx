@@ -5,7 +5,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
-/** Layout: Home-18 HeroV18 / AiAutomationHero — gradient + split headline/CTAs + right visual. */
+/** Layout: packages/ai-automation/AiAutomationHero (Home-18 HeroV18) — commit fb75787 */
 const WebApplicationsHero = () => {
   return (
     <section

@@ -1,3 +1,4 @@
+import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -44,27 +45,33 @@ export default async function WebApplicationsServicePage({ params }: Props) {
   setRequestLocale(locale as Locale)
 
   return (
-    <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-      {/* 1. Hero — Home-18 HeroV18 / AiAutomationHero */}
-      <WebApplicationsHero />
-      {/* 2. What We Build — Home-16 ServicesV14 */}
-      <WhatWeBuild />
-      {/* 3. Built for Your Business — Home-25 WhyChooseUsV8 / OurApproach */}
-      <BuiltForYourBusiness />
-      {/* 4. Our Process — TechLaunchPath */}
-      <OurProcess />
-      {/* 5. Capabilities — BuiltToPerform + ClientV4 */}
-      <Capabilities />
-      {/* 6. Selected Work — FeaturedWork */}
-      <SelectedWork />
-      {/* 7. Global CTA */}
-      <div className="mb-3">
+    <LayoutOne>
+      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+        {/* 1. Hero — packages/ai-automation/AiAutomationHero (Home-18 HeroV18) — commit fb75787 */}
+        <WebApplicationsHero />
+
+        {/* 2. What We Build — for-you/software-and-technology/WhatWeBuild (Home-16 ServicesV14) — commit b5ae9d5 */}
+        <WhatWeBuild />
+
+        {/* 3. Built for Your Business — for-you/software-and-technology/OurApproach (Home-25 WhyChooseUsV8) — commit b5ae9d5 */}
+        <BuiltForYourBusiness />
+
+        {/* 4. Our Process — for-you/software-and-technology/TechLaunchPath (LaunchPath) — commit b5ae9d5 */}
+        <OurProcess />
+
+        {/* 5. Capabilities — packages/website-growth-engine/BuiltToPerform (Home-24) + AutomationTools (Home-06 ClientV4) — commits b406900, fb75787 */}
+        <Capabilities />
+
+        {/* 6. Selected Work — portfolio/FeaturedWork (case-study/Projects) — commits 9739ed3, f663f92 */}
+        <SelectedWork />
+
+        {/* 7. Ready to Build? — shared WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to"
           mainText="Build?"
           ariaLabel="Start a web application project with SoftwareWOW"
         />
       </div>
-    </div>
+    </LayoutOne>
   )
 }

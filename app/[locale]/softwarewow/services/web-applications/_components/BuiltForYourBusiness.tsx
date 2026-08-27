@@ -26,7 +26,7 @@ const points = [
   },
 ]
 
-/** Layout: Home-25 WhyChooseUsV8 / OurApproach — approach list + image + CTA. */
+/** Layout: for-you/software-and-technology/OurApproach (Home-25 WhyChooseUsV8) — commit b5ae9d5 */
 const BuiltForYourBusiness = () => {
   return (
     <section>
