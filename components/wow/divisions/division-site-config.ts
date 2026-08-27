@@ -96,11 +96,12 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
           id: 'services',
           title: 'Services',
           links: [
-            { id: 'customSoftware', label: 'Custom Software', href: '/softwarewow#services' },
-            { id: 'saasDevelopment', label: 'SaaS Development', href: '/softwarewow#services' },
-            { id: 'webApplications', label: 'Web Applications', href: '/softwarewow#services' },
-            { id: 'mobileApps', label: 'Mobile Apps', href: '/softwarewow#services' },
-            { id: 'aiAutomation', label: 'AI & Automation', href: '/softwarewow#services' },
+            { id: 'customSoftware', label: 'Custom Software', href: '/softwarewow/services/custom-software' },
+            { id: 'saasDevelopment', label: 'SaaS Development', href: '/softwarewow/services/saas-development' },
+            { id: 'webApplications', label: 'Web Applications', href: '/softwarewow/services/web-applications' },
+            { id: 'mobileApps', label: 'Mobile Apps', href: '/softwarewow/services/mobile-app-development' },
+            { id: 'aiAutomation', label: 'AI & Automation', href: '/softwarewow/services/ai-automation' },
+            { id: 'modernizationIntegrations', label: 'Modernization & Integrations', href: '/softwarewow/services/modernization-integrations' },
           ],
         },
         {

@@ -8,7 +8,7 @@ import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
 const SoftwareServices = () => {
   return (
-    <section>
+    <section id="services" className="scroll-mt-28">
       <div className="mx-auto max-w-[1320px] px-3 md:px-4">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-6 sm:items-center md:mb-20 md:flex-row lg:justify-start">
           <div className="flex-1">
