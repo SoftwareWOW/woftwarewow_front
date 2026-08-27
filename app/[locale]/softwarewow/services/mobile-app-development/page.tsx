@@ -66,7 +66,7 @@ export default async function MobileAppDevelopmentServicePage({ params }: Props)
         {/* 6. Technology — about/TechStack UI, mobile-only categories (local) */}
         <TechStack />
 
-        {/* 7. Selected Work — softwarewow/SoftwareWoWProjectsClient overlay + Load More */}
+        {/* 7. Selected Work — web-applications/SelectedWork alternating FeaturedWork + Load More */}
         <SelectedWork />
 
         {/* 8. Ready to Build? — shared WowGrowthCta */}

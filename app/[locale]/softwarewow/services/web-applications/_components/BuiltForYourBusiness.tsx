@@ -38,9 +38,9 @@ const BuiltForYourBusiness = () => {
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>
-                Not another <InstrumentText>off-the-shelf</InstrumentText> solution.
+                Not another <InstrumentText>of the shelf</InstrumentText> solution.
               </h2>
-            </RevealWrapper>
+            </RevealWrapper>  
           </div>
 
           <div className="w-full md:max-w-80 md:self-end lg:max-w-[470px]">

@@ -130,7 +130,7 @@ const WhatWeBuild = () => {
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear lg:leading-[1.20]">
-              Apps built for <InstrumentText>real-world</InstrumentText> use.
+              Apps built for <InstrumentText>real world</InstrumentText> use.
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>

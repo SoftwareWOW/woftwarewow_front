@@ -1,6 +1,7 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
@@ -20,79 +21,79 @@ const projects: PortfolioProject[] = [...publishedPortfolioProjects].sort((a, b)
   return aSoftware - bSoftware
 })
 
-/** Layout: softwarewow/SoftwareWoWProjectsClient — overlay cards + Load More */
+/** Layout: web-applications/SelectedWork — FeaturedWork alternating rows + Load More */
 const SelectedWork = () => {
   const [showAll, setShowAll] = useState(false)
   const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_VISIBLE_COUNT)
   const hasMore = projects.length > INITIAL_VISIBLE_COUNT
 
   return (
-    <section className="px-3 md:px-4">
-      <div className="mx-auto max-w-[1320px]">
-        <div className="mb-10 text-center lg:mb-20">
-          <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Selected Work</SectionLabel>
-          </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear">
-              Mobile products we&apos;ve helped bring to <InstrumentText>life.</InstrumentText>
-            </h2>
-          </TextAppearAnimation>
-        </div>
+    <section>
+      <div className="container mb-10 text-center md:mb-16">
+        <RevealWrapper className="reveal-me mb-3 flex justify-center">
+          <SectionLabel>Selected Work</SectionLabel>
+        </RevealWrapper>
+        <TextAppearAnimation>
+          <h2 className="text-appear">
+            Mobile products we&apos;ve helped bring to <InstrumentText>life.</InstrumentText>
+          </h2>
+        </TextAppearAnimation>
+      </div>
 
-        <div className="mb-[60px] space-y-[30px]">
-          {visibleProjects.map((item) => (
-            <RevealWrapper
-              key={item.slug}
-              className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row"
-            >
-              <figure className="-z-30 max-w-[870px] overflow-hidden">
-                <Link href={`/case-study/${item.slug}`} className="block">
-                  <img
-                    src={item.image}
-                    className="h-full w-full transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
-                    alt={item.alt}
-                  />
-                </Link>
+      <div className="container flex flex-col gap-16 md:gap-20 lg:gap-24">
+        {visibleProjects.map((project, index) => (
+          <RevealWrapperV2
+            key={project.slug}
+            className={`reveal-me group flex flex-col gap-8 lg:items-center lg:gap-10 ${
+              index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'
+            }`}
+          >
+            <Link href={`/case-study/${project.slug}`} className="block flex-1 overflow-hidden rounded-radius-md">
+              <figure className="overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.alt}
+                  className="aspect-[16/10] w-full object-cover transition-all duration-500 group-hover:scale-105"
+                />
               </figure>
+            </Link>
 
-              <div className="z-30 w-full border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
-                <p className="mb-3.5 text-sm font-normal uppercase leading-6 tracking-[3px] text-black dark:text-white">
-                  {item.client} · {item.industry}
-                </p>
-                <div className="blog-title mb-6">
-                  <Link href={`/case-study/${item.slug}`}>
-                    <h3 className="text[25px] md:text-3xl lg:text-4xl lg:leading-[1.2] lg:tracking-[-0.72px]">
-                      {item.title}
-                    </h3>
-                  </Link>
-                </div>
-                <p className="mb-6 text-sm text-[#808080]">{item.serviceTags.join(' · ')}</p>
-                <p className="mb-20 text-base leading-relaxed text-[#808080] lg:mb-[104px]">{item.description}</p>
-                <ButtonComponent href={`/case-study/${item.slug}`} variant="white">
+            <div className="flex flex-1 flex-col justify-center lg:max-w-md xl:max-w-lg">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#808080]">
+                {project.client} · {project.industry}
+              </p>
+              <h3 className="mt-3 text-3xl md:text-4xl lg:text-[44px] lg:leading-[1.15]">{project.title}</h3>
+              <p className="mt-3 flex flex-wrap gap-2 text-sm text-[#808080]">
+                {project.serviceTags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-[#808080] md:text-lg">{project.description}</p>
+              <div className="mt-6">
+                <ButtonComponent href={`/case-study/${project.slug}`} variant="secondary" size="sm">
                   View Case Study
                 </ButtonComponent>
               </div>
-            </RevealWrapper>
-          ))}
-        </div>
-
-        {hasMore && (
-          <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
-            <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-              <ButtonComponent
-                type="button"
-                variant="white"
-                fullWidth
-                onClick={() => setShowAll((prev) => !prev)}
-                ariaExpanded={showAll}
-              >
-                {showAll ? 'See Less' : 'Load More'}
-              </ButtonComponent>
-            </ButtonComponentList>
-          </RevealWrapper>
-        )}
+            </div>
+          </RevealWrapperV2>
+        ))}
       </div>
+
+      {hasMore && (
+        <RevealWrapper className="mt-12 flex justify-center md:mt-16">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent
+              type="button"
+              variant="primary"
+              fullWidth
+              onClick={() => setShowAll((prev) => !prev)}
+              ariaExpanded={showAll}
+            >
+              {showAll ? 'See Less' : 'Load More'}
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
+      )}
     </section>
   )
 }
