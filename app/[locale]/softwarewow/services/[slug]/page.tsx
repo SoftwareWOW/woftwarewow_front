@@ -13,7 +13,9 @@ type Props = {
 }
 
 export function generateStaticParams() {
-  return SOFTWARE_WOW_NAV_SERVICE_SLUGS.filter((slug) => slug !== 'web-applications').map((slug) => ({
+  return SOFTWARE_WOW_NAV_SERVICE_SLUGS.filter(
+    (slug) => slug !== 'web-applications' && slug !== 'mobile-app-development',
+  ).map((slug) => ({
     slug,
   }))
 }
