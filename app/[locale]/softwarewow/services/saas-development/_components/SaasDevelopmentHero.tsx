@@ -11,7 +11,7 @@ import AnimatedSaasHeroImage from './AnimatedSaasHeroImage'
 const SaasDevelopmentHero = () => {
   return (
     <RevealWrapper as="section" className="relative overflow-hidden" aria-labelledby="saas-hero-heading">
-      <div className="relative overflow-hidden pb-12 pt-28 sm:pb-28 md:pt-36 lg:pb-[120px] lg:pt-[220px]">
+      <div className="relative overflow-hidden pb-12 pt-6 sm:pb-28 sm:pt-8 md:pt-10 lg:pb-[120px] lg:pt-12">
         <HeroGradientAnimation />
         <div className="container">
           <RevealWrapper className="text-center">

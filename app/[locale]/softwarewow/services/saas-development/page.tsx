@@ -66,7 +66,7 @@ export default async function SaasDevelopmentServicePage({ params }: Props) {
         {/* 6. Technology — about/TechStack UI, SaaS-focused categories (local filter) */}
         <TechStack />
 
-        {/* 7. Selected Work — homepage-14/OurWorkShowcase + Load More */}
+        {/* 7. Selected Work — same 2-col grid as custom-software SelectedWork */}
         <SelectedWork />
 
         {/* 8. Ready to Build Your SaaS? — shared WowGrowthCta */}
