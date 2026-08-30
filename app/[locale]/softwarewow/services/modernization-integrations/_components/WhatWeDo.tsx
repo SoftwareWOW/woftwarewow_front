@@ -85,13 +85,13 @@ const RowBody = ({
       </div>
     </div>
 
-    <div className="overflow-hidden">
-      <figure className="h-0 -translate-y-4 transform opacity-0 transition-all duration-700 ease-in-out group-hover:h-[110px] group-hover:translate-y-0 group-hover:opacity-100 md:group-hover:h-[160px] lg:group-hover:h-[230px]">
+    <div className="overflow-hidden px-5 pb-5 pt-4 md:px-10 md:pb-10">
+      <figure className="h-0 overflow-hidden rounded-radius-md -translate-y-4 transform opacity-0 transition-all duration-700 ease-in-out group-hover:h-[110px] group-hover:translate-y-0 group-hover:opacity-100 md:group-hover:h-[160px] lg:group-hover:h-[230px]">
         <img
           src={image}
           alt=""
           aria-hidden
-          className="block h-full w-full rounded-radius-sm object-cover px-5 pb-5 pt-4 transition-all duration-700 ease-in-out md:px-10 md:pb-10"
+          className="block h-full w-full rounded-radius-md object-cover transition-all duration-700 ease-in-out"
         />
       </figure>
     </div>
