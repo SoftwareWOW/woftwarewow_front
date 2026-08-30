@@ -106,21 +106,6 @@ const ModernizationHero = () => {
         </div>
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           <RevealWrapper as="figure" className="reveal-me relative mt-[78px]">
-            <div className="absolute -left-0 -top-[12%] z-10 mx-auto flex h-[120px] w-[120px] items-center justify-center rounded-full before:absolute before:h-[140px] before:w-[140px] before:rounded-full before:bg-white before:content-[''] dark:before:bg-secondary lg:-left-[12%]">
-              <figure className="relative z-50">
-                <img src="/images/icons/text-circle-logo.png" alt="" aria-hidden className="inline dark:hidden" />
-                <img
-                  src="/images/icons/text-circle-dark-logo.png"
-                  alt=""
-                  aria-hidden
-                  className="hidden dark:inline"
-                />
-              </figure>
-              <div
-                ref={textRef}
-                className="text-2 h-[120px] w-[120px] rounded-full bg-secondary text-[10px] text-backgroundBody dark:bg-backgroundBody dark:text-secondary"
-              />
-            </div>
             <figure className="overflow-hidden rounded-radius-md">
               <img src={HERO_IMAGES[0].src} alt={HERO_IMAGES[0].alt} className="block w-full max-sm:w-full" />
             </figure>

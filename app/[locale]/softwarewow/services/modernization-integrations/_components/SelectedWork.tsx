@@ -46,17 +46,17 @@ const SelectedWork = () => {
               key={item.slug}
               className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row"
             >
-              <figure className="relative -z-30 h-[240px] w-full max-w-[870px] overflow-hidden rounded-radius-md sm:h-[280px] sm:rounded-radius-sm md:h-[320px] lg:h-[360px]">
+              <figure className="relative -z-30 h-[240px] w-full max-w-[870px] overflow-hidden rounded-radius-md sm:h-[280px] md:h-[320px] lg:h-[360px]">
                 <Link href={`/case-study/${item.slug}`} className="block h-full w-full">
                   <img
                     src={item.image}
-                    className="absolute inset-0 h-full w-full object-cover object-center transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
+                    className="absolute inset-0 block h-full w-full object-cover object-center transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                     alt={item.alt}
                   />
                 </Link>
               </figure>
 
-              <div className="z-30 w-full border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
+              <div className="z-30 w-full overflow-hidden rounded-radius-md border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
                 <p className="mb-3.5 text-sm font-normal uppercase leading-6 tracking-[3px] text-black dark:text-white">
                   {item.client} · {item.industry}
                 </p>

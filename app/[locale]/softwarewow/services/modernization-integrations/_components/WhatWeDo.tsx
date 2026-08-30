@@ -91,7 +91,7 @@ const RowBody = ({
           src={image}
           alt=""
           aria-hidden
-          className="block h-full w-full object-cover px-5 pb-5 pt-4 transition-all duration-700 ease-in-out md:px-10 md:pb-10"
+          className="block h-full w-full rounded-radius-sm object-cover px-5 pb-5 pt-4 transition-all duration-700 ease-in-out md:px-10 md:pb-10"
         />
       </figure>
     </div>
@@ -121,6 +121,7 @@ const WhatWeDo = () => {
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px]">
+          <div className="overflow-hidden rounded-radius-md">
           {solutions.map((solution, index) => {
             const isLast = index === solutions.length - 1
             const body = <RowBody title={solution.title} description={solution.description} image={solution.image} />
@@ -139,6 +140,7 @@ const WhatWeDo = () => {
               </RowChrome>
             )
           })}
+          </div>
         </RevealWrapper>
 
         <RevealWrapper className="mt-14 flex justify-center">

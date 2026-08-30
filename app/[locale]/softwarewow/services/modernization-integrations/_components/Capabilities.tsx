@@ -121,50 +121,45 @@ const Capabilities = () => {
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
           {capabilities.map((capability, index) => (
-            <div key={capability.id} className="accordion-item overflow-hidden bg-secondary duration-300">
+            <div
+              key={capability.id}
+              className={`faq-body-transition overflow-hidden rounded-radius-md border bg-backgroundBody duration-[400ms] dark:bg-dark ${
+                activeIndex === index ? 'pb-10' : 'pb-0'
+              }`}
+              style={{
+                borderColor: activeIndex === index ? 'black' : 'transparent',
+              }}
+            >
               <div
-                className={`accordion-header group relative flex cursor-pointer justify-between px-5 py-[35px] md:px-10 ${
-                  activeIndex === index ? 'active' : ''
+                className={`relative cursor-pointer py-5 max-md:px-5 md:px-10 md:py-[35px] ${
+                  activeIndex === index ? 'open active' : ''
                 }`}
                 onClick={() => toggleAccordion(index)}
               >
-                <h3 className="flex flex-col gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-white md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-5xl">
+                <h3 className="flex flex-col gap-x-10 gap-y-3 text-xl font-normal max-lg:pr-[33px] sm:text-[23px] sm:font-medium md:text-[25px] md:leading-[25.2px] md:tracking-wide">
                   <span className="text-inherit">{capability.title}</span>
-                  <span className="mt-2 pr-[2px] text-base text-[#ffffff99] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                  <span className="mt-2 pr-[2px] text-base text-black/70 dark:text-backgroundBody/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                     {capability.subtitle}
                   </span>
                 </h3>
-                <div className="accordion-header-iconV3">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    className="active-arrow absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 duration-300 ease-faq-body-transition group-hover:rotate-90 md:size-8"
-                    aria-hidden
-                  >
-                    <path d="M5 16H27" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <path
-                      d="M18 7L27 16L18 25"
-                      stroke="black"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
+                <div
+                  className={`accordion-header-icon transition-transform duration-[400ms] ${
+                    activeIndex === index ? 'rotate-180' : 'rotate-0'
+                  }`}
+                />
               </div>
               <div
-                className={`grid transition-all duration-300 ease-in-out ${
+                className={`grid transition-all duration-[400ms] ease-in-out ${
                   activeIndex === index ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                 }`}
               >
                 <div className="overflow-hidden">
-                  <div className="accordion-body ml-2.5 flex flex-col justify-start gap-x-10 px-10 pb-10 duration-300 sm:pt-6 md:ml-6 md:flex-row lg:gap-x-[73px]">
+                  <div className="ml-2.5 flex flex-col justify-start gap-x-10 px-5 pb-2 duration-300 sm:pt-2 md:ml-6 md:flex-row md:px-10 lg:gap-x-[73px]">
                     <ul className="[&>*:not(:last-child)]:mb-1">
                       {capability.items.slice(0, Math.ceil(capability.items.length / 2)).map((item) => (
                         <li
                           key={item}
-                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-backgroundBody/70"
+                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70"
                         >
                           {item}
                         </li>
@@ -174,7 +169,7 @@ const Capabilities = () => {
                       {capability.items.slice(Math.ceil(capability.items.length / 2)).map((item) => (
                         <li
                           key={item}
-                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-backgroundBody/70"
+                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70"
                         >
                           {item}
                         </li>

@@ -139,7 +139,7 @@ const WhyModernize = () => {
         ref={previewRef}
         className="pointer-events-none fixed left-1/2 top-1/4 z-20 h-[200px] w-[200px] origin-center rotate-[20deg] scale-0"
       >
-        <figure className="h-full w-full overflow-hidden">
+        <figure className="h-full w-full overflow-hidden rounded-radius-sm">
           <img
             ref={previewImgRef}
             src="/images/wow/nav/cards/software&technology.png"

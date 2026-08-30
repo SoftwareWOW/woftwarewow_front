@@ -46,7 +46,7 @@ const OurProcess = () => {
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
           {processSteps.map(({ step, title, description }) => (
             <RevealWrapper key={step} className="reveal-me w-full grow pt-6 sm:w-[48%] xl:grow">
-              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center dark:border-dark">
+              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between overflow-hidden rounded-radius-sm border px-5 pb-[42px] pt-10 text-center dark:border-dark">
                 <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
                   <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-secondary">
                     {step}
