@@ -131,13 +131,19 @@ const AiAutomationHero = () => {
         </RevealWrapper>
       </div>
       <div className="absolute -left-[4.5%] top-[42%] hidden md:block" ref={heroImage1Ref}>
-        <img src="/images/hero-img/hero-img-05.png" alt="" className="reveal-me" />
+        <figure className="overflow-hidden rounded-radius-md">
+          <img src="/images/hero-img/hero-img-05.png" alt="" className="reveal-me rounded-radius-md" />
+        </figure>
       </div>
       <div className="absolute -right-[5%] top-[12%] hidden md:block" ref={heroImage2Ref}>
-        <img src="/images/hero-img/hero-img-06.png" alt="" />
+        <figure className="overflow-hidden rounded-radius-md">
+          <img src="/images/hero-img/hero-img-06.png" alt="" className="rounded-radius-md" />
+        </figure>
       </div>
       <div className="absolute bottom-[0%] right-[18.5%] hidden lg:block" ref={heroImage3Ref}>
-        <img src="/images/hero-img/hero-img-07.png" alt="" className="reveal-me" />
+        <figure className="overflow-hidden rounded-radius-md">
+          <img src="/images/hero-img/hero-img-07.png" alt="" className="reveal-me rounded-radius-md" />
+        </figure>
       </div>
     </section>
   )

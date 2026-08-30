@@ -66,7 +66,7 @@ export default async function AiAutomationServicePage({ params }: Props) {
         {/* 6. Technology — about/TechStack UI, AI-focused categories (local filter) */}
         <TechStack />
 
-        {/* 7. Selected Work — homepage-21/CaseStudyV2 overlay + Load More */}
+        {/* 7. Selected Work — wow/LandascapComponets/WowProjects + See More */}
         <SelectedWork />
 
         {/* 8. Ready to Automate? — shared WowGrowthCta */}

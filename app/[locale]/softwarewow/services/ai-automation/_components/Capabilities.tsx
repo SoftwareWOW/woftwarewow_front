@@ -56,7 +56,7 @@ const bottomRow: Capability[] = [
 ]
 
 const CapabilityCard = ({ item }: { item: Capability }) => (
-  <RevealWrapper className="flex-1 border px-[30px] py-20 dark:border-dark">
+  <RevealWrapper className="flex-1 rounded-radius-md border px-[30px] py-20 dark:border-dark">
     <span>{item.icon}</span>
     <h5 className="mb-2.5 mt-5 lg:text-[35px]">{item.title}</h5>
     <p className="text-base leading-[1.6] text-[#808080]">{item.description}</p>

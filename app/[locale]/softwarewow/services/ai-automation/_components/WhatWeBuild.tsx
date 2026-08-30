@@ -2,15 +2,16 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import {
   AdvertisingCopyIcon,
+  ArrowIcon,
   BrandMessagingIcon,
   DigitalContentIcon,
   EmailSalesCopyIcon,
   SeoCopywritingIcon,
 } from '@/components/homepage-18/Icons'
-import ServiceCard from '@/components/homepage-18/ServiceCard'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 type Solution = {
@@ -89,14 +90,19 @@ const WhatWeBuild = () => {
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
         {solutions.map((service) => (
-          <ServiceCard
-            id={service.id}
+          <RevealWrapper
             key={service.id}
-            title={service.title}
-            description={service.description}
-            icon={service.icon}
-            href={service.href}
-          />
+            className="reveal-me group rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
+          >
+            <Link href={service.href} className="block">
+              <span>{service.icon}</span>
+              <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{service.title}</h5>
+              <p className="mb-20 lg:mb-[106px]">{service.description}</p>
+              <div className="flex items-center justify-center overflow-hidden rounded-radius-sm border p-8 transition-colors duration-[400ms] ease-team-bezier group-hover:bg-secondary dark:border-dark dark:group-hover:bg-backgroundBody max-lg:size-16 lg:h-24 lg:w-[92px]">
+                <ArrowIcon />
+              </div>
+            </Link>
+          </RevealWrapper>
         ))}
       </div>
     </section>

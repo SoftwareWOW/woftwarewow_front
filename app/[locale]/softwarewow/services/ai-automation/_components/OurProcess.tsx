@@ -44,19 +44,21 @@ const OurProcess = () => {
         </div>
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
           {steps.map((item) => (
-            <RevealWrapper key={item.step} className="reveal-me w-full grow pt-6 sm:w-[48%] xl:grow">
-              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center dark:border-dark">
-                <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
-                  <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-secondary">
-                    {item.step}
-                  </span>
-                </div>
-                <h6 className="text-2xl font-normal leading-[1.1] text-black dark:text-white">{item.title}</h6>
-                <p className="text-base font-normal leading-[1.3] text-black/70 dark:text-backgroundBody/70">
-                  {item.description}
-                </p>
+            <div key={item.step} className="relative w-full grow pt-6 sm:w-[48%] xl:grow">
+              <div className="absolute left-1/2 top-2 z-10 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
+                <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-secondary">
+                  {item.step}
+                </span>
               </div>
-            </RevealWrapper>
+              <RevealWrapper className="reveal-me">
+                <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between rounded-radius-sm border px-5 pb-[42px] pt-10 text-center dark:border-dark">
+                  <h6 className="text-2xl font-normal leading-[1.1] text-black dark:text-white">{item.title}</h6>
+                  <p className="text-base font-normal leading-[1.3] text-black/70 dark:text-backgroundBody/70">
+                    {item.description}
+                  </p>
+                </div>
+              </RevealWrapper>
+            </div>
           ))}
         </div>
         <RevealWrapper className="mt-7 flex justify-center max-md:w-full md:mt-14">
