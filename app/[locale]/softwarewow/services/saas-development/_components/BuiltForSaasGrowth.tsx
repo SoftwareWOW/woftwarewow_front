@@ -57,11 +57,13 @@ const BuiltForSaasGrowth = () => {
           {points.map((point) => (
             <RevealWrapper
               key={point.title}
-              className="underline-hover-effect group flex flex-col-reverse items-start border dark:border-dark md:flex-row md:items-center md:gap-x-11 md:gap-y-10 md:pr-5 lg:gap-x-[70px] lg:pr-0"
+              className="group flex flex-col-reverse items-start border dark:border-dark md:flex-row md:items-center md:gap-x-11 md:gap-y-10 md:pr-5 lg:gap-x-[70px] lg:pr-0"
             >
               <div className="flex-1 pl-5 max-lg:py-6 max-md:pr-5 lg:pl-10">
-                <div className="blog-title mb-6">
-                  <h3 className="text-[27px] md:text-4xl md:leading-[1.2] md:tracking-[-0.72px]">{point.title}</h3>
+                <div className="mb-6">
+                  <h3 className="cursor-default text-[27px] md:text-4xl md:leading-[1.2] md:tracking-[-0.72px]">
+                    {point.title}
+                  </h3>
                 </div>
                 <p className="border-t pt-2 dark:border-dark md:pt-5">{point.description}</p>
               </div>
