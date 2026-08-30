@@ -43,11 +43,13 @@ const SelectedWork = () => {
         {visibleProjects.map((item) => (
           <RevealWrapper key={item.slug} className="underline-hover-effect group w-full">
             <Link href={`/case-study/${item.slug}`} className="block">
-              <figure className="w-full overflow-hidden">
+              <figure className="relative h-[240px] w-full shrink-0 overflow-hidden sm:h-[280px] md:h-[320px] lg:h-[360px]">
                 <img
                   src={item.image}
-                  className="h-full w-full transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
+                  className="absolute inset-0 h-full w-full object-cover object-center transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                   alt={item.alt}
+                  width={720}
+                  height={360}
                 />
               </figure>
             </Link>
