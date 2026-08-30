@@ -47,7 +47,7 @@ const SelectedWork = () => {
               className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row"
             >
               <figure className="relative -z-30 h-[240px] w-full max-w-[870px] overflow-hidden rounded-radius-md sm:h-[280px] md:h-[320px] lg:h-[360px]">
-                <Link href={`/case-study/${item.slug}`} className="block h-full w-full">
+                <Link href={`/case-study/${item.slug}`} className="block h-full w-full rounded-radius-md">
                   <img
                     src={item.image}
                     className="absolute inset-0 block h-full w-full object-cover object-center transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
