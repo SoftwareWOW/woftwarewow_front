@@ -35,7 +35,7 @@ const AnimatedSaasHeroImage = () => {
   }, [])
 
   return (
-    <figure className="mx-auto w-[97%] overflow-hidden sm:w-full" ref={imageRef}>
+    <figure className="mx-auto w-[97%] overflow-hidden sm:w-full rounded-radius-sm md:rounded-radius-md" ref={imageRef}>
       <Image
         src={saasHeroVisual}
         alt="SaaS product dashboard interface"
