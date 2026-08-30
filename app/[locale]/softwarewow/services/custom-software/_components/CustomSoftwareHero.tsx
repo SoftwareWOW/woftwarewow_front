@@ -25,7 +25,7 @@ const CustomSoftwareHero = () => {
   return (
     <RevealWrapper
       as="section"
-      className="relative overflow-x-hidden pb-10 pt-[100px] sm:pt-[110px] md:pb-14 md:pt-[120px] lg:pt-32 xl:pb-16 xl:pt-36"
+      className="relative overflow-x-hidden pb-10 pt-6 sm:pt-8 md:pb-14 md:pt-10 lg:pt-12 xl:pb-16 xl:pt-14"
       aria-labelledby="custom-software-hero-heading"
     >
       <div className="relative">
