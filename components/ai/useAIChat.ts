@@ -1,6 +1,6 @@
 'use client'
 
-import { WELCOME_MESSAGE } from '@/lib/system-prompt'
+import { isSeedWelcomeMessage, MAX_API_HISTORY_MESSAGES, WELCOME_MESSAGE } from '@/lib/system-prompt'
 import { useCallback, useRef, useState } from 'react'
 import type { ChatMessage, ChatStatus, SendMessageOptions } from './types'
 
@@ -17,6 +17,14 @@ function createMessage(
   }
 }
 
+function toApiMessages(messages: ChatMessage[]) {
+  return messages
+    .filter((message) => message.content.trim().length > 0)
+    .filter((message) => !isSeedWelcomeMessage(message.content))
+    .slice(-MAX_API_HISTORY_MESSAGES)
+    .map(({ role, content }) => ({ role, content }))
+}
+
 async function streamChatResponse(
   messages: ChatMessage[],
   onDelta: (content: string) => void,
@@ -29,7 +37,7 @@ async function streamChatResponse(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      messages: messages.map(({ role, content }) => ({ role, content })),
+      messages: toApiMessages(messages),
       mode,
     }),
     signal,
@@ -48,28 +56,46 @@ async function streamChatResponse(
   const decoder = new TextDecoder()
   let buffer = ''
 
+  const consumeLine = (line: string) => {
+    if (!line.startsWith('data: ')) return false
+
+    const payload = line.slice(6).trim()
+    if (payload === '[DONE]') return true
+
+    try {
+      const parsed = JSON.parse(payload) as { content?: string }
+      if (parsed.content) {
+        onDelta(parsed.content)
+      }
+    } catch {
+      // Ignore malformed stream chunks.
+    }
+
+    return false
+  }
+
   while (true) {
     const { done, value } = await reader.read()
-    if (done) break
+    if (value) {
+      buffer += decoder.decode(value, { stream: true })
+    }
 
-    buffer += decoder.decode(value, { stream: true })
+    if (done) {
+      buffer += decoder.decode()
+    }
+
     const lines = buffer.split('\n')
-    buffer = lines.pop() ?? ''
+    buffer = done ? '' : (lines.pop() ?? '')
 
     for (const line of lines) {
-      if (!line.startsWith('data: ')) continue
+      if (consumeLine(line)) return
+    }
 
-      const payload = line.slice(6).trim()
-      if (payload === '[DONE]') return
-
-      try {
-        const parsed = JSON.parse(payload) as { content?: string }
-        if (parsed.content) {
-          onDelta(parsed.content)
-        }
-      } catch {
-        // Ignore malformed stream chunks.
+    if (done) {
+      if (buffer.trim()) {
+        consumeLine(buffer)
       }
+      return
     }
   }
 }
