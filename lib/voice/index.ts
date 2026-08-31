@@ -89,4 +89,4 @@ export type {
   VoiceStatus,
 } from './voice-types'
 export { VOICE_ERROR_MESSAGES } from './voice-types'
-export { toSpokenText } from './spoken-text'
+export { splitCompleteSentences, toSpokenText } from './spoken-text'

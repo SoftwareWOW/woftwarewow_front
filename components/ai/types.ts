@@ -13,4 +13,5 @@ export type SendMessageOptions = {
   historyOverride?: ChatMessage[]
   mode?: 'text' | 'voice'
   signal?: AbortSignal
+  onDelta?: (delta: string) => void
 }

@@ -135,6 +135,7 @@ export function useAIChat() {
         }
 
         streamedContent += delta
+        options?.onDelta?.(delta)
         setMessages((current) =>
           current.map((message) =>
             message.id === assistantMessage.id

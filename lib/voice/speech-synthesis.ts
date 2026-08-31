@@ -13,13 +13,17 @@ function pickEnglishVoice(voices: SpeechSynthesisVoice[]) {
   return preferred ?? null
 }
 
+let cachedVoices: SpeechSynthesisVoice[] | null = null
+
 function loadVoices() {
   if (typeof window === 'undefined' || !window.speechSynthesis) return []
-  return window.speechSynthesis.getVoices()
+  const voices = window.speechSynthesis.getVoices()
+  if (voices.length > 0) cachedVoices = voices
+  return voices
 }
 
 function waitForVoices() {
-  const existing = loadVoices()
+  const existing = cachedVoices?.length ? cachedVoices : loadVoices()
   if (existing.length > 0) return Promise.resolve(existing)
 
   return new Promise<SpeechSynthesisVoice[]>((resolve) => {
@@ -58,7 +62,9 @@ export function createBrowserSpeechSynthesisProvider(): SpeechSynthesisProvider 
       if (!spoken || options.muted) return
       if (!isSpeechSynthesisSupported()) return
 
-      this.cancel()
+      if (options.interrupt !== false) {
+        this.cancel()
+      }
 
       const voices = await waitForVoices()
       const utterance = new SpeechSynthesisUtterance(spoken)

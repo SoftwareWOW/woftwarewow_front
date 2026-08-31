@@ -35,7 +35,7 @@ export default function VoiceWaveform({ status }: VoiceWaveformProps) {
         <motion.span
           key={index}
           className={cn(
-            'w-1 rounded-full bg-[#615CCE]',
+            'w-1 rounded-full bg-primary',
             status === 'error' || status === 'ended' ? 'opacity-30' : 'opacity-80',
           )}
           animate={{

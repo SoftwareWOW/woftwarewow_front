@@ -1,6 +1,6 @@
 'use client'
 
-import { VOICE_ERROR_MESSAGES } from '@/lib/voice'
+import { splitCompleteSentences, toSpokenText, VOICE_ERROR_MESSAGES } from '@/lib/voice'
 import type { SpeechRecognitionErrorCode, VoiceStatus } from '@/lib/voice'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSpeechSynthesis } from './useSpeechSynthesis'
@@ -11,7 +11,11 @@ const RESTART_LISTEN_DELAY_MS = 400
 type UseVoiceConversationOptions = {
   sendMessage: (
     content: string,
-    options?: { mode?: 'text' | 'voice'; signal?: AbortSignal },
+    options?: {
+      mode?: 'text' | 'voice'
+      signal?: AbortSignal
+      onDelta?: (delta: string) => void
+    },
   ) => Promise<string | null>
 }
 
@@ -36,6 +40,12 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
   const mountedRef = useRef(true)
   const scheduleListenRestartRef = useRef<(delay?: number) => void>(() => {})
   const startListeningRef = useRef<() => void>(() => {})
+
+  const responseStreamActiveRef = useRef(false)
+  const speechQueueRef = useRef<string[]>([])
+  const speechBufferRef = useRef('')
+  const isSpeakingUtteranceRef = useRef(false)
+  const currentUtteranceRef = useRef<string | null>(null)
 
   useEffect(() => {
     sendMessageRef.current = sendMessage
@@ -64,7 +74,118 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     isListeningRef.current = false
     isProcessingRef.current = false
     isSpeakingRef.current = false
+    responseStreamActiveRef.current = false
+    isSpeakingUtteranceRef.current = false
+    currentUtteranceRef.current = null
+    speechQueueRef.current = []
+    speechBufferRef.current = ''
   }, [])
+
+  const clearSpeechQueue = useCallback(() => {
+    speechQueueRef.current = []
+    speechBufferRef.current = ''
+    isSpeakingUtteranceRef.current = false
+    currentUtteranceRef.current = null
+    cancelSpeech()
+  }, [cancelSpeech])
+
+  const finishSpeakingTurn = useCallback(
+    (session: number) => {
+      if (!mountedRef.current) return
+      if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
+      if (responseStreamActiveRef.current) return
+      if (speechQueueRef.current.length > 0 || isSpeakingUtteranceRef.current) return
+
+      const leftover = toSpokenText(speechBufferRef.current)
+      if (leftover) {
+        speechBufferRef.current = ''
+        speechQueueRef.current.push(leftover)
+        pumpSpeechRef.current(session)
+        return
+      }
+
+      isSpeakingRef.current = false
+      isProcessingRef.current = false
+      networkRetryRef.current = 0
+      scheduleListenRestartRef.current()
+    },
+    [],
+  )
+
+  const pumpSpeechRef = useRef<(session: number) => void>(() => {})
+
+  const pumpSpeech = useCallback(
+    (session: number) => {
+      if (!mountedRef.current) return
+      if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
+      if (isSpeakingUtteranceRef.current) return
+
+      const next = speechQueueRef.current.shift()
+      if (!next) {
+        finishSpeakingTurn(session)
+        return
+      }
+
+      if (!ttsSupported) {
+        finishSpeakingTurn(session)
+        return
+      }
+
+      isSpeakingUtteranceRef.current = true
+      isSpeakingRef.current = true
+      isProcessingRef.current = false
+      currentUtteranceRef.current = next
+      setVoiceStatus('speaking')
+
+      void speak(next, { interrupt: false })
+        .catch(() => undefined)
+        .finally(() => {
+          isSpeakingUtteranceRef.current = false
+          currentUtteranceRef.current = null
+          if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
+          pumpSpeechRef.current(session)
+        })
+    },
+    [finishSpeakingTurn, setVoiceStatus, speak, ttsSupported],
+  )
+
+  pumpSpeechRef.current = pumpSpeech
+
+  const enqueueSpokenText = useCallback(
+    (text: string, session: number) => {
+      const spoken = toSpokenText(text)
+      if (!spoken) return
+      speechQueueRef.current.push(spoken)
+      pumpSpeechRef.current(session)
+    },
+    [],
+  )
+
+  const handleStreamDelta = useCallback(
+    (delta: string, session: number) => {
+      if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
+      if (!delta) return
+
+      setAssistantTranscript((current) => current + delta)
+      speechBufferRef.current += delta
+
+      if (statusRef.current === 'processing') {
+        isProcessingRef.current = false
+        isSpeakingRef.current = true
+        setVoiceStatus('speaking')
+      }
+
+      if (!ttsSupported) return
+
+      const { sentences, rest } = splitCompleteSentences(speechBufferRef.current)
+      speechBufferRef.current = rest
+
+      for (const sentence of sentences) {
+        enqueueSpokenText(sentence, session)
+      }
+    },
+    [enqueueSpokenText, setVoiceStatus, ttsSupported],
+  )
 
   const handleRecognitionError = useCallback(
     (code: SpeechRecognitionErrorCode, message: string) => {
@@ -162,10 +283,13 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
         return
       }
 
+      abort()
+      clearSpeechQueue()
       isProcessingRef.current = true
       isSpeakingRef.current = false
-      abort()
+      responseStreamActiveRef.current = true
       setUserTranscript(trimmed)
+      setAssistantTranscript('')
       setVoiceStatus('processing')
 
       abortChatRequest()
@@ -176,41 +300,52 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
         const reply = await sendMessageRef.current(trimmed, {
           mode: 'voice',
           signal: controller.signal,
+          onDelta: (delta) => handleStreamDelta(delta, session),
         })
 
         if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
 
+        responseStreamActiveRef.current = false
+
         if (!reply?.trim()) {
           isProcessingRef.current = false
+          isSpeakingRef.current = false
           setErrorMessage("I'm having trouble responding right now. Please try again.")
           setVoiceStatus('error')
           return
         }
 
-        abort()
-        isProcessingRef.current = false
-        isSpeakingRef.current = true
         setAssistantTranscript(reply)
-        setVoiceStatus('speaking')
 
-        if (ttsSupported) {
-          await speak(reply)
+        if (!ttsSupported) {
+          isProcessingRef.current = false
+          isSpeakingRef.current = false
+          networkRetryRef.current = 0
+          scheduleListenRestart()
+          return
         }
 
-        if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
-
-        isSpeakingRef.current = false
-        networkRetryRef.current = 0
-        scheduleListenRestart()
+        finishSpeakingTurn(session)
       } catch {
         if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
+        responseStreamActiveRef.current = false
         isProcessingRef.current = false
         isSpeakingRef.current = false
+        clearSpeechQueue()
         setErrorMessage("I'm having trouble responding right now. Please try again.")
         setVoiceStatus('error')
       }
     },
-    [abort, abortChatRequest, scheduleListenRestart, setVoiceStatus, speak, ttsSupported],
+    [
+      abort,
+      abortChatRequest,
+      clearSpeechQueue,
+      finishSpeakingTurn,
+      handleStreamDelta,
+      scheduleListenRestart,
+      setVoiceStatus,
+      ttsSupported,
+    ],
   )
 
   const handleFinalTranscriptRef = useRef(handleFinalTranscript)

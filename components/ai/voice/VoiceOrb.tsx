@@ -37,7 +37,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         aria-hidden
         className={cn(
           'absolute inset-0 rounded-full border',
-          isListening ? 'border-[#615CCE]/55' : 'border-[#615CCE]/20',
+          isListening ? 'border-primary/55' : 'border-primary/20',
         )}
         animate={
           isActive
@@ -56,7 +56,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         aria-hidden
         className={cn(
           'absolute inset-3 rounded-full border',
-          isListening ? 'border-[#615CCE]/60' : 'border-[#615CCE]/25',
+          isListening ? 'border-primary/60' : 'border-primary/25',
         )}
         animate={
           isActive
@@ -66,10 +66,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isActive ? 0.9 : 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
       />
       <motion.span
-        className={cn(
-          'relative z-10 flex h-20 w-20 items-center justify-center rounded-full text-white shadow-lg shadow-[#615CCE]/25',
-          isListening ? 'bg-[#4F46B8]' : 'bg-[#615CCE]',
-        )}
+        className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25"
         animate={
           isListening
             ? { scale: [1, 1.08, 1] }

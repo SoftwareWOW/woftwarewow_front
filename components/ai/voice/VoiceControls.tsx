@@ -10,7 +10,7 @@ export default function VoiceControls({ onEnd }: VoiceControlsProps) {
       <button
         type="button"
         onClick={onEnd}
-        className="text-sm font-medium text-[#808080] underline-offset-2 transition-colors hover:text-secondary hover:underline dark:text-dark-100 dark:hover:text-backgroundBody"
+        className="text-sm font-medium text-muted underline-offset-2 transition-colors hover:text-secondary hover:underline dark:text-dark-100 dark:hover:text-backgroundBody"
       >
         End conversation
       </button>

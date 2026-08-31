@@ -23,7 +23,7 @@ export default function VoiceButton({ isActive = false, disabled = false, onClic
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40',
         isActive
           ? 'border-[#615CCE] bg-[#615CCE] text-white shadow-sm shadow-primary/25'
-          : 'border-[#1515151A] bg-transparent text-secondary hover:border-[#615CCE]/50 hover:text-[#615CCE] dark:border-[#EDF0F51A] dark:text-backgroundBody dark:hover:border-[#615CCE]/50',
+          : 'border-[#1515151A] bg-transparent text-secondary hover:border-primary/50 hover:text-primary dark:border-[#EDF0F51A] dark:text-backgroundBody dark:hover:border-primary/50',
         'disabled:cursor-not-allowed disabled:opacity-50',
       )}
     >

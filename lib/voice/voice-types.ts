@@ -31,6 +31,7 @@ export type SpeakOptions = {
   lang?: string
   rate?: number
   pitch?: number
+  interrupt?: boolean
 }
 
 export type SpeechSynthesisProvider = {

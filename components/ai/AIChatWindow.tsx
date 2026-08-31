@@ -105,14 +105,28 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
   }, [onClose, stopVoiceMode])
 
   useEffect(() => {
-    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
-      const messagesContainer = messagesContainerRef.current
-      const target = event.target
+    const isInsideChatScrollable = (target: EventTarget | null) => {
+      const root = windowRef.current
+      if (!(target instanceof Node) || !root || !root.contains(target)) return false
 
-      if (messagesContainer && target instanceof Node && messagesContainer.contains(target)) {
-        return
+      let element: HTMLElement | null =
+        target instanceof HTMLElement ? target : target.parentElement
+
+      while (element && root.contains(element)) {
+        if (element.hasAttribute('data-chat-scroll')) return true
+
+        const overflowY = window.getComputedStyle(element).overflowY
+        if (overflowY === 'auto' || overflowY === 'scroll') return true
+
+        if (element === root) break
+        element = element.parentElement
       }
 
+      return false
+    }
+
+    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
+      if (isInsideChatScrollable(event.target)) return
       event.preventDefault()
     }
 
@@ -216,6 +230,7 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
 
             <div
               ref={messagesContainerRef}
+              data-chat-scroll
               data-lenis-prevent
               className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [-webkit-overflow-scrolling:touch]"
             >

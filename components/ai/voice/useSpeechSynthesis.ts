@@ -1,7 +1,7 @@
 'use client'
 
 import { createSpeechSynthesisProvider, isSpeechSynthesisSupported } from '@/lib/voice'
-import type { SpeechSynthesisProvider } from '@/lib/voice'
+import type { SpeakOptions, SpeechSynthesisProvider } from '@/lib/voice'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 export function useSpeechSynthesis() {
@@ -22,17 +22,26 @@ export function useSpeechSynthesis() {
     setIsSpeaking(false)
   }, [])
 
-  const speak = useCallback(async (text: string) => {
+  const speak = useCallback(async (text: string, options?: SpeakOptions) => {
     const provider = providerRef.current
     if (!provider?.isSupported() || isMutedRef.current) {
       return
     }
 
-    provider.cancel()
+    if (options?.interrupt !== false) {
+      provider.cancel()
+    }
+
     setIsSpeaking(true)
 
     try {
-      await provider.speak(text, { muted: isMutedRef.current, rate: 0.95, pitch: 1 })
+      await provider.speak(text, {
+        muted: isMutedRef.current,
+        rate: 0.95,
+        pitch: 1,
+        interrupt: false,
+        ...options,
+      })
     } catch {
       // Speech failed — text is still visible.
     } finally {

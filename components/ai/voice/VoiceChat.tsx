@@ -32,13 +32,13 @@ export default function VoiceChat({
   onRetry,
 }: VoiceChatProps) {
   return (
-    <div className="flex min-h-0 flex-1 flex-col bg-backgroundBody dark:bg-dark">
-      <div className="flex items-start justify-between gap-3 border-b border-[#1515151A] px-5 py-4 dark:border-[#EDF0F51A]">
+    <div className="flex h-full min-h-0 flex-1 flex-col overflow-hidden bg-backgroundBody dark:bg-dark">
+      <div className="flex shrink-0 items-start justify-between gap-3 border-b border-[#1515151A] px-5 py-4 dark:border-[#EDF0F51A]">
         <div className="min-w-0">
           <h2 className="truncate font-seasons text-lg font-normal tracking-[-0.02em] text-secondary dark:text-backgroundBody">
             Voice conversation
           </h2>
-          <p className="mt-1 text-sm text-[#808080] dark:text-dark-100">WOW Superagency AI</p>
+          <p className="mt-1 text-sm text-muted dark:text-dark-100">WOW Superagency AI</p>
         </div>
         <button
           type="button"
@@ -46,13 +46,13 @@ export default function VoiceChat({
           aria-label="Close voice conversation"
           className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#1515151A] text-secondary transition-colors hover:bg-[#1515150A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 dark:border-[#EDF0F51A] dark:text-backgroundBody dark:hover:bg-white/5"
         >
-          <X className="h-4 w-4" />
+          <X className="h-4 w-4" stroke="currentColor" />
         </button>
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col px-5 py-5">
+      <div className="flex min-h-0 flex-1 flex-col px-5 pt-5">
         {!isSupported ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 text-center">
             <p className="max-w-[280px] text-sm leading-relaxed text-secondary dark:text-backgroundBody">
               Voice recognition is not supported by your current browser. You can continue chatting
               using text.
@@ -60,14 +60,14 @@ export default function VoiceChat({
             <button
               type="button"
               onClick={onClose}
-              className="text-sm font-medium text-[#615CCE] underline-offset-2 hover:underline"
+              className="text-sm font-medium text-primary underline-offset-2 hover:underline"
             >
               Return to text chat
             </button>
           </div>
         ) : (
           <>
-            <div className="flex flex-col items-center gap-4 pb-4">
+            <div className="flex shrink-0 flex-col items-center gap-4 pb-4">
               <VoiceOrb status={status} onPress={onOrbPress} />
               <VoiceWaveform status={status} />
               <VoiceStatusLabel status={status} />
@@ -82,7 +82,7 @@ export default function VoiceChat({
 
             {errorMessage ? (
               <div
-                className="mt-3 rounded-radius-sm border border-red-200 bg-red-50 px-3 py-2.5 text-center text-sm text-red-700 dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-200"
+                className="mt-3 shrink-0 rounded-radius-sm border border-red-200 bg-red-50 px-3 py-2.5 text-center text-sm text-red-700 dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-200"
                 role="alert"
               >
                 <p>{errorMessage}</p>
@@ -98,7 +98,7 @@ export default function VoiceChat({
               </div>
             ) : null}
 
-            <div className="mt-4">
+            <div className="mt-4 shrink-0">
               <VoiceControls onEnd={onClose} />
             </div>
           </>
