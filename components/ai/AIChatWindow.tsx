@@ -47,8 +47,7 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
     status,
     errorMessage: voiceError,
     interimTranscript,
-    userTranscript,
-    assistantTranscript,
+    history: voiceHistory,
     startVoiceMode,
     stopVoiceMode,
     startListening,
@@ -213,8 +212,7 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
             errorMessage={voiceError}
             isSupported={isSupported}
             interimTranscript={interimTranscript}
-            userTranscript={userTranscript}
-            assistantTranscript={assistantTranscript}
+            history={voiceHistory}
             onClose={stopVoiceMode}
             onOrbPress={handleOrbPress}
             onRetry={startListening}

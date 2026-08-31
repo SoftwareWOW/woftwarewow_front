@@ -66,7 +66,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isActive ? 0.9 : 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
       />
       <motion.span
-        className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+        className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/25"
         animate={
           isListening
             ? { scale: [1, 1.08, 1] }
@@ -77,7 +77,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isListening ? 0.85 : 2.8, repeat: Infinity, ease: 'easeInOut' }}
         whileTap={{ scale: 0.96 }}
       >
-        <Mic className="h-7 w-7" stroke="currentColor" />
+        <Mic className="h-7 w-7 text-white" stroke="currentColor" color="white" />
       </motion.span>
     </button>
   )

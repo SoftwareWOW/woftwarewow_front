@@ -1,5 +1,11 @@
 export type VoiceStatus = 'listening' | 'processing' | 'speaking' | 'error' | 'ended'
 
+export type VoiceHistoryMessage = {
+  id: string
+  role: 'user' | 'assistant'
+  content: string
+}
+
 export type SpeechRecognitionErrorCode =
   | 'not-supported'
   | 'permission-denied'

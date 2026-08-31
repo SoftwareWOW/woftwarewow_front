@@ -1,6 +1,6 @@
 'use client'
 
-import type { VoiceStatus } from '@/lib/voice'
+import type { VoiceHistoryMessage, VoiceStatus } from '@/lib/voice'
 import { X } from 'lucide-react'
 import VoiceControls from './VoiceControls'
 import VoiceOrb from './VoiceOrb'
@@ -13,8 +13,7 @@ type VoiceChatProps = {
   errorMessage: string
   isSupported: boolean
   interimTranscript: string
-  userTranscript: string
-  assistantTranscript: string
+  history: VoiceHistoryMessage[]
   onClose: () => void
   onOrbPress: () => void
   onRetry?: () => void
@@ -25,8 +24,7 @@ export default function VoiceChat({
   errorMessage,
   isSupported,
   interimTranscript,
-  userTranscript,
-  assistantTranscript,
+  history,
   onClose,
   onOrbPress,
   onRetry,
@@ -75,8 +73,7 @@ export default function VoiceChat({
 
             <VoiceTranscript
               status={status}
-              userText={userTranscript}
-              assistantText={assistantTranscript}
+              history={history}
               interimText={interimTranscript}
             />
 

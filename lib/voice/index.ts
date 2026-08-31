@@ -86,7 +86,8 @@ export type {
   SpeakOptions,
   SpeechRecognitionCallbacks,
   SpeechRecognitionErrorCode,
+  VoiceHistoryMessage,
   VoiceStatus,
 } from './voice-types'
 export { VOICE_ERROR_MESSAGES } from './voice-types'
-export { splitCompleteSentences, toSpokenText } from './spoken-text'
+export { splitCompleteSentences, sanitizeVoiceResponseForDisplay, toSpokenText } from './spoken-text'

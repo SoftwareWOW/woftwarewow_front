@@ -109,7 +109,11 @@ Suggest a meeting only when the visitor wants to hire, needs a tailored plan, or
 - /contact — Contact form
 - /services — Explore divisions and services`
 
-export const VOICE_CONVERSATION_ADDENDUM = `VOICE MODE: The visitor is speaking with you. Be even more concise and natural. Default to one or two spoken sentences. No lists, markdown, or URLs unless they ask. Ask one question at a time. Do not greet every turn.`
+export const VOICE_CONVERSATION_ADDENDUM = `You are responding in a live voice conversation. Reply in natural plain text, as if you are talking directly to a person.
+
+Do not use Markdown. Do not use headings, # symbols, *, bullet lists, tables, code blocks, or formatting characters.
+
+Keep answers short and easy to listen to: generally 1 to 4 short sentences unless the visitor asks for more detail. Ask one question at a time. Do not greet every turn. Do not use URLs unless they specifically ask for a link.`
 
 export const WELCOME_MESSAGE = `Hi there — welcome to WOW Superagency.
 

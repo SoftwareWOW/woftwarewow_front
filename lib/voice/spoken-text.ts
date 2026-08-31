@@ -1,16 +1,6 @@
-/** Strip markdown so TTS reads naturally. */
+/** Strip markdown so TTS reads naturally. Uses the same cleaner as the voice history. */
 export function toSpokenText(markdown: string) {
-  return markdown
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/[#*_~]+/g, '')
-    .replace(/^\s*[-•*]\s+/gm, '')
-    .replace(/^\s*\d+\.\s+/gm, '')
-    .replace(/\n{2,}/g, '. ')
-    .replace(/\n/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
+  return sanitizeVoiceResponseForDisplay(markdown)
 }
 
 export function getDocumentLanguage() {
@@ -33,8 +23,8 @@ export function getSpeechRecognitionLanguage() {
 
 /**
  * Pull finished sentences off a streaming buffer.
- * A sentence is complete only when punctuation is followed by more text,
- * so a trailing "Hello." is held until flush (the stream may still continue).
+ * `!` and `?` complete immediately. A trailing period is held until more text
+ * arrives or the stream is flushed, so abbreviations are not split too early.
  */
 export function splitCompleteSentences(buffer: string): { sentences: string[]; rest: string } {
   const sentences: string[] = []
@@ -47,7 +37,8 @@ export function splitCompleteSentences(buffer: string): { sentences: string[]; r
     const following = buffer.slice(end)
     const hasFollowingText = following.trim().length > 0
 
-    if (!hasFollowingText) break
+    const isStrongEnd = /[!?…]["')\]]*$/.test(match[0])
+    if (!hasFollowingText && !isStrongEnd) break
 
     const sentence = buffer.slice(cursor, end).trim()
     if (sentence) sentences.push(sentence)
@@ -66,4 +57,31 @@ export function splitCompleteSentences(buffer: string): { sentences: string[]; r
   }
 
   return { sentences, rest: buffer.slice(cursor).replace(/^\s+/, '') }
+}
+
+/**
+ * Convert Markdown-style model output into natural plain text for voice UI and TTS.
+ * Does not strip normal punctuation or apostrophes.
+ */
+export function sanitizeVoiceResponseForDisplay(raw: string) {
+  return raw
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^>\s?/gm, '')
+    .replace(/^\s*[-*•]\s+/gm, '')
+    .replace(/^\s*\d+\.\s+/gm, '')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/__(.+?)__/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/(^|\s)_([^_]+)_(?=\s|[.,!?;:]|$)/g, '$1$2')
+    .replace(/(^|\s)\*{1,3}(\s|$)/g, '$1$2')
+    .replace(/(^|\s)_{1,3}(\s|$)/g, '$1$2')
+    .replace(/(^|\s)#{1,6}(\s|$)/g, '$1$2')
+    .replace(/\n{2,}/g, '\n')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\s+([.,!?])/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
 }

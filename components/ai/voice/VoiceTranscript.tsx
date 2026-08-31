@@ -1,13 +1,12 @@
 'use client'
 
 import { cn } from '@/utils/cn'
-import type { VoiceStatus } from '@/lib/voice'
+import type { VoiceHistoryMessage, VoiceStatus } from '@/lib/voice'
 import { useEffect, useRef } from 'react'
 
 type VoiceTranscriptProps = {
   status?: VoiceStatus
-  userText: string
-  assistantText: string
+  history: VoiceHistoryMessage[]
   interimText?: string
 }
 
@@ -15,19 +14,21 @@ const NEAR_BOTTOM_PX = 72
 
 export default function VoiceTranscript({
   status = 'listening',
-  userText,
-  assistantText,
+  history,
   interimText = '',
 }: VoiceTranscriptProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const nearBottomRef = useRef(true)
-  const displayedUser = interimText || userText
+  const lastUser = [...history].reverse().find((message) => message.role === 'user')
+  const showInterim =
+    Boolean(interimText.trim()) &&
+    lastUser?.content.trim() !== interimText.trim()
 
   useEffect(() => {
     const el = scrollerRef.current
     if (!el || !nearBottomRef.current) return
     el.scrollTop = el.scrollHeight
-  }, [displayedUser, assistantText])
+  }, [history, interimText])
 
   const handleScroll = () => {
     const el = scrollerRef.current
@@ -35,7 +36,7 @@ export default function VoiceTranscript({
     nearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < NEAR_BOTTOM_PX
   }
 
-  if (!displayedUser && !assistantText) {
+  if (history.length === 0 && !showInterim) {
     if (status === 'speaking' || status === 'ended') return <div className="min-h-0 flex-1" />
 
     const helper =
@@ -61,29 +62,28 @@ export default function VoiceTranscript({
       className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-1 [-webkit-overflow-scrolling:touch]"
     >
       <div className="flex flex-col gap-3 pb-2">
-        {displayedUser ? (
-          <div>
+        {history.map((message) => (
+          <div key={message.id}>
             <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.08em] text-muted dark:text-dark-100">
-              You
+              {message.role === 'user' ? 'YOU' : 'WOW AI'}
             </p>
-            <p
-              className={cn(
-                'text-sm leading-relaxed text-secondary dark:text-backgroundBody',
-                interimText && !userText ? 'opacity-70' : '',
-              )}
-            >
-              {displayedUser}
-            </p>
+            {message.content ? (
+              <p className="whitespace-pre-wrap text-sm leading-relaxed text-secondary dark:text-backgroundBody">
+                {message.content}
+              </p>
+            ) : message.role === 'assistant' ? (
+              <p className="text-sm leading-relaxed text-muted dark:text-dark-100">…</p>
+            ) : null}
           </div>
-        ) : null}
+        ))}
 
-        {assistantText ? (
+        {showInterim ? (
           <div>
             <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.08em] text-muted dark:text-dark-100">
-              WOW AI
+              YOU
             </p>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-secondary dark:text-backgroundBody">
-              {assistantText}
+            <p className="text-sm leading-relaxed text-secondary opacity-70 dark:text-backgroundBody">
+              {interimText}
             </p>
           </div>
         ) : null}
