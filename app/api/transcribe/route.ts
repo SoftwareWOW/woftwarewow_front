@@ -5,10 +5,15 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024
 
 export async function POST(request: Request) {
   const apiKey = process.env.OPENROUTER_API_KEY?.trim()
-  const model = process.env.OPENROUTER_TRANSCRIBE_MODEL?.trim() ?? 'openai/whisper-1'
+  const model =
+    process.env.OPENROUTER_TRANSCRIBE_MODEL?.trim() || process.env.OPENROUTER_MODEL?.trim()
 
   if (!apiKey) {
     return NextResponse.json({ error: 'AI assistant is not configured.' }, { status: 500 })
+  }
+
+  if (!model) {
+    return NextResponse.json({ error: 'AI model is not configured.' }, { status: 500 })
   }
 
   let formData: FormData
