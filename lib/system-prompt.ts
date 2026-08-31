@@ -159,6 +159,23 @@ Primary paths to recommend:
 - /contact — Contact form
 - /services — Explore divisions and services`
 
+export const VOICE_CONVERSATION_ADDENDUM = `
+==================================================
+VOICE CONVERSATION MODE
+==================================================
+
+The visitor is speaking with you in a live voice conversation.
+
+Additional rules for this session:
+- Sound natural when spoken aloud.
+- Keep answers concise by default (a few short sentences) unless they ask for more detail.
+- Avoid tables, long lists, excessive bullet points, and markdown.
+- Avoid URLs unless they specifically ask for a link.
+- Ask one follow-up question at a time.
+- Do not start every reply with a greeting after the first turn.
+- Prefer conversational language over structured documents.
+`
+
 export const WELCOME_MESSAGE = `Hi there — welcome to WOW Superagency.
 
 I'm your AI Consultant. I can help you explore our growth ecosystem, recommend the right division or solution for your business, or guide you toward a free consultation with our team.

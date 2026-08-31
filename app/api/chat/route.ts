@@ -1,4 +1,4 @@
-import { SYSTEM_PROMPT } from '@/lib/system-prompt'
+import { SYSTEM_PROMPT, VOICE_CONVERSATION_ADDENDUM } from '@/lib/system-prompt'
 import OpenAI from 'openai'
 import { NextResponse } from 'next/server'
 
@@ -9,6 +9,7 @@ type ChatMessagePayload = {
 
 type ChatRequestBody = {
   messages?: ChatMessagePayload[]
+  mode?: 'text' | 'voice'
 }
 
 const MAX_MESSAGES = 40
@@ -56,6 +57,9 @@ export async function POST(request: Request) {
   }
 
   const messages = sanitizeMessages(body.messages)
+  const mode = body.mode === 'voice' ? 'voice' : 'text'
+  const systemContent =
+    mode === 'voice' ? `${SYSTEM_PROMPT}\n${VOICE_CONVERSATION_ADDENDUM}` : SYSTEM_PROMPT
 
   if (messages.length === 0 || messages.at(-1)?.role !== 'user') {
     return NextResponse.json({ error: 'A user message is required.' }, { status: 400 })
@@ -73,7 +77,7 @@ export async function POST(request: Request) {
   try {
     const stream = await openai.chat.completions.create({
       model,
-      messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+      messages: [{ role: 'system', content: systemContent }, ...messages],
       stream: true,
       temperature: 0.7,
       max_tokens: 1024,

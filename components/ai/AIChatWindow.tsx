@@ -3,12 +3,19 @@
 import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
 import { useLenis } from 'lenis/react'
+import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
 import AIInput from './AIInput'
 import AIMessage from './AIMessage'
 import ChatHeader from './ChatHeader'
 import TypingIndicator from './TypingIndicator'
 import { useAIChat } from './useAIChat'
+import { useVoiceConversation } from './voice/useVoiceConversation'
+
+const VoiceChat = dynamic(() => import('./voice/VoiceChat'), {
+  ssr: false,
+  loading: () => null,
+})
 
 type AIChatWindowProps = {
   onClose: () => void
@@ -27,38 +34,67 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
     errorMessage,
     input,
     setInput,
+    sendMessage,
     submitInput,
     retryLastMessage,
     isBusy,
     showTypingIndicator,
   } = useAIChat()
 
-  // Scroll only the chat messages panel — never the page body
+  const {
+    isSupported,
+    isVoiceMode,
+    status,
+    errorMessage: voiceError,
+    interimTranscript,
+    userTranscript,
+    assistantTranscript,
+    isContinuous,
+    isMuted,
+    startVoiceMode,
+    stopVoiceMode,
+    startListening,
+    handleOrbPress,
+    toggleMute,
+    toggleContinuous,
+    replayLastResponse,
+  } = useVoiceConversation({ sendMessage })
+
+  useEffect(() => {
+    return () => {
+      stopVoiceMode()
+    }
+  }, [stopVoiceMode])
+
   useEffect(() => {
     const container = messagesContainerRef.current
-    if (!container) return
+    if (!container || isVoiceMode) return
 
     container.scrollTo({
       top: container.scrollHeight,
       behavior: 'smooth',
     })
-  }, [messages, showTypingIndicator, errorMessage])
+  }, [messages, showTypingIndicator, errorMessage, isVoiceMode])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose()
+      if (event.key !== 'Escape') return
+      if (isVoiceMode) {
+        stopVoiceMode()
+        return
       }
+      onClose()
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [onClose])
+  }, [isVoiceMode, onClose, stopVoiceMode])
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
       const target = event.target as Node | null
       if (windowRef.current && target && !windowRef.current.contains(target)) {
+        stopVoiceMode()
         onClose()
       }
     }
@@ -71,20 +107,14 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
       window.cancelAnimationFrame(openFrame)
       document.removeEventListener('mousedown', handlePointerDown)
     }
-  }, [onClose])
+  }, [onClose, stopVoiceMode])
 
-  // Keep body scrollbar visible, but stop page/Lenis scroll while chat is open.
-  // Wheel/touch over the messages area scrolls the chat; elsewhere is blocked.
   useEffect(() => {
     const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
       const messagesContainer = messagesContainerRef.current
       const target = event.target
 
-      if (
-        messagesContainer &&
-        target instanceof Node &&
-        messagesContainer.contains(target)
-      ) {
+      if (messagesContainer && target instanceof Node && messagesContainer.contains(target)) {
         return
       }
 
@@ -132,7 +162,7 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
 
     container.addEventListener('keydown', handleTab)
     return () => container.removeEventListener('keydown', handleTab)
-  }, [])
+  }, [isVoiceMode])
 
   return (
     <>
@@ -168,56 +198,84 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
         )}
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <ChatHeader onClose={onClose} />
+        {isVoiceMode ? (
+          <VoiceChat
+            status={status}
+            errorMessage={voiceError}
+            isSupported={isSupported}
+            interimTranscript={interimTranscript}
+            userTranscript={userTranscript}
+            assistantTranscript={assistantTranscript}
+            isContinuous={isContinuous}
+            isMuted={isMuted}
+            onClose={stopVoiceMode}
+            onOrbPress={handleOrbPress}
+            onToggleMute={toggleMute}
+            onToggleContinuous={toggleContinuous}
+            onReplay={() => void replayLastResponse()}
+            onRetry={startListening}
+          />
+        ) : (
+          <>
+            <ChatHeader
+              onClose={() => {
+                stopVoiceMode()
+                onClose()
+              }}
+            />
 
-        <div
-          ref={messagesContainerRef}
-          data-lenis-prevent
-          className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [-webkit-overflow-scrolling:touch]"
-        >
-          {messages
-            .filter((message) => message.content.length > 0)
-            .map((message) => (
-              <AIMessage key={message.id} message={message} />
-            ))}
-
-          {showTypingIndicator && (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex justify-start"
+            <div
+              ref={messagesContainerRef}
+              data-lenis-prevent
+              className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 [-webkit-overflow-scrolling:touch]"
             >
-              <TypingIndicator />
-            </motion.div>
-          )}
+              {messages
+                .filter((message) => message.content.length > 0)
+                .map((message) => (
+                  <AIMessage key={message.id} message={message} />
+                ))}
 
-          {errorMessage && (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="rounded-radius-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-200"
-              role="alert"
-            >
-              <p>{errorMessage}</p>
-              <button
-                type="button"
-                onClick={() => void retryLastMessage()}
-                className="mt-2 font-medium underline underline-offset-2"
-              >
-                Retry
-              </button>
-            </motion.div>
-          )}
+              {showTypingIndicator && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex justify-start"
+                >
+                  <TypingIndicator />
+                </motion.div>
+              )}
 
-          <div ref={messagesEndRef} />
-        </div>
+              {errorMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="rounded-radius-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-200"
+                  role="alert"
+                >
+                  <p>{errorMessage}</p>
+                  <button
+                    type="button"
+                    onClick={() => void retryLastMessage()}
+                    className="mt-2 font-medium underline underline-offset-2"
+                  >
+                    Retry
+                  </button>
+                </motion.div>
+              )}
 
-        <AIInput
-          value={input}
-          onChange={setInput}
-          onSubmit={() => void submitInput()}
-          disabled={isBusy}
-        />
+              <div ref={messagesEndRef} />
+            </div>
+
+            <AIInput
+              value={input}
+              onChange={setInput}
+              onSubmit={() => void submitInput()}
+              disabled={isBusy}
+              isVoiceActive={false}
+              onStartVoice={startVoiceMode}
+            />
+          </>
+        )}
       </motion.div>
     </>
   )

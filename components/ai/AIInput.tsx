@@ -3,6 +3,7 @@
 import { cn } from '@/utils/cn'
 import { SendHorizontal } from 'lucide-react'
 import { KeyboardEvent, useEffect, useRef } from 'react'
+import VoiceButton from './voice/VoiceButton'
 
 type AIInputProps = {
   value: string
@@ -10,6 +11,8 @@ type AIInputProps = {
   onSubmit: () => void
   disabled?: boolean
   placeholder?: string
+  isVoiceActive?: boolean
+  onStartVoice?: () => void
 }
 
 export default function AIInput({
@@ -18,6 +21,8 @@ export default function AIInput({
   onSubmit,
   disabled = false,
   placeholder = 'Ask us anything about our services...',
+  isVoiceActive = false,
+  onStartVoice,
 }: AIInputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -57,6 +62,8 @@ export default function AIInput({
             '[&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#15151533]',
           )}
         />
+
+        <VoiceButton isActive={isVoiceActive} onClick={onStartVoice} />
 
         <button
           type="button"

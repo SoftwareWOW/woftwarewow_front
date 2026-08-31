@@ -2,6 +2,7 @@
 
 import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
+import { Mic } from 'lucide-react'
 import type { Components } from 'react-markdown'
 import ReactMarkdown from 'react-markdown'
 import type { ChatMessage } from './types'
@@ -154,7 +155,12 @@ export default function AIMessage({ message }: AIMessageProps) {
         )}
       >
         {isUser ? (
-          <p className="whitespace-pre-wrap font-normal text-white dark:text-white">{content}</p>
+          <p className="whitespace-pre-wrap font-normal text-white dark:text-white">
+            {message.via === 'voice' ? (
+              <Mic className="mr-1.5 inline h-3.5 w-3.5 align-[-2px] opacity-80" aria-hidden />
+            ) : null}
+            {content}
+          </p>
         ) : (
           <div className="prose-ai font-normal">
             <ReactMarkdown components={markdownComponents}>{content}</ReactMarkdown>

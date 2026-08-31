@@ -2,13 +2,18 @@
 
 import { WELCOME_MESSAGE } from '@/lib/system-prompt'
 import { useCallback, useRef, useState } from 'react'
-import type { ChatMessage, ChatStatus } from './types'
+import type { ChatMessage, ChatStatus, SendMessageOptions } from './types'
 
-function createMessage(role: ChatMessage['role'], content: string): ChatMessage {
+function createMessage(
+  role: ChatMessage['role'],
+  content: string,
+  via?: ChatMessage['via'],
+): ChatMessage {
   return {
     id: crypto.randomUUID(),
     role,
     content,
+    ...(via ? { via } : {}),
   }
 }
 
@@ -16,6 +21,7 @@ async function streamChatResponse(
   messages: ChatMessage[],
   onDelta: (content: string) => void,
   signal: AbortSignal,
+  mode: 'text' | 'voice' = 'text',
 ) {
   const response = await fetch('/api/chat', {
     method: 'POST',
@@ -24,6 +30,7 @@ async function streamChatResponse(
     },
     body: JSON.stringify({
       messages: messages.map(({ role, content }) => ({ role, content })),
+      mode,
     }),
     signal,
   })
@@ -76,14 +83,15 @@ export function useAIChat() {
   const [errorMessage, setErrorMessage] = useState('')
   const [input, setInput] = useState('')
 
-  const sendMessage = useCallback(async (rawContent: string, historyOverride?: ChatMessage[]) => {
+  const sendMessage = useCallback(async (rawContent: string, options?: SendMessageOptions): Promise<string | null> => {
     const content = rawContent.trim()
-    if (!content || inFlightRef.current) return
+    if (!content || inFlightRef.current) return null
 
     inFlightRef.current = true
 
-    const history = historyOverride ?? messages
-    const userMessage = createMessage('user', content)
+    const history = options?.historyOverride ?? messages
+    const mode = options?.mode ?? 'text'
+    const userMessage = createMessage('user', content, mode === 'voice' ? 'voice' : undefined)
     const assistantMessage = createMessage('assistant', '')
     const nextMessages = [...history, userMessage]
 
@@ -108,16 +116,17 @@ export function useAIChat() {
               : message,
           ),
         )
-      }, new AbortController().signal)
+      }, new AbortController().signal, mode)
 
       if (!streamedContent.trim()) {
         throw new Error('The assistant returned an empty response.')
       }
 
       setStatus('idle')
+      return streamedContent
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') {
-        return
+        return null
       }
 
       setMessages((current) => current.filter((message) => message.id !== assistantMessage.id))
@@ -125,6 +134,7 @@ export function useAIChat() {
       setErrorMessage(
         error instanceof Error ? error.message : 'Unable to get a response. Please try again.',
       )
+      return null
     } finally {
       inFlightRef.current = false
     }
@@ -146,7 +156,7 @@ export function useAIChat() {
     setMessages(trimmedMessages)
     setStatus('idle')
     setErrorMessage('')
-    await sendMessage(lastUserMessage.content, trimmedMessages)
+    await sendMessage(lastUserMessage.content, { historyOverride: trimmedMessages })
   }, [messages, sendMessage])
 
   const submitInput = useCallback(async () => {
@@ -166,6 +176,7 @@ export function useAIChat() {
     errorMessage,
     input,
     setInput,
+    setErrorMessage,
     sendMessage,
     submitInput,
     retryLastMessage,
