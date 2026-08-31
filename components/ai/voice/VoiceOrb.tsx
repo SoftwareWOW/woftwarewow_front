@@ -2,7 +2,7 @@
 
 import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
-import { Mic, Square } from 'lucide-react'
+import { Mic } from 'lucide-react'
 import type { VoiceStatus } from '@/lib/voice'
 
 type VoiceOrbProps = {
@@ -12,11 +12,11 @@ type VoiceOrbProps = {
 }
 
 const STATUS_LABEL: Record<VoiceStatus, string> = {
-  idle: 'Tap to speak',
-  listening: 'Stop listening',
+  listening: 'Listening',
   processing: 'Thinking',
-  speaking: 'Stop speaking',
+  speaking: 'Speaking',
   error: 'Try again',
+  ended: 'Start listening',
 }
 
 export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrbProps) {
@@ -80,11 +80,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isListening ? 0.85 : 2.8, repeat: Infinity, ease: 'easeInOut' }}
         whileTap={{ scale: 0.96 }}
       >
-        {isListening ? (
-          <Square className="h-6 w-6 fill-current" stroke="currentColor" />
-        ) : (
-          <Mic className="h-7 w-7" stroke="currentColor" />
-        )}
+        <Mic className="h-7 w-7" stroke="currentColor" />
       </motion.span>
     </button>
   )

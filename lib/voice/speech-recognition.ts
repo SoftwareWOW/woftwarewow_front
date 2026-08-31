@@ -321,7 +321,12 @@ export function createBrowserSpeechRecognitionProvider(): SpeechRecognitionProvi
   return {
     name: 'browser-speech-recognition',
     isSupported: isBrowserSpeechRecognitionSupported,
+    isActive: () => sessionActive && !stopping && recognition !== null,
     start(nextCallbacks: SpeechRecognitionCallbacks) {
+      if (sessionActive && !stopping && recognition) {
+        return
+      }
+
       stopHardware()
       sessionId += 1
       const activeSession = sessionId
@@ -368,6 +373,7 @@ export function createUnsupportedSpeechRecognitionProvider(): SpeechRecognitionP
   return {
     name: 'unsupported',
     isSupported: () => false,
+    isActive: () => false,
     start(callbacks) {
       callbacks.onError(
         'not-supported',

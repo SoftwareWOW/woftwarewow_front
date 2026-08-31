@@ -15,13 +15,8 @@ type VoiceChatProps = {
   interimTranscript: string
   userTranscript: string
   assistantTranscript: string
-  isContinuous: boolean
-  isMuted: boolean
   onClose: () => void
   onOrbPress: () => void
-  onToggleMute: () => void
-  onToggleContinuous: () => void
-  onReplay: () => void
   onRetry?: () => void
 }
 
@@ -32,13 +27,8 @@ export default function VoiceChat({
   interimTranscript,
   userTranscript,
   assistantTranscript,
-  isContinuous,
-  isMuted,
   onClose,
   onOrbPress,
-  onToggleMute,
-  onToggleContinuous,
-  onReplay,
   onRetry,
 }: VoiceChatProps) {
   return (
@@ -108,16 +98,8 @@ export default function VoiceChat({
               </div>
             ) : null}
 
-            <div className="mt-4 pb-[max(0.25rem,env(safe-area-inset-bottom))]">
-              <VoiceControls
-                isMuted={isMuted}
-                isContinuous={isContinuous}
-                canReplay={Boolean(assistantTranscript)}
-                onToggleMute={onToggleMute}
-                onToggleContinuous={onToggleContinuous}
-                onReplay={onReplay}
-                onEnd={onClose}
-              />
+            <div className="mt-4">
+              <VoiceControls onEnd={onClose} />
             </div>
           </>
         )}

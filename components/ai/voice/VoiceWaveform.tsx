@@ -36,7 +36,7 @@ export default function VoiceWaveform({ status }: VoiceWaveformProps) {
           key={index}
           className={cn(
             'w-1 rounded-full bg-[#615CCE]',
-            status === 'idle' || status === 'error' ? 'opacity-30' : 'opacity-80',
+            status === 'error' || status === 'ended' ? 'opacity-30' : 'opacity-80',
           )}
           animate={{
             height: [

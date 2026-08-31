@@ -11,7 +11,7 @@ type VoiceTranscriptProps = {
 }
 
 export default function VoiceTranscript({
-  status = 'idle',
+  status = 'listening',
   userText,
   assistantText,
   interimText = '',
@@ -19,12 +19,17 @@ export default function VoiceTranscript({
   const displayedUser = interimText || userText
 
   if (!displayedUser && !assistantText) {
+    const helper =
+      status === 'listening'
+        ? "I'm listening. Pause when you are finished."
+        : status === 'processing'
+          ? 'One moment…'
+          : 'Speak naturally — I am here to help with WOW Superagency.'
+
+    if (status === 'speaking' || status === 'ended') return null
+
     return (
-      <p className="px-2 text-center text-sm text-[#808080] dark:text-dark-100">
-        {status === 'listening'
-          ? "I'm listening. Pause when you are finished."
-          : 'Speak naturally — I am here to help with WOW Superagency.'}
-      </p>
+      <p className="px-2 text-center text-sm text-[#808080] dark:text-dark-100">{helper}</p>
     )
   }
 

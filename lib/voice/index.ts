@@ -18,6 +18,7 @@ function createFallbackSpeechRecognitionProvider(
   return {
     name: 'fallback-speech-recognition',
     isSupported: () => primary.isSupported() || secondary.isSupported(),
+    isActive: () => active.isActive?.() ?? false,
     start(callbacks) {
       if (!usingFallback && !primary.isSupported() && secondary.isSupported()) {
         usingFallback = true

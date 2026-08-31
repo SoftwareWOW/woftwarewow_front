@@ -1,4 +1,4 @@
-export type VoiceStatus = 'idle' | 'listening' | 'processing' | 'speaking' | 'error'
+export type VoiceStatus = 'listening' | 'processing' | 'speaking' | 'error' | 'ended'
 
 export type SpeechRecognitionErrorCode =
   | 'not-supported'
@@ -20,6 +20,7 @@ export type SpeechRecognitionCallbacks = {
 export type SpeechRecognitionProvider = {
   readonly name: string
   isSupported: () => boolean
+  isActive?: () => boolean
   start: (callbacks: SpeechRecognitionCallbacks) => void | Promise<void>
   stop: () => void
   abort: () => void
@@ -43,12 +44,12 @@ export const VOICE_ERROR_MESSAGES: Record<SpeechRecognitionErrorCode, string> = 
   'not-supported':
     'Voice recognition is not supported by your current browser. You can continue chatting using text.',
   'permission-denied':
-    'Microphone access is required to use voice chat. Please allow microphone access in your browser settings.',
-  'no-speech': 'I did not catch that. Tap the microphone and try speaking again.',
+    'Unable to access the microphone. Please check your browser permissions and try again.',
+  'no-speech': '',
   network:
-    'Voice recognition lost its connection. Please check your internet and try again, or continue with text chat.',
+    'Voice recognition lost its connection. Please check your internet and try again.',
   aborted: '',
   'audio-capture':
-    'Microphone access is required to use voice chat. Please allow microphone access in your browser settings.',
+    'Unable to access the microphone. Please check your browser permissions and try again.',
   unknown: 'Voice input failed. Please try again, or continue chatting using text.',
 }

@@ -6,27 +6,36 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSpeechSynthesis } from './useSpeechSynthesis'
 import { useVoiceRecognition } from './useVoiceRecognition'
 
-const CONTINUOUS_LISTEN_DELAY_MS = 900
+const RESTART_LISTEN_DELAY_MS = 400
 
 type UseVoiceConversationOptions = {
-  sendMessage: (content: string, options?: { mode?: 'text' | 'voice' }) => Promise<string | null>
+  sendMessage: (
+    content: string,
+    options?: { mode?: 'text' | 'voice'; signal?: AbortSignal },
+  ) => Promise<string | null>
 }
 
 export function useVoiceConversation({ sendMessage }: UseVoiceConversationOptions) {
   const [isVoiceMode, setIsVoiceMode] = useState(false)
-  const [status, setStatus] = useState<VoiceStatus>('idle')
+  const [status, setStatus] = useState<VoiceStatus>('ended')
   const [errorMessage, setErrorMessage] = useState('')
   const [userTranscript, setUserTranscript] = useState('')
   const [assistantTranscript, setAssistantTranscript] = useState('')
-  const [isContinuous, setIsContinuous] = useState(false)
 
-  const isVoiceModeRef = useRef(false)
-  const statusRef = useRef<VoiceStatus>('idle')
-  const isContinuousRef = useRef(false)
+  const isVoiceConversationActiveRef = useRef(false)
+  const isListeningRef = useRef(false)
+  const isProcessingRef = useRef(false)
+  const isSpeakingRef = useRef(false)
+  const shouldRestartListeningRef = useRef(false)
+  const statusRef = useRef<VoiceStatus>('ended')
   const sessionRef = useRef(0)
   const sendMessageRef = useRef(sendMessage)
   const listenTimerRef = useRef<number | null>(null)
-  const lastAssistantRef = useRef('')
+  const chatAbortRef = useRef<AbortController | null>(null)
+  const networkRetryRef = useRef(0)
+  const mountedRef = useRef(true)
+  const scheduleListenRestartRef = useRef<(delay?: number) => void>(() => {})
+  const startListeningRef = useRef<() => void>(() => {})
 
   useEffect(() => {
     sendMessageRef.current = sendMessage
@@ -44,15 +53,43 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     }
   }, [])
 
-  const { isSupported: ttsSupported, isMuted, speak, cancel: cancelSpeech, toggleMute } =
-    useSpeechSynthesis()
+  const { isSupported: ttsSupported, speak, cancel: cancelSpeech } = useSpeechSynthesis()
+
+  const abortChatRequest = useCallback(() => {
+    chatAbortRef.current?.abort()
+    chatAbortRef.current = null
+  }, [])
+
+  const resetPhaseRefs = useCallback(() => {
+    isListeningRef.current = false
+    isProcessingRef.current = false
+    isSpeakingRef.current = false
+  }, [])
 
   const handleRecognitionError = useCallback(
     (code: SpeechRecognitionErrorCode, message: string) => {
-      if (code === 'aborted' || !isVoiceModeRef.current) return
+      if (!isVoiceConversationActiveRef.current || !mountedRef.current) return
+      if (code === 'aborted') return
+
+      isListeningRef.current = false
 
       if (code === 'no-speech') {
         setErrorMessage('')
+        if (shouldRestartListeningRef.current && !isProcessingRef.current && !isSpeakingRef.current) {
+          scheduleListenRestartRef.current()
+        }
+        return
+      }
+
+      if (
+        code === 'network' &&
+        networkRetryRef.current < 1 &&
+        shouldRestartListeningRef.current &&
+        !isProcessingRef.current &&
+        !isSpeakingRef.current
+      ) {
+        networkRetryRef.current += 1
+        scheduleListenRestartRef.current(600)
         return
       }
 
@@ -62,66 +99,97 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     [setVoiceStatus],
   )
 
-  const startRecognitionRef = useRef<() => void>(() => {})
+  const { isSupported, interimTranscript, start, abort, isListeningRef: recognitionListeningRef } =
+    useVoiceRecognition({
+      onFinal: (transcript) => {
+        void handleFinalTranscriptRef.current(transcript)
+      },
+      onError: handleRecognitionError,
+      onEnded: () => {
+        isListeningRef.current = false
+        recognitionListeningRef.current = false
 
-  const { isSupported, interimTranscript, start, abort } = useVoiceRecognition({
-    onFinal: (transcript) => {
-      void handleFinalTranscriptRef.current(transcript)
-    },
-    onError: handleRecognitionError,
-    onEnded: () => {
-      if (isVoiceModeRef.current && statusRef.current === 'listening') {
-        startRecognitionRef.current()
-      }
-    },
-  })
+        if (!isVoiceConversationActiveRef.current || !shouldRestartListeningRef.current) return
+        if (!mountedRef.current) return
+        if (isProcessingRef.current || isSpeakingRef.current) return
+        if (statusRef.current === 'error' || statusRef.current === 'ended') return
 
-  startRecognitionRef.current = start
+        scheduleListenRestartRef.current()
+      },
+    })
 
   const startListening = useCallback(() => {
-    if (!isVoiceModeRef.current) return
-    if (
-      statusRef.current === 'processing' ||
-      statusRef.current === 'speaking' ||
-      statusRef.current === 'listening'
-    ) {
-      return
-    }
+    if (!mountedRef.current) return
+    if (!isVoiceConversationActiveRef.current || !shouldRestartListeningRef.current) return
+    if (isProcessingRef.current || isSpeakingRef.current) return
 
     clearListenTimer()
-    cancelSpeech()
     setErrorMessage('')
+    isListeningRef.current = true
     setVoiceStatus('listening')
     start()
-  }, [cancelSpeech, clearListenTimer, setVoiceStatus, start])
+  }, [clearListenTimer, setVoiceStatus, start])
+
+  startListeningRef.current = startListening
+
+  const scheduleListenRestart = useCallback(
+    (delay = RESTART_LISTEN_DELAY_MS) => {
+      clearListenTimer()
+      if (!mountedRef.current) return
+      if (!isVoiceConversationActiveRef.current || !shouldRestartListeningRef.current) return
+      if (isProcessingRef.current || isSpeakingRef.current) return
+
+      listenTimerRef.current = window.setTimeout(() => {
+        listenTimerRef.current = null
+        startListeningRef.current()
+      }, delay)
+    },
+    [clearListenTimer],
+  )
+
+  scheduleListenRestartRef.current = scheduleListenRestart
 
   const handleFinalTranscript = useCallback(
     async (transcript: string) => {
-      if (!isVoiceModeRef.current) return
+      if (!isVoiceConversationActiveRef.current || !mountedRef.current) return
 
       const session = sessionRef.current
       const trimmed = transcript.trim()
+      isListeningRef.current = false
 
       if (!trimmed) {
-        setVoiceStatus('listening')
-        start()
+        scheduleListenRestart()
         return
       }
 
+      isProcessingRef.current = true
+      isSpeakingRef.current = false
+      abort()
       setUserTranscript(trimmed)
       setVoiceStatus('processing')
 
+      abortChatRequest()
+      const controller = new AbortController()
+      chatAbortRef.current = controller
+
       try {
-        const reply = await sendMessageRef.current(trimmed, { mode: 'voice' })
-        if (!isVoiceModeRef.current || session !== sessionRef.current) return
+        const reply = await sendMessageRef.current(trimmed, {
+          mode: 'voice',
+          signal: controller.signal,
+        })
+
+        if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
 
         if (!reply?.trim()) {
+          isProcessingRef.current = false
           setErrorMessage("I'm having trouble responding right now. Please try again.")
           setVoiceStatus('error')
           return
         }
 
-        lastAssistantRef.current = reply
+        abort()
+        isProcessingRef.current = false
+        isSpeakingRef.current = true
         setAssistantTranscript(reply)
         setVoiceStatus('speaking')
 
@@ -129,24 +197,20 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
           await speak(reply)
         }
 
-        if (!isVoiceModeRef.current || session !== sessionRef.current) return
+        if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
 
-        setVoiceStatus('idle')
-
-        if (isContinuousRef.current) {
-          listenTimerRef.current = window.setTimeout(() => {
-            if (isVoiceModeRef.current && session === sessionRef.current) {
-              startListening()
-            }
-          }, CONTINUOUS_LISTEN_DELAY_MS)
-        }
+        isSpeakingRef.current = false
+        networkRetryRef.current = 0
+        scheduleListenRestart()
       } catch {
-        if (!isVoiceModeRef.current || session !== sessionRef.current) return
+        if (!isVoiceConversationActiveRef.current || session !== sessionRef.current) return
+        isProcessingRef.current = false
+        isSpeakingRef.current = false
         setErrorMessage("I'm having trouble responding right now. Please try again.")
         setVoiceStatus('error')
       }
     },
-    [setVoiceStatus, speak, start, startListening, ttsSupported],
+    [abort, abortChatRequest, scheduleListenRestart, setVoiceStatus, speak, ttsSupported],
   )
 
   const handleFinalTranscriptRef = useRef(handleFinalTranscript)
@@ -157,79 +221,61 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
 
   const stopVoiceMode = useCallback(() => {
     sessionRef.current += 1
-    isVoiceModeRef.current = false
-    setIsVoiceMode(false)
-    setVoiceStatus('idle')
-    setErrorMessage('')
-    setUserTranscript('')
+    shouldRestartListeningRef.current = false
+    isVoiceConversationActiveRef.current = false
+    resetPhaseRefs()
     clearListenTimer()
+    abortChatRequest()
     abort()
     cancelSpeech()
-  }, [abort, cancelSpeech, clearListenTimer, setVoiceStatus])
+    setIsVoiceMode(false)
+    setVoiceStatus('ended')
+    setErrorMessage('')
+    setUserTranscript('')
+  }, [abort, abortChatRequest, cancelSpeech, clearListenTimer, resetPhaseRefs, setVoiceStatus])
 
   const startVoiceMode = useCallback(() => {
     sessionRef.current += 1
-    isVoiceModeRef.current = true
+    shouldRestartListeningRef.current = true
+    isVoiceConversationActiveRef.current = true
+    resetPhaseRefs()
+    networkRetryRef.current = 0
+    clearListenTimer()
+    abortChatRequest()
+    abort()
+    cancelSpeech()
     setIsVoiceMode(true)
     setErrorMessage('')
     setUserTranscript('')
     setAssistantTranscript('')
     startListening()
-  }, [startListening])
-
-  const toggleVoiceMode = useCallback(() => {
-    if (isVoiceModeRef.current) {
-      stopVoiceMode()
-      return
-    }
-    startVoiceMode()
-  }, [startVoiceMode, stopVoiceMode])
-
-  const toggleContinuous = useCallback(() => {
-    isContinuousRef.current = !isContinuousRef.current
-    setIsContinuous(isContinuousRef.current)
-  }, [])
-
-  const replayLastResponse = useCallback(async () => {
-    const reply = lastAssistantRef.current
-    if (!reply || !isVoiceModeRef.current) return
-
-    clearListenTimer()
-    abort()
-    setVoiceStatus('speaking')
-    await speak(reply)
-    if (!isVoiceModeRef.current) return
-    setVoiceStatus('idle')
-  }, [abort, clearListenTimer, setVoiceStatus, speak])
-
-  const stopSpeaking = useCallback(() => {
-    cancelSpeech()
-    if (statusRef.current === 'speaking') {
-      setVoiceStatus('idle')
-    }
-  }, [cancelSpeech, setVoiceStatus])
+  }, [abort, abortChatRequest, cancelSpeech, clearListenTimer, resetPhaseRefs, startListening])
 
   const handleOrbPress = useCallback(() => {
-    const current = statusRef.current
-    if (current === 'processing') return
-    if (current === 'listening') {
-      abort()
-      setVoiceStatus('idle')
-      return
-    }
-    if (current === 'speaking') {
-      stopSpeaking()
-      return
-    }
+    if (!isVoiceConversationActiveRef.current) return
+    if (isProcessingRef.current || isSpeakingRef.current) return
+    if (statusRef.current === 'listening' && recognitionListeningRef.current) return
+
+    shouldRestartListeningRef.current = true
+    isListeningRef.current = false
+    recognitionListeningRef.current = false
+    abort()
     startListening()
-  }, [abort, setVoiceStatus, startListening, stopSpeaking])
+  }, [abort, recognitionListeningRef, startListening])
 
   useEffect(() => {
+    mountedRef.current = true
     return () => {
-      isVoiceModeRef.current = false
+      mountedRef.current = false
+      shouldRestartListeningRef.current = false
+      isVoiceConversationActiveRef.current = false
+      resetPhaseRefs()
       clearListenTimer()
+      abortChatRequest()
+      abort()
+      cancelSpeech()
     }
-  }, [clearListenTimer])
+  }, [abort, abortChatRequest, cancelSpeech, clearListenTimer, resetPhaseRefs])
 
   return {
     isSupported,
@@ -239,18 +285,9 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     interimTranscript,
     userTranscript,
     assistantTranscript,
-    isContinuous,
-    isMuted,
-    ttsSupported,
-    toggleVoiceMode,
     startVoiceMode,
     stopVoiceMode,
     startListening,
-    stopListening: abort,
     handleOrbPress,
-    toggleMute,
-    toggleContinuous,
-    replayLastResponse,
-    stopSpeaking,
   }
 }

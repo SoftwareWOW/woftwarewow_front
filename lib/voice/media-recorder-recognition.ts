@@ -149,7 +149,10 @@ export function createMediaRecorderRecognitionProvider(): SpeechRecognitionProvi
   return {
     name: 'media-recorder-transcription',
     isSupported: isMediaRecorderSupported,
+    isActive: () => Boolean(mediaRecorder && !stopped && !aborted),
     async start(callbacks: SpeechRecognitionCallbacks) {
+      if (mediaRecorder && !stopped && !aborted) return
+
       this.abort()
       stopped = false
       aborted = false

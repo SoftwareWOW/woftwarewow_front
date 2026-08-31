@@ -12,4 +12,5 @@ export type ChatStatus = 'idle' | 'loading' | 'streaming' | 'error'
 export type SendMessageOptions = {
   historyOverride?: ChatMessage[]
   mode?: 'text' | 'voice'
+  signal?: AbortSignal
 }

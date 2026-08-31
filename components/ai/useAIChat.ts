@@ -142,7 +142,7 @@ export function useAIChat() {
               : message,
           ),
         )
-      }, new AbortController().signal, mode)
+      }, options?.signal ?? new AbortController().signal, mode)
 
       if (!streamedContent.trim()) {
         throw new Error('The assistant returned an empty response.')
@@ -152,7 +152,9 @@ export function useAIChat() {
       return streamedContent
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') {
-        return null
+        setMessages((current) => current.filter((message) => message.id !== assistantMessage.id))
+        setStatus('idle')
+        return streamedContent.trim() || null
       }
 
       setMessages((current) => current.filter((message) => message.id !== assistantMessage.id))

@@ -49,15 +49,10 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
     interimTranscript,
     userTranscript,
     assistantTranscript,
-    isContinuous,
-    isMuted,
     startVoiceMode,
     stopVoiceMode,
     startListening,
     handleOrbPress,
-    toggleMute,
-    toggleContinuous,
-    replayLastResponse,
   } = useVoiceConversation({ sendMessage })
 
   useEffect(() => {
@@ -206,13 +201,8 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
             interimTranscript={interimTranscript}
             userTranscript={userTranscript}
             assistantTranscript={assistantTranscript}
-            isContinuous={isContinuous}
-            isMuted={isMuted}
             onClose={stopVoiceMode}
             onOrbPress={handleOrbPress}
-            onToggleMute={toggleMute}
-            onToggleContinuous={toggleContinuous}
-            onReplay={() => void replayLastResponse()}
             onRetry={startListening}
           />
         ) : (

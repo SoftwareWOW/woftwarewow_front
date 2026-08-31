@@ -15,9 +15,9 @@ type UseVoiceRecognitionOptions = {
 }
 
 export function useVoiceRecognition({ onFinal, onError, onEnded }: UseVoiceRecognitionOptions) {
-  const [isListening, setIsListening] = useState(false)
   const [interimTranscript, setInterimTranscript] = useState('')
   const providerRef = useRef<SpeechRecognitionProvider | null>(null)
+  const listeningRef = useRef(false)
   const onFinalRef = useRef(onFinal)
   const onErrorRef = useRef(onError)
   const onEndedRef = useRef(onEnded)
@@ -37,17 +37,22 @@ export function useVoiceRecognition({ onFinal, onError, onEnded }: UseVoiceRecog
   useEffect(() => {
     providerRef.current = createSpeechRecognitionProvider()
     return () => {
+      listeningRef.current = false
       providerRef.current?.abort()
     }
   }, [])
 
   const abort = useCallback(() => {
+    listeningRef.current = false
     providerRef.current?.abort()
-    setIsListening(false)
     setInterimTranscript('')
   }, [])
 
   const start = useCallback(() => {
+    if (providerRef.current?.isActive?.()) {
+      return
+    }
+
     if (!providerRef.current) {
       providerRef.current = createSpeechRecognitionProvider()
     }
@@ -60,44 +65,38 @@ export function useVoiceRecognition({ onFinal, onError, onEnded }: UseVoiceRecog
     }
 
     setInterimTranscript('')
-    setIsListening(true)
+    listeningRef.current = true
 
     void provider.start({
       onStart: () => {
-        setIsListening(true)
+        listeningRef.current = true
       },
       onInterim: (transcript) => {
         setInterimTranscript(transcript)
       },
       onFinal: (transcript) => {
+        listeningRef.current = false
         setInterimTranscript('')
-        setIsListening(false)
         onFinalRef.current(transcript)
       },
       onError: (code, raw) => {
-        setIsListening(false)
+        listeningRef.current = false
         setInterimTranscript('')
-        if (code === 'aborted' || code === 'no-speech') return
+        if (code === 'aborted') return
         onErrorRef.current?.(code, VOICE_ERROR_MESSAGES[code] || raw)
       },
       onEnd: () => {
-        setIsListening(false)
+        listeningRef.current = false
         onEndedRef.current?.()
       },
     })
   }, [])
 
-  const stop = useCallback(() => {
-    providerRef.current?.stop()
-    setIsListening(false)
-  }, [])
-
   return {
     isSupported: isVoiceInputSupported(),
-    isListening,
     interimTranscript,
     start,
-    stop,
     abort,
+    isListeningRef: listeningRef,
   }
 }
