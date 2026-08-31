@@ -48,6 +48,10 @@ export function useVoiceRecognition({ onFinal, onError, onEnded }: UseVoiceRecog
   }, [])
 
   const start = useCallback(() => {
+    if (!providerRef.current) {
+      providerRef.current = createSpeechRecognitionProvider()
+    }
+
     const provider = providerRef.current
     if (!provider?.isSupported()) {
       const message = VOICE_ERROR_MESSAGES['not-supported']
@@ -59,6 +63,9 @@ export function useVoiceRecognition({ onFinal, onError, onEnded }: UseVoiceRecog
     setIsListening(true)
 
     void provider.start({
+      onStart: () => {
+        setIsListening(true)
+      },
       onInterim: (transcript) => {
         setInterimTranscript(transcript)
       },
@@ -70,7 +77,7 @@ export function useVoiceRecognition({ onFinal, onError, onEnded }: UseVoiceRecog
       onError: (code, raw) => {
         setIsListening(false)
         setInterimTranscript('')
-        if (code === 'aborted') return
+        if (code === 'aborted' || code === 'no-speech') return
         onErrorRef.current?.(code, VOICE_ERROR_MESSAGES[code] || raw)
       },
       onEnd: () => {

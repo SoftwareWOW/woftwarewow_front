@@ -1,14 +1,17 @@
 'use client'
 
 import { cn } from '@/utils/cn'
+import type { VoiceStatus } from '@/lib/voice'
 
 type VoiceTranscriptProps = {
+  status?: VoiceStatus
   userText: string
   assistantText: string
   interimText?: string
 }
 
 export default function VoiceTranscript({
+  status = 'idle',
   userText,
   assistantText,
   interimText = '',
@@ -18,7 +21,9 @@ export default function VoiceTranscript({
   if (!displayedUser && !assistantText) {
     return (
       <p className="px-2 text-center text-sm text-[#808080] dark:text-dark-100">
-        Speak naturally — I am here to help with WOW Superagency.
+        {status === 'listening'
+          ? "I'm listening. Pause when you are finished."
+          : 'Speak naturally — I am here to help with WOW Superagency.'}
       </p>
     )
   }

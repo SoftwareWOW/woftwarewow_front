@@ -45,7 +45,8 @@ export const VOICE_ERROR_MESSAGES: Record<SpeechRecognitionErrorCode, string> = 
   'permission-denied':
     'Microphone access is required to use voice chat. Please allow microphone access in your browser settings.',
   'no-speech': 'I did not catch that. Tap the microphone and try speaking again.',
-  network: "I'm having trouble responding right now. Please try again.",
+  network:
+    'Voice recognition lost its connection. Please check your internet and try again, or continue with text chat.',
   aborted: '',
   'audio-capture':
     'Microphone access is required to use voice chat. Please allow microphone access in your browser settings.',

@@ -3,8 +3,8 @@
 import type { VoiceStatus } from '@/lib/voice'
 
 const STATUS_COPY: Record<VoiceStatus, string> = {
-  idle: 'Tap to speak',
-  listening: 'Listening...',
+  idle: 'Tap the microphone to speak',
+  listening: 'Listening… speak now',
   processing: 'Thinking...',
   speaking: 'Speaking...',
   error: 'Something went wrong',

@@ -84,6 +84,7 @@ export default function VoiceChat({
             </div>
 
             <VoiceTranscript
+              status={status}
               userText={userTranscript}
               assistantText={assistantTranscript}
               interimText={interimTranscript}

@@ -20,3 +20,13 @@ export function getDocumentLanguage() {
 
   return 'en-US'
 }
+
+export function getSpeechRecognitionLanguage() {
+  const lang = getDocumentLanguage().trim() || 'en-US'
+  const lower = lang.toLowerCase()
+
+  if (lower === 'en' || lower.startsWith('en-')) return 'en-US'
+  if (lower === 'fr' || lower.startsWith('fr-')) return 'fr-CA'
+
+  return lang
+}

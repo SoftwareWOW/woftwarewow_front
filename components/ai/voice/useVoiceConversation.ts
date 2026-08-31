@@ -53,7 +53,6 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
 
       if (code === 'no-speech') {
         setErrorMessage('')
-        setVoiceStatus('idle')
         return
       }
 
@@ -63,17 +62,21 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     [setVoiceStatus],
   )
 
+  const startRecognitionRef = useRef<() => void>(() => {})
+
   const { isSupported, interimTranscript, start, abort } = useVoiceRecognition({
     onFinal: (transcript) => {
       void handleFinalTranscriptRef.current(transcript)
     },
     onError: handleRecognitionError,
     onEnded: () => {
-      if (statusRef.current === 'listening') {
-        setVoiceStatus('idle')
+      if (isVoiceModeRef.current && statusRef.current === 'listening') {
+        startRecognitionRef.current()
       }
     },
   })
+
+  startRecognitionRef.current = start
 
   const startListening = useCallback(() => {
     if (!isVoiceModeRef.current) return
@@ -100,7 +103,8 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
       const trimmed = transcript.trim()
 
       if (!trimmed) {
-        setVoiceStatus('idle')
+        setVoiceStatus('listening')
+        start()
         return
       }
 
@@ -142,7 +146,7 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
         setVoiceStatus('error')
       }
     },
-    [setVoiceStatus, speak, startListening, ttsSupported],
+    [setVoiceStatus, speak, start, startListening, ttsSupported],
   )
 
   const handleFinalTranscriptRef = useRef(handleFinalTranscript)
@@ -170,8 +174,8 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     setErrorMessage('')
     setUserTranscript('')
     setAssistantTranscript('')
-    setVoiceStatus('idle')
-  }, [setVoiceStatus])
+    startListening()
+  }, [startListening])
 
   const toggleVoiceMode = useCallback(() => {
     if (isVoiceModeRef.current) {

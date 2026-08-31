@@ -105,7 +105,6 @@ export function createMediaRecorderRecognitionProvider(): SpeechRecognitionProvi
     chunks = []
 
     if (!shouldTranscribe || blob.size === 0) {
-      activeCallbacks?.onFinal('')
       activeCallbacks?.onEnd?.()
       activeCallbacks = null
       return
