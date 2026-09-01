@@ -1,8 +1,12 @@
 'use client'
 
+import { useAIChatControllerOptional } from '@/components/ai/AIChatController'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import bigArrowIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
+import { cn } from '@/utils/cn'
+import { ArrowUp, Mic, SendHorizontal } from 'lucide-react'
 import Image from 'next/image'
+import bigArrowIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
+import { KeyboardEvent, useState } from 'react'
 import { useContactDialogOptional } from '../shared/ContactDialogProvider'
 import InstrumentText from '../shared/InstrumentText'
 
@@ -12,19 +16,71 @@ interface WowGrowthCtaProps {
   ariaLabel?: string
 }
 
+const MicWithWavesIcon = () => (
+  <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+    <path d="M4 9v6M2.5 10.5v3" strokeLinecap="round" />
+    <rect x="9" y="4" width="6" height="10" rx="3" />
+    <path d="M8 12a4 4 0 0 0 8 0M12 16v3" strokeLinecap="round" />
+    <path d="M20 9v6M21.5 10.5v3" strokeLinecap="round" />
+  </svg>
+)
+
+const CtaGlowOrb = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label="Start a voice conversation with WOW"
+      className="relative mx-auto flex h-36 w-36 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background md:h-44 md:w-44"
+    >
+      <span
+        aria-hidden
+        className="absolute inset-0 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(183,148,244,0.55)_0%,rgba(97,92,206,0.28)_42%,transparent_70%)] blur-md"
+      />
+      <span
+        aria-hidden
+        className="absolute inset-6 rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffffff_0%,#f4a8b8_28%,#b794f4_58%,#615cce_100%)] shadow-[0_0_48px_rgba(97,92,206,0.55)] md:inset-7"
+      />
+      <span aria-hidden className="absolute inset-10 rounded-full bg-white/80 blur-[2px] md:inset-12" />
+    </button>
+  )
+}
+
 const WowGrowthCta = ({
   accentText = 'Ready to',
   mainText = 'Grow?',
   ariaLabel = 'Contact WOW Superagency',
 }: WowGrowthCtaProps) => {
   const contactDialog = useContactDialogOptional()
+  const aiChat = useAIChatControllerOptional()
+  const [input, setInput] = useState('')
 
   const handleOpenContact = () => {
     contactDialog?.open()
   }
 
+  const handleOpenVoice = () => {
+    aiChat?.open({ voice: true })
+  }
+
+  const handleSubmit = () => {
+    const message = input.trim()
+    if (!message) return
+    aiChat?.open({ message })
+    setInput('')
+  }
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      handleSubmit()
+    }
+  }
+
+  const canSend = Boolean(input.trim())
+
   return (
-    <section className="bg-backgroundBody pb-5 sm:pb-10 md:pb-15 lg:pb-20 dark:bg-secondary">
+    <section className="relative bg-background transition-colors duration-300 dark:bg-background">
       <div className="container flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20">
         <RevealWrapper
           as="h2"
@@ -61,6 +117,83 @@ const WowGrowthCta = ({
             </figure>
           </RevealWrapper>
         </button>
+      </div>
+
+      <div className="container mt-12 md:mt-16 lg:mt-20">
+        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+          <CtaGlowOrb onClick={handleOpenVoice} />
+
+          <h3 className="mt-8 text-2xl font-normal leading-tight text-secondary dark:text-backgroundBody md:text-3xl lg:text-4xl">
+            What can we help you <InstrumentText>achieve?</InstrumentText>
+          </h3>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#808080] md:text-base">
+            Ask WOW anything. Find a service, explore our divisions, get a recommendation, or tell us what your
+            business needs.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-10 w-full max-w-3xl md:mt-14">
+          <div className="flex items-center gap-2 dark:hidden md:gap-3">
+            <input
+              type="text"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask us anything about our services..."
+              aria-label="Ask us anything about our services"
+              className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#C4B5FD] bg-white px-5 py-3 text-sm text-secondary placeholder:text-[#808080] focus:border-primary focus:outline-none md:min-h-14 md:text-base"
+            />
+            <button
+              type="button"
+              onClick={handleOpenVoice}
+              aria-label="Start a voice conversation with WOW"
+              className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl border border-black/10 bg-[#F2F2F2] text-secondary transition-colors hover:border-primary/40 md:size-14"
+            >
+              <Mic className="size-5" stroke="currentColor" />
+            </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={!canSend}
+              aria-label="Send message to WOW"
+              className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white transition-opacity hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40 md:size-14"
+            >
+              <SendHorizontal className="size-5 !stroke-white !text-white" stroke="currentColor" />
+            </button>
+          </div>
+
+          <div className="hidden items-center gap-2 rounded-2xl bg-[#1A1A1A] px-3 py-2 dark:flex md:gap-2.5 md:rounded-3xl md:px-4 md:py-2.5">
+            <input
+              type="text"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask WOW anything..."
+              aria-label="Ask WOW anything"
+              className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-backgroundBody placeholder:text-[#808080] focus:outline-none md:text-base"
+            />
+            <button
+              type="button"
+              onClick={handleOpenVoice}
+              aria-label="Start a voice conversation with WOW"
+              className="inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm border border-white/20 text-backgroundBody transition-colors hover:border-primary/50 md:size-12"
+            >
+              <MicWithWavesIcon />
+            </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={!canSend}
+              aria-label="Send message to WOW"
+              className={cn(
+                'inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:bg-primary/90 md:size-12',
+                !canSend && 'cursor-not-allowed opacity-40',
+              )}
+            >
+              <ArrowUp className="size-5 !stroke-white !text-white" stroke="currentColor" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   )

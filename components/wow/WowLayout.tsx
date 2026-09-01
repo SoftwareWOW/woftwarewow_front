@@ -1,4 +1,5 @@
 import AIAssistant from '@/components/ai/AIAssistant'
+import { AIChatProvider } from '@/components/ai/AIChatController'
 import SuperagencyChrome from '@/components/wow/SuperagencyChrome'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
@@ -16,17 +17,19 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
     <ToastProvider>
       <ContactDialogProvider>
         <MeetDialogProvider>
-          <div className="relative w-full max-w-full overflow-x-clip">
-            <SuperagencyChrome
-              navbar={dictionary.navbar}
-              navigation={dictionary.navigation}
-              languageSwitcher={dictionary.languageSwitcher}
-              footer={dictionary.footer}
-            >
-              {children}
-            </SuperagencyChrome>
-            <AIAssistant />
-          </div>
+          <AIChatProvider>
+            <div className="relative w-full max-w-full overflow-x-clip">
+              <SuperagencyChrome
+                navbar={dictionary.navbar}
+                navigation={dictionary.navigation}
+                languageSwitcher={dictionary.languageSwitcher}
+                footer={dictionary.footer}
+              >
+                {children}
+              </SuperagencyChrome>
+              <AIAssistant />
+            </div>
+          </AIChatProvider>
         </MeetDialogProvider>
       </ContactDialogProvider>
     </ToastProvider>

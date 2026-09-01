@@ -19,15 +19,24 @@ const VoiceChat = dynamic(() => import('./voice/VoiceChat'), {
 
 type AIChatWindowProps = {
   onClose: () => void
+  requestId?: number
+  initialMessage?: string
+  startVoice?: boolean
 }
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
-export default function AIChatWindow({ onClose }: AIChatWindowProps) {
+export default function AIChatWindow({
+  onClose,
+  requestId,
+  initialMessage,
+  startVoice = false,
+}: AIChatWindowProps) {
   const windowRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const handledRequestIdRef = useRef<number | null>(null)
   const lenis = useLenis()
   const {
     messages,
@@ -59,6 +68,20 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
       stopVoiceMode()
     }
   }, [stopVoiceMode])
+
+  useEffect(() => {
+    if (!requestId || handledRequestIdRef.current === requestId) return
+    handledRequestIdRef.current = requestId
+
+    if (startVoice) {
+      startVoiceMode()
+      return
+    }
+
+    if (initialMessage) {
+      void sendMessage(initialMessage)
+    }
+  }, [requestId, initialMessage, startVoice, sendMessage, startVoiceMode])
 
   useEffect(() => {
     const container = messagesContainerRef.current
@@ -185,27 +208,23 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
         onMouseDown={onClose}
       />
 
-      <motion.div
-        ref={windowRef}
-        key="ai-chat-window"
-        role="dialog"
-        aria-modal="true"
-        aria-label="WOW Superagency AI Assistant"
-        initial={{ opacity: 0, y: 24, scale: 0.96 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 24, scale: 0.96 }}
-        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-        className={cn(
-          'fixed z-[1200] flex flex-col overflow-hidden border border-[#1515151A] bg-backgroundBody shadow-box dark:border-[#EDF0F51A] dark:bg-dark',
-          'inset-x-3 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] top-auto',
-          'h-[min(72dvh,650px)] max-h-[calc(100dvh-6.75rem-env(safe-area-inset-bottom))]',
-          'w-auto rounded-radius-md',
-          'md:inset-x-auto md:bottom-6 md:right-6 md:top-auto',
-          'md:h-[min(650px,calc(100dvh-3rem))] md:max-h-[calc(100dvh-3rem)]',
-          'md:w-[min(400px,calc(100vw-3rem))]',
-        )}
-        onMouseDown={(event) => event.stopPropagation()}
-      >
+      <div className="pointer-events-none fixed inset-0 z-[1200] flex items-center justify-center p-3">
+        <motion.div
+          ref={windowRef}
+          key="ai-chat-window"
+          role="dialog"
+          aria-modal="true"
+          aria-label="WOW Superagency AI Assistant"
+          initial={{ opacity: 0, y: 24, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 24, scale: 0.96 }}
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          className={cn(
+            'pointer-events-auto flex flex-col overflow-hidden border border-[#1515151A] bg-backgroundBody shadow-box dark:border-[#EDF0F51A] dark:bg-dark',
+            'h-[min(72dvh,650px)] w-[min(560px,calc(100vw-1.5rem))] max-h-[calc(100dvh-2rem)] rounded-radius-md',
+          )}
+          onMouseDown={(event) => event.stopPropagation()}
+        >
         {isVoiceMode ? (
           <VoiceChat
             status={status}
@@ -279,7 +298,8 @@ export default function AIChatWindow({ onClose }: AIChatWindowProps) {
             />
           </>
         )}
-      </motion.div>
+        </motion.div>
+      </div>
     </>
   )
 }

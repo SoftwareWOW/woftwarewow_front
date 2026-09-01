@@ -2,8 +2,7 @@
 
 import { AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
-import AIChatButton from './AIChatButton'
+import { useAIChatController } from './AIChatController'
 
 const AIChatWindow = dynamic(() => import('./AIChatWindow'), {
   ssr: false,
@@ -11,12 +10,18 @@ const AIChatWindow = dynamic(() => import('./AIChatWindow'), {
 })
 
 export default function AIAssistant() {
-  const [isOpen, setIsOpen] = useState(false)
+  const { isOpen, request, close } = useAIChatController()
 
   return (
-    <>
-      <AIChatButton onClick={() => setIsOpen(true)} isOpen={isOpen} />
-      <AnimatePresence>{isOpen ? <AIChatWindow onClose={() => setIsOpen(false)} /> : null}</AnimatePresence>
-    </>
+    <AnimatePresence>
+      {isOpen ? (
+        <AIChatWindow
+          onClose={close}
+          requestId={request?.id}
+          initialMessage={request?.message}
+          startVoice={request?.voice}
+        />
+      ) : null}
+    </AnimatePresence>
   )
 }
