@@ -52,7 +52,10 @@ function useShrinkProgress() {
       const element = ref.current
       if (!element) return
 
-      const travel = element.offsetHeight - window.innerHeight
+      const viewportHeight =
+        window.visualViewport?.height ?? window.innerHeight
+
+      const travel = element.offsetHeight - viewportHeight
 
       if (travel <= 0) {
         setProgress(0)
@@ -81,6 +84,8 @@ function useShrinkProgress() {
     })
 
     window.addEventListener('resize', onScroll)
+    window.visualViewport?.addEventListener('resize', onScroll)
+    window.visualViewport?.addEventListener('scroll', onScroll)
 
     let removeLenisListener: (() => void) | undefined
 
@@ -99,6 +104,8 @@ function useShrinkProgress() {
 
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      window.visualViewport?.removeEventListener('resize', onScroll)
+      window.visualViewport?.removeEventListener('scroll', onScroll)
 
       removeLenisListener?.()
     }
@@ -200,71 +207,6 @@ function NotchedCta({
   )
 }
 
-function MobileWowHero() {
-  const meetDialog = useMeetDialogOptional()
-
-  return (
-    <section
-      aria-label="Hero"
-      className={`relative z-0 overflow-x-clip px-4 pb-8 pt-24 sm:px-6 md:px-8 md:pt-28 xl:hidden ${stageBgClass}`}
-    >
-      <div
-        className="mx-auto flex w-full max-w-full flex-col gap-5 [--hero-bg:#ededed] dark:[--hero-bg:#0D0D0D]"
-      >
-        <h1 className="max-w-full break-words font-outfit text-[clamp(1.75rem,8vw,2.75rem)] font-light leading-[1.15] tracking-tight text-secondary dark:text-backgroundBody">
-          {HERO_COPY.headline}
-        </h1>
-
-        <p className="max-w-xl font-outfit text-sm font-light leading-relaxed text-secondary/85 dark:text-backgroundBody/85 sm:text-base">
-          {HERO_COPY.lead}
-        </p>
-
-        <div className="relative mt-1 w-full min-w-0">
-          <div className="relative aspect-[4/5] min-h-[280px] w-full overflow-hidden rounded-radius-md sm:aspect-[16/11] sm:min-h-[320px]">
-            <Image
-              src="/images/wow/hero-banner.jpg"
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 1280px) 100vw, 720px"
-              className="object-cover object-center"
-            />
-          </div>
-
-          <div className="absolute right-0 top-0 z-[2] max-w-[calc(100%-0.5rem)]">
-            <NotchedCta
-              placement="top-right"
-              href="/meet"
-              className={`${pillBase} bg-secondary text-backgroundBody dark:bg-backgroundBody dark:text-secondary`}
-              onClick={(event) => {
-                if (!meetDialog) return
-                event.preventDefault()
-                meetDialog.open()
-              }}
-            >
-              {HERO_COPY.ctaPrimary}
-            </NotchedCta>
-          </div>
-
-          <div className="absolute bottom-0 left-0 z-[2] max-w-[calc(100%-0.5rem)]">
-            <NotchedCta
-              placement="bottom-left"
-              href="/services"
-              className={`${pillBase} bg-primary text-white`}
-            >
-              {HERO_COPY.ctaSecondary}
-            </NotchedCta>
-          </div>
-        </div>
-
-        <p className="max-w-xl font-outfit text-sm font-light leading-relaxed text-muted-foreground dark:text-dark-100 sm:text-base">
-          {HERO_COPY.body}
-        </p>
-      </div>
-    </section>
-  )
-}
-
 /* =========================================================
    HERO
 ========================================================= */
@@ -335,26 +277,24 @@ export default function WowHero({
 
   /*
    * MOBILE
-   * Below md
+   * Below md — same shrink as desktop, with extra top
+   * room so the wrapping headline stays above the image.
    */
   const mobileImageTop =
-    lerp(0, 28, eased)
+    lerp(0, 38, eased)
 
   const mobileImageBottom =
-    lerp(0, 15, eased)
+    lerp(0, 12, eased)
 
   /*
    * TABLET
    * md -> xl
-   *
-   * Tablet text wraps onto more lines, so the image needs to
-   * begin lower than it does on large desktop.
    */
   const tabletImageTop =
-    lerp(0, 48, eased)
+    lerp(0, 42, eased)
 
   const tabletImageBottom =
-    lerp(0, 1, eased)
+    lerp(0, 8, eased)
 
   /*
    * Image corners:
@@ -365,12 +305,10 @@ export default function WowHero({
     lerp(0, 10, eased)
 
   return (
-    <>
-    <MobileWowHero />
     <section
       ref={ref}
       aria-label="Hero"
-      className={`relative z-0 hidden h-[240vh] xl:block ${stageBgClass}`}
+      className={`relative z-0 h-[240dvh] ${stageBgClass}`}
     >
       {/* ==================================================
           FIXED / PINNED HERO
@@ -378,7 +316,7 @@ export default function WowHero({
 
       <div
         className={`
-          h-screen
+          h-dvh
           w-full
           overflow-hidden
           isolate
@@ -394,7 +332,15 @@ export default function WowHero({
           right: 0,
           bottom: 0,
           left: 0,
-        }}
+          ['--image-top-mobile' as string]: `${mobileImageTop}dvh`,
+          ['--image-bottom-mobile' as string]: `${mobileImageBottom}dvh`,
+          ['--image-top-tablet' as string]: `${tabletImageTop}dvh`,
+          ['--image-bottom-tablet' as string]: `${tabletImageBottom}dvh`,
+          ['--image-top-desktop' as string]: `${imageTop}dvh`,
+          ['--image-bottom-desktop' as string]: `${imageBottom}dvh`,
+          ['--image-side' as string]: `${imageSide}vw`,
+          ['--image-radius' as string]: `${imageRadius}px`,
+        } as CSSProperties}
       >
         {/* ==================================================
             IMAGE
@@ -418,18 +364,8 @@ export default function WowHero({
             xl:bottom-[var(--image-bottom-desktop)]
           "
           style={{
-            '--image-top-mobile': `${mobileImageTop}vh`,
-            '--image-bottom-mobile': `${mobileImageBottom}vh`,
-
-            '--image-top-tablet': `${tabletImageTop}vh`,
-            '--image-bottom-tablet': `${tabletImageBottom}vh`,
-
-            '--image-top-desktop': `${imageTop}vh`,
-            '--image-bottom-desktop': `${imageBottom}vh`,
-
-            '--image-side': `${imageSide}vw`,
             borderRadius: `${imageRadius}px`,
-          } as CSSProperties}
+          }}
         >
           <Image
             src="/images/wow/hero-banner.jpg"
@@ -463,8 +399,9 @@ export default function WowHero({
           <h1
             className="
               max-w-4xl
+              break-words
               font-outfit
-              text-[clamp(2.25rem,6vw,4.5rem)]
+              text-[clamp(1.85rem,8vw,4.5rem)]
               font-light
               leading-[1.05]
               tracking-tight
@@ -503,7 +440,7 @@ export default function WowHero({
             z-[20]
             px-[6vw]
 
-            pt-[9rem]
+            pt-[max(5.5rem,8vh)]
             md:pt-[max(5.5rem,6vh)]
           "
           style={{
@@ -517,8 +454,9 @@ export default function WowHero({
           <h2
             className="
               max-w-3xl
+              break-words
               font-outfit
-              text-[clamp(1.75rem,4.2vw,3.15rem)]
+              text-[clamp(1.6rem,5.4vw,3.15rem)]
               font-light
               leading-[1.08]
               tracking-tight
@@ -561,11 +499,11 @@ export default function WowHero({
         </div>
 
         {/* ==================================================
-            MOBILE IMAGE OVERLAP TEXT
+            IMAGE OVERLAP TEXT
 
-            Kept for mobile only.
-            It uses exactly the same mobile top padding as the
-            normal docked text, so there is no duplicate offset.
+            Same copy as the docked layer, clipped to the
+            shrinking image so type turns white on the photo
+            without a second unclipped headline showing through.
         ================================================== */}
 
         <div
@@ -576,86 +514,23 @@ export default function WowHero({
             inset-0
             z-[21]
             px-[6vw]
-            pt-[9rem]
-            md:hidden
+            pt-[max(5.5rem,8vh)]
+            md:pt-[max(5.5rem,6vh)]
+
+            [clip-path:inset(var(--image-top-mobile)_var(--image-side)_var(--image-bottom-mobile)_var(--image-side)_round_var(--image-radius))]
+            md:[clip-path:inset(var(--image-top-tablet)_var(--image-side)_var(--image-bottom-tablet)_var(--image-side)_round_var(--image-radius))]
+            xl:[clip-path:inset(var(--image-top-desktop)_var(--image-side)_var(--image-bottom-desktop)_var(--image-side)_round_var(--image-radius))]
           "
           style={{
             opacity: dockedOpacity,
-            clipPath: `inset(${mobileImageTop}vh ${imageSide}vw ${mobileImageBottom}vh ${imageSide}vw round ${imageRadius}px)`,
           }}
         >
           <h2
             className="
               max-w-3xl
+              break-words
               font-outfit
-              text-[clamp(1.75rem,4.2vw,3.15rem)]
-              font-light
-              leading-[1.08]
-              tracking-tight
-              text-white
-            "
-          >
-            {HERO_COPY.headline}
-          </h2>
-
-          <p
-            className="
-              mt-5
-              max-w-xl
-              font-outfit
-              text-sm
-              font-light
-              text-white/85
-            "
-          >
-            {HERO_COPY.lead}
-          </p>
-
-          <p
-            className="
-              mt-4
-              max-w-xl
-              font-outfit
-              text-sm
-              font-light
-              text-white/75
-            "
-          >
-            {HERO_COPY.body}
-          </p>
-        </div>
-
-        {/* ==================================================
-            LARGE DESKTOP IMAGE OVERLAP TEXT
-
-            IMPORTANT:
-            Starts only at xl now.
-            It is intentionally disabled on tablet so tablet
-            text cannot be clipped by the desktop image mask.
-        ================================================== */}
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            z-[21]
-            hidden
-            px-[6vw]
-            pt-[max(5.5rem,6vh)]
-            xl:block
-          "
-          style={{
-            opacity: dockedOpacity,
-            clipPath: `inset(${imageTop}vh ${imageSide}vw ${imageBottom}vh ${imageSide}vw round ${imageRadius}px)`,
-          }}
-        >
-          <h2
-            className="
-              max-w-3xl
-              font-outfit
-              text-[clamp(1.75rem,4.2vw,3.15rem)]
+              text-[clamp(1.6rem,5.4vw,3.15rem)]
               font-light
               leading-[1.08]
               tracking-tight
@@ -695,206 +570,76 @@ export default function WowHero({
         </div>
 
         {/* ==================================================
-            TOP-RIGHT CTA
-
-            Mobile: above image.
-            Tablet: follows tablet image top.
-            Desktop: keeps original desktop image top.
+            TOP-RIGHT CTA — sits on the shrinking image corner
         ================================================== */}
 
         <div
           className="
             absolute
             z-[30]
+            max-w-[calc(100%-0.75rem)]
 
-            top-[var(--cta-top-mobile)]
-            right-[var(--cta-side)]
-            -translate-y-full
+            top-[var(--image-top-mobile)]
+            right-[var(--image-side)]
 
-            md:top-[var(--cta-top-tablet)]
-            md:translate-y-0
-
-            xl:top-[var(--cta-top-desktop)]
+            md:top-[var(--image-top-tablet)]
+            xl:top-[var(--image-top-desktop)]
           "
           style={{
-            '--cta-top-mobile': `${mobileImageTop}vh`,
-            '--cta-top-tablet': `${tabletImageTop}vh`,
-            '--cta-top-desktop': `${imageTop}vh`,
-            '--cta-side': `${imageSide}vw`,
             opacity: ctaOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
                 : 'none',
-          } as CSSProperties}
+          }}
         >
-          <div
-            className="
-              relative
-              z-[2]
-              rounded-bl-[10px]
-              bg-backgroundBody
-              pb-2
-              pl-2
-              dark:bg-dark
-            "
+          <NotchedCta
+            placement="top-right"
+            href="/meet"
+            className={`${pillBase} bg-secondary text-backgroundBody dark:bg-backgroundBody dark:text-secondary`}
+            onClick={(event) => {
+              if (!meetDialog) return
+              event.preventDefault()
+              meetDialog.open()
+            }}
           >
-            {/* LEFT INVERTED CORNER */}
-
-            <span
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                left-[-10px]
-                top-0
-                z-[3]
-                h-[10px]
-                w-[10px]
-              "
-              style={{
-                background:
-                  'radial-gradient(circle at 0% 100%, transparent 10px, var(--hero-bg) 10.5px)',
-              }}
-            />
-
-            {/* BOTTOM INVERTED CORNER */}
-
-            <span
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                bottom-[-10px]
-                right-0
-                z-[3]
-                h-[10px]
-                w-[10px]
-              "
-              style={{
-                background:
-                  'radial-gradient(circle at 0% 100%, transparent 10px, var(--hero-bg) 10.5px)',
-              }}
-            />
-
-            <Link
-              href="/meet"
-              className={`
-                ${pillBase}
-                bg-secondary
-                text-backgroundBody
-                dark:bg-backgroundBody
-                dark:text-secondary
-              `}
-              onClick={(event) => {
-                if (!meetDialog) return
-
-                event.preventDefault()
-                meetDialog.open()
-              }}
-            >
-              {HERO_COPY.ctaPrimary}
-            </Link>
-          </div>
+            {HERO_COPY.ctaPrimary}
+          </NotchedCta>
         </div>
 
         {/* ==================================================
-            BOTTOM-LEFT CTA
-
-            Mobile keeps the mobile bottom.
-            Tablet gets its own bottom.
-            Large desktop keeps the desktop bottom.
+            BOTTOM-LEFT CTA — sits on the shrinking image corner
         ================================================== */}
 
         <div
           className="
             absolute
             z-[30]
+            max-w-[calc(100%-0.75rem)]
 
-            left-[var(--cta-side)]
-            bottom-[var(--cta-bottom-mobile)]
-            translate-y-full
+            left-[var(--image-side)]
+            bottom-[var(--image-bottom-mobile)]
 
-            md:bottom-[var(--cta-bottom-tablet)]
-            md:translate-y-0
-
-            xl:bottom-[var(--cta-bottom-desktop)]
+            md:bottom-[var(--image-bottom-tablet)]
+            xl:bottom-[var(--image-bottom-desktop)]
           "
           style={{
-            '--cta-side': `${imageSide}vw`,
-            '--cta-bottom-mobile': `${mobileImageBottom}vh`,
-            '--cta-bottom-tablet': `${tabletImageBottom}vh`,
-            '--cta-bottom-desktop': `${imageBottom}vh`,
             opacity: ctaOpacity,
             pointerEvents:
               dockedInteractive
                 ? 'auto'
                 : 'none',
-          } as CSSProperties}
+          }}
         >
-          <div
-            className="
-              relative
-              z-[2]
-              rounded-tr-[10px]
-              bg-backgroundBody
-              pr-2
-              pt-2
-              dark:bg-dark
-            "
+          <NotchedCta
+            placement="bottom-left"
+            href="/services"
+            className={`${pillBase} bg-primary text-white`}
           >
-            {/* TOP INVERTED CORNER */}
-
-            <span
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                left-0
-                top-[-10px]
-                z-[3]
-                h-[10px]
-                w-[10px]
-              "
-              style={{
-                background:
-                  'radial-gradient(circle at 100% 0%, transparent 10px, var(--hero-bg) 10.5px)',
-              }}
-            />
-
-            {/* RIGHT INVERTED CORNER */}
-
-            <span
-              aria-hidden
-              className="
-                pointer-events-none
-                absolute
-                bottom-0
-                right-[-10px]
-                z-[3]
-                h-[10px]
-                w-[10px]
-              "
-              style={{
-                background:
-                  'radial-gradient(circle at 100% 0%, transparent 10px, var(--hero-bg) 10.5px)',
-              }}
-            />
-
-            <Link
-              href="/services"
-              className={`
-                ${pillBase}
-                bg-primary
-                text-white
-              `}
-            >
-              {HERO_COPY.ctaSecondary}
-            </Link>
-          </div>
+            {HERO_COPY.ctaSecondary}
+          </NotchedCta>
         </div>
       </div>
     </section>
-    </>
   )
 }
