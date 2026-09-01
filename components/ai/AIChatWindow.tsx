@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
 import { useLenis } from 'lenis/react'
 import dynamic from 'next/dynamic'
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import AIInput from './AIInput'
 import AIMessage from './AIMessage'
 import ChatHeader from './ChatHeader'
@@ -37,6 +37,7 @@ export default function AIChatWindow({
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const handledRequestIdRef = useRef<number | null>(null)
+  const [exitedVoice, setExitedVoice] = useState(false)
   const lenis = useLenis()
   const {
     messages,
@@ -61,27 +62,37 @@ export default function AIChatWindow({
     stopVoiceMode,
     startListening,
     handleOrbPress,
-  } = useVoiceConversation({ sendMessage })
+  } = useVoiceConversation({ sendMessage, startOnMount: startVoice })
+
+  const stopVoiceModeRef = useRef(stopVoiceMode)
+  stopVoiceModeRef.current = stopVoiceMode
+
+  const startVoiceModeRef = useRef(startVoiceMode)
+  startVoiceModeRef.current = startVoiceMode
+
+  const sendMessageRef = useRef(sendMessage)
+  sendMessageRef.current = sendMessage
 
   useEffect(() => {
     return () => {
-      stopVoiceMode()
+      stopVoiceModeRef.current()
     }
-  }, [stopVoiceMode])
+  }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!requestId || handledRequestIdRef.current === requestId) return
     handledRequestIdRef.current = requestId
 
     if (startVoice) {
-      startVoiceMode()
+      setExitedVoice(false)
+      startVoiceModeRef.current()
       return
     }
 
     if (initialMessage) {
-      void sendMessage(initialMessage)
+      void sendMessageRef.current(initialMessage)
     }
-  }, [requestId, initialMessage, startVoice, sendMessage, startVoiceMode])
+  }, [requestId, initialMessage, startVoice])
 
   useEffect(() => {
     const container = messagesContainerRef.current
@@ -225,14 +236,17 @@ export default function AIChatWindow({
           )}
           onMouseDown={(event) => event.stopPropagation()}
         >
-        {isVoiceMode ? (
+        {isVoiceMode || (startVoice && !exitedVoice) ? (
           <VoiceChat
             status={status}
             errorMessage={voiceError}
             isSupported={isSupported}
             interimTranscript={interimTranscript}
             history={voiceHistory}
-            onClose={stopVoiceMode}
+            onClose={() => {
+              setExitedVoice(true)
+              stopVoiceMode()
+            }}
             onOrbPress={handleOrbPress}
             onRetry={startListening}
           />

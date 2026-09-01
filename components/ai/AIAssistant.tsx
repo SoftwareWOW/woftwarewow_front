@@ -16,10 +16,11 @@ export default function AIAssistant() {
     <AnimatePresence>
       {isOpen ? (
         <AIChatWindow
+          key={request?.id ?? 'ai-chat'}
           onClose={close}
           requestId={request?.id}
           initialMessage={request?.message}
-          startVoice={request?.voice}
+          startVoice={request?.voice === true}
         />
       ) : null}
     </AnimatePresence>

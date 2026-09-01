@@ -23,6 +23,7 @@ type UseVoiceConversationOptions = {
       onDelta?: (delta: string) => void
     },
   ) => Promise<string | null>
+  startOnMount?: boolean
 }
 
 type SentenceJob = {
@@ -42,8 +43,8 @@ function splitRevealTokens(text: string) {
   return text.split(/(\s+)/).filter((part) => part.length > 0)
 }
 
-export function useVoiceConversation({ sendMessage }: UseVoiceConversationOptions) {
-  const [isVoiceMode, setIsVoiceMode] = useState(false)
+export function useVoiceConversation({ sendMessage, startOnMount = false }: UseVoiceConversationOptions) {
+  const [isVoiceMode, setIsVoiceMode] = useState(startOnMount)
   const [status, setStatus] = useState<VoiceStatus>('ended')
   const [errorMessage, setErrorMessage] = useState('')
   const [history, setHistory] = useState<VoiceHistoryMessage[]>([])
@@ -517,6 +518,14 @@ export function useVoiceConversation({ sendMessage }: UseVoiceConversationOption
     abort()
     startListening()
   }, [abort, recognitionListeningRef, startListening])
+
+  const didAutoStartRef = useRef(false)
+
+  useEffect(() => {
+    if (!startOnMount || didAutoStartRef.current) return
+    didAutoStartRef.current = true
+    startVoiceMode()
+  }, [startOnMount, startVoiceMode])
 
   useEffect(() => {
     mountedRef.current = true

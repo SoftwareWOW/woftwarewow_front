@@ -1,12 +1,11 @@
 'use client'
 
 import { useAIChatControllerOptional } from '@/components/ai/AIChatController'
+import PromptBar from '@/components/ai/PromptBar'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import { cn } from '@/utils/cn'
-import { ArrowUp, Mic, SendHorizontal } from 'lucide-react'
 import Image from 'next/image'
 import bigArrowIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
-import { KeyboardEvent, useState } from 'react'
+import { useState } from 'react'
 import { useContactDialogOptional } from '../shared/ContactDialogProvider'
 import InstrumentText from '../shared/InstrumentText'
 
@@ -15,15 +14,6 @@ interface WowGrowthCtaProps {
   mainText?: string
   ariaLabel?: string
 }
-
-const MicWithWavesIcon = () => (
-  <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
-    <path d="M4 9v6M2.5 10.5v3" strokeLinecap="round" />
-    <rect x="9" y="4" width="6" height="10" rx="3" />
-    <path d="M8 12a4 4 0 0 0 8 0M12 16v3" strokeLinecap="round" />
-    <path d="M20 9v6M21.5 10.5v3" strokeLinecap="round" />
-  </svg>
-)
 
 const CtaGlowOrb = ({ onClick }: { onClick: () => void }) => {
   return (
@@ -69,15 +59,6 @@ const WowGrowthCta = ({
     aiChat?.open({ message })
     setInput('')
   }
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-      handleSubmit()
-    }
-  }
-
-  const canSend = Boolean(input.trim())
 
   return (
     <section className="relative bg-background transition-colors duration-300 dark:bg-background">
@@ -133,66 +114,14 @@ const WowGrowthCta = ({
         </div>
 
         <div className="mx-auto mt-10 w-full max-w-3xl md:mt-14">
-          <div className="flex items-center gap-2 dark:hidden md:gap-3">
-            <input
-              type="text"
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask us anything about our services..."
-              aria-label="Ask us anything about our services"
-              className="min-h-12 min-w-0 flex-1 rounded-xl border border-[#C4B5FD] bg-white px-5 py-3 text-sm text-secondary placeholder:text-[#808080] focus:border-primary focus:outline-none md:min-h-14 md:text-base"
-            />
-            <button
-              type="button"
-              onClick={handleOpenVoice}
-              aria-label="Start a voice conversation with WOW"
-              className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl border border-black/10 bg-[#F2F2F2] text-secondary transition-colors hover:border-primary/40 md:size-14"
-            >
-              <Mic className="size-5" stroke="currentColor" />
-            </button>
-            <button
-              type="button"
-              onClick={handleSubmit}
-              disabled={!canSend}
-              aria-label="Send message to WOW"
-              className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white transition-opacity hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-40 md:size-14"
-            >
-              <SendHorizontal className="size-5 !stroke-white !text-white" stroke="currentColor" />
-            </button>
-          </div>
-
-          <div className="hidden items-center gap-2 rounded-2xl bg-[#1A1A1A] px-3 py-2 dark:flex md:gap-2.5 md:rounded-3xl md:px-4 md:py-2.5">
-            <input
-              type="text"
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask WOW anything..."
-              aria-label="Ask WOW anything"
-              className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-backgroundBody placeholder:text-[#808080] focus:outline-none md:text-base"
-            />
-            <button
-              type="button"
-              onClick={handleOpenVoice}
-              aria-label="Start a voice conversation with WOW"
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm border border-white/20 text-backgroundBody transition-colors hover:border-primary/50 md:size-12"
-            >
-              <MicWithWavesIcon />
-            </button>
-            <button
-              type="button"
-              onClick={handleSubmit}
-              disabled={!canSend}
-              aria-label="Send message to WOW"
-              className={cn(
-                'inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:bg-primary/90 md:size-12',
-                !canSend && 'cursor-not-allowed opacity-40',
-              )}
-            >
-              <ArrowUp className="size-5 !stroke-white !text-white" stroke="currentColor" />
-            </button>
-          </div>
+          <PromptBar
+            value={input}
+            onChange={setInput}
+            onSubmit={handleSubmit}
+            onVoice={handleOpenVoice}
+            placeholder="Ask WOW anything..."
+            ariaLabel="Ask WOW anything"
+          />
         </div>
       </div>
     </section>
