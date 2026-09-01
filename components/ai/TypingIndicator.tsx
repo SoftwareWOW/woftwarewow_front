@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react'
 export default function TypingIndicator() {
   return (
     <div
-      className="inline-flex items-center gap-3 rounded-radius-md border border-[#1515151A] bg-white px-4 py-3 shadow-sm dark:border-[#EDF0F51A] dark:bg-dark"
+      className="inline-flex items-center gap-3 rounded-radius-sm border border-[#1515151A] bg-white px-4 py-3 dark:border-[#EDF0F51A] dark:bg-dark"
       aria-label="Assistant is thinking"
       role="status"
     >

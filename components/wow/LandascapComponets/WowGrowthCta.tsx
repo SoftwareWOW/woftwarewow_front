@@ -23,15 +23,14 @@ const CtaGlowOrb = ({ onClick }: { onClick: () => void }) => {
       aria-label="Start a voice conversation with WOW"
       className="relative mx-auto flex h-36 w-36 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background md:h-44 md:w-44"
     >
-      <span
-        aria-hidden
-        className="absolute inset-0 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(183,148,244,0.55)_0%,rgba(97,92,206,0.28)_42%,transparent_70%)] blur-md"
+      <Image
+        src="/images/wow/aiicon.png"
+        alt=""
+        width={176}
+        height={176}
+        className="h-full w-full object-contain"
+        priority
       />
-      <span
-        aria-hidden
-        className="absolute inset-6 rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffffff_0%,#f4a8b8_28%,#b794f4_58%,#615cce_100%)] shadow-[0_0_48px_rgba(97,92,206,0.55)] md:inset-7"
-      />
-      <span aria-hidden className="absolute inset-10 rounded-full bg-white/80 blur-[2px] md:inset-12" />
     </button>
   )
 }

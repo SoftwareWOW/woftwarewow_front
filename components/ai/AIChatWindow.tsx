@@ -3,7 +3,7 @@
 import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
 import { useLenis } from 'lenis/react'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import AIInput from './AIInput'
 import AIMessage from './AIMessage'
 import ChatHeader from './ChatHeader'
@@ -60,8 +60,22 @@ export default function AIChatWindow({
   const startVoiceModeRef = useRef(startVoiceMode)
   startVoiceModeRef.current = startVoiceMode
 
+  const stopVoiceModeRef = useRef(stopVoiceMode)
+  stopVoiceModeRef.current = stopVoiceMode
+
   const sendMessageRef = useRef(sendMessage)
   sendMessageRef.current = sendMessage
+
+  const handleCloseDialog = useCallback(() => {
+    stopVoiceModeRef.current()
+    onClose()
+  }, [onClose])
+
+  useEffect(() => {
+    return () => {
+      stopVoiceModeRef.current()
+    }
+  }, [])
 
   useLayoutEffect(() => {
     if (startVoice) {
@@ -93,23 +107,18 @@ export default function AIChatWindow({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return
-      if (isVoiceMode) {
-        stopVoiceMode()
-        return
-      }
-      onClose()
+      handleCloseDialog()
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isVoiceMode, onClose, stopVoiceMode])
+  }, [handleCloseDialog])
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
       const target = event.target as Node | null
       if (windowRef.current && target && !windowRef.current.contains(target)) {
-        stopVoiceMode()
-        onClose()
+        handleCloseDialog()
       }
     }
 
@@ -121,7 +130,7 @@ export default function AIChatWindow({
       window.cancelAnimationFrame(openFrame)
       document.removeEventListener('mousedown', handlePointerDown)
     }
-  }, [onClose, stopVoiceMode])
+  }, [handleCloseDialog])
 
   useEffect(() => {
     const isInsideChatScrollable = (target: EventTarget | null) => {
@@ -202,7 +211,7 @@ export default function AIChatWindow({
         transition={{ duration: 0.2 }}
         className="fixed inset-0 z-[1198] bg-black/20 backdrop-blur-[1px] md:bg-black/10"
         aria-hidden
-        onMouseDown={onClose}
+        onMouseDown={handleCloseDialog}
       />
 
       <div className="pointer-events-none fixed inset-0 z-[1200] flex items-center justify-center p-3">
@@ -222,12 +231,7 @@ export default function AIChatWindow({
           )}
           onMouseDown={(event) => event.stopPropagation()}
         >
-          <ChatHeader
-            onClose={() => {
-              stopVoiceMode()
-              onClose()
-            }}
-          />
+          <ChatHeader onClose={handleCloseDialog} />
 
           <div
             ref={messagesContainerRef}

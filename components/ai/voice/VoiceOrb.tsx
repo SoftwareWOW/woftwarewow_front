@@ -2,7 +2,7 @@
 
 import { cn } from '@/utils/cn'
 import { motion } from 'framer-motion'
-import { Mic } from 'lucide-react'
+import Image from 'next/image'
 import type { VoiceStatus } from '@/lib/voice'
 
 type VoiceOrbProps = {
@@ -24,7 +24,6 @@ export default function VoiceOrb({ status, onPress, disabled = false, compact = 
   const isListening = status === 'listening'
   const isSpeaking = status === 'speaking'
   const isProcessing = status === 'processing'
-  const isActive = isListening || isSpeaking
 
   return (
     <button
@@ -33,47 +32,12 @@ export default function VoiceOrb({ status, onPress, disabled = false, compact = 
       disabled={disabled || isProcessing}
       aria-label={STATUS_LABEL[status]}
       className={cn(
-        'relative mx-auto flex items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed',
-        compact ? 'h-24 w-24' : 'h-36 w-36',
+        'relative mx-auto flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed',
+        compact ? 'h-14 w-14' : 'h-20 w-20',
       )}
     >
       <motion.span
-        aria-hidden
-        className={cn(
-          'absolute inset-0 rounded-full border',
-          isListening ? 'border-primary/55' : 'border-primary/20',
-        )}
-        animate={
-          isActive
-            ? { scale: [1, 1.16, 1], opacity: [0.55, 0.18, 0.55] }
-            : isProcessing
-              ? { rotate: 360, opacity: 0.4 }
-              : { scale: [1, 1.04, 1], opacity: [0.22, 0.12, 0.22] }
-        }
-        transition={
-          isProcessing
-            ? { duration: 8, repeat: Infinity, ease: 'linear' }
-            : { duration: isActive ? 1.2 : 3.6, repeat: Infinity, ease: 'easeInOut' }
-        }
-      />
-      <motion.span
-        aria-hidden
-        className={cn(
-          'absolute inset-3 rounded-full border',
-          isListening ? 'border-primary/60' : 'border-primary/25',
-        )}
-        animate={
-          isActive
-            ? { scale: [1, 1.12, 1], opacity: [0.65, 0.22, 0.65] }
-            : { scale: [1, 1.03, 1], opacity: [0.2, 0.1, 0.2] }
-        }
-        transition={{ duration: isActive ? 0.9 : 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
-      />
-      <motion.span
-        className={cn(
-          'relative z-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/25 dark:text-white',
-          compact ? 'h-14 w-14' : 'h-20 w-20',
-        )}
+        className="relative block h-full w-full"
         animate={
           isListening
             ? { scale: [1, 1.08, 1] }
@@ -84,15 +48,12 @@ export default function VoiceOrb({ status, onPress, disabled = false, compact = 
         transition={{ duration: isListening ? 0.85 : 2.8, repeat: Infinity, ease: 'easeInOut' }}
         whileTap={{ scale: 0.96 }}
       >
-        <Mic
-          aria-hidden
-          className={cn(
-            'h-7 w-7 !text-white !stroke-white dark:!text-white dark:!stroke-white [&_*]:!stroke-white',
-            compact && 'h-5 w-5',
-          )}
-          stroke="#ffffff"
-          color="#ffffff"
-          strokeWidth={2}
+        <Image
+          src="/images/wow/aiicon.png"
+          alt=""
+          fill
+          className="object-contain"
+          sizes={compact ? '56px' : '80px'}
         />
       </motion.span>
     </button>
