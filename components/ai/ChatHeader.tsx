@@ -8,7 +8,7 @@ type ChatHeaderProps = {
 
 export default function ChatHeader({ onClose }: ChatHeaderProps) {
   return (
-    <div className="flex items-start justify-between gap-3 border-b border-[#1515151A] px-5 py-4 dark:border-[#EDF0F51A]">
+    <div className="flex items-start justify-between gap-3 border-b border-[#1515151A] bg-background px-5 py-4 dark:border-[#EDF0F51A]">
       <div className="min-w-0">
         <div className="flex items-center gap-2.5">
           <span className="relative flex h-2.5 w-2.5 shrink-0">

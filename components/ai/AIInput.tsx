@@ -21,7 +21,7 @@ export default function AIInput({
   onStartVoice,
 }: AIInputProps) {
   return (
-    <div className="border-t border-[#1515151A] bg-backgroundBody px-4 py-4 dark:border-[#EDF0F51A] dark:bg-dark">
+    <div className="border-t border-[#1515151A] bg-background px-4 py-4 dark:border-[#EDF0F51A]">
       <PromptBar
         value={value}
         onChange={onChange}

@@ -71,7 +71,7 @@ export default function PromptBar({
   )
 
   return (
-    <div className="flex items-end gap-2 rounded-2xl bg-white px-3 py-2 ring-1 ring-[#C4B5FD] dark:bg-[#1A1A1A] dark:ring-0 md:gap-2.5 md:px-4 md:py-2.5">
+    <div className="flex items-end gap-2 rounded-radius-md border border-[#1515151A] bg-background px-3 py-2 dark:border-[#EDF0F51A] md:gap-2.5 md:px-4 md:py-2.5">
       {multiline ? (
         <textarea
           ref={textareaRef}
@@ -102,7 +102,7 @@ export default function PromptBar({
         onClick={onVoice}
         disabled={disabled}
         aria-label="Start a voice conversation with WOW"
-        className="mb-px inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm border border-secondary/20 text-secondary transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/20 dark:text-backgroundBody dark:hover:border-primary/50 md:size-12"
+        className="mb-px inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm border border-[#1515151A] text-secondary transition-colors hover:border-primary/50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#EDF0F51A] dark:text-backgroundBody dark:hover:border-primary/50 md:size-12"
       >
         <MicWithWavesIcon />
       </button>

@@ -9,6 +9,7 @@ type VoiceOrbProps = {
   status: VoiceStatus
   onPress: () => void
   disabled?: boolean
+  compact?: boolean
 }
 
 const STATUS_LABEL: Record<VoiceStatus, string> = {
@@ -19,7 +20,7 @@ const STATUS_LABEL: Record<VoiceStatus, string> = {
   ended: 'Start listening',
 }
 
-export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrbProps) {
+export default function VoiceOrb({ status, onPress, disabled = false, compact = false }: VoiceOrbProps) {
   const isListening = status === 'listening'
   const isSpeaking = status === 'speaking'
   const isProcessing = status === 'processing'
@@ -31,7 +32,10 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
       onClick={onPress}
       disabled={disabled || isProcessing}
       aria-label={STATUS_LABEL[status]}
-      className="relative mx-auto flex h-36 w-36 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-backgroundBody disabled:cursor-not-allowed dark:focus-visible:ring-offset-dark"
+      className={cn(
+        'relative mx-auto flex items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed',
+        compact ? 'h-24 w-24' : 'h-36 w-36',
+      )}
     >
       <motion.span
         aria-hidden
@@ -66,7 +70,10 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isActive ? 0.9 : 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
       />
       <motion.span
-        className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/25 dark:text-white"
+        className={cn(
+          'relative z-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/25 dark:text-white',
+          compact ? 'h-14 w-14' : 'h-20 w-20',
+        )}
         animate={
           isListening
             ? { scale: [1, 1.08, 1] }
@@ -79,7 +86,10 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
       >
         <Mic
           aria-hidden
-          className="h-7 w-7 !text-white !stroke-white dark:!text-white dark:!stroke-white [&_*]:!stroke-white"
+          className={cn(
+            'h-7 w-7 !text-white !stroke-white dark:!text-white dark:!stroke-white [&_*]:!stroke-white',
+            compact && 'h-5 w-5',
+          )}
           stroke="#ffffff"
           color="#ffffff"
           strokeWidth={2}

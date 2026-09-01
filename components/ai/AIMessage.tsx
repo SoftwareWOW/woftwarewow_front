@@ -151,7 +151,7 @@ export default function AIMessage({ message }: AIMessageProps) {
           'max-w-[88%] text-sm font-normal leading-relaxed md:text-[15px]',
           isUser
             ? 'rounded-radius-md rounded-br-sm bg-[#615CCE] px-4 py-3 text-white shadow-sm shadow-primary/20 dark:bg-[#615CCE] dark:text-white [&_*]:!text-white'
-            : 'rounded-radius-md rounded-bl-sm border border-[#1515151A] bg-backgroundBody px-4 py-3 text-secondary dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody',
+            : 'rounded-radius-md rounded-bl-sm border border-[#1515151A] bg-white px-4 py-3 text-secondary dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody',
         )}
       >
         {isUser ? (
