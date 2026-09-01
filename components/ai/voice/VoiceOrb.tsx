@@ -31,7 +31,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
       onClick={onPress}
       disabled={disabled || isProcessing}
       aria-label={STATUS_LABEL[status]}
-      className="relative mx-auto flex h-36 w-36 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-backgroundBody disabled:cursor-not-allowed dark:focus-visible:ring-offset-dark"
+      className="relative mx-auto flex h-36 w-36 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-backgroundBody disabled:cursor-not-allowed dark:focus-visible:ring-offset-dark"
     >
       <motion.span
         aria-hidden
@@ -66,7 +66,7 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isActive ? 0.9 : 3.2, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}
       />
       <motion.span
-        className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/25"
+        className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/25 dark:text-white"
         animate={
           isListening
             ? { scale: [1, 1.08, 1] }
@@ -77,7 +77,13 @@ export default function VoiceOrb({ status, onPress, disabled = false }: VoiceOrb
         transition={{ duration: isListening ? 0.85 : 2.8, repeat: Infinity, ease: 'easeInOut' }}
         whileTap={{ scale: 0.96 }}
       >
-        <Mic className="h-7 w-7 text-white" stroke="currentColor" color="white" />
+        <Mic
+          aria-hidden
+          className="h-7 w-7 !text-white !stroke-white dark:!text-white dark:!stroke-white [&_*]:!stroke-white"
+          stroke="#ffffff"
+          color="#ffffff"
+          strokeWidth={2}
+        />
       </motion.span>
     </button>
   )
