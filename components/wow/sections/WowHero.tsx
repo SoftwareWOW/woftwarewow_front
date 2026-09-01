@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import { useLenis } from 'lenis/react'
 import Image from 'next/image'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent, ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 type WowHeroProps = {
@@ -118,24 +118,152 @@ const pillBase = `
   relative
   z-[5]
   inline-flex
+  max-w-full
   items-center
   justify-center
   whitespace-nowrap
-  rounded-[10px]
-  px-8
-  py-5
-  text-[11px]
+  rounded-radius-md
+  px-5
+  py-4
+  text-[10px]
   font-medium
   uppercase
-  tracking-[0.22em]
+  tracking-[0.16em]
   transition-opacity
   hover:opacity-85
   focus-visible:outline-none
   focus-visible:ring-2
   focus-visible:ring-white/40
-  sm:px-12
-  sm:py-6
+  sm:px-8
+  sm:py-5
+  sm:text-[11px]
+  sm:tracking-[0.22em]
+  md:px-12
+  md:py-6
 `
+
+type NotchPlacement = 'top-right' | 'bottom-left'
+
+function NotchedCta({
+  placement,
+  href,
+  className,
+  children,
+  onClick,
+}: {
+  placement: NotchPlacement
+  href: string
+  className: string
+  children: ReactNode
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void
+}) {
+  const isTopRight = placement === 'top-right'
+
+  return (
+    <div
+      className={
+        isTopRight
+          ? 'relative z-[2] rounded-bl-[10px] bg-backgroundBody pb-2 pl-2 dark:bg-dark'
+          : 'relative z-[2] rounded-tr-[10px] bg-backgroundBody pr-2 pt-2 dark:bg-dark'
+      }
+    >
+      <span
+        aria-hidden
+        className={
+          isTopRight
+            ? 'pointer-events-none absolute left-[-10px] top-0 z-[3] h-[10px] w-[10px]'
+            : 'pointer-events-none absolute left-0 top-[-10px] z-[3] h-[10px] w-[10px]'
+        }
+        style={{
+          background: isTopRight
+            ? 'radial-gradient(circle at 0% 100%, transparent 10px, var(--hero-bg) 10.5px)'
+            : 'radial-gradient(circle at 100% 0%, transparent 10px, var(--hero-bg) 10.5px)',
+        }}
+      />
+      <span
+        aria-hidden
+        className={
+          isTopRight
+            ? 'pointer-events-none absolute bottom-[-10px] right-0 z-[3] h-[10px] w-[10px]'
+            : 'pointer-events-none absolute bottom-0 right-[-10px] z-[3] h-[10px] w-[10px]'
+        }
+        style={{
+          background: isTopRight
+            ? 'radial-gradient(circle at 0% 100%, transparent 10px, var(--hero-bg) 10.5px)'
+            : 'radial-gradient(circle at 100% 0%, transparent 10px, var(--hero-bg) 10.5px)',
+        }}
+      />
+      <Link href={href} className={className} onClick={onClick}>
+        {children}
+      </Link>
+    </div>
+  )
+}
+
+function MobileWowHero() {
+  const meetDialog = useMeetDialogOptional()
+
+  return (
+    <section
+      aria-label="Hero"
+      className={`relative z-0 overflow-x-clip px-4 pb-8 pt-24 sm:px-6 md:px-8 md:pt-28 xl:hidden ${stageBgClass}`}
+    >
+      <div
+        className="mx-auto flex w-full max-w-full flex-col gap-5 [--hero-bg:#ededed] dark:[--hero-bg:#0D0D0D]"
+      >
+        <h1 className="max-w-full break-words font-outfit text-[clamp(1.75rem,8vw,2.75rem)] font-light leading-[1.15] tracking-tight text-secondary dark:text-backgroundBody">
+          {HERO_COPY.headline}
+        </h1>
+
+        <p className="max-w-xl font-outfit text-sm font-light leading-relaxed text-secondary/85 dark:text-backgroundBody/85 sm:text-base">
+          {HERO_COPY.lead}
+        </p>
+
+        <div className="relative mt-1 w-full min-w-0">
+          <div className="relative aspect-[4/5] min-h-[280px] w-full overflow-hidden rounded-radius-md sm:aspect-[16/11] sm:min-h-[320px]">
+            <Image
+              src="/images/wow/hero-banner.jpg"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 1280px) 100vw, 720px"
+              className="object-cover object-center"
+            />
+          </div>
+
+          <div className="absolute right-0 top-0 z-[2] max-w-[calc(100%-0.5rem)]">
+            <NotchedCta
+              placement="top-right"
+              href="/meet"
+              className={`${pillBase} bg-secondary text-backgroundBody dark:bg-backgroundBody dark:text-secondary`}
+              onClick={(event) => {
+                if (!meetDialog) return
+                event.preventDefault()
+                meetDialog.open()
+              }}
+            >
+              {HERO_COPY.ctaPrimary}
+            </NotchedCta>
+          </div>
+
+          <div className="absolute bottom-0 left-0 z-[2] max-w-[calc(100%-0.5rem)]">
+            <NotchedCta
+              placement="bottom-left"
+              href="/services"
+              className={`${pillBase} bg-primary text-white`}
+            >
+              {HERO_COPY.ctaSecondary}
+            </NotchedCta>
+          </div>
+        </div>
+
+        <p className="max-w-xl font-outfit text-sm font-light leading-relaxed text-muted-foreground dark:text-dark-100 sm:text-base">
+          {HERO_COPY.body}
+        </p>
+      </div>
+    </section>
+  )
+}
 
 /* =========================================================
    HERO
@@ -158,10 +286,11 @@ export default function WowHero({
 
   /* =======================================================
      OPACITY
-  ======================================================= */
 
-  const introOpacity =
-    1 - Math.min(1, eased * 1.6)
+     Intro copy and docked copy must never render together.
+     A crossfade is what made the two headlines sit on top
+     of each other while the image shrank.
+  ======================================================= */
 
   const dockedOpacity =
     Math.max(
@@ -171,6 +300,9 @@ export default function WowHero({
         (eased - 0.35) / 0.4,
       ),
     )
+
+  const introOpacity =
+    dockedOpacity > 0 ? 0 : 1 - Math.min(1, eased * 1.6)
 
   const ctaOpacity =
     Math.max(
@@ -233,10 +365,12 @@ export default function WowHero({
     lerp(0, 10, eased)
 
   return (
+    <>
+    <MobileWowHero />
     <section
       ref={ref}
       aria-label="Hero"
-      className={`relative z-0 h-[240vh] ${stageBgClass}`}
+      className={`relative z-0 hidden h-[240vh] xl:block ${stageBgClass}`}
     >
       {/* ==================================================
           FIXED / PINNED HERO
@@ -761,5 +895,6 @@ export default function WowHero({
         </div>
       </div>
     </section>
+    </>
   )
 }
