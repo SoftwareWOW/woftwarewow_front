@@ -7,6 +7,7 @@ import {
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import OpenAI from 'openai'
+import type { ChatCompletionChunk } from 'openai/resources/chat/completions'
 import { NextResponse } from 'next/server'
 
 type ChatMessagePayload = {
@@ -163,7 +164,7 @@ export async function POST(request: Request) {
       ...completionOptions,
       model: selectedModel,
       stream: true,
-    } as Parameters<typeof openai.chat.completions.create>[0])
+    } as OpenAI.Chat.ChatCompletionCreateParamsStreaming)
 
   const toSseResponse = (source: ReadableStream<Uint8Array>) =>
     new Response(source, {
@@ -176,7 +177,7 @@ export async function POST(request: Request) {
     })
 
   try {
-    let stream: Awaited<ReturnType<typeof createChatStream>> | undefined
+    let stream: AsyncIterable<ChatCompletionChunk> | undefined
     let lastError: unknown
 
     for (const selectedModel of models) {

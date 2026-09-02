@@ -126,9 +126,9 @@ export function useAIChat() {
     setErrorMessage('')
     setStatus('loading')
 
-    try {
-      let streamedContent = ''
+    let streamedContent = ''
 
+    try {
       await streamChatResponse(nextMessages, (delta) => {
         if (streamedContent.length === 0) {
           setStatus('streaming')
