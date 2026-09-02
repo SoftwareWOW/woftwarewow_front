@@ -58,6 +58,13 @@ export const divisionHrefs: Record<DivisionId, string> = {
   wowEvents: '/wowevents',
 }
 
+const divisionHrefSet = new Set(Object.values(divisionHrefs))
+
+export function isDivisionHref(href: string) {
+  const path = href.split('#')[0]
+  return divisionHrefSet.has(path)
+}
+
 export const divisionProfilePictures = {
   light: {
     softwareWow: assetPath('Profile Picture', 'Light', 'SoftwareWOW PFP Light.png'),

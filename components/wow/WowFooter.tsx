@@ -9,6 +9,7 @@ import { useMeetDialogOptional } from '@/components/wow/shared/MeetDialogProvide
 import { Link } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import { cn } from '@/utils/cn'
+import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
 import { House, Sparkles } from 'lucide-react'
 import { useState, type MouseEvent } from 'react'
 
@@ -30,23 +31,26 @@ const accessTabs = [
 ] as const
 
 const tabButtonClass = cn(
-  'inline-flex h-11 shrink-0 items-center whitespace-nowrap rounded-radius-sm border px-3.5 font-outfit text-sm font-light tracking-[0.4px] transition-colors',
-  'sm:h-12 sm:px-5 sm:text-base',
-  'xl:h-[79px] xl:px-8 xl:text-[20px]',
+  'inline-flex h-9 shrink-0 items-center whitespace-nowrap rounded-radius-sm border px-3 font-outfit text-xs font-light tracking-[0.4px] transition-colors',
+  'sm:h-10 sm:px-4 sm:text-sm',
+  '2xl:h-[79px] 2xl:px-8 2xl:text-[20px]',
 )
 
 const tabIdleClass = cn(
-  'border-[#1515151A] bg-transparent text-secondary hover:border-primary/40',
-  'dark:border-[#EDF0F51A] dark:text-[#F2F2F2] dark:hover:border-primary/50',
+  'border-[#1515151A] bg-transparent text-secondary',
+  'dark:border-[#EDF0F51A] dark:text-[#F2F2F2]',
+  navItemHoverClass,
 )
 
-const tabActiveClass = 'border-primary bg-[#292757] text-white hover:border-primary'
+const tabActiveClass = 'border-primary bg-[#292757] !text-white hover:border-primary'
 
 const accessTabClass = cn(
-  'inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-radius-sm border px-3.5 py-2 font-outfit text-sm font-light tracking-[0.4px] !text-[#808080] transition-colors hover:border-primary/40 hover:!text-secondary',
-  'border-[#1515151A] dark:border-[#EDF0F51A] dark:hover:!text-[#F2F2F2]',
-  'sm:min-h-0 sm:px-4 sm:py-2.5 sm:text-base',
-  'md:px-[22px] md:py-[11px] md:text-[20px]',
+  'inline-flex min-h-9 shrink-0 items-center whitespace-nowrap rounded-radius-sm border px-3 py-1.5 font-outfit text-xs font-light tracking-[0.4px] !text-[#808080] transition-colors',
+  'border-[#1515151A] hover:border-transparent hover:!text-black',
+  'dark:border-[#EDF0F51A] dark:hover:!text-white',
+  navItemHoverClass,
+  'sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm',
+  '2xl:px-[22px] 2xl:py-[11px] 2xl:text-[20px]',
 )
 
 export default function WowFooter({ footer: _footer }: WowFooterProps) {
@@ -56,7 +60,6 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
 
   const selectTab = (tab: FooterTabId) => {
     setActiveTab(tab)
-    footerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleAccessClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -68,18 +71,18 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
 
   return (
     <footer ref={footerRef} className={stickyFooterClass}>
-      <div className="relative bg-background px-3 py-3 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:py-4 md:px-5 md:py-5 lg:px-8 xl:px-10">
+      <div className="relative bg-background px-3 py-2 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:py-3 2xl:px-10 2xl:py-5">
         <div className="relative z-10 mx-auto w-full max-w-[1440px]">
           <div
             className={cn(
-              'flex flex-col items-center gap-6 overflow-hidden rounded-radius-md border py-5 sm:gap-[24px] sm:py-6 lg:gap-[30px] lg:py-[30px]',
+              'flex flex-col items-center gap-3 rounded-radius-md border py-3 sm:gap-4 sm:py-4 2xl:gap-[30px] 2xl:py-[30px]',
               'border-[#1515151A] dark:border-[#EDF0F51A]',
             )}
           >
             <div
               role="tablist"
               aria-label="Footer sections"
-              className="flex w-full max-w-full flex-wrap items-center justify-center gap-2 px-3 sm:gap-3 md:gap-4 xl:gap-5 xl:px-6"
+              className="flex w-full max-w-full flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6"
             >
               <button
                 type="button"
@@ -88,11 +91,15 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
                 onClick={() => selectTab('ask')}
                 aria-label="Ask WOW"
                 className={cn(
-                  'inline-flex size-11 shrink-0 items-center justify-center rounded-radius-sm border text-white transition-opacity hover:opacity-90 sm:size-12 xl:size-[79px]',
-                  activeTab === 'ask' ? 'border-primary bg-[#292757]' : 'border-primary/70 bg-[#292757]/80',
+                  'group inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm border bg-[#292757] !text-white transition-transform sm:size-10 2xl:size-[79px]',
+                  activeTab === 'ask' ? 'border-primary' : 'border-primary/70',
                 )}
               >
-                <Sparkles className="size-5 sm:size-6 xl:size-[46px]" strokeWidth={1.5} />
+                <Sparkles
+                  className="size-4 !stroke-white !text-white transition-transform duration-300 group-hover:skew-x-6 sm:size-5 2xl:size-[46px]"
+                  strokeWidth={1.5}
+                  color="#ffffff"
+                />
               </button>
 
               {footerTextTabs.map((tab) => {
@@ -114,14 +121,17 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
 
             <FooterTabContent tab={activeTab} />
 
-            <div className="flex w-full flex-wrap items-center justify-center gap-2 px-3 sm:gap-3 md:gap-5">
+            <div className="flex w-full flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 2xl:gap-5">
               <button
                 type="button"
                 onClick={() => selectTab('ask')}
                 aria-label="Home"
-                className="inline-flex size-11 shrink-0 items-center justify-center !text-[#808080] transition-colors hover:!text-secondary dark:hover:!text-[#F2F2F2] sm:size-[50px]"
+                className={cn(
+                  'inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm !text-[#808080] transition-colors sm:size-10 2xl:size-[50px]',
+                  navItemHoverClass,
+                )}
               >
-                <House className="size-6 sm:size-[30px] md:size-[50px]" strokeWidth={1.5} />
+                <House className="size-5 sm:size-6 2xl:size-[30px]" strokeWidth={1.5} />
               </button>
 
               {accessTabs.map((tab) => (
@@ -138,22 +148,22 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
 
             <div className="h-px w-[min(1248px,calc(100%-1.5rem))] bg-[#1515151A] dark:bg-[#EDF0F51A]" />
 
-            <div className="flex w-full max-w-[1248px] flex-col items-center justify-between gap-3 px-4 sm:px-6 md:flex-row md:gap-4">
-              <p className="text-center font-outfit text-xs font-light leading-[1.6] !text-[#808080] sm:text-sm md:text-left md:text-[20px]">
+            <div className="flex w-full max-w-[1248px] flex-col items-center justify-between gap-2 px-3 sm:px-5 md:flex-row md:gap-3 2xl:px-6">
+              <p className="text-center font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] sm:text-xs md:text-left 2xl:text-[20px] 2xl:leading-[1.6]">
                 © 2026 WOW Superagency. All rights reserved.
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-x-[13px] gap-y-2">
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 2xl:gap-x-[13px]">
                 {legalLinks.map((link, index) => (
-                  <span key={link.label} className="inline-flex items-center gap-x-[13px]">
+                  <span key={link.label} className="inline-flex items-center gap-x-2 2xl:gap-x-[13px]">
                     {index > 0 ? (
-                      <span className="font-outfit text-xs font-light !text-[#808080] sm:text-sm md:text-[20px]" aria-hidden>
+                      <span className="font-outfit text-[11px] font-light !text-[#808080] sm:text-xs 2xl:text-[20px]" aria-hidden>
                         •
                       </span>
                     ) : null}
                     <Link
                       href={link.href}
-                      className="font-outfit text-xs font-light leading-[1.6] !text-[#808080] transition-colors hover:!text-primary sm:text-sm md:text-[20px]"
+                      className="font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] transition-colors hover:!text-primary sm:text-xs 2xl:text-[20px] 2xl:leading-[1.6]"
                     >
                       {link.label}
                     </Link>
@@ -165,7 +175,7 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
 
           <div
             aria-hidden
-            className="footer-wow-watermark pointer-events-none mt-2 max-w-full overflow-hidden select-none whitespace-nowrap pb-2 text-center text-[clamp(1.25rem,7vw,7.5rem)] font-semibold leading-none tracking-[-0.04em] sm:mt-3 sm:pb-3"
+            className="footer-wow-watermark pointer-events-none mt-1 max-w-full overflow-hidden select-none whitespace-nowrap pb-1 text-center text-[clamp(0.95rem,3.2vw,1.85rem)] font-semibold leading-none tracking-[-0.04em] sm:mt-1.5 sm:pb-1.5 2xl:mt-2 2xl:pb-2 2xl:text-[clamp(1.75rem,3.8vw,3.25rem)]"
           >
             <WowText variant="watermark" />
             <span className="ml-2 !text-[#1a1a1a]/[0.04] dark:!text-white/[0.04] sm:ml-3">Superagency</span>

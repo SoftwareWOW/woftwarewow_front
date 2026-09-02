@@ -30,34 +30,34 @@ export default function FooterAskWow() {
   }
 
   return (
-    <div className="relative flex w-full flex-col items-center gap-6 overflow-hidden px-4 py-8 sm:gap-8 sm:px-6 sm:py-10 md:px-10 lg:gap-10 lg:px-[80px] lg:py-[60px]">
-      <div className="relative flex w-full flex-col items-center gap-5">
-        <div className="relative flex size-[88px] items-center justify-center sm:size-[112px]">
+    <div className="relative flex w-full flex-col items-center gap-4 overflow-hidden px-3 py-4 sm:gap-5 sm:px-6 sm:py-5 2xl:gap-10 2xl:px-[80px] 2xl:py-[60px]">
+      <div className="relative flex w-full flex-col items-center gap-3 sm:gap-4 2xl:gap-5">
+        <div className="relative flex size-16 items-center justify-center sm:size-[72px] 2xl:size-[112px]">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 size-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(97,92,206,0.42)_0%,transparent_68%)] sm:size-[280px]"
+            className="pointer-events-none absolute left-1/2 top-1/2 size-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(97,92,206,0.42)_0%,transparent_68%)] sm:size-[180px] 2xl:size-[280px]"
           />
           <button
             type="button"
             onClick={handleOpenVoice}
             aria-label="Start a voice conversation with WOW"
-            className="relative z-[1] flex size-[88px] items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 sm:size-[112px]"
+            className="relative z-[1] flex size-16 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 sm:size-[72px] 2xl:size-[112px]"
           >
             <Image
               src="/images/wow/aiicon.png"
               alt=""
               width={112}
               height={112}
-              className="size-[88px] object-contain sm:size-[112px]"
+              className="size-16 object-contain sm:size-[72px] 2xl:size-[112px]"
             />
           </button>
         </div>
 
-        <h2 className="text-center font-outfit text-[clamp(1.75rem,4.2vw,48px)] font-light leading-[1.1] text-secondary dark:text-[#F2F2F2]">
+        <h2 className="text-center font-outfit text-[22px] font-light leading-[1.15] text-secondary dark:text-[#F2F2F2] sm:text-[26px] 2xl:text-[48px] 2xl:leading-[1.1]">
           What can we help you <InstrumentText variant="solid">achieve?</InstrumentText>
         </h2>
 
-        <p className="max-w-[720px] text-center font-outfit text-base font-light leading-[1.6] !text-[#808080]">
+        <p className="max-w-[720px] text-center font-outfit text-xs font-light leading-[1.5] !text-[#808080] sm:text-sm 2xl:text-base 2xl:leading-[1.6]">
           Ask WOW anything. Find a service, explore our divisions, get a recommendation, or tell us what your
           business needs.
         </p>
@@ -66,7 +66,7 @@ export default function FooterAskWow() {
       <div className="relative z-[1] flex w-full max-w-[842px] items-center justify-center gap-2 sm:gap-3">
         <div
           className={cn(
-            'flex h-12 min-w-0 flex-1 items-center justify-between rounded-[8px] border py-2 pl-4 pr-2 sm:h-16 sm:py-2.5 sm:pl-5 sm:pr-2.5',
+            'flex h-10 min-w-0 flex-1 items-center justify-between rounded-[8px] border py-1.5 pl-3 pr-1.5 sm:h-11 sm:pl-4 sm:pr-2 2xl:h-16 2xl:py-2.5 2xl:pl-5 2xl:pr-2.5',
             'border-[#1515151A] bg-background dark:border-[#EDF0F51A] dark:bg-[#151515]',
           )}
         >
@@ -77,7 +77,7 @@ export default function FooterAskWow() {
             onKeyDown={handleKeyDown}
             placeholder="Ask WOW anything…"
             aria-label="Ask WOW anything"
-            className="min-w-0 flex-1 bg-transparent font-outfit text-[18px] font-light leading-[1.6] text-secondary placeholder:text-[#808080] focus:outline-none dark:text-[#F2F2F2] md:text-[20px]"
+            className="min-w-0 flex-1 bg-transparent font-outfit text-sm font-light leading-[1.5] text-secondary placeholder:text-[#808080] focus:outline-none dark:text-[#F2F2F2] sm:text-base 2xl:text-[20px] 2xl:leading-[1.6]"
           />
           <button
             type="button"
@@ -85,13 +85,13 @@ export default function FooterAskWow() {
             disabled={!canSend}
             aria-label="Send message to WOW"
             className={cn(
-              'inline-flex shrink-0 items-center justify-center rounded-radius-sm p-2.5 text-secondary transition-opacity dark:text-[#F2F2F2]',
+              'inline-flex shrink-0 items-center justify-center rounded-radius-sm p-1.5 text-secondary transition-opacity dark:text-[#F2F2F2] sm:p-2 2xl:p-2.5',
               canSend
                 ? 'bg-[#15151533] hover:bg-[#1515154D] dark:bg-[rgba(237,240,245,0.28)] dark:hover:bg-[rgba(237,240,245,0.36)]'
                 : 'cursor-not-allowed bg-[#1515151A] opacity-70 dark:bg-[rgba(237,240,245,0.2)]',
             )}
           >
-            <ArrowRight className="size-6" strokeWidth={1.75} />
+            <ArrowRight className="size-4 sm:size-5 2xl:size-6" strokeWidth={1.75} />
           </button>
         </div>
 
@@ -99,9 +99,9 @@ export default function FooterAskWow() {
           type="button"
           onClick={handleOpenVoice}
           aria-label="Start a voice conversation with WOW"
-          className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:bg-primary/90 sm:size-16"
+          className="inline-flex size-10 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:bg-primary/90 sm:size-11 2xl:size-16"
         >
-          <AudioLines className="size-6 !stroke-white !text-white sm:size-8" strokeWidth={1.75} />
+          <AudioLines className="size-5 !stroke-white !text-white sm:size-6 2xl:size-8" strokeWidth={1.75} />
         </button>
       </div>
     </div>

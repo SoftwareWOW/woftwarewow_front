@@ -25,6 +25,15 @@ type WowTextProps = {
 }
 
 export function renderWowInTitle(title: string, className?: string) {
+  if (/^softwarewow/i.test(title.replace(/[^a-z]/gi, ''))) {
+    return (
+      <>
+        <span className="font-extrabold tracking-[-0.06em] text-secondary group-hover:text-black dark:text-[#F2F2F2] dark:group-hover:!text-white">Software</span>
+        <WowText className={className}>WOW!</WowText>
+      </>
+    )
+  }
+
   if (title.startsWith('WOW ')) {
     return (
       <>
