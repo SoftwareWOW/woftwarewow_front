@@ -8,7 +8,7 @@
   .service-card,
   .faq-body-transition.border,
   .reveal-me.border,
-  .group.border {
+  .group.border:not([class*='rounded']) {
     @apply card;
   }
 
