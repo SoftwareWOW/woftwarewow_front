@@ -91,14 +91,19 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
                 onClick={() => selectTab('ask')}
                 aria-label="Ask WOW"
                 className={cn(
-                  'group inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm border bg-[#292757] !text-white transition-transform sm:size-10 2xl:size-[79px]',
-                  activeTab === 'ask' ? 'border-primary' : 'border-primary/70',
+                  'group inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm border transition-colors sm:size-10 2xl:size-[79px]',
+                  activeTab === 'ask' ? tabActiveClass : tabIdleClass,
                 )}
               >
                 <Sparkles
-                  className="size-4 !stroke-white !text-white transition-transform duration-300 group-hover:skew-x-6 sm:size-5 2xl:size-[46px]"
+                  className={cn(
+                    'size-4 transition-transform duration-300 group-hover:skew-x-6 sm:size-5 2xl:size-[46px]',
+                    activeTab === 'ask'
+                      ? '!stroke-white !text-white'
+                      : 'stroke-secondary text-secondary dark:stroke-[#F2F2F2] dark:text-[#F2F2F2]',
+                  )}
                   strokeWidth={1.5}
-                  color="#ffffff"
+                  color={activeTab === 'ask' ? '#ffffff' : undefined}
                 />
               </button>
 
@@ -127,7 +132,7 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
                 onClick={() => selectTab('ask')}
                 aria-label="Home"
                 className={cn(
-                  'inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm !text-[#808080] transition-colors sm:size-10 2xl:size-[50px]',
+                  'inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm border border-[#1515151A] !text-[#808080] transition-colors dark:border-[#EDF0F51A] sm:size-10 2xl:size-[50px]',
                   navItemHoverClass,
                 )}
               >
@@ -163,7 +168,7 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
                     ) : null}
                     <Link
                       href={link.href}
-                      className="font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] transition-colors hover:!text-primary sm:text-xs 2xl:text-[20px] 2xl:leading-[1.6]"
+                      className="rounded-radius-sm px-1 py-0.5 font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] transition-colors hover:!text-primary sm:text-xs 2xl:text-[20px] 2xl:leading-[1.6]"
                     >
                       {link.label}
                     </Link>
