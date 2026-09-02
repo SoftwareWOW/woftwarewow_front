@@ -101,3 +101,15 @@
     }
   }
 }
+
+.footer-wow-watermark {
+  font-size: clamp(1rem, 3.5vw, 1.75rem);
+
+  @media (min-width: 1024px) {
+    font-size: clamp(1.35rem, 4.5vw, 2.5rem);
+  }
+
+  @media (min-width: 1430px) {
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+  }
+}

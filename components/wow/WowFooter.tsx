@@ -175,10 +175,10 @@ export default function WowFooter({ footer: _footer }: WowFooterProps) {
 
           <div
             aria-hidden
-            className="footer-wow-watermark pointer-events-none mt-1 max-w-full overflow-hidden select-none whitespace-nowrap pb-1 text-center text-[clamp(0.95rem,3.2vw,1.85rem)] font-semibold leading-none tracking-[-0.04em] sm:mt-1.5 sm:pb-1.5 2xl:mt-2 2xl:pb-2 2xl:text-[clamp(1.75rem,3.8vw,3.25rem)]"
+            className="footer-wow-watermark pointer-events-none mt-1 max-w-full overflow-hidden select-none whitespace-nowrap pb-1 text-center font-semibold leading-none tracking-[-0.04em] sm:mt-1.5 sm:pb-1.5 2xl:mt-2 2xl:pb-2"
           >
-            <WowText variant="watermark" />
-            <span className="ml-2 !text-[#1a1a1a]/[0.04] dark:!text-white/[0.04] sm:ml-3">Superagency</span>
+            <WowText variant="watermark" className="text-[length:inherit]" />
+            <span className="ml-2 text-[length:inherit] !text-[#1a1a1a]/[0.04] dark:!text-white/[0.04] sm:ml-3">Superagency</span>
           </div>
         </div>
       </div>
