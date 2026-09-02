@@ -2,7 +2,12 @@
 
 import { MenuItemIcon } from '@/components/wow/nav/MenuItemIcon'
 import { isDivisionHref } from '@/components/wow/nav/nav-brand-assets'
-import { navItemHoverClass, navItemIconClass } from '@/components/wow/nav/nav-interaction-styles'
+import {
+  navItemDescriptionClass,
+  navItemHoverClass,
+  navItemIconClass,
+  navItemLabelClass,
+} from '@/components/wow/nav/nav-interaction-styles'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { ArrowUpRight } from 'lucide-react'
@@ -27,7 +32,7 @@ const rowShellClass = cn(
   navItemHoverClass,
 )
 
-function FooterSkewArrow() {
+function FooterContactArrow() {
   return (
     <span
       className={cn(
@@ -75,6 +80,19 @@ function FooterIconBox({ iconId, icon }: { iconId?: string; icon?: ReactNode }) 
   )
 }
 
+function FooterPlainIcon({ iconId }: { iconId: string }) {
+  return (
+    <MenuItemIcon
+      iconId={iconId}
+      className={cn(
+        'size-5 shrink-0 sm:size-6 2xl:size-7',
+        'stroke-secondary text-secondary group-hover:!stroke-white group-hover:!text-white',
+        'dark:stroke-[#F2F2F2] dark:text-[#F2F2F2] dark:group-hover:!stroke-white dark:group-hover:!text-white',
+      )}
+    />
+  )
+}
+
 type FooterNavLinkProps = {
   href?: string
   onClick?: (event: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void
@@ -112,6 +130,8 @@ export function FooterActionCard({
   icon,
   title,
   description,
+  showArrow = false,
+  iconStyle = 'none',
 }: {
   href?: string
   onClick?: (event: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void
@@ -119,21 +139,36 @@ export function FooterActionCard({
   icon?: ReactNode
   title: ReactNode
   description?: string
+  showArrow?: boolean
+  iconStyle?: 'none' | 'boxed' | 'plain'
 }) {
   return (
     <FooterNavLink href={href} onClick={onClick} className={cardShellClass}>
-      {iconId || icon ? <FooterIconBox iconId={iconId} icon={icon} /> : null}
+      {iconStyle === 'boxed' && (iconId || icon) ? <FooterIconBox iconId={iconId} icon={icon} /> : null}
+      {iconStyle === 'plain' && iconId ? <FooterPlainIcon iconId={iconId} /> : null}
       <span className="min-w-0 flex-1">
-        <span className="block font-outfit text-[13px] font-light leading-tight text-secondary group-hover:text-black dark:text-[#F2F2F2] dark:group-hover:!text-white sm:text-sm 2xl:text-lg">
+        <span
+          className={cn(
+            'block font-outfit text-[13px] font-light leading-tight sm:text-sm 2xl:text-lg',
+            navItemLabelClass,
+            'text-secondary dark:text-[#F2F2F2]',
+          )}
+        >
           {title}
         </span>
         {description ? (
-          <span className="mt-0.5 block font-outfit text-[11px] font-light leading-snug !text-[#808080] group-hover:text-black/60 dark:group-hover:!text-[#94A3B8] sm:text-xs 2xl:text-sm">
+          <span
+            className={cn(
+              'mt-0.5 block font-outfit text-[11px] font-light leading-snug sm:text-xs 2xl:text-sm',
+              navItemDescriptionClass,
+              '!text-[#808080]',
+            )}
+          >
             {description}
           </span>
         ) : null}
       </span>
-      <FooterSkewArrow />
+      {showArrow ? <FooterContactArrow /> : null}
     </FooterNavLink>
   )
 }
@@ -149,11 +184,23 @@ export function FooterTextLink({
 }) {
   return (
     <FooterNavLink href={href} className={rowShellClass}>
-      <FooterIconBox iconId={iconId} />
-      <span className="min-w-0 flex-1 font-outfit text-[13px] font-light text-secondary group-hover:text-black dark:text-[#F2F2F2] dark:group-hover:!text-white sm:text-sm 2xl:text-base">
+      <span
+        className={cn(
+          'inline-flex size-7 shrink-0 items-center justify-center rounded-radius-sm border p-1.5 sm:size-8 2xl:p-2',
+          footerIconBoxClass,
+        )}
+      >
+        <MenuItemIcon iconId={iconId} className={cn('size-3.5 sm:size-4', navItemIconClass)} />
+      </span>
+      <span
+        className={cn(
+          'min-w-0 flex-1 font-outfit text-[13px] font-light sm:text-sm 2xl:text-base',
+          navItemLabelClass,
+          'text-secondary dark:text-[#F2F2F2]',
+        )}
+      >
         {label}
       </span>
-      <FooterSkewArrow />
     </FooterNavLink>
   )
 }

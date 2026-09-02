@@ -86,7 +86,7 @@ function ExplorePanel() {
         <FooterActionCard
           key={division.href}
           href={division.href}
-          iconId={division.iconId}
+          iconStyle="none"
           title={renderWowInTitle(division.title)}
           description={division.subtitle}
         />
@@ -103,6 +103,7 @@ function ServicesPanel() {
           key={service.title}
           href={service.href}
           iconId={service.iconId}
+          iconStyle="plain"
           title={service.title}
           description={service.description}
         />
@@ -122,6 +123,8 @@ function ContactPanel() {
           href={card.action === 'link' ? card.href : undefined}
           onClick={card.action === 'contact' ? () => contactDialog?.open() : undefined}
           iconId={card.iconId}
+          iconStyle="boxed"
+          showArrow
           title={card.title}
           description={card.description}
         />
