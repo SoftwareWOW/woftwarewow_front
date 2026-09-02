@@ -26,7 +26,7 @@ export default function ChatHeader({ onClose }: ChatHeaderProps) {
         type="button"
         onClick={onClose}
         aria-label="Close AI assistant"
-        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#1515151A] text-secondary transition-colors hover:bg-[#1515150A] dark:border-[#EDF0F51A] dark:text-backgroundBody dark:hover:bg-white/5"
+        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-radius-sm border border-[#1515151A] text-secondary transition-colors hover:bg-[#1515150A] dark:border-[#EDF0F51A] dark:text-backgroundBody dark:hover:bg-white/5"
       >
         <X className="h-4 w-4" />
       </button>

@@ -13,8 +13,8 @@ import { ArrowUpRight } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
 
 const footerIconBoxClass = cn(
-  'border-black/10 bg-transparent group-hover:border-transparent group-hover:bg-transparent',
-  'dark:border-[#EDF0F51A] dark:bg-transparent dark:group-hover:border-transparent dark:group-hover:bg-transparent',
+  'border-black/10 bg-transparent group-hover:bg-transparent',
+  'dark:border-[#EDF0F51A] dark:bg-transparent dark:group-hover:bg-transparent',
 )
 
 const footerIconClass = cn(
@@ -23,7 +23,7 @@ const footerIconClass = cn(
 )
 
 const cardShellClass = cn(
-  'group !inline-flex w-full items-center gap-2 rounded-radius-md border px-2.5 py-2 text-left transition-colors',
+  'group !inline-flex w-full items-center gap-2 rounded-radius-sm border px-2.5 py-2 text-left transition-colors',
   'border-[#1515151A] bg-transparent dark:border-[#EDF0F51A]',
   'hover:border-transparent dark:hover:border-transparent',
   navItemHoverClass,

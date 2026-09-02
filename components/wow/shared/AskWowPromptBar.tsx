@@ -59,7 +59,7 @@ export default function AskWowPromptBar({
     <div className={cn('flex w-full items-center justify-center gap-2 sm:gap-3', className)}>
       <div
         className={cn(
-          'flex h-10 min-w-0 flex-1 items-center justify-between rounded-[8px] border py-1.5 pl-3 pr-1.5 sm:h-11 sm:pl-4 sm:pr-2 2xl:h-16 2xl:py-2.5 2xl:pl-5 2xl:pr-2.5',
+          'flex h-10 min-w-0 flex-1 items-center justify-between rounded-radius-sm border py-1.5 pl-3 pr-1.5 sm:h-11 sm:pl-4 sm:pr-2 2xl:h-16 2xl:py-2.5 2xl:pl-5 2xl:pr-2.5',
           'border-[#1515151A] bg-background dark:border-[#EDF0F51A] dark:bg-[#151515]',
         )}
       >

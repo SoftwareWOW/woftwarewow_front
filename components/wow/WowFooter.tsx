@@ -46,7 +46,7 @@ const tabActiveClass = 'border-primary bg-[#292757] !text-white hover:border-pri
 
 const accessTabClass = cn(
   'inline-flex min-h-9 shrink-0 items-center whitespace-nowrap rounded-radius-sm border px-3 py-1.5 font-outfit text-xs font-light tracking-[0.4px] !text-[#808080] transition-colors',
-  'border-[#1515151A] hover:border-transparent hover:!text-black',
+  'border-[#1515151A] hover:!text-black',
   'dark:border-[#EDF0F51A] dark:hover:!text-white',
   navItemHoverClass,
   'sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm',
