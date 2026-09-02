@@ -30,25 +30,25 @@ export default function FooterAskWow() {
   }
 
   return (
-    <div className="relative flex w-full flex-col items-center gap-10 overflow-hidden px-4 py-10 sm:px-8 sm:py-14 md:px-[80px] md:py-[75px]">
+    <div className="relative flex w-full flex-col items-center gap-6 overflow-hidden px-4 py-8 sm:gap-8 sm:px-6 sm:py-10 md:px-10 lg:gap-10 lg:px-[80px] lg:py-[60px]">
       <div className="relative flex w-full flex-col items-center gap-5">
-        <div className="relative flex size-[112px] items-center justify-center">
+        <div className="relative flex size-[88px] items-center justify-center sm:size-[112px]">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 size-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(97,92,206,0.42)_0%,transparent_68%)]"
+            className="pointer-events-none absolute left-1/2 top-1/2 size-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(97,92,206,0.42)_0%,transparent_68%)] sm:size-[280px]"
           />
           <button
             type="button"
             onClick={handleOpenVoice}
             aria-label="Start a voice conversation with WOW"
-            className="relative z-[1] flex size-[112px] items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            className="relative z-[1] flex size-[88px] items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 sm:size-[112px]"
           >
             <Image
               src="/images/wow/aiicon.png"
               alt=""
               width={112}
               height={112}
-              className="size-[112px] object-contain"
+              className="size-[88px] object-contain sm:size-[112px]"
             />
           </button>
         </div>
@@ -63,10 +63,10 @@ export default function FooterAskWow() {
         </p>
       </div>
 
-      <div className="relative z-[1] flex w-full max-w-[842px] items-center justify-center gap-3">
+      <div className="relative z-[1] flex w-full max-w-[842px] items-center justify-center gap-2 sm:gap-3">
         <div
           className={cn(
-            'flex h-16 min-w-0 flex-1 items-center justify-between rounded-[8px] border py-2.5 pl-5 pr-2.5',
+            'flex h-12 min-w-0 flex-1 items-center justify-between rounded-[8px] border py-2 pl-4 pr-2 sm:h-16 sm:py-2.5 sm:pl-5 sm:pr-2.5',
             'border-[#1515151A] bg-background dark:border-[#EDF0F51A] dark:bg-[#151515]',
           )}
         >
@@ -99,9 +99,9 @@ export default function FooterAskWow() {
           type="button"
           onClick={handleOpenVoice}
           aria-label="Start a voice conversation with WOW"
-          className="inline-flex size-16 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:bg-primary/90"
+          className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:bg-primary/90 sm:size-16"
         >
-          <AudioLines className="size-8 !stroke-white !text-white" strokeWidth={1.75} />
+          <AudioLines className="size-6 !stroke-white !text-white sm:size-8" strokeWidth={1.75} />
         </button>
       </div>
     </div>
