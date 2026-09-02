@@ -1,11 +1,8 @@
 'use client'
 
-import { useAIChatControllerOptional } from '@/components/ai/AIChatController'
-import PromptBar from '@/components/ai/PromptBar'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import Image from 'next/image'
 import bigArrowIcon from '@/public/images/icons/big-arrow-Icon-dark.svg'
-import { useState } from 'react'
 import { useContactDialogOptional } from '../shared/ContactDialogProvider'
 import InstrumentText from '../shared/InstrumentText'
 
@@ -15,52 +12,19 @@ interface WowGrowthCtaProps {
   ariaLabel?: string
 }
 
-const CtaGlowOrb = ({ onClick }: { onClick: () => void }) => {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label="Start a voice conversation with WOW"
-      className="relative mx-auto flex h-36 w-36 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background md:h-44 md:w-44"
-    >
-      <Image
-        src="/images/wow/aiicon.png"
-        alt=""
-        width={176}
-        height={176}
-        className="h-full w-full object-contain"
-        priority
-      />
-    </button>
-  )
-}
-
 const WowGrowthCta = ({
   accentText = 'Ready to',
   mainText = 'Grow?',
   ariaLabel = 'Contact WOW Superagency',
 }: WowGrowthCtaProps) => {
   const contactDialog = useContactDialogOptional()
-  const aiChat = useAIChatControllerOptional()
-  const [input, setInput] = useState('')
 
   const handleOpenContact = () => {
     contactDialog?.open()
   }
 
-  const handleOpenVoice = () => {
-    aiChat?.open({ voice: true })
-  }
-
-  const handleSubmit = () => {
-    const message = input.trim()
-    if (!message) return
-    aiChat?.open({ message })
-    setInput('')
-  }
-
   return (
-    <section className="relative bg-background pb-5 sm:pb-10 md:pb-15 lg:pb-20 transition-colors duration-300 dark:bg-background">
+    <section className="relative bg-background pb-5 transition-colors duration-300 dark:bg-background sm:pb-10 md:pb-15 lg:pb-20">
       <div className="container flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20">
         <RevealWrapper
           as="h2"
@@ -97,31 +61,6 @@ const WowGrowthCta = ({
             </figure>
           </RevealWrapper>
         </button>
-      </div>
-
-      <div className="container mt-12 md:mt-16 lg:mt-20">
-        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-          <CtaGlowOrb onClick={handleOpenVoice} />
-
-          <h3 className="mt-8 text-2xl font-normal leading-tight text-secondary dark:text-backgroundBody md:text-3xl lg:text-4xl">
-            What can we help you <InstrumentText>achieve?</InstrumentText>
-          </h3>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#808080] md:text-base">
-            Ask WOW anything. Find a service, explore our divisions, get a recommendation, or tell us what your
-            business needs.
-          </p>
-        </div>
-
-        <div className="mx-auto mt-10 w-full max-w-3xl md:mt-14">
-          <PromptBar
-            value={input}
-            onChange={setInput}
-            onSubmit={handleSubmit}
-            onVoice={handleOpenVoice}
-            placeholder="Ask WOW anything..."
-            ariaLabel="Ask WOW anything"
-          />
-        </div>
       </div>
     </section>
   )
