@@ -5,7 +5,6 @@ import { isDivisionHref } from '@/components/wow/nav/nav-brand-assets'
 import {
   navItemDescriptionClass,
   navItemHoverClass,
-  navItemIconClass,
   navItemLabelClass,
 } from '@/components/wow/nav/nav-interaction-styles'
 import { Link } from '@/i18n/navigation'
@@ -14,8 +13,13 @@ import { ArrowUpRight } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
 
 const footerIconBoxClass = cn(
-  'border-black/10 bg-transparent group-hover:border-transparent group-hover:bg-primary group-[.is-active]:border-transparent group-[.is-active]:bg-primary',
-  'dark:border-[#EDF0F51A] dark:bg-transparent dark:group-hover:border-transparent dark:group-hover:bg-primary dark:group-[.is-active]:border-transparent dark:group-[.is-active]:bg-primary',
+  'border-black/10 bg-transparent group-hover:border-transparent group-hover:bg-transparent',
+  'dark:border-[#EDF0F51A] dark:bg-transparent dark:group-hover:border-transparent dark:group-hover:bg-transparent',
+)
+
+const footerIconClass = cn(
+  'stroke-secondary text-secondary dark:stroke-[#F2F2F2] dark:text-[#F2F2F2]',
+  'group-hover:stroke-black group-hover:text-black dark:group-hover:!stroke-white dark:group-hover:!text-white',
 )
 
 const cardShellClass = cn(
@@ -36,7 +40,7 @@ function FooterContactArrow() {
   return (
     <span
       className={cn(
-        'relative inline-flex size-7 shrink-0 overflow-hidden rounded-radius-sm border sm:size-8 2xl:size-10',
+        'relative inline-flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-radius-sm border sm:size-8 2xl:size-10',
         footerIconBoxClass,
       )}
     >
@@ -44,22 +48,20 @@ function FooterContactArrow() {
         aria-hidden
         className={cn(
           'absolute left-1/2 top-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500',
-          'group-hover:-translate-y-6 group-hover:translate-x-4 group-hover:opacity-0',
-          'sm:size-4 sm:group-hover:-translate-y-7 sm:group-hover:translate-x-5',
-          '2xl:size-5 2xl:group-hover:-translate-y-8 2xl:group-hover:translate-x-6',
-          navItemIconClass,
+          'group-hover:translate-x-1/2 group-hover:-translate-y-[180%] group-hover:opacity-0',
+          'sm:size-4 2xl:size-5',
+          footerIconClass,
         )}
         strokeWidth={1.75}
       />
       <ArrowUpRight
         aria-hidden
         className={cn(
-          'absolute size-3.5 opacity-0 transition-all duration-500',
-          '-translate-x-2 translate-y-6',
-          'group-hover:translate-x-[14px] group-hover:translate-y-[2px] group-hover:opacity-100',
-          'sm:size-4 sm:-translate-x-2.5 sm:translate-y-7 sm:group-hover:translate-x-[17px] sm:group-hover:translate-y-[2px]',
-          '2xl:size-5 2xl:-translate-x-3 2xl:translate-y-8 2xl:group-hover:translate-x-[22px] 2xl:group-hover:translate-y-[3px]',
-          navItemIconClass,
+          'absolute left-1/2 top-1/2 size-3.5 opacity-0 transition-all duration-500',
+          '-translate-x-[180%] translate-y-[180%]',
+          'group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:opacity-100',
+          'sm:size-4 2xl:size-5',
+          footerIconClass,
         )}
         strokeWidth={1.75}
       />
@@ -75,7 +77,7 @@ function FooterIconBox({ iconId, icon }: { iconId?: string; icon?: ReactNode }) 
         footerIconBoxClass,
       )}
     >
-      {iconId ? <MenuItemIcon iconId={iconId} className={cn('size-3.5 sm:size-4', navItemIconClass)} /> : icon}
+      {iconId ? <MenuItemIcon iconId={iconId} className={cn('size-3.5 sm:size-4', footerIconClass)} /> : icon}
     </span>
   )
 }
@@ -190,7 +192,7 @@ export function FooterTextLink({
           footerIconBoxClass,
         )}
       >
-        <MenuItemIcon iconId={iconId} className={cn('size-3.5 sm:size-4', navItemIconClass)} />
+        <MenuItemIcon iconId={iconId} className={cn('size-3.5 sm:size-4', footerIconClass)} />
       </span>
       <span
         className={cn(
