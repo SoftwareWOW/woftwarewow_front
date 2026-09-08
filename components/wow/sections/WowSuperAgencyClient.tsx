@@ -111,6 +111,8 @@ const CarouselGridIndicator = ({
 
 type WowSuperAgencyClientProps = {
   superAgencyClient: Dictionary['superAgencyClient']
+  clientImages?: Record<string, string>
+  reviewCaseStudies?: Record<number, { href: string; mediaSrc: string; mediaAlt: string }>
 }
 
 /* =========================================================
@@ -119,7 +121,11 @@ type WowSuperAgencyClientProps = {
 
 const WowSuperAgencyClient = ({
   superAgencyClient,
+  clientImages: clientImagesProp,
+  reviewCaseStudies: reviewCaseStudiesProp,
 }: WowSuperAgencyClientProps) => {
+  const clientImages = { ...CLIENT_IMAGES, ...clientImagesProp }
+  const reviewCaseStudies = { ...REVIEW_CASE_STUDIES, ...reviewCaseStudiesProp }
   const [api, setApi] = useState<CarouselApi>()
   const [isAutoPlay, setIsAutoPlay] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)

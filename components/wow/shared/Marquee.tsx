@@ -7,7 +7,12 @@ import React from 'react'
 import ButtonComponent, { ButtonComponentList } from './ButtonComponent'
 import SectionLabel from './SectionLabel'
 
-const Marquee: React.FC = () => {
+type MarqueeProps = {
+  logos?: Array<{ id: number; logo: string; darkLogo: string; alt: string }>
+}
+
+const Marquee: React.FC<MarqueeProps> = ({ logos: logosProp }) => {
+  const logos = logosProp ?? data
   const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
 
   const handleMouseEnter = () => {
@@ -31,7 +36,7 @@ const Marquee: React.FC = () => {
           className="relative overflow-hidden"
         >
           <div ref={marqueeRef} className="z-50 flex w-fit flex-nowrap gap-2.5 whitespace-nowrap">
-            {data.map((item) => (
+            {logos.map((item) => (
               <div
                 key={item.id}
                 className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark"

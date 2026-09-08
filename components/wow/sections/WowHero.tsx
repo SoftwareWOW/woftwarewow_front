@@ -10,6 +10,14 @@ import { useEffect, useRef, useState } from 'react'
 
 type WowHeroProps = {
   hero: Dictionary['hero']
+  copy?: {
+    headline?: string
+    lead?: string
+    body?: string
+    ctaPrimary?: string
+    ctaSecondary?: string
+    heroImage?: string
+  }
 }
 
 const HERO_COPY = {
@@ -213,7 +221,10 @@ function NotchedCta({
 
 export default function WowHero({
   hero: _hero,
+  copy,
 }: WowHeroProps) {
+  const activeCopy = { ...HERO_COPY, ...copy }
+  const heroImage = copy?.heroImage ?? '/images/wow/hero-banner.jpg'
   const { ref, progress } = useShrinkProgress()
 
   const meetDialog = useMeetDialogOptional()
@@ -368,7 +379,7 @@ export default function WowHero({
           }}
         >
           <Image
-            src="/images/wow/hero-banner.jpg"
+            src={heroImage}
             alt=""
             fill
             priority
@@ -408,7 +419,7 @@ export default function WowHero({
               text-white
             "
           >
-            {HERO_COPY.headline}
+            {activeCopy.headline}
           </h1>
 
           <p
@@ -422,7 +433,7 @@ export default function WowHero({
               md:text-lg
             "
           >
-            {HERO_COPY.lead}
+            {activeCopy.lead}
           </p>
         </div>
 
@@ -464,7 +475,7 @@ export default function WowHero({
               dark:text-backgroundBody
             "
           >
-            {HERO_COPY.headline}
+            {activeCopy.headline}
           </h2>
 
           <p
@@ -479,7 +490,7 @@ export default function WowHero({
               md:text-base
             "
           >
-            {HERO_COPY.lead}
+            {activeCopy.lead}
           </p>
 
           <p
@@ -494,7 +505,7 @@ export default function WowHero({
               md:text-base
             "
           >
-            {HERO_COPY.body}
+            {activeCopy.body}
           </p>
         </div>
 
@@ -537,7 +548,7 @@ export default function WowHero({
               text-white
             "
           >
-            {HERO_COPY.headline}
+            {activeCopy.headline}
           </h2>
 
           <p
@@ -551,7 +562,7 @@ export default function WowHero({
               md:text-base
             "
           >
-            {HERO_COPY.lead}
+            {activeCopy.lead}
           </p>
 
           <p
@@ -565,7 +576,7 @@ export default function WowHero({
               md:text-base
             "
           >
-            {HERO_COPY.body}
+            {activeCopy.body}
           </p>
         </div>
 
@@ -603,7 +614,7 @@ export default function WowHero({
               meetDialog.open()
             }}
           >
-            {HERO_COPY.ctaPrimary}
+            {activeCopy.ctaPrimary}
           </NotchedCta>
         </div>
 
@@ -636,7 +647,7 @@ export default function WowHero({
             href="/services"
             className={`${pillBase} bg-primary text-white`}
           >
-            {HERO_COPY.ctaSecondary}
+            {activeCopy.ctaSecondary}
           </NotchedCta>
         </div>
       </div>

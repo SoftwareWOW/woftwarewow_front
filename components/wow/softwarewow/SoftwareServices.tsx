@@ -3,10 +3,15 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ScrollingServiceCardsMarquee from '@/components/wow/shared/ScrollingServiceCardsMarquee'
-import { SOFTWARE_WOW_SERVICES } from '@/data/softwareWowServices'
+import { SOFTWARE_WOW_SERVICES, type SoftwareWowService } from '@/data/softwareWowServices'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 
-const SoftwareServices = () => {
+type SoftwareServicesProps = {
+  services?: SoftwareWowService[]
+}
+
+const SoftwareServices = ({ services: servicesProp }: SoftwareServicesProps) => {
+  const services = servicesProp ?? SOFTWARE_WOW_SERVICES
   return (
     <section id="services" className="scroll-mt-28">
       <div className="mx-auto max-w-[1320px] px-3 md:px-4">
@@ -42,7 +47,7 @@ const SoftwareServices = () => {
       </div>
 
       <ScrollingServiceCardsMarquee
-        items={SOFTWARE_WOW_SERVICES}
+        items={services}
         getItemHref={() => '/services'}
         prevAriaLabel="Previous service"
         nextAriaLabel="Next service"

@@ -37,7 +37,12 @@ const articles = [
   },
 ]
 
-const GrowthStrategies = () => {
+type GrowthStrategiesProps = {
+  articles?: typeof articles
+}
+
+const GrowthStrategies = ({ articles: articlesProp }: GrowthStrategiesProps) => {
+  const articlesData = articlesProp ?? articles
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       {/* Background decorative elements */}
@@ -89,7 +94,7 @@ const GrowthStrategies = () => {
         </div>
 
         <div className="divide-y divide-[#e5e5e5] dark:divide-white/10">
-          {articles.map((article) => (
+          {articlesData.map((article) => (
             <RevealWrapper
               key={article.id}
               className="group grid grid-cols-1 gap-6 border-b border-[#1515151A] py-8 transition-all duration-300 first:pt-0 last:pb-0 md:grid-cols-[auto_1fr] md:items-stretch md:gap-10 lg:gap-14"

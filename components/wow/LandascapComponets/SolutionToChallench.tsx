@@ -91,18 +91,37 @@ const servicesData = [
   },
 ]
 
-const SolutionToChallenges = () => {
+type SolutionToChallengesProps = {
+  sectionLabel?: string
+  heading?: string
+  description?: string
+  initialVisibleCount?: number
+  viewAllLabel?: string
+  contactLabel?: string
+  categories?: typeof servicesData
+}
+
+const SolutionToChallenges = ({
+  sectionLabel = 'Solutions to chellenges.',
+  heading = 'Built To Solve Modern Business',
+  description = 'In a world where change is the only constant, we ensure your business stays ahead of the curve — with integrated technology, marketing, and growth systems built to deliver real results.',
+  initialVisibleCount = INITIAL_VISIBLE_COUNT,
+  categories: categoriesProp,
+}: SolutionToChallengesProps) => {
+  const servicesDataResolved = categoriesProp ?? servicesData
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
-  const visibleServices = showAll ? servicesData : servicesData.slice(0, INITIAL_VISIBLE_COUNT)
+  const visibleServices = showAll
+    ? servicesDataResolved
+    : servicesDataResolved.slice(0, initialVisibleCount)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
 
   const handleToggleShowAll = () => {
-    if (showAll && activeIndex !== null && activeIndex >= INITIAL_VISIBLE_COUNT) {
+    if (showAll && activeIndex !== null && activeIndex >= initialVisibleCount) {
       setActiveIndex(null)
     }
     setShowAll((prev) => !prev)
@@ -139,7 +158,7 @@ const SolutionToChallenges = () => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
           <div className="flex-1">
                 <RevealWrapper>
-            <SectionLabel className="mb-5">Solutions to chellenges.</SectionLabel>
+            <SectionLabel className="mb-5">{sectionLabel}</SectionLabel>
                           </RevealWrapper>
               <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 Built To Solve Modern Business{' '}
@@ -150,8 +169,7 @@ const SolutionToChallenges = () => {
           <div className="flex-1 max-md:w-full md:self-end">
            
               <p className="text-appear max-w-lg text-[#808080] transition-colors duration-300 dark:text-[#808080] md:justify-self-end md:text-right">
-                In a world where change is the only constant, we ensure your business stays ahead of the curve —
-                with integrated technology, marketing, and growth systems built to deliver real results.
+                {description}
               </p>
              <RevealWrapper className="mt-6 flex justify-end md:mt-8">
               <ButtonComponentList>
@@ -247,7 +265,7 @@ const SolutionToChallenges = () => {
         </RevealWrapper>
 
         <RevealWrapper className="mx-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-14">
-          {servicesData.length > INITIAL_VISIBLE_COUNT && (
+          {servicesDataResolved.length > initialVisibleCount && (
             <ButtonComponentList>
               <ButtonComponent
                 type="button"

@@ -12,7 +12,27 @@ import hero02 from '@/public/images/wow/Hero/Human/Rectangle2.png'
 import hero03 from '@/public/images/wow/Hero/Human/sadat2.png'
 import hero04 from '@/public/images/wow/Hero/Human/Rectangle3.png'
 
-const HumanTouch = () => {
+type HumanTouchProps = {
+  sectionLabel?: string
+  title?: string
+  founder?: {
+    name?: string
+    role?: string
+    tagline?: string
+    avatar?: string
+  }
+}
+
+const HumanTouch = ({
+  sectionLabel = 'Human Touch',
+  title,
+  founder,
+}: HumanTouchProps) => {
+  const founderName = founder?.name ?? 'Yahya Sadat'
+  const founderRole = founder?.role ?? 'Founder & CEO'
+  const founderTagline = founder?.tagline ?? 'Technology powered. People focused.'
+  const founderAvatar = founder?.avatar ?? '/images/wow/Hero/Human/sadat1.png'
+
   return (
     <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
@@ -40,29 +60,35 @@ const HumanTouch = () => {
           <div className="w-full flex-1 max-lg:self-center">
                 
                         <RevealWrapper>
-                          <SectionLabel className="mb-5">Human Touch</SectionLabel>
+                          <SectionLabel className="mb-5">{sectionLabel}</SectionLabel>
                         </RevealWrapper>
             <h2 className="max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-              <TextAppearAnimation>
-                <span className="text-appear">
-                  Technology <br />
-                  Powered.{' '}
-                </span>
-              </TextAppearAnimation>
-              <InstrumentText className="font-normal tracking-[-0.06em]">Human</InstrumentText>
-              <TextAppearAnimation>
-                <span className="text-appear">
-                  <br />
-                  Led.
-                </span>
-              </TextAppearAnimation>
+              {title ? (
+                <span className="text-appear">{title}</span>
+              ) : (
+                <>
+                  <TextAppearAnimation>
+                    <span className="text-appear">
+                      Technology <br />
+                      Powered.{' '}
+                    </span>
+                  </TextAppearAnimation>
+                  <InstrumentText className="font-normal tracking-[-0.06em]">Human</InstrumentText>
+                  <TextAppearAnimation>
+                    <span className="text-appear">
+                      <br />
+                      Led.
+                    </span>
+                  </TextAppearAnimation>
+                </>
+              )}
             </h2>
 
             <RevealWrapper className="reveal-me mt-8 flex items-center gap-5 pb-8">
               <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-[#8b7cff] shadow-lg shadow-[#8b7cff]/20">
                 <Image
-                  src="/images/wow/Hero/Human/sadat1.png"
-                  alt="Yahya Sadat"
+                  src={founderAvatar}
+                  alt={founderName}
                   width={48}
                   height={48}
                   className="size-full object-contain"
@@ -71,13 +97,13 @@ const HumanTouch = () => {
 
               <figcaption>
                 <p className="text-sm font-medium text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-                  Yahya Sadat
+                  {founderName}
                 </p>
                 <span className="text-xs text-[#8b7cff] dark:text-[#b794f4]">
-                  Founder & CEO
+                  {founderRole}
                 </span>
                 <p className="mt-1 max-w-[360px] text-[11px] leading-4 text-[#555555] transition-colors duration-300 dark:text-[#F2F2F2]/35">
-                  Technology powered. People focused.
+                  {founderTagline}
                 </p>
               </figcaption>
             </RevealWrapper>

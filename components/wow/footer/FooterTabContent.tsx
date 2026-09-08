@@ -133,7 +133,7 @@ function ContactPanel() {
   )
 }
 
-function ConnectPanel() {
+export function ConnectPanel() {
   const toast = useToastOptional()
   const [email, setEmail] = useState('')
 

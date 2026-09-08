@@ -33,7 +33,16 @@ const achievementStats = [
   },
 ]
 
-const Stats = () => {
+type StatsProps = {
+  intro?: string
+  stats?: typeof achievementStats
+}
+
+const Stats = ({ intro, stats: statsProp }: StatsProps) => {
+  const statsData = statsProp ?? achievementStats
+  const introText =
+    intro ??
+    'WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem — helping businesses scale with less complexity and more confidence.'
   const { revealRef } = useReveal()
 
   return (
@@ -66,13 +75,13 @@ const Stats = () => {
             className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-[300px] leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700"
             ref={revealRef}
           >
-            WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem — helping businesses scale with less complexity and more confidence.
+            {introText}
           </h4>
         </RevealWrapper>
 
         {/* Stats Grid - Reduced gap on small devices */}
         <div className="mt-8 grid grid-cols-1 gap-1 sm:mt-12 sm:grid-cols-2 sm:gap-2 md:mt-16 md:gap-6 lg:grid-cols-4 lg:gap-6">
-          {achievementStats.map((stat, index) => (
+          {statsData.map((stat, index) => (
             <div key={stat.label} className="stat-item w-full">
               <div className="relative flex h-full min-h-[200px] flex-col items-center justify-start p-4 transition-colors duration-300 sm:min-h-[240px] sm:p-6 md:min-h-[280px] md:p-8">
                

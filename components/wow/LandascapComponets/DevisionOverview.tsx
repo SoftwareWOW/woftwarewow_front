@@ -97,7 +97,12 @@ function renderDivisionTitle(title: string) {
   return renderWowInTitle(title)
 }
 
-const DevisionOverview = () => {
+type DevisionOverviewProps = {
+  divisions?: typeof divisions
+}
+
+const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) => {
+  const divisionsData = divisionsProp ?? divisions
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [activeCardId, setActiveCardId] = useState<number>(1)
   const cardRefs = useRef<Record<number, HTMLElement | null>>({})
@@ -226,7 +231,7 @@ const DevisionOverview = () => {
           className="absolute inset-0 bg-[#ebe6f4] transition-colors duration-500 dark:bg-[#0a0a0a]"
         />
 
-        {divisions.map((item) => (
+        {divisionsData.map((item) => (
           <div
             key={item.id}
             aria-hidden
@@ -290,7 +295,7 @@ const DevisionOverview = () => {
           onPointerMove={handleCardPointerMove}
           onPointerLeave={handleCardPointerLeave}
         >
-          {divisions.map((item) => {
+          {divisionsData.map((item) => {
             const isActive = activeBgId === item.id
 
             return (

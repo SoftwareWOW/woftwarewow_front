@@ -14,6 +14,7 @@ import SoftwareWoWProjects from '@/components/wow/softwarewow/SoftwareWoWProject
 import Technologies from '@/components/wow/softwarewow/Technologies'
 import SoftwareRfq from '@/components/wow/softwarewow/SoftwareRfq'
 
+export const revalidate = 60
 type Props = {
   params: Promise<{ locale: string }>
 }
@@ -50,7 +51,7 @@ export default async function SoftwareWowPage({ params }: Props) {
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"
-          ariaLabel="Contact WOW Superagency"
+          ariaLabel="Contact SoftwareWOW"
         />
       </div>
     </div>

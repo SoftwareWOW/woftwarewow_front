@@ -73,11 +73,16 @@ const faqData = [
   },
 ]
 
-const Faq = () => {
+type FaqProps = {
+  faqs?: typeof faqData
+}
+
+const Faq = ({ faqs: faqsProp }: FaqProps) => {
+  const faqItems = faqsProp ?? faqData
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
-  const visibleFaqs = showAll ? faqData : faqData.slice(0, INITIAL_VISIBLE_COUNT)
+  const visibleFaqs = showAll ? faqItems : faqItems.slice(0, INITIAL_VISIBLE_COUNT)
 
   const faqColumns = useMemo(() => {
     const columns: (typeof faqData)[] = [[], [], []]
@@ -93,7 +98,7 @@ const Faq = () => {
 
   const handleToggleShowAll = () => {
     if (showAll) {
-      const hiddenIds = new Set(faqData.slice(INITIAL_VISIBLE_COUNT).map((faq) => faq.id))
+      const hiddenIds = new Set(faqItems.slice(INITIAL_VISIBLE_COUNT).map((faq) => faq.id))
       if (activeAccordion !== null && hiddenIds.has(activeAccordion)) {
         setActiveAccordion(null)
       }
@@ -178,7 +183,7 @@ const Faq = () => {
           ))}
         </div>
 
-        {faqData.length > INITIAL_VISIBLE_COUNT && (
+        {faqItems.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
             <ButtonComponentList>
               <ButtonComponent

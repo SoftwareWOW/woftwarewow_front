@@ -69,9 +69,14 @@ const wowProjects = [
   },
 ]
 
-const WowProjects = () => {
+type WowProjectsProps = {
+  projects?: typeof wowProjects
+}
+
+const WowProjects = ({ projects: projectsProp }: WowProjectsProps) => {
+  const projectsData = projectsProp ?? wowProjects
   const [showAll, setShowAll] = useState(false)
-  const visibleProjects = showAll ? wowProjects : wowProjects.slice(0, INITIAL_VISIBLE_COUNT)
+  const visibleProjects = showAll ? projectsData : projectsData.slice(0, INITIAL_VISIBLE_COUNT)
 
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
@@ -184,7 +189,7 @@ const WowProjects = () => {
         </div>
 
         {/* See More / See Less Button */}
-        {wowProjects.length > INITIAL_VISIBLE_COUNT && (
+        {projectsData.length > INITIAL_VISIBLE_COUNT && (
           <RevealWrapper className="mt-10 flex justify-center md:mt-14">
             <ButtonComponentList>
               <ButtonComponent
