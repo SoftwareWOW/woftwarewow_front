@@ -4,26 +4,23 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 function getStrapiImageRemotePatterns(): NonNullable<NextConfig['images']>['remotePatterns'] {
-  const hostnames = new Set<string>(['wow.softwarewow.xyz'])
+  const strapiUrl = process.env.STRAPI_URL
+  if (!strapiUrl) return []
 
-  if (process.env.STRAPI_URL) {
-    try {
-      hostnames.add(new URL(process.env.STRAPI_URL).hostname)
-    } catch {
-      // ignore invalid STRAPI_URL
-    }
-  }
+  try {
+    const parsed = new URL(strapiUrl)
+    const isLocal = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1'
 
-  return [...hostnames].flatMap((hostname) => {
-    const isLocal = hostname === 'localhost' || hostname === '127.0.0.1'
     return [
       {
-        protocol: isLocal ? ('http' as const) : ('https' as const),
-        hostname,
+        protocol: (parsed.protocol.replace(':', '') || (isLocal ? 'http' : 'https')) as 'http' | 'https',
+        hostname: parsed.hostname,
         pathname: '/uploads/**',
       },
     ]
-  })
+  } catch {
+    return []
+  }
 }
 
 const nextConfig: NextConfig = {

@@ -12,6 +12,13 @@ import hero02 from '@/public/images/wow/Hero/Human/Rectangle2.png'
 import hero03 from '@/public/images/wow/Hero/Human/sadat2.png'
 import hero04 from '@/public/images/wow/Hero/Human/Rectangle3.png'
 
+type HumanTouchGalleryItem = {
+  src: string
+  alt?: string
+  width?: number
+  height?: number
+}
+
 type HumanTouchProps = {
   sectionLabel?: string
   title?: string
@@ -21,17 +28,23 @@ type HumanTouchProps = {
     tagline?: string
     avatar?: string
   }
+  galleryItems?: (HumanTouchGalleryItem | undefined)[]
 }
 
 const HumanTouch = ({
   sectionLabel = 'Human Touch',
   title,
   founder,
+  galleryItems,
 }: HumanTouchProps) => {
   const founderName = founder?.name ?? 'Yahya Sadat'
   const founderRole = founder?.role ?? 'Founder & CEO'
   const founderTagline = founder?.tagline ?? 'Technology powered. People focused.'
   const founderAvatar = founder?.avatar ?? '/images/wow/Hero/Human/sadat1.png'
+  const galleryItem01 = galleryItems?.[0]
+  const galleryItem02 = galleryItems?.[1]
+  const galleryItem03 = galleryItems?.[2]
+  const galleryItem04 = galleryItems?.[3]
 
   return (
     <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
@@ -109,21 +122,45 @@ const HumanTouch = ({
             </RevealWrapper>
 
             <RevealWrapperV2 as="figure" className="reveal-me mb-8 w-full rounded-radius-sm">
-              <Image src={hero01} alt="Hero Img 01" className="w-full" />
+              <Image
+                src={galleryItem01?.src ?? hero01}
+                alt={galleryItem01?.alt || 'Hero Img 01'}
+                width={galleryItem01?.width ?? hero01.width}
+                height={galleryItem01?.height ?? hero01.height}
+                className="h-auto w-full"
+              />
             </RevealWrapperV2>
 
             <RevealWrapper as="figure" className="reveal-me w-full rounded-radius-sm">
-              <Image src={hero02} alt="Hero Img 02" className="w-full" />
+              <Image
+                src={galleryItem02?.src ?? hero02}
+                alt={galleryItem02?.alt || 'Hero Img 02'}
+                width={galleryItem02?.width ?? hero02.width}
+                height={galleryItem02?.height ?? hero02.height}
+                className="h-auto w-full"
+              />
             </RevealWrapper>
           </div>
 
           <div className="w-full flex-1 max-lg:self-center">
             <RevealWrapper as="figure" className="reveal-me mb-8 rounded-radius-sm">
-              <Image src={hero03} alt="Hero Img 03" className="w-full" />
+              <Image
+                src={galleryItem03?.src ?? hero03}
+                alt={galleryItem03?.alt || 'Hero Img 03'}
+                width={galleryItem03?.width ?? hero03.width}
+                height={galleryItem03?.height ?? hero03.height}
+                className="h-auto w-full"
+              />
             </RevealWrapper>
 
             <RevealWrapper as="figure" className="reveal-me rounded-radius-sm">
-              <Image src={hero04} alt="Hero Img 04" className="w-full" />
+              <Image
+                src={galleryItem04?.src ?? hero04}
+                alt={galleryItem04?.alt || 'Hero Img 04'}
+                width={galleryItem04?.width ?? hero04.width}
+                height={galleryItem04?.height ?? hero04.height}
+                className="h-auto w-full"
+              />
             </RevealWrapper>
           </div>
         </div>

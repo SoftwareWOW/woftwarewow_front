@@ -109,6 +109,7 @@ const Home = async ({ params }: Props) => {
           sectionLabel={humanTouch?.sectionLabel}
           title={humanTouch?.title}
           founder={humanTouch?.founder}
+          galleryItems={humanTouch?.galleryItems}
         />
         <Faq faqs={faqs ?? undefined} />
         <WowProjects projects={projects ?? undefined} />

@@ -1,4 +1,4 @@
-import { getStrapiMediaUrl } from '@/lib/strapi/client';
+import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
 import type {
   StrapiSuperagencyDivision,
   StrapiSuperagencyEcosystem,
@@ -82,10 +82,22 @@ export function mapStrapiTestimonials(
       id: index + 1,
       tags: item.tags ?? '',
       title: item.title ?? '',
-      userName: item.userName ?? '',
-      position: item.position ?? '',
+      userName: item.userName?.trim() ?? '',
+      position: item.position?.trim() ?? '',
     })),
   };
+}
+
+function isStrapiMediaPath(path?: string | null) {
+  const value = path?.trim() ?? '';
+  if (!value) return false;
+
+  return (
+    value.startsWith('http://') ||
+    value.startsWith('https://') ||
+    value.startsWith('/uploads/') ||
+    /\.(avif|gif|jpe?g|png|svg|webp)(\?.*)?$/i.test(value)
+  );
 }
 
 export function mapStrapiTestimonialExtras(testimonials: StrapiSuperagencyTestimonial[]) {
@@ -97,15 +109,26 @@ export function mapStrapiTestimonialExtras(testimonials: StrapiSuperagencyTestim
 
   testimonials.forEach((item, index) => {
     const id = index + 1;
-    if (item.userName) {
-      const img = item.userImgPath ?? getStrapiMediaUrl(item.userImg ?? undefined);
-      if (img) clientImages[item.userName] = img;
+    const userName = item.userName?.trim();
+    const avatar =
+      getStrapiMediaUrl(item.userImg ?? undefined) ??
+      (isStrapiMediaPath(item.userImgPath) ? getStrapiMediaUrl({ url: item.userImgPath!.trim() }) : undefined);
+
+    if (userName && avatar) {
+      clientImages[userName] = avatar;
     }
-    if (item.caseStudyHref) {
+
+    const mediaSrc =
+      getStrapiMediaUrl(item.caseStudyMedia ?? undefined) ??
+      (isStrapiMediaPath(item.caseStudyMediaPath)
+        ? getStrapiMediaUrl({ url: item.caseStudyMediaPath!.trim() })
+        : undefined);
+
+    if (item.caseStudyHref || mediaSrc) {
       reviewCaseStudies[id] = {
-        href: item.caseStudyHref,
-        mediaSrc: item.caseStudyMediaPath ?? getStrapiMediaUrl(item.caseStudyMedia ?? undefined) ?? '',
-        mediaAlt: item.caseStudyMediaAlt ?? '',
+        href: item.caseStudyHref?.trim() || '/case-study',
+        mediaSrc: mediaSrc ?? '',
+        mediaAlt: item.caseStudyMediaAlt?.trim() || userName || '',
       };
     }
   });
@@ -166,9 +189,36 @@ export function mapStrapiPartnerLogos(logos: StrapiSuperagencyPartnerLogo[]) {
   }));
 }
 
+function mapStrapiGalleryImage(image?: StrapiMedia | null) {
+  const src = getStrapiMediaUrl(image);
+  return src
+    ? {
+        src,
+        alt: image?.alternativeText ?? undefined,
+        width: image?.width,
+        height: image?.height,
+      }
+    : undefined;
+}
+
 export function mapStrapiHumanTouch(humanTouch: StrapiSuperagencyHumanTouch | null) {
   const content = humanTouch?.content;
   if (!content) return null;
+
+  const galleryByPosition = new Map<
+    string,
+    NonNullable<ReturnType<typeof mapStrapiGalleryImage>>
+  >();
+
+  (content.galleryItems ?? []).forEach((item) => {
+    const mappedImage = mapStrapiGalleryImage(item.image);
+    if (item.position && mappedImage) {
+      galleryByPosition.set(item.position, mappedImage);
+    }
+  });
+
+  const galleryPositions = ['leftTop', 'leftBottom', 'rightTop', 'rightBottom'];
+  const galleryItems = galleryPositions.map((position) => galleryByPosition.get(position));
 
   return {
     sectionLabel: content.heading?.label,
@@ -181,6 +231,7 @@ export function mapStrapiHumanTouch(humanTouch: StrapiSuperagencyHumanTouch | nu
           avatar: getStrapiMediaUrl(content.founder.avatar ?? undefined),
         }
       : undefined,
+    galleryItems: galleryItems.some(Boolean) ? galleryItems : undefined,
   };
 }
 

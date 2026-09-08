@@ -335,11 +335,12 @@ const WowSuperAgencyClient = ({
             <CarouselContent className="-ml-2 md:-ml-4">
               {superAgencyClient.reviews.map((review) => {
                 const caseStudy =
-                  REVIEW_CASE_STUDIES[review.id] ??
-                  REVIEW_CASE_STUDIES[1]
+                  reviewCaseStudies[review.id] ??
+                  reviewCaseStudies[1]
 
                 const clientImage =
-                  CLIENT_IMAGES[review.userName]
+                  clientImages[review.userName] ??
+                  clientImages[review.userName.trim()]
 
                 return (
                   <CarouselItem

@@ -112,6 +112,10 @@ export type StrapiSuperagencyHumanTouch = {
   content?: {
     heading?: { label?: string; title?: string };
     founder?: { name?: string; role?: string; tagline?: string; avatar?: StrapiMedia | null };
+    galleryItems?: {
+      position?: 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
+      image?: StrapiMedia | null;
+    }[] | null;
   } | null;
 };
 

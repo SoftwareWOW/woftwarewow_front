@@ -20,6 +20,23 @@ import type {
 } from '@/lib/strapi/types';
 
 const DEEP_POPULATE = '*';
+const HUMAN_TOUCH_POPULATE = {
+  content: {
+    populate: {
+      heading: true,
+      founder: {
+        populate: {
+          avatar: true,
+        },
+      },
+      galleryItems: {
+        populate: {
+          image: true,
+        },
+      },
+    },
+  },
+};
 
 export async function getSuperagencyLayout(locale: Locale) {
   const [header, footer] = await Promise.all([
@@ -55,7 +72,10 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     fetchSingleType<StrapiSuperagencyHero>('superagency-hero', { locale, populate: DEEP_POPULATE }),
     fetchSingleType<StrapiSuperagencyStats>('superagency-stats', { locale, populate: DEEP_POPULATE }),
     fetchSingleType<StrapiSuperagencySolutions>('superagency-solutions', { locale, populate: DEEP_POPULATE }),
-    fetchSingleType<StrapiSuperagencyHumanTouch>('superagency-human-touch', { locale, populate: DEEP_POPULATE }),
+    fetchSingleType<StrapiSuperagencyHumanTouch>('superagency-human-touch', {
+      locale,
+      populate: HUMAN_TOUCH_POPULATE,
+    }),
     fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', { locale, populate: DEEP_POPULATE }),
     fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', { locale, populate: DEEP_POPULATE }),
     fetchCollection<StrapiSuperagencyDivision>('superagency-divisions', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),

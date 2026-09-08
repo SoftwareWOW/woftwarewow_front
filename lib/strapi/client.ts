@@ -35,7 +35,9 @@ export type StrapiCollectionResponse<T> = {
 export function getStrapiMediaUrl(media?: StrapiMedia | null): string | undefined {
   if (!media?.url) return undefined;
   if (media.url.startsWith('http')) return media.url;
-  return `${STRAPI_URL.replace(/\/$/, '')}${media.url}`;
+  if (!STRAPI_URL) return undefined;
+
+  return `${STRAPI_URL}${media.url}`;
 }
 
 export function isStrapiConfigured(): boolean {
@@ -54,6 +56,30 @@ type InternalFetchOptions = Omit<FetchOptions, 'locale'> & {
   strapiLocale: StrapiLocale;
 };
 
+function appendNestedSearchParam(
+  searchParams: URLSearchParams,
+  key: string,
+  value: unknown,
+) {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => {
+      appendNestedSearchParam(searchParams, `${key}[${index}]`, item);
+    });
+    return;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    Object.entries(value).forEach(([childKey, childValue]) => {
+      appendNestedSearchParam(searchParams, `${key}[${childKey}]`, childValue);
+    });
+    return;
+  }
+
+  if (value !== undefined && value !== null) {
+    searchParams.set(key, String(value));
+  }
+}
+
 async function strapiFetchWithLocale<T>(
   path: string,
   { strapiLocale, populate = '*', sort, filters, revalidate }: InternalFetchOptions,
@@ -67,7 +93,7 @@ async function strapiFetchWithLocale<T>(
   if (typeof populate === 'string') {
     url.searchParams.set('populate', populate);
   } else if (populate) {
-    url.searchParams.set('populate', JSON.stringify(populate));
+    appendNestedSearchParam(url.searchParams, 'populate', populate);
   }
 
   if (sort) url.searchParams.set('sort', sort);
