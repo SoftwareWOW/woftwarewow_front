@@ -1,10 +1,10 @@
 import type { Locale } from '@/i18n/config';
 
-export type StrapiLocale = 'en' | 'fr';
+export type StrapiLocale = Locale;
 
 const STRAPI_LOCALE_BY_FRONTEND: Record<Locale, StrapiLocale> = {
-  'en-US': 'en',
-  'fr-CA': 'fr',
+  'en-US': 'en-US',
+  'fr-CA': 'fr-CA',
 };
 
 export function toStrapiLocale(locale: Locale): StrapiLocale {
@@ -12,5 +12,5 @@ export function toStrapiLocale(locale: Locale): StrapiLocale {
 }
 
 export function getStrapiFallbackLocale(strapiLocale: StrapiLocale): StrapiLocale | null {
-  return strapiLocale === 'en' ? null : 'en';
+  return strapiLocale === 'en-US' ? null : 'en-US';
 }

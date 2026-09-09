@@ -87,7 +87,7 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     fetchCollection<StrapiSuperagencyPartnerLogo>('superagency-partner-logos', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
   ]);
 
-  return {
+  const data = {
     hero,
     stats,
     solutions,
@@ -102,4 +102,36 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     growthArticles,
     partnerLogos,
   };
+
+  if (process.env.NODE_ENV === 'development') {
+    const sections: Record<string, 'ok' | 'empty'> = {
+      hero: hero ? 'ok' : 'empty',
+      stats: stats ? 'ok' : 'empty',
+      solutions: solutions ? 'ok' : 'empty',
+      humanTouch: humanTouch ? 'ok' : 'empty',
+      growthCta: growthCta ? 'ok' : 'empty',
+      ecosystem: ecosystem ? 'ok' : 'empty',
+      divisions: divisions.length ? 'ok' : 'empty',
+      projects: projects.length ? 'ok' : 'empty',
+      testimonials: testimonials.length ? 'ok' : 'empty',
+      faqs: faqs.length ? 'ok' : 'empty',
+      solutionCategories: solutionCategories.length ? 'ok' : 'empty',
+      growthArticles: growthArticles.length ? 'ok' : 'empty',
+      partnerLogos: partnerLogos.length ? 'ok' : 'empty',
+    };
+
+    const empty = Object.entries(sections)
+      .filter(([, status]) => status === 'empty')
+      .map(([name]) => name);
+
+    if (empty.length) {
+      console.info(
+        `[Strapi] Homepage CMS (${locale}): ${empty.length} empty section(s) — ${empty.join(', ')}`,
+      );
+    } else {
+      console.info(`[Strapi] Homepage CMS (${locale}): all sections populated`);
+    }
+  }
+
+  return data;
 }

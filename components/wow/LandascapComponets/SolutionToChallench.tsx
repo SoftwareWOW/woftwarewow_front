@@ -10,6 +10,20 @@ import SectionLabel from '../shared/SectionLabel'
 
 const INITIAL_VISIBLE_COUNT = 3
 
+function splitSolutionsHeading(heading: string) {
+  const trimmed = heading.trim()
+  const highlight = 'Challenges'
+
+  if (trimmed.endsWith(` ${highlight}`)) {
+    return {
+      main: trimmed.slice(0, -(highlight.length + 1)),
+      highlight,
+    }
+  }
+
+  return { main: trimmed, highlight: null as string | null }
+}
+
 const servicesData = [
   {
     id: 1,
@@ -103,11 +117,14 @@ type SolutionToChallengesProps = {
 
 const SolutionToChallenges = ({
   sectionLabel = 'Solutions to chellenges.',
-  heading = 'Built To Solve Modern Business',
+  heading = 'Built To Solve Modern Business Challenges',
   description = 'In a world where change is the only constant, we ensure your business stays ahead of the curve — with integrated technology, marketing, and growth systems built to deliver real results.',
   initialVisibleCount = INITIAL_VISIBLE_COUNT,
+  viewAllLabel = 'View All Solutions',
+  contactLabel = 'Contact Us',
   categories: categoriesProp,
 }: SolutionToChallengesProps) => {
+  const { main: headingMain, highlight: headingHighlight } = splitSolutionsHeading(heading)
   const servicesDataResolved = categoriesProp ?? servicesData
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
@@ -161,8 +178,14 @@ const SolutionToChallenges = ({
             <SectionLabel className="mb-5">{sectionLabel}</SectionLabel>
                           </RevealWrapper>
               <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-                Built To Solve Modern Business{' '}
-                <span className="font-instrument italic lg:text-[65px]">Challenges</span>
+                {headingHighlight ? (
+                  <>
+                    {headingMain}{' '}
+                    <span className="font-instrument italic lg:text-[65px]">{headingHighlight}</span>
+                  </>
+                ) : (
+                  headingMain
+                )}
               </h2>
          
           </div>
@@ -173,8 +196,8 @@ const SolutionToChallenges = ({
               </p>
              <RevealWrapper className="mt-6 flex justify-end md:mt-8">
               <ButtonComponentList>
-                <ButtonComponent href="/services"   variant="white">
-               Explore Our Solutions
+                <ButtonComponent href="/services" variant="white">
+                  Explore Our Solutions
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapper>
@@ -273,13 +296,13 @@ const SolutionToChallenges = ({
                 onClick={handleToggleShowAll}
                 ariaExpanded={showAll}
               >
-                {showAll ? 'See Less' : 'See More'}
+                {showAll ? 'See Less' : viewAllLabel}
               </ButtonComponent>
             </ButtonComponentList>
           )}
           <ButtonComponentList>
-            <ButtonComponent href="/contact" variant="secondary" >
-              Start Now
+            <ButtonComponent href="/contact" variant="secondary">
+              {contactLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>
