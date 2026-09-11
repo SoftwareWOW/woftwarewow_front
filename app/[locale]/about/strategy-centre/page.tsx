@@ -18,6 +18,7 @@ import StrategyInAction from './_components/StrategyInAction'
 import StrategyPlaybooks from './_components/StrategyPlaybooks'
 // 2. The WOW Growth Framework — Home-15 BrandingProcess
 import WowGrowthFramework from './_components/WowGrowthFramework'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

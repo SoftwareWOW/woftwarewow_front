@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'technology-and-saas' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -11,6 +16,7 @@ import MissionSolutions from './_components/MissionSolutions'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import TechnologyHero from './_components/TechnologyHero'
 import TechnologyHeroAbout from './_components/TechnologyHeroAbout'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -7,15 +7,15 @@ import WowText from '@/components/wow/shared/WowText'
 import type { Dictionary } from '@/i18n/types'
 
 type WowFooterProps = {
-  footer: Dictionary['footer']
+  footer: Dictionary['footer'] & { copyright?: string }
 }
 
-export default function WowFooter({ footer: _footer }: WowFooterProps) {
+export default function WowFooter({ footer }: WowFooterProps) {
   return (
     <WowFooterShell
       tabs={footerTextTabs}
       defaultTabId="ask"
-      copyright="© 2026 WOW Superagency. All rights reserved."
+      copyright={footer.copyright ?? '© 2026 WOW Superagency. All rights reserved.'}
       watermark={
         <>
           <WowText variant="watermark" className="text-[length:inherit]" />

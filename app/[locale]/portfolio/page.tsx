@@ -8,6 +8,7 @@ import FeaturedWork from './_components/FeaturedWork'
 import HowWeCreateImpact from './_components/HowWeCreateImpact'
 import PortfolioCta from './_components/PortfolioCta'
 import PortfolioHero from './_components/PortfolioHero'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

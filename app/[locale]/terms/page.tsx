@@ -3,26 +3,52 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
 import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
+import type { Locale } from '@/i18n/config'
+import { buildLegalPageMetadata, loadLegalPage } from '@/lib/strapi/load-legal-page'
 import getMarkDownData from '@/utils/GetMarkDownData'
+import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 
-export const metadata = {
-  title: 'Terms & Conditions',
-}
+export const revalidate = 60
+
 export interface TermsDataType {
   slug: string
   content: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
-const termsData: TermsDataType[] = getMarkDownData('data/policy')
+const fallbackTermsData: TermsDataType[] = getMarkDownData('data/policy')
 
-const FAQPage = () => {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  return buildLegalPageMetadata('terms', locale as Locale, { title: 'Terms & Conditions' })
+}
+
+const TermsPage = async ({ params }: Props) => {
+  const { locale } = await params
+  setRequestLocale(locale as Locale)
+  const legal = await loadLegalPage('terms', locale as Locale)
+
+  const termsData: TermsDataType[] =
+    legal?.body ?
+      [{ slug: 'terms', content: legal.body }]
+    : fallbackTermsData
+
   return (
     <LayoutOne>
-      <PageHero title="Terms & " italicTitle="Privacy" badgeTitle="Terms" scale />
+      <PageHero
+        title={legal?.title?.replace(/\s+\S+$/, '') ?? 'Terms & '}
+        italicTitle={legal?.title?.split(/\s+/).pop() ?? 'Privacy'}
+        badgeTitle="Terms"
+        scale
+      />
       <TermsPolicyBody termsData={termsData} />
       <CTA>
-        Let's chat!
+        Let&apos;s chat!
         <CtaImageSlider
           slides={[
             { id: '1', img: '/images/agent/14.png' },
@@ -37,4 +63,4 @@ const FAQPage = () => {
   )
 }
 
-export default FAQPage
+export default TermsPage

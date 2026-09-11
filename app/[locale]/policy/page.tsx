@@ -3,26 +3,52 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
 import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
+import type { Locale } from '@/i18n/config'
+import { buildLegalPageMetadata, loadLegalPage } from '@/lib/strapi/load-legal-page'
 import getMarkDownData from '@/utils/GetMarkDownData'
+import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 
-export const metadata = {
-  title: 'Privacy & Policy',
-}
+export const revalidate = 60
+
 export interface TermsDataType {
   slug: string
   content: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
-const termsData: TermsDataType[] = getMarkDownData('data/terms')
+const fallbackTermsData: TermsDataType[] = getMarkDownData('data/terms')
 
-const FAQPage = () => {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  return buildLegalPageMetadata('privacy', locale as Locale, { title: 'Privacy & Policy' })
+}
+
+const PolicyPage = async ({ params }: Props) => {
+  const { locale } = await params
+  setRequestLocale(locale as Locale)
+  const legal = await loadLegalPage('privacy', locale as Locale)
+
+  const termsData: TermsDataType[] =
+    legal?.body ?
+      [{ slug: 'privacy', content: legal.body }]
+    : fallbackTermsData
+
   return (
     <LayoutOne>
-      <PageHero title="Privacy & " italicTitle="Policy" badgeTitle="Policy" scale />
+      <PageHero
+        title={legal?.title?.replace(/\s+\S+$/, '') ?? 'Privacy & '}
+        italicTitle={legal?.title?.split(/\s+/).pop() ?? 'Policy'}
+        badgeTitle="Policy"
+        scale
+      />
       <TermsPolicyBody termsData={termsData} heading={true} />
       <CTA>
-        Let's chat!
+        Let&apos;s chat!
         <CtaImageSlider
           slides={[
             { id: '1', img: '/images/agent/01.jpg' },
@@ -37,4 +63,4 @@ const FAQPage = () => {
   )
 }
 
-export default FAQPage
+export default PolicyPage

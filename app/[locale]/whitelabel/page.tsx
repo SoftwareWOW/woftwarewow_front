@@ -7,6 +7,7 @@ import HowWePartner from './_components/HowWePartner'
 import PartnerBenefits from './_components/PartnerBenefits'
 import WhiteLabelCapabilities from './_components/WhiteLabelCapabilities'
 import WhiteLabelHero from './_components/WhiteLabelHero'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

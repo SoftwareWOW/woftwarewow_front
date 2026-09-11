@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'enterprise-infrastructure' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -8,6 +13,7 @@ import ConnectedExpertise from './_components/ConnectedExpertise'
 import EnterpriseInfrastructureHero from './_components/EnterpriseInfrastructureHero'
 import InfrastructureJourney from './_components/InfrastructureJourney'
 import WhatsIncluded from './_components/WhatsIncluded'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

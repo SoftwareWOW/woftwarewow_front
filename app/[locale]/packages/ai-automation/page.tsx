@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'ai-automation' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
@@ -17,6 +22,7 @@ import AutomationTools from './_components/AutomationTools'
 import FromIdeaToAutomation from './_components/FromIdeaToAutomation'
 // 2. Start with the repetitive — SolutionToChallenges
 import StartWithTheRepetitive from './_components/StartWithTheRepetitive'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -1,4 +1,9 @@
 import type { StrapiMedia } from '@/lib/strapi/client';
+import type {
+  StrapiDetailPanel,
+  StrapiFooterColumn,
+  StrapiNavMenuItem,
+} from '@/lib/strapi/types/pages';
 
 export type StrapiHeroContent = {
   headline?: string;
@@ -142,8 +147,8 @@ export type StrapiSuperagencyHeader = {
   closeMenu?: string;
   menu?: string;
   scheduleMeeting?: string;
-  navItems?: unknown[];
-  detailPanels?: unknown[];
+  navItems?: StrapiNavMenuItem[];
+  detailPanels?: StrapiDetailPanel[];
   primaryCta?: { label?: string; href?: string };
 };
 
@@ -153,7 +158,7 @@ export type StrapiSuperagencyFooter = {
   address?: { line1?: string; line2?: string };
   socialLinks?: { platform?: string; url?: string }[];
   footerTabs?: unknown;
-  resourceColumns?: unknown[];
+  resourceColumns?: StrapiFooterColumn[];
   copyright?: string;
 };
 

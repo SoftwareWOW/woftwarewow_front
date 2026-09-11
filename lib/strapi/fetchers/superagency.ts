@@ -19,7 +19,6 @@ import type {
   SuperagencyHomepageData,
 } from '@/lib/strapi/types';
 
-const DEEP_POPULATE = '*';
 const HUMAN_TOUCH_POPULATE = {
   content: {
     populate: {
@@ -38,17 +37,42 @@ const HUMAN_TOUCH_POPULATE = {
   },
 };
 
+const HERO_POPULATE = { heroImage: true };
+const STATS_POPULATE = { stats: true };
+const DIVISION_POPULATE = { featuredImage: true };
+const PROJECT_POPULATE = { thumbnail: true };
+const TESTIMONIAL_POPULATE = { userImg: true, caseStudyMedia: true };
+const PARTNER_LOGO_POPULATE = { logo: true, darkLogo: true };
+
 export async function getSuperagencyLayout(locale: Locale) {
   const [header, footer] = await Promise.all([
     fetchSingleType<StrapiSuperagencyHeader>('superagency-header', {
       locale,
-      populate: DEEP_POPULATE,
+      populate: '*',
     }),
     fetchSingleType<StrapiSuperagencyFooter>('superagency-footer', {
       locale,
-      populate: DEEP_POPULATE,
+      populate: {
+        resourceColumns: { populate: { links: true } },
+        socialLinks: true,
+      },
     }),
   ]);
+
+  if (process.env.NODE_ENV === 'development') {
+    const empty: string[] = [];
+    if (!header) empty.push('header');
+    if (!footer) empty.push('footer');
+    if (empty.length) {
+      console.info(`[Strapi] Layout CMS (${locale}): empty — ${empty.join(', ')}`);
+    } else {
+      const hasNav = Boolean(header?.navItems?.length);
+      const hasFooterColumns = Boolean(footer?.resourceColumns?.length);
+      console.info(
+        `[Strapi] Layout CMS (${locale}): loaded (navItems=${hasNav ? 'yes' : 'no'}, resourceColumns=${hasFooterColumns ? 'yes' : 'no'})`,
+      );
+    }
+  }
 
   return { header, footer };
 }
@@ -69,22 +93,22 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     growthArticles,
     partnerLogos,
   ] = await Promise.all([
-    fetchSingleType<StrapiSuperagencyHero>('superagency-hero', { locale, populate: DEEP_POPULATE }),
-    fetchSingleType<StrapiSuperagencyStats>('superagency-stats', { locale, populate: DEEP_POPULATE }),
-    fetchSingleType<StrapiSuperagencySolutions>('superagency-solutions', { locale, populate: DEEP_POPULATE }),
+    fetchSingleType<StrapiSuperagencyHero>('superagency-hero', { locale, populate: HERO_POPULATE }),
+    fetchSingleType<StrapiSuperagencyStats>('superagency-stats', { locale, populate: STATS_POPULATE }),
+    fetchSingleType<StrapiSuperagencySolutions>('superagency-solutions', { locale, populate: '*' }),
     fetchSingleType<StrapiSuperagencyHumanTouch>('superagency-human-touch', {
       locale,
       populate: HUMAN_TOUCH_POPULATE,
     }),
-    fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', { locale, populate: DEEP_POPULATE }),
-    fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', { locale, populate: DEEP_POPULATE }),
-    fetchCollection<StrapiSuperagencyDivision>('superagency-divisions', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyProject>('wowsuperagencyprojects', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyTestimonial>('wow-super-agency-clients', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyFaq>('superagency-faqs', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencySolutionCategory>('superagency-solution-categories', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyGrowthArticle>('superagency-growth-articles', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyPartnerLogo>('superagency-partner-logos', { locale, populate: DEEP_POPULATE, sort: 'order:asc' }),
+    fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', { locale, populate: '*' }),
+    fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', { locale, populate: '*' }),
+    fetchCollection<StrapiSuperagencyDivision>('superagency-divisions', { locale, populate: DIVISION_POPULATE, sort: 'order:asc' }),
+    fetchCollection<StrapiSuperagencyProject>('wowsuperagencyprojects', { locale, populate: PROJECT_POPULATE, sort: 'order:asc' }),
+    fetchCollection<StrapiSuperagencyTestimonial>('wow-super-agency-clients', { locale, populate: TESTIMONIAL_POPULATE, sort: 'order:asc' }),
+    fetchCollection<StrapiSuperagencyFaq>('superagency-faqs', { locale, populate: '*', sort: 'order:asc' }),
+    fetchCollection<StrapiSuperagencySolutionCategory>('superagency-solution-categories', { locale, populate: '*', sort: 'order:asc' }),
+    fetchCollection<StrapiSuperagencyGrowthArticle>('superagency-growth-articles', { locale, populate: { thumbnail: true }, sort: 'order:asc' }),
+    fetchCollection<StrapiSuperagencyPartnerLogo>('superagency-partner-logos', { locale, populate: PARTNER_LOGO_POPULATE, sort: 'order:asc' }),
   ]);
 
   const data = {

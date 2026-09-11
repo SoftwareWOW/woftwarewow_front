@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'professional-services' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -9,6 +14,7 @@ import ProfessionalServiceSolutions from './_components/ProfessionalServiceSolut
 import ProfessionalServicesHero from './_components/ProfessionalServicesHero'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import WhatMattersMost from './_components/WhatMattersMost'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

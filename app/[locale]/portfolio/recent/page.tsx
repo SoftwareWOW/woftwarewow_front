@@ -5,6 +5,7 @@ import { setRequestLocale } from 'next-intl/server'
 import RecentWorkCta from './_components/RecentWorkCta'
 import RecentWorkExplorer from './_components/RecentWorkExplorer'
 import RecentWorkHero from './_components/RecentWorkHero'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

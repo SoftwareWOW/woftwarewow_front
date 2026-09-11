@@ -1,16 +1,16 @@
 import type { Locale } from '@/i18n/config';
 
-export type StrapiLocale = Locale;
+/** Strapi i18n codes used by the CMS (includes legacy `en` from local dev seeds). */
+export type StrapiLocale = Locale | 'en';
 
-const STRAPI_LOCALE_BY_FRONTEND: Record<Locale, StrapiLocale> = {
-  'en-US': 'en-US',
-  'fr-CA': 'fr-CA',
-};
+export function getStrapiLocaleChain(locale: Locale): StrapiLocale[] {
+  if (locale === 'fr-CA') {
+    return ['fr-CA', 'en-US', 'en'];
+  }
 
-export function toStrapiLocale(locale: Locale): StrapiLocale {
-  return STRAPI_LOCALE_BY_FRONTEND[locale];
+  return ['en-US', 'en'];
 }
 
-export function getStrapiFallbackLocale(strapiLocale: StrapiLocale): StrapiLocale | null {
-  return strapiLocale === 'en-US' ? null : 'en-US';
+export function toStrapiLocale(locale: Locale): StrapiLocale {
+  return locale;
 }

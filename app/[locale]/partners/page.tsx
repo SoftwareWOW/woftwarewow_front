@@ -7,6 +7,7 @@ import HowWePartner from './_components/HowWePartner'
 import PartnerNetwork from './_components/PartnerNetwork'
 import PartnersHero from './_components/PartnersHero'
 import WhyPartnerWithWow from './_components/WhyPartnerWithWow'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

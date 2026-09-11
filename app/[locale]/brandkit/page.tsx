@@ -8,6 +8,7 @@ import BrandSystem from './_components/BrandSystem'
 import BrandUsageGuidelines from './_components/BrandUsageGuidelines'
 import BrandVisualStyle from './_components/BrandVisualStyle'
 import BrandKitLogos from './_components/BrandKitLogo'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

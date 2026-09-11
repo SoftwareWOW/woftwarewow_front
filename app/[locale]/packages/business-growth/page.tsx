@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'business-growth' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -13,6 +18,7 @@ import ConnectedGrowth from './_components/ConnectedGrowth'
 import GrowthPieces from './_components/GrowthPieces'
 // 5. How it works — AiWithPurpose
 import HowItWorks from './_components/HowItWorks'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -15,6 +15,7 @@ import SuperagencyAdvantage from './_components/SuperagencyAdvantage'
 import WhatMakesUsDifferent from './_components/WhatMakesUsDifferent'
 // 1. Hero — Why WOW? — Home-19 HeroV19
 import WhyUsHero from './_components/WhyUsHero'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

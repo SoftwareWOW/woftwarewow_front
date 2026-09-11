@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'saas-product-development' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
@@ -14,6 +19,7 @@ import SaasIntegrations from './_components/SaasIntegrations'
 import SaasPackageCard from './_components/SaasPackageCard'
 import SaasProductHero from './_components/SaasProductHero'
 import SaasTransformPlan from './_components/SaasTransformPlan'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

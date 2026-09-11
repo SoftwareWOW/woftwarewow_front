@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'education-and-training' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -11,6 +16,7 @@ import HowItWorks from './_components/HowItWorks'
 import MissionSolutions from './_components/MissionSolutions'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import SocialGallery from './_components/SocialGallery'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

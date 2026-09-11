@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'hospitality-and-tourism' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -11,6 +16,7 @@ import HospitalityHero from './_components/HospitalityHero'
 import HospitalityHeroAbout from './_components/HospitalityHeroAbout'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import WhatMattersMost from './_components/WhatMattersMost'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

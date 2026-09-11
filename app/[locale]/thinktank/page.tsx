@@ -10,6 +10,7 @@ import ThinkTankFaq from './_components/ThinkTankFaq'
 import ThinkTankHero from './_components/ThinkTankHero'
 import ThinkTankSessionInfo from './_components/ThinkTankSessionInfo'
 import WhyThinkTank from './_components/WhyThinkTank'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

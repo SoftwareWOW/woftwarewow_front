@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'organizations-and-nonprofits' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -11,6 +16,7 @@ import OrganizationsHero from './_components/OrganizationsHero'
 import OrganizationsHeroAbout from './_components/OrganizationsHeroAbout'
 import OurPortfolio from './_components/OurPortfolio'
 import RecommendedSolutions from './_components/RecommendedSolutions'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'software-and-technology' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -13,6 +18,7 @@ import SoftwareTechHero from './_components/SoftwareTechHero'
 import TechLaunchPath from './_components/TechLaunchPath'
 // 2. What We Build — Home-16 ServicesV14
 import WhatWeBuild from './_components/WhatWeBuild'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

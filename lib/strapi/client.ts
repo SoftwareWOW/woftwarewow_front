@@ -1,9 +1,5 @@
 import type { Locale } from '@/i18n/config';
-import {
-  getStrapiFallbackLocale,
-  toStrapiLocale,
-  type StrapiLocale,
-} from '@/lib/strapi/locale';
+import { getStrapiLocaleChain, type StrapiLocale } from '@/lib/strapi/locale';
 
 const STRAPI_URL = (process.env.STRAPI_URL ?? '').replace(/\/$/, '');
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
@@ -97,7 +93,7 @@ async function strapiFetchWithLocale<T>(
   }
 
   if (sort) url.searchParams.set('sort', sort);
-  if (filters) url.searchParams.set('filters', JSON.stringify(filters));
+  if (filters) appendNestedSearchParam(url.searchParams, 'filters', filters);
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -131,27 +127,32 @@ export async function strapiFetch<T>(
   path: string,
   { locale, populate = '*', sort, filters, revalidate }: FetchOptions,
 ): Promise<T | null> {
-  const strapiLocale = toStrapiLocale(locale);
-  const result = await strapiFetchWithLocale<T>(path, {
-    strapiLocale,
-    populate,
-    sort,
-    filters,
-    revalidate,
-  });
+  const localeChain = getStrapiLocaleChain(locale);
 
-  if (result) return result;
+  for (const [index, strapiLocale] of localeChain.entries()) {
+    const result = await strapiFetchWithLocale<T>(path, {
+      strapiLocale,
+      populate,
+      sort,
+      filters,
+      revalidate,
+    });
 
-  const fallbackLocale = getStrapiFallbackLocale(strapiLocale);
-  if (!fallbackLocale) return null;
+    if (!result) continue;
 
-  return strapiFetchWithLocale<T>(path, {
-    strapiLocale: fallbackLocale,
-    populate,
-    sort,
-    filters,
-    revalidate,
-  });
+    if (
+      process.env.NODE_ENV === 'development' &&
+      index > 0
+    ) {
+      console.info(
+        `[Strapi] ${path}: used fallback locale "${strapiLocale}" (requested ${localeChain[0]})`,
+      );
+    }
+
+    return result;
+  }
+
+  return null;
 }
 
 export async function fetchSingleType<T>(

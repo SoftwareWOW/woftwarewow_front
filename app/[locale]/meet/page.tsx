@@ -7,6 +7,29 @@ import MeetHero from './_components/MeetHero'
 import MeetingInformation from './_components/MeetingInformation'
 import WhyMeetWithUs from './_components/WhyMeetWithUs'
 
+import type { Locale } from '@/i18n/config'
+import {
+  buildSuperagencyPageMetadata,
+  loadSuperagencyPage,
+} from '@/lib/strapi/superagency-page-loader'
+import { setRequestLocale } from 'next-intl/server'
+
+const PAGE_SLUG = 'meet' as const
+
+export const revalidate = 60
+
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Meet' })
+}
+
+
+
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
 export const metadata: Metadata = {

@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'retail-and-ecommerce' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -12,6 +17,7 @@ import RetailEcommerceHero from './_components/RetailEcommerceHero'
 import RetailGrowthPillars from './_components/RetailGrowthPillars'
 import RetailHeroAbout from './_components/RetailHeroAbout'
 import SocialGallery from './_components/SocialGallery'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

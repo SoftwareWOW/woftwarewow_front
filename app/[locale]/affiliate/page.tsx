@@ -7,6 +7,7 @@ import AffiliateBenefits from './_components/AffiliateBenefits'
 import AffiliateHero from './_components/AffiliateHero'
 import AffiliateJourney from './_components/AffiliateJourney'
 import PartnerPaths from './_components/PartnerPaths'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

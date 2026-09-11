@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'learning-and-events' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -8,6 +13,7 @@ import LearningEventsHero from './_components/LearningEventsHero'
 import LearningTopics from './_components/LearningTopics'
 import LearnYourWay from './_components/LearnYourWay'
 import UpcomingEvents from './_components/UpcomingEvents'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

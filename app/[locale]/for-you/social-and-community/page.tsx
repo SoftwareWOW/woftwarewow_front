@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'social-and-community' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -15,6 +20,7 @@ import SocialCommunityHero from './_components/SocialCommunityHero'
 import SocialGallery from './_components/SocialGallery'
 // 2. Process — Home-07 ProcessV4
 import SocialProcess from './_components/SocialProcess'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

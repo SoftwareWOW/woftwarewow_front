@@ -6,6 +6,7 @@ import ClientStories from './_components/ClientStories'
 import ClientsCta from './_components/ClientsCta'
 import ClientsHero from './_components/ClientsHero'
 import ClientsMarquee from './_components/ClientsMarquee'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

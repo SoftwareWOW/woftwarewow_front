@@ -15,6 +15,7 @@ import PartnersHero from './_components/PartnersHero'
 import WaysToPartner from './_components/WaysToPartner'
 // 4. Why We Partner — Home-23 WhyChooseUsV7
 import WhyWePartner from './_components/WhyWePartner'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

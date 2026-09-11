@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'marketing-and-growth' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -17,6 +22,7 @@ import SpecialistTeams from './_components/SpecialistTeams'
 import EverythingToGrow from './_components/EverythingToGrow'
 // 2. Your Growth Challenges — Home-16 WhyChooseUsV5
 import GrowthChallenges from './_components/GrowthChallenges'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'hosting-and-infrastructure' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquee from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -14,6 +19,7 @@ import HostingInfraHero from './_components/HostingInfraHero'
 import HostingThatFits from './_components/HostingThatFits'
 // 3. Infrastructure Solutions — RevenueCapabilities flip cards
 import InfrastructureSolutions from './_components/InfrastructureSolutions'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

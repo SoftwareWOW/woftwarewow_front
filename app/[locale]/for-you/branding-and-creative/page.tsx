@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'branding-and-creative' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -15,6 +20,7 @@ import BuiltToBeUsed from './_components/BuiltToBeUsed'
 import OurCapabilities from './_components/OurCapabilities'
 // 5. Our Tools — Home-06 ClientV4 pattern
 import OurTools from './_components/OurTools'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

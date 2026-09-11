@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'digital-transformation' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -15,6 +20,7 @@ import TransformationPriorities from './_components/TransformationPriorities'
 import TransformationPlan from './_components/TransformationPlan'
 // 2. The Gap — LearnYourWay / HostingThatFits
 import TheGap from './_components/TheGap'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

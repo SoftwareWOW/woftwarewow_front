@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'healthcare-and-wellness' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -11,6 +16,7 @@ import CareSolutions from './_components/CareSolutions'
 import ExperiencePillars from './_components/ExperiencePillars'
 import HealthcareHero from './_components/HealthcareHero'
 import HealthcareHeroAbout from './_components/HealthcareHeroAbout'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

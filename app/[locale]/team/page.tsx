@@ -4,6 +4,29 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Metadata } from 'next'
 import TeamHero from './_components/TeamHero'
 
+import type { Locale } from '@/i18n/config'
+import {
+  buildSuperagencyPageMetadata,
+  loadSuperagencyPage,
+} from '@/lib/strapi/superagency-page-loader'
+import { setRequestLocale } from 'next-intl/server'
+
+const PAGE_SLUG = 'team' as const
+
+export const revalidate = 60
+
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Team' })
+}
+
+
+
 export const metadata: Metadata = {
   title: 'Our Team',
   description:
@@ -33,7 +56,12 @@ export const metadata: Metadata = {
   },
 }
 
-const TeamPage = () => {
+const TeamPage = async ({ params }: Props) => {
+  const { locale } = await params
+  setRequestLocale(locale as Locale)
+  await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">

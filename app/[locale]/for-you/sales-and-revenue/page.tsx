@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'sales-and-revenue' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -13,6 +18,7 @@ import SalesRevenueHero from './_components/SalesRevenueHero'
 import SalesVisibility from './_components/SalesVisibility'
 // 2. Find the Gap — Home-19 ElevateBrandV2
 import SalesJourneyGap from './_components/SalesJourneyGap'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

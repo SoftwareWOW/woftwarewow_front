@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'ai-and-automation' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
@@ -17,6 +22,7 @@ import AiWithPurpose from './_components/AiWithPurpose'
 // 2. Start with the work — SolutionToChallenges
 import StartWithTheWork from './_components/StartWithTheWork'
 import Marquee from '@/components/wow/LandascapComponets/Marquee'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

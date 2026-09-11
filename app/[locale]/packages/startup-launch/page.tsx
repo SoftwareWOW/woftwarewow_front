@@ -1,3 +1,8 @@
+
+const PAGE_SLUG = 'startup-launch' as const
+
+export const revalidate = 60
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -13,6 +18,7 @@ import SpecialistTeams from './_components/SpecialistTeams'
 import StartupLaunchHero from './_components/StartupLaunchHero'
 // 3. What's included — Home-12 WhyChooseUs
 import WhatsIncluded from './_components/WhatsIncluded'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>

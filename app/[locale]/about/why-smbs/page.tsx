@@ -17,6 +17,7 @@ import TheReality from './_components/TheReality'
 import WhySuperagency from './_components/WhySuperagency'
 // 1. Hero — IndustriesHero
 import WhySmbsHero from './_components/WhySmbsHero'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
 
 type Props = {
   params: Promise<{ locale: string }>
