@@ -1,6 +1,8 @@
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const stats = [
+const DEFAULT_STATS = [
   {
     value: '$2B',
     label: 'Total Revenue',
@@ -15,17 +17,35 @@ const stats = [
   },
 ]
 
-const IndustriesJourney = () => {
+type IndustriesJourneyProps = Partial<CmsTechnologiesSection>
+
+const IndustriesJourney = ({
+  eyebrow = '',
+  title = 'Join in the journey',
+  accentTitle = '',
+  description,
+  items,
+}: IndustriesJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = DEFAULT_STATS.map((item, index) => {
+    const cms = items?.[index]
+    if (!cms) return item
+    return {
+      ...item,
+      value: cms.title || item.value,
+      label: cms.description ?? item.label,
+    }
+  })
+
+
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="mx-auto max-w-[1320px] border-y border-[#1515151A] py-10 transition-colors duration-300 dark:border-white/10 md:py-14 lg:py-16">
         <RevealWrapper className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
-          <h2 className="max-w-[420px] text-[clamp(1.75rem,3.5vw,3rem)] font-normal leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-            Join in the journey
-          </h2>
+          <h2 className="max-w-[420px] text-[clamp(1.75rem,3.5vw,3rem)] font-normal leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">{header.title}</h2>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10 md:gap-14 lg:gap-16 xl:gap-20">
-            {stats.map((stat) => (
+            {mergedItems.map((stat) => (
               <div key={stat.label} className="text-left sm:text-center lg:min-w-[120px]">
                 <p className="text-[clamp(1.75rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                   {stat.value}

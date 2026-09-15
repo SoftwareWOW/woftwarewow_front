@@ -7,11 +7,21 @@ import { useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-interface FaqProps {
-  bigTitleWithBadge?: boolean
+type FaqItem = {
+  id?: number
+  question: string
+  answer: string
 }
 
-const FAQ = ({ bigTitleWithBadge = false }: FaqProps) => {
+interface FaqProps {
+  bigTitleWithBadge?: boolean
+  items?: FaqItem[] | null
+}
+
+const FAQ = ({ bigTitleWithBadge = false, items }: FaqProps) => {
+  const faqItems = items?.length ?
+      items.map((item, index) => ({ id: item.id ?? index + 1, question: item.question, answer: item.answer }))
+    : faqData
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
@@ -51,7 +61,7 @@ const FAQ = ({ bigTitleWithBadge = false }: FaqProps) => {
         )}
 
         <RevealWrapper className="mx-auto w-full max-w-[900px] [&>*:not(:last-child)]:mb-6">
-          {faqData.map((item, index) => (
+          {faqItems.map((item, index) => (
             <div
               key={item.id}
               className={`faq-body-transition overflow-hidden border bg-backgroundBody duration-[400ms] dark:bg-dark ${

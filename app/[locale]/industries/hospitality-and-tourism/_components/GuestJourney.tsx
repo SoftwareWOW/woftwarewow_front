@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const topRow = [
+const DEFAULT_TOPROW = [
   {
     number: '01',
     title: 'Discover',
@@ -58,13 +60,24 @@ const JourneyCard = ({ card, tall = false }: { card: JourneyCard; tall?: boolean
 )
 
 /** Layout: Home-14 WhyChooseUsV3 — 3+2 bordered cards. */
-const GuestJourney = () => {
+type GuestJourneyProps = Partial<CmsProcessSection>
+
+const GuestJourney = ({
+  eyebrow = 'THE GUEST JOURNEY',
+  title = 'Make Every Stage Count.',
+  accentTitle = '',
+  description,
+  steps,
+}: GuestJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_TOPROW, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>THE GUEST JOURNEY</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3">Make Every Stage Count.</h2>
@@ -79,7 +92,7 @@ const GuestJourney = () => {
 
         <article>
           <RevealWrapper className="mb-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            {topRow.map((card) => (
+            {mergedSteps.map((card) => (
               <JourneyCard key={card.number} card={card} />
             ))}
           </RevealWrapper>

@@ -3,6 +3,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 type GalleryItem = {
@@ -55,7 +57,12 @@ const data: GalleryItem[] = [
 ]
 
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
-const SocialGallery = () => {
+type SocialGalleryProps = Partial<CmsTechnologiesSection>
+
+const SocialGallery = ({ eyebrow, title, accentTitle, description, items }: SocialGalleryProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
   const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)

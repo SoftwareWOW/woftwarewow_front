@@ -3,6 +3,13 @@ const PAGE_SLUG = 'business-growth' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Business Growth Package',
+  title: 'Turn growth into a system.',
+  description:
+    'Bring your marketing, sales and digital growth activities together in one coordinated package designed to help your business attract more opportunities, convert more customers and keep improving.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -18,7 +25,8 @@ import ConnectedGrowth from './_components/ConnectedGrowth'
 import GrowthPieces from './_components/GrowthPieces'
 // 5. How it works — AiWithPurpose
 import HowItWorks from './_components/HowItWorks'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -26,46 +34,31 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Business Growth Package | WOW Superagency',
-    description:
-      'Bring your marketing, sales and digital growth activities together in one coordinated package designed to help your business attract more opportunities, convert more customers and keep improving.',
-    keywords: [
-      'business growth package',
-      'growth strategy',
-      'demand generation',
-      'conversion and sales',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Business Growth Package | WOW Superagency',
-      description: 'Turn growth into a system — marketing, conversion and sales working together.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/packages/business-growth`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Business Growth Package' })
 }
 
 export default async function BusinessGrowthPackagePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — Home-19 HeroV19 */}
-        <BusinessGrowthHero />
+        <BusinessGrowthHero {...hero} images={hero.images} />
         {/* 2. Built for Growth — Home-04 AboutV4 */}
-        <BuiltForGrowth />
+        <BuiltForGrowth {...(sections.builtForGrowth ?? {})} />
         {/* 3. Growth pieces — Home-04 ServicesV5 */}
-        <GrowthPieces />
+        <GrowthPieces {...(sections.growthPieces ?? {})} />
         {/* 4. Connected Growth — Home-07 ProcessV4 */}
-        <ConnectedGrowth />
+        <ConnectedGrowth {...(sections.connectedGrowth ?? {})} />
         {/* 5. How it works — AiWithPurpose */}
-        <HowItWorks />
+        <HowItWorks {...(sections.howItWorks ?? {})} />
         {/* 6. General CTA */}
         <WowGrowthCta
           accentText="Ready to grow"

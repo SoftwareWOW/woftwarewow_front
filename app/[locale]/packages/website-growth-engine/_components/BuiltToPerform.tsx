@@ -3,6 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 type CapabilityCard = {
   title: string
@@ -40,7 +42,7 @@ const iconInfra = (
   </svg>
 )
 
-const topRowCards: CapabilityCard[] = [
+const DEFAULT_TOP_ITEMS: CapabilityCard[] = [
   {
     title: 'Conversion focused',
     description: 'Designed to turn more visitors into customers.',
@@ -58,7 +60,7 @@ const topRowCards: CapabilityCard[] = [
   },
 ]
 
-const bottomRowCards: CapabilityCard[] = [
+const DEFAULT_BOTTOM_ITEMS: CapabilityCard[] = [
   {
     title: 'Mobile first',
     description: 'Built around the way customers browse today.',
@@ -101,24 +103,44 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: RevenueCapabilities / Home-24 ServicesV16 — hover-flip cards, 3+3 grid. */
-const BuiltToPerform = () => {
+const BuiltToPerform = ({
+  eyebrow = 'Built to Perform',
+  title = 'Designed for more than ',
+  accentTitle = 'looks.',
+  description =
+    'Every part of your website should help improve visibility, experience, conversion, and performance.',
+  items,
+}: Props = {}) => {
+  const defaultItems = [...DEFAULT_TOP_ITEMS, ...DEFAULT_BOTTOM_ITEMS]
+  const mergedItems = mergeFeatureItems(
+    defaultItems.map(({ title: t, description: d }) => ({ title: t, description: d })),
+    items,
+  ).map((item, index) => ({
+    ...defaultItems[index],
+    title: item.title,
+    description: item.description ?? defaultItems[index].description,
+  }))
+  const topRowCards = mergedItems.slice(0, DEFAULT_TOP_ITEMS.length)
+  const bottomRowCards = mergedItems.slice(DEFAULT_TOP_ITEMS.length)
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Built to Perform</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3 lg:leading-[1.21]">
-              Designed for more than <InstrumentText>looks.</InstrumentText>
+              {title}
+              <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-[770px] text-[#808080]">
-              Every part of your website should help improve visibility, experience, conversion, and performance.
-            </p>
+            <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
       </div>

@@ -3,8 +3,10 @@ import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Share the Opportunity',
@@ -28,24 +30,34 @@ const steps = [
 ]
 
 /** Layout: organizations ImpactJourney — split heading + 2×2 numbered grid. */
-const AffiliateJourney = () => {
+type AffiliateJourneyProps = Partial<CmsProcessSection>
+
+const AffiliateJourney = ({
+  eyebrow = 'SIMPLE FROM THE START',
+  title = 'Introduce. Connect. Get',
+  accentTitle = 'Rewarded.',
+  description,
+  steps,
+  image,
+}: AffiliateJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section className="relative mx-auto max-w-[1600px] px-5">
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <div>
           <HeroGradientAnimation />
           <RevealWrapper className="reveal-me mb-3">
-            <SectionLabel>SIMPLE FROM THE START</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation02>
-            <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
-              Introduce. Connect. Get <InstrumentText>Rewarded.</InstrumentText>
-            </h2>
+            <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">{header.title}<InstrumentText>{header.accentTitle}</InstrumentText></h2>
           </TextAppearAnimation02>
         </div>
 
         <div className="grid grid-cols-2 gap-y-[26px]">
-          {steps.map((step, index) => (
+          {mergedSteps.map((step, index) => (
             <RevealWrapper
               key={step.title}
               className={`px-[30px] py-[50px] ${index % 2 === 0 ? 'border-r dark:border-dark' : ''}`}

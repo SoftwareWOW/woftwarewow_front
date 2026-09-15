@@ -1,7 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '01',
     title: 'Define',
@@ -25,19 +27,22 @@ const steps = [
 ]
 
 /** Layout: Services ServiceProces — numbered steps with a single divider between columns. */
-const LaunchPath = () => {
+const LaunchPath = ({
+  title = 'A clear path from idea to launch.',
+  steps,
+}: Partial<CmsProcessSection> = {}) => {
+  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section>
       <div className="container">
         <RevealWrapper className="reveal-me mb-20">
-          <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">
-            A clear path from idea to launch.
-          </h2>
+          <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">{title}</h2>
         </RevealWrapper>
 
         <RevealWrapper>
           <div className="grid grid-cols-1 items-start justify-between gap-10 md:grid-cols-2 md:gap-x-0 lg:gap-y-16">
-            {steps.map((step, index) => (
+            {displaySteps.map((step, index) => (
               <RevealWrapper
                 key={step.number}
                 className={`text-center md:px-10 ${

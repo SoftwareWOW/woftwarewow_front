@@ -4,6 +4,8 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 type CapabilityCard = {
   title: string
@@ -11,7 +13,7 @@ type CapabilityCard = {
   icon: ReactNode
 }
 
-const topRowCards: CapabilityCard[] = [
+const DEFAULT_TOP_ITEMS: CapabilityCard[] = [
   {
     title: 'Digital & Process Audit',
     description:
@@ -44,7 +46,7 @@ const topRowCards: CapabilityCard[] = [
   },
 ]
 
-const bottomRowCards: CapabilityCard[] = [
+const DEFAULT_BOTTOM_ITEMS: CapabilityCard[] = [
   {
     title: 'Digital Experience',
     description:
@@ -90,23 +92,40 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
   </RevealWrapper>
 )
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: RevenueCapabilities / Home-24 ServicesV16 — hover-flip cards, 3+2 grid. */
-const TransformationPlan = () => {
+const TransformationPlan = ({
+  eyebrow = 'Your Transformation Plan',
+  title = 'Modernize what matters.',
+  description =
+    'We identify where technology can make the biggest difference, then bring the right improvements together into one coordinated transformation.',
+  items,
+}: Props = {}) => {
+  const defaultItems = [...DEFAULT_TOP_ITEMS, ...DEFAULT_BOTTOM_ITEMS]
+  const mergedItems = mergeFeatureItems(
+    defaultItems.map(({ title: t, description: d }) => ({ title: t, description: d })),
+    items,
+  ).map((item, index) => ({
+    ...defaultItems[index],
+    title: item.title,
+    description: item.description ?? defaultItems[index].description,
+  }))
+  const topRowCards = mergedItems.slice(0, DEFAULT_TOP_ITEMS.length)
+  const bottomRowCards = mergedItems.slice(DEFAULT_TOP_ITEMS.length)
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Your Transformation Plan</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 lg:leading-[1.21]">Modernize what matters.</h2>
+            <h2 className="text-appear mb-3 lg:leading-[1.21]">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-[770px] text-[#808080]">
-              We identify where technology can make the biggest difference, then bring the right improvements together
-              into one coordinated transformation.
-            </p>
+            <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
       </div>

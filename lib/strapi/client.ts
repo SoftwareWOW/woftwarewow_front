@@ -111,7 +111,18 @@ async function strapiFetchWithLocale<T>(
 
     if (!response.ok) {
       if (response.status !== 404) {
-        console.error(`Strapi fetch failed: ${path} (${response.status})`);
+        let detail = '';
+        try {
+          const body = (await response.json()) as {
+            error?: { message?: string; details?: { key?: string } };
+          };
+          const message = body.error?.message;
+          const key = body.error?.details?.key;
+          detail = message ? `: ${message}${key ? ` (${key})` : ''}` : '';
+        } catch {
+          // ignore parse errors
+        }
+        console.error(`Strapi fetch failed: ${path} (${response.status})${detail}`);
       }
       return null;
     }

@@ -4,6 +4,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import type { CmsImageGallerySection } from '@/lib/strapi/mappers/page-sections'
+import { mergeGalleryItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 type GalleryItem = {
   id: number
@@ -13,7 +15,7 @@ type GalleryItem = {
 
 const card = (file: string) => `/images/wow/nav/cards/${encodeURIComponent(file)}`
 
-const data: GalleryItem[] = [
+const DEFAULT_DATA: GalleryItem[] = [
   { id: 1, image: '/images/wow/Hero/devision/Education.jpg', link: 'https://www.instagram.com/' },
   { id: 2, image: card('learningevent.png'), link: 'https://www.instagram.com/' },
   { id: 3, image: card('pexels-fauxels-3183132 1.png'), link: 'https://www.instagram.com/' },
@@ -25,7 +27,18 @@ const data: GalleryItem[] = [
 ]
 
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
-const SocialGallery = () => {
+type SocialGalleryProps = Partial<CmsImageGallerySection>
+
+const SocialGallery = ({
+  eyebrow = 'Gallery',
+  title,
+  accentTitle,
+  description,
+  images,
+}: SocialGalleryProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const galleryItems = mergeGalleryItems(DEFAULT_DATA, images)
+
   const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -60,7 +73,7 @@ const SocialGallery = () => {
   }, [currentIndex])
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % galleryItems.length)
   }, [])
 
   const startSlider = useCallback(() => {
@@ -109,7 +122,7 @@ const SocialGallery = () => {
               className="slides-wrapper relative flex h-full w-full items-center justify-center"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              {data.map((item, index) => (
+              {galleryItems.map((item, index) => (
                 <div
                   key={item.id}
                   ref={(el) => {

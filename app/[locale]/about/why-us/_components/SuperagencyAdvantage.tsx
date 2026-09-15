@@ -5,6 +5,8 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const divisions = [
   {
@@ -38,7 +40,13 @@ const divisions = [
 ]
 
 /** Layout: Home-02 ProcessV2 — hover capability grid (ecosystem around one partner). */
-const SuperagencyAdvantage = () => {
+type SuperagencyAdvantageProps = Partial<CmsProcessSection>
+
+const SuperagencyAdvantage = ({ eyebrow, title, accentTitle, description, steps }: SuperagencyAdvantageProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps([], steps)
+
+
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.2] max-lg:scale-y-[2.8]">

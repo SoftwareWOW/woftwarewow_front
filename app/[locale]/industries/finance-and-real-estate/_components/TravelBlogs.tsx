@@ -3,6 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -32,14 +34,20 @@ const packages = [
 ]
 
 /** Layout: Home-13 TravelBlogs — 3 overlapping content panels. Title underline on hover. */
-const TravelBlogs = () => {
+type TravelBlogsProps = Partial<CmsTechnologiesSection>
+
+const TravelBlogs = ({ eyebrow = 'RECOMMENDED SOLUTIONS', title, accentTitle, description, items }: TravelBlogsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section className="relative overflow-visible pb-28 md:pb-40 lg:pb-48">
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
           <div className="flex-1 md:self-start">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>RECOMMENDED SOLUTIONS</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear">Packages Built for High-Trust Growth.</h2>

@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
 type IconTone = 'front' | 'back'
 
@@ -86,7 +88,7 @@ const BackupsIcon = ({ tone }: { tone: IconTone }) => (
   </svg>
 )
 
-const solutions: SolutionCard[] = [
+const DEFAULT_SOLUTIONS: SolutionCard[] = [
   {
     title: 'Website Hosting',
     headline: 'Reliable hosting for your digital presence.',
@@ -154,24 +156,35 @@ const FlipCard = ({ card }: { card: SolutionCard }) => (
 )
 
 /** Layout: RevenueCapabilities / ServicesV16 — hover-flip cards, 3+3 grid. */
-const InfrastructureSolutions = () => {
+const InfrastructureSolutions = ({
+  eyebrow = 'Infrastructure Solutions',
+  title = 'The essentials, managed in',
+  accentTitle = 'one place.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displaySolutions = mergeFeatureItems(DEFAULT_SOLUTIONS, items).map((card, index) => ({
+    ...DEFAULT_SOLUTIONS[index],
+    title: card.title,
+    description: card.description ?? DEFAULT_SOLUTIONS[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Infrastructure Solutions</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear">
-              The essentials, managed in <InstrumentText>one place.</InstrumentText>
+              {title} <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
         </div>
       </div>
 
       <div className={gridRowClass}>
-        {solutions.slice(0, 3).map((card) => (
+        {displaySolutions.slice(0, 3).map((card) => (
           <FlipCard key={card.title} card={card} />
         ))}
       </div>
@@ -179,7 +192,7 @@ const InfrastructureSolutions = () => {
       <div
         className={`${gridRowClass} max-lg:mt-5 max-lg:[&>*]:border-y max-lg:dark:[&>*]:border-y-dark lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}
       >
-        {solutions.slice(3).map((card) => (
+        {displaySolutions.slice(3).map((card) => (
           <FlipCard key={card.title} card={card} />
         ))}
       </div>

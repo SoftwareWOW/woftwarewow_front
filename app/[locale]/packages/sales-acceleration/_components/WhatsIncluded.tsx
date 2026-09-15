@@ -6,8 +6,10 @@ import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const included = [
+const DEFAULT_ITEMS = [
   {
     id: 1,
     title: 'Lead Generation',
@@ -40,8 +42,23 @@ const included = [
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: SolutionToChallenges / StartWithTheWork — accordion closed by default. */
-const WhatsIncluded = () => {
+const WhatsIncluded = ({
+  eyebrow = "What's Included",
+  title = 'Everything your sales system needs to move faster.',
+  description = 'A connected set of acquisition, automation, CRM, and conversion essentials.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(
+    DEFAULT_ITEMS.map(({ title: t, subtitle }) => ({ title: t, description: subtitle })),
+    items,
+  ).map((item, index) => ({
+    ...DEFAULT_ITEMS[index],
+    title: item.title,
+    subtitle: item.description ?? DEFAULT_ITEMS[index].subtitle,
+  }))
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
@@ -77,20 +94,18 @@ const WhatsIncluded = () => {
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>What&apos;s Included</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 w-full md:mb-8">Everything your sales system needs to move faster.</h2>
+            <h2 className="mx-auto mb-5 w-full md:mb-8">{title}</h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              A connected set of acquisition, automation, CRM, and conversion essentials.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
         <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
-          {included.map((item, index) => {
+          {mergedItems.map((item, index) => {
             const isActive = activeIndex === index
 
             return (

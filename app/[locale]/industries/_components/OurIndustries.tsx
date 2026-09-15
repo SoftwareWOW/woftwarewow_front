@@ -1,14 +1,28 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const OurIndustries = () => {
+type OurIndustriesProps = Partial<CmsTechnologiesSection>
+
+const OurIndustries = ({
+  eyebrow = 'Case Studies',
+  title = '',
+  accentTitle = '',
+  description,
+  items,
+}: OurIndustriesProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
+
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>Case Studies</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3 text-[#0D0D0D] dark:text-[#F2F2F2]">

@@ -14,8 +14,10 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const wowProjects = [
+const DEFAULT_WOWPROJECTS = [
   {
     id: 1,
     title: 'Healthcare Practice Digital Transformation',
@@ -72,7 +74,18 @@ const CarouselGridIndicator = ({ isActive, onClick, ariaLabel }: CarouselGridInd
   />
 )
 
-const ChallengeSolution = () => {
+type ChallengeSolutionProps = Partial<CmsTechnologiesSection>
+
+const ChallengeSolution = ({
+  eyebrow = 'Case Studies',
+  title = '',
+  accentTitle = '',
+  description,
+  items,
+}: ChallengeSolutionProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_WOWPROJECTS, items)
+
   const [api, setApi] = useState<CarouselApi>()
   const [isAutoPlay, setIsAutoPlay] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -122,7 +135,7 @@ const ChallengeSolution = () => {
     } else if (api.canScrollPrev()) {
       api.scrollPrev()
     } else {
-      api.scrollTo(wowProjects.length - 1)
+      api.scrollTo(mergedItems.length - 1)
     }
 
     setTimeout(() => setIsAutoPlay(true), 5000)
@@ -154,7 +167,7 @@ const ChallengeSolution = () => {
         <div className="mb-10 flex flex-col items-center justify-center gap-y-4 md:mb-20 md:flex-row md:justify-between">
           <div>
             <RevealWrapper>
-              <SectionLabel className="mb-3">Case Studies</SectionLabel>
+              <SectionLabel className="mb-3">{header.eyebrow}</SectionLabel>
             </RevealWrapper>
 
             <TextAppearAnimation>
@@ -198,7 +211,7 @@ const ChallengeSolution = () => {
             className="w-full"
           >
             <CarouselContent className="-ml-0">
-              {wowProjects.map((project) => (
+              {mergedItems.map((project) => (
                 <CarouselItem key={project.id} className="basis-full pl-0">
                   <RevealWrapper
                     as="article"
@@ -274,7 +287,7 @@ const ChallengeSolution = () => {
 
             <div className="relative z-20 mt-6 flex justify-center">
               <div className="flex items-center gap-1">
-                {wowProjects.map((project, index) => (
+                {mergedItems.map((project, index) => (
                   <CarouselGridIndicator
                     key={project.id}
                     isActive={index === currentIndex}

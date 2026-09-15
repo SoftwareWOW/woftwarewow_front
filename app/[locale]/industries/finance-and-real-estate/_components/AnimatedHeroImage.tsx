@@ -7,8 +7,16 @@ import { useRef } from 'react'
 
 gsap.registerPlugin(ScrollTrigger)
 
+type AnimatedHeroImageProps = {
+  src?: string
+  alt?: string
+}
+
 /** Layout: Home-06 AnimatedHeroImage — scroll-scale banner. */
-const AnimatedHeroImage = () => {
+const AnimatedHeroImage = ({
+  src = '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png',
+  alt = 'Finance and real estate growth dashboard',
+}: AnimatedHeroImageProps) => {
   const imageRef = useRef<HTMLElement>(null)
 
   useGSAP(() => {
@@ -33,8 +41,8 @@ const AnimatedHeroImage = () => {
   return (
     <figure className="mx-auto w-[97%] overflow-hidden rounded-radius-md sm:w-full" ref={imageRef}>
       <img
-        src="/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png"
-        alt="Finance and real estate growth dashboard"
+        src={src}
+        alt={alt}
         className="mx-auto w-[97%] rounded-radius-md object-cover sm:w-full"
       />
     </figure>

@@ -5,6 +5,8 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -37,13 +39,19 @@ const packages = [
 ]
 
 /** Layout: Home-20 PortfolioV6 — overlapping image + card rows. Bottom CTA omitted. */
-const StartupPackages = () => {
+type StartupPackagesProps = Partial<CmsTechnologiesSection>
+
+const StartupPackages = ({ eyebrow = 'Startup Solutions', title, accentTitle, description, items }: StartupPackagesProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section aria-labelledby="startup-packages-heading">
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>Startup Solutions</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 id="startup-packages-heading" className="text-appear mb-3 text-center">

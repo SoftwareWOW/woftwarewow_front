@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { ReactNode } from 'react'
 
 const IconFrame = ({ children }: { children: ReactNode }) => (
@@ -10,7 +12,7 @@ const IconFrame = ({ children }: { children: ReactNode }) => (
   </span>
 )
 
-const solutions: { title: string; description: string; icon: ReactNode }[] = [
+const DEFAULT_ITEMS: { title: string; description: string; icon: ReactNode }[] = [
   {
     title: 'Custom Software',
     description: 'Solutions designed around your specific workflows, requirements and goals.',
@@ -133,28 +135,35 @@ const solutions: { title: string; description: string; icon: ReactNode }[] = [
 ]
 
 /** Layout: Home-16 ServicesV14 — 6 bordered cards without hover CTA. */
-const WhatWeBuild = () => {
+const WhatWeBuild = ({
+  eyebrow = 'What We Build',
+  title = 'From business tools to',
+  accentTitle = 'digital products.',
+  description =
+    'Build something new, improve what already exists, or connect the systems your business depends on.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>What We Build</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h2 className="mb-3">
-            From business tools to
-            <InstrumentText> digital products.</InstrumentText>
+            {title}
+            <InstrumentText> {accentTitle}</InstrumentText>
           </h2>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
-          <p className="mx-auto max-w-[770px] text-base leading-relaxed text-[#808080]">
-            Build something new, improve what already exists, or connect the systems your business depends on.
-          </p>
+          <p className="mx-auto max-w-[770px] text-base leading-relaxed text-[#808080]">{description}</p>
         </RevealWrapper>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {solutions.map((item) => (
+        {displayItems.map((item) => (
           <RevealWrapper
             key={item.title}
             className="reveal-me rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"

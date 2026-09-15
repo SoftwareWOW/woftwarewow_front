@@ -4,6 +4,8 @@ import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import { useToast } from '@/components/wow/shared/ToastProvider'
 import { ChevronDown } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import {
   budgetOptions,
   projectStageOptions,
@@ -31,7 +33,13 @@ const chipClassName = (selected: boolean) =>
       : 'bg-backgroundBody text-secondary hover:border-primary/30 dark:bg-dark dark:text-backgroundBody dark:hover:border-[#EDF0F533]',
   ].join(' ')
 
-const QuotationForm = () => {
+type QuotationFormProps = Partial<CmsTechnologiesSection>
+
+const QuotationForm = ({ eyebrow = '', title, accentTitle, description, items }: QuotationFormProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   const { showToast } = useToast()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')

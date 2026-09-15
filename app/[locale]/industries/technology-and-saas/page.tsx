@@ -3,6 +3,13 @@ const PAGE_SLUG = 'technology-and-saas' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Digital Transformation Package',
+  title: 'Build Products People Keep Using.',
+  description:
+    'We help technology companies turn ideas into scalable products, stronger brands, smarter growth systems, and better digital experiences.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -16,7 +23,8 @@ import MissionSolutions from './_components/MissionSolutions'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import TechnologyHero from './_components/TechnologyHero'
 import TechnologyHeroAbout from './_components/TechnologyHeroAbout'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -24,46 +32,31 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Technology & SaaS | WOW Superagency',
-    description: 'Product, brand, and growth systems for technology and SaaS companies.',
-    keywords: [
-      'technology',
-      'SaaS',
-      'product development',
-      'go-to-market',
-      'AI automation',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Technology & SaaS | WOW Superagency',
-      description: 'Product, brand, and growth systems for technology and SaaS companies.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/industries/technology-and-saas`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Technology & SaaS' })
 }
 
 export default async function TechnologyAndSaasPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
   <div>
-          <TechnologyHero />
-        <TechnologyHeroAbout />
+          <TechnologyHero {...hero} images={hero.images} />
+        <TechnologyHeroAbout {...(sections.technologyHeroAbout ?? {})} />
   </div>
-        <ExperiencePillars />
+        <ExperiencePillars {...(sections.experiencePillars ?? {})} />
         <Marquess />
-        <MissionSolutions />
-        <ClientJourney />
-        <ConnectedExpertise />
-        <RecommendedSolutions />
+        <MissionSolutions {...(sections.missionSolutions ?? {})} />
+        <ClientJourney {...(sections.clientJourney ?? {})} />
+        <ConnectedExpertise {...(sections.connectedExpertise ?? {})} />
+        <RecommendedSolutions {...(sections.recommendedSolutions ?? {})} />
         <WowGrowthCta
           accentText="Ready to Build"
           mainText="What's Next?"

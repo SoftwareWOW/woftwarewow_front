@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const CheckIcon = () => (
   <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-backgroundBody">
@@ -17,7 +19,7 @@ const CheckIcon = () => (
   </span>
 )
 
-const solutions = [
+const DEFAULT_SOLUTIONS = [
   {
     number: '01',
     title: 'Brand & Digital Presence',
@@ -46,7 +48,12 @@ const solutions = [
 ]
 
 /** Layout: Home-23 WhyChooseUsV7 — 2×2 numbered cards with checklists. */
-const GuestSolutions = () => {
+type GuestSolutionsProps = Partial<CmsTechnologiesSection>
+
+const GuestSolutions = ({ eyebrow, title, accentTitle, description, items }: GuestSolutionsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_SOLUTIONS, items)
+
   return (
     <section id="solutions">
       <div className="container">
@@ -66,7 +73,7 @@ const GuestSolutions = () => {
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
-          {solutions.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.number}
               className="col-span-12 flex-1 rounded-radius-sm border border-[#e5e5e5] px-[30px] py-10 dark:border-white/10 lg:col-span-6"

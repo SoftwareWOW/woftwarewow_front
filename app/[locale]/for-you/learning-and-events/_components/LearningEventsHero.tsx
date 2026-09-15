@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 import Link from 'next/link'
 
@@ -12,7 +14,17 @@ const avatars = [
 ]
 
 /** Layout: Home-05 HeroV5 — two-column hero with social proof + dual CTAs. */
-const LearningEventsHero = () => {
+const LearningEventsHero = ({
+  badgeTitle = 'Learning & Events',
+  title = 'Learn, connect, and',
+  italicTitle = 'grow.',
+  description =
+    'Access workshops, events, and learning experiences designed to help businesses build skills and make better decisions.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/hero-img/learning-hero-1.jpg', alt: 'Learning and events' }
+  const image1 = images?.[1] ?? { src: '/images/hero-img/learning-hero-2.jpg', alt: 'Business workshops' }
+
   return (
     <section
       className="relative overflow-hidden pt-24 md:pt-[100px] xl:pt-[120px]"
@@ -27,11 +39,13 @@ const LearningEventsHero = () => {
           <SectionLabel className="mb-4">Learning &amp; Events</SectionLabel>
 
           <h1
-            id="learning-events-heading"
-            className="text-[clamp(2.25rem,5vw,4.5rem)] font-normal leading-[1.1] tracking-[-0.03em]"
-          >
-            Learn. Connect. Grow.
-          </h1>
+              id="learning-events-heading"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            >
+              {title}
+              <br className="hidden lg:block" />
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+            </h1>
 
           <div className="relative mt-5 max-w-lg">
             <p className="text-base leading-relaxed text-[#808080] md:text-lg">
@@ -70,7 +84,7 @@ const LearningEventsHero = () => {
                 <img
                   key={src}
                   src={src}
-                  alt=""
+                  alt={image0.alt ?? ''}
                   className="size-[52px] rounded-full border-2 border-background object-cover dark:border-secondary"
                 />
               ))}
@@ -81,23 +95,23 @@ const LearningEventsHero = () => {
               >
                 <figure>
                   <img
-                    src="/images/home-5/ArrowUpRight.svg"
-                    alt=""
+                    src={image1.src}
+                    alt={image1.alt ?? ''}
                     className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
                   />
                   <img
-                    src="/images/home-5/ArrowUpRight.svg"
-                    alt=""
+                    src={image1.src}
+                    alt={image1.alt ?? ''}
                     className="absolute inline -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:hidden"
                   />
                   <img
-                    src="/images/home-5/ArrowUpRight-dark.svg"
-                    alt=""
+                    src={image1.src}
+                    alt={image1.alt ?? ''}
                     className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:inline"
                   />
                   <img
-                    src="/images/home-5/ArrowUpRight-dark.svg"
-                    alt=""
+                    src={image1.src}
+                    alt={image1.alt ?? ''}
                     className="absolute hidden -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:inline"
                   />
                 </figure>
@@ -127,8 +141,8 @@ const LearningEventsHero = () => {
 
         <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
           <img
-            src="/images/wow/Hero/devision/Education.jpg"
-            alt="Professionals collaborating over business insights"
+            src={image1.src}
+            alt={image1.alt ?? ''}
             className="h-auto w-full rounded-radius-md object-cover"
           />
         </RevealWrapper>

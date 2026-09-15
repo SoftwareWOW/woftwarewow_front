@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const data = [
+const DEFAULT_DATA = [
   {
     id: 1,
     step: 'Step 01',
@@ -30,7 +32,16 @@ const data = [
   },
 ]
 
-const IndustriesProcess = () => {
+type IndustriesProcessProps = Partial<CmsProcessSection>
+
+const IndustriesProcess = ({ eyebrow, title, accentTitle, description, steps }: IndustriesProcessProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_DATA, steps).map((step, i) => ({
+    ...DEFAULT_DATA[i],
+    title: step.title,
+    description: step.description ?? DEFAULT_DATA[i].description,
+  }))
+
   return (
     <section className="relative bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
@@ -52,7 +63,7 @@ const IndustriesProcess = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-[30px]">
-          {data.map((item) => (
+          {mergedSteps.map((item) => (
             <RevealWrapper key={item.id} className="w-full">
               <div className="relative pt-4">
                 {/* Label sits outside the bordered card so global `.card { overflow:hidden }` cannot clip it */}

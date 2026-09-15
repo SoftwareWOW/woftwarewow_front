@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsPackageOfferSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import pricingBg from '@/public/images/pricing-gradient.png'
 import type { StaticImageData } from 'next/image'
 import Link from 'next/link'
@@ -49,7 +51,7 @@ const CheckmarkIcon = () => (
   </span>
 )
 
-const pricingPlans: Plan[] = [
+const DEFAULT_PRICING_PLANS: Plan[] = [
   {
     id: 1,
     title: 'Shared Hosting',
@@ -92,23 +94,50 @@ const pricingPlans: Plan[] = [
   },
 ]
 
+function mergePlanFeatures(plans: Plan[], cmsFeatures?: CmsPackageOfferSection['features'] | null): Plan[] {
+  if (!cmsFeatures?.length) return plans
+
+  const flatDefaults = plans.flatMap((plan) => plan.features.map((feature) => ({ title: feature })))
+  const mergedFlat = mergeFeatureItems(flatDefaults, cmsFeatures)
+  let offset = 0
+
+  return plans.map((plan) => {
+    const count = plan.features.length
+    const features = mergedFlat.slice(offset, offset + count).map((item) => item.title)
+    offset += count
+
+    return {
+      ...plan,
+      features: features.length ? features : plan.features,
+    }
+  })
+}
+
 /** Layout: Home-19 PricingV4 — three hosting tiers (tagline instead of dollar price). */
-const HostingThatFits = () => {
+const HostingThatFits = ({
+  eyebrow = 'Hosting That Fits',
+  title = 'Start with what you need. Scale when you need more.',
+  description =
+    "Different businesses need different levels of infrastructure. We'll help match the setup to your requirements.",
+  features,
+  cta,
+}: Partial<CmsPackageOfferSection> = {}) => {
+  const pricingPlans = mergePlanFeatures(DEFAULT_PRICING_PLANS, features)
+  const defaultCtaText = cta?.label ?? 'Learn More'
+  const defaultCtaHref = cta?.href ?? '/contact'
+
   return (
     <section className="overflow-hidden">
       <div className="container">
         <div className="mb-7 text-center lg:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Hosting That Fits</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 text-center">Start with what you need. Scale when you need more.</h2>
+            <h2 className="text-appear mb-3 text-center">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-3xl text-[#808080]">
-              Different businesses need different levels of infrastructure. We&apos;ll help match the setup to your
-              requirements.
-            </p>
+            <p className="text-appear mx-auto max-w-3xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
@@ -119,7 +148,7 @@ const HostingThatFits = () => {
             tagline,
             description,
             features,
-            ctaText = 'Learn More',
+            ctaText = defaultCtaText,
             ctaVariant = 'white',
             isFeatured,
             id,
@@ -166,7 +195,7 @@ const HostingThatFits = () => {
               </ul>
 
               <div className="absolute bottom-8 w-[calc(100%-60px)]">
-                <Link href="/contact" className={`rv-button rv-button-${ctaVariant} w-full`}>
+                <Link href={defaultCtaHref} className={`rv-button rv-button-${ctaVariant} w-full`}>
                   <div className="rv-button-top !w-full !text-center">
                     <span className="font-normal">{ctaText}</span>
                   </div>

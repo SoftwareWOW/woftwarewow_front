@@ -3,8 +3,10 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const infrastructurePoints = [
+const DEFAULT_ITEMS = [
   {
     title: 'Performance',
     description: 'Infrastructure designed for demanding workloads.',
@@ -27,15 +29,25 @@ const infrastructurePoints = [
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: Home-16 WhyChooseUsV5 — split title + stacked points, no numbers. */
-const BusinessCriticalOperations = () => {
+const BusinessCriticalOperations = ({
+  eyebrow = 'Built for Business-Critical Operations',
+  title = 'Built for performance. ',
+  accentTitle = 'Ready to scale.',
+  description = 'Create a stronger digital foundation for the systems and services your business depends on.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="mx-auto max-w-[1500px] px-4 md:px-[30px]">
         <div className="flex flex-col-reverse gap-y-8 md:flex-row-reverse md:gap-5 lg:gap-10 xl:gap-x-20">
           <div className="md:w-[45%]">
             <div className="[&>*:not(:first-child)]:mt-3.5">
-              {infrastructurePoints.map((point) => (
+              {mergedItems.map((point) => (
                 <RevealWrapper key={point.title} className="py-2.5">
                   <h6>{point.title}</h6>
                   <p className="mt-1.5 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{point.description}</p>
@@ -51,16 +63,15 @@ const BusinessCriticalOperations = () => {
             </RevealWrapper>
           </div>
           <RevealWrapper className="md:w-[55%]">
-            <SectionLabel className="mb-3.5">Built for Business-Critical Operations</SectionLabel>
+            <SectionLabel className="mb-3.5">{eyebrow}</SectionLabel>
             <TextAppearAnimation>
               <h2 className="text-appear">
-                Built for performance. <InstrumentText>Ready to scale.</InstrumentText>
+                {title}
+                <InstrumentText>{accentTitle}</InstrumentText>
               </h2>
             </TextAppearAnimation>
             <TextAppearAnimation>
-              <p className="text-appear mt-4 max-w-lg text-[#808080]">
-                Create a stronger digital foundation for the systems and services your business depends on.
-              </p>
+              <p className="text-appear mt-4 max-w-lg text-[#808080]">{description}</p>
             </TextAppearAnimation>
           </RevealWrapper>
         </div>

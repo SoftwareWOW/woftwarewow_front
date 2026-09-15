@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { cmsImageSrc, mergeProcessSteps } from '@/lib/strapi/cms-section-props'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '01',
     title: 'Discover',
@@ -31,29 +33,44 @@ const steps = [
   },
 ]
 
+const DEFAULT_IMAGE = '/images/wow/nav/cards/Softwaerwow.png'
+
+type Props = Partial<CmsProcessSection>
+
 /** Layout: Home-07 ProcessV4 — image height matches steps; centered CTA. */
-const ProductJourney = () => {
+const ProductJourney = ({
+  eyebrow = 'The Product Journey',
+  title = 'Clear steps from concept to launch.',
+  description = 'Growth works better when the product is built in clear stages — from discovery through launch.',
+  steps,
+  image,
+}: Props = {}) => {
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
+    ...DEFAULT_STEPS[index],
+    title: step.title,
+    description: step.description,
+  }))
+  const imageSrc = cmsImageSrc(image, DEFAULT_IMAGE)
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
-            <SectionLabel>The Product Journey</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">Clear steps from concept to launch.</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-              Growth works better when the product is built in clear stages — from discovery through launch.
-            </p>
+            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative w-full overflow-hidden rounded-radius-md md:w-[min(100%,420px)] md:shrink-0">
             <img
-              src="/images/wow/nav/cards/Softwaerwow.png"
+              src={imageSrc ?? ''}
               alt="Product journey from concept to launch"
               className="h-full min-h-[280px] w-full rounded-radius-md object-cover md:absolute md:inset-0 md:min-h-0"
             />
@@ -61,7 +78,7 @@ const ProductJourney = () => {
 
           <div className="min-w-0 flex-1">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
-              {steps.map((step, index) => (
+              {mergedSteps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">
                   <div
                     className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${

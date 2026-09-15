@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '01',
     title: 'Shape the Opportunity',
@@ -31,13 +33,24 @@ const steps = [
 ]
 
 /** Layout: Home-07 ProcessV4 — image height matches steps. */
-const ClientJourney = () => {
+type ClientJourneyProps = Partial<CmsProcessSection>
+
+const ClientJourney = ({
+  eyebrow = 'THE PRODUCT JOURNEY',
+  title = 'From Product Idea to Scale.',
+  accentTitle = '',
+  description,
+  steps,
+}: ClientJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
-            <SectionLabel>THE PRODUCT JOURNEY</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mx-auto max-w-[770px]">From Product Idea to Scale.</h2>
@@ -61,7 +74,7 @@ const ClientJourney = () => {
 
           <div className="min-w-0 flex-1">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
-              {steps.map((step, index) => (
+              {mergedSteps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">
                   <div
                     className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${

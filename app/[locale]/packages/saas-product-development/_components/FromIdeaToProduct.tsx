@@ -2,8 +2,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsRfqAccordionSection } from '@/lib/strapi/mappers/page-sections'
 
-const cards = [
+const DEFAULT_GROUPS = [
   {
     number: '01',
     title: 'I Have an Idea',
@@ -25,9 +26,11 @@ const cards = [
 ]
 
 type CardContentProps = {
-  card: (typeof cards)[number]
+  card: (typeof DEFAULT_GROUPS)[number]
   inverted?: boolean
 }
+
+type Props = Partial<CmsRfqAccordionSection>
 
 const CardContent = ({ card, inverted = false }: CardContentProps) => (
   <>
@@ -55,23 +58,39 @@ const CardContent = ({ card, inverted = false }: CardContentProps) => (
 )
 
 /** Layout: OurExpertiseV2 + ServicesV11 slide hover. */
-const FromIdeaToProduct = () => {
+const FromIdeaToProduct = ({
+  eyebrow = 'From Idea to Product',
+  title = 'You have the idea. Now you need the team ',
+  accentTitle = 'to build it.',
+  groups,
+}: Props = {}) => {
+  const mergedCards = DEFAULT_GROUPS.map((card, index) => {
+    const cms = groups?.[index]
+    return {
+      ...card,
+      title: cms?.title || card.title,
+      subtitle: cms?.subtitle ?? card.subtitle,
+      description: cms?.items?.join(' ') ?? card.description,
+    }
+  })
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>From Idea to Product</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3">
-              You have the idea. Now you need the team <InstrumentText>to build it.</InstrumentText>
+              {title}
+              <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row md:items-stretch">
-          {cards.map((card) => (
+          {mergedCards.map((card) => (
             <div
               key={card.number}
               className="group relative flex-1 overflow-hidden rounded-radius-sm border dark:border-dark"

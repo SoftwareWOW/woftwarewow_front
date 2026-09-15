@@ -5,19 +5,40 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gradientBg from '@/public/images/gradient-bg.png'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
+import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
 
 export interface CareerJobType {
   slug: string
   content: string
   [key: string]: any
 }
+type JobsProps = {
+  jobs?: Array<{
+    title?: string
+    location?: string | null
+    type?: string | null
+    href?: string | null
+  }> | null
+  sectionHeader?: boolean
+}
+
 interface sectionHeaderProps {
   sectionHeader?: boolean
 }
 
 const jobsData: CareerJobType[] = getMarkDownData('data/career')
 
-const Jobs = ({ sectionHeader = false }: sectionHeaderProps) => {
+const Jobs = ({ jobs, sectionHeader = false }: JobsProps) => {
+  const displayJobs = jobs?.length
+    ? jobs.map((job, index) => ({
+        slug: job.href?.split('/').pop() ?? String(index),
+        title: job.title ?? '',
+        description: job.location ?? '',
+        tags: job.type ? [job.type] : [],
+        content: '',
+      }))
+    : jobsData
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.7] scale-y-[6] sm:scale-y-[4] md:scale-y-[3.4] lg:scale-y-[2.8] xl:scale-y-[2.3] 2xl:scale-y-[1.5]">
@@ -46,7 +67,7 @@ const Jobs = ({ sectionHeader = false }: sectionHeaderProps) => {
       )}
 
       <div className="mt-[60px] max-lg:px-5 [&>*:not(:last-child)]:mb-6">
-        {jobsData?.toReversed()?.map((job) => (
+        {displayJobs?.toReversed()?.map((job) => (
           <RevealWrapper
             as="article"
             key={job.slug}

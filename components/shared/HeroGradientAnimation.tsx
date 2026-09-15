@@ -8,9 +8,10 @@ import { useEffect, useRef, useState } from 'react'
 
 interface PropsType {
   scale?: boolean
+  backgroundSrc?: string
 }
 
-const HeroGradientAnimation = ({ scale = false }: PropsType) => {
+const HeroGradientAnimation = ({ scale = false, backgroundSrc }: PropsType) => {
   const [isClient, setIsClient] = useState(false)
   const wrapperRef = useRef(null)
   const bgRef = useRef(null)
@@ -48,6 +49,21 @@ const HeroGradientAnimation = ({ scale = false }: PropsType) => {
     },
     { dependencies: [isClient] },
   )
+
+  if (backgroundSrc) {
+    return (
+      <div
+        className={`pointer-events-none absolute left-0 top-0 -z-10 h-full w-full blur-[50px] ${scale ? 'scale-75' : 'scale-100'}`}
+      >
+        <img
+          src={backgroundSrc}
+          alt=""
+          aria-hidden
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    )
+  }
 
   if (!isClient) {
     return (

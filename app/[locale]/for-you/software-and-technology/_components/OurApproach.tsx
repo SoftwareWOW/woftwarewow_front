@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
-const points = [
+const DEFAULT_ITEMS = [
   {
     title: 'Business-first technology decisions',
     description: 'We look at the problem before prescribing a build, buy or integrate path.',
@@ -25,21 +27,38 @@ const points = [
   },
 ]
 
+const DEFAULT_IMAGE = '/images/wow/Hero/devision/Server.jpg'
+
 /** Layout: Home-25 WhyChooseUsV8 — approach list + image + CTA. */
-const OurApproach = () => {
+const OurApproach = ({
+  eyebrow = 'Our Approach',
+  title = 'Build what you need.\nIntegrate what already works.',
+  description =
+    'Not every problem needs custom software. We look at the business first—then determine where custom development, existing platforms, integrations, automation or modernization make the most sense.',
+  image,
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+  const imageSrc = cmsImageSrc(image, DEFAULT_IMAGE)
+  const titleLines = title.split('\n')
+
   return (
     <section>
       <div className="container">
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-16 md:flex-row lg:justify-between">
           <div className="flex-1 md:self-start">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Our Approach</SectionLabel>
+              <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>
-                Build what you need.
-                <br />
-                Integrate what already works.
+                {titleLines[0]}
+                {titleLines[1] ? (
+                  <>
+                    <br />
+                    {titleLines[1]}
+                  </>
+                ) : null}
               </h2>
             </RevealWrapper>
           </div>
@@ -47,8 +66,7 @@ const OurApproach = () => {
           <div className="w-full md:max-w-80 md:self-end lg:max-w-[470px]">
             <RevealWrapper className="reveal-me">
               <p className="max-w-lg text-base leading-relaxed text-[#808080] md:place-self-end md:text-right">
-                Not every problem needs custom software. We look at the business first—then determine where custom
-                development, existing platforms, integrations, automation or modernization make the most sense.
+                {description}
               </p>
             </RevealWrapper>
           </div>
@@ -56,7 +74,7 @@ const OurApproach = () => {
 
         <div className="flex flex-col-reverse gap-y-8 md:flex-row md:gap-14 lg:gap-16 xl:gap-x-20">
           <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-            {points.map((point) => (
+            {displayItems.map((point) => (
               <RevealWrapper key={point.title} className="reveal-me py-3.5 pr-5 lg:py-5">
                 <h5>{point.title}</h5>
                 <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{point.description}</p>
@@ -74,8 +92,8 @@ const OurApproach = () => {
 
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
-              src="/images/wow/Hero/devision/Server.jpg"
-              alt="Technology approach — build and integrate"
+              src={imageSrc}
+              alt={image?.alt ?? 'Technology approach — build and integrate'}
               className="h-full w-full object-cover"
             />
           </RevealWrapper>

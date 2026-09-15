@@ -1,6 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const primaryColors = [
   { name: 'WOW Purple', hex: '#615CCE', swatch: 'bg-[#615CCE]' },
@@ -20,15 +23,28 @@ const gradientColors = [
   },
 ]
 
-const BrandSystem = () => (
+type BrandSystemProps = Partial<CmsTechnologiesSection>
+
+const BrandSystem = ({
+  eyebrow = 'Brand System',
+  title = 'Colors & Typography',
+  accentTitle,
+  description,
+}: BrandSystemProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+
+  return (
   <section>
     <div className="container">
       <div className="mb-10 text-center md:mb-14">
         <RevealWrapper className="reveal-me mb-5 flex justify-center">
-          <SectionLabel>Brand System</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mx-auto max-w-[900px]">Consistency Makes the Brand Stronger.</h2>
+          <h2 className="text-appear mx-auto max-w-[900px]">{header.title}{header.accentTitle ? <> <InstrumentText>{header.accentTitle}</InstrumentText></> : null}</h2>
         </TextAppearAnimation>
       </div>
 
@@ -107,6 +123,7 @@ const BrandSystem = () => (
       </div>
     </div>
   </section>
-)
+  )
+}
 
 export default BrandSystem

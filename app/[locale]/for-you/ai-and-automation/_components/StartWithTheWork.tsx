@@ -8,10 +8,11 @@ import { useState } from 'react'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsRfqAccordionSection } from '@/lib/strapi/mappers/page-sections'
 
 const INITIAL_VISIBLE_COUNT = 3
 
-const servicesData = [
+const DEFAULT_GROUPS = [
   {
     id: 1,
     title: 'Branding From A To Z',
@@ -92,11 +93,38 @@ const servicesData = [
   },
 ]
 
+function mergeRfqGroups<T extends { id: number; title: string; subtitle?: string; items: string[] }>(
+  defaults: T[],
+  cmsGroups?: CmsRfqAccordionSection['groups'] | null,
+): T[] {
+  if (!cmsGroups?.length) return defaults
+
+  return defaults.map((group, index) => {
+    const cms = cmsGroups[index]
+    if (!cms) return group
+
+    return {
+      ...group,
+      title: cms.title || group.title,
+      subtitle: cms.subtitle ?? group.subtitle,
+      items: cms.items?.length ? cms.items : group.items,
+    }
+  })
+}
+
 /** Layout: SolutionToChallenges — centered header + accordion (services unchanged). */
-const StartWithTheWork = () => {
+const StartWithTheWork = ({
+  eyebrow = 'Start with the work',
+  title = 'What would you',
+  accentTitle = 'stop',
+  description =
+    "The best place to start with AI isn't the technology. It's the work that takes too much time, happens too often or could be done better.",
+  groups,
+}: Partial<CmsRfqAccordionSection> = {}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
+  const servicesData = mergeRfqGroups(DEFAULT_GROUPS, groups)
   const visibleServices = showAll ? servicesData : servicesData.slice(0, INITIAL_VISIBLE_COUNT)
 
   const toggleAccordion = (index: number) => {
@@ -139,18 +167,15 @@ const StartWithTheWork = () => {
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Start with the work</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto mb-5 w-full md:mb-8">
-              What would you <InstrumentText>stop</InstrumentText> doing manually?
+              {title} <InstrumentText>{accentTitle}</InstrumentText> doing manually?
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              The best place to start with AI isn&apos;t the technology. It&apos;s the work that takes too much time,
-              happens too often or could be done better.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
@@ -239,7 +264,7 @@ const StartWithTheWork = () => {
         </RevealWrapper>
 
         <RevealWrapper className="mx-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-14">
-          {servicesData.length > INITIAL_VISIBLE_COUNT && (
+          {DEFAULT_GROUPS.length > INITIAL_VISIBLE_COUNT && (
             <ButtonComponentList>
               <ButtonComponent type="button" variant="white" onClick={handleToggleShowAll} ariaExpanded={showAll}>
                 {showAll ? 'See Less' : 'See More'}

@@ -4,8 +4,23 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import HeroHoverImages from './HeroHoverImages'
 
+type PageHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+  images?: { src: string; alt?: string }[]
+}
+
 /** Layout: Home-13 HeroV13 — centered headline + dual CTAs + hover-expand images. */
-const EnterpriseInfrastructureHero = () => {
+const EnterpriseInfrastructureHero = ({
+  badgeTitle = 'Enterprise Infrastructure',
+  title = 'Infrastructure built for ',
+  italicTitle = "what's next.",
+  description =
+    'Secure, reliable and scalable infrastructure designed to support your growing business.',
+  images,
+}: PageHeroProps) => {
   return (
     <section
       className="overflow-hidden pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-48"
@@ -22,14 +37,15 @@ const EnterpriseInfrastructureHero = () => {
         </div>
         <RevealWrapper className="container">
           <div className="mb-4 flex justify-center">
-            <SectionLabel>Enterprise Infrastructure</SectionLabel>
+            <SectionLabel>{badgeTitle}</SectionLabel>
           </div>
           <h1 id="enterprise-infrastructure-heading" className="text-center">
-            Infrastructure built for <InstrumentText>what&apos;s next.</InstrumentText>
+            {title}
+            {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
           </h1>
-          <p className="mx-auto mt-3 max-w-3xl text-center text-[#808080]">
-            Secure, reliable and scalable infrastructure designed to support your growing business.
-          </p>
+          {description ? (
+            <p className="mx-auto mt-3 max-w-3xl text-center text-[#808080]">{description}</p>
+          ) : null}
           <div className="mt-14 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="primary">
@@ -44,7 +60,7 @@ const EnterpriseInfrastructureHero = () => {
           </div>
         </RevealWrapper>
       </div>
-      <HeroHoverImages />
+      <HeroHoverImages images={images} />
     </section>
   )
 }

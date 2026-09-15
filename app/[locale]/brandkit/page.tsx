@@ -8,7 +8,22 @@ import BrandSystem from './_components/BrandSystem'
 import BrandUsageGuidelines from './_components/BrandUsageGuidelines'
 import BrandVisualStyle from './_components/BrandVisualStyle'
 import BrandKitLogos from './_components/BrandKitLogo'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import {
+  buildSuperagencyPageMetadata,
+  loadSuperagencyPage, resolvePageSections,
+} from '@/lib/strapi/superagency-page-loader'
+
+const PAGE_SLUG = 'brandkit' as const
+
+export const revalidate = 60
+
+const DEFAULT_HERO = {
+  badgeTitle: 'Brand Kit',
+  title: 'The WOW Brand, Ready to Use.',
+  description:
+    'Access official logos, colors, typography, and brand resources for approved WOW Superagency communications.',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -16,36 +31,25 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Brand Kit | WOW Superagency',
-    description:
-      'Access official logos, colors, typography, and brand resources for approved WOW Superagency communications.',
-    keywords: ['brand kit', 'logos', 'brand assets', 'WOW Superagency'],
-    openGraph: {
-      title: 'Brand Kit | WOW Superagency',
-      description:
-        'Access official logos, colors, typography, and brand resources for approved WOW Superagency communications.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/brandkit`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Brand Kit' })
 }
 
 export default async function BrandKitPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        <BrandKitHero />
-        <BrandKitLogos />
-        <BrandSystem />
-        <BrandVisualStyle />
-        <BrandUsageGuidelines />
+        <BrandKitHero {...hero} />
+        <BrandKitLogos {...(sections.brandKitLogos ?? {})} />
+        <BrandSystem {...(sections.brandSystem ?? {})} />
+        <BrandVisualStyle {...(sections.brandVisualStyle ?? {})} />
+        <BrandUsageGuidelines {...(sections.brandUsageGuidelines ?? {})} />
         <WowGrowthCta
           accentText="Need something"
           mainText="not included here?"

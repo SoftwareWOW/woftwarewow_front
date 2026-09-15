@@ -3,8 +3,10 @@ import Image from 'next/image'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const pillars = [
+const DEFAULT_PILLARS = [
   {
     title: 'Reach More Customers',
     description: 'Increase visibility through search, advertising, content, and social.',
@@ -24,7 +26,19 @@ const pillars = [
 ]
 
 /** Layout: Home-02 ProcessV2 — four hover columns. Origin CTA omitted. */
-const RetailGrowthPillars = () => {
+type RetailGrowthPillarsProps = Partial<CmsTechnologiesSection>
+
+const RetailGrowthPillars = ({
+  eyebrow = 'Professional Service Solutions',
+  title = 'Built Around How You Win Clients.',
+  accentTitle = '',
+  description,
+  items,
+}: RetailGrowthPillarsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_PILLARS, items)
+
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.2] max-lg:scale-y-[2.8]">
@@ -34,10 +48,10 @@ const RetailGrowthPillars = () => {
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
           <div className="flex-1 md:self-start">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Professional Service Solutions</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
-              <h2 className="text-appear">Built Around How You Win Clients.</h2>
+              <h2 className="text-appear">{header.title}</h2>
             </TextAppearAnimation>
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
@@ -51,7 +65,7 @@ const RetailGrowthPillars = () => {
         </div>
 
         <RevealWrapper className="grid grid-cols-12 items-center justify-center gap-[1px]">
-          {pillars.map((pillar) => (
+          {mergedItems.map((pillar) => (
             <div
               key={pillar.title}
               className="group col-span-full min-h-[400px] bg-backgroundBody px-7 pb-4 pt-7 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:px-10 md:pb-16 md:pt-10 lg:col-span-4 xl:col-span-3"

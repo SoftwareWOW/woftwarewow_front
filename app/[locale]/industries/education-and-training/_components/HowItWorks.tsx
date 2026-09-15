@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const topRow = [
+const DEFAULT_TOPROW = [
   {
     number: '1',
     title: 'Discover',
@@ -53,13 +55,24 @@ const StepItem = ({ step }: { step: Step }) => (
 )
 
 /** Layout: AiWithPurpose / BuildCommunity — faded background numbers in a 3+2 grid. */
-const HowItWorks = () => {
+type HowItWorksProps = Partial<CmsProcessSection>
+
+const HowItWorks = ({
+  eyebrow = 'THE LEARNER JOURNEY',
+  title = 'Support Every Stage of Learning.',
+  accentTitle = '',
+  description,
+  steps,
+}: HowItWorksProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_TOPROW, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>THE LEARNER JOURNEY</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto">Support Every Stage of Learning.</h2>
@@ -68,7 +81,7 @@ const HowItWorks = () => {
 
         <div className="flex flex-col gap-10 sm:gap-y-14">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 lg:gap-x-10 lg:grid-cols-3">
-            {topRow.map((step) => (
+            {mergedSteps.map((step) => (
               <StepItem key={step.title} step={step} />
             ))}
           </div>

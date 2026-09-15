@@ -4,8 +4,10 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const pieces = [
+const DEFAULT_ITEMS = [
   {
     title: 'Growth Strategy',
     description:
@@ -32,31 +34,38 @@ const pieces = [
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Home-04 — ServicesV5: accordion rows closed by default, expand on hover only. */
-const GrowthPieces = () => {
+const GrowthPieces = ({
+  eyebrow = 'Built for Growth',
+  title = 'The pieces that move growth forward.',
+  description = 'A coordinated mix of strategy, acquisition, conversion and sales support built around your business.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Built for Growth</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear">The pieces that move growth forward.</h2>
+            <h2 className="text-appear">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-3 max-w-2xl text-[#808080]">
-              A coordinated mix of strategy, acquisition, conversion and sales support built around your business.
-            </p>
+            <p className="text-appear mx-auto mt-3 max-w-2xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px]">
-          {pieces.map((piece, index) => (
+          {mergedItems.map((piece, index) => (
             <Link href="/contact" key={piece.title} className="block">
               <div
                 className={`group relative overflow-hidden border-x border-t bg-backgroundBody dark:border-dark dark:bg-dark ${
-                  index === pieces.length - 1 ? 'border-b' : ''
+                  index === mergedItems.length - 1 ? 'border-b' : ''
                 }`}
               >
                 <div className="group relative z-10 flex cursor-pointer items-center justify-between px-5 py-10 md:px-10 md:py-[60px]">

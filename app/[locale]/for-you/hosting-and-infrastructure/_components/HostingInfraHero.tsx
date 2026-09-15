@@ -2,9 +2,20 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-19 HeroV19 — split headline + dual media (no circle logo), container width. */
-const HostingInfraHero = () => {
+const HostingInfraHero = ({
+  badgeTitle = 'Hosting & Infrastructure',
+  title = 'Reliable infrastructure for your',
+  italicTitle = 'business.',
+  description =
+    'Secure hosting, scalable systems, and the technical foundation your business needs to stay online and perform.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/hero-img/hosting-hero-1.jpg', alt: 'Hosting infrastructure' }
+  const image1 = images?.[1] ?? { src: '/images/hero-img/hosting-hero-2.jpg', alt: 'Business infrastructure' }
+
   return (
     <section
       className="relative overflow-hidden pt-28 md:pt-[160px] xl:pt-[180px]"
@@ -22,27 +33,26 @@ const HostingInfraHero = () => {
       <div className="container flex flex-col justify-between gap-x-5 gap-y-10 lg:flex-row">
         <div className="md:flex-1">
           <RevealWrapper className="reveal-me mb-4">
-            <SectionLabel>Hosting &amp; Infrastructure</SectionLabel>
+            <SectionLabel>{badgeTitle}</SectionLabel>
           </RevealWrapper>
 
           <RevealWrapper className="reveal-me">
             <h1
               id="hosting-infra-heading"
-              className="text-[clamp(2rem,4.571vw,5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
             >
-              Keep your
+              {title}
               <br className="hidden lg:block" />
-              business online
-              <br className="hidden lg:block" />
-              and <InstrumentText>ready.</InstrumentText>
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
             </h1>
           </RevealWrapper>
 
           <RevealWrapper className="reveal-me mt-3">
-            <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-              Reliable hosting, domains, business email and infrastructure designed to keep your digital operations
-              fast, secure and accessible.
-            </p>
+            {description ? (
+            <RevealWrapper className="reveal-me mt-3">
+              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+            </RevealWrapper>
+          ) : null}
           </RevealWrapper>
 
           <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-10 lg:mt-14">
@@ -62,15 +72,15 @@ const HostingInfraHero = () => {
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
             <img
-              src="/images/hero-img/startup-hero-1.jpg"
-              alt="Team collaborating in a modern workspace"
+              src={image0.src}
+              alt={image0.alt ?? ''}
               className="max-sm:w-full"
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me">
             <img
-              src="/images/hero-img/startup-hero-2.jpg"
-              alt="Focused workspace for digital infrastructure"
+              src={image1.src}
+              alt={image1.alt ?? ''}
               className="max-sm:w-full"
             />
           </RevealWrapper>

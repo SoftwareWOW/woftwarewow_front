@@ -4,6 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 type IconVariant = 'default' | 'inverted'
 
@@ -68,7 +69,7 @@ const LaunchIcon = ({ variant }: { variant: IconVariant }) => (
   </svg>
 )
 
-const cards: {
+const DEFAULT_ITEMS: {
   title: string
   items: string[]
   icon: (variant: IconVariant) => ReactNode
@@ -142,29 +143,47 @@ const CardPanel = ({ title, items, icon, inverted = false }: CardPanelProps) => 
   </>
 )
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: WhyChooseUsV7 + ServicesV11 slide hover. */
-const SaasTransformPlan = () => {
+const SaasTransformPlan = ({
+  eyebrow = 'Your Transformation Plan',
+  title = 'Everything needed to move from ',
+  accentTitle = 'concept to launch.',
+  description = 'One coordinated product team across strategy, experience, technology and launch.',
+  items,
+}: Props = {}) => {
+  const mergedItems = DEFAULT_ITEMS.map((card, index) => {
+    const cms = items?.[index]
+    return {
+      ...card,
+      title: cms?.title || card.title,
+      items: cms?.description
+        ? cms.description.split(',').map((entry) => entry.trim())
+        : card.items,
+    }
+  })
+
   return (
     <section>
       <div className="container">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Your Transformation Plan</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear lg:leading-[1.1]">
-              Everything needed to move from <InstrumentText>concept to launch.</InstrumentText>
+              {title}
+              <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mt-4 text-[#808080]">
-              One coordinated product team across strategy, experience, technology and launch.
-            </p>
+            <p className="text-appear mt-4 text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
-          {cards.map((card) => (
+          {mergedItems.map((card) => (
             <div
               key={card.title}
               className="group relative col-span-12 overflow-hidden rounded-radius-sm border dark:border-dark lg:col-span-6"

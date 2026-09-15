@@ -6,6 +6,8 @@ import WowText from '@/components/wow/shared/WowText'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const divisions: {
   id: string
@@ -112,18 +114,30 @@ const divisions: {
 ]
 
 /** Layout: industries/technology-and-saas/_components/ConnectedExpertise.tsx (Home-19 ElevateBrandV2) — clickable specialist rows with portfolio division copy. */
-const ExpertiseBehindWork = () => {
+type ExpertiseBehindWorkProps = Partial<CmsTechnologiesSection>
+
+const ExpertiseBehindWork = ({
+  eyebrow = 'THE WOW ECOSYSTEM',
+  title = 'Different expertise. One connected team.',
+  accentTitle = '',
+  description,
+  items,
+}: ExpertiseBehindWorkProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
+
   return (
     <section>
       <div className="container">
         <RevealWrapper className="reveal-me mb-5">
-          <SectionLabel>THE WOW ECOSYSTEM</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
 
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-16 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <TextAppearAnimation02>
-              <h2 className="text-appear-2">Different expertise. One connected team.</h2>
+              <h2 className="text-appear-2">{header.title}</h2>
             </TextAppearAnimation02>
           </div>
           <div className="w-full md:w-80 lg:w-96">

@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const capabilities = [
   {
@@ -32,14 +34,20 @@ const capabilities = [
 ]
 
 /** Layout: Home-15 ElevateBrand — large numbered hover rows. */
-const ElevateSmb = () => {
+type ElevateSmbProps = Partial<CmsTechnologiesSection>
+
+const ElevateSmb = ({ eyebrow = 'What Growing SMBs Need', title, accentTitle, description, items }: ElevateSmbProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section>
       <div className="container">
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-16 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="mb-3">
-              <SectionLabel>What Growing SMBs Need</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>

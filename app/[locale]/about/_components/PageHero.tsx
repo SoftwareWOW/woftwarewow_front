@@ -3,19 +3,26 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import HeroTypingTitle from './HeroTypingTitle'
 
-interface PropsType {
-  badgeTitle?: string
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+
+interface PropsType extends CmsHeroComponentProps {
   title: string
-  italicTitle?: string
-  description?: string
   spacing?: string
   scale?: boolean
 }
 
-const PageHero = ({ badgeTitle, title, description, italicTitle, spacing, scale }: PropsType) => {
+const PageHero = ({
+  badgeTitle,
+  title,
+  description,
+  italicTitle,
+  spacing,
+  scale,
+  backgroundImage,
+}: PropsType) => {
   return (
     <section className={spacing ?? 'relative overflow-hidden pt-32 md:pt-40 lg:pt-[185px]'}>
-      <HeroGradientAnimation scale={scale} />
+      <HeroGradientAnimation scale={scale} backgroundSrc={backgroundImage?.src} />
 
       <div className="container">
         <RevealWrapper className="flex flex-col items-center text-center">

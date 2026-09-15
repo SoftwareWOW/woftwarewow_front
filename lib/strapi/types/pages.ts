@@ -9,22 +9,32 @@ export type StrapiImageWithAlt = {
 export type StrapiPageHero = {
   eyebrow?: string | null;
   title: string;
+  accentTitle?: string | null;
   description?: string | null;
-  image?: StrapiImageWithAlt | null;
+  images?: StrapiImageWithAlt[] | null;
+  backgroundImage?: StrapiImageWithAlt | null;
 };
 
 export type StrapiHeroAbout = {
   body?: string | null;
+  image?: StrapiImageWithAlt | null;
 };
 
 export type StrapiFeatureCard = {
   id?: number;
   title: string;
   description?: string | null;
+  image?: StrapiImageWithAlt | null;
 };
 
 export type StrapiPageTechnologies = {
   sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  image?: StrapiImageWithAlt | null;
+  backgroundImage?: StrapiImageWithAlt | null;
   items?: StrapiFeatureCard[] | null;
 };
 
@@ -37,7 +47,79 @@ export type StrapiProcessStep = {
 
 export type StrapiPageProcess = {
   sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  image?: StrapiImageWithAlt | null;
+  backgroundImage?: StrapiImageWithAlt | null;
   steps?: StrapiProcessStep[] | null;
+};
+
+export type StrapiRfqGroup = {
+  id?: number;
+  title: string;
+  subtitle?: string | null;
+  items?: string[] | null;
+};
+
+export type StrapiPageRfqAccordion = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  groups?: StrapiRfqGroup[] | null;
+  backgroundImage?: StrapiImageWithAlt | null;
+};
+
+export type StrapiPackageOffer = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title: string;
+  description?: string | null;
+  price?: string | null;
+  billingNote?: string | null;
+  features?: StrapiFeatureCard[] | null;
+  image?: StrapiImageWithAlt | null;
+  backgroundImage?: StrapiImageWithAlt | null;
+  cta?: {
+    label?: string | null;
+    href?: string | null;
+  } | null;
+};
+
+export type StrapiEventCard = {
+  id?: number;
+  date?: string | null;
+  title: string;
+  location?: string | null;
+  href?: string | null;
+};
+
+export type StrapiPageEvents = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  events?: StrapiEventCard[] | null;
+};
+
+export type StrapiImageWithLink = {
+  id?: number;
+  image?: StrapiMedia | null;
+  alt?: string | null;
+  href?: string | null;
+};
+
+export type StrapiImageGallery = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  images?: StrapiImageWithLink[] | null;
 };
 
 export type StrapiPageProjectItem = {

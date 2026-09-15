@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
+import type { CmsPackageOfferSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import pricingBg from '@/public/images/pricing-gradient.png'
 import type { StaticImageData } from 'next/image'
 import Link from 'next/link'
@@ -52,7 +54,7 @@ const CheckmarkIcon = () => (
   </span>
 )
 
-const plans: Plan[] = [
+const DEFAULT_PLANS: Plan[] = [
   {
     id: 1,
     titlePrefix: 'WOW',
@@ -80,22 +82,46 @@ const plans: Plan[] = [
   },
 ]
 
+function mergePlanFeatures(plans: Plan[], cmsFeatures?: CmsPackageOfferSection['features'] | null): Plan[] {
+  if (!cmsFeatures?.length) return plans
+
+  const flatDefaults = plans.flatMap((plan) => plan.features.map((feature) => ({ title: feature })))
+  const mergedFlat = mergeFeatureItems(flatDefaults, cmsFeatures)
+  let offset = 0
+
+  return plans.map((plan) => {
+    const count = plan.features.length
+    const features = mergedFlat.slice(offset, offset + count).map((item) => item.title)
+    offset += count
+
+    return {
+      ...plan,
+      features: features.length ? features : plan.features,
+    }
+  })
+}
+
 /** Layout: HostingThatFits / PricingV4 — two learning path cards. */
-const LearnYourWay = () => {
+const LearnYourWay = ({
+  eyebrow = 'Explore',
+  title = 'Learn your way.',
+  description = 'Build knowledge on your own time or join us for practical, interactive experiences.',
+  features,
+}: Partial<CmsPackageOfferSection> = {}) => {
+  const plans = mergePlanFeatures(DEFAULT_PLANS, features)
+
   return (
     <section className="overflow-hidden">
       <div className="container">
         <div className="mb-7 text-center lg:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Explore</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 text-center">Learn your way.</h2>
+            <h2 className="text-appear mb-3 text-center">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-3xl text-[#808080]">
-              Build knowledge on your own time or join us for practical, interactive experiences.
-            </p>
+            <p className="text-appear mx-auto max-w-3xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 

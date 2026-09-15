@@ -10,6 +10,8 @@ import {
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const challenges: { id: string; title: string; description: string; icon: ReactNode }[] = [
   {
@@ -51,12 +53,18 @@ const challenges: { id: string; title: string; description: string; icon: ReactN
 ]
 
 /** Layout: Home-18 ServicesV15 — 6 bordered icon cards in a responsive grid. */
-const TheReality = () => {
+type TheRealityProps = Partial<CmsTechnologiesSection>
+
+const TheReality = ({ eyebrow = 'The Reality', title, accentTitle, description, items }: TheRealityProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section>
       <div className="container mb-10 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>The Reality</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h2 className="mx-auto max-w-4xl">

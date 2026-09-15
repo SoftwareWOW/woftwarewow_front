@@ -4,6 +4,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const teams: {
   title: ReactNode
@@ -87,13 +89,19 @@ const teams: {
 ]
 
 /** Layout: Home-13 ExclusiveTravelDeals — image overlay cards. */
-const ExclusiveTravelDeals = () => {
+type ExclusiveTravelDealsProps = Partial<CmsTechnologiesSection>
+
+const ExclusiveTravelDeals = ({ eyebrow = 'THE WOW ECOSYSTEM', title, accentTitle, description, items }: ExclusiveTravelDealsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center lg:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>THE WOW ECOSYSTEM</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3 text-center">More Capabilities Behind Every Opportunity.</h2>

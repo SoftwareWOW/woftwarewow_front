@@ -11,6 +11,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 interface ExpertiseCardProps {
   id: string
@@ -65,26 +67,36 @@ const BOTTOM_ROW_EXPERTISE: ExpertiseCardProps[] = [
   },
 ]
 
-const StrategicExpertise: FC = () => {
+type StrategicExpertiseProps = Partial<CmsTechnologiesSection>
+
+const StrategicExpertise: FC<StrategicExpertiseProps> = ({
+  eyebrow = 'Strategic Expertise',
+  title = 'Our strategic',
+  accentTitle = 'expertise',
+  description = 'Five strategic areas that shape every roadmap — before specialist divisions execute the work.',
+}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
           <div className="md:w-[60%] md:self-start">
             <RevealWrapper className="reveal-me mb-2">
-              <SectionLabel>Strategic Expertise</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <HeadingWithInstrument
               className="lg:leading-[1.1]"
-              before="Our strategic"
-              accent="expertise"
+              before={header.title ?? ''}
+              accent={header.accentTitle ?? ''}
             />
           </div>
           <div className="w-full md:w-[40%] md:max-w-72 md:self-end lg:max-w-[470px]">
             <TextAppearAnimation>
-              <p className="text-appear max-w-lg md:place-self-end md:text-right">
-                Five strategic areas that shape every roadmap — before specialist divisions execute the work.
-              </p>
+              <p className="text-appear max-w-lg md:place-self-end md:text-right">{header.description}</p>
             </TextAppearAnimation>
             <RevealWrapper className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
               <ButtonComponentList

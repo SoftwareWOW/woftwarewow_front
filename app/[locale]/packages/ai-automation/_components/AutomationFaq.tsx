@@ -5,8 +5,9 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
+import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
 
-const faqData = [
+const DEFAULT_ITEMS = [
   {
     id: 1,
     question: 'What kinds of processes can you automate?',
@@ -45,8 +46,18 @@ const faqData = [
   },
 ]
 
+type Props = { items?: CmsFaqItem[] }
+
 /** Layout: Home Faq — 3-column accordion grid, closed by default. */
-const AutomationFaq = () => {
+const AutomationFaq = ({ items }: Props = {}) => {
+  const faqData = DEFAULT_ITEMS.map((faq, index) => {
+    const cms = items?.[index]
+    return {
+      ...faq,
+      question: cms?.question || faq.question,
+      answer: cms?.answer ?? faq.answer,
+    }
+  })
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {
@@ -55,7 +66,7 @@ const AutomationFaq = () => {
       columns[index % 3].push(faq)
     })
     return columns
-  }, [])
+  }, [faqData])
 
   const toggleAccordion = (id: number) => {
     setActiveAccordion((prevActive) => (prevActive === id ? null : id))

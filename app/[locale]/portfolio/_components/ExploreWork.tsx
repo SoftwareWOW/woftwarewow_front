@@ -7,9 +7,27 @@ import Link from 'next/link'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
 import { PORTFOLIO_FILTERS, portfolioProjects, type PortfolioFilter } from '../_data/projects'
+import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
 /** Layout: case-study/_components/Projects.tsx — underline-hover-effect card styling + new filter tabs. */
-const ExploreWork = () => {
+type ExploreWorkProps = { projects?: CmsProjectCard[] | null }
+
+const ExploreWork = ({ projects }: ExploreWorkProps = {}) => {
+  const displayProjects = projects?.length
+    ? projects.map((p, i) => ({
+        slug: p.href?.split('/').pop() ?? String(i),
+        title: p.title,
+        description: p.description ?? '',
+        image: p.thumbnail ?? '',
+        alt: p.alt ?? p.title,
+        client: '',
+        industry: '',
+        serviceTags: [] as string[],
+        tagline: p.description ?? '',
+      }))
+    : []
+
+
   const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All')
 
   const filteredProjects = useMemo(() => {

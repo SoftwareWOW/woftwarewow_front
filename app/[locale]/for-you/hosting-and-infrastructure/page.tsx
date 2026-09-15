@@ -3,6 +3,14 @@ const PAGE_SLUG = 'hosting-and-infrastructure' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Hosting & Infrastructure',
+  title: 'Keep your business online and ',
+  italicTitle: 'ready.',
+  description:
+    'Reliable hosting, domains, business email and infrastructure designed to keep your digital operations fast, secure and accessible.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquee from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -19,7 +27,8 @@ import HostingInfraHero from './_components/HostingInfraHero'
 import HostingThatFits from './_components/HostingThatFits'
 // 3. Infrastructure Solutions — RevenueCapabilities flip cards
 import InfrastructureSolutions from './_components/InfrastructureSolutions'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -27,51 +36,33 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Hosting & Infrastructure | WOW Superagency',
-    description:
-      'Reliable hosting, domains, business email and infrastructure designed to keep your digital operations fast, secure and accessible.',
-    keywords: [
-      'hosting and infrastructure',
-      'website hosting',
-      'VPS hosting',
-      'domains',
-      'business email',
-      'cloud storage',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Hosting & Infrastructure | WOW Superagency',
-      description:
-        'Keep your business online and ready — hosting, domains, email and infrastructure managed in one place.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/for-you/hosting-and-infrastructure`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Hosting & Infrastructure' })
 }
 
 export default async function HostingAndInfrastructurePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — Home-19 HeroV19 */}
-        <HostingInfraHero />
+        <HostingInfraHero {...hero} images={hero.images} />
         {/* 2. Digital Foundations — BrandCapabilities */}
-        <DigitalFoundations />
+        <DigitalFoundations {...(sections.digitalFoundations ?? {})} />
         {/* 3. Infrastructure Solutions — RevenueCapabilities */}
-        <InfrastructureSolutions />
+        <InfrastructureSolutions {...(sections.infrastructureSolutions ?? {})} />
         {/* 4. Built for Business — ElevateBrandV2 */}
-        <BuiltForBusiness />
+        <BuiltForBusiness {...(sections.builtForBusiness ?? {})} />
         {/* 5. Trusted logos — shared Marquee */}
         <Marquee />
         {/* 6. Hosting That Fits — PricingV4 */}
-        <HostingThatFits />
+        <HostingThatFits {...(sections.hostingThatFits ?? {})} />
         {/* 7. Ready to secure — WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to secure your"

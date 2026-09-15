@@ -4,7 +4,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import SectionDecorativeBackground from '@/components/shared/SectionDecorativeBackground'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
+import type { CmsRfqAccordionSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsImageProps } from '@/lib/strapi/cms-section-props'
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,7 +15,7 @@ import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
 
-const servicesData = [
+const DEFAULT_GROUPS = [
   {
     id: 1,
     title: 'Branding From A To Z',
@@ -93,11 +96,38 @@ const servicesData = [
   },
 ]
 
+function mergeRfqGroups<T extends { id: number; title: string; subtitle?: string; items: string[] }>(
+  defaults: T[],
+  cmsGroups?: CmsRfqAccordionSection['groups'] | null,
+): T[] {
+  if (!cmsGroups?.length) return defaults
+
+  return defaults.map((group, index) => {
+    const cms = cmsGroups[index]
+    if (!cms) return group
+
+    return {
+      ...group,
+      title: cms.title || group.title,
+      subtitle: cms.subtitle ?? group.subtitle,
+      items: cms.items?.length ? cms.items : group.items,
+    }
+  })
+}
+
 /** Layout: SolutionToChallenges accordion — Build & Launch RFQ variant with centered header. */
-const BuildAndLaunchRfq = () => {
+const BuildAndLaunchRfq = ({
+  eyebrow = 'From Idea to Launch',
+  title = 'Bring the pieces together.',
+  description =
+    'Instead of finding separate providers for every part of your launch, build the essentials through one coordinated team.',
+  groups,
+  backgroundImage,
+}: Partial<CmsRfqAccordionSection> & CmsImageProps = {}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
+  const servicesData = mergeRfqGroups(DEFAULT_GROUPS, groups)
   const visibleServices = showAll ? servicesData : servicesData.slice(0, INITIAL_VISIBLE_COUNT)
 
   const toggleAccordion = (index: number) => {
@@ -133,25 +163,28 @@ const BuildAndLaunchRfq = () => {
         }}
       />
 
-      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
-        <Image src={gradientBg} alt="" aria-hidden />
-      </div>
+      {backgroundImage?.src ? (
+        <SectionDecorativeBackground
+          src={backgroundImage.src}
+          wrapperClassName="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]"
+          imgClassName="h-full w-full object-cover"
+        />
+      ) : (
+        <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
+          <Image src={gradientBg} alt="" aria-hidden />
+        </div>
+      )}
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="mb-4 flex justify-center">
-            <SectionLabel>From Idea to Launch</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper>
-            <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-              Bring the pieces together.
-            </h2>
+            <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">{title}</h2>
           </RevealWrapper>
           <RevealWrapper className="mt-4">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              Instead of finding separate providers for every part of your launch, build the essentials through one
-              coordinated team.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
@@ -240,7 +273,7 @@ const BuildAndLaunchRfq = () => {
         </RevealWrapper>
 
         <RevealWrapper className="mx-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-14">
-          {servicesData.length > INITIAL_VISIBLE_COUNT && (
+          {DEFAULT_GROUPS.length > INITIAL_VISIBLE_COUNT && (
             <ButtonComponentList>
               <ButtonComponent type="button" variant="white" onClick={handleToggleShowAll} ariaExpanded={showAll}>
                 {showAll ? 'See Less' : 'See More'}

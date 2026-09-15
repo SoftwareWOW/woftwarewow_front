@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 type CapabilityCard = {
   title: string
@@ -85,16 +87,27 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-10px)] xl:w-[calc(50%-10px)] max-w-[640px]'
 
 /** Layout: technology-and-saas ExperiencePillars — hover-flip cards, 2×2 grid. All cards start default dark. */
-const AffiliateBenefits = () => {
+type AffiliateBenefitsProps = Partial<CmsTechnologiesSection>
+
+const AffiliateBenefits = ({
+  eyebrow = 'PARTNER WITH WOW',
+  title = 'More Opportunity From Every Introduction.',
+  accentTitle = '',
+  description,
+  items,
+}: AffiliateBenefitsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>PARTNER WITH WOW</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 lg:leading-[1.21]">More Opportunity From Every Introduction.</h2>
+            <h2 className="text-appear mb-3 lg:leading-[1.21]">{header.title}</h2>
           </TextAppearAnimation>
         </div>
       </div>

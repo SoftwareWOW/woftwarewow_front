@@ -4,6 +4,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -34,13 +36,19 @@ const packages = [
 ]
 
 /** Layout: Home-20 PortfolioV6 / StartupPackages — overlapping image + card rows. */
-const CarePackages = () => {
+type CarePackagesProps = Partial<CmsTechnologiesSection>
+
+const CarePackages = ({ eyebrow = 'Recommended Solutions', title, accentTitle, description, items }: CarePackagesProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section aria-labelledby="care-packages-heading">
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>Recommended Solutions</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 id="care-packages-heading" className="text-appear mb-3 text-center">

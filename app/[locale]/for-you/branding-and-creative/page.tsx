@@ -3,6 +3,14 @@ const PAGE_SLUG = 'branding-and-creative' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Branding & Creative',
+  title: 'Build a brand people',
+  italicTitle: 'remember.',
+  description:
+    'Turn what makes your business different into a clear, distinctive brand—with the strategy, identity and creative assets to show up consistently.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -20,7 +28,8 @@ import BuiltToBeUsed from './_components/BuiltToBeUsed'
 import OurCapabilities from './_components/OurCapabilities'
 // 5. Our Tools — Home-06 ClientV4 pattern
 import OurTools from './_components/OurTools'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -28,50 +37,33 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Branding & Creative | WOW Superagency',
-    description:
-      'Turn what makes your business different into a clear, distinctive brand—with the strategy, identity and creative assets to show up consistently.',
-    keywords: [
-      'branding and creative',
-      'brand strategy',
-      'visual identity',
-      'brand guidelines',
-      'creative design',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Branding & Creative | WOW Superagency',
-      description:
-        'Build a brand people remember — strategy, identity and creative systems your business can actually use.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/for-you/branding-and-creative`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Branding & Creative' })
 }
 
 export default async function BrandingAndCreativePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — Home-04 HeroV11 */}
-        <BrandingCreativeHero />
+        <BrandingCreativeHero {...hero} images={hero.images} />
         {/* 2. Our Capabilities — Home-16 ServicesV14 */}
-        <OurCapabilities />
+        <OurCapabilities {...(sections.ourCapabilities ?? {})} />
         {/* 3. Brand Capabilities — Home-12 WhyChooseUs */}
-        <BrandCapabilities />
+        <BrandCapabilities {...(sections.brandCapabilities ?? {})} />
         {/* 4. Built to Be Used — 6-card grid */}
-        <BuiltToBeUsed />
+        <BuiltToBeUsed {...(sections.builtToBeUsed ?? {})} />
         {/* 5. Our Tools — Home-06 ClientV4 */}
-        <OurTools />
+        <OurTools {...(sections.ourTools ?? {})} />
         {/* 6. Brand Visibility — SalesVisibility */}
-        <BrandVisibility />
+        <BrandVisibility {...(sections.brandVisibility ?? {})} />
         {/* 7. Ready to brand — WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to build your"

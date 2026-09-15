@@ -3,6 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import pricingBg from '@/public/images/pricing-gradient.png'
 import type { StaticImageData } from 'next/image'
+import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
 
 type GapCard = {
   id: number
@@ -67,8 +68,10 @@ const cards: GapCard[] = [
   },
 ]
 
+type Props = Partial<CmsHeroAboutSection>
+
 /** Layout: LearnYourWay / HostingThatFits — two comparison cards. */
-const TheGap = () => {
+const TheGap = (_props: Props = {}) => {
   return (
     <section className="overflow-hidden">
       <div className="container">

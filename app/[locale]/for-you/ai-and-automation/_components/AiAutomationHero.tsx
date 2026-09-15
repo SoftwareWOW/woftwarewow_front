@@ -3,12 +3,24 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimationV2 from '@/components/shared/HeroGradientAnimationV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import gsap from 'gsap'
 import { useEffect, useRef, useState } from 'react'
 
 /** Layout: Home-12 HeroV12 — centered hero + floating images + dual CTAs. */
-const AiAutomationHero = () => {
+const AiAutomationHero = ({
+  badgeTitle = 'AI & Automation',
+  title = 'Work smarter with',
+  italicTitle = 'AI.',
+  description =
+    'Use AI and automation to remove repetitive work, improve efficiency, and create smarter business systems.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/hero-img/ai-hero-1.jpg', alt: 'AI and automation' }
+  const image1 = images?.[1] ?? { src: '/images/hero-img/ai-hero-2.jpg', alt: 'Smart workflows' }
+
   const heroImage1Ref = useRef<HTMLDivElement>(null)
   const heroImage2Ref = useRef<HTMLDivElement>(null)
   const heroImage3Ref = useRef<HTMLDivElement>(null)
@@ -95,15 +107,17 @@ const AiAutomationHero = () => {
       <div className="container">
         <HeroGradientAnimationV2 />
         <RevealWrapper className="mb-3 flex items-center justify-center">
-          <SectionLabel>AI &amp; Automation</SectionLabel>
+          <SectionLabel>{badgeTitle}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h1
-            id="ai-automation-heading"
-            className="text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em]"
-          >
-            Put AI to work in your business.
-          </h1>
+              id="ai-automation-heading"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            >
+              {title}
+              <br className="hidden lg:block" />
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+            </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <p className="mx-auto mt-3 max-w-3xl text-center text-base leading-relaxed text-[#808080] md:text-lg">
@@ -131,13 +145,13 @@ const AiAutomationHero = () => {
         </RevealWrapper>
       </div>
       <div className="absolute -left-[4.5%] top-[42%] hidden md:block" ref={heroImage1Ref}>
-        <img src="/images/hero-img/hero-img-05.png" alt="" className="reveal-me" />
+        <img src={image0.src} alt={image0.alt ?? ''} className="reveal-me" />
       </div>
       <div className="absolute -right-[5%] top-[12%] hidden md:block" ref={heroImage2Ref}>
-        <img src="/images/hero-img/hero-img-06.png" alt="" />
+        <img src={image1.src} alt={image1.alt ?? ''} />
       </div>
       <div className="absolute bottom-[0%] right-[18.5%] hidden lg:block" ref={heroImage3Ref}>
-        <img src="/images/hero-img/hero-img-07.png" alt="" className="reveal-me" />
+        <img src={image1.src} alt={image1.alt ?? ''} className="reveal-me" />
       </div>
     </section>
   )

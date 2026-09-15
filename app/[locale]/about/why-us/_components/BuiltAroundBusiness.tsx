@@ -2,8 +2,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroImage, CmsProcessStep } from '@/lib/strapi/mappers/page-sections'
 
-const points = [
+const DEFAULT_POINTS = [
   {
     title: 'Your goals',
     description: 'Priorities shaped around the outcomes that matter most to your business.',
@@ -26,19 +27,51 @@ const points = [
   },
 ]
 
+const DEFAULT_IMAGE: CmsHeroImage = {
+  src: '/images/wow/Hero/devision/Accelerate.jpg',
+  alt: 'Solutions built around your business',
+}
+
+type BuiltAroundBusinessProps = {
+  eyebrow?: string
+  title?: string
+  accentTitle?: string
+  description?: string
+  image?: CmsHeroImage
+  steps?: CmsProcessStep[]
+}
+
+function mapPoints(steps?: CmsProcessStep[]) {
+  if (!steps?.length) return DEFAULT_POINTS
+
+  return steps.map((step) => ({
+    title: step.title,
+    description: step.description ?? '',
+  }))
+}
+
 /** Layout: Home-25 WhyChooseUsV8 — list + image. */
-const BuiltAroundBusiness = () => {
+const BuiltAroundBusiness = ({
+  eyebrow = 'Built Around You',
+  title = 'Built around',
+  accentTitle = 'your business',
+  description = 'Solutions adapt to your goals, industry, growth stage, requirements, and resources — so you get a partner that fits, not a one-size package.',
+  image = DEFAULT_IMAGE,
+  steps,
+}: BuiltAroundBusinessProps) => {
+  const points = mapPoints(steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-16 md:flex-row lg:justify-between">
           <div className="flex-1 md:self-start">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Built Around You</SectionLabel>
+              <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>
-                Built around <InstrumentText>your business</InstrumentText>
+                {title} <InstrumentText>{accentTitle}</InstrumentText>
               </h2>
             </RevealWrapper>
           </div>
@@ -46,8 +79,7 @@ const BuiltAroundBusiness = () => {
           <div className="w-full md:max-w-80 md:self-end lg:max-w-[470px]">
             <RevealWrapper className="reveal-me">
               <p className="max-w-lg text-base leading-relaxed text-[#808080] md:place-self-end md:text-right">
-                Solutions adapt to your goals, industry, growth stage, requirements, and resources — so you get a
-                partner that fits, not a one-size package.
+                {description}
               </p>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">
@@ -82,11 +114,7 @@ const BuiltAroundBusiness = () => {
           </div>
 
           <RevealWrapper as="figure" className="reveal-me md:w-1/2">
-            <img
-              src="/images/wow/Hero/devision/Accelerate.jpg"
-              alt="Solutions built around your business"
-              className="h-full w-full object-cover"
-            />
+            <img src={image.src} alt={image.alt ?? ''} className="h-full w-full object-cover" />
           </RevealWrapper>
         </div>
       </div>

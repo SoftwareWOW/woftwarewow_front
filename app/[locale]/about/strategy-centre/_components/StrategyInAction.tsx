@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
 interface CaseStudyType {
   slug: string
@@ -13,7 +14,24 @@ interface CaseStudyType {
 
 const caseStudies: CaseStudyType[] = getMarkDownData('data/management-consulting/project')
 
-const StrategyInAction = () => {
+type StrategyInActionProps = { projects?: CmsProjectCard[] | null }
+
+const StrategyInAction = ({ projects }: StrategyInActionProps = {}) => {
+  const displayProjects = projects?.length
+    ? projects.map((p, i) => ({
+        slug: p.href?.split('/').pop() ?? String(i),
+        title: p.title,
+        description: p.description ?? '',
+        image: p.thumbnail ?? '',
+        alt: p.alt ?? p.title,
+        client: '',
+        industry: '',
+        serviceTags: [] as string[],
+        tagline: p.description ?? '',
+      }))
+    : []
+
+
   return (
     <section>
       <div className="container">

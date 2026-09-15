@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Start with the problem',
@@ -22,28 +24,31 @@ const steps = [
 ]
 
 /** Layout: BuildCommunity — 3 numbered columns with faded background numbers. */
-const AiWithPurpose = () => {
+const AiWithPurpose = ({
+  eyebrow = 'AI with a purpose',
+  title = 'Automate what makes sense. Keep people where they matter.',
+  description = 'AI should make the business work better—not add another layer of complexity.',
+  steps,
+}: Partial<CmsProcessSection> = {}) => {
+  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>AI with a purpose</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto ">
-              Automate what makes sense. Keep people where they matter.
-            </h2>
+            <h2 className="mx-auto ">{title}</h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me mt-5">
-            <p className="mx-auto  text-base leading-relaxed text-[#808080]">
-              AI should make the business work better—not add another layer of complexity.
-            </p>
+            <p className="mx-auto  text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:gap-x-10 xl:grid-cols-3">
-          {steps.map((step) => (
+          {displaySteps.map((step) => (
             <RevealWrapper
               key={step.title}
               className="relative flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24"

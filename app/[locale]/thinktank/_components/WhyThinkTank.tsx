@@ -1,9 +1,11 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { Lightbulb, MessageSquare, Route, Users } from 'lucide-react'
 import { meetSectionClass, meetSectionInnerClass } from '@/app/[locale]/meet/_components/meetSectionSpacing'
 
-const whyThinkTankItems = [
+const DEFAULT_WHYTHINKTANKITEMS = [
   {
     title: 'Focused Discussion',
     description: 'Work through a specific challenge, idea, or decision with our team.',
@@ -26,19 +28,41 @@ const whyThinkTankItems = [
   },
 ]
 
-const WhyThinkTank = () => (
+type WhyThinkTankProps = Partial<CmsTechnologiesSection>
+
+const WhyThinkTank = ({
+  eyebrow = 'Why Join a Think Tank Session',
+  title = 'A session designed to',
+  accentTitle = 'create clarity',
+  items,
+}: WhyThinkTankProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle }, { eyebrow, title, accentTitle })
+  const mergedItems = mergeFeatureItems(
+    DEFAULT_WHYTHINKTANKITEMS.map(({ title: itemTitle, description, icon }) => ({
+      title: itemTitle,
+      description,
+      icon,
+    })),
+    items,
+  ).map((item, index) => ({
+    ...DEFAULT_WHYTHINKTANKITEMS[index],
+    title: item.title,
+    description: item.description ?? DEFAULT_WHYTHINKTANKITEMS[index].description,
+  }))
+
+  return (
   <section className={meetSectionClass}>
     <div className={meetSectionInnerClass}>
       <RevealWrapper className="mb-10 text-center md:mb-14">
-        <SectionLabel className="mb-5">Why Join a Think Tank Session</SectionLabel>
+        <SectionLabel className="mb-5">{header.eyebrow}</SectionLabel>
         <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-          A session designed to{' '}
-          <span className="font-instrument italic">create clarity</span>
+          {header.title}{' '}
+          <span className="font-instrument italic">{header.accentTitle}</span>
         </h2>
       </RevealWrapper>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {whyThinkTankItems.map((item) => {
+        {mergedItems.map((item) => {
           const Icon = item.icon
 
           return (
@@ -60,6 +84,7 @@ const WhyThinkTank = () => (
       </div>
     </div>
   </section>
-)
+  )
+}
 
 export default WhyThinkTank

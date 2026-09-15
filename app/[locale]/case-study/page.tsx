@@ -1,6 +1,7 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
+import { mapFooterResourceHeroForCaseStudy } from '@/lib/strapi/mappers/footer-resource-page'
 import {
   buildFooterResourceMetadata,
   loadFooterResourcePage,
@@ -26,12 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const CaseStudyPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  await loadFooterResourcePage(PAGE_KEY, locale as Locale)
+  const cms = await loadFooterResourcePage(PAGE_KEY, locale as Locale)
+  const hero = mapFooterResourceHeroForCaseStudy(cms.raw) ?? {}
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <CaseStudyHero />
+        <CaseStudyHero {...hero} />
         <Projects />
         <WowGrowthCta
           accentText="Ready to"

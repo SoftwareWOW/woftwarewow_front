@@ -2,9 +2,11 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import Image from 'next/image'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '01',
     title: 'Get Found',
@@ -28,7 +30,12 @@ const steps = [
 ]
 
 /** Layout: Home-07 ProcessV4 — image height matches steps. */
-const ClientJourney = () => {
+type ClientJourneyProps = Partial<CmsProcessSection>
+
+const ClientJourney = ({ eyebrow, title, accentTitle, description, steps }: ClientJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section>
       <div className="container">
@@ -62,7 +69,7 @@ const ClientJourney = () => {
 
           <div className="min-w-0 flex-1">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
-              {steps.map((step, index) => (
+              {mergedSteps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">
                   <div
                     className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${

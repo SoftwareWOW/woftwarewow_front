@@ -3,6 +3,13 @@ const PAGE_SLUG = 'digital-transformation' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Digital Transformation Package',
+  title: 'Modernize how your business works.',
+  description:
+    'We identify where technology can make the biggest difference, then bring the right improvements together into one coordinated transformation.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -20,7 +27,8 @@ import TransformationPriorities from './_components/TransformationPriorities'
 import TransformationPlan from './_components/TransformationPlan'
 // 2. The Gap — LearnYourWay / HostingThatFits
 import TheGap from './_components/TheGap'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -28,48 +36,33 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Digital Transformation Package | WOW Superagency',
-    description:
-      'We identify where technology can make the biggest difference, then bring the right improvements together into one coordinated transformation.',
-    keywords: [
-      'digital transformation package',
-      'systems and integrations',
-      'workflow automation',
-      'process modernization',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Digital Transformation Package | WOW Superagency',
-      description: 'Modernize how your business works — connected systems, automation and a clearer digital setup.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/packages/digital-transformation`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Digital Transformation Package' })
 }
 
 export default async function DigitalTransformationPackagePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — BrandingCreativeHero / Home-04 HeroV11 */}
-        <DigitalTransformationHero />
+        <DigitalTransformationHero {...hero} images={hero.images} />
         {/* 2. The Gap — LearnYourWay / HostingThatFits */}
-        <TheGap />
+        <TheGap {...(sections.theGap ?? {})} />
         {/* 3. Transformation Plan — RevenueCapabilities / Home-24 ServicesV16 */}
-        <TransformationPlan />
+        <TransformationPlan {...(sections.transformationPlan ?? {})} />
         {/* 4. Before / After — AutomationInAction */}
-        <BeforeAfterGap />
+        <BeforeAfterGap {...(sections.beforeAfterGap ?? {})} />
         {/* 5. Priorities — SpecialistTeams / Home-15 ElevateBrand */}
-        <TransformationPriorities />
+        <TransformationPriorities {...(sections.transformationPriorities ?? {})} />
         {/* 6. Path — LaunchPath / ServiceProces */}
-        <ModernizationPath />
+        <ModernizationPath {...(sections.modernizationPath ?? {})} />
         {/* 7. General CTA */}
         <WowGrowthCta
           accentText="Outgrown the old way?"

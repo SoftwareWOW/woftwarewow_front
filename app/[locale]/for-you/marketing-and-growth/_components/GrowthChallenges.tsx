@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
-const challenges = [
+const DEFAULT_ITEMS = [
   {
     title: 'Low visibility',
     description: 'Customers can\'t find you when they\'re ready to buy.',
@@ -27,14 +29,22 @@ const challenges = [
 ]
 
 /** Layout: Home-16 WhyChooseUsV5 — split headline + stacked challenge list. */
-const GrowthChallenges = () => {
+const GrowthChallenges = ({
+  eyebrow = 'Your Growth Challenges',
+  title = 'Problems that keep growth',
+  accentTitle = 'stuck',
+  description = "If these sound familiar, you don't need more disconnected tactics — you need a connected growth system.",
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="mx-auto max-w-[1500px] px-4 md:px-[30px]">
         <div className="flex flex-col-reverse gap-y-8 md:flex-row-reverse md:gap-5 lg:gap-10 xl:gap-x-20">
           <div className="md:w-[45%]">
             <div className="[&>*:not(:first-child)]:mt-3.5">
-              {challenges.map((item) => (
+              {displayItems.map((item) => (
                 <RevealWrapper key={item.title} className="reveal-me border-b py-2.5 dark:border-dark">
                   <h6>{item.title}</h6>
                   <p className="mt-1.5 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
@@ -51,15 +61,12 @@ const GrowthChallenges = () => {
           </div>
 
           <RevealWrapper className="reveal-me md:w-[55%]">
-            <SectionLabel className="mb-3.5">Your Growth Challenges</SectionLabel>
+            <SectionLabel className="mb-3.5">{eyebrow}</SectionLabel>
             <h2>
-              Problems that keep growth
-              <InstrumentText> stuck</InstrumentText>
+              {title}
+              <InstrumentText> {accentTitle}</InstrumentText>
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-[#808080]">
-              If these sound familiar, you don&apos;t need more disconnected tactics — you need a connected growth
-              system.
-            </p>
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
       </div>

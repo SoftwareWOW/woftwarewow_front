@@ -52,10 +52,7 @@ export async function getSuperagencyLayout(locale: Locale) {
     }),
     fetchSingleType<StrapiSuperagencyFooter>('superagency-footer', {
       locale,
-      populate: {
-        resourceColumns: { populate: { links: true } },
-        socialLinks: true,
-      },
+      populate: '*',
     }),
   ]);
 

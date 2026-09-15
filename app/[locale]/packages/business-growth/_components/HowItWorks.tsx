@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Diagnose',
@@ -20,26 +22,39 @@ const steps = [
   },
 ]
 
+type Props = Partial<CmsProcessSection>
+
 /** Layout: AiWithPurpose / BuildCommunity — 3 numbered columns with faded background numbers. */
-const HowItWorks = () => {
+const HowItWorks = ({
+  eyebrow = 'How It Works',
+  title = 'Strategy first. Execution next.',
+  accentTitle = 'Improvement ongoing.',
+  steps,
+}: Props = {}) => {
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
+    ...DEFAULT_STEPS[index],
+    title: step.title,
+    description: step.description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>How It Works</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto">
-              Strategy first. Execution next.
+              {title}
               <br className="hidden md:block" />
-              Improvement ongoing.
+              {accentTitle}
             </h2>
           </RevealWrapper>
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:gap-x-10 xl:grid-cols-3">
-          {steps.map((step) => (
+          {mergedSteps.map((step) => (
             <RevealWrapper
               key={step.title}
               className="relative flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24"

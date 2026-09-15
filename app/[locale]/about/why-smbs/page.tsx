@@ -17,7 +17,22 @@ import TheReality from './_components/TheReality'
 import WhySuperagency from './_components/WhySuperagency'
 // 1. Hero — IndustriesHero
 import WhySmbsHero from './_components/WhySmbsHero'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import {
+  buildSuperagencyPageMetadata,
+  loadSuperagencyPage, resolvePageSections,
+} from '@/lib/strapi/superagency-page-loader'
+
+const PAGE_SLUG = 'about-why-smbs' as const
+
+export const revalidate = 60
+
+const DEFAULT_HERO = {
+  badgeTitle: 'Why SMBs',
+  title: 'Small businesses deserve big capabilities.',
+  description:
+    'We built WOW Superagency to give small and growing businesses access to the expertise, technology and growth capabilities they need to compete—without the complexity of managing multiple disconnected providers.',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -25,51 +40,34 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Why SMBs | WOW Superagency',
-    description:
-      'Why WOW focuses on growing SMBs — practical expertise across technology, marketing, AI, and systems designed for businesses that need to move fast without building everything in-house.',
-    keywords: [
-      'why SMBs',
-      'SMB growth',
-      'small business agency',
-      'superagency for SMBs',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Why SMBs | WOW Superagency',
-      description:
-        'Running a small business has never felt this complex. WOW helps growing SMBs align technology, marketing, AI, and sales under one partner.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/about/why-smbs`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Why SMBs' })
 }
 
 export default async function WhySmbsPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — IndustriesHero */}
-        <WhySmbsHero />
+        <WhySmbsHero {...hero} />
         {/* 2. Gallery — Home-11 InstagramGallery */}
-        <SmbGallery />
+        <SmbGallery {...(sections.smbGallery ?? {})} />
         {/* 3. The Reality — Home-18 ServicesV15 */}
-        <TheReality />
+        <TheReality {...(sections.theReality ?? {})} />
         {/* 4. The Gap — Home-23 PricingV5 */}
-        <TheGap />
+        <TheGap {...(sections.theGap ?? {})} />
         {/* 5. Elevate — Home-15 ElevateBrand */}
-        <ElevateSmb />
+        <ElevateSmb {...(sections.elevateSmb ?? {})} />
         {/* 6. Why a Superagency — Home-20 MarqueeV4 */}
-        <WhySuperagency />
+        <WhySuperagency {...(sections.whySuperagency ?? {})} />
         {/* 7. Built to Grow — Home-16 ProcessV8 */}
-        <BuiltToGrow />
+        <BuiltToGrow {...(sections.builtToGrow ?? {})} />
         {/* 8. Ready to grow — WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to grow"

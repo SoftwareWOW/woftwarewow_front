@@ -7,7 +7,23 @@ import HowWePartner from './_components/HowWePartner'
 import PartnerBenefits from './_components/PartnerBenefits'
 import WhiteLabelCapabilities from './_components/WhiteLabelCapabilities'
 import WhiteLabelHero from './_components/WhiteLabelHero'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import {
+  buildSuperagencyPageMetadata,
+  loadSuperagencyPage, resolvePageSections,
+} from '@/lib/strapi/superagency-page-loader'
+
+const PAGE_SLUG = 'whitelabel' as const
+
+export const revalidate = 60
+
+const DEFAULT_HERO = {
+  badgeTitle: 'White-label',
+  title: 'Your Brand. Our',
+  italicTitle: 'Expertise.',
+  description:
+    'Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing, AI, and more.',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -15,35 +31,24 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'White-label | WOW Superagency',
-    description:
-      'Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing, AI, and more.',
-    keywords: ['white-label', 'white label partner', 'WOW Superagency', 'partner delivery'],
-    openGraph: {
-      title: 'White-label | WOW Superagency',
-      description:
-        'Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing, AI, and more.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/whitelabel`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'White-label' })
 }
 
 export default async function WhiteLabelPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        <WhiteLabelHero />
-        <WhiteLabelCapabilities />
-        <HowWePartner />
-        <PartnerBenefits />
+        <WhiteLabelHero {...hero} />
+        <WhiteLabelCapabilities {...(sections.whiteLabelCapabilities ?? {})} />
+        <HowWePartner {...(sections.howWePartner ?? {})} />
+        <PartnerBenefits {...(sections.partnerBenefits ?? {})} />
         <WowGrowthCta
           accentText="Ready to Deliver"
           mainText="More Together?"

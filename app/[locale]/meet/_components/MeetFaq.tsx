@@ -7,10 +7,11 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
 import { useMemo, useState } from 'react'
+import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
 
 const INITIAL_VISIBLE_COUNT = 6
 
-const faqData = [
+const DEFAULT_FAQDATA = [
   {
     id: 1,
     question: 'What makes WOW different from a traditional agency?',
@@ -73,7 +74,14 @@ const faqData = [
   },
 ]
 
-const MeetFaq = () => {
+type MeetFaqProps = { items?: CmsFaqItem[] | null }
+
+const MeetFaq = ({ items }: MeetFaqProps = {}) => {
+  const faqData = items?.length
+    ? items.map((item, index) => ({ id: index + 1, question: item.question, answer: item.answer }))
+    : DEFAULT_FAQDATA
+
+
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 

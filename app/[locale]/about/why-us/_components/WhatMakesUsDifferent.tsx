@@ -10,6 +10,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const advantages: { title: string; description: string; icon: ReactNode }[] = [
   {
@@ -40,7 +42,13 @@ const advantages: { title: string; description: string; icon: ReactNode }[] = [
 ]
 
 /** Layout: Home-17 WhyChooseUsV6 — header split + 3+2 bordered cards. */
-const WhatMakesUsDifferent = () => {
+type WhatMakesUsDifferentProps = Partial<CmsTechnologiesSection>
+
+const WhatMakesUsDifferent = ({ eyebrow = 'Differentiators', title, accentTitle, description, items }: WhatMakesUsDifferentProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   const top = advantages.slice(0, 3)
   const bottom = advantages.slice(3)
 
@@ -50,7 +58,7 @@ const WhatMakesUsDifferent = () => {
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-16 md:flex-row lg:justify-between">
           <div className="md:w-[60%] md:self-start">
             <RevealWrapper className="reveal-me mb-2">
-              <SectionLabel>Differentiators</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2 className="lg:leading-[1.1]">

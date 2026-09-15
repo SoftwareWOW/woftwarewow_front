@@ -4,8 +4,10 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const included = [
+const DEFAULT_ITEMS = [
   {
     title: 'Website Strategy',
     description: 'Goals, audience, structure, customer journeys, and conversion priorities.',
@@ -38,33 +40,42 @@ const included = [
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Home-04 — ServicesV5: accordion rows closed by default, expand on hover only. */
-const WhatsIncluded = () => {
+const WhatsIncluded = ({
+  eyebrow = "What's Included",
+  title = 'Everything your website needs to ',
+  accentTitle = 'perform.',
+  description = 'A connected set of strategy, design, technology, and optimization essentials.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>What&apos;s Included</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear">
-              Everything your website needs to <InstrumentText>perform.</InstrumentText>
+              {title}
+              <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-3 max-w-2xl text-[#808080]">
-              A connected set of strategy, design, technology, and optimization essentials.
-            </p>
+            <p className="text-appear mx-auto mt-3 max-w-2xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px]">
-          {included.map((item, index) => (
+          {mergedItems.map((item, index) => (
             <Link href="/contact" key={item.title} className="block">
               <div
                 className={`group relative overflow-hidden border-x border-t bg-backgroundBody dark:border-dark dark:bg-dark ${
-                  index === included.length - 1 ? 'border-b' : ''
+                  index === mergedItems.length - 1 ? 'border-b' : ''
                 }`}
               >
                 <div className="group relative z-10 flex cursor-pointer items-center justify-between px-5 py-10 md:px-10 md:py-[60px]">

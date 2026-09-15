@@ -3,6 +3,8 @@
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { renderWowInTitle } from '@/components/wow/shared/WowText'
 import { cn } from '@/lib/utils'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
@@ -16,7 +18,7 @@ const DIVISION_BG_BASE = '/images/wow/Hero/devision'
 /** Viewport X ratio used to pick the focused card (left side, first card on entry). */
 const FOCUS_X_RATIO = 0.22
 
-const divisions = [
+const DEFAULT_DIVISIONS = [
   {
     id: 1,
     title: 'SoftwareWOW',
@@ -98,7 +100,12 @@ function renderDivisionTitle(title: string) {
 }
 
 /** Local copy of homepage DevisionOverview — same divisions, images, and horizontal-scroll behavior. */
-const ConnectedExpertise = () => {
+type ConnectedExpertiseProps = Partial<CmsTechnologiesSection>
+
+const ConnectedExpertise = ({ eyebrow, title, accentTitle, description, items }: ConnectedExpertiseProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_DIVISIONS, items)
+
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [activeCardId, setActiveCardId] = useState<number>(1)
   const cardRefs = useRef<Record<number, HTMLElement | null>>({})
@@ -162,7 +169,7 @@ const ConnectedExpertise = () => {
     let closestId = 1
     let closestDistance = Infinity
 
-    for (const item of divisions) {
+    for (const item of mergedItems) {
       const el = cardRefs.current[item.id]
       if (!el) continue
 
@@ -227,7 +234,7 @@ const ConnectedExpertise = () => {
           className="absolute inset-0 bg-[#ebe6f4] transition-colors duration-500 dark:bg-[#0a0a0a]"
         />
 
-        {divisions.map((item) => (
+        {mergedItems.map((item) => (
           <div
             key={item.id}
             aria-hidden
@@ -291,7 +298,7 @@ const ConnectedExpertise = () => {
           onPointerMove={handleCardPointerMove}
           onPointerLeave={handleCardPointerLeave}
         >
-          {divisions.map((item) => {
+          {mergedItems.map((item) => {
             const isActive = activeBgId === item.id
 
             return (

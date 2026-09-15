@@ -3,10 +3,24 @@ import Image from 'next/image'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { partnershipTypes } from '../_data/partners'
+import { partnershipTypes as DEFAULT_PARTNERSHIPTYPES } from '../_data/partners'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-02 ProcessV2 — 4 equal hover cards. */
-const HowWePartner = () => {
+type HowWePartnerProps = Partial<CmsProcessSection>
+
+const HowWePartner = ({
+  eyebrow = 'PARTNERSHIP MODELS',
+  title = 'Different ways to grow together.',
+  accentTitle = '',
+  description,
+  steps,
+  image,
+}: HowWePartnerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_PARTNERSHIPTYPES, steps)
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.2] max-lg:scale-y-[2.8]">
@@ -16,10 +30,10 @@ const HowWePartner = () => {
         <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-10 md:flex-row lg:justify-between">
           <div className="flex-1 md:self-start">
             <RevealWrapper className="reveal-me mb-4 md:mb-5">
-              <SectionLabel>PARTNERSHIP MODELS</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
-              <h2 className="text-appear">Different ways to grow together.</h2>
+              <h2 className="text-appear">{header.title}</h2>
             </TextAppearAnimation>
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
@@ -32,7 +46,7 @@ const HowWePartner = () => {
         </div>
 
         <RevealWrapper className="grid grid-cols-12 items-center justify-center gap-[1px]">
-          {partnershipTypes.map((type) => (
+          {mergedSteps.map((type) => (
             <div
               key={type.id}
               className="group col-span-full min-h-[320px] bg-backgroundBody px-7 pb-4 pt-7 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:min-h-[400px] md:px-10 md:pb-16 md:pt-10 lg:col-span-4 xl:col-span-3"

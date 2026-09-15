@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
-const processSteps = [
+const DEFAULT_PROCESS_STEPS = [
   {
     step: 'Step 01',
     title: 'Prospecting',
@@ -32,29 +34,35 @@ const processSteps = [
 ]
 
 /** Layout: Home-19 ProcessV10 — 5 step cards + CTA. */
-const LeadToCustomer = () => {
+const LeadToCustomer = ({
+  eyebrow = 'From Lead to Customer',
+  title = 'Make every stage work',
+  description =
+    'Connect prospecting, CRM, follow-up and reporting into a sales process your team can actually use.',
+  steps,
+}: Partial<CmsProcessSection> = {}) => {
+  const processSteps = mergeProcessSteps(DEFAULT_PROCESS_STEPS, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>From Lead to Customer</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
-              Make every stage work
+              {title}
               <i className="font-instrument"> together.</i>
             </h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              Connect prospecting, CRM, follow-up and reporting into a sales process your team can actually use.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
-          {processSteps.map(({ step, title, description }) => (
+          {processSteps.map(({ step, title: stepTitle, description: stepDescription }) => (
             <RevealWrapper key={step} className="reveal-me w-full grow pt-6 sm:w-[48%] xl:grow">
               <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center dark:border-dark">
                 <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
@@ -62,9 +70,9 @@ const LeadToCustomer = () => {
                     {step}
                   </span>
                 </div>
-                <h6 className="text-2xl font-normal leading-[1.1] text-black dark:text-white">{title}</h6>
+                <h6 className="text-2xl font-normal leading-[1.1] text-black dark:text-white">{stepTitle}</h6>
                 <p className="text-base font-normal leading-[1.3] text-black/70 dark:text-backgroundBody/70">
-                  {description}
+                  {stepDescription}
                 </p>
               </div>
             </RevealWrapper>

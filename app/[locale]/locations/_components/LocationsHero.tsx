@@ -22,13 +22,28 @@ const HERO_IMAGES = [
   '/images/wow/locations/landmarks/UK.png',
 ] as const
 
+type PageHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+  images?: { src: string; alt?: string }[]
+}
+
 /** Layout: industries/technology-and-saas/TechnologyHero — centered hero + 6 floating decorative images. */
-const LocationsHero = () => {
+const LocationsHero = ({
+  badgeTitle = 'OUR LOCATIONS',
+  title = 'Global Reach. Connected ',
+  italicTitle = 'Expertise.',
+  description = 'A connected Superagency working across markets, industries, and time zones.',
+  images,
+}: PageHeroProps) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
+  const imagePaths = images?.length ? images.map((item) => item.src) : [...HERO_IMAGES]
 
   useEffect(() => {
-    const imagePaths: string[] = [...HERO_IMAGES]
+    const paths: string[] = [...imagePaths]
 
     const translations: Translation[] = [
       { x: '-50%', y: '-8%' },
@@ -45,7 +60,7 @@ const LocationsHero = () => {
     const originalSrcs: string[] = decorativeImages.map((img) => img.src)
 
     const handleMouseEnter = (): void => {
-      const shuffledPaths: string[] = [...imagePaths].sort(() => Math.random() - 0.5)
+      const shuffledPaths: string[] = [...paths].sort(() => Math.random() - 0.5)
       const selectedPaths = shuffledPaths.slice(0, decorativeImages.length)
 
       decorativeImages.forEach((img, index) => {
@@ -94,7 +109,7 @@ const LocationsHero = () => {
         buttonElement.removeEventListener('mouseleave', handleMouseLeave)
       }
     }
-  }, [])
+  }, [imagePaths])
 
   const setImageRef = (index: number) => (el: HTMLImageElement | null) => {
     imagesRef.current[index] = el
@@ -110,7 +125,7 @@ const LocationsHero = () => {
 
       <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
         <img
-          src={HERO_IMAGES[0]}
+          src={images?.[0]?.src ?? HERO_IMAGES[0]}
           alt=""
           className="h-[110px] w-[85px] object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
           ref={setImageRef(0)}
@@ -118,7 +133,7 @@ const LocationsHero = () => {
       </figure>
       <figure className="pointer-events-none absolute right-[2%] top-[14%] z-0 hidden md:block lg:right-[6%] lg:top-[16%] xl:right-[10%]">
         <img
-          src={HERO_IMAGES[1]}
+          src={images?.[1]?.src ?? HERO_IMAGES[1]}
           alt=""
           className="h-[100px] w-[82px] object-contain lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
           ref={setImageRef(1)}
@@ -126,7 +141,7 @@ const LocationsHero = () => {
       </figure>
       <figure className="pointer-events-none absolute left-[1%] top-[46%] z-0 hidden lg:block xl:left-[3%]">
         <img
-          src={HERO_IMAGES[2]}
+          src={images?.[2]?.src ?? HERO_IMAGES[2]}
           alt=""
           className="h-[120px] w-[92px] object-contain xl:h-[148px] xl:w-[114px]"
           ref={setImageRef(2)}
@@ -134,7 +149,7 @@ const LocationsHero = () => {
       </figure>
       <figure className="pointer-events-none absolute right-[1%] top-[38%] z-0 hidden lg:block xl:right-[3%]">
         <img
-          src={HERO_IMAGES[3]}
+          src={images?.[3]?.src ?? HERO_IMAGES[3]}
           alt=""
           className="h-[150px] w-[110px] object-contain xl:h-[180px] xl:w-[132px]"
           ref={setImageRef(3)}
@@ -142,7 +157,7 @@ const LocationsHero = () => {
       </figure>
       <figure className="pointer-events-none absolute bottom-[6%] left-[8%] z-0 hidden md:block lg:bottom-[8%] lg:left-[14%] xl:left-[18%]">
         <img
-          src={HERO_IMAGES[4]}
+          src={images?.[4]?.src ?? HERO_IMAGES[4]}
           alt=""
           className="h-[95px] w-[74px] object-contain lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]"
           ref={setImageRef(4)}
@@ -150,7 +165,7 @@ const LocationsHero = () => {
       </figure>
       <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
         <img
-          src={HERO_IMAGES[5]}
+          src={images?.[5]?.src ?? HERO_IMAGES[5]}
           alt=""
           className="h-[90px] w-[130px] object-contain lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
           ref={setImageRef(5)}
@@ -159,21 +174,24 @@ const LocationsHero = () => {
 
       <div className="container relative z-10">
         <RevealWrapper className="mb-3 flex items-center justify-center">
-          <SectionLabel>OUR LOCATIONS</SectionLabel>
+          <SectionLabel>{badgeTitle}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h1
             id="locations-hero-heading"
             className="mx-auto max-w-[20ch] text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em] md:max-w-[18ch]"
           >
-            Global Reach. Connected <InstrumentText variant="solid">Expertise.</InstrumentText>
+            {title}
+            {italicTitle ? <InstrumentText variant="solid">{italicTitle}</InstrumentText> : null}
           </h1>
         </RevealWrapper>
-        <RevealWrapper className="reveal-me">
-          <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-[#808080] md:max-w-2xl md:text-lg">
-            A connected Superagency working across markets, industries, and time zones.
-          </p>
-        </RevealWrapper>
+        {description ? (
+          <RevealWrapper className="reveal-me">
+            <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-[#808080] md:max-w-2xl md:text-lg">
+              {description}
+            </p>
+          </RevealWrapper>
+        ) : null}
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
           <div ref={heroButtonRef} className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <ButtonComponentList className="flex" itemClassName="block">

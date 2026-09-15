@@ -4,9 +4,20 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-18 HeroV18 — gradient + split headline/CTAs + right visual. */
-const SalesAccelerationHero = () => {
+const SalesAccelerationHero = ({
+  badgeTitle = 'Sales Acceleration Package',
+  title = 'Turn leads into',
+  italicTitle = 'revenue.',
+  description =
+    'Build stronger sales systems, better follow-up, and clearer conversion paths that help your business close more deals.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/wow/nav/cards/Sales%20Acceleration%201.png', alt: 'Sales acceleration' }
+  const image1 = images?.[1] ?? { src: '/images/wow/nav/cards/Sales%20Acceleration%202.png', alt: 'Sales growth' }
+
   return (
     <section className="relative overflow-hidden pb-14 pt-[90px] md:pb-[90px] md:pt-[100px] lg:pb-[110px] lg:pt-[120px]">
       <div
@@ -26,8 +37,13 @@ const SalesAccelerationHero = () => {
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-12 xl:gap-16">
           <RevealWrapper className="reveal-me w-full min-w-0 flex-1">
             <SectionLabel className="mb-4">Sales Acceleration</SectionLabel>
-            <h1 className="mb-6 mt-5 text-[clamp(1.75rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em] sm:mt-10 md:mb-10">
-              Turn more opportunities into revenue.
+            <h1
+              id="startup-launch-heading"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            >
+              {title}
+              <br className="hidden lg:block" />
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-[#808080] md:max-w-[670px] md:text-lg">
               Build a smarter sales system for generating leads, improving follow-up, and increasing conversion.
@@ -48,8 +64,8 @@ const SalesAccelerationHero = () => {
 
           <RevealWrapper as="figure" className="reveal-me w-full max-w-md shrink-0 overflow-hidden rounded-radius-sm lg:max-w-lg">
             <img
-              src="/images/wow/nav/cards/Sales Acceleration 1.png"
-              alt="Sales acceleration from lead to revenue"
+              src={image0.src}
+              alt={image0.alt ?? ''}
               className="h-auto w-full rounded-radius-sm object-cover"
             />
           </RevealWrapper>

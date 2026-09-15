@@ -5,6 +5,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gsap from 'gsap'
 import { useRef } from 'react'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 interface JourneyItem {
   id: number
@@ -71,7 +73,13 @@ const data: JourneyItem[] = [
 ]
 
 /** Layout: Home-14 AwardWinningWork — cursor-following hover preview + numbered rows. */
-const CareJourney = () => {
+type CareJourneyProps = Partial<CmsProcessSection>
+
+const CareJourney = ({ eyebrow, title, accentTitle, description, steps }: CareJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps([], steps)
+
+
   const previewRef = useRef<HTMLDivElement>(null)
   const previewImgRef = useRef<HTMLImageElement>(null)
 

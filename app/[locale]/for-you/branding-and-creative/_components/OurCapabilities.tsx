@@ -3,9 +3,11 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import Link from 'next/link'
 
-const stages = [
+const DEFAULT_STAGES = [
   {
     title: 'Start',
     headline: "I'm building a new brand.",
@@ -27,28 +29,34 @@ const stages = [
 ]
 
 /** Layout: Home-16 ServicesV14 — 3 bordered cards with arrow button hover slide + bg. */
-const OurCapabilities = () => {
+const OurCapabilities = ({
+  eyebrow = 'Our Capabilities',
+  title = 'Solutions for Every Stage of',
+  accentTitle = 'Growth',
+  description =
+    'Our specialized divisions work together to help businesses launch, grow, automate, and scale with confidence.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayStages = mergeFeatureItems(DEFAULT_STAGES, items)
+
   return (
     <section>
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Our Capabilities</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            Solutions for Every Stage of <InstrumentText>Growth</InstrumentText>
+            {title} <InstrumentText>{accentTitle}</InstrumentText>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">
-            Our specialized divisions work together to help businesses launch, grow, automate, and scale with
-            confidence.
-          </p>
+          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
         </TextAppearAnimation>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {stages.map((stage) => (
+        {displayStages.map((stage) => (
           <RevealWrapper
             key={stage.title}
             className="reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"

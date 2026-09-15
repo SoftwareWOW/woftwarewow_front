@@ -3,10 +3,27 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
-import { clientStories } from '../_data/clients'
+import { clientStories as DEFAULT_CLIENTSTORIES, type ClientStory } from '../_data/clients'
+import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
 /** Layout: portfolio/_components/FeaturedWork.tsx — alternating lg:flex-row layout. */
-const ClientStories = () => {
+type ClientStoriesProps = { projects?: CmsProjectCard[] | null }
+
+const ClientStories = ({ projects }: ClientStoriesProps = {}) => {
+  const displayProjects: ClientStory[] = projects?.length
+    ? projects.map((p, i) => ({
+        slug: p.href?.split('/').pop() ?? String(i),
+        client: p.title,
+        industry: '',
+        challenge: p.description ?? '',
+        serviceTags: [] as string[],
+        outcome: '',
+        image: p.thumbnail ?? '',
+        alt: p.alt ?? p.title,
+      }))
+    : DEFAULT_CLIENTSTORIES
+
+
   return (
     <section id="client-stories" className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36">
       <div className="container mb-10 text-center md:mb-16">
@@ -25,7 +42,7 @@ const ClientStories = () => {
       </div>
 
       <div className="container flex flex-col gap-16 md:gap-20 lg:gap-24">
-        {clientStories.map((story, index) => (
+        {displayProjects.map((story, index) => (
           <RevealWrapperV2
             key={story.slug}
             className={`reveal-me group flex flex-col gap-8 lg:items-center lg:gap-10 ${

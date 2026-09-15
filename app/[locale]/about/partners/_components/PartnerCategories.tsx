@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const partnerTypes = [
   {
@@ -23,14 +25,20 @@ const partnerTypes = [
 ]
 
 /** Layout: Home-13 WhyChooseUsV2 — stacked list + image (distinct from WhyWePartner cards). */
-const PartnerCategories = () => {
+type PartnerCategoriesProps = Partial<CmsTechnologiesSection>
+
+const PartnerCategories = ({ eyebrow = 'Categories', title, accentTitle, description, items }: PartnerCategoriesProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section>
       <div className="container">
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-16 md:flex-row lg:justify-between">
           <div className="flex-1 md:self-start">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Categories</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>

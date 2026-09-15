@@ -3,10 +3,12 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
-const packages = [
+const DEFAULT_PACKAGES = [
   {
     number: '01',
     title: 'Brand Authority',
@@ -31,7 +33,12 @@ const packages = [
 ]
 
 /** Layout: Home-19 OurExpertiseV2 — split header + 3 cards with hover fill. */
-const RecommendedSolutions = () => {
+type RecommendedSolutionsProps = Partial<CmsTechnologiesSection>
+
+const RecommendedSolutions = ({ eyebrow, title, accentTitle, description, items }: RecommendedSolutionsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_PACKAGES, items)
+
   return (
     <section>
       <div className="container">
@@ -64,7 +71,7 @@ const RecommendedSolutions = () => {
 
         <article>
           <RevealWrapper className="reveal-me flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            {packages.map((item) => (
+            {mergedItems.map((item) => (
               <Link
                 key={item.number}
                 href={item.href}

@@ -3,6 +3,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import { Icon, addCollection } from '@iconify/react'
 import logos from '@iconify-json/logos/icons.json'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
@@ -10,7 +12,7 @@ import simpleIcons from '@iconify-json/simple-icons/icons.json'
 addCollection(logos)
 addCollection(simpleIcons)
 
-const tools = [
+const DEFAULT_TOOLS = [
   { name: 'Photoshop', icon: 'logos:adobe-photoshop' },
   { name: 'Blender', icon: 'logos:blender' },
   { name: 'After Effects', icon: 'logos:adobe-after-effects' },
@@ -21,23 +23,33 @@ const tools = [
 ]
 
 /** Layout: Home-06 ClientV4 — bordered icon row for creative tools. */
-const OurTools = () => {
+const OurTools = ({
+  eyebrow = 'Our Tools',
+  title = 'Not just an identity. A working system for your brand.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayTools = mergeFeatureItems(
+    DEFAULT_TOOLS.map((tool) => ({ ...tool, title: tool.name })),
+    items,
+  ).map((tool, index) => ({
+    ...DEFAULT_TOOLS[index],
+    name: tool.title,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto mb-5">
-              Not just an identity. A working system for your brand.
-            </h2>
+            <h2 className="text-appear mx-auto mb-5">{title}</h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me flex justify-center">
-            <SectionLabel>Our Tools</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
         </div>
 
         <RevealWrapper className="mx-auto flex max-w-5xl flex-wrap justify-center border-x border-t dark:border-dark [&>*:nth-child(7)]:border-r-0 max-md:[&>*:nth-child(even)]:border-r-0 [&>*]:border-b [&>*]:border-r dark:[&>*]:border-dark">
-          {tools.map((tool) => (
+          {displayTools.map((tool) => (
             <figure
               key={tool.name}
               className="flex size-[110px] items-center justify-center sm:size-[120px] md:size-[130px]"

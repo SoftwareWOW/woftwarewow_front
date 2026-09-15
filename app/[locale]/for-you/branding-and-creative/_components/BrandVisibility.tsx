@@ -4,8 +4,10 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
-const qualities = [
+const DEFAULT_QUALITIES = [
   {
     title: 'Distinctive',
     headline: 'Easy to recognize.',
@@ -29,14 +31,20 @@ const qualities = [
 ]
 
 /** Layout: Home-15 BrandingProcess / SalesVisibility — split heading + 2×2 grid. */
-const BrandVisibility = () => {
+const BrandVisibility = ({
+  eyebrow = 'Brand Visibility',
+  description = 'We shape brands that stand the test of time',
+  steps,
+}: Partial<CmsProcessSection> = {}) => {
+  const displayQualities = mergeProcessSteps(DEFAULT_QUALITIES, steps)
+
   return (
     <section className="relative mx-auto max-w-[1600px] px-5">
       <div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-16">
         <div className="w-full lg:max-w-[45%]">
           <HeroGradientAnimation />
           <RevealWrapper className="reveal-me mb-3">
-            <SectionLabel>Brand Visibility</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation02>
             <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
@@ -45,7 +53,7 @@ const BrandVisibility = () => {
           </TextAppearAnimation02>
           <TextAppearAnimation02>
             <p className="text-appear mt-3 text-lg leading-[1.6] tracking-[0.36px] text-[#808080]">
-              We shape brands that stand the test of time
+              {description}
             </p>
           </TextAppearAnimation02>
 
@@ -59,7 +67,7 @@ const BrandVisibility = () => {
         </div>
 
         <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:max-w-[55%]">
-          {qualities.map((item, index) => (
+          {displayQualities.map((item, index) => (
             <RevealWrapper
               key={item.title}
               className={`reveal-me px-[30px] py-[50px] dark:border-dark ${

@@ -4,9 +4,41 @@ import HeroGradientAnimationV2 from '@/components/shared/HeroGradientAnimationV2
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
+
+const DEFAULT_SLIDES = [
+  { id: '1', img: '/images/wow/Hero/client/Avatar.png' },
+  { id: '2', img: '/images/wow/Hero/client/Avatar (1).png' },
+  { id: '3', img: '/images/wow/Hero/client/Avatar (2).png' },
+]
+
+type PartnersHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+  images?: CmsHeroImage[]
+}
+
+function mapSlides(images?: CmsHeroImage[]) {
+  if (!images?.length) return DEFAULT_SLIDES
+
+  return images.slice(0, 3).map((image, index) => ({
+    id: String(index + 1),
+    img: image.src,
+  }))
+}
 
 /** Layout: Home-20 HeroV20 — centered modern hero with inline image slider. */
-const PartnersHero = () => {
+const PartnersHero = ({
+  badgeTitle = 'Partners',
+  title = 'Better',
+  italicTitle = 'Together',
+  description = 'We partner with trusted technology, platform, and industry leaders to deliver better solutions for growing businesses.',
+  images,
+}: PartnersHeroProps) => {
+  const slides = mapSlides(images)
+
   return (
     <section
       className="relative overflow-hidden pt-28 md:pt-[160px] lg:pt-[180px]"
@@ -15,23 +47,16 @@ const PartnersHero = () => {
       <HeroGradientAnimationV2 />
 
       <RevealWrapper className="container text-center">
-        <SectionLabel className="mb-3">Partners</SectionLabel>
+        <SectionLabel className="mb-3">{badgeTitle}</SectionLabel>
 
         <h1 id="partners-hero-heading" className="xl:leading-[1.1]">
-          Better <InstrumentText>Together</InstrumentText>
-          <CtaImageSlider
-            slides={[
-              { id: '1', img: '/images/wow/Hero/client/Avatar.png' },
-              { id: '2', img: '/images/wow/Hero/client/Avatar (1).png' },
-              { id: '3', img: '/images/wow/Hero/client/Avatar (2).png' },
-            ]}
-          />
+          {title} <InstrumentText>{italicTitle}</InstrumentText>
+          <CtaImageSlider slides={slides} />
           with trusted collaborators.
         </h1>
 
         <p className="mx-auto mt-3 max-w-[670px] text-center text-base leading-relaxed text-[#808080] md:text-lg">
-          We partner with trusted technology, platform, and industry leaders to deliver better solutions for growing
-          businesses.
+          {description}
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-12">

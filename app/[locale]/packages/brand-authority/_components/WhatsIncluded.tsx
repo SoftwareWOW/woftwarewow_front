@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const included = [
+const DEFAULT_ITEMS = [
   {
     title: 'Brand Positioning',
     description: 'Value proposition, audience positioning, messaging, and brand direction.',
@@ -30,28 +32,39 @@ const included = [
   },
 ]
 
+const DEFAULT_IMAGE = '/images/wow/nav/cards/social media start 1.png'
+
+type Props = Partial<CmsTechnologiesSection>
+
 /** Home-12 — WhyChooseUs: centered header + list + image + CTA. */
-const WhatsIncluded = () => {
+const WhatsIncluded = ({
+  eyebrow = "What's Included",
+  title = 'Everything you need to strengthen your presence.',
+  description = 'A coordinated set of brand, content, digital, and reputation-building essentials.',
+  items,
+  image,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+  const imageSrc = cmsImageSrc(image, DEFAULT_IMAGE)
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>What&apos;s Included</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3">Everything you need to strengthen your presence.</h2>
+            <h2 className="text-appear mb-3">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-2xl text-[#808080]">
-              A coordinated set of brand, content, digital, and reputation-building essentials.
-            </p>
+            <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
           <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-            {included.map((item) => (
+            {mergedItems.map((item) => (
               <RevealWrapper key={item.title} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
                 <h5>{item.title}</h5>
                 <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
@@ -61,7 +74,7 @@ const WhatsIncluded = () => {
 
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm md:w-1/2">
             <img
-              src="/images/wow/nav/cards/social media start 1.png"
+              src={imageSrc ?? ''}
               alt="Brand authority package essentials"
               className="h-full w-full rounded-radius-sm object-cover"
             />

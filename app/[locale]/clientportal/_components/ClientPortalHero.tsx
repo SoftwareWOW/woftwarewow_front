@@ -47,7 +47,20 @@ const AppleIcon = () => (
     <path d="M16.7 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-1-3-1c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-.1 2.9-2.3c.7-1 1.2-2 1.5-3.1-3.6-1.4-3.8-6.4-.8-8.1ZM14.8 5.9c.6-.8 1.1-1.9.9-3-1 .1-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.5 3-1.4Z" />
   </svg>
 )
-const ClientPortalHero = () => {
+
+type ClientPortalHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+}
+
+const ClientPortalHero = ({
+  badgeTitle = 'CLIENT PORTAL',
+  title = 'Everything in',
+  italicTitle = 'Place.',
+  description = 'Access your projects, files, updates, billing, and communication with the WOW team.',
+}: ClientPortalHeroProps) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -66,17 +79,17 @@ const ClientPortalHero = () => {
       <div className="relative z-10 mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-10 px-6 md:px-14 xl:flex-row xl:items-center xl:justify-between xl:gap-x-16">
         <div className="flex-1">
           <RevealWrapper className="reveal-me mb-4 md:mb-5">
-            <SectionLabel>CLIENT PORTAL</SectionLabel>
+            <SectionLabel>{badgeTitle}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper
             as="h1"
             id="client-portal-hero-heading"
             className="reveal-me text-[clamp(2rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
           >
-            Everything in <InstrumentText variant="solid">Place.</InstrumentText>
+            {title} <InstrumentText variant="solid">{italicTitle}</InstrumentText>
           </RevealWrapper>
           <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
-            Access your projects, files, updates, billing, and communication with the WOW team.
+            {description}
           </RevealWrapper>
         </div>
 

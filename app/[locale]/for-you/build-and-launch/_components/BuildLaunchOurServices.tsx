@@ -1,6 +1,7 @@
 'use client'
 
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -37,14 +38,18 @@ const WhiteArrowIcon = ({ className }: { className?: string }) => (
 )
 
 /** Layout: Home-22 OurServices — horizontal scroll cards (Build & Launch). */
-const BuildLaunchOurServices = ({ servicesData }: { servicesData: ServiceItem[] }) => {
+const BuildLaunchOurServices = ({
+  servicesData,
+  title = 'Tailored experiences for',
+  accentTitle = 'all occasions',
+}: { servicesData: ServiceItem[] } & Partial<CmsTechnologiesSection>) => {
   const { contentRef, triggerRef } = useHorizontalScroll()
 
   return (
     <section ref={triggerRef} className="service-section relative overflow-hidden">
       <div className="container">
         <h2>
-          Tailored experiences for <InstrumentText> all occasions</InstrumentText>
+          {title} <InstrumentText> {accentTitle}</InstrumentText>
         </h2>
       </div>
       <article

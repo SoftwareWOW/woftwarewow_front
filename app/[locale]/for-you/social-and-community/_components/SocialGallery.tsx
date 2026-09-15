@@ -3,6 +3,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsImageGallerySection } from '@/lib/strapi/mappers/page-sections'
+import { mergeGalleryItems } from '@/lib/strapi/cms-section-props'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 type GalleryItem = {
@@ -11,7 +13,7 @@ type GalleryItem = {
   link: string
 }
 
-const data: GalleryItem[] = [
+const DEFAULT_DATA: GalleryItem[] = [
   {
     id: 1,
     image: '/images/testimonial/testimonial-1.png',
@@ -55,7 +57,13 @@ const data: GalleryItem[] = [
 ]
 
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
-const SocialGallery = () => {
+const SocialGallery = ({
+  eyebrow = 'Gallery',
+  title = 'Follow us on',
+  accentTitle = 'Instagram',
+  images,
+}: Partial<CmsImageGallerySection> = {}) => {
+  const data = mergeGalleryItems(DEFAULT_DATA, images)
   const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -91,7 +99,7 @@ const SocialGallery = () => {
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length)
-  }, [])
+  }, [data.length])
 
   const startSlider = useCallback(() => {
     if (intervalRef.current) {
@@ -122,12 +130,12 @@ const SocialGallery = () => {
     <section>
       <div className="mb-8 text-center md:mb-14">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Gallery</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h2>
-            Follow us on
-            <InstrumentText> Instagram</InstrumentText>
+            {title}
+            <InstrumentText> {accentTitle}</InstrumentText>
           </h2>
         </RevealWrapper>
       </div>

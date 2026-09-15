@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import CounterAnimation from '@/utils/CounterAnimation'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const points = [
+const DEFAULT_POINTS = [
   {
     number: 1,
     suffix: '',
@@ -21,13 +23,23 @@ const points = [
   },
 ]
 /** Layout: Home-09 OurAchievement — short headline + compact stats (minimal copy). */
-const OnePartner = () => {
+type OnePartnerProps = Partial<CmsTechnologiesSection>
+
+const OnePartner = ({ eyebrow = 'Superagency Model', title, accentTitle, description, items }: OnePartnerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = DEFAULT_POINTS.map((item, index) => {
+    const cms = items?.[index]
+    if (!cms) return item
+    return { ...item, label: cms.title || item.label }
+  })
+
+
   return (
     <section>
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Superagency Model</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me mx-auto mb-8 md:mb-14">
             <h2>
@@ -37,7 +49,7 @@ const OnePartner = () => {
         </div>
 
         <div className="flex items-center justify-center gap-[30px] max-xl:flex-wrap">
-          {points.map((item) => (
+          {mergedItems.map((item) => (
             <RevealWrapper
               key={item.label}
               className="reveal-me flex min-h-[210px] min-w-[280px] flex-col items-center justify-center space-y-3 border px-9 py-7 dark:border-dark lg:min-w-[320px] lg:px-16 lg:py-10"

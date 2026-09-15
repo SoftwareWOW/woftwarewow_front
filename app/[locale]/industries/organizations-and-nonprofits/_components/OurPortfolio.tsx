@@ -4,8 +4,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Marquee from 'react-fast-marquee'
+import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
-const portfolioImages = [
+const DEFAULT_PORTFOLIOIMAGES = [
   {
     id: 1,
     src: '/images/wow/nav/cards/pexels-fauxels-3183132%201.png',
@@ -59,7 +60,17 @@ const portfolioImages = [
 ]
 
 /** Layout: Home-22 OurPortfolio — dual marquee rows. */
-const OurPortfolio = () => {
+type OurPortfolioProps = { projects?: CmsProjectCard[] | null }
+
+const OurPortfolio = ({ projects }: OurPortfolioProps = {}) => {
+  const portfolioImages = projects?.length
+    ? projects.map((p, i) => ({
+        id: i + 1,
+        src: p.thumbnail ?? '',
+        alt: p.alt ?? p.title,
+      }))
+    : DEFAULT_PORTFOLIOIMAGES
+
   return (
     <section className="relative overflow-hidden">
       <div className="container">

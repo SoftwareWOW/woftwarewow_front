@@ -3,6 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 type CapabilityCard = {
   title: string
@@ -102,18 +104,27 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
 
 /** Layout: TransformationPlan / Home-24 ServicesV16 — hover-flip cards, 3+3 grid. No default inverted state. */
-const FromIdeaToGrowth = () => {
+type FromIdeaToGrowthProps = Partial<CmsTechnologiesSection>
+
+const FromIdeaToGrowth = ({
+  eyebrow = 'From Idea to Growth',
+  title = 'Everything your business needs to',
+  accentTitle = 'move forward.',
+  description,
+  items,
+}: FromIdeaToGrowthProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>From Idea to Growth</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 lg:leading-[1.21]">
-              Everything your business needs to <InstrumentText>move forward.</InstrumentText>
-            </h2>
+            <h2 className="text-appear mb-3 lg:leading-[1.21]">{header.title}<InstrumentText>{header.accentTitle}</InstrumentText></h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mx-auto max-w-[770px] text-[#808080]">

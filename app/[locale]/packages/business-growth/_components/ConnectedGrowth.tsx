@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import processImg from '@/public/images/process-img-01.png'
 import Image from 'next/image'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '01',
     title: 'Attract',
@@ -36,22 +38,33 @@ const steps = [
   },
 ]
 
+type Props = Partial<CmsProcessSection>
+
 /** Copied from Home-07 ProcessV4 — local copy, not imported from origin. */
-const ConnectedGrowth = () => {
+const ConnectedGrowth = ({
+  eyebrow = 'Connected Growth',
+  title = 'From first click to closed customer.',
+  description = "Growth works better when marketing, conversion and sales aren't treated as separate activities.",
+  steps,
+}: Props = {}) => {
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
+    ...DEFAULT_STEPS[index],
+    title: step.title,
+    description: step.description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
-            <span className="rv-badge-text">Connected Growth</span>
+            <span className="rv-badge-text">{eyebrow}</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">From first click to closed customer.</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-3 max-w-2xl">
-              Growth works better when marketing, conversion and sales aren&apos;t treated as separate activities.
-            </p>
+            <p className="text-appear mx-auto mt-3 max-w-2xl">{description}</p>
           </TextAppearAnimation>
         </div>
         <RevealWrapper className="flex flex-col gap-20 md:flex-row">
@@ -61,7 +74,7 @@ const ConnectedGrowth = () => {
 
           <div>
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
-              {steps.map((step, index) => (
+              {mergedSteps.map((step, index) => (
                 <li key={step.number} className="max-w-max px-10">
                   <div
                     className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${

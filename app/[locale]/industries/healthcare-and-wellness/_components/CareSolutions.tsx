@@ -3,6 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const IconBars = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none" aria-hidden>
@@ -103,16 +105,27 @@ const solutions: { title: string; description: string; items: string[]; icon: Re
 ]
 
 /** Layout: Home-23 WhyChooseUsV7 / CommerceSolutions — 2-column bordered icon cards + bottom CTA. */
-const CareSolutions = () => {
+type CareSolutionsProps = Partial<CmsTechnologiesSection>
+
+const CareSolutions = ({
+  eyebrow = 'Industry Solutions',
+  title = 'Digital Solutions Built Around Care.',
+  accentTitle = '',
+  description,
+  items,
+}: CareSolutionsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
   return (
     <section id="solutions">
       <div className="container">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Industry Solutions</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">Digital Solutions Built Around Care.</h2>
+            <h2 className="text-appear lg:leading-[1.1]">{header.title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mt-4 text-[#808080]">

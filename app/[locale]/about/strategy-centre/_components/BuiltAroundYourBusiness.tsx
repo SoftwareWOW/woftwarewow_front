@@ -3,8 +3,10 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const points = [
+const DEFAULT_POINTS = [
   {
     title: 'Business goals',
     description: 'Built around the outcomes that matter most.',
@@ -27,18 +29,30 @@ const points = [
   },
 ]
 
-const BuiltAroundYourBusiness = () => {
+type BuiltAroundYourBusinessProps = Partial<CmsProcessSection>
+
+const BuiltAroundYourBusiness = ({
+  eyebrow = 'Built Around You',
+  title = 'Strategies built around',
+  accentTitle = 'your business',
+  description,
+  steps,
+}: BuiltAroundYourBusinessProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_POINTS, steps)
+
+
   return (
     <section className="relative overflow-hidden">
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>Built Around You</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <HeadingWithInstrument
             className="mt-3 text-center"
-            before="Strategies built around"
-            accent="your business"
+            before={header.title}
+            accent={header.accentTitle ?? ''}
           />
           <TextAppearAnimation>
             <p className="text-appear">
@@ -48,7 +62,7 @@ const BuiltAroundYourBusiness = () => {
         </div>
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
           <div className="md:w-1/2 [&>*]:border-b">
-            {points.map((point) => (
+            {mergedSteps.map((point) => (
               <RevealWrapper key={point.title} className="py-3.5 pr-[30px] lg:py-[30px]">
                 <h5>{point.title}</h5>
                 <p className="mt-3 text-base leading-[1.6] tracking-[0.32px]">{point.description}</p>

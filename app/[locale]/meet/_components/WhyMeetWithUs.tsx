@@ -1,9 +1,11 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { Gift, MessageSquare, Route, Sparkles } from 'lucide-react'
 import { meetSectionClass, meetSectionInnerClass } from './meetSectionSpacing'
 
-const whyMeetItems = [
+const DEFAULT_WHYMEETITEMS = [
   {
     title: 'Free Consultation',
     description: 'Get expert guidance at no cost and explore the best path forward for your business.',
@@ -26,19 +28,45 @@ const whyMeetItems = [
   },
 ]
 
-const WhyMeetWithUs = () => (
+type WhyMeetWithUsProps = Partial<CmsTechnologiesSection>
+
+const WhyMeetWithUs = ({
+  eyebrow = 'Why Meet With Us',
+  title = 'A conversation designed to',
+  accentTitle = 'move you forward',
+  description,
+  items,
+}: WhyMeetWithUsProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+  const mergedItems = mergeFeatureItems(
+    DEFAULT_WHYMEETITEMS.map(({ title: itemTitle, description: itemDescription, icon }) => ({
+      title: itemTitle,
+      description: itemDescription,
+      icon,
+    })),
+    items,
+  ).map((item, index) => ({
+    ...DEFAULT_WHYMEETITEMS[index],
+    title: item.title,
+    description: item.description ?? DEFAULT_WHYMEETITEMS[index].description,
+  }))
+
+  return (
   <section className={meetSectionClass}>
     <div className={meetSectionInnerClass}>
       <RevealWrapper className="mb-10 text-center md:mb-14">
-        <SectionLabel className="mb-5">Why Meet With Us</SectionLabel>
+        <SectionLabel className="mb-5">{header.eyebrow}</SectionLabel>
         <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-          A conversation designed to{' '}
-          <span className="font-instrument italic">move you forward</span>
+          {header.title}{' '}
+          <span className="font-instrument italic">{header.accentTitle}</span>
         </h2>
       </RevealWrapper>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {whyMeetItems.map((item) => {
+        {mergedItems.map((item) => {
           const Icon = item.icon
 
           return (
@@ -60,6 +88,7 @@ const WhyMeetWithUs = () => (
       </div>
     </div>
   </section>
-)
+  )
+}
 
 export default WhyMeetWithUs

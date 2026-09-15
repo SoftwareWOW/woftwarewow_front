@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import communityImg from '@/public/images/wow/Hero/career/team/teamimage.png'
 import Image from 'next/image'
 import { FaFacebookF, FaPlus } from 'react-icons/fa6'
@@ -15,7 +17,11 @@ const communityAvatars = [
   '/images/wow/Hero/career/team/Avatar wrap.png',
 ]
 
-const Communities = () => {
+type CommunitiesProps = Partial<CmsTechnologiesSection>
+
+const Communities = ({ title = '{header.title}', accentTitle, description }: CommunitiesProps = {}) => {
+  const header = mergeSectionHeader({ title, accentTitle, description }, { title, accentTitle, description })
+
   return (
     <section className="overflow-hidden">
       <div className="container">

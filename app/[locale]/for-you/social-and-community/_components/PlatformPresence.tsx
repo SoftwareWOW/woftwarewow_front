@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
-const platforms = [
+const DEFAULT_PLATFORMS = [
   {
     name: 'Facebook',
     description: 'Meet people where they already gather with useful updates and conversation-led content.',
@@ -41,34 +43,51 @@ const platforms = [
   },
 ]
 
+const SIDE_IMAGE = '/images/wow/nav/cards/social media start 1.png'
+
 /** Layout: Home-14 ServicesV13 cards — header matches social capabilities mock. */
-const PlatformPresence = () => {
+const PlatformPresence = ({
+  eyebrow = 'Social Capabilities',
+  title = 'Everything behind a',
+  accentTitle = 'stronger social',
+  description = 'From deciding what to say to getting it in front of the right people.',
+  items,
+  image,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayPlatforms = mergeFeatureItems(
+    DEFAULT_PLATFORMS.map((platform) => ({ ...platform, title: platform.name })),
+    items,
+  ).map((platform, index) => ({
+    ...DEFAULT_PLATFORMS[index],
+    name: platform.title,
+    description: platform.description ?? DEFAULT_PLATFORMS[index].description,
+  }))
+  const sideImageSrc = cmsImageSrc(image, SIDE_IMAGE)
+
   return (
     <section className="relative overflow-hidden">
       <div className="container">
         <div className="mb-12 flex flex-col items-start gap-8 md:mb-16 lg:mb-20 lg:flex-row lg:items-center lg:justify-between lg:gap-x-10">
           <div className="flex-1">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Social Capabilities</SectionLabel>
+              <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>
-                Everything behind a
-                <InstrumentText> stronger social </InstrumentText>
+                {title}
+                <InstrumentText> {accentTitle} </InstrumentText>
                 presence.
               </h2>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-4">
-              <p className="max-w-lg text-base leading-relaxed text-[#808080]">
-                From deciding what to say to getting it in front of the right people.
-              </p>
+              <p className="max-w-lg text-base leading-relaxed text-[#808080]">{description}</p>
             </RevealWrapper>
           </div>
 
           <RevealWrapper className="reveal-me w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md">
             <img
-              src="/images/wow/nav/cards/social media start 1.png"
-              alt="Social insights on mobile"
+              src={sideImageSrc}
+              alt={image?.alt ?? 'Social insights on mobile'}
               className="h-auto w-full object-cover"
             />
           </RevealWrapper>
@@ -76,7 +95,7 @@ const PlatformPresence = () => {
       </div>
 
       <div className="flex justify-center max-xl:flex-wrap max-xl:gap-5 xl:px-5 max-xl:[&>*:first-child]:border-r dark:max-xl:[&>*:first-child]:border-dark [&>*:last-child]:border-l [&>*:last-child]:border-r dark:[&>*:last-child]:border-l-dark dark:[&>*:last-child]:border-r-dark [&>*:not(:last-child)]:border-l dark:[&>*:not(:last-child)]:border-l-dark max-xl:[&>*:nth-child(2)]:border-r dark:max-xl:[&>*:nth-child(2)]:border-dark max-2xl:[&>*:nth-child(3)]:border-r dark:max-2xl:[&>*:nth-child(3)]:border-dark [&>*]:border-y dark:[&>*]:border-y-dark">
-        {platforms.map((platform) => (
+        {displayPlatforms.map((platform) => (
           <RevealWrapper
             key={platform.name}
             className="group relative h-[500px] w-full overflow-hidden shadow-none sm:w-[calc(50%-10px)] lg:w-[360px]"

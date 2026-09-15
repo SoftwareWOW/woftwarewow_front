@@ -17,6 +17,13 @@ import { FC, useEffect, useState } from 'react'
 
 interface BlogCaseStudiesProps {
   blogs: BlogType[]
+  blogPosts?: Array<{
+    title?: string
+    excerpt?: string | null
+    href?: string | null
+    date?: string | null
+    thumbnail?: string | null
+  }> | null
 }
 
 const CarouselGridIndicator = ({
@@ -39,7 +46,20 @@ const CarouselGridIndicator = ({
   />
 )
 
-const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
+const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs, blogPosts }) => {
+  const sourceBlogs =
+    blogPosts?.length
+      ? blogPosts.map((post, index) => ({
+          slug: post.href?.split('/').pop() ?? String(index),
+          title: post.title ?? '',
+          description: post.excerpt ?? '',
+          date: post.date ?? '',
+          thumbnail: post.thumbnail ?? '',
+          content: '',
+          tags: [],
+        }))
+      : blogs
+
   const [api, setApi] = useState<CarouselApi>()
   const [isAutoPlay, setIsAutoPlay] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -89,13 +109,13 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
     } else if (api.canScrollPrev()) {
       api.scrollPrev()
     } else {
-      api.scrollTo(blogs.length - 1)
+      api.scrollTo(sourceBlogs.length - 1)
     }
 
     setTimeout(() => setIsAutoPlay(true), 5000)
   }
 
-  if (!blogs.length) return null
+  if (!sourceBlogs.length) return null
 
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
@@ -154,7 +174,7 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
             className="w-full"
           >
             <CarouselContent className="-ml-4 md:-ml-6">
-              {blogs.map((blog, index) => {
+              {sourceBlogs.map((blog, index) => {
                 const isFeatured = index === currentIndex
                 return (
                   <CarouselItem
@@ -167,7 +187,7 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
                         className="relative mb-5 block overflow-hidden rounded-radius-md border border-[#e5e5e5] dark:border-white/5"
                       >
                         <Image
-                          src={blog.thumbnail || blog.featureImage || '/images/blog-img/blog-img-5.png'}
+                          src={blog.thumbnail || ('featureImage' in blog ? blog.featureImage : undefined) || '/images/blog-img/blog-img-5.png'}
                           width={420}
                           height={320}
                           alt={blog.title ?? 'Case study'}
@@ -219,7 +239,7 @@ const BlogCaseStudies: FC<BlogCaseStudiesProps> = ({ blogs }) => {
 
             <div className="relative z-20 mt-10 flex justify-center md:mt-12">
               <div className="flex items-center gap-1">
-                {blogs.map((blog, index) => (
+                {sourceBlogs.map((blog, index) => (
                   <CarouselGridIndicator
                     key={blog.slug}
                     isActive={index === currentIndex}

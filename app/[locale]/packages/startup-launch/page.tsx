@@ -3,6 +3,14 @@ const PAGE_SLUG = 'startup-launch' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Startup Launch Package',
+  title: 'Everything you need to ',
+  italicTitle: 'launch.',
+  description:
+    'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -18,7 +26,8 @@ import SpecialistTeams from './_components/SpecialistTeams'
 import StartupLaunchHero from './_components/StartupLaunchHero'
 // 3. What's included — Home-12 WhyChooseUs
 import WhatsIncluded from './_components/WhatsIncluded'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -26,48 +35,31 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Startup Launch Package | WOW Superagency',
-    description:
-      'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
-    keywords: [
-      'startup launch package',
-      'startup package',
-      'brand foundations',
-      'website launch',
-      'go-to-market',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Startup Launch Package | WOW Superagency',
-      description:
-        'Everything you need to launch — brand, website, marketing, social, technology and hosting in one coordinated package.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/packages/startup-launch`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Startup Launch Package' })
 }
 
 export default async function StartupLaunchPackagePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — Home-19 HeroV19 */}
-        <StartupLaunchHero />
+        <StartupLaunchHero {...hero} images={hero.images} />
         {/* 2. Foundations — Home-16 ServicesV14 */}
-        <LaunchFoundations />
+        <LaunchFoundations {...(sections.launchFoundations ?? {})} />
         {/* 3. What's Included — Home-12 WhyChooseUs */}
-        <WhatsIncluded />
+        <WhatsIncluded {...(sections.whatsIncluded ?? {})} />
         {/* 4. Launch Journey — Home-20 ProcessV9 */}
-        <LaunchJourney />
+        <LaunchJourney {...(sections.launchJourney ?? {})} />
         {/* 5. Specialist Teams — Home-15 ElevateBrand */}
-        <SpecialistTeams />
+        <SpecialistTeams {...(sections.specialistTeams ?? {})} />
         {/* 6. General CTA */} 
         <WowGrowthCta
           accentText="Ready to bring your idea to"

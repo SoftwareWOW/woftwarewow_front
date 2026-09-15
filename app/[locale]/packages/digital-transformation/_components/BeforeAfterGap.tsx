@@ -1,7 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const beforeSteps = [
+const DEFAULT_BEFORE_STEPS = [
   'Too much work is still manual.',
   'Information in different places',
   'Disconnected tools',
@@ -10,7 +12,7 @@ const beforeSteps = [
   'Technology that creates friction',
 ]
 
-const afterSteps = [
+const DEFAULT_AFTER_STEPS = [
   'Automated workflows',
   'Better-connected information',
   'Integrated systems',
@@ -62,23 +64,36 @@ const ComparisonList = ({ steps, variant }: { steps: string[]; variant: 'before'
   </ul>
 )
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: AutomationInAction — two comparison cards with X / check lists. */
-const BeforeAfterGap = () => {
+const BeforeAfterGap = ({
+  eyebrow = 'The Gap',
+  title = "More providers shouldn't mean more problems.",
+  description =
+    'But for many growing businesses, getting the right expertise means managing an increasingly fragmented network.',
+  items,
+}: Props = {}) => {
+  const defaultItems = [
+    ...DEFAULT_BEFORE_STEPS.map((step) => ({ title: step, description: '' })),
+    ...DEFAULT_AFTER_STEPS.map((step) => ({ title: step, description: '' })),
+  ]
+  const mergedItems = mergeFeatureItems(defaultItems, items)
+  const beforeSteps = mergedItems.slice(0, DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+  const afterSteps = mergedItems.slice(DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+
   return (
     <section className="relative overflow-hidden">
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>The Gap</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 md:mb-8">More providers shouldn&apos;t mean more problems.</h2>
+            <h2 className="mx-auto mb-5 md:mb-8">{title}</h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              But for many growing businesses, getting the right expertise means managing an increasingly fragmented
-              network.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 

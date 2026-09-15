@@ -2,14 +2,36 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 import Image from 'next/image'
 
-const StrategyHero = () => {
+const DEFAULT_IMAGE: CmsHeroImage = {
+  src: '/images/wow/hero-banner.jpg',
+  alt: 'WOW Strategy Centre',
+}
+
+type StrategyHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+  images?: CmsHeroImage[]
+}
+
+const StrategyHero = ({
+  badgeTitle = 'Strategy Centre',
+  title = 'Strategy That Drives',
+  italicTitle = 'Clear. Measurable. Built to scale.',
+  description = 'Discover how WOW plans, executes, and measures digital growth for SMBs — with clarity, measurable outcomes, and a coordinated roadmap across every division.',
+  images,
+}: StrategyHeroProps) => {
+  const heroImage = images?.[0] ?? DEFAULT_IMAGE
+
   return (
     <section className="relative w-full overflow-hidden">
       <Image
-        src="/images/wow/hero-banner.jpg"
-        alt="WOW Strategy Centre"
+        src={heroImage.src}
+        alt={heroImage.alt ?? 'WOW Strategy Centre'}
         fill
         priority
         sizes="100vw"
@@ -20,20 +42,19 @@ const StrategyHero = () => {
       <div className="container relative z-10 flex min-h-[70vh] items-end pb-12 pt-28 sm:min-h-[75vh] sm:items-center sm:pb-16 sm:pt-32 md:min-h-[80vh] lg:min-h-screen lg:pb-20 lg:pt-36">
         <RevealWrapper className="reveal-me w-full max-w-3xl">
           <SectionLabel className="mb-4 bg-white/15 text-backgroundBody dark:bg-white/15 dark:text-backgroundBody sm:mb-5">
-            Strategy Centre
+            {badgeTitle}
           </SectionLabel>
 
           <h1 className="mb-3 text-3xl leading-tight text-backgroundBody sm:text-4xl sm:leading-tight md:text-5xl lg:text-[clamp(2.75rem,5vw,4.5rem)] lg:leading-[1.1]">
-            Strategy That Drives{' '}
+            {title}{' '}
             <br className="hidden sm:block" />
             Growth –{' '}
             <br className="hidden md:block" />
-            <InstrumentText>Clear. Measurable. Built to scale.</InstrumentText>
+            <InstrumentText>{italicTitle}</InstrumentText>
           </h1>
 
           <p className="max-w-xl text-sm leading-relaxed text-backgroundBody/70 sm:max-w-2xl sm:text-base md:max-w-3xl md:text-lg">
-            Discover how WOW plans, executes, and measures digital growth for SMBs — with clarity, measurable outcomes,
-            and a coordinated roadmap across every division.
+            {description}
           </p>
 
           <div className="mt-6 sm:mt-8 lg:mt-12">

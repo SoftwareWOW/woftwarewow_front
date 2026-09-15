@@ -10,9 +10,17 @@ import {
   type PortfolioFilter,
 } from '../../_data/projects'
 import LatestProjects from './LatestProjects'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: portfolio/_components/ExploreWork.tsx — recent-work filters driving a year-grouped grid. */
-const RecentWorkExplorer = () => {
+type RecentWorkExplorerProps = Partial<CmsTechnologiesSection>
+
+const RecentWorkExplorer = ({ eyebrow = 'EXPLORE BY EXPERTISE', title, accentTitle, description, items }: RecentWorkExplorerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All')
 
   const filteredProjects = useMemo(() => {
@@ -26,7 +34,7 @@ const RecentWorkExplorer = () => {
       <div className="container">
         <div className="mb-10 text-center md:mb-14">
           <div className="mb-4 flex justify-center md:mb-5">
-            <SectionLabel>EXPLORE BY EXPERTISE</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </div>
           <h2 className="text-appear text-center">
             Fresh from <WowText>WOW</WowText>

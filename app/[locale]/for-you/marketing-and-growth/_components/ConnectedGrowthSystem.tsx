@@ -3,8 +3,10 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
-const stages = [
+const DEFAULT_STEPS = [
   {
     id: 1,
     step: 'Stage 01',
@@ -38,29 +40,35 @@ const stages = [
 ]
 
 /** Layout: Home-16 ProcessV8 — stage cards extended to 5 growth stages. */
-const ConnectedGrowthSystem = () => {
+const ConnectedGrowthSystem = ({
+  eyebrow = 'A Connected Growth System',
+  title = 'Attract → Engage → Convert → Retain →',
+  accentTitle = 'Grow',
+  description = 'Awareness, acquisition, conversion and retention working together — not as separate services.',
+  steps,
+}: Partial<CmsProcessSection> = {}) => {
+  const displayStages = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>A Connected Growth System</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mb-3">
-              Attract → Engage → Convert → Retain →
-              <InstrumentText> Grow</InstrumentText>
+              {title}
+              <InstrumentText> {accentTitle}</InstrumentText>
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              Awareness, acquisition, conversion and retention working together — not as separate services.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
         <div className="flex justify-center gap-[24px] max-xl:flex-wrap xl:gap-[20px]">
-          {stages.map((item) => (
+          {displayStages.map((item) => (
             <RevealWrapper key={item.id} className="reveal-me w-full grow pt-6 sm:w-[45%] lg:w-[30%] xl:w-auto xl:grow">
               <div className="relative mx-auto grid min-h-[280px] grid-cols-1 content-between rounded-radius-md border px-5 pb-8 pt-10 text-center dark:border-dark">
                 <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">

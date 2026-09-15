@@ -5,6 +5,8 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { TechCard, type Tech } from '@/components/wow/shared/TechStackShared'
 import Marquee from 'react-fast-marquee'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Platforms in our ecosystem — not claimed co-branded partner logos. */
 const rowOne: Tech[] = [
@@ -49,12 +51,18 @@ function MarqueeRow({ items, direction = 'left' }: { items: Tech[]; direction?: 
 }
 
 /** Layout: Home-03 Clients — dual marquees, theme-aware background. */
-const PartnerEcosystem = () => {
+type PartnerEcosystemProps = Partial<CmsTechnologiesSection>
+
+const PartnerEcosystem = ({ eyebrow = 'Ecosystem', title, accentTitle, description, items }: PartnerEcosystemProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section className="relative overflow-hidden">
       <div className="container mb-10 md:mb-14">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Ecosystem</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me mb-3 text-center">
           <h2>

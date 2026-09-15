@@ -4,8 +4,10 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     id: 1,
     title: 'Discover',
@@ -38,7 +40,19 @@ const steps = [
   },
 ]
 
-const WowGrowthFramework = () => {
+type WowGrowthFrameworkProps = Partial<CmsProcessSection>
+
+const WowGrowthFramework = ({
+  eyebrow = 'Framework',
+  title = 'The WOW Growth',
+  accentTitle = 'Framework',
+  description,
+  steps,
+}: WowGrowthFrameworkProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
+
   return (
     <section
       id="growth-framework"
@@ -48,12 +62,12 @@ const WowGrowthFramework = () => {
         <div className="">
           <HeroGradientAnimation />
           <RevealWrapper className="mb-5">
-            <SectionLabel>Framework</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <HeadingWithInstrument
             className="max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]"
-            before="The WOW Growth"
-            accent="Framework"
+            before={header.title}
+            accent={header.accentTitle ?? ''}
           />
           <TextAppearAnimation02>
             <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">
@@ -69,7 +83,7 @@ const WowGrowthFramework = () => {
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-y-[26px] lg:mt-0">
-          {steps.map((step, index) => {
+          {mergedSteps.map((step, index) => {
             const isLeftColumn = index % 2 === 0
 
             return (

@@ -5,8 +5,19 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 
 const HERO_IMAGE = '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217%201.png'
 
+type WhiteLabelHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+}
+
 /** Layout: organizations OrganizationsHero — image left + headline + dual CTAs. */
-const WhiteLabelHero = () => {
+const WhiteLabelHero = ({
+  title = 'Your Brand. Our',
+  italicTitle = 'Expertise.',
+  description = 'Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing, AI, and more.',
+}: WhiteLabelHeroProps) => {
   return (
     <section
       className="video-section relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover object-center pt-[107px] dark:bg-none md:pt-[100px] xl:pt-[120px]"
@@ -51,14 +62,13 @@ const WhiteLabelHero = () => {
                 id="whitelabel-hero-heading"
                 className="text-[clamp(2rem,4.5vw,4rem)] font-normal leading-[1.2] tracking-[-0.02em] md:leading-[1.15]"
               >
-                Your Brand. Our <InstrumentText>Expertise.</InstrumentText>
+                {title} <InstrumentText>{italicTitle}</InstrumentText>
               </h1>
             </RevealWrapper>
 
             <RevealWrapper className="reveal-me mt-3 md:mt-4">
               <p className="max-w-xl text-base leading-relaxed text-[#808080] sm:max-w-2xl md:text-lg">
-                Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing,
-                AI, and more.
+                {description}
               </p>
             </RevealWrapper>
 

@@ -4,12 +4,27 @@ import { useState, useId } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { WOW_GRADIENT } from '@/components/wow/shared/WowText'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import {
   techCategories,
   TechCard,
 } from '@/components/wow/shared/TechStackShared'
 
-const TechStack = () => {
+type TechStackProps = Partial<CmsTechnologiesSection>
+
+const TechStack = ({
+  eyebrow = 'Our Stack',
+  title = 'Powered by industry-leading',
+  accentTitle = 'technology',
+  description =
+    'We choose proven, modern tools to ship secure, scalable, and high-performance solutions — engineered for businesses that expect world-class digital experiences.',
+}: TechStackProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+
   const [activeId, setActiveId] = useState(techCategories[0].id)
   const active = techCategories.find((c) => c.id === activeId) ?? techCategories[0]
   const tabsId = useId()
@@ -42,12 +57,12 @@ const TechStack = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <SectionLabel className="mb-6">Our Stack</SectionLabel>
+          <SectionLabel className="mb-6">{header.eyebrow}</SectionLabel>
           <h2
             id="tech-heading"
             className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
           >
-            Powered by industry-leading{' '}
+            {header.title}{' '}
             <span
               className="font-instrument italic"
               style={{
@@ -58,12 +73,11 @@ const TechStack = () => {
                 color: 'transparent',
               }}
             >
-              technology
+              {header.accentTitle}
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#808080] transition-colors duration-300 sm:text-lg">
-            We choose proven, modern tools to ship secure, scalable, and high-performance solutions —
-            engineered for businesses that expect world-class digital experiences.
+            {header.description}
           </p>
         </motion.div>
 

@@ -2,9 +2,20 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Home-19 — HeroV19: split headline + dual media + single CTA (no circle logo). */
-const StartupLaunchHero = () => {
+const StartupLaunchHero = ({
+  badgeTitle = 'Startup Launch Package',
+  title = 'Everything you need',
+  italicTitle = 'launch.',
+  description =
+    'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/wow/nav/cards/Startup%20laiunch%201.png', alt: 'Startup launch foundations and collaboration' }
+  const image1 = images?.[1] ?? { src: '/images/wow/nav/cards/build%26lanch.png', alt: 'Building and launching a new business' }
+
   return (
     <section
       className="relative overflow-hidden pt-[137px] md:pt-[160px] xl:pt-[180px]"
@@ -23,7 +34,7 @@ const StartupLaunchHero = () => {
       <div className="mx-auto flex max-w-[1600px] flex-col justify-between gap-x-5 gap-y-10 px-4 md:px-[30px] lg:flex-row">
         <div className="md:flex-1">
           <RevealWrapper className="reveal-me mb-4">
-            <SectionLabel>Startup Launch Package</SectionLabel>
+            <SectionLabel>{badgeTitle}</SectionLabel>
           </RevealWrapper>
 
           <RevealWrapper className="reveal-me">
@@ -31,18 +42,17 @@ const StartupLaunchHero = () => {
               id="startup-launch-heading"
               className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
             >
-              Everything you need
+              {title}
               <br className="hidden lg:block" />
-              to <InstrumentText>launch.</InstrumentText>
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
             </h1>
           </RevealWrapper>
 
-          <RevealWrapper className="reveal-me mt-3">
-            <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-              Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology
-              foundations in one package.
-            </p>
-          </RevealWrapper>
+          {description ? (
+            <RevealWrapper className="reveal-me mt-3">
+              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+            </RevealWrapper>
+          ) : null}
 
           <RevealWrapper className="reveal-me mt-7 md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
@@ -57,15 +67,15 @@ const StartupLaunchHero = () => {
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
             <img
-              src="/images/wow/nav/cards/Startup%20laiunch%201.png"
-              alt="Startup launch foundations and collaboration"
+              src={image0.src}
+              alt={image0.alt ?? ''}
               className="max-sm:w-full rounded-radius-sm"
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
             <img
-              src="/images/wow/nav/cards/build%26lanch.png"
-              alt="Building and launching a new business"
+              src={image1.src}
+              alt={image1.alt ?? ''}
               className="max-sm:w-full rounded-radius-sm"
             />
           </RevealWrapper>

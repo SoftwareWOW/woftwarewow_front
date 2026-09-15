@@ -3,6 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 const IconBars = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none" aria-hidden>
@@ -75,7 +77,7 @@ const IconPeople = () => (
   </svg>
 )
 
-const salesChallenges: { title: string; description: string; icon: ReactNode }[] = [
+const DEFAULT_ITEMS: { title: string; description: string; icon: ReactNode }[] = [
   {
     title: 'Lead generation',
     description: 'Create a more consistent flow of qualified opportunities.',
@@ -103,29 +105,46 @@ const salesChallenges: { title: string; description: string; icon: ReactNode }[]
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: Home-23 WhyChooseUsV7 — 2-column bordered icon cards, no numbers. */
-const SalesGaps = () => {
+const SalesGaps = ({
+  eyebrow = 'Fix the Gaps in Your Sales Engine',
+  title = 'Make every stage ',
+  accentTitle = 'work better.',
+  description =
+    'Connect lead generation, follow-up, conversion, and reporting into one clearer sales process.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(
+    DEFAULT_ITEMS.map(({ title: t, description: d }) => ({ title: t, description: d })),
+    items,
+  ).map((item, index) => ({
+    ...DEFAULT_ITEMS[index],
+    title: item.title,
+    description: item.description ?? DEFAULT_ITEMS[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Fix the Gaps in Your Sales Engine</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear lg:leading-[1.1]">
-              Make every stage <InstrumentText>work better.</InstrumentText>
+              {title}
+              <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mt-4 text-[#808080]">
-              Connect lead generation, follow-up, conversion, and reporting into one clearer sales process.
-            </p>
+            <p className="text-appear mt-4 text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
-          {salesChallenges.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.title}
               className="col-span-12 flex-1 border px-[30px] py-10 dark:border-dark lg:col-span-6"

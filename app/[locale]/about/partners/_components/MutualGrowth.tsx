@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const gains = [
   'Access to WOW’s SMB ecosystem of growing businesses',
@@ -11,7 +13,13 @@ const gains = [
 ]
 
 /** Layout: Home-25 WhatWeOffer — image + list. */
-const MutualGrowth = () => {
+type MutualGrowthProps = Partial<CmsTechnologiesSection>
+
+const MutualGrowth = ({ eyebrow = 'Mutual Growth', title, accentTitle, description, items }: MutualGrowthProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section>
       <div className="container">
@@ -26,7 +34,7 @@ const MutualGrowth = () => {
 
           <RevealWrapper className="col-span-12 space-y-7 lg:col-span-6">
             <div className="space-y-3">
-              <SectionLabel>Mutual Growth</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
               <h2>
                 Built for mutual <InstrumentText>growth</InstrumentText>
               </h2>

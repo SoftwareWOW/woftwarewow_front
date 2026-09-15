@@ -4,12 +4,23 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import VideoModal from '@/components/shared/VideoModal'
 import Link from 'next/link'
 import { useState } from 'react'
 
 /** Layout: Home-16 HeroV16 — split outcome headline + trust/media. */
-const MarketingGrowthHero = () => {
+const MarketingGrowthHero = ({
+  badgeTitle = 'Marketing & Growth',
+  title = 'Marketing that drives',
+  italicTitle = 'growth.',
+  description =
+    'Build stronger visibility, better campaigns, and smarter systems that help your business attract, convert, and retain customers.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/hero-img/marketing-hero-1.jpg', alt: 'Marketing and growth strategy' }
+  const image1 = images?.[1] ?? { src: '/images/hero-img/marketing-hero-2.jpg', alt: 'Growth marketing team' }
+
   const [open, setOpen] = useState(false)
 
   return (
@@ -31,19 +42,24 @@ const MarketingGrowthHero = () => {
         <div className="flex flex-col items-end gap-8 lg:flex-row">
           <div className="lg:w-[65%]">
             <RevealWrapper className="reveal-me mb-4">
-              <SectionLabel>Marketing &amp; Growth</SectionLabel>
+              <SectionLabel>{badgeTitle}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
-              <h1 id="marketing-growth-heading">
-                Turn attention into
-                <br className="hidden lg:block" />
-                sustainable growth.
-              </h1>
+              <h1
+              id="marketing-growth-heading"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            >
+              {title}
+              <br className="hidden lg:block" />
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+            </h1>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-3">
-              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-  Attract more customers, convert more opportunities, and grow smarter.
-</p>
+              {description ? (
+            <RevealWrapper className="reveal-me mt-3">
+              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+            </RevealWrapper>
+          ) : null}
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
               <ButtonComponentList className="flex" itemClassName="block">
@@ -58,24 +74,24 @@ const MarketingGrowthHero = () => {
             <div className="flex items-center gap-x-5 lg:flex-col xl:flex-row">
               <div className="my-3 flex [&>*:not(:first-child)]:-ml-4">
                 <img
-                  src="/images/avatar/review-19.png"
+                  src={image0.src}
                   className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  alt=""
+                  alt={image0.alt ?? ''}
                 />
                 <img
-                  src="/images/avatar/review-20.png"
+                  src={image1.src}
                   className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  alt=""
+                  alt={image1.alt ?? ''}
                 />
                 <img
-                  src="/images/avatar/review-21.png"
+                  src={image1.src}
                   className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  alt=""
+                  alt={image1.alt ?? ''}
                 />
                 <Link href="/contact">
                   <figure className="duration-300 ease-in-out hover:scale-105 max-md:size-12">
-                    <img src="/images/icons/plus-icon.svg" className="block dark:hidden" alt="" />
-                    <img src="/images/icons/plus-icon-white.svg" alt="" className="hidden dark:block" />
+                    <img src={image1.src} className="block dark:hidden" alt={image1.alt ?? ''} />
+                    <img src={image1.src} alt={image1.alt ?? ''} className="hidden dark:block" />
                   </figure>
                 </Link>
               </div>
@@ -107,7 +123,7 @@ const MarketingGrowthHero = () => {
                   </svg>
                 </div>
               </button>
-              <img src="/images/hero-img/video-img.png" alt="Marketing and growth overview" className="w-full" />
+              <img src={image1.src} alt={image1.alt ?? ''} className="w-full" />
             </div>
           </RevealWrapper>
         </div>

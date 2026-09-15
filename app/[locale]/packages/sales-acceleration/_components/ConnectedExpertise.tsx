@@ -5,6 +5,8 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import type { ReactNode } from 'react'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 const teams: {
   id: string
@@ -63,35 +65,52 @@ const teams: {
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: Home-19 ElevateBrandV2 — numbered hover specialist rows. */
-const ConnectedExpertise = () => {
+const ConnectedExpertise = ({
+  eyebrow = 'One Package. Connected Expertise.',
+  title = 'One sales system. ',
+  accentTitle = 'Multiple specialists behind it.',
+  description =
+    'Bring acquisition, technology, automation, conversion, and analytics together through one connected team.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(
+    teams.map(({ description: desc }) => ({ title: '', description: desc })),
+    items,
+  ).map((item, index) => ({
+    ...teams[index],
+    description: item.description ?? teams[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <RevealWrapper className="reveal-me mb-5">
-          <SectionLabel>One Package. Connected Expertise.</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
 
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <TextAppearAnimation02>
               <h2 className="text-appear-2">
-                One sales system. <InstrumentText>Multiple specialists behind it.</InstrumentText>
+                {title}
+                <InstrumentText>{accentTitle}</InstrumentText>
               </h2>
             </TextAppearAnimation02>
           </div>
           <div className="w-full md:w-80 lg:w-96">
             <TextAppearAnimation>
               <p className="text-appear text-appear-2 max-w-lg text-[#808080] max-md:text-justify md:place-self-end md:text-right">
-                Bring acquisition, technology, automation, conversion, and analytics together through one connected
-                team.
+                {description}
               </p>
             </TextAppearAnimation>
           </div>
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-          {teams.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.id}
               className="ease-[cubic-bezier(0.4, 0, 0.2, 1)] group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.010] hover:backdrop-blur-sm md:pb-10 md:pt-10"

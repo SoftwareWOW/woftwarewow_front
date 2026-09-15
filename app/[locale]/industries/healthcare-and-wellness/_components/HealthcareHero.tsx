@@ -4,8 +4,31 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 
+type PageHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+  images?: { src: string; alt?: string }[]
+}
+
 /** Layout: SaaS SaasProductHero / Home-24 HeroV24 — split headline + dual tall images. */
-const HealthcareHero = () => {
+const HealthcareHero = ({
+  title = 'Better Digital Experiences for ',
+  italicTitle = 'Better Care.',
+  description =
+    'We help healthcare and wellness organizations build trusted brands, stronger digital experiences, smarter systems, and sustainable growth.',
+  images,
+}: PageHeroProps) => {
+  const image0 = images?.[0] ?? {
+    src: '/images/wow/nav/cards/pexels-fauxels-3183132%201.png',
+    alt: 'Healthcare and wellness team collaborating',
+  }
+  const image1 = images?.[1] ?? {
+    src: '/images/wow/nav/cards/pexels-cottonbro-4069290%201.png',
+    alt: 'Wellness professionals reviewing a care plan',
+  }
+
   return (
     <section
       className="pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-48"
@@ -18,13 +41,14 @@ const HealthcareHero = () => {
             id="healthcare-hero-heading"
             className="reveal-me text-[clamp(2rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
           >
-            Better Digital Experiences for{' '}
-            <InstrumentText variant="solid">Better Care.</InstrumentText>
+            {title}
+            {italicTitle ? <InstrumentText variant="solid">{italicTitle}</InstrumentText> : null}
           </RevealWrapper>
-          <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
-            We help healthcare and wellness organizations build trusted brands, stronger digital experiences, smarter
-            systems, and sustainable growth.
-          </RevealWrapper>
+          {description ? (
+            <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
+              {description}
+            </RevealWrapper>
+          ) : null}
 
           <RevealWrapper className="mt-7 flex flex-col gap-3 md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
@@ -42,8 +66,8 @@ const HealthcareHero = () => {
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="Healthcare and wellness imagery">
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/pexels-fauxels-3183132%201.png"
-              alt="Healthcare and wellness team collaborating"
+              src={image0.src}
+              alt={image0.alt ?? 'Healthcare and wellness team collaborating'}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
               height={540}
@@ -51,8 +75,8 @@ const HealthcareHero = () => {
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/pexels-cottonbro-4069290%201.png"
-              alt="Wellness professionals reviewing a care plan"
+              src={image1.src}
+              alt={image1.alt ?? 'Wellness professionals reviewing a care plan'}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
               height={540}

@@ -6,10 +6,21 @@ import VideoModal from '@/components/shared/VideoModal'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import { useState } from 'react'
 
 /** Layout: Home-25 HeroV25 — video left + headline + dual CTAs. */
-const SalesRevenueHero = () => {
+const SalesRevenueHero = ({
+  badgeTitle = 'Sales & Revenue',
+  title = 'Turn interest into',
+  italicTitle = 'revenue.',
+  description =
+    'Build stronger sales systems, better follow-up, and clearer conversion paths that help your business grow revenue.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/hero-img/sales-hero-1.jpg', alt: 'Sales and revenue' }
+  const image1 = images?.[1] ?? { src: '/images/hero-img/sales-hero-2.jpg', alt: 'Revenue growth' }
+
   const [open, setOpen] = useState(false)
 
   return (
@@ -40,8 +51,8 @@ const SalesRevenueHero = () => {
                 </div>
               </div>
               <img
-                src="/images/wow/nav/cards/Sales Acceleration 1.png"
-                alt="Sales team working on revenue growth"
+                src={image0.src}
+                alt={image0.alt ?? ''}
                 className="h-full w-full object-cover"
                 width={800}
                 height={450}
@@ -51,20 +62,25 @@ const SalesRevenueHero = () => {
 
           <div className="flex w-full flex-col justify-center lg:w-1/2">
             <RevealWrapper className="reveal-me mb-4">
-              <SectionLabel>Sales &amp; Revenue</SectionLabel>
+              <SectionLabel>{badgeTitle}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
-              <h1 className="text-[42px] font-normal leading-[1.3] md:text-[47px] md:leading-[1.2] lg:text-[54px] lg:leading-[1.24] xl:text-[64px]">
-                Turn more opportunities into
-                <InstrumentText> revenue.</InstrumentText>
-              </h1>
+              <h1
+              id="startup-launch-heading"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            >
+              {title}
+              <br className="hidden lg:block" />
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+            </h1>
             </RevealWrapper>
 
             <RevealWrapper className="reveal-me mt-3">
-              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-                Build a stronger sales engine with better lead generation, funnels, CRM workflows and automation —
-                designed to help your team sell more effectively and consistently.
-              </p>
+              {description ? (
+            <RevealWrapper className="reveal-me mt-3">
+              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+            </RevealWrapper>
+          ) : null}
             </RevealWrapper>
 
             <RevealWrapperV2 className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">

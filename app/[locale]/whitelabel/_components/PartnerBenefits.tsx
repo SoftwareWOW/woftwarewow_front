@@ -1,25 +1,39 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { partnerBenefits } from '../_data/whitelabel'
+import { partnerBenefits as DEFAULT_PARTNERBENEFITS } from '../_data/whitelabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: technology-and-saas RecommendedSolutions — bordered cards with primary highlight. */
-const PartnerBenefits = () => {
+type PartnerBenefitsProps = Partial<CmsTechnologiesSection>
+
+const PartnerBenefits = ({
+  eyebrow = 'BUILT FOR PARTNERS',
+  title = 'Scale Capability, Not',
+  accentTitle = '',
+  description,
+  items,
+}: PartnerBenefitsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([...DEFAULT_PARTNERBENEFITS], items)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-5 flex justify-center">
-            <SectionLabel>BUILT FOR PARTNERS</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto">Scale Capability, Not Overhead.</h2>
+            <h2 className="text-appear mx-auto">{header.title}{header.accentTitle ? <> <InstrumentText>{header.accentTitle}</InstrumentText></> : null}</h2>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="reveal-me flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-          {partnerBenefits.map((item) => (
+          {mergedItems.map((item) => (
             <article
               key={item.title}
               className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 transition-colors duration-300 hover:border-primary hover:bg-primary dark:border-dark"

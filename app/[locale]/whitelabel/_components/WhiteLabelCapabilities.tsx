@@ -2,16 +2,24 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
-import { capabilityCards } from '../_data/whitelabel'
+import { capabilityCards as DEFAULT_CAPABILITYCARDS } from '../_data/whitelabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: blog BlogDetailsList — 3-column image/title/description/button cards. */
-const WhiteLabelCapabilities = () => {
+type WhiteLabelCapabilitiesProps = Partial<CmsTechnologiesSection>
+
+const WhiteLabelCapabilities = ({ eyebrow = 'YOUR CONVERSATION', title, accentTitle, description, items }: WhiteLabelCapabilitiesProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([...DEFAULT_CAPABILITYCARDS], items)
+
+
   return (
     <section id="capabilities">
       <div className="container">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>YOUR CONVERSATION</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto">Bring the Challenge. We&apos;ll Bring the Expertise.</h2>
@@ -25,7 +33,7 @@ const WhiteLabelCapabilities = () => {
         </div>
 
         <RevealWrapper className="grid grid-cols-1 items-stretch justify-items-center gap-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-          {capabilityCards.map((item, index) => (
+          {mergedItems.map((item, index) => (
             <RevealWrapper key={item.title} className="group mx-auto flex w-full flex-col xl:max-w-[370px]">
               <Link href={item.href}>
                 <figure className="mb-6 overflow-hidden rounded-radius-sm xl:aspect-[370/399]">

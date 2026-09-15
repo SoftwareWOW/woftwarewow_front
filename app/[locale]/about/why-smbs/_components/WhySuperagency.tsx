@@ -6,6 +6,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const divisions = [
   'Design',
@@ -21,14 +23,20 @@ const divisions = [
 ]
 
 /** Layout: Home-20 MarqueeV4 — scrolling strip with Why Superagency header + CTA. */
-const WhySuperagency = () => {
+type WhySuperagencyProps = Partial<CmsTechnologiesSection>
+
+const WhySuperagency = ({ eyebrow = 'Why a Superagency?', title, accentTitle, description, items }: WhySuperagencyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
 
   return (
     <section aria-labelledby="why-superagency-heading">
       <div className="container mb-10 text-center lg:mb-14">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Why a Superagency?</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h2 id="why-superagency-heading" className="mx-auto max-w-4xl">

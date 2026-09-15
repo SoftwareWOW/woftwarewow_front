@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
 
 const fragmented = [
   'Multiple priorities',
@@ -49,7 +50,10 @@ const cardClassName =
   'relative rounded-radius-md border border-secondary/15 px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 md:pt-16'
 
 /** Layout: Home-23 PricingV5 — two bordered comparison columns (no pricing chrome). */
-const TheGap = () => {
+type TheGapProps = Partial<CmsHeroAboutSection>
+
+const TheGap = ({ body = '' }: TheGapProps = {}) => {
+
   return (
     <section className="relative overflow-hidden">
       <div className="container">

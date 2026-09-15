@@ -5,10 +5,11 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
+import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
 
 const INITIAL_VISIBLE_COUNT = 6
 
-const faqData = [
+const DEFAULT_FAQDATA = [
   {
     id: 1,
     question: 'How do I apply for a role at WOW Superagency?',
@@ -71,7 +72,14 @@ const faqData = [
   },
 ]
 
-const CareerRfq = () => {
+type CareerRfqProps = { items?: CmsFaqItem[] | null }
+
+const CareerRfq = ({ items }: CareerRfqProps = {}) => {
+  const faqData = items?.length
+    ? items.map((item, index) => ({ id: index + 1, question: item.question, answer: item.answer }))
+    : DEFAULT_FAQDATA
+
+
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 

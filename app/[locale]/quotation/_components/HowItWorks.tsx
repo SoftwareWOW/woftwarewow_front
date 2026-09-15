@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Review',
@@ -38,18 +40,27 @@ const StepItem = ({ step }: { step: Step }) => (
 )
 
 /** Layout: industries/education-and-training/HowItWorks — faded background numbers, 3-column grid. */
-const HowItWorks = () => {
+type HowItWorksProps = Partial<CmsProcessSection>
+
+const HowItWorks = ({ title = 'Simple From Here.', steps }: HowItWorksProps = {}) => {
+  const header = mergeSectionHeader({ title }, { title })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, i) => ({
+    ...DEFAULT_STEPS[i],
+    title: step.title,
+    description: step.description ?? DEFAULT_STEPS[i].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto">Simple From Here.</h2>
+            <h2 className="mx-auto">{header.title}</h2>
           </RevealWrapper>
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-3 lg:gap-x-10">
-          {steps.map((step) => (
+          {mergedSteps.map((step) => (
             <StepItem key={step.title} step={step} />
           ))}
         </div>

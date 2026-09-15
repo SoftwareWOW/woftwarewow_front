@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const benefitsData = [
+const DEFAULT_BENEFITSDATA = [
   { id: 1, title: 'Flexible scheduling options' },
   { id: 2, title: 'Career development' },
   { id: 3, title: 'Work-life balance' },
@@ -14,15 +16,27 @@ const benefitsData = [
   { id: 9, title: 'Meaningful impact' },
 ]
 
-const BenefitsCareer = () => {
+type BenefitsCareerProps = Partial<CmsTechnologiesSection>
+
+const BenefitsCareer = ({
+  eyebrow = 'Benefits',
+  title = 'Why You\'ll Love Working Here',
+  accentTitle = '',
+  description,
+  items,
+}: BenefitsCareerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_BENEFITSDATA, items)
+
+
   return (
     <section className="overflow-hidden">
       <div className="container">
         <RevealWrapper className="mb-3 flex justify-center">
-          <SectionLabel>Benefits</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mb-4 text-center lg:mb-8">Why You'll Love Working Here</h2>
+          <h2 className="text-appear mb-4 text-center lg:mb-8">{header.title}</h2>
         </TextAppearAnimation>
         <RevealWrapper>
           <p className="text-appear mx-auto max-w-[750px] text-left max-lg:px-5 md:text-center">
@@ -32,7 +46,7 @@ const BenefitsCareer = () => {
         </RevealWrapper>
 
         <div className="mt-10 grid grid-cols-1 items-center justify-center gap-[30px] sm:grid-cols-2 md:mt-[60px] lg:grid-cols-3">
-          {benefitsData.map((benefit) => (
+          {mergedItems.map((benefit) => (
             <RevealWrapper key={benefit.id} className="border p-[30px] text-center dark:border-dark">
               {benefit.title}
             </RevealWrapper>

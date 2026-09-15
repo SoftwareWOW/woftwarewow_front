@@ -3,6 +3,12 @@ const PAGE_SLUG = 'education-and-training' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  title: 'Turn Your Mission Into Momentum.',
+  description:
+    'We help organizations strengthen their presence, reach more people, simplify operations, and build the digital systems behind lasting impact.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -16,7 +22,8 @@ import HowItWorks from './_components/HowItWorks'
 import MissionSolutions from './_components/MissionSolutions'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import SocialGallery from './_components/SocialGallery'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -24,46 +31,31 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Education & Training | WOW Superagency',
-    description: 'Digital growth for education and training organizations.',
-    keywords: [
-      'education',
-      'training',
-      'learning',
-      'enrollment',
-      'website growth',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Education & Training | WOW Superagency',
-      description: 'Digital growth for education and training organizations.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/industries/education-and-training`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Education & Training' })
 }
 
 export default async function EducationAndTrainingPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
      <div>
-         <EducationHero />
-        <EducationHeroAbout />
+         <EducationHero {...hero} images={hero.images} />
+        <EducationHeroAbout {...(sections.educationHeroAbout ?? {})} />
      </div>
-        <SocialGallery />
-        <CareJourney />
-        <MissionSolutions />
-        <HowItWorks />
+        <SocialGallery {...(sections.socialGallery ?? {})} />
+        <CareJourney {...(sections.careJourney ?? {})} />
+        <MissionSolutions {...(sections.missionSolutions ?? {})} />
+        <HowItWorks {...(sections.howItWorks ?? {})} />
         <DevisionOverview />
-        <RecommendedSolutions />
+        <RecommendedSolutions {...(sections.recommendedSolutions ?? {})} />
         <WowGrowthCta
           accentText="Ready to Reach"
           mainText="More Learners?"

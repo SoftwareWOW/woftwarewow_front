@@ -5,6 +5,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { renderWowInTitle } from '@/components/wow/shared/WowText'
 import { officeLocations } from '../_data/locations'
+import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
 
 function mapsEmbedUrl(mapQuery: string) {
   return `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&output=embed`
@@ -15,8 +16,27 @@ function mapsSearchUrl(mapQuery: string) {
 }
 
 /** Layout: partners/WhyPartnerWithWow — header + two-column details/media + CTA. */
-const LocationsPresence = () => {
-  const location = officeLocations[0]
+type LocationsPresenceProps = {
+  locations?: Array<{ city?: string | null; country?: string | null; address?: string | null }> | null
+}
+
+const LocationsPresence = ({ locations }: LocationsPresenceProps = {}) => {
+  const displayLocations = locations?.length
+    ? locations.map((loc) => ({
+        city: loc.city ?? '',
+        region: loc.country ?? '',
+        description: '',
+        addressLines: loc.address ? [loc.address] : [],
+        mapQuery: [loc.address, loc.city, loc.country].filter(Boolean).join(', '),
+        meta: '',
+        phone: '',
+        phoneHref: '#',
+        ctaLabel: 'Open in Maps',
+      }))
+    : officeLocations
+
+
+  const location = displayLocations[0]
 
   if (!location) return null
 

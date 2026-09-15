@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { ReactNode } from 'react'
 
 type CapabilityCard = {
@@ -10,7 +12,7 @@ type CapabilityCard = {
   icon: ReactNode
 }
 
-const topRowCards: CapabilityCard[] = [
+const DEFAULT_TOP_ROW_CARDS: CapabilityCard[] = [
   {
     title: 'Lead Generation',
     headline: 'Create more opportunities.',
@@ -43,7 +45,7 @@ const topRowCards: CapabilityCard[] = [
   },
 ]
 
-const bottomRowCards: CapabilityCard[] = [
+const DEFAULT_BOTTOM_ROW_CARDS: CapabilityCard[] = [
   {
     title: 'Outbound Sales',
     headline: 'Reach the right prospects proactively.',
@@ -92,24 +94,40 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 )
 
 /** Layout: Home-24 ServicesV16 — hover-flip cards, 3+2 grid. */
-const RevenueCapabilities = () => {
+const RevenueCapabilities = ({
+  eyebrow = 'Revenue Capabilities',
+  title = 'Build the systems behind',
+  description = 'From deciding what to say to getting it in front of the right people.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const allDefaults = [...DEFAULT_TOP_ROW_CARDS, ...DEFAULT_BOTTOM_ROW_CARDS]
+  const merged = mergeFeatureItems(allDefaults, items)
+  const topRowCards = merged.slice(0, DEFAULT_TOP_ROW_CARDS.length).map((card, index) => ({
+    ...DEFAULT_TOP_ROW_CARDS[index],
+    title: card.title,
+    description: card.description ?? DEFAULT_TOP_ROW_CARDS[index].description,
+  }))
+  const bottomRowCards = merged.slice(DEFAULT_TOP_ROW_CARDS.length).map((card, index) => ({
+    ...DEFAULT_BOTTOM_ROW_CARDS[index],
+    title: card.title,
+    description: card.description ?? DEFAULT_BOTTOM_ROW_CARDS[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Revenue Capabilities</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3 lg:leading-[1.21]">
-              Build the systems behind
+              {title}
               <span className="font-instrument italic"> better sales.</span>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-[770px]">
-              From deciding what to say to getting it in front of the right people.
-            </p>
+            <p className="text-appear mx-auto max-w-[770px]">{description}</p>
           </TextAppearAnimation>
         </div>
       </div>

@@ -3,8 +3,10 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const cards = [
+const DEFAULT_CARDS = [
   {
     number: '01',
     title: 'Get Support',
@@ -24,13 +26,19 @@ const cards = [
 ]
 
 /** Layout: technology-and-saas RecommendedSolutions — numbered cards. Two cards, no featured glow. */
-const SupportContact = () => {
+type SupportContactProps = Partial<CmsTechnologiesSection>
+
+const SupportContact = ({ eyebrow = 'CONTACT SUPPORT', title, accentTitle, description, items }: SupportContactProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_CARDS, items)
+
+
   return (
     <section>
       <div className="container pb-5 sm:pb-10 md:pb-15 lg:pb-20">
         <div className="mb-16 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center">
-            <SectionLabel>CONTACT SUPPORT</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mx-auto">
@@ -46,7 +54,7 @@ const SupportContact = () => {
 
         <article>
           <RevealWrapper className="reveal-me flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            {cards.map((item) => (
+            {mergedItems.map((item) => (
               <div
                 key={item.number}
                 className="flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 dark:border-dark"

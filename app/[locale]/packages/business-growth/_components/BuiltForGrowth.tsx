@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
 
 const fitItems = [
   'Your business is established, but growth feels inconsistent.',
@@ -25,8 +27,17 @@ const CheckIcon = () => (
   </span>
 )
 
+const DEFAULT_IMAGE = '/images/wow/nav/cards/Business%20growth%201.png'
+
+type Props = Partial<CmsHeroAboutSection>
+
 /** Home-04 — AboutV4: badge + headline + image + copy column (checklist content). */
-const BuiltForGrowth = () => {
+const BuiltForGrowth = ({
+  body = 'The Business Growth Package is designed for established businesses that have the foundations in place but need a more structured approach to generating and converting growth.',
+  image,
+}: Props = {}) => {
+  const imageSrc = cmsImageSrc(image, DEFAULT_IMAGE)
+
   return (
     <section>
       <div className="container">
@@ -39,16 +50,13 @@ const BuiltForGrowth = () => {
           </h3>
         </TextAppearAnimation>
         <RevealWrapper className="reveal-me mb-10 max-w-3xl lg:mb-16">
-          <p className="text-lg leading-[1.6] tracking-[0.36px] text-[#808080]">
-            The Business Growth Package is designed for established businesses that have the foundations in place but
-            need a more structured approach to generating and converting growth.
-          </p>
+          <p className="text-lg leading-[1.6] tracking-[0.36px] text-[#808080]">{body}</p>
         </RevealWrapper>
 
         <RevealWrapper className="flex flex-col gap-x-16 gap-y-16 lg:flex-row">
           <figure className="overflow-hidden rounded-radius-sm lg:w-1/2">
             <img
-              src="/images/wow/nav/cards/Business%20growth%201.png"
+              src={imageSrc ?? ''}
               alt="Business owner looking ahead to the next stage of growth"
               className="h-full w-full rounded-radius-sm object-cover"
             />

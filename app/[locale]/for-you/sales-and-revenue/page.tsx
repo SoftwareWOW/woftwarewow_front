@@ -3,6 +3,14 @@ const PAGE_SLUG = 'sales-and-revenue' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Sales & Revenue',
+  title: 'Turn more opportunities into',
+  italicTitle: ' revenue.',
+  description:
+    'Build a stronger sales engine with better lead generation, funnels, CRM workflows and automation — designed to help your team sell more effectively and consistently.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -18,7 +26,8 @@ import SalesRevenueHero from './_components/SalesRevenueHero'
 import SalesVisibility from './_components/SalesVisibility'
 // 2. Find the Gap — Home-19 ElevateBrandV2
 import SalesJourneyGap from './_components/SalesJourneyGap'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -26,48 +35,31 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Sales & Revenue | WOW Superagency',
-    description:
-      'Turn more opportunities into revenue — lead generation, CRM, sales automation, outbound and conversion systems designed to help your team sell more effectively.',
-    keywords: [
-      'sales and revenue',
-      'CRM',
-      'lead generation',
-      'sales automation',
-      'conversion optimization',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Sales & Revenue | WOW Superagency',
-      description:
-        'Build a stronger sales engine with better lead generation, funnels, CRM workflows and automation.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/for-you/sales-and-revenue`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Sales & Revenue' })
 }
 
 export default async function SalesAndRevenuePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — Home-25 HeroV25 */}
-        <SalesRevenueHero />
+        <SalesRevenueHero {...hero} images={hero.images} />
         {/* 2. Find the Gap — Home-19 ElevateBrandV2 */}
-        <SalesJourneyGap />
+        <SalesJourneyGap {...(sections.salesJourneyGap ?? {})} />
         {/* 3. Revenue Capabilities — Home-24 bento */}
-        <RevenueCapabilities />
+        <RevenueCapabilities {...(sections.revenueCapabilities ?? {})} />
         {/* 4. From Lead to Customer — Home-19 ProcessV10 */}
-        <LeadToCustomer />
+        <LeadToCustomer {...(sections.leadToCustomer ?? {})} />
         {/* 5. Sales Visibility — Home-15 BrandingProcess */}
-        <SalesVisibility />
+        <SalesVisibility {...(sections.salesVisibility ?? {})} />
         {/* 6. Ready to accelerate sales — WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to accelerate"

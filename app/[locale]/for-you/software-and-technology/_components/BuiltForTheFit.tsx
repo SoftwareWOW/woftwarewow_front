@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
 
 const needCustom = [
   'Your team relies heavily on spreadsheets or manual processes.',
@@ -34,7 +35,9 @@ const cardClassName =
   'relative rounded-radius-md border px-[30px] pb-[30px] pt-8 shadow-none dark:border-dark md:pt-16'
 
 /** Layout: Why SMBs TheGap — dual bordered columns with checks on both sides. */
-const BuiltForTheFit = () => {
+const BuiltForTheFit = ({
+  body = "Sometimes existing tools work perfectly. Sometimes they create more work than they remove.",
+}: Partial<CmsHeroAboutSection> = {}) => {
   return (
     <section className="relative overflow-hidden">
       <div className="container">
@@ -48,9 +51,7 @@ const BuiltForTheFit = () => {
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-           Sometimes existing tools work perfectly. Sometimes they create more work than they remove.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{body}</p>
           </RevealWrapper>
         </div>
 

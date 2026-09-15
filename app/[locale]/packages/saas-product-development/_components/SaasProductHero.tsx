@@ -3,9 +3,20 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-24 HeroV24 — split headline + dual tall images. */
-const SaasProductHero = () => {
+const SaasProductHero = ({
+  badgeTitle = 'SaaS Product Development',
+  title = 'From idea to',
+  italicTitle = 'product.',
+  description =
+    'Design, build, and launch a SaaS product with the strategy, technology, and go-to-market support you need in one package.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/wow/nav/cards/SaaS%20Product%201.png', alt: 'SaaS product development' }
+  const image1 = images?.[1] ?? { src: '/images/wow/nav/cards/SaaS%20Product%202.png', alt: 'Product launch' }
+
   return (
     <section
       className="relative overflow-hidden pb-14 pt-[80px] md:pb-16 md:pt-[90px] lg:pb-[88px] xl:pb-[112px] xl:pt-[130px]"
@@ -54,8 +65,8 @@ const SaasProductHero = () => {
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="SaaS product development imagery">
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/SaaS%20Dev%201.png"
-              alt="Team collaborating on a SaaS product"
+              src={image0.src}
+              alt={image0.alt ?? ''}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
               height={540}
@@ -63,8 +74,8 @@ const SaasProductHero = () => {
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/Softwaerwow.png"
-              alt="Product team reviewing launch readiness"
+              src={image1.src}
+              alt={image1.alt ?? ''}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
               height={540}

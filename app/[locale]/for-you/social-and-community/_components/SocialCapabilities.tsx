@@ -2,13 +2,15 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { ReactNode } from 'react'
 
 const IconFrame = ({ children }: { children: ReactNode }) => (
   <span className="mb-2 inline-flex size-[52px] items-center justify-center">{children}</span>
 )
 
-const capabilities: { title: string; description: string; icon: ReactNode }[] = [
+const DEFAULT_CAPABILITIES: { title: string; description: string; icon: ReactNode }[] = [
   {
     title: 'Social Strategy',
     description: 'Channel strategy, audience direction and content planning built around clear objectives.',
@@ -140,29 +142,39 @@ const capabilities: { title: string; description: string; icon: ReactNode }[] = 
 ]
 
 /** Layout: Home-13 ServicesV12 adapted to mock — centered header + 6 capability cards. */
-const SocialCapabilities = () => {
+const SocialCapabilities = ({
+  eyebrow = 'Social Capabilities',
+  title = 'Everything behind a',
+  accentTitle = 'stronger social',
+  description = 'From deciding what to say to getting it in front of the right people.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayCapabilities = mergeFeatureItems(DEFAULT_CAPABILITIES, items).map((item, index) => ({
+    ...DEFAULT_CAPABILITIES[index],
+    title: item.title,
+    description: item.description ?? DEFAULT_CAPABILITIES[index].description,
+  }))
+
   return (
     <section>
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Social Capabilities</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h2 className="mb-3">
-            Everything behind a
-            <InstrumentText> stronger social </InstrumentText>
+            {title}
+            <InstrumentText> {accentTitle} </InstrumentText>
             presence.
           </h2>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
-          <p className="mx-auto max-w-[770px] text-base leading-relaxed text-[#808080]">
-            From deciding what to say to getting it in front of the right people.
-          </p>
+          <p className="mx-auto max-w-[770px] text-base leading-relaxed text-[#808080]">{description}</p>
         </RevealWrapper>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {capabilities.map((item) => (
+        {displayCapabilities.map((item) => (
           <RevealWrapper
             key={item.title}
             className="reveal-me rounded-radius-md border px-6 py-9 shadow-none dark:border-dark lg:px-[30px] lg:py-[50px]"

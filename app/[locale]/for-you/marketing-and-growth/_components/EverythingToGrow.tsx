@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
-const solutions = [
+const DEFAULT_ITEMS = [
   {
     title: 'Marketing Strategy',
     description: 'Clear strategies built around your market, customers and growth goals.',
@@ -31,30 +33,36 @@ const solutions = [
 ]
 
 /** Layout: Home-16 ServicesV14 — centered header + 6 bordered solution cards. */
-const EverythingToGrow = () => {
+const EverythingToGrow = ({
+  eyebrow = 'Everything You Need to Grow',
+  title = 'Marketing solutions designed for',
+  accentTitle = 'maximum impact',
+  description =
+    'Strategy, visibility, demand and conversion — connected capabilities that help you attract customers and grow revenue.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section id="growth-solutions">
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Everything You Need to Grow</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h2 className="mb-3">
-            Marketing solutions designed for
+            {title}
             <br />
-            <InstrumentText> maximum impact</InstrumentText>
+            <InstrumentText> {accentTitle}</InstrumentText>
           </h2>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
-          <p className="mx-auto max-w-[770px] text-base leading-relaxed text-[#808080]">
-            Strategy, visibility, demand and conversion — connected capabilities that help you attract customers and
-            grow revenue.
-          </p>
+          <p className="mx-auto max-w-[770px] text-base leading-relaxed text-[#808080]">{description}</p>
         </RevealWrapper>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {solutions.map((item) => (
+        {displayItems.map((item) => (
           <RevealWrapper
             key={item.title}
             className="reveal-me rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"

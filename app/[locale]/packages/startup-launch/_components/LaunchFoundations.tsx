@@ -3,9 +3,11 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import Link from 'next/link'
 
-const foundations = [
+const DEFAULT_ITEMS = [
   { title: 'Brand', description: 'Identity and messaging' },
   { title: 'Website', description: 'Your digital presence' },
   { title: 'Marketing', description: 'Go-to-market foundations' },
@@ -51,28 +53,38 @@ const ArrowButton = () => (
   </div>
 )
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Home-16 — ServicesV14: 6 bordered cards with arrow hover. */
-const LaunchFoundations = () => {
+const LaunchFoundations = ({
+  eyebrow = 'Everything You Need to Get Started',
+  title = 'Start with the right ',
+  accentTitle = 'foundations.',
+  description =
+    'Bring the essentials together from day one, so your business is ready to launch, reach customers, and grow.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Everything You Need to Get Started</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            Start with the right <InstrumentText>foundations.</InstrumentText>
+            {title}
+            <InstrumentText>{accentTitle}</InstrumentText>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">
-            Bring the essentials together from day one, so your business is ready to launch, reach customers, and grow.
-          </p>
+          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
         </TextAppearAnimation>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {foundations.map((item) => (
+        {mergedItems.map((item) => (
           <RevealWrapper
             key={item.title}
             className="reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"

@@ -4,6 +4,8 @@ import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import WowText from '@/components/wow/shared/WowText'
 import type { ReactNode } from 'react'
 
@@ -76,7 +78,12 @@ const teams: {
 ]
 
 /** Layout: Home-19 ElevateBrandV2 — numbered hover specialist rows + header CTA. */
-const ConnectedExpertise = () => {
+type ConnectedExpertiseProps = Partial<CmsTechnologiesSection>
+
+const ConnectedExpertise = ({ eyebrow, title, accentTitle, description, items }: ConnectedExpertiseProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
   return (
     <section>
       <div className="container">

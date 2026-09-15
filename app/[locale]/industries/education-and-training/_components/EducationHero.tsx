@@ -5,15 +5,24 @@ import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import Marquee from 'react-fast-marquee'
 
-const HERO_IMAGES = [
+const DEFAULT_HERO_IMAGES = [
   '/images/wow/Hero/devision/Education.jpg',
   `/images/wow/nav/cards/${encodeURIComponent('learningevent.png')}`,
 ]
 
 /** Layout: Home-15 HeroV15 — split headline + stacked mockups + marquee. */
-const EducationHero = () => {
+const EducationHero = ({
+  title = 'Turn Your Mission Into Momentum.',
+  description =
+    'We help organizations strengthen their presence, reach more people, simplify operations, and build the digital systems behind lasting impact.',
+  images,
+}: CmsHeroComponentProps) => {
+  const heroImages = images?.length
+    ? images.map((image) => image.src)
+    : DEFAULT_HERO_IMAGES
   return (
     <RevealWrapper
       as="section"
@@ -30,13 +39,12 @@ const EducationHero = () => {
                   id="education-hero-heading"
                   className="text-appear text-[clamp(2rem,4.8vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.02em]"
                 >
-                  Turn Your Mission Into Momentum.
+                  {title}
                 </h1>
               </TextAppearAnimation>
             </div>
             <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-              We help organizations strengthen their presence, reach more people, simplify operations, and build the
-              digital systems behind lasting impact.
+              {description}
             </RevealWrapper>
 
             <RevealWrapperV2 className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-9 lg:mt-10">
@@ -63,7 +71,7 @@ const EducationHero = () => {
             </div>
           </div>
           <div className="flex w-full min-w-0 flex-col gap-4 lg:w-[42%] xl:w-[46%]">
-            {HERO_IMAGES.map((src) => (
+            {heroImages.map((src) => (
               <RevealWrapper as="figure" key={src} className="w-full overflow-hidden rounded-radius-md">
                 <img
                   src={src}

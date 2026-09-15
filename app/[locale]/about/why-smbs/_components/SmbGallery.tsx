@@ -4,6 +4,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
+import { mergeGalleryItems } from '@/lib/strapi/cms-section-props'
 
 type GalleryItem = {
   id: number
@@ -11,7 +13,7 @@ type GalleryItem = {
   link: string
 }
 
-const data: GalleryItem[] = [
+const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 1,
     image: '/images/testimonial/testimonial-1.png',
@@ -55,7 +57,12 @@ const data: GalleryItem[] = [
 ]
 
 /** Layout: Home-11 InstagramGallery — 3D carousel gallery. */
-const SmbGallery = () => {
+type SmbGalleryProps = { images?: CmsGalleryImage[] | null }
+
+const SmbGallery = ({ images }: SmbGalleryProps = {}) => {
+  const galleryItems = mergeGalleryItems(DEFAULT_GALLERY_ITEMS, images)
+
+
   const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -92,7 +99,7 @@ const SmbGallery = () => {
   }, [currentIndex])
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % galleryItems.length)
   }, [])
 
   const startSlider = useCallback(() => {
@@ -148,7 +155,7 @@ const SmbGallery = () => {
               className="slides-wrapper relative flex h-full w-full items-center justify-center"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              {data.map((item, index) => (
+              {galleryItems.map((item, index) => (
                 <div
                   key={item.id}
                   ref={(el) => {

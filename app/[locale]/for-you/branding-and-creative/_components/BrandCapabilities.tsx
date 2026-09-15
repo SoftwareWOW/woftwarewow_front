@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
-const capabilities = [
+const DEFAULT_CAPABILITIES = [
   {
     number: '01',
     title: 'Brand Strategy',
@@ -32,29 +34,38 @@ const capabilities = [
   },
 ]
 
+const SIDE_IMAGE = '/images/wow/nav/cards/Branding%20%26%20Creative%201.png'
+
 /** Layout: Home-12 WhyChooseUs — centered header + list + image + dual CTAs. */
-const BrandCapabilities = () => {
+const BrandCapabilities = ({
+  eyebrow = 'Brand Capabilities',
+  title = 'From strategy to every expression of your brand.',
+  description =
+    'Build the foundations first, then turn them into a visual and creative system your business can actually use.',
+  items,
+  image,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayCapabilities = mergeFeatureItems(DEFAULT_CAPABILITIES, items)
+  const sideImageSrc = cmsImageSrc(image, SIDE_IMAGE)
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Brand Capabilities</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3">From strategy to every expression of your brand.</h2>
+            <h2 className="text-appear mb-3">{title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-2xl text-[#808080]">
-              Build the foundations first, then turn them into a visual and creative system your business can actually
-              use.
-            </p>
+            <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
           <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-            {capabilities.map((item) => (
+            {displayCapabilities.map((item) => (
               <RevealWrapper key={item.number} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
                 <h5>
                   <span className="mr-2 text-[#808080]">{item.number}</span>
@@ -67,8 +78,8 @@ const BrandCapabilities = () => {
 
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
-              src="/images/wow/nav/cards/Branding%20%26%20Creative%201.png"
-              alt="Brand strategy and creative identity"
+              src={sideImageSrc}
+              alt={image?.alt ?? 'Brand strategy and creative identity'}
               className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
             />
           </RevealWrapper>

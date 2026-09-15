@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Listen',
@@ -26,25 +28,32 @@ const steps = [
 ]
 
 /** Layout: SoftwareWOW WoWProces — numbered community steps, responsive. */
-const BuildCommunity = () => {
+const BuildCommunity = ({
+  eyebrow = 'Build Community',
+  title = 'Followers are numbers.',
+  description = 'Relationships are an asset.',
+  steps,
+}: Partial<CmsProcessSection> = {}) => {
+  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>Build Community</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2>
-              Followers are numbers.
+              {title}
               <br />
-              Relationships are an asset.
+              {description}
             </h2>
           </RevealWrapper>
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:gap-x-10 xl:grid-cols-4">
-          {steps.map((step) => (
+          {displaySteps.map((step) => (
             <RevealWrapper
               key={step.title}
               className="relative flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24"

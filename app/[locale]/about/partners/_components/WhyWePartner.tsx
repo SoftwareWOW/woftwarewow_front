@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const benefits = [
+const DEFAULT_BENEFITS = [
   {
     title: 'Better solutions',
     description: 'Combine WOW delivery with specialist platforms for stronger client outcomes.',
@@ -23,13 +25,19 @@ const benefits = [
 ]
 
 /** Layout: Home-23 WhyChooseUsV7 — 2×2 bordered grid. */
-const WhyWePartner = () => {
+type WhyWePartnerProps = Partial<CmsTechnologiesSection>
+
+const WhyWePartner = ({ eyebrow = 'Why Partner', title, accentTitle, description, items }: WhyWePartnerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_BENEFITS, items)
+
+
   return (
     <section>
       <div className="container">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Why Partner</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="lg:leading-[1.1]">
@@ -44,7 +52,7 @@ const WhyWePartner = () => {
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
-          {benefits.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.title}
               className="col-span-12 flex-1 border px-[30px] py-10 dark:border-dark lg:col-span-6"

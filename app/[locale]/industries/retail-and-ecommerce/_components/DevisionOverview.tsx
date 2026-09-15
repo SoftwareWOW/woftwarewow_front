@@ -10,13 +10,15 @@ import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DIVISION_BG_BASE = '/images/wow/Hero/devision'
 
 /** Viewport X ratio used to pick the focused card (left side, first card on entry). */
 const FOCUS_X_RATIO = 0.22
 
-const divisions = [
+const DEFAULT_DIVISIONS = [
   {
     id: 1,
     title: 'SoftwareWOW',
@@ -98,7 +100,19 @@ function renderDivisionTitle(title: string) {
 }
 
 /** Local copy of homepage DevisionOverview — same divisions, images, and horizontal-scroll behavior. */
-const DevisionOverview = () => {
+type DevisionOverviewProps = Partial<CmsTechnologiesSection>
+
+const DevisionOverview = ({
+  eyebrow = 'Divisions Overview',
+  title = '',
+  accentTitle = '',
+  description,
+  items,
+}: DevisionOverviewProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_DIVISIONS, items)
+
+
   const [hoveredId, setHoveredId] = useState<number | null>(null)
   const [activeCardId, setActiveCardId] = useState<number>(1)
   const cardRefs = useRef<Record<number, HTMLElement | null>>({})
@@ -162,7 +176,7 @@ const DevisionOverview = () => {
     let closestId = 1
     let closestDistance = Infinity
 
-    for (const item of divisions) {
+    for (const item of mergedItems) {
       const el = cardRefs.current[item.id]
       if (!el) continue
 
@@ -227,7 +241,7 @@ const DevisionOverview = () => {
           className="absolute inset-0 bg-[#ebe6f4] transition-colors duration-500 dark:bg-[#0a0a0a]"
         />
 
-        {divisions.map((item) => (
+        {mergedItems.map((item) => (
           <div
             key={item.id}
             aria-hidden
@@ -263,9 +277,7 @@ const DevisionOverview = () => {
                     'mb-4 transition-colors duration-500 md:mb-5',
                     activeBgId !== null && '!bg-white/15 !text-white/90',
                   )}
-                >
-                  Divisions Overview
-                </SectionLabel>
+                >{header.eyebrow}</SectionLabel>
               </RevealWrapper>
 
               <TextAppearAnimation>
@@ -291,7 +303,7 @@ const DevisionOverview = () => {
           onPointerMove={handleCardPointerMove}
           onPointerLeave={handleCardPointerLeave}
         >
-          {divisions.map((item) => {
+          {mergedItems.map((item) => {
             const isActive = activeBgId === item.id
 
             return (

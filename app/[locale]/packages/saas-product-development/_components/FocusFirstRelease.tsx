@@ -3,8 +3,10 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const priorities = [
+const DEFAULT_ITEMS = [
   {
     id: '01',
     title: 'Must Have',
@@ -22,34 +24,50 @@ const priorities = [
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: Home-19 ElevateBrandV2 — numbered hover priority rows. */
-const FocusFirstRelease = () => {
+const FocusFirstRelease = ({
+  eyebrow = 'Focus the First Release',
+  title = "You don't need to ",
+  accentTitle = 'change everything at once.',
+  description =
+    'Prioritize the core problem, the first experience and the foundation that makes the product usable.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items).map((item, index) => ({
+    ...DEFAULT_ITEMS[index],
+    title: item.title,
+    description: item.description ?? DEFAULT_ITEMS[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <RevealWrapper className="reveal-me mb-5">
-          <SectionLabel>Focus the First Release</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
 
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <TextAppearAnimation02>
               <h2 className="text-appear-2">
-                You don&apos;t need to <InstrumentText>change</InstrumentText> everything at once.
+                {title}
+                <InstrumentText>{accentTitle}</InstrumentText>
               </h2>
             </TextAppearAnimation02>
           </div>
           <div className="w-full md:w-80 lg:w-96">
             <TextAppearAnimation>
               <p className="text-appear text-appear-2 max-w-lg max-md:text-justify md:place-self-end md:text-right">
-                Prioritize the core problem, the first experience and the foundation that makes the product usable.
+                {description}
               </p>
             </TextAppearAnimation>
           </div>
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-          {priorities.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.id}
               className="ease-[cubic-bezier(0.4, 0, 0.2, 1)] group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.010] hover:backdrop-blur-sm md:pb-10 md:pt-10"

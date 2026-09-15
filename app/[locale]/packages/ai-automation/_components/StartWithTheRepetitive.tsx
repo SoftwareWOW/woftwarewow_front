@@ -6,8 +6,9 @@ import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import type { CmsRfqAccordionSection } from '@/lib/strapi/mappers/page-sections'
 
-const servicesData = [
+const DEFAULT_GROUPS = [
   {
     id: 1,
     title: 'Leads & Enquiries',
@@ -51,8 +52,24 @@ const servicesData = [
   },
 ]
 
+type Props = Partial<CmsRfqAccordionSection>
+
 /** Layout: SolutionToChallenges / StartWithTheWork — accordion closed by default, all 6 visible. */
-const StartWithTheRepetitive = () => {
+const StartWithTheRepetitive = ({
+  eyebrow = 'Start with the repetitive',
+  title = 'Think about what your team does every day.',
+  description = 'Good automation starts with repetitive, predictable work—not with adding AI everywhere.',
+  groups,
+}: Props = {}) => {
+  const mergedGroups = DEFAULT_GROUPS.map((service, index) => {
+    const cms = groups?.[index]
+    return {
+      ...service,
+      title: cms?.title || service.title,
+      subtitle: cms?.subtitle ?? service.subtitle,
+      example: cms?.items?.[0] ?? service.example,
+    }
+  })
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
@@ -88,20 +105,18 @@ const StartWithTheRepetitive = () => {
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Start with the repetitive</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 w-full md:mb-8">Think about what your team does every day.</h2>
+            <h2 className="mx-auto mb-5 w-full md:mb-8">{title}</h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              Good automation starts with repetitive, predictable work—not with adding AI everywhere.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 
         <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
-          {servicesData.map((service, index) => {
+          {mergedGroups.map((service, index) => {
             const isActive = activeIndex === index
 
             return (

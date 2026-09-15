@@ -1,27 +1,51 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { Calendar, Clock, Monitor, Video } from 'lucide-react'
 import { meetSectionClass, meetSectionInnerClass } from '@/app/[locale]/meet/_components/meetSectionSpacing'
 
-const sessionDetails = [
+const DEFAULT_SESSIONDETAILS = [
   { label: 'Duration', value: '30 Minutes', icon: Clock },
   { label: 'Meeting Type', value: 'Online', icon: Monitor },
   { label: 'Platform', value: 'Google Meet', icon: Video },
   { label: 'Cost', value: 'Included', icon: Calendar },
 ]
 
-const ThinkTankSessionInfo = () => (
+type ThinkTankSessionInfoProps = Partial<CmsTechnologiesSection>
+
+const ThinkTankSessionInfo = ({
+  eyebrow = 'Session Information',
+  title = 'What to',
+  accentTitle = 'expect',
+  items,
+}: ThinkTankSessionInfoProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle }, { eyebrow, title, accentTitle })
+  const mergedItems = mergeFeatureItems(
+    DEFAULT_SESSIONDETAILS.map(({ label, value, icon }) => ({
+      title: label,
+      description: value,
+      icon,
+    })),
+    items,
+  ).map((item, index) => ({
+    ...DEFAULT_SESSIONDETAILS[index],
+    label: item.title,
+    value: item.description ?? DEFAULT_SESSIONDETAILS[index].value,
+  }))
+
+  return (
   <section className={meetSectionClass}>
     <div className={meetSectionInnerClass}>
       <RevealWrapper className="mb-10 text-center md:mb-14">
-        <SectionLabel className="mb-5">Session Information</SectionLabel>
+        <SectionLabel className="mb-5">{header.eyebrow}</SectionLabel>
         <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-          What to <span className="font-instrument italic">expect</span>
+          {header.title} <span className="font-instrument italic">{header.accentTitle}</span>
         </h2>
       </RevealWrapper>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {sessionDetails.map((item) => {
+        {mergedItems.map((item) => {
           const Icon = item.icon
 
           return (
@@ -41,6 +65,7 @@ const ThinkTankSessionInfo = () => (
       </div>
     </div>
   </section>
-)
+  )
+}
 
 export default ThinkTankSessionInfo

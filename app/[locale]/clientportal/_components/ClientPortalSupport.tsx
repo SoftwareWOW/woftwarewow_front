@@ -2,15 +2,29 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: education HowItWorks header — centered label, title, body, CTA. */
-const ClientPortalSupport = () => {
+type ClientPortalSupportProps = Partial<CmsTechnologiesSection>
+
+const ClientPortalSupport = ({
+  eyebrow = 'BEYOND OUR LOCATIONS',
+  title = '',
+  accentTitle = '',
+  description,
+  items,
+}: ClientPortalSupportProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
+
   return (
     <section>
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>BEYOND OUR LOCATIONS</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto max-w-[18ch]">

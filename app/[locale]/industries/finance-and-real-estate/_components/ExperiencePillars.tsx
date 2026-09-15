@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import type { ReactNode } from 'react'
 
 type CapabilityCard = {
@@ -101,7 +103,12 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
 
 /** Layout: TransformationPlan / Home-24 ServicesV16 — hover-flip cards, 3+3 grid. */
-const ExperiencePillars = () => {
+type ExperiencePillarsProps = Partial<CmsTechnologiesSection>
+
+const ExperiencePillars = ({ eyebrow, title, accentTitle, description, items }: ExperiencePillarsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
   return (
     <section>
       <div className="container">

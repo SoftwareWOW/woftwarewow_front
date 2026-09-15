@@ -5,6 +5,7 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
 
@@ -23,7 +24,17 @@ const HERO_IMAGES = [
 ] as const
 
 /** Layout: Home-04 HeroV11 — centered hero + 6 floating decorative images. */
-const BrandingCreativeHero = () => {
+const BrandingCreativeHero = ({
+  badgeTitle = 'Branding & Creative',
+  title = 'Build a brand people',
+  italicTitle = 'remember.',
+  description =
+    'Create stronger identity, clearer messaging, and creative assets that help your business stand out and connect.',
+  images,
+}: CmsHeroComponentProps) => {
+  const image0 = images?.[0] ?? { src: '/images/hero-img/branding-hero-1.jpg', alt: 'Branding and creative' }
+  const image1 = images?.[1] ?? { src: '/images/hero-img/branding-hero-2.jpg', alt: 'Creative brand work' }
+
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -111,7 +122,7 @@ const BrandingCreativeHero = () => {
       <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
         <img
           src={HERO_IMAGES[0]}
-          alt=""
+          alt={image0.alt ?? ''}
           className="h-[110px] w-[85px] rounded-sm object-cover shadow-sm lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
           ref={setImageRef(0)}
         />
@@ -119,7 +130,7 @@ const BrandingCreativeHero = () => {
       <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
         <img
           src={HERO_IMAGES[1]}
-          alt=""
+          alt={image1.alt ?? ''}
           className="h-[100px] w-[82px] rounded-sm object-cover shadow-sm lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
           ref={setImageRef(1)}
         />
@@ -127,7 +138,7 @@ const BrandingCreativeHero = () => {
       <figure className="pointer-events-none absolute left-[1%] top-[46%] z-0 hidden lg:block xl:left-[3%]">
         <img
           src={HERO_IMAGES[2]}
-          alt=""
+          alt={image1.alt ?? ''}
           className="h-[120px] w-[92px] rounded-sm object-cover shadow-sm xl:h-[148px] xl:w-[114px]"
           ref={setImageRef(2)}
         />
@@ -135,7 +146,7 @@ const BrandingCreativeHero = () => {
       <figure className="pointer-events-none absolute right-[1%] top-[38%] z-0 hidden lg:block xl:right-[3%]">
         <img
           src={HERO_IMAGES[3]}
-          alt=""
+          alt={image1.alt ?? ''}
           className="h-[150px] w-[110px] rounded-sm object-cover shadow-sm xl:h-[180px] xl:w-[132px]"
           ref={setImageRef(3)}
         />
@@ -143,7 +154,7 @@ const BrandingCreativeHero = () => {
       <figure className="pointer-events-none absolute bottom-[6%] left-[8%] z-0 hidden md:block lg:bottom-[8%] lg:left-[14%] xl:left-[18%]">
         <img
           src={HERO_IMAGES[4]}
-          alt=""
+          alt={image1.alt ?? ''}
           className="h-[95px] w-[74px] rounded-sm object-cover shadow-sm lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]"
           ref={setImageRef(4)}
         />
@@ -151,7 +162,7 @@ const BrandingCreativeHero = () => {
       <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
         <img
           src={HERO_IMAGES[5]}
-          alt=""
+          alt={image1.alt ?? ''}
           className="h-[90px] w-[130px] rounded-sm object-cover shadow-sm lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
           ref={setImageRef(5)}
         />
@@ -159,14 +170,17 @@ const BrandingCreativeHero = () => {
 
       <div className="container relative z-10">
         <RevealWrapper className="mb-3 flex items-center justify-center">
-          <SectionLabel>Branding &amp; Creative</SectionLabel>
+          <SectionLabel>{badgeTitle}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
-          <h1 className="mx-auto max-w-[18ch] text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em] md:max-w-[16ch]">
-            Build a brand people
-            <br />
-            <InstrumentText>remember.</InstrumentText>
-          </h1>
+          <h1
+              id="startup-launch-heading"
+              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            >
+              {title}
+              <br className="hidden lg:block" />
+              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+            </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-[#808080] md:max-w-2xl md:text-lg">

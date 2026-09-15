@@ -1,8 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
 
-const priorities = [
+const DEFAULT_PRIORITIES = [
   {
     id: '01',
     title: 'Reliability',
@@ -26,7 +27,7 @@ const priorities = [
 ]
 
 /** Layout: ElevateBrandV2 / SalesJourneyGap — full-width header + hover-dim numbered rows. */
-const BuiltForBusiness = () => {
+const BuiltForBusiness = (_props: Partial<CmsHeroAboutSection> = {}) => {
   return (
     <section>
       <div className="container">
@@ -42,7 +43,7 @@ const BuiltForBusiness = () => {
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-          {priorities.map((item) => (
+          {DEFAULT_PRIORITIES.map((item) => (
             <div
               key={item.id}
               className="ease-[cubic-bezier(0.4, 0, 0.2, 1)] group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.010] hover:backdrop-blur-sm md:pb-10 md:pt-10"

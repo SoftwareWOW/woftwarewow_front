@@ -1,9 +1,11 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import { ArrowDown } from 'lucide-react'
 
-const beforeSteps = [
+const DEFAULT_BEFORE_STEPS = [
   'A customer sends an enquiry',
   'Someone checks the inbox',
   'Information is copied into CRM',
@@ -12,7 +14,7 @@ const beforeSteps = [
   'Team remembers to follow up again',
 ]
 
-const afterSteps = [
+const DEFAULT_AFTER_STEPS = [
   'A customer sends an enquiry',
   'AI identifies the request',
   'CRM updates automatically',
@@ -40,23 +42,36 @@ const WorkflowSteps = ({ steps }: { steps: string[] }) => (
 )
 
 /** Layout: Before/After automation workflow — dark comparison cards with left-aligned arrow steps. */
-const AutomationInAction = () => {
+const AutomationInAction = ({
+  eyebrow = 'Automation in action',
+  title = 'Turn repetitive processes into smarter',
+  accentTitle = 'workflows.',
+  description =
+    'Connect the steps that happen repeatedly so information and actions can move automatically.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const defaultItems = [
+    ...DEFAULT_BEFORE_STEPS.map((step) => ({ title: step, description: '' })),
+    ...DEFAULT_AFTER_STEPS.map((step) => ({ title: step, description: '' })),
+  ]
+  const mergedItems = mergeFeatureItems(defaultItems, items)
+  const beforeSteps = mergedItems.slice(0, DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+  const afterSteps = mergedItems.slice(DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+
   return (
     <section className="relative overflow-hidden">
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Automation in action</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto mb-5  md:mb-8">
-              Turn repetitive processes into smarter <InstrumentText>workflows.</InstrumentText>
+              {title} <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">
-              Connect the steps that happen repeatedly so information and actions can move automatically.
-            </p>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
           </RevealWrapper>
         </div>
 

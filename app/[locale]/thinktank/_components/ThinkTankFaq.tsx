@@ -6,8 +6,9 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { meetSectionClass, meetSectionInnerClass } from '@/app/[locale]/meet/_components/meetSectionSpacing'
 import { useMemo, useState } from 'react'
+import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
 
-const faqData = [
+const DEFAULT_FAQDATA = [
   {
     id: 1,
     question: 'What is a Think Tank session?',
@@ -46,7 +47,12 @@ const faqData = [
   },
 ]
 
-const ThinkTankFaq = () => {
+type ThinkTankFaqProps = { items?: CmsFaqItem[] | null }
+
+const ThinkTankFaq = ({ items }: ThinkTankFaqProps = {}) => {
+  const faqData = items?.length ? items.map((item, i) => ({ id: i + 1, question: item.question, answer: item.answer })) : DEFAULT_FAQDATA
+
+
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {

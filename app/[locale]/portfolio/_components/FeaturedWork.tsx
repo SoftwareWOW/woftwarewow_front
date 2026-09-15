@@ -3,10 +3,28 @@ import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import Link from 'next/link'
-import { featuredProjects } from '../_data/projects'
+import { featuredProjects as DEFAULT_FEATUREDPROJECTS } from '../_data/projects'
+import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
 /** Layout: case-study/_components/Projects.tsx — alternating lg:flex-row layout, featured subset. */
-const FeaturedWork = () => {
+type FeaturedWorkProps = { projects?: CmsProjectCard[] | null }
+
+const FeaturedWork = ({ projects }: FeaturedWorkProps = {}) => {
+  const displayProjects = projects?.length
+    ? projects.map((p, i) => ({
+        slug: p.href?.split('/').pop() ?? String(i),
+        title: p.title,
+        description: p.description ?? '',
+        image: p.thumbnail ?? '',
+        alt: p.alt ?? p.title,
+        client: '',
+        industry: '',
+        serviceTags: [] as string[],
+        tagline: p.description ?? '',
+      }))
+    : DEFAULT_FEATUREDPROJECTS
+
+
   return (
     <section>
       <div className="container mb-10 text-center md:mb-16">
@@ -21,7 +39,7 @@ const FeaturedWork = () => {
       </div>
 
       <div className="container flex flex-col gap-16 md:gap-20 lg:gap-24">
-        {featuredProjects.map((project, index) => (
+        {displayProjects.map((project, index) => (
           <RevealWrapperV2
             key={project.slug}
             className={`reveal-me group flex flex-col gap-8 lg:items-center lg:gap-10 ${

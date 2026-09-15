@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, cmsImageSrc, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const points = [
+const DEFAULT_POINTS = [
   {
     title: 'Build Credibility',
     description: 'Create a brand and digital presence that reflects the quality of your expertise.',
@@ -27,16 +29,29 @@ const points = [
 ]
 
 /** Layout: Home-12 WhyChooseUs — left list + right image. */
-const WhatMattersMost = () => {
+type WhatMattersMostProps = Partial<CmsTechnologiesSection>
+
+const WhatMattersMost = ({
+  eyebrow = 'What Matters Most',
+  title = 'Your Expertise Deserves a Stronger Business Around It.',
+  accentTitle = '',
+  description,
+  items,
+  image,
+}: WhatMattersMostProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_POINTS, items)
+  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217 1.png')
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>What Matters Most</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mt-3">Your Expertise Deserves a Stronger Business Around It.</h2>
+            <h2 className="text-appear mt-3">{header.title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mt-3 text-[#808080]">
@@ -47,7 +62,7 @@ const WhatMattersMost = () => {
         </div>
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
           <div className="md:w-1/2 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-[#e5e5e5] dark:[&>*:not(:last-child)]:border-white/10">
-            {points.map((point) => (
+            {mergedItems.map((point) => (
               <RevealWrapper key={point.title} className="py-3.5 pr-[30px] lg:py-[30px]">
                 <h5>{point.title}</h5>
                 <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{point.description}</p>
@@ -56,7 +71,7 @@ const WhatMattersMost = () => {
           </div>
           <RevealWrapper as="figure" className="relative min-h-[320px] overflow-hidden rounded-radius-md md:min-h-[480px] md:w-1/2 lg:min-h-[560px]">
             <Image
-              src="/images/wow/nav/cards/pexels-polina-tankilevitch-5386217 1.png"
+              src={imageSrc ?? ''}
               alt="Professional services growth"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

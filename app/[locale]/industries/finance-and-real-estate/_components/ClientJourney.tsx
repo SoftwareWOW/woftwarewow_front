@@ -1,8 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '01',
     title: 'Reach the Right People',
@@ -31,16 +33,29 @@ const steps = [
 ]
 
 /** Layout: Home-07 ProcessV4 — image height matches steps. */
-const ClientJourney = () => {
+type ClientJourneyProps = Partial<CmsProcessSection>
+
+const ClientJourney = ({
+  eyebrow = 'THE GROWTH JOURNEY',
+  title = 'Turn Interest Into Opportunity.',
+  accentTitle = '',
+  description,
+  steps,
+  image,
+}: ClientJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/pexels-cottonbro-4069290%201.png')
+
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
-            <SectionLabel>THE GROWTH JOURNEY</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">Turn Interest Into Opportunity.</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">{header.title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
@@ -53,7 +68,7 @@ const ClientJourney = () => {
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
             <img
-              src="/images/wow/nav/cards/pexels-cottonbro-4069290%201.png"
+              src={imageSrc ?? ''}
               alt="Finance and real estate client journey"
               className="h-full min-h-[320px] w-full rounded-radius-md object-cover md:min-h-[480px] lg:min-h-[560px]"
             />
@@ -61,7 +76,7 @@ const ClientJourney = () => {
 
           <div className="min-w-0 flex-1">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
-              {steps.map((step, index) => (
+              {mergedSteps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">
                   <div
                     className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${

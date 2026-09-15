@@ -5,6 +5,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gsap from 'gsap'
 import { useRef } from 'react'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 interface JourneyItem {
   id: number
@@ -46,7 +48,18 @@ const data: JourneyItem[] = [
 ]
 
 /** Layout: Home-14 AwardWinningWork — cursor-following hover preview + numbered rows. */
-const CareJourney = () => {
+type CareJourneyProps = Partial<CmsProcessSection>
+
+const CareJourney = ({
+  eyebrow = 'Care Journey',
+  title = 'Support Every Step of the Experience.',
+  accentTitle = '',
+  description,
+  steps,
+}: CareJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps([], steps)
+
   const previewRef = useRef<HTMLDivElement>(null)
   const previewImgRef = useRef<HTMLImageElement>(null)
 
@@ -89,7 +102,7 @@ const CareJourney = () => {
         <div className="mb-16 flex flex-col items-start justify-center gap-x-6 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Care Journey</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear">Support Every Step of the Experience.</h2>

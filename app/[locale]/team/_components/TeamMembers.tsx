@@ -11,8 +11,6 @@ import facebookDarkLogo from '@/public/images/icons/facebook-dark.svg'
 import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TeamGallery from '@/components/aboutpage-02/TeamGallery'
-
-
 interface TeamMember {
   id: string
   name: string
@@ -27,7 +25,9 @@ interface TeamMember {
 }
 
 const Team = () => {
-  const [selectedMember, setSelectedMember] = useState<TeamMember>(teamMembers[0])
+  const displayMembers = teamMembers as TeamMember[]
+
+  const [selectedMember, setSelectedMember] = useState<TeamMember>(displayMembers[0])
   const [isTransitioning, setIsTransitioning] = useState(false)
 
   const handleMemberChange = (member: TeamMember) => {

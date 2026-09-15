@@ -2,8 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
-const processSteps = [
+const DEFAULT_PROCESSSTEPS = [
   {
     step: 'Step 01',
     title: 'Attract',
@@ -32,13 +34,25 @@ const processSteps = [
 ]
 
 /** Layout: Home-19 ProcessV10 — 5 step cards + CTA. Hover fill is hover-only. */
-const LeadToCustomer = () => {
+type LeadToCustomerProps = Partial<CmsProcessSection>
+
+const LeadToCustomer = ({
+  eyebrow = 'FROM LEAD TO CUSTOMER',
+  title = '',
+  accentTitle = '',
+  description,
+  steps,
+  image,
+}: LeadToCustomerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_PROCESSSTEPS, steps)
+
   return (
     <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>FROM LEAD TO CUSTOMER</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
@@ -54,7 +68,7 @@ const LeadToCustomer = () => {
         </div>
 
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
-          {processSteps.map(({ step, title, description }) => (
+          {mergedSteps.map(({ step, title, description }) => (
             <RevealWrapper key={step} className="relative w-full grow pt-8 sm:w-[48%] xl:grow">
               <div className="absolute left-1/2 top-4 z-10 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
                 <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-secondary">

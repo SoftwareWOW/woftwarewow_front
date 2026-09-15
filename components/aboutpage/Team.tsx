@@ -20,15 +20,36 @@ interface TeamMember {
   role: string
   image: string
   bio: string
-  socialLinks: {
+  socialLinks?: {
     twitter?: string
     facebook?: string
     youtube?: string
   }
 }
 
-const Team = () => {
-  const [selectedMember, setSelectedMember] = useState<TeamMember>(teamMembers[0])
+type TeamProps = {
+  members?: Array<{
+    id: string
+    name: string
+    role?: string
+    bio?: string
+    image?: string
+  }> | null
+}
+
+const Team = ({ members }: TeamProps = {}) => {
+  const displayMembers: TeamMember[] = members?.length ?
+      members.map((member) => ({
+        id: member.id,
+        name: member.name,
+        role: member.role ?? '',
+        image: member.image ?? '',
+        bio: member.bio ?? '',
+        socialLinks: {},
+      }))
+    : (teamMembers as TeamMember[])
+
+  const [selectedMember, setSelectedMember] = useState<TeamMember>(displayMembers[0])
   const [isTransitioning, setIsTransitioning] = useState(false)
 
   const handleMemberChange = (member: TeamMember) => {
@@ -65,7 +86,7 @@ const Team = () => {
               </div>
 
               <ul className="flex gap-5">
-                {selectedMember.socialLinks.twitter && (
+                {selectedMember.socialLinks?.twitter && (
                   <li>
                     <Link
                       href={selectedMember.socialLinks.twitter}
@@ -76,7 +97,7 @@ const Team = () => {
                     </Link>
                   </li>
                 )}
-                {selectedMember.socialLinks.facebook && (
+                {selectedMember.socialLinks?.facebook && (
                   <li>
                     <a
                       href={selectedMember.socialLinks.facebook}
@@ -93,7 +114,7 @@ const Team = () => {
                     </a>
                   </li>
                 )}
-                {selectedMember.socialLinks.youtube && (
+                {selectedMember.socialLinks?.youtube && (
                   <li>
                     <a
                       href={selectedMember.socialLinks.youtube}

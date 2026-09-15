@@ -5,6 +5,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -31,12 +33,18 @@ const packages = [
 ]
 
 /** Layout: Home-19 OurExpertiseV2 — split header + 3 cards with hover fill. */
-const RecommendedSolutions = () => {
+type RecommendedSolutionsProps = Partial<CmsTechnologiesSection>
+
+const RecommendedSolutions = ({ eyebrow = 'RECOMMENDED SOLUTIONS', title, accentTitle, description, items }: RecommendedSolutionsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems([], items)
+
+
   return (
     <section>
       <div className="container">
         <RevealWrapper className="reveal-me mb-5">
-          <SectionLabel>RECOMMENDED SOLUTIONS</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
 
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">

@@ -4,8 +4,10 @@ import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const foundations = [
+const DEFAULT_ITEMS = [
   {
     title: 'Positioning',
     description: 'Define what makes your brand distinctive and valuable.',
@@ -65,28 +67,37 @@ const ArrowButton = () => (
   </div>
 )
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Home-16 — ServicesV14: bordered cards with arrow hover. */
-const AuthorityFoundation = () => {
+const AuthorityFoundation = ({
+  eyebrow = 'Build Your Authority Foundation',
+  title = 'Be known for what you ',
+  accentTitle = 'do best.',
+  description = 'Build the foundations that help people recognize, trust, and remember your brand.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
+
   return (
     <section>
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>Build Your Authority Foundation</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            Be known for what you <InstrumentText>do best.</InstrumentText>
+            {title}
+            <InstrumentText>{accentTitle}</InstrumentText>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">
-            Build the foundations that help people recognize, trust, and remember your brand.
-          </p>
+          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
         </TextAppearAnimation>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {foundations.map((item) => (
+        {mergedItems.map((item) => (
           <RevealWrapper
             key={item.title}
             className="reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"

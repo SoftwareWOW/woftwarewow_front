@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
@@ -10,7 +12,7 @@ type AiService = {
   icon: ReactNode
 }
 
-const sliceOne: AiService[] = [
+const DEFAULT_SLICE_ONE: AiService[] = [
   {
     title: 'AI Chatbots',
     description: 'Assist customers and internal teams with intelligent, context-aware responses.',
@@ -52,7 +54,7 @@ const sliceOne: AiService[] = [
   },
 ]
 
-const sliceTwo: AiService[] = [
+const DEFAULT_SLICE_TWO: AiService[] = [
   {
     title: 'Custom AI Models',
     description: 'Build models tuned to your data, workflows and business rules.',
@@ -149,16 +151,33 @@ const FlipCard = ({ service }: { service: AiService }) => (
 )
 
 /** Layout: Home-13 ServicesV12 — centered header + hover-flip service cards (3+3 grid). */
-const AiCapabilities = () => {
+const AiCapabilities = ({
+  eyebrow = 'AI Capabilities',
+  title = 'Practical AI. Built for real work.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const allDefaults = [...DEFAULT_SLICE_ONE, ...DEFAULT_SLICE_TWO]
+  const merged = mergeFeatureItems(allDefaults, items)
+  const sliceOne = merged.slice(0, DEFAULT_SLICE_ONE.length).map((service, index) => ({
+    ...DEFAULT_SLICE_ONE[index],
+    title: service.title,
+    description: service.description ?? DEFAULT_SLICE_ONE[index].description,
+  }))
+  const sliceTwo = merged.slice(DEFAULT_SLICE_ONE.length).map((service, index) => ({
+    ...DEFAULT_SLICE_TWO[index],
+    title: service.title,
+    description: service.description ?? DEFAULT_SLICE_TWO[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>AI Capabilities</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.20]">Practical AI. Built for real work.</h2>
+            <h2 className="text-appear lg:leading-[1.20]">{title}</h2>
           </TextAppearAnimation>
         </div>
       </div>

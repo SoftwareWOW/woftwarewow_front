@@ -4,16 +4,29 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const IndustriesHero = () => {
+type PageHeroProps = {
+  badgeTitle?: string
+  title?: string
+  italicTitle?: string
+  description?: string
+  images?: { src: string; alt?: string }[]
+}
+
+const IndustriesHero = ({
+  badgeTitle = 'SEO Agency',
+  title = 'We are the brilliants in terms of digital marketing',
+  images,
+}: PageHeroProps) => {
+  const heroImage = images?.[0] ?? { src: '/images/home-5/hero-img.png', alt: 'Industries hero' }
   return (
     <section className="relative overflow-hidden bg-background px-3 pt-28 transition-colors duration-300 dark:bg-background sm:pt-32 md:px-4 lg:pt-[140px] xl:pt-[160px]">
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <RevealWrapper className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-14 xl:gap-16">
           <div className="w-full max-w-[640px] text-center lg:text-left">
-            <SectionLabel className="mx-auto mb-4 lg:mx-0">SEO Agency</SectionLabel>
+            <SectionLabel className="mx-auto mb-4 lg:mx-0">{badgeTitle}</SectionLabel>
 
             <h1 className="text-[clamp(2rem,5vw,4rem)] font-normal leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-              We are the brilliants in terms of digital marketing
+              {title}
             </h1>
 
             <div className="mt-8 flex flex-col items-center gap-4 lg:items-start">
@@ -91,8 +104,8 @@ const IndustriesHero = () => {
 
           <figure className="w-full max-w-[560px] shrink-0 overflow-hidden rounded-radius-md lg:max-w-[48%]">
             <Image
-              src="/images/home-5/hero-img.png"
-              alt="Industries hero"
+              src={heroImage.src}
+              alt={heroImage.alt ?? 'Industries hero'}
               width={720}
               height={720}
               priority

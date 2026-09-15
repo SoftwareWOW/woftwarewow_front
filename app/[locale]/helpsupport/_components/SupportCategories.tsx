@@ -3,6 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 type CapabilityCard = {
   title: string
@@ -87,16 +89,27 @@ const CategoryCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: 
 const cardWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
 
 /** Layout: technology-and-saas ExperiencePillars — 3+3 grid, static default face, no FlipCard. */
-const SupportCategories = () => {
+type SupportCategoriesProps = Partial<CmsTechnologiesSection>
+
+const SupportCategories = ({
+  eyebrow = 'SUPPORT CATEGORIES',
+  title = 'Find What You Need.',
+  accentTitle = '',
+  description,
+  items,
+}: SupportCategoriesProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
   return (
     <section id="support-categories">
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>SUPPORT CATEGORIES</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 lg:leading-[1.21]">Find What You Need.</h2>
+            <h2 className="text-appear mb-3 lg:leading-[1.21]">{header.title}</h2>
           </TextAppearAnimation>
         </div>
       </div>

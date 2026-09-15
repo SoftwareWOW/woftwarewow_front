@@ -6,8 +6,10 @@ import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const articles = [
+const DEFAULT_ARTICLES = [
   {
     id: 1,
     date: 'JUNE 7, 2026',
@@ -37,7 +39,19 @@ const articles = [
   },
 ]
 
-const StrategyPlaybooks = () => {
+type StrategyPlaybooksProps = Partial<CmsTechnologiesSection>
+
+const StrategyPlaybooks = ({
+  eyebrow = 'Playbooks &amp; Insights',
+  title = '',
+  accentTitle = '',
+  description,
+  items,
+}: StrategyPlaybooksProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_ARTICLES, items)
+
+
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
@@ -62,7 +76,7 @@ const StrategyPlaybooks = () => {
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <RevealWrapper>
-          <SectionLabel className="mb-5">Playbooks &amp; Insights</SectionLabel>
+          <SectionLabel className="mb-5">{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
           <div>
@@ -87,7 +101,7 @@ const StrategyPlaybooks = () => {
         </div>
 
         <div className="divide-y divide-[#e5e5e5] dark:divide-white/10">
-          {articles.map((article) => (
+          {mergedItems.map((article) => (
             <RevealWrapper
               key={article.id}
               className="group grid grid-cols-1 gap-6 border-b border-[#1515151A] py-8 transition-all duration-300 first:pt-0 last:pb-0 md:grid-cols-[auto_1fr] md:items-stretch md:gap-10 lg:gap-14"

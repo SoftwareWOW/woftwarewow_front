@@ -3,11 +3,21 @@ import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
-const HERO_IMAGE = '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217%201.png'
+const DEFAULT_HERO_IMAGE = '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217%201.png'
 
 /** Layout: Home-25 HeroV25 — image left + headline + dual CTAs (static image). */
-const OrganizationsHero = () => {
+const OrganizationsHero = ({
+  badgeTitle = 'Organizations & Nonprofits',
+  title = 'Turn Your Mission Into',
+  italicTitle = ' Momentum.',
+  description =
+    'We help organizations strengthen their presence, reach more people, simplify operations, and build the digital systems behind lasting impact.',
+  images,
+  backgroundImage,
+}: CmsHeroComponentProps) => {
+  const heroImage = images?.[0]?.src ?? backgroundImage?.src ?? DEFAULT_HERO_IMAGE
   return (
     <section
       className="video-section relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover object-center pt-[107px] dark:bg-none md:pt-[100px] xl:pt-[120px]"
@@ -18,7 +28,7 @@ const OrganizationsHero = () => {
           <RevealWrapper className="reveal-me relative w-full lg:w-1/2">
             <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-md sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px] xl:min-h-[620px] 2xl:min-h-[700px]">
               <img
-                src={HERO_IMAGE}
+                src={heroImage}
                 alt="Mission-driven organization working with WOW Superagency"
                 className="absolute inset-0 h-full w-full object-cover"
                 width={800}
@@ -29,22 +39,21 @@ const OrganizationsHero = () => {
 
           <div className="flex w-full flex-col justify-center lg:w-1/2 lg:py-4">
             <RevealWrapper className="reveal-me mb-4">
-              <SectionLabel>Organizations &amp; Nonprofits</SectionLabel>
+              <SectionLabel>{badgeTitle}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h1
                 id="organizations-hero-heading"
                 className="text-[clamp(2rem,4.5vw,4rem)] font-normal leading-[1.2] tracking-[-0.02em] md:leading-[1.15]"
               >
-                Turn Your Mission Into
-                <InstrumentText> Momentum.</InstrumentText>
+                {title}
+                {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
               </h1>
             </RevealWrapper>
 
             <RevealWrapper className="reveal-me mt-3 md:mt-4">
               <p className="max-w-xl text-base leading-relaxed text-[#808080] sm:max-w-2xl md:text-lg">
-                We help organizations strengthen their presence, reach more people, simplify operations, and build the
-                digital systems behind lasting impact.
+                {description}
               </p>
             </RevealWrapper>
 

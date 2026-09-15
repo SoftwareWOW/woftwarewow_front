@@ -5,8 +5,10 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import Link from 'next/link'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const teams = [
+const DEFAULT_ITEMS = [
   { name: 'Websites', description: 'Website strategy & development' },
   { name: 'Design', description: 'UX/UI & creative' },
   { name: 'Marketing', description: 'SEO & acquisition' },
@@ -52,29 +54,45 @@ const ArrowButton = () => (
   </div>
 )
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Home-16 — ServicesV14: 6 bordered cards with arrow hover + WowText. */
-const SpecialistExpertise = () => {
+const SpecialistExpertise = ({
+  eyebrow = 'One Website. Specialist Expertise.',
+  title = 'One website. ',
+  accentTitle = 'An entire growth team behind it.',
+  description =
+    'Bring strategy, design, development, marketing, hosting, and optimization together through one connected team.',
+  items,
+}: Props = {}) => {
+  const mergedItems = mergeFeatureItems(
+    DEFAULT_ITEMS.map(({ name, description: desc }) => ({ title: name, description: desc })),
+    items,
+  ).map((item, index) => ({
+    ...DEFAULT_ITEMS[index],
+    name: item.title,
+    description: item.description ?? DEFAULT_ITEMS[index].description,
+  }))
+
   return (
     <section>
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
-          <SectionLabel>One Website. Specialist Expertise.</SectionLabel>
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            One website. <InstrumentText>An entire growth team behind it.</InstrumentText>
+            {title}
+            <InstrumentText>{accentTitle}</InstrumentText>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">
-            Bring strategy, design, development, marketing, hosting, and optimization together through one connected
-            team.
-          </p>
+          <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
         </TextAppearAnimation>
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {teams.map((team) => (
+        {mergedItems.map((team) => (
           <RevealWrapper
             key={team.name}
             className="reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"

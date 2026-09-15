@@ -2,6 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 type PathCard = {
   id: number
@@ -51,16 +53,27 @@ const cards: PathCard[] = [
 ]
 
 /** Layout: digital-transformation TheGap — two comparison cards. No default featured glow. */
-const PartnerPaths = () => {
+type PartnerPathsProps = Partial<CmsTechnologiesSection>
+
+const PartnerPaths = ({
+  eyebrow = 'CHOOSE YOUR PATH',
+  title = 'Refer Occasionally or Partner With Us Ongoing.',
+  accentTitle = '',
+  description,
+  items,
+}: PartnerPathsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
   return (
     <section className="overflow-hidden">
       <div className="container">
         <div className="mb-7 text-center lg:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>CHOOSE YOUR PATH</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 text-center">Refer Occasionally or Partner With Us Ongoing.</h2>
+            <h2 className="text-appear mb-3 text-center">{header.title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mx-auto max-w-3xl text-[#808080]">

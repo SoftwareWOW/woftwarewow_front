@@ -3,6 +3,13 @@ const PAGE_SLUG = 'ai-automation' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  title: 'Less manual work. More time for what ',
+  italicTitle: 'matters.',
+  description:
+    'We identify repetitive work across your business and build AI-powered automations that save time, connect your tools and keep everyday processes moving.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
@@ -22,7 +29,8 @@ import AutomationTools from './_components/AutomationTools'
 import FromIdeaToAutomation from './_components/FromIdeaToAutomation'
 // 2. Start with the repetitive — SolutionToChallenges
 import StartWithTheRepetitive from './_components/StartWithTheRepetitive'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -30,27 +38,8 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'AI Automation Package | WOW Superagency',
-    description:
-      'Identify repetitive work and build AI-powered automations that save time, connect your tools and keep everyday processes moving.',
-    keywords: [
-      'AI automation package',
-      'workflow automation',
-      'process automation',
-      'system integrations',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'AI Automation Package | WOW Superagency',
-      description: 'Less manual work. More time for what matters — practical AI automation for growing businesses.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/packages/ai-automation`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'AI Automation Package' })
 }
 
 export default async function AiAutomationPackagePage({ params }: Props) {
@@ -58,24 +47,27 @@ export default async function AiAutomationPackagePage({ params }: Props) {
   setRequestLocale(locale as Locale)
 
   const dictionary = await getDictionary(locale as Locale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — Home-18 HeroV18 */}
-        <AiAutomationHero />
+        <AiAutomationHero {...hero} images={hero.images} />
         {/* 2. Start with the repetitive — SolutionToChallenges */}
-        <StartWithTheRepetitive />
+        <StartWithTheRepetitive {...(sections.startWithTheRepetitive ?? {})} />
         {/* 3. Package card — HostingThatFits / image 3 */}
-        <AiPackageCard />
+        <AiPackageCard {...(sections.aiPackageCard ?? {})} />
         {/* 4. Integrations — OurTools */}
-        <AutomationTools />
+        <AutomationTools {...(sections.automationTools ?? {})} />
         {/* 5. Superagency client — shared */}
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
         {/* 6. Path — ModernizationPath */}
-        <FromIdeaToAutomation />
+        <FromIdeaToAutomation {...(sections.fromIdeaToAutomation ?? {})} />
         {/* 7. FAQ — Home Faq */}
-        <AutomationFaq />
+        <AutomationFaq {...(sections.automationFaq ?? {})} />
         {/* 8. General CTA */}
         <WowGrowthCta
           accentText="Too much manual work?"

@@ -2,9 +2,12 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const teams: {
   id: string
@@ -81,18 +84,37 @@ const teams: {
 ]
 
 /** Layout: Home-19 ElevateBrandV2 — numbered hover specialist rows + header CTA. */
-const ConnectedExpertise = () => {
+type ConnectedExpertiseProps = Partial<CmsTechnologiesSection>
+
+const ConnectedExpertise = ({
+  eyebrow = 'THE WOW ECOSYSTEM',
+  title = 'Everything Behind a Better Guest',
+  accentTitle = '',
+  description,
+  items,
+}: ConnectedExpertiseProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = teams.map((item, index) => {
+    const cms = items?.[index]
+    if (!cms) return item
+    return {
+      ...item,
+      heading: cms.title || item.heading,
+      description: cms.description ?? item.description,
+    }
+  })
+
   return (
     <section>
       <div className="container">
         <RevealWrapper className="reveal-me mb-5">
-          <SectionLabel>THE WOW ECOSYSTEM</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
 
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <TextAppearAnimation02>
-              <h2 className="text-appear-2">Everything Behind a Better Guest Experience.</h2>
+              <h2 className="text-appear-2">{header.title}{header.accentTitle ? <> <InstrumentText>{header.accentTitle}</InstrumentText></> : null}</h2>
             </TextAppearAnimation02>
           </div>
           <div className="w-full md:w-80 lg:w-96">
@@ -113,7 +135,7 @@ const ConnectedExpertise = () => {
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-          {teams.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.id}
               className="ease-[cubic-bezier(0.4, 0, 0.2, 1)] group flex transform items-center justify-between gap-5 pb-5 pt-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.010] hover:backdrop-blur-sm md:pb-10 md:pt-10"

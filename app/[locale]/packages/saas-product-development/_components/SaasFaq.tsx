@@ -5,8 +5,9 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
+import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
 
-const faqData = [
+const DEFAULT_ITEMS = [
   {
     id: 1,
     question: 'How much does the package cost?',
@@ -47,14 +48,24 @@ const faqData = [
 
 const INITIAL_VISIBLE = 3
 
+type Props = { items?: CmsFaqItem[] }
+
 /** Layout: AutomationFaq — 3-column accordion, closed by default + load more. */
-const SaasFaq = () => {
+const SaasFaq = ({ items }: Props = {}) => {
+  const faqData = DEFAULT_ITEMS.map((faq, index) => {
+    const cms = items?.[index]
+    return {
+      ...faq,
+      question: cms?.question || faq.question,
+      answer: cms?.answer ?? faq.answer,
+    }
+  })
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
   const visibleFaqs = useMemo(
     () => (showAll || faqData.length <= INITIAL_VISIBLE ? faqData : faqData.slice(0, INITIAL_VISIBLE)),
-    [showAll],
+    [showAll, faqData],
   )
 
   const faqColumns = useMemo(() => {

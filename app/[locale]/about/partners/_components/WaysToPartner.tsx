@@ -3,8 +3,10 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const ways = [
+const DEFAULT_WAYS = [
   {
     id: 1,
     title: 'Technology',
@@ -28,14 +30,26 @@ const ways = [
 ]
 
 /** Layout: Home-15 ElevateBrand — large numbered hover rows. */
-const WaysToPartner = () => {
+type WaysToPartnerProps = Partial<CmsTechnologiesSection>
+
+const WaysToPartner = ({
+  eyebrow = 'Partner Paths',
+  title = '',
+  accentTitle = '',
+  description,
+  items,
+}: WaysToPartnerProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_WAYS, items)
+
+
   return (
     <section>
       <div className="container">
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-16 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="mb-3">
-              <SectionLabel>Partner Paths</SectionLabel>
+              <SectionLabel>{header.eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h2>
@@ -63,7 +77,7 @@ const WaysToPartner = () => {
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:dark:border-dark">
-          {ways.map((item) => (
+          {mergedItems.map((item) => (
             <div
               key={item.id}
               className="group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:scale-[1.01] hover:backdrop-blur-sm md:pb-10 md:pt-10"

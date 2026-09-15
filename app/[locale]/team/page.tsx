@@ -5,15 +5,24 @@ import type { Metadata } from 'next'
 import TeamHero from './_components/TeamHero'
 
 import type { Locale } from '@/i18n/config'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import {
   buildSuperagencyPageMetadata,
-  loadSuperagencyPage,
+  loadSuperagencyPage, resolvePageSections,
 } from '@/lib/strapi/superagency-page-loader'
 import { setRequestLocale } from 'next-intl/server'
 
 const PAGE_SLUG = 'team' as const
 
 export const revalidate = 60
+
+const DEFAULT_HERO = {
+  badgeTitle: 'Team',
+  title: 'Our Creative ',
+  italicTitle: 'Team',
+  description:
+    "These alternatives can add a different tone or emphasis depending on how you want to introduce your creative team. Let me know if you'd like any specific adjustments!",
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -25,54 +34,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildSuperagencyPageMetadata(cms, { title: 'Team' })
 }
 
-
-
-export const metadata: Metadata = {
-  title: 'Our Team',
-  description:
-    'Meet the creative team behind WOW Superagency — strategists, designers, developers, and marketers helping businesses grow through technology, design, marketing, and AI.',
-  keywords: [
-    'WOW Superagency team',
-    'creative agency team',
-    'digital marketing experts',
-    'design agency Palermo',
-    'meet our team',
-  ],
-  openGraph: {
-    title: 'Our Team | WOW Superagency',
-    description:
-      'Meet the strategists, designers, developers, and marketers behind WOW Superagency.',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Our Team | WOW Superagency',
-    description:
-      'Meet the creative team behind WOW Superagency helping businesses grow through technology, design, marketing, and AI.',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-}
-
 const TeamPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
-  await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <TeamHero
-          title="Our Creative "
-          italicTitle="Team"
-          badgeTitle="Team"
-          description="These alternatives can add a different tone or emphasis depending on how you want to introduce your creative team. Let me know if you'd like any specific adjustments!"
-          scale
-        />
-        <Team />
+        <TeamHero {...hero} scale />
+        <Team {...(sections.teamMembers ?? {})} />
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"

@@ -8,6 +8,7 @@ import WowText from '@/components/wow/shared/WowText'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 const teams: { id: string; title: ReactNode; description: string; image: string; alt: string }[] = [
   {
@@ -63,8 +64,24 @@ const teams: { id: string; title: ReactNode; description: string; image: string;
   },
 ]
 
+type Props = Partial<CmsTechnologiesSection>
+
 /** Layout: Home-11 ServicesV10 — horizontal-scroll image cards. */
-const ConnectedExpertise = () => {
+const ConnectedExpertise = ({
+  eyebrow = 'One Package. Connected Expertise.',
+  title = 'One infrastructure. ',
+  accentTitle = 'Connected expertise.',
+  description = 'Bring hosting, software and intelligent technology together through one connected team.',
+  items,
+}: Props = {}) => {
+  const mergedItems = teams.map((team, index) => {
+    const cms = items?.[index]
+    return {
+      ...team,
+      description: cms?.description ?? team.description,
+      image: cms?.image?.src ?? team.image,
+    }
+  })
   const { contentRef, triggerRef } = useHorizontalScroll()
 
   return (
@@ -72,17 +89,16 @@ const ConnectedExpertise = () => {
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>One Package. Connected Expertise.</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3">
-              One infrastructure. <InstrumentText>Connected expertise.</InstrumentText>
+              {title}
+              <InstrumentText>{accentTitle}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear text-[#808080]">
-              Bring hosting, software and intelligent technology together through one connected team.
-            </p>
+            <p className="text-appear text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
       </div>
@@ -91,7 +107,7 @@ const ConnectedExpertise = () => {
           ref={contentRef}
           className="video-section service-wrapper flex w-fit flex-col gap-6 overflow-x-hidden pl-[5%] pr-[30px] max-md:gap-y-10 md:flex-row md:flex-nowrap"
         >
-          {teams.map((item) => (
+          {mergedItems.map((item) => (
             <div key={item.id} className="group w-[370px]">
               <figure className="overflow-hidden rounded-radius-sm">
                 <Link href="/contact" className="block">

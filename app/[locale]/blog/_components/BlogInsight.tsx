@@ -12,6 +12,12 @@ import { FC, useMemo, useState } from 'react'
 
 interface BlogsProps {
   Blogs: BlogType[]
+  blogPosts?: Array<{
+    title?: string
+    excerpt?: string | null
+    href?: string | null
+    date?: string | null
+  }> | null
 }
 
 const CATEGORIES = ['ALL', 'NEWS', 'CASE STUDY', 'TECHNOLOGY', 'EVENT'] as const
@@ -57,18 +63,33 @@ function formatDate(date?: string) {
 
 type CategorizedBlog = BlogType & { category: Exclude<Category, 'ALL'> }
 
-const BlogInsight: FC<BlogsProps> = ({ Blogs }) => {
+const BlogInsight: FC<BlogsProps> = ({ Blogs, blogPosts }) => {
+  const sourceBlogs = useMemo<BlogType[]>(
+    () =>
+      blogPosts?.length
+        ? blogPosts.map((post, index) => ({
+            slug: post.href?.split('/').pop() ?? String(index),
+            title: post.title ?? '',
+            description: post.excerpt ?? '',
+            date: post.date ?? '',
+            content: '',
+            tags: [],
+          }))
+        : Blogs,
+    [Blogs, blogPosts],
+  )
+
   const [activeCategory, setActiveCategory] = useState<Category>('ALL')
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
   const [isCollapsing, setIsCollapsing] = useState(false)
 
   const categorizedBlogs = useMemo<CategorizedBlog[]>(
     () =>
-      Blogs.map((blog) => ({
+      sourceBlogs.map((blog) => ({
         ...blog,
         category: resolveCategory(blog),
       })),
-    [Blogs],
+    [sourceBlogs],
   )
 
   const filteredBlogs = useMemo(() => {

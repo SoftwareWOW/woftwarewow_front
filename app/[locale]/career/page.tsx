@@ -9,15 +9,24 @@ import Communities from './_components/Comunities'
 import Jobs from './_components/Jobs'
 
 import type { Locale } from '@/i18n/config'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import {
   buildSuperagencyPageMetadata,
-  loadSuperagencyPage,
+  loadSuperagencyPage, resolvePageSections,
 } from '@/lib/strapi/superagency-page-loader'
 import { setRequestLocale } from 'next-intl/server'
 
 const PAGE_SLUG = 'career' as const
 
 export const revalidate = 60
+
+const DEFAULT_HERO = {
+  badgeTitle: 'Career',
+  title: 'Build the Future of Small Business',
+  italicTitle: 'Growth',
+  description:
+    'Join a team of creators, strategists, developers, marketers, and innovators building technology and digital solutions that help businesses grow.',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -29,54 +38,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildSuperagencyPageMetadata(cms, { title: 'Career' })
 }
 
-
-
-export const metadata: Metadata = {
-  title: 'Careers',
-  description:
-    'Join WOW Superagency. Explore open roles, benefits, and a collaborative culture where designers, developers, and marketers build digital products that grow businesses.',
-  keywords: [
-    'WOW Superagency careers',
-    'agency jobs',
-    'design jobs',
-    'developer jobs',
-    'marketing careers',
-    'join our team',
-    'creative agency careers',
-  ],
-  openGraph: {
-    title: 'Careers | WOW Superagency',
-    description:
-      'Explore open positions and grow your career at WOW Superagency — a collaborative team of designers, developers, and marketers.',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Careers | WOW Superagency',
-    description:
-      'Explore open roles, benefits, and culture at WOW Superagency. Start building your future with us.',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-}
-
 const CareerPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
-  await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <CareerHeroPage />
+        <CareerHeroPage {...hero} />
         <CompanyGallery />
-        <BenefitsCareer />
-        <Jobs />
-        <Communities />
-        <CareerRfq />
+        <BenefitsCareer {...(sections.benefitsCareer ?? {})} />
+        <Jobs {...(sections.jobs ?? {})} />
+        <Communities {...(sections.communities ?? {})} />
+        <CareerRfq {...(sections.careerRfq ?? {})} />
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"

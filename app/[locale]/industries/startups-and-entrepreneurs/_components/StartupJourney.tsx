@@ -4,8 +4,10 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Idea & Strategy',
@@ -29,14 +31,26 @@ const steps = [
 ]
 
 /** Layout: Home-15 BrandingProcess — split heading + 2×2 numbered grid. All four cells the same style. */
-const StartupJourney = () => {
+type StartupJourneyProps = Partial<CmsProcessSection>
+
+const StartupJourney = ({
+  eyebrow = 'The Startup Journey',
+  title = 'One partner.',
+  accentTitle = 'Every stage.',
+  description,
+  steps,
+}: StartupJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
+
   return (
     <section className="relative mx-auto max-w-[1600px] px-5">
       <div className="flex flex-col items-center justify-between lg:flex-row">
         <div>
           <HeroGradientAnimation />
           <RevealWrapper className="reveal-me mb-3">
-            <SectionLabel>The Startup Journey</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation02>
             <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
@@ -60,7 +74,7 @@ const StartupJourney = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-y-[26px]">
-          {steps.map((step, index) => (
+          {mergedSteps.map((step, index) => (
             <RevealWrapper
               key={step.title}
               className={`px-[30px] py-[50px] ${index % 2 === 0 ? 'border-r dark:border-dark' : ''}`}

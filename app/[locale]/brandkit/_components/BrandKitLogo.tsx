@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { divisionBrandLogos, type DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
@@ -103,20 +105,27 @@ const logoCards: LogoCard[] = [
 const downloadButtonClass =
   'inline-flex items-center justify-center rounded-radius-sm border border-black/15 px-4 py-2.5 text-xs font-medium uppercase tracking-[0.06em] text-secondary transition-colors hover:border-primary hover:text-primary dark:border-white/20 dark:text-backgroundBody dark:hover:border-primary dark:hover:text-primary'
 
-const BrandKitLogos = () => (
+type BrandKitLogosProps = Partial<CmsTechnologiesSection>
+
+const BrandKitLogos = ({
+  eyebrow = 'Logos',
+  title = 'Use the Right WOW Mark.',
+  description = 'Build knowledge on your own time or join us for practical, interactive experiences.',
+}: BrandKitLogosProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, description }, { eyebrow, title, description })
+
+  return (
   <section id="logos" className="scroll-mt-28">
     <div className="container">
       <div className="mb-10 text-center md:mb-14">
         <RevealWrapper className="reveal-me mb-5 flex justify-center">
-          <SectionLabel>Logos</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mx-auto max-w-[770px]">Use the Right WOW Mark.</h2>
+          <h2 className="text-appear mx-auto max-w-[770px]">{header.title}</h2>
         </TextAppearAnimation>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-            Build knowledge on your own time or join us for practical, interactive experiences.
-          </p>
+          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
         </TextAppearAnimation>
       </div>
 
@@ -155,6 +164,7 @@ const BrandKitLogos = () => (
       </div>
     </div>
   </section>
-)
+  )
+}
 
 export default BrandKitLogos

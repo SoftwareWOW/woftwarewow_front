@@ -11,6 +11,7 @@ export type CmsSectionType =
   | 'page-rfq'
   | 'page-technologies'
   | 'page-projects'
+  | 'page-portfolio-explorer'
   | 'page-images'
   | 'page-partners'
   | 'page-process'
@@ -20,6 +21,13 @@ export type CmsSectionType =
   | 'page-team-members'
   | 'page-office-locations'
   | 'page-client-logos'
+  | 'page-stats-banner'
+  | 'page-package-list'
+  | 'hero-about'
+  | 'image-gallery'
+  | 'page-rfq-accordion'
+  | 'package-offer'
+  | 'page-events'
   | null;
 
 export type PageSectionManifest = {
@@ -79,6 +87,7 @@ const PACKAGE_SLUGS = [
 ] as const;
 
 export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
+  // Company / About (6)
   {
     identifier: 'about',
     family: 'company-about',
@@ -119,7 +128,6 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/about/partners',
     sections: [
       { sectionKey: 'partners-hero', cms: 'hero' },
-      { sectionKey: 'partner-network', cms: 'page-partners' },
       { sectionKey: 'ways-to-partner', cms: 'page-technologies' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
@@ -145,6 +153,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
   },
+  // Explore (6)
   {
     identifier: 'portfolio',
     family: 'explore',
@@ -164,7 +173,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/portfolio/recent',
     sections: [
       { sectionKey: 'recent-work-hero', cms: 'hero' },
-      { sectionKey: 'recent-work-explorer', cms: 'page-projects' },
+      { sectionKey: 'recent-work-explorer', cms: 'page-portfolio-explorer' },
       { sectionKey: 'recent-work-cta', cms: null },
     ],
   },
@@ -185,7 +194,6 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/partners',
     sections: [
       { sectionKey: 'partners-hero', cms: 'hero' },
-      { sectionKey: 'partner-network', cms: 'page-partners' },
       { sectionKey: 'how-we-partner', cms: 'page-process' },
       { sectionKey: 'why-partner-with-wow', cms: 'page-technologies' },
       { sectionKey: 'wow-growth-cta', cms: null },
@@ -210,52 +218,259 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       { sectionKey: 'industry-capabilities', cms: 'page-technologies' },
     ],
   },
-  ...INDUSTRY_SLUGS.map(
-    (slug): PageSectionManifest => ({
+  // Explore / Industries (9) — per-page sections; Phase 1 overrides for 3 slugs
+  ...(
+    [
+      'professional-services',
+      'startups-and-entrepreneurs',
+      'retail-and-ecommerce',
+      'healthcare-and-wellness',
+      'hospitality-and-tourism',
+      'finance-and-real-estate',
+      'organizations-and-nonprofits',
+      'education-and-training',
+      'technology-and-saas',
+    ] as const
+  ).map((slug): PageSectionManifest => {
+    const defaultSections: PageSectionManifest['sections'] = [
+      { sectionKey: `${slug}-hero`, cms: 'hero' },
+      { sectionKey: 'capabilities', cms: 'page-technologies' },
+      { sectionKey: 'solutions', cms: 'page-technologies' },
+      { sectionKey: 'journey', cms: 'page-process' },
+      { sectionKey: 'gallery', cms: 'page-images' },
+      { sectionKey: 'wow-growth-cta', cms: null },
+    ];
+
+    const phase1Sections: Record<string, PageSectionManifest['sections']> = {
+      'startups-and-entrepreneurs': [
+        { sectionKey: 'startups-and-entrepreneurs-hero', cms: 'hero' },
+        { sectionKey: 'startup-packages', cms: 'page-package-list' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'professional-services': [
+        { sectionKey: 'professional-services-hero', cms: 'hero' },
+        { sectionKey: 'what-matters-most', cms: 'page-technologies' },
+        { sectionKey: 'client-journey', cms: 'page-process' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'retail-and-ecommerce': [
+        { sectionKey: 'retail-and-ecommerce-hero', cms: 'hero' },
+        { sectionKey: 'hero-about', cms: 'hero-about' },
+        { sectionKey: 'hero-marquee', cms: 'page-images' },
+        { sectionKey: 'client-journey', cms: 'page-process' },
+        { sectionKey: 'social-gallery', cms: 'image-gallery' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+    };
+
+    return {
       identifier: slug,
       family: 'explore-industry',
       frontendRoute: `/industries/${slug}`,
-      sections: [
-        { sectionKey: `${slug}-hero`, cms: 'hero' },
-        { sectionKey: 'capabilities', cms: 'page-technologies' },
-        { sectionKey: 'solutions', cms: 'page-technologies' },
-        { sectionKey: 'journey', cms: 'page-process' },
-        { sectionKey: 'gallery', cms: 'page-images' },
+      sections: phase1Sections[slug] ?? defaultSections,
+    };
+  }),
+  // For You / Solutions (9) — frontend-accurate per-page sections
+  ...(
+    [
+      'build-and-launch',
+      'marketing-and-growth',
+      'software-and-technology',
+      'social-and-community',
+      'ai-and-automation',
+      'sales-and-revenue',
+      'branding-and-creative',
+      'hosting-and-infrastructure',
+      'learning-and-events',
+    ] as const
+  ).map((slug): PageSectionManifest => {
+    const solutionSections: Record<string, PageSectionManifest['sections']> = {
+      'build-and-launch': [
+        { sectionKey: 'build-and-launch-hero', cms: 'hero' },
+        { sectionKey: 'our-services', cms: 'page-technologies' },
+        { sectionKey: 'build-and-launch-rfq', cms: 'page-rfq-accordion' },
+        { sectionKey: 'launch-path', cms: 'page-process' },
+        { sectionKey: 'startup-package', cms: 'package-offer' },
         { sectionKey: 'wow-growth-cta', cms: null },
       ],
-    }),
-  ),
-  ...FOR_YOU_SLUGS.map(
-    (slug): PageSectionManifest => ({
+      'marketing-and-growth': [
+        { sectionKey: 'marketing-and-growth-hero', cms: 'hero' },
+        { sectionKey: 'growth-challenges', cms: 'page-technologies' },
+        { sectionKey: 'everything-to-grow', cms: 'page-technologies' },
+        { sectionKey: 'connected-growth-system', cms: 'page-process' },
+        { sectionKey: 'built-around-goals', cms: 'page-technologies' },
+        { sectionKey: 'growth-in-action', cms: 'page-projects' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'software-and-technology': [
+        { sectionKey: 'software-and-technology-hero', cms: 'hero' },
+        { sectionKey: 'what-we-build', cms: 'page-technologies' },
+        { sectionKey: 'built-for-the-fit', cms: 'hero-about' },
+        { sectionKey: 'tech-launch-path', cms: 'page-process' },
+        { sectionKey: 'our-approach', cms: 'page-technologies' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'branding-and-creative': [
+        { sectionKey: 'branding-and-creative-hero', cms: 'hero' },
+        { sectionKey: 'our-capabilities', cms: 'page-technologies' },
+        { sectionKey: 'brand-capabilities', cms: 'page-technologies' },
+        { sectionKey: 'built-to-be-used', cms: 'page-technologies' },
+        { sectionKey: 'brand-visibility', cms: 'page-process' },
+        { sectionKey: 'our-tools', cms: 'page-technologies' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'ai-and-automation': [
+        { sectionKey: 'ai-and-automation-hero', cms: 'hero' },
+        { sectionKey: 'start-with-the-work', cms: 'page-rfq-accordion' },
+        { sectionKey: 'ai-gallery', cms: 'page-images' },
+        { sectionKey: 'ai-capabilities', cms: 'page-technologies' },
+        { sectionKey: 'automation-in-action', cms: 'page-technologies' },
+        { sectionKey: 'ai-with-purpose', cms: 'page-process' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'sales-and-revenue': [
+        { sectionKey: 'sales-and-revenue-hero', cms: 'hero' },
+        { sectionKey: 'sales-journey-gap', cms: 'hero-about' },
+        { sectionKey: 'revenue-capabilities', cms: 'page-technologies' },
+        { sectionKey: 'lead-to-customer', cms: 'page-process' },
+        { sectionKey: 'sales-visibility', cms: 'page-process' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'social-and-community': [
+        { sectionKey: 'social-and-community-hero', cms: 'hero' },
+        { sectionKey: 'social-process', cms: 'page-process' },
+        { sectionKey: 'social-capabilities', cms: 'page-technologies' },
+        { sectionKey: 'platform-presence', cms: 'page-technologies' },
+        { sectionKey: 'build-community', cms: 'page-process' },
+        { sectionKey: 'social-gallery', cms: 'image-gallery' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'hosting-and-infrastructure': [
+        { sectionKey: 'hosting-and-infrastructure-hero', cms: 'hero' },
+        { sectionKey: 'digital-foundations', cms: 'page-technologies' },
+        { sectionKey: 'built-for-business', cms: 'hero-about' },
+        { sectionKey: 'infrastructure-solutions', cms: 'page-technologies' },
+        { sectionKey: 'hosting-that-fits', cms: 'package-offer' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'learning-and-events': [
+        { sectionKey: 'learning-and-events-hero', cms: 'hero' },
+        { sectionKey: 'learn-your-way', cms: 'package-offer' },
+        { sectionKey: 'learning-topics', cms: 'page-technologies' },
+        { sectionKey: 'upcoming-events', cms: 'page-events' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+    };
+
+    return {
       identifier: slug,
       family: 'for-you-solution',
       frontendRoute: `/for-you/${slug}`,
-      sections: [
-        { sectionKey: `${slug}-hero`, cms: 'hero' },
-        { sectionKey: 'capabilities', cms: 'page-technologies' },
-        { sectionKey: 'process', cms: 'page-process' },
-        { sectionKey: 'projects', cms: 'page-projects' },
-        { sectionKey: 'gallery', cms: 'page-images' },
-        { sectionKey: 'rfq', cms: 'page-rfq' },
+      sections: solutionSections[slug]!,
+    };
+  }),
+  // For You / Packages (9) — frontend-accurate per-page sections
+  ...(
+    [
+      'startup-launch',
+      'business-growth',
+      'digital-transformation',
+      'ai-automation',
+      'brand-authority',
+      'saas-product-development',
+      'website-growth-engine',
+      'sales-acceleration',
+      'enterprise-infrastructure',
+    ] as const
+  ).map((slug): PageSectionManifest => {
+    const packageSections: Record<string, PageSectionManifest['sections']> = {
+      'startup-launch': [
+        { sectionKey: 'startup-launch-hero', cms: 'hero' },
+        { sectionKey: 'launch-foundations', cms: 'page-technologies' },
+        { sectionKey: 'whats-included', cms: 'page-technologies' },
+        { sectionKey: 'launch-journey', cms: 'page-process' },
         { sectionKey: 'wow-growth-cta', cms: null },
       ],
-    }),
-  ),
-  ...PACKAGE_SLUGS.map(
-    (slug): PageSectionManifest => ({
+      'business-growth': [
+        { sectionKey: 'business-growth-hero', cms: 'hero' },
+        { sectionKey: 'built-for-growth', cms: 'hero-about' },
+        { sectionKey: 'growth-pieces', cms: 'page-technologies' },
+        { sectionKey: 'connected-growth', cms: 'page-process' },
+        { sectionKey: 'how-it-works', cms: 'page-process' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'digital-transformation': [
+        { sectionKey: 'digital-transformation-hero', cms: 'hero' },
+        { sectionKey: 'the-gap', cms: 'hero-about' },
+        { sectionKey: 'transformation-plan', cms: 'page-technologies' },
+        { sectionKey: 'before-after-gap', cms: 'page-technologies' },
+        { sectionKey: 'transformation-priorities', cms: 'page-technologies' },
+        { sectionKey: 'modernization-path', cms: 'page-process' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'brand-authority': [
+        { sectionKey: 'brand-authority-hero', cms: 'hero' },
+        { sectionKey: 'authority-foundation', cms: 'page-technologies' },
+        { sectionKey: 'whats-included', cms: 'page-technologies' },
+        { sectionKey: 'authority-journey', cms: 'page-process' },
+        { sectionKey: 'specialist-expertise', cms: 'page-technologies' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'website-growth-engine': [
+        { sectionKey: 'website-growth-engine-hero', cms: 'hero' },
+        { sectionKey: 'built-to-perform', cms: 'page-technologies' },
+        { sectionKey: 'whats-included', cms: 'page-technologies' },
+        { sectionKey: 'website-journey', cms: 'page-process' },
+        { sectionKey: 'specialist-expertise', cms: 'page-technologies' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'sales-acceleration': [
+        { sectionKey: 'sales-acceleration-hero', cms: 'hero' },
+        { sectionKey: 'sales-gaps', cms: 'page-technologies' },
+        { sectionKey: 'whats-included', cms: 'page-technologies' },
+        { sectionKey: 'acceleration-journey', cms: 'page-process' },
+        { sectionKey: 'connected-expertise', cms: 'page-technologies' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'enterprise-infrastructure': [
+        { sectionKey: 'enterprise-infrastructure-hero', cms: 'hero' },
+        { sectionKey: 'business-critical-operations', cms: 'page-technologies' },
+        { sectionKey: 'whats-included', cms: 'page-technologies' },
+        { sectionKey: 'infrastructure-journey', cms: 'page-process' },
+        { sectionKey: 'connected-expertise', cms: 'page-technologies' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'ai-automation': [
+        { sectionKey: 'ai-automation-hero', cms: 'hero' },
+        { sectionKey: 'start-with-the-repetitive', cms: 'page-rfq-accordion' },
+        { sectionKey: 'ai-package-card', cms: 'package-offer' },
+        { sectionKey: 'automation-tools', cms: 'page-technologies' },
+        { sectionKey: 'from-idea-to-automation', cms: 'page-process' },
+        { sectionKey: 'automation-faq', cms: 'page-faq' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+      'saas-product-development': [
+        { sectionKey: 'saas-product-development-hero', cms: 'hero' },
+        { sectionKey: 'from-idea-to-product', cms: 'page-rfq-accordion' },
+        { sectionKey: 'saas-package-card', cms: 'package-offer' },
+        { sectionKey: 'saas-transform-plan', cms: 'page-technologies' },
+        { sectionKey: 'idea-to-product-path', cms: 'page-process' },
+        { sectionKey: 'product-journey', cms: 'page-process' },
+        { sectionKey: 'focus-first-release', cms: 'page-technologies' },
+        { sectionKey: 'saas-integrations', cms: 'page-technologies' },
+        { sectionKey: 'saas-faq', cms: 'page-faq' },
+        { sectionKey: 'wow-growth-cta', cms: null },
+      ],
+    };
+
+    return {
       identifier: slug,
       family: 'for-you-package',
       frontendRoute: `/packages/${slug}`,
-      sections: [
-        { sectionKey: `${slug}-hero`, cms: 'hero' },
-        { sectionKey: 'whats-included', cms: 'page-technologies' },
-        { sectionKey: 'journey', cms: 'page-process' },
-        { sectionKey: 'faq', cms: 'page-faq' },
-        { sectionKey: 'projects', cms: 'page-projects' },
-        { sectionKey: 'wow-growth-cta', cms: null },
-      ],
-    }),
-  ),
+      sections: packageSections[slug]!,
+    };
+  }),
+  // More (10)
   {
     identifier: 'meet',
     family: 'more',
@@ -301,6 +516,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       { sectionKey: 'whitelabel-hero', cms: 'hero' },
       { sectionKey: 'capabilities', cms: 'page-technologies' },
       { sectionKey: 'how-we-partner', cms: 'page-process' },
+      { sectionKey: 'partner-benefits', cms: 'page-technologies' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
   },
@@ -310,8 +526,9 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/affiliate',
     sections: [
       { sectionKey: 'affiliate-hero', cms: 'hero' },
-      { sectionKey: 'affiliate-benefits', cms: 'page-technologies' },
+      { sectionKey: 'partner-paths', cms: 'page-technologies' },
       { sectionKey: 'affiliate-journey', cms: 'page-process' },
+      { sectionKey: 'affiliate-benefits', cms: 'page-technologies' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
   },
@@ -331,7 +548,10 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/brandkit',
     sections: [
       { sectionKey: 'brandkit-hero', cms: 'hero' },
-      { sectionKey: 'brand-assets', cms: 'page-images' },
+      { sectionKey: 'brand-kit-logos', cms: 'page-images' },
+      { sectionKey: 'brand-system', cms: 'page-technologies' },
+      { sectionKey: 'brand-visual-style', cms: 'page-technologies' },
+      { sectionKey: 'brand-usage-guidelines', cms: 'page-technologies' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
   },
@@ -357,7 +577,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       { sectionKey: 'benefits-career', cms: 'page-technologies' },
       { sectionKey: 'jobs', cms: 'page-career-jobs' },
       { sectionKey: 'communities', cms: 'page-technologies' },
-      { sectionKey: 'career-rfq', cms: 'page-rfq' },
+      { sectionKey: 'career-rfq', cms: 'page-faq' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
   },
@@ -377,6 +597,7 @@ const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, string> =
   'page-rfq': 'sections.page-rfq',
   'page-technologies': 'sections.page-technologies',
   'page-projects': 'sections.page-projects',
+  'page-portfolio-explorer': 'sections.page-portfolio-explorer',
   'page-images': 'sections.page-images',
   'page-partners': 'sections.page-partners',
   'page-process': 'sections.page-process',
@@ -386,17 +607,348 @@ const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, string> =
   'page-team-members': 'sections.page-team-members',
   'page-office-locations': 'sections.page-office-locations',
   'page-client-logos': 'sections.page-client-logos',
+  'page-stats-banner': 'sections.page-stats-banner',
+  'page-package-list': 'sections.page-package-list',
+  'hero-about': 'sections.hero-about',
+  'image-gallery': 'sections.image-gallery',
+  'page-rfq-accordion': 'sections.page-rfq-accordion',
+  'package-offer': 'sections.package-offer',
+  'page-events': 'sections.page-events',
 };
 
 const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
   about: [
     { name: 'heroAbout', component: 'sections.hero-about', sectionKey: 'hero-about' },
-    { name: 'techStack', component: 'sections.page-technologies', sectionKey: 'technology-stack' },
+    {
+      name: 'techStack',
+      component: 'sections.page-technologies',
+      sectionKey: 'technology-stack',
+    },
     { name: 'team', component: 'sections.page-team-members', sectionKey: 'team' },
     {
       name: 'solutionToChallenges',
       component: 'sections.page-technologies',
       sectionKey: 'solution-to-challenges',
+    },
+  ],
+  'startups-and-entrepreneurs': [
+    {
+      name: 'startupPackages',
+      component: 'sections.page-package-list',
+      sectionKey: 'startup-packages',
+    },
+  ],
+  'professional-services': [
+    {
+      name: 'whatMattersMost',
+      component: 'sections.page-technologies',
+      sectionKey: 'what-matters-most',
+    },
+    {
+      name: 'clientJourney',
+      component: 'sections.page-process',
+      sectionKey: 'client-journey',
+    },
+  ],
+  'retail-and-ecommerce': [
+    { name: 'heroAbout', component: 'sections.hero-about', sectionKey: 'hero-about' },
+    { name: 'heroMarquee', component: 'sections.page-images', sectionKey: 'hero-marquee' },
+    {
+      name: 'clientJourney',
+      component: 'sections.page-process',
+      sectionKey: 'client-journey',
+    },
+    {
+      name: 'socialGallery',
+      component: 'sections.image-gallery',
+      sectionKey: 'social-gallery',
+    },
+  ],
+  // For You / Solutions (9)
+  'build-and-launch': [
+    { name: 'ourServices', component: 'sections.page-technologies', sectionKey: 'our-services' },
+    {
+      name: 'buildAndLaunchRfq',
+      component: 'sections.page-rfq-accordion',
+      sectionKey: 'build-and-launch-rfq',
+    },
+    { name: 'launchPath', component: 'sections.page-process', sectionKey: 'launch-path' },
+    { name: 'startupPackage', component: 'sections.package-offer', sectionKey: 'startup-package' },
+  ],
+  'marketing-and-growth': [
+    {
+      name: 'growthChallenges',
+      component: 'sections.page-technologies',
+      sectionKey: 'growth-challenges',
+    },
+    {
+      name: 'everythingToGrow',
+      component: 'sections.page-technologies',
+      sectionKey: 'everything-to-grow',
+    },
+    {
+      name: 'connectedGrowthSystem',
+      component: 'sections.page-process',
+      sectionKey: 'connected-growth-system',
+    },
+    {
+      name: 'builtAroundGoals',
+      component: 'sections.page-technologies',
+      sectionKey: 'built-around-goals',
+    },
+    {
+      name: 'growthInAction',
+      component: 'sections.page-projects',
+      sectionKey: 'growth-in-action',
+    },
+  ],
+  'software-and-technology': [
+    { name: 'whatWeBuild', component: 'sections.page-technologies', sectionKey: 'what-we-build' },
+    { name: 'builtForTheFit', component: 'sections.hero-about', sectionKey: 'built-for-the-fit' },
+    { name: 'techLaunchPath', component: 'sections.page-process', sectionKey: 'tech-launch-path' },
+    { name: 'ourApproach', component: 'sections.page-technologies', sectionKey: 'our-approach' },
+  ],
+  'branding-and-creative': [
+    {
+      name: 'ourCapabilities',
+      component: 'sections.page-technologies',
+      sectionKey: 'our-capabilities',
+    },
+    {
+      name: 'brandCapabilities',
+      component: 'sections.page-technologies',
+      sectionKey: 'brand-capabilities',
+    },
+    {
+      name: 'builtToBeUsed',
+      component: 'sections.page-technologies',
+      sectionKey: 'built-to-be-used',
+    },
+    { name: 'brandVisibility', component: 'sections.page-process', sectionKey: 'brand-visibility' },
+    { name: 'ourTools', component: 'sections.page-technologies', sectionKey: 'our-tools' },
+  ],
+  'ai-and-automation': [
+    {
+      name: 'startWithTheWork',
+      component: 'sections.page-rfq-accordion',
+      sectionKey: 'start-with-the-work',
+    },
+    { name: 'aiGallery', component: 'sections.page-images', sectionKey: 'ai-gallery' },
+    { name: 'aiCapabilities', component: 'sections.page-technologies', sectionKey: 'ai-capabilities' },
+    {
+      name: 'automationInAction',
+      component: 'sections.page-technologies',
+      sectionKey: 'automation-in-action',
+    },
+    { name: 'aiWithPurpose', component: 'sections.page-process', sectionKey: 'ai-with-purpose' },
+  ],
+  'sales-and-revenue': [
+    { name: 'salesJourneyGap', component: 'sections.hero-about', sectionKey: 'sales-journey-gap' },
+    {
+      name: 'revenueCapabilities',
+      component: 'sections.page-technologies',
+      sectionKey: 'revenue-capabilities',
+    },
+    { name: 'leadToCustomer', component: 'sections.page-process', sectionKey: 'lead-to-customer' },
+    { name: 'salesVisibility', component: 'sections.page-process', sectionKey: 'sales-visibility' },
+  ],
+  'social-and-community': [
+    { name: 'socialProcess', component: 'sections.page-process', sectionKey: 'social-process' },
+    {
+      name: 'socialCapabilities',
+      component: 'sections.page-technologies',
+      sectionKey: 'social-capabilities',
+    },
+    {
+      name: 'platformPresence',
+      component: 'sections.page-technologies',
+      sectionKey: 'platform-presence',
+    },
+    { name: 'buildCommunity', component: 'sections.page-process', sectionKey: 'build-community' },
+    { name: 'socialGallery', component: 'sections.image-gallery', sectionKey: 'social-gallery' },
+  ],
+  'hosting-and-infrastructure': [
+    {
+      name: 'digitalFoundations',
+      component: 'sections.page-technologies',
+      sectionKey: 'digital-foundations',
+    },
+    { name: 'builtForBusiness', component: 'sections.hero-about', sectionKey: 'built-for-business' },
+    {
+      name: 'infrastructureSolutions',
+      component: 'sections.page-technologies',
+      sectionKey: 'infrastructure-solutions',
+    },
+    {
+      name: 'hostingThatFits',
+      component: 'sections.package-offer',
+      sectionKey: 'hosting-that-fits',
+    },
+  ],
+  'learning-and-events': [
+    { name: 'learnYourWay', component: 'sections.package-offer', sectionKey: 'learn-your-way' },
+    { name: 'learningTopics', component: 'sections.page-technologies', sectionKey: 'learning-topics' },
+    { name: 'upcomingEvents', component: 'sections.page-events', sectionKey: 'upcoming-events' },
+  ],
+  // For You / Packages (9)
+  'startup-launch': [
+    {
+      name: 'launchFoundations',
+      component: 'sections.page-technologies',
+      sectionKey: 'launch-foundations',
+    },
+    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
+    { name: 'launchJourney', component: 'sections.page-process', sectionKey: 'launch-journey' },
+  ],
+  'business-growth': [
+    { name: 'builtForGrowth', component: 'sections.hero-about', sectionKey: 'built-for-growth' },
+    { name: 'growthPieces', component: 'sections.page-technologies', sectionKey: 'growth-pieces' },
+    { name: 'connectedGrowth', component: 'sections.page-process', sectionKey: 'connected-growth' },
+    { name: 'howItWorks', component: 'sections.page-process', sectionKey: 'how-it-works' },
+  ],
+  'digital-transformation': [
+    { name: 'theGap', component: 'sections.hero-about', sectionKey: 'the-gap' },
+    {
+      name: 'transformationPlan',
+      component: 'sections.page-technologies',
+      sectionKey: 'transformation-plan',
+    },
+    {
+      name: 'beforeAfterGap',
+      component: 'sections.page-technologies',
+      sectionKey: 'before-after-gap',
+    },
+    {
+      name: 'transformationPriorities',
+      component: 'sections.page-technologies',
+      sectionKey: 'transformation-priorities',
+    },
+    {
+      name: 'modernizationPath',
+      component: 'sections.page-process',
+      sectionKey: 'modernization-path',
+    },
+  ],
+  'brand-authority': [
+    {
+      name: 'authorityFoundation',
+      component: 'sections.page-technologies',
+      sectionKey: 'authority-foundation',
+    },
+    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
+    { name: 'authorityJourney', component: 'sections.page-process', sectionKey: 'authority-journey' },
+    {
+      name: 'specialistExpertise',
+      component: 'sections.page-technologies',
+      sectionKey: 'specialist-expertise',
+    },
+  ],
+  'website-growth-engine': [
+    { name: 'builtToPerform', component: 'sections.page-technologies', sectionKey: 'built-to-perform' },
+    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
+    { name: 'websiteJourney', component: 'sections.page-process', sectionKey: 'website-journey' },
+    {
+      name: 'specialistExpertise',
+      component: 'sections.page-technologies',
+      sectionKey: 'specialist-expertise',
+    },
+  ],
+  'sales-acceleration': [
+    { name: 'salesGaps', component: 'sections.page-technologies', sectionKey: 'sales-gaps' },
+    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
+    {
+      name: 'accelerationJourney',
+      component: 'sections.page-process',
+      sectionKey: 'acceleration-journey',
+    },
+    {
+      name: 'connectedExpertise',
+      component: 'sections.page-technologies',
+      sectionKey: 'connected-expertise',
+    },
+  ],
+  'enterprise-infrastructure': [
+    {
+      name: 'businessCriticalOperations',
+      component: 'sections.page-technologies',
+      sectionKey: 'business-critical-operations',
+    },
+    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
+    {
+      name: 'infrastructureJourney',
+      component: 'sections.page-process',
+      sectionKey: 'infrastructure-journey',
+    },
+    {
+      name: 'connectedExpertise',
+      component: 'sections.page-technologies',
+      sectionKey: 'connected-expertise',
+    },
+  ],
+  'ai-automation': [
+    {
+      name: 'startWithTheRepetitive',
+      component: 'sections.page-rfq-accordion',
+      sectionKey: 'start-with-the-repetitive',
+    },
+    { name: 'aiPackageCard', component: 'sections.package-offer', sectionKey: 'ai-package-card' },
+    { name: 'automationTools', component: 'sections.page-technologies', sectionKey: 'automation-tools' },
+    {
+      name: 'fromIdeaToAutomation',
+      component: 'sections.page-process',
+      sectionKey: 'from-idea-to-automation',
+    },
+    { name: 'automationFaq', component: 'sections.page-faq', sectionKey: 'automation-faq' },
+  ],
+  'saas-product-development': [
+    {
+      name: 'fromIdeaToProduct',
+      component: 'sections.page-rfq-accordion',
+      sectionKey: 'from-idea-to-product',
+    },
+    { name: 'saasPackageCard', component: 'sections.package-offer', sectionKey: 'saas-package-card' },
+    {
+      name: 'saasTransformPlan',
+      component: 'sections.page-technologies',
+      sectionKey: 'saas-transform-plan',
+    },
+    {
+      name: 'ideaToProductPath',
+      component: 'sections.page-process',
+      sectionKey: 'idea-to-product-path',
+    },
+    { name: 'productJourney', component: 'sections.page-process', sectionKey: 'product-journey' },
+    {
+      name: 'focusFirstRelease',
+      component: 'sections.page-technologies',
+      sectionKey: 'focus-first-release',
+    },
+    {
+      name: 'saasIntegrations',
+      component: 'sections.page-technologies',
+      sectionKey: 'saas-integrations',
+    },
+    { name: 'saasFaq', component: 'sections.page-faq', sectionKey: 'saas-faq' },
+  ],
+  // More (fixes)
+  whitelabel: [
+    { name: 'capabilities', component: 'sections.page-technologies', sectionKey: 'capabilities' },
+    { name: 'howWePartner', component: 'sections.page-process', sectionKey: 'how-we-partner' },
+    { name: 'partnerBenefits', component: 'sections.page-technologies', sectionKey: 'partner-benefits' },
+  ],
+  affiliate: [
+    { name: 'partnerPaths', component: 'sections.page-technologies', sectionKey: 'partner-paths' },
+    { name: 'affiliateJourney', component: 'sections.page-process', sectionKey: 'affiliate-journey' },
+    { name: 'affiliateBenefits', component: 'sections.page-technologies', sectionKey: 'affiliate-benefits' },
+  ],
+  brandkit: [
+    { name: 'brandKitLogos', component: 'sections.page-images', sectionKey: 'brand-kit-logos' },
+    { name: 'brandSystem', component: 'sections.page-technologies', sectionKey: 'brand-system' },
+    { name: 'brandVisualStyle', component: 'sections.page-technologies', sectionKey: 'brand-visual-style' },
+    {
+      name: 'brandUsageGuidelines',
+      component: 'sections.page-technologies',
+      sectionKey: 'brand-usage-guidelines',
     },
   ],
 };

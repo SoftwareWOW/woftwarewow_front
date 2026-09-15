@@ -8,7 +8,9 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { Tech } from '@/components/wow/shared/TechStackShared'
 import useScrollingMarquee from '@/hooks/useScrollingMarquee'
-import { partnerCategories } from '../_data/partners'
+import { partnerCategories as DEFAULT_PARTNERCATEGORIES } from '../_data/partners'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 addCollection(logos)
 addCollection(simpleIcons)
@@ -55,13 +57,19 @@ function CategoryMarquee({ partners }: { partners: Tech[] }) {
   )
 }
 
-const PartnerNetwork = () => {
+type PartnerNetworkProps = Partial<CmsTechnologiesSection>
+
+const PartnerNetwork = ({ eyebrow = 'PARTNER NETWORK', title, accentTitle, description, items }: PartnerNetworkProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = mergeFeatureItems(DEFAULT_PARTNERCATEGORIES, items)
+
+
   return (
     <section id="partner-network" className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36">
       <div className="container">
         <div className="mb-8 text-center md:mb-10">
           <div className="mb-4 flex justify-center md:mb-5">
-            <SectionLabel>PARTNER NETWORK</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </div>
           <TextAppearAnimation>
             <h2 className="text-appear">Trusted partnerships. Connected expertise.</h2>
@@ -75,7 +83,7 @@ const PartnerNetwork = () => {
       </div>
 
       <div className="flex flex-col gap-8 md:gap-10">
-        {partnerCategories.map((category) => (
+        {mergedItems.map((category) => (
           <RevealWrapper key={category.title} className="reveal-me">
             <div className="container mb-4 md:mb-5">
               <h3 className="text-xl md:text-2xl">{category.title}</h3>

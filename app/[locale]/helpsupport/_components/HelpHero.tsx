@@ -9,8 +9,18 @@ import { FormEvent, useState } from 'react'
 const inputClassName =
   'w-full rounded-radius-sm border border-[#1515151A] bg-backgroundBody px-5 py-4 text-base leading-[1.4] tracking-[0.02em] text-secondary placeholder:text-[#808080] focus:border-[#1515151A] focus:bg-[#D9D8F3] focus:outline-none dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody dark:placeholder:text-dark-100 dark:focus:bg-[#1F1F1F] md:text-lg'
 
+type HelpHeroProps = {
+  badgeTitle?: string
+  title?: string
+  description?: string
+}
+
 /** Layout: about PageHero — centered label, title, body + quotation-style search. */
-const HelpHero = () => {
+const HelpHero = ({
+  badgeTitle = 'HELP & SUPPORT',
+  title = 'How Can We Help?',
+  description = 'Build knowledge on your own time or join us for practical, interactive experiences.',
+}: HelpHeroProps) => {
   const [query, setQuery] = useState('')
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -24,11 +34,9 @@ const HelpHero = () => {
 
       <div className="container">
         <RevealWrapper className="flex flex-col items-center text-center">
-          <SectionLabel className="mb-4">HELP &amp; SUPPORT</SectionLabel>
-          <h1 className="mb-4 mt-3.5">How Can We Help?</h1>
-          <p className="mx-auto max-w-[470px] text-[#808080] md:max-w-[750px]">
-            Build knowledge on your own time or join us for practical, interactive experiences.
-          </p>
+          <SectionLabel className="mb-4">{badgeTitle}</SectionLabel>
+          <h1 className="mb-4 mt-3.5">{title}</h1>
+          <p className="mx-auto max-w-[470px] text-[#808080] md:max-w-[750px]">{description}</p>
         </RevealWrapper>
 
         <RevealWrapper className="reveal-me mx-auto mt-8 w-full max-w-3xl md:mt-10">

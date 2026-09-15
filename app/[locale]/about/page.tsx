@@ -8,10 +8,10 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
 import Team from '@/components/aboutpage/Team'
 import type { Locale } from '@/i18n/config'
-import { mergeCmsHero } from '@/lib/strapi/mappers/page-sections'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import {
   buildSuperagencyPageMetadata,
-  loadSuperagencyPage,
+  loadSuperagencyPage, resolvePageSections,
 } from '@/lib/strapi/superagency-page-loader'
 import type {
   StrapiHeroAbout,
@@ -47,7 +47,8 @@ const AboutPage = async ({ params }: Props) => {
   setRequestLocale(locale as Locale)
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
 
-  const hero = mergeCmsHero(DEFAULT_HERO, cms.hero)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
   const heroAbout = cms.field<StrapiHeroAbout>('heroAbout')
   const techStackItems = cms.technologies(
     cms.field<StrapiPageTechnologies>('techStack'),
@@ -60,12 +61,15 @@ const AboutPage = async ({ params }: Props) => {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <PageHero {...hero} />
-        <HeroAbout body={heroAbout?.body ?? undefined} />
+        <HeroAbout
+          body={heroAbout?.body ?? cms.heroAbout('heroAbout')?.body ?? undefined}
+        />
         <SkewMarquee className="!pb-0 !pt-0 lg:!pb-0" />
-        <TechStack />
-        <Team />
+        <TechStack {...(sections.techStack ?? {})} />
+        <Team {...(sections.team ?? {})} />
         <Marquee />
         <SolutionToChallenges
+          {...(sections.solutionToChallenges ?? {})}
           categories={
             solutionCategories?.length ?
               solutionCategories.map((item, index) => ({

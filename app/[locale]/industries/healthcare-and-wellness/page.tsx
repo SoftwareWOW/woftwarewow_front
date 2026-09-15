@@ -3,6 +3,13 @@ const PAGE_SLUG = 'healthcare-and-wellness' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  title: 'Better Digital Experiences for ',
+  italicTitle: 'Better Care.',
+  description:
+    'We help healthcare and wellness organizations build trusted brands, stronger digital experiences, smarter systems, and sustainable growth.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -16,7 +23,8 @@ import CareSolutions from './_components/CareSolutions'
 import ExperiencePillars from './_components/ExperiencePillars'
 import HealthcareHero from './_components/HealthcareHero'
 import HealthcareHeroAbout from './_components/HealthcareHeroAbout'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -24,32 +32,17 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Healthcare & Wellness | WOW Superagency',
-    description: 'Digital experiences for healthcare and wellness organizations.',
-    keywords: [
-      'healthcare',
-      'wellness',
-      'digital health',
-      'patient experience',
-      'website growth',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Healthcare & Wellness | WOW Superagency',
-      description: 'Digital experiences for healthcare and wellness organizations.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/industries/healthcare-and-wellness`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Healthcare & Wellness' })
 }
 
 export default async function HealthcareAndWellnessPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
@@ -62,21 +55,21 @@ export default async function HealthcareAndWellnessPage({ params }: Props) {
             </div>
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-backgroundBody dark:to-secondary" />
           </div>
-          <HealthcareHero />
-          <HealthcareHeroAbout />
+          <HealthcareHero {...hero} images={hero.images} />
+          <HealthcareHeroAbout {...(sections.healthcareHeroAbout ?? {})} />
         </div>
         {/* 3. FromIdeaToGrowth — hover-flip experience pillars */}
-        <ExperiencePillars />
+        <ExperiencePillars {...(sections.experiencePillars ?? {})} />
         {/* 4. CommerceSolutions — 2×2 care solutions */}
-        <CareSolutions />
+        <CareSolutions {...(sections.careSolutions ?? {})} />
         {/* 5. TravelImagesGallery */}
-        <CareGallery />
+        <CareGallery {...(sections.careGallery ?? {})} />
         {/* 5b. AwardWinningWork — care journey rows */}
-        <CareJourney />
+        <CareJourney {...(sections.careJourney ?? {})} />
         {/* 6. Divisions — homepage DevisionOverview */}
-        <CareDevisionOverview />
+        <CareDevisionOverview {...(sections.careDevisionOverview ?? {})} />
         {/* 7. Packages — StartupPackages */}
-        <CarePackages />
+        <CarePackages {...(sections.carePackages ?? {})} />
         {/* 8. Ready to Create a Better Care Experience? */}
         <WowGrowthCta
           accentText="Ready to Create"

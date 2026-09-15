@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 import { cn } from '@/utils/cn'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import Link from 'next/link'
@@ -11,10 +12,39 @@ type CaseStudy = {
   [key: string]: unknown
 }
 
-const caseStudies = (getMarkDownData('data/marketing/project') as CaseStudy[]).reverse()
+const DEFAULT_CASE_STUDIES = (getMarkDownData('data/marketing/project') as CaseStudy[]).reverse()
+
+function mergeProjects(defaults: CaseStudy[], cmsProjects?: CmsProjectCard[] | null): CaseStudy[] {
+  if (!cmsProjects?.length) return defaults
+
+  return defaults.map((item, index) => {
+    const cms = cmsProjects[index]
+    if (!cms) return item
+
+    return {
+      ...item,
+      title: cms.title || item.title,
+      image: cms.thumbnail ?? item.image,
+      slug: cms.href?.split('/').pop() ?? item.slug,
+    }
+  })
+}
 
 /** Layout: Home-16 ProjectServicesV4 — one-row header + image/title case cards. */
-const GrowthInAction = () => {
+const GrowthInAction = ({
+  title = 'Growth in',
+  accentTitle = 'action',
+  description =
+    'Problem → Solution → Result — how connected growth systems turn marketing into measurable outcomes.',
+  projects,
+}: {
+  title?: string
+  accentTitle?: string
+  description?: string
+  projects?: CmsProjectCard[] | null
+} = {}) => {
+  const caseStudies = mergeProjects(DEFAULT_CASE_STUDIES, projects)
+
   return (
     <section>
       <div className="container">
@@ -22,15 +52,13 @@ const GrowthInAction = () => {
           <div className="w-full md:w-[55%] lg:w-[60%]">
             <RevealWrapper className="reveal-me">
               <h2 className="mt-3 md:mt-4">
-                Growth in <InstrumentText>action</InstrumentText>
+                {title} <InstrumentText>{accentTitle}</InstrumentText>
               </h2>
             </RevealWrapper>
           </div>
           <div className="w-full md:w-[45%] lg:w-[40%]">
             <RevealWrapper className="reveal-me">
-              <p className="text-base leading-relaxed text-[#808080] md:text-right">
-                Problem → Solution → Result — how connected growth systems turn marketing into measurable outcomes.
-              </p>
+              <p className="text-base leading-relaxed text-[#808080] md:text-right">{description}</p>
             </RevealWrapper>
           </div>
         </div>

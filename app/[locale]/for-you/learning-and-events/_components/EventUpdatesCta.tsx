@@ -1,10 +1,13 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
-import WowText from '@/components/wow/shared/WowText'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 /** Centered mid-page CTA — event updates signup prompt. */
-const EventUpdatesCta = () => {
+const EventUpdatesCta = ({
+  title = 'More events are on the way.',
+  description = 'Join the list and be the first to hear about upcoming WOW events.',
+}: Partial<CmsTechnologiesSection> = {}) => {
   return (
     <section className="relative overflow-hidden px-4 py-16 md:py-24 lg:py-28">
       <div
@@ -18,13 +21,11 @@ const EventUpdatesCta = () => {
 
       <RevealWrapper className="relative z-10 mx-auto max-w-[800px] text-center">
         <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-normal leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2]">
-          <InstrumentText variant="solid">More events are on the way.</InstrumentText>
+          <InstrumentText variant="solid">{title}</InstrumentText>
         </h2>
 
         <div className="relative mx-auto mt-5 inline-block max-w-xl">
-          <p className="text-base leading-relaxed text-[#808080] md:text-lg">
-            Join the list and be the first to hear about upcoming WOW events.
-          </p>
+          <p className="text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
         </div>
 
         <div className="mt-10 flex justify-center">

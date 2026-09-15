@@ -1,7 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const steps = [
+const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Strategize',
@@ -25,7 +27,19 @@ const steps = [
 ]
 
 /** Layout: packages/business-growth/_components/HowItWorks.tsx — 4 steps, no SectionLabel/CTA. */
-const HowWeCreateImpact = () => {
+type HowWeCreateImpactProps = Partial<CmsProcessSection>
+
+const HowWeCreateImpact = ({
+  eyebrow = '',
+  title = 'From challenge to outcome.',
+  accentTitle = '',
+  description,
+  steps,
+}: HowWeCreateImpactProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+
+
   return (
     <section>
       <div className="container">
@@ -36,7 +50,7 @@ const HowWeCreateImpact = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:gap-x-10 xl:grid-cols-4">
-          {steps.map((step) => (
+          {mergedSteps.map((step) => (
             <RevealWrapper
               key={step.title}
               className="relative flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24"

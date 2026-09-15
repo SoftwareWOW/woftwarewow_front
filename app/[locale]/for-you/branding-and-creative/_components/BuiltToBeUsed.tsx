@@ -1,6 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
 type IconTone = 'front' | 'back'
 
@@ -78,7 +80,7 @@ const DigitalAssetsIcon = ({ tone }: { tone: IconTone }) => (
   </svg>
 )
 
-const assets: AssetCard[] = [
+const DEFAULT_ASSETS: AssetCard[] = [
   {
     title: 'Logo System',
     description: 'Primary, secondary and flexible brand marks.',
@@ -138,22 +140,32 @@ const FlipCard = ({ asset }: { asset: AssetCard }) => (
 )
 
 /** Layout: Home-13 ServicesV12 — hover-flip cards (3+3 grid), no CTA on back. */
-const BuiltToBeUsed = () => {
+const BuiltToBeUsed = ({
+  eyebrow = 'Built to Be Used',
+  title = 'A brand your whole business can use.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const displayAssets = mergeFeatureItems(DEFAULT_ASSETS, items).map((asset, index) => ({
+    ...DEFAULT_ASSETS[index],
+    title: asset.title,
+    description: asset.description ?? DEFAULT_ASSETS[index].description,
+  }))
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 text-center md:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Built to Be Used</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear">A brand your whole business can use.</h2>
+            <h2 className="text-appear">{title}</h2>
           </TextAppearAnimation>
         </div>
       </div>
 
       <div className={gridRowClass}>
-        {assets.slice(0, 3).map((asset) => (
+        {displayAssets.slice(0, 3).map((asset) => (
           <FlipCard key={asset.title} asset={asset} />
         ))}
       </div>
@@ -161,7 +173,7 @@ const BuiltToBeUsed = () => {
       <div
         className={`${gridRowClass} max-lg:mt-5 max-lg:[&>*]:border-y max-lg:dark:[&>*]:border-y-dark lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}
       >
-        {assets.slice(3).map((asset) => (
+        {displayAssets.slice(3).map((asset) => (
           <FlipCard key={asset.title} asset={asset} />
         ))}
       </div>

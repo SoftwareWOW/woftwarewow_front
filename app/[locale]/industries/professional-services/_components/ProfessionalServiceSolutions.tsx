@@ -4,6 +4,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const IconBars = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none" aria-hidden>
@@ -105,18 +107,27 @@ const solutions: { title: string; description: string; items: string[]; icon: Re
 ]
 
 /** Layout: Home-23 WhyChooseUsV7 — 2-column bordered icon cards + origin SVGs + bottom CTA. */
-const ProfessionalServiceSolutions = () => {
+type ProfessionalServiceSolutionsProps = Partial<CmsTechnologiesSection>
+
+const ProfessionalServiceSolutions = ({
+  eyebrow = 'Professional Service Solutions',
+  title = 'Built Around How You',
+  accentTitle = 'Win Clients.',
+  description,
+  items,
+}: ProfessionalServiceSolutionsProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedItems = (items ?? [])
+
   return (
     <section id="solutions">
       <div className="container">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Professional Service Solutions</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">
-              Built Around How You <InstrumentText>Win Clients.</InstrumentText>
-            </h2>
+            <h2 className="text-appear lg:leading-[1.1]">{header.title}<InstrumentText>{header.accentTitle}</InstrumentText></h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mt-4 text-[#808080]">

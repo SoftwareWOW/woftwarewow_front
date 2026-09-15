@@ -1,7 +1,10 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { Check, X } from 'lucide-react'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const dontItems = [
   'Stretch or distort the logo',
@@ -19,21 +22,31 @@ const doItems = [
   'Ensure strong contrast',
 ]
 
-const BrandUsageGuidelines = () => (
+type BrandUsageGuidelinesProps = Partial<CmsTechnologiesSection>
+
+const BrandUsageGuidelines = ({
+  eyebrow = 'Usage Guidelines',
+  title = 'Do & Don\'t',
+  accentTitle,
+  description = 'Follow these rules to keep WOW Superagency brand assets consistent across every touchpoint.',
+}: BrandUsageGuidelinesProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+
+  return (
   <section>
     <div className="container">
       <div className="mb-10 text-center md:mb-14">
         <RevealWrapper className="reveal-me mb-5 flex justify-center">
-          <SectionLabel>Usage Guidelines</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mx-auto max-w-[770px]">Keep It WOW.</h2>
+          <h2 className="text-appear mx-auto max-w-[770px]">{header.title}{header.accentTitle ? <> <InstrumentText>{header.accentTitle}</InstrumentText></> : null}</h2>
         </TextAppearAnimation>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-            But for many growing businesses, getting the right expertise means managing an increasingly fragmented
-            network.
-          </p>
+          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
         </TextAppearAnimation>
       </div>
 
@@ -79,6 +92,7 @@ const BrandUsageGuidelines = () => (
       </div>
     </div>
   </section>
-)
+  )
+}
 
 export default BrandUsageGuidelines

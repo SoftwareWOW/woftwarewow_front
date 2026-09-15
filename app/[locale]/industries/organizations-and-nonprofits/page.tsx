@@ -3,6 +3,14 @@ const PAGE_SLUG = 'organizations-and-nonprofits' as const
 
 export const revalidate = 60
 
+const DEFAULT_HERO = {
+  badgeTitle: 'Organizations & Nonprofits',
+  title: 'Turn Your Mission Into',
+  italicTitle: ' Momentum.',
+  description:
+    'We help organizations strengthen their presence, reach more people, simplify operations, and build the digital systems behind lasting impact.',
+}
+
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -16,7 +24,8 @@ import OrganizationsHero from './_components/OrganizationsHero'
 import OrganizationsHeroAbout from './_components/OrganizationsHeroAbout'
 import OurPortfolio from './_components/OurPortfolio'
 import RecommendedSolutions from './_components/RecommendedSolutions'
-import { buildSuperagencyPageMetadata, loadSuperagencyPage } from '@/lib/strapi/superagency-page-loader'
+import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -24,45 +33,29 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-
-  return {
-    title: 'Organizations & Nonprofits | WOW Superagency',
-    description: 'Digital growth for mission-driven organizations and nonprofits.',
-    keywords: [
-      'nonprofits',
-      'organizations',
-      'mission-driven',
-      'community growth',
-      'brand authority',
-      'website growth',
-      'WOW Superagency',
-    ],
-    openGraph: {
-      title: 'Organizations & Nonprofits | WOW Superagency',
-      description: 'Digital growth for mission-driven organizations and nonprofits.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: `/${locale}/industries/organizations-and-nonprofits`,
-    },
-  }
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  return buildSuperagencyPageMetadata(cms, { title: 'Organizations & Nonprofits' })
 }
 
 export default async function OrganizationsAndNonprofitsPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const sections = resolvePageSections(cms, PAGE_SLUG)
+
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        <OrganizationsHero />
-        <OrganizationsHeroAbout />
-        <MissionJourney />
-        <OurPortfolio />
-        <MissionSolutions />
-        <ImpactJourney />
-        <ConnectedExpertise />
-        <RecommendedSolutions />
+        <OrganizationsHero {...hero} images={hero.images} />
+        <OrganizationsHeroAbout {...(sections.organizationsHeroAbout ?? {})} />
+        <MissionJourney {...(sections.missionJourney ?? {})} />
+        <OurPortfolio {...(sections.ourPortfolio ?? {})} />
+        <MissionSolutions {...(sections.missionSolutions ?? {})} />
+        <ImpactJourney {...(sections.impactJourney ?? {})} />
+        <ConnectedExpertise {...(sections.connectedExpertise ?? {})} />
+        <RecommendedSolutions {...(sections.recommendedSolutions ?? {})} />
         <WowGrowthCta
           accentText="Ready to Amplify"
           mainText="Your Impact?"

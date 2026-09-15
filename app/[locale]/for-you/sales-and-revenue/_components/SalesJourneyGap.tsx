@@ -2,8 +2,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
 
-const stages = [
+const DEFAULT_STAGES = [
   {
     id: '01',
     title: 'Attract',
@@ -32,7 +33,9 @@ const stages = [
 ]
 
 /** Layout: Home-19 ElevateBrandV2 — split header + large numbered row list. */
-const SalesJourneyGap = () => {
+const SalesJourneyGap = ({
+  body = "More leads alone won't fix a broken sales process. We look at where opportunities are being lost — and what can improve them.",
+}: Partial<CmsHeroAboutSection> = {}) => {
   return (
     <section>
       <div className="container">
@@ -48,15 +51,14 @@ const SalesJourneyGap = () => {
           <div className="w-full md:w-80 lg:w-96">
             <TextAppearAnimation>
               <p className="text-appear text-appear-2 max-w-lg max-md:text-justify md:place-self-end md:text-right">
-                More leads alone won&apos;t fix a broken sales process. We look at where opportunities are being lost
-                — and what can improve them.
+                {body}
               </p>
             </TextAppearAnimation>
           </div>
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-          {stages.map((stage) => (
+          {DEFAULT_STAGES.map((stage) => (
             <div
               key={stage.id}
               className="ease-[cubic-bezier(0.4, 0, 0.2, 1)] group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.010] hover:backdrop-blur-sm md:pb-10 md:pt-10">

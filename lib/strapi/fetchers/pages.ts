@@ -8,21 +8,7 @@ import type {
   StrapiSuperagencyPage,
 } from '@/lib/strapi/types/pages';
 
-const FOOTER_RESOURCE_POPULATE = {
-  hero: { populate: { image: { populate: { image: true } } } },
-  seo: { populate: { ogImage: true } },
-  sections: {
-    populate: {
-      image: { populate: { image: true } },
-      images: { populate: { image: true } },
-      avatar: true,
-      items: true,
-      features: true,
-      steps: true,
-      cta: true,
-    },
-  },
-};
+const FOOTER_RESOURCE_POPULATE = '*';
 
 export async function getSuperagencyPage(
   slug: string,
@@ -56,9 +42,7 @@ export async function getLegalPage(
 ): Promise<StrapiLegalPage | null> {
   const results = await fetchCollection<StrapiLegalPage>('superagency-legal-pages', {
     locale,
-    populate: {
-      seo: { populate: { ogImage: true } },
-    },
+    populate: '*',
     filters: { pageKey: { $eq: pageKey } },
   });
 
