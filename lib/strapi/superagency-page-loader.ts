@@ -31,7 +31,11 @@ import {
   type CmsTeamMember,
   type CmsTechnologiesSection,
 } from '@/lib/strapi/mappers/page-sections';
-import { getPageManifest } from '@/lib/strapi/page-registry';
+import {
+  getComponentForCmsType,
+  getPageManifest,
+  inferCmsTypeFromSectionValue,
+} from '@/lib/strapi/page-registry';
 import type {
   StrapiHeroAbout,
   StrapiImageGallery,
@@ -124,66 +128,88 @@ export function buildSuperagencyPageMetadata(
 
 export type ResolvedPageSections = Record<string, unknown>;
 
-/** Resolve all CMS section props for a page slug from the page registry manifest. */
+const PAGE_METADATA_KEYS = new Set([
+  'id',
+  'documentId',
+  'createdAt',
+  'updatedAt',
+  'publishedAt',
+  'locale',
+  'hero',
+  'seo',
+]);
+
+function resolveComponentType(
+  fieldName: string,
+  value: unknown,
+  slug: string,
+): string | null {
+  const manifestField = getPageManifest(slug)?.fields.find((field) => field.name === fieldName);
+  if (manifestField) return manifestField.component;
+
+  const cmsType = inferCmsTypeFromSectionValue(value);
+  return cmsType ? getComponentForCmsType(cmsType) : null;
+}
+
+function mapSectionByComponent(
+  cms: LoadedSuperagencyPage,
+  fieldName: string,
+  component: string,
+): unknown {
+  switch (component) {
+    case 'sections.page-technologies':
+      return cms.technologiesSection(fieldName);
+    case 'sections.page-process':
+      return cms.processSection(fieldName);
+    case 'sections.hero-about':
+      return cms.heroAbout(fieldName);
+    case 'sections.package-offer':
+      return cms.packageOffer(fieldName);
+    case 'sections.page-rfq-accordion':
+      return cms.rfqAccordion(fieldName);
+    case 'sections.page-events':
+      return cms.pageEvents(fieldName);
+    case 'sections.image-gallery':
+      return cms.imageGallery(fieldName);
+    case 'sections.page-projects': {
+      const projects = cms.projects(cms.field<StrapiPageProjects>(fieldName));
+      return projects ? { projects } : null;
+    }
+    case 'sections.page-images': {
+      const images = cms.images(cms.field<StrapiPageImages>(fieldName));
+      return images ? { images } : null;
+    }
+    case 'sections.page-faq': {
+      const items = cms.faq(cms.field<StrapiPageFaq>(fieldName));
+      return items ? { items } : null;
+    }
+    case 'sections.page-team-members': {
+      const members = cms.teamMembers(cms.field<StrapiPageTeamMembers>(fieldName));
+      return members ? { members } : null;
+    }
+    default:
+      return cms.field(fieldName);
+  }
+}
+
+/** Resolve CMS section props using actual Strapi field names from the loaded page. */
 export function resolvePageSections(
   cms: LoadedSuperagencyPage,
   slug: string,
 ): ResolvedPageSections {
-  const manifest = getPageManifest(slug);
-  if (!manifest) return {};
-
   const sections: ResolvedPageSections = {};
+  const raw = cms.raw;
+  if (!raw) return sections;
 
-  for (const field of manifest.fields) {
-    switch (field.component) {
-      case 'sections.page-technologies':
-        sections[field.name] = cms.technologiesSection(field.name);
-        break;
-      case 'sections.page-process':
-        sections[field.name] = cms.processSection(field.name);
-        break;
-      case 'sections.hero-about':
-        sections[field.name] = cms.heroAbout(field.name);
-        break;
-      case 'sections.package-offer':
-        sections[field.name] = cms.packageOffer(field.name);
-        break;
-      case 'sections.page-rfq-accordion':
-        sections[field.name] = cms.rfqAccordion(field.name);
-        break;
-      case 'sections.page-events':
-        sections[field.name] = cms.pageEvents(field.name);
-        break;
-      case 'sections.image-gallery':
-        sections[field.name] = cms.imageGallery(field.name);
-        break;
-      case 'sections.page-projects': {
-        const projects = cms.projects(
-          cms.field<StrapiPageProjects>(field.name),
-        );
-        sections[field.name] = projects ? { projects } : null;
-        break;
-      }
-      case 'sections.page-images': {
-        const images = cms.images(cms.field<StrapiPageImages>(field.name));
-        sections[field.name] = images ? { images } : null;
-        break;
-      }
-      case 'sections.page-faq': {
-        const items = cms.faq(cms.field<StrapiPageFaq>(field.name));
-        sections[field.name] = items ? { items } : null;
-        break;
-      }
-      case 'sections.page-team-members': {
-        const members = cms.teamMembers(
-          cms.field<StrapiPageTeamMembers>(field.name),
-        );
-        sections[field.name] = members ? { members } : null;
-        break;
-      }
-      default:
-        sections[field.name] = cms.field(field.name);
-        break;
+  for (const [fieldName, value] of Object.entries(raw)) {
+    if (PAGE_METADATA_KEYS.has(fieldName) || value == null) continue;
+
+    const component = resolveComponentType(fieldName, value, slug);
+    if (!component) continue;
+
+    const mapped = mapSectionByComponent(cms, fieldName, component);
+    if (mapped != null) {
+      sections[fieldName] = mapped;
     }
   }
 

@@ -46,6 +46,8 @@ type FetchOptions = {
   sort?: string;
   filters?: Record<string, unknown>;
   revalidate?: number;
+  /** When false, non-404 fetch failures are not logged (used for populate fallbacks). */
+  logErrors?: boolean;
 };
 
 type InternalFetchOptions = Omit<FetchOptions, 'locale'> & {
@@ -78,7 +80,14 @@ function appendNestedSearchParam(
 
 async function strapiFetchWithLocale<T>(
   path: string,
-  { strapiLocale, populate = '*', sort, filters, revalidate }: InternalFetchOptions,
+  {
+    strapiLocale,
+    populate = '*',
+    sort,
+    filters,
+    revalidate,
+    logErrors = true,
+  }: InternalFetchOptions,
 ): Promise<T | null> {
   if (!isStrapiConfigured()) return null;
 
@@ -110,7 +119,7 @@ async function strapiFetchWithLocale<T>(
     });
 
     if (!response.ok) {
-      if (response.status !== 404) {
+      if (response.status !== 404 && logErrors) {
         let detail = '';
         try {
           const body = (await response.json()) as {
@@ -136,7 +145,7 @@ async function strapiFetchWithLocale<T>(
 
 export async function strapiFetch<T>(
   path: string,
-  { locale, populate = '*', sort, filters, revalidate }: FetchOptions,
+  { locale, populate = '*', sort, filters, revalidate, logErrors = true }: FetchOptions,
 ): Promise<T | null> {
   const localeChain = getStrapiLocaleChain(locale);
 
@@ -147,6 +156,7 @@ export async function strapiFetch<T>(
       sort,
       filters,
       revalidate,
+      logErrors,
     });
 
     if (!result) continue;

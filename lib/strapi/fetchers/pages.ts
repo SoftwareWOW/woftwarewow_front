@@ -1,6 +1,10 @@
 import type { Locale } from '@/i18n/config';
 import { fetchCollection, fetchSingleType } from '@/lib/strapi/client';
-import { buildSuperagencyPagePopulate } from '@/lib/strapi/page-populate';
+import {
+  buildDeepPopulateFromPageData,
+  buildSafePopulateFromPageData,
+  buildSuperagencyPageShallowPopulate,
+} from '@/lib/strapi/page-populate';
 import { pageApiId } from '@/lib/strapi/page-registry';
 import type {
   StrapiFooterResourcePage,
@@ -14,10 +18,34 @@ export async function getSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<StrapiSuperagencyPage | null> {
-  return fetchSingleType<StrapiSuperagencyPage>(pageApiId(slug), {
+  const apiId = pageApiId(slug);
+
+  const shallow = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
     locale,
-    populate: buildSuperagencyPagePopulate(slug),
+    populate: buildSuperagencyPageShallowPopulate(),
   });
+
+  if (!shallow) return null;
+
+  const pageRecord = shallow as unknown as Record<string, unknown>;
+  const deepPopulate = buildDeepPopulateFromPageData(pageRecord);
+
+  const deep = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
+    locale,
+    populate: deepPopulate,
+    logErrors: false,
+  });
+
+  if (deep) return deep;
+
+  const safePopulate = buildSafePopulateFromPageData(pageRecord);
+  const safe = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
+    locale,
+    populate: safePopulate,
+    logErrors: false,
+  });
+
+  return safe ?? shallow;
 }
 
 export async function getFooterResourcePage(

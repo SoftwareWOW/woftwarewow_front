@@ -263,10 +263,27 @@ export function mapHeroAboutSection(
   };
 }
 
-export function mapPageProcess(section?: StrapiPageProcess | null): CmsProcessStep[] | null {
-  if (!section?.steps?.length) return null;
+type ProcessLikeSection = StrapiPageProcess & {
+  items?: Array<{ title: string; description?: string | null; order?: number | null }>;
+};
 
-  return [...section.steps]
+function getProcessSteps(section?: ProcessLikeSection | null) {
+  if (section?.steps?.length) return section.steps;
+  if (section?.items?.length) {
+    return section.items.map((item, index) => ({
+      title: item.title,
+      description: item.description,
+      order: item.order ?? index + 1,
+    }));
+  }
+  return null;
+}
+
+export function mapPageProcess(section?: ProcessLikeSection | null): CmsProcessStep[] | null {
+  const steps = getProcessSteps(section);
+  if (!steps?.length) return null;
+
+  return [...steps]
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
     .map((step) => ({
       title: step.title,
@@ -276,7 +293,7 @@ export function mapPageProcess(section?: StrapiPageProcess | null): CmsProcessSt
 }
 
 export function mapPageProcessSection(
-  section?: StrapiPageProcess | null,
+  section?: ProcessLikeSection | null,
 ): CmsProcessSection | null {
   if (!section) return null;
 

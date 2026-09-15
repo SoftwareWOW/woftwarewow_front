@@ -593,7 +593,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
   },
 ];
 
-const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, string> = {
+export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, string> = {
   'page-rfq': 'sections.page-rfq',
   'page-technologies': 'sections.page-technologies',
   'page-projects': 'sections.page-projects',
@@ -615,6 +615,104 @@ const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, string> =
   'package-offer': 'sections.package-offer',
   'page-events': 'sections.page-events',
 };
+
+export const SECTION_KEY_TO_CMS: Record<
+  string,
+  Exclude<CmsSectionType, null | 'hero'>
+> = Object.fromEntries(
+  HEADER_PAGE_SECTION_REGISTRY.flatMap((page) =>
+    page.sections
+      .filter(
+        (section): section is { sectionKey: string; cms: Exclude<CmsSectionType, null | 'hero'> } =>
+          Boolean(section.cms && section.cms !== 'hero'),
+      )
+      .map((section) => [section.sectionKey, section.cms]),
+  ),
+) as Record<string, Exclude<CmsSectionType, null | 'hero'>>;
+
+export function getCmsTypeForSectionKey(sectionKey: string) {
+  return SECTION_KEY_TO_CMS[sectionKey] ?? null;
+}
+
+export function getComponentForCmsType(cmsType: Exclude<CmsSectionType, null | 'hero'>) {
+  return CMS_TO_COMPONENT[cmsType];
+}
+
+type StrapiSectionKeyConfig = {
+  cmsType: Exclude<CmsSectionType, null | 'hero'>;
+  populate: Record<string, unknown>;
+};
+
+/** Strapi sectionKey values that differ from the frontend registry section keys. */
+export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> = {
+  'care-gallery': {
+    cmsType: 'page-images',
+    populate: { images: { populate: '*' } },
+  },
+  'care-journey': {
+    cmsType: 'page-process',
+    populate: { items: { populate: '*' } },
+  },
+  'care-packages': {
+    cmsType: 'page-technologies',
+    populate: { items: { populate: '*' } },
+  },
+  'built-around-guest': {
+    cmsType: 'page-process',
+    populate: { items: { populate: '*' } },
+  },
+  'featured-Work': {
+    cmsType: 'page-projects',
+    populate: { projects: { populate: '*' } },
+  },
+  'explore-Work': {
+    cmsType: 'page-projects',
+    populate: { projects: { populate: '*' } },
+  },
+  'how-we-create-impact': {
+    cmsType: 'page-process',
+    populate: { steps: { populate: '*' } },
+  },
+  'social-gallery': {
+    cmsType: 'image-gallery',
+    populate: { images: { populate: '*' } },
+  },
+  'growth-journey': {
+    cmsType: 'page-process',
+    populate: { items: { populate: '*' } },
+  },
+  'product-journey': {
+    cmsType: 'page-process',
+    populate: { items: { populate: '*' } },
+  },
+  'portfolio-gallery': {
+    cmsType: 'page-images',
+    populate: { images: { populate: '*' } },
+  },
+};
+
+export function getStrapiSectionKeyConfig(sectionKey: string) {
+  return STRAPI_SECTION_KEY_CONFIG[sectionKey] ?? null;
+}
+
+export function inferCmsTypeFromSectionValue(
+  value: unknown,
+): Exclude<CmsSectionType, null | 'hero'> | null {
+  if (!value || typeof value !== 'object') return null;
+
+  const section = value as Record<string, unknown>;
+  if (typeof section.sectionKey === 'string') {
+    const strapiConfig = getStrapiSectionKeyConfig(section.sectionKey);
+    if (strapiConfig) return strapiConfig.cmsType;
+
+    const cmsType = getCmsTypeForSectionKey(section.sectionKey);
+    if (cmsType) return cmsType;
+  }
+
+  if ('body' in section) return 'hero-about';
+
+  return null;
+}
 
 const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
   about: [
