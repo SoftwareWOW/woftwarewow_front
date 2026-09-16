@@ -108,8 +108,16 @@ const SkewMarquee = ({ className, images }: SkewMarqueeProps) => {
         >
           <div ref={marqueeRef} className="flex flex-nowrap gap-5">
             {marqueeImages.map((img) => (
-              <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
-                <Image width={370} height={400} src={img.src} alt={img.alt ?? `Marquee ${img.id}`} className='object-cover rounded-radius-md' />
+              <figure
+                key={img.id}
+                className="marquee-part z-50 h-[280px] w-[240px] flex-shrink-0 overflow-hidden rounded-radius-md sm:h-[340px] sm:w-[300px] lg:h-[400px] lg:w-[370px]">
+                <Image
+                  width={370}
+                  height={400}
+                  src={img.src}
+                  alt={img.alt ?? `Marquee ${img.id}`}
+                  className="h-full w-full object-cover"
+                />
               </figure>
             ))}
           </div>
