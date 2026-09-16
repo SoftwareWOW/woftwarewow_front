@@ -691,7 +691,10 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
   },
   'team-member': {
     cmsType: 'page-team-members',
-    populate: { members: { populate: '*' } },
+    populate: {
+      featuredMember: { populate: { image: true } },
+      members: { populate: { image: true } },
+    },
   },
 };
 

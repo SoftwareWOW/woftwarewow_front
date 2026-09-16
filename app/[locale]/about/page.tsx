@@ -9,6 +9,7 @@ import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionTo
 import Team from '@/components/aboutpage/Team'
 import type { Locale } from '@/i18n/config'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import { resolveTeamSection } from '@/lib/strapi/fetchers/team-members'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,
@@ -50,6 +51,10 @@ const AboutPage = async ({ params }: Props) => {
 
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const teamSection = await resolveTeamSection(
+    cms.field<StrapiPageTeamMembers>('team'),
+    locale as Locale,
+  )
   const heroAbout = cms.field<StrapiHeroAbout>('heroAbout')
   const techStackItems = cms.technologies(
     cms.field<StrapiPageTechnologies>('techStack'),
@@ -67,7 +72,10 @@ const AboutPage = async ({ params }: Props) => {
         />
         <SkewMarquee className="!pb-0 !pt-0 lg:!pb-0" />
         <TechStack {...(sections.techStack ?? {})} />
-        <Team members={cms.teamMembers(cms.field<StrapiPageTeamMembers>('team')) ?? undefined} />
+        <Team
+          featuredMember={teamSection?.featuredMember}
+          galleryMembers={teamSection?.galleryMembers}
+        />
         <Marquee />
         <SolutionToChallenges
           {...(sections.solutionToChallenges ?? {})}

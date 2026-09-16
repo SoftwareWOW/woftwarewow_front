@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
 import teamMembers from '@/data/teamMemberData.json'
 import twiterLogo from '@/public/images/icons/x-twitter.svg'
 import twiterDarkLogo from '@/public/images/icons/x-twitter-dark.svg'
@@ -12,7 +11,8 @@ import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import RevealWrapper from '../animation/RevealWrapper'
-import TeamGallery from '../aboutpage-02/TeamGallery'
+import TeamGallery from './TeamGallery'
+import type { CmsTeamMember } from '@/lib/strapi/mappers/page-sections'
 
 interface TeamMember {
   id: string
@@ -28,68 +28,80 @@ interface TeamMember {
 }
 
 type TeamProps = {
-  members?: Array<{
-    id: string
-    name: string
-    role?: string
-    bio?: string
-    image?: string
-  }> | null
+  featuredMember?: CmsTeamMember | null
+  galleryMembers?: CmsTeamMember[] | null
+  /** @deprecated Use featuredMember + galleryMembers */
+  members?: CmsTeamMember[] | null
 }
 
-const Team = ({ members }: TeamProps = {}) => {
-  const displayMembers: TeamMember[] = members?.length ?
-      members.map((member) => ({
-        id: member.id,
-        name: member.name,
-        role: member.role ?? '',
-        image: member.image ?? '',
-        bio: member.bio ?? '',
-        socialLinks: {},
-      }))
-    : (teamMembers as TeamMember[])
+const FALLBACK_IMAGE = '/images/home-ai/team/ai-team-1.png'
 
-  const [selectedMember, setSelectedMember] = useState<TeamMember>(displayMembers[0])
-  const [isTransitioning, setIsTransitioning] = useState(false)
-
-  const handleMemberChange = (member: TeamMember) => {
-    if (member.id === selectedMember.id) return
-
-    setIsTransitioning(true)
-    setTimeout(() => {
-      setSelectedMember(member)
-      setIsTransitioning(false)
-    }, 300)
+function toDisplayMember(member: CmsTeamMember): TeamMember {
+  return {
+    id: member.id,
+    name: member.name,
+    role: member.role ?? '',
+    image: member.image || FALLBACK_IMAGE,
+    bio: member.bio ?? '',
+    socialLinks: {},
   }
+}
+
+function resolveTeamLayout({
+  featuredMember,
+  galleryMembers,
+  members,
+}: TeamProps): { featured: TeamMember; gallery: TeamMember[] } {
+  if (featuredMember) {
+    return {
+      featured: toDisplayMember(featuredMember),
+      gallery: (galleryMembers ?? []).map(toDisplayMember),
+    }
+  }
+
+  if (members?.length) {
+    return {
+      featured: toDisplayMember(members[0]),
+      gallery: members.slice(1).map(toDisplayMember),
+    }
+  }
+
+  const staticMembers = teamMembers as TeamMember[]
+  return {
+    featured: staticMembers[0],
+    gallery: staticMembers.slice(1),
+  }
+}
+
+const Team = (props: TeamProps = {}) => {
+  const { featured, gallery } = resolveTeamLayout(props)
 
   return (
     <section className="relative overflow-hidden">
       <RevealWrapper className="container">
-        {/* Main profile card */}
-        <div
-          className={`our-team-details flex flex-col gap-10 gap-x-[30px] border bg-backgroundBody p-5 dark:border-dark dark:bg-dark max-md:items-center max-md:justify-center lg:flex-row lg:p-10 ${isTransitioning ? 'transitioning' : ''}`}>
+        <div className="our-team-details flex flex-col gap-10 gap-x-[30px] border bg-backgroundBody p-5 dark:border-dark dark:bg-dark max-md:items-center max-md:justify-center lg:flex-row lg:p-10">
           <figure className="max-lg:w-full lg:min-h-[372px] lg:min-w-[330px]">
             <Image
-              src={selectedMember.image}
+              src={featured.image}
               width={330}
               height={372}
-              alt={selectedMember.name}
-              className="w-full object-cover"
+              alt={featured.name}
+              className="h-full w-full object-cover"
             />
           </figure>
 
           <div className="flex-1">
             <div className="mb-5 flex flex-col justify-between gap-y-10 md:flex-row lg:mb-10">
               <div>
-                <h2 className="mb-3 lg:text-4xl lg:leading-[1.2] lg:-tracking-[1.08px]">{selectedMember.name}</h2>
-                <SectionLabel>{selectedMember.role}</SectionLabel>
+                <h2 className="mb-3 lg:text-4xl lg:leading-[1.2] lg:-tracking-[1.08px]">{featured.name}</h2>
+                <SectionLabel>{featured.role}</SectionLabel>
               </div>
 
               <ul className="flex gap-5">
-                {selectedMember.socialLinks?.twitter && (
+                {featured.socialLinks?.twitter && (
                   <li>
                     <Link
-                      href={selectedMember.socialLinks.twitter}
+                      href={featured.socialLinks.twitter}
                       target="_blank"
                       className="transition-transform duration-200 ease-in-out hover:-translate-y-1">
                       <Image src={twiterLogo} alt="Twitter" width={24} height={24} className="inline dark:hidden" />
@@ -97,10 +109,10 @@ const Team = ({ members }: TeamProps = {}) => {
                     </Link>
                   </li>
                 )}
-                {selectedMember.socialLinks?.facebook && (
+                {featured.socialLinks?.facebook && (
                   <li>
                     <a
-                      href={selectedMember.socialLinks.facebook}
+                      href={featured.socialLinks.facebook}
                       target="_blank"
                       className="transition-transform duration-200 ease-in-out hover:-translate-y-1">
                       <Image src={facebookLogo} alt="Facebook" width={24} height={24} className="inline dark:hidden" />
@@ -114,10 +126,10 @@ const Team = ({ members }: TeamProps = {}) => {
                     </a>
                   </li>
                 )}
-                {selectedMember.socialLinks?.youtube && (
+                {featured.socialLinks?.youtube && (
                   <li>
                     <a
-                      href={selectedMember.socialLinks.youtube}
+                      href={featured.socialLinks.youtube}
                       target="_blank"
                       className="transition-transform duration-200 ease-in-out hover:-translate-y-1">
                       <Image src={youtubeLogo} alt="YouTube" width={24} height={24} className="inline dark:hidden" />
@@ -135,11 +147,11 @@ const Team = ({ members }: TeamProps = {}) => {
             </div>
 
             <div className="max-w-[730px] border-t pt-5 dark:border-dark lg:pt-10">
-              <p>{selectedMember.bio}</p>
+              <p>{featured.bio}</p>
             </div>
           </div>
         </div>
-        <TeamGallery />
+        <TeamGallery members={gallery} />
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/career" variant="primary">

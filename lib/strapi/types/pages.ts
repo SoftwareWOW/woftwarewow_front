@@ -180,6 +180,7 @@ export type StrapiTeamMember = {
 
 export type StrapiPageTeamMembers = {
   sectionKey?: string;
+  featuredMember?: StrapiTeamMember | null;
   members?: StrapiTeamMember[] | null;
 };
 

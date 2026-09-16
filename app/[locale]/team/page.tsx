@@ -6,10 +6,12 @@ import TeamHero from './_components/TeamHero'
 
 import type { Locale } from '@/i18n/config'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import { resolveTeamSection } from '@/lib/strapi/fetchers/team-members'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage,
 } from '@/lib/strapi/superagency-page-loader'
+import type { StrapiPageTeamMembers } from '@/lib/strapi/types/pages'
 import { setRequestLocale } from 'next-intl/server'
 
 const PAGE_SLUG = 'team' as const
@@ -39,12 +41,19 @@ const TeamPage = async ({ params }: Props) => {
   setRequestLocale(locale as Locale)
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const teamSection = await resolveTeamSection(
+    cms.field<StrapiPageTeamMembers>('teamMembers'),
+    locale as Locale,
+  )
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <TeamHero {...hero} scale />
-        <Team members={cms.teamMembers(cms.field('teamMembers')) ?? undefined} />
+        <Team
+          featuredMember={teamSection?.featuredMember}
+          galleryMembers={teamSection?.galleryMembers}
+        />
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"

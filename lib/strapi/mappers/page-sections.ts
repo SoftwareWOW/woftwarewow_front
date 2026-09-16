@@ -449,16 +449,59 @@ function mapTeamMember(member: StrapiTeamMember, index: number): CmsTeamMember |
   };
 }
 
+export function mapStrapiTeamMember(
+  member?: StrapiTeamMember | null,
+  index = 0,
+): CmsTeamMember | null {
+  if (!member) return null;
+  return mapTeamMember(member, index);
+}
+
 export function mapPageTeamMembers(
   section?: StrapiPageTeamMembers | null,
 ): CmsTeamMember[] | null {
-  if (!section?.members?.length) return null;
+  const members: CmsTeamMember[] = [];
 
-  const members = section.members
-    .map(mapTeamMember)
-    .filter((member): member is CmsTeamMember => member !== null);
+  const featured = mapStrapiTeamMember(section?.featuredMember, 0);
+  if (featured) members.push(featured);
+
+  for (const [index, member] of (section?.members ?? []).entries()) {
+    const mapped = mapTeamMember(member, index + 1);
+    if (!mapped) continue;
+    if (featured && mapped.id === featured.id) continue;
+    members.push(mapped);
+  }
 
   return members.length ? members : null;
+}
+
+export type CmsTeamSectionProps = {
+  featuredMember: CmsTeamMember;
+  galleryMembers: CmsTeamMember[];
+};
+
+export function mapPageTeamSection(
+  section?: StrapiPageTeamMembers | null,
+): CmsTeamSectionProps | null {
+  const featuredMember = mapStrapiTeamMember(section?.featuredMember, 0);
+  const galleryMembers = (section?.members ?? [])
+    .map(mapTeamMember)
+    .filter((member): member is CmsTeamMember => member !== null)
+    .filter((member) => !featuredMember || member.id !== featuredMember.id);
+
+  if (!featuredMember && !galleryMembers.length) return null;
+
+  if (!featuredMember && galleryMembers.length) {
+    return {
+      featuredMember: galleryMembers[0],
+      galleryMembers: galleryMembers.slice(1),
+    };
+  }
+
+  return {
+    featuredMember: featuredMember!,
+    galleryMembers,
+  };
 }
 
 export function mapStrapiSeo(seo?: StrapiPageSeo | null, fallback?: Metadata): Metadata {

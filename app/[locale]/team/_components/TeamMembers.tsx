@@ -10,7 +10,7 @@ import facebookLogo from '@/public/images/icons/facebook.svg'
 import facebookDarkLogo from '@/public/images/icons/facebook-dark.svg'
 import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TeamGallery from '@/components/aboutpage-02/TeamGallery'
+import TeamGallery from '@/components/aboutpage/TeamGallery'
 interface TeamMember {
   id: string
   name: string
