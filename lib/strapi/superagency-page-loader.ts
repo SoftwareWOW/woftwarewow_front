@@ -1,6 +1,7 @@
 import type { Locale } from '@/i18n/config';
 import type { Metadata } from 'next';
 import { getSuperagencyPage } from '@/lib/strapi/fetchers/pages';
+import { getSuperagencyTeamMembers } from '@/lib/strapi/fetchers/team-members';
 import {
   mapHeroAboutSection,
   mapImageGallery,
@@ -77,7 +78,10 @@ export async function loadSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<LoadedSuperagencyPage> {
-  const raw = await getSuperagencyPage(slug, locale);
+  const [raw, globalTeamMembers] = await Promise.all([
+    getSuperagencyPage(slug, locale),
+    getSuperagencyTeamMembers(locale),
+  ]);
 
   if (process.env.NODE_ENV === 'development') {
     const populatedFields =
@@ -114,7 +118,8 @@ export async function loadSuperagencyPage(
     projects: (section) => mapPageProjects(section),
     images: (section) => mapPageImages(section),
     faq: (section) => mapPageFaq(section),
-    teamMembers: (section) => mapPageTeamMembers(section),
+    teamMembers: (section) =>
+      mapPageTeamMembers(section) ?? globalTeamMembers,
     field,
   };
 }
@@ -185,7 +190,7 @@ function mapSectionByComponent(
     }
     case 'sections.page-team-members': {
       const members = cms.teamMembers(cms.field<StrapiPageTeamMembers>(fieldName));
-      return members ? { members } : null;
+      return members?.length ? { members } : null;
     }
     default:
       return cms.field(fieldName);

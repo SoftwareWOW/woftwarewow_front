@@ -15,6 +15,7 @@ import {
 } from '@/lib/strapi/superagency-page-loader'
 import type {
   StrapiHeroAbout,
+  StrapiPageTeamMembers,
   StrapiPageTechnologies,
 } from '@/lib/strapi/types/pages'
 import type { Metadata } from 'next'
@@ -66,7 +67,7 @@ const AboutPage = async ({ params }: Props) => {
         />
         <SkewMarquee className="!pb-0 !pt-0 lg:!pb-0" />
         <TechStack {...(sections.techStack ?? {})} />
-        <Team {...(sections.team ?? {})} />
+        <Team members={cms.teamMembers(cms.field<StrapiPageTeamMembers>('team')) ?? undefined} />
         <Marquee />
         <SolutionToChallenges
           {...(sections.solutionToChallenges ?? {})}

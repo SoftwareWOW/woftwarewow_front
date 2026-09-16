@@ -64,6 +64,15 @@ function mapNavItems(
                     type: navItem.type ?? fallbackNavItem.type,
                     href: navItem.href ?? fallbackNavItem.href,
                     detailPanel: navItem.detailPanelKey ?? fallbackNavItem.detailPanel,
+                    ...('description' in fallbackNavItem || navItem.description
+                      ? {
+                          description:
+                            navItem.description ??
+                            ('description' in fallbackNavItem ?
+                              fallbackNavItem.description
+                            : undefined),
+                        }
+                      : {}),
                   };
                 }) ?? fallbackColumn.items,
             };

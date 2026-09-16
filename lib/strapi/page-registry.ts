@@ -689,6 +689,10 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
     cmsType: 'page-images',
     populate: { images: { populate: '*' } },
   },
+  'team-member': {
+    cmsType: 'page-team-members',
+    populate: { members: { populate: '*' } },
+  },
 };
 
 export function getStrapiSectionKeyConfig(sectionKey: string) {

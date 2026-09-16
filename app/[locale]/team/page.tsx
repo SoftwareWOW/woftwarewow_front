@@ -8,7 +8,7 @@ import type { Locale } from '@/i18n/config'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import {
   buildSuperagencyPageMetadata,
-  loadSuperagencyPage, resolvePageSections,
+  loadSuperagencyPage,
 } from '@/lib/strapi/superagency-page-loader'
 import { setRequestLocale } from 'next-intl/server'
 
@@ -39,13 +39,12 @@ const TeamPage = async ({ params }: Props) => {
   setRequestLocale(locale as Locale)
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
-  const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <TeamHero {...hero} scale />
-        <Team {...(sections.teamMembers ?? {})} />
+        <Team members={cms.teamMembers(cms.field('teamMembers')) ?? undefined} />
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"

@@ -9,9 +9,33 @@ import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import {
   techCategories,
   TechCard,
+  type Category,
 } from '@/components/wow/shared/TechStackShared'
 
 type TechStackProps = Partial<CmsTechnologiesSection>
+
+function mergeCmsIntoTechCategories(
+  categories: Category[],
+  cmsItems?: CmsTechnologiesSection['items'],
+): Category[] {
+  if (!cmsItems?.length) return categories
+
+  let itemIndex = 0
+  return categories.map((category) => ({
+    ...category,
+    items: category.items.map((tech) => {
+      const cms = cmsItems[itemIndex]
+      itemIndex += 1
+      if (!cms) return tech
+
+      return {
+        ...tech,
+        name: cms.title || tech.name,
+        hint: cms.description ?? tech.hint,
+      }
+    }),
+  }))
+}
 
 const TechStack = ({
   eyebrow = 'Our Stack',
@@ -19,14 +43,16 @@ const TechStack = ({
   accentTitle = 'technology',
   description =
     'We choose proven, modern tools to ship secure, scalable, and high-performance solutions — engineered for businesses that expect world-class digital experiences.',
+  items,
 }: TechStackProps = {}) => {
   const header = mergeSectionHeader(
     { eyebrow, title, accentTitle, description },
     { eyebrow, title, accentTitle, description },
   )
 
-  const [activeId, setActiveId] = useState(techCategories[0].id)
-  const active = techCategories.find((c) => c.id === activeId) ?? techCategories[0]
+  const categories = mergeCmsIntoTechCategories(techCategories, items)
+  const [activeId, setActiveId] = useState(categories[0].id)
+  const active = categories.find((c) => c.id === activeId) ?? categories[0]
   const tabsId = useId()
 
   return (
@@ -87,7 +113,7 @@ const TechStack = ({
             aria-label="Technology categories"
             className="mx-auto mt-12 flex max-w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-6 px-1 pb-3 sm:mt-14 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
           >
-            {techCategories.map((cat) => {
+            {categories.map((cat) => {
               const isActive = cat.id === activeId
               const CatIcon = cat.icon
               return (
