@@ -1,5 +1,6 @@
 import { resolveCmsImage } from '@/lib/strapi/cms-image';
 import { getStrapiMediaUrl } from '@/lib/strapi/client';
+import { mapSocialLinks, type CmsSocialLink } from '@/lib/strapi/social-icons';
 import type { Metadata } from 'next';
 import type {
   StrapiHeroAbout,
@@ -140,11 +141,32 @@ export type CmsFaqItem = {
 
 export type CmsTeamMember = {
   id: string;
+  memberId?: string;
   name: string;
   role?: string;
   bio?: string;
   image?: string;
+  order?: number;
 };
+
+export type CmsTeamMemberDetail = {
+  id: string;
+  memberId?: string;
+  name: string;
+  role?: string;
+  description: string;
+  image: string;
+  skills: string[];
+  tags: string[];
+  socialLinks: CmsSocialLink[];
+};
+
+const FALLBACK_TEAM_IMAGE = '/images/home-ai/team/ai-team-1.png';
+
+function parseStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0);
+}
 
 function splitHeroTitle(title: string) {
   const parts = title.trim().split(/\s+/);
@@ -441,11 +463,45 @@ function mapTeamMember(member: StrapiTeamMember, index: number): CmsTeamMember |
 
   return {
     id: member.documentId ?? member.memberId ?? String(index + 1),
+    memberId: member.memberId ?? undefined,
     name: member.name,
     role: member.role ?? undefined,
     bio: member.bio ?? member.description ?? undefined,
     image:
       member.imagePath ?? getStrapiMediaUrl(member.image ?? undefined) ?? undefined,
+    order: member.order ?? undefined,
+  };
+}
+
+export function pickFeaturedTeamMember(members: CmsTeamMember[]): {
+  featuredMember: CmsTeamMember | null;
+  galleryMembers: CmsTeamMember[];
+} {
+  if (!members.length) {
+    return { featuredMember: null, galleryMembers: [] };
+  }
+
+  const featuredIndex = members.findIndex(
+    (member) =>
+      member.memberId === 'yahya-sadat' ||
+      member.role?.toLowerCase() === 'founder',
+  );
+
+  if (featuredIndex >= 0) {
+    const featuredMember = members[featuredIndex] ?? null;
+    return {
+      featuredMember,
+      galleryMembers: members.filter((_, index) => index !== featuredIndex),
+    };
+  }
+
+  const sorted = [...members].sort(
+    (left, right) => (left.order ?? 99) - (right.order ?? 99),
+  );
+
+  return {
+    featuredMember: sorted[0] ?? null,
+    galleryMembers: sorted.slice(1),
   };
 }
 
@@ -457,49 +513,67 @@ export function mapStrapiTeamMember(
   return mapTeamMember(member, index);
 }
 
+export function mapTeamMemberDetail(
+  member?: StrapiTeamMember | null,
+): CmsTeamMemberDetail | null {
+  if (!member?.name || member.isActive === false) return null;
+
+  return {
+    id: member.documentId ?? member.memberId ?? String(member.id ?? ''),
+    memberId: member.memberId ?? undefined,
+    name: member.name,
+    role: member.role ?? undefined,
+    description: member.description ?? member.bio ?? '',
+    image:
+      member.imagePath ?? getStrapiMediaUrl(member.image ?? undefined) ?? FALLBACK_TEAM_IMAGE,
+    skills: parseStringArray(member.skills),
+    tags: parseStringArray(member.portfolioTags),
+    socialLinks: mapSocialLinks(member.socialLinks),
+  };
+}
+
 export function mapPageTeamMembers(
   section?: StrapiPageTeamMembers | null,
 ): CmsTeamMember[] | null {
-  const members: CmsTeamMember[] = [];
-
-  const featured = mapStrapiTeamMember(section?.featuredMember, 0);
-  if (featured) members.push(featured);
-
-  for (const [index, member] of (section?.members ?? []).entries()) {
-    const mapped = mapTeamMember(member, index + 1);
-    if (!mapped) continue;
-    if (featured && mapped.id === featured.id) continue;
-    members.push(mapped);
-  }
+  const members = (section?.members ?? [])
+    .map(mapTeamMember)
+    .filter((member): member is CmsTeamMember => member !== null);
 
   return members.length ? members : null;
 }
 
 export type CmsTeamSectionProps = {
-  featuredMember: CmsTeamMember;
+  /** Top card — only from CMS featuredMember, never inferred from gallery order. */
+  featuredMember: CmsTeamMember | null;
+  /** Bottom gallery — all CMS members entries, no deduplication. */
   galleryMembers: CmsTeamMember[];
 };
+
+function sortTeamMembersByOrder(members: StrapiTeamMember[]): StrapiTeamMember[] {
+  return [...members].sort((left, right) => (left.order ?? 99) - (right.order ?? 99));
+}
 
 export function mapPageTeamSection(
   section?: StrapiPageTeamMembers | null,
 ): CmsTeamSectionProps | null {
-  const featuredMember = mapStrapiTeamMember(section?.featuredMember, 0);
-  const galleryMembers = (section?.members ?? [])
+  let featuredMember = mapStrapiTeamMember(section?.featuredMember, 0);
+  let galleryMembers = sortTeamMembersByOrder(section?.members ?? [])
     .map(mapTeamMember)
-    .filter((member): member is CmsTeamMember => member !== null)
-    .filter((member) => !featuredMember || member.id !== featuredMember.id);
+    .filter((member): member is CmsTeamMember => member !== null);
+
+  // About page often links only `members`; infer featured card when unset.
+  if (!featuredMember && galleryMembers.length) {
+    const inferred = pickFeaturedTeamMember(galleryMembers);
+    featuredMember = inferred.featuredMember;
+    galleryMembers = inferred.galleryMembers;
+  } else if (featuredMember) {
+    galleryMembers = galleryMembers.filter((member) => member.id !== featuredMember!.id);
+  }
 
   if (!featuredMember && !galleryMembers.length) return null;
 
-  if (!featuredMember && galleryMembers.length) {
-    return {
-      featuredMember: galleryMembers[0],
-      galleryMembers: galleryMembers.slice(1),
-    };
-  }
-
   return {
-    featuredMember: featuredMember!,
+    featuredMember: featuredMember ?? null,
     galleryMembers,
   };
 }

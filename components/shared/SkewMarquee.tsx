@@ -9,26 +9,44 @@ import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const MARQUEE_IMAGES = [
-  { id: 1, src: '/images/marquee-img/hero-marquee-01.png' },
-  { id: 2, src: '/images/marquee-img/hero-marquee-02.png' },
-  { id: 3, src: '/images/marquee-img/hero-marquee-03.png' },
-  { id: 4, src: '/images/marquee-img/hero-marquee-04.png' },
-  { id: 5, src: '/images/marquee-img/hero-marquee-05.png' },
-  { id: 6, src: '/images/marquee-img/hero-marquee-06.png' },
-  { id: 7, src: '/images/marquee-img/hero-marquee-01.png' },
-  { id: 8, src: '/images/marquee-img/hero-marquee-02.png' },
-  { id: 9, src: '/images/marquee-img/hero-marquee-03.png' },
-  { id: 10, src: '/images/marquee-img/hero-marquee-04.png' },
-  { id: 11, src: '/images/marquee-img/hero-marquee-05.png' },
-  { id: 12, src: '/images/marquee-img/hero-marquee-06.png' },
+const DEFAULT_MARQUEE_IMAGES = [
+  { id: 1, src: '/images/marquee-img/hero-marquee-01.png', alt: 'Marquee 1' },
+  { id: 2, src: '/images/marquee-img/hero-marquee-02.png', alt: 'Marquee 2' },
+  { id: 3, src: '/images/marquee-img/hero-marquee-03.png', alt: 'Marquee 3' },
+  { id: 4, src: '/images/marquee-img/hero-marquee-04.png', alt: 'Marquee 4' },
+  { id: 5, src: '/images/marquee-img/hero-marquee-05.png', alt: 'Marquee 5' },
+  { id: 6, src: '/images/marquee-img/hero-marquee-06.png', alt: 'Marquee 6' },
 ]
+
+type MarqueeImage = {
+  id: number
+  src: string
+  alt?: string
+}
 
 type SkewMarqueeProps = {
   className?: string
+  images?: Array<{ src: string; alt?: string }> | null
 }
 
-const SkewMarquee = ({ className }: SkewMarqueeProps) => {
+function buildMarqueeImages(images?: Array<{ src: string; alt?: string }> | null): MarqueeImage[] {
+  const source =
+    images?.length ?
+      images.filter((image) => Boolean(image.src))
+    : DEFAULT_MARQUEE_IMAGES
+
+  if (!source.length) return DEFAULT_MARQUEE_IMAGES
+
+  const loop = [...source, ...source]
+  return loop.map((image, index) => ({
+    id: index + 1,
+    src: image.src,
+    alt: image.alt,
+  }))
+}
+
+const SkewMarquee = ({ className, images }: SkewMarqueeProps) => {
+  const marqueeImages = buildMarqueeImages(images)
   const containerRef = useRef<HTMLDivElement>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
 
@@ -89,9 +107,9 @@ const SkewMarquee = ({ className }: SkewMarqueeProps) => {
           }}
         >
           <div ref={marqueeRef} className="flex flex-nowrap gap-5">
-            {MARQUEE_IMAGES.map((img) => (
+            {marqueeImages.map((img) => (
               <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
-                <Image width={370} height={400} src={img.src} alt={`Marquee ${img.id}`} />
+                <Image width={370} height={400} src={img.src} alt={img.alt ?? `Marquee ${img.id}`} className='object-cover rounded-radius-md' />
               </figure>
             ))}
           </div>

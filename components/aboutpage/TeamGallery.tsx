@@ -57,7 +57,7 @@ const TeamGallery = ({ members }: TeamGalleryProps = {}) => {
                   width={344}
                   height={388}
                   alt={teamM.title}
-                  className="h-full w-full object-cover shadow-lg"
+                  className="h-full w-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 m-5 bg-primary px-4 py-4">
                   <Link href={`/team/${teamM.id}`}>

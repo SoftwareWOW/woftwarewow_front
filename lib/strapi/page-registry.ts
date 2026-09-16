@@ -689,7 +689,22 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
     cmsType: 'page-images',
     populate: { images: { populate: '*' } },
   },
+  'about-skew-marquee': {
+    cmsType: 'page-images',
+    populate: { images: { populate: '*' } },
+  },
+  'skew-marquee': {
+    cmsType: 'page-images',
+    populate: { images: { populate: '*' } },
+  },
   'team-member': {
+    cmsType: 'page-team-members',
+    populate: {
+      featuredMember: { populate: { image: true } },
+      members: { populate: { image: true } },
+    },
+  },
+  team: {
     cmsType: 'page-team-members',
     populate: {
       featuredMember: { populate: { image: true } },

@@ -33,7 +33,8 @@ const CMS_NESTED_POPULATE: Partial<
     images: { populate: '*' },
   },
   'page-team-members': {
-    members: { populate: '*' },
+    featuredMember: { populate: { image: true } },
+    members: { populate: { image: true } },
   },
   'page-rfq-accordion': {
     groups: { populate: '*' },

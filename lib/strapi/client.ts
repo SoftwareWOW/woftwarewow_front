@@ -191,3 +191,12 @@ export async function fetchCollection<T>(
   const result = await strapiFetch<StrapiCollectionResponse<T>>(apiId, options);
   return result?.data ?? [];
 }
+
+export async function fetchDocument<T>(
+  apiId: string,
+  documentId: string,
+  options: FetchOptions,
+): Promise<T | null> {
+  const result = await strapiFetch<StrapiResponse<T>>(`${apiId}/${documentId}`, options);
+  return result?.data ?? null;
+}

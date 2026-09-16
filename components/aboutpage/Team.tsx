@@ -29,7 +29,10 @@ interface TeamMember {
 
 type TeamProps = {
   featuredMember?: CmsTeamMember | null
+  /** Bottom gallery — CMS `members` only. */
   galleryMembers?: CmsTeamMember[] | null
+  /** When true, gallery uses CMS members only (no static fallback). */
+  fromCms?: boolean
   /** @deprecated Use featuredMember + galleryMembers */
   members?: CmsTeamMember[] | null
 }
@@ -51,25 +54,21 @@ function resolveTeamLayout({
   featuredMember,
   galleryMembers,
   members,
+  fromCms = false,
 }: TeamProps): { featured: TeamMember; gallery: TeamMember[] } {
-  if (featuredMember) {
+  const staticMembers = teamMembers as TeamMember[]
+
+  if (fromCms) {
     return {
-      featured: toDisplayMember(featuredMember),
+      featured: featuredMember ? toDisplayMember(featuredMember) : staticMembers[0],
       gallery: (galleryMembers ?? []).map(toDisplayMember),
     }
   }
 
-  if (members?.length) {
-    return {
-      featured: toDisplayMember(members[0]),
-      gallery: members.slice(1).map(toDisplayMember),
-    }
-  }
-
-  const staticMembers = teamMembers as TeamMember[]
+  const gallery = (galleryMembers ?? members ?? []).map(toDisplayMember)
   return {
-    featured: staticMembers[0],
-    gallery: staticMembers.slice(1),
+    featured: featuredMember ? toDisplayMember(featuredMember) : staticMembers[0],
+    gallery: gallery.length ? gallery : staticMembers.slice(1),
   }
 }
 
@@ -86,7 +85,7 @@ const Team = (props: TeamProps = {}) => {
               width={330}
               height={372}
               alt={featured.name}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover rounded-radius-md"
             />
           </figure>
 

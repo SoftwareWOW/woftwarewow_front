@@ -26,16 +26,16 @@ const Teams: FC<TeamsProps> = ({ team }) => {
             height={388}
             src={member.image}
             alt={`Team member ${member.title}`}
-            className="h-full w-full object-cover shadow-lg transition-all duration-300 ease-in-out"
+            className="h-full w-full object-cover rounded-radius-sm transition-all duration-300 ease-in-out"
           />
           <div
-            className={`underline-hover-effect absolute bottom-0 left-0 right-0 m-5 bg-primary px-5 py-7 transition-all duration-500 ${index === activeIndex ? 'translate-y-0 opacity-100' : '-translate-y-40 opacity-0'}`}>
+            className={`underline-hover-effect rounded-radius-sm absolute bottom-0 left-0 right-0 m-5 bg-primary px-5 py-7 transition-all duration-500 ${index === activeIndex ? 'translate-y-0 opacity-100' : '-translate-y-40 opacity-0'}`}>
             <Link href={`/team/${member.id}`}>
               <div className="project-title mb-1">
-                <h3 className="text-4xl leading-tight tracking-tight dark:text-secondary">{member.title}</h3>
+                <h3 className="text-4xl leading-tight tracking-tight text-white">{member.title}</h3>
               </div>
             </Link>
-            <SectionLabel className="mt-2 bg-white/30 dark:bg-secondary/10">{member.position}</SectionLabel>
+            <SectionLabel className="mt-2 bg-white/30 dark:bg-secondary/10 text-white">{member.position}</SectionLabel>
           </div>
         </div>
       ))}

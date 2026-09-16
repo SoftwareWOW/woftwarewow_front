@@ -16,6 +16,7 @@ import {
 } from '@/lib/strapi/superagency-page-loader'
 import type {
   StrapiHeroAbout,
+  StrapiPageImages,
   StrapiPageTeamMembers,
   StrapiPageTechnologies,
 } from '@/lib/strapi/types/pages'
@@ -62,6 +63,7 @@ const AboutPage = async ({ params }: Props) => {
   const solutionCategories =
     cms.technologies(cms.field<StrapiPageTechnologies>('solutionToChallenges')) ??
     techStackItems
+  const skewMarqueeImages = cms.images(cms.field<StrapiPageImages>('skewMarquee'))
 
   return (
     <LayoutOne>
@@ -70,9 +72,10 @@ const AboutPage = async ({ params }: Props) => {
         <HeroAbout
           body={heroAbout?.body ?? cms.heroAbout('heroAbout')?.body ?? undefined}
         />
-        <SkewMarquee className="!pb-0 !pt-0 lg:!pb-0" />
+        <SkewMarquee className="!pb-0 !pt-0 lg:!pb-0" images={skewMarqueeImages} />
         <TechStack {...(sections.techStack ?? {})} />
         <Team
+          fromCms={cms.field('team') != null}
           featuredMember={teamSection?.featuredMember}
           galleryMembers={teamSection?.galleryMembers}
         />

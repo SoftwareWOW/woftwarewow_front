@@ -165,13 +165,22 @@ export type StrapiPageRfq = {
   body?: string | null;
 };
 
+export type StrapiSocialLink = {
+  platform?: string | null;
+  url?: string | null;
+};
+
 export type StrapiTeamMember = {
+  id?: number;
   documentId?: string;
   memberId?: string;
   name?: string;
   role?: string | null;
   bio?: string | null;
   description?: string | null;
+  skills?: string[] | null;
+  portfolioTags?: string[] | null;
+  socialLinks?: StrapiSocialLink[] | null;
   image?: StrapiMedia | null;
   imagePath?: string | null;
   order?: number | null;

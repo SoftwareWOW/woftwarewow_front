@@ -51,6 +51,7 @@ const TeamPage = async ({ params }: Props) => {
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <TeamHero {...hero} scale />
         <Team
+          fromCms={cms.field('teamMembers') != null}
           featuredMember={teamSection?.featuredMember}
           galleryMembers={teamSection?.galleryMembers}
         />
