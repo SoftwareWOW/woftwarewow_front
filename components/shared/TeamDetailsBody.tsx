@@ -14,7 +14,7 @@ const TeamDetailsBody = ({ teamData }: { teamData: CmsTeamMemberDetail }) => {
               width={682}
               height={428}
               alt={teamData.name}
-              className="aspect-3/2 h-full w-full object-cover"
+              className="aspect-3/2 h-full w-full object-cover rounded-radius-md"
             />
           </figure>
 

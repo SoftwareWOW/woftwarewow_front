@@ -23,7 +23,7 @@ export async function getSuperagencyTeamMembers(
 ): Promise<CmsTeamMember[] | null> {
   const members = await fetchCollection<StrapiTeamMember>('superagency-team-members', {
     locale,
-    populate: { image: true },
+    populate: { image: true, socialLinks: true },
     sort: 'order:asc',
   });
 
@@ -36,7 +36,7 @@ async function hydrateTeamSectionFromCollection(
 ): Promise<CmsTeamSectionProps | null> {
   const collection = await fetchCollection<StrapiTeamMember>('superagency-team-members', {
     locale,
-    populate: { image: true },
+    populate: { image: true, socialLinks: true },
   });
 
   if (!collection.length) return null;
@@ -101,7 +101,7 @@ export async function resolveTeamSection(
   // CMS team section exists but Strapi did not return relations (unpublished links).
   const collection = await fetchCollection<StrapiTeamMember>('superagency-team-members', {
     locale,
-    populate: { image: true },
+    populate: { image: true, socialLinks: true },
     sort: 'order:asc',
   });
 
@@ -157,7 +157,7 @@ export async function getSuperagencyTeamMemberParams(
 ): Promise<Array<{ id: string }>> {
   const members = await fetchCollection<StrapiTeamMember>('superagency-team-members', {
     locale,
-    populate: { image: true },
+    populate: { image: true, socialLinks: true },
     filters: { isActive: { $eq: true } },
     sort: 'order:asc',
   });

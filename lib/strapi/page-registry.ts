@@ -700,15 +700,15 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
   'team-member': {
     cmsType: 'page-team-members',
     populate: {
-      featuredMember: { populate: { image: true } },
-      members: { populate: { image: true } },
+      featuredMember: { populate: { image: true, socialLinks: true } },
+      members: { populate: { image: true, socialLinks: true } },
     },
   },
   team: {
     cmsType: 'page-team-members',
     populate: {
-      featuredMember: { populate: { image: true } },
-      members: { populate: { image: true } },
+      featuredMember: { populate: { image: true, socialLinks: true } },
+      members: { populate: { image: true, socialLinks: true } },
     },
   },
 };

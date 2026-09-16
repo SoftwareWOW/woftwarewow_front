@@ -147,6 +147,7 @@ export type CmsTeamMember = {
   bio?: string;
   image?: string;
   order?: number;
+  socialLinks?: CmsSocialLink[];
 };
 
 export type CmsTeamMemberDetail = {
@@ -470,6 +471,7 @@ function mapTeamMember(member: StrapiTeamMember, index: number): CmsTeamMember |
     image:
       member.imagePath ?? getStrapiMediaUrl(member.image ?? undefined) ?? undefined,
     order: member.order ?? undefined,
+    socialLinks: mapSocialLinks(member.socialLinks),
   };
 }
 
