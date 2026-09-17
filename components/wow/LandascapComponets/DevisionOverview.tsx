@@ -4,7 +4,6 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { renderWowInTitle } from '@/components/wow/shared/WowText'
-import { cn } from '@/lib/utils'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
@@ -12,6 +11,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const DIVISION_BG_BASE = '/images/wow/Hero/devision'
+const DIVISIONS_SECTION_BG = 'bg-[#ebe6f4] dark:bg-[#ebe6f4]'
 
 /** Viewport X ratio used to pick the focused card (left side, first card on entry). */
 const FOCUS_X_RATIO = 0.22
@@ -153,6 +153,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
       if (pinSpacer?.classList.contains('pin-spacer')) {
         pinSpacer.style.overflowX = 'clip'
         pinSpacer.style.maxWidth = '100%'
+        pinSpacer.style.backgroundColor = '#ebe6f4'
       }
     },
   })
@@ -166,7 +167,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
     let closestId = 1
     let closestDistance = Infinity
 
-    for (const item of divisions) {
+    for (const item of divisionsData) {
       const el = cardRefs.current[item.id]
       if (!el) continue
 
@@ -181,7 +182,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
     }
 
     setActiveCardId((prev) => (prev === closestId ? prev : closestId))
-  }, [triggerRef])
+  }, [divisionsData, triggerRef])
 
   const handleCardPointerMove = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
     if (isScrollAnimatingRef.current) return
@@ -220,54 +221,20 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
   const activeBgId = hoveredId ?? activeCardId
 
   return (
-    <section className="relative w-full max-w-full overflow-x-clip">
+    <section className={`relative w-full max-w-full overflow-x-clip ${DIVISIONS_SECTION_BG}`}>
       <div
         ref={triggerRef}
-        className="service-section relative z-10 flex min-h-[100svh] w-full max-w-full flex-col overflow-x-clip"
+        className={`service-section relative z-10 flex min-h-[100svh] w-full max-w-full flex-col overflow-x-clip ${DIVISIONS_SECTION_BG}`}
         aria-labelledby="divisions-heading"
       >
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[#ebe6f4] transition-colors duration-500 dark:bg-[#0a0a0a]"
-        />
-
-        {divisionsData.map((item) => (
-          <div
-            key={item.id}
-            aria-hidden
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              activeBgId === item.id ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <Image
-              src={item.bgImage}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority={item.id <= 2}
-            />
-          </div>
-        ))}
-
-        <div
-          aria-hidden
-          className={`absolute inset-0 transition-opacity duration-700 ${
-            activeBgId !== null ? 'bg-black/60' : 'bg-black/40'
-          }`}
-        />
+        <div aria-hidden className={`absolute inset-0 ${DIVISIONS_SECTION_BG}`} />
 
         {/* Header Section */}
         <div className="relative z-10 px-5 pt-24 sm:px-10 md:px-16 md:pt-28 lg:px-20 lg:pt-32">
           <div className="mx-auto flex w-full max-w-[1320px] items-start justify-between gap-6">
             <div className="max-w-3xl">
               <RevealWrapper>
-                <SectionLabel
-                  className={cn(
-                    'mb-4 transition-colors duration-500 md:mb-5',
-                    activeBgId !== null && '!bg-white/15 !text-white/90',
-                  )}
-                >
+                <SectionLabel className="mb-4 dark:bg-[#15151533] dark:text-[#0D0D0D] md:mb-5">
                   Divisions Overview
                 </SectionLabel>
               </RevealWrapper>
@@ -275,15 +242,34 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
               <TextAppearAnimation>
                 <h2
                   id="divisions-heading"
-                  className={`text-appear text-left transition-colors duration-500 max-md:text-4xl max-sm:text-3xl ${
-                    activeBgId !== null ? 'text-white' : 'text-[#1a1a1a] dark:text-[#F2F2F2]'
-                  }`}
+                  className="text-appear text-left text-[#1a1a1a] dark:text-[#1a1a1a] dark:[&_.word]:text-[#1a1a1a] dark:[&_.font-instrument_.word]:!text-transparent max-md:text-4xl max-sm:text-3xl"
                 >
                   Eleven Divisions. <br />
                   One Growth{' '}
                   <span className="font-instrument italic">Ecosystem.</span>
                 </h2>
               </TextAppearAnimation>
+            </div>
+
+            <div
+              aria-hidden
+              className="relative hidden h-28 w-28 shrink-0 sm:block md:h-36 md:w-36 lg:h-44 lg:w-44 xl:h-52 xl:w-52"
+            >
+              {divisionsData.map((item) =>
+                item.bgImage ?
+                  <Image
+                    key={item.id}
+                    src={item.bgImage}
+                    alt=""
+                    fill
+                    className={`object-contain transition-opacity duration-700 ${
+                      activeBgId === item.id ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    sizes="(max-width: 768px) 112px, (max-width: 1280px) 176px, 208px"
+                    priority={item.id <= 2}
+                  />
+                : null,
+              )}
             </div>
           </div>
         </div>
