@@ -5,8 +5,13 @@ import type { Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionary'
 import { normalizeCaseStudyData } from '@/lib/case-study/normalizeCaseStudyData'
 import type { CaseStudyItem } from '@/lib/case-study/types'
+import { getCaseStudySlugs } from '@/lib/strapi/fetchers/case-study'
+import { loadCaseStudyBySlug } from '@/lib/strapi/load-case-study'
 import getMarkDownContent from '@/utils/GetMarkDownContent'
 import getMarkDownData from '@/utils/GetMarkDownData'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import CaseStudyAboutClient from '../_components/CaseStudyAboutClient'
 import CaseStudyApproach from '../_components/CaseStudyApproach'
 import CaseStudyBusinessGoals from '../_components/CaseStudyBusinessGoals'
@@ -16,18 +21,66 @@ import CaseStudyHighlights from '../_components/CaseStudyHighlights'
 import CaseStudySuccessMetrics from '../_components/CaseStudySuccessMetrics'
 import CaseStudyTargetAudience from '../_components/CaseStudyTargetAudience'
 
-export async function generateStaticParams() {
-  const studies = getMarkDownData('data/case-study') as CaseStudyItem[]
-  return studies.map((study) => ({
-    slug: study.slug,
-  }))
+export const revalidate = 60
+
+type PageProps = {
+  params: Promise<{ slug: string; locale: string }>
 }
 
-const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string; locale: string }> }) => {
+function loadMarkdownCaseStudy(slug: string) {
+  try {
+    const studyFile = getMarkDownContent('data/case-study/', slug)
+    return normalizeCaseStudyData(studyFile.data as Record<string, unknown>, slug)
+  } catch {
+    return null
+  }
+}
+
+export async function generateStaticParams() {
+  const studies = getMarkDownData('data/case-study') as CaseStudyItem[]
+  const slugSet = new Set(studies.map((study) => study.slug))
+
+  try {
+    const cmsSlugs = await getCaseStudySlugs('en-US')
+    cmsSlugs.forEach((slug) => slugSet.add(slug))
+  } catch {
+    // Strapi unavailable at build time — markdown slugs only
+  }
+
+  return Array.from(slugSet, (slug) => ({ slug }))
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params
-  const dictionary = await getDictionary(locale as Locale)
-  const studyFile = getMarkDownContent('data/case-study/', slug)
-  const study = normalizeCaseStudyData(studyFile.data as Record<string, unknown>, slug)
+  const cms = await loadCaseStudyBySlug(slug, locale as Locale)
+
+  if (cms?.seo?.title || cms?.seo?.description) {
+    return {
+      title: cms.seo.title,
+      description: cms.seo.description,
+    }
+  }
+
+  const markdown = loadMarkdownCaseStudy(slug)
+  if (markdown?.title) {
+    return { title: `${markdown.title} | Case Study` }
+  }
+
+  return { title: 'Case Study' }
+}
+
+const CaseStudyDetailsPage = async ({ params }: PageProps) => {
+  const { slug, locale } = await params
+  setRequestLocale(locale as Locale)
+
+  const typedLocale = locale as Locale
+  const dictionary = await getDictionary(typedLocale)
+  const cms = await loadCaseStudyBySlug(slug, typedLocale)
+  const study = cms?.study ?? loadMarkdownCaseStudy(slug)
+
+  if (!study) {
+    notFound()
+  }
 
   return (
     <LayoutOne>
