@@ -19,7 +19,7 @@ export type BlogCarouselItem = {
   slug: string
   title: string
   date: string
-  thumbnail: string
+  thumbnail?: string
 }
 
 type BlogItemsCarouselProps = {
@@ -207,18 +207,20 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
                     className="pl-4 basis-full sm:basis-1/2 md:pl-6 lg:basis-1/3"
                   >
                     <article className="group flex h-full flex-col">
-                      <Link
-                        href={href}
-                        className="relative mb-5 block overflow-hidden rounded-radius-md border border-[#e5e5e5] dark:border-white/5"
-                      >
-                        <Image
-                          src={item.thumbnail || '/images/blog-img/blog-img-5.png'}
-                          width={420}
-                          height={320}
-                          alt={item.title ?? 'Item'}
-                          className="aspect-[420/320] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </Link>
+                      {item.thumbnail ? (
+                        <Link
+                          href={href}
+                          className="relative mb-5 block overflow-hidden rounded-radius-md border border-[#e5e5e5] dark:border-white/5"
+                        >
+                          <Image
+                            src={item.thumbnail}
+                            width={420}
+                            height={320}
+                            alt={item.title ?? 'Item'}
+                            className="aspect-[420/320] h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </Link>
+                      ) : null}
 
                       <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[#808080] sm:text-xs">
                         {String(item.date ?? '').toUpperCase()}

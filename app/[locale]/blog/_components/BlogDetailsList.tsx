@@ -14,7 +14,7 @@ const BlogDetailsList: FC<BlogListProps> = ({ blogData }) => {
     slug: item.slug,
     title: item.title,
     date: item.date,
-    thumbnail: item.thumbnail || item.featureImage || '/images/wow/blog/Blog card 1.jpg',
+    thumbnail: item.thumbnail || item.featureImage || '',
   }))
 
   return (

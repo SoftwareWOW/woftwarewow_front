@@ -49,9 +49,7 @@ function buildHeroPost(
   posts: BlogCard[],
 ): BlogHeroPost | null {
   const featuredPost =
-    posts.find((blog) => blog.slug === hero?.slug) ??
-    posts.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ??
-    posts[0]
+    posts.find((blog) => blog.slug === hero?.slug) ?? posts[0]
 
   if (hero) {
     return {

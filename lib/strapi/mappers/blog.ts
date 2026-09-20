@@ -4,14 +4,12 @@ import type {
   BlogCategoryTab,
   BlogPageHeroData,
 } from '@/lib/blog/types';
-import {
-  normalizeBlogBodyImages,
-  pickBlogCardFallback,
-  resolveBlogPostImage,
-} from '@/lib/blog/images';
+import { normalizeBlogBody, resolveBlogPostImage } from '@/lib/blog/images';
 import { resolveCaseStudySlug } from '@/lib/case-study/slug';
 import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
+import type { BlogBodyImage } from '@/lib/blog/types';
 import type {
+  StrapiBlogBodyImage,
   StrapiBlogCategory,
   StrapiBlogPage,
   StrapiBlogPost,
@@ -33,11 +31,7 @@ function resolveMediaUrl(
   return getStrapiMediaUrl({ url: trimmed });
 }
 
-export function normalizeBlogBody(body?: string | null, slug = ''): string {
-  if (!body?.trim()) return '';
-
-  return normalizeBlogBodyImages(body, slug);
-}
+export { normalizeBlogBody } from '@/lib/blog/images';
 
 function normalizeTags(tags?: unknown): string[] {
   if (!tags) return [];
@@ -101,6 +95,17 @@ function formatProjectDate(project: StrapiProjectFeedItem): string {
     .toUpperCase();
 }
 
+function mapStrapiBodyImages(bodyImages?: StrapiBlogBodyImage[] | null): BlogBodyImage[] {
+  if (!bodyImages?.length) return [];
+
+  return bodyImages.flatMap((item) => {
+    const src = resolveBlogPostImage(item.image);
+    if (!src) return [];
+
+    return [{ src, alt: item.alt?.trim() || '' }];
+  });
+}
+
 export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
   const authorName = post.author?.name?.trim();
   const authorAvatar = resolveMediaUrl(
@@ -113,19 +118,10 @@ export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
     title: post.title,
     description: post.description?.trim() ?? '',
     date: formatBlogDate(post),
-    content: normalizeBlogBody(post.body, post.slug),
-    thumbnail: resolveBlogPostImage(
-      post.thumbnail,
-      post.thumbnailPath,
-      post.slug,
-      'thumbnail',
-    ),
-    featureImage: resolveBlogPostImage(
-      post.featureImage,
-      post.featureImagePath,
-      post.slug,
-      'feature',
-    ),
+    content: normalizeBlogBody(post.body),
+    thumbnail: resolveBlogPostImage(post.thumbnail),
+    featureImage: resolveBlogPostImage(post.featureImage),
+    bodyImages: mapStrapiBodyImages(post.bodyImages),
     tags: normalizeTags(post.tags),
     categorySlug: post.category?.slug,
     categoryLabel: post.category?.label,
@@ -133,7 +129,7 @@ export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
       authorName ?
         {
           name: authorName,
-          avatar: authorAvatar ?? '/images/wow/Hero/career/team/Avatar wrap-3.png',
+          avatar: authorAvatar ?? '',
         }
       : undefined,
   };
@@ -201,9 +197,7 @@ export function mapStrapiProjectFeedItems(
       title: project.title,
       description: project.description?.trim() ?? '',
       date: formatProjectDate(project),
-      thumbnail:
-        resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath) ??
-        pickBlogCardFallback(slug),
+      thumbnail: resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath) ?? '',
     });
 
     if (items.length >= 20) break;

@@ -12,22 +12,50 @@ type BlogDetailsContentProps = {
   restBlogPosts: BlogCard[]
 }
 
+const OBSTACLES_HEADING = '### Overcoming Obstacles'
+
+function stripMarkdownImages(content: string) {
+  return content.replace(/!\[[^\]]*\]\([^)]+\)\s*/g, '').trim()
+}
+
+function splitContentForBodyImages(content: string) {
+  const cleaned = stripMarkdownImages(content)
+  const splitIndex = cleaned.indexOf(OBSTACLES_HEADING)
+
+  if (splitIndex === -1) {
+    return { before: cleaned, after: '' }
+  }
+
+  return {
+    before: cleaned.slice(0, splitIndex).trim(),
+    after: cleaned.slice(splitIndex).trim(),
+  }
+}
+
 const BlogDetailsContent = ({ post, restBlogPosts }: BlogDetailsContentProps) => {
   const headings = post.content.match(/### .+/g) ?? []
   const tableOfContents = headings.map((heading: string) => heading.replace('### ', ''))
+  const bodyImages = post.bodyImages ?? []
+  const contentParts =
+    bodyImages.length > 0 ?
+      splitContentForBodyImages(post.content)
+    : { before: stripMarkdownImages(post.content), after: '' }
+  const { before, after } = contentParts
 
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
-        <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]">
-          <Image
-            src={post.featureImage || post.thumbnail || '/images/wow/blog/Blog card 1.jpg'}
-            width={1280}
-            height={523}
-            alt={post.title || 'Blog Details'}
-            className="w-full rounded-radius-md object-cover"
-          />
-        </RevealWrapper>
+        {(post.featureImage || post.thumbnail) ? (
+          <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]">
+            <Image
+              src={post.featureImage || post.thumbnail || ''}
+              width={1280}
+              height={523}
+              alt={post.title || 'Blog Details'}
+              className="w-full rounded-radius-md object-cover"
+            />
+          </RevealWrapper>
+        ) : null}
 
         <div className="mt-12 flex flex-col justify-start gap-10 pb-14 md:mt-[60px] md:pb-16 lg:flex-row lg:pb-[88px] xl:pb-[100px]">
           <aside className="min-w-[275px] flex-1">
@@ -44,7 +72,26 @@ const BlogDetailsContent = ({ post, restBlogPosts }: BlogDetailsContentProps) =>
             </div>
           </aside>
           <article className="career-details-body overflow-hidden">
-            <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{post.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{before}</ReactMarkdown>
+
+            {bodyImages.map((image, index) => (
+              <figure
+                key={`${image.src}-${index}`}
+                className="my-8 w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]"
+              >
+                <Image
+                  src={image.src}
+                  width={1280}
+                  height={523}
+                  alt={image.alt || post.title || 'Blog image'}
+                  className="w-full rounded-radius-md object-cover"
+                />
+              </figure>
+            ))}
+
+            {after ? (
+              <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{after}</ReactMarkdown>
+            ) : null}
           </article>
         </div>
       </div>
