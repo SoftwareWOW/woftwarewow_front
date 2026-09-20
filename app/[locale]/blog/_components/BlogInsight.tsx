@@ -15,40 +15,11 @@ interface BlogsProps {
   categories?: BlogCategoryTab[]
 }
 
-const FALLBACK_CATEGORIES = ['NEWS', 'CASE STUDY', 'TECHNOLOGY', 'EVENT'] as const
-
 const INITIAL_COUNT = 4
 const LOAD_MORE_COUNT = 4
 
-function getBlogTags(blog: BlogCard): string[] {
-  if (!blog.tags?.length) return []
-  return blog.tags.map(String)
-}
-
 function resolveCategory(blog: BlogCard): string {
-  if (blog.categoryLabel?.trim()) {
-    return blog.categoryLabel.trim().toUpperCase()
-  }
-
-  const haystack = `${blog.title} ${blog.description ?? ''} ${getBlogTags(blog).join(' ')}`.toLowerCase()
-
-  if (
-    /ai|artificial|automation|blockchain|voice|technology|tech|software|personalization|email|video/.test(
-      haystack,
-    )
-  ) {
-    return 'TECHNOLOGY'
-  }
-
-  if (/event|podcast|conference|webinar/.test(haystack)) {
-    return 'EVENT'
-  }
-
-  if (/case|project|study|transformation|shift|era|evolution|dynamics/.test(haystack)) {
-    return 'CASE STUDY'
-  }
-
-  return 'NEWS'
+  return blog.categoryLabel?.trim().toUpperCase() ?? ''
 }
 
 function formatDate(date?: string) {
@@ -58,16 +29,10 @@ function formatDate(date?: string) {
 type CategorizedBlog = BlogCard & { category: string }
 
 const BlogInsight: FC<BlogsProps> = ({ Blogs, categories }) => {
-  const categoryTabs = useMemo(() => {
-    if (categories?.length) {
-      return [{ label: 'ALL', slug: 'ALL' }, ...categories]
-    }
-
-    return [
-      { label: 'ALL', slug: 'ALL' },
-      ...FALLBACK_CATEGORIES.map((label) => ({ label, slug: label })),
-    ]
-  }, [categories])
+  const categoryTabs = useMemo(
+    () => [{ label: 'ALL', slug: 'ALL' }, ...(categories ?? [])],
+    [categories],
+  )
 
   const [activeCategory, setActiveCategory] = useState('ALL')
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
@@ -197,17 +162,19 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs, categories }) => {
                     </div>
                   </div>
 
-                  <Link
-                    href={`/blog/${blog.slug}`}
-                    className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 lg:w-[42%] lg:max-w-[480px]">
-                    <Image
-                      src={blog.thumbnail || blog.featureImage || '/images/blog-img/blog-img-5.png'}
-                      alt={blog.title ?? 'Blog post'}
-                      width={480}
-                      height={280}
-                      className="aspect-[16/10] h-full w-full rounded-radius-sm object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </Link>
+                  {(blog.thumbnail || blog.featureImage) ? (
+                    <Link
+                      href={`/blog/${blog.slug}`}
+                      className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 lg:w-[42%] lg:max-w-[480px]">
+                      <Image
+                        src={blog.thumbnail || blog.featureImage || ''}
+                        alt={blog.title ?? 'Blog post'}
+                        width={480}
+                        height={280}
+                        className="aspect-[16/10] h-full w-full rounded-radius-sm object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </Link>
+                  ) : null}
                 </div>
               </article>
             </RevealWrapper>

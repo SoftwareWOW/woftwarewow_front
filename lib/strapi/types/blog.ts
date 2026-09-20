@@ -15,6 +15,12 @@ export type StrapiBlogAuthor = {
   avatarPath?: string | null;
 };
 
+export type StrapiBlogBodyImage = {
+  id?: number;
+  image?: StrapiMedia | null;
+  alt?: string | null;
+};
+
 export type StrapiBlogPost = {
   documentId: string;
   slug: string;
@@ -28,6 +34,7 @@ export type StrapiBlogPost = {
   thumbnailPath?: string | null;
   featureImage?: StrapiMedia | null;
   featureImagePath?: string | null;
+  bodyImages?: StrapiBlogBodyImage[] | null;
   category?: StrapiBlogCategory | null;
   author?: StrapiBlogAuthor | null;
   seo?: StrapiPageSeo | null;

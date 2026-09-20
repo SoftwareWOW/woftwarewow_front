@@ -9,7 +9,6 @@ import {
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import getMarkDownData from '@/utils/GetMarkDownData'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import BlogCaseStudies from './_components/BlogCaseStudies'
@@ -45,54 +44,35 @@ const DEFAULT_METADATA: Metadata = {
     'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
 }
 
-function mapMarkdownBlog(blog: Record<string, unknown>): BlogCard {
-  const tags = blog.tags;
-  return {
-    slug: String(blog.slug ?? ''),
-    title: String(blog.title ?? ''),
-    description: String(blog.description ?? ''),
-    date: String(blog.date ?? ''),
-    content: String(blog.content ?? ''),
-    thumbnail: typeof blog.thumbnail === 'string' ? blog.thumbnail : undefined,
-    featureImage: typeof blog.featureImage === 'string' ? blog.featureImage : undefined,
-    tags: Array.isArray(tags) ? tags.map(String) : typeof tags === 'string' ? tags.split(',').map((t) => t.trim()) : [],
-    author:
-      blog.author && typeof blog.author === 'object' ?
-        {
-          name: String((blog.author as { name?: string }).name ?? ''),
-          avatar: String((blog.author as { avatar?: string }).avatar ?? ''),
-        }
-      : undefined,
-  }
-}
+function buildHeroPost(
+  hero: BlogPageHeroData | null,
+  posts: BlogCard[],
+): BlogHeroPost | null {
+  const featuredPost =
+    posts.find((blog) => blog.slug === hero?.slug) ?? posts[0]
 
-function buildHeroPost(hero: BlogPageHeroData | null, fallbackPosts: BlogCard[]): BlogHeroPost {
   if (hero) {
     return {
-      slug: hero.slug,
-      title: hero.title,
-      description: hero.description,
-      date: hero.date ?? '',
-      tags: hero.tags,
-      featureImage: hero.image,
-      thumbnail: hero.image,
+      slug: hero.slug || featuredPost?.slug || '',
+      title: hero.title || featuredPost?.title || '',
+      description: hero.description || featuredPost?.description || '',
+      date: hero.date ?? featuredPost?.date ?? '',
+      tags: hero.tags?.length ? hero.tags : featuredPost?.tags,
+      featureImage: hero.image || featuredPost?.featureImage,
+      thumbnail: hero.image || featuredPost?.thumbnail,
     }
   }
 
-  const featured =
-    fallbackPosts.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ??
-    fallbackPosts[0]
+  if (!featuredPost) return null
 
   return {
-    slug: featured?.slug ?? '',
-    title: featured?.title ?? 'Insights That Help Businesses Grow',
-    description:
-      featured?.description ??
-      'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
-    date: featured?.date ?? '',
-    tags: featured?.tags,
-    featureImage: featured?.featureImage,
-    thumbnail: featured?.thumbnail,
+    slug: featuredPost.slug,
+    title: featuredPost.title,
+    description: featuredPost.description,
+    date: featuredPost.date,
+    tags: featuredPost.tags,
+    featureImage: featuredPost.featureImage,
+    thumbnail: featuredPost.thumbnail,
   }
 }
 
@@ -106,20 +86,15 @@ const BlogPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const markdownBlogs = (getMarkDownData('data/blogsV2') as Record<string, unknown>[]).map(
-    mapMarkdownBlog,
-  )
-
   const { hero, posts, categories, caseStudies } = await loadBlogPageData(locale as Locale)
-  const blogPosts = posts.length ? posts : markdownBlogs
-  const featuredPost = buildHeroPost(hero, blogPosts)
+  const featuredPost = buildHeroPost(hero, posts)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <BlogHero blog={featuredPost} imageSrc={hero?.image} />
+        {featuredPost ? <BlogHero blog={featuredPost} imageSrc={hero?.image} /> : null}
         <Marquess />
-        <BlogInsight Blogs={blogPosts} categories={categories} />
+        <BlogInsight Blogs={posts} categories={categories} />
         <BlogCaseStudies caseStudies={caseStudies} />
         <WowGrowthCta
           accentText="Ready to"

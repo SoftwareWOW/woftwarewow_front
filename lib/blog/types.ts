@@ -3,6 +3,11 @@ export type BlogAuthor = {
   avatar: string
 }
 
+export type BlogBodyImage = {
+  src: string
+  alt: string
+}
+
 export type BlogCard = {
   slug: string
   title: string
@@ -11,6 +16,7 @@ export type BlogCard = {
   content: string
   thumbnail?: string
   featureImage?: string
+  bodyImages?: BlogBodyImage[]
   tags?: string[]
   categorySlug?: string
   categoryLabel?: string

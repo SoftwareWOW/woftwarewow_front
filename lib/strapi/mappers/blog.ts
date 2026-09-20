@@ -4,9 +4,12 @@ import type {
   BlogCategoryTab,
   BlogPageHeroData,
 } from '@/lib/blog/types';
+import { normalizeBlogBody, resolveBlogPostImage } from '@/lib/blog/images';
 import { resolveCaseStudySlug } from '@/lib/case-study/slug';
 import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
+import type { BlogBodyImage } from '@/lib/blog/types';
 import type {
+  StrapiBlogBodyImage,
   StrapiBlogCategory,
   StrapiBlogPage,
   StrapiBlogPost,
@@ -27,6 +30,8 @@ function resolveMediaUrl(
 
   return getStrapiMediaUrl({ url: trimmed });
 }
+
+export { normalizeBlogBody } from '@/lib/blog/images';
 
 function normalizeTags(tags?: unknown): string[] {
   if (!tags) return [];
@@ -90,6 +95,17 @@ function formatProjectDate(project: StrapiProjectFeedItem): string {
     .toUpperCase();
 }
 
+function mapStrapiBodyImages(bodyImages?: StrapiBlogBodyImage[] | null): BlogBodyImage[] {
+  if (!bodyImages?.length) return [];
+
+  return bodyImages.flatMap((item) => {
+    const src = resolveBlogPostImage(item.image);
+    if (!src) return [];
+
+    return [{ src, alt: item.alt?.trim() || '' }];
+  });
+}
+
 export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
   const authorName = post.author?.name?.trim();
   const authorAvatar = resolveMediaUrl(
@@ -102,9 +118,10 @@ export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
     title: post.title,
     description: post.description?.trim() ?? '',
     date: formatBlogDate(post),
-    content: post.body?.trim() ?? '',
-    thumbnail: resolveMediaUrl(post.thumbnail ?? undefined, post.thumbnailPath),
-    featureImage: resolveMediaUrl(post.featureImage ?? undefined, post.featureImagePath),
+    content: normalizeBlogBody(post.body),
+    thumbnail: resolveBlogPostImage(post.thumbnail),
+    featureImage: resolveBlogPostImage(post.featureImage),
+    bodyImages: mapStrapiBodyImages(post.bodyImages),
     tags: normalizeTags(post.tags),
     categorySlug: post.category?.slug,
     categoryLabel: post.category?.label,
@@ -112,7 +129,7 @@ export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
       authorName ?
         {
           name: authorName,
-          avatar: authorAvatar ?? '/images/wow/Hero/career/team/Avatar wrap-3.png',
+          avatar: authorAvatar ?? '',
         }
       : undefined,
   };
@@ -146,15 +163,18 @@ export function mapStrapiBlogPageHero(page: StrapiBlogPage | null): BlogPageHero
   const hero = page?.hero;
   if (!hero) return null;
 
-  const postSlug = hero.post?.slug?.trim();
-  if (!postSlug) return null;
+  const title = hero.title?.trim() || hero.post?.title?.trim();
+  const description = hero.description?.trim() || hero.post?.description?.trim();
+  const image = resolveMediaUrl(hero.image ?? undefined);
+
+  if (!title && !description && !image && !hero.post?.slug) return null;
 
   return {
-    slug: postSlug,
-    title: hero.title?.trim() || hero.post?.title?.trim() || '',
-    description: hero.description?.trim() || hero.post?.description?.trim() || '',
+    slug: hero.post?.slug?.trim() ?? '',
+    title: title ?? '',
+    description: description ?? '',
     tags: normalizeTags(hero.tags),
-    image: resolveMediaUrl(hero.image ?? undefined),
+    image,
     date: hero.post ? formatBlogDate(hero.post) : undefined,
   };
 }
@@ -177,9 +197,7 @@ export function mapStrapiProjectFeedItems(
       title: project.title,
       description: project.description?.trim() ?? '',
       date: formatProjectDate(project),
-      thumbnail:
-        resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath) ??
-        '/images/blog-img/blog-img-5.png',
+      thumbnail: resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath) ?? '',
     });
 
     if (items.length >= 20) break;
