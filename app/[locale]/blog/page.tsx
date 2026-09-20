@@ -1,7 +1,6 @@
 import BlogHero, { type BlogHeroPost } from '@/app/[locale]/blog/_components/BlogHero'
 
 import type { Locale } from '@/i18n/config'
-import { mapMarkdownBlogCard } from '@/lib/blog/markdown'
 import type { BlogCard, BlogPageHeroData } from '@/lib/blog/types'
 import {
   buildBlogPageMetadata,
@@ -10,7 +9,6 @@ import {
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import getMarkDownData from '@/utils/GetMarkDownData'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import BlogCaseStudies from './_components/BlogCaseStudies'
@@ -46,33 +44,37 @@ const DEFAULT_METADATA: Metadata = {
     'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
 }
 
-function buildHeroPost(hero: BlogPageHeroData | null, fallbackPosts: BlogCard[]): BlogHeroPost {
-  const featuredFallback =
-    fallbackPosts.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ??
-    fallbackPosts[0]
+function buildHeroPost(
+  hero: BlogPageHeroData | null,
+  posts: BlogCard[],
+): BlogHeroPost | null {
+  const featuredPost =
+    posts.find((blog) => blog.slug === hero?.slug) ??
+    posts.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ??
+    posts[0]
 
   if (hero) {
     return {
-      slug: hero.slug || featuredFallback?.slug || '',
-      title: hero.title || featuredFallback?.title || '',
-      description: hero.description || featuredFallback?.description || '',
-      date: hero.date ?? featuredFallback?.date ?? '',
-      tags: hero.tags?.length ? hero.tags : featuredFallback?.tags,
-      featureImage: hero.image || featuredFallback?.featureImage,
-      thumbnail: hero.image || featuredFallback?.thumbnail,
+      slug: hero.slug || featuredPost?.slug || '',
+      title: hero.title || featuredPost?.title || '',
+      description: hero.description || featuredPost?.description || '',
+      date: hero.date ?? featuredPost?.date ?? '',
+      tags: hero.tags?.length ? hero.tags : featuredPost?.tags,
+      featureImage: hero.image || featuredPost?.featureImage,
+      thumbnail: hero.image || featuredPost?.thumbnail,
     }
   }
 
+  if (!featuredPost) return null
+
   return {
-    slug: featuredFallback?.slug ?? '',
-    title: featuredFallback?.title ?? 'Insights That Help Businesses Grow',
-    description:
-      featuredFallback?.description ??
-      'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
-    date: featuredFallback?.date ?? '',
-    tags: featuredFallback?.tags,
-    featureImage: featuredFallback?.featureImage,
-    thumbnail: featuredFallback?.thumbnail,
+    slug: featuredPost.slug,
+    title: featuredPost.title,
+    description: featuredPost.description,
+    date: featuredPost.date,
+    tags: featuredPost.tags,
+    featureImage: featuredPost.featureImage,
+    thumbnail: featuredPost.thumbnail,
   }
 }
 
@@ -86,20 +88,15 @@ const BlogPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const markdownBlogs = (getMarkDownData('data/blogsV2') as Record<string, unknown>[]).map(
-    (blog) => mapMarkdownBlogCard(blog),
-  )
-
   const { hero, posts, categories, caseStudies } = await loadBlogPageData(locale as Locale)
-  const blogPosts = posts.length ? posts : markdownBlogs
-  const featuredPost = buildHeroPost(hero, blogPosts)
+  const featuredPost = buildHeroPost(hero, posts)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <BlogHero blog={featuredPost} imageSrc={hero?.image} />
+        {featuredPost ? <BlogHero blog={featuredPost} imageSrc={hero?.image} /> : null}
         <Marquess />
-        <BlogInsight Blogs={blogPosts} categories={categories} />
+        <BlogInsight Blogs={posts} categories={categories} />
         <BlogCaseStudies caseStudies={caseStudies} />
         <WowGrowthCta
           accentText="Ready to"

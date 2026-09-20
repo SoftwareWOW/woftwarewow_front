@@ -1,14 +1,25 @@
 import type { BlogCard } from '@/lib/blog/types';
-import { normalizeBlogBody } from '@/lib/strapi/mappers/blog';
+import {
+  normalizeBlogBodyImages,
+  pickBlogCardFallback,
+  pickBlogFeatureFallback,
+  resolveBlogPostImage,
+} from '@/lib/blog/images';
 
-const DEFAULT_BLOG_CARD_IMAGE = '/images/wow/blog/Blog card 1.jpg';
-const DEFAULT_BLOG_DETAIL_IMAGE = '/images/wow/blog/Blog card 2.jpg';
+function resolveMarkdownImage(
+  path: string | undefined,
+  slug: string,
+  kind: 'thumbnail' | 'feature',
+): string {
+  if (!path?.trim()) {
+    return kind === 'feature' ? pickBlogFeatureFallback(slug) : pickBlogCardFallback(slug);
+  }
 
-function resolveMarkdownImage(path?: string): string | undefined {
-  if (!path?.trim()) return undefined;
   const trimmed = path.trim();
-  if (trimmed.startsWith('/images/blog-img/')) return DEFAULT_BLOG_CARD_IMAGE;
-  if (trimmed.startsWith('/images/services/')) return DEFAULT_BLOG_DETAIL_IMAGE;
+  if (trimmed.startsWith('/images/blog-img/') || trimmed.startsWith('/images/services/')) {
+    return kind === 'feature' ? pickBlogFeatureFallback(slug) : pickBlogCardFallback(slug);
+  }
+
   return trimmed;
 }
 
@@ -17,19 +28,27 @@ export function mapMarkdownBlogCard(
   content?: string,
 ): BlogCard {
   const tags = blog.tags;
+  const slug = String(blog.slug ?? '');
 
   return {
-    slug: String(blog.slug ?? ''),
+    slug,
     title: String(blog.title ?? ''),
     description: String(blog.description ?? ''),
     date: String(blog.date ?? ''),
-    content: normalizeBlogBody(typeof content === 'string' ? content : String(blog.content ?? '')),
+    content: normalizeBlogBodyImages(
+      typeof content === 'string' ? content : String(blog.content ?? ''),
+      slug,
+    ),
     thumbnail: resolveMarkdownImage(
       typeof blog.thumbnail === 'string' ? blog.thumbnail : undefined,
-    ) ?? DEFAULT_BLOG_CARD_IMAGE,
+      slug,
+      'thumbnail',
+    ),
     featureImage: resolveMarkdownImage(
       typeof blog.featureImage === 'string' ? blog.featureImage : undefined,
-    ) ?? DEFAULT_BLOG_DETAIL_IMAGE,
+      slug,
+      'feature',
+    ),
     tags: Array.isArray(tags) ? tags.map(String) : typeof tags === 'string' ? tags.split(',').map((t) => t.trim()) : [],
     author:
       blog.author && typeof blog.author === 'object' ?
