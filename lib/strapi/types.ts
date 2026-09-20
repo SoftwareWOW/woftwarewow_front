@@ -53,6 +53,7 @@ export type StrapiSuperagencyDivision = {
 
 export type StrapiSuperagencyProject = {
   documentId: string;
+  slug?: string | null;
   title: string;
   description?: string;
   thumbnail?: StrapiMedia | null;

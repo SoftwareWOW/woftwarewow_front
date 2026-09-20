@@ -69,8 +69,13 @@ const wowProjects = [
   },
 ]
 
+type WowProjectItem = (typeof wowProjects)[number] & {
+  thumbnailWidth?: number
+  thumbnailHeight?: number
+}
+
 type WowProjectsProps = {
-  projects?: typeof wowProjects
+  projects?: WowProjectItem[]
 }
 
 const WowProjects = ({ projects: projectsProp }: WowProjectsProps) => {
@@ -150,11 +155,12 @@ const WowProjects = ({ projects: projectsProp }: WowProjectsProps) => {
             >
               <Link href={project.href} className="block overflow-hidden rounded-t-radius-sm">
                 <Image
-                  width={1330}
-                  height={445}
+                  width={project.thumbnailWidth ?? 1330}
+                  height={project.thumbnailHeight ?? 445}
                   src={project.thumbnail}
                   alt={project.alt}
-                  className="transition-all duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 1320px"
+                  className="aspect-[1330/445] h-auto w-full object-cover transition-all duration-700 group-hover:scale-105"
                 />
               </Link>
 

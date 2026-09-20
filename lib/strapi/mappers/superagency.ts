@@ -1,3 +1,4 @@
+import { resolveCaseStudySlug } from '@/lib/case-study/slug';
 import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
 import type {
   StrapiSuperagencyDivision,
@@ -57,6 +58,9 @@ export function mapStrapiDivisions(divisions: StrapiSuperagencyDivision[]) {
     }));
 }
 
+const WOW_PROJECT_IMAGE_WIDTH = 1330;
+const WOW_PROJECT_IMAGE_HEIGHT = 445;
+
 export function mapStrapiProjects(projects: StrapiSuperagencyProject[]) {
   if (!projects.length) return null;
 
@@ -66,7 +70,9 @@ export function mapStrapiProjects(projects: StrapiSuperagencyProject[]) {
     description: project.description ?? '',
     thumbnail: project.thumbnailPath ?? getStrapiMediaUrl(project.thumbnail ?? undefined) ?? '',
     alt: project.alt ?? project.title,
-    href: project.href ?? '/case-study',
+    href: `/case-study/${resolveCaseStudySlug(project)}`,
+    thumbnailWidth: WOW_PROJECT_IMAGE_WIDTH,
+    thumbnailHeight: WOW_PROJECT_IMAGE_HEIGHT,
   }));
 }
 
