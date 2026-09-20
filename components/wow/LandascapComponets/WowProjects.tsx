@@ -12,7 +12,18 @@ import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
 
-const wowProjects = [
+type WowProjectItem = {
+  id: number
+  title: string
+  description: string
+  thumbnail: string
+  alt: string
+  href: string
+  thumbnailWidth?: number
+  thumbnailHeight?: number
+}
+
+const wowProjects: WowProjectItem[] = [
   {
     id: 1,
     title: 'Healthcare Practice Digital Transformation',
@@ -68,11 +79,6 @@ const wowProjects = [
     href: '/case-studies/professional-services-hub',
   },
 ]
-
-type WowProjectItem = (typeof wowProjects)[number] & {
-  thumbnailWidth?: number
-  thumbnailHeight?: number
-}
 
 type WowProjectsProps = {
   projects?: WowProjectItem[]

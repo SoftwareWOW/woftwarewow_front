@@ -5,7 +5,7 @@ import type {
   CaseStudyHighlight,
   CaseStudyImage,
 } from '@/lib/case-study/types';
-import { getStrapiMediaUrl } from '@/lib/strapi/client';
+import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
 import type {
   StrapiCaseStudyHighlight,
   StrapiCaseStudyProject,
@@ -25,7 +25,7 @@ export type CaseStudyListItem = {
 export { resolveCaseStudySlug };
 
 function resolveMediaUrl(
-  media?: { url?: string } | null,
+  media?: StrapiMedia | null,
   path?: string | null,
 ): string | undefined {
   const fromMedia = getStrapiMediaUrl(media ?? undefined);
@@ -57,20 +57,20 @@ function mapHighlights(
 ): CaseStudyHighlight[] | undefined {
   if (!highlights?.length) return undefined;
 
-  const mapped = highlights
-    .map((item) => {
-      const src = resolveMediaUrl(item.image ?? undefined);
-      if (!src) return null;
+  const mapped: CaseStudyHighlight[] = [];
 
-      return {
-        image: src,
-        alt: item.alt?.trim() || undefined,
-        quote: item.quote?.trim() || undefined,
-        author: item.author?.trim() || undefined,
-        href: item.href?.trim() || undefined,
-      };
-    })
-    .filter((item): item is CaseStudyHighlight => item !== null);
+  for (const item of highlights) {
+    const src = resolveMediaUrl(item.image ?? undefined);
+    if (!src) continue;
+
+    mapped.push({
+      image: src,
+      alt: item.alt?.trim() || undefined,
+      quote: item.quote?.trim() || undefined,
+      author: item.author?.trim() || undefined,
+      href: item.href?.trim() || undefined,
+    });
+  }
 
   return mapped.length ? mapped : undefined;
 }

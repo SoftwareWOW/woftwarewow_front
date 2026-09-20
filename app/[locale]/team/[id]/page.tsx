@@ -13,6 +13,7 @@ import type { CmsTeamMemberDetail } from '@/lib/strapi/mappers/page-sections'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { setRequestLocale } from 'next-intl/server'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
 export const revalidate = 60
 
@@ -85,7 +86,11 @@ const TeamDetailsPage = async ({ params }: Props) => {
   return (
     <LayoutOne>
       <TeamDetailsBody teamData={teamData} />
-      <GradientCta />
+      <WowGrowthCta
+  accentText="Meet the team."
+  mainText="Build something WOW."
+  ariaLabel="Contact the WOW Superagency team"
+/>
     </LayoutOne>
   )
 }

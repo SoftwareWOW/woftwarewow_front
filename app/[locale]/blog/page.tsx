@@ -26,6 +26,8 @@ export interface BlogType {
   thumbnail?: string
   featureImage?: string
   tags?: string | string[]
+  id?: string | number
+  badge?: string
   author?: {
     name: string
     avatar: string
