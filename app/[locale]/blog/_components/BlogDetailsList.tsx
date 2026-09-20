@@ -22,9 +22,9 @@ const BlogDetailsList: FC<BlogListProps> = ({ blogData }) => {
       items={items}
       hrefPrefix="/blog/"
       buttonText="3 Minute Read"
-      sectionLabel="Blog"
-      heading="View our previous works"
-      subheading="Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth."
+      sectionLabel="Articles"
+      heading="Related Articles"
+      subheading="More insights and ideas to help you explore the topic further."
     />
   )
 }
