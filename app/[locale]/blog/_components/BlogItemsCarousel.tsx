@@ -86,11 +86,7 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
     if (!api || !isAutoPlay || uniqueItems.length <= 1) return
 
     const interval = setInterval(() => {
-      if (api.canScrollNext()) {
-        api.scrollNext()
-      } else {
-        api.scrollTo(0)
-      }
+      api.scrollNext()
     }, 4000)
 
     return () => clearInterval(interval)
@@ -123,15 +119,9 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
     setIsAutoPlay(false)
 
     if (direction === 'next') {
-      if (api.canScrollNext()) {
-        api.scrollNext()
-      } else {
-        api.scrollTo(0)
-      }
-    } else if (api.canScrollPrev()) {
-      api.scrollPrev()
+      api.scrollNext()
     } else {
-      api.scrollTo(uniqueItems.length - 1)
+      api.scrollPrev()
     }
 
     setTimeout(() => setIsAutoPlay(true), 5000)
@@ -192,7 +182,7 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
             setApi={setApi}
             opts={{
               align: 'start',
-              loop: false,
+              loop: true,
             }}
             className="w-full"
           >
