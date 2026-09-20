@@ -8,6 +8,7 @@ import {
 } from '@/lib/strapi/load-footer-resource-page'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
+import { loadCaseStudyList } from '@/lib/strapi/load-case-study-list'
 import CaseStudyHero from './_components/CaseStudyHero'
 import Projects from './_components/Projects'
 
@@ -27,14 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const CaseStudyPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const cms = await loadFooterResourcePage(PAGE_KEY, locale as Locale)
+  const typedLocale = locale as Locale
+  const cms = await loadFooterResourcePage(PAGE_KEY, typedLocale)
   const hero = mapFooterResourceHeroForCaseStudy(cms.raw) ?? {}
+  const projects = await loadCaseStudyList(typedLocale)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <CaseStudyHero {...hero} />
-        <Projects />
+        <Projects projects={projects.length ? projects : undefined} />
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"

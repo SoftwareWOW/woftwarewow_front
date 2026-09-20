@@ -1,9 +1,17 @@
 import type { Locale } from '@/i18n/config';
+import { matchesCaseStudySlug, resolveCaseStudySlug } from '@/lib/case-study/slug';
 import { fetchCollection } from '@/lib/strapi/client';
 import type { StrapiCaseStudyProject } from '@/lib/strapi/types/case-study';
 
+const IMAGE_WITH_ALT_POPULATE = { populate: { image: true } };
+
 export const CASE_STUDY_POPULATE = {
   thumbnail: true,
+  clientImage: IMAGE_WITH_ALT_POPULATE,
+  challengeBeforeImage: IMAGE_WITH_ALT_POPULATE,
+  challengeAfterImage: IMAGE_WITH_ALT_POPULATE,
+  businessGoalsImage: IMAGE_WITH_ALT_POPULATE,
+  highlightImages: { populate: { image: true } },
   targetAudience: true,
   testimonial: true,
   successMetrics: true,
@@ -13,24 +21,6 @@ export const CASE_STUDY_POPULATE = {
 export const CASE_STUDY_LIST_POPULATE = {
   thumbnail: true,
 };
-
-function slugifyTitle(title: string): string {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-function isUsableSlug(slug?: string | null): slug is string {
-  return Boolean(slug && slug !== 'wowsuperagencyproject');
-}
-
-function matchesRequestedSlug(project: StrapiCaseStudyProject, slug: string): boolean {
-  if (isUsableSlug(project.slug) && project.slug === slug) return true;
-  if (project.title && slugifyTitle(project.title) === slug) return true;
-  return false;
-}
 
 export async function getCaseStudyProjects(
   locale: Locale,
@@ -46,15 +36,15 @@ export async function getCaseStudyBySlug(
   slug: string,
   locale: Locale,
 ): Promise<StrapiCaseStudyProject | null> {
-  if (isUsableSlug(slug)) {
-    const direct = await fetchCollection<StrapiCaseStudyProject>('wowsuperagencyprojects', {
-      locale,
-      populate: CASE_STUDY_POPULATE,
-      filters: { slug: { $eq: slug } },
-    });
+  const normalizedSlug = slug.trim();
 
-    if (direct[0]) return direct[0];
-  }
+  const direct = await fetchCollection<StrapiCaseStudyProject>('wowsuperagencyprojects', {
+    locale,
+    populate: CASE_STUDY_POPULATE,
+    filters: { slug: { $eq: normalizedSlug } },
+  });
+
+  if (direct[0]) return direct[0];
 
   const all = await fetchCollection<StrapiCaseStudyProject>('wowsuperagencyprojects', {
     locale,
@@ -62,16 +52,13 @@ export async function getCaseStudyBySlug(
     sort: 'order:asc',
   });
 
-  const matched = all.find((project) => matchesRequestedSlug(project, slug));
-  return matched ?? null;
+  return all.find((project) => matchesCaseStudySlug(project, normalizedSlug)) ?? null;
 }
 
 export async function getCaseStudySlugs(locale: Locale): Promise<string[]> {
   const projects = await getCaseStudyProjects(locale);
 
   return projects
-    .map((project) =>
-      isUsableSlug(project.slug) ? project.slug : slugifyTitle(project.title),
-    )
+    .map((project) => resolveCaseStudySlug(project))
     .filter((slug): slug is string => Boolean(slug));
 }

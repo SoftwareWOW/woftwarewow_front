@@ -1,12 +1,14 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import ImagePlaceholder from './ImagePlaceholder'
+import type { CaseStudyImage } from '@/lib/case-study/types'
+import CaseStudySectionImage from './CaseStudySectionImage'
 import { caseStudySectionClass, caseStudySectionInnerClass } from './caseStudySectionSpacing'
 
 type CaseStudyBusinessGoalsProps = {
   goals: string[]
+  image?: CaseStudyImage
 }
 
-const CaseStudyBusinessGoals = ({ goals }: CaseStudyBusinessGoalsProps) => (
+const CaseStudyBusinessGoals = ({ goals, image }: CaseStudyBusinessGoalsProps) => (
   <section className={caseStudySectionClass}>
     <div className={caseStudySectionInnerClass}>
       <RevealWrapper>
@@ -19,15 +21,18 @@ const CaseStudyBusinessGoals = ({ goals }: CaseStudyBusinessGoalsProps) => (
               {goals.map((goal) => (
                 <li
                   key={goal}
-                  className="relative pl-5 text-base leading-relaxed text-muted before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary lg:text-[20px]">
+                  className="relative pl-5 text-base leading-relaxed text-muted before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary lg:text-[20px]"
+                >
                   {goal}
                 </li>
               ))}
             </ul>
           </div>
-          <ImagePlaceholder
+          <CaseStudySectionImage
+            src={image?.src}
+            alt={image?.alt}
             aspectClassName="aspect-square min-h-[240px]"
-            label="Visual placeholder"
+            placeholderLabel="Visual placeholder"
             className="w-full"
           />
         </div>

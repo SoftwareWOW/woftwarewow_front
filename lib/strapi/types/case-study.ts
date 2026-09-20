@@ -1,4 +1,5 @@
 import type { StrapiMedia } from '@/lib/strapi/client';
+import type { StrapiImageWithAlt } from '@/lib/strapi/types/pages';
 
 export type StrapiCaseStudyAudience = {
   label?: string;
@@ -22,6 +23,14 @@ export type StrapiCaseStudySeo = {
   description?: string;
 };
 
+export type StrapiCaseStudyHighlight = {
+  alt?: string | null;
+  quote?: string | null;
+  author?: string | null;
+  href?: string | null;
+  image?: StrapiMedia | null;
+};
+
 export type StrapiCaseStudyProject = {
   documentId: string;
   slug?: string | null;
@@ -39,6 +48,8 @@ export type StrapiCaseStudyProject = {
   companySize?: string | null;
   projectDate?: string | null;
   projectDuration?: string | null;
+  year?: string | null;
+  categories?: string[] | null;
   services?: unknown;
   aboutClient?: unknown;
   challengeParagraphs?: unknown;
@@ -50,4 +61,9 @@ export type StrapiCaseStudyProject = {
   testimonial?: StrapiCaseStudyTestimonial | null;
   successMetrics?: StrapiCaseStudySuccessMetric[] | null;
   seo?: StrapiCaseStudySeo | null;
+  clientImage?: StrapiImageWithAlt | null;
+  challengeBeforeImage?: StrapiImageWithAlt | null;
+  challengeAfterImage?: StrapiImageWithAlt | null;
+  businessGoalsImage?: StrapiImageWithAlt | null;
+  highlightImages?: StrapiCaseStudyHighlight[] | null;
 };

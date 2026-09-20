@@ -1,8 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import type { CaseStudyListItem } from '@/lib/strapi/mappers/case-study'
 
-const projects = [
+const DEFAULT_PROJECTS: CaseStudyListItem[] = [
   {
     slug: 'ccg-breakthrough',
     category: 'Featured Case Study',
@@ -53,22 +54,31 @@ const projects = [
   },
 ]
 
-const Projects = () => {
+type ProjectsProps = {
+  projects?: CaseStudyListItem[] | null
+}
+
+const Projects = ({ projects }: ProjectsProps = {}) => {
+  const displayProjects = projects?.length ? projects : DEFAULT_PROJECTS
+
   return (
     <section className="overflow-hidden">
       <div className="container grid gap-20 max-md:gap-y-16 md:grid-cols-2 xl:gap-16">
-        {projects.map((project) => (
+        {displayProjects.map((project) => (
           <RevealWrapperV2
             as="a"
             href={`/case-study/${project.slug}`}
             key={project.slug}
-            className="reveal-me project-item underline-hover-effect group col-span-full flex flex-col gap-x-10 gap-y-6 lg:items-center">
+            className="reveal-me project-item underline-hover-effect group col-span-full flex flex-col gap-x-10 gap-y-6 lg:items-center"
+          >
             <figure className="overflow-hidden max-lg:w-full">
-              <img
-                src={project.image}
-                alt={project.alt}
-                className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
-              />
+              {project.image ?
+                <img
+                  src={project.image}
+                  alt={project.alt}
+                  className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
+                />
+              : null}
             </figure>
             <div className="project-item-content">
               <p className="text-xs font-normal uppercase leading-3 tracking-[5px] text-secondary dark:text-backgroundBody md:leading-6 md:tracking-[8px]">

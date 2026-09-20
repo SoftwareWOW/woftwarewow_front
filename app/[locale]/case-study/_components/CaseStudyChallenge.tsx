@@ -1,12 +1,19 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import ImagePlaceholder from './ImagePlaceholder'
+import type { CaseStudyImage } from '@/lib/case-study/types'
+import CaseStudySectionImage from './CaseStudySectionImage'
 import { caseStudySectionClass, caseStudySectionInnerClass } from './caseStudySectionSpacing'
 
 type CaseStudyChallengeProps = {
   paragraphs: string[]
+  beforeImage?: CaseStudyImage
+  afterImage?: CaseStudyImage
 }
 
-const CaseStudyChallenge = ({ paragraphs }: CaseStudyChallengeProps) => (
+const CaseStudyChallenge = ({
+  paragraphs,
+  beforeImage,
+  afterImage,
+}: CaseStudyChallengeProps) => (
   <section className={caseStudySectionClass}>
     <div className={caseStudySectionInnerClass}>
       <RevealWrapper>
@@ -21,12 +28,26 @@ const CaseStudyChallenge = ({ paragraphs }: CaseStudyChallengeProps) => (
 
         <div className="mt-10 grid grid-cols-1 gap-8 lg:mt-12 lg:grid-cols-2 lg:gap-10">
           <div>
-            <p className="mb-4 text-lg text-secondary dark:text-backgroundBody sm:text-[24px]">Before</p>
-            <ImagePlaceholder aspectClassName="aspect-[4/3] min-h-[220px]" label="Before placeholder" />
+            <p className="mb-4 text-lg text-secondary dark:text-backgroundBody sm:text-[24px]">
+              Before
+            </p>
+            <CaseStudySectionImage
+              src={beforeImage?.src}
+              alt={beforeImage?.alt ?? 'Before'}
+              aspectClassName="aspect-[4/3] min-h-[220px]"
+              placeholderLabel="Before placeholder"
+            />
           </div>
           <div>
-            <p className="mb-4 text-lg text-secondary dark:text-backgroundBody sm:text-[24px]">After</p>
-            <ImagePlaceholder aspectClassName="aspect-[4/3] min-h-[220px]" label="After placeholder" />
+            <p className="mb-4 text-lg text-secondary dark:text-backgroundBody sm:text-[24px]">
+              After
+            </p>
+            <CaseStudySectionImage
+              src={afterImage?.src}
+              alt={afterImage?.alt ?? 'After'}
+              aspectClassName="aspect-[4/3] min-h-[220px]"
+              placeholderLabel="After placeholder"
+            />
           </div>
         </div>
       </RevealWrapper>

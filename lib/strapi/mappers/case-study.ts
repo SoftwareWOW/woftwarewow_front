@@ -1,50 +1,91 @@
 import { normalizeCaseStudyData } from '@/lib/case-study/normalizeCaseStudyData';
-import type { CaseStudyData } from '@/lib/case-study/types';
+import { resolveCaseStudySlug } from '@/lib/case-study/slug';
+import type {
+  CaseStudyData,
+  CaseStudyHighlight,
+  CaseStudyImage,
+} from '@/lib/case-study/types';
 import { getStrapiMediaUrl } from '@/lib/strapi/client';
 import type {
+  StrapiCaseStudyHighlight,
   StrapiCaseStudyProject,
   StrapiCaseStudySeo,
 } from '@/lib/strapi/types/case-study';
+import type { StrapiImageWithAlt } from '@/lib/strapi/types/pages';
 
-function slugifyTitle(title: string): string {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+export type CaseStudyListItem = {
+  slug: string;
+  category: string;
+  title: string;
+  year: number;
+  image: string;
+  alt: string;
+};
 
-export function resolveCaseStudySlug(project: StrapiCaseStudyProject): string {
-  if (project.slug && project.slug !== 'wowsuperagencyproject') {
-    return project.slug;
-  }
+export { resolveCaseStudySlug };
 
-  return slugifyTitle(project.title);
-}
-
-function resolveThumbnailUrl(project: StrapiCaseStudyProject): string | undefined {
-  const fromMedia = getStrapiMediaUrl(project.thumbnail ?? undefined);
+function resolveMediaUrl(
+  media?: { url?: string } | null,
+  path?: string | null,
+): string | undefined {
+  const fromMedia = getStrapiMediaUrl(media ?? undefined);
   if (fromMedia) return fromMedia;
 
-  const path = project.thumbnailPath?.trim();
-  if (!path) return undefined;
+  const trimmed = path?.trim();
+  if (!trimmed) return undefined;
 
-  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
 
-  return getStrapiMediaUrl({ url: path });
+  return getStrapiMediaUrl({ url: trimmed });
+}
+
+function mapImageWithAlt(
+  component?: StrapiImageWithAlt | null,
+  fallbackAlt?: string,
+): CaseStudyImage | undefined {
+  const src = resolveMediaUrl(component?.image ?? undefined);
+  if (!src) return undefined;
+
+  return {
+    src,
+    alt: component?.alt?.trim() || fallbackAlt,
+  };
+}
+
+function mapHighlights(
+  highlights?: StrapiCaseStudyHighlight[] | null,
+): CaseStudyHighlight[] | undefined {
+  if (!highlights?.length) return undefined;
+
+  const mapped = highlights
+    .map((item) => {
+      const src = resolveMediaUrl(item.image ?? undefined);
+      if (!src) return null;
+
+      return {
+        image: src,
+        alt: item.alt?.trim() || undefined,
+        quote: item.quote?.trim() || undefined,
+        author: item.author?.trim() || undefined,
+        href: item.href?.trim() || undefined,
+      };
+    })
+    .filter((item): item is CaseStudyHighlight => item !== null);
+
+  return mapped.length ? mapped : undefined;
 }
 
 export function mapStrapiCaseStudy(
   project: StrapiCaseStudyProject,
   slug: string,
 ): CaseStudyData {
-  return normalizeCaseStudyData(
+  const base = normalizeCaseStudyData(
     {
       title: project.title,
       tagline: project.tagline ?? '',
       subtitle: project.subtitle ?? '',
       website: project.website ?? undefined,
-      image: resolveThumbnailUrl(project),
+      image: resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath),
       imageAlt: project.alt ?? project.title,
       companySize: project.companySize ?? '',
       date: project.projectDate ?? '',
@@ -62,6 +103,38 @@ export function mapStrapiCaseStudy(
     },
     slug,
   );
+
+  return {
+    ...base,
+    clientImage: mapImageWithAlt(project.clientImage, project.title),
+    challengeBeforeImage: mapImageWithAlt(project.challengeBeforeImage, 'Before'),
+    challengeAfterImage: mapImageWithAlt(project.challengeAfterImage, 'After'),
+    businessGoalsImage: mapImageWithAlt(project.businessGoalsImage, project.title),
+    highlights: mapHighlights(project.highlightImages),
+  };
+}
+
+function asStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is string => typeof item === 'string');
+}
+
+export function mapStrapiCaseStudyListItems(
+  projects: StrapiCaseStudyProject[],
+): CaseStudyListItem[] {
+  return projects.map((project) => {
+    const slug = resolveCaseStudySlug(project);
+    const categories = asStringArray(project.categories);
+
+    return {
+      slug,
+      category: categories[0] ?? 'Case Study',
+      title: project.title,
+      year: Number(project.year) || new Date().getFullYear(),
+      image: resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath) ?? '',
+      alt: project.alt ?? project.title,
+    };
+  });
 }
 
 export function mapStrapiCaseStudySeo(

@@ -15,6 +15,19 @@ export type CaseStudyTestimonial = {
   author: string
 }
 
+export type CaseStudyImage = {
+  src: string
+  alt?: string
+}
+
+export type CaseStudyHighlight = {
+  image: string
+  alt?: string
+  quote?: string
+  author?: string
+  href?: string
+}
+
 export type CaseStudyData = {
   slug?: string
   title: string
@@ -36,6 +49,11 @@ export type CaseStudyData = {
   targetAudience: CaseStudyAudience[]
   testimonial?: CaseStudyTestimonial
   successMetrics: CaseStudySuccessMetric[]
+  clientImage?: CaseStudyImage
+  challengeBeforeImage?: CaseStudyImage
+  challengeAfterImage?: CaseStudyImage
+  businessGoalsImage?: CaseStudyImage
+  highlights?: CaseStudyHighlight[]
 }
 
 export type CaseStudyItem = CaseStudyData & {

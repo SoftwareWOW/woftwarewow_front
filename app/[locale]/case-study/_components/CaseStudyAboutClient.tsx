@@ -1,12 +1,14 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import ImagePlaceholder from './ImagePlaceholder'
+import type { CaseStudyImage } from '@/lib/case-study/types'
+import CaseStudySectionImage from './CaseStudySectionImage'
 import { caseStudySectionClass, caseStudySectionInnerClass } from './caseStudySectionSpacing'
 
 type CaseStudyAboutClientProps = {
   paragraphs: string[]
+  image?: CaseStudyImage
 }
 
-const CaseStudyAboutClient = ({ paragraphs }: CaseStudyAboutClientProps) => (
+const CaseStudyAboutClient = ({ paragraphs, image }: CaseStudyAboutClientProps) => (
   <section className={caseStudySectionClass}>
     <div className={caseStudySectionInnerClass}>
       <RevealWrapper>
@@ -18,10 +20,12 @@ const CaseStudyAboutClient = ({ paragraphs }: CaseStudyAboutClientProps) => (
             <p key={paragraph.slice(0, 40)}>{paragraph}</p>
           ))}
         </div>
-        <ImagePlaceholder
+        <CaseStudySectionImage
+          src={image?.src}
+          alt={image?.alt}
           className="mt-8 w-full lg:mt-10"
           aspectClassName="aspect-[16/8] min-h-[220px]"
-          label="Client image placeholder"
+          placeholderLabel="Client image placeholder"
         />
       </RevealWrapper>
     </div>

@@ -22,6 +22,7 @@ import CaseStudySuccessMetrics from '../_components/CaseStudySuccessMetrics'
 import CaseStudyTargetAudience from '../_components/CaseStudyTargetAudience'
 
 export const revalidate = 60
+export const dynamicParams = true
 
 type PageProps = {
   params: Promise<{ slug: string; locale: string }>
@@ -86,16 +87,29 @@ const CaseStudyDetailsPage = async ({ params }: PageProps) => {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <CaseStudyDetailsHero study={study} />
-        <CaseStudyAboutClient paragraphs={study.aboutClient} />
-        <CaseStudyChallenge paragraphs={study.challengeParagraphs} />
+        <CaseStudyAboutClient
+          paragraphs={study.aboutClient}
+          image={study.clientImage}
+        />
+        <CaseStudyChallenge
+          paragraphs={study.challengeParagraphs}
+          beforeImage={study.challengeBeforeImage}
+          afterImage={study.challengeAfterImage}
+        />
         <CaseStudyApproach
           intro={study.approachIntro}
           callout={study.approachCallout}
           paragraphs={study.approachParagraphs}
         />
-        <CaseStudyBusinessGoals goals={study.businessGoals} />
+        <CaseStudyBusinessGoals
+          goals={study.businessGoals}
+          image={study.businessGoalsImage}
+        />
         <CaseStudyTargetAudience audiences={study.targetAudience} />
-        <CaseStudyHighlights testimonial={study.testimonial} />
+        <CaseStudyHighlights
+          testimonial={study.testimonial}
+          highlights={study.highlights}
+        />
         <CaseStudySuccessMetrics metrics={study.successMetrics} />
         <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
         <div className="mb-3">

@@ -1,4 +1,5 @@
 import type { Locale } from '@/i18n/config';
+import { resolveCaseStudySlug } from '@/lib/case-study/slug';
 import type { CaseStudyData } from '@/lib/case-study/types';
 import { getCaseStudyBySlug } from '@/lib/strapi/fetchers/case-study';
 import {
@@ -28,8 +29,10 @@ export async function loadCaseStudyBySlug(
 
   if (!project) return null;
 
+  const resolvedSlug = resolveCaseStudySlug(project);
+
   return {
-    study: mapStrapiCaseStudy(project, slug),
+    study: mapStrapiCaseStudy(project, resolvedSlug),
     seo: mapStrapiCaseStudySeo(project),
   };
 }
