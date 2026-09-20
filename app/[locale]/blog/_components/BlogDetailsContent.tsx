@@ -21,7 +21,7 @@ const BlogDetailsContent = ({ post, restBlogPosts }: BlogDetailsContentProps) =>
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
         <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]">
           <Image
-            src={post.thumbnail || post.featureImage || '/images/blog-img/blog-img-5.png'}
+            src={post.thumbnail || post.featureImage || '/images/wow/blog/Blog card 1.jpg'}
             width={1280}
             height={523}
             alt={post.title || 'Blog Details'}

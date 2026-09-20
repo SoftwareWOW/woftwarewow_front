@@ -13,6 +13,16 @@ import type {
   StrapiProjectFeedItem,
 } from '@/lib/strapi/types/blog';
 
+const DEFAULT_BLOG_CARD_IMAGE = '/images/wow/blog/Blog card 1.jpg';
+const DEFAULT_BLOG_DETAIL_IMAGE = '/images/wow/blog/Blog card 2.jpg';
+
+/** Legacy markdown/seed paths not shipped in public/ — map to existing WOW blog art. */
+function resolveLegacyBlogAssetPath(path: string): string | undefined {
+  if (path.startsWith('/images/blog-img/')) return DEFAULT_BLOG_CARD_IMAGE;
+  if (path.startsWith('/images/services/')) return DEFAULT_BLOG_DETAIL_IMAGE;
+  return undefined;
+}
+
 function resolveMediaUrl(
   media?: StrapiMedia | null,
   path?: string | null,
@@ -25,7 +35,19 @@ function resolveMediaUrl(
 
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
 
+  const legacy = resolveLegacyBlogAssetPath(trimmed);
+  if (legacy) return legacy;
+
   return getStrapiMediaUrl({ url: trimmed });
+}
+
+export function normalizeBlogBody(body?: string | null): string {
+  if (!body?.trim()) return '';
+
+  return body
+    .replace(/\/images\/blog-img\/[^)\s"]+/g, DEFAULT_BLOG_CARD_IMAGE)
+    .replace(/\/images\/services\/[^)\s"]+/g, DEFAULT_BLOG_DETAIL_IMAGE)
+    .replace(/\r\n/g, '\n');
 }
 
 function normalizeTags(tags?: unknown): string[] {
@@ -102,9 +124,13 @@ export function mapStrapiBlogPost(post: StrapiBlogPost): BlogCard {
     title: post.title,
     description: post.description?.trim() ?? '',
     date: formatBlogDate(post),
-    content: post.body?.trim() ?? '',
-    thumbnail: resolveMediaUrl(post.thumbnail ?? undefined, post.thumbnailPath),
-    featureImage: resolveMediaUrl(post.featureImage ?? undefined, post.featureImagePath),
+    content: normalizeBlogBody(post.body),
+    thumbnail:
+      resolveMediaUrl(post.thumbnail ?? undefined, post.thumbnailPath) ??
+      DEFAULT_BLOG_CARD_IMAGE,
+    featureImage:
+      resolveMediaUrl(post.featureImage ?? undefined, post.featureImagePath) ??
+      DEFAULT_BLOG_DETAIL_IMAGE,
     tags: normalizeTags(post.tags),
     categorySlug: post.category?.slug,
     categoryLabel: post.category?.label,
@@ -146,15 +172,18 @@ export function mapStrapiBlogPageHero(page: StrapiBlogPage | null): BlogPageHero
   const hero = page?.hero;
   if (!hero) return null;
 
-  const postSlug = hero.post?.slug?.trim();
-  if (!postSlug) return null;
+  const title = hero.title?.trim() || hero.post?.title?.trim();
+  const description = hero.description?.trim() || hero.post?.description?.trim();
+  const image = resolveMediaUrl(hero.image ?? undefined);
+
+  if (!title && !description && !image && !hero.post?.slug) return null;
 
   return {
-    slug: postSlug,
-    title: hero.title?.trim() || hero.post?.title?.trim() || '',
-    description: hero.description?.trim() || hero.post?.description?.trim() || '',
+    slug: hero.post?.slug?.trim() ?? '',
+    title: title ?? '',
+    description: description ?? '',
     tags: normalizeTags(hero.tags),
-    image: resolveMediaUrl(hero.image ?? undefined),
+    image,
     date: hero.post ? formatBlogDate(hero.post) : undefined,
   };
 }
@@ -179,7 +208,7 @@ export function mapStrapiProjectFeedItems(
       date: formatProjectDate(project),
       thumbnail:
         resolveMediaUrl(project.thumbnail ?? undefined, project.thumbnailPath) ??
-        '/images/blog-img/blog-img-5.png',
+        DEFAULT_BLOG_CARD_IMAGE,
     });
 
     if (items.length >= 20) break;

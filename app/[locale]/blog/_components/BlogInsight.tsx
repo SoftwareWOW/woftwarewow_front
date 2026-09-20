@@ -201,7 +201,7 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs, categories }) => {
                     href={`/blog/${blog.slug}`}
                     className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] dark:border-white/5 lg:w-[42%] lg:max-w-[480px]">
                     <Image
-                      src={blog.thumbnail || blog.featureImage || '/images/blog-img/blog-img-5.png'}
+                      src={blog.thumbnail || blog.featureImage || '/images/wow/blog/Blog card 1.jpg'}
                       alt={blog.title ?? 'Blog post'}
                       width={480}
                       height={280}

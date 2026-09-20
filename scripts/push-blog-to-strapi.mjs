@@ -118,7 +118,7 @@ async function upsertPost(post, categoryDocumentId) {
     featured: post.featured ?? false,
     seo: post.seo ?? null,
     order: post.order ?? 0,
-    ...(categoryDocumentId ? { category: categoryDocumentId } : {}),
+    ...(categoryDocumentId ? { category: { connect: [categoryDocumentId] } } : {}),
   }
 
   if (existing?.documentId) {
@@ -141,7 +141,7 @@ async function upsertBlogPage(blogPostSeeds, featuredPostDocumentId) {
       featured?.description ??
       'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
     tags: featured?.tags ?? ['Ecommerce', 'Technology', 'Artificial Intelligence', 'Design'],
-    post: featuredPostDocumentId,
+    post: featuredPostDocumentId ? { connect: [featuredPostDocumentId] } : undefined,
   }
 
   const seo = {

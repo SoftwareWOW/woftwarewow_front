@@ -1,5 +1,6 @@
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
+import { mapMarkdownBlogCard } from '@/lib/blog/markdown'
 import type { BlogCard } from '@/lib/blog/types'
 import {
   loadBlogPostBySlug,
@@ -23,34 +24,10 @@ type PageProps = {
   params: Promise<{ slug: string; locale: string }>
 }
 
-function mapMarkdownBlog(blog: Record<string, unknown>): BlogCard {
-  const tags = blog.tags
-  return {
-    slug: String(blog.slug ?? ''),
-    title: String(blog.title ?? ''),
-    description: String(blog.description ?? ''),
-    date: String(blog.date ?? ''),
-    content: String(blog.content ?? ''),
-    thumbnail: typeof blog.thumbnail === 'string' ? blog.thumbnail : undefined,
-    featureImage: typeof blog.featureImage === 'string' ? blog.featureImage : undefined,
-    tags: Array.isArray(tags) ? tags.map(String) : typeof tags === 'string' ? tags.split(',').map((t) => t.trim()) : [],
-    author:
-      blog.author && typeof blog.author === 'object' ?
-        {
-          name: String((blog.author as { name?: string }).name ?? ''),
-          avatar: String((blog.author as { avatar?: string }).avatar ?? ''),
-        }
-      : undefined,
-  }
-}
-
 function loadMarkdownBlog(slug: string): BlogCard | null {
   try {
     const blog = getMarkDownContent('data/blogsV2/', slug)
-    return {
-      ...mapMarkdownBlog(blog.data as Record<string, unknown>),
-      content: blog.content,
-    }
+    return mapMarkdownBlogCard(blog.data as Record<string, unknown>, blog.content)
   } catch {
     return null
   }
@@ -101,7 +78,7 @@ const BlogDetails = async ({ params }: PageProps) => {
   const feedPosts = await loadBlogPostFeed(typedLocale)
 
   const markdownPosts = (getMarkDownData('data/blogsV2') as Record<string, unknown>[]).map(
-    mapMarkdownBlog,
+    (blog) => mapMarkdownBlogCard(blog),
   )
 
   const allPosts = feedPosts.length ? feedPosts : markdownPosts

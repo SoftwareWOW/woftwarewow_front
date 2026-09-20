@@ -1,6 +1,7 @@
 import BlogHero, { type BlogHeroPost } from '@/app/[locale]/blog/_components/BlogHero'
 
 import type { Locale } from '@/i18n/config'
+import { mapMarkdownBlogCard } from '@/lib/blog/markdown'
 import type { BlogCard, BlogPageHeroData } from '@/lib/blog/types'
 import {
   buildBlogPageMetadata,
@@ -45,54 +46,33 @@ const DEFAULT_METADATA: Metadata = {
     'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
 }
 
-function mapMarkdownBlog(blog: Record<string, unknown>): BlogCard {
-  const tags = blog.tags;
-  return {
-    slug: String(blog.slug ?? ''),
-    title: String(blog.title ?? ''),
-    description: String(blog.description ?? ''),
-    date: String(blog.date ?? ''),
-    content: String(blog.content ?? ''),
-    thumbnail: typeof blog.thumbnail === 'string' ? blog.thumbnail : undefined,
-    featureImage: typeof blog.featureImage === 'string' ? blog.featureImage : undefined,
-    tags: Array.isArray(tags) ? tags.map(String) : typeof tags === 'string' ? tags.split(',').map((t) => t.trim()) : [],
-    author:
-      blog.author && typeof blog.author === 'object' ?
-        {
-          name: String((blog.author as { name?: string }).name ?? ''),
-          avatar: String((blog.author as { avatar?: string }).avatar ?? ''),
-        }
-      : undefined,
-  }
-}
-
 function buildHeroPost(hero: BlogPageHeroData | null, fallbackPosts: BlogCard[]): BlogHeroPost {
-  if (hero) {
-    return {
-      slug: hero.slug,
-      title: hero.title,
-      description: hero.description,
-      date: hero.date ?? '',
-      tags: hero.tags,
-      featureImage: hero.image,
-      thumbnail: hero.image,
-    }
-  }
-
-  const featured =
+  const featuredFallback =
     fallbackPosts.find((blog) => blog.slug === 'the-new-era-of-digital-advertising') ??
     fallbackPosts[0]
 
+  if (hero) {
+    return {
+      slug: hero.slug || featuredFallback?.slug || '',
+      title: hero.title || featuredFallback?.title || '',
+      description: hero.description || featuredFallback?.description || '',
+      date: hero.date ?? featuredFallback?.date ?? '',
+      tags: hero.tags?.length ? hero.tags : featuredFallback?.tags,
+      featureImage: hero.image || featuredFallback?.featureImage,
+      thumbnail: hero.image || featuredFallback?.thumbnail,
+    }
+  }
+
   return {
-    slug: featured?.slug ?? '',
-    title: featured?.title ?? 'Insights That Help Businesses Grow',
+    slug: featuredFallback?.slug ?? '',
+    title: featuredFallback?.title ?? 'Insights That Help Businesses Grow',
     description:
-      featured?.description ??
+      featuredFallback?.description ??
       'Practical ideas, expert perspectives, and emerging trends across technology, marketing, AI, websites, and business growth.',
-    date: featured?.date ?? '',
-    tags: featured?.tags,
-    featureImage: featured?.featureImage,
-    thumbnail: featured?.thumbnail,
+    date: featuredFallback?.date ?? '',
+    tags: featuredFallback?.tags,
+    featureImage: featuredFallback?.featureImage,
+    thumbnail: featuredFallback?.thumbnail,
   }
 }
 
@@ -107,7 +87,7 @@ const BlogPage = async ({ params }: Props) => {
   setRequestLocale(locale as Locale)
 
   const markdownBlogs = (getMarkDownData('data/blogsV2') as Record<string, unknown>[]).map(
-    mapMarkdownBlog,
+    (blog) => mapMarkdownBlogCard(blog),
   )
 
   const { hero, posts, categories, caseStudies } = await loadBlogPageData(locale as Locale)
