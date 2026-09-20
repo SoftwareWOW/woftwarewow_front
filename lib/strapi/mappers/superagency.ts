@@ -98,6 +98,14 @@ function isStrapiMediaPath(path?: string | null) {
   const value = path?.trim() ?? '';
   if (!value) return false;
 
+  if (
+    value.startsWith('/images/') ||
+    value.startsWith('/case-study/') ||
+    value.startsWith('/public/')
+  ) {
+    return false;
+  }
+
   return (
     value.startsWith('http://') ||
     value.startsWith('https://') ||

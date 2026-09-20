@@ -19,6 +19,7 @@ export type BlogHeroPost = {
 
 type BlogHeroProps = {
   blog: BlogHeroPost
+  imageSrc?: string
 }
 
 const DEFAULT_TAGS = ['Ecommerce', 'Technology', 'Artificial Intelligence', 'Design']
@@ -33,10 +34,14 @@ function normalizeTags(tags?: string | string[]) {
   return tags.split(',').map((tag) => tag.trim()).filter(Boolean)
 }
 
-export default function BlogHero({ blog }: BlogHeroProps) {
+export default function BlogHero({ blog, imageSrc }: BlogHeroProps) {
   const tags = normalizeTags(blog.tags)
   const author =  DEFAULT_AUTHOR
-  const imageSrc = '/images/wow/blog/blogheroimage.jpg'
+  const heroImage =
+    imageSrc ||
+    blog.featureImage ||
+    blog.thumbnail ||
+    '/images/wow/blog/blogheroimage.jpg'
 
   return (
     <section className="bg-backgroundBody px-4 pt-28 transition-colors duration-300 dark:bg-dark sm:px-8 sm:pt-32 md:px-16 lg:px-[200px] lg:pt-36">
@@ -46,7 +51,7 @@ export default function BlogHero({ blog }: BlogHeroProps) {
             <figure className="relative overflow-hidden rounded-radius-md">
               <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[1320/523]">
                 <Image
-                  src={imageSrc}
+                  src={heroImage}
                   alt={blog.title}
                   fill
                   priority
@@ -88,27 +93,6 @@ export default function BlogHero({ blog }: BlogHeroProps) {
           <p className="mt-5 max-w-4xl text-base leading-relaxed text-muted dark:text-dark-100 sm:text-lg">
             {blog.description}
           </p>
-        </RevealWrapper>
-
-        <RevealWrapper className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between lg:mt-12">
-          <div>
-            <p className="mb-3 text-sm text-muted dark:text-dark-100">Written by</p>
-            <div className="flex items-center gap-3">
-              <Image
-                src={author.avatar}
-                alt={author.name}
-                width={40}
-                height={40}
-                className="size-10 rounded-full object-cover"
-              />
-              <span className="text-base font-medium text-secondary dark:text-backgroundBody">{author.name}</span>
-            </div>
-          </div>
-
-          <div className="sm:text-right">
-            <p className="mb-2 text-sm text-muted dark:text-dark-100">Published on</p>
-            <p className="text-base font-medium capitalize text-secondary dark:text-backgroundBody">{blog.date}</p>
-          </div>
         </RevealWrapper>
       </div>
     </section>

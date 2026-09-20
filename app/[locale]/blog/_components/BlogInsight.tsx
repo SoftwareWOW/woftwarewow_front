@@ -1,6 +1,6 @@
 'use client'
 
-import { BlogType } from '@/app/[locale]/blog/page'
+import type { BlogCard, BlogCategoryTab } from '@/lib/blog/types'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 
@@ -11,31 +11,25 @@ import Link from 'next/link'
 import { FC, useMemo, useState } from 'react'
 
 interface BlogsProps {
-  Blogs: BlogType[]
-  blogPosts?: Array<{
-    title?: string
-    excerpt?: string | null
-    href?: string | null
-    date?: string | null
-  }> | null
+  Blogs: BlogCard[]
+  categories?: BlogCategoryTab[]
 }
 
-const CATEGORIES = ['ALL', 'NEWS', 'CASE STUDY', 'TECHNOLOGY', 'EVENT'] as const
-type Category = (typeof CATEGORIES)[number]
+const FALLBACK_CATEGORIES = ['NEWS', 'CASE STUDY', 'TECHNOLOGY', 'EVENT'] as const
 
 const INITIAL_COUNT = 4
 const LOAD_MORE_COUNT = 4
 
-function getBlogTags(blog: BlogType): string[] {
-  if (!blog.tags) return []
-  if (Array.isArray(blog.tags)) return blog.tags.map(String)
-  return String(blog.tags)
-    .split(',')
-    .map((tag) => tag.trim())
-    .filter(Boolean)
+function getBlogTags(blog: BlogCard): string[] {
+  if (!blog.tags?.length) return []
+  return blog.tags.map(String)
 }
 
-function resolveCategory(blog: BlogType): Exclude<Category, 'ALL'> {
+function resolveCategory(blog: BlogCard): string {
+  if (blog.categoryLabel?.trim()) {
+    return blog.categoryLabel.trim().toUpperCase()
+  }
+
   const haystack = `${blog.title} ${blog.description ?? ''} ${getBlogTags(blog).join(' ')}`.toLowerCase()
 
   if (
@@ -61,48 +55,54 @@ function formatDate(date?: string) {
   return date?.toUpperCase?.() ?? date ?? ''
 }
 
-type CategorizedBlog = BlogType & { category: Exclude<Category, 'ALL'> }
+type CategorizedBlog = BlogCard & { category: string }
 
-const BlogInsight: FC<BlogsProps> = ({ Blogs, blogPosts }) => {
-  const sourceBlogs = useMemo<BlogType[]>(
-    () =>
-      blogPosts?.length
-        ? blogPosts.map((post, index) => ({
-            slug: post.href?.split('/').pop() ?? String(index),
-            title: post.title ?? '',
-            description: post.excerpt ?? '',
-            date: post.date ?? '',
-            content: '',
-            tags: [],
-          }))
-        : Blogs,
-    [Blogs, blogPosts],
-  )
+const BlogInsight: FC<BlogsProps> = ({ Blogs, categories }) => {
+  const categoryTabs = useMemo(() => {
+    if (categories?.length) {
+      return [{ label: 'ALL', slug: 'ALL' }, ...categories]
+    }
 
-  const [activeCategory, setActiveCategory] = useState<Category>('ALL')
+    return [
+      { label: 'ALL', slug: 'ALL' },
+      ...FALLBACK_CATEGORIES.map((label) => ({ label, slug: label })),
+    ]
+  }, [categories])
+
+  const [activeCategory, setActiveCategory] = useState('ALL')
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT)
   const [isCollapsing, setIsCollapsing] = useState(false)
 
   const categorizedBlogs = useMemo<CategorizedBlog[]>(
     () =>
-      sourceBlogs.map((blog) => ({
+      Blogs.map((blog) => ({
         ...blog,
         category: resolveCategory(blog),
       })),
-    [sourceBlogs],
+    [Blogs],
   )
 
   const filteredBlogs = useMemo(() => {
     if (activeCategory === 'ALL') return categorizedBlogs
-    return categorizedBlogs.filter((blog) => blog.category === activeCategory)
-  }, [activeCategory, categorizedBlogs])
+
+    const activeTab = categoryTabs.find((tab) => tab.slug === activeCategory)
+    if (!activeTab) return categorizedBlogs
+
+    return categorizedBlogs.filter((blog) => {
+      if (blog.categorySlug) {
+        return blog.categorySlug === activeTab.slug
+      }
+
+      return blog.category === activeTab.label.toUpperCase()
+    })
+  }, [activeCategory, categorizedBlogs, categoryTabs])
 
   const visibleBlogs = filteredBlogs.slice(0, visibleCount)
   const hasMore = visibleCount < filteredBlogs.length
   const canToggle = filteredBlogs.length > INITIAL_COUNT
   const showSeeLess = isCollapsing || !hasMore
 
-  const handleCategoryChange = (category: Category) => {
+  const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
     setVisibleCount(INITIAL_COUNT)
     setIsCollapsing(false)
@@ -151,21 +151,21 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs, blogPosts }) => {
             role="tablist"
             aria-label="Blog categories"
             className="flex w-full flex-wrap overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-[#f5f5f5] dark:border-white/10 dark:bg-dark/50 sm:flex-nowrap">
-            {CATEGORIES.map((category, index) => {
-              const isActive = activeCategory === category
+            {categoryTabs.map((category, index) => {
+              const isActive = activeCategory === category.slug
               return (
                 <button
-                  key={category}
+                  key={category.slug}
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  onClick={() => handleCategoryChange(category)}
+                  onClick={() => handleCategoryChange(category.slug)}
                   className={`relative flex-1 px-3 py-3.5 text-center text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 sm:px-4 sm:py-4 sm:text-xs md:text-[13px] ${
                     isActive
                       ? 'bg-primary text-white'
                       : 'bg-background text-[#0D0D0D] hover:bg-[#8b7cff]/10 dark:text-[#F2F2F2] dark:hover:bg-white/5'
                   } ${index > 0 ? 'border-l border-[#1515151A] dark:border-[#EDF0F51A]' : ''}`}>
-                  {category}
+                  {category.label.toUpperCase()}
                 </button>
               )
             })}

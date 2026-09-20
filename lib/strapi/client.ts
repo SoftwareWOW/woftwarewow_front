@@ -28,12 +28,39 @@ export type StrapiCollectionResponse<T> = {
   };
 };
 
+function isStrapiUploadPath(url: string): boolean {
+  return url.startsWith('/uploads/');
+}
+
+function isFrontendAssetPath(url: string): boolean {
+  return (
+    url.startsWith('/images/') ||
+    url.startsWith('/public/') ||
+    url.startsWith('/_next/') ||
+    url.startsWith('/favicon')
+  );
+}
+
 export function getStrapiMediaUrl(media?: StrapiMedia | null): string | undefined {
   if (!media?.url) return undefined;
-  if (media.url.startsWith('http')) return media.url;
-  if (!STRAPI_URL) return undefined;
 
-  return `${STRAPI_URL}${media.url}`;
+  const url = media.url.trim();
+  if (!url) return undefined;
+
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+
+  if (url.startsWith('/')) {
+    if (isFrontendAssetPath(url)) return url;
+    if (isStrapiUploadPath(url)) {
+      if (!STRAPI_URL) return undefined;
+      return `${STRAPI_URL}${url}`;
+    }
+    // Other app routes (e.g. /case-study/foo) are not Strapi media.
+    return url;
+  }
+
+  if (!STRAPI_URL) return undefined;
+  return `${STRAPI_URL}/${url.replace(/^\//, '')}`;
 }
 
 export function isStrapiConfigured(): boolean {
@@ -42,7 +69,8 @@ export function isStrapiConfigured(): boolean {
 
 type FetchOptions = {
   locale: Locale;
-  populate?: string | Record<string, unknown>;
+  /** Set to `false` to omit populate (custom feed routes). */
+  populate?: string | Record<string, unknown> | false;
   sort?: string;
   filters?: Record<string, unknown>;
   revalidate?: number;
@@ -95,10 +123,12 @@ async function strapiFetchWithLocale<T>(
 
   url.searchParams.set('locale', strapiLocale);
 
-  if (typeof populate === 'string') {
-    url.searchParams.set('populate', populate);
-  } else if (populate) {
-    appendNestedSearchParam(url.searchParams, 'populate', populate);
+  if (populate !== false) {
+    if (typeof populate === 'string') {
+      url.searchParams.set('populate', populate);
+    } else if (populate) {
+      appendNestedSearchParam(url.searchParams, 'populate', populate);
+    }
   }
 
   if (sort) url.searchParams.set('sort', sort);

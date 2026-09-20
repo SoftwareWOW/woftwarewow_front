@@ -1,24 +1,19 @@
+import type { BlogCard } from '@/lib/blog/types'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TableOfContent from '@/components/shared/TableOfContent'
-import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import rehypeSlug from 'rehype-slug'
 import BlogDetailsList from './BlogDetailsList'
 import BlogShareButtons from './BlogShareButtons'
 
-interface RestOfTheBlogType {
-  slug: string
-  content: string
-  [key: string]: any
+type BlogDetailsContentProps = {
+  post: BlogCard
+  restBlogPosts: BlogCard[]
 }
 
-const blogs: RestOfTheBlogType[] = getMarkDownData('data/blogsV2')
-
-const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
-  const currentSlug = slug ?? blog?.data?.slug
-  const RestBlogData = blogs.filter((item) => item.slug !== currentSlug).slice(0, 3)
-  const headings = blog.content.match(/### .+/g) ?? []
+const BlogDetailsContent = ({ post, restBlogPosts }: BlogDetailsContentProps) => {
+  const headings = post.content.match(/### .+/g) ?? []
   const tableOfContents = headings.map((heading: string) => heading.replace('### ', ''))
 
   return (
@@ -26,10 +21,10 @@ const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
         <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]">
           <Image
-            src={blog?.data?.thumbnail || blog?.data?.featureImage || '/images/blog-img/blog-img-5.png'}
+            src={post.thumbnail || post.featureImage || '/images/blog-img/blog-img-5.png'}
             width={1280}
             height={523}
-            alt={blog?.data?.title || 'Blog Details'}
+            alt={post.title || 'Blog Details'}
             className="w-full rounded-radius-md object-cover"
           />
         </RevealWrapper>
@@ -42,19 +37,19 @@ const BlogDetailsContent = ({ blog, slug }: { blog: any; slug?: string }) => {
                   <h6>Share This Post</h6>
                 </div>
                 <BlogShareButtons
-                  title={blog?.data?.title || 'Blog post'}
-                  description={blog?.data?.description}
+                  title={post.title || 'Blog post'}
+                  description={post.description}
                 />
               </TableOfContent>
             </div>
           </aside>
           <article className="career-details-body overflow-hidden">
-            <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{blog.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{post.content}</ReactMarkdown>
           </article>
         </div>
       </div>
-      <div className="container overflow-hidden pt-14 md:pt-16 lg:pt-[88px] xl:pt-[100px]">
-        <BlogDetailsList blogData={RestBlogData} />
+      <div className="overflow-hidden pt-14 md:pt-16 lg:pt-[88px] xl:pt-[100px]">
+        <BlogDetailsList blogData={restBlogPosts} />
       </div>
     </section>
   )
