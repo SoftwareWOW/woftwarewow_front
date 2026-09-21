@@ -2,42 +2,29 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionHeaderV3 from '@/components/shared/SectionHeaderV3'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsCareerJobCard } from '@/lib/strapi/mappers/page-sections'
 import gradientBg from '@/public/images/gradient-bg.png'
-import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
-import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
 
 export interface CareerJobType {
   slug: string
   content: string
-  [key: string]: any
+  [key: string]: unknown
 }
+
 type JobsProps = {
-  jobs?: Array<{
-    title?: string
-    location?: string | null
-    type?: string | null
-    href?: string | null
-  }> | null
+  jobs?: CmsCareerJobCard[] | null
   sectionHeader?: boolean
 }
-
-interface sectionHeaderProps {
-  sectionHeader?: boolean
-}
-
-const jobsData: CareerJobType[] = getMarkDownData('data/career')
 
 const Jobs = ({ jobs, sectionHeader = false }: JobsProps) => {
-  const displayJobs = jobs?.length
-    ? jobs.map((job, index) => ({
-        slug: job.href?.split('/').pop() ?? String(index),
-        title: job.title ?? '',
-        description: job.location ?? '',
-        tags: job.type ? [job.type] : [],
-        content: '',
-      }))
-    : jobsData
+  const displayJobs = (jobs ?? []).map((job) => ({
+    slug: job.slug,
+    title: job.title,
+    description: job.description,
+    tags: job.tags ?? [],
+    content: '',
+  }))
 
   return (
     <section className="relative overflow-hidden">
@@ -67,7 +54,7 @@ const Jobs = ({ jobs, sectionHeader = false }: JobsProps) => {
       )}
 
       <div className="mt-[60px] max-lg:px-5 [&>*:not(:last-child)]:mb-6">
-        {displayJobs?.toReversed()?.map((job) => (
+        {displayJobs.toReversed().map((job) => (
           <RevealWrapper
             as="article"
             key={job.slug}

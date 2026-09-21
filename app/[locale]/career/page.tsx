@@ -9,10 +9,18 @@ import Communities from './_components/Comunities'
 import Jobs from './_components/Jobs'
 
 import type { Locale } from '@/i18n/config'
+import type {
+  CmsCareerJobCard,
+  CmsFaqItem,
+  CmsCareerCommunitySection,
+  CmsImageGallerySection,
+  CmsRfqAccordionSection,
+} from '@/lib/strapi/mappers/page-sections'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import {
   buildSuperagencyPageMetadata,
-  loadSuperagencyPage, resolvePageSections,
+  loadSuperagencyPage,
+  resolvePageSections,
 } from '@/lib/strapi/superagency-page-loader'
 import { setRequestLocale } from 'next-intl/server'
 
@@ -32,6 +40,14 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
+function mapRfqGroupsToFaqItems(section?: CmsRfqAccordionSection | null): CmsFaqItem[] | undefined {
+  if (!section?.groups?.length) return undefined
+  return section.groups.map((group) => ({
+    question: group.title,
+    answer: group.subtitle ?? '',
+  }))
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
@@ -41,19 +57,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const CareerPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
+
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+
+  const companyGallery = sections.companyGallery as CmsImageGallerySection | undefined
+  const communityImages = sections.communityImages as CmsCareerCommunitySection | undefined
+  const careerJobs = sections.careerJobs as { jobs?: CmsCareerJobCard[] } | undefined
+  const careerRfq = sections.careerRfq as CmsRfqAccordionSection | undefined
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <CareerHeroPage {...hero} />
-        <CompanyGallery />
-        <BenefitsCareer {...(sections.benefitsCareer ?? {})} />
-        <Jobs {...(sections.jobs ?? {})} />
-        <Communities {...(sections.communities ?? {})} />
-        <CareerRfq {...(sections.careerRfq ?? {})} />
+        <CompanyGallery images={companyGallery?.images} />
+        <BenefitsCareer />
+        <Jobs jobs={careerJobs?.jobs} />
+        <Communities avatars={communityImages?.avatars} teamImage={communityImages?.teamImage} />
+        <CareerRfq items={mapRfqGroupsToFaqItems(careerRfq)} />
         <WowGrowthCta
           accentText="Ready to"
           mainText="Grow?"

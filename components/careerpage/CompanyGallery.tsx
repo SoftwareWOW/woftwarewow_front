@@ -1,3 +1,5 @@
+import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
+
 const galleryData = [
   {
     id: 1,
@@ -29,12 +31,25 @@ const galleryData = [
   },
 ]
 
-const CompanyGallery = () => {
+type CompanyGalleryProps = {
+  images?: CmsGalleryImage[]
+}
+
+const CompanyGallery = ({ images }: CompanyGalleryProps) => {
+  const displayImages = galleryData.map((item, index) => {
+    const cmsImage = images?.[index]
+    return {
+      ...item,
+      src: cmsImage?.src ?? item.src,
+      alt: cmsImage?.alt ?? item.alt,
+    }
+  })
+
   return (
     <section className="overflow-hidden">
       <div className="mx-auto max-w-[1440px] max-lg:px-4">
         <div className="relative grid grid-cols-1 max-lg:gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {galleryData.map((image) => (
+          {displayImages.map((image) => (
             <figure key={image.id} className={`w-full ${image.order}`}>
               <img src={image.src} alt={image.alt} className={image.className} />
             </figure>

@@ -51,6 +51,8 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
   const lenis = useLenis()
+  const lenisRef = useRef(lenis)
+  lenisRef.current = lenis
   const pathname = usePathname()
 
   useEffect(() => {
@@ -62,32 +64,24 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
 
     if (!menuOpen) return
 
-    const scrollY = lenis?.scroll ?? window.scrollY
+    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (navContainerRef.current?.contains(target)) return
+      if (target instanceof Element && target.closest('[data-nav-scroll-lock-exempt]')) return
+      event.preventDefault()
+    }
 
-    document.documentElement.style.overflowY = 'scroll'
-
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.left = '0'
-    document.body.style.right = '0'
-    document.body.style.width = '100%'
+    lenisRef.current?.stop()
+    document.addEventListener('wheel', preventBackgroundScroll, { passive: false })
+    document.addEventListener('touchmove', preventBackgroundScroll, { passive: false })
 
     return () => {
-      document.documentElement.style.overflowY = ''
-
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.width = ''
-
-      if (lenis) {
-        lenis.scrollTo(scrollY, { immediate: true })
-      } else {
-        window.scrollTo(0, scrollY)
-      }
+      document.removeEventListener('wheel', preventBackgroundScroll)
+      document.removeEventListener('touchmove', preventBackgroundScroll)
+      lenisRef.current?.start()
     }
-  }, [activeMenuId, mobileMenuId, lenis])
+  }, [activeMenuId, mobileMenuId])
 
   useEffect(() => {
     const getScrollY = () => lenis?.scroll ?? window.scrollY

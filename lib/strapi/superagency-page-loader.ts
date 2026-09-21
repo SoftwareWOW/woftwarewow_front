@@ -9,6 +9,7 @@ import {
   mapPageEvents,
   mapPageFaq,
   mapPageHero,
+  mapCareerCommunitySection,
   mapPageImages,
   mapPageProcess,
   mapPageProcessSection,
@@ -32,6 +33,7 @@ import {
   type CmsTeamMember,
   type CmsTechnologiesSection,
 } from '@/lib/strapi/mappers/page-sections';
+import { mapStrapiPageCareerJobs } from '@/lib/strapi/mappers/career';
 import {
   getComponentForCmsType,
   getPageManifest,
@@ -47,6 +49,8 @@ import type {
   StrapiPageProcess,
   StrapiPageProjects,
   StrapiPageRfqAccordion,
+  StrapiPageCareerCommunity,
+  StrapiPageCareerJobs,
   StrapiPageSeo,
   StrapiPageTeamMembers,
   StrapiPageTechnologies,
@@ -191,6 +195,16 @@ function mapSectionByComponent(
     case 'sections.page-team-members': {
       const members = cms.teamMembers(cms.field<StrapiPageTeamMembers>(fieldName));
       return members?.length ? { members } : null;
+    }
+    case 'sections.page-career-jobs': {
+      const jobs = mapStrapiPageCareerJobs(cms.field<StrapiPageCareerJobs>(fieldName));
+      return jobs.length ? { jobs } : null;
+    }
+    case 'sections.page-career-community': {
+      const community = mapCareerCommunitySection(
+        cms.field<StrapiPageCareerCommunity>(fieldName),
+      );
+      return community;
     }
     default:
       return cms.field(fieldName);

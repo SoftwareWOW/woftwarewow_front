@@ -1,7 +1,8 @@
 import type { Locale } from '@/i18n/config';
 import { getStrapiLocaleChain, type StrapiLocale } from '@/lib/strapi/locale';
 
-const STRAPI_URL = (process.env.STRAPI_URL ?? '').replace(/\/$/, '');
+const DEFAULT_STRAPI_URL = 'https://wow.softwarewow.xyz';
+const STRAPI_URL = (process.env.STRAPI_URL || DEFAULT_STRAPI_URL).replace(/\/$/, '');
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
 export type StrapiMedia = {

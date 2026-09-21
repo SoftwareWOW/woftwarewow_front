@@ -61,7 +61,22 @@ const CMS_NESTED_POPULATE: Partial<
     packages: { populate: '*' },
   },
   'page-career-jobs': {
-    jobs: { populate: '*' },
+    jobs: {
+      fields: [
+        'title',
+        'slug',
+        'description',
+        'tags',
+        'department',
+        'employment',
+        'location',
+        'order',
+      ],
+    },
+  },
+  'page-career-community': {
+    avatars: { populate: { image: true } },
+    teamImage: { populate: { image: true } },
   },
   'page-office-locations': {
     locations: { populate: '*' },

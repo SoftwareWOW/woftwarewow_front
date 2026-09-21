@@ -86,7 +86,10 @@ export default function WowMobileMenuSheet({ item, navbar, onClose }: WowMobileM
               </div>
             )}
 
-            <div className="mt-[10px] min-w-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain">
+            <div
+              data-nav-scroll-lock-exempt
+              className="mt-[10px] min-w-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain"
+            >
               <ul className="flex min-w-0 flex-col gap-[3px]">
                 {activePage?.items.map((entry) => (
                   <li key={entry.id} className="min-w-0">

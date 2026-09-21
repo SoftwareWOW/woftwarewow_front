@@ -13,6 +13,7 @@ import { Link, usePathname } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import { motion } from 'framer-motion'
 import { ArrowDown, ChevronDown, Globe, MessageCircle, Moon, Sun } from 'lucide-react'
+import { useLenis } from 'lenis/react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -47,6 +48,9 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
 
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
+  const lenis = useLenis()
+  const lenisRef = useRef(lenis)
+  lenisRef.current = lenis
   const contactDialog = useContactDialogOptional()
   const pathname = usePathname()
 
@@ -59,22 +63,22 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
     const menuOpen = Boolean(activeMenuId || mobileMenuId)
     if (!menuOpen) return
 
-    const scrollY = window.scrollY
-    document.documentElement.style.overflowY = 'scroll'
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.left = '0'
-    document.body.style.right = '0'
-    document.body.style.width = '100%'
+    const preventBackgroundScroll = (event: WheelEvent | TouchEvent) => {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (navContainerRef.current?.contains(target)) return
+      if (target instanceof Element && target.closest('[data-nav-scroll-lock-exempt]')) return
+      event.preventDefault()
+    }
+
+    lenisRef.current?.stop()
+    document.addEventListener('wheel', preventBackgroundScroll, { passive: false })
+    document.addEventListener('touchmove', preventBackgroundScroll, { passive: false })
 
     return () => {
-      document.documentElement.style.overflowY = ''
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.left = ''
-      document.body.style.right = ''
-      document.body.style.width = ''
-      window.scrollTo(0, scrollY)
+      document.removeEventListener('wheel', preventBackgroundScroll)
+      document.removeEventListener('touchmove', preventBackgroundScroll)
+      lenisRef.current?.start()
     }
   }, [hasMegaNav, activeMenuId, mobileMenuId])
 

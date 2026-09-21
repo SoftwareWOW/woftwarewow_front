@@ -14,10 +14,30 @@ import type {
 
 const FOOTER_RESOURCE_POPULATE = '*';
 
+/** Careers page uses a custom /full route with safe nested populate (matches Postman). */
+export async function getCareerPageFull(
+  locale: Locale,
+): Promise<StrapiSuperagencyPage | null> {
+  const result = await fetchSingleType<StrapiSuperagencyPage>(
+    'superagency-page-career/full',
+    {
+      locale,
+      populate: false,
+    },
+  );
+
+  return result;
+}
+
 export async function getSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<StrapiSuperagencyPage | null> {
+  if (slug === 'career') {
+    const full = await getCareerPageFull(locale);
+    if (full) return full;
+  }
+
   const apiId = pageApiId(slug);
 
   const shallow = await fetchSingleType<StrapiSuperagencyPage>(apiId, {

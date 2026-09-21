@@ -18,6 +18,7 @@ export type CmsSectionType =
   | 'page-faq'
   | 'page-blog-posts'
   | 'page-career-jobs'
+  | 'page-career-community'
   | 'page-team-members'
   | 'page-office-locations'
   | 'page-client-logos'
@@ -604,6 +605,7 @@ export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, st
   'page-faq': 'sections.page-faq',
   'page-blog-posts': 'sections.page-blog-posts',
   'page-career-jobs': 'sections.page-career-jobs',
+  'page-career-community': 'sections.page-career-community',
   'page-team-members': 'sections.page-team-members',
   'page-office-locations': 'sections.page-office-locations',
   'page-client-logos': 'sections.page-client-logos',
@@ -711,11 +713,65 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
       members: { populate: { image: true, socialLinks: true } },
     },
   },
+  'company-gallery': {
+    cmsType: 'image-gallery',
+    populate: { images: { populate: { image: true } } },
+  },
+  'carrer-company-galleryimage': {
+    cmsType: 'image-gallery',
+    populate: { images: { populate: { image: true } } },
+  },
+  'community-images': {
+    cmsType: 'page-career-community',
+    populate: {
+      avatars: { populate: { image: true } },
+      teamImage: { populate: { image: true } },
+    },
+  },
+  'career-communityimage': {
+    cmsType: 'page-career-community',
+    populate: {
+      avatars: { populate: { image: true } },
+      teamImage: { populate: { image: true } },
+    },
+  },
+  'career-community-image': {
+    cmsType: 'page-career-community',
+    populate: {
+      avatars: { populate: { image: true } },
+      teamImage: { populate: { image: true } },
+    },
+  },
+  'career-jobs': {
+    cmsType: 'page-career-jobs',
+    populate: {
+      jobs: {
+        fields: [
+          'title',
+          'slug',
+          'description',
+          'tags',
+          'department',
+          'employment',
+          'location',
+          'order',
+        ],
+      },
+    },
+  },
+  'career-rfq': {
+    cmsType: 'page-rfq-accordion',
+    populate: { groups: true },
+  },
 };
 
 export function getStrapiSectionKeyConfig(sectionKey: string) {
   return STRAPI_SECTION_KEY_CONFIG[sectionKey] ?? null;
 }
+
+const COMPONENT_TO_CMS_TYPE = Object.fromEntries(
+  Object.entries(CMS_TO_COMPONENT).map(([cmsType, component]) => [component, cmsType]),
+) as Record<string, Exclude<CmsSectionType, null | 'hero'>>;
 
 export function inferCmsTypeFromSectionValue(
   value: unknown,
@@ -723,6 +779,12 @@ export function inferCmsTypeFromSectionValue(
   if (!value || typeof value !== 'object') return null;
 
   const section = value as Record<string, unknown>;
+
+  if (typeof section.__component === 'string') {
+    const fromComponent = COMPONENT_TO_CMS_TYPE[section.__component];
+    if (fromComponent) return fromComponent;
+  }
+
   if (typeof section.sectionKey === 'string') {
     const strapiConfig = getStrapiSectionKeyConfig(section.sectionKey);
     if (strapiConfig) return strapiConfig.cmsType;
@@ -732,6 +794,8 @@ export function inferCmsTypeFromSectionValue(
   }
 
   if ('body' in section) return 'hero-about';
+  if ('avatars' in section || 'teamImage' in section) return 'page-career-community';
+  if ('jobs' in section) return 'page-career-jobs';
 
   return null;
 }
@@ -1070,6 +1134,12 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       component: 'sections.page-technologies',
       sectionKey: 'brand-usage-guidelines',
     },
+  ],
+  career: [
+    { name: 'companyGallery', component: 'sections.image-gallery', sectionKey: 'company-gallery' },
+    { name: 'communityImages', component: 'sections.page-career-community', sectionKey: 'community-images' },
+    { name: 'careerJobs', component: 'sections.page-career-jobs', sectionKey: 'career-jobs' },
+    { name: 'careerRfq', component: 'sections.page-rfq-accordion', sectionKey: 'career-rfq' },
   ],
 };
 

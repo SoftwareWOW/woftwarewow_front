@@ -54,6 +54,7 @@ export default function WowMegaMenuPanel({
   return (
     <div
       ref={scrollRef}
+      data-nav-scroll-lock-exempt
       role="region"
       aria-label={item.label}
       onWheel={handleWheel}

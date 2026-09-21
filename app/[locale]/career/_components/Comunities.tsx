@@ -2,13 +2,11 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
 import communityImg from '@/public/images/wow/Hero/career/team/teamimage.png'
 import Image from 'next/image'
-import { FaFacebookF, FaPlus } from 'react-icons/fa6'
 
-const communityAvatars = [
+const fallbackAvatars = [
   '/images/wow/Hero/career/team/Avatar wrap-1.png',
   '/images/wow/Hero/career/team/Avatar wrap-2.png',
   '/images/wow/Hero/career/team/Avatar wrap-3.png',
@@ -17,10 +15,25 @@ const communityAvatars = [
   '/images/wow/Hero/career/team/Avatar wrap.png',
 ]
 
-type CommunitiesProps = Partial<CmsTechnologiesSection>
+type CommunitiesProps = {
+  avatars?: CmsGalleryImage[]
+  teamImage?: CmsGalleryImage | null
+}
 
-const Communities = ({ title = '{header.title}', accentTitle, description }: CommunitiesProps = {}) => {
-  const header = mergeSectionHeader({ title, accentTitle, description }, { title, accentTitle, description })
+const Communities = ({ avatars, teamImage }: CommunitiesProps = {}) => {
+  const avatarItems =
+    avatars?.length ?
+      avatars.map((item, index) => ({
+        src: item.src,
+        alt: item.alt ?? `Community member ${index + 1}`,
+      }))
+    : fallbackAvatars.map((src, index) => ({
+        src,
+        alt: `Community member ${index + 1}`,
+      }))
+
+  const teamImageSrc = teamImage?.src
+  const teamImageAlt = teamImage?.alt ?? 'Community Discussion'
 
   return (
     <section className="overflow-hidden">
@@ -37,12 +50,12 @@ const Communities = ({ title = '{header.title}', accentTitle, description }: Com
           <RevealWrapper className="col-span-full flex flex-col items-stretch gap-6 border p-6 dark:border-dark max-md:gap-y-8 md:flex-row md:items-center md:justify-between md:gap-x-10 md:p-10">
             <div className="flex max-w-[520px] flex-col items-start max-md:w-full">
               <div className="mb-6 flex items-center">
-                {communityAvatars.map((src, index) => (
+                {avatarItems.map((item, index) => (
                   <div
-                    key={`${src}-${index}`}
+                    key={`${item.src}-${index}`}
                     className="relative size-10 shrink-0 overflow-hidden rounded-full border-2 border-backgroundBody dark:border-dark sm:size-12"
                     style={{ marginLeft: index === 0 ? 0 : -18, zIndex: index + 1 }}>
-                    <Image src={src} alt={`Community member ${index + 1}`} fill className="object-cover" sizes="48px" />
+                    <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="48px" />
                   </div>
                 ))}
               </div>
@@ -62,7 +75,11 @@ const Communities = ({ title = '{header.title}', accentTitle, description }: Com
             </div>
 
             <figure className="max-md:w-full">
-              <Image src={communityImg} alt="Community Discussion" className="max-md:w-full" />
+              {teamImageSrc ? (
+                <img src={teamImageSrc} alt={teamImageAlt} className="max-md:w-full" />
+              ) : (
+                <Image src={communityImg} alt="Community Discussion" className="max-md:w-full" />
+              )}
             </figure>
           </RevealWrapper>
 

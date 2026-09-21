@@ -9,75 +9,14 @@ import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
 
 const INITIAL_VISIBLE_COUNT = 6
 
-const DEFAULT_FAQDATA = [
-  {
-    id: 1,
-    question: 'How do I apply for a role at WOW Superagency?',
-    answer:
-      'Browse the open roles on this page, choose the position that fits you, and click Apply Now. Submit your resume and portfolio when relevant — our talent team reviews every application and follows up if there is a match.',
-  },
-  {
-    id: 2,
-    question: 'What is the hiring process like?',
-    answer:
-      'Most roles follow a clear path: application review, an intro call, a skills or portfolio conversation, then a final culture-fit chat with the team. We keep timelines transparent so you always know what comes next.',
-  },
-  {
-    id: 3,
-    question: 'Do you offer flexible or hybrid schedules?',
-    answer:
-      'Yes. We support flexible scheduling options and work-life balance so you can do your best work. Exact arrangements depend on the role — details are shared during the interview process.',
-  },
-  {
-    id: 4,
-    question: 'What will I love about working here?',
-    answer:
-      'Team members get career development, modern tools & technology, recognition & rewards, continuous learning, and a collaborative culture focused on innovation and meaningful impact.',
-  },
-  {
-    id: 5,
-    question: 'I do not see a role that fits. Can I still apply?',
-    answer:
-      'Absolutely. Send an open application through our contact page with your resume and a short note about the work you want to do. We keep strong candidates in mind as new roles open.',
-  },
-  {
-    id: 6,
-    question: 'What kind of experience do you look for?',
-    answer:
-      'We value craft, curiosity, and collaboration. Relevant experience helps, but portfolios, side projects, and people who learn quickly and communicate well across design, tech, and marketing stand out too.',
-  },
-  {
-    id: 7,
-    question: 'Is there room to grow inside WOW?',
-    answer:
-      'Yes. WOW is a connected ecosystem of divisions — you can deepen expertise in your lane or grow across branding, software, AI, websites, marketing, and business growth with real client work and mentorship.',
-  },
-  {
-    id: 8,
-    question: 'How can I join the WOW community before applying?',
-    answer:
-      'Explore our community for educational content and networking, watch tutorials on YouTube, and follow WOW on LinkedIn for updates and future opportunities — all linked in the Communities section above.',
-  },
-  {
-    id: 9,
-    question: 'How long does it take to hear back after applying?',
-    answer:
-      'We aim to respond within one to two weeks. Strong matches often hear sooner. High-volume periods can take a little longer, but every application is reviewed carefully.',
-  },
-  {
-    id: 10,
-    question: 'Who can I contact with career questions?',
-    answer:
-      'Reach out through our contact form or book a conversation from the careers page. Mention the role you are interested in and we will connect you with the right person on the talent team.',
-  },
-]
-
 type CareerRfqProps = { items?: CmsFaqItem[] | null }
 
 const CareerRfq = ({ items }: CareerRfqProps = {}) => {
-  const faqData = items?.length
-    ? items.map((item, index) => ({ id: index + 1, question: item.question, answer: item.answer }))
-    : DEFAULT_FAQDATA
+  const faqData = (items ?? []).map((item, index) => ({
+    id: index + 1,
+    question: item.question,
+    answer: item.answer,
+  }))
 
 
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)

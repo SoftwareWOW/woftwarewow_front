@@ -8,6 +8,7 @@ import type {
   StrapiPageEvents,
   StrapiPageFaq,
   StrapiPageHero,
+  StrapiPageCareerCommunity,
   StrapiPageImages,
   StrapiPageProcess,
   StrapiPageProjects,
@@ -112,6 +113,11 @@ export type CmsGalleryImage = {
   href?: string;
 };
 
+export type CmsCareerCommunitySection = {
+  avatars: CmsGalleryImage[];
+  teamImage?: CmsGalleryImage | null;
+};
+
 export type CmsImageGallerySection = {
   eyebrow?: string;
   title?: string;
@@ -137,6 +143,17 @@ export type CmsProjectCard = {
 export type CmsFaqItem = {
   question: string;
   answer: string;
+};
+
+export type CmsCareerJobCard = {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  department?: string;
+  employment?: string;
+  location?: string;
+  order?: number;
 };
 
 export type CmsTeamMember = {
@@ -448,6 +465,29 @@ export function mapPageImages(section?: StrapiPageImages | null) {
       alt: item.alt ?? undefined,
     }))
     .filter((item) => Boolean(item.src)) as { src: string; alt?: string }[];
+}
+
+function mapImageWithAltItem(item?: { image?: Parameters<typeof getStrapiMediaUrl>[0]; alt?: string | null }) {
+  const src = getStrapiMediaUrl(item?.image ?? undefined);
+  if (!src) return null;
+  return { src, alt: item?.alt ?? undefined };
+}
+
+export function mapCareerCommunitySection(
+  section?: StrapiPageCareerCommunity | null,
+): CmsCareerCommunitySection | null {
+  if (!section) return null;
+
+  const avatars =
+    section.avatars
+      ?.map((item) => mapImageWithAltItem(item))
+      .filter((item): item is CmsGalleryImage => item !== null) ?? [];
+
+  const teamImage = mapImageWithAltItem(section.teamImage ?? undefined);
+
+  if (!avatars.length && !teamImage) return null;
+
+  return { avatars, teamImage };
 }
 
 export function mapPageFaq(section?: StrapiPageFaq | null): CmsFaqItem[] | null {

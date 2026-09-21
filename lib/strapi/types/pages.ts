@@ -149,6 +149,12 @@ export type StrapiPageImages = {
   images?: StrapiPageImageItem[] | null;
 };
 
+export type StrapiPageCareerCommunity = {
+  sectionKey?: string;
+  avatars?: StrapiPageImageItem[] | null;
+  teamImage?: StrapiPageImageItem | null;
+};
+
 export type StrapiPageFaqItem = {
   id?: number;
   question: string;
@@ -244,14 +250,7 @@ export type StrapiPageBlogPosts = {
 
 export type StrapiPageCareerJobs = {
   sectionKey?: string;
-  jobs?: Array<{
-    documentId?: string;
-    title?: string;
-    location?: string | null;
-    type?: string | null;
-    href?: string | null;
-    order?: number | null;
-  }> | null;
+  jobs?: import('@/lib/strapi/types/career').StrapiCareerJob[] | null;
 };
 
 export type StrapiPageSeo = {
