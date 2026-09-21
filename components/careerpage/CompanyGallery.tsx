@@ -1,57 +1,77 @@
 import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
 
-const galleryData = [
+/** Fixed 4-slot collage — CMS images map by index (0–3). */
+const galleryLayout = [
   {
     id: 1,
-    src: '/images/wow/Hero/career/career (1).png',
     alt: 'Team collaborating in modern office space',
-    className: 'w-full lg:w-full lg:object-cover',
-    order: 'md:order-4 lg:order-first',
+    mobileClass: 'md:order-4',
+    desktop: 'left-0 top-0 h-[520px] w-1/4',
   },
   {
     id: 2,
-    src: '/images/wow/Hero/career/career (2).png',
     alt: 'Creative workshop session with design team',
-    className: 'w-full lg:w-1/3 lg:absolute lg:top-[57px] z-10',
-    order: 'place-self-start',
+    mobileClass: '',
+    desktop: 'left-[18%] top-[57px] z-10 h-[340px] w-1/3',
   },
   {
     id: 3,
-    src: '/images/wow/Hero/career/career (3).png',
     alt: 'Modern collaborative workspace environment',
-    className: 'w-full lg:absolute lg:bottom-10 lg:w-fit -z-0',
-    order: 'lg:place-self-end',
+    mobileClass: '',
+    desktop: 'bottom-10 left-[40%] z-[5] h-[260px] w-[28%]',
   },
   {
     id: 4,
-    src: '/images/wow/Hero/career/career (4).png',
     alt: 'Team building and social activities',
-    className: 'w-full',
-    order: '',
+    mobileClass: '',
+    desktop: 'left-3/4 top-0 h-[520px] w-1/4',
   },
-]
+] as const
 
 type CompanyGalleryProps = {
   images?: CmsGalleryImage[]
 }
 
 const CompanyGallery = ({ images }: CompanyGalleryProps) => {
-  const displayImages = galleryData.map((item, index) => {
-    const cmsImage = images?.[index]
-    return {
-      ...item,
-      src: cmsImage?.src ?? item.src,
-      alt: cmsImage?.alt ?? item.alt,
-    }
-  })
+  if (!images?.length) return null
+
+  const slots = galleryLayout
+    .map((slot, index) => {
+      const cmsImage = images[index]
+      if (!cmsImage?.src) return null
+      return { ...slot, src: cmsImage.src, alt: cmsImage.alt ?? slot.alt }
+    })
+    .filter(Boolean) as Array<(typeof galleryLayout)[number] & { src: string; alt: string }>
+
+  if (!slots.length) return null
 
   return (
     <section className="overflow-hidden">
       <div className="mx-auto max-w-[1440px] max-lg:px-4">
-        <div className="relative grid grid-cols-1 max-lg:gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {displayImages.map((image) => (
-            <figure key={image.id} className={`w-full ${image.order}`}>
-              <img src={image.src} alt={image.alt} className={image.className} />
+        {/* Mobile / tablet */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:hidden">
+          {slots.map((slot) => (
+            <figure
+              key={slot.id}
+              className={`overflow-hidden rounded-lg ${slot.mobileClass}`}
+            >
+              <img
+                src={slot.src}
+                alt={slot.alt}
+                className="h-[280px] w-full object-cover md:h-[360px]"
+              />
+            </figure>
+          ))}
+        </div>
+
+        {/* Desktop — explicit absolute collage (matches original 4-col overlap) */}
+        <div className="relative hidden h-[560px] w-full lg:block">
+          {slots.map((slot) => (
+            <figure
+              key={slot.id}
+              className={`absolute overflow-hidden rounded-lg ${slot.desktop}`}
+            >
+              <img src={slot.src} alt={slot.alt} className="h-full w-full object-cover" />
             </figure>
           ))}
         </div>

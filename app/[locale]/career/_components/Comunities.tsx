@@ -3,17 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
-import communityImg from '@/public/images/wow/Hero/career/team/teamimage.png'
 import Image from 'next/image'
-
-const fallbackAvatars = [
-  '/images/wow/Hero/career/team/Avatar wrap-1.png',
-  '/images/wow/Hero/career/team/Avatar wrap-2.png',
-  '/images/wow/Hero/career/team/Avatar wrap-3.png',
-  '/images/wow/Hero/career/team/Avatar wrap-4.png',
-  '/images/wow/Hero/career/team/Avatar wrap-5.png',
-  '/images/wow/Hero/career/team/Avatar wrap.png',
-]
 
 type CommunitiesProps = {
   avatars?: CmsGalleryImage[]
@@ -21,20 +11,6 @@ type CommunitiesProps = {
 }
 
 const Communities = ({ avatars, teamImage }: CommunitiesProps = {}) => {
-  const avatarItems =
-    avatars?.length ?
-      avatars.map((item, index) => ({
-        src: item.src,
-        alt: item.alt ?? `Community member ${index + 1}`,
-      }))
-    : fallbackAvatars.map((src, index) => ({
-        src,
-        alt: `Community member ${index + 1}`,
-      }))
-
-  const teamImageSrc = teamImage?.src
-  const teamImageAlt = teamImage?.alt ?? 'Community Discussion'
-
   return (
     <section className="overflow-hidden">
       <div className="container">
@@ -49,16 +25,24 @@ const Communities = ({ avatars, teamImage }: CommunitiesProps = {}) => {
         <div className="grid grid-cols-12 gap-6">
           <RevealWrapper className="col-span-full flex flex-col items-stretch gap-6 border p-6 dark:border-dark max-md:gap-y-8 md:flex-row md:items-center md:justify-between md:gap-x-10 md:p-10">
             <div className="flex max-w-[520px] flex-col items-start max-md:w-full">
-              <div className="mb-6 flex items-center">
-                {avatarItems.map((item, index) => (
-                  <div
-                    key={`${item.src}-${index}`}
-                    className="relative size-10 shrink-0 overflow-hidden rounded-full border-2 border-backgroundBody dark:border-dark sm:size-12"
-                    style={{ marginLeft: index === 0 ? 0 : -18, zIndex: index + 1 }}>
-                    <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="48px" />
-                  </div>
-                ))}
-              </div>
+              {avatars?.length ? (
+                <div className="mb-6 flex items-center">
+                  {avatars.map((item, index) => (
+                    <div
+                      key={`${item.src}-${index}`}
+                      className="relative size-10 shrink-0 overflow-hidden rounded-full border-2 border-backgroundBody dark:border-dark sm:size-12"
+                      style={{ marginLeft: index === 0 ? 0 : -18, zIndex: index + 1 }}>
+                      <Image
+                        src={item.src}
+                        alt={item.alt ?? `Community member ${index + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="48px"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : null}
 
               <h3 className="mb-8 leading-[1.2] tracking-[-1.08px] lg:text-4xl">
                 Explore our community, educational content, and professional network built to support continuous
@@ -74,13 +58,15 @@ const Communities = ({ avatars, teamImage }: CommunitiesProps = {}) => {
               </ButtonComponentList>
             </div>
 
-            <figure className="max-md:w-full">
-              {teamImageSrc ? (
-                <img src={teamImageSrc} alt={teamImageAlt} className="max-md:w-full" />
-              ) : (
-                <Image src={communityImg} alt="Community Discussion" className="max-md:w-full" />
-              )}
-            </figure>
+            {teamImage?.src ? (
+              <figure className="max-md:w-full">
+                <img
+                  src={teamImage.src}
+                  alt={teamImage.alt ?? 'Community Discussion'}
+                  className="max-md:w-full"
+                />
+              </figure>
+            ) : null}
           </RevealWrapper>
 
           <RevealWrapper className="card col-span-full border pb-10 pt-10 text-center dark:border-dark md:col-span-6 md:pb-[60px]">

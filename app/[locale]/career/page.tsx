@@ -16,7 +16,6 @@ import type {
   CmsImageGallerySection,
   CmsRfqAccordionSection,
 } from '@/lib/strapi/mappers/page-sections'
-import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage,
@@ -27,14 +26,6 @@ import { setRequestLocale } from 'next-intl/server'
 const PAGE_SLUG = 'career' as const
 
 export const revalidate = 60
-
-const DEFAULT_HERO = {
-  badgeTitle: 'Career',
-  title: 'Build the Future of Small Business',
-  italicTitle: 'Growth',
-  description:
-    'Join a team of creators, strategists, developers, marketers, and innovators building technology and digital solutions that help businesses grow.',
-}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -59,10 +50,11 @@ const CareerPage = async ({ params }: Props) => {
   setRequestLocale(locale as Locale)
 
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
-  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
 
-  const companyGallery = sections.companyGallery as CmsImageGallerySection | undefined
+  const companyGallery =
+    cms.imageGallery('companyGallery') ??
+    (sections.companyGallery as CmsImageGallerySection | undefined)
   const communityImages = sections.communityImages as CmsCareerCommunitySection | undefined
   const careerJobs = sections.careerJobs as { jobs?: CmsCareerJobCard[] } | undefined
   const careerRfq = sections.careerRfq as CmsRfqAccordionSection | undefined
@@ -70,7 +62,7 @@ const CareerPage = async ({ params }: Props) => {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <CareerHeroPage {...hero} />
+        {cms.hero ? <CareerHeroPage {...cms.hero} /> : null}
         <CompanyGallery images={companyGallery?.images} />
         <BenefitsCareer />
         <Jobs jobs={careerJobs?.jobs} />

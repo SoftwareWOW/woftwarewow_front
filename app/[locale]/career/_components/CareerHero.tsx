@@ -11,10 +11,10 @@ type CareerHeroProps = {
 }
 
 const CareerHeroPage = ({
-  badgeTitle = 'Career',
-  title = 'Build the Future of Small Business',
-  italicTitle = 'Growth',
-  description = 'Join a team of creators, strategists, developers, marketers, and innovators building technology and digital solutions that help businesses grow.',
+  badgeTitle,
+  title,
+  italicTitle,
+  description,
 }: CareerHeroProps) => {
   return (
     <section className="relative overflow-hidden bg-background px-3 pt-28 transition-colors duration-300 dark:bg-background sm:pt-32 md:px-4 lg:pt-[140px] xl:pt-[160px]">
