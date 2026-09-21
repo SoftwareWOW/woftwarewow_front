@@ -63,7 +63,7 @@ const Communities = ({ avatars, teamImage }: CommunitiesProps = {}) => {
                 <img
                   src={teamImage.src}
                   alt={teamImage.alt ?? 'Community Discussion'}
-                  className="max-md:w-full"
+                  className="max-md:w-full rounded-radius-md"
                 />
               </figure>
             ) : null}

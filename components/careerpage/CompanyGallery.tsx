@@ -18,7 +18,7 @@ const galleryLayout = [
     id: 3,
     alt: 'Modern collaborative workspace environment',
     mobileClass: '',
-    desktop: 'bottom-10 left-[40%] z-[5] h-[260px] w-[28%]',
+    desktop: 'bottom-10 left-[50%] z-[5] h-[260px] w-[28%]',
   },
   {
     id: 4,
