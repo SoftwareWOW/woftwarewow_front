@@ -46,13 +46,16 @@ const BlogDetailsContent = ({ post, restBlogPosts }: BlogDetailsContentProps) =>
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
         {(post.featureImage || post.thumbnail) ? (
-          <RevealWrapper as="figure" className="reveal-me w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]">
+          <RevealWrapper
+            as="figure"
+            className="reveal-me relative w-full overflow-hidden rounded-radius-md aspect-[16/9] sm:aspect-[2/1] lg:aspect-[1320/523]"
+          >
             <Image
               src={post.featureImage || post.thumbnail || ''}
-              width={1280}
-              height={523}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px"
               alt={post.title || 'Blog Details'}
-              className="w-full rounded-radius-md object-cover"
+              className="rounded-radius-md object-cover"
             />
           </RevealWrapper>
         ) : null}
@@ -77,14 +80,14 @@ const BlogDetailsContent = ({ post, restBlogPosts }: BlogDetailsContentProps) =>
             {bodyImages.map((image, index) => (
               <figure
                 key={`${image.src}-${index}`}
-                className="my-8 w-full overflow-hidden rounded-radius-md 2xl:max-h-[523px]"
+                className="relative my-8 w-full overflow-hidden rounded-radius-md aspect-[16/9] sm:aspect-[2/1] lg:aspect-[1320/523]"
               >
                 <Image
                   src={image.src}
-                  width={1280}
-                  height={523}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px"
                   alt={image.alt || post.title || 'Blog image'}
-                  className="w-full rounded-radius-md object-cover"
+                  className="rounded-radius-md object-cover"
                 />
               </figure>
             ))}

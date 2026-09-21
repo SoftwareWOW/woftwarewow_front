@@ -130,7 +130,7 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
   if (!uniqueItems.length) return null
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
+    <section className="relative bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
           className="absolute inset-0"
@@ -174,7 +174,7 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
         )}
 
         <div
-          className="relative w-full"
+          className="relative w-full px-11 sm:px-12 md:px-14 lg:px-16"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -184,7 +184,7 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
               align: 'start',
               loop: true,
             }}
-            className="w-full"
+            className="w-full overflow-hidden"
           >
             <CarouselContent className="-ml-4 md:-ml-6">
               {uniqueItems.map((item, index) => {
@@ -234,28 +234,6 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
             </CarouselContent>
 
             {uniqueItems.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => handleManualNavigation('prev')}
-                  aria-label="Previous slide"
-                  className="absolute left-0 top-[22%] z-20 flex size-9 items-center justify-center rounded-radius-sm border border-[#1515151A] bg-background text-[#0D0D0D] transition-colors duration-300 hover:border-primary hover:text-primary dark:border-[#EDF0F51A] dark:bg-dark dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:text-[#b794f4] sm:size-10 md:-left-2 lg:-left-4 xl:-left-12"
-                >
-                  <ChevronLeft className="size-5" strokeWidth={1.5} />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleManualNavigation('next')}
-                  aria-label="Next slide"
-                  className="absolute right-0 top-[22%] z-20 flex size-9 items-center justify-center rounded-radius-sm border border-[#1515151A] bg-background text-[#0D0D0D] transition-colors duration-300 hover:border-primary hover:text-primary dark:border-[#EDF0F51A] dark:bg-dark dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:text-[#b794f4] sm:size-10 md:-right-2 lg:-right-4 xl:-right-12"
-                >
-                  <ChevronRight className="size-5" strokeWidth={1.5} />
-                </button>
-              </>
-            )}
-
-            {uniqueItems.length > 1 && (
               <div className="relative z-20 mt-10 flex justify-center md:mt-12">
                 <div className="flex items-center gap-1">
                   {uniqueItems.map((item, index) => (
@@ -275,6 +253,28 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
               </div>
             )}
           </Carousel>
+
+          {uniqueItems.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() => handleManualNavigation('prev')}
+                aria-label="Previous slide"
+                className="absolute left-0 top-[22%] z-20 flex size-9 shrink-0 items-center justify-center rounded-radius-sm border border-[#1515151A] bg-background text-[#0D0D0D] shadow-sm transition-colors duration-300 hover:border-primary hover:text-primary dark:border-[#EDF0F51A] dark:bg-dark dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:text-[#b794f4] sm:size-10"
+              >
+                <ChevronLeft className="size-5" strokeWidth={1.5} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleManualNavigation('next')}
+                aria-label="Next slide"
+                className="absolute right-0 top-[22%] z-20 flex size-9 shrink-0 items-center justify-center rounded-radius-sm border border-[#1515151A] bg-background text-[#0D0D0D] shadow-sm transition-colors duration-300 hover:border-primary hover:text-primary dark:border-[#EDF0F51A] dark:bg-dark dark:text-[#F2F2F2] dark:hover:border-[#b794f4] dark:hover:text-[#b794f4] sm:size-10"
+              >
+                <ChevronRight className="size-5" strokeWidth={1.5} />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </section>
