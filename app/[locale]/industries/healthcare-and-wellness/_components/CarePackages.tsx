@@ -4,8 +4,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import type { CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
+import { mergePackageListItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -36,12 +36,17 @@ const packages = [
 ]
 
 /** Layout: Home-20 PortfolioV6 / StartupPackages — overlapping image + card rows. */
-type CarePackagesProps = Partial<CmsTechnologiesSection>
+type CarePackagesProps = Partial<CmsPackageListSection>
 
-const CarePackages = ({ eyebrow = 'Recommended Solutions', title, accentTitle, description, items }: CarePackagesProps = {}) => {
+const CarePackages = ({
+  eyebrow = 'Recommended Solutions',
+  title,
+  accentTitle,
+  description,
+  items,
+}: CarePackagesProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = mergeFeatureItems([], items)
-
+  const displayPackages = mergePackageListItems(packages, items ? { items } : null)
 
   return (
     <section aria-labelledby="care-packages-heading">
@@ -64,7 +69,7 @@ const CarePackages = ({ eyebrow = 'Recommended Solutions', title, accentTitle, d
         </div>
 
         <div className="mb-[60px] space-y-[30px]">
-          {packages.map((item) => (
+          {displayPackages.map((item) => (
             <RevealWrapper
               key={item.href}
               className="underline-hover-effect reveal-me group relative flex w-full flex-col items-center lg:flex-row"

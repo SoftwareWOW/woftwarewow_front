@@ -8,26 +8,79 @@ import {
   PORTFOLIO_FILTERS,
   recentPortfolioProjects,
   type PortfolioFilter,
+  type PortfolioProject,
 } from '../../_data/projects'
 import LatestProjects from './LatestProjects'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import type { CmsPortfolioExplorerSection, CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+
+function slugFromHref(href?: string, fallbackIndex?: number) {
+  if (href) {
+    const match = href.match(/\/case-stud(?:y|ies)\/([^/?#]+)/)
+    if (match?.[1]) return match[1]
+  }
+  return `cms-project-${fallbackIndex ?? 0}`
+}
+
+function cmsProjectsToPortfolio(projects: CmsProjectCard[]): PortfolioProject[] {
+  const year = new Date().getFullYear()
+
+  return projects.map((project, index) => ({
+    slug: slugFromHref(project.href, index),
+    title: project.title,
+    client: project.title,
+    industry: '',
+    tagline: '',
+    description: project.description ?? '',
+    image: project.thumbnail ?? '',
+    alt: project.alt ?? project.title,
+    year,
+    completedAt: `${year}-01-01`,
+    featured: false,
+    status: 'published' as const,
+    categories: [],
+    serviceTags: [],
+  }))
+}
 
 /** Layout: portfolio/_components/ExploreWork.tsx — recent-work filters driving a year-grouped grid. */
-type RecentWorkExplorerProps = Partial<CmsTechnologiesSection>
+type RecentWorkExplorerProps = Partial<CmsPortfolioExplorerSection>
 
-const RecentWorkExplorer = ({ eyebrow = 'EXPLORE BY EXPERTISE', title, accentTitle, description, items }: RecentWorkExplorerProps = {}) => {
-  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = mergeFeatureItems([], items)
+const RecentWorkExplorer = ({
+  eyebrow = 'EXPLORE BY EXPERTISE',
+  title,
+  accentTitle,
+  description,
+  filterGroups,
+}: RecentWorkExplorerProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
 
+  const cmsFilterLabels = filterGroups?.map((group) => group.label) ?? []
+  const filters = cmsFilterLabels.length ? (['All', ...cmsFilterLabels] as string[]) : [...PORTFOLIO_FILTERS]
 
-  const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All')
+  const [activeFilter, setActiveFilter] = useState<string>('All')
+
+  const allCmsProjects = useMemo(() => {
+    if (!filterGroups?.length) return null
+    return cmsProjectsToPortfolio(filterGroups.flatMap((group) => group.projects))
+  }, [filterGroups])
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') return recentPortfolioProjects
+    if (!filterGroups?.length) {
+      if (activeFilter === 'All') return recentPortfolioProjects
+      return recentPortfolioProjects.filter((project) =>
+        project.categories.includes(activeFilter as Exclude<PortfolioFilter, 'All'>),
+      )
+    }
 
-    return recentPortfolioProjects.filter((project) => project.categories.includes(activeFilter))
-  }, [activeFilter])
+    if (activeFilter === 'All') return allCmsProjects ?? []
+
+    const group = filterGroups.find((entry) => entry.label === activeFilter)
+    return group ? cmsProjectsToPortfolio(group.projects) : allCmsProjects ?? []
+  }, [activeFilter, allCmsProjects, filterGroups])
 
   return (
     <section>
@@ -41,13 +94,14 @@ const RecentWorkExplorer = ({ eyebrow = 'EXPLORE BY EXPERTISE', title, accentTit
           </h2>
           <TextAppearAnimation>
             <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-              Browse our newest completed projects and filter by the expertise behind each one.
+              {header.description ??
+                'Browse our newest completed projects and filter by the expertise behind each one.'}
             </p>
           </TextAppearAnimation>
         </div>
 
         <div className="mb-10 flex flex-wrap justify-center gap-2 md:mb-14 md:gap-3">
-          {PORTFOLIO_FILTERS.map((filter) => {
+          {filters.map((filter) => {
             const isActive = activeFilter === filter
 
             return (

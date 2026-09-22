@@ -5,10 +5,16 @@ import { data } from '@/data/logo/logo'
 import useScrollingMarquee from '@/hooks/useScrollingMarquee'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsClientLogo } from '@/lib/strapi/mappers/page-sections'
 
 /** Layout: components/wow/shared/Marquee.tsx — scrolling client logo marquee from home page. */
-const ClientsMarquee = () => {
+type ClientsMarqueeProps = {
+  logos?: CmsClientLogo[] | null
+}
+
+const ClientsMarquee = ({ logos }: ClientsMarqueeProps = {}) => {
   const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
+  const displayLogos = logos?.length ? logos : data
 
   return (
     <section id="clients" className="relative scroll-mt-28 overflow-hidden px-3 sm:scroll-mt-32 md:px-4 lg:scroll-mt-36">
@@ -23,13 +29,17 @@ const ClientsMarquee = () => {
           className="relative overflow-hidden"
         >
           <div ref={marqueeRef} className="z-50 flex w-fit flex-nowrap gap-2.5 whitespace-nowrap">
-            {data.map((item) => (
+            {displayLogos.map((item) => (
               <div
                 key={item.id}
                 className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark"
               >
                 <img src={item.logo} alt={item.alt} className="inline-block dark:hidden" />
-                <img src={item.darkLogo} alt={item.alt} className="hidden dark:inline-block" />
+                <img
+                  src={item.darkLogo ?? item.logo}
+                  alt={item.alt}
+                  className="hidden dark:inline-block"
+                />
               </div>
             ))}
           </div>

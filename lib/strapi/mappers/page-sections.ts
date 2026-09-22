@@ -11,11 +11,22 @@ import type {
   StrapiPageCareerCommunity,
   StrapiPageImages,
   StrapiPageProcess,
+  StrapiPageProcessSteps,
+  StrapiPageSectionImage,
+  StrapiPageProjectItem,
   StrapiPageProjects,
+  StrapiPageRfq,
   StrapiPageRfqAccordion,
   StrapiPageSeo,
   StrapiPageTechnologies,
   StrapiPageTeamMembers,
+  StrapiPageClientLogos,
+  StrapiPageOfficeLocations,
+  StrapiPagePortfolioExplorer,
+  StrapiPagePackageList,
+  StrapiBrandKitLogos,
+  StrapiFaqList,
+  StrapiPagePartners,
   StrapiPackageOffer,
   StrapiTeamMember,
 } from '@/lib/strapi/types/pages';
@@ -143,6 +154,93 @@ export type CmsProjectCard = {
 export type CmsFaqItem = {
   question: string;
   answer: string;
+};
+
+export type CmsFaqListSection = {
+  eyebrow?: string;
+  title?: string;
+  accentTitle?: string;
+  description?: string;
+  items: CmsFaqItem[];
+};
+
+export type CmsPageRfqSection = {
+  body?: string;
+};
+
+export type CmsClientLogo = {
+  id: string;
+  logo: string;
+  darkLogo?: string;
+  alt: string;
+};
+
+export type CmsOfficeLocation = {
+  id: string;
+  city: string;
+  region?: string;
+  description?: string;
+  addressLines?: string[];
+  meta?: string;
+  phone?: string;
+  phoneHref?: string;
+  mapQuery?: string;
+  ctaLabel?: string;
+};
+
+export type CmsPortfolioFilterGroup = {
+  label: string;
+  filterKey?: string;
+  projects: CmsProjectCard[];
+};
+
+export type CmsPortfolioExplorerSection = {
+  eyebrow?: string;
+  title?: string;
+  accentTitle?: string;
+  description?: string;
+  filterGroups: CmsPortfolioFilterGroup[];
+};
+
+export type CmsPackageCard = {
+  index?: string;
+  subtitle?: string;
+  title: string;
+  description?: string;
+  href?: string;
+  buttonLabel?: string;
+  image?: CmsHeroImage;
+};
+
+export type CmsPackageListSection = {
+  eyebrow?: string;
+  title?: string;
+  accentTitle?: string;
+  description?: string;
+  items: CmsPackageCard[];
+};
+
+export type CmsBrandLogoCard = {
+  title: string;
+  description?: string;
+  previewImage?: CmsHeroImage;
+  svgHref?: string;
+  pngHref?: string;
+};
+
+export type CmsBrandKitLogosSection = {
+  eyebrow?: string;
+  title?: string;
+  accentTitle?: string;
+  description?: string;
+  items: CmsBrandLogoCard[];
+};
+
+export type CmsPartnerCard = {
+  title: string;
+  description?: string;
+  logo?: string;
+  href?: string;
 };
 
 export type CmsCareerJobCard = {
@@ -440,11 +538,9 @@ export function mapImageGallery(
   };
 }
 
-export function mapPageProjects(section?: StrapiPageProjects | null): CmsProjectCard[] | null {
-  const projects = section?.projects;
-  if (!projects?.length) return null;
-
-  return projects.map((project) => ({
+function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
+  const slug = typeof project.slug === 'string' ? project.slug : undefined;
+  return {
     title: project.title ?? '',
     description: project.description ?? undefined,
     thumbnail:
@@ -452,8 +548,189 @@ export function mapPageProjects(section?: StrapiPageProjects | null): CmsProject
       getStrapiMediaUrl(project.thumbnail ?? undefined) ??
       undefined,
     alt: project.alt ?? project.title ?? undefined,
-    href: project.href ?? undefined,
+    href: project.href ?? (slug ? `/case-studies/${slug}` : undefined),
+  };
+}
+
+export function mapPageProjects(section?: StrapiPageProjects | null): CmsProjectCard[] | null {
+  const projects = section?.projects;
+  if (!projects?.length) return null;
+
+  return projects.map((project) => mapProjectItem(project));
+}
+
+export function mapPageClientLogos(
+  section?: StrapiPageClientLogos | null,
+): CmsClientLogo[] | null {
+  const logos = section?.clientLogos;
+  if (!logos?.length) return null;
+
+  const mapped = logos
+    .map((item, index) => {
+      const logo =
+        item.logoPath ?? getStrapiMediaUrl(item.logo ?? undefined) ?? undefined;
+      if (!logo) return null;
+      const darkLogo =
+        item.darkLogoPath ?? getStrapiMediaUrl(item.darkLogo ?? undefined) ?? undefined;
+      const entry: CmsClientLogo = {
+        id: item.documentId ?? item.clientKey ?? String(index + 1),
+        logo,
+        alt: item.alt ?? item.name ?? 'Client logo',
+      };
+      if (darkLogo) entry.darkLogo = darkLogo;
+      return entry;
+    })
+    .filter((item): item is CmsClientLogo => item !== null);
+
+  return mapped.length ? mapped : null;
+}
+
+export function mapPageOfficeLocations(
+  section?: StrapiPageOfficeLocations | null,
+): CmsOfficeLocation[] | null {
+  const locations = section?.locations;
+  if (!locations?.length) return null;
+
+  return locations.map((loc, index) => {
+    const addressLines = Array.isArray(loc.addressLines)
+      ? loc.addressLines.filter((line): line is string => typeof line === 'string')
+      : [];
+    const mapQuery =
+      loc.mapQuery ??
+      [addressLines.join(', '), loc.city, loc.region].filter(Boolean).join(', ');
+
+    return {
+      id: loc.documentId ?? loc.locationId ?? String(index + 1),
+      city: loc.city ?? '',
+      region: loc.region ?? undefined,
+      description: loc.description ?? undefined,
+      addressLines: addressLines.length ? addressLines : undefined,
+      meta: loc.meta ?? undefined,
+      phone: loc.phone ?? undefined,
+      phoneHref: loc.phoneHref ?? undefined,
+      mapQuery,
+      ctaLabel: loc.locationId ? `VIEW ${loc.city?.toUpperCase() ?? 'LOCATION'}` : undefined,
+    };
+  });
+}
+
+export function mapPortfolioExplorer(
+  section?: StrapiPagePortfolioExplorer | null,
+): CmsPortfolioExplorerSection | null {
+  if (!section?.filterGroups?.length) return null;
+
+  const filterGroups = section.filterGroups
+    .map((group) => {
+      const projects = group.projects?.length
+        ? group.projects.map((project) => mapProjectItem(project))
+        : [];
+      if (!projects.length) return null;
+      const entry: CmsPortfolioFilterGroup = {
+        label: group.label,
+        projects,
+      };
+      if (group.filterKey) entry.filterKey = group.filterKey;
+      return entry;
+    })
+    .filter((group): group is CmsPortfolioFilterGroup => group !== null);
+
+  if (!filterGroups.length) return null;
+
+  return {
+    eyebrow: section.eyebrow ?? undefined,
+    title: section.title ?? undefined,
+    accentTitle: section.accentTitle ?? undefined,
+    description: section.description ?? undefined,
+    filterGroups,
+  };
+}
+
+export function mapPagePackageList(
+  section?: StrapiPagePackageList | null,
+): CmsPackageListSection | null {
+  if (!section?.items?.length) return null;
+
+  const items = section.items.map((item) => ({
+    index: item.index ?? undefined,
+    subtitle: item.subtitle ?? undefined,
+    title: item.title,
+    description: item.description ?? undefined,
+    href: item.href ?? undefined,
+    buttonLabel: item.buttonLabel ?? undefined,
+    image: item.image
+      ? {
+          src: getStrapiMediaUrl(item.image.image ?? undefined) ?? '',
+          alt: item.image.alt ?? undefined,
+        }
+      : undefined,
   }));
+
+  return {
+    eyebrow: section.eyebrow ?? undefined,
+    title: section.title ?? undefined,
+    accentTitle: section.accentTitle ?? undefined,
+    description: section.description ?? undefined,
+    items,
+  };
+}
+
+export function mapPagePartners(section?: StrapiPagePartners | null): CmsPartnerCard[] | null {
+  const partners = section?.partners;
+  if (!partners?.length) return null;
+
+  return partners.map((partner) => ({
+    title: partner.name ?? '',
+    description: partner.description ?? undefined,
+    logo: getStrapiMediaUrl(partner.logo ?? undefined) ?? undefined,
+    href: partner.href ?? undefined,
+  }));
+}
+
+export function mapPageRfq(section?: StrapiPageRfq | null): CmsPageRfqSection | null {
+  if (!section?.body) return null;
+  return { body: section.body };
+}
+
+export function mapFaqList(section?: StrapiFaqList | null): CmsFaqListSection | null {
+  if (!section?.items?.length) return null;
+
+  return {
+    eyebrow: section.eyebrow ?? undefined,
+    title: section.title ?? undefined,
+    accentTitle: section.accentTitle ?? undefined,
+    description: section.description ?? undefined,
+    items: section.items.map((item) => ({
+      question: item.question,
+      answer: item.answer,
+    })),
+  };
+}
+
+export function mapBrandKitLogos(
+  section?: StrapiBrandKitLogos | null,
+): CmsBrandKitLogosSection | null {
+  if (!section?.items?.length) return null;
+
+  const items = section.items.map((item) => {
+    const previewSrc = getStrapiMediaUrl(item.previewImage?.image ?? undefined);
+    return {
+      title: item.title,
+      description: item.description ?? undefined,
+      previewImage: previewSrc
+        ? { src: previewSrc, alt: item.previewImage?.alt ?? item.title }
+        : undefined,
+      svgHref: item.svgHref ?? undefined,
+      pngHref: item.pngHref ?? undefined,
+    };
+  });
+
+  return {
+    eyebrow: section.eyebrow ?? undefined,
+    title: section.title ?? undefined,
+    accentTitle: section.accentTitle ?? undefined,
+    description: section.description ?? undefined,
+    items,
+  };
 }
 
 export function mapPageImages(section?: StrapiPageImages | null) {
@@ -465,6 +742,13 @@ export function mapPageImages(section?: StrapiPageImages | null) {
       alt: item.alt ?? undefined,
     }))
     .filter((item) => Boolean(item.src)) as { src: string; alt?: string }[];
+}
+
+export function mapPageSectionImage(
+  section?: StrapiPageSectionImage | null,
+): CmsHeroImage | null {
+  if (!section?.image) return null;
+  return resolveCmsImage(section.image) ?? null;
 }
 
 function mapImageWithAltItem(

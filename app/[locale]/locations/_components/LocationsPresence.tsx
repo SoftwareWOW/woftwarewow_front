@@ -5,7 +5,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { renderWowInTitle } from '@/components/wow/shared/WowText'
 import { officeLocations } from '../_data/locations'
-import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
+import type { CmsOfficeLocation } from '@/lib/strapi/mappers/page-sections'
 
 function mapsEmbedUrl(mapQuery: string) {
   return `https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=15&output=embed`
@@ -17,23 +17,11 @@ function mapsSearchUrl(mapQuery: string) {
 
 /** Layout: partners/WhyPartnerWithWow — header + two-column details/media + CTA. */
 type LocationsPresenceProps = {
-  locations?: Array<{ city?: string | null; country?: string | null; address?: string | null }> | null
+  locations?: CmsOfficeLocation[] | null
 }
 
 const LocationsPresence = ({ locations }: LocationsPresenceProps = {}) => {
-  const displayLocations = locations?.length
-    ? locations.map((loc) => ({
-        city: loc.city ?? '',
-        region: loc.country ?? '',
-        description: '',
-        addressLines: loc.address ? [loc.address] : [],
-        mapQuery: [loc.address, loc.city, loc.country].filter(Boolean).join(', '),
-        meta: '',
-        phone: '',
-        phoneHref: '#',
-        ctaLabel: 'Open in Maps',
-      }))
-    : officeLocations
+  const displayLocations = locations?.length ? locations : officeLocations
 
 
   const location = displayLocations[0]
@@ -41,6 +29,7 @@ const LocationsPresence = ({ locations }: LocationsPresenceProps = {}) => {
   if (!location) return null
 
   const openMaps = () => {
+    if (!location.mapQuery) return
     window.open(mapsSearchUrl(location.mapQuery), '_blank', 'noopener,noreferrer')
   }
 
@@ -70,7 +59,7 @@ const LocationsPresence = ({ locations }: LocationsPresenceProps = {}) => {
               </h3>
               <p className="mt-4 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{location.description}</p>
               <div className="mt-6 space-y-1 text-base leading-[1.6] text-[#808080]">
-                {location.addressLines.map((line) => (
+                {location.addressLines?.map((line) => (
                   <p key={line}>{line}</p>
                 ))}
               </div>
@@ -97,7 +86,7 @@ const LocationsPresence = ({ locations }: LocationsPresenceProps = {}) => {
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <iframe
               title={`Map of ${location.city}, ${location.region}`}
-              src={mapsEmbedUrl(location.mapQuery)}
+              src={mapsEmbedUrl(location.mapQuery ?? '')}
               className="aspect-square h-full min-h-[280px] w-full rounded-radius-md border-0 sm:min-h-[360px] md:aspect-auto md:min-h-[420px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

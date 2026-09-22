@@ -55,7 +55,7 @@ export default async function WhySmbsPage({ params }: Props) {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — IndustriesHero */}
-        <WhySmbsHero {...hero} />
+        <WhySmbsHero {...hero} images={hero.images} />
         {/* 2. Gallery — Home-11 InstagramGallery */}
         <SmbGallery {...(sections.smbGallery ?? {})} />
         {/* 3. The Reality — Home-18 ServicesV15 */}

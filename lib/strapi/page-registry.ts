@@ -15,6 +15,8 @@ export type CmsSectionType =
   | 'page-images'
   | 'page-partners'
   | 'page-process'
+  | 'page-process-steps'
+  | 'page-section-image'
   | 'page-faq'
   | 'page-blog-posts'
   | 'page-career-jobs'
@@ -29,6 +31,8 @@ export type CmsSectionType =
   | 'page-rfq-accordion'
   | 'package-offer'
   | 'page-events'
+  | 'faq-list'
+  | 'brand-kit-logos'
   | null;
 
 export type PageSectionManifest = {
@@ -107,8 +111,9 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/about/strategy-centre',
     sections: [
       { sectionKey: 'strategy-hero', cms: 'hero' },
-      { sectionKey: 'wow-growth-framework', cms: 'page-process' },
-      { sectionKey: 'how-we-build-strategy', cms: 'page-process' },
+      { sectionKey: 'wow-growth-framework', cms: 'page-process-steps' },
+      { sectionKey: 'how-we-build-strategy', cms: 'page-process-steps' },
+      { sectionKey: 'built-around-your-business', cms: 'page-section-image' },
       { sectionKey: 'strategy-in-action', cms: 'page-projects' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
@@ -602,6 +607,8 @@ export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, st
   'page-images': 'sections.page-images',
   'page-partners': 'sections.page-partners',
   'page-process': 'sections.page-process',
+  'page-process-steps': 'sections.page-process-steps',
+  'page-section-image': 'sections.page-section-image',
   'page-faq': 'sections.page-faq',
   'page-blog-posts': 'sections.page-blog-posts',
   'page-career-jobs': 'sections.page-career-jobs',
@@ -616,6 +623,8 @@ export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, st
   'page-rfq-accordion': 'sections.page-rfq-accordion',
   'package-offer': 'sections.package-offer',
   'page-events': 'sections.page-events',
+  'faq-list': 'sections.faq-list',
+  'brand-kit-logos': 'sections.brand-kit-logos',
 };
 
 export const SECTION_KEY_TO_CMS: Record<
@@ -656,8 +665,8 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
     populate: { items: { populate: '*' } },
   },
   'care-packages': {
-    cmsType: 'page-technologies',
-    populate: { items: { populate: '*' } },
+    cmsType: 'page-package-list',
+    populate: { items: { populate: { image: { populate: '*' } } } },
   },
   'built-around-guest': {
     cmsType: 'page-process',
@@ -793,6 +802,11 @@ export function inferCmsTypeFromSectionValue(
     if (cmsType) return cmsType;
   }
 
+  if ('filterGroups' in section) return 'page-portfolio-explorer';
+  if ('clientLogos' in section) return 'page-client-logos';
+  if ('locations' in section) return 'page-office-locations';
+  if ('partners' in section) return 'page-partners';
+  if ('body' in section && !('image' in section)) return 'page-rfq';
   if ('body' in section) return 'hero-about';
   if ('avatars' in section || 'teamImage' in section) return 'page-career-community';
   if ('jobs' in section) return 'page-career-jobs';
@@ -815,11 +829,55 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       sectionKey: 'solution-to-challenges',
     },
   ],
+  'about-strategy-centre': [
+    {
+      name: 'wowGrowthFramework',
+      component: 'sections.page-process-steps',
+      sectionKey: 'wow-growth-framework',
+    },
+    {
+      name: 'howWeBuildStrategy',
+      component: 'sections.page-process-steps',
+      sectionKey: 'how-we-build-strategy',
+    },
+    {
+      name: 'builtAroundYourBusiness',
+      component: 'sections.page-section-image',
+      sectionKey: 'built-around-your-business',
+    },
+    {
+      name: 'strategyInAction',
+      component: 'sections.page-projects',
+      sectionKey: 'strategy-in-action',
+    },
+  ],
+  'about-why-smbs': [
+    { name: 'smbGallery', component: 'sections.page-images', sectionKey: 'smb-gallery' },
+  ],
   'startups-and-entrepreneurs': [
     {
       name: 'startupPackages',
       component: 'sections.page-package-list',
       sectionKey: 'startup-packages',
+    },
+  ],
+  'healthcare-and-wellness': [
+    {
+      name: 'carePackages',
+      component: 'sections.page-package-list',
+      sectionKey: 'care-packages',
+    },
+  ],
+  'finance-and-real-estate': [
+    {
+      name: 'wowEcosystem',
+      component: 'sections.page-package-list',
+      sectionKey: 'wow-ecosystem',
+    },
+    {
+      name: 'recommendedSolutions',
+      component: 'sections.page-package-list',
+      sectionKey: 'recommended-solutions',
     },
   ],
   'professional-services': [
@@ -1112,7 +1170,7 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       component: 'sections.page-technologies',
       sectionKey: 'saas-integrations',
     },
-    { name: 'saasFaq', component: 'sections.page-faq', sectionKey: 'saas-faq' },
+    { name: 'saasFaq', component: 'sections.faq-list', sectionKey: 'saas-faq' },
   ],
   // More (fixes)
   whitelabel: [
@@ -1126,15 +1184,12 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     { name: 'affiliateBenefits', component: 'sections.page-technologies', sectionKey: 'affiliate-benefits' },
   ],
   brandkit: [
-    { name: 'brandKitLogos', component: 'sections.page-images', sectionKey: 'brand-kit-logos' },
-    { name: 'brandSystem', component: 'sections.page-technologies', sectionKey: 'brand-system' },
-    { name: 'brandVisualStyle', component: 'sections.page-technologies', sectionKey: 'brand-visual-style' },
-    {
-      name: 'brandUsageGuidelines',
-      component: 'sections.page-technologies',
-      sectionKey: 'brand-usage-guidelines',
-    },
+    { name: 'brandKitLogos', component: 'sections.brand-kit-logos', sectionKey: 'brand-kit-logos' },
+    { name: 'brandVisualStyle', component: 'sections.page-process', sectionKey: 'brand-visual-style' },
   ],
+  meet: [{ name: 'meetFaq', component: 'sections.faq-list', sectionKey: 'meet-faq' }],
+  thinktank: [{ name: 'thinktankFaq', component: 'sections.faq-list', sectionKey: 'thinktank-faq' }],
+  quotation: [{ name: 'requestDetails', component: 'sections.page-rfq', sectionKey: 'request-details' }],
   career: [
     { name: 'companyGallery', component: 'sections.image-gallery', sectionKey: 'company-gallery' },
     { name: 'communityImages', component: 'sections.page-career-community', sectionKey: 'community-images' },

@@ -52,14 +52,13 @@ type Props = { items?: CmsFaqItem[] }
 
 /** Layout: AutomationFaq — 3-column accordion, closed by default + load more. */
 const SaasFaq = ({ items }: Props = {}) => {
-  const faqData = DEFAULT_ITEMS.map((faq, index) => {
-    const cms = items?.[index]
-    return {
-      ...faq,
-      question: cms?.question || faq.question,
-      answer: cms?.answer ?? faq.answer,
-    }
-  })
+  const faqData = items?.length
+    ? items.map((item, index) => ({
+        id: index + 1,
+        question: item.question,
+        answer: item.answer,
+      }))
+    : DEFAULT_ITEMS
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 

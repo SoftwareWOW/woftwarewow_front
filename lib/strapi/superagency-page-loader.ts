@@ -13,10 +13,19 @@ import {
   mapPageImages,
   mapPageProcess,
   mapPageProcessSection,
+  mapPageSectionImage,
   mapPageProjects,
   mapPageTeamMembers,
   mapPageTechnologies,
   mapPageTechnologiesSection,
+  mapPageClientLogos,
+  mapPageOfficeLocations,
+  mapPortfolioExplorer,
+  mapPagePackageList,
+  mapPagePartners,
+  mapPageRfq,
+  mapFaqList,
+  mapBrandKitLogos,
   mapRfqAccordion,
   mapStrapiSeo,
   type CmsFaqItem,
@@ -47,13 +56,23 @@ import type {
   StrapiPageHero,
   StrapiPageImages,
   StrapiPageProcess,
+  StrapiPageProcessSteps,
+  StrapiPageSectionImage,
   StrapiPageProjects,
+  StrapiPageRfq,
   StrapiPageRfqAccordion,
   StrapiPageCareerCommunity,
   StrapiPageCareerJobs,
   StrapiPageSeo,
   StrapiPageTeamMembers,
   StrapiPageTechnologies,
+  StrapiPageClientLogos,
+  StrapiPageOfficeLocations,
+  StrapiPagePortfolioExplorer,
+  StrapiPagePackageList,
+  StrapiPagePartners,
+  StrapiBrandKitLogos,
+  StrapiFaqList,
   StrapiPackageOffer,
   StrapiSuperagencyPage,
 } from '@/lib/strapi/types/pages';
@@ -169,7 +188,12 @@ function mapSectionByComponent(
     case 'sections.page-technologies':
       return cms.technologiesSection(fieldName);
     case 'sections.page-process':
+    case 'sections.page-process-steps':
       return cms.processSection(fieldName);
+    case 'sections.page-section-image': {
+      const image = mapPageSectionImage(cms.field<StrapiPageSectionImage>(fieldName));
+      return image ? { image } : null;
+    }
     case 'sections.hero-about':
       return cms.heroAbout(fieldName);
     case 'sections.package-offer':
@@ -206,6 +230,28 @@ function mapSectionByComponent(
       );
       return community;
     }
+    case 'sections.page-client-logos': {
+      const logos = mapPageClientLogos(cms.field<StrapiPageClientLogos>(fieldName));
+      return logos ? { logos } : null;
+    }
+    case 'sections.page-office-locations': {
+      const locations = mapPageOfficeLocations(cms.field<StrapiPageOfficeLocations>(fieldName));
+      return locations ? { locations } : null;
+    }
+    case 'sections.page-portfolio-explorer':
+      return mapPortfolioExplorer(cms.field<StrapiPagePortfolioExplorer>(fieldName));
+    case 'sections.page-package-list':
+      return mapPagePackageList(cms.field<StrapiPagePackageList>(fieldName));
+    case 'sections.page-partners': {
+      const partners = mapPagePartners(cms.field<StrapiPagePartners>(fieldName));
+      return partners ? { partners } : null;
+    }
+    case 'sections.page-rfq':
+      return mapPageRfq(cms.field<StrapiPageRfq>(fieldName));
+    case 'sections.faq-list':
+      return mapFaqList(cms.field<StrapiFaqList>(fieldName));
+    case 'sections.brand-kit-logos':
+      return mapBrandKitLogos(cms.field<StrapiBrandKitLogos>(fieldName));
     default:
       return cms.field(fieldName);
   }

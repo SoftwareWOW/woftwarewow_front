@@ -4,6 +4,7 @@ import {
   buildDeepPopulateFromPageData,
   buildSafePopulateFromPageData,
   buildSuperagencyPageShallowPopulate,
+  WHY_SMBS_PAGE_POPULATE,
 } from '@/lib/strapi/page-populate';
 import { pageApiId } from '@/lib/strapi/page-registry';
 import type {
@@ -14,31 +15,36 @@ import type {
 
 const FOOTER_RESOURCE_POPULATE = '*';
 
-/** Careers page uses a custom /full route with safe nested populate (matches Postman). */
-export async function getCareerPageFull(
+/** Pages with a custom /full route — nested media populate handled server-side. */
+async function getSuperagencyPageFull(
+  apiId: string,
   locale: Locale,
 ): Promise<StrapiSuperagencyPage | null> {
-  const result = await fetchSingleType<StrapiSuperagencyPage>(
-    'superagency-page-career/full',
-    {
-      locale,
-      populate: false,
-    },
-  );
-
-  return result;
+  return fetchSingleType<StrapiSuperagencyPage>(`${apiId}/full`, {
+    locale,
+    populate: false,
+  });
 }
 
 export async function getSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<StrapiSuperagencyPage | null> {
-  if (slug === 'career') {
-    const full = await getCareerPageFull(locale);
+  const apiId = pageApiId(slug);
+
+  if (slug === 'career' || slug === 'about-why-smbs') {
+    const full = await getSuperagencyPageFull(apiId, locale);
     if (full) return full;
   }
 
-  const apiId = pageApiId(slug);
+  if (slug === 'about-why-smbs') {
+    const explicit = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
+      locale,
+      populate: WHY_SMBS_PAGE_POPULATE,
+      logErrors: false,
+    });
+    if (explicit) return explicit;
+  }
 
   const shallow = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
     locale,
@@ -48,7 +54,7 @@ export async function getSuperagencyPage(
   if (!shallow) return null;
 
   const pageRecord = shallow as unknown as Record<string, unknown>;
-  const deepPopulate = buildDeepPopulateFromPageData(pageRecord);
+  const deepPopulate = buildDeepPopulateFromPageData(pageRecord, slug);
 
   const deep = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
     locale,
@@ -58,7 +64,7 @@ export async function getSuperagencyPage(
 
   if (deep) return deep;
 
-  const safePopulate = buildSafePopulateFromPageData(pageRecord);
+  const safePopulate = buildSafePopulateFromPageData(pageRecord, slug);
   const safe = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
     locale,
     populate: safePopulate,

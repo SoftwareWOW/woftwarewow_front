@@ -1,7 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsBrandKitLogosSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 import { divisionBrandLogos, type DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import Link from 'next/link'
@@ -105,14 +105,38 @@ const logoCards: LogoCard[] = [
 const downloadButtonClass =
   'inline-flex items-center justify-center rounded-radius-sm border border-black/15 px-4 py-2.5 text-xs font-medium uppercase tracking-[0.06em] text-secondary transition-colors hover:border-primary hover:text-primary dark:border-white/20 dark:text-backgroundBody dark:hover:border-primary dark:hover:text-primary'
 
-type BrandKitLogosProps = Partial<CmsTechnologiesSection>
+type BrandKitLogosProps = Partial<CmsBrandKitLogosSection>
 
 const BrandKitLogos = ({
   eyebrow = 'Logos',
   title = 'Use the Right WOW Mark.',
   description = 'Build knowledge on your own time or join us for practical, interactive experiences.',
+  items,
 }: BrandKitLogosProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, description }, { eyebrow, title, description })
+  const displayCards = items?.length
+    ? items.map((item, index) => {
+        const fallback = logoCards[index] ?? logoCards[0]
+        return {
+          id: fallback.id,
+          title: item.title,
+          description: item.description ?? fallback.description,
+          previewBg: fallback.previewBg,
+          svgHref: item.svgHref ?? fallback.svgHref,
+          pngHref: item.pngHref ?? fallback.pngHref,
+          showDivisionLink: fallback.showDivisionLink,
+          preview: item.previewImage?.src ? (
+            <img
+              src={item.previewImage.src}
+              alt={item.previewImage.alt ?? item.title}
+              className="max-h-16 w-auto max-w-full object-contain"
+            />
+          ) : (
+            fallback.preview
+          ),
+        }
+      })
+    : logoCards
 
   return (
   <section id="logos" className="scroll-mt-28">
@@ -130,7 +154,7 @@ const BrandKitLogos = ({
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {logoCards.map((card) => (
+        {displayCards.map((card) => (
           <RevealWrapper key={card.id}>
             <article className="flex h-full flex-col rounded-radius-md border border-black/10 bg-backgroundBody p-6 dark:border-white/10 dark:bg-dark">
               <div

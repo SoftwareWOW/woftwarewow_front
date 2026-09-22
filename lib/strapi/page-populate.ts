@@ -1,3 +1,4 @@
+import { getHeroImagesForPage } from '@/lib/strapi/hero-image-manifest';
 import {
   getCmsTypeForSectionKey,
   getStrapiSectionKeyConfig,
@@ -13,6 +14,30 @@ const PAGE_METADATA_KEYS = new Set([
   'locale',
 ]);
 
+const HERO_IMAGES_POPULATE = {
+  images: { populate: { image: true } },
+};
+
+function buildHeroPopulate(hero: unknown, slug?: string): Record<string, unknown> {
+  const manifestLayout = slug ? getHeroImagesForPage(slug).layout : undefined;
+  const needsHeroImages =
+    (manifestLayout !== undefined && manifestLayout !== 'none') ||
+    (hero && typeof hero === 'object' && 'images' in hero);
+
+  if (needsHeroImages) {
+    return { populate: HERO_IMAGES_POPULATE };
+  }
+
+  return { populate: '*' };
+}
+
+/** Explicit populate for pages that need nested hero + page-images media. */
+export const WHY_SMBS_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  smbGallery: { populate: { images: { populate: { image: true } } } },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).
@@ -27,10 +52,10 @@ const CMS_NESTED_POPULATE: Partial<
     steps: { populate: '*' },
   },
   'page-images': {
-    images: { populate: '*' },
+    images: { populate: { image: true } },
   },
   'image-gallery': {
-    images: { populate: '*' },
+    images: { populate: { image: true } },
   },
   'page-team-members': {
     featuredMember: { populate: { image: true, socialLinks: true } },
@@ -55,10 +80,19 @@ const CMS_NESTED_POPULATE: Partial<
     partners: { populate: '*' },
   },
   'page-client-logos': {
-    logos: { populate: '*' },
+    clientLogos: { populate: '*' },
   },
   'page-package-list': {
-    packages: { populate: '*' },
+    items: { populate: { image: { populate: '*' } } },
+  },
+  'page-portfolio-explorer': {
+    filterGroups: { populate: { projects: { populate: '*' } } },
+  },
+  'faq-list': {
+    items: { populate: '*' },
+  },
+  'brand-kit-logos': {
+    items: { populate: { previewImage: { populate: '*' } } },
   },
   'page-career-jobs': {
     jobs: {
@@ -118,9 +152,10 @@ function buildSectionPopulate(sectionValue: unknown): Record<string, unknown> {
 /** Build a deep populate query from a shallow Strapi page payload (populate=*). */
 export function buildDeepPopulateFromPageData(
   page: Record<string, unknown>,
+  slug?: string,
 ): Record<string, unknown> {
   const populate: Record<string, unknown> = {
-    hero: { populate: '*' },
+    hero: buildHeroPopulate(page.hero, slug),
     seo: { populate: '*' },
   };
 
@@ -143,9 +178,10 @@ export function buildDeepPopulateFromPageData(
  */
 export function buildSafePopulateFromPageData(
   page: Record<string, unknown>,
+  slug?: string,
 ): Record<string, unknown> {
   const populate: Record<string, unknown> = {
-    hero: { populate: '*' },
+    hero: buildHeroPopulate(page.hero, slug),
     seo: { populate: '*' },
   };
 

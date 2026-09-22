@@ -2,6 +2,7 @@ import type {
   CmsFeatureItem,
   CmsGalleryImage,
   CmsHeroImage,
+  CmsPackageListSection,
   CmsPageHeroProps,
   CmsProcessSection,
   CmsProcessStep,
@@ -70,6 +71,20 @@ export function mergeGalleryItems<
   });
 }
 
+/** Use CMS gallery images when present; otherwise keep static defaults. */
+export function resolveGalleryItems<
+  T extends { id: number; image: string; link: string; alt?: string },
+>(defaults: T[], cmsImages?: CmsGalleryImage[] | null): T[] {
+  if (!cmsImages?.length) return defaults;
+
+  return cmsImages.map((cms, index) => ({
+    id: index + 1,
+    image: cms.src,
+    link: cms.href ?? defaults[index]?.link ?? '#',
+    alt: cms.alt ?? defaults[index]?.alt,
+  })) as T[];
+}
+
 /** Merge CMS process steps onto static defaults by index. */
 export function mergeProcessSteps<T extends { title: string; description?: string }>(
   defaults: T[],
@@ -104,6 +119,38 @@ export function mergeRfqGroups<
       title: cms.title || item.title,
       subtitle: cms.subtitle ?? item.subtitle,
       items: cms.items?.length ? cms.items : item.items,
+    };
+  });
+}
+
+/** Merge CMS package-list items onto static defaults by index. */
+export function mergePackageListItems<
+  T extends {
+    index?: string;
+    number?: string;
+    title: string;
+    description?: string;
+    href?: string;
+    image?: string;
+    button?: string;
+  },
+>(defaults: T[], cmsSection?: CmsPackageListSection | null): T[] {
+  if (!cmsSection?.items?.length) return defaults;
+
+  return defaults.map((item, index) => {
+    const cms = cmsSection.items[index];
+    if (!cms) return item;
+
+    return {
+      ...item,
+      ...(cms.index
+        ? { index: cms.index, number: cms.index }
+        : {}),
+      title: cms.title || item.title,
+      description: cms.description ?? item.description,
+      href: cms.href ?? item.href,
+      ...(cms.buttonLabel ? { button: cms.buttonLabel } : {}),
+      image: cms.image?.src ?? item.image,
     };
   });
 }

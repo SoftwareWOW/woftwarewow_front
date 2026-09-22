@@ -44,8 +44,8 @@ export default async function QuotationPage({ params }: Props) {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         <QuotationHero {...hero} />
-        <QuotationForm {...(sections.quotationForm ?? {})} />
-        <HowItWorks {...(sections.howItWorks ?? {})} />
+        <QuotationForm {...(sections.requestDetails ?? {})} />
+        <HowItWorks />
         <WowGrowthCta
           accentText="Having an idea?"
           mainText="Let's get it launched"

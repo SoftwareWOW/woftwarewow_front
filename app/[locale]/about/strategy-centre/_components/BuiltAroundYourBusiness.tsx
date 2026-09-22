@@ -3,7 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsHeroImage, CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_POINTS = [
@@ -29,7 +29,14 @@ const DEFAULT_POINTS = [
   },
 ]
 
-type BuiltAroundYourBusinessProps = Partial<CmsProcessSection>
+type BuiltAroundYourBusinessProps = Partial<CmsProcessSection> & {
+  image?: CmsHeroImage | null
+}
+
+const DEFAULT_IMAGE = {
+  src: '/images/home-5/why-rivor.png',
+  alt: 'Strategies built around your business',
+}
 
 const BuiltAroundYourBusiness = ({
   eyebrow = 'Built Around You',
@@ -37,6 +44,7 @@ const BuiltAroundYourBusiness = ({
   accentTitle = 'your business',
   description,
   steps,
+  image,
 }: BuiltAroundYourBusinessProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_POINTS, steps)
@@ -70,7 +78,11 @@ const BuiltAroundYourBusiness = ({
             ))}
           </div>
           <RevealWrapper as="figure" className="md:w-1/2">
-            <img src="/images/home-5/why-rivor.png" alt="Strategies built around your business" className="h-full w-full" />
+            <img
+              src={image?.src ?? DEFAULT_IMAGE.src}
+              alt={image?.alt ?? DEFAULT_IMAGE.alt}
+              className="h-full w-full"
+            />
           </RevealWrapper>
         </div>
         <RevealWrapper className="mt-14 flex justify-center">

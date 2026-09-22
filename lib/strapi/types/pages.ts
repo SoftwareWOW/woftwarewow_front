@@ -56,6 +56,13 @@ export type StrapiPageProcess = {
   steps?: StrapiProcessStep[] | null;
 };
 
+export type StrapiPageProcessSteps = Omit<StrapiPageProcess, 'image' | 'backgroundImage'>;
+
+export type StrapiPageSectionImage = {
+  sectionKey?: string;
+  image?: StrapiImageWithAlt | null;
+};
+
 export type StrapiRfqGroup = {
   id?: number;
   title: string;
@@ -124,6 +131,7 @@ export type StrapiImageGallery = {
 
 export type StrapiPageProjectItem = {
   documentId?: string;
+  slug?: string | null;
   title?: string;
   description?: string | null;
   thumbnail?: StrapiMedia | null;
@@ -131,6 +139,10 @@ export type StrapiPageProjectItem = {
   alt?: string | null;
   href?: string | null;
   order?: number | null;
+  categories?: string[] | null;
+  serviceTags?: string[] | null;
+  year?: number | null;
+  completedAt?: string | null;
 };
 
 export type StrapiPageProjects = {
@@ -217,8 +229,12 @@ export type StrapiPageClientLogos = {
   sectionKey?: string;
   clientLogos?: Array<{
     documentId?: string;
+    clientKey?: string;
     name?: string;
     logo?: StrapiMedia | null;
+    logoPath?: string | null;
+    darkLogo?: StrapiMedia | null;
+    darkLogoPath?: string | null;
     alt?: string | null;
     order?: number | null;
   }> | null;
@@ -228,11 +244,80 @@ export type StrapiPageOfficeLocations = {
   sectionKey?: string;
   locations?: Array<{
     documentId?: string;
+    locationId?: string;
     city?: string | null;
-    country?: string | null;
-    address?: string | null;
+    region?: string | null;
+    description?: string | null;
+    addressLines?: string[] | null;
+    meta?: string | null;
+    phone?: string | null;
+    phoneHref?: string | null;
+    mapQuery?: string | null;
     order?: number | null;
   }> | null;
+};
+
+export type StrapiPortfolioFilterGroup = {
+  id?: number;
+  label: string;
+  filterKey?: string | null;
+  projects?: StrapiPageProjectItem[] | null;
+};
+
+export type StrapiPagePortfolioExplorer = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  filterGroups?: StrapiPortfolioFilterGroup[] | null;
+};
+
+export type StrapiPackageCard = {
+  id?: number;
+  index?: string | null;
+  subtitle?: string | null;
+  title: string;
+  description?: string | null;
+  href?: string | null;
+  buttonLabel?: string | null;
+  image?: StrapiImageWithAlt | null;
+};
+
+export type StrapiPagePackageList = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  items?: StrapiPackageCard[] | null;
+};
+
+export type StrapiBrandLogoCard = {
+  id?: number;
+  title: string;
+  description?: string | null;
+  previewImage?: StrapiImageWithAlt | null;
+  svgHref?: string | null;
+  pngHref?: string | null;
+};
+
+export type StrapiBrandKitLogos = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  items?: StrapiBrandLogoCard[] | null;
+};
+
+export type StrapiFaqList = {
+  sectionKey?: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  items?: StrapiPageFaqItem[] | null;
 };
 
 export type StrapiPageBlogPosts = {
