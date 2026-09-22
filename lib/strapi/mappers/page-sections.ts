@@ -467,10 +467,14 @@ export function mapPageImages(section?: StrapiPageImages | null) {
     .filter((item) => Boolean(item.src)) as { src: string; alt?: string }[];
 }
 
-function mapImageWithAltItem(item?: { image?: Parameters<typeof getStrapiMediaUrl>[0]; alt?: string | null }) {
+function mapImageWithAltItem(
+  item?: { image?: Parameters<typeof getStrapiMediaUrl>[0]; alt?: string | null },
+): CmsGalleryImage | null {
   const src = getStrapiMediaUrl(item?.image ?? undefined);
   if (!src) return null;
-  return { src, alt: item?.alt ?? undefined };
+  const mapped: CmsGalleryImage = { src };
+  if (item?.alt) mapped.alt = item.alt;
+  return mapped;
 }
 
 export function mapCareerCommunitySection(
