@@ -30,7 +30,7 @@ export function resolveHeroImages(
     return [...valid, ...defaults.slice(valid.length)];
   }
 
-  return valid;
+  return valid.length > 0 ? valid : defaults;
 }
 
 const DEFAULT_HERO_BACKGROUND = '/images/hero-gradient-background.png';

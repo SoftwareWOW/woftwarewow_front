@@ -773,6 +773,14 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
     cmsType: 'page-rfq-accordion',
     populate: { groups: true },
   },
+  'superagency-partnerCategories': {
+    cmsType: 'page-section-image',
+    populate: { image: { populate: { image: true } } },
+  },
+  'superagency-mutualGrouwth-page': {
+    cmsType: 'page-section-image',
+    populate: { image: { populate: { image: true } } },
+  },
 };
 
 export function getStrapiSectionKeyConfig(sectionKey: string) {

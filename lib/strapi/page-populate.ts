@@ -38,6 +38,18 @@ export const WHY_SMBS_PAGE_POPULATE = {
   smbGallery: { populate: { images: { populate: { image: true } } } },
 };
 
+const PAGE_SECTION_IMAGE_POPULATE = {
+  image: { populate: { image: true } },
+};
+
+/** Explicit populate for about/partners — hero side images + section media. */
+export const ABOUT_PARTNERS_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  partnerCategories: { populate: PAGE_SECTION_IMAGE_POPULATE },
+  mutualGrowth: { populate: PAGE_SECTION_IMAGE_POPULATE },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).
@@ -79,6 +91,7 @@ const CMS_NESTED_POPULATE: Partial<
   'page-partners': {
     partners: { populate: '*' },
   },
+  'page-section-image': PAGE_SECTION_IMAGE_POPULATE,
   'page-client-logos': {
     clientLogos: { populate: '*' },
   },

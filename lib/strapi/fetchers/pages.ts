@@ -1,6 +1,7 @@
 import type { Locale } from '@/i18n/config';
 import { fetchCollection, fetchSingleType } from '@/lib/strapi/client';
 import {
+  ABOUT_PARTNERS_PAGE_POPULATE,
   buildDeepPopulateFromPageData,
   buildSafePopulateFromPageData,
   buildSuperagencyPageShallowPopulate,
@@ -41,6 +42,15 @@ export async function getSuperagencyPage(
     const explicit = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
       locale,
       populate: WHY_SMBS_PAGE_POPULATE,
+      logErrors: false,
+    });
+    if (explicit) return explicit;
+  }
+
+  if (slug === 'about-partners') {
+    const explicit = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
+      locale,
+      populate: ABOUT_PARTNERS_PAGE_POPULATE,
       logErrors: false,
     });
     if (explicit) return explicit;

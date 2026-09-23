@@ -94,7 +94,7 @@ const PartnerCategories = ({
             <img
               src={image?.src ?? DEFAULT_IMAGE.src}
               alt={image?.alt ?? DEFAULT_IMAGE.alt}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover rounded-radius-md"
             />
           </RevealWrapper>
         </div>

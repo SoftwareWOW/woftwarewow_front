@@ -324,7 +324,7 @@ export function mapPageHero(hero?: StrapiPageHero | null): CmsPageHeroProps | nu
     title,
     italicTitle,
     suffixTitle: hero.suffixTitle ?? undefined,
-    description: hero.description ?? undefined,
+    description: hero.description?.trim() ?? undefined,
     images: mapHeroImages(hero),
     ...(backgroundImage ? { backgroundImage } : {}),
   };
