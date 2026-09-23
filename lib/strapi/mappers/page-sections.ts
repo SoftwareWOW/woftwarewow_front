@@ -478,7 +478,7 @@ export function mapPageProcessSection(
     eyebrow: section.eyebrow ?? undefined,
     title,
     accentTitle,
-    description: section.description?.trim() ?? undefined,
+    description: section.description?.replace(/\s*\n+\s*/g, ' ').trim() ?? undefined,
     image: resolveCmsImage(section.image ?? undefined),
     backgroundImage: resolveCmsImage(section.backgroundImage ?? undefined),
     steps,

@@ -833,6 +833,7 @@ export function inferCmsTypeFromSectionValue(
   if ('body' in section) return 'hero-about';
   if ('avatars' in section || 'teamImage' in section) return 'page-career-community';
   if ('jobs' in section) return 'page-career-jobs';
+  if ('steps' in section) return 'page-process';
 
   return null;
 }

@@ -300,9 +300,10 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
     note: "Text-only hero — leave **hero → images** empty.",
   },
   'whitelabel': {
-    layout: 'none',
-    images: [],
-    note: "Text-only hero — leave **hero → images** empty.",
+    layout: 'single',
+    images: [
+      img('/images/wow/nav/cards/pexels-polina-tankilevitch-5386217%201.png', 'White-label partnership with WOW Superagency'),
+    ],
   },
   'affiliate': {
     layout: 'dual',

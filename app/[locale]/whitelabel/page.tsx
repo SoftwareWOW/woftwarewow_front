@@ -8,6 +8,7 @@ import PartnerBenefits from './_components/PartnerBenefits'
 import WhiteLabelCapabilities from './_components/WhiteLabelCapabilities'
 import WhiteLabelHero from './_components/WhiteLabelHero'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,
@@ -41,13 +42,20 @@ export default async function WhiteLabelPage({ params }: Props) {
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const howWePartner = sections.howWePartner as CmsProcessSection | undefined
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         <WhiteLabelHero {...hero} />
         <WhiteLabelCapabilities {...(sections.capabilities ?? {})} />
-        <HowWePartner {...(sections.howWePartner ?? {})} />
+        <HowWePartner
+          eyebrow={howWePartner?.eyebrow}
+          title={howWePartner?.title}
+          description={howWePartner?.description}
+          steps={howWePartner?.steps}
+          image={howWePartner?.image}
+        />
         <PartnerBenefits {...(sections.partnerBenefits ?? {})} />
         <WowGrowthCta
           accentText="Ready to Deliver"

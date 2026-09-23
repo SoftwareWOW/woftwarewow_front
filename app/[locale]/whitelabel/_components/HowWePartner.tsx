@@ -8,19 +8,32 @@ import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi
 /** Layout: technology-and-saas ClientJourney — image + numbered steps. */
 type HowWePartnerProps = Partial<CmsProcessSection>
 
+const DEFAULT_HEADER = {
+  eyebrow: 'HOW IT WORKS',
+  title: 'Built Around Your Client Relationship.',
+  description:
+    'Successful technology businesses continuously improve the product while building the systems that bring users in and keep them there.',
+}
+
 const HowWePartner = ({
-  eyebrow = 'HOW IT WORKS',
-  title = 'Built Around Your Client Relationship.',
-  description = 'Successful technology businesses continuously improve the product while building the systems that bring users in and keep them there.',
+  eyebrow,
+  title,
+  description,
   steps,
   image,
 }: HowWePartnerProps = {}) => {
-  const header = mergeSectionHeader({ eyebrow, title, description }, { eyebrow, title, description })
-  const mergedSteps = mergeProcessSteps([...DEFAULT_PARTNERSTEPS], steps).map((step, i) => ({
-    ...DEFAULT_PARTNERSTEPS[i],
-    title: step.title,
-    description: step.description ?? DEFAULT_PARTNERSTEPS[i].description,
-  }))
+  const header = mergeSectionHeader(DEFAULT_HEADER, { eyebrow, title, description })
+  const mergedSteps = steps?.length
+    ? steps.map((step, index) => ({
+        number: String(index + 1).padStart(2, '0'),
+        title: step.title,
+        description: step.description ?? '',
+      }))
+    : mergeProcessSteps([...DEFAULT_PARTNERSTEPS], steps).map((step, i) => ({
+        ...DEFAULT_PARTNERSTEPS[i],
+        title: step.title,
+        description: step.description ?? DEFAULT_PARTNERSTEPS[i].description,
+      }))
   const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/software%26technology.png')
 
   return (

@@ -2,14 +2,16 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 
-const HERO_IMAGE = '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217%201.png'
+const DEFAULT_HERO_IMAGE = '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217%201.png'
 
 type WhiteLabelHeroProps = {
   badgeTitle?: string
   title?: string
   italicTitle?: string
   description?: string
+  images?: CmsHeroImage[]
 }
 
 /** Layout: organizations OrganizationsHero — image left + headline + dual CTAs. */
@@ -17,7 +19,11 @@ const WhiteLabelHero = ({
   title = 'Your Brand. Our',
   italicTitle = 'Expertise.',
   description = 'Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing, AI, and more.',
+  images,
 }: WhiteLabelHeroProps) => {
+  const heroImage = images?.[0]?.src ?? DEFAULT_HERO_IMAGE
+  const heroAlt = images?.[0]?.alt ?? 'White-label partnership with WOW Superagency'
+
   return (
     <section
       className="video-section relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover object-center pt-[107px] dark:bg-none md:pt-[100px] xl:pt-[120px]"
@@ -28,8 +34,8 @@ const WhiteLabelHero = ({
           <RevealWrapper className="reveal-me group relative w-full lg:w-1/2">
             <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-md sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px] xl:min-h-[620px] 2xl:min-h-[700px]">
               <img
-                src={HERO_IMAGE}
-                alt="White-label partnership with WOW Superagency"
+                src={heroImage}
+                alt={heroAlt}
                 className="absolute inset-0 h-full w-full object-cover"
                 width={800}
                 height={450}

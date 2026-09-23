@@ -3,9 +3,16 @@ import { fetchCollection, fetchSingleType } from '@/lib/strapi/client';
 import {
   ABOUT_PARTNERS_PAGE_POPULATE,
   ABOUT_WHY_US_PAGE_POPULATE,
+  AFFILIATE_PAGE_POPULATE,
+  BRANDKIT_PAGE_POPULATE,
   buildDeepPopulateFromPageData,
   buildSafePopulateFromPageData,
   buildSuperagencyPageShallowPopulate,
+  HELPSUPPORT_PAGE_POPULATE,
+  MEET_PAGE_POPULATE,
+  QUOTATION_PAGE_POPULATE,
+  THINKTANK_PAGE_POPULATE,
+  WHITELABEL_PAGE_POPULATE,
   WHY_SMBS_PAGE_POPULATE,
 } from '@/lib/strapi/page-populate';
 import { pageApiId } from '@/lib/strapi/page-registry';
@@ -61,6 +68,28 @@ export async function getSuperagencyPage(
     const explicit = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
       locale,
       populate: ABOUT_WHY_US_PAGE_POPULATE,
+      logErrors: false,
+    });
+    if (explicit) return explicit;
+  }
+
+  const explicitPopulateBySlug: Partial<
+    Record<string, Record<string, unknown>>
+  > = {
+    meet: MEET_PAGE_POPULATE,
+    thinktank: THINKTANK_PAGE_POPULATE,
+    quotation: QUOTATION_PAGE_POPULATE,
+    whitelabel: WHITELABEL_PAGE_POPULATE,
+    affiliate: AFFILIATE_PAGE_POPULATE,
+    helpsupport: HELPSUPPORT_PAGE_POPULATE,
+    brandkit: BRANDKIT_PAGE_POPULATE,
+  };
+
+  const explicitPopulate = explicitPopulateBySlug[slug];
+  if (explicitPopulate) {
+    const explicit = await fetchSingleType<StrapiSuperagencyPage>(apiId, {
+      locale,
+      populate: explicitPopulate,
       logErrors: false,
     });
     if (explicit) return explicit;

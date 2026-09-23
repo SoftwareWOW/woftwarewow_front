@@ -9,6 +9,7 @@ import BrandUsageGuidelines from './_components/BrandUsageGuidelines'
 import BrandVisualStyle from './_components/BrandVisualStyle'
 import BrandKitLogos from './_components/BrandKitLogo'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,
@@ -41,6 +42,7 @@ export default async function BrandKitPage({ params }: Props) {
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const brandVisualStyle = sections.brandVisualStyle as CmsProcessSection | undefined
 
   return (
     <LayoutOne>
@@ -48,7 +50,17 @@ export default async function BrandKitPage({ params }: Props) {
         <BrandKitHero {...hero} />
         <BrandKitLogos {...(sections.brandKitLogos ?? {})} />
         <BrandSystem {...(sections.brandSystem ?? {})} />
-        <BrandVisualStyle {...(sections.brandVisualStyle ?? {})} />
+        <BrandVisualStyle
+          eyebrow={brandVisualStyle?.eyebrow}
+          title={brandVisualStyle?.title}
+          accentTitle={brandVisualStyle?.accentTitle}
+          description={brandVisualStyle?.description}
+          image={brandVisualStyle?.image}
+          items={brandVisualStyle?.steps?.map((step) => ({
+            title: step.title,
+            description: step.description,
+          }))}
+        />
         <BrandUsageGuidelines {...(sections.brandUsageGuidelines ?? {})} />
         <WowGrowthCta
           accentText="Need something"

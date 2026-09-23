@@ -63,6 +63,68 @@ export const ABOUT_WHY_US_PAGE_POPULATE = {
   builtAroundBusiness: { populate: PAGE_PROCESS_POPULATE },
 };
 
+const FAQ_SECTION_POPULATE = {
+  items: { populate: '*' },
+};
+
+const PAGE_TECHNOLOGIES_POPULATE = {
+  items: { populate: { image: { populate: { image: true } } } },
+  image: { populate: { image: true } },
+  backgroundImage: { populate: { image: true } },
+};
+
+/** Explicit populate for /meet — hero, seo, FAQ items. */
+export const MEET_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+  meetFaq: { populate: FAQ_SECTION_POPULATE },
+};
+
+/** Explicit populate for /thinktank — hero, seo, FAQ items. */
+export const THINKTANK_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+  thinktankFaq: { populate: FAQ_SECTION_POPULATE },
+};
+
+/** Explicit populate for /quotation — hero + seo. */
+export const QUOTATION_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+};
+
+/** Explicit populate for /whitelabel — hero image, capabilities, how-we-partner. */
+export const WHITELABEL_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  capabilities: { populate: PAGE_TECHNOLOGIES_POPULATE },
+  howWePartner: { populate: PAGE_PROCESS_POPULATE },
+};
+
+/** Explicit populate for /affiliate — hero images + seo. */
+export const AFFILIATE_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+};
+
+/** Explicit populate for /helpsupport — hero + seo. */
+export const HELPSUPPORT_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+};
+
+/** Explicit populate for /brandkit — logos preview images + visual style process. */
+export const BRANDKIT_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+  brandKitLogos: {
+    populate: {
+      items: { populate: { previewImage: { populate: { image: true } } } },
+    },
+  },
+  brandVisualStyle: { populate: PAGE_PROCESS_POPULATE },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).
@@ -70,9 +132,7 @@ export const ABOUT_WHY_US_PAGE_POPULATE = {
 const CMS_NESTED_POPULATE: Partial<
   Record<Exclude<CmsSectionType, null | 'hero'>, Record<string, unknown>>
 > = {
-  'page-technologies': {
-    items: { populate: '*' },
-  },
+  'page-technologies': PAGE_TECHNOLOGIES_POPULATE,
   'page-process': PAGE_PROCESS_POPULATE,
   'page-images': {
     images: { populate: { image: true } },

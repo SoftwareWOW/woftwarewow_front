@@ -50,11 +50,11 @@ export default async function ThinkTankPage({ params }: Props) {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <ThinkTankHero {...hero} />
-        <WhyThinkTank {...(sections.whyThinkTank ?? {})} />
+        <WhyThinkTank {...(sections.whyThinktank ?? {})} />
         <ThinkTankSessionInfo {...(sections.thinkTankSessionInfo ?? {})} />
         <ThinkTankBooking calLink={calLink} {...(sections.thinkTankBooking ?? {})} />
         <BeforeWeMeet {...(sections.beforeWeMeet ?? {})} />
-        <ThinkTankFaq {...(sections.thinkTankFaq ?? {})} />
+        <ThinkTankFaq {...(sections.thinktankFaq ?? {})} />
         <WowGrowthCta accentText="Ready to" mainText="Grow?" ariaLabel="Contact WOW Superagency" />
       </div>
     </LayoutOne>
