@@ -60,6 +60,7 @@ export type CmsProcessSection = {
 export type CmsFeatureItem = {
   title: string;
   description?: string;
+  href?: string;
   image?: CmsHeroImage;
 };
 
@@ -372,6 +373,7 @@ function mapFeatureItems(items?: StrapiPageTechnologies['items']): CmsFeatureIte
   return (items ?? []).map((item) => ({
     title: item.title,
     description: item.description ?? undefined,
+    href: item.href ?? undefined,
     image: resolveCmsImage(item.image ?? undefined),
   }));
 }

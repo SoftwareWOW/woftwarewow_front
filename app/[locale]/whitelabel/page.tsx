@@ -46,7 +46,7 @@ export default async function WhiteLabelPage({ params }: Props) {
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         <WhiteLabelHero {...hero} />
-        <WhiteLabelCapabilities {...(sections.whiteLabelCapabilities ?? {})} />
+        <WhiteLabelCapabilities {...(sections.capabilities ?? {})} />
         <HowWePartner {...(sections.howWePartner ?? {})} />
         <PartnerBenefits {...(sections.partnerBenefits ?? {})} />
         <WowGrowthCta

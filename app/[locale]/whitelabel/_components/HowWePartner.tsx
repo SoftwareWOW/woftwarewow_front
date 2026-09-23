@@ -33,19 +33,18 @@ const HowWePartner = ({
           <TextAppearAnimation>
             <h2 className="text-appear mx-auto max-w-[770px]">{header.title}</h2>
           </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-              Successful technology businesses continuously improve the product while building the systems that bring
-              users in and keep them there.
-            </p>
-          </TextAppearAnimation>
+          {header.description ? (
+            <TextAppearAnimation>
+              <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
             <img
               src={imageSrc ?? ''}
-              alt="White-label partnership delivery"
+              alt={image?.alt ?? 'White-label partnership delivery'}
               className="h-full min-h-[320px] w-full rounded-radius-md object-cover md:min-h-[480px] lg:min-h-[560px]"
             />
           </figure>

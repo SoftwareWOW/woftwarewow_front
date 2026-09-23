@@ -31,10 +31,9 @@ export function cmsImageSrc(cms?: CmsHeroImage | null, fallback?: string): strin
 }
 
 /** Merge CMS feature items onto static defaults by index (title, description, card image). */
-export function mergeFeatureItems<T extends { title: string; description?: string; image?: string }>(
-  defaults: T[],
-  cmsItems?: CmsFeatureItem[] | null,
-): T[] {
+export function mergeFeatureItems<
+  T extends { title: string; description?: string; href?: string; image?: string },
+>(defaults: T[], cmsItems?: CmsFeatureItem[] | null): T[] {
   if (!cmsItems?.length) return defaults;
 
   return defaults.map((item, index) => {
@@ -45,6 +44,7 @@ export function mergeFeatureItems<T extends { title: string; description?: strin
       ...item,
       title: cms.title || item.title,
       description: cms.description ?? item.description,
+      ...(item.href !== undefined || cms.href ? { href: cms.href ?? item.href } : {}),
       ...(item.image !== undefined || cms.image?.src
         ? { image: cms.image?.src ?? item.image }
         : {}),

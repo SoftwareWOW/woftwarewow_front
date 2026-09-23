@@ -1,5 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import { capabilityCards as DEFAULT_CAPABILITYCARDS } from '../_data/whitelabel'
@@ -9,10 +11,26 @@ import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-
 /** Layout: blog BlogDetailsList — 3-column image/title/description/button cards. */
 type WhiteLabelCapabilitiesProps = Partial<CmsTechnologiesSection>
 
-const WhiteLabelCapabilities = ({ eyebrow = 'YOUR CONVERSATION', title, accentTitle, description, items }: WhiteLabelCapabilitiesProps = {}) => {
-  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = mergeFeatureItems([...DEFAULT_CAPABILITYCARDS], items)
+const DEFAULT_HEADER = {
+  eyebrow: 'YOUR CONVERSATION',
+  title: "Bring the Challenge. We'll Bring the Expertise.",
+  accentTitle: '',
+  description:
+    'Our partner network allows us to extend capabilities, connect specialized expertise, and build stronger solutions without limiting clients to what one agency can do alone.',
+}
 
+const WhiteLabelCapabilities = ({
+  eyebrow = DEFAULT_HEADER.eyebrow,
+  title = DEFAULT_HEADER.title,
+  accentTitle = DEFAULT_HEADER.accentTitle,
+  description = DEFAULT_HEADER.description,
+  items,
+}: WhiteLabelCapabilitiesProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+  const mergedItems = mergeFeatureItems([...DEFAULT_CAPABILITYCARDS], items)
 
   return (
     <section id="capabilities">
@@ -21,15 +39,24 @@ const WhiteLabelCapabilities = ({ eyebrow = 'YOUR CONVERSATION', title, accentTi
           <RevealWrapper className="mb-5 flex justify-center">
             <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
-          <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto">Bring the Challenge. We&apos;ll Bring the Expertise.</h2>
-          </RevealWrapper>
-          <RevealWrapper className="reveal-me">
-            <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-[#808080] md:text-lg">
-              Our partner network allows us to extend capabilities, connect specialized expertise, and build stronger
-              solutions without limiting clients to what one agency can do alone.
-            </p>
-          </RevealWrapper>
+          <TextAppearAnimation>
+            <h2 className="text-appear mx-auto">
+              {header.title}
+              {header.accentTitle ? (
+                <>
+                  {' '}
+                  <InstrumentText>{header.accentTitle}</InstrumentText>
+                </>
+              ) : null}
+            </h2>
+          </TextAppearAnimation>
+          {header.description ? (
+            <RevealWrapper className="reveal-me">
+              <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-[#808080] md:text-lg">
+                {header.description}
+              </p>
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <RevealWrapper className="grid grid-cols-1 items-stretch justify-items-center gap-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">

@@ -25,6 +25,7 @@ export type StrapiFeatureCard = {
   id?: number;
   title: string;
   description?: string | null;
+  href?: string | null;
   image?: StrapiImageWithAlt | null;
 };
 
