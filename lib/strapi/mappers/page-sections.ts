@@ -1,3 +1,4 @@
+import { resolveCaseStudySlug } from '@/lib/case-study/slug';
 import { resolveCmsImage } from '@/lib/strapi/cms-image';
 import { getStrapiMediaUrl } from '@/lib/strapi/client';
 import { mapSocialLinks, type CmsSocialLink } from '@/lib/strapi/social-icons';
@@ -149,7 +150,10 @@ export type CmsProjectCard = {
   description?: string;
   thumbnail?: string;
   alt?: string;
+  /** External client site URL from CMS, when set. */
   href?: string;
+  /** Public case study detail slug for internal routing. */
+  slug?: string;
 };
 
 export type CmsFaqItem = {
@@ -569,7 +573,11 @@ export function mapImageGallery(
 }
 
 function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
-  const slug = typeof project.slug === 'string' ? project.slug : undefined;
+  const slug = resolveCaseStudySlug({
+    slug: project.slug,
+    title: project.title ?? '',
+  });
+
   return {
     title: project.title ?? '',
     description: project.description ?? undefined,
@@ -578,7 +586,8 @@ function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
       getStrapiMediaUrl(project.thumbnail ?? undefined) ??
       undefined,
     alt: project.alt ?? project.title ?? undefined,
-    href: project.href ?? (slug ? `/case-studies/${slug}` : undefined),
+    href: project.href ?? undefined,
+    slug,
   };
 }
 
