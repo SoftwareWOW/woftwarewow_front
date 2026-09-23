@@ -1,7 +1,10 @@
 import LayoutOne from '@/components/shared/LayoutOne'
+import GrowthStrategies from '@/components/wow/LandascapComponets/GrowthStrategies'
 // 8. Build Your Growth Strategy — WOW WowGrowthCta
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import { mapStrapiGrowthArticles } from '@/lib/strapi/mappers/superagency'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 5. Strategies Built Around Your Business — Home-12 WhyChooseUs
@@ -14,8 +17,6 @@ import StrategicExpertise from './_components/StrategicExpertise'
 import StrategyHero from './_components/StrategyHero'
 // 7. Strategy in Action — Home-24 ProjectCaseStudies
 import StrategyInAction from './_components/StrategyInAction'
-// 6. Strategy Playbooks & Insights — WOW GrowthStrategies
-import StrategyPlaybooks from './_components/StrategyPlaybooks'
 // 2. The WOW Growth Framework — Home-15 BrandingProcess
 import WowGrowthFramework from './_components/WowGrowthFramework'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
@@ -50,8 +51,10 @@ export default async function StrategyCentrePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const homepageCms = await getSuperagencyHomepage(locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const growthArticles = mapStrapiGrowthArticles(homepageCms.growthArticles)
 
   return (
     <LayoutOne>
@@ -66,8 +69,8 @@ export default async function StrategyCentrePage({ params }: Props) {
         <HowWeBuildStrategy {...(sections.howWeBuildStrategy ?? {})} />
         {/* 5. Strategies Built Around Your Business — Home-12 WhyChooseUs */}
         <BuiltAroundYourBusiness {...(sections.builtAroundYourBusiness ?? {})} />
-        {/* 6. Strategy Playbooks & Insights — WOW GrowthStrategies */}
-        <StrategyPlaybooks {...(sections.strategyPlaybooks ?? {})} />
+        {/* 6. Strategy Playbooks & Insights — homepage GrowthStrategies */}
+        <GrowthStrategies articles={growthArticles ?? undefined} />
         {/* 7. Strategy in Action — Home-24 ProjectCaseStudies */}
         <StrategyInAction {...(sections.strategyInAction ?? {})} />
         {/* 8. Build Your Growth Strategy — WOW WowGrowthCta */}

@@ -81,7 +81,7 @@ const BuiltAroundYourBusiness = ({
             <img
               src={image?.src ?? DEFAULT_IMAGE.src}
               alt={image?.alt ?? DEFAULT_IMAGE.alt}
-              className="h-full w-full"
+              className="h-full w-full rounded-radius-sm sm:rounded-radius-sm md:rounded-radius-md"
             />
           </RevealWrapper>
         </div>
