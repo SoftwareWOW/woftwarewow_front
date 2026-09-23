@@ -297,6 +297,30 @@ function splitHeroTitle(title: string) {
   };
 }
 
+/** Split a full CMS section title into title + accent when accentTitle is omitted. */
+function splitSectionTitle(title: string, accentTitle?: string | null) {
+  if (accentTitle) {
+    return { title, accentTitle };
+  }
+
+  const words = title.trim().split(/\s+/);
+  if (words.length >= 4 && words[words.length - 2] === 'your') {
+    return {
+      title: words.slice(0, -2).join(' '),
+      accentTitle: words.slice(-2).join(' '),
+    };
+  }
+
+  if (words.length >= 3) {
+    return {
+      title: words.slice(0, -1).join(' '),
+      accentTitle: words[words.length - 1],
+    };
+  }
+
+  return { title, accentTitle: undefined as string | undefined };
+}
+
 function mapHeroImages(hero?: StrapiPageHero | null): CmsHeroImage[] | undefined {
   if (!hero?.images?.length) return undefined;
 
@@ -440,11 +464,15 @@ export function mapPageProcessSection(
   const steps = mapPageProcess(section) ?? [];
   if (!steps.length && !hasSectionHeader(section)) return null;
 
+  const { title, accentTitle } = section.title
+    ? splitSectionTitle(section.title, section.accentTitle)
+    : { title: undefined, accentTitle: section.accentTitle ?? undefined };
+
   return {
     eyebrow: section.eyebrow ?? undefined,
-    title: section.title ?? undefined,
-    accentTitle: section.accentTitle ?? undefined,
-    description: section.description ?? undefined,
+    title,
+    accentTitle,
+    description: section.description?.trim() ?? undefined,
     image: resolveCmsImage(section.image ?? undefined),
     backgroundImage: resolveCmsImage(section.backgroundImage ?? undefined),
     steps,

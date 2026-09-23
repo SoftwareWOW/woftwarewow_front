@@ -781,6 +781,20 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
     cmsType: 'page-section-image',
     populate: { image: { populate: { image: true } } },
   },
+  'strategy-to-results': {
+    cmsType: 'page-process',
+    populate: {
+      steps: { populate: '*' },
+      image: { populate: { image: true } },
+    },
+  },
+  'built-around-business': {
+    cmsType: 'page-process',
+    populate: {
+      steps: { populate: '*' },
+      image: { populate: { image: true } },
+    },
+  },
 };
 
 export function getStrapiSectionKeyConfig(sectionKey: string) {

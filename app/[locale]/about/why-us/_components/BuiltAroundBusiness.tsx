@@ -114,7 +114,7 @@ const BuiltAroundBusiness = ({
           </div>
 
           <RevealWrapper as="figure" className="reveal-me md:w-1/2">
-            <img src={image.src} alt={image.alt ?? ''} className="h-full w-full object-cover" />
+            <img src={image.src} alt={image.alt ?? ''} className="h-full w-full object-cover rounded-radius-md" />
           </RevealWrapper>
         </div>
       </div>

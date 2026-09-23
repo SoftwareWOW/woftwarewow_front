@@ -50,6 +50,19 @@ export const ABOUT_PARTNERS_PAGE_POPULATE = {
   mutualGrowth: { populate: PAGE_SECTION_IMAGE_POPULATE },
 };
 
+const PAGE_PROCESS_POPULATE = {
+  steps: { populate: '*' },
+  image: { populate: { image: true } },
+};
+
+/** Explicit populate for about/why-us — hero images + process sections with media. */
+export const ABOUT_WHY_US_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  strategyToResults: { populate: PAGE_PROCESS_POPULATE },
+  builtAroundBusiness: { populate: PAGE_PROCESS_POPULATE },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).
@@ -60,9 +73,7 @@ const CMS_NESTED_POPULATE: Partial<
   'page-technologies': {
     items: { populate: '*' },
   },
-  'page-process': {
-    steps: { populate: '*' },
-  },
+  'page-process': PAGE_PROCESS_POPULATE,
   'page-images': {
     images: { populate: { image: true } },
   },

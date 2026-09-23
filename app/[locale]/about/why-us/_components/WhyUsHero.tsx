@@ -82,12 +82,12 @@ const WhyUsHero = ({
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           {primaryImage && (
             <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
-              <img src={primaryImage.src} alt={primaryImage.alt ?? ''} className="w-full object-cover" />
+              <img src={primaryImage.src} alt={primaryImage.alt ?? ''} className="w-full object-cover rounded-radius-sm" />
             </RevealWrapper>
           )}
           {secondaryImage && (
             <RevealWrapper as="figure" className="reveal-me">
-              <img src={secondaryImage.src} alt={secondaryImage.alt ?? ''} className="w-full object-cover" />
+              <img src={secondaryImage.src} alt={secondaryImage.alt ?? ''} className="w-full object-cover rounded-radius-sm" />
             </RevealWrapper>
           )}
         </div>
