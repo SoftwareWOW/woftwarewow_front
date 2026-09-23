@@ -134,7 +134,8 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/about/partners',
     sections: [
       { sectionKey: 'partners-hero', cms: 'hero' },
-      { sectionKey: 'ways-to-partner', cms: 'page-technologies' },
+      { sectionKey: 'partner-categories', cms: 'page-section-image' },
+      { sectionKey: 'mutual-growth', cms: 'page-section-image' },
       { sectionKey: 'wow-growth-cta', cms: null },
     ],
   },
@@ -827,6 +828,18 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       name: 'solutionToChallenges',
       component: 'sections.page-technologies',
       sectionKey: 'solution-to-challenges',
+    },
+  ],
+  'about-partners': [
+    {
+      name: 'partnerCategories',
+      component: 'sections.page-section-image',
+      sectionKey: 'partner-categories',
+    },
+    {
+      name: 'mutualGrowth',
+      component: 'sections.page-section-image',
+      sectionKey: 'mutual-growth',
     },
   ],
   'about-strategy-centre': [

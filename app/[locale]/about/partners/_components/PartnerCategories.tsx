@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsHeroImage, CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const partnerTypes = [
@@ -24,10 +24,24 @@ const partnerTypes = [
   },
 ]
 
-/** Layout: Home-13 WhyChooseUsV2 — stacked list + image (distinct from WhyWePartner cards). */
-type PartnerCategoriesProps = Partial<CmsTechnologiesSection>
+const DEFAULT_IMAGE: CmsHeroImage = {
+  src: '/images/wow/Hero/devision/Accelerate.jpg',
+  alt: 'Technology and platform partners',
+}
 
-const PartnerCategories = ({ eyebrow = 'Categories', title, accentTitle, description, items }: PartnerCategoriesProps = {}) => {
+/** Layout: Home-13 WhyChooseUsV2 — stacked list + image (distinct from WhyWePartner cards). */
+type PartnerCategoriesProps = Partial<CmsTechnologiesSection> & {
+  image?: CmsHeroImage | null
+}
+
+const PartnerCategories = ({
+  eyebrow = 'Categories',
+  title,
+  accentTitle,
+  description,
+  items,
+  image,
+}: PartnerCategoriesProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedItems = mergeFeatureItems([], items)
 
@@ -78,8 +92,8 @@ const PartnerCategories = ({ eyebrow = 'Categories', title, accentTitle, descrip
 
           <RevealWrapper as="figure" className="reveal-me md:w-1/2">
             <img
-              src="/images/wow/Hero/devision/Accelerate.jpg"
-              alt="Technology and platform partners"
+              src={image?.src ?? DEFAULT_IMAGE.src}
+              alt={image?.alt ?? DEFAULT_IMAGE.alt}
               className="h-full w-full object-cover"
             />
           </RevealWrapper>

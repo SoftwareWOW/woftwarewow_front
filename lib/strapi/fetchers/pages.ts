@@ -32,7 +32,7 @@ export async function getSuperagencyPage(
 ): Promise<StrapiSuperagencyPage | null> {
   const apiId = pageApiId(slug);
 
-  if (slug === 'career' || slug === 'about-why-smbs') {
+  if (slug === 'career' || slug === 'about-why-smbs' || slug === 'about-strategy-centre') {
     const full = await getSuperagencyPageFull(apiId, locale);
     if (full) return full;
   }

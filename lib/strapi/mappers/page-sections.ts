@@ -40,6 +40,7 @@ export type CmsPageHeroProps = {
   badgeTitle?: string;
   title?: string;
   italicTitle?: string;
+  suffixTitle?: string;
   description?: string;
   images?: CmsHeroImage[];
   backgroundImage?: CmsHeroImage;
@@ -322,6 +323,7 @@ export function mapPageHero(hero?: StrapiPageHero | null): CmsPageHeroProps | nu
     badgeTitle: hero.eyebrow ?? undefined,
     title,
     italicTitle,
+    suffixTitle: hero.suffixTitle ?? undefined,
     description: hero.description ?? undefined,
     images: mapHeroImages(hero),
     ...(backgroundImage ? { backgroundImage } : {}),
@@ -941,6 +943,7 @@ export function mergeCmsHero<T extends CmsPageHeroProps>(
     ...(cms.badgeTitle ? { badgeTitle: cms.badgeTitle } : {}),
     ...(cms.title ? { title: cms.title } : {}),
     ...(cms.italicTitle ? { italicTitle: cms.italicTitle } : {}),
+    ...(cms.suffixTitle ? { suffixTitle: cms.suffixTitle } : {}),
     ...(cms.description ? { description: cms.description } : {}),
     ...(cms.images?.length ? { images: cms.images } : {}),
     ...(cms.backgroundImage ? { backgroundImage: cms.backgroundImage } : {}),

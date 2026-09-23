@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsHeroImage, CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const gains = [
@@ -12,10 +12,24 @@ const gains = [
   'Joint growth initiatives — co-marketing, referrals, and shared offers',
 ]
 
-/** Layout: Home-25 WhatWeOffer — image + list. */
-type MutualGrowthProps = Partial<CmsTechnologiesSection>
+const DEFAULT_IMAGE: CmsHeroImage = {
+  src: '/images/wow/nav/cards/pexels-fauxels-3183132 1.png',
+  alt: 'Built for mutual growth',
+}
 
-const MutualGrowth = ({ eyebrow = 'Mutual Growth', title, accentTitle, description, items }: MutualGrowthProps = {}) => {
+/** Layout: Home-25 WhatWeOffer — image + list. */
+type MutualGrowthProps = Partial<CmsTechnologiesSection> & {
+  image?: CmsHeroImage | null
+}
+
+const MutualGrowth = ({
+  eyebrow = 'Mutual Growth',
+  title,
+  accentTitle,
+  description,
+  items,
+  image,
+}: MutualGrowthProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedItems = mergeFeatureItems([], items)
 
@@ -26,8 +40,8 @@ const MutualGrowth = ({ eyebrow = 'Mutual Growth', title, accentTitle, descripti
         <div className="grid grid-cols-12 items-start gap-y-12 lg:gap-x-16">
           <RevealWrapper className="reveal-me col-span-12 lg:col-span-6 lg:h-full">
             <img
-              src="/images/wow/nav/cards/pexels-fauxels-3183132 1.png"
-              alt="Built for mutual growth"
+              src={image?.src ?? DEFAULT_IMAGE.src}
+              alt={image?.alt ?? DEFAULT_IMAGE.alt}
               className="h-full w-full object-cover"
             />
           </RevealWrapper>

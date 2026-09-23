@@ -33,11 +33,10 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
     ],
   },
   'about-partners': {
-    layout: 'slider',
+    layout: 'dual',
     images: [
-      img("/images/wow/Hero/client/Avatar.png", "Avatar"),
-      img("/images/wow/Hero/client/Avatar (1).png", "Avatar (1)"),
-      img("/images/wow/Hero/client/Avatar (2).png", "Avatar (2)"),
+      img('/images/hero-img/startup-hero-1.jpg', 'Partners hero — left decorative image'),
+      img('/images/hero-img/startup-hero-2.jpg', 'Partners hero — right decorative image'),
     ],
   },
   'about-why-us': {

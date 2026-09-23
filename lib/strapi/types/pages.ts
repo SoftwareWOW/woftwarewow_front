@@ -10,6 +10,7 @@ export type StrapiPageHero = {
   eyebrow?: string | null;
   title: string;
   accentTitle?: string | null;
+  suffixTitle?: string | null;
   description?: string | null;
   images?: StrapiImageWithAlt[] | null;
   backgroundImage?: StrapiImageWithAlt | null;

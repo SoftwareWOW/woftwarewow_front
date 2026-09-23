@@ -9,7 +9,7 @@ import MutualGrowth from './_components/MutualGrowth'
 import PartnerCategories from './_components/PartnerCategories'
 // 2. Our Partner Ecosystem — Home-03 Clients (dual marquee)
 import PartnerEcosystem from './_components/PartnerEcosystem'
-// 1. Hero — Better Together — Home-20 HeroV20
+// 1. Hero — Better together with trusted collaborators
 import PartnersHero from './_components/PartnersHero'
 // 5. Ways to Partner With WOW — Home-15 ElevateBrand
 import WaysToPartner from './_components/WaysToPartner'
@@ -28,7 +28,8 @@ export const revalidate = 60
 const DEFAULT_HERO = {
   badgeTitle: 'Partners',
   title: 'Better',
-  italicTitle: 'Together',
+  italicTitle: 'together',
+  suffixTitle: ' with trusted collaborators',
   description:
     'We partner with trusted technology, platform, and industry leaders to deliver better solutions for growing businesses.',
 }
@@ -53,7 +54,7 @@ export default async function PartnersPage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-        {/* 1. Hero — Better Together — Home-20 HeroV20 */}
+        {/* 1. Hero — Better together with trusted collaborators */}
         <PartnersHero {...hero} />
         {/* 2. Our Partner Ecosystem — Home-03 Clients (dual marquee) */}
         <PartnerEcosystem {...(sections.partnerEcosystem ?? {})} />
