@@ -7,80 +7,79 @@ import { useMemo, useState } from 'react'
 import {
   PORTFOLIO_FILTERS,
   recentPortfolioProjects,
-  type PortfolioFilter,
   type PortfolioProject,
 } from '../../_data/projects'
 import LatestProjects from './LatestProjects'
-import type { CmsPortfolioExplorerSection, CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
+import type { CmsPageProjectsSection, CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-function slugFromHref(href?: string, fallbackIndex?: number) {
-  if (href) {
-    const match = href.match(/\/case-stud(?:y|ies)\/([^/?#]+)/)
-    if (match?.[1]) return match[1]
-  }
-  return `cms-project-${fallbackIndex ?? 0}`
+const DEFAULT_HEADER = {
+  eyebrow: 'EXPLORE BY EXPERTISE',
+  description:
+    'Browse our newest completed projects and filter by the expertise behind each one.',
 }
 
 function cmsProjectsToPortfolio(projects: CmsProjectCard[]): PortfolioProject[] {
-  const year = new Date().getFullYear()
+  const fallbackYear = new Date().getFullYear()
 
-  return projects.map((project, index) => ({
-    slug: slugFromHref(project.href, index),
-    title: project.title,
-    client: project.title,
-    industry: '',
-    tagline: '',
-    description: project.description ?? '',
-    image: project.thumbnail ?? '',
-    alt: project.alt ?? project.title,
-    year,
-    completedAt: `${year}-01-01`,
-    featured: false,
-    status: 'published' as const,
-    categories: [],
-    serviceTags: [],
-  }))
+  return projects
+    .filter((project) => project.thumbnail)
+    .map((project) => {
+      const completedAt =
+        project.completedAt ??
+        (project.year ? `${project.year}-06-01` : `${fallbackYear}-01-01`)
+      const year = project.year ?? new Date(completedAt).getFullYear()
+
+      return {
+        slug: project.slug ?? project.title,
+        title: project.title,
+        client: project.client ?? project.title,
+        industry: project.industry ?? '',
+        tagline: project.tagline ?? '',
+        description: project.description ?? '',
+        image: project.thumbnail ?? '',
+        alt: project.alt ?? project.title,
+        year,
+        completedAt,
+        featured: false,
+        status: 'published' as const,
+        categories: (project.categories ?? []) as PortfolioProject['categories'],
+        serviceTags: project.serviceTags ?? [],
+      }
+    })
 }
 
-/** Layout: portfolio/_components/ExploreWork.tsx — recent-work filters driving a year-grouped grid. */
-type RecentWorkExplorerProps = Partial<CmsPortfolioExplorerSection>
+/** Layout: portfolio/ExploreWork category filters + LatestProjects year grouping. */
+type RecentWorkExplorerProps = Partial<CmsPageProjectsSection>
 
 const RecentWorkExplorer = ({
-  eyebrow = 'EXPLORE BY EXPERTISE',
-  title,
+  eyebrow = DEFAULT_HEADER.eyebrow,
   accentTitle,
-  description,
-  filterGroups,
+  description = DEFAULT_HEADER.description,
+  filterCategories,
+  projects,
 }: RecentWorkExplorerProps = {}) => {
   const header = mergeSectionHeader(
-    { eyebrow, title, accentTitle, description },
-    { eyebrow, title, accentTitle, description },
+    { eyebrow, title: accentTitle, description },
+    { eyebrow, title: accentTitle, description },
   )
 
-  const cmsFilterLabels = filterGroups?.map((group) => group.label) ?? []
+  const cmsFilterLabels = filterCategories?.map((category) => category.label) ?? []
   const filters = cmsFilterLabels.length ? (['All', ...cmsFilterLabels] as string[]) : [...PORTFOLIO_FILTERS]
+
+  const displayProjects = useMemo(() => {
+    if (projects?.length) return cmsProjectsToPortfolio(projects)
+    return recentPortfolioProjects
+  }, [projects])
 
   const [activeFilter, setActiveFilter] = useState<string>('All')
 
-  const allCmsProjects = useMemo(() => {
-    if (!filterGroups?.length) return null
-    return cmsProjectsToPortfolio(filterGroups.flatMap((group) => group.projects))
-  }, [filterGroups])
-
   const filteredProjects = useMemo(() => {
-    if (!filterGroups?.length) {
-      if (activeFilter === 'All') return recentPortfolioProjects
-      return recentPortfolioProjects.filter((project) =>
-        project.categories.includes(activeFilter as Exclude<PortfolioFilter, 'All'>),
-      )
-    }
-
-    if (activeFilter === 'All') return allCmsProjects ?? []
-
-    const group = filterGroups.find((entry) => entry.label === activeFilter)
-    return group ? cmsProjectsToPortfolio(group.projects) : allCmsProjects ?? []
-  }, [activeFilter, allCmsProjects, filterGroups])
+    if (activeFilter === 'All') return displayProjects
+    return displayProjects.filter((project) =>
+      project.categories.some((category) => category === activeFilter),
+    )
+  }, [activeFilter, displayProjects])
 
   return (
     <section>
@@ -90,13 +89,16 @@ const RecentWorkExplorer = ({
             <SectionLabel>{header.eyebrow}</SectionLabel>
           </div>
           <h2 className="text-appear text-center">
-            Fresh from <WowText>WOW</WowText>
+            {header.title ? (
+              header.title
+            ) : (
+              <>
+                Fresh from <WowText>WOW</WowText>
+              </>
+            )}
           </h2>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-              {header.description ??
-                'Browse our newest completed projects and filter by the expertise behind each one.'}
-            </p>
+            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
           </TextAppearAnimation>
         </div>
 

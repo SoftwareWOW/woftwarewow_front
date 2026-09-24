@@ -160,6 +160,8 @@ export type CmsProjectCard = {
   tagline?: string;
   serviceTags?: string[];
   categories?: string[];
+  year?: number;
+  completedAt?: string;
 };
 
 export type CmsPortfolioCategoryFilter = {
@@ -629,6 +631,8 @@ function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
       ? project.serviceTags.filter((tag): tag is string => typeof tag === 'string')
       : undefined,
     categories: projectCategoryLabels(project),
+    year: project.year ?? undefined,
+    completedAt: project.completedAt ?? undefined,
   };
 }
 

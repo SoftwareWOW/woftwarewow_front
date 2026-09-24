@@ -144,10 +144,11 @@ export const PORTFOLIO_PAGE_POPULATE = {
   howWeCreateImpact: { populate: PAGE_PROCESS_POPULATE },
 };
 
-/** Explicit populate for /portfolio/recent — hero + seo. */
+/** Explicit populate for /portfolio/recent — hero, seo, optional explore section. */
 export const PORTFOLIO_RECENT_PAGE_POPULATE = {
   hero: { populate: '*' },
   seo: { populate: '*' },
+  exploreWork: { populate: PAGE_PROJECTS_SECTION_POPULATE },
 };
 
 /** Explicit populate for /clients — hero gallery + client story projects. */

@@ -33,9 +33,14 @@ export default async function RecentWorkPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const [cms, portfolioCms] = await Promise.all([
+    loadSuperagencyPage(PAGE_SLUG, locale as Locale),
+    loadSuperagencyPage('portfolio', locale as Locale),
+  ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const portfolioSections = resolvePageSections(portfolioCms, 'portfolio')
+  const exploreWork = sections.exploreWork ?? portfolioSections.exploreWork
 
   return (
     <LayoutOne>
@@ -43,7 +48,7 @@ export default async function RecentWorkPage({ params }: Props) {
         {/* 1. Hero — case-study/CaseStudyHero (compact variant) */}
         <RecentWorkHero {...hero} images={hero.images} />
         {/* 2. Latest Projects + 3. Explore by Expertise — portfolio/ExploreWork + case-study/Projects */}
-        <RecentWorkExplorer />
+        <RecentWorkExplorer {...(exploreWork ?? {})} />
         {/* 4. Start Your Project — shared WowGrowthCta */}
         <RecentWorkCta {...(sections.recentWorkCta ?? {})} />
       </div>

@@ -1216,6 +1216,13 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     { name: 'brandKitLogos', component: 'sections.brand-kit-logos', sectionKey: 'brand-kit-logos' },
     { name: 'brandVisualStyle', component: 'sections.page-process', sectionKey: 'brand-visual-style' },
   ],
+  'portfolio-recent': [
+    {
+      name: 'exploreWork',
+      component: 'sections.page-projects',
+      sectionKey: 'recent-work-explorer',
+    },
+  ],
   meet: [{ name: 'meetFaq', component: 'sections.faq-list', sectionKey: 'meet-faq' }],
   thinktank: [{ name: 'thinktankFaq', component: 'sections.faq-list', sectionKey: 'thinktank-faq' }],
   quotation: [{ name: 'requestDetails', component: 'sections.page-rfq', sectionKey: 'request-details' }],
