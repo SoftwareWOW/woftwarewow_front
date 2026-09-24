@@ -20,6 +20,7 @@ const WhyPartnerWithWow = ({
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedItems = mergeFeatureItems(DEFAULT_PARTNERBENEFITS, items)
   const imageSrc = cmsImageSrc(image, '/images/wow/Hero/devision/Accelerate.jpg')
+  const imageAlt = image?.alt ?? 'WOW partner ecosystem'
 
 
   return (
@@ -46,7 +47,7 @@ const WhyPartnerWithWow = ({
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
               src={imageSrc ?? ''}
-              alt="WOW partner ecosystem"
+              alt={imageAlt}
               className="h-full w-full rounded-radius-md object-cover"
             />
           </RevealWrapper>

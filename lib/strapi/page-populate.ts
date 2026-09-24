@@ -166,8 +166,13 @@ export const CLIENTS_PAGE_POPULATE = {
 export const PARTNERS_PAGE_POPULATE = {
   hero: { populate: HERO_IMAGES_POPULATE },
   seo: { populate: '*' },
-  howWePartner: { populate: PAGE_PROCESS_POPULATE },
-  whyPartnerWithWow: { populate: PAGE_TECHNOLOGIES_POPULATE },
+  howWePartner: { populate: { steps: true } },
+  whyPartnerWithWow: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
 };
 
 /** Explicit populate for /locations — hero gallery + office locations. */
