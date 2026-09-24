@@ -5,6 +5,11 @@ import {
   ABOUT_WHY_US_PAGE_POPULATE,
   AFFILIATE_PAGE_POPULATE,
   BRANDKIT_PAGE_POPULATE,
+  CLIENTS_PAGE_POPULATE,
+  LOCATIONS_PAGE_POPULATE,
+  PARTNERS_PAGE_POPULATE,
+  PORTFOLIO_PAGE_POPULATE,
+  PORTFOLIO_RECENT_PAGE_POPULATE,
   buildDeepPopulateFromPageData,
   buildSafePopulateFromPageData,
   buildSuperagencyPageShallowPopulate,
@@ -83,6 +88,11 @@ export async function getSuperagencyPage(
     affiliate: AFFILIATE_PAGE_POPULATE,
     helpsupport: HELPSUPPORT_PAGE_POPULATE,
     brandkit: BRANDKIT_PAGE_POPULATE,
+    portfolio: PORTFOLIO_PAGE_POPULATE,
+    'portfolio-recent': PORTFOLIO_RECENT_PAGE_POPULATE,
+    clients: CLIENTS_PAGE_POPULATE,
+    partners: PARTNERS_PAGE_POPULATE,
+    locations: LOCATIONS_PAGE_POPULATE,
   };
 
   const explicitPopulate = explicitPopulateBySlug[slug];

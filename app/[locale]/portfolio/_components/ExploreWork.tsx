@@ -6,54 +6,98 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import Link from 'next/link'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
-import { PORTFOLIO_FILTERS, portfolioProjects, type PortfolioFilter } from '../_data/projects'
-import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
+import { PORTFOLIO_FILTERS, portfolioProjects } from '../_data/projects'
+import type { CmsPageProjectsSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-/** Layout: case-study/_components/Projects.tsx — underline-hover-effect card styling + new filter tabs. */
-type ExploreWorkProps = { projects?: CmsProjectCard[] | null }
+/** Layout: case-study/_components/Projects.tsx — underline-hover-effect card styling + filter tabs. */
+type ExploreWorkProps = Partial<CmsPageProjectsSection>
 
-const ExploreWork = ({ projects }: ExploreWorkProps = {}) => {
-  const displayProjects = projects?.length
-    ? projects.map((p, i) => ({
-        slug: p.href?.split('/').pop() ?? String(i),
-        title: p.title,
-        description: p.description ?? '',
-        image: p.thumbnail ?? '',
-        alt: p.alt ?? p.title,
-        client: '',
-        industry: '',
-        serviceTags: [] as string[],
-        tagline: p.description ?? '',
+const DEFAULT_HEADER = {
+  eyebrow: 'EXPLORE BY EXPERTISE',
+  title: 'Explore Our Work',
+  description:
+    'Browse projects by category to see how we approach different challenges across the WOW ecosystem.',
+}
+
+function slugFromHref(href?: string, fallback?: string) {
+  if (href) {
+    const match = href.match(/\/case-stud(?:y|ies)\/([^/?#]+)/)
+    if (match?.[1]) return match[1]
+  }
+  return fallback ?? 'project'
+}
+
+const ExploreWork = ({
+  eyebrow = DEFAULT_HEADER.eyebrow,
+  accentTitle,
+  description = DEFAULT_HEADER.description,
+  filterCategories,
+  projects,
+}: ExploreWorkProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title: DEFAULT_HEADER.title, accentTitle, description },
+    { eyebrow, title: DEFAULT_HEADER.title, accentTitle, description },
+  )
+
+  const cmsFilterLabels = filterCategories?.map((category) => category.label) ?? []
+  const filters = cmsFilterLabels.length
+    ? (['All', ...cmsFilterLabels] as string[])
+    : [...PORTFOLIO_FILTERS]
+
+  const displayProjects = useMemo(() => {
+    if (projects?.length) {
+      return projects.map((project, index) => ({
+        slug: project.slug ?? slugFromHref(project.href, String(index)),
+        title: project.title,
+        description: project.description ?? '',
+        image: project.thumbnail ?? '',
+        alt: project.alt ?? project.title,
+        client: project.client ?? project.title,
+        industry: project.industry ?? '',
+        serviceTags: project.serviceTags ?? [],
+        tagline: project.tagline ?? project.description ?? '',
+        categories: project.categories ?? [],
       }))
-    : []
+    }
 
+    return portfolioProjects.map((project) => ({
+      slug: project.slug,
+      title: project.title,
+      description: project.description,
+      image: project.image,
+      alt: project.alt,
+      client: project.client,
+      industry: project.industry,
+      serviceTags: project.serviceTags,
+      tagline: project.tagline,
+      categories: project.categories,
+    }))
+  }, [projects])
 
-  const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All')
+  const [activeFilter, setActiveFilter] = useState<string>('All')
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') return portfolioProjects
-
-    return portfolioProjects.filter((project) => project.categories.includes(activeFilter))
-  }, [activeFilter])
+    if (activeFilter === 'All') return displayProjects
+    return displayProjects.filter((project) => project.categories.includes(activeFilter))
+  }, [activeFilter, displayProjects])
 
   return (
     <section id="work" className="scroll-mt-28 overflow-hidden sm:scroll-mt-32 lg:scroll-mt-36">
       <div className="container mb-10 text-center md:mb-14">
         <div className="mb-4 flex justify-center md:mb-5">
-          <SectionLabel>EXPLORE BY EXPERTISE</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </div>
         <TextAppearAnimation>
-          <h2 className="text-appear">Explore Our Work</h2>
+          <h2 className="text-appear">{DEFAULT_HEADER.title}</h2>
         </TextAppearAnimation>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-            Browse projects by category to see how we approach different challenges across the WOW ecosystem.
-          </p>
+          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
         </TextAppearAnimation>
       </div>
 
       <div className="container mb-10 flex flex-wrap justify-center gap-2 md:mb-14 md:gap-3">
-        {PORTFOLIO_FILTERS.map((filter) => {
+        {filters.map((filter) => {
           const isActive = activeFilter === filter
 
           return (

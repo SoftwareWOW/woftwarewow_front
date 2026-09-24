@@ -11,6 +11,7 @@ export type CmsSectionType =
   | 'page-rfq'
   | 'page-technologies'
   | 'page-projects'
+  | 'page-client-stories'
   | 'page-portfolio-explorer'
   | 'page-images'
   | 'page-partners'
@@ -180,7 +181,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/portfolio/recent',
     sections: [
       { sectionKey: 'recent-work-hero', cms: 'hero' },
-      { sectionKey: 'recent-work-explorer', cms: 'page-portfolio-explorer' },
+      { sectionKey: 'recent-work-explorer', cms: null },
       { sectionKey: 'recent-work-cta', cms: null },
     ],
   },
@@ -190,8 +191,8 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     frontendRoute: '/clients',
     sections: [
       { sectionKey: 'clients-hero', cms: 'hero' },
-      { sectionKey: 'clients-marquee', cms: 'page-client-logos' },
-      { sectionKey: 'client-stories', cms: 'page-projects' },
+      { sectionKey: 'clients-marquee', cms: null },
+      { sectionKey: 'client-stories', cms: 'page-client-stories' },
       { sectionKey: 'clients-cta', cms: null },
     ],
   },
@@ -214,15 +215,6 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       { sectionKey: 'locations-hero', cms: 'hero' },
       { sectionKey: 'locations-presence', cms: 'page-office-locations' },
       { sectionKey: 'wow-growth-cta', cms: null },
-    ],
-  },
-  {
-    identifier: 'industries',
-    family: 'explore',
-    frontendRoute: '/industries',
-    sections: [
-      { sectionKey: 'industries-hero', cms: 'hero' },
-      { sectionKey: 'industry-capabilities', cms: 'page-technologies' },
     ],
   },
   // Explore / Industries (9) — per-page sections; Phase 1 overrides for 3 slugs
@@ -604,6 +596,7 @@ export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, st
   'page-rfq': 'sections.page-rfq',
   'page-technologies': 'sections.page-technologies',
   'page-projects': 'sections.page-projects',
+  'page-client-stories': 'sections.page-client-stories',
   'page-portfolio-explorer': 'sections.page-portfolio-explorer',
   'page-images': 'sections.page-images',
   'page-partners': 'sections.page-partners',

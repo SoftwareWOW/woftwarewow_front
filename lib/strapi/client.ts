@@ -42,26 +42,54 @@ function isFrontendAssetPath(url: string): boolean {
   );
 }
 
+/** True when `src` is safe for next/image (local assets or Strapi /uploads/ URLs). */
+export function isAllowedNextImageSrc(src: string | undefined): boolean {
+  const value = src?.trim();
+  if (!value) return false;
+
+  if (isFrontendAssetPath(value) || value.startsWith('/images/')) return true;
+
+  let pathname: string;
+  if (value.startsWith('http://') || value.startsWith('https://')) {
+    try {
+      pathname = new URL(value).pathname;
+    } catch {
+      return false;
+    }
+  } else if (value.startsWith('/')) {
+    pathname = value;
+  } else {
+    return false;
+  }
+
+  return isStrapiUploadPath(pathname);
+}
+
 export function getStrapiMediaUrl(media?: StrapiMedia | null): string | undefined {
   if (!media?.url) return undefined;
 
   const url = media.url.trim();
   if (!url) return undefined;
 
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return isAllowedNextImageSrc(url) ? url : undefined;
+  }
 
   if (url.startsWith('/')) {
     if (isFrontendAssetPath(url)) return url;
     if (isStrapiUploadPath(url)) {
       if (!STRAPI_URL) return undefined;
-      return `${STRAPI_URL}${url}`;
+      const absolute = `${STRAPI_URL}${url}`;
+      return isAllowedNextImageSrc(absolute) ? absolute : undefined;
     }
-    // Other app routes (e.g. /case-study/foo) are not Strapi media.
-    return url;
+    return undefined;
   }
 
   if (!STRAPI_URL) return undefined;
-  return `${STRAPI_URL}/${url.replace(/^\//, '')}`;
+  const normalized = url.replace(/^\//, '');
+  if (!normalized.startsWith('uploads/')) return undefined;
+  const absolute = `${STRAPI_URL}/${normalized}`;
+  return isAllowedNextImageSrc(absolute) ? absolute : undefined;
 }
 
 export function isStrapiConfigured(): boolean {

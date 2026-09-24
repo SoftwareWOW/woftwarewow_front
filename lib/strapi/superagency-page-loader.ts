@@ -15,6 +15,7 @@ import {
   mapPageProcessSection,
   mapPageSectionImage,
   mapPageProjects,
+  mapPageProjectsSection,
   mapPageTeamMembers,
   mapPageTechnologies,
   mapPageTechnologiesSection,
@@ -205,8 +206,21 @@ function mapSectionByComponent(
     case 'sections.image-gallery':
       return cms.imageGallery(fieldName);
     case 'sections.page-projects': {
-      const projects = cms.projects(cms.field<StrapiPageProjects>(fieldName));
-      return projects ? { projects } : null;
+      return mapPageProjectsSection(cms.field<StrapiPageProjects>(fieldName));
+    }
+    case 'sections.page-client-stories': {
+      const section = mapPageProjectsSection(cms.field<StrapiPageProjects>(fieldName));
+      if (!section) return null;
+      const { filterCategories: _filterCategories, ...clientStories } = section;
+      if (
+        !clientStories.projects?.length &&
+        !clientStories.eyebrow &&
+        !clientStories.accentTitle &&
+        !clientStories.description
+      ) {
+        return null;
+      }
+      return clientStories;
     }
     case 'sections.page-images': {
       const images = cms.images(cms.field<StrapiPageImages>(fieldName));

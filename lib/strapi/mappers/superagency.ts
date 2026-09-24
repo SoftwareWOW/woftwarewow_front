@@ -1,5 +1,5 @@
 import { resolveCaseStudySlug } from '@/lib/case-study/slug';
-import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
+import { getStrapiMediaUrl, isAllowedNextImageSrc, type StrapiMedia } from '@/lib/strapi/client';
 import type {
   StrapiSuperagencyDivision,
   StrapiSuperagencyEcosystem,
@@ -61,19 +61,47 @@ export function mapStrapiDivisions(divisions: StrapiSuperagencyDivision[]) {
 const WOW_PROJECT_IMAGE_WIDTH = 1330;
 const WOW_PROJECT_IMAGE_HEIGHT = 445;
 
+function resolveProjectThumbnail(project: StrapiSuperagencyProject): string | undefined {
+  const fromMedia = getStrapiMediaUrl(project.thumbnail ?? undefined);
+  if (fromMedia && isAllowedNextImageSrc(fromMedia)) return fromMedia;
+
+  const path = project.thumbnailPath?.trim();
+  if (!path) return undefined;
+
+  if (path.startsWith('/images/') && isAllowedNextImageSrc(path)) return path;
+
+  const fromPath = getStrapiMediaUrl({ url: path });
+  if (fromPath && isAllowedNextImageSrc(fromPath)) return fromPath;
+
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return isAllowedNextImageSrc(path) ? path : undefined;
+  }
+
+  return undefined;
+}
+
 export function mapStrapiProjects(projects: StrapiSuperagencyProject[]) {
   if (!projects.length) return null;
 
-  return projects.map((project, index) => ({
-    id: index + 1,
-    title: project.title,
-    description: project.description ?? '',
-    thumbnail: project.thumbnailPath ?? getStrapiMediaUrl(project.thumbnail ?? undefined) ?? '',
-    alt: project.alt ?? project.title,
-    href: `/case-study/${resolveCaseStudySlug(project)}`,
-    thumbnailWidth: WOW_PROJECT_IMAGE_WIDTH,
-    thumbnailHeight: WOW_PROJECT_IMAGE_HEIGHT,
-  }));
+  const mapped = projects
+    .map((project, index) => {
+      const thumbnail = resolveProjectThumbnail(project);
+      if (!thumbnail) return null;
+
+      return {
+        id: index + 1,
+        title: project.title,
+        description: project.description ?? '',
+        thumbnail,
+        alt: project.alt ?? project.title,
+        href: `/case-study/${resolveCaseStudySlug(project)}`,
+        thumbnailWidth: WOW_PROJECT_IMAGE_WIDTH,
+        thumbnailHeight: WOW_PROJECT_IMAGE_HEIGHT,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null);
+
+  return mapped.length ? mapped : null;
 }
 
 export function mapStrapiTestimonials(

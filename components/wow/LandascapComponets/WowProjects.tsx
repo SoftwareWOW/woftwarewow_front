@@ -8,6 +8,7 @@ import Link from 'next/link'
 import ButtonComponent, { ButtonComponentList } from '../shared/ButtonComponent'
 import HeadingWithInstrument from '../shared/HeadingWithInstrument'
 import SectionLabel from '../shared/SectionLabel'
+import { isAllowedNextImageSrc } from '@/lib/strapi/client'
 import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
@@ -84,8 +85,16 @@ type WowProjectsProps = {
   projects?: WowProjectItem[]
 }
 
+function withFallbackThumbnail(projects: WowProjectItem[]): WowProjectItem[] {
+  return projects.map((project, index) => {
+    if (isAllowedNextImageSrc(project.thumbnail)) return project;
+    const fallback = wowProjects[index % wowProjects.length];
+    return { ...project, thumbnail: fallback.thumbnail, alt: project.alt || fallback.alt };
+  });
+}
+
 const WowProjects = ({ projects: projectsProp }: WowProjectsProps) => {
-  const projectsData = projectsProp ?? wowProjects
+  const projectsData = withFallbackThumbnail(projectsProp?.length ? projectsProp : wowProjects)
   const [showAll, setShowAll] = useState(false)
   const visibleProjects = showAll ? projectsData : projectsData.slice(0, INITIAL_VISIBLE_COUNT)
 

@@ -90,12 +90,6 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
       img("/images/wow/locations/landmarks/UK.png", "UK"),
     ],
   },
-  'industries': {
-    layout: 'single',
-    images: [
-      img("/images/home-5/hero-img.png", "Industries hero"),
-    ],
-  },
   'professional-services': {
     layout: 'hover',
     images: [

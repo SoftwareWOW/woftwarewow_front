@@ -43,7 +43,7 @@ export default async function RecentWorkPage({ params }: Props) {
         {/* 1. Hero — case-study/CaseStudyHero (compact variant) */}
         <RecentWorkHero {...hero} images={hero.images} />
         {/* 2. Latest Projects + 3. Explore by Expertise — portfolio/ExploreWork + case-study/Projects */}
-        <RecentWorkExplorer {...(sections.recentWorkExplorer ?? {})} />
+        <RecentWorkExplorer />
         {/* 4. Start Your Project — shared WowGrowthCta */}
         <RecentWorkCta {...(sections.recentWorkCta ?? {})} />
       </div>

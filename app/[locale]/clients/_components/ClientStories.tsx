@@ -4,23 +4,43 @@ import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import { clientStories as DEFAULT_CLIENTSTORIES, type ClientStory } from '../_data/clients'
-import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
+import type { CmsPageProjectsSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: portfolio/_components/FeaturedWork.tsx — alternating lg:flex-row layout. */
-type ClientStoriesProps = { projects?: CmsProjectCard[] | null }
+type ClientStoriesProps = Partial<CmsPageProjectsSection>
 
-const ClientStories = ({ projects }: ClientStoriesProps = {}) => {
+const DEFAULT_HEADER = {
+  eyebrow: 'CLIENT STORIES',
+  title: 'Partnerships that create progress.',
+  description:
+    'See how we work with our clients to turn business challenges into practical solutions and meaningful outcomes.',
+}
+
+const ClientStories = ({
+  eyebrow = DEFAULT_HEADER.eyebrow,
+  accentTitle,
+  description = DEFAULT_HEADER.description,
+  projects,
+}: ClientStoriesProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title: accentTitle ?? DEFAULT_HEADER.title, description },
+    { eyebrow, title: accentTitle ?? DEFAULT_HEADER.title, description },
+  )
+
   const displayProjects: ClientStory[] = projects?.length
-    ? projects.map((p, i) => ({
-        slug: p.href?.split('/').pop() ?? String(i),
-        client: p.title,
-        industry: '',
-        challenge: p.description ?? '',
-        serviceTags: [] as string[],
-        outcome: '',
-        image: p.thumbnail ?? '',
-        alt: p.alt ?? p.title,
-      }))
+    ? projects
+        .filter((p) => p.thumbnail)
+        .map((p, i) => ({
+          slug: p.slug ?? String(i),
+          client: p.client ?? p.title,
+          industry: p.industry ?? '',
+          challenge: p.description ?? '',
+          serviceTags: p.serviceTags ?? [],
+          outcome: '',
+          image: p.thumbnail ?? '',
+          alt: p.alt ?? p.title,
+        }))
     : DEFAULT_CLIENTSTORIES
 
 
@@ -28,16 +48,13 @@ const ClientStories = ({ projects }: ClientStoriesProps = {}) => {
     <section id="client-stories" className="scroll-mt-28 sm:scroll-mt-32 lg:scroll-mt-36">
       <div className="container mb-10 text-center md:mb-16">
         <div className="mb-4 flex justify-center md:mb-5">
-          <SectionLabel>CLIENT STORIES</SectionLabel>
+          <SectionLabel>{header.eyebrow}</SectionLabel>
         </div>
         <TextAppearAnimation>
-          <h2 className="text-appear">Partnerships that create progress.</h2>
+          <h2 className="text-appear">{header.title}</h2>
         </TextAppearAnimation>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-            See how we work with our clients to turn business challenges into practical solutions and meaningful
-            outcomes.
-          </p>
+          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
         </TextAppearAnimation>
       </div>
 

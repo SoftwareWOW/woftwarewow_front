@@ -4,24 +4,42 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import Link from 'next/link'
 import { featuredProjects as DEFAULT_FEATUREDPROJECTS } from '../_data/projects'
-import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
+import type { CmsPageProjectsSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: case-study/_components/Projects.tsx — alternating lg:flex-row layout, featured subset. */
-type FeaturedWorkProps = { projects?: CmsProjectCard[] | null }
+type FeaturedWorkProps = Partial<CmsPageProjectsSection>
 
-const FeaturedWork = ({ projects }: FeaturedWorkProps = {}) => {
+const DEFAULT_HEADER = {
+  title: 'Selected work. Real challenges.',
+  description:
+    'A closer look at projects where strategy, creativity, and technology came together.',
+}
+
+const FeaturedWork = ({
+  accentTitle,
+  description = DEFAULT_HEADER.description,
+  projects,
+}: FeaturedWorkProps = {}) => {
+  const header = mergeSectionHeader(
+    { title: accentTitle ?? DEFAULT_HEADER.title, description },
+    { title: accentTitle ?? DEFAULT_HEADER.title, description },
+  )
+
   const displayProjects = projects?.length
-    ? projects.map((p, i) => ({
-        slug: p.href?.split('/').pop() ?? String(i),
-        title: p.title,
-        description: p.description ?? '',
-        image: p.thumbnail ?? '',
-        alt: p.alt ?? p.title,
-        client: '',
-        industry: '',
-        serviceTags: [] as string[],
-        tagline: p.description ?? '',
-      }))
+    ? projects
+        .filter((p) => p.thumbnail)
+        .map((p, i) => ({
+          slug: p.slug ?? String(i),
+          title: p.title,
+          description: p.description ?? '',
+          image: p.thumbnail ?? '',
+          alt: p.alt ?? p.title,
+          client: p.client ?? '',
+          industry: p.industry ?? '',
+          serviceTags: p.serviceTags ?? [],
+          tagline: p.tagline ?? p.description ?? '',
+        }))
     : DEFAULT_FEATUREDPROJECTS
 
 
@@ -29,12 +47,10 @@ const FeaturedWork = ({ projects }: FeaturedWorkProps = {}) => {
     <section>
       <div className="container mb-10 text-center md:mb-16">
         <TextAppearAnimation>
-          <h2 className="text-appear">Selected work. Real challenges.</h2>
+          <h2 className="text-appear">{header.title}</h2>
         </TextAppearAnimation>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-            A closer look at projects where strategy, creativity, and technology came together.
-          </p>
+          <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
         </TextAppearAnimation>
       </div>
 

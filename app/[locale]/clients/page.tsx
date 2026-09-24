@@ -44,7 +44,7 @@ export default async function ClientsPage({ params }: Props) {
         {/* 1. Hero — industries/technology-and-saas/TechnologyHero */}
         <ClientsHero {...hero} images={hero.images} />
         {/* 2. Our Clients — wow/shared/Marquee (home page) */}
-        <ClientsMarquee {...(sections.clientsMarquee ?? {})} />
+        <ClientsMarquee />
         {/* 3. Client Stories — portfolio/FeaturedWork alternating layout */}
         <ClientStories {...(sections.clientStories ?? {})} />
         {/* 4. Global CTA — WowGrowthCta defaults */}

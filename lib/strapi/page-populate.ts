@@ -125,6 +125,61 @@ export const BRANDKIT_PAGE_POPULATE = {
   brandVisualStyle: { populate: PAGE_PROCESS_POPULATE },
 };
 
+const PAGE_PROJECTS_SECTION_POPULATE = {
+  filterCategories: true,
+  projects: {
+    populate: {
+      thumbnail: true,
+      portfolioCategories: true,
+    },
+  },
+};
+
+/** Explicit populate for /portfolio — featured + explore projects, impact steps. */
+export const PORTFOLIO_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+  featuredWork: { populate: PAGE_PROJECTS_SECTION_POPULATE },
+  exploreWork: { populate: PAGE_PROJECTS_SECTION_POPULATE },
+  howWeCreateImpact: { populate: PAGE_PROCESS_POPULATE },
+};
+
+/** Explicit populate for /portfolio/recent — hero + seo. */
+export const PORTFOLIO_RECENT_PAGE_POPULATE = {
+  hero: { populate: '*' },
+  seo: { populate: '*' },
+};
+
+/** Explicit populate for /clients — hero gallery + client story projects. */
+export const CLIENTS_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  clientStories: {
+    populate: {
+      projects: { populate: { thumbnail: true } },
+    },
+  },
+};
+
+/** Explicit populate for /partners — hero, how we partner, why partner section. */
+export const PARTNERS_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  howWePartner: { populate: PAGE_PROCESS_POPULATE },
+  whyPartnerWithWow: { populate: PAGE_TECHNOLOGIES_POPULATE },
+};
+
+/** Explicit populate for /locations — hero gallery + office locations. */
+export const LOCATIONS_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  locationsPresence: {
+    populate: {
+      locations: { populate: '*' },
+    },
+  },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).
@@ -148,7 +203,20 @@ const CMS_NESTED_POPULATE: Partial<
     groups: { populate: '*' },
   },
   'page-projects': {
-    projects: { populate: '*' },
+    filterCategories: true,
+    projects: {
+      populate: {
+        thumbnail: true,
+        portfolioCategories: true,
+      },
+    },
+  },
+  'page-client-stories': {
+    projects: {
+      populate: {
+        thumbnail: true,
+      },
+    },
   },
   'page-faq': {
     items: { populate: '*' },

@@ -155,6 +155,24 @@ export type CmsProjectCard = {
   href?: string;
   /** Public case study detail slug for internal routing. */
   slug?: string;
+  client?: string;
+  industry?: string;
+  tagline?: string;
+  serviceTags?: string[];
+  categories?: string[];
+};
+
+export type CmsPortfolioCategoryFilter = {
+  label: string;
+  slug: string;
+};
+
+export type CmsPageProjectsSection = {
+  eyebrow?: string;
+  accentTitle?: string;
+  description?: string;
+  filterCategories: CmsPortfolioCategoryFilter[];
+  projects: CmsProjectCard[];
 };
 
 export type CmsFaqItem = {
@@ -574,6 +592,20 @@ export function mapImageGallery(
   };
 }
 
+function projectCategoryLabels(project: StrapiPageProjectItem): string[] {
+  const fromRelation = (project.portfolioCategories ?? [])
+    .map((category) => category.label?.trim())
+    .filter(Boolean) as string[];
+
+  if (fromRelation.length) return fromRelation;
+
+  if (Array.isArray(project.categories)) {
+    return project.categories.filter((value): value is string => typeof value === 'string' && value.trim().length > 0);
+  }
+
+  return [];
+}
+
 function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
   const slug = resolveCaseStudySlug({
     slug: project.slug,
@@ -582,7 +614,7 @@ function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
 
   return {
     title: project.title ?? '',
-    description: project.description ?? undefined,
+    description: project.description ?? project.tagline ?? undefined,
     thumbnail:
       project.thumbnailPath ??
       getStrapiMediaUrl(project.thumbnail ?? undefined) ??
@@ -590,6 +622,13 @@ function mapProjectItem(project: StrapiPageProjectItem): CmsProjectCard {
     alt: project.alt ?? project.title ?? undefined,
     href: project.href ?? undefined,
     slug,
+    client: project.client ?? undefined,
+    industry: project.industry ?? undefined,
+    tagline: project.tagline ?? undefined,
+    serviceTags: Array.isArray(project.serviceTags)
+      ? project.serviceTags.filter((tag): tag is string => typeof tag === 'string')
+      : undefined,
+    categories: projectCategoryLabels(project),
   };
 }
 
@@ -598,6 +637,32 @@ export function mapPageProjects(section?: StrapiPageProjects | null): CmsProject
   if (!projects?.length) return null;
 
   return projects.map((project) => mapProjectItem(project));
+}
+
+export function mapPageProjectsSection(
+  section?: StrapiPageProjects | null,
+): CmsPageProjectsSection | null {
+  if (!section) return null;
+
+  const projects = section.projects?.length ? section.projects.map((project) => mapProjectItem(project)) : [];
+  const filterCategories = (section.filterCategories ?? [])
+    .map((category) => ({
+      label: category.label?.trim() ?? '',
+      slug: category.slug?.trim() ?? '',
+    }))
+    .filter((category) => category.label.length > 0);
+
+  if (!projects.length && !filterCategories.length && !section.eyebrow && !section.description) {
+    return null;
+  }
+
+  return {
+    eyebrow: section.eyebrow ?? undefined,
+    accentTitle: section.accentTitle ?? undefined,
+    description: section.description ?? undefined,
+    filterCategories,
+    projects,
+  };
 }
 
 export function mapPageClientLogos(

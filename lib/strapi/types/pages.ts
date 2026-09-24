@@ -131,6 +131,13 @@ export type StrapiImageGallery = {
   images?: StrapiImageWithLink[] | null;
 };
 
+export type StrapiPortfolioCategory = {
+  documentId?: string;
+  slug?: string | null;
+  label?: string | null;
+  order?: number | null;
+};
+
 export type StrapiPageProjectItem = {
   documentId?: string;
   slug?: string | null;
@@ -142,13 +149,21 @@ export type StrapiPageProjectItem = {
   href?: string | null;
   order?: number | null;
   categories?: string[] | null;
+  portfolioCategories?: StrapiPortfolioCategory[] | null;
   serviceTags?: string[] | null;
+  client?: string | null;
+  industry?: string | null;
+  tagline?: string | null;
   year?: number | null;
   completedAt?: string | null;
 };
 
 export type StrapiPageProjects = {
   sectionKey?: string;
+  eyebrow?: string | null;
+  accentTitle?: string | null;
+  description?: string | null;
+  filterCategories?: StrapiPortfolioCategory[] | null;
   projects?: StrapiPageProjectItem[] | null;
 };
 
