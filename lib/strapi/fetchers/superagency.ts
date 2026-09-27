@@ -40,6 +40,15 @@ const HUMAN_TOUCH_POPULATE = {
 const HERO_POPULATE = { heroImage: true };
 const STATS_POPULATE = { stats: true };
 const DIVISION_POPULATE = { featuredImage: true };
+
+export async function getSuperagencyDivisions(locale: Locale) {
+  return fetchCollection<StrapiSuperagencyDivision>('superagency-divisions', {
+    locale,
+    populate: DIVISION_POPULATE,
+    sort: 'order:asc',
+    logErrors: false,
+  });
+}
 const PROJECT_POPULATE = { thumbnail: true };
 const TESTIMONIAL_POPULATE = { userImg: true, caseStudyMedia: true };
 const PARTNER_LOGO_POPULATE = { logo: true, darkLogo: true };
@@ -49,10 +58,12 @@ export async function getSuperagencyLayout(locale: Locale) {
     fetchSingleType<StrapiSuperagencyHeader>('superagency-header', {
       locale,
       populate: '*',
+      logErrors: false,
     }),
     fetchSingleType<StrapiSuperagencyFooter>('superagency-footer', {
       locale,
       populate: '*',
+      logErrors: false,
     }),
   ]);
 
@@ -99,7 +110,7 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     }),
     fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', { locale, populate: '*' }),
     fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', { locale, populate: '*' }),
-    fetchCollection<StrapiSuperagencyDivision>('superagency-divisions', { locale, populate: DIVISION_POPULATE, sort: 'order:asc' }),
+    getSuperagencyDivisions(locale),
     fetchCollection<StrapiSuperagencyProject>('wowsuperagencyprojects', { locale, populate: PROJECT_POPULATE, sort: 'order:asc' }),
     fetchCollection<StrapiSuperagencyTestimonial>('wow-super-agency-clients', { locale, populate: TESTIMONIAL_POPULATE, sort: 'order:asc' }),
     fetchCollection<StrapiSuperagencyFaq>('superagency-faqs', { locale, populate: '*', sort: 'order:asc' }),

@@ -2,7 +2,41 @@ import type { Locale } from '@/i18n/config';
 import { getStrapiLocaleChain, type StrapiLocale } from '@/lib/strapi/locale';
 
 const DEFAULT_STRAPI_URL = 'https://wow.softwarewow.xyz';
-const STRAPI_URL = (process.env.STRAPI_URL || DEFAULT_STRAPI_URL).replace(/\/$/, '');
+
+/** Next.js dev ports — STRAPI_URL must not point here (returns HTML, not Strapi JSON). */
+const LIKELY_NEXT_DEV_PORTS = new Set(['3000', '3001', '3002']);
+
+function resolveStrapiBaseUrl(): string {
+  const raw = process.env.STRAPI_URL?.trim();
+  if (!raw) return DEFAULT_STRAPI_URL;
+
+  const normalized = raw.replace(/\/$/, '');
+
+  try {
+    const parsed = new URL(normalized.includes('://') ? normalized : `https://${normalized}`);
+    const isLocalHost =
+      parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1';
+    const port = parsed.port || (parsed.protocol === 'https:' ? '443' : '80');
+
+    if (isLocalHost && LIKELY_NEXT_DEV_PORTS.has(port)) {
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(
+          `[Strapi] STRAPI_URL is set to the Next.js app (${normalized}). Using ${DEFAULT_STRAPI_URL} instead. Point STRAPI_URL at Strapi (e.g. ${DEFAULT_STRAPI_URL} or http://localhost:1337).`,
+        );
+      }
+      return DEFAULT_STRAPI_URL;
+    }
+  } catch {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`[Strapi] Invalid STRAPI_URL "${raw}"; using ${DEFAULT_STRAPI_URL}.`);
+    }
+    return DEFAULT_STRAPI_URL;
+  }
+
+  return normalized;
+}
+
+const STRAPI_URL = resolveStrapiBaseUrl();
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
 export type StrapiMedia = {
@@ -135,7 +169,12 @@ function appendNestedSearchParam(
   }
 }
 
-async function strapiFetchWithLocale<T>(
+type StrapiFetchAttempt<T> =
+  | { kind: 'data'; data: T }
+  | { kind: 'miss' }
+  | { kind: 'non_json' };
+
+async function strapiFetchAttemptWithBase<T>(
   path: string,
   {
     strapiLocale,
@@ -145,10 +184,9 @@ async function strapiFetchWithLocale<T>(
     revalidate,
     logErrors = true,
   }: InternalFetchOptions,
-): Promise<T | null> {
-  if (!isStrapiConfigured()) return null;
-
-  const url = new URL(`/api/${path}`, STRAPI_URL);
+  baseUrl: string,
+): Promise<StrapiFetchAttempt<T>> {
+  const url = new URL(`/api/${path}`, baseUrl);
 
   url.searchParams.set('locale', strapiLocale);
 
@@ -171,35 +209,88 @@ async function strapiFetchWithLocale<T>(
     headers.Authorization = `Bearer ${STRAPI_API_TOKEN}`;
   }
 
-  try {
-    const response = await fetch(url.toString(), {
-      headers,
-      next: { revalidate: revalidate ?? Number(process.env.STRAPI_REVALIDATE_SECONDS ?? 60) },
-    });
+  const response = await fetch(url.toString(), {
+    headers,
+    next: { revalidate: revalidate ?? Number(process.env.STRAPI_REVALIDATE_SECONDS ?? 60) },
+  });
 
-    if (!response.ok) {
-      if (response.status !== 404 && logErrors) {
-        let detail = '';
-        try {
-          const body = (await response.json()) as {
-            error?: { message?: string; details?: { key?: string } };
-          };
-          const message = body.error?.message;
-          const key = body.error?.details?.key;
-          detail = message ? `: ${message}${key ? ` (${key})` : ''}` : '';
-        } catch {
-          // ignore parse errors
-        }
-        console.error(`Strapi fetch failed: ${path} (${response.status})${detail}`);
+  const rawBody = await response.text();
+
+  if (!response.ok) {
+    if (response.status !== 404 && logErrors) {
+      let detail = '';
+      try {
+        const body = JSON.parse(rawBody) as {
+          error?: { message?: string; details?: { key?: string } };
+        };
+        const message = body.error?.message;
+        const key = body.error?.details?.key;
+        detail = message ? `: ${message}${key ? ` (${key})` : ''}` : '';
+      } catch {
+        // ignore parse errors (HTML error pages, etc.)
       }
-      return null;
+      console.error(`Strapi fetch failed: ${path} (${response.status})${detail}`);
     }
-
-    return (await response.json()) as T;
-  } catch (error) {
-    console.error(`Strapi fetch error: ${path}`, error);
-    return null;
+    return { kind: 'miss' };
   }
+
+  const trimmed = rawBody.trim();
+  if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
+    return { kind: 'non_json' };
+  }
+
+  try {
+    return { kind: 'data', data: JSON.parse(trimmed) as T };
+  } catch (error) {
+    if (logErrors) {
+      console.error(`Strapi fetch JSON parse failed: ${path}`, error);
+    }
+    return { kind: 'miss' };
+  }
+}
+
+async function strapiFetchWithLocale<T>(
+  path: string,
+  options: InternalFetchOptions,
+): Promise<T | null> {
+  if (!isStrapiConfigured()) return null;
+
+  const basesToTry =
+    STRAPI_URL === DEFAULT_STRAPI_URL ? [STRAPI_URL] : [STRAPI_URL, DEFAULT_STRAPI_URL];
+
+  for (const [index, baseUrl] of basesToTry.entries()) {
+    try {
+      const attempt = await strapiFetchAttemptWithBase<T>(path, options, baseUrl);
+
+      if (attempt.kind === 'data') {
+        if (
+          index > 0 &&
+          process.env.NODE_ENV === 'development'
+        ) {
+          console.warn(
+            `[Strapi] ${path}: primary STRAPI_URL returned HTML; loaded from ${DEFAULT_STRAPI_URL}. Fix STRAPI_URL in .env.local.`,
+          );
+        }
+        return attempt.data;
+      }
+
+      if (attempt.kind === 'non_json' && index < basesToTry.length - 1) {
+        continue;
+      }
+
+      if (attempt.kind === 'non_json' && options.logErrors !== false) {
+        console.warn(
+          `[Strapi] ${path}: non-JSON response (check STRAPI_URL — should be ${DEFAULT_STRAPI_URL} or http://localhost:1337).`,
+        );
+      }
+    } catch (error) {
+      if (index === basesToTry.length - 1 && options.logErrors !== false) {
+        console.error(`Strapi fetch error: ${path}`, error);
+      }
+    }
+  }
+
+  return null;
 }
 
 export async function strapiFetch<T>(

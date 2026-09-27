@@ -47,8 +47,16 @@ export function mapStrapiStats(stats: StrapiSuperagencyStats | null) {
 export function mapStrapiDivisions(divisions: StrapiSuperagencyDivision[]) {
   if (!divisions.length) return null;
 
+  const seenTitles = new Set<string>();
+
   return divisions
     .filter((d) => d.isActive !== false)
+    .filter((d) => {
+      const key = (d.name ?? '').trim().toLowerCase();
+      if (!key || seenTitles.has(key)) return false;
+      seenTitles.add(key);
+      return true;
+    })
     .map((division, index) => ({
       id: index + 1,
       title: division.name,

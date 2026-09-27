@@ -16,12 +16,14 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import ConnectedExpertise from './_components/ConnectedExpertise'
+import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import FromIdeaToGrowth from './_components/FromIdeaToGrowth'
 import StartupJourney from './_components/StartupJourney'
 import StartupPackages from './_components/StartupPackages'
 import StartupSolutions from './_components/StartupSolutions'
 import StartupsEntrepreneursHero from './_components/StartupsEntrepreneursHero'
+import { getSuperagencyDivisions } from '@/lib/strapi/fetchers/superagency'
+import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
@@ -39,9 +41,14 @@ export default async function StartupsAndEntrepreneursPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const typedLocale = locale as Locale
+  const [cms, divisionRecords] = await Promise.all([
+    loadSuperagencyPage(PAGE_SLUG, typedLocale),
+    getSuperagencyDivisions(typedLocale),
+  ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const divisions = mapStrapiDivisions(divisionRecords)
 
   return (
     <LayoutOne>
@@ -54,8 +61,8 @@ export default async function StartupsAndEntrepreneursPage({ params }: Props) {
         <StartupSolutions {...(sections.startupSolutions ?? {})} />
         {/* 4. The Startup Journey — Sales Visibility / Home-15 BrandingProcess */}
         <StartupJourney {...(sections.startupJourney ?? {})} />
-        {/* 5. Connected Expertise — DevisionOverview copy */}
-        <ConnectedExpertise {...(sections.connectedExpertise ?? {})} />
+        {/* 5. Division overview — same as homepage */}
+        <DevisionOverview divisions={divisions ?? undefined} />
         {/* 6. Packages — Home-20 PortfolioV6 */}
         <StartupPackages {...(sections.startupPackages ?? {})} />
         {/* 7. Ready to Bring Your Idea to Life? */}

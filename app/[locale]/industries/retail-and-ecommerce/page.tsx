@@ -18,12 +18,14 @@ import { setRequestLocale } from 'next-intl/server'
 import ClientJourney from './_components/ClientJourney'
 import CommerceJourneyPath from './_components/CommerceJourneyPath'
 import CommerceSolutions from './_components/CommerceSolutions'
-import DevisionOverview from './_components/DevisionOverview'
+import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import RetailEcommerceHero from './_components/RetailEcommerceHero'
 import RetailGrowthPillars from './_components/RetailGrowthPillars'
 import RetailHeroAbout from './_components/RetailHeroAbout'
 import SocialGallery from './_components/SocialGallery'
+import { getSuperagencyDivisions } from '@/lib/strapi/fetchers/superagency'
+import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
@@ -41,9 +43,14 @@ export default async function RetailAndEcommercePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const typedLocale = locale as Locale
+  const [cms, divisionRecords] = await Promise.all([
+    loadSuperagencyPage(PAGE_SLUG, typedLocale),
+    getSuperagencyDivisions(typedLocale),
+  ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const divisions = mapStrapiDivisions(divisionRecords)
 
   return (
     <LayoutOne>
@@ -58,13 +65,13 @@ export default async function RetailAndEcommercePage({ params }: Props) {
         {/* 4. Commerce Solutions — ProfessionalServiceSolutions / Home-23 WhyChooseUsV7 */}
         <CommerceSolutions {...(sections.commerceSolutions ?? {})} />
         {/* 5. The Commerce Journey — ClientJourney / Home-07 ProcessV4 */}
-        <ClientJourney {...(sections.clientJourney ?? {})} />
+        <ClientJourney {...(sections.commerceJourney ?? {})} />
         {/* 6. Gallery — SocialGallery / Home-11 InstagramGallery */}
         <SocialGallery {...(sections.socialGallery ?? {})} />
         {/* 7. IdeaToProductPath — horizontal numbered timeline */}
         <CommerceJourneyPath {...(sections.commerceJourneyPath ?? {})} />
-        {/* 8. Divisions — homepage DevisionOverview copy */}
-        <DevisionOverview {...(sections.devisionOverview ?? {})} />
+        {/* 8. Divisions — same as homepage */}
+        <DevisionOverview divisions={divisions ?? undefined} />
         {/* 9. Recommended Solutions — Home-19 OurExpertiseV2 */}
         <RecommendedSolutions {...(sections.recommendedSolutions ?? {})} />
         {/* 10. Ready to Grow Your Store? */}

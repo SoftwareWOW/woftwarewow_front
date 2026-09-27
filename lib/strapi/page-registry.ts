@@ -248,8 +248,8 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       ],
       'professional-services': [
         { sectionKey: 'professional-services-hero', cms: 'hero' },
-        { sectionKey: 'what-matters-most', cms: 'page-technologies' },
-        { sectionKey: 'client-journey', cms: 'page-process' },
+        { sectionKey: 'what-matters-most', cms: 'page-section-image' },
+        { sectionKey: 'client-journey', cms: 'page-section-image' },
         { sectionKey: 'wow-growth-cta', cms: null },
       ],
       'retail-and-ecommerce': [
@@ -912,12 +912,12 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
   'professional-services': [
     {
       name: 'whatMattersMost',
-      component: 'sections.page-technologies',
+      component: 'sections.page-section-image',
       sectionKey: 'what-matters-most',
     },
     {
       name: 'clientJourney',
-      component: 'sections.page-process',
+      component: 'sections.page-section-image',
       sectionKey: 'client-journey',
     },
   ],
@@ -925,9 +925,9 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     { name: 'heroAbout', component: 'sections.hero-about', sectionKey: 'hero-about' },
     { name: 'heroMarquee', component: 'sections.page-images', sectionKey: 'hero-marquee' },
     {
-      name: 'clientJourney',
+      name: 'commerceJourney',
       component: 'sections.page-process',
-      sectionKey: 'client-journey',
+      sectionKey: 'commerce-journey',
     },
     {
       name: 'socialGallery',
