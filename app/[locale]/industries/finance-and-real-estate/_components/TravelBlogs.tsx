@@ -3,8 +3,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import type { CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
+import { mergePackageListItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -34,11 +34,12 @@ const packages = [
 ]
 
 /** Layout: Home-13 TravelBlogs — 3 overlapping content panels. Title underline on hover. */
-type TravelBlogsProps = Partial<CmsTechnologiesSection>
+type TravelBlogsProps = Partial<CmsPackageListSection>
 
-const TravelBlogs = ({ eyebrow = 'RECOMMENDED SOLUTIONS', title, accentTitle, description, items }: TravelBlogsProps = {}) => {
+const TravelBlogs = (cmsSection: TravelBlogsProps = {}) => {
+  const { eyebrow = 'RECOMMENDED SOLUTIONS', title, accentTitle, description } = cmsSection
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = mergeFeatureItems([], items)
+  const mergedItems = mergePackageListItems(packages, cmsSection)
 
 
   return (
@@ -70,14 +71,14 @@ const TravelBlogs = ({ eyebrow = 'RECOMMENDED SOLUTIONS', title, accentTitle, de
         </div>
 
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
-          {packages.map((item) => (
-            <div key={item.number} className="relative">
+          {mergedItems.map((item) => (
+            <div key={item.number ?? item.index ?? item.title} className="relative">
               <RevealWrapper as="figure" className="reveal-me w-full">
                 <img src={item.image} alt={item.title} className="h-auto w-full rounded-radius-md object-cover" />
               </RevealWrapper>
               <RevealWrapper className="reveal-me absolute inset-x-[5px] top-[22%] mx-auto max-w-[calc(100%-10px)] rounded-radius-md bg-backgroundBody px-6 pb-8 pt-6 dark:bg-dark sm:top-[38%] md:top-1/2 lg:top-3/4">
                 <div className="mb-4 flex items-center justify-center gap-3">
-                  <span className="font-instrument text-2xl italic leading-none">{item.number}</span>
+                  <span className="font-instrument text-2xl italic leading-none">{item.number ?? item.index}</span>
                   <div className="blog-title">
                     <Link href={item.href}>
                       <h3 className="text-center text-[28px] font-normal lg:text-[34px] lg:leading-[1.05]">

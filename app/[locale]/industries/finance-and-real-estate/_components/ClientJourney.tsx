@@ -70,7 +70,7 @@ const ClientJourney = ({
             <img
               src={imageSrc ?? ''}
               alt="Finance and real estate client journey"
-              className="h-full min-h-[320px] w-full rounded-radius-md object-cover md:min-h-[480px] lg:min-h-[560px]"
+              className="h-full min-h-[320px] w-full rounded-radius-md object-contain md:min-h-[480px] lg:min-h-[560px]"
             />
           </figure>
 

@@ -68,9 +68,8 @@ const FAQ_SECTION_POPULATE = {
 };
 
 const PAGE_TECHNOLOGIES_POPULATE = {
-  items: { populate: { image: { populate: { image: true } } } },
+  items: true,
   image: { populate: { image: true } },
-  backgroundImage: { populate: { image: true } },
 };
 
 /** Explicit populate for /meet — hero, seo, FAQ items. */
@@ -205,7 +204,7 @@ export const HEALTHCARE_AND_WELLNESS_PAGE_POPULATE = {
   },
   careJourney: {
     populate: {
-      items: { populate: { image: { populate: { image: true } } } },
+      items: true,
     },
   },
   carePackages: {
@@ -233,6 +232,84 @@ export const RETAIL_AND_ECOMMERCE_PAGE_POPULATE = {
   socialGallery: {
     populate: {
       images: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /industries/hospitality-and-tourism (matches Strapi Postman query). */
+export const HOSPITALITY_AND_TOURISM_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  builtAroundGuest: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /industries/finance-and-real-estate (matches Strapi Postman query). */
+export const FINANCE_AND_REAL_ESTATE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  socialGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+  growthJourney: {
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
+    },
+  },
+  wowEcosystem: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+  recommendedSolutions: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+};
+
+/** Explicit populate for /industries/organizations-and-nonprofits (matches Strapi Postman query). */
+export const ORGANIZATIONS_AND_NONPROFITS_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: true,
+  portfolioGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /industries/education-and-training (matches Strapi Postman query). */
+export const EDUCATION_AND_TRAINING_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  Hero: { populate: HERO_IMAGES_POPULATE },
+  careJourney: {
+    populate: {
+      items: true,
+    },
+  },
+  socialGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /industries/technology-and-saas (matches Strapi Postman query). */
+export const TECHNOLOGY_AND_SAAS_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  productJourney: {
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
     },
   },
 };

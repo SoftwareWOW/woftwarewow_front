@@ -11,6 +11,7 @@ type GalleryItem = {
   id: number
   image: string
   link: string
+  alt?: string
 }
 
 const card = (file: string) => `/images/wow/nav/cards/${encodeURIComponent(file)}`
@@ -128,43 +129,16 @@ const SocialGallery = ({
                   ref={(el) => {
                     if (el) slideRefs.current[index] = el
                   }}
-                  className="slide absolute w-[220px] cursor-pointer transition-all duration-500 sm:w-[280px] md:w-[320px] lg:w-[400px]"
+                  className="slide absolute w-[220px] transition-all duration-500 sm:w-[280px] md:w-[320px] lg:w-[400px]"
                   onMouseEnter={stopSlider}
                   onMouseLeave={startSlider}
                 >
-                  <figure className="group relative overflow-hidden rounded-radius-md shadow-none">
+                  <figure className="relative overflow-hidden rounded-radius-md shadow-none">
                     <img
                       src={item.image}
-                      alt={`Social gallery ${item.id}`}
-                      className="h-[200px] w-full rounded-radius-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 sm:h-[240px] md:h-[280px] lg:h-[320px]"
+                      alt={item.alt ?? `Social gallery ${item.id}`}
+                      className="h-[200px] w-full rounded-radius-md object-cover sm:h-[240px] md:h-[280px] lg:h-[320px]"
                     />
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="absolute left-1/3 top-[55%] cursor-pointer opacity-0 transition-all duration-[400ms] ease-in-out group-hover:left-1/2 group-hover:top-1/2 group-hover:-translate-x-1/2 group-hover:-translate-y-1/2 group-hover:opacity-100"
-                    >
-                      <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" fill="none">
-                          <rect width={48} height={48} fill="#151515" />
-                          <path
-                            d="M24 31.5C28.1421 31.5 31.5 28.1421 31.5 24C31.5 19.8579 28.1421 16.5 24 16.5C19.8579 16.5 16.5 19.8579 16.5 24C16.5 28.1421 19.8579 31.5 24 31.5Z"
-                            stroke="#EDF0F5"
-                            strokeMiterlimit={10}
-                          />
-                          <path
-                            d="M32.25 6.75H15.75C10.7794 6.75 6.75 10.7794 6.75 15.75V32.25C6.75 37.2206 10.7794 41.25 15.75 41.25H32.25C37.2206 41.25 41.25 37.2206 41.25 32.25V15.75C41.25 10.7794 37.2206 6.75 32.25 6.75Z"
-                            stroke="#EDF0F5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M33.75 16.5C34.9926 16.5 36 15.4926 36 14.25C36 13.0074 34.9926 12 33.75 12C32.5074 12 31.5 13.0074 31.5 14.25C31.5 15.4926 32.5074 16.5 33.75 16.5Z"
-                            fill="#EDF0F5"
-                          />
-                        </svg>
-                      </span>
-                    </a>
                   </figure>
                 </div>
               ))}

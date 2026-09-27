@@ -21,7 +21,7 @@ export function resolveHeroImages(
   const valid = cmsImages.filter((item) => item.src);
   if (!valid.length) return defaults;
 
-  if (manifest.layout === 'none') return defaults;
+  if (manifest.layout === 'none') return valid;
 
   if (manifest.layout === 'multi' || manifest.layout === 'hover' || manifest.layout === 'slider') {
     if (valid.length >= defaults.length) {

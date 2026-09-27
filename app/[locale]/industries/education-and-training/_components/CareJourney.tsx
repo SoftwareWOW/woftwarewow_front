@@ -5,7 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gsap from 'gsap'
 import { useRef } from 'react'
-import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsProcessSection, CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 interface JourneyItem {
@@ -73,11 +73,37 @@ const data: JourneyItem[] = [
 ]
 
 /** Layout: Home-14 AwardWinningWork — cursor-following hover preview + numbered rows. */
-type CareJourneyProps = Partial<CmsProcessSection>
+type CareJourneyProps = Partial<CmsProcessSection & CmsTechnologiesSection>
 
-const CareJourney = ({ eyebrow, title, accentTitle, description, steps }: CareJourneyProps = {}) => {
+const CareJourney = ({
+  eyebrow,
+  title,
+  accentTitle,
+  description,
+  steps,
+  items,
+}: CareJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedSteps = mergeProcessSteps([], steps)
+  const cmsSteps = items?.map((item, index) => ({
+    number: String(index + 1).padStart(2, '0'),
+    title: item.title,
+    description: item.description,
+  }))
+  const mergedSteps = mergeProcessSteps(
+    data.map((item) => ({
+      number: item.index,
+      title: item.title,
+      description: item.description,
+    })),
+    cmsSteps ?? steps,
+  )
+  const journeyItems = mergedSteps.map((step, index) => ({
+    id: data[index]?.id ?? index + 1,
+    index: step.number,
+    title: step.title,
+    description: step.description ?? '',
+    img: data[index]?.img ?? hoverImages[index] ?? hoverImages[0],
+  }))
 
 
   const previewRef = useRef<HTMLDivElement>(null)
@@ -122,10 +148,10 @@ const CareJourney = ({ eyebrow, title, accentTitle, description, steps }: CareJo
         <div className="mb-16 flex flex-col items-start justify-center gap-x-6 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>BUILT AROUND THE LEARNER</SectionLabel>
+              <SectionLabel>{header.eyebrow ?? 'BUILT AROUND THE LEARNER'}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
-              <h2 className="text-appear">Make Learning Easier to Discover, Join, and Continue.</h2>
+              <h2 className="text-appear">{header.title ?? 'Make Learning Easier to Discover, Join, and Continue.'}</h2>
             </TextAppearAnimation>
           </div>
           <div className="max-md:w-full md:max-w-80 lg:max-w-[470px]">
@@ -152,7 +178,7 @@ const CareJourney = ({ eyebrow, title, accentTitle, description, steps }: CareJo
       </div>
 
       <div className="reveal-me mx-auto border-t text-sm max-md:px-5 lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1380px]">
-        {data.map((item) => (
+        {journeyItems.map((item) => (
           <div
             key={item.id}
             className="row group flex min-h-[110px] cursor-pointer flex-col justify-center gap-2 border-b py-5 sm:min-h-[138px] sm:flex-row sm:items-center sm:justify-start sm:gap-0 sm:py-4"

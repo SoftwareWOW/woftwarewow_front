@@ -98,14 +98,29 @@ export type LoadedSuperagencyPage = {
   field: <T>(name: string) => T | null;
 };
 
+/** Strapi content-type field names that differ from frontend conventions. */
+function normalizeSuperagencyPageRaw(
+  page: StrapiSuperagencyPage | null,
+): StrapiSuperagencyPage | null {
+  if (!page) return null;
+
+  const record = page as Record<string, unknown>;
+  if (record.hero == null && record.Hero != null) {
+    return { ...page, hero: record.Hero as StrapiPageHero };
+  }
+
+  return page;
+}
+
 export async function loadSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<LoadedSuperagencyPage> {
-  const [raw, globalTeamMembers] = await Promise.all([
+  const [fetched, globalTeamMembers] = await Promise.all([
     getSuperagencyPage(slug, locale),
     getSuperagencyTeamMembers(locale),
   ]);
+  const raw = normalizeSuperagencyPageRaw(fetched);
 
   if (process.env.NODE_ENV === 'development') {
     const populatedFields =

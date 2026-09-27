@@ -60,16 +60,25 @@ const DEFAULT_PORTFOLIOIMAGES = [
 ]
 
 /** Layout: Home-22 OurPortfolio — dual marquee rows. */
-type OurPortfolioProps = { projects?: CmsProjectCard[] | null }
+type OurPortfolioProps = {
+  projects?: CmsProjectCard[] | null
+  images?: { src: string; alt?: string }[] | null
+}
 
-const OurPortfolio = ({ projects }: OurPortfolioProps = {}) => {
-  const portfolioImages = projects?.length
-    ? projects.map((p, i) => ({
+const OurPortfolio = ({ projects, images }: OurPortfolioProps = {}) => {
+  const portfolioImages = images?.length
+    ? images.map((img, i) => ({
         id: i + 1,
-        src: p.thumbnail ?? '',
-        alt: p.alt ?? p.title,
+        src: img.src,
+        alt: img.alt ?? '',
       }))
-    : DEFAULT_PORTFOLIOIMAGES
+    : projects?.length
+      ? projects.map((p, i) => ({
+          id: i + 1,
+          src: p.thumbnail ?? '',
+          alt: p.alt ?? p.title,
+        }))
+      : DEFAULT_PORTFOLIOIMAGES
 
   return (
     <section className="relative overflow-hidden">

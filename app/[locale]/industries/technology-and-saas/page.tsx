@@ -54,7 +54,7 @@ export default async function TechnologyAndSaasPage({ params }: Props) {
         <ExperiencePillars {...(sections.experiencePillars ?? {})} />
         <Marquess />
         <MissionSolutions {...(sections.missionSolutions ?? {})} />
-        <ClientJourney {...(sections.clientJourney ?? {})} />
+        <ClientJourney {...(sections.productJourney ?? {})} />
         <ConnectedExpertise {...(sections.connectedExpertise ?? {})} />
         <RecommendedSolutions {...(sections.recommendedSolutions ?? {})} />
         <WowGrowthCta

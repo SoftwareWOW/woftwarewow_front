@@ -657,7 +657,7 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
   'care-journey': {
     cmsType: 'page-technologies',
     populate: {
-      items: { populate: { image: { populate: { image: true } } } },
+      items: true,
     },
   },
   'care-packages': {
@@ -665,8 +665,8 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
     populate: { items: { populate: { image: { populate: { image: true } } } } },
   },
   'built-around-guest': {
-    cmsType: 'page-process',
-    populate: { items: { populate: '*' } },
+    cmsType: 'page-technologies',
+    populate: { items: true },
   },
   'featured-Work': {
     cmsType: 'page-projects',
@@ -697,15 +697,21 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
   },
   'growth-journey': {
     cmsType: 'page-process',
-    populate: { items: { populate: '*' } },
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
+    },
   },
   'product-journey': {
     cmsType: 'page-process',
-    populate: { items: { populate: '*' } },
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
+    },
   },
   'portfolio-gallery': {
     cmsType: 'page-images',
-    populate: { images: { populate: '*' } },
+    populate: { images: { populate: { image: true } } },
   },
   'about-skew-marquee': {
     cmsType: 'page-images',
@@ -929,7 +935,50 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       sectionKey: 'care-packages',
     },
   ],
+  'hospitality-and-tourism': [
+    {
+      name: 'builtAroundGuest',
+      component: 'sections.page-technologies',
+      sectionKey: 'built-around-guest',
+    },
+  ],
+  'organizations-and-nonprofits': [
+    {
+      name: 'portfolioGallery',
+      component: 'sections.page-images',
+      sectionKey: 'portfolio-gallery',
+    },
+  ],
+  'education-and-training': [
+    {
+      name: 'careJourney',
+      component: 'sections.page-technologies',
+      sectionKey: 'care-journey',
+    },
+    {
+      name: 'socialGallery',
+      component: 'sections.image-gallery',
+      sectionKey: 'social-gallery',
+    },
+  ],
+  'technology-and-saas': [
+    {
+      name: 'productJourney',
+      component: 'sections.page-process',
+      sectionKey: 'product-journey',
+    },
+  ],
   'finance-and-real-estate': [
+    {
+      name: 'growthJourney',
+      component: 'sections.page-process',
+      sectionKey: 'growth-journey',
+    },
+    {
+      name: 'socialGallery',
+      component: 'sections.image-gallery',
+      sectionKey: 'social-gallery',
+    },
     {
       name: 'wowEcosystem',
       component: 'sections.page-package-list',

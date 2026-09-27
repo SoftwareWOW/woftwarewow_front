@@ -51,7 +51,7 @@ export default async function OrganizationsAndNonprofitsPage({ params }: Props) 
         <OrganizationsHero {...hero} images={hero.images} />
         <OrganizationsHeroAbout {...(sections.organizationsHeroAbout ?? {})} />
         <MissionJourney {...(sections.missionJourney ?? {})} />
-        <OurPortfolio {...(sections.ourPortfolio ?? {})} />
+        <OurPortfolio {...(sections.portfolioGallery ?? {})} />
         <MissionSolutions {...(sections.missionSolutions ?? {})} />
         <ImpactJourney {...(sections.impactJourney ?? {})} />
         <ConnectedExpertise {...(sections.connectedExpertise ?? {})} />

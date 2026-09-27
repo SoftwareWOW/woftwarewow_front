@@ -4,8 +4,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import type { ReactNode } from 'react'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import type { CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const teams: {
   title: ReactNode
@@ -88,13 +88,30 @@ const teams: {
   },
 ]
 
+type DisplayTeam = {
+  title: ReactNode
+  heading: string
+  description: string
+  image: string
+  href: string
+}
+
 /** Layout: Home-13 ExclusiveTravelDeals — image overlay cards. */
-type ExclusiveTravelDealsProps = Partial<CmsTechnologiesSection>
+type ExclusiveTravelDealsProps = Partial<CmsPackageListSection>
 
-const ExclusiveTravelDeals = ({ eyebrow = 'THE WOW ECOSYSTEM', title, accentTitle, description, items }: ExclusiveTravelDealsProps = {}) => {
+const ExclusiveTravelDeals = (cmsSection: ExclusiveTravelDealsProps = {}) => {
+  const { eyebrow = 'THE WOW ECOSYSTEM', title, accentTitle, description, items: cmsItems } = cmsSection
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = mergeFeatureItems([], items)
 
+  const displayTeams: DisplayTeam[] = cmsItems?.length
+    ? cmsItems.map((cms, index) => ({
+        title: cms.title,
+        heading: cms.subtitle ?? teams[index]?.heading ?? '',
+        description: cms.description ?? teams[index]?.description ?? '',
+        image: cms.image?.src ?? teams[index]?.image ?? '',
+        href: cms.href ?? teams[index]?.href ?? '#',
+      }))
+    : teams
 
   return (
     <section>
@@ -115,8 +132,8 @@ const ExclusiveTravelDeals = ({ eyebrow = 'THE WOW ECOSYSTEM', title, accentTitl
         </div>
 
         <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {teams.map((item) => (
-            <RevealWrapper key={item.heading} as="figure" className="reveal-me relative overflow-hidden rounded-radius-md">
+          {displayTeams.map((item) => (
+            <RevealWrapper key={item.heading + item.href} as="figure" className="reveal-me relative overflow-hidden rounded-radius-md">
               <img src={item.image} alt="" className="h-auto min-h-[420px] w-full object-cover opacity-70" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" aria-hidden />
               <div className="absolute bottom-10 left-[30px] right-[30px] md:bottom-6 xl:bottom-10">

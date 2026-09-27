@@ -56,10 +56,10 @@ export default async function FinanceAndRealEstatePage({ params }: Props) {
         <ExperiencePillars {...(sections.experiencePillars ?? {})} />
         <SocialGallery {...(sections.socialGallery ?? {})} />
         <GuestSolutions {...(sections.guestSolutions ?? {})} />
-        <ClientJourney {...(sections.clientJourney ?? {})} />
+        <ClientJourney {...(sections.growthJourney ?? {})} />
         <LeadToCustomer {...(sections.leadToCustomer ?? {})} />
-        <ExclusiveTravelDeals {...(sections.exclusiveTravelDeals ?? {})} />
-        <TravelBlogs {...(sections.travelBlogs ?? {})} />
+        <ExclusiveTravelDeals {...(sections.wowEcosystem ?? {})} />
+        <TravelBlogs {...(sections.recommendedSolutions ?? {})} />
         <WowGrowthCta
           accentText="Ready to Create"
           mainText="More Opportunity?"

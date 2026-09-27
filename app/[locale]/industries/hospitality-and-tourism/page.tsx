@@ -49,7 +49,7 @@ export default async function HospitalityAndTourismPage({ params }: Props) {
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         <HospitalityHero {...hero} images={hero.images} />
         <HospitalityHeroAbout {...(sections.hospitalityHeroAbout ?? {})} />
-        <WhatMattersMost {...(sections.whatMattersMost ?? {})} />
+        <WhatMattersMost {...(sections.builtAroundGuest ?? {})} />
         <Marquess />
         <GuestSolutions {...(sections.guestSolutions ?? {})} />
         <GuestJourney {...(sections.guestJourney ?? {})} />
