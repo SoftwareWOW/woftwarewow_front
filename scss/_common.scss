@@ -132,7 +132,7 @@ html body[data-scroll-locked] {
 .text-appear,
 .text-appear-2 {
   .line {
-    @apply overflow-hidden text-inherit;
+    @apply w-full overflow-hidden text-inherit;
     span {
       @apply text-inherit;
     }

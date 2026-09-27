@@ -42,15 +42,19 @@ const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image 
           <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
             <SectionLabel>The Commerce Journey</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">Growth Doesn&apos;t End at Checkout.</h2>
-          </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-              Strong commerce businesses continuously attract, convert, understand, and retain customers. We help
-              strengthen every stage of that cycle.
-            </p>
-          </TextAppearAnimation>
+          <div className="mx-auto w-full max-w-[770px]">
+            <TextAppearAnimation>
+              <h2 className="text-appear w-full">Growth Doesn&apos;t End at Checkout.</h2>
+            </TextAppearAnimation>
+          </div>
+          <div className="mx-auto w-full max-w-2xl">
+            <TextAppearAnimation>
+              <p className="text-appear mt-4 w-full text-[#808080]">
+                Strong commerce businesses continuously attract, convert, understand, and retain customers. We help
+                strengthen every stage of that cycle.
+              </p>
+            </TextAppearAnimation>
+          </div>
         </div>
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
