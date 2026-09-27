@@ -1,4 +1,4 @@
-import { getStrapiMediaUrl } from '@/lib/strapi/client';
+import { getStrapiMediaUrl, type StrapiMedia } from '@/lib/strapi/client';
 
 export type CmsImageRef = {
   src: string;
@@ -7,11 +7,11 @@ export type CmsImageRef = {
 
 /** Use CMS media URL when present, otherwise static fallback path. */
 export function resolveCmsImage(
-  cmsImage?: { image?: { url?: string } | null; alt?: string | null } | null,
+  cmsImage?: { image?: StrapiMedia | null; alt?: string | null } | null,
   fallback?: { path: string; alt?: string },
 ): CmsImageRef | undefined {
   const media = cmsImage?.image;
-  const cmsUrl = media?.url ? getStrapiMediaUrl({ url: media.url }) : undefined;
+  const cmsUrl = media ? getStrapiMediaUrl(media) : undefined;
   if (cmsUrl) {
     return { src: cmsUrl, alt: cmsImage?.alt ?? fallback?.alt };
   }

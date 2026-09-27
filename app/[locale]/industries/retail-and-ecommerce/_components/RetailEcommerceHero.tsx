@@ -11,6 +11,7 @@ type PageHeroProps = {
   italicTitle?: string
   description?: string
   images?: { src: string; alt?: string }[]
+  marqueeImages?: { src: string; alt?: string }[] | null
 }
 
 /** Layout: Home-07 HeroV7 — heading + origin SkewMarquee. */
@@ -19,6 +20,7 @@ const RetailEcommerceHero = ({
   title = 'Turn More Browsers Into Buyers.',
   description =
     'Build better shopping experiences, reach more customers, and connect the technology, marketing, and systems behind sustainable eCommerce growth.',
+  marqueeImages,
 }: PageHeroProps) => {
   return (
     <section className="relative" aria-labelledby="retail-ecommerce-heading">
@@ -38,7 +40,7 @@ const RetailEcommerceHero = ({
         </RevealWrapper>
       </div>
 
-      <SkewMarquee />
+      <SkewMarquee images={marqueeImages} />
     </section>
   )
 }

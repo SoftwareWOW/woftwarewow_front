@@ -3,7 +3,6 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import { cmsImageSrc, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
-import Image from 'next/image'
 
 const DEFAULT_STEPS = [
   {
@@ -56,12 +55,10 @@ const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image 
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
-            <Image
+            <img
               src={imageSrc ?? ''}
               alt={image?.alt ?? 'Commerce journey from first visit to repeat purchase'}
-              fill
-              sizes="(max-width: 768px) 100vw, 420px"
-              className="rounded-radius-md object-cover"
+              className="h-full w-full min-h-[320px] rounded-radius-md object-cover md:min-h-[480px] lg:min-h-[560px]"
             />
           </figure>
 

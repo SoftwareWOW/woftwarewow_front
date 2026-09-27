@@ -680,7 +680,18 @@ export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> =
   },
   'social-gallery': {
     cmsType: 'image-gallery',
-    populate: { images: { populate: '*' } },
+    populate: { images: { populate: { image: true } } },
+  },
+  'hero-marquee': {
+    cmsType: 'page-images',
+    populate: { images: { populate: { image: true } } },
+  },
+  'commerce-journey': {
+    cmsType: 'page-process',
+    populate: {
+      steps: { populate: '*' },
+      image: { populate: { image: true } },
+    },
   },
   'growth-journey': {
     cmsType: 'page-process',

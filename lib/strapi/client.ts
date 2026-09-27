@@ -44,7 +44,24 @@ export type StrapiMedia = {
   alternativeText?: string | null;
   width?: number;
   height?: number;
+  formats?: {
+    large?: { url?: string } | null;
+    medium?: { url?: string } | null;
+    small?: { url?: string } | null;
+    thumbnail?: { url?: string } | null;
+  } | null;
 };
+
+/** Prefer responsive Strapi formats over the original upload (better for next/image). */
+function pickStrapiMediaPath(media: StrapiMedia): string | undefined {
+  const fromFormat =
+    media.formats?.large?.url?.trim() ||
+    media.formats?.medium?.url?.trim() ||
+    media.formats?.small?.url?.trim();
+
+  const path = (fromFormat || media.url)?.trim();
+  return path || undefined;
+}
 
 export type StrapiResponse<T> = {
   data: T;
@@ -100,9 +117,7 @@ export function isAllowedNextImageSrc(src: string | undefined): boolean {
 }
 
 export function getStrapiMediaUrl(media?: StrapiMedia | null): string | undefined {
-  if (!media?.url) return undefined;
-
-  const url = media.url.trim();
+  const url = media ? pickStrapiMediaPath(media) : undefined;
   if (!url) return undefined;
 
   if (url.startsWith('http://') || url.startsWith('https://')) {

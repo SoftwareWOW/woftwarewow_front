@@ -50,6 +50,7 @@ export default async function RetailAndEcommercePage({ params }: Props) {
   ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const heroMarqueeImages = cms.images(cms.field('heroMarquee'))
   const divisions = mapStrapiDivisions(divisionRecords)
 
   return (
@@ -57,8 +58,8 @@ export default async function RetailAndEcommercePage({ params }: Props) {
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
         {/* 1. Hero — heading + SkewMarquee */}
       <div>
-          <RetailEcommerceHero {...hero} images={hero.images} />
-        <RetailHeroAbout {...(sections.retailHeroAbout ?? {})} />
+          <RetailEcommerceHero {...hero} images={hero.images} marqueeImages={heroMarqueeImages} />
+        <RetailHeroAbout {...(sections.heroAbout ?? {})} />
       </div>
         {/* 3. ProcessV2 — four hover columns */}
         <RetailGrowthPillars {...(sections.retailGrowthPillars ?? {})} />

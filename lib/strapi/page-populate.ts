@@ -194,6 +194,28 @@ export const PROFESSIONAL_SERVICES_PAGE_POPULATE = {
   clientJourney: { populate: PAGE_SECTION_IMAGE_POPULATE },
 };
 
+/** Explicit populate for /industries/retail-and-ecommerce (matches Strapi Postman query). */
+export const RETAIL_AND_ECOMMERCE_PAGE_POPULATE = {
+  hero: true,
+  seo: true,
+  heroMarquee: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+  commerceJourney: {
+    populate: {
+      steps: true,
+      image: { populate: '*' },
+    },
+  },
+  socialGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).
