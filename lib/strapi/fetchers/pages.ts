@@ -10,6 +10,7 @@ import {
   PARTNERS_PAGE_POPULATE,
   PROFESSIONAL_SERVICES_PAGE_POPULATE,
   RETAIL_AND_ECOMMERCE_PAGE_POPULATE,
+  HEALTHCARE_AND_WELLNESS_PAGE_POPULATE,
   PORTFOLIO_PAGE_POPULATE,
   PORTFOLIO_RECENT_PAGE_POPULATE,
   buildDeepPopulateFromPageData,
@@ -97,6 +98,7 @@ export async function getSuperagencyPage(
     locations: LOCATIONS_PAGE_POPULATE,
     'professional-services': PROFESSIONAL_SERVICES_PAGE_POPULATE,
     'retail-and-ecommerce': RETAIL_AND_ECOMMERCE_PAGE_POPULATE,
+    'healthcare-and-wellness': HEALTHCARE_AND_WELLNESS_PAGE_POPULATE,
   };
 
   const explicitPopulate = explicitPopulateBySlug[slug];

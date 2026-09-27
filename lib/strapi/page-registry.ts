@@ -652,15 +652,17 @@ type StrapiSectionKeyConfig = {
 export const STRAPI_SECTION_KEY_CONFIG: Record<string, StrapiSectionKeyConfig> = {
   'care-gallery': {
     cmsType: 'page-images',
-    populate: { images: { populate: '*' } },
+    populate: { images: { populate: { image: true } } },
   },
   'care-journey': {
-    cmsType: 'page-process',
-    populate: { items: { populate: '*' } },
+    cmsType: 'page-technologies',
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
   },
   'care-packages': {
     cmsType: 'page-package-list',
-    populate: { items: { populate: { image: { populate: '*' } } } },
+    populate: { items: { populate: { image: { populate: { image: true } } } } },
   },
   'built-around-guest': {
     cmsType: 'page-process',
@@ -911,6 +913,16 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     },
   ],
   'healthcare-and-wellness': [
+    {
+      name: 'careGallery',
+      component: 'sections.page-images',
+      sectionKey: 'care-gallery',
+    },
+    {
+      name: 'careJourney',
+      component: 'sections.page-technologies',
+      sectionKey: 'care-journey',
+    },
     {
       name: 'carePackages',
       component: 'sections.page-package-list',

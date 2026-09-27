@@ -15,7 +15,7 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import CareDevisionOverview from './_components/CareDevisionOverview'
+import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import CareGallery from './_components/CareGallery'
 import CareJourney from './_components/CareJourney'
 import CarePackages from './_components/CarePackages'
@@ -23,6 +23,8 @@ import CareSolutions from './_components/CareSolutions'
 import ExperiencePillars from './_components/ExperiencePillars'
 import HealthcareHero from './_components/HealthcareHero'
 import HealthcareHeroAbout from './_components/HealthcareHeroAbout'
+import { getSuperagencyDivisions } from '@/lib/strapi/fetchers/superagency'
+import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
@@ -40,9 +42,14 @@ export default async function HealthcareAndWellnessPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const typedLocale = locale as Locale
+  const [cms, divisionRecords] = await Promise.all([
+    loadSuperagencyPage(PAGE_SLUG, typedLocale),
+    getSuperagencyDivisions(typedLocale),
+  ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const divisions = mapStrapiDivisions(divisionRecords)
 
   return (
     <LayoutOne>
@@ -66,8 +73,8 @@ export default async function HealthcareAndWellnessPage({ params }: Props) {
         <CareGallery {...(sections.careGallery ?? {})} />
         {/* 5b. AwardWinningWork — care journey rows */}
         <CareJourney {...(sections.careJourney ?? {})} />
-        {/* 6. Divisions — homepage DevisionOverview */}
-        <CareDevisionOverview {...(sections.careDevisionOverview ?? {})} />
+        {/* 6. Divisions — same as homepage */}
+        <DevisionOverview divisions={divisions ?? undefined} />
         {/* 7. Packages — StartupPackages */}
         <CarePackages {...(sections.carePackages ?? {})} />
         {/* 8. Ready to Create a Better Care Experience? */}

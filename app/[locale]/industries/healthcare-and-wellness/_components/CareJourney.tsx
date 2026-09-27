@@ -5,7 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gsap from 'gsap'
 import { useRef } from 'react'
-import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsProcessSection, CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 interface JourneyItem {
@@ -48,7 +48,7 @@ const data: JourneyItem[] = [
 ]
 
 /** Layout: Home-14 AwardWinningWork — cursor-following hover preview + numbered rows. */
-type CareJourneyProps = Partial<CmsProcessSection>
+type CareJourneyProps = Partial<CmsTechnologiesSection> & Partial<CmsProcessSection>
 
 const CareJourney = ({
   eyebrow = 'Care Journey',
@@ -56,9 +56,29 @@ const CareJourney = ({
   accentTitle = '',
   description,
   steps,
+  items,
 }: CareJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedSteps = mergeProcessSteps([], steps)
+  const cmsSteps = items?.map((item, index) => ({
+    number: String(index + 1).padStart(2, '0'),
+    title: item.title,
+    description: item.description,
+  }))
+  const mergedSteps = mergeProcessSteps(
+    data.map((item) => ({
+      number: item.index,
+      title: item.title,
+      description: item.description,
+    })),
+    cmsSteps ?? steps,
+  )
+  const journeyItems = mergedSteps.map((step, index) => ({
+    id: data[index]?.id ?? index + 1,
+    index: step.number,
+    title: step.title,
+    description: step.description ?? '',
+    img: items?.[index]?.image?.src ?? data[index]?.img ?? data[0].img,
+  }))
 
   const previewRef = useRef<HTMLDivElement>(null)
   const previewImgRef = useRef<HTMLImageElement>(null)
@@ -97,7 +117,7 @@ const CareJourney = ({
   }
 
   return (
-    <section>
+    <section className="overflow-hidden">
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-6 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
@@ -120,7 +140,7 @@ const CareJourney = ({
 
       <div
         ref={previewRef}
-        className="pointer-events-none fixed left-1/2 top-1/4 z-50 h-[200px] w-[200px] origin-center rotate-[20deg] scale-0 overflow-hidden rounded-radius-md"
+        className="pointer-events-none fixed left-1/2 top-1/4 z-50 hidden h-[200px] w-[200px] origin-center rotate-[20deg] scale-0 overflow-hidden rounded-radius-md md:block"
       >
         <img
           ref={previewImgRef}
@@ -130,22 +150,22 @@ const CareJourney = ({
         />
       </div>
 
-      <div className="reveal-me mx-auto border-t text-sm max-xl:overflow-auto max-md:px-5 lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1380px]">
-        {data.map((item) => (
+      <div className="reveal-me mx-auto border-t text-sm max-md:px-5 lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1380px]">
+        {journeyItems.map((item) => (
           <div
             key={item.id}
-            className="row group flex min-h-[138px] cursor-pointer items-center justify-start border-b py-4"
+            className="row group flex min-h-[110px] cursor-pointer flex-col justify-center gap-2 border-b py-5 sm:min-h-[138px] sm:flex-row sm:items-center sm:justify-start sm:gap-0 sm:py-4"
             onMouseEnter={() => showPreview(item.img)}
             onMouseMove={movePreview}
             onMouseLeave={hidePreview}
           >
-            <div className="-mt-5 w-16 shrink-0 text-nowrap font-instrument text-lg italic leading-[22px]">
+            <div className="w-12 shrink-0 font-instrument text-lg italic leading-[22px] sm:-mt-5 sm:w-16 sm:text-nowrap">
               {item.index}
             </div>
-            <div className="ml-11 w-72 text-nowrap text-3xl md:w-96 md:text-4xl lg:w-80 lg:leading-[1.1] 2xl:w-[470px] 2xl:text-5xl">
+            <div className="min-w-0 text-2xl leading-tight sm:ml-8 sm:w-64 md:ml-11 md:w-80 md:text-3xl lg:w-80 lg:leading-[1.1] xl:text-4xl 2xl:ml-11 2xl:w-[470px] 2xl:text-5xl">
               {item.title}
             </div>
-            <div className="ml-16 min-w-0 flex-1 text-base leading-[1.6] text-[#808080] xl:ml-40 2xl:ml-[150px] 2xl:text-2xl">
+            <div className="min-w-0 flex-1 text-sm leading-[1.6] text-[#808080] sm:ml-8 md:ml-12 md:text-base xl:ml-24 2xl:ml-[150px] 2xl:text-2xl">
               {item.description}
             </div>
           </div>

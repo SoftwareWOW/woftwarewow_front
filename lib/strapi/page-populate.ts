@@ -194,6 +194,27 @@ export const PROFESSIONAL_SERVICES_PAGE_POPULATE = {
   clientJourney: { populate: PAGE_SECTION_IMAGE_POPULATE },
 };
 
+/** Explicit populate for /industries/healthcare-and-wellness (matches Strapi Postman query). */
+export const HEALTHCARE_AND_WELLNESS_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  careGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+  careJourney: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+  carePackages: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+};
+
 /** Explicit populate for /industries/retail-and-ecommerce (matches Strapi Postman query). */
 export const RETAIL_AND_ECOMMERCE_PAGE_POPULATE = {
   hero: true,
