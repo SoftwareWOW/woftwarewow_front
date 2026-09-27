@@ -72,7 +72,7 @@ const WhatMattersMost = ({
           <RevealWrapper as="figure" className="relative min-h-[320px] overflow-hidden rounded-radius-md md:min-h-[480px] md:w-1/2 lg:min-h-[560px]">
             <Image
               src={imageSrc ?? ''}
-              alt="Professional services growth"
+              alt={image?.alt ?? 'Professional services growth'}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="rounded-radius-md object-cover"

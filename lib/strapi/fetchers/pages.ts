@@ -8,6 +8,7 @@ import {
   CLIENTS_PAGE_POPULATE,
   LOCATIONS_PAGE_POPULATE,
   PARTNERS_PAGE_POPULATE,
+  PROFESSIONAL_SERVICES_PAGE_POPULATE,
   PORTFOLIO_PAGE_POPULATE,
   PORTFOLIO_RECENT_PAGE_POPULATE,
   buildDeepPopulateFromPageData,
@@ -93,6 +94,7 @@ export async function getSuperagencyPage(
     clients: CLIENTS_PAGE_POPULATE,
     partners: PARTNERS_PAGE_POPULATE,
     locations: LOCATIONS_PAGE_POPULATE,
+    'professional-services': PROFESSIONAL_SERVICES_PAGE_POPULATE,
   };
 
   const explicitPopulate = explicitPopulateBySlug[slug];

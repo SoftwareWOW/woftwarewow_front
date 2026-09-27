@@ -19,24 +19,29 @@ const AnimatedHeroImage = ({
 }: AnimatedHeroImageProps) => {
   const imageRef = useRef<HTMLElement>(null)
 
-  useGSAP(() => {
-    if (imageRef.current) {
-      gsap.to(imageRef.current, {
+  useGSAP(
+    () => {
+      const target = imageRef.current
+      if (!target) return
+
+      const tween = gsap.to(target, {
         scale: 0.8,
         ease: 'power2.inOut',
         scrollTrigger: {
-          trigger: imageRef.current,
+          trigger: target,
           start: 'top 70%',
           end: 'top 0%',
           scrub: 1,
         },
       })
-    }
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [])
+      return () => {
+        tween.scrollTrigger?.kill()
+        tween.kill()
+      }
+    },
+    { scope: imageRef },
+  )
 
   return (
     <figure className="mx-auto w-[97%] overflow-hidden rounded-radius-md sm:w-full" ref={imageRef}>

@@ -186,6 +186,14 @@ export const LOCATIONS_PAGE_POPULATE = {
   },
 };
 
+/** Explicit populate for /industries/professional-services — hero, section images, seo. */
+export const PROFESSIONAL_SERVICES_PAGE_POPULATE = {
+  hero: { populate: HERO_IMAGES_POPULATE },
+  seo: { populate: '*' },
+  whatMattersMost: { populate: PAGE_SECTION_IMAGE_POPULATE },
+  clientJourney: { populate: PAGE_SECTION_IMAGE_POPULATE },
+};
+
 /**
  * Only populate repeatable relations. Strapi v5 rejects populate keys that are
  * absent from a component schema (e.g. backgroundImage on techStack).

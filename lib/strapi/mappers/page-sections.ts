@@ -857,8 +857,22 @@ export function mapPageImages(section?: StrapiPageImages | null) {
 export function mapPageSectionImage(
   section?: StrapiPageSectionImage | null,
 ): CmsHeroImage | null {
-  if (!section?.image) return null;
-  return resolveCmsImage(section.image) ?? null;
+  if (!section) return null;
+
+  const wrapper = section.image;
+  if (wrapper) {
+    const fromWrapper = resolveCmsImage(wrapper);
+    if (fromWrapper?.src) return fromWrapper;
+
+    const directSrc = getStrapiMediaUrl(
+      wrapper as unknown as Parameters<typeof getStrapiMediaUrl>[0],
+    );
+    if (directSrc) {
+      return { src: directSrc, alt: wrapper.alt ?? undefined };
+    }
+  }
+
+  return null;
 }
 
 function mapImageWithAltItem(
