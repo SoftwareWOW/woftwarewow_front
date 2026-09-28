@@ -13,8 +13,13 @@ const SocialCommunityHero = ({
     'Create stronger social visibility, meaningful engagement, and community experiences that support brand growth.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/social-hero-1.jpg', alt: 'Social media presence' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/social-hero-2.jpg', alt: 'Community building' }
+  const useStaticHeroImages = !images?.length
+  const image0 = useStaticHeroImages
+    ? { src: '/images/hero-img/social-hero-1.jpg', alt: 'Social media presence' }
+    : images[0]
+  const image1 = useStaticHeroImages
+    ? { src: '/images/hero-img/social-hero-2.jpg', alt: 'Community building' }
+    : (images[1] ?? images[0])
 
   return (
     <section

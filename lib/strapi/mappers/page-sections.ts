@@ -20,6 +20,7 @@ import type {
   StrapiPageRfqAccordion,
   StrapiPageSeo,
   StrapiPageTechnologies,
+  StrapiPageOurServicesCarousel,
   StrapiPageTeamMembers,
   StrapiPageClientLogos,
   StrapiPageOfficeLocations,
@@ -74,6 +75,20 @@ export type CmsTechnologiesSection = {
   items: CmsFeatureItem[];
 };
 
+export type CmsBuildLaunchServiceItem = {
+  slug: string;
+  title?: string;
+  description?: string;
+  number?: string;
+  coverImage?: string;
+};
+
+export type CmsOurServicesCarouselSection = {
+  title?: string;
+  accentTitle?: string;
+  services: CmsBuildLaunchServiceItem[];
+};
+
 export type CmsHeroAboutSection = {
   body?: string;
   image?: CmsHeroImage;
@@ -111,6 +126,9 @@ export type CmsEventCard = {
   title: string;
   location?: string;
   href?: string;
+  description?: string;
+  thumbnail?: string;
+  alt?: string;
 };
 
 export type CmsPageEventsSection = {
@@ -442,6 +460,28 @@ export function mapPageTechnologiesSection(
   };
 }
 
+export function mapPageOurServicesCarousel(
+  section?: StrapiPageOurServicesCarousel | null,
+): CmsOurServicesCarouselSection | null {
+  if (!section) return null;
+
+  const services = (section.items ?? []).map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    description: item.description ?? undefined,
+    number: item.number ?? undefined,
+    coverImage: resolveCmsImage(item.image ?? undefined)?.src,
+  }));
+
+  if (!services.length && !section.title && !section.accentTitle) return null;
+
+  return {
+    title: section.title ?? undefined,
+    accentTitle: section.accentTitle ?? undefined,
+    services,
+  };
+}
+
 export function mapHeroAboutSection(
   section?: StrapiHeroAbout | null,
 ): CmsHeroAboutSection | null {
@@ -562,6 +602,9 @@ export function mapPageEvents(
       title: event.title,
       location: event.location ?? undefined,
       href: event.href ?? undefined,
+      description: event.description ?? undefined,
+      thumbnail: resolveCmsImage(event.image ?? undefined)?.src,
+      alt: event.image?.alt ?? undefined,
     })),
   };
 }

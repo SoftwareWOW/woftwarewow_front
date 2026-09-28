@@ -18,8 +18,13 @@ const AiAutomationHero = ({
     'Use AI and automation to remove repetitive work, improve efficiency, and create smarter business systems.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/ai-hero-1.jpg', alt: 'AI and automation' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/ai-hero-2.jpg', alt: 'Smart workflows' }
+  const useStaticHeroImages = !images?.length
+  const image0 = useStaticHeroImages
+    ? { src: '/images/hero-img/ai-hero-1.jpg', alt: 'AI and automation' }
+    : images[0]
+  const image1 = useStaticHeroImages
+    ? { src: '/images/hero-img/ai-hero-2.jpg', alt: 'Smart workflows' }
+    : (images[1] ?? images[0])
 
   const heroImage1Ref = useRef<HTMLDivElement>(null)
   const heroImage2Ref = useRef<HTMLDivElement>(null)

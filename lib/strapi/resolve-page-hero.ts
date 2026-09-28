@@ -5,6 +5,13 @@ import {
   type CmsPageHeroProps,
 } from '@/lib/strapi/mappers/page-sections';
 
+/** Pages whose heroes are fully driven by Strapi (no manifest image padding). */
+const CMS_ONLY_HERO_IMAGE_SLUGS = new Set([
+  'branding-and-creative',
+  'hosting-and-infrastructure',
+  'learning-and-events',
+]);
+
 /** Resolve hero images: CMS when populated, otherwise frontend static defaults from manifest. */
 export function resolveHeroImages(
   slug: string,
@@ -16,12 +23,16 @@ export function resolveHeroImages(
     alt: item.alt,
   }));
 
-  if (!cmsImages?.length) return defaults;
+  if (!cmsImages?.length) {
+    return CMS_ONLY_HERO_IMAGE_SLUGS.has(slug) ? [] : defaults;
+  }
 
   const valid = cmsImages.filter((item) => item.src);
-  if (!valid.length) return defaults;
+  if (!valid.length) {
+    return CMS_ONLY_HERO_IMAGE_SLUGS.has(slug) ? [] : defaults;
+  }
 
-  if (manifest.layout === 'none') return valid;
+  if (manifest.layout === 'none' || CMS_ONLY_HERO_IMAGE_SLUGS.has(slug)) return valid;
 
   if (manifest.layout === 'multi' || manifest.layout === 'hover' || manifest.layout === 'slider') {
     if (valid.length >= defaults.length) {

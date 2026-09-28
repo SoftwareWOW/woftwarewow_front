@@ -22,8 +22,8 @@ const LearningEventsHero = ({
     'Access workshops, events, and learning experiences designed to help businesses build skills and make better decisions.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/learning-hero-1.jpg', alt: 'Learning and events' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/learning-hero-2.jpg', alt: 'Business workshops' }
+  const image0 = images?.[0]
+  const heroMedia = images?.[1] ?? image0
 
   return (
     <section
@@ -36,7 +36,7 @@ const LearningEventsHero = ({
 
       <RevealWrapper className="container flex flex-col items-center justify-between gap-10 xl:flex-row xl:gap-14">
         <div className="w-full max-w-xl xl:max-w-[560px]">
-          <SectionLabel className="mb-4">Learning &amp; Events</SectionLabel>
+          <SectionLabel className="mb-4">{badgeTitle}</SectionLabel>
 
           <h1
               id="learning-events-heading"
@@ -47,13 +47,11 @@ const LearningEventsHero = ({
               {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
             </h1>
 
-          <div className="relative mt-5 max-w-lg">
-            <p className="text-base leading-relaxed text-[#808080] md:text-lg">
-              Practical learning, expert insights and live experiences designed to help business owners and teams build
-              skills, discover new ideas and move forward.
-            </p>
-          
-          </div>
+          {description ? (
+            <div className="relative mt-5 max-w-lg">
+              <p className="text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+            </div>
+          ) : null}
 
           <div className="mt-8">
             <figure className="flex items-center gap-2">
@@ -84,38 +82,40 @@ const LearningEventsHero = ({
                 <img
                   key={src}
                   src={src}
-                  alt={image0.alt ?? ''}
+                  alt=""
                   className="size-[52px] rounded-full border-2 border-background object-cover dark:border-secondary"
                 />
               ))}
-              <Link
-                href="/wowevents"
-                className="group relative size-[52px] shrink-0 cursor-pointer rounded-full border-[1.9px] border-backgroundBody bg-secondary p-4 dark:bg-backgroundBody"
-                aria-label="View events"
-              >
-                <figure>
-                  <img
-                    src={image1.src}
-                    alt={image1.alt ?? ''}
-                    className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
-                  />
-                  <img
-                    src={image1.src}
-                    alt={image1.alt ?? ''}
-                    className="absolute inline -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:hidden"
-                  />
-                  <img
-                    src={image1.src}
-                    alt={image1.alt ?? ''}
-                    className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:inline"
-                  />
-                  <img
-                    src={image1.src}
-                    alt={image1.alt ?? ''}
-                    className="absolute hidden -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:inline"
-                  />
-                </figure>
-              </Link>
+              {heroMedia?.src ? (
+                <Link
+                  href="/wowevents"
+                  className="group relative size-[52px] shrink-0 cursor-pointer rounded-full border-[1.9px] border-backgroundBody bg-secondary p-4 dark:bg-backgroundBody"
+                  aria-label="View events"
+                >
+                  <figure>
+                    <img
+                      src={heroMedia.src}
+                      alt={heroMedia.alt ?? ''}
+                      className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
+                    />
+                    <img
+                      src={heroMedia.src}
+                      alt={heroMedia.alt ?? ''}
+                      className="absolute inline -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:hidden"
+                    />
+                    <img
+                      src={heroMedia.src}
+                      alt={heroMedia.alt ?? ''}
+                      className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:inline"
+                    />
+                    <img
+                      src={heroMedia.src}
+                      alt={heroMedia.alt ?? ''}
+                      className="absolute hidden -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:inline"
+                    />
+                  </figure>
+                </Link>
+              ) : null}
             </div>
 
             <p className="text-base leading-[1.2] text-secondary dark:text-backgroundBody">
@@ -139,13 +139,15 @@ const LearningEventsHero = ({
           </div>
         </div>
 
-        <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
-          <img
-            src={image1.src}
-            alt={image1.alt ?? ''}
-            className="h-auto w-full rounded-radius-md object-cover"
-          />
-        </RevealWrapper>
+        {heroMedia?.src ? (
+          <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
+            <img
+              src={heroMedia.src}
+              alt={heroMedia.alt ?? ''}
+              className="h-auto w-full rounded-radius-md object-cover"
+            />
+          </RevealWrapper>
+        ) : null}
       </RevealWrapper>
     </section>
   )

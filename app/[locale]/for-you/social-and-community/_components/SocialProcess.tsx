@@ -1,30 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeProcessSteps } from '@/lib/strapi/cms-section-props'
-
-const DEFAULT_STEPS = [
-  {
-    number: '01',
-    title: 'Discover',
-    description:
-      'We learn your brand, audience and goals — then define the channels, voice and outcomes that matter most.',
-  },
-  {
-    number: '02',
-    title: 'Create',
-    description:
-      'Strategy, content calendars and creative take shape so every post and campaign has a clear job to do.',
-  },
-  {
-    number: '03',
-    title: 'Grow',
-    description:
-      'We publish, engage, optimize and report — building community while improving what drives results.',
-  },
-]
-
-const PROCESS_IMAGE = '/images/process-img-01.png'
+import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-07 ProcessV4 — image + numbered vertical process. */
 const SocialProcess = ({
@@ -33,8 +10,17 @@ const SocialProcess = ({
   steps,
   image,
 }: Partial<CmsProcessSection> = {}) => {
-  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
-  const processImageSrc = cmsImageSrc(image, PROCESS_IMAGE)
+  const displaySteps =
+    steps?.map((step, index) => ({
+      number: String(step.order ?? index + 1).padStart(2, '0'),
+      title: step.title,
+      description: step.description ?? '',
+    })) ?? []
+  const processImageSrc = cmsImageSrc(image)
+
+  if (!displaySteps.length && !processImageSrc) {
+    return null
+  }
 
   return (
     <section>
@@ -49,13 +35,15 @@ const SocialProcess = ({
         </div>
 
         <RevealWrapper className="flex flex-col gap-20 md:flex-row">
-          <figure className="overflow-hidden rounded-radius-md md:shrink-0">
-            <img
-              src={processImageSrc}
-              alt={image?.alt ?? 'Social and community process'}
-              className="h-auto w-full object-cover"
-            />
-          </figure>
+          {processImageSrc ? (
+            <figure className="overflow-hidden rounded-radius-md md:shrink-0">
+              <img
+                src={processImageSrc}
+                alt={image?.alt ?? 'Social and community process'}
+                className="h-auto w-full object-cover"
+              />
+            </figure>
+          ) : null}
 
           <div>
             <ul className="relative space-y-10 border-secondary dark:border-backgroundBody md:border-l lg:space-y-28 xl:space-y-[170px]">

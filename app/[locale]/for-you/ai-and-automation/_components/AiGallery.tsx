@@ -2,19 +2,27 @@
 
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
-import { mergeGalleryItems } from '@/lib/strapi/cms-section-props'
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
-const DEFAULT_IMAGES = [
-  { id: 1, image: '/images/hero-img/about-hero-1.png', alt: '' },
-  { id: 2, image: '/images/hero-img/about-hero-2.png', alt: '' },
-  { id: 3, image: '/images/hero-img/about-hero-3.png', alt: '' },
-]
+type GalleryPanel = {
+  id: number
+  image: string
+  alt?: string
+}
 
 /** Layout: Home-13 AboutHoverImages — 3 tilted panels with hover-active swap. */
 const AiGallery = ({ images }: { images?: CmsGalleryImage[] | null } = {}) => {
   const galleryRef = useRef<HTMLDivElement>(null)
-  const displayImages = mergeGalleryItems(DEFAULT_IMAGES, images)
+  const displayImages = useMemo<GalleryPanel[]>(() => {
+    if (!images?.length) return []
+    return images
+      .filter((img) => img.src)
+      .map((img, index) => ({
+        id: index + 1,
+        image: img.src,
+        alt: img.alt,
+      }))
+  }, [images])
 
   useEffect(() => {
     const container = galleryRef.current
@@ -36,13 +44,17 @@ const AiGallery = ({ images }: { images?: CmsGalleryImage[] | null } = {}) => {
     }
   }, [displayImages])
 
+  if (!displayImages.length) {
+    return null
+  }
+
   return (
     <section>
       <div className="container" ref={galleryRef}>
         <RevealWrapperV2 className="flex items-start justify-center overflow-hidden max-lg:flex-wrap max-lg:gap-y-5 md:space-x-5">
           {displayImages.map((item, index) => (
             <figure
-              key={item.id ?? index}
+              key={item.id}
               className={`about-image h-[450px] cursor-pointer lg:min-h-[660px]${index === 0 ? ' about-active-image' : ''}`}
             >
               <img src={item.image} alt={item.alt ?? ''} className="h-full w-full object-cover" />

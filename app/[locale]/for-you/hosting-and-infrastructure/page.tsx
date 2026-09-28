@@ -5,10 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Hosting & Infrastructure',
-  title: 'Keep your business online and ',
-  italicTitle: 'ready.',
+  title: 'Reliable',
+  italicTitle: 'foundations.',
   description:
-    'Reliable hosting, domains, business email and infrastructure designed to keep your digital operations fast, secure and accessible.',
+    'Hosting, domains, security, and cloud infrastructure that keep your business online, protected, and ready to scale.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

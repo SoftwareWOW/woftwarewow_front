@@ -15,119 +15,28 @@ import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 3
 
-const DEFAULT_GROUPS = [
-  {
-    id: 1,
-    title: 'Branding From A To Z',
-    subtitle: 'Clarity, identity, and positioning that set your business up for long-term growth.',
-    items: [
-      'Brand Strategy & Positioning',
-      'Visual Identity Systems',
-      'Logo & Mark Design',
-      'Brand Guidelines & Standards',
-      'Messaging & Voice Development',
-      'Collateral & Launch Assets',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Sales Funnels & Revenue Systems',
-    subtitle: 'Systems that turn visitors into leads and leads into paying customers.',
-    items: [
-      'User Research & Market Analysis',
-      'Concept Ideation',
-      'Prototyping',
-      'Sketching & Wireframing',
-      'Funnel Architecture & Mapping',
-      'Conversion Optimization & A/B Testing',
-    ],
-  },
-  {
-    id: 3,
-    title: 'High-Performance Websites',
-    subtitle: 'Fast, reliable websites designed to convert visitors into paying customers.',
-    items: [
-      'UX Strategy & Information Architecture',
-      'Custom Web Design',
-      'Next.js & Headless Development',
-      'SEO & Core Web Vitals Optimization',
-      'CMS Integration & Training',
-      'Ongoing Maintenance & Support',
-    ],
-  },
-  {
-    id: 4,
-    title: 'Custom Software & Automation',
-    subtitle: 'Digital products and workflows that remove bottlenecks and scale operations.',
-    items: [
-      'SaaS & Web Application Development',
-      'Mobile App Development',
-      'API Integrations & Middleware',
-      'AI-Powered Automation',
-      'Legacy System Modernization',
-      'Product Roadmapping & Delivery',
-    ],
-  },
-  {
-    id: 5,
-    title: 'Marketing & Growth Campaigns',
-    subtitle: 'Performance-driven campaigns that attract qualified leads and measurable ROI.',
-    items: [
-      'Paid Media & PPC Management',
-      'SEO & Content Strategy',
-      'Email Marketing & Nurture Flows',
-      'Social Media Strategy',
-      'Analytics & Attribution',
-      'Growth Experimentation',
-    ],
-  },
-  {
-    id: 6,
-    title: 'AI & Intelligence Solutions',
-    subtitle: 'Smart tools that sharpen decisions, reduce manual work, and accelerate results.',
-    items: [
-      'AI Strategy & Use-Case Discovery',
-      'Chatbots & Virtual Assistants',
-      'Predictive Analytics',
-      'Process Automation',
-      'Data Pipelines & Dashboards',
-      'Team Training & Adoption',
-    ],
-  },
-]
-
-function mergeRfqGroups<T extends { id: number; title: string; subtitle?: string; items: string[] }>(
-  defaults: T[],
-  cmsGroups?: CmsRfqAccordionSection['groups'] | null,
-): T[] {
-  if (!cmsGroups?.length) return defaults
-
-  return defaults.map((group, index) => {
-    const cms = cmsGroups[index]
-    if (!cms) return group
-
-    return {
-      ...group,
-      title: cms.title || group.title,
-      subtitle: cms.subtitle ?? group.subtitle,
-      items: cms.items?.length ? cms.items : group.items,
-    }
-  })
-}
-
 /** Layout: SolutionToChallenges accordion — Build & Launch RFQ variant with centered header. */
 const BuildAndLaunchRfq = ({
-  eyebrow = 'From Idea to Launch',
-  title = 'Bring the pieces together.',
-  description =
-    'Instead of finding separate providers for every part of your launch, build the essentials through one coordinated team.',
+  eyebrow,
+  title,
+  description,
   groups,
   backgroundImage,
 }: Partial<CmsRfqAccordionSection> & CmsImageProps = {}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [showAll, setShowAll] = useState(false)
 
-  const servicesData = mergeRfqGroups(DEFAULT_GROUPS, groups)
+  const servicesData =
+    groups?.map((group, index) => ({
+      id: index + 1,
+      title: group.title,
+      subtitle: group.subtitle,
+      items: group.items,
+    })) ?? []
+
+  if (!servicesData.length) {
+    return null
+  }
   const visibleServices = showAll ? servicesData : servicesData.slice(0, INITIAL_VISIBLE_COUNT)
 
   const toggleAccordion = (index: number) => {
@@ -177,15 +86,21 @@ const BuildAndLaunchRfq = ({
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-16">
-          <RevealWrapper className="mb-4 flex justify-center">
-            <SectionLabel>{eyebrow}</SectionLabel>
-          </RevealWrapper>
-          <RevealWrapper>
-            <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">{title}</h2>
-          </RevealWrapper>
-          <RevealWrapper className="mt-4">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
-          </RevealWrapper>
+          {eyebrow ? (
+            <RevealWrapper className="mb-4 flex justify-center">
+              <SectionLabel>{eyebrow}</SectionLabel>
+            </RevealWrapper>
+          ) : null}
+          {title ? (
+            <RevealWrapper>
+              <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">{title}</h2>
+            </RevealWrapper>
+          ) : null}
+          {description ? (
+            <RevealWrapper className="mt-4">
+              <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
@@ -273,7 +188,7 @@ const BuildAndLaunchRfq = ({
         </RevealWrapper>
 
         <RevealWrapper className="mx-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-14">
-          {DEFAULT_GROUPS.length > INITIAL_VISIBLE_COUNT && (
+          {servicesData.length > INITIAL_VISIBLE_COUNT && (
             <ButtonComponentList>
               <ButtonComponent type="button" variant="white" onClick={handleToggleShowAll} ariaExpanded={showAll}>
                 {showAll ? 'See Less' : 'See More'}

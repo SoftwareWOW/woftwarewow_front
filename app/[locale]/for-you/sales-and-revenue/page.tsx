@@ -5,10 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Sales & Revenue',
-  title: 'Turn more opportunities into',
-  italicTitle: ' revenue.',
+  title: 'Turn interest into',
+  italicTitle: 'revenue.',
   description:
-    'Build a stronger sales engine with better lead generation, funnels, CRM workflows and automation — designed to help your team sell more effectively and consistently.',
+    'Build funnels, CRM systems, and sales enablement that convert leads and scale revenue predictably.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

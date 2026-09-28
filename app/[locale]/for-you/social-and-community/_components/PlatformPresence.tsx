@@ -43,8 +43,6 @@ const DEFAULT_PLATFORMS = [
   },
 ]
 
-const SIDE_IMAGE = '/images/wow/nav/cards/social media start 1.png'
-
 /** Layout: Home-14 ServicesV13 cards — header matches social capabilities mock. */
 const PlatformPresence = ({
   eyebrow = 'Social Capabilities',
@@ -62,7 +60,7 @@ const PlatformPresence = ({
     name: platform.title,
     description: platform.description ?? DEFAULT_PLATFORMS[index].description,
   }))
-  const sideImageSrc = cmsImageSrc(image, SIDE_IMAGE)
+  const sideImageSrc = cmsImageSrc(image)
 
   return (
     <section className="relative overflow-hidden">
@@ -84,13 +82,15 @@ const PlatformPresence = ({
             </RevealWrapper>
           </div>
 
-          <RevealWrapper className="reveal-me w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md">
-            <img
-              src={sideImageSrc}
-              alt={image?.alt ?? 'Social insights on mobile'}
-              className="h-auto w-full object-cover"
-            />
-          </RevealWrapper>
+          {sideImageSrc ? (
+            <RevealWrapper className="reveal-me w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md">
+              <img
+                src={sideImageSrc}
+                alt={image?.alt ?? 'Social insights on mobile'}
+                className="h-auto w-full object-cover"
+              />
+            </RevealWrapper>
+          ) : null}
         </div>
       </div>
 

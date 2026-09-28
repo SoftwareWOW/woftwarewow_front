@@ -5,7 +5,8 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Marketing & Growth',
-  title: 'Turn attention into sustainable growth.',
+  title: 'Turn attention into sustainable',
+  italicTitle: 'growth.',
   description: 'Attract more customers, convert more opportunities, and grow smarter.',
 }
 

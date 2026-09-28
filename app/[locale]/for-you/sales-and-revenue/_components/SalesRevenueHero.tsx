@@ -18,8 +18,13 @@ const SalesRevenueHero = ({
     'Build stronger sales systems, better follow-up, and clearer conversion paths that help your business grow revenue.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/sales-hero-1.jpg', alt: 'Sales and revenue' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/sales-hero-2.jpg', alt: 'Revenue growth' }
+  const useStaticHeroImages = !images?.length
+  const image0 = useStaticHeroImages
+    ? { src: '/images/hero-img/sales-hero-1.jpg', alt: 'Sales and revenue' }
+    : images[0]
+  const image1 = useStaticHeroImages
+    ? { src: '/images/hero-img/sales-hero-2.jpg', alt: 'Revenue growth' }
+    : (images[1] ?? images[0])
 
   const [open, setOpen] = useState(false)
 

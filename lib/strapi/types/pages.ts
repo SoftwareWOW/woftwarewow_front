@@ -40,6 +40,22 @@ export type StrapiPageTechnologies = {
   items?: StrapiFeatureCard[] | null;
 };
 
+export type StrapiServiceCarouselCard = {
+  id?: number;
+  slug: string;
+  title: string;
+  description?: string | null;
+  number?: string | null;
+  image?: StrapiImageWithAlt | null;
+};
+
+export type StrapiPageOurServicesCarousel = {
+  sectionKey?: string;
+  title?: string | null;
+  accentTitle?: string | null;
+  items?: StrapiServiceCarouselCard[] | null;
+};
+
 export type StrapiProcessStep = {
   id?: number;
   title: string;
@@ -104,6 +120,8 @@ export type StrapiEventCard = {
   title: string;
   location?: string | null;
   href?: string | null;
+  description?: string | null;
+  image?: StrapiImageWithLink | null;
 };
 
 export type StrapiPageEvents = {

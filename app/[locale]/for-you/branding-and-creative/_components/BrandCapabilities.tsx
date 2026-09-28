@@ -3,50 +3,27 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
-
-const DEFAULT_CAPABILITIES = [
-  {
-    number: '01',
-    title: 'Brand Strategy',
-    description:
-      'Define positioning, personality, audience, differentiation and the ideas your brand should stand for.',
-  },
-  {
-    number: '02',
-    title: 'Visual Identity',
-    description: 'Create logos, typography, colors and the visual language that makes the brand recognizable.',
-  },
-  {
-    number: '03',
-    title: 'Messaging & Voice',
-    description: 'Shape how your brand communicates, from core messages to tone of voice.',
-  },
-  {
-    number: '04',
-    title: 'Brand Guidelines',
-    description: 'Turn the identity into a practical system for keeping everything consistent.',
-  },
-  {
-    number: '05',
-    title: 'Creative & Campaign Design',
-    description: 'Create advertising, social, digital and campaign assets that bring the brand to life.',
-  },
-]
-
-const SIDE_IMAGE = '/images/wow/nav/cards/Branding%20%26%20Creative%201.png'
+import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-12 WhyChooseUs — centered header + list + image + dual CTAs. */
 const BrandCapabilities = ({
   eyebrow = 'Brand Capabilities',
   title = 'From strategy to every expression of your brand.',
-  description =
-    'Build the foundations first, then turn them into a visual and creative system your business can actually use.',
+  description,
   items,
   image,
 }: Partial<CmsTechnologiesSection> = {}) => {
-  const displayCapabilities = mergeFeatureItems(DEFAULT_CAPABILITIES, items)
-  const sideImageSrc = cmsImageSrc(image, SIDE_IMAGE)
+  const displayCapabilities =
+    items?.map((item, index) => ({
+      number: String(index + 1).padStart(2, '0'),
+      title: item.title,
+      description: item.description ?? '',
+    })) ?? []
+  const sideImageSrc = cmsImageSrc(image)
+
+  if (!displayCapabilities.length && !sideImageSrc) {
+    return null
+  }
 
   return (
     <section>
@@ -55,40 +32,53 @@ const BrandCapabilities = ({
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mb-3">{title}</h2>
-          </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
-          </TextAppearAnimation>
+          {title ? (
+            <TextAppearAnimation>
+              <h2 className="text-appear mb-3">{title}</h2>
+            </TextAppearAnimation>
+          ) : null}
+          {description ? (
+            <TextAppearAnimation>
+              <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
 
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
-          <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-            {displayCapabilities.map((item) => (
-              <RevealWrapper key={item.number} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
-                <h5>
-                  <span className="mr-2 text-[#808080]">{item.number}</span>
-                  {item.title}
-                </h5>
-                <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
-              </RevealWrapper>
-            ))}
-          </div>
+          {displayCapabilities.length ? (
+            <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
+              {displayCapabilities.map((item) => (
+                <RevealWrapper key={item.number} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
+                  <h5>
+                    <span className="mr-2 text-[#808080]">{item.number}</span>
+                    {item.title}
+                  </h5>
+                  <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
+                </RevealWrapper>
+              ))}
+            </div>
+          ) : null}
 
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
-            <img
-              src={sideImageSrc}
-              alt={image?.alt ?? 'Brand strategy and creative identity'}
-              className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
-            />
-          </RevealWrapper>
+          {sideImageSrc ? (
+            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
+              <img
+                src={sideImageSrc}
+                alt={image?.alt ?? 'Brand capabilities and identity system'}
+                className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
+              />
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <RevealWrapper className="mt-10 flex justify-center gap-3 max-md:flex-col max-md:items-center md:mt-14 md:gap-4">
           <ButtonComponentList className="flex" itemClassName="block">
             <ButtonComponent href="/contact" variant="primary">
-              Get Started
+              Build Your Brand
+            </ButtonComponent>
+          </ButtonComponentList>
+          <ButtonComponentList className="flex" itemClassName="block">
+            <ButtonComponent href="/contact" variant="secondary">
+              Talk to a Branding Expert
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

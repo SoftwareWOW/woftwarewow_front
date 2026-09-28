@@ -5,9 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Learning & Events',
-  title: 'Learn. Connect. Grow.',
+  title: 'Knowledge that drives',
+  italicTitle: 'action.',
   description:
-    'Practical learning, expert insights and live experiences designed to help business owners and teams build skills, discover new ideas and move forward.',
+    'Training, workshops, webinars, and event experiences that help teams and audiences learn, connect, and grow.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

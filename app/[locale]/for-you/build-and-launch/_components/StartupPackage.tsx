@@ -29,8 +29,6 @@ const CheckIcon = () => (
   </span>
 )
 
-const PACKAGE_IMAGE = '/images/wow/foryou/package.png'
-
 /** Layout: Home-19 HeroV19 split + home-12 Pricing checklist (no WOW sticker). */
 const StartupPackage = ({
   eyebrow = 'Ready-Made Starting Point',
@@ -42,7 +40,7 @@ const StartupPackage = ({
   backgroundImage,
   cta,
 }: Partial<CmsPackageOfferSection> = {}) => {
-  const sideImageSrc = cmsImageSrc(image, PACKAGE_IMAGE)
+  const sideImageSrc = cmsImageSrc(image)
   const packageItems = mergeFeatureItems(DEFAULT_FEATURES, features)
   const primaryHref = cta?.href ?? '/contact'
   const primaryLabel = cta?.label ?? 'Start Now'
@@ -108,16 +106,18 @@ const StartupPackage = ({
             </RevealWrapper>
           </div>
 
-          <RevealWrapper
-            as="figure"
-            className="w-full max-w-[250px] shrink-0 sm:max-w-[280px] md:max-w-[300px] lg:max-w-[350px] xl:max-w-[400px]"
-          >
-            <img
-              src={sideImageSrc}
-              alt={image?.alt ?? 'Startup launch package foundations'}
-              className="h-auto w-full object-cover"
-            />
-          </RevealWrapper>
+          {sideImageSrc ? (
+            <RevealWrapper
+              as="figure"
+              className="w-full max-w-[250px] shrink-0 sm:max-w-[280px] md:max-w-[300px] lg:max-w-[350px] xl:max-w-[400px]"
+            >
+              <img
+                src={sideImageSrc}
+                alt={image?.alt ?? 'Startup launch package foundations'}
+                className="h-auto w-full object-cover"
+              />
+            </RevealWrapper>
+          ) : null}
         </div>
       </div>
     </section>

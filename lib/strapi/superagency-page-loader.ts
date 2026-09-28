@@ -19,6 +19,7 @@ import {
   mapPageTeamMembers,
   mapPageTechnologies,
   mapPageTechnologiesSection,
+  mapPageOurServicesCarousel,
   mapPageClientLogos,
   mapPageOfficeLocations,
   mapPortfolioExplorer,
@@ -44,6 +45,7 @@ import {
   type CmsTechnologiesSection,
 } from '@/lib/strapi/mappers/page-sections';
 import { mapStrapiPageCareerJobs } from '@/lib/strapi/mappers/career';
+import type { StrapiPageOurServicesCarousel } from '@/lib/strapi/types/pages';
 import {
   getComponentForCmsType,
   getPageManifest,
@@ -203,6 +205,8 @@ function mapSectionByComponent(
   switch (component) {
     case 'sections.page-technologies':
       return cms.technologiesSection(fieldName);
+    case 'sections.page-our-services-carousel':
+      return mapPageOurServicesCarousel(cms.field<StrapiPageOurServicesCarousel>(fieldName));
     case 'sections.page-process':
     case 'sections.page-process-steps':
       return cms.processSection(fieldName);
@@ -220,7 +224,8 @@ function mapSectionByComponent(
       return cms.pageEvents(fieldName);
     case 'sections.image-gallery':
       return cms.imageGallery(fieldName);
-    case 'sections.page-projects': {
+    case 'sections.page-projects':
+    case 'sections.page-project-links': {
       return mapPageProjectsSection(cms.field<StrapiPageProjects>(fieldName));
     }
     case 'sections.page-client-stories': {

@@ -39,18 +39,26 @@ const WhiteArrowIcon = ({ className }: { className?: string }) => (
 
 /** Layout: Home-22 OurServices — horizontal scroll cards (Build & Launch). */
 const BuildLaunchOurServices = ({
-  servicesData,
-  title = 'Tailored experiences for',
-  accentTitle = 'all occasions',
-}: { servicesData: ServiceItem[] } & Partial<CmsTechnologiesSection>) => {
+  services,
+  title,
+  accentTitle,
+}: { services?: ServiceItem[] } & Partial<CmsTechnologiesSection>) => {
+  const servicesData = services ?? []
   const { contentRef, triggerRef } = useHorizontalScroll()
+
+  if (!servicesData.length) {
+    return null
+  }
 
   return (
     <section ref={triggerRef} className="service-section relative overflow-hidden">
       <div className="container">
-        <h2>
-          {title} <InstrumentText> {accentTitle}</InstrumentText>
-        </h2>
+        {title ? (
+          <h2>
+            {title}
+            {accentTitle ? <InstrumentText> {accentTitle}</InstrumentText> : null}
+          </h2>
+        ) : null}
       </div>
       <article
         ref={contentRef}

@@ -2,32 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
-
-const DEFAULT_ITEMS = [
-  {
-    title: 'Business-first technology decisions',
-    description: 'We look at the problem before prescribing a build, buy or integrate path.',
-  },
-  {
-    title: 'Custom where it creates advantage',
-    description: 'Purpose-built software when off-the-shelf tools fight your workflow.',
-  },
-  {
-    title: 'Integrate what already works',
-    description: 'Connect platforms, automate handoffs, and reduce duplicate effort.',
-  },
-  {
-    title: 'Modernize without disruption',
-    description: 'Upgrade legacy systems in stages so operations keep moving.',
-  },
-  {
-    title: 'Built to scale with you',
-    description: 'Architecture and tooling that grow as your team and product grow.',
-  },
-]
-
-const DEFAULT_IMAGE = '/images/wow/Hero/devision/Server.jpg'
+import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-25 WhyChooseUsV8 — approach list + image + CTA. */
 const OurApproach = ({
@@ -38,8 +13,12 @@ const OurApproach = ({
   image,
   items,
 }: Partial<CmsTechnologiesSection> = {}) => {
-  const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
-  const imageSrc = cmsImageSrc(image, DEFAULT_IMAGE)
+  const displayItems = items?.length ? items : []
+  const imageSrc = cmsImageSrc(image)
+
+  if (!displayItems.length && !imageSrc) {
+    return null
+  }
   const titleLines = title.split('\n')
 
   return (
@@ -90,13 +69,15 @@ const OurApproach = ({
             </RevealWrapper>
           </div>
 
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
-            <img
-              src={imageSrc}
-              alt={image?.alt ?? 'Technology approach — build and integrate'}
-              className="h-full w-full object-cover"
-            />
-          </RevealWrapper>
+          {imageSrc ? (
+            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
+              <img
+                src={imageSrc}
+                alt={image?.alt ?? 'Technology approach — build and integrate'}
+                className="h-full w-full object-cover"
+              />
+            </RevealWrapper>
+          ) : null}
         </div>
       </div>
     </section>

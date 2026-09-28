@@ -5,9 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Social & Community',
-  title: 'Turn your audience into a community.',
+  title: 'Turn content into',
+  italicTitle: 'community.',
   description:
-    'Strategy, content, paid social and community management — connected so attention turns into lasting relationships.',
+    'Build social strategies, content, and campaigns that grow visibility, engagement, and business outcomes.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'
@@ -47,6 +48,8 @@ export default async function SocialAndCommunityPage({ params }: Props) {
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const platformImageSection = sections.platformImage as { images?: { src: string; alt?: string }[] } | undefined
+  const platformImage = platformImageSection?.images?.[0]
 
   return (
     <LayoutOne>
@@ -58,7 +61,7 @@ export default async function SocialAndCommunityPage({ params }: Props) {
         {/* 3. Social Capabilities — Home-13 ServicesV12 */}
         <SocialCapabilities {...(sections.socialCapabilities ?? {})} />
         {/* 4. Platform Presence — interactive platforms */}
-        <PlatformPresence {...(sections.platformPresence ?? {})} />
+        <PlatformPresence image={platformImage} {...(sections.platformPresence ?? {})} />
         {/* 5. Build Community — SoftwareWOW WoWProces */}
         <BuildCommunity {...(sections.buildCommunity ?? {})} />
         {/* 6. Gallery — Home-11 InstagramGallery */}

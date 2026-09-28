@@ -5,10 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Branding & Creative',
-  title: 'Build a brand people',
-  italicTitle: 'remember.',
+  title: 'Brand that stands',
+  italicTitle: 'out.',
   description:
-    'Turn what makes your business different into a clear, distinctive brand—with the strategy, identity and creative assets to show up consistently.',
+    'Identity, design, and creative systems that make your business unmistakable across every touchpoint.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

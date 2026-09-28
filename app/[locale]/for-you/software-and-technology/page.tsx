@@ -5,9 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Software & Technology',
-  title: 'Technology built around your business.',
+  title: 'Build what you need.',
+  italicTitle: 'Integrate what works.',
   description:
-    'From custom software and digital products to integrations and modernization, we build technology that solves real problems and supports how your business works.',
+    'Build custom software, apps, SaaS, modernization, and automation designed around your business.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

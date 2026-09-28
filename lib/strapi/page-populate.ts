@@ -236,6 +236,134 @@ export const RETAIL_AND_ECOMMERCE_PAGE_POPULATE = {
   },
 };
 
+/** Explicit populate for /for-you/build-and-launch — our services carousel + RFQ + package image. */
+export const BUILD_AND_LAUNCH_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  buildLaunchOurServices: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+  buildAndLaunchRfq: {
+    populate: {
+      groups: true,
+    },
+  },
+  packageImage: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/marketing-and-growth (matches Strapi Postman query). */
+export const MARKETING_AND_GROWTH_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  growthInAction: {
+    populate: {
+      projects: {
+        populate: {
+          thumbnail: true,
+          portfolioCategories: true,
+        },
+      },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/software-and-technology (matches Strapi Postman query). */
+export const SOFTWARE_AND_TECHNOLOGY_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  ourApproach: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/social-and-community (matches Strapi Postman query). */
+export const SOCIAL_AND_COMMUNITY_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  socialProcess: {
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
+    },
+  },
+  platformImage: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+  socialGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/ai-and-automation (matches Strapi Postman query). */
+export const AI_AND_AUTOMATION_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  startWithTheWork: {
+    populate: {
+      groups: true,
+    },
+  },
+  aiGallery: {
+    populate: {
+      images: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/sales-and-revenue (matches Strapi Postman query). */
+export const SALES_AND_REVENUE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+};
+
+/** Explicit populate for /for-you/branding-and-creative (matches Strapi Postman query). */
+export const BRANDING_AND_CREATIVE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  brandCapabilities: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/hosting-and-infrastructure (matches Strapi Postman query). */
+export const HOSTING_AND_INFRASTRUCTURE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  digitalFoundations: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /for-you/learning-and-events (matches Strapi Postman query). */
+export const LEARNING_AND_EVENTS_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  upcomingEvents: {
+    populate: {
+      events: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+};
+
 /** Explicit populate for /industries/hospitality-and-tourism (matches Strapi Postman query). */
 export const HOSPITALITY_AND_TOURISM_PAGE_POPULATE = {
   seo: { populate: '*' },
@@ -370,6 +498,17 @@ const CMS_NESTED_POPULATE: Partial<
   },
   'page-package-list': {
     items: { populate: { image: { populate: '*' } } },
+  },
+  'page-our-services-carousel': {
+    items: { populate: { image: { populate: { image: true } } } },
+  },
+  'page-project-links': {
+    projects: {
+      populate: {
+        thumbnail: true,
+        portfolioCategories: true,
+      },
+    },
   },
   'page-portfolio-explorer': {
     filterGroups: { populate: { projects: { populate: '*' } } },

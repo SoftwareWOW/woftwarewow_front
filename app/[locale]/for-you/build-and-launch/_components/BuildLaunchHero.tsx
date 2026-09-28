@@ -15,14 +15,19 @@ const BuildLaunchHero = ({
   images,
   backgroundImage,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? {
-    src: '/images/hero-img/startup-hero-1.jpg',
-    alt: 'Team building and launching a new product',
-  }
-  const image1 = images?.[1] ?? {
-    src: '/images/hero-img/startup-hero-2.jpg',
-    alt: 'Focused workspace ready for go-to-market',
-  }
+  const useStaticHeroImages = !images?.length
+  const image0 = useStaticHeroImages
+    ? {
+        src: '/images/hero-img/startup-hero-1.jpg',
+        alt: 'Team building and launching a new product',
+      }
+    : images[0]
+  const image1 = useStaticHeroImages
+    ? {
+        src: '/images/hero-img/startup-hero-2.jpg',
+        alt: 'Focused workspace ready for go-to-market',
+      }
+    : (images[1] ?? images[0])
 
   return (
     <section

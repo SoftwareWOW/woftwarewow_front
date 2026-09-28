@@ -1,11 +1,9 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsImageGallerySection } from '@/lib/strapi/mappers/page-sections'
-import { mergeGalleryItems } from '@/lib/strapi/cms-section-props'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type GalleryItem = {
   id: number
@@ -14,54 +12,21 @@ type GalleryItem = {
   alt?: string
 }
 
-const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: 1,
-    image: '/images/testimonial/testimonial-1.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 2,
-    image: '/images/testimonial/testimonial-2.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 3,
-    image: '/images/testimonial/testimonial-3.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 4,
-    image: '/images/testimonial/testimonial-4.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 5,
-    image: '/images/testimonial/testimonial-5.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 6,
-    image: '/images/testimonial/testimonial-1.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 7,
-    image: '/images/testimonial/testimonial-2.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 8,
-    image: '/images/testimonial/testimonial-3.png',
-    link: 'https://www.instagram.com/',
-  },
-]
-
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
-type SocialGalleryProps = Partial<CmsImageGallerySection>
+type SocialGalleryProps = Pick<Partial<CmsImageGallerySection>, 'images'>
 
 const SocialGallery = ({ images }: SocialGalleryProps = {}) => {
-  const galleryItems = mergeGalleryItems(DEFAULT_GALLERY_ITEMS, images)
+  const galleryItems = useMemo<GalleryItem[]>(() => {
+    if (!images?.length) return []
+    return images
+      .filter((img) => img.src)
+      .map((img, index) => ({
+        id: index + 1,
+        image: img.src,
+        link: img.href ?? '#',
+        alt: img.alt,
+      }))
+  }, [images])
 
   const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -115,6 +80,12 @@ const SocialGallery = ({ images }: SocialGalleryProps = {}) => {
   }, [])
 
   useEffect(() => {
+    slideRefs.current = []
+    setCurrentIndex(0)
+  }, [galleryItems])
+
+  useEffect(() => {
+    if (!galleryItems.length) return
     updateSlider()
     startSlider()
 
@@ -123,19 +94,17 @@ const SocialGallery = ({ images }: SocialGalleryProps = {}) => {
         clearInterval(intervalRef.current)
       }
     }
-  }, [updateSlider, startSlider])
+  }, [galleryItems.length, updateSlider, startSlider])
+
+  if (!galleryItems.length) {
+    return null
+  }
 
   return (
     <section>
       <div className="mb-8 text-center md:mb-14">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
           <SectionLabel>Gallery</SectionLabel>
-        </RevealWrapper>
-        <RevealWrapper className="reveal-me">
-          <h2>
-            Follow us on
-            <InstrumentText> Instagram</InstrumentText>
-          </h2>
         </RevealWrapper>
       </div>
 

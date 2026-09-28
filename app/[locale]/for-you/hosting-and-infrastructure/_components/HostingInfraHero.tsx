@@ -13,8 +13,8 @@ const HostingInfraHero = ({
     'Secure hosting, scalable systems, and the technical foundation your business needs to stay online and perform.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/hosting-hero-1.jpg', alt: 'Hosting infrastructure' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/hosting-hero-2.jpg', alt: 'Business infrastructure' }
+  const image0 = images?.[0]
+  const image1 = images?.[1]
 
   return (
     <section
@@ -69,22 +69,20 @@ const HostingInfraHero = ({
           </RevealWrapper>
         </div>
 
-        <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
-          <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
-            <img
-              src={image0.src}
-              alt={image0.alt ?? ''}
-              className="max-sm:w-full"
-            />
-          </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me">
-            <img
-              src={image1.src}
-              alt={image1.alt ?? ''}
-              className="max-sm:w-full"
-            />
-          </RevealWrapper>
-        </div>
+        {image0?.src || image1?.src ? (
+          <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
+            {image0?.src ? (
+              <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
+                <img src={image0.src} alt={image0.alt ?? ''} className="max-sm:w-full" />
+              </RevealWrapper>
+            ) : null}
+            {image1?.src ? (
+              <RevealWrapper as="figure" className="reveal-me">
+                <img src={image1.src} alt={image1.alt ?? ''} className="max-sm:w-full" />
+              </RevealWrapper>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </section>
   )

@@ -18,8 +18,13 @@ const MarketingGrowthHero = ({
     'Build stronger visibility, better campaigns, and smarter systems that help your business attract, convert, and retain customers.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/marketing-hero-1.jpg', alt: 'Marketing and growth strategy' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/marketing-hero-2.jpg', alt: 'Growth marketing team' }
+  const useStaticHeroImages = !images?.length
+  const image0 = useStaticHeroImages
+    ? { src: '/images/hero-img/marketing-hero-1.jpg', alt: 'Marketing and growth strategy' }
+    : images[0]
+  const image1 = useStaticHeroImages
+    ? { src: '/images/hero-img/marketing-hero-2.jpg', alt: 'Growth marketing team' }
+    : (images[1] ?? images[0])
 
   const [open, setOpen] = useState(false)
 

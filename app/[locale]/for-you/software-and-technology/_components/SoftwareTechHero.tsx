@@ -18,8 +18,13 @@ const SoftwareTechHero = ({
     'Design and build software, apps, and digital products that solve real problems and support long-term growth.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/hero-img/software-hero-1.jpg', alt: 'Software development' }
-  const image1 = images?.[1] ?? { src: '/images/hero-img/software-hero-2.jpg', alt: 'Technology team' }
+  const useStaticHeroImages = !images?.length
+  const image0 = useStaticHeroImages
+    ? { src: '/images/hero-img/software-hero-1.jpg', alt: 'Software development' }
+    : images[0]
+  const image1 = useStaticHeroImages
+    ? { src: '/images/hero-img/software-hero-2.jpg', alt: 'Technology team' }
+    : (images[1] ?? images[0])
 
   const heroImage1Ref = useRef<HTMLDivElement>(null)
   const heroImage2Ref = useRef<HTMLDivElement>(null)

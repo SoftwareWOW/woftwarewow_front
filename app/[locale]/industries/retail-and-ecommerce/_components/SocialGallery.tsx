@@ -3,64 +3,37 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { CmsImageGallerySection } from '@/lib/strapi/mappers/page-sections'
-import { mergeGalleryItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 type GalleryItem = {
   id: number
   image: string
   link: string
+  alt?: string
 }
-
-const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: 1,
-    image: '/images/testimonial/testimonial-1.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 2,
-    image: '/images/testimonial/testimonial-2.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 3,
-    image: '/images/testimonial/testimonial-3.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 4,
-    image: '/images/testimonial/testimonial-4.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 5,
-    image: '/images/testimonial/testimonial-5.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 6,
-    image: '/images/testimonial/testimonial-1.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 7,
-    image: '/images/testimonial/testimonial-2.png',
-    link: 'https://www.instagram.com/',
-  },
-  {
-    id: 8,
-    image: '/images/testimonial/testimonial-3.png',
-    link: 'https://www.instagram.com/',
-  },
-]
 
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
 type SocialGalleryProps = Partial<CmsImageGallerySection>
 
-const SocialGallery = ({ images, ...headerCms }: SocialGalleryProps = {}) => {
-  const galleryItems = mergeGalleryItems(DEFAULT_GALLERY_ITEMS, images)
+const SocialGallery = ({
+  eyebrow,
+  title,
+  accentTitle,
+  description,
+  images,
+}: SocialGalleryProps = {}) => {
+  const galleryItems = useMemo<GalleryItem[]>(() => {
+    if (!images?.length) return []
+    return images
+      .filter((img) => img.src)
+      .map((img, index) => ({
+        id: index + 1,
+        image: img.src,
+        link: img.href ?? '#',
+        alt: img.alt,
+      }))
+  }, [images])
 
   const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -97,7 +70,7 @@ const SocialGallery = ({ images, ...headerCms }: SocialGalleryProps = {}) => {
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % galleryItems.length)
-  }, [])
+  }, [galleryItems.length])
 
   const startSlider = useCallback(() => {
     if (intervalRef.current) {
@@ -114,6 +87,12 @@ const SocialGallery = ({ images, ...headerCms }: SocialGalleryProps = {}) => {
   }, [])
 
   useEffect(() => {
+    slideRefs.current = []
+    setCurrentIndex(0)
+  }, [galleryItems])
+
+  useEffect(() => {
+    if (!galleryItems.length) return
     updateSlider()
     startSlider()
 
@@ -122,22 +101,20 @@ const SocialGallery = ({ images, ...headerCms }: SocialGalleryProps = {}) => {
         clearInterval(intervalRef.current)
       }
     }
-  }, [updateSlider, startSlider])
+  }, [galleryItems.length, updateSlider, startSlider])
+
+  if (!galleryItems.length) {
+    return null
+  }
+
+  const showHeader = Boolean(eyebrow || title || accentTitle || description)
 
   return (
     <section>
-      <div className="mb-8 text-center md:mb-14">
-        <RevealWrapper className="reveal-me mb-3 flex justify-center">
+
+   <RevealWrapper className="reveal-me mb-3 flex justify-center">
           <SectionLabel>Gallery</SectionLabel>
         </RevealWrapper>
-        <RevealWrapper className="reveal-me">
-          <h2>
-            Follow us on
-            <InstrumentText> Instagram</InstrumentText>
-          </h2>
-        </RevealWrapper>
-      </div>
-
       <div className="relative overflow-hidden" ref={sliderRef}>
         <div className="flex h-[500px] items-center justify-center">
           <div className="instagram-slider-container perspective-[1000px] relative flex w-full items-center justify-center">
@@ -158,7 +135,7 @@ const SocialGallery = ({ images, ...headerCms }: SocialGalleryProps = {}) => {
                   <figure className="relative overflow-hidden rounded-radius-md shadow-none">
                     <img
                       src={item.image}
-                      alt={`Social gallery ${item.id}`}
+                      alt={item.alt ?? `Social gallery ${item.id}`}
                       className="h-full w-full rounded-radius-md object-cover"
                     />
                   </figure>

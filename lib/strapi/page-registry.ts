@@ -34,6 +34,8 @@ export type CmsSectionType =
   | 'page-events'
   | 'faq-list'
   | 'brand-kit-logos'
+  | 'page-our-services-carousel'
+  | 'page-project-links'
   | null;
 
 export type PageSectionManifest = {
@@ -286,7 +288,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
     const solutionSections: Record<string, PageSectionManifest['sections']> = {
       'build-and-launch': [
         { sectionKey: 'build-and-launch-hero', cms: 'hero' },
-        { sectionKey: 'our-services', cms: 'page-technologies' },
+        { sectionKey: 'build-launch-our-services', cms: 'page-our-services-carousel' },
         { sectionKey: 'build-and-launch-rfq', cms: 'page-rfq-accordion' },
         { sectionKey: 'launch-path', cms: 'page-process' },
         { sectionKey: 'startup-package', cms: 'package-offer' },
@@ -298,7 +300,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
         { sectionKey: 'everything-to-grow', cms: 'page-technologies' },
         { sectionKey: 'connected-growth-system', cms: 'page-process' },
         { sectionKey: 'built-around-goals', cms: 'page-technologies' },
-        { sectionKey: 'growth-in-action', cms: 'page-projects' },
+        { sectionKey: 'growth-in-action', cms: 'page-project-links' },
         { sectionKey: 'wow-growth-cta', cms: null },
       ],
       'software-and-technology': [
@@ -619,6 +621,8 @@ export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, st
   'page-events': 'sections.page-events',
   'faq-list': 'sections.faq-list',
   'brand-kit-logos': 'sections.brand-kit-logos',
+  'page-our-services-carousel': 'sections.page-our-services-carousel',
+  'page-project-links': 'sections.page-project-links',
 };
 
 export const SECTION_KEY_TO_CMS: Record<
@@ -918,6 +922,50 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       sectionKey: 'startup-packages',
     },
   ],
+  'build-and-launch': [
+    {
+      name: 'buildLaunchOurServices',
+      component: 'sections.page-our-services-carousel',
+      sectionKey: 'build-launch-our-services',
+    },
+    {
+      name: 'buildAndLaunchRfq',
+      component: 'sections.page-rfq-accordion',
+      sectionKey: 'build-and-launch-rfq',
+    },
+    {
+      name: 'launchPath',
+      component: 'sections.page-process',
+      sectionKey: 'launch-path',
+    },
+    {
+      name: 'packageImage',
+      component: 'sections.page-images',
+      sectionKey: 'package-image',
+    },
+  ],
+  'social-and-community': [
+    { name: 'socialProcess', component: 'sections.page-process', sectionKey: 'social-process' },
+    { name: 'platformImage', component: 'sections.page-images', sectionKey: 'platform-image' },
+    { name: 'socialGallery', component: 'sections.image-gallery', sectionKey: 'social-gallery' },
+  ],
+  'branding-and-creative': [
+    {
+      name: 'brandCapabilities',
+      component: 'sections.page-technologies',
+      sectionKey: 'brand-capabilities',
+    },
+  ],
+  'hosting-and-infrastructure': [
+    {
+      name: 'digitalFoundations',
+      component: 'sections.page-technologies',
+      sectionKey: 'digital-foundations',
+    },
+  ],
+  'learning-and-events': [
+    { name: 'upcomingEvents', component: 'sections.page-events', sectionKey: 'upcoming-events' },
+  ],
   'healthcare-and-wellness': [
     {
       name: 'careGallery',
@@ -1016,17 +1064,6 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       sectionKey: 'social-gallery',
     },
   ],
-  // For You / Solutions (9)
-  'build-and-launch': [
-    { name: 'ourServices', component: 'sections.page-technologies', sectionKey: 'our-services' },
-    {
-      name: 'buildAndLaunchRfq',
-      component: 'sections.page-rfq-accordion',
-      sectionKey: 'build-and-launch-rfq',
-    },
-    { name: 'launchPath', component: 'sections.page-process', sectionKey: 'launch-path' },
-    { name: 'startupPackage', component: 'sections.package-offer', sectionKey: 'startup-package' },
-  ],
   'marketing-and-growth': [
     {
       name: 'growthChallenges',
@@ -1050,7 +1087,7 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     },
     {
       name: 'growthInAction',
-      component: 'sections.page-projects',
+      component: 'sections.page-project-links',
       sectionKey: 'growth-in-action',
     },
   ],
@@ -1059,25 +1096,6 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     { name: 'builtForTheFit', component: 'sections.hero-about', sectionKey: 'built-for-the-fit' },
     { name: 'techLaunchPath', component: 'sections.page-process', sectionKey: 'tech-launch-path' },
     { name: 'ourApproach', component: 'sections.page-technologies', sectionKey: 'our-approach' },
-  ],
-  'branding-and-creative': [
-    {
-      name: 'ourCapabilities',
-      component: 'sections.page-technologies',
-      sectionKey: 'our-capabilities',
-    },
-    {
-      name: 'brandCapabilities',
-      component: 'sections.page-technologies',
-      sectionKey: 'brand-capabilities',
-    },
-    {
-      name: 'builtToBeUsed',
-      component: 'sections.page-technologies',
-      sectionKey: 'built-to-be-used',
-    },
-    { name: 'brandVisibility', component: 'sections.page-process', sectionKey: 'brand-visibility' },
-    { name: 'ourTools', component: 'sections.page-technologies', sectionKey: 'our-tools' },
   ],
   'ai-and-automation': [
     {
@@ -1103,44 +1121,6 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
     },
     { name: 'leadToCustomer', component: 'sections.page-process', sectionKey: 'lead-to-customer' },
     { name: 'salesVisibility', component: 'sections.page-process', sectionKey: 'sales-visibility' },
-  ],
-  'social-and-community': [
-    { name: 'socialProcess', component: 'sections.page-process', sectionKey: 'social-process' },
-    {
-      name: 'socialCapabilities',
-      component: 'sections.page-technologies',
-      sectionKey: 'social-capabilities',
-    },
-    {
-      name: 'platformPresence',
-      component: 'sections.page-technologies',
-      sectionKey: 'platform-presence',
-    },
-    { name: 'buildCommunity', component: 'sections.page-process', sectionKey: 'build-community' },
-    { name: 'socialGallery', component: 'sections.image-gallery', sectionKey: 'social-gallery' },
-  ],
-  'hosting-and-infrastructure': [
-    {
-      name: 'digitalFoundations',
-      component: 'sections.page-technologies',
-      sectionKey: 'digital-foundations',
-    },
-    { name: 'builtForBusiness', component: 'sections.hero-about', sectionKey: 'built-for-business' },
-    {
-      name: 'infrastructureSolutions',
-      component: 'sections.page-technologies',
-      sectionKey: 'infrastructure-solutions',
-    },
-    {
-      name: 'hostingThatFits',
-      component: 'sections.package-offer',
-      sectionKey: 'hosting-that-fits',
-    },
-  ],
-  'learning-and-events': [
-    { name: 'learnYourWay', component: 'sections.package-offer', sectionKey: 'learn-your-way' },
-    { name: 'learningTopics', component: 'sections.page-technologies', sectionKey: 'learning-topics' },
-    { name: 'upcomingEvents', component: 'sections.page-events', sectionKey: 'upcoming-events' },
   ],
   // For You / Packages (9)
   'startup-launch': [
