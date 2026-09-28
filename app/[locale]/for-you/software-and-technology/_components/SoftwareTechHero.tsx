@@ -7,9 +7,14 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import gsap from 'gsap'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
-/** Layout: Home-12 HeroV12 — centered hero + floating images. */
+interface Translation {
+  x: string
+  y: string
+}
+
+/** Layout: Branding-style floating hero images (3 slots) + Home-12 centered copy. */
 const SoftwareTechHero = ({
   badgeTitle = 'Software & Technology',
   title = 'Technology built for your',
@@ -18,119 +23,143 @@ const SoftwareTechHero = ({
     'Design and build software, apps, and digital products that solve real problems and support long-term growth.',
   images,
 }: CmsHeroComponentProps) => {
-  const useStaticHeroImages = !images?.length
-  const image0 = useStaticHeroImages
-    ? { src: '/images/hero-img/software-hero-1.jpg', alt: 'Software development' }
-    : images[0]
-  const image1 = useStaticHeroImages
-    ? { src: '/images/hero-img/software-hero-2.jpg', alt: 'Technology team' }
-    : (images[1] ?? images[0])
+  const decorativeImagePaths = useMemo(
+    () => (images ?? []).map((img) => img.src).filter(Boolean).slice(0, 3),
+    [images],
+  )
 
-  const heroImage1Ref = useRef<HTMLDivElement>(null)
-  const heroImage2Ref = useRef<HTMLDivElement>(null)
-  const heroImage3Ref = useRef<HTMLDivElement>(null)
-  const [isHovered, setIsHovered] = useState(true)
+  const heroButtonRef = useRef<HTMLDivElement>(null)
+  const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
   useEffect(() => {
-    if (!heroImage1Ref.current || !heroImage2Ref.current || !heroImage3Ref.current) return
+    const imagePaths: string[] = [...decorativeImagePaths]
+    if (!imagePaths.length) return
 
-    gsap.set(heroImage1Ref.current, {
-      x: -320,
-      opacity: 0.8,
-      rotate: -20,
-      visibility: 'visible',
-    })
+    const translations: Translation[] = [
+      { x: '-50%', y: '-8%' },
+      { x: '50%', y: '-8%' },
+      { x: '0%', y: '-8%' },
+    ]
 
-    gsap.set(heroImage2Ref.current, {
-      x: 280,
-      opacity: 0.8,
-      rotate: 20,
-      visibility: 'visible',
-    })
+    const decorativeImageElements: HTMLImageElement[] = imagesRef.current.filter(
+      (ref): ref is HTMLImageElement => ref !== null,
+    )
+    const originalSrcs: string[] = decorativeImageElements.map((img) => img.src)
 
-    gsap.set(heroImage3Ref.current, {
-      scale: 0,
-      opacity: 0.8,
-      rotate: -17,
-      visibility: 'visible',
-    })
-  }, [])
+    const handleMouseEnter = (): void => {
+      const shuffledPaths: string[] = [...imagePaths].sort(() => Math.random() - 0.5)
+      const selectedPaths = shuffledPaths.slice(0, decorativeImageElements.length)
 
-  useEffect(() => {
-    if (!heroImage1Ref.current || !heroImage2Ref.current || !heroImage3Ref.current) return
+      decorativeImageElements.forEach((img, index) => {
+        const newImagePath = selectedPaths[index]
+        const translation = translations[index % translations.length]
 
-    const ctx = gsap.context(() => {
-      const image1 = heroImage1Ref.current
-      const image2 = heroImage2Ref.current
-      const image3 = heroImage3Ref.current
+        gsap.to(img, {
+          duration: 0.7,
+          x: translation.x,
+          y: translation.y,
+          opacity: 0,
+          onComplete: () => {
+            img.src = newImagePath
+            gsap.set(img, { x: translation.x, y: translation.y, opacity: 0, scale: 0 })
+            gsap.to(img, { duration: 0.7, opacity: 1, scale: 1 })
+          },
+        })
+      })
+    }
 
-      gsap.killTweensOf([image1, image2, image3])
+    const handleMouseLeave = (): void => {
+      decorativeImageElements.forEach((img, index) => {
+        const translation = translations[index % translations.length]
+        const originalSrc = originalSrcs[index]
 
-      if (isHovered) {
-        gsap.fromTo(
-          image1,
-          { x: -320, opacity: 0.8, rotate: -20 },
-          { duration: 0.5, x: 0, opacity: 1, rotate: 0, ease: 'power2.out' },
-        )
-        gsap.fromTo(
-          image2,
-          { x: 280, opacity: 0.8, rotate: 20 },
-          { duration: 0.5, x: 0, opacity: 1, rotate: 0, ease: 'power2.out' },
-        )
-        gsap.fromTo(
-          image3,
-          { scale: 0, opacity: 0.8, rotate: -17 },
-          { duration: 0.5, scale: 1, opacity: 1, rotate: 0, ease: 'power2.out' },
-        )
-      } else {
-        gsap.fromTo(
-          image1,
-          { x: 0, opacity: 1, rotate: 0 },
-          { duration: 1.2, x: -320, opacity: 0.8, rotate: -20, ease: 'power1.inOut' },
-        )
-        gsap.fromTo(
-          image2,
-          { x: 0, opacity: 1, rotate: 0 },
-          { duration: 1.2, x: 280, opacity: 0.8, rotate: 20, ease: 'power1.inOut' },
-        )
-        gsap.fromTo(
-          image3,
-          { scale: 1, opacity: 1, rotate: 0 },
-          { duration: 1, scale: 0, opacity: 0.8, rotate: -17, ease: 'back.in(1.2)' },
-        )
+        gsap.to(img, {
+          duration: 0.7,
+          x: translation.x,
+          y: translation.y,
+          opacity: 0,
+          onComplete: () => {
+            img.src = originalSrc
+            gsap.set(img, { x: '0%', y: '0%', opacity: 0, scale: 0 })
+            gsap.to(img, { duration: 0.7, opacity: 1, scale: 1 })
+          },
+        })
+      })
+    }
+
+    const buttonElement = heroButtonRef.current
+    if (buttonElement && decorativeImageElements.length > 0) {
+      buttonElement.addEventListener('mouseenter', handleMouseEnter)
+      buttonElement.addEventListener('mouseleave', handleMouseLeave)
+      return () => {
+        buttonElement.removeEventListener('mouseenter', handleMouseEnter)
+        buttonElement.removeEventListener('mouseleave', handleMouseLeave)
       }
-    })
+    }
+  }, [decorativeImagePaths])
 
-    return () => ctx.revert()
-  }, [isHovered])
+  const setImageRef = (index: number) => (el: HTMLImageElement | null) => {
+    imagesRef.current[index] = el
+  }
 
   return (
     <section
-      className="relative overflow-hidden pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-[200px]"
+      className="relative overflow-hidden pb-16 pt-[120px] sm:pt-[135px] md:pb-20 md:pt-[150px] lg:pb-28 lg:pt-44 xl:pb-[160px] xl:pt-[200px]"
       aria-labelledby="software-tech-heading"
     >
-      <div className="container">
+      {decorativeImagePaths[0] ? (
+        <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
+          <img
+            src={decorativeImagePaths[0]}
+            alt={images?.[0]?.alt ?? ''}
+            className="h-[110px] w-[85px] rounded-sm object-cover lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
+            ref={setImageRef(0)}
+          />
+        </figure>
+      ) : null}
+      {decorativeImagePaths[1] ? (
+        <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
+          <img
+            src={decorativeImagePaths[1]}
+            alt={images?.[1]?.alt ?? ''}
+            className="h-[100px] w-[82px] rounded-sm object-cover  lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
+            ref={setImageRef(1)}
+          />
+        </figure>
+      ) : null}
+      {decorativeImagePaths[2] ? (
+        <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
+          <img
+            src={decorativeImagePaths[2]}
+            alt={images?.[2]?.alt ?? ''}
+            className="h-[90px] w-[130px] rounded-sm object-cover lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
+            ref={setImageRef(2)}
+          />
+        </figure>
+      ) : null}
+
+      <div className="container relative z-10">
         <HeroGradientAnimationV2 />
         <RevealWrapper className="mb-3 flex items-center justify-center">
           <SectionLabel>{badgeTitle}</SectionLabel>
         </RevealWrapper>
-        <RevealWrapper className="reveal-me">
+        <RevealWrapper className="reveal-me text-center">
           <h1
-              id="software-tech-heading"
-              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
-            >
-              {title}
-              <br className="hidden lg:block" />
-              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
-            </h1>
+            id="software-tech-heading"
+            className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+          >
+            {title}
+            <br className="hidden lg:block" />
+            {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+          </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <p className="mx-auto mt-3 max-w-3xl text-center text-base leading-relaxed text-[#808080] md:text-lg">
-           From custom software and digital products to integrations and modernization, we build technology that solves real problems and supports how your business works.
+            {description}
           </p>
         </RevealWrapper>
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
-          <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+          <div ref={heroButtonRef}>
             <ButtonComponentList>
               <ButtonComponent href="/contact" variant="primary">
                 Talk to a Technology Expert
@@ -138,15 +167,6 @@ const SoftwareTechHero = ({
             </ButtonComponentList>
           </div>
         </RevealWrapper>
-      </div>
-      <div className="absolute -left-[4.5%] top-[42%] hidden md:block" ref={heroImage1Ref}>
-        <img src={image0.src} alt={image0.alt ?? ''} className="reveal-me" />
-      </div>
-      <div className="absolute -right-[5%] top-[12%] hidden md:block" ref={heroImage2Ref}>
-        <img src={image1.src} alt={image1.alt ?? ''} />
-      </div>
-      <div className="absolute bottom-[0%] right-[18.5%] hidden lg:block" ref={heroImage3Ref}>
-        <img src={image1.src} alt={image1.alt ?? ''} className="reveal-me" />
       </div>
     </section>
   )

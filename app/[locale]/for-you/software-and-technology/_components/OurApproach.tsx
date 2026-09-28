@@ -74,7 +74,7 @@ const OurApproach = ({
               <img
                 src={imageSrc}
                 alt={image?.alt ?? 'Technology approach — build and integrate'}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               />
             </RevealWrapper>
           ) : null}

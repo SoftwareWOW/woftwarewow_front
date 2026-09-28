@@ -86,13 +86,13 @@ const BuildLaunchOurServices = ({
           >
             <Link href={`/event-planner/${service.slug}`}>
               <div className="flex flex-col items-start gap-y-7 md:flex-row md:gap-x-12">
-                <figure className="max-md:w-full">
+                <figure className="relative size-[270px] shrink-0 overflow-hidden rounded-radius-sm">
                   <Image
-                    width={270}
-                    height={270}
                     src={String(service.coverImage ?? '')}
                     alt={String(service.title ?? 'Service')}
-                    className="h-auto w-full rounded-radius-sm"
+                    fill
+                    sizes="270px"
+                    className="object-cover"
                   />
                 </figure>
                 <div className="flex flex-col justify-between">
