@@ -6,12 +6,16 @@ import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 import Link from 'next/link'
 
-const avatars = [
-  '/images/avatar/review-1.png',
-  '/images/avatar/review-2.png',
-  '/images/avatar/review-3.png',
-  '/images/avatar/review-4.png',
-]
+const HERO_REVIEW_AVATARS = [
+  '/images/home-5/review-1.png',
+  '/images/home-5/review-2.png',
+  '/images/home-5/review-3.png',
+] as const
+
+const STATIC_HERO_MAIN_IMAGE = {
+  src: '/images/home-5/hero-img.png',
+  alt: 'Learning and events',
+}
 
 /** Layout: Home-05 HeroV5 — two-column hero with social proof + dual CTAs. */
 const LearningEventsHero = ({
@@ -22,8 +26,10 @@ const LearningEventsHero = ({
     'Access workshops, events, and learning experiences designed to help businesses build skills and make better decisions.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0]
-  const heroMedia = images?.[1] ?? image0
+  const cmsMain = images?.[0]
+  const mainHeroImage = cmsMain?.src
+    ? { src: cmsMain.src, alt: cmsMain.alt ?? STATIC_HERO_MAIN_IMAGE.alt }
+    : STATIC_HERO_MAIN_IMAGE
 
   return (
     <section
@@ -78,44 +84,37 @@ const LearningEventsHero = ({
             </figure>
 
             <div className="my-3 flex items-center [&>*:not(:first-child)]:-ml-4">
-              {avatars.map((src) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt=""
-                  className="size-[52px] rounded-full border-2 border-background object-cover dark:border-secondary"
-                />
+              {HERO_REVIEW_AVATARS.map((src) => (
+                <img key={src} src={src} alt="" className="size-[52px] rounded-full object-cover" />
               ))}
-              {heroMedia?.src ? (
-                <Link
-                  href="/wowevents"
-                  className="group relative size-[52px] shrink-0 cursor-pointer rounded-full border-[1.9px] border-backgroundBody bg-secondary p-4 dark:bg-backgroundBody"
-                  aria-label="View events"
-                >
-                  <figure>
-                    <img
-                      src={heroMedia.src}
-                      alt={heroMedia.alt ?? ''}
-                      className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
-                    />
-                    <img
-                      src={heroMedia.src}
-                      alt={heroMedia.alt ?? ''}
-                      className="absolute inline -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:hidden"
-                    />
-                    <img
-                      src={heroMedia.src}
-                      alt={heroMedia.alt ?? ''}
-                      className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:inline"
-                    />
-                    <img
-                      src={heroMedia.src}
-                      alt={heroMedia.alt ?? ''}
-                      className="absolute hidden -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:inline"
-                    />
-                  </figure>
-                </Link>
-              ) : null}
+              <Link
+                href="/wowevents"
+                className="group relative size-[52px] shrink-0 cursor-pointer rounded-full border-[1.9px] border-backgroundBody bg-secondary p-4 dark:bg-backgroundBody"
+                aria-label="View events"
+              >
+                <figure>
+                  <img
+                    src="/images/home-5/ArrowUpRight.svg"
+                    alt=""
+                    className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
+                  />
+                  <img
+                    src="/images/home-5/ArrowUpRight.svg"
+                    alt=""
+                    className="absolute inline -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:hidden"
+                  />
+                  <img
+                    src="/images/home-5/ArrowUpRight-dark.svg"
+                    alt=""
+                    className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:inline"
+                  />
+                  <img
+                    src="/images/home-5/ArrowUpRight-dark.svg"
+                    alt=""
+                    className="absolute hidden -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:inline"
+                  />
+                </figure>
+              </Link>
             </div>
 
             <p className="text-base leading-[1.2] text-secondary dark:text-backgroundBody">
@@ -139,15 +138,13 @@ const LearningEventsHero = ({
           </div>
         </div>
 
-        {heroMedia?.src ? (
-          <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
-            <img
-              src={heroMedia.src}
-              alt={heroMedia.alt ?? ''}
-              className="h-auto w-full rounded-radius-md object-cover"
-            />
-          </RevealWrapper>
-        ) : null}
+        <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
+          <img
+            src={mainHeroImage.src}
+            alt={mainHeroImage.alt}
+            className="h-auto w-full rounded-radius-md object-cover"
+          />
+        </RevealWrapper>
       </RevealWrapper>
     </section>
   )

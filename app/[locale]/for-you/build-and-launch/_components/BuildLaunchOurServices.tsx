@@ -84,8 +84,8 @@ const BuildLaunchOurServices = ({
             className="group rounded-radius-sm border p-5 dark:border-dark md:w-[740px] md:p-[30px] lg:w-[890px]"
             key={service.slug}
           >
-            <Link href={`/event-planner/${service.slug}`}>
-              <div className="flex flex-col items-start gap-y-7 md:flex-row md:gap-x-12">
+            <Link href={`/event-planner/${service.slug}`} className="block w-full">
+              <div className="flex w-full flex-col gap-y-7 md:flex-row md:gap-x-12">
                 <figure className="relative size-[270px] shrink-0 overflow-hidden rounded-radius-sm">
                   <Image
                     src={String(service.coverImage ?? '')}
@@ -95,7 +95,7 @@ const BuildLaunchOurServices = ({
                     className="object-cover"
                   />
                 </figure>
-                <div className="flex flex-col justify-between">
+                <div className="flex min-w-0 flex-1 flex-col justify-between md:min-h-[270px]">
                   <figure className="relative mb-[50px] mt-2 hidden size-20 cursor-pointer self-end overflow-hidden rounded-radius-sm border border-transparent bg-primary p-7 transition-all duration-500 md:block lg:p-8">
                     <WhiteArrowIcon className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0" />
                     <WhiteArrowIcon className="absolute -translate-x-[47px] translate-y-16 opacity-0 transition-all duration-500 group-hover:-translate-y-[3px] group-hover:translate-x-0 group-hover:opacity-100" />

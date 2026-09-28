@@ -34,19 +34,21 @@ const SocialProcess = ({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-20 md:flex-row">
+        <RevealWrapper className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-12 lg:gap-16">
           {processImageSrc ? (
-            <figure className="overflow-hidden rounded-radius-md md:shrink-0">
+            <figure className="relative mx-auto h-[240px] w-full max-w-[570px] shrink-0 overflow-hidden rounded-radius-md sm:h-[320px] md:mx-0 md:h-auto md:w-[570px]">
               <img
                 src={processImageSrc}
                 alt={image?.alt ?? 'Social and community process'}
-                className="h-auto w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
+                width={570}
+                height={389}
               />
             </figure>
           ) : null}
 
-          <div>
-            <ul className="relative space-y-10 border-secondary dark:border-backgroundBody md:border-l lg:space-y-28 xl:space-y-[170px]">
+          <div className="min-w-0 flex-1">
+            <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l md:space-y-10 lg:space-y-12">
               {displaySteps.map((step) => (
                 <li key={step.number} className="max-w-max px-10">
                   <div className="absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:-left-[52px] lg:px-6 lg:py-8">
@@ -56,7 +58,7 @@ const SocialProcess = ({
                   </div>
                   <div className="ml-[30px]">
                     <h3>{step.title}</h3>
-                    <p className="mt-5 max-w-[483px] text-base leading-relaxed text-[#808080]">{step.description}</p>
+                    <p className="mt-3 max-w-[483px] text-base leading-relaxed text-[#808080]">{step.description}</p>
                   </div>
                 </li>
               ))}

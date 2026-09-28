@@ -5,11 +5,20 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
-import VideoModal from '@/components/shared/VideoModal'
 import Link from 'next/link'
-import { useState } from 'react'
 
-/** Layout: Home-16 HeroV16 — split outcome headline + trust/media. */
+const HERO_AVATARS = [
+  { src: '/images/avatar/review-19.png', alt: 'Client review' },
+  { src: '/images/avatar/review-20.png', alt: 'Client review' },
+  { src: '/images/avatar/review-21.png', alt: 'Client review' },
+] as const
+
+const STATIC_HERO_MAIN_IMAGE = {
+  src: '/images/hero-img/video-img.png',
+  alt: 'Marketing and growth overview',
+}
+
+/** Layout: Home-16 HeroV16 — split headline + trust avatars + main hero image (CMS). */
 const MarketingGrowthHero = ({
   badgeTitle = 'Marketing & Growth',
   title = 'Marketing that drives',
@@ -18,15 +27,10 @@ const MarketingGrowthHero = ({
     'Build stronger visibility, better campaigns, and smarter systems that help your business attract, convert, and retain customers.',
   images,
 }: CmsHeroComponentProps) => {
-  const useStaticHeroImages = !images?.length
-  const image0 = useStaticHeroImages
-    ? { src: '/images/hero-img/marketing-hero-1.jpg', alt: 'Marketing and growth strategy' }
-    : images[0]
-  const image1 = useStaticHeroImages
-    ? { src: '/images/hero-img/marketing-hero-2.jpg', alt: 'Growth marketing team' }
-    : (images[1] ?? images[0])
-
-  const [open, setOpen] = useState(false)
+  const cmsMain = images?.[0]
+  const mainImage = cmsMain?.src
+    ? { src: cmsMain.src, alt: cmsMain.alt ?? STATIC_HERO_MAIN_IMAGE.alt }
+    : STATIC_HERO_MAIN_IMAGE
 
   return (
     <section
@@ -51,21 +55,19 @@ const MarketingGrowthHero = ({
             </RevealWrapper>
             <RevealWrapper className="reveal-me">
               <h1
-              id="marketing-growth-heading"
-              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
-            >
-              {title}
-              <br className="hidden lg:block" />
-              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
-            </h1>
+                id="marketing-growth-heading"
+                className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+              >
+                {title}
+                <br className="hidden lg:block" />
+                {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+              </h1>
             </RevealWrapper>
-            <RevealWrapper className="reveal-me mt-3">
-              {description ? (
-            <RevealWrapper className="reveal-me mt-3">
-              <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
-            </RevealWrapper>
-          ) : null}
-            </RevealWrapper>
+            {description ? (
+              <RevealWrapper className="reveal-me mt-3">
+                <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+              </RevealWrapper>
+            ) : null}
             <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
               <ButtonComponentList className="flex" itemClassName="block">
                 <ButtonComponent href="/contact" variant="primary">
@@ -78,25 +80,18 @@ const MarketingGrowthHero = ({
           <RevealWrapper className="reveal-me w-full lg:w-[34%]">
             <div className="flex items-center gap-x-5 lg:flex-col xl:flex-row">
               <div className="my-3 flex [&>*:not(:first-child)]:-ml-4">
-                <img
-                  src={image0.src}
-                  className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  alt={image0.alt ?? ''}
-                />
-                <img
-                  src={image1.src}
-                  className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  alt={image1.alt ?? ''}
-                />
-                <img
-                  src={image1.src}
-                  className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  alt={image1.alt ?? ''}
-                />
-                <Link href="/contact">
+                {HERO_AVATARS.map((avatar) => (
+                  <img
+                    key={avatar.src}
+                    src={avatar.src}
+                    className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
+                    alt={avatar.alt}
+                  />
+                ))}
+                <Link href="/team">
                   <figure className="duration-300 ease-in-out hover:scale-105 max-md:size-12">
-                    <img src={image1.src} className="block dark:hidden" alt={image1.alt ?? ''} />
-                    <img src={image1.src} alt={image1.alt ?? ''} className="hidden dark:block" />
+                    <img src="/images/icons/plus-icon.svg" className="block dark:hidden" alt="" />
+                    <img src="/images/icons/plus-icon-white.svg" alt="" className="hidden dark:block" />
                   </figure>
                 </Link>
               </div>
@@ -106,34 +101,12 @@ const MarketingGrowthHero = ({
                 businesses worldwide
               </p>
             </div>
-            <div
-              className="hero-video-container group relative mt-5 h-full w-full cursor-pointer overflow-hidden rounded-radius-md md:mt-[30px]"
-              onClick={() => setOpen(true)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  setOpen(true)
-                }
-              }}
-              role="button"
-              tabIndex={0}
-            >
-              <button type="button" className="absolute left-[45%] top-[40%] -translate-x-[45%]" aria-label="Play video">
-                <div className="flex size-12 transform items-center justify-center rounded-full bg-secondary transition-transform duration-300 group-hover:scale-105 dark:bg-backgroundBody md:size-[60px]">
-                  <svg xmlns="http://www.w3.org/2000/svg" width={15} height={18} viewBox="0 0 15 18" fill="none">
-                    <path
-                      d="M14.4886 8.40229L1.47805 0.667204C1.36852 0.601523 1.24296 0.565438 1.1143 0.562672C0.985649 0.559906 0.858564 0.590558 0.74616 0.651467C0.633755 0.712376 0.540101 0.801336 0.474856 0.90917C0.409612 1.017 0.375142 1.13981 0.375 1.26491V16.7351C0.375142 16.8602 0.409612 16.983 0.474856 17.0908C0.540101 17.1987 0.633755 17.2876 0.74616 17.3485C0.858564 17.4094 0.985649 17.4401 1.1143 17.4373C1.24296 17.4346 1.36852 17.3985 1.47805 17.3328L14.4886 9.59771C14.5954 9.53629 14.684 9.44887 14.7454 9.34406C14.8069 9.23925 14.8393 9.12066 14.8393 9C14.8393 8.87934 14.8069 8.76076 14.7454 8.65594C14.684 8.55113 14.5954 8.46371 14.4886 8.40229V8.40229Z"
-                      className="fill-backgroundBody dark:fill-[#181818]"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <img src={image1.src} alt={image1.alt ?? ''} className="w-full" />
-            </div>
+            <figure className="relative mt-5 h-full w-full overflow-hidden rounded-radius-md md:mt-[30px]">
+              <img src={mainImage.src} alt={mainImage.alt} className="h-auto w-full object-cover" />
+            </figure>
           </RevealWrapper>
         </div>
       </div>
-      <VideoModal open={open} setOpen={setOpen} />
     </section>
   )
 }
