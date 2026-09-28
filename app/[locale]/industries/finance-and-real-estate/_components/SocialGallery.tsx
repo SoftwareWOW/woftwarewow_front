@@ -11,6 +11,7 @@ type GalleryItem = {
   id: number
   image: string
   link: string
+  alt?: string
 }
 
 const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [

@@ -22,7 +22,7 @@ export function resolveCmsImage(
 }
 
 export function resolveCmsImageSrc(
-  cmsImage?: { image?: { url?: string } | null } | null,
+  cmsImage?: { image?: StrapiMedia | null; alt?: string | null } | null,
   fallbackPath?: string,
 ): string | undefined {
   return resolveCmsImage(cmsImage, fallbackPath ? { path: fallbackPath } : undefined)?.src;

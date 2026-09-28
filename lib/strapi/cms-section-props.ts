@@ -134,11 +134,12 @@ export function mergePackageListItems<
     image?: string;
     button?: string;
   },
->(defaults: T[], cmsSection?: CmsPackageListSection | null): T[] {
-  if (!cmsSection?.items?.length) return defaults;
+>(defaults: T[], cmsSection?: Partial<CmsPackageListSection> | null): T[] {
+  const items = cmsSection?.items;
+  if (!items?.length) return defaults;
 
   return defaults.map((item, index) => {
-    const cms = cmsSection.items[index];
+    const cms = items[index];
     if (!cms) return item;
 
     return {

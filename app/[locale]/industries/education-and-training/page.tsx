@@ -22,7 +22,7 @@ import HowItWorks from './_components/HowItWorks'
 import MissionSolutions from './_components/MissionSolutions'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import SocialGallery from './_components/SocialGallery'
-import { getSuperagencyDivisions } from '@/lib/strapi/fetchers/superagency'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
@@ -42,13 +42,13 @@ export default async function EducationAndTrainingPage({ params }: Props) {
   setRequestLocale(locale as Locale)
 
   const typedLocale = locale as Locale
-  const [cms, divisionRecords] = await Promise.all([
+  const [cms, homepage] = await Promise.all([
     loadSuperagencyPage(PAGE_SLUG, typedLocale),
-    getSuperagencyDivisions(typedLocale),
+    getSuperagencyHomepage(typedLocale),
   ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
-  const divisions = mapStrapiDivisions(divisionRecords)
+  const divisions = mapStrapiDivisions(homepage.divisions)
 
   return (
     <LayoutOne>

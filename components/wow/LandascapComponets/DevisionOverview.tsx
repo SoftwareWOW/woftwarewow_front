@@ -97,8 +97,16 @@ function renderDivisionTitle(title: string) {
   return renderWowInTitle(title)
 }
 
+export type DevisionOverviewItem = {
+  id: number
+  title: string
+  description: string
+  bgImage: string
+  href: string
+}
+
 type DevisionOverviewProps = {
-  divisions?: typeof divisions
+  divisions?: DevisionOverviewItem[]
 }
 
 const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) => {

@@ -72,13 +72,13 @@ const TravelBlogs = (cmsSection: TravelBlogsProps = {}) => {
 
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
           {mergedItems.map((item) => (
-            <div key={item.number ?? item.index ?? item.title} className="relative">
+            <div key={item.number ?? item.title} className="relative">
               <RevealWrapper as="figure" className="reveal-me w-full">
                 <img src={item.image} alt={item.title} className="h-auto w-full rounded-radius-md object-cover" />
               </RevealWrapper>
               <RevealWrapper className="reveal-me absolute inset-x-[5px] top-[22%] mx-auto max-w-[calc(100%-10px)] rounded-radius-md bg-backgroundBody px-6 pb-8 pt-6 dark:bg-dark sm:top-[38%] md:top-1/2 lg:top-3/4">
                 <div className="mb-4 flex items-center justify-center gap-3">
-                  <span className="font-instrument text-2xl italic leading-none">{item.number ?? item.index}</span>
+                  <span className="font-instrument text-2xl italic leading-none">{item.number}</span>
                   <div className="blog-title">
                     <Link href={item.href}>
                       <h3 className="text-center text-[28px] font-normal lg:text-[34px] lg:leading-[1.05]">
