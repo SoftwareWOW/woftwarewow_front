@@ -5,12 +5,16 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
-import Link from 'next/link'
 
+const TEAM_HERO_IMAGE_BASE = '/images/wow/Hero/career/team'
+
+/** Avatar wrap.png first (face visible), then numbered wraps — static only, no links. */
 const HERO_AVATARS = [
-  { src: '/images/avatar/review-19.png', alt: 'Client review' },
-  { src: '/images/avatar/review-20.png', alt: 'Client review' },
-  { src: '/images/avatar/review-21.png', alt: 'Client review' },
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-1.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-2.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-3.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-4.png`,
 ] as const
 
 const STATIC_HERO_MAIN_IMAGE = {
@@ -80,20 +84,14 @@ const MarketingGrowthHero = ({
           <RevealWrapper className="reveal-me w-full lg:w-[34%]">
             <div className="flex items-center gap-x-5 lg:flex-col xl:flex-row">
               <div className="my-3 flex [&>*:not(:first-child)]:-ml-4">
-                {HERO_AVATARS.map((avatar) => (
+                {HERO_AVATARS.map((src) => (
                   <img
-                    key={avatar.src}
-                    src={avatar.src}
-                    className="size-12 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                    alt={avatar.alt}
+                    key={src}
+                    src={encodeURI(src)}
+                    alt=""
+                    className="size-12 shrink-0 rounded-full border-2 border-secondary object-cover md:size-[60px]"
                   />
                 ))}
-                <Link href="/team">
-                  <figure className="duration-300 ease-in-out hover:scale-105 max-md:size-12">
-                    <img src="/images/icons/plus-icon.svg" className="block dark:hidden" alt="" />
-                    <img src="/images/icons/plus-icon-white.svg" alt="" className="hidden dark:block" />
-                  </figure>
-                </Link>
               </div>
               <p className="text-[17px] leading-[1.4] text-[#808080]">
                 Trusted by growing

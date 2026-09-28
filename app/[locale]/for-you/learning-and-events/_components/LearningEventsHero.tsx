@@ -4,16 +4,19 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
-import Link from 'next/link'
+const TEAM_HERO_IMAGE_BASE = '/images/wow/Hero/career/team'
 
+/** Avatar wrap.png first (face visible), then numbered wraps — static only. */
 const HERO_REVIEW_AVATARS = [
-  '/images/home-5/review-1.png',
-  '/images/home-5/review-2.png',
-  '/images/home-5/review-3.png',
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-1.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-2.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-3.png`,
+  `${TEAM_HERO_IMAGE_BASE}/Avatar wrap-4.png`,
 ] as const
 
 const STATIC_HERO_MAIN_IMAGE = {
-  src: '/images/home-5/hero-img.png',
+  src: `${TEAM_HERO_IMAGE_BASE}/teamimage.png`,
   alt: 'Learning and events',
 }
 
@@ -85,36 +88,13 @@ const LearningEventsHero = ({
 
             <div className="my-3 flex items-center [&>*:not(:first-child)]:-ml-4">
               {HERO_REVIEW_AVATARS.map((src) => (
-                <img key={src} src={src} alt="" className="size-[52px] rounded-full object-cover" />
+                <img
+                  key={src}
+                  src={encodeURI(src)}
+                  alt=""
+                  className="size-[52px] shrink-0 rounded-full object-cover"
+                />
               ))}
-              <Link
-                href="/wowevents"
-                className="group relative size-[52px] shrink-0 cursor-pointer rounded-full border-[1.9px] border-backgroundBody bg-secondary p-4 dark:bg-backgroundBody"
-                aria-label="View events"
-              >
-                <figure>
-                  <img
-                    src="/images/home-5/ArrowUpRight.svg"
-                    alt=""
-                    className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
-                  />
-                  <img
-                    src="/images/home-5/ArrowUpRight.svg"
-                    alt=""
-                    className="absolute inline -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:hidden"
-                  />
-                  <img
-                    src="/images/home-5/ArrowUpRight-dark.svg"
-                    alt=""
-                    className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:inline"
-                  />
-                  <img
-                    src="/images/home-5/ArrowUpRight-dark.svg"
-                    alt=""
-                    className="absolute hidden -translate-x-5 translate-y-6 opacity-0 transition-all duration-500 group-hover:-translate-x-[2px] group-hover:translate-y-[1%] group-hover:opacity-100 dark:inline"
-                  />
-                </figure>
-              </Link>
             </div>
 
             <p className="text-base leading-[1.2] text-secondary dark:text-backgroundBody">
