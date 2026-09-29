@@ -6,60 +6,25 @@ import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
-import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
-import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import type { CmsRfqAccordionSection } from '@/lib/strapi/mappers/page-sections'
 
-const DEFAULT_ITEMS = [
-  {
-    id: 1,
-    title: 'Lead Generation',
-    subtitle: 'Outbound and inbound systems for creating qualified opportunities.',
-  },
-  {
-    id: 2,
-    title: 'Sales Funnel Setup',
-    subtitle: 'Landing pages, conversion paths, and lead capture flows.',
-  },
-  {
-    id: 3,
-    title: 'CRM Optimization',
-    subtitle: 'Pipeline stages, lead organization, workflows, and follow-up structure.',
-  },
-  {
-    id: 4,
-    title: 'Sales Automation',
-    subtitle: 'Automated reminders, nurture flows, routing, and repetitive tasks.',
-  },
-  {
-    id: 5,
-    title: 'Outbound Campaigns',
-    subtitle: 'Structured outreach campaigns across appropriate channels.',
-  },
-  {
-    id: 6,
-    title: 'Reporting & Optimization',
-    subtitle: 'Pipeline tracking, conversion analysis, and ongoing improvement.',
-  },
-]
-
-type Props = Partial<CmsTechnologiesSection>
+type Props = Partial<CmsRfqAccordionSection>
 
 /** Layout: SolutionToChallenges / StartWithTheWork — accordion closed by default. */
-const WhatsIncluded = ({
-  eyebrow = "What's Included",
-  title = 'Everything your sales system needs to move faster.',
-  description = 'A connected set of acquisition, automation, CRM, and conversion essentials.',
-  items,
-}: Props = {}) => {
-  const mergedItems = mergeFeatureItems(
-    DEFAULT_ITEMS.map(({ title: t, subtitle }) => ({ title: t, description: subtitle })),
-    items,
-  ).map((item, index) => ({
-    ...DEFAULT_ITEMS[index],
-    title: item.title,
-    subtitle: item.description ?? DEFAULT_ITEMS[index].subtitle,
-  }))
+const WhatsIncluded = ({ eyebrow, title, description, groups }: Props = {}) => {
+  const displayGroups =
+    groups?.map((group, index) => ({
+      id: index + 1,
+      title: group.title,
+      subtitle: group.subtitle ?? '',
+      detail: group.items?.length ? group.items.join('\n') : group.subtitle ?? '',
+    })) ?? []
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  if (!displayGroups.length && !title) {
+    return null
+  }
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
@@ -93,81 +58,93 @@ const WhatsIncluded = ({
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <div className="mb-10 text-center md:mb-20">
-          <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>{eyebrow}</SectionLabel>
-          </RevealWrapper>
-          <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 w-full md:mb-8">{title}</h2>
-          </RevealWrapper>
-          <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
-          </RevealWrapper>
+          {eyebrow ? (
+            <RevealWrapper className="reveal-me mb-3 flex justify-center">
+              <SectionLabel>{eyebrow}</SectionLabel>
+            </RevealWrapper>
+          ) : null}
+          {title ? (
+            <RevealWrapper className="reveal-me">
+              <h2 className="mx-auto mb-5 w-full md:mb-8">{title}</h2>
+            </RevealWrapper>
+          ) : null}
+          {description ? (
+            <RevealWrapper className="reveal-me">
+              <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
+            </RevealWrapper>
+          ) : null}
         </div>
 
-        <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
-          {mergedItems.map((item, index) => {
-            const isActive = activeIndex === index
+        {displayGroups.length ? (
+          <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
+            {displayGroups.map((item, index) => {
+              const isActive = activeIndex === index
 
-            return (
-              <div
-                key={item.id}
-                className={`accordion-item relative w-full rounded-radius-sm border bg-backgroundBody px-5 py-0 duration-300 dark:bg-dark ${
-                  isActive ? 'open active border-black dark:border-white/10' : 'border-black/10 dark:border-white/10'
-                }`}
-                data-active={isActive ? true : false}
-              >
+              return (
                 <div
-                  className={`accordion-header group relative flex w-full cursor-pointer items-start justify-between gap-4 py-[35px] ${
-                    isActive ? 'active' : ''
+                  key={item.id}
+                  className={`accordion-item relative w-full rounded-radius-sm border bg-backgroundBody px-5 py-0 duration-300 dark:bg-dark ${
+                    isActive ? 'open active border-black dark:border-white/10' : 'border-black/10 dark:border-white/10'
                   }`}
-                  onClick={() => toggleAccordion(index)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      toggleAccordion(index)
-                    }
-                  }}
-                  aria-expanded={isActive}
+                  data-active={isActive ? true : false}
                 >
-                  <h3 className="flex min-w-0 flex-1 flex-col gap-y-3 font-outfit text-[25px] font-[500px] leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:font-medium md:leading-[1.2] lg:text-3xl">
-                    <span className="block w-full uppercase">{item.title}</span>
-                    <span className="block w-full pr-[2px] text-base font-normal text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
-                      {item.subtitle}
-                    </span>
-                  </h3>
                   <div
-                    className={`flex size-[60px] shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-colors duration-300 group-hover:bg-primary/50 dark:group-hover:bg-[#1F1F1F] md:size-[65px] lg:size-[79px] ${
-                      isActive ? 'bg-primary/50 dark:bg-[#1F1F1F]' : ''
+                    className={`accordion-header group relative flex w-full cursor-pointer items-start justify-between gap-4 py-[35px] ${
+                      isActive ? 'active' : ''
                     }`}
+                    onClick={() => toggleAccordion(index)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        toggleAccordion(index)
+                      }
+                    }}
+                    aria-expanded={isActive}
                   >
-                    <ArrowDown
-                      aria-hidden
-                      className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out ${
-                        isActive ? 'rotate-180' : ''
+                    <h3 className="flex min-w-0 flex-1 flex-col gap-y-3 font-outfit text-[25px] font-[500px] leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:font-medium md:leading-[1.2] lg:text-3xl">
+                      <span className="block w-full uppercase">{item.title}</span>
+                      {item.subtitle ? (
+                        <span className="block w-full pr-[2px] text-base font-normal text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                          {item.subtitle}
+                        </span>
+                      ) : null}
+                    </h3>
+                    <div
+                      className={`flex size-[60px] shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-colors duration-300 group-hover:bg-primary/50 dark:group-hover:bg-[#1F1F1F] md:size-[65px] lg:size-[79px] ${
+                        isActive ? 'bg-primary/50 dark:bg-[#1F1F1F]' : ''
                       }`}
-                      strokeWidth={2}
-                    />
-                  </div>
-                </div>
-                <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="accordion-body pb-10 duration-300">
-                      <p className="text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] dark:text-[#999999]">
-                        {item.subtitle}
-                      </p>
+                    >
+                      <ArrowDown
+                        aria-hidden
+                        className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out ${
+                          isActive ? 'rotate-180' : ''
+                        }`}
+                        strokeWidth={2}
+                      />
                     </div>
                   </div>
+                  {item.detail ? (
+                    <div
+                      className={`grid transition-all duration-300 ease-in-out ${
+                        isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="accordion-body pb-10 duration-300">
+                          <p className="text-[17px] leading-[1.5] tracking-[0.36px] text-[#555555] dark:text-[#999999]">
+                            {item.detail}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-              </div>
-            )
-          })}
-        </RevealWrapper>
+              )
+            })}
+          </RevealWrapper>
+        ) : null}
       </div>
     </section>
   )

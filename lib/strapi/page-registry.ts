@@ -10,6 +10,7 @@ export type CmsSectionType =
   | 'hero'
   | 'page-rfq'
   | 'page-technologies'
+  | 'page-technologies-items-only'
   | 'page-projects'
   | 'page-client-stories'
   | 'page-portfolio-explorer'
@@ -394,8 +395,8 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       ],
       'business-growth': [
         { sectionKey: 'business-growth-hero', cms: 'hero' },
-        { sectionKey: 'built-for-growth', cms: 'hero-about' },
-        { sectionKey: 'growth-pieces', cms: 'page-technologies' },
+        { sectionKey: 'built-for-growth', cms: 'page-technologies' },
+        { sectionKey: 'growth-pieces', cms: 'page-technologies-items-only' },
         { sectionKey: 'connected-growth', cms: 'page-process' },
         { sectionKey: 'how-it-works', cms: 'page-process' },
         { sectionKey: 'wow-growth-cta', cms: null },
@@ -420,7 +421,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
       'website-growth-engine': [
         { sectionKey: 'website-growth-engine-hero', cms: 'hero' },
         { sectionKey: 'built-to-perform', cms: 'page-technologies' },
-        { sectionKey: 'whats-included', cms: 'page-technologies' },
+        { sectionKey: 'whats-included', cms: 'page-technologies-items-only' },
         { sectionKey: 'website-journey', cms: 'page-process' },
         { sectionKey: 'specialist-expertise', cms: 'page-technologies' },
         { sectionKey: 'wow-growth-cta', cms: null },
@@ -597,6 +598,7 @@ export const HEADER_PAGE_SECTION_REGISTRY: PageSectionManifest[] = [
 export const CMS_TO_COMPONENT: Record<Exclude<CmsSectionType, null | 'hero'>, string> = {
   'page-rfq': 'sections.page-rfq',
   'page-technologies': 'sections.page-technologies',
+  'page-technologies-items-only': 'sections.page-technologies-items-only',
   'page-projects': 'sections.page-projects',
   'page-client-stories': 'sections.page-client-stories',
   'page-portfolio-explorer': 'sections.page-portfolio-explorer',
@@ -1124,97 +1126,45 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
   ],
   // For You / Packages (9)
   'startup-launch': [
-    {
-      name: 'launchFoundations',
-      component: 'sections.page-technologies',
-      sectionKey: 'launch-foundations',
-    },
     { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
-    { name: 'launchJourney', component: 'sections.page-process', sectionKey: 'launch-journey' },
   ],
   'business-growth': [
-    { name: 'builtForGrowth', component: 'sections.hero-about', sectionKey: 'built-for-growth' },
-    { name: 'growthPieces', component: 'sections.page-technologies', sectionKey: 'growth-pieces' },
+    { name: 'builtForGrowth', component: 'sections.page-technologies', sectionKey: 'built-for-growth' },
+    {
+      name: 'growthPieces',
+      component: 'sections.page-technologies-items-only',
+      sectionKey: 'growth-pieces',
+    },
     { name: 'connectedGrowth', component: 'sections.page-process', sectionKey: 'connected-growth' },
-    { name: 'howItWorks', component: 'sections.page-process', sectionKey: 'how-it-works' },
   ],
-  'digital-transformation': [
-    { name: 'theGap', component: 'sections.hero-about', sectionKey: 'the-gap' },
-    {
-      name: 'transformationPlan',
-      component: 'sections.page-technologies',
-      sectionKey: 'transformation-plan',
-    },
-    {
-      name: 'beforeAfterGap',
-      component: 'sections.page-technologies',
-      sectionKey: 'before-after-gap',
-    },
-    {
-      name: 'transformationPriorities',
-      component: 'sections.page-technologies',
-      sectionKey: 'transformation-priorities',
-    },
-    {
-      name: 'modernizationPath',
-      component: 'sections.page-process',
-      sectionKey: 'modernization-path',
-    },
-  ],
+  'digital-transformation': [],
   'brand-authority': [
-    {
-      name: 'authorityFoundation',
-      component: 'sections.page-technologies',
-      sectionKey: 'authority-foundation',
-    },
     { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
-    { name: 'authorityJourney', component: 'sections.page-process', sectionKey: 'authority-journey' },
-    {
-      name: 'specialistExpertise',
-      component: 'sections.page-technologies',
-      sectionKey: 'specialist-expertise',
-    },
   ],
   'website-growth-engine': [
-    { name: 'builtToPerform', component: 'sections.page-technologies', sectionKey: 'built-to-perform' },
-    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
-    { name: 'websiteJourney', component: 'sections.page-process', sectionKey: 'website-journey' },
     {
-      name: 'specialistExpertise',
-      component: 'sections.page-technologies',
-      sectionKey: 'specialist-expertise',
+      name: 'whatsIncluded',
+      component: 'sections.page-technologies-items-only',
+      sectionKey: 'whats-included',
     },
   ],
   'sales-acceleration': [
-    { name: 'salesGaps', component: 'sections.page-technologies', sectionKey: 'sales-gaps' },
-    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
+    {
+      name: 'whatsIncludedRfq',
+      component: 'sections.page-rfq-accordion',
+      sectionKey: 'whats-included-rfq',
+    },
     {
       name: 'accelerationJourney',
       component: 'sections.page-process',
       sectionKey: 'acceleration-journey',
     },
-    {
-      name: 'connectedExpertise',
-      component: 'sections.page-technologies',
-      sectionKey: 'connected-expertise',
-    },
   ],
   'enterprise-infrastructure': [
-    {
-      name: 'businessCriticalOperations',
-      component: 'sections.page-technologies',
-      sectionKey: 'business-critical-operations',
-    },
-    { name: 'whatsIncluded', component: 'sections.page-technologies', sectionKey: 'whats-included' },
     {
       name: 'infrastructureJourney',
       component: 'sections.page-process',
       sectionKey: 'infrastructure-journey',
-    },
-    {
-      name: 'connectedExpertise',
-      component: 'sections.page-technologies',
-      sectionKey: 'connected-expertise',
     },
   ],
   'ai-automation': [
@@ -1223,43 +1173,9 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       component: 'sections.page-rfq-accordion',
       sectionKey: 'start-with-the-repetitive',
     },
-    { name: 'aiPackageCard', component: 'sections.package-offer', sectionKey: 'ai-package-card' },
-    { name: 'automationTools', component: 'sections.page-technologies', sectionKey: 'automation-tools' },
-    {
-      name: 'fromIdeaToAutomation',
-      component: 'sections.page-process',
-      sectionKey: 'from-idea-to-automation',
-    },
-    { name: 'automationFaq', component: 'sections.page-faq', sectionKey: 'automation-faq' },
   ],
   'saas-product-development': [
-    {
-      name: 'fromIdeaToProduct',
-      component: 'sections.page-rfq-accordion',
-      sectionKey: 'from-idea-to-product',
-    },
-    { name: 'saasPackageCard', component: 'sections.package-offer', sectionKey: 'saas-package-card' },
-    {
-      name: 'saasTransformPlan',
-      component: 'sections.page-technologies',
-      sectionKey: 'saas-transform-plan',
-    },
-    {
-      name: 'ideaToProductPath',
-      component: 'sections.page-process',
-      sectionKey: 'idea-to-product-path',
-    },
     { name: 'productJourney', component: 'sections.page-process', sectionKey: 'product-journey' },
-    {
-      name: 'focusFirstRelease',
-      component: 'sections.page-technologies',
-      sectionKey: 'focus-first-release',
-    },
-    {
-      name: 'saasIntegrations',
-      component: 'sections.page-technologies',
-      sectionKey: 'saas-integrations',
-    },
     { name: 'saasFaq', component: 'sections.faq-list', sectionKey: 'saas-faq' },
   ],
   // More (fixes)

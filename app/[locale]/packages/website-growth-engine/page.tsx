@@ -4,10 +4,10 @@ const PAGE_SLUG = 'website-growth-engine' as const
 export const revalidate = 60
 
 const DEFAULT_HERO = {
-  badgeTitle: 'Website Growth Engine',
-  title: 'Build a website that works harder.',
-  description:
-    'Create a faster, smarter website designed to attract visitors, convert opportunities, and support growth.',
+  badgeTitle: 'Website Growth Engine Package',
+  title: 'A website that drives',
+  italicTitle: 'growth.',
+  description: 'A website designed to attract and convert.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

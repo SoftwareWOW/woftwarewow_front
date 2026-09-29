@@ -3,19 +3,19 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-24 HeroV24 — split headline + dual tall images. */
 const SaasProductHero = ({
-  badgeTitle = 'SaaS Product Development',
-  title = 'From idea to',
+  badgeTitle = 'SaaS Product Development Package',
+  title = 'From idea to scalable',
   italicTitle = 'product.',
-  description =
-    'Design, build, and launch a SaaS product with the strategy, technology, and go-to-market support you need in one package.',
+  description = 'Build and launch scalable SaaS products.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/wow/nav/cards/SaaS%20Product%201.png', alt: 'SaaS product development' }
-  const image1 = images?.[1] ?? { src: '/images/wow/nav/cards/SaaS%20Product%202.png', alt: 'Product launch' }
+  const image0 = images?.[0]
+  const image1 = images?.[1]
 
   return (
     <section
@@ -33,21 +33,25 @@ const SaasProductHero = ({
       </div>
       <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 px-6 md:px-14 xl:flex-row xl:justify-between">
         <div className="flex-1">
+          {badgeTitle ? (
+            <RevealWrapper className="reveal-me mb-4">
+              <SectionLabel>{badgeTitle}</SectionLabel>
+            </RevealWrapper>
+          ) : null}
           <RevealWrapper
             as="h1"
             id="saas-hero-heading"
             className="reveal-me text-[clamp(2rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
           >
-            Turn your SaaS
+            {title}
             <br className="hidden md:block" />
-            idea into
-       
-            real product.
+            {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
           </RevealWrapper>
-          <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
-            From product strategy and UX/UI to development and launch, we bring the pieces together to turn your
-            software idea into a product people can actually use.
-          </RevealWrapper>
+          {description ? (
+            <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
+              {description}
+            </RevealWrapper>
+          ) : null}
 
           <RevealWrapper className="mt-7 flex flex-col gap-3 md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
@@ -62,26 +66,32 @@ const SaasProductHero = ({
             </ButtonComponentList>
           </RevealWrapper>
         </div>
-        <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="SaaS product development imagery">
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image0.src}
-              alt={image0.alt ?? ''}
-              className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
-            />
-          </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image1.src}
-              alt={image1.alt ?? ''}
-              className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
-            />
-          </RevealWrapper>
-        </div>
+        {image0?.src || image1?.src ? (
+          <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="SaaS product development imagery">
+            {image0?.src ? (
+              <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
+                <img
+                  src={image0.src}
+                  alt={image0.alt ?? ''}
+                  className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
+                  width={410}
+                  height={540}
+                />
+              </RevealWrapper>
+            ) : null}
+            {image1?.src ? (
+              <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
+                <img
+                  src={image1.src}
+                  alt={image1.alt ?? ''}
+                  className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
+                  width={410}
+                  height={540}
+                />
+              </RevealWrapper>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </section>
   )

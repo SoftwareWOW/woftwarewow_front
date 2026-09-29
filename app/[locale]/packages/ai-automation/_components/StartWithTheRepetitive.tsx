@@ -8,69 +8,28 @@ import Image from 'next/image'
 import { useState } from 'react'
 import type { CmsRfqAccordionSection } from '@/lib/strapi/mappers/page-sections'
 
-const DEFAULT_GROUPS = [
-  {
-    id: 1,
-    title: 'Leads & Enquiries',
-    subtitle: 'Qualify, route and respond automatically.',
-    example:
-      'Capture inbound leads, score them against your criteria, and route them to the right person with an automatic first response.',
-  },
-  {
-    id: 2,
-    title: 'Follow-ups',
-    subtitle: 'Trigger the right communication at the right time.',
-    example: 'Automate handoffs, approvals and notifications.',
-  },
-  {
-    id: 3,
-    title: 'Data & Admin',
-    subtitle: 'Move, update and organize information automatically.',
-    example:
-      'Sync records between tools, clean duplicate data and keep CRM, spreadsheets and forms up to date without manual entry.',
-  },
-  {
-    id: 4,
-    title: 'Customer Support',
-    subtitle: 'Handle common requests and route complex ones.',
-    example:
-      'Answer frequent questions automatically, create tickets for edge cases and escalate complex issues to the right teammate.',
-  },
-  {
-    id: 5,
-    title: 'Reporting',
-    subtitle: 'Collect, summarize and distribute recurring insights.',
-    example:
-      'Pull metrics from your systems, summarize what changed and send recurring reports to the people who need them.',
-  },
-  {
-    id: 6,
-    title: 'Internal Workflows',
-    subtitle: 'Automate handoffs, approvals and notifications.',
-    example:
-      'Connect approvals, task handoffs and status updates so internal processes move forward without constant follow-up.',
-  },
-]
-
 type Props = Partial<CmsRfqAccordionSection>
 
 /** Layout: SolutionToChallenges / StartWithTheWork — accordion closed by default, all 6 visible. */
 const StartWithTheRepetitive = ({
-  eyebrow = 'Start with the repetitive',
-  title = 'Think about what your team does every day.',
-  description = 'Good automation starts with repetitive, predictable work—not with adding AI everywhere.',
+  eyebrow = 'Start With The Repetitive',
+  title = 'What manual work should we remove first?',
+  description,
   groups,
 }: Props = {}) => {
-  const mergedGroups = DEFAULT_GROUPS.map((service, index) => {
-    const cms = groups?.[index]
-    return {
-      ...service,
-      title: cms?.title || service.title,
-      subtitle: cms?.subtitle ?? service.subtitle,
-      example: cms?.items?.[0] ?? service.example,
-    }
-  })
+  const displayGroups =
+    groups?.map((group, index) => ({
+      id: index + 1,
+      title: group.title,
+      subtitle: group.subtitle ?? '',
+      example: group.items?.[0] ?? '',
+    })) ?? []
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  if (!displayGroups.length) {
+    return null
+  }
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
@@ -110,13 +69,15 @@ const StartWithTheRepetitive = ({
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto mb-5 w-full md:mb-8">{title}</h2>
           </RevealWrapper>
-          <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
-          </RevealWrapper>
+          {description ? (
+            <RevealWrapper className="reveal-me">
+              <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
-          {mergedGroups.map((service, index) => {
+          {displayGroups.map((service, index) => {
             const isActive = activeIndex === index
 
             return (

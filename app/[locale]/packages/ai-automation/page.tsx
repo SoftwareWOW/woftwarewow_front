@@ -4,10 +4,11 @@ const PAGE_SLUG = 'ai-automation' as const
 export const revalidate = 60
 
 const DEFAULT_HERO = {
-  title: 'Less manual work. More time for what ',
-  italicTitle: 'matters.',
+  badgeTitle: 'AI Automation Package',
+  title: 'Less manual work.',
+  italicTitle: 'More impact.',
   description:
-    'We identify repetitive work across your business and build AI-powered automations that save time, connect your tools and keep everyday processes moving.',
+    'Less manual work. More time for what matters — practical AI automation for growing businesses.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'
@@ -29,6 +30,11 @@ import AutomationTools from './_components/AutomationTools'
 import FromIdeaToAutomation from './_components/FromIdeaToAutomation'
 // 2. Start with the repetitive — SolutionToChallenges
 import StartWithTheRepetitive from './_components/StartWithTheRepetitive'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import {
+  mapStrapiTestimonialExtras,
+  mapStrapiTestimonials,
+} from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
@@ -46,10 +52,16 @@ export default async function AiAutomationPackagePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const dictionary = await getDictionary(locale as Locale)
-  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const typedLocale = locale as Locale
+  const dictionary = await getDictionary(typedLocale)
+  const [cms, homepageCms] = await Promise.all([
+    loadSuperagencyPage(PAGE_SLUG, typedLocale),
+    getSuperagencyHomepage(typedLocale),
+  ])
   const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+  const superAgencyClient = mapStrapiTestimonials(homepageCms.testimonials, dictionary.superAgencyClient)
+  const testimonialExtras = mapStrapiTestimonialExtras(homepageCms.testimonials)
 
   return (
     <LayoutOne>
@@ -63,7 +75,19 @@ export default async function AiAutomationPackagePage({ params }: Props) {
         {/* 4. Integrations — OurTools */}
         <AutomationTools {...(sections.automationTools ?? {})} />
         {/* 5. Superagency client — shared */}
-        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        <WowSuperAgencyClient
+          superAgencyClient={superAgencyClient}
+          clientImages={
+            Object.keys(testimonialExtras.clientImages).length
+              ? testimonialExtras.clientImages
+              : undefined
+          }
+          reviewCaseStudies={
+            Object.keys(testimonialExtras.reviewCaseStudies).length
+              ? testimonialExtras.reviewCaseStudies
+              : undefined
+          }
+        />
         {/* 6. Path — ModernizationPath */}
         <FromIdeaToAutomation {...(sections.fromIdeaToAutomation ?? {})} />
         {/* 7. FAQ — Home Faq */}

@@ -2,37 +2,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-
-const DEFAULT_ITEMS = [
-  {
-    title: 'Brand Foundation',
-    description: 'Brand identity, visual direction and core messaging.',
-  },
-  {
-    title: 'Website & Digital Presence',
-    description: 'A professional website and essential online setup.',
-  },
-  {
-    title: 'Marketing Foundation',
-    description: 'Initial strategy, SEO foundations and launch planning.',
-  },
-  {
-    title: 'Social Setup',
-    description: 'Core social channels and content direction.',
-  },
-  {
-    title: 'Business Technology',
-    description: 'Essential tools, integrations and automation where required.',
-  },
-  {
-    title: 'Hosting & Infrastructure',
-    description: 'Hosting, domain, business email, security and backups.',
-  },
-]
-
-const DEFAULT_IMAGE = '/images/wow/nav/cards/Startup%20laiunch%201.png'
 
 type Props = Partial<CmsTechnologiesSection>
 
@@ -40,12 +11,20 @@ type Props = Partial<CmsTechnologiesSection>
 const WhatsIncluded = ({
   eyebrow = "What's Included",
   title = 'What your launch can include.',
-  description = 'A coordinated set of essentials designed to take your business from concept to market.',
+  description,
   items,
   image,
 }: Props = {}) => {
-  const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
-  const imageSrc = cmsImageSrc(image, DEFAULT_IMAGE)
+  const displayItems =
+    items?.map((item) => ({
+      title: item.title,
+      description: item.description ?? '',
+    })) ?? []
+  const imageSrc = cmsImageSrc(image)
+
+  if (!displayItems.length && !imageSrc) {
+    return null
+  }
 
   return (
     <section>
@@ -54,31 +33,39 @@ const WhatsIncluded = ({
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mb-3">{title}</h2>
-          </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
-          </TextAppearAnimation>
+          {title ? (
+            <TextAppearAnimation>
+              <h2 className="text-appear mb-3">{title}</h2>
+            </TextAppearAnimation>
+          ) : null}
+          {description ? (
+            <TextAppearAnimation>
+              <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
 
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
-          <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-            {mergedItems.map((item) => (
-              <RevealWrapper key={item.title} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
-                <h5>{item.title}</h5>
-                <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
-              </RevealWrapper>
-            ))}
-          </div>
+          {displayItems.length ? (
+            <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
+              {displayItems.map((item) => (
+                <RevealWrapper key={item.title} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
+                  <h5>{item.title}</h5>
+                  <p className="mt-3 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
+                </RevealWrapper>
+              ))}
+            </div>
+          ) : null}
 
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm md:w-1/2">
-            <img
-              src={imageSrc}
-              alt="Startup launch package essentials"
-              className="h-full w-full rounded-radius-sm object-cover"
-            />
-          </RevealWrapper>
+          {imageSrc ? (
+            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm md:w-1/2">
+              <img
+                src={imageSrc}
+                alt={image?.alt ?? 'Startup launch package essentials'}
+                className="h-full w-full rounded-radius-sm object-cover"
+              />
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <RevealWrapper className="mt-14 flex justify-center">

@@ -8,10 +8,19 @@ import {
 /** Pages whose heroes are fully driven by Strapi (no manifest image padding). */
 const CMS_ONLY_HERO_IMAGE_SLUGS = new Set([
   'ai-and-automation',
+  'ai-automation',
   'branding-and-creative',
+  'digital-transformation',
   'hosting-and-infrastructure',
   'learning-and-events',
   'software-and-technology',
+  'startup-launch',
+  'business-growth',
+  'brand-authority',
+  'saas-product-development',
+  'website-growth-engine',
+  'sales-acceleration',
+  'enterprise-infrastructure',
 ]);
 
 /** Resolve hero images: CMS when populated, otherwise frontend static defaults from manifest. */

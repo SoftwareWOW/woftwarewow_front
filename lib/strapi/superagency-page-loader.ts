@@ -204,6 +204,7 @@ function mapSectionByComponent(
 ): unknown {
   switch (component) {
     case 'sections.page-technologies':
+    case 'sections.page-technologies-items-only':
       return cms.technologiesSection(fieldName);
     case 'sections.page-our-services-carousel':
       return mapPageOurServicesCarousel(cms.field<StrapiPageOurServicesCarousel>(fieldName));

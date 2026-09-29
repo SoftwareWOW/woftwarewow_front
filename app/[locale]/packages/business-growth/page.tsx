@@ -5,7 +5,8 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Business Growth Package',
-  title: 'Turn growth into a system.',
+  title: 'Turn growth into a',
+  italicTitle: 'system.',
   description:
     'Bring your marketing, sales and digital growth activities together in one coordinated package designed to help your business attract more opportunities, convert more customers and keep improving.',
 }

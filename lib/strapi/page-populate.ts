@@ -364,6 +364,124 @@ export const LEARNING_AND_EVENTS_PAGE_POPULATE = {
   },
 };
 
+/** Explicit populate for /packages/startup-launch (matches Strapi Postman query). */
+export const STARTUP_LAUNCH_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  whatsIncluded: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /packages/digital-transformation (matches Strapi Postman query). */
+export const DIGITAL_TRANSFORMATION_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+};
+
+/** Explicit populate for /packages/ai-automation (matches Strapi Postman query). */
+export const AI_AUTOMATION_PACKAGE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  startWithTheRepetitive: {
+    populate: {
+      groups: true,
+    },
+  },
+};
+
+/** Explicit populate for /packages/business-growth (matches Strapi Postman query). */
+export const BUSINESS_GROWTH_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  builtForGrowth: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+  growthPieces: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+  connectedGrowth: {
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /packages/brand-authority (matches Strapi Postman query). */
+export const BRAND_AUTHORITY_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  whatsIncluded: {
+    populate: {
+      items: true,
+      image: { populate: { image: true } },
+    },
+  },
+};
+
+/** Explicit populate for /packages/saas-product-development (matches Strapi Postman query). */
+export const SAAS_PRODUCT_DEVELOPMENT_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  productJourney: {
+    populate: {
+      steps: true,
+    },
+  },
+  saasFaq: {
+    populate: {
+      items: true,
+    },
+  },
+};
+
+/** Explicit populate for /packages/website-growth-engine (matches Strapi Postman query). */
+export const WEBSITE_GROWTH_ENGINE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  whatsIncluded: {
+    populate: {
+      items: { populate: { image: { populate: { image: true } } } },
+    },
+  },
+};
+
+/** Explicit populate for /packages/sales-acceleration (matches Strapi Postman query). */
+export const SALES_ACCELERATION_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  whatsIncludedRfq: {
+    populate: {
+      groups: true,
+    },
+  },
+  accelerationJourney: {
+    populate: {
+      steps: true,
+    },
+  },
+};
+
+/** Explicit populate for /packages/enterprise-infrastructure (matches Strapi Postman query). */
+export const ENTERPRISE_INFRASTRUCTURE_PAGE_POPULATE = {
+  seo: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
+  infrastructureJourney: {
+    populate: {
+      steps: true,
+    },
+  },
+};
+
 /** Explicit populate for /industries/hospitality-and-tourism (matches Strapi Postman query). */
 export const HOSPITALITY_AND_TOURISM_PAGE_POPULATE = {
   seo: { populate: '*' },
@@ -450,6 +568,9 @@ const CMS_NESTED_POPULATE: Partial<
   Record<Exclude<CmsSectionType, null | 'hero'>, Record<string, unknown>>
 > = {
   'page-technologies': PAGE_TECHNOLOGIES_POPULATE,
+  'page-technologies-items-only': {
+    items: { populate: { image: { populate: { image: true } } } },
+  },
   'page-process': PAGE_PROCESS_POPULATE,
   'page-images': {
     images: { populate: { image: true } },

@@ -7,21 +7,20 @@ import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 /** Home-19 — HeroV19: split headline + dual media + single CTA (no circle logo). */
 const StartupLaunchHero = ({
   badgeTitle = 'Startup Launch Package',
-  title = 'Everything you need',
+  title = 'Everything you need to',
   italicTitle = 'launch.',
   description =
     'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/wow/nav/cards/Startup%20laiunch%201.png', alt: 'Startup launch foundations and collaboration' }
-  const image1 = images?.[1] ?? { src: '/images/wow/nav/cards/build%26lanch.png', alt: 'Building and launching a new business' }
+  const image0 = images?.[0]
+  const image1 = images?.[1]
 
   return (
     <section
       className="relative overflow-hidden pt-[137px] md:pt-[160px] xl:pt-[180px]"
       aria-labelledby="startup-launch-heading"
     >
-      {/* Home-19 HeroV19 gradient */}
       <div className="pointer-events-none absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0">
         <img
           src="/images/hero-gradient-background.png"
@@ -63,23 +62,20 @@ const StartupLaunchHero = ({
           </RevealWrapper>
         </div>
 
-        {/* Home-19 HeroV19 dual figures */}
-        <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
-          <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
-            <img
-              src={image0.src}
-              alt={image0.alt ?? ''}
-              className="max-sm:w-full rounded-radius-sm"
-            />
-          </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
-            <img
-              src={image1.src}
-              alt={image1.alt ?? ''}
-              className="max-sm:w-full rounded-radius-sm"
-            />
-          </RevealWrapper>
-        </div>
+        {image0?.src || image1?.src ? (
+          <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
+            {image0?.src ? (
+              <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
+                <img src={image0.src} alt={image0.alt ?? ''} className="max-sm:w-full rounded-radius-sm" />
+              </RevealWrapper>
+            ) : null}
+            {image1?.src ? (
+              <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
+                <img src={image1.src} alt={image1.alt ?? ''} className="max-sm:w-full rounded-radius-sm" />
+              </RevealWrapper>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </section>
   )

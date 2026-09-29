@@ -7,8 +7,7 @@ const DEFAULT_HERO = {
   badgeTitle: 'Brand Authority Package',
   title: 'Turn expertise into',
   italicTitle: 'authority.',
-  description:
-    'Build a credible, recognizable brand that strengthens trust, visibility, and influence.',
+  description: 'Build a credible, recognizable brand that strengthens trust, visibility, and influence.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

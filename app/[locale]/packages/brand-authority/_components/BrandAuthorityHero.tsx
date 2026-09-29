@@ -7,14 +7,13 @@ import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 /** Home-19 — HeroV19: split headline + dual media + dual CTAs. */
 const BrandAuthorityHero = ({
   badgeTitle = 'Brand Authority Package',
-  title = 'Build a brand people',
-  italicTitle = 'trust.',
-  description =
-    'Create a stronger brand presence, clearer messaging, and more consistent visibility across the channels that matter most.',
+  title = 'Turn expertise into',
+  italicTitle = 'authority.',
+  description,
   images,
 }: CmsHeroComponentProps) => {
-  const image0 = images?.[0] ?? { src: '/images/wow/nav/cards/Brand%20Authority%201.png', alt: 'Brand authority' }
-  const image1 = images?.[1] ?? { src: '/images/wow/nav/cards/Brand%20Authority%202.png', alt: 'Brand building' }
+  const image0 = images?.[0]
+  const image1 = images?.[1]
 
   return (
     <section
@@ -42,13 +41,11 @@ const BrandAuthorityHero = ({
             </h1>
           </RevealWrapper>
 
-          <RevealWrapper className="reveal-me mt-3">
-            {description ? (
+          {description ? (
             <RevealWrapper className="reveal-me mt-3">
               <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
             </RevealWrapper>
           ) : null}
-          </RevealWrapper>
 
           <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
@@ -64,22 +61,20 @@ const BrandAuthorityHero = ({
           </RevealWrapper>
         </div>
 
-        <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
-          <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
-            <img
-              src={image0.src}
-              alt={image0.alt ?? ''}
-              className="rounded-radius-sm max-sm:w-full"
-            />
-          </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
-            <img
-              src={image1.src}
-              alt={image1.alt ?? ''}
-              className="rounded-radius-sm max-sm:w-full"
-            />
-          </RevealWrapper>
-        </div>
+        {image0?.src || image1?.src ? (
+          <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
+            {image0?.src ? (
+              <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
+                <img src={image0.src} alt={image0.alt ?? ''} className="rounded-radius-sm max-sm:w-full" />
+              </RevealWrapper>
+            ) : null}
+            {image1?.src ? (
+              <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
+                <img src={image1.src} alt={image1.alt ?? ''} className="rounded-radius-sm max-sm:w-full" />
+              </RevealWrapper>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </section>
   )

@@ -4,10 +4,10 @@ const PAGE_SLUG = 'sales-acceleration' as const
 export const revalidate = 60
 
 const DEFAULT_HERO = {
-  badgeTitle: 'Sales Acceleration',
-  title: 'Turn more opportunities into revenue.',
-  description:
-    'Build a smarter sales system for generating leads, improving follow-up, and increasing conversion.',
+  badgeTitle: 'Sales Acceleration Package',
+  title: 'Close more,',
+  italicTitle: 'faster.',
+  description: 'Systems to increase sales velocity and close more deals.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'
@@ -49,7 +49,7 @@ export default async function SalesAccelerationPackagePage({ params }: Props) {
         {/* 2. Fix the Gaps in Your Sales Engine — AiWithPurpose */}
         <SalesGaps {...(sections.salesGaps ?? {})} />
         {/* 3. What’s Included — SolutionToChallenges */}
-        <WhatsIncluded {...(sections.whatsIncluded ?? {})} />
+        <WhatsIncluded {...(sections.whatsIncludedRfq ?? {})} />
         {/* 4. Your Acceleration Journey — Home-07 ProcessV4 */}
         <AccelerationJourney {...(sections.accelerationJourney ?? {})} />
         {/* 5. One Package. Connected Expertise. — Home-19 ElevateBrandV2 */}

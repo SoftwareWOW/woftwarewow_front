@@ -4,11 +4,10 @@ const PAGE_SLUG = 'enterprise-infrastructure' as const
 export const revalidate = 60
 
 const DEFAULT_HERO = {
-  badgeTitle: 'Enterprise Infrastructure',
-  title: 'Infrastructure built for ',
-  italicTitle: "what's next.",
-  description:
-    'Secure, reliable and scalable infrastructure designed to support your growing business.',
+  badgeTitle: 'Enterprise Infrastructure Package',
+  title: 'Infrastructure built for',
+  italicTitle: 'scale.',
+  description: 'For companies needing secure digital infrastructure.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

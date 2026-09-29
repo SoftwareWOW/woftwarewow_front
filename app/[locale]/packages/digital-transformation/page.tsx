@@ -5,9 +5,10 @@ export const revalidate = 60
 
 const DEFAULT_HERO = {
   badgeTitle: 'Digital Transformation Package',
-  title: 'Modernize how your business works.',
+  title: 'Modernize how you',
+  italicTitle: 'work.',
   description:
-    'We identify where technology can make the biggest difference, then bring the right improvements together into one coordinated transformation.',
+    'Modernize how your business works — connected systems, automation and a clearer digital setup.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'

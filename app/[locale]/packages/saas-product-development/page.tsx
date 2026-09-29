@@ -4,9 +4,10 @@ const PAGE_SLUG = 'saas-product-development' as const
 export const revalidate = 60
 
 const DEFAULT_HERO = {
-  title: 'Turn your SaaS idea into real product.',
-  description:
-    'From product strategy and UX/UI to development and launch, we bring the pieces together to turn your software idea into a product people can actually use.',
+  badgeTitle: 'SaaS Product Development Package',
+  title: 'From idea to scalable',
+  italicTitle: 'product.',
+  description: 'Build and launch scalable SaaS products.',
 }
 
 import LayoutOne from '@/components/shared/LayoutOne'
