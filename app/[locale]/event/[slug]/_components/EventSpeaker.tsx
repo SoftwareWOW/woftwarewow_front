@@ -7,6 +7,7 @@ import type { CmsSocialLink } from '@/lib/strapi/social-icons'
 import type { CmsTeamMember } from '@/lib/strapi/mappers/page-sections'
 import Image from 'next/image'
 import Link from 'next/link'
+import { EVENT_DETAILS_INNER, EVENT_DETAILS_SECTION_X } from './event-details-layout'
 
 const FALLBACK_IMAGE = '/images/home-ai/team/ai-team-1.png'
 
@@ -57,8 +58,8 @@ const EventSpeaker = ({ featuredMember }: Props) => {
   const profileHref = `/team/${featured.id}`
 
   return (
-    <section className="relative overflow-hidden">
-      <RevealWrapper className="container">
+    <section className={`relative overflow-hidden ${EVENT_DETAILS_SECTION_X}`}>
+      <RevealWrapper className={EVENT_DETAILS_INNER}>
         <div className="our-team-details relative flex flex-col gap-10 gap-x-[30px] border bg-backgroundBody p-5 dark:border-dark dark:bg-dark max-md:items-center max-md:justify-center lg:flex-row lg:p-10">
           <Link
             href={profileHref}

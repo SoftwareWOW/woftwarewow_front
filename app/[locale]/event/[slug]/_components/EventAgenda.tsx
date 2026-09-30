@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { EventAgendaItem } from '@/lib/events/event-detail-content'
+import { EVENT_DETAILS_INNER, EVENT_DETAILS_SECTION_X } from './event-details-layout'
 
 type Props = {
   eyebrow?: string
@@ -18,8 +19,8 @@ const EventAgenda = ({
   if (!items.length) return null
 
   return (
-    <section>
-      <div className="container">
+    <section className={EVENT_DETAILS_SECTION_X}>
+      <div className={EVENT_DETAILS_INNER}>
         <RevealWrapper className="reveal-me mb-5">
           <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>

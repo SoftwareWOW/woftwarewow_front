@@ -10,13 +10,21 @@ interface WowGrowthCtaProps {
   accentText?: string
   mainText?: string
   ariaLabel?: string
+  /** Overrides default `.container` width (e.g. event detail 1320px column). */
+  innerClassName?: string
+  sectionClassName?: string
 }
 
 const WowGrowthCta = ({
   accentText = 'Ready to',
   mainText = 'Grow?',
   ariaLabel = 'Contact WOW Superagency',
+  innerClassName,
+  sectionClassName,
 }: WowGrowthCtaProps) => {
+  const innerLayout =
+    innerClassName ??
+    'container flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20'
   const contactDialog = useContactDialogOptional()
 
   const handleOpenContact = () => {
@@ -24,8 +32,10 @@ const WowGrowthCta = ({
   }
 
   return (
-    <section className="relative bg-background pb-5 transition-colors duration-300 dark:bg-background sm:pb-10 md:pb-15 lg:pb-20">
-      <div className="container flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20">
+    <section
+      className={`relative bg-background pb-5 transition-colors duration-300 dark:bg-background sm:pb-10 md:pb-15 lg:pb-20${sectionClassName ? ` ${sectionClassName}` : ''}`}
+    >
+      <div className={innerLayout}>
         <RevealWrapper
           as="h2"
           className="reveal-me min-w-0 flex-1 text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"

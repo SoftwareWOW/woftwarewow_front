@@ -11,6 +11,7 @@ import { setRequestLocale } from 'next-intl/server'
 import EventAgenda from './_components/EventAgenda'
 import EventDetailsHero from './_components/EventDetailsHero'
 import EventSpeaker from './_components/EventSpeaker'
+import { EVENT_DETAILS_INNER, EVENT_DETAILS_SECTION_X } from './_components/event-details-layout'
 
 export const revalidate = 60
 export const dynamicParams = true
@@ -63,6 +64,8 @@ export default async function EventDetailsPage({ params }: PageProps) {
           accentText="Ready to"
           mainText="learn & connect?"
           ariaLabel="Talk about Learning & Events at WOW Superagency"
+          sectionClassName={EVENT_DETAILS_SECTION_X}
+          innerClassName={`${EVENT_DETAILS_INNER} flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20`}
         />
       </div>
     </LayoutOne>

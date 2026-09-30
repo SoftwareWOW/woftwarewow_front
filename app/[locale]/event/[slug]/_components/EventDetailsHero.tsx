@@ -4,6 +4,7 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { EventDetail } from '@/lib/events/event-detail-content'
 import Image from 'next/image'
 import EventCountdown from './EventCountdown'
+import { EVENT_DETAILS_INNER, EVENT_DETAILS_SECTION_X } from './event-details-layout'
 
 type Props = {
   event: EventDetail
@@ -20,8 +21,10 @@ const EventDetailsHero = ({ event }: Props) => {
   ]
 
   return (
-    <section className="bg-background px-4 pt-28 transition-colors duration-300 dark:bg-dark sm:px-8 sm:pt-32 md:px-16 lg:px-[200px] lg:pt-36">
-      <div className="mx-auto w-full max-w-[1320px]">
+    <section
+      className={`bg-background pt-28 transition-colors duration-300 dark:bg-dark sm:pt-32 lg:pt-36 ${EVENT_DETAILS_SECTION_X}`}
+    >
+      <div className={EVENT_DETAILS_INNER}>
         {heroImage ? (
           <RevealWrapper>
             <figure
