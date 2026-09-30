@@ -121,6 +121,12 @@ export type CmsPackageOfferSection = {
   cta?: { label?: string; href?: string };
 };
 
+export type CmsEventAgendaItem = {
+  time: string;
+  title: string;
+  description?: string;
+};
+
 export type CmsEventCard = {
   date?: string;
   title: string;
@@ -129,6 +135,16 @@ export type CmsEventCard = {
   description?: string;
   thumbnail?: string;
   alt?: string;
+  slug?: string;
+  format?: string;
+  time?: string;
+  duration?: string;
+  startsAt?: string;
+  agendaEyebrow?: string;
+  agendaTitle?: string;
+  agenda?: CmsEventAgendaItem[];
+  registerLabel?: string;
+  registerHref?: string;
 };
 
 export type CmsPageEventsSection = {
@@ -605,6 +621,22 @@ export function mapPageEvents(
       description: event.description ?? undefined,
       thumbnail: resolveCmsImage(event.image ?? undefined)?.src,
       alt: event.image?.alt ?? undefined,
+      slug: event.slug ?? undefined,
+      format: event.format ?? undefined,
+      time: event.time ?? undefined,
+      duration: event.duration ?? undefined,
+      startsAt: event.startsAt ?? undefined,
+      agendaEyebrow: event.agendaEyebrow ?? undefined,
+      agendaTitle: event.agendaTitle ?? undefined,
+      agenda: event.agenda?.length
+        ? event.agenda.map((row) => ({
+            time: row.time ?? '',
+            title: row.title,
+            description: row.description ?? undefined,
+          }))
+        : undefined,
+      registerLabel: event.registerLabel ?? undefined,
+      registerHref: event.registerHref ?? undefined,
     })),
   };
 }

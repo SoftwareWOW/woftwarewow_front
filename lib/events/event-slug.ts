@@ -14,10 +14,22 @@ export function eventSlugFromHref(href?: string | null): string | null {
   return match?.[1] ?? null
 }
 
-export function resolveEventDetailsHref(href: string | undefined | null, title: string): string {
-  const fromHref = eventSlugFromHref(href)
-  if (fromHref) {
-    return `/event/${fromHref}`
-  }
-  return `/event/${slugifyEventTitle(title)}`
+export function resolveEventSlug(event: {
+  slug?: string | null
+  href?: string | null
+  title: string
+}): string {
+  const explicit = event.slug?.trim()
+  if (explicit) return explicit
+  const fromHref = eventSlugFromHref(event.href)
+  if (fromHref) return fromHref
+  return slugifyEventTitle(event.title)
+}
+
+export function resolveEventDetailsHref(
+  href: string | undefined | null,
+  title: string,
+  slug?: string | null,
+): string {
+  return `/event/${resolveEventSlug({ slug, href, title })}`
 }

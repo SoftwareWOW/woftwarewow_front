@@ -114,6 +114,13 @@ export type StrapiPackageOffer = {
   } | null;
 };
 
+export type StrapiEventAgendaItem = {
+  id?: number;
+  time?: string | null;
+  title: string;
+  description?: string | null;
+};
+
 export type StrapiEventCard = {
   id?: number;
   date?: string | null;
@@ -122,6 +129,16 @@ export type StrapiEventCard = {
   href?: string | null;
   description?: string | null;
   image?: StrapiImageWithLink | null;
+  slug?: string | null;
+  format?: string | null;
+  time?: string | null;
+  duration?: string | null;
+  startsAt?: string | null;
+  agendaEyebrow?: string | null;
+  agendaTitle?: string | null;
+  agenda?: StrapiEventAgendaItem[] | null;
+  registerLabel?: string | null;
+  registerHref?: string | null;
 };
 
 export type StrapiPageEvents = {

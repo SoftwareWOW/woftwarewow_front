@@ -359,7 +359,12 @@ export const LEARNING_AND_EVENTS_PAGE_POPULATE = {
   hero: { populate: HERO_IMAGES_POPULATE },
   upcomingEvents: {
     populate: {
-      events: { populate: { image: { populate: { image: true } } } },
+      events: {
+        populate: {
+          image: { populate: { image: true } },
+          agenda: true,
+        },
+      },
     },
   },
 };
@@ -593,7 +598,12 @@ const CMS_NESTED_POPULATE: Partial<
     items: { populate: '*' },
   },
   'page-events': {
-    events: { populate: '*' },
+    events: {
+      populate: {
+        image: { populate: { image: true } },
+        agenda: true,
+      },
+    },
   },
   'package-offer': {
     features: { populate: '*' },
