@@ -24,8 +24,15 @@ type BlogHeroProps = {
 
 function normalizeTags(tags?: string | string[]) {
   if (!tags) return []
-  if (Array.isArray(tags)) return tags.filter(Boolean)
-  return tags.split(',').map((tag) => tag.trim()).filter(Boolean)
+
+  if (Array.isArray(tags)) {
+    return tags.filter(Boolean)
+  }
+
+  return tags
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean)
 }
 
 export default function BlogHero({ blog, imageSrc }: BlogHeroProps) {
@@ -39,6 +46,7 @@ export default function BlogHero({ blog, imageSrc }: BlogHeroProps) {
           <RevealWrapper>
             <Link href={`/blog/${blog.slug}`} className="group block">
               <figure className="relative overflow-hidden rounded-radius-md">
+                {/* HERO IMAGE */}
                 <div className="relative aspect-[16/9] w-full sm:aspect-[2/1] lg:aspect-[1320/523]">
                   <Image
                     src={heroImage}
@@ -50,8 +58,72 @@ export default function BlogHero({ blog, imageSrc }: BlogHeroProps) {
                   />
                 </div>
 
-                <div className="absolute bottom-0 right-0 bg-backgroundBody p-3 transition-colors duration-300 dark:bg-dark sm:p-4">
-                  <div className="flex size-14 items-center justify-center bg-primary transition-transform duration-300 group-hover:scale-105 sm:size-16 lg:size-[72px]">
+                {/* BOTTOM-RIGHT NOTCHED BUTTON AREA */}
+                <div
+                  className="
+                    absolute
+                    bottom-0
+                    right-0
+                    z-10
+                    rounded-tl-[10px]
+                    bg-backgroundBody
+                    p-3
+                    transition-colors
+                    duration-300
+                    dark:bg-dark
+                    sm:p-4
+                  "
+                >
+                  {/* TOP-RIGHT INVERTED CORNER */}
+                  <span
+                    aria-hidden
+                    className="
+                      pointer-events-none
+                      absolute
+                      right-0
+                      top-[-10px]
+                      h-[10px]
+                      w-[10px]
+                      bg-backgroundBody
+                      dark:bg-dark
+                      [mask-image:radial-gradient(circle_at_0_0,transparent_0,transparent_10px,#000_10.5px)]
+                      [-webkit-mask-image:radial-gradient(circle_at_0_0,transparent_0,transparent_10px,#000_10.5px)]
+                    "
+                  />
+
+                  {/* BOTTOM-LEFT INVERTED CORNER */}
+                  <span
+                    aria-hidden
+                    className="
+                      pointer-events-none
+                      absolute
+                      bottom-0
+                      left-[-10px]
+                      h-[10px]
+                      w-[10px]
+                      bg-backgroundBody
+                      dark:bg-dark
+                      [mask-image:radial-gradient(circle_at_0_0,transparent_0,transparent_10px,#000_10.5px)]
+                      [-webkit-mask-image:radial-gradient(circle_at_0_0,transparent_0,transparent_10px,#000_10.5px)]
+                    "
+                  />
+
+                  {/* PURPLE BUTTON */}
+                  <div
+                    className="
+                      flex
+                      size-14
+                      items-center
+                      justify-center
+                      rounded-[5px]
+                      bg-primary
+                      transition-transform
+                      duration-300
+                      group-hover:scale-105
+                      sm:size-16
+                      lg:size-[72px]
+                    "
+                  >
                     <ArrowDownRight
                       className="size-6 !stroke-white !text-white sm:size-7"
                       strokeWidth={1.75}
@@ -75,7 +147,8 @@ export default function BlogHero({ blog, imageSrc }: BlogHeroProps) {
                 {tags.map((tag) => (
                   <li
                     key={tag}
-                    className="rounded-full border border-secondary/15 bg-background px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-secondary/70 dark:border-dark dark:bg-background dark:text-dark-100">
+                    className="rounded-full border border-secondary/15 bg-background px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-secondary/70 dark:border-dark dark:bg-background dark:text-dark-100"
+                  >
                     {tag}
                   </li>
                 ))}
