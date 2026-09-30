@@ -39,19 +39,21 @@ const ConnectedGrowth = ({ eyebrow, title, description, steps, image }: Props = 
             </TextAppearAnimation>
           ) : null}
         </div>
-        <RevealWrapper className="flex flex-col gap-20 md:flex-row">
+        <RevealWrapper className="flex flex-col gap-20 md:flex-row md:items-center md:gap-16 lg:gap-20">
           {imageSrc ? (
-            <figure>
+            <figure className="mx-auto shrink-0 md:mx-0">
               <img
                 src={imageSrc}
                 alt={image?.alt ?? ''}
-                className="rounded-radius-md"
+                width={420}
+                height={360}
+                className="h-[280px] w-full max-w-[420px] rounded-radius-md object-contain sm:h-[320px] md:h-[360px] md:w-[420px]"
               />
             </figure>
           ) : null}
 
           {displaySteps.length ? (
-            <div>
+            <div className="min-w-0 flex-1">
               <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
                 {displaySteps.map((step, index) => (
                   <li key={step.number} className="max-w-max px-10">

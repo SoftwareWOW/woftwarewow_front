@@ -6,14 +6,18 @@ import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Home-19 — HeroV19: split headline + dual media + dual CTAs (no circle logo). */
 const BusinessGrowthHero = ({
-  badgeTitle = 'Business Growth Package',
-  title = 'Turn growth into a',
-  italicTitle = 'system.',
+  badgeTitle,
+  title,
+  italicTitle,
   description,
   images,
 }: CmsHeroComponentProps) => {
   const image0 = images?.[0]
   const image1 = images?.[1]
+
+  if (!title && !italicTitle && !image0?.src && !image1?.src) {
+    return null
+  }
 
   return (
     <section
@@ -32,20 +36,28 @@ const BusinessGrowthHero = ({
 
       <div className="mx-auto flex max-w-[1600px] flex-col justify-between gap-x-5 gap-y-10 px-4 md:px-[30px] lg:flex-row">
         <div className="md:flex-1">
-          <RevealWrapper className="reveal-me mb-4">
-            <SectionLabel>{badgeTitle}</SectionLabel>
-          </RevealWrapper>
+          {badgeTitle ? (
+            <RevealWrapper className="reveal-me mb-4">
+              <SectionLabel>{badgeTitle}</SectionLabel>
+            </RevealWrapper>
+          ) : null}
 
-          <RevealWrapper className="reveal-me">
-            <h1
-              id="business-growth-heading"
-              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
-            >
-              {title}
-              <br className="hidden lg:block" />
-              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
-            </h1>
-          </RevealWrapper>
+          {title || italicTitle ? (
+            <RevealWrapper className="reveal-me">
+              <h1
+                id="business-growth-heading"
+                className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+              >
+                {title}
+                {italicTitle ? (
+                  <>
+                    <br className="hidden lg:block" />
+                    <InstrumentText>{italicTitle}</InstrumentText>
+                  </>
+                ) : null}
+              </h1>
+            </RevealWrapper>
+          ) : null}
 
           {description ? (
             <RevealWrapper className="reveal-me mt-3">

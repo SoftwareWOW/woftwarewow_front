@@ -41,9 +41,8 @@ const StartupLaunchHero = ({
               id="startup-launch-heading"
               className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
             >
-              {title}
-              <br className="hidden lg:block" />
-              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+              {title} 
+              {italicTitle ? <InstrumentText> {italicTitle}</InstrumentText> : null}
             </h1>
           </RevealWrapper>
 

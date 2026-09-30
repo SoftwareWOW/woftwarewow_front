@@ -131,7 +131,7 @@ const DigitalTransformationHero = ({
           <img
             src={decorativeImagePaths[1]}
             alt={images?.[1]?.alt ?? ''}
-            className="rounded-sm object-contain shadow-sm h-[100px] w-[82px] lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
+            className="rounded-sm object-contain h-[100px] w-[82px] lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
             ref={setImageRef(1)}
           />
         </figure>
@@ -141,7 +141,7 @@ const DigitalTransformationHero = ({
           <img
             src={decorativeImagePaths[2]}
             alt={images?.[2]?.alt ?? ''}
-            className="rounded-sm object-contain shadow-sm h-[120px] w-[92px] xl:h-[148px] xl:w-[114px]"
+            className="rounded-sm object-contain  h-[120px] w-[92px] xl:h-[148px] xl:w-[114px]"
             ref={setImageRef(2)}
           />
         </figure>
@@ -151,7 +151,7 @@ const DigitalTransformationHero = ({
           <img
             src={decorativeImagePaths[3]}
             alt={images?.[3]?.alt ?? ''}
-            className="rounded-sm object-contain shadow-sm h-[150px] w-[110px] xl:h-[180px] xl:w-[132px]"
+            className="rounded-sm object-contain h-[150px] w-[110px] xl:h-[180px] xl:w-[132px]"
             ref={setImageRef(3)}
           />
         </figure>
@@ -161,7 +161,7 @@ const DigitalTransformationHero = ({
           <img
             src={decorativeImagePaths[4]}
             alt={images?.[4]?.alt ?? ''}
-            className="rounded-sm object-contain shadow-sm h-[95px] w-[74px] lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]"
+            className="rounded-sm object-contain h-[95px] w-[74px] lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]"
             ref={setImageRef(4)}
           />
         </figure>
@@ -171,7 +171,7 @@ const DigitalTransformationHero = ({
           <img
             src={decorativeImagePaths[5]}
             alt={images?.[5]?.alt ?? ''}
-            className="rounded-sm object-contain shadow-sm h-[90px] w-[130px] lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
+            className="rounded-sm object-contain h-[90px] w-[130px] lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
             ref={setImageRef(5)}
           />
         </figure>

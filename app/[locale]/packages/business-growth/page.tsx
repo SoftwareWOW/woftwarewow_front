@@ -3,14 +3,6 @@ const PAGE_SLUG = 'business-growth' as const
 
 export const revalidate = 60
 
-const DEFAULT_HERO = {
-  badgeTitle: 'Business Growth Package',
-  title: 'Turn growth into a',
-  italicTitle: 'system.',
-  description:
-    'Bring your marketing, sales and digital growth activities together in one coordinated package designed to help your business attract more opportunities, convert more customers and keep improving.',
-}
-
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -44,7 +36,7 @@ export default async function BusinessGrowthPackagePage({ params }: Props) {
   setRequestLocale(locale as Locale)
 
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
-  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const hero = buildPageHero(PAGE_SLUG, {}, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (

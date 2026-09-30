@@ -408,8 +408,12 @@ export const BUSINESS_GROWTH_PAGE_POPULATE = {
       items: { populate: { image: { populate: { image: true } } } },
     },
   },
-  connectedGrowth: { populate: PAGE_PROCESS_POPULATE },
-  howItWorks: { populate: PAGE_PROCESS_POPULATE },
+  connectedGrowth: {
+    populate: {
+      steps: true,
+      image: { populate: { image: true } },
+    },
+  },
 };
 
 /** Explicit populate for /packages/brand-authority (matches Strapi Postman query). */
