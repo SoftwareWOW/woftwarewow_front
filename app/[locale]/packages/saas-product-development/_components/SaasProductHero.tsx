@@ -8,11 +8,10 @@ import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-24 HeroV24 — dark-friendly split hero + product mockup imagery. */
 const SaasProductHero = ({
-  title = 'Turn your SaaS idea into',
-  italicTitle = 'real',
-  suffixTitle = ' product.',
-  description =
-    'From product strategy and UX/UI to development and launch, we bring the pieces together to turn your software idea into a product people can actually use.',
+  title,
+  italicTitle,
+  suffixTitle,
+  description,
   images,
 }: CmsHeroComponentProps) => {
   const heroImages = (images ?? []).filter((image) => image.src)
@@ -31,30 +30,32 @@ const SaasProductHero = ({
 
       <div className="relative z-10 mx-auto flex max-w-[1600px] flex-col items-start gap-y-10 px-6 md:gap-12 md:px-14 xl:flex-row xl:items-center xl:justify-between xl:gap-16">
         <div className="w-full min-w-0 flex-1 xl:max-w-[640px]">
-          <RevealWrapper className="reveal-me">
-            <h1
-              id="saas-hero-heading"
-              className="text-[clamp(2.25rem,4.2vw,4.75rem)] font-normal leading-[1.12] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:leading-[1.08]"
-            >
-              {useInlineAccent ? (
-                <>
-                  {title}{' '}
-                  {italicTitle ? <InstrumentText variant="solid">{italicTitle}</InstrumentText> : null}
-                  {suffixTitle}
-                </>
-              ) : (
-                <>
-                  {title}
-                  {italicTitle ? (
-                    <>
-                      <br className="hidden md:block" />
-                      <InstrumentText variant="solid">{italicTitle}</InstrumentText>
-                    </>
-                  ) : null}
-                </>
-              )}
-            </h1>
-          </RevealWrapper>
+          {title || italicTitle ? (
+            <RevealWrapper className="reveal-me">
+              <h1
+                id="saas-hero-heading"
+                className="text-[clamp(2.25rem,4.2vw,4.75rem)] font-normal leading-[1.12] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:leading-[1.08]"
+              >
+                {useInlineAccent ? (
+                  <>
+                    {title}{' '}
+                    {italicTitle ? <InstrumentText variant="solid">{italicTitle}</InstrumentText> : null}
+                    {suffixTitle}
+                  </>
+                ) : (
+                  <>
+                    {title}
+                    {italicTitle ? (
+                      <>
+                        <br className="hidden md:block" />
+                        <InstrumentText variant="solid">{italicTitle}</InstrumentText>
+                      </>
+                    ) : null}
+                  </>
+                )}
+              </h1>
+            </RevealWrapper>
+          ) : null}
           {description ? (
             <RevealWrapper className="reveal-me mt-4 md:mt-5">
               <p className="max-w-xl text-base leading-relaxed text-[#808080] md:max-w-[540px] md:text-lg md:leading-[1.6]">

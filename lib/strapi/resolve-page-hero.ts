@@ -71,9 +71,14 @@ export function buildPageHero<T extends CmsPageHeroProps>(
   cms?: CmsPageHeroProps | null,
 ): T & { images: CmsHeroImage[]; backgroundImage: CmsHeroImage } {
   const merged = mergeCmsHero(defaults, cms);
+  const cmsOnlyHero = CMS_ONLY_HERO_IMAGE_SLUGS.has(slug);
   return {
     ...merged,
     images: resolveHeroImages(slug, merged.images),
-    backgroundImage: resolveHeroBackgroundImage(merged.backgroundImage),
+    backgroundImage: cmsOnlyHero
+      ? merged.backgroundImage?.src
+        ? merged.backgroundImage
+        : { src: '' }
+      : resolveHeroBackgroundImage(merged.backgroundImage),
   };
 }

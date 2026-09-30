@@ -3,14 +3,6 @@ const PAGE_SLUG = 'saas-product-development' as const
 
 export const revalidate = 60
 
-const DEFAULT_HERO = {
-  title: 'Turn your SaaS idea into',
-  italicTitle: 'real',
-  suffixTitle: ' product.',
-  description:
-    'From product strategy and UX/UI to development and launch, we bring the pieces together to turn your software idea into a product people can actually use.',
-}
-
 import LayoutOne from '@/components/shared/LayoutOne'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
@@ -46,7 +38,7 @@ export default async function SaasProductDevelopmentPackagePage({ params }: Prop
 
   const dictionary = await getDictionary(locale as Locale)
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
-  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const hero = buildPageHero(PAGE_SLUG, {}, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
 
   return (
