@@ -2,24 +2,35 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import processImg from '@/public/images/process-img-01.png'
 import Image from 'next/image'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { cmsImageSrc, mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+
+const DEFAULT_STEPS = [
+  { title: 'Attract', description: 'Get discovered by the right audience.' },
+  { title: 'Engage', description: 'Give them a reason to explore and trust the business.' },
+  { title: 'Convert', description: 'Turn attention into enquiries, leads or purchases.' },
+  { title: 'Nurture', description: 'Keep promising opportunities moving.' },
+  { title: 'Close', description: 'Turn qualified opportunities into customers.' },
+  { title: 'Improve', description: 'Use what you learn to strengthen the next cycle.' },
+]
 
 type Props = Partial<CmsProcessSection>
 
 /** Copied from Home-07 ProcessV4 — local copy, not imported from origin. */
-const ConnectedGrowth = ({ eyebrow, title, description, steps, image }: Props = {}) => {
+const ConnectedGrowth = ({
+  eyebrow = 'Connected Growth',
+  title = 'From first click to closed customer.',
+  description = "Growth works better when marketing, conversion and sales aren't treated as separate activities.",
+  steps,
+  image,
+}: Props = {}) => {
   const imageSrc = cmsImageSrc(image)
-  const displaySteps =
-    steps?.map((step, index) => ({
-      number: String(index + 1).padStart(2, '0'),
-      title: step.title,
-      description: step.description ?? '',
-    })) ?? []
-
-  if (!displaySteps.length && !title) {
-    return null
-  }
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+  const displaySteps = mergedSteps.map((step, index) => ({
+    number: String(index + 1).padStart(2, '0'),
+    title: step.title,
+    description: step.description ?? '',
+  }))
 
   return (
     <section>
@@ -50,7 +61,11 @@ const ConnectedGrowth = ({ eyebrow, title, description, steps, image }: Props = 
                 className="rounded-radius-md"
               />
             ) : (
-              <Image src={processImg} alt="Connected growth from first click to closed customer" className="rounded-radius-md" />
+              <Image
+                src={processImg}
+                alt="Connected growth from first click to closed customer"
+                className="rounded-radius-md"
+              />
             )}
           </figure>
 

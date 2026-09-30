@@ -408,12 +408,8 @@ export const BUSINESS_GROWTH_PAGE_POPULATE = {
       items: { populate: { image: { populate: { image: true } } } },
     },
   },
-  connectedGrowth: {
-    populate: {
-      steps: true,
-      image: { populate: { image: true } },
-    },
-  },
+  connectedGrowth: { populate: PAGE_PROCESS_POPULATE },
+  howItWorks: { populate: PAGE_PROCESS_POPULATE },
 };
 
 /** Explicit populate for /packages/brand-authority (matches Strapi Postman query). */
@@ -432,11 +428,7 @@ export const BRAND_AUTHORITY_PAGE_POPULATE = {
 export const SAAS_PRODUCT_DEVELOPMENT_PAGE_POPULATE = {
   seo: { populate: '*' },
   hero: { populate: HERO_IMAGES_POPULATE },
-  productJourney: {
-    populate: {
-      steps: true,
-    },
-  },
+  productJourney: { populate: PAGE_PROCESS_POPULATE },
   saasFaq: {
     populate: {
       items: true,
@@ -464,22 +456,14 @@ export const SALES_ACCELERATION_PAGE_POPULATE = {
       groups: true,
     },
   },
-  accelerationJourney: {
-    populate: {
-      steps: true,
-    },
-  },
+  accelerationJourney: { populate: PAGE_PROCESS_POPULATE },
 };
 
 /** Explicit populate for /packages/enterprise-infrastructure (matches Strapi Postman query). */
 export const ENTERPRISE_INFRASTRUCTURE_PAGE_POPULATE = {
   seo: { populate: '*' },
   hero: { populate: HERO_IMAGES_POPULATE },
-  infrastructureJourney: {
-    populate: {
-      steps: true,
-    },
-  },
+  infrastructureJourney: { populate: PAGE_PROCESS_POPULATE },
 };
 
 /** Explicit populate for /industries/hospitality-and-tourism (matches Strapi Postman query). */

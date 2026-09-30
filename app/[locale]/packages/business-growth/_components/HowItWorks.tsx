@@ -32,7 +32,7 @@ const HowItWorks = ({
   steps,
 }: Props = {}) => {
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
-    ...DEFAULT_STEPS[index],
+    number: DEFAULT_STEPS[index]?.number ?? String(index + 1),
     title: step.title,
     description: step.description,
   }))

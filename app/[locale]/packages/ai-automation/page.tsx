@@ -54,13 +54,16 @@ export default async function AiAutomationPackagePage({ params }: Props) {
 
   const typedLocale = locale as Locale
   const dictionary = await getDictionary(typedLocale)
-  const [cms, homepageCms] = await Promise.all([
-    loadSuperagencyPage(PAGE_SLUG, typedLocale),
-    getSuperagencyHomepage(typedLocale),
-  ])
-  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
-  const sections = resolvePageSections(cms, PAGE_SLUG)
-  const superAgencyClient = mapStrapiTestimonials(homepageCms.testimonials, dictionary.superAgencyClient)
+  const homepageCms = await getSuperagencyHomepage(typedLocale)
+  const packageCms = await loadSuperagencyPage(PAGE_SLUG, typedLocale)
+
+  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, packageCms.hero)
+  const sections = resolvePageSections(packageCms, PAGE_SLUG)
+
+  const superAgencyClient = mapStrapiTestimonials(
+    homepageCms.testimonials,
+    dictionary.superAgencyClient,
+  )
   const testimonialExtras = mapStrapiTestimonialExtras(homepageCms.testimonials)
 
   return (
@@ -74,7 +77,7 @@ export default async function AiAutomationPackagePage({ params }: Props) {
         <AiPackageCard {...(sections.aiPackageCard ?? {})} />
         {/* 4. Integrations — OurTools */}
         <AutomationTools {...(sections.automationTools ?? {})} />
-        {/* 5. Superagency client — shared */}
+        {/* 5. Superagency client — same as app/[locale]/page.tsx */}
         <WowSuperAgencyClient
           superAgencyClient={superAgencyClient}
           clientImages={

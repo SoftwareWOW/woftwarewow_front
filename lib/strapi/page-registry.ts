@@ -1136,6 +1136,7 @@ const FIELD_OVERRIDES: Partial<Record<string, PageField[]>> = {
       sectionKey: 'growth-pieces',
     },
     { name: 'connectedGrowth', component: 'sections.page-process', sectionKey: 'connected-growth' },
+    { name: 'howItWorks', component: 'sections.page-process', sectionKey: 'how-it-works' },
   ],
   'digital-transformation': [],
   'brand-authority': [

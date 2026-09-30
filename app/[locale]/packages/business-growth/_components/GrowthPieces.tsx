@@ -4,25 +4,53 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+
+const DEFAULT_ITEMS = [
+  {
+    title: 'Growth Strategy',
+    description:
+      'Know where to focus. Review your current position, audience, customer journey and opportunities to create a focused growth plan.',
+    image: '/images/wow/nav/cards/Marketing.png',
+  },
+  {
+    title: 'Demand Generation',
+    description:
+      'Create more opportunities. Use the right mix of search, content, campaigns and paid channels to increase qualified demand.',
+    image: '/images/wow/nav/cards/Accelerate.png',
+  },
+  {
+    title: 'Conversion & Sales',
+    description:
+      'Turn more interest into business. Improve the journey from visitor to lead to customer with stronger conversion and sales processes.',
+    image: '/images/wow/nav/cards/Sales Acceleration 1.png',
+  },
+  {
+    title: 'Measurement & Optimization',
+    description:
+      "Know what's working. Connect reporting and performance insights so activity can be continuously improved.",
+    image: '/images/wow/nav/cards/Intelligent.png',
+  },
+]
 
 type Props = Partial<CmsTechnologiesSection>
 
 /** Home-04 — ServicesV5: accordion rows closed by default, expand on hover only. */
-const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
-  const displayItems =
-    items
-      ?.map((item) => ({
-        title: item.title,
-        description: item.description ?? '',
-        image: cmsImageSrc(item.image),
-      }))
-      .filter((item) => item.title) ?? []
-
-  if (!displayItems.length && !title) {
-    return null
-  }
+const GrowthPieces = ({
+  eyebrow = 'Built for Growth',
+  title = 'The pieces that move growth forward.',
+  description = 'A coordinated mix of strategy, acquisition, conversion and sales support built around your business.',
+  items,
+}: Props = {}) => {
+  const merged = mergeFeatureItems(DEFAULT_ITEMS, items)
+  const displayItems = merged
+    .map((item) => ({
+      title: item.title,
+      description: item.description ?? '',
+      image: item.image,
+    }))
+    .filter((item) => item.title)
 
   return (
     <section>
