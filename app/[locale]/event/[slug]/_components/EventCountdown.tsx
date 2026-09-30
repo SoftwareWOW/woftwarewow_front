@@ -13,7 +13,7 @@ type CountdownParts = {
   seconds: string
 }
 
-function pad(value: number) {
+function pad2(value: number) {
   return String(Math.max(0, value)).padStart(2, '0')
 }
 
@@ -27,10 +27,10 @@ function computeParts(targetMs: number): CountdownParts | null {
   const seconds = Math.floor((diff / 1000) % 60)
 
   return {
-    days: pad(days),
-    hours: pad(hours),
-    minutes: pad(minutes),
-    seconds: pad(seconds),
+    days: String(days),
+    hours: pad2(hours),
+    minutes: pad2(minutes),
+    seconds: pad2(seconds),
   }
 }
 
@@ -51,15 +51,28 @@ const EventCountdown = ({ targetIso }: Props) => {
 
   if (!parts) return null
 
+  const segment = (value: string, unit: string) => (
+    <span className="tabular-nums">
+      {value}
+      {unit}
+    </span>
+  )
+
+  const separator = <span className="px-1 text-white/45 sm:px-1.5">:</span>
+
   return (
-    <div className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 bg-secondary px-4 py-3 font-mono text-sm text-backgroundBody dark:bg-backgroundBody dark:text-secondary sm:text-base">
-      <span>{parts.days}D</span>
-      <span className="opacity-60">:</span>
-      <span>{parts.hours}HR</span>
-      <span className="opacity-60">:</span>
-      <span>{parts.minutes}M</span>
-      <span className="opacity-60">:</span>
-      <span>{parts.seconds}S</span>
+    <div
+      className="inline-flex items-center whitespace-nowrap rounded-radius-sm bg-[#111111] px-4 py-3 text-[13px] font-medium leading-none tracking-[0.02em] text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] dark:bg-[#0A0A0A] sm:px-5 sm:py-4 sm:text-[15px] md:text-base"
+      role="timer"
+      aria-live="polite"
+    >
+      {segment(parts.days, 'D')}
+      {separator}
+      {segment(parts.hours, 'HR')}
+      {separator}
+      {segment(parts.minutes, 'M')}
+      {separator}
+      {segment(parts.seconds, 'S')}
     </div>
   )
 }
