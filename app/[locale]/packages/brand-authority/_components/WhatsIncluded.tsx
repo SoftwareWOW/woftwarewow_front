@@ -60,7 +60,7 @@ const WhatsIncluded = ({ eyebrow, title, description, items, image }: Props = {}
               <img
                 src={imageSrc}
                 alt={image?.alt ?? 'Brand authority package essentials'}
-                className="h-full w-full rounded-radius-sm object-cover"
+                className="h-full w-full rounded-radius-sm object-contain"
               />
             </RevealWrapper>
           ) : null}

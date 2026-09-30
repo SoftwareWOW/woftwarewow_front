@@ -1,130 +1,123 @@
-'use client'
-
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import WowText from '@/components/wow/shared/WowText'
-import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import Link from 'next/link'
-import type { ReactNode } from 'react'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
-const teams: { id: string; title: ReactNode; description: string; image: string; alt: string }[] = [
+/** Layout: blog BlogDetailsList — 3-column image/title/description/button cards (same as WhiteLabelCapabilities). */
+type ConnectedExpertiseProps = Partial<CmsTechnologiesSection>
+
+const DEFAULT_CAPABILITY_CARDS = [
   {
-    id: 'host',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Host
-      </>
-    ),
+    title: 'WOW Host',
     description: 'Hosting, cloud & infrastructure',
+    href: '/contact',
     image: '/images/wow/nav/cards/Host.png',
-    alt: 'WOW Host hosting and cloud infrastructure',
   },
   {
-    id: 'software',
     title: 'SoftwareWOW',
     description: 'Applications & system integrations',
+    href: '/contact',
     image: '/images/wow/nav/cards/Softwaerwow.png',
-    alt: 'SoftwareWOW applications and integrations',
   },
   {
-    id: 'intelligence',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Intelligence
-      </>
-    ),
+    title: 'WOW Intelligence',
     description: 'AI & business automation',
+    href: '/contact',
     image: '/images/wow/nav/cards/Intelligent.png',
-    alt: 'WOW Intelligence AI and automation',
   },
   {
-    id: 'websites',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Websites
-      </>
-    ),
+    title: 'WOW Websites',
     description: 'Web platforms',
+    href: '/contact',
     image: '/images/wow/nav/cards/Website.png',
-    alt: 'WOW Websites web platforms',
   },
   {
-    id: 'accelerate',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Accelerate
-      </>
-    ),
+    title: 'WOW Accelerate',
     description: 'CRM & growth systems',
+    href: '/contact',
     image: '/images/wow/nav/cards/Accelerate.png',
-    alt: 'WOW Accelerate CRM and growth systems',
   },
-]
+] as const
 
-type Props = Partial<CmsTechnologiesSection>
+const DEFAULT_HEADER = {
+  eyebrow: 'One Package. Connected Expertise.',
+  title: 'One infrastructure.',
+  accentTitle: 'Connected expertise.',
+  description:
+    'Bring hosting, software and intelligent technology together through one connected team.',
+}
 
-/** Layout: Home-11 ServicesV10 — horizontal-scroll image cards. */
 const ConnectedExpertise = ({
-  eyebrow = 'One Package. Connected Expertise.',
-  title = 'One infrastructure. ',
-  accentTitle = 'Connected expertise.',
-  description = 'Bring hosting, software and intelligent technology together through one connected team.',
+  eyebrow = DEFAULT_HEADER.eyebrow,
+  title = DEFAULT_HEADER.title,
+  accentTitle = DEFAULT_HEADER.accentTitle,
+  description = DEFAULT_HEADER.description,
   items,
-}: Props = {}) => {
-  const mergedItems = teams.map((team, index) => {
-    const cms = items?.[index]
-    return {
-      ...team,
-      description: cms?.description ?? team.description,
-      image: cms?.image?.src ?? team.image,
-    }
-  })
-  const { contentRef, triggerRef } = useHorizontalScroll()
+}: ConnectedExpertiseProps = {}) => {
+  const header = mergeSectionHeader(
+    { eyebrow, title, accentTitle, description },
+    { eyebrow, title, accentTitle, description },
+  )
+  const mergedItems = mergeFeatureItems([...DEFAULT_CAPABILITY_CARDS], items)
 
   return (
-    <section>
+    <section id="connected-expertise">
       <div className="container">
-        <div className="mb-8 text-center md:mb-14">
-          <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>{eyebrow}</SectionLabel>
+        <div className="mb-10 text-center md:mb-16">
+          <RevealWrapper className="mb-5 flex justify-center">
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear my-3">
-              {title}
-              <InstrumentText>{accentTitle}</InstrumentText>
+            <h2 className="text-appear mx-auto">
+              {header.title}
+              {header.accentTitle ? (
+                <>
+                  {' '}
+                  <InstrumentText>{header.accentTitle}</InstrumentText>
+                </>
+              ) : null}
             </h2>
           </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear text-[#808080]">{description}</p>
-          </TextAppearAnimation>
+          {header.description ? (
+            <RevealWrapper className="reveal-me">
+              <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-[#808080] md:text-lg">
+                {header.description}
+              </p>
+            </RevealWrapper>
+          ) : null}
         </div>
-      </div>
-      <div ref={triggerRef} className="service-section pt-10">
-        <div
-          ref={contentRef}
-          className="video-section service-wrapper flex w-fit flex-col gap-6 overflow-x-hidden pl-[5%] pr-[30px] max-md:gap-y-10 md:flex-row md:flex-nowrap"
-        >
-          {mergedItems.map((item) => (
-            <div key={item.id} className="group w-[370px]">
-              <figure className="overflow-hidden rounded-radius-sm">
-                <Link href="/contact" className="block">
+
+        <RevealWrapper className="grid grid-cols-1 items-stretch justify-items-center gap-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+          {mergedItems.map((item, index) => (
+            <RevealWrapper key={item.title} className="group mx-auto flex w-full flex-col xl:max-w-[370px]">
+              <Link href={item.href ?? '/contact'}>
+                <figure className="mb-6 overflow-hidden rounded-radius-sm xl:aspect-[370/399]">
                   <img
                     src={item.image}
-                    alt={item.alt}
-                    className="h-auto w-full rounded-radius-sm object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt={item.title}
+                    className="h-full w-full object-cover transition-all duration-500 hover:scale-125"
                   />
+                </figure>
+              </Link>
+
+              <div className="blog-title">
+                <Link href={item.href ?? '/contact'}>
+                  <h3 className="text-[27px] leading-tight tracking-tight md:text-3xl lg:text-4xl">{item.title}</h3>
                 </Link>
-              </figure>
-              <h3 className="mb-2.5 mt-[30px] flex items-baseline gap-[0.25em] text-2xl leading-[1.1] tracking-normal md:text-[32px]">
-                {item.title}
-              </h3>
-              <p className="max-w-[95%] text-base leading-[1.6] tracking-[0.32px] text-[#808080]">{item.description}</p>
-            </div>
+                <p className="font-poppins mb-5 mt-3 text-lg font-normal leading-[1.4] tracking-[0.4px] text-[#808080] md:mb-10 md:mt-5">
+                  {item.description}
+                </p>
+                <ButtonComponent href={item.href ?? '/contact'} variant={index === 0 ? 'primary' : 'white'}>
+                  READ MORE
+                </ButtonComponent>
+              </div>
+            </RevealWrapper>
           ))}
-        </div>
+        </RevealWrapper>
       </div>
     </section>
   )

@@ -18,14 +18,6 @@ const PAGE_SLUG = 'whitelabel' as const
 
 export const revalidate = 60
 
-const DEFAULT_HERO = {
-  badgeTitle: 'White-label',
-  title: 'Your Brand. Our',
-  italicTitle: 'Expertise.',
-  description:
-    'Expand what you can offer with a trusted team behind the scenes—across technology, design, marketing, AI, and more.',
-}
-
 type Props = {
   params: Promise<{ locale: string }>
 }
@@ -40,7 +32,7 @@ export default async function WhiteLabelPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
   const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
-  const hero = buildPageHero(PAGE_SLUG, DEFAULT_HERO, cms.hero)
+  const hero = buildPageHero(PAGE_SLUG, {}, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
   const howWePartner = sections.howWePartner as CmsProcessSection | undefined
 

@@ -74,16 +74,18 @@ const SaasPackageCard = ({
   return (
     <section className="overflow-hidden">
       <div className="container">
-        <div className="mb-10 md:mb-14">
-          <RevealWrapper className="reveal-me mb-3">
+        <div className="mb-10 w-full md:mb-14">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mb-3 max-w-3xl">{title}</h2>
-          </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear max-w-2xl text-[#808080]">{description}</p>
-          </TextAppearAnimation>
+          <div className="block w-full text-center">
+            <TextAppearAnimation>
+              <h2 className="text-appear mx-auto mb-3 block w-full max-w-4xl">{title}</h2>
+            </TextAppearAnimation>
+            <TextAppearAnimation>
+              <p className="text-appear mx-auto max-w-2xl text-[#808080]">{description}</p>
+            </TextAppearAnimation>
+          </div>
         </div>
 
         <RevealWrapper className="reveal-me relative flex w-full flex-col overflow-hidden rounded-radius-sm border bg-backgroundBody p-[30px] dark:border-dark dark:bg-dark md:p-10">

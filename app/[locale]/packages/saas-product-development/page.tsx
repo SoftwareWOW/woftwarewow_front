@@ -19,6 +19,11 @@ import SaasIntegrations from './_components/SaasIntegrations'
 import SaasPackageCard from './_components/SaasPackageCard'
 import SaasProductHero from './_components/SaasProductHero'
 import SaasTransformPlan from './_components/SaasTransformPlan'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import {
+  mapStrapiTestimonialExtras,
+  mapStrapiTestimonials,
+} from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
@@ -36,10 +41,18 @@ export default async function SaasProductDevelopmentPackagePage({ params }: Prop
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const dictionary = await getDictionary(locale as Locale)
-  const cms = await loadSuperagencyPage(PAGE_SLUG, locale as Locale)
+  const typedLocale = locale as Locale
+  const dictionary = await getDictionary(typedLocale)
+  const homepageCms = await getSuperagencyHomepage(typedLocale)
+  const cms = await loadSuperagencyPage(PAGE_SLUG, typedLocale)
   const hero = buildPageHero(PAGE_SLUG, {}, cms.hero)
   const sections = resolvePageSections(cms, PAGE_SLUG)
+
+  const superAgencyClient = mapStrapiTestimonials(
+    homepageCms.testimonials,
+    dictionary.superAgencyClient,
+  )
+  const testimonialExtras = mapStrapiTestimonialExtras(homepageCms.testimonials)
 
   return (
     <LayoutOne>
@@ -51,7 +64,19 @@ export default async function SaasProductDevelopmentPackagePage({ params }: Prop
         <IdeaToProductPath {...(sections.ideaToProductPath ?? {})} />
         <FocusFirstRelease {...(sections.focusFirstRelease ?? {})} />
         <SaasIntegrations {...(sections.saasIntegrations ?? {})} />
-        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        <WowSuperAgencyClient
+          superAgencyClient={superAgencyClient}
+          clientImages={
+            Object.keys(testimonialExtras.clientImages).length
+              ? testimonialExtras.clientImages
+              : undefined
+          }
+          reviewCaseStudies={
+            Object.keys(testimonialExtras.reviewCaseStudies).length
+              ? testimonialExtras.reviewCaseStudies
+              : undefined
+          }
+        />
         <ProductJourney {...(sections.productJourney ?? {})} />
         <SaasFaq {...(sections.saasFaq ?? {})} />
         <WowGrowthCta

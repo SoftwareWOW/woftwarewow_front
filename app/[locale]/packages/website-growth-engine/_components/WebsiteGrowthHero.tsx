@@ -116,7 +116,7 @@ const WebsiteGrowthHero = ({
           <img
             src={decorativeImagePaths[0]}
             alt={images?.[0]?.alt ?? ''}
-            className="h-[110px] w-[85px] rounded-radius-sm object-cover lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
+            className="h-[110px] w-[85px] rounded-radius-sm object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
             ref={setImageRef(0)}
           />
         </figure>
@@ -126,7 +126,7 @@ const WebsiteGrowthHero = ({
           <img
             src={decorativeImagePaths[1]}
             alt={images?.[1]?.alt ?? ''}
-            className="h-[100px] w-[82px] rounded-radius-sm object-cover lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
+            className="h-[100px] w-[82px] rounded-radius-sm object-contain lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
             ref={setImageRef(1)}
           />
         </figure>
@@ -136,7 +136,7 @@ const WebsiteGrowthHero = ({
           <img
             src={decorativeImagePaths[2]}
             alt={images?.[2]?.alt ?? ''}
-            className="h-[120px] w-[92px] rounded-radius-sm object-cover shadow-sm xl:h-[148px] xl:w-[114px]"
+            className="h-[120px] w-[92px] rounded-radius-sm object-contain  xl:h-[148px] xl:w-[114px]"
             ref={setImageRef(2)}
           />
         </figure>
@@ -146,7 +146,7 @@ const WebsiteGrowthHero = ({
           <img
             src={decorativeImagePaths[3]}
             alt={images?.[3]?.alt ?? ''}
-            className="h-[150px] w-[110px] rounded-radius-sm object-cover shadow-sm xl:h-[180px] xl:w-[132px]"
+            className="h-[150px] w-[110px] rounded-radius-sm object-contain  xl:h-[180px] xl:w-[132px]"
             ref={setImageRef(3)}
           />
         </figure>
@@ -156,7 +156,7 @@ const WebsiteGrowthHero = ({
           <img
             src={decorativeImagePaths[4]}
             alt={images?.[4]?.alt ?? ''}
-            className="h-[95px] w-[74px] rounded-radius-sm object-cover shadow-sm lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]"
+            className="h-[95px] w-[74px] rounded-radius-sm object-contain  lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]"
             ref={setImageRef(4)}
           />
         </figure>
@@ -166,7 +166,7 @@ const WebsiteGrowthHero = ({
           <img
             src={decorativeImagePaths[5]}
             alt={images?.[5]?.alt ?? ''}
-            className="h-[90px] w-[130px] rounded-radius-sm object-cover shadow-sm lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
+            className="h-[90px] w-[130px] rounded-radius-sm object-contain  lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
             ref={setImageRef(5)}
           />
         </figure>
