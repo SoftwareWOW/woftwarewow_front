@@ -4,6 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { staticEventDetailsPath } from '@/lib/events/static-events'
 import type { CmsPageEventsSection } from '@/lib/strapi/mappers/page-sections'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -34,7 +35,7 @@ const UpcomingEvents = ({
     format: event.location ?? '',
     description: event.description ?? '',
     thumbnail: event.thumbnail ?? '',
-    href: event.href ?? '/wowevents',
+    href: staticEventDetailsPath(),
     alt: event.alt ?? event.title,
   }))
 
