@@ -3,14 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
-
-type PageHeroProps = {
-  badgeTitle?: string
-  title?: string
-  italicTitle?: string
-  description?: string
-  images?: { src: string; alt?: string }[]
-}
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: SaaS SaasProductHero / Home-24 HeroV24 — split headline + dual tall images. */
 const HealthcareHero = ({
@@ -19,7 +12,7 @@ const HealthcareHero = ({
   description =
     'We help healthcare and wellness organizations build trusted brands, stronger digital experiences, smarter systems, and sustainable growth.',
   images,
-}: PageHeroProps) => {
+}: CmsHeroComponentProps) => {
   const image0 = images?.[0] ?? {
     src: '/images/wow/nav/cards/pexels-fauxels-3183132%201.png',
     alt: 'Healthcare and wellness team collaborating',
@@ -65,21 +58,23 @@ const HealthcareHero = ({
         </div>
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="Healthcare and wellness imagery">
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image0.src}
+            <CmsResponsiveImage
+              image={image0}
               alt={image0.alt ?? 'Healthcare and wellness team collaborating'}
+              sizes={CMS_IMAGE_SIZES.halfGrid}
+              width={image0.width ?? 410}
+              height={image0.height ?? 540}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image1.src}
+            <CmsResponsiveImage
+              image={image1}
               alt={image1.alt ?? 'Wellness professionals reviewing a care plan'}
+              sizes={CMS_IMAGE_SIZES.halfGrid}
+              width={image1.width ?? 410}
+              height={image1.height ?? 540}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
             />
           </RevealWrapper>
         </div>

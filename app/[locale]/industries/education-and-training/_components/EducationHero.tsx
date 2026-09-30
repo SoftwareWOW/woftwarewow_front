@@ -5,7 +5,8 @@ import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import type { CmsHeroImage } from '@/lib/strapi/cms-image'
 import Marquee from 'react-fast-marquee'
 
 const DEFAULT_HERO_IMAGES = [
@@ -20,9 +21,9 @@ const EducationHero = ({
     'We help organizations strengthen their presence, reach more people, simplify operations, and build the digital systems behind lasting impact.',
   images,
 }: CmsHeroComponentProps) => {
-  const heroImages = images?.length
-    ? images.map((image) => image.src)
-    : DEFAULT_HERO_IMAGES
+  const heroImages: CmsHeroImage[] = images?.length
+    ? images.slice(0, 2)
+    : DEFAULT_HERO_IMAGES.map((src) => ({ src }))
   return (
     <RevealWrapper
       as="section"
@@ -71,14 +72,15 @@ const EducationHero = ({
             </div>
           </div>
           <div className="flex w-full min-w-0 flex-col gap-4 lg:w-[42%] xl:w-[46%]">
-            {heroImages.map((src) => (
-              <RevealWrapper as="figure" key={src} className="w-full overflow-hidden rounded-radius-md">
-                <img
-                  src={src}
-                  alt="Education and training brand work"
+            {heroImages.map((image, index) => (
+              <RevealWrapper as="figure" key={image.src ?? index} className="w-full overflow-hidden rounded-radius-md">
+                <CmsResponsiveImage
+                  image={image}
+                  alt={image.alt ?? 'Education and training brand work'}
+                  sizes={CMS_IMAGE_SIZES.halfGrid}
+                  width={image.width ?? 665}
+                  height={image.height ?? 440}
                   className="h-auto w-full object-cover sm:max-h-[280px] lg:max-h-[320px] xl:max-h-[380px]"
-                  width={665}
-                  height={440}
                 />
               </RevealWrapper>
             ))}

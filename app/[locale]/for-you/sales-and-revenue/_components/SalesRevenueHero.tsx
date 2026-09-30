@@ -6,7 +6,7 @@ import VideoModal from '@/components/shared/VideoModal'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import { useState } from 'react'
 
 /** Layout: Home-25 HeroV25 — video left + headline + dual CTAs. */
@@ -55,12 +55,12 @@ const SalesRevenueHero = ({
                   </svg>
                 </div>
               </div>
-              <img
-                src={image0.src}
-                alt={image0.alt ?? ''}
-                className="h-full w-full object-cover"
+              <CmsResponsiveImage
+                image={image0}
+                sizes={CMS_IMAGE_SIZES.halfGrid}
                 width={800}
                 height={450}
+                className="h-full w-full object-cover"
               />
             </div>
           </RevealWrapper>

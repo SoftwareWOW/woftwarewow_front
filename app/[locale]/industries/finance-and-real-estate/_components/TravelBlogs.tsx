@@ -4,7 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import type { CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
-import { mergePackageListItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergePackageListItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
   {
@@ -71,10 +71,20 @@ const TravelBlogs = (cmsSection: TravelBlogsProps = {}) => {
         </div>
 
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
-          {mergedItems.map((item) => (
+          {mergedItems.map((item, index) => {
+            const cmsImage = cmsSection.items?.[index]?.image
+            const image = cmsImage?.src ? cmsImage : { src: item.image ?? '' }
+            return (
             <div key={item.number ?? item.title} className="relative">
               <RevealWrapper as="figure" className="reveal-me w-full">
-                <img src={item.image} alt={item.title} className="h-auto w-full rounded-radius-md object-cover" />
+                <CmsResponsiveImage
+                  image={image}
+                  alt={item.title}
+                  sizes={CMS_IMAGE_SIZES.halfGrid}
+                  width={image.width ?? 640}
+                  height={image.height ?? 480}
+                  className="h-auto w-full rounded-radius-md object-cover"
+                />
               </RevealWrapper>
               <RevealWrapper className="reveal-me absolute inset-x-[5px] top-[22%] mx-auto max-w-[calc(100%-10px)] rounded-radius-md bg-backgroundBody px-6 pb-8 pt-6 dark:bg-dark sm:top-[38%] md:top-1/2 lg:top-3/4">
                 <div className="mb-4 flex items-center justify-center gap-3">
@@ -95,7 +105,8 @@ const TravelBlogs = (cmsSection: TravelBlogsProps = {}) => {
                 </div>
               </RevealWrapper>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

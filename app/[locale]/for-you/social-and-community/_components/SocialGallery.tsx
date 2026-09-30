@@ -2,14 +2,14 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsImageGallerySection } from '@/lib/strapi/mappers/page-sections'
+import { CMS_IMAGE_SIZES, StrapiResponsiveImg } from '@/lib/strapi/cms-section-props'
+import type { CmsGalleryImage, CmsImageGallerySection } from '@/lib/strapi/mappers/page-sections'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type GalleryItem = {
   id: number
-  image: string
+  image: CmsGalleryImage
   link: string
-  alt?: string
 }
 
 /** Layout: Home-11 InstagramGallery — 3D carousel (no shadow). */
@@ -22,9 +22,8 @@ const SocialGallery = ({ images }: SocialGalleryProps = {}) => {
       .filter((img) => img.src)
       .map((img, index) => ({
         id: index + 1,
-        image: img.src,
+        image: img,
         link: img.href ?? '#',
-        alt: img.alt,
       }))
   }, [images])
 
@@ -126,9 +125,11 @@ const SocialGallery = ({ images }: SocialGalleryProps = {}) => {
                   onMouseLeave={startSlider}
                 >
                   <figure className="relative overflow-hidden rounded-radius-md shadow-none">
-                    <img
-                      src={item.image}
-                      alt={item.alt ?? `Social gallery ${item.id}`}
+                    <StrapiResponsiveImg
+                      image={item.image}
+                      alt={item.image.alt ?? `Social gallery ${item.id}`}
+                      sizes={CMS_IMAGE_SIZES.galleryPanel}
+                      displayWidth={400}
                       className="h-full w-full rounded-radius-md object-cover"
                     />
                   </figure>

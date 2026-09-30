@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 const TEAM_HERO_IMAGE_BASE = '/images/wow/Hero/career/team'
 
@@ -31,8 +31,8 @@ const LearningEventsHero = ({
 }: CmsHeroComponentProps) => {
   const cmsMain = images?.[0]
   const mainHeroImage = cmsMain?.src
-    ? { src: cmsMain.src, alt: cmsMain.alt ?? STATIC_HERO_MAIN_IMAGE.alt }
-    : STATIC_HERO_MAIN_IMAGE
+    ? cmsMain
+    : { src: STATIC_HERO_MAIN_IMAGE.src, alt: STATIC_HERO_MAIN_IMAGE.alt }
 
   return (
     <section
@@ -119,9 +119,11 @@ const LearningEventsHero = ({
         </div>
 
         <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
-          <img
-            src={mainHeroImage.src}
-            alt={mainHeroImage.alt}
+          <CmsResponsiveImage
+            image={mainHeroImage}
+            sizes={CMS_IMAGE_SIZES.sideColumn}
+            width={mainHeroImage.width ?? 560}
+            height={mainHeroImage.height ?? 640}
             className="h-auto w-full rounded-radius-md object-cover"
           />
         </RevealWrapper>

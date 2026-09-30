@@ -1,57 +1,30 @@
-'use client'
+'use client';
 
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
-import { useRef } from 'react'
-
-gsap.registerPlugin(ScrollTrigger)
+import CmsAnimatedHeroBanner from '@/components/strapi/CmsAnimatedHeroBanner';
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections';
 
 type AnimatedHeroImageProps = {
-  src?: string
-  alt?: string
-}
+  image?: CmsHeroImage | null;
+  src?: string;
+  alt?: string;
+};
+
+const FALLBACK_SRC = '/images/wow/nav/cards/Startup%20laiunch%201.png';
 
 /** Layout: Home-06 AnimatedHeroImage — scroll-scale banner. */
-const AnimatedHeroImage = ({
-  src = '/images/wow/nav/cards/Startup%20laiunch%201.png',
+export default function AnimatedHeroImage({
+  image,
+  src,
   alt = 'Founders building a startup with WOW Superagency',
-}: AnimatedHeroImageProps) => {
-  const imageRef = useRef<HTMLElement>(null)
-
-  useGSAP(
-    () => {
-      const target = imageRef.current
-      if (!target) return
-
-      const tween = gsap.to(target, {
-        scale: 0.8,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: target,
-          start: 'top 70%',
-          end: 'top 0%',
-          scrub: 1,
-        },
-      })
-
-      return () => {
-        tween.scrollTrigger?.kill()
-        tween.kill()
-      }
-    },
-    { scope: imageRef },
-  )
+}: AnimatedHeroImageProps) {
+  const resolvedImage =
+    image?.src ? image : src ? { src, alt } : undefined;
 
   return (
-    <figure className="mx-auto w-[97%] overflow-hidden rounded-radius-md sm:w-full" ref={imageRef}>
-      <img
-        src={src}
-        alt={alt}
-        className="mx-auto w-[97%] rounded-radius-md object-cover sm:w-full"
-      />
-    </figure>
-  )
+    <CmsAnimatedHeroBanner
+      image={resolvedImage}
+      fallbackSrc={FALLBACK_SRC}
+      alt={alt}
+    />
+  );
 }
-
-export default AnimatedHeroImage

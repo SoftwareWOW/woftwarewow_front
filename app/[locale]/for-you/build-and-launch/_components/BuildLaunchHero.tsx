@@ -84,9 +84,11 @@ const BuildLaunchHero = ({
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image1.src}
-              alt={image1.alt ?? ''}
+            <CmsResponsiveImage
+              image={image1}
+              sizes={CMS_IMAGE_SIZES.heroDual}
+              width={image1.width ?? 480}
+              height={image1.height ?? 360}
               className="w-full object-cover"
             />
           </RevealWrapper>

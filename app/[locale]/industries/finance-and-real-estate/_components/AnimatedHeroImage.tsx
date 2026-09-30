@@ -1,52 +1,31 @@
-'use client'
+'use client';
 
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
-import { useRef } from 'react'
-
-gsap.registerPlugin(ScrollTrigger)
+import CmsAnimatedHeroBanner from '@/components/strapi/CmsAnimatedHeroBanner';
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections';
 
 type AnimatedHeroImageProps = {
-  src?: string
-  alt?: string
-}
+  image?: CmsHeroImage | null;
+  src?: string;
+  alt?: string;
+};
+
+const FALLBACK_SRC =
+  '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png';
 
 /** Layout: Home-06 AnimatedHeroImage — scroll-scale banner. */
-const AnimatedHeroImage = ({
-  src = '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png',
+export default function AnimatedHeroImage({
+  image,
+  src,
   alt = 'Finance and real estate growth dashboard',
-}: AnimatedHeroImageProps) => {
-  const imageRef = useRef<HTMLElement>(null)
-
-  useGSAP(() => {
-    if (imageRef.current) {
-      gsap.to(imageRef.current, {
-        scale: 0.8,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: imageRef.current,
-          start: 'top 70%',
-          end: 'top 0%',
-          scrub: 1,
-        },
-      })
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [])
+}: AnimatedHeroImageProps) {
+  const resolvedImage =
+    image?.src ? image : src ? { src, alt } : undefined;
 
   return (
-    <figure className="mx-auto w-[97%] overflow-hidden rounded-radius-md sm:w-full" ref={imageRef}>
-      <img
-        src={src}
-        alt={alt}
-        className="mx-auto w-[97%] rounded-radius-md object-cover sm:w-full"
-      />
-    </figure>
-  )
+    <CmsAnimatedHeroBanner
+      image={resolvedImage}
+      fallbackSrc={FALLBACK_SRC}
+      alt={alt}
+    />
+  );
 }
-
-export default AnimatedHeroImage

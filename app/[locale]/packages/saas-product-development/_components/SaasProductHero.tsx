@@ -4,7 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimationV2 from '@/components/shared/HeroGradientAnimationV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-24 HeroV24 — dark-friendly split hero + product mockup imagery. */
 const SaasProductHero = ({
@@ -95,16 +95,16 @@ const SaasProductHero = ({
                     : 'reveal-me w-full overflow-hidden rounded-radius-md md:w-[410px] md:shrink-0'
                 }
               >
-                <img
-                  src={image.src}
-                  alt={image.alt ?? ''}
+                <CmsResponsiveImage
+                  image={image}
+                  sizes={singleImage ? CMS_IMAGE_SIZES.contentFull : CMS_IMAGE_SIZES.heroDual}
+                  width={singleImage ? image.width ?? 920 : 410}
+                  height={singleImage ? image.height ?? 560 : 540}
                   className={
                     singleImage
                       ? 'h-auto w-full max-h-[min(52vh,560px)] object-contain object-center xl:max-h-[600px] xl:object-right'
                       : 'h-auto w-full rounded-radius-md object-contain md:h-[540px] md:w-[410px]'
                   }
-                  width={singleImage ? 920 : 410}
-                  height={singleImage ? 560 : 540}
                 />
               </RevealWrapper>
             ))}

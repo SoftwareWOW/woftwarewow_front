@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 
 const DEFAULT_IMAGE: CmsHeroImage = {
@@ -66,9 +67,12 @@ const StrategyHero = ({
         </div>
 
         <RevealWrapper as="figure" className="reveal-me flex w-full justify-center lg:w-auto lg:flex-1 lg:justify-end">
-          <img
-            src={heroImage.src}
+          <CmsResponsiveImage
+            image={heroImage}
             alt={heroImage.alt ?? 'WOW Strategy Centre'}
+            sizes={CMS_IMAGE_SIZES.sideColumn}
+            width={heroImage.width ?? 520}
+            height={heroImage.height ?? 640}
             className="h-auto max-h-[min(70vh,520px)] w-full max-w-[520px] object-contain lg:max-w-none"
           />
         </RevealWrapper>

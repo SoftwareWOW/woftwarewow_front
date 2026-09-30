@@ -57,7 +57,7 @@ const StartupsEntrepreneursHero = ({
           </RevealWrapper>
         </div>
       </div>
-      <AnimatedHeroImage src={heroImage.src} alt={heroImage.alt} />
+      <AnimatedHeroImage image={heroImage} alt={heroImage.alt} />
     </RevealWrapper>
   )
 }

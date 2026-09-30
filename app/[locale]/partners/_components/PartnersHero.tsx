@@ -4,14 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-
-type PageHeroProps = {
-  badgeTitle?: string
-  title?: string
-  italicTitle?: string
-  description?: string
-  images?: { src: string; alt?: string }[]
-}
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: healthcare-and-wellness/HealthcareHero — split headline + dual tall images. */
 const PartnersHero = ({
@@ -21,7 +14,7 @@ const PartnersHero = ({
   description =
     'We collaborate with trusted technology, platform, and industry partners to create stronger solutions for growing businesses.',
   images,
-}: PageHeroProps) => {
+}: CmsHeroComponentProps) => {
   const image0 = images?.[0] ?? {
     src: '/images/wow/nav/cards/software%26technology.png',
     alt: 'Technology partners collaborating',
@@ -67,21 +60,23 @@ const PartnersHero = ({
         </div>
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="Partner ecosystem imagery">
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image0.src}
+            <CmsResponsiveImage
+              image={image0}
               alt={image0.alt ?? 'Technology partners collaborating'}
+              sizes={CMS_IMAGE_SIZES.halfGrid}
+              width={image0.width ?? 410}
+              height={image0.height ?? 540}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <img
-              src={image1.src}
+            <CmsResponsiveImage
+              image={image1}
               alt={image1.alt ?? 'Growth and partnership collaboration'}
+              sizes={CMS_IMAGE_SIZES.halfGrid}
+              width={image1.width ?? 410}
+              height={image1.height ?? 540}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
             />
           </RevealWrapper>
         </div>

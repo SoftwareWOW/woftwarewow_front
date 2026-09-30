@@ -3,13 +3,15 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 
 type PageHeroProps = {
   badgeTitle?: string
   title?: string
   italicTitle?: string
   description?: string
-  images?: { src: string; alt?: string }[]
+  images?: CmsHeroImage[]
 }
 
 const IndustriesHero = ({
@@ -103,11 +105,11 @@ const IndustriesHero = ({
           </div>
 
           <figure className="w-full max-w-[560px] shrink-0 overflow-hidden rounded-radius-md lg:max-w-[48%]">
-            <Image
-              src={heroImage.src}
-              alt={heroImage.alt ?? 'Industries hero'}
-              width={720}
-              height={720}
+            <CmsResponsiveImage
+              image={heroImage}
+              sizes={CMS_IMAGE_SIZES.sideColumn}
+              width={heroImage.width ?? 720}
+              height={heroImage.height ?? 720}
               priority
               className="h-auto w-full object-cover"
             />

@@ -1,13 +1,13 @@
 'use client'
 
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
 import { useEffect, useMemo, useRef } from 'react'
 
 type GalleryPanel = {
   id: number
-  image: string
-  alt?: string
+  image: CmsGalleryImage
 }
 
 /** Layout: Home-13 AboutHoverImages — 3 tilted panels with hover-active swap. */
@@ -19,8 +19,7 @@ const AiGallery = ({ images }: { images?: CmsGalleryImage[] | null } = {}) => {
       .filter((img) => img.src)
       .map((img, index) => ({
         id: index + 1,
-        image: img.src,
-        alt: img.alt,
+        image: img,
       }))
   }, [images])
 
@@ -55,9 +54,14 @@ const AiGallery = ({ images }: { images?: CmsGalleryImage[] | null } = {}) => {
           {displayImages.map((item, index) => (
             <figure
               key={item.id}
-              className={`about-image h-[450px] cursor-pointer lg:min-h-[660px]${index === 0 ? ' about-active-image' : ''}`}
+              className={`about-image relative h-[450px] cursor-pointer lg:min-h-[660px]${index === 0 ? ' about-active-image' : ''}`}
             >
-              <img src={item.image} alt={item.alt ?? ''} className="h-full w-full object-cover" />
+              <CmsResponsiveImage
+                image={item.image}
+                fill
+                sizes={CMS_IMAGE_SIZES.galleryPanel}
+                className="object-cover"
+              />
             </figure>
           ))}
         </RevealWrapperV2>

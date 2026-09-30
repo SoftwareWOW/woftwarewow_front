@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-24 HeroV24 — split headline + dual imagery. */
 const SocialCommunityHero = ({
@@ -70,21 +70,21 @@ const SocialCommunityHero = ({
 
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="Social and community imagery">
           <figure className="overflow-hidden rounded-radius-md">
-            <img
-              src={image0.src}
-              alt={image0.alt ?? ''}
-              className="h-auto w-full object-cover md:h-[540px] md:w-[410px]"
+            <CmsResponsiveImage
+              image={image0}
+              sizes={CMS_IMAGE_SIZES.heroDual}
               width={410}
               height={540}
+              className="h-auto w-full object-cover md:h-[540px] md:w-[410px]"
             />
           </figure>
           <figure className="overflow-hidden rounded-radius-md">
-            <img
-              src={image1.src}
-              alt={image1.alt ?? ''}
-              className="h-auto w-full object-cover md:h-[540px] md:w-[410px]"
+            <CmsResponsiveImage
+              image={image1}
+              sizes={CMS_IMAGE_SIZES.heroDual}
               width={410}
               height={540}
+              className="h-auto w-full object-cover md:h-[540px] md:w-[410px]"
             />
           </figure>
         </div>

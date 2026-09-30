@@ -4,7 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-18 HeroV18 — gradient + split headline/CTAs + right visual. */
 const AiAutomationHero = ({
@@ -68,9 +68,11 @@ const AiAutomationHero = ({
 
           {heroImage?.src ? (
             <RevealWrapper as="figure" className="reveal-me w-full max-w-md shrink-0 overflow-hidden rounded-radius-sm lg:max-w-lg">
-              <img
-                src={heroImage.src}
-                alt={heroImage.alt ?? ''}
+              <CmsResponsiveImage
+                image={heroImage}
+                sizes={CMS_IMAGE_SIZES.sideColumn}
+                width={heroImage.width ?? 512}
+                height={heroImage.height ?? 512}
                 className="h-auto w-full rounded-radius-sm object-cover"
               />
             </RevealWrapper>

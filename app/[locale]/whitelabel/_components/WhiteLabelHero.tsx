@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 
 type WhiteLabelHeroProps = {
@@ -14,10 +15,9 @@ type WhiteLabelHeroProps = {
 
 /** Layout: organizations OrganizationsHero — image left + headline + dual CTAs. */
 const WhiteLabelHero = ({ title, italicTitle, description, images }: WhiteLabelHeroProps) => {
-  const heroImage = images?.[0]?.src
-  const heroAlt = images?.[0]?.alt ?? ''
+  const heroImage = images?.[0]
 
-  if (!title && !italicTitle && !description && !heroImage) {
+  if (!title && !italicTitle && !description && !heroImage?.src) {
     return null
   }
 
@@ -28,15 +28,14 @@ const WhiteLabelHero = ({ title, italicTitle, description, images }: WhiteLabelH
     >
       <div className="hero-video-container mx-auto max-w-[1600px] px-4 pb-14 md:px-[30px] md:pb-16 lg:pb-[88px] xl:pb-[100px]">
         <div className="flex flex-col items-center gap-x-12 gap-y-10 lg:flex-row lg:items-center lg:gap-x-16 xl:gap-x-20">
-          {heroImage ? (
+          {heroImage?.src ? (
             <RevealWrapper className="reveal-me group relative w-full lg:w-1/2">
               <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-md sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px] xl:min-h-[620px] 2xl:min-h-[700px]">
-                <img
-                  src={heroImage}
-                  alt={heroAlt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  width={800}
-                  height={450}
+                <CmsResponsiveImage
+                  image={heroImage}
+                  fill
+                  sizes={CMS_IMAGE_SIZES.halfGrid}
+                  className="object-cover"
                 />
               </figure>
             </RevealWrapper>

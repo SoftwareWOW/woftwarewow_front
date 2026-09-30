@@ -185,3 +185,15 @@ export function mapStrapiMediaToCmsImage(
 export function resolveStrapiMediaSrc(media?: StrapiMedia | null): string | undefined {
   return mapStrapiMediaToCmsImage(media)?.src ?? getStrapiMediaUrl(media ?? undefined);
 }
+
+/** Build a width-based `srcSet` from Strapi format variants. */
+export function buildStrapiSrcSet(
+  image: Pick<CmsHeroImage, 'formats' | 'original' | 'src'>,
+): string | undefined {
+  const variants = collectVariants(image).filter(
+    (variant) => variant.url && (variant.width ?? 0) > 0,
+  );
+  if (variants.length < 2) return undefined;
+
+  return variants.map((variant) => `${variant.url} ${variant.width}w`).join(', ');
+}

@@ -4,8 +4,8 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
 import type { ReactNode } from 'react'
-import type { CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import type { CmsHeroImage, CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const teams: {
   title: ReactNode
@@ -92,7 +92,7 @@ type DisplayTeam = {
   title: ReactNode
   heading: string
   description: string
-  image: string
+  image: CmsHeroImage
   href: string
 }
 
@@ -108,10 +108,12 @@ const ExclusiveTravelDeals = (cmsSection: ExclusiveTravelDealsProps = {}) => {
         title: cms.title,
         heading: cms.subtitle ?? teams[index]?.heading ?? '',
         description: cms.description ?? teams[index]?.description ?? '',
-        image: cms.image?.src ?? teams[index]?.image ?? '',
+        image: cms.image?.src
+          ? cms.image
+          : { src: teams[index]?.image ?? '' },
         href: cms.href ?? teams[index]?.href ?? '#',
       }))
-    : teams
+    : teams.map((team) => ({ ...team, image: { src: team.image } }))
 
   return (
     <section>
@@ -133,8 +135,13 @@ const ExclusiveTravelDeals = (cmsSection: ExclusiveTravelDealsProps = {}) => {
 
         <div className="grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
           {displayTeams.map((item) => (
-            <RevealWrapper key={item.heading + item.href} as="figure" className="reveal-me relative overflow-hidden rounded-radius-md">
-              <img src={item.image} alt="" className="h-auto min-h-[420px] w-full object-cover opacity-70" />
+            <RevealWrapper key={item.heading + item.href} as="figure" className="reveal-me relative min-h-[420px] overflow-hidden rounded-radius-md">
+              <CmsResponsiveImage
+                image={item.image}
+                fill
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                className="object-cover opacity-70"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" aria-hidden />
               <div className="absolute bottom-10 left-[30px] right-[30px] md:bottom-6 xl:bottom-10">
                 <h6 className="flex flex-wrap items-center gap-[0.25em] text-backgroundBody">{item.title}</h6>
