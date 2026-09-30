@@ -1,9 +1,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import Image from 'next/image'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeFeatureItems, cmsImageSrc, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_POINTS = [
   {
@@ -41,7 +40,7 @@ const WhatMattersMost = ({
 }: WhatMattersMostProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedItems = mergeFeatureItems(DEFAULT_POINTS, items)
-  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217 1.png')
+  const fallbackImage = '/images/wow/nav/cards/pexels-polina-tankilevitch-5386217 1.png'
 
   return (
     <section>
@@ -70,11 +69,12 @@ const WhatMattersMost = ({
             ))}
           </div>
           <RevealWrapper as="figure" className="relative min-h-[320px] overflow-hidden rounded-radius-md md:min-h-[480px] md:w-1/2 lg:min-h-[560px]">
-            <Image
-              src={imageSrc ?? ''}
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
               alt={image?.alt ?? 'Professional services growth'}
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes={CMS_IMAGE_SIZES.halfGrid}
               className="rounded-radius-md object-cover"
             />
           </RevealWrapper>

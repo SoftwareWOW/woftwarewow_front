@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_STEPS = [
   {
@@ -45,7 +45,7 @@ const ClientJourney = ({
 }: ClientJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
-  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/software%26technology.png')
+  const fallbackImage = '/images/wow/nav/cards/software%26technology.png'
 
   return (
     <section>
@@ -67,10 +67,13 @@ const ClientJourney = ({
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
-            <img
-              src={imageSrc ?? ''}
-              alt="Technology product journey"
-              className="h-full min-h-[320px] w-full rounded-radius-md object-cover md:min-h-[480px] lg:min-h-[560px]"
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
+              alt={image?.alt ?? 'Technology product journey'}
+              fill
+              sizes={CMS_IMAGE_SIZES.column420}
+              className="rounded-radius-md object-cover"
             />
           </figure>
 

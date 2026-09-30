@@ -30,6 +30,9 @@ export function cmsImageSrc(cms?: CmsHeroImage | null, fallback?: string): strin
   return cms?.src ?? fallback;
 }
 
+export { CMS_IMAGE_SIZES } from '@/lib/strapi/cms-image-sizes';
+export { default as CmsResponsiveImage } from '@/components/strapi/CmsResponsiveImage';
+
 /** Merge CMS feature items onto static defaults by index (title, description, card image). */
 export function mergeFeatureItems<
   T extends { title: string; description?: string; href?: string; image?: string },

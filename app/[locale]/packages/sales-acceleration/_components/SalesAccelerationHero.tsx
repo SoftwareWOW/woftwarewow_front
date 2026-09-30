@@ -4,7 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-18 HeroV18 — gradient + split headline/CTAs + right visual. */
 const SalesAccelerationHero = ({
@@ -62,7 +62,13 @@ const SalesAccelerationHero = ({
 
           {image0?.src ? (
             <RevealWrapper as="figure" className="reveal-me w-full max-w-md shrink-0 overflow-hidden rounded-radius-sm lg:max-w-lg">
-              <img src={image0.src} alt={image0.alt ?? ''} className="h-auto w-full rounded-radius-sm object-cover" />
+              <CmsResponsiveImage
+                image={image0}
+                sizes={CMS_IMAGE_SIZES.sideColumn}
+                width={image0.width ?? 512}
+                height={image0.height ?? 640}
+                className="h-auto w-full rounded-radius-sm object-cover"
+              />
             </RevealWrapper>
           ) : null}
         </div>

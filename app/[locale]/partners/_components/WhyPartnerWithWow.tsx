@@ -4,7 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { partnerBenefits as DEFAULT_PARTNERBENEFITS } from '../_data/partners'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeFeatureItems, cmsImageSrc, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-12 WhyChooseUs — 5 stacked benefit rows + image. */
 type WhyPartnerWithWowProps = Partial<CmsTechnologiesSection>
@@ -19,7 +19,7 @@ const WhyPartnerWithWow = ({
 }: WhyPartnerWithWowProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedItems = mergeFeatureItems(DEFAULT_PARTNERBENEFITS, items)
-  const imageSrc = cmsImageSrc(image, '/images/wow/Hero/devision/Accelerate.jpg')
+  const fallbackImage = '/images/wow/Hero/devision/Accelerate.jpg'
   const imageAlt = image?.alt ?? 'WOW partner ecosystem'
 
 
@@ -44,11 +44,14 @@ const WhyPartnerWithWow = ({
               </RevealWrapper>
             ))}
           </div>
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
-            <img
-              src={imageSrc ?? ''}
+          <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] overflow-hidden rounded-radius-md md:w-1/2">
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
               alt={imageAlt}
-              className="h-full w-full rounded-radius-md object-cover"
+              fill
+              sizes={CMS_IMAGE_SIZES.halfGrid}
+              className="rounded-radius-md object-cover"
             />
           </RevealWrapper>
         </div>

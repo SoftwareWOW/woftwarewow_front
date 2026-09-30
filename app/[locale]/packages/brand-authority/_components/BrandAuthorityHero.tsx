@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Home-19 — HeroV19: split headline + dual media + dual CTAs. */
 const BrandAuthorityHero = ({
@@ -65,12 +65,24 @@ const BrandAuthorityHero = ({
           <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
             {image0?.src ? (
               <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-sm sm:mt-[78px]">
-                <img src={image0.src} alt={image0.alt ?? ''} className="rounded-radius-sm max-sm:w-full" />
+                <CmsResponsiveImage
+                  image={image0}
+                  sizes={CMS_IMAGE_SIZES.heroDual}
+                  width={image0.width ?? 480}
+                  height={image0.height ?? 360}
+                  className="rounded-radius-sm max-sm:w-full"
+                />
               </RevealWrapper>
             ) : null}
             {image1?.src ? (
               <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm">
-                <img src={image1.src} alt={image1.alt ?? ''} className="rounded-radius-sm max-sm:w-full" />
+                <CmsResponsiveImage
+                  image={image1}
+                  sizes={CMS_IMAGE_SIZES.heroDual}
+                  width={image1.width ?? 480}
+                  height={image1.height ?? 360}
+                  className="rounded-radius-sm max-sm:w-full"
+                />
               </RevealWrapper>
             ) : null}
           </div>

@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 type Props = Partial<CmsTechnologiesSection>
@@ -20,9 +20,9 @@ const WhatsIncluded = ({
       title: item.title,
       description: item.description ?? '',
     })) ?? []
-  const imageSrc = cmsImageSrc(image)
+  const hasImage = Boolean(image?.src)
 
-  if (!displayItems.length && !imageSrc) {
+  if (!displayItems.length && !hasImage) {
     return null
   }
 
@@ -57,12 +57,14 @@ const WhatsIncluded = ({
             </div>
           ) : null}
 
-          {imageSrc ? (
-            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-sm md:w-1/2">
-              <img
-                src={imageSrc}
+          {hasImage ? (
+            <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] overflow-hidden rounded-radius-sm md:w-1/2">
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Startup launch package essentials'}
-                className="h-full w-full rounded-radius-sm object-cover"
+                fill
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                className="rounded-radius-sm object-cover"
               />
             </RevealWrapper>
           ) : null}

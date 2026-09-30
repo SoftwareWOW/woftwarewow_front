@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 
 const DEFAULT_IMAGES: CmsHeroImage[] = [
@@ -82,12 +83,24 @@ const WhyUsHero = ({
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           {primaryImage && (
             <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
-              <img src={primaryImage.src} alt={primaryImage.alt ?? ''} className="w-full object-cover rounded-radius-sm" />
+              <CmsResponsiveImage
+                image={primaryImage}
+                sizes={CMS_IMAGE_SIZES.heroDual}
+                width={primaryImage.width ?? 480}
+                height={primaryImage.height ?? 360}
+                className="w-full object-cover rounded-radius-sm"
+              />
             </RevealWrapper>
           )}
           {secondaryImage && (
             <RevealWrapper as="figure" className="reveal-me">
-              <img src={secondaryImage.src} alt={secondaryImage.alt ?? ''} className="w-full object-cover rounded-radius-sm" />
+              <CmsResponsiveImage
+                image={secondaryImage}
+                sizes={CMS_IMAGE_SIZES.heroDual}
+                width={secondaryImage.width ?? 480}
+                height={secondaryImage.height ?? 360}
+                className="w-full object-cover rounded-radius-sm"
+              />
             </RevealWrapper>
           )}
         </div>

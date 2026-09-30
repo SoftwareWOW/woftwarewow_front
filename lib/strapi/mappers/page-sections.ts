@@ -1,5 +1,5 @@
 import { resolveCaseStudySlug } from '@/lib/case-study/slug';
-import { resolveCmsImage } from '@/lib/strapi/cms-image';
+import { mapStrapiMediaToCmsImage, resolveCmsImage, type CmsHeroImage } from '@/lib/strapi/cms-image';
 import { getStrapiMediaUrl } from '@/lib/strapi/client';
 import { mapSocialLinks, type CmsSocialLink } from '@/lib/strapi/social-icons';
 import type { Metadata } from 'next';
@@ -33,10 +33,7 @@ import type {
   StrapiTeamMember,
 } from '@/lib/strapi/types/pages';
 
-export type CmsHeroImage = {
-  src: string;
-  alt?: string;
-};
+export type { CmsHeroImage } from '@/lib/strapi/cms-image';
 
 export type CmsPageHeroProps = {
   badgeTitle?: string;
@@ -384,11 +381,8 @@ function mapHeroImages(hero?: StrapiPageHero | null): CmsHeroImage[] | undefined
   if (!hero?.images?.length) return undefined;
 
   const images = hero.images
-    .map((item) => ({
-      src: getStrapiMediaUrl(item.image ?? undefined) ?? '',
-      alt: item.alt ?? undefined,
-    }))
-    .filter((item) => Boolean(item.src));
+    .map((item) => mapStrapiMediaToCmsImage(item.image ?? undefined, item.alt))
+    .filter((item): item is CmsHeroImage => Boolean(item?.src));
 
   return images.length ? images : undefined;
 }
@@ -648,11 +642,10 @@ export function mapImageGallery(
 
   const images = section.images
     .map((item) => {
-      const src = getStrapiMediaUrl(item.image ?? undefined);
-      if (!src) return null;
+      const mapped = mapStrapiMediaToCmsImage(item.image ?? undefined, item.alt);
+      if (!mapped?.src) return null;
       return {
-        src,
-        alt: item.alt ?? undefined,
+        ...mapped,
         href: item.href ?? undefined,
       };
     })
@@ -843,10 +836,7 @@ export function mapPagePackageList(
     href: item.href ?? undefined,
     buttonLabel: item.buttonLabel ?? undefined,
     image: item.image
-      ? {
-          src: getStrapiMediaUrl(item.image.image ?? undefined) ?? '',
-          alt: item.image.alt ?? undefined,
-        }
+      ? mapStrapiMediaToCmsImage(item.image.image ?? undefined, item.image.alt)
       : undefined,
   }));
 
@@ -922,11 +912,8 @@ export function mapPageImages(section?: StrapiPageImages | null) {
   if (!section?.images?.length) return null;
 
   return section.images
-    .map((item) => ({
-      src: getStrapiMediaUrl(item.image ?? undefined),
-      alt: item.alt ?? undefined,
-    }))
-    .filter((item) => Boolean(item.src)) as { src: string; alt?: string }[];
+    .map((item) => mapStrapiMediaToCmsImage(item.image ?? undefined, item.alt))
+    .filter((item): item is CmsHeroImage => Boolean(item?.src));
 }
 
 export function mapPageSectionImage(
@@ -953,10 +940,8 @@ export function mapPageSectionImage(
 function mapImageWithAltItem(
   item?: { image?: Parameters<typeof getStrapiMediaUrl>[0]; alt?: string | null },
 ): CmsGalleryImage | null {
-  const src = getStrapiMediaUrl(item?.image ?? undefined);
-  if (!src) return null;
-  const mapped: CmsGalleryImage = { src };
-  if (item?.alt) mapped.alt = item.alt;
+  const mapped = mapStrapiMediaToCmsImage(item?.image ?? undefined, item?.alt);
+  if (!mapped?.src) return null;
   return mapped;
 }
 

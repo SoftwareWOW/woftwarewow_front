@@ -4,7 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 type Props = Partial<CmsTechnologiesSection>
@@ -16,7 +16,7 @@ const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
       ?.map((item) => ({
         title: item.title,
         description: item.description ?? '',
-        image: cmsImageSrc(item.image),
+        image: item.image,
       }))
       .filter((item) => item.title) ?? []
 
@@ -84,12 +84,15 @@ const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
                     </div>
                   </div>
 
-                  {piece.image ? (
+                  {piece.image?.src ? (
                     <div className="overflow-hidden">
                       <figure className="h-0 -translate-y-4 transform opacity-0 transition-all duration-700 ease-in-out group-hover:h-[110px] group-hover:translate-y-0 group-hover:opacity-100 md:group-hover:h-[160px] lg:group-hover:h-[230px]">
-                        <img
-                          src={piece.image}
+                        <CmsResponsiveImage
+                          image={piece.image}
                           alt={piece.title}
+                          sizes={CMS_IMAGE_SIZES.wideSection}
+                          width={piece.image.width ?? 1170}
+                          height={piece.image.height ?? 230}
                           className="rounded-radius-sm object-cover px-5 pb-5 pt-4 transition-all duration-700 ease-in-out md:px-10 md:pb-10"
                         />
                       </figure>

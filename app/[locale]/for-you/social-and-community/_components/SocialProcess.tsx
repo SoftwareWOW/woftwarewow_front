@@ -1,7 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-07 ProcessV4 — image + numbered vertical process. */
 const SocialProcess = ({
@@ -16,9 +16,9 @@ const SocialProcess = ({
       title: step.title,
       description: step.description ?? '',
     })) ?? []
-  const processImageSrc = cmsImageSrc(image)
+  const hasProcessImage = Boolean(image?.src)
 
-  if (!displaySteps.length && !processImageSrc) {
+  if (!displaySteps.length && !hasProcessImage) {
     return null
   }
 
@@ -35,14 +35,14 @@ const SocialProcess = ({
         </div>
 
         <RevealWrapper className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-12 lg:gap-16">
-          {processImageSrc ? (
+          {hasProcessImage ? (
             <figure className="relative mx-auto h-[240px] w-full max-w-[570px] shrink-0 overflow-hidden rounded-radius-md sm:h-[320px] md:mx-0 md:h-auto md:w-[570px]">
-              <img
-                src={processImageSrc}
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Social and community process'}
-                className="absolute inset-0 h-full w-full object-cover"
-                width={570}
-                height={389}
+                fill
+                sizes="(max-width: 768px) 100vw, 570px"
+                className="object-cover"
               />
             </figure>
           ) : null}

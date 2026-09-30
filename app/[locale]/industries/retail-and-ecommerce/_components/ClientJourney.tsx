@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_STEPS = [
   {
@@ -33,7 +33,7 @@ type ClientJourneyProps = Partial<CmsProcessSection>
 const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image }: ClientJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
-  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/pexels-cottonbro-4069290 1.png')
+  const fallbackImage = '/images/wow/nav/cards/pexels-cottonbro-4069290 1.png'
 
   return (
     <section>
@@ -59,10 +59,13 @@ const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image 
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
-            <img
-              src={imageSrc ?? ''}
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
               alt={image?.alt ?? 'Commerce journey from first visit to repeat purchase'}
-              className="h-full w-full min-h-[320px] rounded-radius-md object-cover md:min-h-[480px] lg:min-h-[560px]"
+              fill
+              sizes={CMS_IMAGE_SIZES.column420}
+              className="rounded-radius-md object-cover"
             />
           </figure>
 

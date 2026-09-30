@@ -3,7 +3,7 @@ import SectionDecorativeBackground from '@/components/shared/SectionDecorativeBa
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-19 HeroV19 — split headline + dual media (no circle logo). */
 const BuildLaunchHero = ({
@@ -75,7 +75,13 @@ const BuildLaunchHero = ({
 
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           <RevealWrapper as="figure" className="reveal-me relative mt-0 overflow-hidden rounded-radius-md sm:mt-[78px]">
-            <img src={image0.src} alt={image0.alt ?? ''} className="w-full object-cover" />
+            <CmsResponsiveImage
+              image={image0}
+              sizes={CMS_IMAGE_SIZES.heroDual}
+              width={image0.width ?? 480}
+              height={image0.height ?? 360}
+              className="w-full object-cover"
+            />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img

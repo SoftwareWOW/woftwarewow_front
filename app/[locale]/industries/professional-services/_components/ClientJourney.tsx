@@ -3,9 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroImage, CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
-import Image from 'next/image'
-
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 const DEFAULT_STEPS = [
   {
     number: '01',
@@ -35,7 +33,7 @@ type ClientJourneyProps = Partial<CmsProcessSection> & { image?: CmsHeroImage | 
 const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image }: ClientJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
-  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/pexels-cottonbro-4069290 1.png')
+  const fallbackImage = '/images/wow/nav/cards/pexels-cottonbro-4069290 1.png'
 
   return (
     <section>
@@ -59,11 +57,12 @@ const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image 
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
-            <Image
-              src={imageSrc ?? ''}
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
               alt={image?.alt ?? 'Client journey from discovery to qualified client'}
               fill
-              sizes="(max-width: 768px) 100vw, 420px"
+              sizes={CMS_IMAGE_SIZES.column420}
               className="rounded-radius-md object-cover"
             />
           </figure>

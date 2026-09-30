@@ -3,7 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-12 WhyChooseUs — centered header + list + image + dual CTAs. */
 const BrandCapabilities = ({
@@ -19,9 +19,9 @@ const BrandCapabilities = ({
       title: item.title,
       description: item.description ?? '',
     })) ?? []
-  const sideImageSrc = cmsImageSrc(image)
+  const hasSideImage = Boolean(image?.src)
 
-  if (!displayCapabilities.length && !sideImageSrc) {
+  if (!displayCapabilities.length && !hasSideImage) {
     return null
   }
 
@@ -59,12 +59,14 @@ const BrandCapabilities = ({
             </div>
           ) : null}
 
-          {sideImageSrc ? (
-            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
-              <img
-                src={sideImageSrc}
+          {hasSideImage ? (
+            <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] overflow-hidden rounded-radius-md md:min-h-[480px] md:w-1/2">
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Brand capabilities and identity system'}
-                className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
+                fill
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                className="object-cover"
               />
             </RevealWrapper>
           ) : null}

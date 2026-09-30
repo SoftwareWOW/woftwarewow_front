@@ -1,10 +1,12 @@
 'use client'
 
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
+import type { CmsHeroImage } from '@/lib/strapi/mappers/page-sections'
 import { useEffect, useRef } from 'react'
 
 type HeroHoverImagesProps = {
-  images?: { src: string; alt?: string }[]
+  images?: CmsHeroImage[]
 }
 
 /** Layout: Home-13 AboutHoverImages — three hover-expand figures. */
@@ -41,11 +43,16 @@ const HeroHoverImages = ({ images }: HeroHoverImagesProps) => {
         {resolvedImages.map((image, index) => (
           <figure
             key={image.src}
-            className={`about-image h-[450px] cursor-pointer overflow-hidden rounded-radius-md lg:min-h-[660px] ${
+            className={`about-image relative h-[450px] cursor-pointer overflow-hidden rounded-radius-md lg:min-h-[660px] ${
               index === 0 ? 'about-active-image' : ''
             }`}
           >
-            <img src={image.src} alt={image.alt ?? ''} className="h-full w-full rounded-radius-md object-cover" />
+            <CmsResponsiveImage
+              image={image}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="rounded-radius-md object-cover"
+            />
           </figure>
         ))}
       </RevealWrapperV2>

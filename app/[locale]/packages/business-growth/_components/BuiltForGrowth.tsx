@@ -1,7 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 const CheckIcon = () => (
@@ -23,11 +23,11 @@ type Props = Partial<CmsTechnologiesSection>
 /** Home-04 — AboutV4: badge + headline + image + copy column (checklist content). */
 const BuiltForGrowth = ({ eyebrow, title, description, image, items }: Props = {}) => {
   const fitItems = items?.map((item) => item.title).filter(Boolean) ?? []
-  const imageSrc = cmsImageSrc(image)
+  const hasImage = Boolean(image?.src)
   const introParagraph = description?.split('\n\n')[0]?.trim()
   const closingParagraph = description?.split('\n\n').slice(1).join('\n\n').trim()
 
-  if (!title && !fitItems.length && !imageSrc) {
+  if (!title && !fitItems.length && !hasImage) {
     return null
   }
 
@@ -53,16 +53,18 @@ const BuiltForGrowth = ({ eyebrow, title, description, image, items }: Props = {
         ) : null}
 
         <RevealWrapper className="flex flex-col gap-x-16 gap-y-16 lg:flex-row">
-          {imageSrc ? (
-            <figure className="overflow-hidden rounded-radius-sm lg:w-1/2">
-              <img
-                src={imageSrc}
+          {hasImage ? (
+            <figure className="relative min-h-[280px] overflow-hidden rounded-radius-sm lg:w-1/2">
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Business owner looking ahead to the next stage of growth'}
-                className="h-full w-full rounded-radius-sm object-cover"
+                fill
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                className="rounded-radius-sm object-cover"
               />
             </figure>
           ) : null}
-          <div className={imageSrc ? 'lg:w-1/2' : 'w-full'}>
+          <div className={hasImage ? 'lg:w-1/2' : 'w-full'}>
             {fitItems.length ? (
               <>
                 <h5 className="mb-8">This package could be right for you if:</h5>

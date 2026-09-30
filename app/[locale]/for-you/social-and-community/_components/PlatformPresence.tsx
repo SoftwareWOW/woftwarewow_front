@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_PLATFORMS = [
   {
@@ -60,7 +60,7 @@ const PlatformPresence = ({
     name: platform.title,
     description: platform.description ?? DEFAULT_PLATFORMS[index].description,
   }))
-  const sideImageSrc = cmsImageSrc(image)
+  const hasSideImage = Boolean(image?.src)
 
   return (
     <section className="relative overflow-hidden">
@@ -82,11 +82,14 @@ const PlatformPresence = ({
             </RevealWrapper>
           </div>
 
-          {sideImageSrc ? (
-            <RevealWrapper className="reveal-me w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md">
-              <img
-                src={sideImageSrc}
+          {hasSideImage ? (
+            <RevealWrapper className="reveal-me relative w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md">
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Social insights on mobile'}
+                sizes={CMS_IMAGE_SIZES.sideColumn}
+                width={image?.width ?? 400}
+                height={image?.height ?? 520}
                 className="h-auto w-full object-cover"
               />
             </RevealWrapper>

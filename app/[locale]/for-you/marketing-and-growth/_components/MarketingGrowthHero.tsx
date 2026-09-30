@@ -4,7 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import type { CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 const TEAM_HERO_IMAGE_BASE = '/images/wow/Hero/career/team'
 
@@ -33,8 +33,8 @@ const MarketingGrowthHero = ({
 }: CmsHeroComponentProps) => {
   const cmsMain = images?.[0]
   const mainImage = cmsMain?.src
-    ? { src: cmsMain.src, alt: cmsMain.alt ?? STATIC_HERO_MAIN_IMAGE.alt }
-    : STATIC_HERO_MAIN_IMAGE
+    ? cmsMain
+    : { src: STATIC_HERO_MAIN_IMAGE.src, alt: STATIC_HERO_MAIN_IMAGE.alt }
 
   return (
     <section
@@ -100,7 +100,13 @@ const MarketingGrowthHero = ({
               </p>
             </div>
             <figure className="relative mt-5 h-full w-full overflow-hidden rounded-radius-md md:mt-[30px]">
-              <img src={mainImage.src} alt={mainImage.alt} className="h-auto w-full object-cover" />
+              <CmsResponsiveImage
+                image={mainImage}
+                sizes={CMS_IMAGE_SIZES.sideColumn}
+                width={mainImage.width ?? 400}
+                height={mainImage.height ?? 520}
+                className="h-auto w-full object-cover"
+              />
             </figure>
           </RevealWrapper>
         </div>

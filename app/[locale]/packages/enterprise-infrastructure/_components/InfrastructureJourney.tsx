@@ -5,7 +5,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import processImg from '@/public/images/process-img-01.png'
 import Image from 'next/image'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
 type Props = Partial<CmsProcessSection>
@@ -17,7 +17,7 @@ const InfrastructureJourney = ({ eyebrow, title, accentTitle, steps, image }: Pr
       title: step.title,
       description: step.description ?? '',
     })) ?? []
-  const imageSrc = cmsImageSrc(image)
+  const hasCmsImage = Boolean(image?.src)
 
   if (!displaySteps.length && !title) {
     return null
@@ -62,10 +62,13 @@ const InfrastructureJourney = ({ eyebrow, title, accentTitle, steps, image }: Pr
             </div>
           ) : null}
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
-            {imageSrc ? (
-              <img
-                src={imageSrc}
+            {hasCmsImage ? (
+              <CmsResponsiveImage
+                image={image}
                 alt="Designing and deploying business infrastructure"
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                width={image?.width ?? 640}
+                height={image?.height ?? 480}
                 className="h-full w-full rounded-radius-md object-cover"
               />
             ) : (

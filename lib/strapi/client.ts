@@ -39,18 +39,46 @@ function resolveStrapiBaseUrl(): string {
 const STRAPI_URL = resolveStrapiBaseUrl();
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
+export type StrapiMediaFormatKey = 'thumbnail' | 'small' | 'medium' | 'large';
+
+export type StrapiMediaFormatVariant = {
+  url: string;
+  width?: number;
+  height?: number;
+};
+
 export type StrapiMedia = {
   url: string;
   alternativeText?: string | null;
   width?: number;
   height?: number;
-  formats?: {
-    large?: { url?: string } | null;
-    medium?: { url?: string } | null;
-    small?: { url?: string } | null;
-    thumbnail?: { url?: string } | null;
-  } | null;
+  formats?: Partial<Record<StrapiMediaFormatKey, StrapiMediaFormatVariant | null>> | null;
 };
+
+export function resolveStrapiUploadUrl(path: string): string | undefined {
+  const url = path.trim();
+  if (!url) return undefined;
+
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return isAllowedNextImageSrc(url) ? url : undefined;
+  }
+
+  if (url.startsWith('/')) {
+    if (isFrontendAssetPath(url)) return url;
+    if (isStrapiUploadPath(url)) {
+      if (!STRAPI_URL) return undefined;
+      const absolute = `${STRAPI_URL}${url}`;
+      return isAllowedNextImageSrc(absolute) ? absolute : undefined;
+    }
+    return undefined;
+  }
+
+  if (!STRAPI_URL) return undefined;
+  const normalized = url.replace(/^\//, '');
+  if (!normalized.startsWith('uploads/')) return undefined;
+  const absolute = `${STRAPI_URL}/${normalized}`;
+  return isAllowedNextImageSrc(absolute) ? absolute : undefined;
+}
 
 /** Prefer responsive Strapi formats over the original upload (better for next/image). */
 function pickStrapiMediaPath(media: StrapiMedia): string | undefined {
@@ -117,28 +145,9 @@ export function isAllowedNextImageSrc(src: string | undefined): boolean {
 }
 
 export function getStrapiMediaUrl(media?: StrapiMedia | null): string | undefined {
-  const url = media ? pickStrapiMediaPath(media) : undefined;
-  if (!url) return undefined;
-
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return isAllowedNextImageSrc(url) ? url : undefined;
-  }
-
-  if (url.startsWith('/')) {
-    if (isFrontendAssetPath(url)) return url;
-    if (isStrapiUploadPath(url)) {
-      if (!STRAPI_URL) return undefined;
-      const absolute = `${STRAPI_URL}${url}`;
-      return isAllowedNextImageSrc(absolute) ? absolute : undefined;
-    }
-    return undefined;
-  }
-
-  if (!STRAPI_URL) return undefined;
-  const normalized = url.replace(/^\//, '');
-  if (!normalized.startsWith('uploads/')) return undefined;
-  const absolute = `${STRAPI_URL}/${normalized}`;
-  return isAllowedNextImageSrc(absolute) ? absolute : undefined;
+  const path = media ? pickStrapiMediaPath(media) : undefined;
+  if (!path) return undefined;
+  return resolveStrapiUploadUrl(path);
 }
 
 export function isStrapiConfigured(): boolean {

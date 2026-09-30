@@ -3,7 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_PROCESSSTEPS = [
   {

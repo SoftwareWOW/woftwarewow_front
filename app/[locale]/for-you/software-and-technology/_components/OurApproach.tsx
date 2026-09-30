@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-25 WhyChooseUsV8 — approach list + image + CTA. */
 const OurApproach = ({
@@ -14,9 +14,9 @@ const OurApproach = ({
   items,
 }: Partial<CmsTechnologiesSection> = {}) => {
   const displayItems = items?.length ? items : []
-  const imageSrc = cmsImageSrc(image)
+  const hasImage = Boolean(image?.src)
 
-  if (!displayItems.length && !imageSrc) {
+  if (!displayItems.length && !hasImage) {
     return null
   }
   const titleLines = title.split('\n')
@@ -69,12 +69,14 @@ const OurApproach = ({
             </RevealWrapper>
           </div>
 
-          {imageSrc ? (
-            <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
-              <img
-                src={imageSrc}
+          {hasImage ? (
+            <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] overflow-hidden rounded-radius-md md:w-1/2">
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Technology approach — build and integrate'}
-                className="h-full w-full object-contain"
+                fill
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                className="object-contain"
               />
             </RevealWrapper>
           ) : null}

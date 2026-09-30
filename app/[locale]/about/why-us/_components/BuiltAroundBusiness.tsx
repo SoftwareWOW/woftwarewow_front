@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage, CmsProcessStep } from '@/lib/strapi/mappers/page-sections'
 
 const DEFAULT_POINTS = [
@@ -113,8 +114,13 @@ const BuiltAroundBusiness = ({
             </RevealWrapper>
           </div>
 
-          <RevealWrapper as="figure" className="reveal-me md:w-1/2">
-            <img src={image.src} alt={image.alt ?? ''} className="h-full w-full object-cover rounded-radius-md" />
+          <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] md:w-1/2">
+            <CmsResponsiveImage
+              image={image}
+              fill
+              sizes={CMS_IMAGE_SIZES.halfGrid}
+              className="object-cover rounded-radius-md"
+            />
           </RevealWrapper>
         </div>
       </div>

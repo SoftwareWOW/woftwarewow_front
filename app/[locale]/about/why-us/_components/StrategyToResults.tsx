@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage, CmsProcessStep } from '@/lib/strapi/mappers/page-sections'
 import processImg from '@/public/images/process-img-01.png'
 import Image from 'next/image'
@@ -79,7 +80,14 @@ const StrategyToResults = ({
         <RevealWrapper className="reveal-me flex flex-col gap-12 md:flex-row md:gap-16 lg:gap-20">
           <figure className="md:w-1/2">
             {image?.src ? (
-              <img src={image.src} alt={image.alt ?? 'From strategy to executed results'} className="h-auto w-full" />
+              <CmsResponsiveImage
+                image={image}
+                alt={image.alt ?? 'From strategy to executed results'}
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                width={image.width ?? 640}
+                height={image.height ?? 480}
+                className="h-auto w-full"
+              />
             ) : (
               <Image src={processImg} alt="From strategy to executed results" className="h-auto w-full" />
             )}

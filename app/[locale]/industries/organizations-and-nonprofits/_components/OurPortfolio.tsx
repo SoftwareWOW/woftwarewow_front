@@ -4,7 +4,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Marquee from 'react-fast-marquee'
-import type { CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
+import type { CmsHeroImage, CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
 const DEFAULT_PORTFOLIOIMAGES = [
   {
@@ -62,14 +63,14 @@ const DEFAULT_PORTFOLIOIMAGES = [
 /** Layout: Home-22 OurPortfolio — dual marquee rows. */
 type OurPortfolioProps = {
   projects?: CmsProjectCard[] | null
-  images?: { src: string; alt?: string }[] | null
+  images?: CmsHeroImage[] | null
 }
 
 const OurPortfolio = ({ projects, images }: OurPortfolioProps = {}) => {
   const portfolioImages = images?.length
     ? images.map((img, i) => ({
         id: i + 1,
-        src: img.src,
+        ...img,
         alt: img.alt ?? '',
       }))
     : projects?.length
@@ -102,8 +103,13 @@ const OurPortfolio = ({ projects, images }: OurPortfolioProps = {}) => {
         <Marquee speed={70} pauseOnHover>
           <div className="flex items-center justify-around gap-5 md:gap-[30px]">
             {portfolioImages.map((img) => (
-              <div className="h-72 min-w-60 md:h-[460px] md:min-w-[370px]" key={img.id}>
-                <img src={img.src} alt={img.alt} className="h-full w-full rounded-radius-md object-cover" />
+              <div className="relative h-72 min-w-60 md:h-[460px] md:min-w-[370px]" key={img.id}>
+                <CmsResponsiveImage
+                  image={img}
+                  fill
+                  sizes="(max-width: 768px) 240px, 370px"
+                  className="rounded-radius-md object-cover"
+                />
               </div>
             ))}
           </div>
@@ -114,8 +120,13 @@ const OurPortfolio = ({ projects, images }: OurPortfolioProps = {}) => {
         <Marquee speed={70} pauseOnHover direction="right">
           <div className="flex items-center justify-around gap-5 pt-[30px] md:gap-[30px]">
             {portfolioImages.toReversed().map((img) => (
-              <div className="h-72 min-w-60 md:h-[460px] md:min-w-[370px]" key={`reverse-${img.id}`}>
-                <img src={img.src} alt={img.alt} className="h-full w-full rounded-radius-md object-cover" />
+              <div className="relative h-72 min-w-60 md:h-[460px] md:min-w-[370px]" key={`reverse-${img.id}`}>
+                <CmsResponsiveImage
+                  image={img}
+                  fill
+                  sizes="(max-width: 768px) 240px, 370px"
+                  className="rounded-radius-md object-cover"
+                />
               </div>
             ))}
           </div>

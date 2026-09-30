@@ -5,7 +5,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { partnershipTypes as DEFAULT_PARTNERSHIPTYPES } from '../_data/partners'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 /** Layout: Home-02 ProcessV2 — 4 equal hover cards. */
 type HowWePartnerProps = Partial<CmsProcessSection>

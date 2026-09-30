@@ -4,7 +4,7 @@ import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeProcessSteps, mergeSectionHeader, cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_STEPS = [
   {

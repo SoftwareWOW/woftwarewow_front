@@ -4,7 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsPackageOfferSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_FEATURES = [
   { title: 'Strategy & positioning' },
@@ -40,7 +40,7 @@ const StartupPackage = ({
   backgroundImage,
   cta,
 }: Partial<CmsPackageOfferSection> = {}) => {
-  const sideImageSrc = cmsImageSrc(image)
+  const hasSideImage = Boolean(image?.src)
   const packageItems = mergeFeatureItems(DEFAULT_FEATURES, features)
   const primaryHref = cta?.href ?? '/contact'
   const primaryLabel = cta?.label ?? 'Start Now'
@@ -106,14 +106,17 @@ const StartupPackage = ({
             </RevealWrapper>
           </div>
 
-          {sideImageSrc ? (
+          {hasSideImage ? (
             <RevealWrapper
               as="figure"
               className="w-full max-w-[250px] shrink-0 sm:max-w-[280px] md:max-w-[300px] lg:max-w-[350px] xl:max-w-[400px]"
             >
-              <img
-                src={sideImageSrc}
+              <CmsResponsiveImage
+                image={image}
                 alt={image?.alt ?? 'Startup launch package foundations'}
+                sizes={CMS_IMAGE_SIZES.sideColumn}
+                width={image?.width ?? 400}
+                height={image?.height ?? 520}
                 className="h-auto w-full object-cover"
               />
             </RevealWrapper>

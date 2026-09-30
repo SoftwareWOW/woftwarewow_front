@@ -3,7 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { cmsImageSrc, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const DEFAULT_STEPS = [
   { number: '01', title: 'Modern' },
@@ -30,7 +30,7 @@ const BrandVisualStyle = ({
     if (!cms) return item
     return { ...item, title: cms.title || item.title }
   })
-  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/software%26technology.png')
+  const fallbackImage = '/images/wow/nav/cards/software%26technology.png'
 
   return (
     <section>
@@ -46,10 +46,13 @@ const BrandVisualStyle = ({
 
         <RevealWrapper className="mx-auto flex max-w-5xl flex-col items-center gap-12 md:flex-row md:items-stretch md:justify-center md:gap-16 lg:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md bg-[#1A1A1A] md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
-            <img
-              src={imageSrc ?? ''}
-              alt="WOW visual style"
-              className="h-full min-h-[320px] w-full rounded-radius-md object-cover opacity-80 md:min-h-[480px] lg:min-h-[560px]"
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
+              alt={image?.alt ?? 'WOW visual style'}
+              fill
+              sizes={CMS_IMAGE_SIZES.column420}
+              className="rounded-radius-md object-cover opacity-80"
             />
           </figure>
 

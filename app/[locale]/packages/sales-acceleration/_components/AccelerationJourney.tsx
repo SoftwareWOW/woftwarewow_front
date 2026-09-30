@@ -5,7 +5,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import processImg from '@/public/images/process-img-01.png'
 import Image from 'next/image'
-import { cmsImageSrc } from '@/lib/strapi/cms-section-props'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
 type Props = Partial<CmsProcessSection>
@@ -18,7 +18,7 @@ const AccelerationJourney = ({ eyebrow, title, accentTitle, steps, image }: Prop
       title: step.title,
       description: step.description ?? '',
     })) ?? []
-  const imageSrc = cmsImageSrc(image)
+  const hasCmsImage = Boolean(image?.src)
 
   if (!displaySteps.length && !title) {
     return null
@@ -45,10 +45,12 @@ const AccelerationJourney = ({ eyebrow, title, accentTitle, steps, image }: Prop
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative w-full overflow-hidden rounded-radius-md md:w-[min(100%,420px)] md:shrink-0">
-            {imageSrc ? (
-              <img
-                src={imageSrc}
+            {hasCmsImage ? (
+              <CmsResponsiveImage
+                image={image}
                 alt="Sales acceleration journey from pipeline to revenue"
+                fill
+                sizes={CMS_IMAGE_SIZES.column420}
                 className="h-full min-h-[280px] w-full rounded-radius-md object-cover md:absolute md:inset-0 md:min-h-0"
               />
             ) : (
