@@ -74,9 +74,9 @@ const Home = async ({ params }: Props) => {
 
   return (
     <>
-      {/* <WowHero hero={dictionary.hero} copy={heroCopy ?? undefined} /> */}
+      <WowHero hero={dictionary.hero} copy={heroCopy ?? undefined} />
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* <div className="flex flex-col gap-0 lg:contents">
+        <div className="flex flex-col gap-0 lg:contents">
           <WowSuperAgencyClient
             superAgencyClient={superAgencyClient}
             clientImages={
@@ -111,7 +111,7 @@ const Home = async ({ params }: Props) => {
           founder={humanTouch?.founder}
           galleryItems={humanTouch?.galleryItems}
         />
-        <Faq faqs={faqs ?? undefined} /> */}
+        <Faq faqs={faqs ?? undefined} />
         <WowProjects projects={projects ?? undefined} />
         <GrowthStrategies articles={growthArticles ?? undefined} />
         <div className="mb-3">
