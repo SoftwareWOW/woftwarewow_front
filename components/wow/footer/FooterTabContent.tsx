@@ -17,7 +17,7 @@ import {
   footerExploreCardGridClass,
   footerPanelTopAlignClass,
 } from '@/components/wow/footer/footer-shell-styles'
-import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
+import { footerItemSurfaceClass, footerSectionBgClass } from '@/components/wow/footer/footer-shell-styles'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import { useToastOptional } from '@/components/wow/shared/ToastProvider'
@@ -167,9 +167,10 @@ export function ConnectPanel() {
             rel="noreferrer"
             aria-label={social.label}
             className={cn(
-              'inline-flex size-8 items-center justify-center rounded-radius-sm transition-colors sm:size-9 2xl:size-11',
+              'inline-flex size-8 items-center justify-center rounded-radius-sm border border-[#1515151A] transition-colors sm:size-9 2xl:size-11',
+              'dark:border-[#EDF0F51A]',
               mutedText,
-              navItemHoverClass,
+              footerItemSurfaceClass,
             )}
           >
             <Icon icon={socialIconNames[social.icon]} className="size-4 sm:size-5 2xl:size-6" />
@@ -191,8 +192,9 @@ export function ConnectPanel() {
               placeholder="hello@email.com"
               aria-label="Email address"
               className={cn(
-                'h-10 min-w-0 flex-1 rounded-radius-sm border bg-transparent px-3 font-outfit text-sm font-light sm:h-11 2xl:h-14 2xl:px-4 2xl:text-base',
+                'h-10 min-w-0 flex-1 rounded-radius-sm border px-3 font-outfit text-sm font-light sm:h-11 2xl:h-14 2xl:px-4 2xl:text-base',
                 'border-[#1515151A] text-secondary placeholder:text-[#808080] focus:outline-none',
+                footerSectionBgClass,
                 'dark:border-[#EDF0F51A] dark:text-[#F2F2F2]',
               )}
             />

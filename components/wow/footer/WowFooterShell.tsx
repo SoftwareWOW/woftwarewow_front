@@ -11,6 +11,7 @@ import {
   footerTabButtonClass,
   footerTabIconButtonClass,
   footerTabIdleClass,
+  footerItemSurfaceClass,
   footerTabPanelClass,
 } from '@/components/wow/footer/footer-shell-styles'
 import { stickyFooterClass } from '@/components/wow/footer-layout'
@@ -18,7 +19,6 @@ import { useStickyFooterHeight } from '@/components/wow/useStickyFooterHeight'
 import { useMeetDialogOptional } from '@/components/wow/shared/MeetDialogProvider'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
-import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
 import { useFooterPanelMinHeight } from '@/components/wow/footer/useFooterPanelMinHeight'
 import { House, Sparkles } from 'lucide-react'
 import { useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
@@ -146,7 +146,7 @@ export default function WowFooterShell({
                   className={cn(
                     footerTabIconButtonClass,
                     'border-[#1515151A] !text-[#808080] dark:border-[#EDF0F51A]',
-                    navItemHoverClass,
+                    footerItemSurfaceClass,
                   )}
                 >
                   <House className="size-5 sm:size-6 2xl:size-[30px]" strokeWidth={1.5} />

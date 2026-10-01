@@ -25,10 +25,6 @@ export default function FooterAskWow() {
     <div className="relative flex w-full flex-col items-center gap-4 overflow-hidden px-3 py-4 sm:gap-5 sm:px-6 sm:py-5 2xl:gap-10 2xl:px-[80px] 2xl:py-[60px]">
       <div className="relative flex w-full flex-col items-center gap-3 sm:gap-4 2xl:gap-5">
         <div className="relative flex size-16 items-center justify-center sm:size-[72px] 2xl:size-[112px]">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 size-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(97,92,206,0.42)_0%,transparent_68%)] sm:size-[180px] 2xl:size-[280px]"
-          />
           <button
             type="button"
             onClick={handleOpenVoice}

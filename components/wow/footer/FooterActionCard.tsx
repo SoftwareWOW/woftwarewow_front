@@ -2,19 +2,17 @@
 
 import { MenuItemIcon } from '@/components/wow/nav/MenuItemIcon'
 import { isDivisionHref } from '@/components/wow/nav/nav-brand-assets'
-import {
-  navItemDescriptionClass,
-  navItemHoverClass,
-  navItemLabelClass,
-} from '@/components/wow/nav/nav-interaction-styles'
+import { footerItemSurfaceClass } from '@/components/wow/footer/footer-shell-styles'
+import { navItemDescriptionClass, navItemLabelClass } from '@/components/wow/nav/nav-interaction-styles'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { ArrowUpRight } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
 
 const footerIconBoxClass = cn(
-  'border-black/10 bg-transparent group-hover:bg-transparent',
-  'dark:border-[#EDF0F51A] dark:bg-transparent dark:group-hover:bg-transparent',
+  'border-black/10 dark:border-[#EDF0F51A]',
+  footerItemSurfaceClass,
+  'group-hover:bg-background dark:group-hover:bg-[#151515]',
 )
 
 const footerIconClass = cn(
@@ -24,9 +22,8 @@ const footerIconClass = cn(
 
 const cardShellClass = cn(
   'group box-border flex h-full min-h-0 w-full self-stretch rounded-radius-sm border text-left transition-colors',
-  'border-[#1515151A] bg-[#EBEBEB]/40 dark:border-[#EDF0F51A] dark:bg-[#1A1A1A]',
-  'hover:border-transparent dark:hover:border-transparent',
-  navItemHoverClass,
+  'border-[#1515151A] dark:border-[#EDF0F51A]',
+  footerItemSurfaceClass,
 )
 
 const cardRowLayoutClass = cn(
@@ -39,7 +36,7 @@ const cardContactLayoutClass = cn(
 
 const rowShellClass = cn(
   'group !inline-flex w-full items-center gap-2 rounded-radius-sm p-1.5 transition-colors sm:gap-2.5 sm:p-2',
-  navItemHoverClass,
+  footerItemSurfaceClass,
 )
 
 function FooterContactArrow() {
@@ -94,7 +91,7 @@ function FooterPlainIcon({ iconId }: { iconId: string }) {
       iconId={iconId}
       className={cn(
         'size-5 shrink-0 sm:size-6 2xl:size-7',
-        'stroke-secondary text-secondary group-hover:!stroke-white group-hover:!text-white',
+        'stroke-secondary text-secondary group-hover:stroke-black group-hover:text-black',
         'dark:stroke-[#F2F2F2] dark:text-[#F2F2F2] dark:group-hover:!stroke-white dark:group-hover:!text-white',
       )}
     />

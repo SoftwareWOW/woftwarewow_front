@@ -1,5 +1,14 @@
-import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
 import { cn } from '@/utils/cn'
+
+/** Matches footer section surface ([WowFooterShell] outer wrapper). */
+export const footerSectionBgClass = 'bg-background dark:bg-[#151515]'
+
+/** Links/buttons: section background on default and hover; borders unchanged. */
+export const footerItemSurfaceClass = cn(
+  footerSectionBgClass,
+  'hover:bg-background dark:hover:bg-[#151515]',
+  'hover:!text-black dark:hover:!text-white',
+)
 
 export const footerLegalLinks = [
   { label: 'Privacy Policy', href: '/policy' },
@@ -28,9 +37,8 @@ export const footerTabIconButtonClass = cn(
 )
 
 export const footerTabIdleClass = cn(
-  'border-[#1515151A] bg-transparent text-secondary',
-  'dark:border-[#EDF0F51A] dark:text-[#F2F2F2]',
-  navItemHoverClass,
+  'border-[#1515151A] text-secondary dark:border-[#EDF0F51A] dark:text-[#F2F2F2]',
+  footerItemSurfaceClass,
 )
 
 export const footerTabActiveClass = cn(
@@ -62,9 +70,9 @@ export const footerAccessRowClass = cn(
 
 export const footerAccessTabClass = cn(
   footerTabButtonClass,
-  '!text-[#808080] border-[#1515151A] hover:!text-black',
-  'dark:border-[#EDF0F51A] dark:hover:!text-white',
-  navItemHoverClass,
+  '!text-[#808080] border-[#1515151A]',
+  'dark:border-[#EDF0F51A]',
+  footerItemSurfaceClass,
 )
 
 /** Stretch card grids to fill the panel slot (Explore / Services / Contact). */
@@ -76,6 +84,7 @@ export const footerPanelTopAlignClass = 'flex h-full min-h-0 w-full flex-col jus
 export const footerShellContainerClass = cn(
   'relative flex w-full flex-col items-center rounded-radius-md border py-3 sm:py-4 2xl:py-[30px]',
   footerBandGapClass,
+  footerSectionBgClass,
   'border-[#1515151A] dark:border-[#EDF0F51A]',
 )
 
