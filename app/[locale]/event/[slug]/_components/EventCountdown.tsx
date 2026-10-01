@@ -2,48 +2,26 @@
 
 import { useEffect, useState } from 'react'
 
+import {
+  computeCountdownParts,
+  parseCountdownTargetMs,
+  type CountdownParts,
+} from './event-countdown-parts'
+
 type Props = {
   targetIso?: string
 }
 
-type CountdownParts = {
-  days: string
-  hours: string
-  minutes: string
-  seconds: string
-}
-
-function pad2(value: number) {
-  return String(Math.max(0, value)).padStart(2, '0')
-}
-
-function computeParts(targetMs: number): CountdownParts | null {
-  const diff = targetMs - Date.now()
-  if (diff <= 0) return null
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
-  const minutes = Math.floor((diff / (1000 * 60)) % 60)
-  const seconds = Math.floor((diff / 1000) % 60)
-
-  return {
-    days: String(days),
-    hours: pad2(hours),
-    minutes: pad2(minutes),
-    seconds: pad2(seconds),
-  }
-}
-
 const EventCountdown = ({ targetIso }: Props) => {
-  const targetMs = targetIso ? new Date(targetIso).getTime() : NaN
+  const targetMs = parseCountdownTargetMs(targetIso)
   const [parts, setParts] = useState<CountdownParts | null>(() =>
-    Number.isFinite(targetMs) ? computeParts(targetMs) : null,
+    Number.isFinite(targetMs) ? computeCountdownParts(targetMs) : null,
   )
 
   useEffect(() => {
     if (!Number.isFinite(targetMs)) return
 
-    const tick = () => setParts(computeParts(targetMs))
+    const tick = () => setParts(computeCountdownParts(targetMs))
     tick()
     const id = window.setInterval(tick, 1000)
     return () => window.clearInterval(id)

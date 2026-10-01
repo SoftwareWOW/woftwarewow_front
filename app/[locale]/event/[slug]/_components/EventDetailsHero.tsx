@@ -3,8 +3,9 @@ import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { EventDetail } from '@/lib/events/event-detail-content'
 import Image from 'next/image'
-import EventCountdown from './EventCountdown'
+import EventHeroCountdownOverlay from './EventHeroCountdownOverlay'
 import { EVENT_DETAILS_INNER, EVENT_DETAILS_SECTION_X } from './event-details-layout'
+import { EVENT_DETAIL_SURFACE } from './event-detail-surfaces'
 
 type Props = {
   event: EventDetail
@@ -50,106 +51,7 @@ const EventDetailsHero = ({ event }: Props) => {
                 />
               </div>
 
-              {event.startsAt ? (
-                <div className="pointer-events-none absolute bottom-0 right-0 z-10 w-fit">
-                  <div
-                    className="
-                      relative
-                      w-fit
-                      rounded-tl-[8px]
-                      bg-backgroundBody
-                      pl-[7px]
-                      pt-[7px]
-                      transition-colors
-                      duration-300
-                      dark:bg-dark
-                    "
-                  >
-                    {/* LEFT INVERTED CORNER */}
-                    <span
-                      aria-hidden
-                      className="
-                        pointer-events-none
-                        absolute
-                        bottom-0
-                        left-[-8px]
-                        z-[3]
-                        h-[8px]
-                        w-[8px]
-                      "
-                      style={{
-                        background:
-                          'radial-gradient(circle at 0% 0%, transparent 8px, var(--event-cutout) 8.5px)',
-                      }}
-                    />
-
-                    {/* TOP INVERTED CORNER */}
-                    <span
-                      aria-hidden
-                      className="
-                        pointer-events-none
-                        absolute
-                        right-0
-                        top-[-8px]
-                        z-[3]
-                        h-[8px]
-                        w-[8px]
-                      "
-                      style={{
-                        background:
-                          'radial-gradient(circle at 0% 0%, transparent 8px, var(--event-cutout) 8.5px)',
-                      }}
-                    />
-
-                    {/* COUNTDOWN BOX */}
-                <div
-  className="
-    flex
-    h-[48px]
-    w-[150px]
-    items-center
-    justify-center
-    gap-[6px]
-    overflow-hidden
-    whitespace-nowrap
-    rounded-[5px]
-    border
-    border-white/10
-    bg-[#121212]
-    px-[16px]
-    text-[8px]
-    tracking-[0.06em]
-    text-white
-
-    sm:h-[56px]
-    sm:w-[175px]
-    sm:gap-[7px]
-    sm:px-[20px]
-    sm:text-[9px]
-
-    md:h-[64px]
-    md:w-[205px]
-    md:gap-[8px]
-    md:px-[24px]
-    md:text-[10px]
-
-    xl:h-[79px]
-    xl:w-[244px]
-    xl:gap-[10px]
-    xl:px-[32px]
-    xl:text-[11px]
-
-    [&>*]:w-full
-    [&>*]:max-w-full
-    [&>*]:text-center
-  "
->
-  <EventCountdown targetIso={event.startsAt} />
-</div>
-            
-                  </div>
-                </div>
-              ) : null}
+              {event.startsAt ? <EventHeroCountdownOverlay targetIso={event.startsAt} /> : null}
             </figure>
           </RevealWrapper>
         ) : null}
@@ -180,7 +82,7 @@ const EventDetailsHero = ({ event }: Props) => {
               {meta.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-radius-sm border border-secondary/10 bg-backgroundBody px-4 py-4 dark:border-dark dark:bg-dark sm:px-5 sm:py-5"
+                  className={`${EVENT_DETAIL_SURFACE} px-4 py-4 sm:px-5 sm:py-5`}
                 >
                   <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.12em] text-[#808080]">
                     {item.label}

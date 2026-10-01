@@ -8,6 +8,7 @@ import type { CmsTeamMember } from '@/lib/strapi/mappers/page-sections'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EVENT_DETAILS_INNER, EVENT_DETAILS_SECTION_X } from './event-details-layout'
+import { EVENT_DETAIL_SURFACE_LG } from './event-detail-surfaces'
 
 const FALLBACK_IMAGE = '/images/home-ai/team/ai-team-1.png'
 
@@ -56,11 +57,17 @@ function resolveFeatured(featuredMember?: CmsTeamMember | null) {
 const EventSpeaker = ({ featuredMember }: Props) => {
   const featured = resolveFeatured(featuredMember)
   const profileHref = `/team/${featured.id}`
+  const hasContent = Boolean(featured.name?.trim() || featured.bio?.trim() || featured.image)
+
+  if (!hasContent) return null
 
   return (
     <section className={`relative overflow-hidden ${EVENT_DETAILS_SECTION_X}`}>
-      <RevealWrapper className={EVENT_DETAILS_INNER}>
-        <div className="our-team-details relative flex flex-col gap-10 gap-x-[30px] border bg-backgroundBody p-5 dark:border-dark dark:bg-dark max-md:items-center max-md:justify-center lg:flex-row lg:p-10">
+      <RevealWrapper className={`reveal-me ${EVENT_DETAILS_INNER}`}>
+        <SectionLabel className="mb-5">Featured speaker</SectionLabel>
+        <div
+          className={`our-team-details relative flex flex-col gap-10 gap-x-[30px] p-5 max-md:items-center max-md:justify-center lg:flex-row lg:p-10 ${EVENT_DETAIL_SURFACE_LG}`}
+        >
           <Link
             href={profileHref}
             aria-label={`View ${featured.name}'s profile`}
@@ -90,8 +97,10 @@ const EventSpeaker = ({ featuredMember }: Props) => {
               />
             </div>
 
-            <div className="max-w-[730px] border-t pt-5 dark:border-dark lg:pt-10">
-              <p>{featured.bio}</p>
+            <div className="max-w-[730px] border-t border-[#1515151A] pt-5 dark:border-white/10 lg:pt-10">
+              {featured.bio ? (
+                <p className="text-secondary dark:text-backgroundBody">{featured.bio}</p>
+              ) : null}
             </div>
           </div>
         </div>
