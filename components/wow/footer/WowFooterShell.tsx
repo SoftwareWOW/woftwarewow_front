@@ -19,8 +19,9 @@ import { useMeetDialogOptional } from '@/components/wow/shared/MeetDialogProvide
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
+import { useFooterPanelMinHeight } from '@/components/wow/footer/useFooterPanelMinHeight'
 import { House, Sparkles } from 'lucide-react'
-import { useState, type MouseEvent, type ReactNode } from 'react'
+import { useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 
 export type FooterTabDefinition = {
   id: string
@@ -50,6 +51,16 @@ export default function WowFooterShell({
   const meetDialog = useMeetDialogOptional()
   const [activeTab, setActiveTab] = useState(defaultTabId)
 
+  const measureTabIds = useMemo(() => {
+    const ids = tabs.map((tab) => tab.id)
+    return showAskTab ? (['ask', ...ids] as string[]) : ids
+  }, [showAskTab, tabs])
+
+  const { measureRef, panelMinHeight } = useFooterPanelMinHeight(measureTabIds, measureTabIds.join(','))
+
+  const tabPanelStyle: CSSProperties | undefined =
+    panelMinHeight > 0 ? { minHeight: panelMinHeight } : undefined
+
   const handleAccessClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href === '/meet' && meetDialog) {
       event.preventDefault()
@@ -63,9 +74,21 @@ export default function WowFooterShell({
         <div className="relative z-10 mx-auto w-full max-w-[1440px]">
           <div className={footerShellContainerClass}>
             <div
+              ref={measureRef}
+              aria-hidden
+              className="pointer-events-none invisible absolute left-0 top-0 -z-10 w-full opacity-0"
+            >
+              {measureTabIds.map((tabId) => (
+                <div key={tabId} data-footer-panel-measure className="w-full">
+                  {renderPanel(tabId)}
+                </div>
+              ))}
+            </div>
+
+            <div
               role="tablist"
               aria-label={tablistLabel}
-              className="flex w-full max-w-full flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6 min-h-9 sm:min-h-10 2xl:min-h-[79px]"
+              className="flex w-full max-w-full shrink-0 flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6 min-h-9 sm:min-h-10 2xl:min-h-[79px]"
             >
               {showAskTab ? (
                 <button
@@ -111,7 +134,7 @@ export default function WowFooterShell({
             </div>
 
             <div className={footerMiddleSectionClass}>
-              <div role="tabpanel" className={footerTabPanelClass}>
+              <div role="tabpanel" className={footerTabPanelClass} style={tabPanelStyle}>
                 {renderPanel(activeTab)}
               </div>
 

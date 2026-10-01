@@ -15,6 +15,7 @@ import {
   footerCardPanelFillClass,
   footerContactCardGridClass,
   footerExploreCardGridClass,
+  footerPanelTopAlignClass,
 } from '@/components/wow/footer/footer-shell-styles'
 import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
@@ -50,7 +51,6 @@ function ResourcesPanel() {
     <div
       className={cn(
         panelClass,
-        footerCardPanelFillClass,
         'grid grid-cols-1 gap-5 pt-3 sm:grid-cols-2 sm:gap-6 sm:pt-4 lg:grid-cols-4 lg:gap-5 2xl:gap-6 2xl:pt-8',
       )}
     >
@@ -221,6 +221,8 @@ export function ConnectPanel() {
   )
 }
 
+const footerStretchTabIds = new Set<FooterTabId>(['explore', 'services', 'contact'])
+
 export default function FooterTabContent({ tab }: { tab: FooterTabId }) {
   let panel: ReactNode
 
@@ -244,5 +246,7 @@ export default function FooterTabContent({ tab }: { tab: FooterTabId }) {
       panel = <FooterAskWow />
   }
 
-  return <div className={footerCardPanelFillClass}>{panel}</div>
+  const wrapperClass = footerStretchTabIds.has(tab) ? footerCardPanelFillClass : footerPanelTopAlignClass
+
+  return <div className={wrapperClass}>{panel}</div>
 }

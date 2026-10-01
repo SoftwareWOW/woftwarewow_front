@@ -39,19 +39,22 @@ export const footerTabActiveClass = cn(
   'dark:hover:border-primary dark:hover:bg-[#292757]',
 )
 
-/** Grows to fill space between top tabs and bottom access row. */
+/** Tab panel slot — min-height set from measured tallest tab (WowFooterShell). */
 export const footerTabPanelClass = cn(
   'row-start-1 flex h-full min-h-0 w-full flex-col overflow-hidden',
-  '[&>*]:flex [&>*]:min-h-0 [&>*]:flex-1 [&>*]:flex-col',
+  '[&>*]:h-full [&>*]:min-h-0 [&>*]:w-full',
 )
 
-/** Tab content + pinned access links; min-height keeps footer stable across tabs. */
+/** Vertical gap between tab row ↔ content ↔ access row (keep in sync with shell gap). */
+export const footerBandGapClass = 'gap-2.5 sm:gap-4 2xl:gap-[30px]'
+
+/** Tab content + pinned access row; panel row height is stable across tab switches. */
 export const footerMiddleSectionClass = cn(
-  'grid w-full min-w-0 flex-1 grid-rows-[minmax(0,1fr)_auto] gap-1.5 sm:gap-2.5 2xl:gap-5',
-  'min-h-[320px] sm:min-h-[380px] 2xl:min-h-[480px]',
+  'grid w-full min-w-0 grid-rows-[minmax(0,1fr)_auto]',
+  footerBandGapClass,
 )
 
-/** Bottom quick links — fixed height (same as top tabs), stays at bottom of middle section. */
+/** Bottom quick links — fixed button height, pinned under the panel slot. */
 export const footerAccessRowClass = cn(
   'row-start-2 flex w-full shrink-0 flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 2xl:gap-5',
   'min-h-9 sm:min-h-10 2xl:min-h-[79px]',
@@ -64,33 +67,36 @@ export const footerAccessTabClass = cn(
   navItemHoverClass,
 )
 
-/** Wrapper so card grids expand between tab bar and access row. */
-export const footerCardPanelFillClass = 'flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden'
+/** Stretch card grids to fill the panel slot (Explore / Services / Contact). */
+export const footerCardPanelFillClass = 'flex h-full min-h-0 w-full flex-col'
+
+/** Top-aligned panels (Resources / Connect / Ask). */
+export const footerPanelTopAlignClass = 'flex h-full min-h-0 w-full flex-col justify-start'
 
 export const footerShellContainerClass = cn(
-  'flex min-h-0 w-full flex-1 flex-col items-center gap-3 rounded-radius-md border py-3 sm:gap-4 sm:py-4 2xl:gap-[30px] 2xl:py-[30px]',
+  'relative flex w-full flex-col items-center rounded-radius-md border py-3 sm:py-4 2xl:py-[30px]',
+  footerBandGapClass,
   'border-[#1515151A] dark:border-[#EDF0F51A]',
-  '2xl:min-h-[640px]',
 )
 
 export const footerPanelClass = 'w-full px-3 sm:px-5 2xl:px-10'
 
-/** Service cards — 3×3 grid fills middle area (design). */
+/** Service cards — 3×3 grid fills panel slot; vertical inset comes from footerBandGapClass only. */
 export const footerActionCardGridClass = cn(
-  'grid h-full min-h-0 w-full flex-1 grid-cols-1 items-stretch gap-2 pt-3 sm:grid-cols-2 sm:gap-2.5 sm:pt-4',
-  'lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:gap-4 lg:pt-8 2xl:gap-4',
+  'grid h-full min-h-0 w-full flex-1 grid-cols-1 items-stretch gap-2 sm:grid-cols-2 sm:gap-2.5',
+  'lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:gap-4 2xl:gap-4',
 )
 
-/** Explore divisions — 3 columns, equal row heights. */
+/** Explore divisions — 3 columns, equal row heights in panel slot. */
 export const footerExploreCardGridClass = cn(
-  'grid h-full min-h-0 w-full flex-1 grid-cols-1 items-stretch gap-2 pt-3 sm:grid-cols-2 sm:gap-2.5 sm:pt-4',
-  'lg:grid-cols-3 lg:auto-rows-fr lg:gap-4 lg:pt-8 2xl:gap-4',
+  'grid h-full min-h-0 w-full flex-1 grid-cols-1 items-stretch gap-2 sm:grid-cols-2 sm:gap-2.5',
+  'lg:grid-cols-3 lg:auto-rows-fr lg:gap-4 2xl:gap-4',
 )
 
-/** Contact cards — 2×2 grid fills middle area (design). */
+/** Contact cards — 2×2 grid fills panel slot when active. */
 export const footerContactCardGridClass = cn(
-  'grid h-full min-h-0 w-full flex-1 grid-cols-1 grid-rows-[repeat(4,minmax(0,1fr))] items-stretch gap-2 pt-3',
-  'sm:grid-cols-2 sm:grid-rows-[repeat(2,minmax(0,1fr))] sm:gap-2.5 sm:pt-4 2xl:gap-4 2xl:pt-8',
+  'grid h-full min-h-0 w-full flex-1 grid-cols-1 grid-rows-[repeat(4,minmax(0,1fr))] items-stretch gap-2',
+  'sm:grid-cols-2 sm:grid-rows-[repeat(2,minmax(0,1fr))] sm:gap-2.5 2xl:gap-4',
 )
 
 export const footerMutedText = '!text-[#808080]'
