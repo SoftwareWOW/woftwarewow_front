@@ -1,13 +1,17 @@
 'use client'
 
 import {
+  footerAccessRowClass,
   footerAccessTabClass,
   footerAccessTabs,
   footerLegalLinks,
+  footerMiddleSectionClass,
   footerShellContainerClass,
   footerTabActiveClass,
   footerTabButtonClass,
+  footerTabIconButtonClass,
   footerTabIdleClass,
+  footerTabPanelClass,
 } from '@/components/wow/footer/footer-shell-styles'
 import { stickyFooterClass } from '@/components/wow/footer-layout'
 import { useStickyFooterHeight } from '@/components/wow/useStickyFooterHeight'
@@ -61,7 +65,7 @@ export default function WowFooterShell({
             <div
               role="tablist"
               aria-label={tablistLabel}
-              className="flex w-full max-w-full flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6"
+              className="flex w-full max-w-full flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6 min-h-9 sm:min-h-10 2xl:min-h-[79px]"
             >
               {showAskTab ? (
                 <button
@@ -71,7 +75,8 @@ export default function WowFooterShell({
                   onClick={() => setActiveTab('ask')}
                   aria-label="Ask WOW"
                   className={cn(
-                    'group inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm border transition-colors sm:size-10 2xl:size-[79px]',
+                    'group',
+                    footerTabIconButtonClass,
                     activeTab === 'ask' ? footerTabActiveClass : footerTabIdleClass,
                   )}
                 >
@@ -105,33 +110,36 @@ export default function WowFooterShell({
               })}
             </div>
 
-            <div role="tabpanel" className="w-full min-w-0">
-              {renderPanel(activeTab)}
-            </div>
+            <div className={footerMiddleSectionClass}>
+              <div role="tabpanel" className={footerTabPanelClass}>
+                {renderPanel(activeTab)}
+              </div>
 
-            <div className="flex w-full flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 2xl:gap-5">
-              <button
-                type="button"
-                onClick={() => setActiveTab(showAskTab ? 'ask' : tabs[0]?.id ?? 'ask')}
-                aria-label="Home"
-                className={cn(
-                  'inline-flex size-9 shrink-0 items-center justify-center rounded-radius-sm border border-[#1515151A] !text-[#808080] transition-colors dark:border-[#EDF0F51A] sm:size-10 2xl:size-[50px]',
-                  navItemHoverClass,
-                )}
-              >
-                <House className="size-5 sm:size-6 2xl:size-[30px]" strokeWidth={1.5} />
-              </button>
-
-              {footerAccessTabs.map((tab) => (
-                <Link
-                  key={tab.label}
-                  href={tab.href}
-                  onClick={(event) => handleAccessClick(event, tab.href)}
-                  className={footerAccessTabClass}
+              <div className={footerAccessRowClass}>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(showAskTab ? 'ask' : tabs[0]?.id ?? 'ask')}
+                  aria-label="Home"
+                  className={cn(
+                    footerTabIconButtonClass,
+                    'border-[#1515151A] !text-[#808080] dark:border-[#EDF0F51A]',
+                    navItemHoverClass,
+                  )}
                 >
-                  {tab.label}
-                </Link>
-              ))}
+                  <House className="size-5 sm:size-6 2xl:size-[30px]" strokeWidth={1.5} />
+                </button>
+
+                {footerAccessTabs.map((tab) => (
+                  <Link
+                    key={tab.label}
+                    href={tab.href}
+                    onClick={(event) => handleAccessClick(event, tab.href)}
+                    className={footerAccessTabClass}
+                  >
+                    {tab.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <div className="h-px w-[min(1248px,calc(100%-1.5rem))] bg-[#1515151A] dark:bg-[#EDF0F51A]" />

@@ -10,6 +10,12 @@ import {
   serviceCards,
   type FooterTabId,
 } from '@/components/wow/footer/footer-tab-data'
+import {
+  footerActionCardGridClass,
+  footerCardPanelFillClass,
+  footerContactCardGridClass,
+  footerExploreCardGridClass,
+} from '@/components/wow/footer/footer-shell-styles'
 import { navItemHoverClass } from '@/components/wow/nav/nav-interaction-styles'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
@@ -41,7 +47,13 @@ const headingText = 'text-secondary dark:text-[#F2F2F2]'
 
 function ResourcesPanel() {
   return (
-    <div className={cn(panelClass, 'grid grid-cols-1 gap-5 py-3 sm:grid-cols-2 sm:gap-6 sm:py-4 lg:grid-cols-4 lg:gap-5 2xl:gap-6 2xl:py-8')}>
+    <div
+      className={cn(
+        panelClass,
+        footerCardPanelFillClass,
+        'grid grid-cols-1 gap-5 pt-3 sm:grid-cols-2 sm:gap-6 sm:pt-4 lg:grid-cols-4 lg:gap-5 2xl:gap-6 2xl:pt-8',
+      )}
+    >
       <div className="flex flex-col gap-2 sm:col-span-2 sm:gap-3 lg:col-span-1">
         <p className="font-outfit text-xl font-extrabold leading-none tracking-[-0.06em] sm:text-2xl 2xl:text-[2rem]">
           <WowText />
@@ -81,7 +93,7 @@ function ResourcesPanel() {
 
 function ExplorePanel() {
   return (
-    <div className={cn(panelClass, 'grid grid-cols-1 gap-2 py-3 sm:grid-cols-2 sm:gap-2.5 sm:py-4 lg:grid-cols-3 2xl:gap-4 2xl:py-8')}>
+    <div className={cn(panelClass, footerExploreCardGridClass)}>
       {exploreDivisions.map((division) => (
         <FooterActionCard
           key={division.href}
@@ -97,7 +109,7 @@ function ExplorePanel() {
 
 function ServicesPanel() {
   return (
-    <div className={cn(panelClass, 'grid grid-cols-1 gap-2 py-3 sm:grid-cols-2 sm:gap-2.5 sm:py-4 lg:grid-cols-3 2xl:gap-4 2xl:py-8')}>
+    <div className={cn(panelClass, footerActionCardGridClass)}>
       {serviceCards.map((service) => (
         <FooterActionCard
           key={service.title}
@@ -116,7 +128,7 @@ function ContactPanel() {
   const contactDialog = useContactDialogOptional()
 
   return (
-    <div className={cn(panelClass, 'grid grid-cols-1 gap-2 py-3 sm:grid-cols-2 sm:gap-2.5 sm:py-4 2xl:gap-4 2xl:py-8')}>
+    <div className={cn(panelClass, footerContactCardGridClass)}>
       {contactCards.map((card) => (
         <FooterActionCard
           key={card.title}
@@ -232,9 +244,5 @@ export default function FooterTabContent({ tab }: { tab: FooterTabId }) {
       panel = <FooterAskWow />
   }
 
-  return (
-    <div role="tabpanel" className="w-full min-w-0">
-      {panel}
-    </div>
-  )
+  return <div className={footerCardPanelFillClass}>{panel}</div>
 }

@@ -23,12 +23,18 @@ const footerIconClass = cn(
 )
 
 const cardShellClass = cn(
-  'group !inline-flex w-full items-center gap-2 rounded-radius-sm border px-2.5 py-2 text-left transition-colors',
-  'border-[#1515151A] bg-transparent dark:border-[#EDF0F51A]',
+  'group box-border flex h-full min-h-0 w-full self-stretch rounded-radius-sm border text-left transition-colors',
+  'border-[#1515151A] bg-[#EBEBEB]/40 dark:border-[#EDF0F51A] dark:bg-[#1A1A1A]',
   'hover:border-transparent dark:hover:border-transparent',
   navItemHoverClass,
-  'sm:gap-2.5 sm:px-3 sm:py-2.5',
-  '2xl:gap-4 2xl:px-5 2xl:py-5',
+)
+
+const cardRowLayoutClass = cn(
+  'items-center gap-2 px-2.5 py-2 sm:gap-2.5 sm:px-3 sm:py-2.5 2xl:gap-4 2xl:px-5 2xl:py-5',
+)
+
+const cardContactLayoutClass = cn(
+  'flex-col items-stretch justify-between gap-3 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-4 2xl:gap-6 2xl:p-8',
 )
 
 const rowShellClass = cn(
@@ -40,7 +46,7 @@ function FooterContactArrow() {
   return (
     <span
       className={cn(
-        'relative inline-flex size-7 shrink-0 items-center justify-center overflow-hidden rounded-radius-sm border sm:size-8 2xl:size-10',
+        'relative inline-flex size-7 shrink-0 items-center justify-center self-end overflow-hidden rounded-radius-sm border sm:size-8 sm:self-center 2xl:size-10',
         footerIconBoxClass,
       )}
     >
@@ -144,33 +150,73 @@ export function FooterActionCard({
   showArrow?: boolean
   iconStyle?: 'none' | 'boxed' | 'plain'
 }) {
+  const isContactCard = showArrow
+
   return (
-    <FooterNavLink href={href} onClick={onClick} className={cardShellClass}>
-      {iconStyle === 'boxed' && (iconId || icon) ? <FooterIconBox iconId={iconId} icon={icon} /> : null}
-      {iconStyle === 'plain' && iconId ? <FooterPlainIcon iconId={iconId} /> : null}
-      <span className="min-w-0 flex-1">
-        <span
-          className={cn(
-            'block font-outfit text-[13px] font-light leading-tight sm:text-sm 2xl:text-lg',
-            navItemLabelClass,
-            'text-secondary dark:text-[#F2F2F2]',
-          )}
-        >
-          {title}
-        </span>
-        {description ? (
-          <span
-            className={cn(
-              'mt-0.5 block font-outfit text-[11px] font-light leading-snug sm:text-xs 2xl:text-sm',
-              navItemDescriptionClass,
-              '!text-[#808080]',
-            )}
-          >
-            {description}
+    <FooterNavLink
+      href={href}
+      onClick={onClick}
+      className={cn(cardShellClass, isContactCard ? cardContactLayoutClass : cardRowLayoutClass)}
+    >
+      {isContactCard ? (
+        <>
+          <div className="flex min-h-0 flex-1 flex-col gap-3 sm:gap-4 2xl:gap-5">
+            {iconStyle === 'boxed' && (iconId || icon) ? (
+              <FooterIconBox iconId={iconId} icon={icon} />
+            ) : null}
+            <span className="min-w-0">
+              <span
+                className={cn(
+                  'block font-outfit text-base font-light leading-tight sm:text-lg 2xl:text-[28px] 2xl:leading-[1.15]',
+                  navItemLabelClass,
+                  'text-secondary dark:text-[#F2F2F2]',
+                )}
+              >
+                {title}
+              </span>
+              {description ? (
+                <span
+                  className={cn(
+                    'mt-1 block font-outfit text-xs font-light leading-snug sm:text-sm 2xl:mt-2 2xl:text-base 2xl:leading-[1.5]',
+                    navItemDescriptionClass,
+                    '!text-[#808080]',
+                  )}
+                >
+                  {description}
+                </span>
+              ) : null}
+            </span>
+          </div>
+          <FooterContactArrow />
+        </>
+      ) : (
+        <>
+          {iconStyle === 'boxed' && (iconId || icon) ? <FooterIconBox iconId={iconId} icon={icon} /> : null}
+          {iconStyle === 'plain' && iconId ? <FooterPlainIcon iconId={iconId} /> : null}
+          <span className="min-w-0 flex-1">
+            <span
+              className={cn(
+                'block font-outfit text-[13px] font-light leading-tight sm:text-sm 2xl:text-lg',
+                navItemLabelClass,
+                'text-secondary dark:text-[#F2F2F2]',
+              )}
+            >
+              {title}
+            </span>
+            {description ? (
+              <span
+                className={cn(
+                  'mt-0.5 block font-outfit text-[11px] font-light leading-snug sm:text-xs 2xl:text-sm',
+                  navItemDescriptionClass,
+                  '!text-[#808080]',
+                )}
+              >
+                {description}
+              </span>
+            ) : null}
           </span>
-        ) : null}
-      </span>
-      {showArrow ? <FooterContactArrow /> : null}
+        </>
+      )}
     </FooterNavLink>
   )
 }
