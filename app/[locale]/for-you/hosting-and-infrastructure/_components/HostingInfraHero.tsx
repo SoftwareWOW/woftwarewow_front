@@ -72,7 +72,7 @@ const HostingInfraHero = ({
         {image0?.src || image1?.src ? (
           <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
             {image0?.src ? (
-              <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px]">
+              <RevealWrapper as="figure" className="reveal-me relative mt-0 sm:mt-[78px] rounded-radius-sm">
                 <CmsResponsiveImage
                   image={image0}
                   sizes={CMS_IMAGE_SIZES.heroDual}
@@ -89,7 +89,7 @@ const HostingInfraHero = ({
                   sizes={CMS_IMAGE_SIZES.heroDual}
                   width={image1.width ?? 480}
                   height={image1.height ?? 360}
-                  className="max-sm:w-full"
+                  className="max-sm:w-full rounded-radius-sm"
                 />
               </RevealWrapper>
             ) : null}
