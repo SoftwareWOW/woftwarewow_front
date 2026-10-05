@@ -131,20 +131,20 @@ export default function MarketingIndustriesCarousel() {
                 >
                   <Link href={slide.href} className="group block">
                     <article className="relative w-full overflow-visible pb-14 sm:pb-16">
-                      <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-radius-md">
-                        <Image
-                          src={slide.image}
-                          alt={slide.title}
-                          fill
-                          className="rounded-radius-md object-cover"
-                          sizes="(max-width: 768px) 300px, 400px"
-                        />
-                      </figure>
+                      <div className="isolate overflow-hidden rounded-radius-md [transform:translateZ(0)]">
+                        <figure className="relative aspect-[4/5] w-full">
+                          <Image
+                            src={slide.image}
+                            alt={slide.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 300px, 400px"
+                          />
+                        </figure>
+                      </div>
 
                       <div className="absolute inset-x-4 bottom-0 translate-y-[4%] rounded-radius-md bg-[#1a1a1a] px-5 py-5 sm:inset-x-5 sm:px-6 sm:py-6">
-                        <h5 className="text-lg font-normal leading-snug text-[#F2F2F2] transition-colors duration-300 group-hover:text-primary sm:text-xl">
-                          {slide.title}
-                        </h5>
+                        <h5 className="text-lg font-normal leading-snug text-[#F2F2F2] sm:text-xl">{slide.title}</h5>
                         <div className="mt-2 flex items-end gap-3 sm:mt-3 sm:gap-4">
                           <p className="min-w-0 flex-1 text-sm leading-relaxed text-[#F2F2F2]/70 sm:text-[15px]">
                             {slide.description}
@@ -152,12 +152,12 @@ export default function MarketingIndustriesCarousel() {
                           <figure className="relative size-10 shrink-0 overflow-hidden rounded-radius-sm bg-primary sm:size-11">
                             <ArrowUpRight
                               aria-hidden
-                              className="absolute left-1/2 top-1/2 size-[18px] -translate-x-1/2 -translate-y-1/2 !stroke-secondary opacity-100 transition-all duration-500 group-hover:-translate-y-8 group-hover:translate-x-6 group-hover:opacity-0 sm:size-5"
+                              className="absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 !stroke-white !text-white opacity-100 transition-all duration-500 group-hover:-translate-y-10 group-hover:translate-x-7 group-hover:opacity-0"
                               strokeWidth={2}
                             />
                             <ArrowUpRight
                               aria-hidden
-                              className="absolute size-[18px] -translate-x-4 translate-y-8 !stroke-secondary opacity-0 transition-all duration-500 group-hover:translate-x-[15px] group-hover:translate-y-[15px] group-hover:opacity-100 sm:size-5"
+                              className="absolute size-6 -translate-x-3 translate-y-8 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[13px] group-hover:translate-y-[10px] group-hover:opacity-100"
                               strokeWidth={2}
                             />
                           </figure>
