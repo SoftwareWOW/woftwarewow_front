@@ -141,7 +141,7 @@ export const MARKETING_INDUSTRIES = {
   titleBefore: 'Marketing Solutions Tailored to',
   titleAccent: 'Your Industry',
   description:
-    'Every industry has different buyers, timelines, and trust signals. We adapt strategy, messaging, and channels to match how your customers actually decide.',
+    'Every industry is different. We tailor strategies, campaigns, and solutions to your market, audience, and business goals to drive meaningful growth.',
   slides: [
     {
       title: 'Healthcare',

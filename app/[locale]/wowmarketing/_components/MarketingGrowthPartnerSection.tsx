@@ -35,21 +35,19 @@ export default function MarketingGrowthPartnerSection() {
             {content.titleBefore} <InstrumentText>{content.titleAccent}</InstrumentText>
           </h3>
         </TextAppearAnimation>
-        <RevealWrapper className="reveal-me mb-10 max-w-3xl lg:mb-16">
-          <p className="text-lg leading-[1.6] tracking-[0.36px] text-[#808080]">{content.description}</p>
-        </RevealWrapper>
 
-        <RevealWrapper className="flex flex-col gap-x-16 gap-y-16 lg:flex-row">
-          <figure className="relative min-h-[280px] overflow-hidden rounded-radius-md lg:w-1/2">
+        <RevealWrapper className="flex flex-col items-stretch gap-x-12 gap-y-10 lg:flex-row lg:gap-x-16">
+          <figure className="relative min-h-[300px] w-full overflow-hidden rounded-radius-md lg:min-h-[420px] lg:flex-1 xl:min-h-[480px]">
             <Image
               src={content.image.src}
               alt={content.image.alt}
               fill
               className="rounded-radius-md object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 58vw"
             />
           </figure>
-          <div className="lg:w-1/2">
+          <div className="flex flex-col justify-center lg:w-[42%] xl:w-[40%]">
+            <p className="mb-8 text-lg leading-[1.6] tracking-[0.36px] text-[#808080] lg:mb-10">{content.description}</p>
             <ul className="[&>*:not(:last-child)]:mb-4 md:[&>*:not(:last-child)]:mb-5">
               {content.benefits.map((item) => (
                 <li

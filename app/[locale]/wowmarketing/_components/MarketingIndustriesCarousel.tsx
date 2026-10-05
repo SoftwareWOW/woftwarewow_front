@@ -11,7 +11,6 @@ import { MARKETING_INDUSTRIES } from './marketing-content'
 export default function MarketingIndustriesCarousel() {
   const content = MARKETING_INDUSTRIES
   const slides = content.slides
-  const sliderRef = useRef<HTMLDivElement>(null)
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -101,11 +100,11 @@ export default function MarketingIndustriesCarousel() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden" ref={sliderRef}>
-        <div className="flex h-[500px] items-center justify-center">
-          <div className="instagram-slider-container relative flex w-full items-center justify-center perspective-[1000px]">
+      <div className="relative overflow-hidden">
+        <div className="flex h-[520px] items-center justify-center md:h-[560px]">
+          <div className="relative flex w-full items-center justify-center perspective-[1000px]">
             <div
-              className="slides-wrapper relative flex h-full w-full items-center justify-center"
+              className="relative flex h-full w-full items-center justify-center"
               style={{ transformStyle: 'preserve-3d' }}
             >
               {slides.map((slide, index) => (
@@ -114,19 +113,34 @@ export default function MarketingIndustriesCarousel() {
                   ref={(el) => {
                     if (el) slideRefs.current[index] = el
                   }}
-                  className="slide absolute w-[320px] transition-all duration-500 md:w-[400px]"
+                  className="absolute w-[320px] transition-all duration-500 md:w-[400px]"
                   onMouseEnter={stopSlider}
                   onMouseLeave={startSlider}
                 >
-                  <figure className="relative overflow-hidden rounded-radius-md">
-                    <Image
-                      src={slide.image}
-                      alt={slide.title}
-                      width={400}
-                      height={500}
-                      className="h-full w-full rounded-radius-md object-cover"
-                    />
-                  </figure>
+                  <article className="overflow-hidden rounded-radius-md border border-secondary/10 dark:border-backgroundBody/10">
+                    <div className="relative aspect-[4/3] w-full">
+                      <Image src={slide.image} alt={slide.title} fill className="object-cover" sizes="400px" />
+                    </div>
+                    <div className="relative bg-secondary p-5 dark:bg-[#1a1a1a]">
+                      <h5 className="text-lg text-backgroundBody dark:text-[#F2F2F2]">{slide.title}</h5>
+                      <p className="mt-2 text-sm leading-relaxed text-backgroundBody/80 dark:text-[#F2F2F2]/75">
+                        {slide.description}
+                      </p>
+                      {index === currentIndex ? (
+                        <span className="absolute bottom-5 right-5 inline-flex size-10 items-center justify-center rounded-radius-sm bg-primary text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                            <path
+                              d="M7 17L17 7M17 7H9M17 7V15"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                      ) : null}
+                    </div>
+                  </article>
                 </div>
               ))}
             </div>

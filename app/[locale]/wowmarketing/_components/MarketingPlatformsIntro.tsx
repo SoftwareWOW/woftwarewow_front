@@ -1,13 +1,22 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import { data as logoData } from '@/data/logo/logo'
+import { data as defaultLogoData } from '@/data/logo/logo'
 import useReveal from '@/hooks/useReveal'
+import useScrollingMarquee from '@/hooks/useScrollingMarquee'
 import { cn } from '@/utils/cn'
 import { MARKETING_PLATFORMS_INTRO } from './marketing-content'
 
-export default function MarketingPlatformsIntro() {
+type LogoItem = { id: number; logo: string; darkLogo: string; alt: string }
+
+type MarketingPlatformsIntroProps = {
+  logos?: LogoItem[]
+}
+
+export default function MarketingPlatformsIntro({ logos: logosProp }: MarketingPlatformsIntroProps) {
+  const logos = logosProp?.length ? logosProp : defaultLogoData
   const { revealRef } = useReveal()
+  const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
 
   return (
     <section className="about relative bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
@@ -41,19 +50,25 @@ export default function MarketingPlatformsIntro() {
           </h4>
         </RevealWrapper>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2.5 sm:mt-14">
-          {logoData.map((item) => (
-            <div
-              key={item.id}
-              className={cn(
-                'flex h-24 w-48 shrink-0 items-center justify-center rounded-radius-sm border border-transparent bg-backgroundBody transition-colors duration-300',
-                'hover:border-primary hover:bg-primary/10 dark:border-transparent dark:bg-dark dark:hover:border-primary dark:hover:bg-primary/10',
-              )}
-            >
-              <img src={item.logo} alt={item.alt} className="inline-block dark:hidden" />
-              <img src={item.darkLogo} alt={item.alt} className="hidden dark:inline-block" />
-            </div>
-          ))}
+        <div
+          onMouseEnter={pauseMarquee}
+          onMouseLeave={resumeMarquee}
+          className="relative mt-10 overflow-hidden sm:mt-14"
+        >
+          <div ref={marqueeRef} className="z-50 flex w-fit flex-nowrap gap-2.5 whitespace-nowrap">
+            {logos.map((item) => (
+              <div
+                key={item.id}
+                className={cn(
+                  'z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody transition-colors duration-300',
+                  'hover:border-primary hover:bg-primary/10 dark:border-backgroundBody/10 dark:bg-dark dark:hover:border-primary dark:hover:bg-[#292757]',
+                )}
+              >
+                <img src={item.logo} alt={item.alt} className="inline-block dark:hidden" />
+                <img src={item.darkLogo} alt={item.alt} className="hidden dark:inline-block" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

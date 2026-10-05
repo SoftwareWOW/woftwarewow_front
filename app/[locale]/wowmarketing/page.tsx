@@ -2,6 +2,8 @@ import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOvervi
 import Faq from '@/components/wow/LandascapComponets/Faq'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import { mapStrapiDivisions, mapStrapiPartnerLogos } from '@/lib/strapi/mappers/superagency'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import MarketingApproachGrid from './_components/MarketingApproachGrid'
@@ -14,6 +16,8 @@ import MarketingPlatformsIntro from './_components/MarketingPlatformsIntro'
 import MarketingProcessSection from './_components/MarketingProcessSection'
 import MarketingServicesGrid from './_components/MarketingServicesGrid'
 import { MARKETING_CTA, MARKETING_FAQS } from './_components/marketing-content'
+
+export const revalidate = 60
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -33,10 +37,15 @@ export default async function WowMarketingPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const typedLocale = locale as Locale
+  const cms = await getSuperagencyHomepage(typedLocale)
+  const divisions = mapStrapiDivisions(cms.divisions)
+  const partnerLogos = mapStrapiPartnerLogos(cms.partnerLogos)
+
   return (
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <MarketingHero />
-      <MarketingPlatformsIntro />
+      <MarketingPlatformsIntro logos={partnerLogos ?? undefined} />
       <MarketingHoldbackSection />
       <MarketingApproachGrid />
       <MarketingServicesGrid />
@@ -44,7 +53,7 @@ export default async function WowMarketingPage({ params }: Props) {
       <MarketingProcessSection />
       <MarketingGrowthPartnerSection />
       <MarketingIndustriesCarousel />
-      <DevisionOverview divisions={undefined} />
+      <DevisionOverview divisions={divisions ?? undefined} />
       <Faq faqs={[...MARKETING_FAQS]} />
       <div className="mb-3">
         <WowGrowthCta
