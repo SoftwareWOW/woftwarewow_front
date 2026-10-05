@@ -4,7 +4,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { MARKETING_INDUSTRIES } from './marketing-content'
 
@@ -117,61 +119,54 @@ export default function MarketingIndustriesCarousel() {
               className="relative flex h-full w-full items-center justify-center overflow-visible"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              {slides.map((slide, index) => {
-                const isActive = index === currentIndex
-                return (
-                  <div
-                    key={slide.title}
-                    ref={(el) => {
-                      if (el) slideRefs.current[index] = el
-                    }}
-                    className="absolute w-[min(300px,78vw)] overflow-visible transition-[transform,opacity] duration-500 ease-out sm:w-[340px] md:w-[380px] lg:w-[400px]"
-                    onMouseEnter={stopSlider}
-                    onMouseLeave={startSlider}
-                  >
+              {slides.map((slide, index) => (
+                <div
+                  key={slide.title}
+                  ref={(el) => {
+                    if (el) slideRefs.current[index] = el
+                  }}
+                  className="absolute w-[min(300px,78vw)] overflow-visible transition-[transform,opacity] duration-500 ease-out sm:w-[340px] md:w-[380px] lg:w-[400px]"
+                  onMouseEnter={stopSlider}
+                  onMouseLeave={startSlider}
+                >
+                  <Link href={slide.href} className="group block">
                     <article className="relative w-full overflow-visible pb-14 sm:pb-16">
                       <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-radius-md">
                         <Image
                           src={slide.image}
                           alt={slide.title}
                           fill
-                          className="object-cover"
+                          className="rounded-radius-md object-cover"
                           sizes="(max-width: 768px) 300px, 400px"
                         />
                       </figure>
 
                       <div className="absolute inset-x-4 bottom-0 translate-y-[4%] rounded-radius-md bg-[#1a1a1a] px-5 py-5 sm:inset-x-5 sm:px-6 sm:py-6">
-                        <h5 className="text-lg font-normal leading-snug text-[#F2F2F2] sm:text-xl">{slide.title}</h5>
+                        <h5 className="text-lg font-normal leading-snug text-[#F2F2F2] transition-colors duration-300 group-hover:text-primary sm:text-xl">
+                          {slide.title}
+                        </h5>
                         <div className="mt-2 flex items-end gap-3 sm:mt-3 sm:gap-4">
                           <p className="min-w-0 flex-1 text-sm leading-relaxed text-[#F2F2F2]/70 sm:text-[15px]">
                             {slide.description}
                           </p>
-                          {isActive ? (
-                            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-radius-sm bg-primary sm:size-11">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                aria-hidden
-                              >
-                                <path
-                                  d="M7 17L17 7M17 7H9M17 7V15"
-                                  className="stroke-secondary"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </span>
-                          ) : null}
+                          <figure className="relative size-10 shrink-0 overflow-hidden rounded-radius-sm bg-primary sm:size-11">
+                            <ArrowUpRight
+                              aria-hidden
+                              className="absolute left-1/2 top-1/2 size-[18px] -translate-x-1/2 -translate-y-1/2 !stroke-secondary opacity-100 transition-all duration-500 group-hover:-translate-y-8 group-hover:translate-x-6 group-hover:opacity-0 sm:size-5"
+                              strokeWidth={2}
+                            />
+                            <ArrowUpRight
+                              aria-hidden
+                              className="absolute size-[18px] -translate-x-4 translate-y-8 !stroke-secondary opacity-0 transition-all duration-500 group-hover:translate-x-[15px] group-hover:translate-y-[15px] group-hover:opacity-100 sm:size-5"
+                              strokeWidth={2}
+                            />
+                          </figure>
                         </div>
                       </div>
                     </article>
-                  </div>
-                )
-              })}
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>

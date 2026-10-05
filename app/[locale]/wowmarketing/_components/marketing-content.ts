@@ -147,31 +147,37 @@ export const MARKETING_INDUSTRIES = {
       title: 'Healthcare',
       description: 'Build trust, reach more patients, and strengthen your digital presence.',
       image: '/images/wow/Hero/devision/Image-copy-scaled.jpeg',
+      href: '/industries/healthcare-and-wellness',
     },
     {
       title: 'Hospitality',
       description: 'Attract more guests, increase bookings, and build lasting loyalty.',
       image: '/images/wow/Hero/devision/Mockup 2 Dark.png',
+      href: '/industries/hospitality-and-tourism',
     },
     {
       title: 'Construction',
       description: 'Generate quality leads and showcase the expertise behind your projects.',
       image: '/images/wow/Hero/devision/Design 1.jpg',
+      href: '/industries/professional-services',
     },
     {
       title: 'Professional Services',
       description: 'Position your firm as the trusted choice in a competitive market.',
       image: '/images/wow/Hero/devision/Image-copy-scaled.jpeg',
+      href: '/industries/professional-services',
     },
     {
       title: 'Retail & eCommerce',
       description: 'Turn browsers into buyers with campaigns built for conversion.',
       image: '/images/wow/Hero/devision/Mockup 2 Dark.png',
+      href: '/industries/retail-and-ecommerce',
     },
     {
       title: 'Legal & Finance',
       description: 'Communicate credibility while staying compliant and clear.',
       image: '/images/wow/Hero/devision/Design 1.jpg',
+      href: '/industries/finance-and-real-estate',
     },
   ],
 } as const
