@@ -1,12 +1,14 @@
 import {
+  getConfiguredChatModels,
+  getGeminiApiKey,
+} from '@/lib/gemini/config'
+import {
   isSeedWelcomeMessage,
   MAX_API_HISTORY_MESSAGES,
   SYSTEM_PROMPT,
   VOICE_CONVERSATION_ADDENDUM,
 } from '@/lib/system-prompt'
 import { GoogleGenAI } from '@google/genai'
-import { existsSync, readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { NextResponse } from 'next/server'
 
 type ChatMessagePayload = {
@@ -30,9 +32,6 @@ const REQUEST_TIMEOUT_MS = 12_000
 const FIRST_TOKEN_TIMEOUT_MS = 8_000
 const TEXT_MAX_TOKENS = 700
 const VOICE_MAX_TOKENS = 280
-const DEFAULT_MODEL = 'gemini-3.5-flash-lite'
-const DEFAULT_FALLBACKS = ['gemini-flash-lite-latest', 'gemini-3.8-flash']
-
 function sanitizeMessages(messages: unknown): ChatMessagePayload[] {
   if (!Array.isArray(messages)) {
     return []
@@ -109,37 +108,9 @@ function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-function readEnvValue(key: string) {
-  const envPath = join(process.cwd(), '.env.local')
-
-  if (existsSync(envPath)) {
-    const match = readFileSync(envPath, 'utf8')
-      .split(/\r?\n/)
-      .find((line) => line.startsWith(`${key}=`) && !line.trimStart().startsWith('#'))
-
-    if (match) {
-      const value = match.slice(key.length + 1).trim().replace(/^["']|["']$/g, '')
-      if (value) return value
-    }
-  }
-
-  return process.env[key]?.trim() ?? ''
-}
-
-function getConfiguredModels() {
-  const primary = readEnvValue('GEMINI_MODEL') || DEFAULT_MODEL
-  const configuredFallbacks = readEnvValue('GEMINI_FALLBACK_MODELS')
-    .split(',')
-    .map((item) => item.trim())
-    .filter(Boolean)
-  const fallbacks = configuredFallbacks.length > 0 ? configuredFallbacks : DEFAULT_FALLBACKS
-
-  return [...new Set([primary, ...fallbacks].filter(Boolean))]
-}
-
 export async function POST(request: Request) {
-  const apiKey = readEnvValue('GEMINI_API_KEY')
-  const models = getConfiguredModels()
+  const apiKey = getGeminiApiKey()
+  const models = getConfiguredChatModels()
 
   if (!apiKey) {
     return NextResponse.json({ error: 'AI assistant is not configured.' }, { status: 500 })

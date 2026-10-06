@@ -69,6 +69,7 @@ export function createSpeechRecognitionProvider(): SpeechRecognitionProvider {
   const media = isMediaRecorderSupported() ? createMediaRecorderRecognitionProvider() : null
 
   if (browser && media) {
+    // Prefer realtime browser listening; Gemini MediaRecorder is the fallback.
     return createFallbackSpeechRecognitionProvider(browser, media)
   }
 

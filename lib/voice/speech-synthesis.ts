@@ -2,15 +2,24 @@ import { getDocumentLanguage, toSpokenText } from './spoken-text'
 import type { SpeakOptions, SpeechSynthesisProvider } from './voice-types'
 
 let activeUtterance: SpeechSynthesisUtterance | null = null
+/** Stick to one browser voice for the whole session so replies never switch mid-answer. */
+let lockedVoice: SpeechSynthesisVoice | null = null
 
 function pickEnglishVoice(voices: SpeechSynthesisVoice[]) {
+  if (lockedVoice) {
+    const stillAvailable = voices.find((voice) => voice.voiceURI === lockedVoice?.voiceURI)
+    if (stillAvailable) return stillAvailable
+  }
+
   const english = voices.filter((voice) => /^en(-|$)/i.test(voice.lang))
   const preferred =
     english.find((voice) => /google|natural|neural|samantha|premium|enhanced/i.test(voice.name)) ??
     english.find((voice) => /en-US/i.test(voice.lang)) ??
-    english[0]
+    english[0] ??
+    null
 
-  return preferred ?? null
+  lockedVoice = preferred
+  return preferred
 }
 
 let cachedVoices: SpeechSynthesisVoice[] | null = null
@@ -50,8 +59,8 @@ export function isSpeechSynthesisSupported() {
 }
 
 /**
- * Browser SpeechSynthesis provider.
- * Swap this for ElevenLabs / OpenAI TTS later via createSpeechSynthesisProvider().
+ * Browser SpeechSynthesis — fast and one consistent voice.
+ * Gemini TTS is too slow for live voice turns and was mixing with this fallback.
  */
 export function createBrowserSpeechSynthesisProvider(): SpeechSynthesisProvider {
   return {
