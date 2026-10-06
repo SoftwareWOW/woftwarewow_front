@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
+    "@google/genai": "^2.27.0",
     "@gsap/react": "^2.1.1",
     "@iconify-json/devicon": "^1.2.62",
     "@iconify-json/logos": "^1.2.11",

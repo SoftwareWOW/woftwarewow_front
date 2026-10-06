@@ -31,18 +31,16 @@ export default function MarketingIndustriesCarousel() {
       const xPos = offset * (slideWidth + gap)
       let scale = 1 - Math.abs(offset) * 0.12
       let opacity = 1 - Math.abs(offset) * 0.25
-      let zPos = -Math.abs(offset) * 90
 
       if (offset === 0) {
-        scale = 1.12
+        scale = 1
         opacity = 1
-        zPos = 0
       } else if (Math.abs(offset) > 1) {
         opacity = 0.45
         scale = 0.78
       }
 
-      slide.style.transform = `translateX(${xPos}px) translateZ(${zPos}px) scale(${scale})`
+      slide.style.transform = `translateX(${xPos}px) scale(${scale})`
       slide.style.opacity = Math.max(0.35, opacity).toString()
       slide.style.zIndex = zIndex.toString()
     })
@@ -103,7 +101,7 @@ export default function MarketingIndustriesCarousel() {
         </div>
       </div>
 
-      <div className="relative overflow-x-hidden overflow-y-visible pb-4">
+      <div className="relative overflow-hidden pt-10 pb-28">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
@@ -113,12 +111,9 @@ export default function MarketingIndustriesCarousel() {
           }}
         />
 
-        <div className="relative flex min-h-[480px] items-center justify-center pb-20 pt-4 sm:min-h-[520px] sm:pb-24 md:min-h-[560px]">
-          <div className="relative flex w-full max-w-[1320px] items-center justify-center perspective-[1200px]">
-            <div
-              className="relative flex h-full w-full items-center justify-center overflow-visible"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
+        <div className="relative flex min-h-[480px] items-center justify-center sm:min-h-[520px] md:min-h-[560px]">
+          <div className="relative flex w-full max-w-[1320px] items-center justify-center">
+            <div className="relative flex h-full w-full items-center justify-center overflow-visible">
               {slides.map((slide, index) => (
                 <div
                   key={slide.title}
@@ -131,17 +126,15 @@ export default function MarketingIndustriesCarousel() {
                 >
                   <Link href={slide.href} className="group block">
                     <article className="relative w-full overflow-visible pb-14 sm:pb-16">
-                      <div className="isolate overflow-hidden rounded-radius-md [transform:translateZ(0)]">
-                        <figure className="relative aspect-[4/5] w-full">
-                          <Image
-                            src={slide.image}
-                            alt={slide.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 300px, 400px"
-                          />
-                        </figure>
-                      </div>
+                      <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-radius-md [clip-path:inset(0_round_var(--radius-md))]">
+                        <Image
+                          src={slide.image}
+                          alt={slide.title}
+                          fill
+                          className="rounded-radius-md object-cover"
+                          sizes="(max-width: 768px) 300px, 400px"
+                        />
+                      </figure>
 
                       <div className="absolute inset-x-4 bottom-0 translate-y-[4%] rounded-radius-md bg-[#1a1a1a] px-5 py-5 sm:inset-x-5 sm:px-6 sm:py-6">
                         <h5 className="text-lg font-normal leading-snug text-[#F2F2F2] sm:text-xl">{slide.title}</h5>

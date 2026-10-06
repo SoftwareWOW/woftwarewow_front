@@ -4,10 +4,9 @@ import {
   SYSTEM_PROMPT,
   VOICE_CONVERSATION_ADDENDUM,
 } from '@/lib/system-prompt'
+import { GoogleGenAI } from '@google/genai'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import OpenAI from 'openai'
-import type { ChatCompletionChunk } from 'openai/resources/chat/completions'
 import { NextResponse } from 'next/server'
 
 type ChatMessagePayload = {
@@ -20,10 +19,19 @@ type ChatRequestBody = {
   mode?: 'text' | 'voice'
 }
 
+type GeminiContent = {
+  role: 'user' | 'model'
+  parts: Array<{ text: string }>
+}
+
 const MAX_CONTENT_LENGTH = 2000
-const RATE_LIMIT_ATTEMPTS = 2
+const TRANSIENT_ATTEMPTS = 2
+const REQUEST_TIMEOUT_MS = 12_000
+const FIRST_TOKEN_TIMEOUT_MS = 8_000
 const TEXT_MAX_TOKENS = 700
 const VOICE_MAX_TOKENS = 280
+const DEFAULT_MODEL = 'gemini-3.5-flash-lite'
+const DEFAULT_FALLBACKS = ['gemini-flash-lite-latest', 'gemini-3.8-flash']
 
 function sanitizeMessages(messages: unknown): ChatMessagePayload[] {
   if (!Array.isArray(messages)) {
@@ -47,24 +55,53 @@ function sanitizeMessages(messages: unknown): ChatMessagePayload[] {
     .slice(-MAX_API_HISTORY_MESSAGES)
 }
 
+function toGeminiContents(messages: ChatMessagePayload[]): GeminiContent[] {
+  const contents: GeminiContent[] = []
+
+  for (const message of messages) {
+    const role = message.role === 'assistant' ? 'model' : 'user'
+    const last = contents.at(-1)
+
+    if (last?.role === role) {
+      last.parts[0].text = `${last.parts[0].text}\n\n${message.content}`
+      continue
+    }
+
+    contents.push({
+      role,
+      parts: [{ text: message.content }],
+    })
+  }
+
+  return contents
+}
+
 function getErrorDetail(error: unknown) {
   if (error instanceof Error) return error.message
   if (typeof error === 'object' && error !== null && 'message' in error) {
     return String((error as { message: unknown }).message)
   }
-  return 'Unknown OpenRouter error'
+  return 'Unknown Gemini error'
 }
 
-function isRateLimitError(error: unknown) {
+function isTransientGeminiError(error: unknown) {
   const lowered = getErrorDetail(error).toLowerCase()
   return (
     lowered.includes('429') ||
+    lowered.includes('503') ||
+    lowered.includes('unavailable') ||
+    lowered.includes('high demand') ||
     lowered.includes('rate limit') ||
     lowered.includes('quota') ||
-    lowered.includes('credits') ||
+    lowered.includes('resource_exhausted') ||
     lowered.includes('temporarily') ||
     lowered.includes('overloaded') ||
-    lowered.includes('capacity')
+    lowered.includes('capacity') ||
+    lowered.includes('try again later') ||
+    lowered.includes('aborted') ||
+    lowered.includes('abort') ||
+    lowered.includes('timeout') ||
+    lowered.includes('timed out')
   )
 }
 
@@ -89,26 +126,19 @@ function readEnvValue(key: string) {
   return process.env[key]?.trim() ?? ''
 }
 
-function getSiteReferer() {
-  const url = readEnvValue('NEXT_PUBLIC_SITE_URL')
-  if (!url || /yourdomain|example\.com|localhost|127\.0\.0\.1/i.test(url)) {
-    return 'https://wowsuperagency.com'
-  }
-  return url
-}
-
 function getConfiguredModels() {
-  const primary = readEnvValue('OPENROUTER_MODEL')
-  const extra = readEnvValue('OPENROUTER_FALLBACK_MODELS')
+  const primary = readEnvValue('GEMINI_MODEL') || DEFAULT_MODEL
+  const configuredFallbacks = readEnvValue('GEMINI_FALLBACK_MODELS')
     .split(',')
     .map((item) => item.trim())
     .filter(Boolean)
+  const fallbacks = configuredFallbacks.length > 0 ? configuredFallbacks : DEFAULT_FALLBACKS
 
-  return [...new Set([primary, ...extra].filter(Boolean))]
+  return [...new Set([primary, ...fallbacks].filter(Boolean))]
 }
 
 export async function POST(request: Request) {
-  const apiKey = readEnvValue('OPENROUTER_API_KEY')
+  const apiKey = readEnvValue('GEMINI_API_KEY')
   const models = getConfiguredModels()
 
   if (!apiKey) {
@@ -136,35 +166,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'A user message is required.' }, { status: 400 })
   }
 
-  const openai = new OpenAI({
-    baseURL: 'https://openrouter.ai/api/v1',
-    apiKey,
-    timeout: 20_000,
-    defaultHeaders: {
-      'HTTP-Referer': getSiteReferer(),
-      'X-Title': 'WOW Superagency AI Assistant',
-    },
-  })
+  const contents = toGeminiContents(messages)
 
-  const completionOptions = {
-    messages: [{ role: 'system' as const, content: systemContent }, ...messages],
-    temperature: 0.6,
-    max_tokens: mode === 'voice' ? VOICE_MAX_TOKENS : TEXT_MAX_TOKENS,
-    frequency_penalty: 0.2,
-    provider: {
-      allow_fallbacks: true,
-    },
-    reasoning: {
-      exclude: true,
-    },
+  if (contents.length === 0 || contents.at(-1)?.role !== 'user') {
+    return NextResponse.json({ error: 'A user message is required.' }, { status: 400 })
   }
 
-  const createChatStream = (selectedModel: string) =>
-    openai.chat.completions.create({
-      ...completionOptions,
+  const ai = new GoogleGenAI({ apiKey })
+
+  const createChatStream = (selectedModel: string, abortSignal: AbortSignal) =>
+    ai.models.generateContentStream({
       model: selectedModel,
-      stream: true,
-    } as OpenAI.Chat.ChatCompletionCreateParamsStreaming)
+      contents,
+      config: {
+        systemInstruction: systemContent,
+        temperature: 0.6,
+        maxOutputTokens: mode === 'voice' ? VOICE_MAX_TOKENS : TEXT_MAX_TOKENS,
+        abortSignal,
+        httpOptions: {
+          timeout: REQUEST_TIMEOUT_MS,
+        },
+      },
+    })
 
   const toSseResponse = (source: ReadableStream<Uint8Array>) =>
     new Response(source, {
@@ -177,38 +200,62 @@ export async function POST(request: Request) {
     })
 
   try {
-    let stream: AsyncIterable<ChatCompletionChunk> | undefined
+    type GeminiStream = Awaited<ReturnType<typeof createChatStream>>
+
+    let stream: GeminiStream | undefined
+    let requestController: AbortController | undefined
+    let streamDeadlineTimer: ReturnType<typeof setTimeout> | undefined
     let lastError: unknown
 
     for (const selectedModel of models) {
-      for (let attempt = 1; attempt <= RATE_LIMIT_ATTEMPTS; attempt += 1) {
+      for (let attempt = 1; attempt <= TRANSIENT_ATTEMPTS; attempt += 1) {
+        const controller = new AbortController()
+        const connectTimer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
         try {
-          stream = await createChatStream(selectedModel)
+          stream = await createChatStream(selectedModel, controller.signal)
+          requestController = controller
           lastError = undefined
+          clearTimeout(connectTimer)
+          streamDeadlineTimer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
           break
         } catch (error) {
+          clearTimeout(connectTimer)
           lastError = error
-          if (!isRateLimitError(error) || attempt === RATE_LIMIT_ATTEMPTS) {
+          if (!isTransientGeminiError(error) || attempt === TRANSIENT_ATTEMPTS) {
             break
           }
-          await wait(500 * 2 ** (attempt - 1))
+          await wait(300 * attempt)
         }
       }
 
       if (stream) break
     }
 
-    if (!stream) {
+    if (!stream || !requestController) {
       throw lastError ?? new Error('Unable to generate a response right now.')
     }
+
+    const activeStream = stream
+    const activeController = requestController
+    const activeDeadlineTimer = streamDeadlineTimer
 
     const encoder = new TextEncoder()
     const readable = new ReadableStream({
       async start(controller) {
+        let gotFirstToken = false
+        const firstTokenTimer = setTimeout(() => {
+          if (!gotFirstToken) {
+            activeController.abort()
+          }
+        }, FIRST_TOKEN_TIMEOUT_MS)
+
         try {
-          for await (const chunk of stream) {
-            const content = chunk.choices[0]?.delta?.content
+          for await (const chunk of activeStream) {
+            const content = chunk.text
             if (content) {
+              gotFirstToken = true
+              clearTimeout(firstTokenTimer)
               controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`))
             }
           }
@@ -217,6 +264,9 @@ export async function POST(request: Request) {
           controller.close()
         } catch (error) {
           controller.error(error)
+        } finally {
+          clearTimeout(firstTokenTimer)
+          if (activeDeadlineTimer) clearTimeout(activeDeadlineTimer)
         }
       },
     })
@@ -224,9 +274,9 @@ export async function POST(request: Request) {
     return toSseResponse(readable)
   } catch (error) {
     const detail = getErrorDetail(error)
-    console.error('[chat] OpenRouter request failed:', detail)
+    console.error('[chat] Gemini request failed:', detail)
 
-    const errorMessage = isRateLimitError(error)
+    const errorMessage = isTransientGeminiError(error)
       ? 'The AI assistant is temporarily busy. Please try again in a moment.'
       : 'Unable to generate a response right now. Please try again.'
 
