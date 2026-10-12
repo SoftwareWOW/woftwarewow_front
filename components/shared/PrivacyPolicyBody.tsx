@@ -41,9 +41,10 @@ type PrivacyPolicyBodyProps = {
 const PrivacyPolicyBody: FC<PrivacyPolicyBodyProps> = ({ content, lastUpdated }) => {
   const { intro, sections } = useMemo(() => parsePrivacyContent(content), [content])
   const tocColumnRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   return (
-    <section className="relative pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+    <section ref={sectionRef} className="relative pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
         <div className="relative mx-auto max-w-[1200px]">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-16">
@@ -90,7 +91,7 @@ const PrivacyPolicyBody: FC<PrivacyPolicyBodyProps> = ({ content, lastUpdated })
             </div>
           </div>
 
-          <PrivacyPolicyToc anchorRef={tocColumnRef} />
+          <PrivacyPolicyToc anchorRef={tocColumnRef} boundsRef={sectionRef} />
         </div>
       </div>
     </section>
