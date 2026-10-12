@@ -167,26 +167,31 @@ export default function WowFooterShell({
 
             <div className="h-px w-[min(1248px,calc(100%-1.5rem))] bg-[#1515151A] dark:bg-[#EDF0F51A]" />
 
-            <div className="flex w-full max-w-[1248px] flex-wrap items-center justify-center gap-x-2 gap-y-1 px-3 sm:px-5 2xl:gap-x-[13px] 2xl:px-6">
-              <span className="font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] sm:text-xs 2xl:text-[20px] 2xl:leading-[1.6]">
+            <div className="flex w-full max-w-[1248px] flex-col items-center justify-between gap-2 px-3 sm:px-5 md:flex-row md:gap-3 2xl:px-6">
+              <span className="text-center font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] sm:text-xs md:text-left 2xl:text-[20px] 2xl:leading-[1.6]">
                 {copyright}
               </span>
-              {footerLegalLinks.map((link) => (
-                <span key={link.label} className="inline-flex items-center gap-x-2 2xl:gap-x-[13px]">
-                  <span
-                    className="font-outfit text-[11px] font-light !text-[#808080] sm:text-xs 2xl:text-[20px]"
-                    aria-hidden
-                  >
-                    ·
+
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 2xl:gap-x-[13px]">
+                {footerLegalLinks.map((link, index) => (
+                  <span key={link.label} className="inline-flex items-center gap-x-2 2xl:gap-x-[13px]">
+                    {index > 0 ? (
+                      <span
+                        className="font-outfit text-[11px] font-light !text-[#808080] sm:text-xs 2xl:text-[20px]"
+                        aria-hidden
+                      >
+                        ·
+                      </span>
+                    ) : null}
+                    <Link
+                      href={link.href}
+                      className="rounded-radius-sm px-1 py-0.5 font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] transition-colors hover:!text-primary sm:text-xs 2xl:text-[20px] 2xl:leading-[1.6]"
+                    >
+                      {link.label}
+                    </Link>
                   </span>
-                  <Link
-                    href={link.href}
-                    className="rounded-radius-sm px-1 py-0.5 font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] transition-colors hover:!text-primary sm:text-xs 2xl:text-[20px] 2xl:leading-[1.6]"
-                  >
-                    {link.label}
-                  </Link>
-                </span>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
