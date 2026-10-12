@@ -15,7 +15,7 @@ export default function WowFooter({ footer }: WowFooterProps) {
     <WowFooterShell
       tabs={footerTextTabs}
       defaultTabId="ask"
-      copyright={footer.copyright ?? '© 2026 WOW Superagency. All rights reserved.'}
+      copyright={footer.copyright ?? '© 2026 WOW Superagency'}
       watermark={<WowSuperagencyLogo variant="watermark" />}
       renderPanel={(tab) => <FooterTabContent tab={tab as FooterTabId} />}
     />

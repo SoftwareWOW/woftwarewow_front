@@ -13,13 +13,11 @@ export const footerItemSurfaceClass = cn(
 export const footerLegalLinks = [
   { label: 'Privacy Policy', href: '/policy' },
   { label: 'Terms of Service', href: '/terms' },
-  { label: 'Cookies Settings', href: '/policy' },
+  { label: 'Cookie Settings', href: '/policy' },
 ] as const
 
 export const footerAccessTabs = [
   { label: 'Book a Meeting', href: '/meet' },
-  { label: 'Case Studies', href: '/case-study' },
-  { label: 'Think Tank', href: '/thinktank' },
   { label: 'Get a Quote', href: '/quotation' },
 ] as const
 

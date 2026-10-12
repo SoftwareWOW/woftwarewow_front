@@ -18,17 +18,17 @@ export const resourceColumns = [
       { label: 'About WOW', href: '/about', iconId: 'about' },
       { label: 'How We Work', href: '/about/why-us', iconId: 'ourProcess' },
       { label: 'Case Studies', href: '/case-study', iconId: 'caseStudies' },
-      { label: 'Insights / Blog', href: '/blog', iconId: 'insights' },
+      { label: 'Insights', href: '/blog', iconId: 'insights' },
       { label: 'Careers', href: '/career', iconId: 'careers' },
     ],
   },
   {
     title: 'Learn',
     links: [
-      { label: 'Resources', href: '/blog', iconId: 'educationTraining' },
-      { label: 'Guides', href: '/blog', iconId: 'caseStudies' },
-      { label: 'WOW Hub', href: '/wowhub', iconId: 'learningEvents' },
+      { label: 'Resources', href: '/wowhub', iconId: 'educationTraining' },
+      { label: 'Guides', href: '/about/strategy-centre', iconId: 'caseStudies' },
       { label: 'FAQs', href: '/faq', iconId: 'helpSupport' },
+      { label: 'Think Tank', href: '/thinktank', iconId: 'thinkTank' },
     ],
   },
   {
@@ -37,8 +37,7 @@ export const resourceColumns = [
       { label: 'Partners', href: '/partners', iconId: 'partners' },
       { label: 'Press / Media', href: '/blog', iconId: 'insights' },
       { label: 'Accessibility', href: '/policy', iconId: 'whyUs' },
-      { label: 'Privacy', href: '/policy', iconId: 'clientPortal' },
-      { label: 'Terms', href: '/terms', iconId: 'quotation' },
+      { label: 'Contact', href: '/contact', iconId: 'contact' },
     ],
   },
 ] as const satisfies ReadonlyArray<{
