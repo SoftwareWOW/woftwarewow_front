@@ -18,6 +18,8 @@ type WowHeroProps = {
     ctaSecondary?: string
     heroImage?: string
   }
+  /** When true, keep hero scrub complete after passing the section on viewport resize (e.g. browser zoom). */
+  stabilizeProgressOnViewportChange?: boolean
 }
 
 const HERO_COPY = {
@@ -37,7 +39,7 @@ const stageBgClass =
    SCROLL PROGRESS
 ========================================================= */
 
-function useShrinkProgress() {
+function useShrinkProgress(stabilizeProgressOnViewportChange: boolean) {
   const ref = useRef<HTMLElement>(null)
   const [progress, setProgress] = useState(0)
   const lenis = useLenis()
@@ -60,8 +62,27 @@ function useShrinkProgress() {
       const element = ref.current
       if (!element) return
 
+      const rect = element.getBoundingClientRect()
       const viewportHeight =
         window.visualViewport?.height ?? window.innerHeight
+
+      const scrollY = lenis?.scroll ?? window.scrollY
+
+      if (stabilizeProgressOnViewportChange) {
+        if (rect.bottom <= 0) {
+          setProgress(1)
+          return
+        }
+
+        const travelForGuard = element.offsetHeight - viewportHeight
+        if (travelForGuard > 0) {
+          const sectionStart = rect.top + scrollY
+          if (scrollY >= sectionStart + travelForGuard - 1) {
+            setProgress(1)
+            return
+          }
+        }
+      }
 
       const travel = element.offsetHeight - viewportHeight
 
@@ -70,10 +91,7 @@ function useShrinkProgress() {
         return
       }
 
-      const scrollY = lenis?.scroll ?? window.scrollY
-
-      const sectionStart =
-        element.getBoundingClientRect().top + scrollY
+      const sectionStart = rect.top + scrollY
 
       const next = (scrollY - sectionStart) / travel
 
@@ -117,7 +135,7 @@ function useShrinkProgress() {
 
       removeLenisListener?.()
     }
-  }, [lenis])
+  }, [lenis, stabilizeProgressOnViewportChange])
 
   return {
     ref,
@@ -222,10 +240,11 @@ function NotchedCta({
 export default function WowHero({
   hero: _hero,
   copy,
+  stabilizeProgressOnViewportChange = false,
 }: WowHeroProps) {
   const activeCopy = { ...HERO_COPY, ...copy }
   const heroImage = copy?.heroImage ?? '/images/wow/hero-banner.jpg'
-  const { ref, progress } = useShrinkProgress()
+  const { ref, progress } = useShrinkProgress(stabilizeProgressOnViewportChange)
 
   const meetDialog = useMeetDialogOptional()
 

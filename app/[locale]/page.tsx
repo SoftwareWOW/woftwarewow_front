@@ -1,3 +1,4 @@
+import LandingScrollResizeGuard from '@/components/wow/sections/LandingScrollResizeGuard'
 import WowHero from '@/components/wow/sections/WowHero'
 import WowEcosystem from '@/components/wow/WowEcosystem'
 import { getDictionary } from '@/i18n/dictionary'
@@ -74,7 +75,12 @@ const Home = async ({ params }: Props) => {
 
   return (
     <>
-      <WowHero hero={dictionary.hero} copy={heroCopy ?? undefined} />
+      {typedLocale === 'en-US' ? <LandingScrollResizeGuard /> : null}
+      <WowHero
+        hero={dictionary.hero}
+        copy={heroCopy ?? undefined}
+        stabilizeProgressOnViewportChange={typedLocale === 'en-US'}
+      />
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <div className="flex flex-col gap-0 lg:contents">
           <WowSuperAgencyClient

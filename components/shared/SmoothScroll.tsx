@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ReactLenis, useLenis } from 'lenis/react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -18,10 +18,13 @@ function LenisScrollEffects({ children }: Readonly<{ children: ReactNode }>) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const lenis = useLenis()
+  const lenisRef = useRef(lenis)
+
+  lenisRef.current = lenis
 
   useEffect(() => {
-    lenis?.scrollTo(0, { immediate: true })
-  }, [pathname, searchParams, lenis])
+    lenisRef.current?.scrollTo(0, { immediate: true })
+  }, [pathname, searchParams])
 
   useEffect(() => {
     if (!lenis) return
@@ -76,7 +79,11 @@ function LenisScrollEffects({ children }: Readonly<{ children: ReactNode }>) {
     })
 
     const handleRefresh = () => {
+      const savedScroll = lenis.scroll
       lenis.resize()
+      if (savedScroll > 32 && lenis.scroll < 32) {
+        lenis.scrollTo(savedScroll, { immediate: true })
+      }
     }
 
     ScrollTrigger.addEventListener('refresh', handleRefresh)
