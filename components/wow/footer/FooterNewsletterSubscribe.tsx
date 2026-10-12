@@ -1,6 +1,7 @@
 'use client'
 
 import { footerSectionBgClass } from '@/components/wow/footer/footer-shell-styles'
+import { useToastOptional } from '@/components/wow/shared/ToastProvider'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { useLocale } from 'next-intl'
@@ -13,6 +14,7 @@ const SUCCESS_MESSAGE = 'Thanks for joining WOW Hub! Please check your inbox to 
 const mutedText = '!text-[#808080]'
 
 export default function FooterNewsletterSubscribe() {
+  const toast = useToastOptional()
   const locale = useLocale()
   const consentId = useId()
   const statusId = useId()
@@ -63,12 +65,13 @@ export default function FooterNewsletterSubscribe() {
       }
 
       if (!response.ok) {
-        setFormMessage(data.error ?? 'Unable to start your subscription. Please try again.')
+        const errorText = data.error ?? 'Unable to start your subscription. Please try again.'
+        toast?.showToast(errorText, 'error')
         return
       }
 
       if (data.status === 'already_subscribed') {
-        setFormMessage(data.message ?? 'This email is already subscribed to WOW Hub.')
+        toast?.showToast(data.message ?? 'This email is already subscribed to WOW Hub.', 'error')
         return
       }
 
@@ -77,7 +80,7 @@ export default function FooterNewsletterSubscribe() {
       setEmail('')
       setConsent(false)
     } catch {
-      setFormMessage('Unable to start your subscription. Please try again.')
+      toast?.showToast('Unable to start your subscription. Please try again.', 'error')
     } finally {
       setIsSubmitting(false)
     }
@@ -112,7 +115,7 @@ export default function FooterNewsletterSubscribe() {
           onChange={(event) => {
             setEmail(event.target.value)
             if (fieldError) setFieldError('')
-            if (formMessage) {
+            if (isSuccess) {
               setFormMessage('')
               setIsSuccess(false)
             }
@@ -120,7 +123,7 @@ export default function FooterNewsletterSubscribe() {
           placeholder="hello@email.com"
           aria-label="Email address"
           aria-invalid={fieldError ? true : undefined}
-          aria-describedby={fieldError || formMessage ? statusId : undefined}
+          aria-describedby={fieldError || (isSuccess && formMessage) ? statusId : undefined}
           disabled={isSubmitting}
           className={cn(
             'h-10 min-w-0 flex-1 rounded-radius-sm border px-3 font-outfit text-sm font-light sm:h-11 2xl:h-14 2xl:px-4 2xl:text-base',
@@ -174,7 +177,7 @@ export default function FooterNewsletterSubscribe() {
           'min-h-[1.25rem] w-full text-left font-outfit text-[11px] font-light leading-[1.45] sm:text-xs 2xl:text-sm',
           fieldError ? 'text-red-600 dark:text-red-400' : isSuccess ? 'text-primary' : mutedText,
         )}>
-        {fieldError || formMessage}
+        {fieldError || (isSuccess ? formMessage : null)}
       </p>
     </div>
   )
