@@ -75,12 +75,6 @@ export default function PrivacyPolicyToc({ anchorRef }: PrivacyPolicyTocProps) {
           </li>
         ))}
       </ol>
-      <a
-        href="#contact-us"
-        className="mt-5 inline-block font-outfit text-xs font-light text-primary underline-offset-2 hover:underline"
-      >
-        View all 13 sections ↓
-      </a>
     </nav>
   )
 }

@@ -40,59 +40,57 @@ type PrivacyPolicyBodyProps = {
 
 const PrivacyPolicyBody: FC<PrivacyPolicyBodyProps> = ({ content, lastUpdated }) => {
   const { intro, sections } = useMemo(() => parsePrivacyContent(content), [content])
-  const tocAnchorRef = useRef<HTMLDivElement>(null)
+  const tocColumnRef = useRef<HTMLElement>(null)
 
   return (
     <section className="relative pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
-        <div className="mx-auto max-w-[820px]">
-          <RevealWrapper>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-colorText/70 dark:text-dark-100/70">
-              Last updated: {lastUpdated}
-            </p>
-            <div className="legal-policy-intro blog-details-body mt-4 space-y-4">
-              <ReactMarkdown>{intro}</ReactMarkdown>
-            </div>
-          </RevealWrapper>
-        </div>
+        <div className="relative mx-auto max-w-[1200px]">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-16">
+            <aside ref={tocColumnRef} className="hidden lg:block" aria-hidden="true" />
 
-        <div
-          ref={tocAnchorRef}
-          className="mx-auto mt-10 grid max-w-[1200px] grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-16"
-        >
-          <aside className="hidden lg:block" aria-hidden="true" />
-          <PrivacyPolicyToc anchorRef={tocAnchorRef} />
-
-          <div className="min-w-0 flex-1">
-            <nav aria-label="On this page" className="mb-8 flex flex-wrap gap-2 lg:hidden">
-              {privacyPolicySections.slice(0, 5).map((section) => (
+            <div className="min-w-0">
+              <nav aria-label="On this page" className="mb-8 flex flex-wrap gap-2 lg:hidden">
+                {privacyPolicySections.slice(0, 5).map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="rounded-radius-sm border border-[#1515151A] px-2.5 py-1 font-outfit text-xs text-colorText dark:border-[#EDF0F51A] dark:text-dark-100"
+                  >
+                    {section.num}
+                  </a>
+                ))}
                 <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className="rounded-radius-sm border border-[#1515151A] px-2.5 py-1 font-outfit text-xs text-colorText dark:border-[#EDF0F51A] dark:text-dark-100"
+                  href="#contact-us"
+                  className="rounded-radius-sm border border-[#1515151A] px-2.5 py-1 font-outfit text-xs text-primary dark:border-[#EDF0F51A]"
                 >
-                  {section.num}
+                  …13
                 </a>
-              ))}
-              <a
-                href="#contact-us"
-                className="rounded-radius-sm border border-[#1515151A] px-2.5 py-1 font-outfit text-xs text-primary dark:border-[#EDF0F51A]"
-              >
-                …13
-              </a>
-            </nav>
+              </nav>
 
-            <div className="legal-policy-body blog-details-body mx-auto max-w-[820px] lg:max-w-none">
-              {sections.map((section) => (
-                <article key={section.id} className="legal-policy-section">
-                  <RevealWrapper>
-                    <h2 id={section.id}>{section.title}</h2>
-                    {section.markdown ? <ReactMarkdown>{section.markdown}</ReactMarkdown> : null}
-                  </RevealWrapper>
-                </article>
-              ))}
+              <RevealWrapper>
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-colorText/70 dark:text-dark-100/70">
+                  Last updated: {lastUpdated}
+                </p>
+                <div className="legal-policy-intro blog-details-body mt-4 space-y-4">
+                  <ReactMarkdown>{intro}</ReactMarkdown>
+                </div>
+              </RevealWrapper>
+
+              <div className="legal-policy-body blog-details-body mt-10 lg:mt-14">
+                {sections.map((section) => (
+                  <article key={section.id} className="legal-policy-section">
+                    <RevealWrapper>
+                      <h2 id={section.id}>{section.title}</h2>
+                      {section.markdown ? <ReactMarkdown>{section.markdown}</ReactMarkdown> : null}
+                    </RevealWrapper>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
+
+          <PrivacyPolicyToc anchorRef={tocColumnRef} />
         </div>
       </div>
     </section>
