@@ -255,7 +255,11 @@ export async function subscribeToWowHubNewsletter(input: NewsletterSubscribeInpu
 
       if (/already exist/i.test(message)) {
         const refreshed = await getContact(config.apiKey, email)
-        if (refreshed?.listIds?.includes(config.listId)) {
+        if (
+          refreshed &&
+          refreshed !== 'lookup_failed' &&
+          refreshed.listIds?.includes(config.listId)
+        ) {
           return { ok: true, status: 'already_subscribed' }
         }
 
