@@ -336,6 +336,23 @@ html body[data-scroll-locked] {
   }
 }
 
+.legal-policy-body {
+  h2 {
+    @apply mb-4 mt-10 scroll-mt-28 font-outfit text-xl font-normal leading-tight text-secondary first:mt-0 dark:text-backgroundBody md:mb-5 md:mt-14 md:text-2xl lg:text-[28px] lg:leading-[1.25];
+  }
+
+}
+
+.legal-policy-intro {
+  p {
+    @apply text-colorText dark:text-dark-100 md:text-lg md:leading-[1.55];
+  }
+
+  p:first-child {
+    @apply text-lg font-medium text-secondary dark:text-backgroundBody md:text-xl;
+  }
+}
+
 .blog-details-body {
   h3 {
     @apply mb-3.5 text-2xl font-normal leading-tight md:mb-5 md:mt-[60px] md:text-[27px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[39px] [&:not(:first-child)]:mt-9;

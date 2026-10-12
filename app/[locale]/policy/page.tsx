@@ -2,7 +2,7 @@ import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
-import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
+import PrivacyPolicyBody from '@/components/shared/PrivacyPolicyBody'
 import type { Locale } from '@/i18n/config'
 import { buildLegalPageMetadata, loadLegalPage } from '@/lib/strapi/load-legal-page'
 import getMarkDownData from '@/utils/GetMarkDownData'
@@ -14,10 +14,11 @@ export const revalidate = 60
 export interface TermsDataType {
   slug: string
   content: string
+  lastUpdated?: string
   [key: string]: unknown
 }
 
-const fallbackTermsData: TermsDataType[] = getMarkDownData('data/terms')
+const fallbackPrivacyPages: TermsDataType[] = getMarkDownData('data/policy')
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -25,28 +26,33 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return buildLegalPageMetadata('privacy', locale as Locale, { title: 'Privacy & Policy' })
+  return buildLegalPageMetadata('privacy', locale as Locale, {
+    title: 'Privacy Policy | WOW Superagency',
+    description:
+      'Clear information about how WOW Superagency collects, uses, and protects your personal information.',
+  })
 }
 
 const PolicyPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const legal = await loadLegalPage('privacy', locale as Locale)
+  await loadLegalPage('privacy', locale as Locale)
 
-  const termsData: TermsDataType[] =
-    legal?.body ?
-      [{ slug: 'privacy', content: legal.body }]
-    : fallbackTermsData
+  const markdownPage = fallbackPrivacyPages[0]
+  const content = markdownPage?.content ?? ''
+  const lastUpdated =
+    typeof markdownPage?.lastUpdated === 'string' ? markdownPage.lastUpdated : 'October 12, 2026'
 
   return (
     <LayoutOne>
       <PageHero
-        title={legal?.title?.replace(/\s+\S+$/, '') ?? 'Privacy & '}
-        italicTitle={legal?.title?.split(/\s+/).pop() ?? 'Policy'}
-        badgeTitle="Policy"
+        title="Privacy "
+        italicTitle="Policy."
+        badgeTitle="Legal / Privacy"
+        description="Clear information about how we collect, use, and protect your data."
         scale
       />
-      <TermsPolicyBody termsData={termsData} heading={true} />
+      <PrivacyPolicyBody content={content} lastUpdated={lastUpdated} />
       <CTA>
         Let&apos;s chat!
         <CtaImageSlider

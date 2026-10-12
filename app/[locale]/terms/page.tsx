@@ -17,7 +17,7 @@ export interface TermsDataType {
   [key: string]: unknown
 }
 
-const fallbackTermsData: TermsDataType[] = getMarkDownData('data/policy')
+const fallbackTermsData: TermsDataType[] = getMarkDownData('data/terms')
 
 type Props = {
   params: Promise<{ locale: string }>

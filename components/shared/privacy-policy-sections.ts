@@ -1,0 +1,15 @@
+export const privacyPolicySections = [
+  { id: 'who-we-are', num: '01', title: 'Who We Are' },
+  { id: 'information-we-collect', num: '02', title: 'Information We Collect' },
+  { id: 'how-we-use-your-information', num: '03', title: 'How We Use Information' },
+  { id: 'cookies-website-analytics', num: '04', title: 'Cookies & Analytics' },
+  { id: 'when-we-share-information', num: '05', title: 'Information Sharing' },
+  { id: 'data-security', num: '06', title: 'Data Security' },
+  { id: 'data-retention', num: '07', title: 'Data Retention' },
+  { id: 'international-data-processing', num: '08', title: 'International Processing' },
+  { id: 'your-privacy-choices-rights', num: '09', title: 'Your Privacy Rights' },
+  { id: 'third-party-websites-services', num: '10', title: 'Third-Party Services' },
+  { id: 'childrens-privacy', num: '11', title: "Children's Privacy" },
+  { id: 'changes-to-this-policy', num: '12', title: 'Policy Changes' },
+  { id: 'contact-us', num: '13', title: 'Contact Us' },
+] as const
