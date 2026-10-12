@@ -1,9 +1,9 @@
 'use client'
 
+import type { LegalDocumentSection } from '@/components/shared/legal-document-types'
 import { cn } from '@/utils/cn'
 import { useLenis } from 'lenis/react'
 import { useCallback, useLayoutEffect, useRef, useState, type RefObject } from 'react'
-import { privacyPolicySections } from '@/components/shared/privacy-policy-sections'
 
 const DESKTOP_MQ = '(min-width: 1024px)'
 const WIDE_MQ = '(min-width: 1280px)'
@@ -11,14 +11,14 @@ const TOC_TOP_PX = 112
 
 type Placement = { left: number; width: number; top: number }
 
-type PrivacyPolicyTocProps = {
+type LegalDocumentTocProps = {
+  sections: readonly LegalDocumentSection[]
   anchorRef: RefObject<HTMLElement | null>
-  /** Policy section — TOC stops at this box’s bottom (does not cover footer). */
   boundsRef: RefObject<HTMLElement | null>
 }
 
 /** Fixed TOC — Lenis/transform parents break `position: sticky`. */
-export default function PrivacyPolicyToc({ anchorRef, boundsRef }: PrivacyPolicyTocProps) {
+export default function LegalDocumentToc({ sections, anchorRef, boundsRef }: LegalDocumentTocProps) {
   const lenis = useLenis()
   const navRef = useRef<HTMLElement | null>(null)
   const updateRef = useRef<() => void>(() => {})
@@ -110,7 +110,7 @@ export default function PrivacyPolicyToc({ anchorRef, boundsRef }: PrivacyPolicy
         On this page
       </p>
       <ol className="space-y-2 border-l border-[#1515151A] pl-4 dark:border-[#EDF0F51A]">
-        {privacyPolicySections.map((section) => (
+        {sections.map((section) => (
           <li key={section.id}>
             <a
               href={`#${section.id}`}

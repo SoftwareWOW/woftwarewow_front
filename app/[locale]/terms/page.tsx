@@ -1,8 +1,6 @@
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
-import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
+import TermsOfServiceBody from '@/components/shared/TermsOfServiceBody'
 import type { Locale } from '@/i18n/config'
 import { buildLegalPageMetadata, loadLegalPage } from '@/lib/strapi/load-legal-page'
 import getMarkDownData from '@/utils/GetMarkDownData'
@@ -14,10 +12,11 @@ export const revalidate = 60
 export interface TermsDataType {
   slug: string
   content: string
+  lastUpdated?: string
   [key: string]: unknown
 }
 
-const fallbackTermsData: TermsDataType[] = getMarkDownData('data/terms')
+const fallbackTermsPages: TermsDataType[] = getMarkDownData('data/terms')
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -25,40 +24,41 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return buildLegalPageMetadata('terms', locale as Locale, { title: 'Terms & Conditions' })
+  return buildLegalPageMetadata('terms', locale as Locale, {
+    title: 'Terms of Service | WOW Superagency',
+    description: 'Clear expectations for using WOW Superagency websites and working with our team.',
+  })
 }
+
+const legalFooterLinks = [
+  { label: 'Privacy Policy', href: '/policy' },
+  { label: 'Cookie Settings', href: '/policy' },
+] as const
 
 const TermsPage = async ({ params }: Props) => {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const legal = await loadLegalPage('terms', locale as Locale)
+  await loadLegalPage('terms', locale as Locale)
 
-  const termsData: TermsDataType[] =
-    legal?.body ?
-      [{ slug: 'terms', content: legal.body }]
-    : fallbackTermsData
+  const markdownPage = fallbackTermsPages[0]
+  const content = markdownPage?.content ?? ''
+  const lastUpdated =
+    typeof markdownPage?.lastUpdated === 'string' ? markdownPage.lastUpdated : 'October 12, 2026'
 
   return (
     <LayoutOne>
       <PageHero
-        title={legal?.title?.replace(/\s+\S+$/, '') ?? 'Terms & '}
-        italicTitle={legal?.title?.split(/\s+/).pop() ?? 'Privacy'}
-        badgeTitle="Terms"
+        title="Terms of "
+        italicTitle="Service."
+        badgeTitle="Legal / Terms"
+        description="Clear expectations. Better partnerships."
         scale
       />
-      <TermsPolicyBody termsData={termsData} />
-      <CTA>
-        Let&apos;s chat!
-        <CtaImageSlider
-          slides={[
-            { id: '1', img: '/images/agent/14.png' },
-            { id: '2', img: '/images/agent/16.png' },
-            { id: '3', img: '/images/agent/19.png' },
-          ]}
-        />
-        with us.
-        <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">A virtual coffee?</i>
-      </CTA>
+      <TermsOfServiceBody
+        content={content}
+        lastUpdated={lastUpdated}
+        footerLinks={[...legalFooterLinks]}
+      />
     </LayoutOne>
   )
 }

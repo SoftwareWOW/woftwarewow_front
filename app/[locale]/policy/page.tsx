@@ -50,7 +50,14 @@ const PolicyPage = async ({ params }: Props) => {
         description="Clear information about how we collect, use, and protect your data."
         scale
       />
-      <PrivacyPolicyBody content={content} lastUpdated={lastUpdated} />
+      <PrivacyPolicyBody
+        content={content}
+        lastUpdated={lastUpdated}
+        footerLinks={[
+          { label: 'Terms of Service', href: '/terms' },
+          { label: 'Cookie Settings', href: '/policy' },
+        ]}
+      />
     </LayoutOne>
   )
 }
