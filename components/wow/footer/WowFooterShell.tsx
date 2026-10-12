@@ -197,7 +197,7 @@ export default function WowFooterShell({
 
           <div
             aria-hidden
-            className="footer-wow-watermark pointer-events-none mt-1 max-w-full overflow-hidden select-none whitespace-nowrap pb-1 text-center font-semibold leading-none tracking-[-0.04em] sm:mt-1.5 sm:pb-1.5 2xl:mt-2 2xl:pb-2"
+            className="footer-wow-watermark pointer-events-none mt-1 flex w-full max-w-full justify-center overflow-hidden select-none pb-1 font-semibold leading-none tracking-[-0.04em] sm:mt-1.5 sm:pb-1.5 2xl:mt-2 2xl:pb-2"
           >
             {watermark}
           </div>

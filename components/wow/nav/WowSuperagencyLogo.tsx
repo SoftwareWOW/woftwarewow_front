@@ -29,25 +29,36 @@ function LogoImage({
 
 export function WowSuperagencyLogo({ className, variant = 'default' }: WowSuperagencyLogoProps) {
   const watermark = variant === 'watermark'
+  const objectClass = watermark ? 'object-center' : 'object-left'
 
-  return (
+  const logo = (
     <>
       <LogoImage
         src={navbarBrandLogo.light}
         className={cn(
-          'h-auto w-auto max-w-full object-contain object-left dark:hidden',
+          'h-auto w-auto max-w-full object-contain dark:hidden',
+          objectClass,
           watermark ? 'max-h-[clamp(2.5rem,8vw,5rem)] opacity-20' : 'max-h-8 sm:max-h-9 2xl:max-h-10',
-          className,
+          !watermark ? className : undefined,
         )}
       />
       <LogoImage
         src={navbarBrandLogo.dark}
         className={cn(
-          'hidden h-auto w-auto max-w-full object-contain object-left dark:block',
+          'hidden h-auto w-auto max-w-full object-contain dark:block',
+          objectClass,
           watermark ? 'max-h-[clamp(2.5rem,8vw,5rem)] opacity-10' : 'max-h-8 sm:max-h-9 2xl:max-h-10',
-          className,
+          !watermark ? className : undefined,
         )}
       />
     </>
   )
+
+  if (watermark) {
+    return (
+      <div className={cn('flex w-full justify-center', className)}>{logo}</div>
+    )
+  }
+
+  return logo
 }
