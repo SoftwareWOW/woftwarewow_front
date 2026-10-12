@@ -47,10 +47,10 @@ export const footerTabActiveClass = cn(
   'dark:hover:border-primary dark:hover:bg-[#292757]',
 )
 
-/** Tab panel slot — min-height set from measured tallest tab (WowFooterShell). */
+/** Tab panel slot — height locked to tallest tab (WowFooterShell). */
 export const footerTabPanelClass = cn(
-  'row-start-1 flex h-full min-h-0 w-full flex-col overflow-x-hidden overflow-y-hidden',
-  '[&>*]:h-full [&>*]:min-h-0 [&>*]:w-full',
+  'row-start-1 flex min-h-0 w-full max-w-full flex-col overflow-x-hidden overflow-y-auto',
+  '[&>*]:h-full [&>*]:min-h-0 [&>*]:w-full [&>*]:max-w-full',
 )
 
 /** Vertical gap between tab row ↔ content ↔ access row (keep in sync with shell gap). */

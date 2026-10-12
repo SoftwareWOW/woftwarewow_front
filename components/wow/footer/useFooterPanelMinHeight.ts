@@ -2,27 +2,33 @@
 
 import { useLayoutEffect, useRef, useState } from 'react'
 
-/** Height of the active footer tab panel (avoids empty space from taller inactive tabs). */
-export function useFooterPanelMinHeight(activeTab: string) {
+/** Stable panel slot height = tallest tab (footer size stays fixed when switching tabs). */
+export function useFooterPanelMinHeight(measureTabIds: readonly string[]) {
   const measureRef = useRef<HTMLDivElement>(null)
   const [panelMinHeight, setPanelMinHeight] = useState(0)
+  const tabKey = measureTabIds.join('\0')
 
   useLayoutEffect(() => {
     const root = measureRef.current
     if (!root) return
 
     const measure = () => {
-      const panel = root.querySelector<HTMLElement>('[data-footer-panel-measure]')
-      const height = panel?.getBoundingClientRect().height ?? 0
-      setPanelMinHeight(height > 0 ? Math.ceil(height) : 0)
+      const panels = root.querySelectorAll<HTMLElement>('[data-footer-panel-measure]')
+      let maxHeight = 0
+      panels.forEach((panel) => {
+        maxHeight = Math.max(maxHeight, panel.getBoundingClientRect().height)
+      })
+      const next = maxHeight > 0 ? Math.ceil(maxHeight) : 0
+      setPanelMinHeight((prev) => (prev === next ? prev : next))
     }
 
     measure()
 
     const observer = new ResizeObserver(measure)
     observer.observe(root)
-    const panel = root.querySelector<HTMLElement>('[data-footer-panel-measure]')
-    if (panel) observer.observe(panel)
+    root.querySelectorAll<HTMLElement>('[data-footer-panel-measure]').forEach((panel) => {
+      observer.observe(panel)
+    })
 
     window.addEventListener('resize', measure)
     window.visualViewport?.addEventListener('resize', measure)
@@ -32,7 +38,7 @@ export function useFooterPanelMinHeight(activeTab: string) {
       window.removeEventListener('resize', measure)
       window.visualViewport?.removeEventListener('resize', measure)
     }
-  }, [activeTab])
+  }, [tabKey])
 
   return { measureRef, panelMinHeight }
 }

@@ -22,7 +22,7 @@ import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { useFooterPanelMinHeight } from '@/components/wow/footer/useFooterPanelMinHeight'
 import { House, Sparkles } from 'lucide-react'
-import { useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
+import { useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 
 export type FooterTabDefinition = {
   id: string
@@ -53,10 +53,17 @@ export default function WowFooterShell({
   const meetDialog = useMeetDialogOptional()
   const [activeTab, setActiveTab] = useState(defaultTabId)
 
-  const { measureRef, panelMinHeight } = useFooterPanelMinHeight(activeTab)
+  const measureTabIds = useMemo(() => {
+    const ids: string[] = []
+    if (showAskTab) ids.push('ask')
+    for (const tab of tabs) ids.push(tab.id)
+    return ids
+  }, [showAskTab, tabs])
+
+  const { measureRef, panelMinHeight } = useFooterPanelMinHeight(measureTabIds)
 
   const tabPanelStyle: CSSProperties | undefined =
-    panelMinHeight > 0 ? { minHeight: panelMinHeight } : undefined
+    panelMinHeight > 0 ? { minHeight: panelMinHeight, height: panelMinHeight } : undefined
 
   const handleAccessClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href === '/meet' && meetDialog) {
@@ -73,11 +80,13 @@ export default function WowFooterShell({
             <div
               ref={measureRef}
               aria-hidden
-              className="pointer-events-none invisible absolute left-0 top-0 -z-10 w-full opacity-0"
+              className="pointer-events-none invisible absolute left-0 top-0 -z-10 h-0 w-full overflow-hidden opacity-0"
             >
-              <div data-footer-panel-measure className="w-full">
-                {renderPanel(activeTab)}
-              </div>
+              {measureTabIds.map((tabId) => (
+                <div key={tabId} data-footer-panel-measure className="absolute left-0 top-0 w-full max-w-full">
+                  {renderPanel(tabId)}
+                </div>
+              ))}
             </div>
 
             <div
