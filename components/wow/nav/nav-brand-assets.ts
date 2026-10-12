@@ -1,43 +1,43 @@
-/** Brand assets from public/images/wow/nav/{SVG,PNG,Profile Picture} */
+/** Brand SVG logos from public/images/logo (Standard = light UI, White = dark UI) */
 
-const navBase = '/images/wow/nav'
+const logoBase = '/images/logo'
 
-function assetPath(...segments: string[]) {
-  return `${navBase}/${segments.map((segment) => encodeURIComponent(segment)).join('/')}`
+function logoPath(filename: string) {
+  return `${logoBase}/${encodeURIComponent(filename)}`
 }
 
 export const navbarBrandLogo = {
-  light: assetPath('SVG', 'Superagency Standard.svg'),
-  dark: assetPath('SVG', 'Superagency White.svg'),
+  light: logoPath('Superagency Standard.svg'),
+  dark: logoPath('Superagency White.svg'),
 } as const
 
 /** Standard on light backgrounds, White on dark backgrounds (brand guideline) */
 export const divisionBrandLogos = {
   light: {
-    softwareWow: assetPath('SVG', 'SoftwareWOW Standard.svg'),
-    wowMarketing: assetPath('SVG', 'Marketing Standard.svg'),
-    wowDesign: assetPath('SVG', 'Design Standard.svg'),
-    wowIntelligence: assetPath('SVG', 'Intelligence Standard.svg'),
-    wowSocial: assetPath('SVG', 'Social Standard.svg'),
-    wowAccelerate: assetPath('SVG', 'Accelerate Standard.svg'),
-    wowWebsites: assetPath('SVG', 'Websites Standard.svg'),
-    wowImpact: assetPath('SVG', 'Impact Standard.svg'),
-    wowHost: assetPath('SVG', 'Host Standard.svg'),
-    wowHub: assetPath('SVG', 'Hub Standard.svg'),
-    wowEvents: assetPath('SVG', 'Events Standard.svg'),
+    softwareWow: logoPath('SoftwareWOW Standard.svg'),
+    wowMarketing: logoPath('Marketing Standard.svg'),
+    wowDesign: logoPath('Design Standard.svg'),
+    wowIntelligence: logoPath('Intelligence Standard.svg'),
+    wowSocial: logoPath('Social Standard.svg'),
+    wowAccelerate: logoPath('Accelerate Standard.svg'),
+    wowWebsites: logoPath('Websites Standard.svg'),
+    wowImpact: logoPath('Impact Standard.svg'),
+    wowHost: logoPath('Host Standard.svg'),
+    wowHub: logoPath('Hub Standard.svg'),
+    wowEvents: logoPath('Events Standard.svg'),
   },
   dark: {
-    softwareWow: assetPath('SVG', 'SoftwareWOW White.svg'),
-    wowMarketing: assetPath('SVG', 'Marketing White.svg'),
-    wowDesign: assetPath('SVG', 'Design White.svg'),
-    wowIntelligence: assetPath('SVG', 'Intelligence White.svg'),
-    wowSocial: assetPath('SVG', 'Social White.svg'),
-    wowAccelerate: assetPath('SVG', 'Accelerate White.svg'),
-    wowWebsites: assetPath('SVG', 'Websites White.svg'),
-    wowImpact: assetPath('SVG', 'Impact White.svg'),
-    wowHost: assetPath('SVG', 'Host White.svg'),
-    wowHub: assetPath('SVG', 'Hub White.svg'),
-    wowEvents: assetPath('SVG', 'Events White.svg'),
+    softwareWow: logoPath('SoftwareWOW White.svg'),
+    wowMarketing: logoPath('Marketing White.svg'),
+    wowDesign: logoPath('Design White.svg'),
+    wowIntelligence: logoPath('Intelligence White.svg'),
+    wowSocial: logoPath('Social White.svg'),
+    wowAccelerate: logoPath('Accelerate White.svg'),
+    wowWebsites: logoPath('Websites White.svg'),
+    wowImpact: logoPath('Impact White.svg'),
+    wowHost: logoPath('Host White.svg'),
+    wowHub: logoPath('Hub White.svg'),
+    wowEvents: logoPath('Events White.svg'),
   },
 } as const
 
@@ -63,6 +63,12 @@ const divisionHrefSet = new Set(Object.values(divisionHrefs))
 export function isDivisionHref(href: string) {
   const path = href.split('#')[0]
   return divisionHrefSet.has(path)
+}
+
+const navBase = '/images/wow/nav'
+
+function assetPath(...segments: string[]) {
+  return `${navBase}/${segments.map((segment) => encodeURIComponent(segment)).join('/')}`
 }
 
 export const divisionProfilePictures = {
@@ -127,7 +133,6 @@ export const divisionIdBySlug: Record<DivisionSiteSlug, DivisionId> = {
 
 export function getDivisionSlugFromPathname(pathname: string): DivisionSiteSlug | null {
   const segments = pathname.split('/').filter(Boolean)
-  // With localePrefix: 'always' → /en-US/softwarewow or sometimes /softwarewow
   const candidate = segments.find((segment) =>
     (DIVISION_SITE_SLUGS as readonly string[]).includes(segment),
   )

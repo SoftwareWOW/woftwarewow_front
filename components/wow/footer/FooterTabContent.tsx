@@ -18,10 +18,11 @@ import {
   footerPanelTopAlignClass,
 } from '@/components/wow/footer/footer-shell-styles'
 import { footerItemSurfaceClass, footerSectionBgClass } from '@/components/wow/footer/footer-shell-styles'
+import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
+import { WowSuperagencyLogo } from '@/components/wow/nav/WowSuperagencyLogo'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import { useToastOptional } from '@/components/wow/shared/ToastProvider'
-import WowText, { renderWowInTitle } from '@/components/wow/shared/WowText'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { Icon, addCollection } from '@iconify/react'
@@ -55,10 +56,7 @@ function ResourcesPanel() {
       )}
     >
       <div className="flex flex-col gap-2 sm:col-span-2 sm:gap-3 lg:col-span-1">
-        <p className="font-outfit text-xl font-extrabold leading-none tracking-[-0.06em] sm:text-2xl 2xl:text-[2rem]">
-          <WowText />
-          <span className={cn('ml-1 font-light', headingText)}>Superagency</span>
-        </p>
+        <WowSuperagencyLogo />
         <p className={cn('max-w-[280px] font-outfit text-xs font-light leading-[1.5] sm:text-sm 2xl:text-base 2xl:leading-[1.6]', mutedText)}>
           This is where ambitions become achievements.
         </p>
@@ -99,7 +97,7 @@ function ExplorePanel() {
           key={division.href}
           href={division.href}
           iconStyle="none"
-          title={renderWowInTitle(division.title)}
+          title={<WowDivisionLogo divisionId={division.divisionId} size="md" />}
           description={division.subtitle}
         />
       ))}
@@ -216,7 +214,7 @@ export function ConnectPanel() {
           className="text-center font-outfit text-[clamp(1.35rem,3.2vw,2rem)] leading-none 2xl:text-[clamp(1.75rem,4vw,2.75rem)]"
         >
           <InstrumentText variant="solid">Join</InstrumentText>{' '}
-          <WowText /> <span className={headingText}>Hub</span>
+          <WowDivisionLogo divisionId="wowHub" size="md" />
         </Link>
       </div>
     </div>
