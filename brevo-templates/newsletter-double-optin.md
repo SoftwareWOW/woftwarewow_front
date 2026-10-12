@@ -1,6 +1,6 @@
 # WOW Hub newsletter — Brevo double opt-in
 
-Footer **Connect** tab posts to `POST /api/newsletter/subscribe`. Subscribers are **not** added to the list until they confirm via Brevo’s double opt-in email.
+Footer **Connect** tab posts to `POST /api/newsletter/subscribe`. The server calls Brevo **`POST /v3/contacts/doubleOptinConfirmation`** (not the generic create-contact endpoint). Subscribers are **not** added to the list until they confirm via Brevo’s double opt-in email.
 
 ## Brevo dashboard setup
 
@@ -9,10 +9,12 @@ Footer **Connect** tab posts to `POST /api/newsletter/subscribe`. Subscribers ar
    - Use list **ID 3** (WOW Hub) — set `BREVO_NEWSLETTER_LIST_ID=3` in `.env.local`.
    - Enable **double opt-in** on that list.
 
-2. **Double opt-in template**
-   - **Campaigns** / **Templates** → create or edit a **Double opt-in** (confirmation) template.
-   - Brand the subject and body for WOW Hub (see `newsletter-double-optin.html` as a starting layout).
-   - Copy the numeric template ID → `BREVO_NEWSLETTER_DOI_TEMPLATE_ID`.
+2. **Double opt-in template (template #8)**
+   - **Marketing → Templates** → your template (e.g. “WOW Hub newsletter subscription”).
+   - **Critical:** the confirm button must use Brevo’s **Double opt-in link** (insert via button link type, not a normal URL). The href must be `{{ doubleoptin }}` — if you only paste HTML, Brevo may not treat it as DOI.
+   - Advanced settings → tag **`optin`** (recommended).
+   - Copy the numeric template ID → `BREVO_NEWSLETTER_DOI_TEMPLATE_ID=8`.
+   - List setup matches your screenshot: **WOW Hub Newsletter = list #3** → `BREVO_NEWSLETTER_LIST_ID=3`.
 
 3. **Sender**
    - Use a **verified** sender (`BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`) — same as contact/quotation forms.
@@ -24,6 +26,10 @@ Footer **Connect** tab posts to `POST /api/newsletter/subscribe`. Subscribers ar
 
 5. **API key**
    - `BREVO_API_KEY` must allow **Contacts** API (create/update contacts, double opt-in).
+
+6. **Authorized IPs (common local dev failure)**
+   - If Brevo **Security → Authorized IPs** is enabled, add your dev machine and production server IPs, or disable IP filtering for testing.
+   - Without this, the API returns **401** and the footer shows “Unable to start your subscription…”.
 
 ## Environment variables
 
