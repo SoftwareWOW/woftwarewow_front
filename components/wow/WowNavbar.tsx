@@ -10,13 +10,12 @@ import {
   Moon,
   Sun,
 } from 'lucide-react'
-import Image from 'next/image'
 import { useLenis } from 'lenis/react'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import LanguageSwitcher from './LanguageSwitcher'
-import { navbarBrandLogo } from './nav/nav-brand-assets'
+import { WowSuperagencyLogo } from './nav/WowSuperagencyLogo'
 import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-styles'
 import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
 import WowMobileBottomNav from './nav/WowMobileBottomNav'
@@ -266,25 +265,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
               href="/"
               className="flex min-w-0 shrink items-center ps-2 md:w-[130px] md:ps-3 lg:w-[180px] lg:ps-5 xl:w-[200px] 2xl:w-[289px]"
             >
-              <Image
-                className="h-[20px] w-auto max-w-[calc(100vw-96px)] dark:hidden"
-                src={navbarBrandLogo.light}
-                alt={navbar.logoAlt}
-                width={183}
-                height={19}
-                unoptimized
-                priority
-              />
-
-              <Image
-                className="hidden h-[20px] w-auto max-w-[calc(100vw-96px)] dark:block"
-                src={navbarBrandLogo.dark}
-                alt={navbar.logoAltDark}
-                width={183}
-                height={19}
-                unoptimized
-                priority
-              />
+              <WowSuperagencyLogo className="max-h-[20px] max-w-[calc(100vw-96px)]" />
             </Link>
 
             <ul className="hidden min-w-0 flex-1 items-center justify-center md:flex md:gap-0 lg:gap-1 xl:gap-0">

@@ -1,7 +1,6 @@
 'use client'
 
 import { navbarBrandLogo } from '@/components/wow/nav/nav-brand-assets'
-import Image from 'next/image'
 import { cn } from '@/utils/cn'
 
 type WowSuperagencyLogoProps = {
@@ -13,22 +12,17 @@ type WowSuperagencyLogoProps = {
 function LogoImage({
   src,
   className,
-  width,
-  height,
 }: {
   src: string
   className?: string
-  width: number
-  height: number
 }) {
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element -- local SVG brand marks
+    <img
       src={src}
       alt="WOW Superagency"
-      width={width}
-      height={height}
-      unoptimized
       className={className}
+      decoding="async"
     />
   )
 }
@@ -40,8 +34,6 @@ export function WowSuperagencyLogo({ className, variant = 'default' }: WowSupera
     <>
       <LogoImage
         src={navbarBrandLogo.light}
-        width={320}
-        height={40}
         className={cn(
           'h-auto w-auto max-w-full object-contain object-left dark:hidden',
           watermark ? 'max-h-[clamp(2.5rem,8vw,5rem)] opacity-20' : 'max-h-8 sm:max-h-9 2xl:max-h-10',
@@ -50,8 +42,6 @@ export function WowSuperagencyLogo({ className, variant = 'default' }: WowSupera
       />
       <LogoImage
         src={navbarBrandLogo.dark}
-        width={320}
-        height={40}
         className={cn(
           'hidden h-auto w-auto max-w-full object-contain object-left dark:block',
           watermark ? 'max-h-[clamp(2.5rem,8vw,5rem)] opacity-10' : 'max-h-8 sm:max-h-9 2xl:max-h-10',

@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { divisionBrandLogos, type DivisionId } from './nav-brand-assets'
 
 type WowDivisionLogoProps = {
@@ -24,17 +23,14 @@ function DivisionLogoImage({
   className?: string
   size: keyof typeof sizeClasses
 }) {
-  const isSvg = src.endsWith('.svg') || src.includes('.svg')
-
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element -- local SVG brand marks; avoids Next image URL edge cases
+    <img
       src={src}
       alt=""
-      width={203}
-      height={15}
-      unoptimized={isSvg}
       className={`w-auto max-w-full object-contain object-left ${sizeClasses[size]} ${className ?? ''}`}
       aria-hidden
+      decoding="async"
     />
   )
 }
@@ -51,8 +47,6 @@ export function WowDivisionLogo({
     return null
   }
 
-  // Light mode + light hover (primary-50): Standard logos
-  // Dark mode + dark navy hover: White logos stay readable
   return (
     <>
       <DivisionLogoImage src={lightSrc} size={size} className="dark:hidden" />
