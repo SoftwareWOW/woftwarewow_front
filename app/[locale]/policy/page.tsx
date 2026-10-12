@@ -1,6 +1,7 @@
-import LayoutOne from '@/components/shared/LayoutOne'
+import LegalPageLayout from '@/components/shared/LegalPageLayout'
 import PageHero from '@/components/shared/PageHero'
 import PrivacyPolicyBody from '@/components/shared/PrivacyPolicyBody'
+import { legalPageHeroSpacingClass } from '@/components/shared/legal-page-hero-spacing'
 import type { Locale } from '@/i18n/config'
 import { buildLegalPageMetadata, loadLegalPage } from '@/lib/strapi/load-legal-page'
 import getMarkDownData from '@/utils/GetMarkDownData'
@@ -42,12 +43,13 @@ const PolicyPage = async ({ params }: Props) => {
     typeof markdownPage?.lastUpdated === 'string' ? markdownPage.lastUpdated : 'October 12, 2026'
 
   return (
-    <LayoutOne>
+    <LegalPageLayout>
       <PageHero
         title="Privacy "
         italicTitle="Policy."
         badgeTitle="Legal / Privacy"
         description="Clear information about how we collect, use, and protect your data."
+        spacing={legalPageHeroSpacingClass}
         scale
       />
       <PrivacyPolicyBody
@@ -58,7 +60,7 @@ const PolicyPage = async ({ params }: Props) => {
           { label: 'Cookie Settings', href: '/policy' },
         ]}
       />
-    </LayoutOne>
+    </LegalPageLayout>
   )
 }
 

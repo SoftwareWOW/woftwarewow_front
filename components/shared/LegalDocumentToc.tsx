@@ -9,7 +9,7 @@ const DESKTOP_MQ = '(min-width: 1024px)'
 const WIDE_MQ = '(min-width: 1280px)'
 const TOC_TOP_PX = 112
 
-type Placement = { left: number; width: number; top: number }
+type Placement = { left: number; width: number; top: number; show: boolean }
 
 type LegalDocumentTocProps = {
   sections: readonly LegalDocumentSection[]
@@ -37,22 +37,38 @@ export default function LegalDocumentToc({ sections, anchorRef, boundsRef }: Leg
       const width = window.matchMedia(WIDE_MQ).matches ? 260 : 240
 
       let top = TOC_TOP_PX
+      let show = true
       const boundsEl = boundsRef.current
       const navEl = navRef.current
-      if (boundsEl && navEl) {
+
+      if (boundsEl) {
         const bounds = boundsEl.getBoundingClientRect()
-        const tocHeight = navEl.getBoundingClientRect().height
-        const bottomLimit = bounds.bottom - tocHeight
-        if (bottomLimit < top) {
-          top = Math.max(bounds.top, bottomLimit)
+        show = bounds.top < window.innerHeight && bounds.bottom > TOC_TOP_PX
+
+        if (bounds.top > top) {
+          top = bounds.top
+        }
+
+        if (navEl) {
+          const tocHeight = navEl.getBoundingClientRect().height
+          const bottomLimit = bounds.bottom - tocHeight
+          if (bottomLimit < top) {
+            top = Math.max(bounds.top, bottomLimit)
+          }
         }
       }
 
       setPlacement((prev) => {
-        if (prev && prev.left === left && prev.width === width && prev.top === top) {
+        if (
+          prev &&
+          prev.left === left &&
+          prev.width === width &&
+          prev.top === top &&
+          prev.show === show
+        ) {
           return prev
         }
-        return { left, width, top }
+        return { left, width, top, show }
       })
     }
 
@@ -90,7 +106,7 @@ export default function LegalDocumentToc({ sections, anchorRef, boundsRef }: Leg
     if (node) updateRef.current()
   }, [])
 
-  if (!placement) return null
+  if (!placement?.show) return null
 
   return (
     <nav

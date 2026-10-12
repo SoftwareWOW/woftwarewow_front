@@ -1,6 +1,7 @@
-import LayoutOne from '@/components/shared/LayoutOne'
+import LegalPageLayout from '@/components/shared/LegalPageLayout'
 import PageHero from '@/components/shared/PageHero'
 import TermsOfServiceBody from '@/components/shared/TermsOfServiceBody'
+import { legalPageHeroSpacingClass } from '@/components/shared/legal-page-hero-spacing'
 import type { Locale } from '@/i18n/config'
 import { buildLegalPageMetadata, loadLegalPage } from '@/lib/strapi/load-legal-page'
 import getMarkDownData from '@/utils/GetMarkDownData'
@@ -46,12 +47,13 @@ const TermsPage = async ({ params }: Props) => {
     typeof markdownPage?.lastUpdated === 'string' ? markdownPage.lastUpdated : 'October 12, 2026'
 
   return (
-    <LayoutOne>
+    <LegalPageLayout>
       <PageHero
         title="Terms of "
         italicTitle="Service."
         badgeTitle="Legal / Terms"
         description="Clear expectations. Better partnerships."
+        spacing={legalPageHeroSpacingClass}
         scale
       />
       <TermsOfServiceBody
@@ -59,7 +61,7 @@ const TermsPage = async ({ params }: Props) => {
         lastUpdated={lastUpdated}
         footerLinks={[...legalFooterLinks]}
       />
-    </LayoutOne>
+    </LegalPageLayout>
   )
 }
 
