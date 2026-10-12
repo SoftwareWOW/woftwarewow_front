@@ -25,6 +25,7 @@ export const footerTabButtonClass = cn(
   'box-border inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-radius-sm border px-3 py-0 font-outfit text-xs font-light leading-none tracking-[0.4px] transition-[color,background-color,border-color]',
   'h-9 min-h-9 max-h-9 sm:h-10 sm:min-h-10 sm:max-h-10 sm:px-4 sm:text-sm',
   '2xl:h-[79px] 2xl:min-h-[79px] 2xl:max-h-[79px] 2xl:px-8 2xl:text-[20px]',
+  'max-h-[920px]:2xl:h-10 max-h-[920px]:2xl:min-h-10 max-h-[920px]:2xl:max-h-10 max-h-[920px]:2xl:px-4 max-h-[920px]:2xl:text-sm',
 )
 
 export const footerTabIconButtonClass = cn(
@@ -32,6 +33,7 @@ export const footerTabIconButtonClass = cn(
   'size-9 min-h-9 max-h-9 min-w-9 max-w-9',
   'sm:size-10 sm:min-h-10 sm:max-h-10 sm:min-w-10 sm:max-w-10',
   '2xl:size-[79px] 2xl:min-h-[79px] 2xl:max-h-[79px] 2xl:min-w-[79px] 2xl:max-w-[79px]',
+  'max-h-[920px]:2xl:size-10 max-h-[920px]:2xl:min-h-10 max-h-[920px]:2xl:max-h-10 max-h-[920px]:2xl:min-w-10 max-h-[920px]:2xl:max-w-10',
 )
 
 export const footerTabIdleClass = cn(
@@ -47,12 +49,13 @@ export const footerTabActiveClass = cn(
 
 /** Tab panel slot — min-height set from measured tallest tab (WowFooterShell). */
 export const footerTabPanelClass = cn(
-  'row-start-1 flex h-full min-h-0 w-full flex-col overflow-hidden',
+  'row-start-1 flex h-full min-h-0 w-full flex-col overflow-x-hidden overflow-y-hidden',
   '[&>*]:h-full [&>*]:min-h-0 [&>*]:w-full',
 )
 
 /** Vertical gap between tab row ↔ content ↔ access row (keep in sync with shell gap). */
-export const footerBandGapClass = 'gap-2.5 sm:gap-4 2xl:gap-[30px]'
+export const footerBandGapClass =
+  'gap-2.5 sm:gap-4 2xl:gap-[30px] max-h-[920px]:2xl:gap-4 max-h-[920px]:gap-2'
 
 /** Tab content + pinned access row; panel row height is stable across tab switches. */
 export const footerMiddleSectionClass = cn(
@@ -63,7 +66,7 @@ export const footerMiddleSectionClass = cn(
 /** Bottom quick links — fixed button height, pinned under the panel slot. */
 export const footerAccessRowClass = cn(
   'row-start-2 flex w-full shrink-0 flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 2xl:gap-5',
-  'min-h-9 sm:min-h-10 2xl:min-h-[79px]',
+  'min-h-9 sm:min-h-10 2xl:min-h-[79px] max-h-[920px]:2xl:min-h-10',
 )
 
 export const footerAccessTabClass = cn(
@@ -80,7 +83,8 @@ export const footerCardPanelFillClass = 'flex h-full min-h-0 w-full flex-col'
 export const footerPanelTopAlignClass = 'flex h-full min-h-0 w-full flex-col justify-start'
 
 export const footerShellContainerClass = cn(
-  'relative flex w-full flex-col items-center rounded-radius-md border py-3 sm:py-4 2xl:py-[30px]',
+  'relative flex w-full min-h-0 flex-col items-center rounded-radius-md border py-3 sm:py-4 2xl:py-[30px]',
+  'max-h-[920px]:2xl:py-4 max-h-[920px]:py-2.5',
   footerBandGapClass,
   footerSectionBgClass,
   'border-[#1515151A] dark:border-[#EDF0F51A]',

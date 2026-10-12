@@ -15,13 +15,14 @@ import {
   footerTabPanelClass,
 } from '@/components/wow/footer/footer-shell-styles'
 import { stickyFooterClass } from '@/components/wow/footer-layout'
+import { useFooterScrollChain } from '@/components/wow/footer/useFooterScrollChain'
 import { useStickyFooterHeight } from '@/components/wow/useStickyFooterHeight'
 import { useMeetDialogOptional } from '@/components/wow/shared/MeetDialogProvider'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { useFooterPanelMinHeight } from '@/components/wow/footer/useFooterPanelMinHeight'
 import { House, Sparkles } from 'lucide-react'
-import { useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
+import { useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 
 export type FooterTabDefinition = {
   id: string
@@ -48,15 +49,11 @@ export default function WowFooterShell({
   tablistLabel = 'Footer sections',
 }: WowFooterShellProps) {
   const footerRef = useStickyFooterHeight<HTMLElement>()
+  useFooterScrollChain(footerRef)
   const meetDialog = useMeetDialogOptional()
   const [activeTab, setActiveTab] = useState(defaultTabId)
 
-  const measureTabIds = useMemo(() => {
-    const ids = tabs.map((tab) => tab.id)
-    return showAskTab ? (['ask', ...ids] as string[]) : ids
-  }, [showAskTab, tabs])
-
-  const { measureRef, panelMinHeight } = useFooterPanelMinHeight(measureTabIds, measureTabIds.join(','))
+  const { measureRef, panelMinHeight } = useFooterPanelMinHeight(activeTab)
 
   const tabPanelStyle: CSSProperties | undefined =
     panelMinHeight > 0 ? { minHeight: panelMinHeight } : undefined
@@ -70,25 +67,26 @@ export default function WowFooterShell({
 
   return (
     <footer ref={footerRef} className={stickyFooterClass}>
-      <div className="relative bg-background px-3 py-2 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:py-3 2xl:px-10 2xl:py-5">
+      <div className="relative bg-background px-3 pt-2 pb-0 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 2xl:px-10 2xl:pt-5">
         <div className="relative z-10 mx-auto w-full max-w-[1440px]">
-          <div className={footerShellContainerClass}>
+          <div className={footerShellContainerClass} data-footer-shell>
             <div
               ref={measureRef}
               aria-hidden
               className="pointer-events-none invisible absolute left-0 top-0 -z-10 w-full opacity-0"
             >
-              {measureTabIds.map((tabId) => (
-                <div key={tabId} data-footer-panel-measure className="w-full">
-                  {renderPanel(tabId)}
-                </div>
-              ))}
+              <div data-footer-panel-measure className="w-full">
+                {renderPanel(activeTab)}
+              </div>
             </div>
 
             <div
               role="tablist"
               aria-label={tablistLabel}
-              className="flex w-full max-w-full shrink-0 flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6 min-h-9 sm:min-h-10 2xl:min-h-[79px]"
+              className={cn(
+                'flex w-full max-w-full shrink-0 flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6',
+                'min-h-9 sm:min-h-10 2xl:min-h-[79px] max-h-[920px]:2xl:min-h-10',
+              )}
             >
               {showAskTab ? (
                 <button
@@ -138,7 +136,7 @@ export default function WowFooterShell({
                 {renderPanel(activeTab)}
               </div>
 
-              <div className={footerAccessRowClass}>
+              <div className={footerAccessRowClass} data-footer-access>
                 <button
                   type="button"
                   onClick={() => setActiveTab(showAskTab ? 'ask' : tabs[0]?.id ?? 'ask')}
@@ -167,7 +165,10 @@ export default function WowFooterShell({
 
             <div className="h-px w-[min(1248px,calc(100%-1.5rem))] bg-[#1515151A] dark:bg-[#EDF0F51A]" />
 
-            <div className="flex w-full max-w-[1248px] flex-col items-center justify-between gap-2 px-3 sm:px-5 md:flex-row md:gap-3 2xl:px-6">
+            <div
+              className="flex w-full max-w-[1248px] shrink-0 flex-col items-center justify-between gap-2 px-3 sm:px-5 md:flex-row md:gap-3 2xl:px-6"
+              data-footer-legal
+            >
               <span className="text-center font-outfit text-[11px] font-light leading-[1.5] !text-[#808080] sm:text-xs md:text-left 2xl:text-[20px] 2xl:leading-[1.6]">
                 {copyright}
               </span>
@@ -197,7 +198,8 @@ export default function WowFooterShell({
 
           <div
             aria-hidden
-            className="footer-wow-watermark pointer-events-none mt-1 flex w-full max-w-full justify-center overflow-hidden select-none pb-1 font-semibold leading-none tracking-[-0.04em] sm:mt-1.5 sm:pb-1.5 2xl:mt-2 2xl:pb-2"
+            className="footer-wow-watermark pointer-events-none mt-1 flex w-full max-w-full shrink-0 justify-center overflow-hidden select-none pb-0 sm:mt-1.5 2xl:mt-2"
+            data-footer-watermark
           >
             {watermark}
           </div>

@@ -25,10 +25,12 @@ export function useStickyFooterHeight<T extends HTMLElement>() {
     const observer = new ResizeObserver(update)
     observer.observe(el)
     window.addEventListener('resize', update)
+    window.visualViewport?.addEventListener('resize', update)
 
     return () => {
       observer.disconnect()
       window.removeEventListener('resize', update)
+      window.visualViewport?.removeEventListener('resize', update)
       document.documentElement.style.removeProperty(FOOTER_HEIGHT_VAR)
     }
   }, [])

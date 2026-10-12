@@ -1,6 +1,6 @@
 /** Sticky footer reveal: main sits above fixed footer; content scrolls over it. */
 export const stickyFooterClass =
-  'relative z-0 w-full max-w-full lg:fixed lg:inset-x-0 lg:bottom-0'
+  'footer-scroll-region relative z-0 w-full max-w-full lg:fixed lg:inset-x-0 lg:bottom-0 lg:max-h-[100dvh] lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-y-contain'
 
 export const stickyFooterMainClass =
   'relative z-10 w-full max-w-full overflow-x-clip bg-backgroundBody pb-[calc(96px+env(safe-area-inset-bottom))] dark:bg-dark md:pb-0 lg:mb-[var(--sticky-footer-height,560px)]'
