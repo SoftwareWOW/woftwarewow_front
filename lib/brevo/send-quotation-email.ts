@@ -1,3 +1,5 @@
+import { getOptionalEnv, getRequiredEnv } from '@/lib/brevo/env'
+
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email'
 
 export type QuotationEmailPayload = {
@@ -23,16 +25,6 @@ type BrevoTemplateEmailOptions = {
   to: Array<{ email: string; name: string }>
   params: Record<string, string>
   replyTo?: { email: string; name: string }
-}
-
-function getRequiredEnv(name: string): string | null {
-  const value = process.env[name]?.trim()
-  return value || null
-}
-
-function getOptionalEnv(name: string): string | null {
-  const value = process.env[name]?.trim()
-  return value || null
 }
 
 function fallback(value: string) {

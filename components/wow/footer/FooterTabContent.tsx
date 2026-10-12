@@ -22,13 +22,12 @@ import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
 import { WowSuperagencyLogo } from '@/components/wow/nav/WowSuperagencyLogo'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
-import { useToastOptional } from '@/components/wow/shared/ToastProvider'
+import FooterNewsletterSubscribe from '@/components/wow/footer/FooterNewsletterSubscribe'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { Icon, addCollection } from '@iconify/react'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
-import type { FormEvent, ReactNode } from 'react'
-import { useState } from 'react'
+import type { ReactNode } from 'react'
 
 addCollection(simpleIcons)
 
@@ -144,16 +143,6 @@ function ContactPanel() {
 }
 
 export function ConnectPanel() {
-  const toast = useToastOptional()
-  const [email, setEmail] = useState('')
-
-  const handleSubscribe = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (!email.trim()) return
-    toast?.showToast('Thanks — we will keep you posted.')
-    setEmail('')
-  }
-
   return (
     <div className={cn(panelClass, 'flex flex-col items-center gap-6 py-3 sm:gap-8 sm:py-4 2xl:gap-12 2xl:py-8')}>
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 2xl:gap-4">
@@ -177,33 +166,7 @@ export function ConnectPanel() {
       </div>
 
       <div className="flex w-full flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-center lg:gap-10 2xl:gap-14">
-        <div className="flex w-full max-w-[520px] flex-col items-center gap-3 lg:items-start">
-          <p className={cn('text-center font-outfit text-xs font-light leading-[1.5] lg:text-left sm:text-sm 2xl:text-base 2xl:leading-[1.6]', mutedText)}>
-            Ideas, insights and practical ways to grow your business.
-          </p>
-          <form onSubmit={handleSubscribe} className="flex w-full flex-col gap-2 sm:flex-row sm:items-stretch">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="hello@email.com"
-              aria-label="Email address"
-              className={cn(
-                'h-10 min-w-0 flex-1 rounded-radius-sm border px-3 font-outfit text-sm font-light sm:h-11 2xl:h-14 2xl:px-4 2xl:text-base',
-                'border-[#1515151A] text-secondary placeholder:text-[#808080] focus:outline-none',
-                footerSectionBgClass,
-                'dark:border-[#EDF0F51A] dark:text-[#F2F2F2]',
-              )}
-            />
-            <button
-              type="submit"
-              className="inline-flex h-10 shrink-0 items-center justify-center rounded-radius-sm bg-primary px-5 font-outfit text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:bg-primary/90 sm:h-11 sm:px-6 sm:text-xs 2xl:h-14 2xl:px-8 2xl:text-sm"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
+        <FooterNewsletterSubscribe />
 
         <div className="hidden h-12 w-px bg-[#1515151A] dark:bg-[#EDF0F51A] lg:block 2xl:h-16" />
 
