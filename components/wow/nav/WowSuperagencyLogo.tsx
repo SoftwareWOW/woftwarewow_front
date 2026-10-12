@@ -31,26 +31,19 @@ export function WowSuperagencyLogo({ className, variant = 'default' }: WowSupera
   const watermark = variant === 'watermark'
   const objectClass = watermark ? 'object-center' : 'object-left'
 
+  const defaultSizeClass = 'h-5 w-auto max-w-full sm:h-6 md:h-8 2xl:h-10'
+  const imageClass = cn(
+    'block object-contain',
+    objectClass,
+    watermark
+      ? 'h-auto w-auto max-h-[clamp(2.5rem,8vw,5rem)] max-w-full opacity-20 dark:opacity-10'
+      : (className ?? defaultSizeClass),
+  )
+
   const logo = (
     <>
-      <LogoImage
-        src={navbarBrandLogo.light}
-        className={cn(
-          'h-auto w-auto max-w-full object-contain dark:hidden',
-          objectClass,
-          watermark ? 'max-h-[clamp(2.5rem,8vw,5rem)] opacity-20' : 'max-h-8 sm:max-h-9 2xl:max-h-10',
-          !watermark ? className : undefined,
-        )}
-      />
-      <LogoImage
-        src={navbarBrandLogo.dark}
-        className={cn(
-          'hidden h-auto w-auto max-w-full object-contain dark:block',
-          objectClass,
-          watermark ? 'max-h-[clamp(2.5rem,8vw,5rem)] opacity-10' : 'max-h-8 sm:max-h-9 2xl:max-h-10',
-          !watermark ? className : undefined,
-        )}
-      />
+      <LogoImage src={navbarBrandLogo.light} className={cn(imageClass, 'dark:hidden')} />
+      <LogoImage src={navbarBrandLogo.dark} className={cn(imageClass, 'hidden dark:block')} />
     </>
   )
 
@@ -60,5 +53,5 @@ export function WowSuperagencyLogo({ className, variant = 'default' }: WowSupera
     )
   }
 
-  return logo
+  return <span className="inline-flex shrink-0 items-center">{logo}</span>
 }

@@ -11,6 +11,10 @@ export const navbarBrandLogo = {
   dark: logoPath('Superagency White.svg'),
 } as const
 
+/** ~269×34.49px at 1400px viewport; scales down/up with screen width. */
+export const navbarSuperagencyLogoClass =
+  'h-[clamp(18px,2.4643vw,47px)] w-auto max-w-full shrink-0 object-contain object-left'
+
 /** Standard on light backgrounds, White on dark backgrounds (brand guideline) */
 export const divisionBrandLogos = {
   light: {

@@ -14,7 +14,9 @@ import { useLenis } from 'lenis/react'
 import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { cn } from '@/utils/cn'
 import LanguageSwitcher from './LanguageSwitcher'
+import { navbarSuperagencyLogoClass } from './nav/nav-brand-assets'
 import { WowSuperagencyLogo } from './nav/WowSuperagencyLogo'
 import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-styles'
 import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
@@ -263,9 +265,11 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           >
             <Link
               href="/"
-              className="flex min-w-0 shrink items-center ps-2 md:w-[130px] md:ps-3 lg:w-[180px] lg:ps-5 xl:w-[200px] 2xl:w-[289px]"
+              className="relative z-[1001] flex min-w-0 max-w-[calc(100%-60px)] flex-1 items-center overflow-hidden ps-2 sm:max-w-none md:shrink-0 md:flex-none md:overflow-visible md:ps-3 lg:ps-5"
             >
-              <WowSuperagencyLogo className="max-h-[20px] max-w-[calc(100vw-96px)]" />
+              <WowSuperagencyLogo
+                className={cn(navbarSuperagencyLogoClass, 'max-md:max-w-[calc(100vw-100px)]')}
+              />
             </Link>
 
             <ul className="hidden min-w-0 flex-1 items-center justify-center md:flex md:gap-0 lg:gap-1 xl:gap-0">
