@@ -13,12 +13,18 @@ type Placement = { left: number; width: number; top: number; show: boolean }
 
 type LegalDocumentTocProps = {
   sections: readonly LegalDocumentSection[]
+  activeSectionId: string
   anchorRef: RefObject<HTMLElement | null>
   boundsRef: RefObject<HTMLElement | null>
 }
 
 /** Fixed TOC — Lenis/transform parents break `position: sticky`. */
-export default function LegalDocumentToc({ sections, anchorRef, boundsRef }: LegalDocumentTocProps) {
+export default function LegalDocumentToc({
+  sections,
+  activeSectionId,
+  anchorRef,
+  boundsRef,
+}: LegalDocumentTocProps) {
   const lenis = useLenis()
   const navRef = useRef<HTMLElement | null>(null)
   const updateRef = useRef<() => void>(() => {})
@@ -126,20 +132,39 @@ export default function LegalDocumentToc({ sections, anchorRef, boundsRef }: Leg
         On this page
       </p>
       <ol className="space-y-2 border-l border-[#1515151A] pl-4 dark:border-[#EDF0F51A]">
-        {sections.map((section) => (
-          <li key={section.id}>
-            <a
-              href={`#${section.id}`}
+        {sections.map((section) => {
+          const isActive = activeSectionId === section.id
+          return (
+            <li
+              key={section.id}
               className={cn(
-                'block py-0.5 font-outfit text-sm font-light leading-snug text-colorText transition-colors',
-                'hover:text-primary dark:text-dark-100 dark:hover:text-primary',
+                '-ml-px border-l-2 pl-[calc(1rem-2px)] transition-colors',
+                isActive ? 'border-primary' : 'border-transparent',
               )}
             >
-              <span className="mr-1.5 text-xs text-colorText/50 dark:text-dark-100/50">{section.num}</span>
-              {section.title}
-            </a>
-          </li>
-        ))}
+              <a
+                href={`#${section.id}`}
+                aria-current={isActive ? 'location' : undefined}
+                className={cn(
+                  'block py-0.5 font-outfit text-sm leading-snug transition-colors',
+                  isActive ?
+                    'font-medium text-primary dark:text-primary'
+                  : 'font-light text-colorText hover:text-primary dark:text-dark-100 dark:hover:text-primary',
+                )}
+              >
+                <span
+                  className={cn(
+                    'mr-1.5 text-xs',
+                    isActive ? 'text-primary/80 dark:text-primary/80' : 'text-colorText/50 dark:text-dark-100/50',
+                  )}
+                >
+                  {section.num}
+                </span>
+                {section.title}
+              </a>
+            </li>
+          )
+        })}
       </ol>
     </nav>
   )

@@ -3,6 +3,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import LegalDocumentToc from '@/components/shared/LegalDocumentToc'
 import type { LegalDocumentFooterLink, LegalDocumentSection } from '@/components/shared/legal-document-types'
+import { useLegalSectionScrollSpy } from '@/components/shared/useLegalSectionScrollSpy'
+import { cn } from '@/utils/cn'
 import { Link } from '@/i18n/navigation'
 import { FC, useMemo, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -46,6 +48,7 @@ const LegalDocumentBody: FC<LegalDocumentBodyProps> = ({ content, lastUpdated, s
   )
   const tocColumnRef = useRef<HTMLElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
+  const activeSectionId = useLegalSectionScrollSpy(sections, sectionRef)
   const lastSection = sections[sections.length - 1]
 
   return (
@@ -57,15 +60,24 @@ const LegalDocumentBody: FC<LegalDocumentBodyProps> = ({ content, lastUpdated, s
 
             <div className="min-w-0">
               <nav aria-label="On this page" className="mb-8 flex flex-wrap gap-2 lg:hidden">
-                {sections.slice(0, 5).map((section) => (
-                  <a
-                    key={section.id}
-                    href={`#${section.id}`}
-                    className="rounded-radius-sm border border-[#1515151A] px-2.5 py-1 font-outfit text-xs text-colorText dark:border-[#EDF0F51A] dark:text-dark-100"
-                  >
-                    {section.num}
-                  </a>
-                ))}
+                {sections.slice(0, 5).map((section) => {
+                  const isActive = activeSectionId === section.id
+                  return (
+                    <a
+                      key={section.id}
+                      href={`#${section.id}`}
+                      aria-current={isActive ? 'location' : undefined}
+                      className={cn(
+                        'rounded-radius-sm border px-2.5 py-1 font-outfit text-xs transition-colors',
+                        isActive ?
+                          'border-primary bg-primary/10 text-primary dark:border-primary dark:bg-primary/15'
+                        : 'border-[#1515151A] text-colorText dark:border-[#EDF0F51A] dark:text-dark-100',
+                      )}
+                    >
+                      {section.num}
+                    </a>
+                  )
+                })}
                 {lastSection ? (
                   <a
                     href={`#${lastSection.id}`}
@@ -114,7 +126,12 @@ const LegalDocumentBody: FC<LegalDocumentBodyProps> = ({ content, lastUpdated, s
             </div>
           </div>
 
-          <LegalDocumentToc sections={sections} anchorRef={tocColumnRef} boundsRef={sectionRef} />
+          <LegalDocumentToc
+            sections={sections}
+            activeSectionId={activeSectionId}
+            anchorRef={tocColumnRef}
+            boundsRef={sectionRef}
+          />
         </div>
       </div>
     </section>
