@@ -106,7 +106,7 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     solutionCategories,
     growthArticles,
     partnerLogos,
-  ] = await runInBatches(
+  ] = (await runInBatches(
     [
       () =>
         fetchSingleType<StrapiSuperagencyHero>('superagency-hero', {
@@ -177,7 +177,21 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
         }),
     ],
     batchSize,
-  );
+  )) as [
+    StrapiSuperagencyHero | null,
+    StrapiSuperagencyStats | null,
+    StrapiSuperagencySolutions | null,
+    StrapiSuperagencyHumanTouch | null,
+    StrapiSuperagencyGrowthCta | null,
+    StrapiSuperagencyEcosystem | null,
+    StrapiSuperagencyDivision[],
+    StrapiSuperagencyProject[],
+    StrapiSuperagencyTestimonial[],
+    StrapiSuperagencyFaq[],
+    StrapiSuperagencySolutionCategory[],
+    StrapiSuperagencyGrowthArticle[],
+    StrapiSuperagencyPartnerLogo[],
+  ];
 
   let data = {
     hero,

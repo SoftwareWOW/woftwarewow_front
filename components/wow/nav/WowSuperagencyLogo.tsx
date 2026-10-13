@@ -53,5 +53,7 @@ export function WowSuperagencyLogo({ className, variant = 'default' }: WowSupera
     )
   }
 
-  return <span className="inline-flex shrink-0 items-center">{logo}</span>
+  return (
+    <span className="inline-flex max-w-full shrink-0 items-center leading-none">{logo}</span>
+  )
 }

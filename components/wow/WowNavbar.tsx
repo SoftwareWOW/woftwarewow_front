@@ -265,7 +265,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           >
             <Link
               href="/"
-              className="relative z-[1001] flex min-w-0 max-w-[calc(100%-60px)] flex-1 items-center overflow-hidden ps-2 sm:max-w-none md:shrink-0 md:flex-none md:overflow-visible md:ps-3 lg:ps-5"
+              className="relative z-[1001] flex min-w-0 max-w-[min(100%,16.8125rem)] flex-1 items-center overflow-hidden ps-2 sm:max-w-none md:max-w-[16.8125rem] md:shrink-0 md:flex-none md:overflow-visible md:ps-3 lg:ps-5"
             >
               <WowSuperagencyLogo
                 className={cn(navbarSuperagencyLogoClass, 'max-md:max-w-[calc(100vw-100px)]')}

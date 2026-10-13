@@ -1,13 +1,13 @@
 /** Run async tasks in fixed-size batches to avoid upstream connect timeouts under burst load. */
-export async function runInBatches<T>(
-  tasks: Array<() => Promise<T>>,
+export async function runInBatches(
+  tasks: ReadonlyArray<() => Promise<unknown>>,
   batchSize: number,
-): Promise<T[]> {
+): Promise<unknown[]> {
   if (batchSize < 1) {
     throw new Error('batchSize must be at least 1');
   }
 
-  const results: T[] = [];
+  const results: unknown[] = [];
 
   for (let index = 0; index < tasks.length; index += batchSize) {
     const batch = tasks.slice(index, index + batchSize);
