@@ -22,15 +22,11 @@ export default function FooterNewsletterSubscribe() {
   const [consent, setConsent] = useState(false)
   const [website, setWebsite] = useState('')
   const [fieldError, setFieldError] = useState('')
-  const [formMessage, setFormMessage] = useState('')
-  const [isSuccess, setIsSuccess] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubscribe = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setFieldError('')
-    setFormMessage('')
-    setIsSuccess(false)
 
     const normalized = email.trim().toLowerCase()
 
@@ -75,8 +71,7 @@ export default function FooterNewsletterSubscribe() {
         return
       }
 
-      setIsSuccess(true)
-      setFormMessage(SUCCESS_MESSAGE)
+      toast?.showToast(SUCCESS_MESSAGE, 'success')
       setEmail('')
       setConsent(false)
     } catch {
@@ -115,15 +110,11 @@ export default function FooterNewsletterSubscribe() {
           onChange={(event) => {
             setEmail(event.target.value)
             if (fieldError) setFieldError('')
-            if (isSuccess) {
-              setFormMessage('')
-              setIsSuccess(false)
-            }
           }}
           placeholder="hello@email.com"
           aria-label="Email address"
           aria-invalid={fieldError ? true : undefined}
-          aria-describedby={fieldError || (isSuccess && formMessage) ? statusId : undefined}
+          aria-describedby={fieldError ? statusId : undefined}
           disabled={isSubmitting}
           className={cn(
             'h-10 min-w-0 flex-1 rounded-radius-sm border px-3 font-outfit text-sm font-light sm:h-11 2xl:h-14 2xl:px-4 2xl:text-base',
@@ -169,16 +160,15 @@ export default function FooterNewsletterSubscribe() {
         </span>
       </label>
 
-      <p
-        id={statusId}
-        role="status"
-        aria-live="polite"
-        className={cn(
-          'min-h-[1.25rem] w-full text-left font-outfit text-[11px] font-light leading-[1.45] sm:text-xs 2xl:text-sm',
-          fieldError ? 'text-red-600 dark:text-red-400' : isSuccess ? 'text-primary' : mutedText,
-        )}>
-        {fieldError || (isSuccess ? formMessage : null)}
-      </p>
+      {fieldError ? (
+        <p
+          id={statusId}
+          role="alert"
+          className="w-full text-left font-outfit text-[11px] font-light leading-[1.45] text-red-600 sm:text-xs dark:text-red-400 2xl:text-sm"
+        >
+          {fieldError}
+        </p>
+      ) : null}
     </div>
   )
 }
