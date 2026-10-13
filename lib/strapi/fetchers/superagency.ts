@@ -1,5 +1,10 @@
 import type { Locale } from '@/i18n/config';
 import { fetchCollection, fetchSingleType } from '@/lib/strapi/client';
+import {
+  isHomepageCmsEmpty,
+  loadSuperagencyHomepageDevFallback,
+} from '@/lib/strapi/dev-fallback';
+import { getStrapiFetchConcurrency, runInBatches } from '@/lib/strapi/fetch-concurrency';
 import type {
   StrapiSuperagencyEcosystem,
   StrapiSuperagencyFooter,
@@ -86,6 +91,7 @@ export async function getSuperagencyLayout(locale: Locale) {
 }
 
 export async function getSuperagencyHomepage(locale: Locale): Promise<SuperagencyHomepageData> {
+  const batchSize = getStrapiFetchConcurrency();
   const [
     hero,
     stats,
@@ -100,26 +106,80 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
     solutionCategories,
     growthArticles,
     partnerLogos,
-  ] = await Promise.all([
-    fetchSingleType<StrapiSuperagencyHero>('superagency-hero', { locale, populate: HERO_POPULATE }),
-    fetchSingleType<StrapiSuperagencyStats>('superagency-stats', { locale, populate: STATS_POPULATE }),
-    fetchSingleType<StrapiSuperagencySolutions>('superagency-solutions', { locale, populate: '*' }),
-    fetchSingleType<StrapiSuperagencyHumanTouch>('superagency-human-touch', {
-      locale,
-      populate: HUMAN_TOUCH_POPULATE,
-    }),
-    fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', { locale, populate: '*' }),
-    fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', { locale, populate: '*' }),
-    getSuperagencyDivisions(locale),
-    fetchCollection<StrapiSuperagencyProject>('wowsuperagencyprojects', { locale, populate: PROJECT_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyTestimonial>('wow-super-agency-clients', { locale, populate: TESTIMONIAL_POPULATE, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyFaq>('superagency-faqs', { locale, populate: '*', sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencySolutionCategory>('superagency-solution-categories', { locale, populate: '*', sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyGrowthArticle>('superagency-growth-articles', { locale, populate: { thumbnail: true }, sort: 'order:asc' }),
-    fetchCollection<StrapiSuperagencyPartnerLogo>('superagency-partner-logos', { locale, populate: PARTNER_LOGO_POPULATE, sort: 'order:asc' }),
-  ]);
+  ] = await runInBatches(
+    [
+      () =>
+        fetchSingleType<StrapiSuperagencyHero>('superagency-hero', {
+          locale,
+          populate: HERO_POPULATE,
+        }),
+      () =>
+        fetchSingleType<StrapiSuperagencyStats>('superagency-stats', {
+          locale,
+          populate: STATS_POPULATE,
+        }),
+      () =>
+        fetchSingleType<StrapiSuperagencySolutions>('superagency-solutions', {
+          locale,
+          populate: '*',
+        }),
+      () =>
+        fetchSingleType<StrapiSuperagencyHumanTouch>('superagency-human-touch', {
+          locale,
+          populate: HUMAN_TOUCH_POPULATE,
+        }),
+      () =>
+        fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', {
+          locale,
+          populate: '*',
+        }),
+      () =>
+        fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', {
+          locale,
+          populate: '*',
+        }),
+      () => getSuperagencyDivisions(locale),
+      () =>
+        fetchCollection<StrapiSuperagencyProject>('wowsuperagencyprojects', {
+          locale,
+          populate: PROJECT_POPULATE,
+          sort: 'order:asc',
+        }),
+      () =>
+        fetchCollection<StrapiSuperagencyTestimonial>('wow-super-agency-clients', {
+          locale,
+          populate: TESTIMONIAL_POPULATE,
+          sort: 'order:asc',
+        }),
+      () =>
+        fetchCollection<StrapiSuperagencyFaq>('superagency-faqs', {
+          locale,
+          populate: '*',
+          sort: 'order:asc',
+        }),
+      () =>
+        fetchCollection<StrapiSuperagencySolutionCategory>('superagency-solution-categories', {
+          locale,
+          populate: '*',
+          sort: 'order:asc',
+        }),
+      () =>
+        fetchCollection<StrapiSuperagencyGrowthArticle>('superagency-growth-articles', {
+          locale,
+          populate: { thumbnail: true },
+          sort: 'order:asc',
+        }),
+      () =>
+        fetchCollection<StrapiSuperagencyPartnerLogo>('superagency-partner-logos', {
+          locale,
+          populate: PARTNER_LOGO_POPULATE,
+          sort: 'order:asc',
+        }),
+    ],
+    batchSize,
+  );
 
-  const data = {
+  let data = {
     hero,
     stats,
     solutions,
@@ -162,6 +222,13 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
       );
     } else {
       console.info(`[Strapi] Homepage CMS (${locale}): all sections populated`);
+    }
+  }
+
+  if (isHomepageCmsEmpty(data)) {
+    const fallback = await loadSuperagencyHomepageDevFallback(locale);
+    if (fallback) {
+      data = { ...data, ...fallback };
     }
   }
 

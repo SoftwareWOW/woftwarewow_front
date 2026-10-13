@@ -198,6 +198,45 @@ type StrapiFetchAttempt<T> =
   | { kind: 'miss' }
   | { kind: 'non_json' };
 
+function isRetriableStrapiFetchError(error: unknown): boolean {
+  if (!(error instanceof TypeError) || error.message !== 'fetch failed') {
+    return false;
+  }
+
+  const cause = (error as Error & { cause?: { code?: string } }).cause;
+  const code = cause?.code;
+  return (
+    code === 'UND_ERR_CONNECT_TIMEOUT' ||
+    code === 'UND_ERR_SOCKET' ||
+    code === 'ECONNRESET' ||
+    code === 'ETIMEDOUT'
+  );
+}
+
+async function fetchStrapiUrl(url: string, init: RequestInit): Promise<Response> {
+  const maxAttempts = Number(process.env.STRAPI_FETCH_RETRIES ?? 2) + 1;
+  const timeoutMs = Number(process.env.STRAPI_FETCH_TIMEOUT_MS ?? 45_000);
+
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fetch(url, {
+        ...init,
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+    } catch (error) {
+      lastError = error;
+      if (attempt >= maxAttempts || !isRetriableStrapiFetchError(error)) {
+        throw error;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 400 * attempt));
+    }
+  }
+
+  throw lastError;
+}
+
 async function strapiFetchAttemptWithBase<T>(
   path: string,
   {
@@ -233,9 +272,12 @@ async function strapiFetchAttemptWithBase<T>(
     headers.Authorization = `Bearer ${STRAPI_API_TOKEN}`;
   }
 
-  const response = await fetch(url.toString(), {
+  const revalidateSeconds = revalidate ?? Number(process.env.STRAPI_REVALIDATE_SECONDS ?? 60);
+  const response = await fetchStrapiUrl(url.toString(), {
     headers,
-    next: { revalidate: revalidate ?? Number(process.env.STRAPI_REVALIDATE_SECONDS ?? 60) },
+    ...(process.env.NODE_ENV === 'development'
+      ? { cache: 'no-store' as const }
+      : { next: { revalidate: revalidateSeconds } }),
   });
 
   const rawBody = await response.text();

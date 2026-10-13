@@ -1,10 +1,12 @@
 import type { Locale } from '@/i18n/config';
 import { fetchCollection, fetchSingleType } from '@/lib/strapi/client';
+import { unstable_noStore as noStore } from 'next/cache';
 import type { DivisionChromeData, SoftwareWowHomepageData, StrapiDivisionFooter, StrapiDivisionHeader, StrapiSoftwareWowHero } from '@/lib/strapi/types';
 
 const DEEP_POPULATE = '*';
 
 export async function getSoftwareWowHomepage(locale: Locale): Promise<SoftwareWowHomepageData> {
+  noStore();
   const [
     hero,
     whyChooseUs,
@@ -60,6 +62,7 @@ export async function getDivisionChrome(
   divisionId: string,
   locale: Locale,
 ): Promise<DivisionChromeData | null> {
+  noStore();
   const slug = DIVISION_API_SLUGS[divisionId] ?? divisionId.replace(/([A-Z])/g, (m) => m.toLowerCase());
 
   const [header, footer, hero] = await Promise.all([

@@ -1,3 +1,4 @@
+import { normalizeDivisionHref } from '@/i18n/division-paths';
 import { resolveCaseStudySlug } from '@/lib/case-study/slug';
 import { getStrapiMediaUrl, isAllowedNextImageSrc, type StrapiMedia } from '@/lib/strapi/client';
 import type {
@@ -62,7 +63,7 @@ export function mapStrapiDivisions(divisions: StrapiSuperagencyDivision[]) {
       title: division.name,
       description: division.shortDescription ?? '',
       bgImage: division.featuredImagePath ?? getStrapiMediaUrl(division.featuredImage ?? undefined) ?? '',
-      href: division.ctaLink ?? '/',
+      href: normalizeDivisionHref(division.ctaLink ?? '/'),
     }));
 }
 

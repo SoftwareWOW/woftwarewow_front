@@ -1,0 +1,38 @@
+{
+  "hero": {
+    "headline": "Why work with an agency when you can work with a Superagency?",
+    "lead": "We're the Superagency with the expertise to deliver beyond the limits of a traditional agency.",
+    "description": "Strategy, technology, marketing, and growth expertise brought together to solve bigger business challenges and turn ambitious goals into action.",
+    "ctaPrimary": "Start a conversation",
+    "ctaSecondary": "Explore what we do"
+  },
+  "stats": {
+    "intro": "Trusted by growing businesses across North America.",
+    "stats": [
+      { "value": "300", "label": "Businesses Reached", "suffix": "+", "description": "Through websites, campaigns, software, and growth programs." },
+      { "value": "500", "label": "Projects Delivered", "suffix": "+", "description": "Across marketing, technology, design, and digital transformation." }
+    ]
+  },
+  "divisions": [
+    {
+      "name": "SoftwareWOW",
+      "shortDescription": "Custom software, mobile apps, and digital products built to scale with your business.",
+      "ctaLink": "/software",
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "name": "WOW Marketing",
+      "shortDescription": "Performance-driven campaigns that attract qualified leads and turn attention into revenue.",
+      "ctaLink": "/marketing",
+      "order": 2,
+      "isActive": true
+    }
+  ],
+  "projects": [],
+  "testimonials": [],
+  "faqs": [],
+  "solutionCategories": [],
+  "growthArticles": [],
+  "partnerLogos": []
+}

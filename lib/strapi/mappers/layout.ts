@@ -1,3 +1,4 @@
+import { normalizeDivisionHref } from '@/i18n/division-paths';
 import type { Dictionary } from '@/i18n/types';
 import type {
   StrapiDetailPanel,
@@ -62,7 +63,7 @@ function mapNavItems(
                     id: navItem.itemKey ?? fallbackNavItem.id,
                     label: navItem.label ?? fallbackNavItem.label,
                     type: navItem.type ?? fallbackNavItem.type,
-                    href: navItem.href ?? fallbackNavItem.href,
+                    href: normalizeDivisionHref(navItem.href ?? fallbackNavItem.href),
                     detailPanel: navItem.detailPanelKey ?? fallbackNavItem.detailPanel,
                     ...('description' in fallbackNavItem || navItem.description
                       ? {

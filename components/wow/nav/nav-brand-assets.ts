@@ -2,8 +2,11 @@ import {
   DIVISION_SITE_SLUGS,
   divisionHrefById,
   divisionIdBySlug,
+  type DivisionId,
   type DivisionSiteSlug,
 } from '@/i18n/division-paths'
+
+export type { DivisionId }
 
 /** Brand SVG logos from public/images/logo (Standard = light UI, White = dark UI) */
 
@@ -51,8 +54,6 @@ export const divisionBrandLogos = {
     wowEvents: logoPath('Events White.svg'),
   },
 } as const
-
-export type DivisionId = keyof typeof divisionBrandLogos.light
 
 /** Canonical division routes — domain/name only, no /divisions prefix */
 export const divisionHrefs: Record<DivisionId, string> = divisionHrefById
