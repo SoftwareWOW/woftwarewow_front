@@ -1,5 +1,6 @@
 import DivisionPlaceholderPage from '@/components/wow/divisions/DivisionPlaceholderPage'
 import type { Locale } from '@/i18n/config'
+import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 
@@ -10,14 +11,14 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   return {
-    title: 'WOW Websites | WOW Superagency',
-    description: 'High-performing websites engineered for clarity, conversion, and continuous growth.',
-    alternates: { canonical: `/${locale}/wowwebsites` },
+    title: 'WOW Hub | WOW Superagency',
+    description: 'The connected workspace for clients, partners, and teams across the WOW ecosystem.',
+    alternates: localizedAlternates(locale, '/hub'),
   }
 }
 
-export default async function WowWebsitesPage({ params }: Props) {
+export default async function WowHubPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  return <DivisionPlaceholderPage divisionId="wowWebsites" />
+  return <DivisionPlaceholderPage divisionId="wowHub" />
 }

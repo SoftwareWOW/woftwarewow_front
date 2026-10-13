@@ -23,14 +23,14 @@ const divisions = [
     description:
       'Custom software, mobile apps, and digital products built to scale with your business — not against it.',
     bgImage: `${DIVISION_BG_BASE}/Mockup 2 Dark.png`,
-    href: '/softwarewow',
+    href: '/software',
   },
   {
     id: 2,
     title: 'WOW Marketing',
     description: 'Performance-driven campaigns that attract qualified leads and turn attention into revenue.',
     bgImage: `${DIVISION_BG_BASE}/Image-copy-scaled.jpeg`,
-    href: '/wowmarketing',
+    href: '/marketing',
   },
   {
     id: 3,
@@ -38,14 +38,14 @@ const divisions = [
     description:
       'Brand identity and visual systems that make your business memorable, credible, and impossible to ignore.',
     bgImage: `${DIVISION_BG_BASE}/Design 1.jpg`,
-    href: '/wowdesign',
+    href: '/design',
   },
   {
     id: 4,
     title: 'WOW Intelligence',
     description: 'AI solutions and automation that sharpen decisions, reduce manual work, and accelerate results.',
     bgImage: `${DIVISION_BG_BASE}/Intelligence.jpg`,
-    href: '/wowintelligence',
+    href: '/intelligence',
   },
   {
     id: 5,
@@ -53,14 +53,14 @@ const divisions = [
     description:
       'Social strategy and community building that turns followers into customers and customers into advocates.',
     bgImage: `${DIVISION_BG_BASE}/Events (1).jpg`,
-    href: '/wowsocial',
+    href: '/social',
   },
   {
     id: 6,
     title: 'WOW Accelerate',
     description: 'Growth programs and strategic coaching designed to help your business reach its next level — faster.',
     bgImage: `${DIVISION_BG_BASE}/Accelerate.jpg`,
-    href: '/wowaccelerate',
+    href: '/accelerate',
   },
   {
     id: 7,
@@ -68,28 +68,28 @@ const divisions = [
     description:
       'High-performance websites optimized for speed, search visibility, conversion, and long-term growth.',
     bgImage: `${DIVISION_BG_BASE}/Website 1.jpg`,
-    href: '/wowwebsites',
+    href: '/websites',
   },
   {
     id: 8,
     title: 'WOW Impact',
     description: 'Purpose-led initiatives and community programs that strengthen your brand and expand your reach.',
     bgImage: `${DIVISION_BG_BASE}/Impact.jpg`,
-    href: '/wowimpact',
+    href: '/impact',
   },
   {
     id: 9,
     title: 'WOW Host',
     description: 'Secure, reliable hosting and infrastructure that keeps your business online, fast, and protected.',
     bgImage: `${DIVISION_BG_BASE}/Server.jpg`,
-    href: '/wowhost',
+    href: '/host',
   },
   {
     id: 10,
     title: 'WOW Hub',
     description: 'Your centralized command center for tools, training, collaboration, and seamless team execution.',
     bgImage: `${DIVISION_BG_BASE}/Education.jpg`,
-    href: '/wowhub',
+    href: '/hub',
   },
 ]
 

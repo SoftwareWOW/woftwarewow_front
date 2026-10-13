@@ -92,7 +92,7 @@ const UpcomingEvents = ({
           <RevealWrapper className="max-w-[420px] lg:text-right">
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">{description}</p>
             <div className="mt-6 flex justify-start md:mt-8 lg:justify-end">
-              <ButtonComponent href="/wowevents" variant="secondary">
+              <ButtonComponent href="/events" variant="secondary">
                 View All Events
               </ButtonComponent>
             </div>

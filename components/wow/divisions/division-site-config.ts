@@ -86,8 +86,8 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
       'SoftwareWOW',
       'Custom software, apps, and digital products built to scale with your business.',
       [
-        { id: 'services', label: 'Services', href: '/softwarewow#services' },
-        { id: 'solutions', label: 'Solutions', href: '/softwarewow#solutions' },
+        { id: 'services', label: 'Services', href: '/software#services' },
+        { id: 'solutions', label: 'Solutions', href: '/software#solutions' },
         { id: 'work', label: 'Work', href: '/portfolio' },
         { id: 'company', label: 'Company', href: '/about' },
       ],
@@ -96,12 +96,12 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
           id: 'services',
           title: 'Services',
           links: [
-            { id: 'customSoftware', label: 'Custom Software', href: '/softwarewow/services/custom-software' },
-            { id: 'saasDevelopment', label: 'SaaS Development', href: '/softwarewow/services/saas-development' },
-            { id: 'webApplications', label: 'Web Applications', href: '/softwarewow/services/web-applications' },
-            { id: 'mobileApps', label: 'Mobile Apps', href: '/softwarewow/services/mobile-app-development' },
-            { id: 'aiAutomation', label: 'AI & Automation', href: '/softwarewow/services/ai-automation' },
-            { id: 'modernizationIntegrations', label: 'Modernization & Integrations', href: '/softwarewow/services/modernization-integrations' },
+            { id: 'customSoftware', label: 'Custom Software', href: '/software/services/custom-software' },
+            { id: 'saasDevelopment', label: 'SaaS Development', href: '/software/services/saas-development' },
+            { id: 'webApplications', label: 'Web Applications', href: '/software/services/web-applications' },
+            { id: 'mobileApps', label: 'Mobile Apps', href: '/software/services/mobile-app-development' },
+            { id: 'aiAutomation', label: 'AI & Automation', href: '/software/services/ai-automation' },
+            { id: 'modernizationIntegrations', label: 'Modernization & Integrations', href: '/software/services/modernization-integrations' },
           ],
         },
         {
@@ -110,7 +110,7 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
           links: [
             { id: 'about', label: 'About SoftwareWOW', href: '/about' },
             { id: 'whyUs', label: 'Why Us', href: '/about/why-us' },
-            { id: 'ourProcess', label: 'Our Process', href: '/softwarewow#process' },
+            { id: 'ourProcess', label: 'Our Process', href: '/software#process' },
             { id: 'superagency', label: 'WOW Superagency ↗', href: '/' },
           ],
         },
@@ -134,18 +134,18 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Marketing',
     'Brand, campaigns, and growth systems that help businesses get discovered and chosen.',
     [
-      { id: 'services', label: 'Services', href: '/wowmarketing#services' },
-      { id: 'approach', label: 'Approach', href: '/wowmarketing#approach' },
-      { id: 'work', label: 'Work', href: '/wowmarketing#work' },
+      { id: 'services', label: 'Services', href: '/marketing#services' },
+      { id: 'approach', label: 'Approach', href: '/marketing#approach' },
+      { id: 'work', label: 'Work', href: '/marketing#work' },
     ],
     [
       {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'brand', label: 'Brand Strategy', href: '/wowmarketing#services' },
-          { id: 'campaigns', label: 'Campaigns', href: '/wowmarketing#services' },
-          { id: 'growth', label: 'Growth', href: '/wowmarketing#services' },
+          { id: 'brand', label: 'Brand Strategy', href: '/marketing#services' },
+          { id: 'campaigns', label: 'Campaigns', href: '/marketing#services' },
+          { id: 'growth', label: 'Growth', href: '/marketing#services' },
         ],
       },
       {
@@ -171,18 +171,18 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Design',
     'Product, brand, and experience design that makes digital feel premium and human.',
     [
-      { id: 'services', label: 'Services', href: '/wowdesign#services' },
-      { id: 'process', label: 'Process', href: '/wowdesign#process' },
-      { id: 'work', label: 'Work', href: '/wowdesign#work' },
+      { id: 'services', label: 'Services', href: '/design#services' },
+      { id: 'process', label: 'Process', href: '/design#process' },
+      { id: 'work', label: 'Work', href: '/design#work' },
     ],
     [
       {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'product', label: 'Product Design', href: '/wowdesign#services' },
-          { id: 'brand', label: 'Brand Design', href: '/wowdesign#services' },
-          { id: 'ux', label: 'UX / UI', href: '/wowdesign#services' },
+          { id: 'product', label: 'Product Design', href: '/design#services' },
+          { id: 'brand', label: 'Brand Design', href: '/design#services' },
+          { id: 'ux', label: 'UX / UI', href: '/design#services' },
         ],
       },
       {
@@ -208,18 +208,18 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Intelligence',
     'AI assistants, analytics, and automation that sharpen decisions and reduce manual work.',
     [
-      { id: 'solutions', label: 'Solutions', href: '/wowintelligence#solutions' },
-      { id: 'process', label: 'Process', href: '/wowintelligence#process' },
-      { id: 'clients', label: 'Clients', href: '/wowintelligence#clients' },
+      { id: 'solutions', label: 'Solutions', href: '/intelligence#solutions' },
+      { id: 'process', label: 'Process', href: '/intelligence#process' },
+      { id: 'clients', label: 'Clients', href: '/intelligence#clients' },
     ],
     [
       {
         id: 'solutions',
         title: 'Solutions',
         links: [
-          { id: 'ai', label: 'AI Assistants', href: '/wowintelligence#solutions' },
-          { id: 'automation', label: 'Automation', href: '/wowintelligence#solutions' },
-          { id: 'analytics', label: 'Analytics', href: '/wowintelligence#solutions' },
+          { id: 'ai', label: 'AI Assistants', href: '/intelligence#solutions' },
+          { id: 'automation', label: 'Automation', href: '/intelligence#solutions' },
+          { id: 'analytics', label: 'Analytics', href: '/intelligence#solutions' },
         ],
       },
       {
@@ -246,18 +246,18 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Social',
     'Social strategy, content, and community systems that build presence and engagement.',
     [
-      { id: 'services', label: 'Services', href: '/wowsocial#services' },
-      { id: 'approach', label: 'Approach', href: '/wowsocial#approach' },
-      { id: 'work', label: 'Work', href: '/wowsocial#work' },
+      { id: 'services', label: 'Services', href: '/social#services' },
+      { id: 'approach', label: 'Approach', href: '/social#approach' },
+      { id: 'work', label: 'Work', href: '/social#work' },
     ],
     [
       {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'strategy', label: 'Social Strategy', href: '/wowsocial#services' },
-          { id: 'content', label: 'Content', href: '/wowsocial#services' },
-          { id: 'community', label: 'Community', href: '/wowsocial#services' },
+          { id: 'strategy', label: 'Social Strategy', href: '/social#services' },
+          { id: 'content', label: 'Content', href: '/social#services' },
+          { id: 'community', label: 'Community', href: '/social#services' },
         ],
       },
       {
@@ -283,17 +283,17 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Accelerate',
     'Launch and growth systems that help startups and teams move from idea to market faster.',
     [
-      { id: 'programs', label: 'Programs', href: '/wowaccelerate#programs' },
-      { id: 'process', label: 'Process', href: '/wowaccelerate#process' },
-      { id: 'outcomes', label: 'Outcomes', href: '/wowaccelerate#outcomes' },
+      { id: 'programs', label: 'Programs', href: '/accelerate#programs' },
+      { id: 'process', label: 'Process', href: '/accelerate#process' },
+      { id: 'outcomes', label: 'Outcomes', href: '/accelerate#outcomes' },
     ],
     [
       {
         id: 'programs',
         title: 'Programs',
         links: [
-          { id: 'launch', label: 'Launch', href: '/wowaccelerate#programs' },
-          { id: 'growth', label: 'Growth', href: '/wowaccelerate#programs' },
+          { id: 'launch', label: 'Launch', href: '/accelerate#programs' },
+          { id: 'growth', label: 'Growth', href: '/accelerate#programs' },
         ],
       },
       {
@@ -319,17 +319,17 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Websites',
     'High-performing websites engineered for clarity, conversion, and continuous growth.',
     [
-      { id: 'services', label: 'Services', href: '/wowwebsites#services' },
-      { id: 'process', label: 'Process', href: '/wowwebsites#process' },
-      { id: 'work', label: 'Work', href: '/wowwebsites#work' },
+      { id: 'services', label: 'Services', href: '/websites#services' },
+      { id: 'process', label: 'Process', href: '/websites#process' },
+      { id: 'work', label: 'Work', href: '/websites#work' },
     ],
     [
       {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'build', label: 'Website Build', href: '/wowwebsites#services' },
-          { id: 'growth', label: 'Website Growth', href: '/wowwebsites#services' },
+          { id: 'build', label: 'Website Build', href: '/websites#services' },
+          { id: 'growth', label: 'Website Growth', href: '/websites#services' },
         ],
       },
       {
@@ -355,17 +355,17 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Impact',
     'Purpose-driven digital solutions that help organizations create measurable community impact.',
     [
-      { id: 'programs', label: 'Programs', href: '/wowimpact#programs' },
-      { id: 'approach', label: 'Approach', href: '/wowimpact#approach' },
-      { id: 'stories', label: 'Stories', href: '/wowimpact#stories' },
+      { id: 'programs', label: 'Programs', href: '/impact#programs' },
+      { id: 'approach', label: 'Approach', href: '/impact#approach' },
+      { id: 'stories', label: 'Stories', href: '/impact#stories' },
     ],
     [
       {
         id: 'programs',
         title: 'Programs',
         links: [
-          { id: 'community', label: 'Community', href: '/wowimpact#programs' },
-          { id: 'nonprofit', label: 'Nonprofit', href: '/wowimpact#programs' },
+          { id: 'community', label: 'Community', href: '/impact#programs' },
+          { id: 'nonprofit', label: 'Nonprofit', href: '/impact#programs' },
         ],
       },
       {
@@ -391,17 +391,17 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Host',
     'Reliable hosting, infrastructure, and support for modern digital products and platforms.',
     [
-      { id: 'services', label: 'Services', href: '/wowhost#services' },
-      { id: 'plans', label: 'Plans', href: '/wowhost#plans' },
-      { id: 'support', label: 'Support', href: '/wowhost#support' },
+      { id: 'services', label: 'Services', href: '/host#services' },
+      { id: 'plans', label: 'Plans', href: '/host#plans' },
+      { id: 'support', label: 'Support', href: '/host#support' },
     ],
     [
       {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'hosting', label: 'Hosting', href: '/wowhost#services' },
-          { id: 'infra', label: 'Infrastructure', href: '/wowhost#services' },
+          { id: 'hosting', label: 'Hosting', href: '/host#services' },
+          { id: 'infra', label: 'Infrastructure', href: '/host#services' },
         ],
       },
       {
@@ -427,9 +427,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Hub',
     'The connected workspace for clients, partners, and teams across the WOW ecosystem.',
     [
-      { id: 'features', label: 'Features', href: '/wowhub#features' },
-      { id: 'access', label: 'Access', href: '/wowhub#access' },
-      { id: 'support', label: 'Support', href: '/wowhub#support' },
+      { id: 'features', label: 'Features', href: '/hub#features' },
+      { id: 'access', label: 'Access', href: '/hub#access' },
+      { id: 'support', label: 'Support', href: '/hub#support' },
     ],
     [
       {
@@ -437,7 +437,7 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
         title: 'Product',
         links: [
           { id: 'portal', label: 'Client Portal', href: '/clientportal' },
-          { id: 'features', label: 'Features', href: '/wowhub#features' },
+          { id: 'features', label: 'Features', href: '/hub#features' },
         ],
       },
       {
@@ -463,16 +463,16 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Events',
     'Experiences and events that bring brands, communities, and ideas together.',
     [
-      { id: 'experiences', label: 'Experiences', href: '/wowevents#experiences' },
-      { id: 'services', label: 'Services', href: '/wowevents#services' },
+      { id: 'experiences', label: 'Experiences', href: '/events#experiences' },
+      { id: 'services', label: 'Services', href: '/events#services' },
     ],
     [
       {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'events', label: 'Events', href: '/wowevents#services' },
-          { id: 'experiences', label: 'Experiences', href: '/wowevents#experiences' },
+          { id: 'events', label: 'Events', href: '/events#services' },
+          { id: 'experiences', label: 'Experiences', href: '/events#experiences' },
         ],
       },
       {

@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
+import { getDivisionRedirects, getDivisionRewrites } from './i18n/division-redirects-config'
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
@@ -44,6 +45,12 @@ function getStrapiImageRemotePatterns(): NonNullable<NextConfig['images']>['remo
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: getStrapiImageRemotePatterns(),
+  },
+  async redirects() {
+    return getDivisionRedirects()
+  },
+  async rewrites() {
+    return getDivisionRewrites()
   },
 }
 

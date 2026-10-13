@@ -4,6 +4,7 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiDivisions, mapStrapiPartnerLogos } from '@/lib/strapi/mappers/superagency'
+import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import MarketingApproachGrid from './_components/MarketingApproachGrid'
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: 'WOW Marketing | WOW Superagency',
     description:
       'Data-driven marketing, SEO, paid ads, and automation that help small businesses attract customers and grow revenue.',
-    alternates: { canonical: `/${locale}/wowmarketing` },
+    alternates: localizedAlternates(locale, '/marketing'),
   }
 }
 

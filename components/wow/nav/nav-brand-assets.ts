@@ -1,3 +1,10 @@
+import {
+  DIVISION_SITE_SLUGS,
+  divisionHrefById,
+  divisionIdBySlug,
+  type DivisionSiteSlug,
+} from '@/i18n/division-paths'
+
 /** Brand SVG logos from public/images/logo (Standard = light UI, White = dark UI) */
 
 const logoBase = '/images/logo'
@@ -48,19 +55,7 @@ export const divisionBrandLogos = {
 export type DivisionId = keyof typeof divisionBrandLogos.light
 
 /** Canonical division routes — domain/name only, no /divisions prefix */
-export const divisionHrefs: Record<DivisionId, string> = {
-  softwareWow: '/softwarewow',
-  wowMarketing: '/wowmarketing',
-  wowDesign: '/wowdesign',
-  wowIntelligence: '/wowintelligence',
-  wowSocial: '/wowsocial',
-  wowAccelerate: '/wowaccelerate',
-  wowWebsites: '/wowwebsites',
-  wowImpact: '/wowimpact',
-  wowHost: '/wowhost',
-  wowHub: '/wowhub',
-  wowEvents: '/wowevents',
-}
+export const divisionHrefs: Record<DivisionId, string> = divisionHrefById
 
 const divisionHrefSet = new Set(Object.values(divisionHrefs))
 
@@ -106,34 +101,7 @@ export const divisionProfilePictures = {
 
 export const divisionIds = new Set(Object.keys(divisionBrandLogos.light))
 
-/** Slugs used by DevisionOverview (excludes Events). */
-export const DIVISION_SITE_SLUGS = [
-  'softwarewow',
-  'wowmarketing',
-  'wowdesign',
-  'wowintelligence',
-  'wowsocial',
-  'wowaccelerate',
-  'wowwebsites',
-  'wowimpact',
-  'wowhost',
-  'wowhub',
-] as const
-
-export type DivisionSiteSlug = (typeof DIVISION_SITE_SLUGS)[number]
-
-export const divisionIdBySlug: Record<DivisionSiteSlug, DivisionId> = {
-  softwarewow: 'softwareWow',
-  wowmarketing: 'wowMarketing',
-  wowdesign: 'wowDesign',
-  wowintelligence: 'wowIntelligence',
-  wowsocial: 'wowSocial',
-  wowaccelerate: 'wowAccelerate',
-  wowwebsites: 'wowWebsites',
-  wowimpact: 'wowImpact',
-  wowhost: 'wowHost',
-  wowhub: 'wowHub',
-}
+export { DIVISION_SITE_SLUGS, divisionIdBySlug, type DivisionSiteSlug }
 
 export function getDivisionSlugFromPathname(pathname: string): DivisionSiteSlug | null {
   const segments = pathname.split('/').filter(Boolean)

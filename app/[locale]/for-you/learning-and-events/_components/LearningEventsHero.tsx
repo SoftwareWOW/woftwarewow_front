@@ -106,12 +106,12 @@ const LearningEventsHero = ({
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/wowhub" variant="primary">
+              <ButtonComponent href="/hub" variant="primary">
                 Explore Learning
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/wowevents" variant="secondary">
+              <ButtonComponent href="/events" variant="secondary">
                 View Events
               </ButtonComponent>
             </ButtonComponentList>

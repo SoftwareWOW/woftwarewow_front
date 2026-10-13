@@ -3,24 +3,21 @@ import Marquee from '@/components/wow/LandascapComponets/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import SocialHero from '@/components/wow/wowsocial/SocialHero'
 import type { Locale } from '@/i18n/config'
-import type { Metadata } from 'next'
+import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params
-
-  return {
-    title: 'WOW Social | Social Media Strategy & Community Growth',
-    description:
-      'Create social strategies, ads, and influencer campaigns that convert engagement into sales.',
-    alternates: {
-      canonical: `/${locale}/wowsocial`,
-    },
-  }
+  return divisionPageMetadata(
+    locale,
+    '/social',
+    'WOW Social | Social Media Strategy & Community Growth',
+    'Create social strategies, ads, and influencer campaigns that convert engagement into sales.',
+  )
 }
 
 export default async function WowSocialPage({ params }: Props) {

@@ -7,23 +7,20 @@ import IntelligenceProcess from '@/components/wow/wowintelligence/IntelligencePr
 import OrderProcess from '@/components/wow/wowintelligence/OrderProcess'
 import IntelligenceRfq from '@/components/wow/wowintelligence/IntelligenceRfq'
 import type { Locale } from '@/i18n/config'
-import type { Metadata } from 'next'
+import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params
-
-  return {
-    title: 'WOW Intelligence | AI Solutions & Automation',
-    description:
-      'AI assistants, predictive analytics, and workflow automation that sharpen decisions, reduce manual work, and accelerate results.',
-    alternates: {
-      canonical: `/${locale}/wowintelligence`,
-    },
-  }
+  return divisionPageMetadata(
+    locale,
+    '/intelligence',
+    'WOW Intelligence | AI Solutions & Automation',
+    'AI assistants, predictive analytics, and workflow automation that sharpen decisions, reduce manual work, and accelerate results.',
+  )
 }
 
 export default async function WowIntelligencePage({ params }: Props) {

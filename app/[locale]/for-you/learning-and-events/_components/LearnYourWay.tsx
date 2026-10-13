@@ -64,7 +64,7 @@ const DEFAULT_PLANS: Plan[] = [
       'Access practical resources and learning designed around the challenges growing businesses face.',
     features: ['Courses & Training', 'Resources & Toolkits', 'Coaching & Development'],
     ctaText: 'Explore WOW Hub',
-    ctaHref: '/wowhub',
+    ctaHref: '/hub',
     ctaVariant: 'white',
   },
   {
@@ -76,7 +76,7 @@ const DEFAULT_PLANS: Plan[] = [
       'Join workshops, webinars, conferences and networking experiences built around useful ideas and meaningful connections.',
     features: ['Workshops & Webinars', 'Conferences & Experiences', 'Networking & Community'],
     ctaText: 'Explore Events',
-    ctaHref: '/wowevents',
+    ctaHref: '/events',
     ctaVariant: 'primary',
     isFeatured: pricingBg,
   },

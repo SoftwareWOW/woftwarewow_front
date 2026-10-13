@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
     },
     alternates: {
-      canonical: `/${locale}/softwarewow/services/ai-automation`,
+      canonical: `/${locale}/software/services/ai-automation`,
     },
   }
 }

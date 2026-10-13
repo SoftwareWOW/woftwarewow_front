@@ -876,77 +876,77 @@
                   "id": "softwareWow",
                   "label": "SoftwareWOW!",
                   "type": "division",
-                  "href": "/softwarewow",
+                  "href": "/software",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowMarketing",
                   "label": "WOW Marketing",
                   "type": "division",
-                  "href": "/wowmarketing",
+                  "href": "/marketing",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowDesign",
                   "label": "WOW Design",
                   "type": "division",
-                  "href": "/wowdesign",
+                  "href": "/design",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowIntelligence",
                   "label": "WOW Intelligence",
                   "type": "division",
-                  "href": "/wowintelligence",
+                  "href": "/intelligence",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowSocial",
                   "label": "WOW Social",
                   "type": "division",
-                  "href": "/wowsocial",
+                  "href": "/social",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowAccelerate",
                   "label": "WOW Accelerate",
                   "type": "division",
-                  "href": "/wowaccelerate",
+                  "href": "/accelerate",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowWebsites",
                   "label": "WOW Websites",
                   "type": "division",
-                  "href": "/wowwebsites",
+                  "href": "/websites",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowImpact",
                   "label": "WOW Impact",
                   "type": "division",
-                  "href": "/wowimpact",
+                  "href": "/impact",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowHost",
                   "label": "WOW Host",
                   "type": "division",
-                  "href": "/wowhost",
+                  "href": "/host",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowHub",
                   "label": "WOW Hub",
                   "type": "division",
-                  "href": "/wowhub",
+                  "href": "/hub",
                   "detailPanel": "default"
                 },
                 {
                   "id": "wowEvents",
                   "label": "WOW Events",
                   "type": "division",
-                  "href": "/wowevents",
+                  "href": "/events",
                   "detailPanel": "default"
                 }
               ]
@@ -1017,67 +1017,67 @@
                   "id": "softwareWow",
                   "label": "SoftwareWOW!",
                   "type": "division",
-                  "href": "/softwarewow"
+                  "href": "/software"
                 },
                 {
                   "id": "wowMarketing",
                   "label": "WOW Marketing",
                   "type": "division",
-                  "href": "/wowmarketing"
+                  "href": "/marketing"
                 },
                 {
                   "id": "wowDesign",
                   "label": "WOW Design",
                   "type": "division",
-                  "href": "/wowdesign"
+                  "href": "/design"
                 },
                 {
                   "id": "wowIntelligence",
                   "label": "WOW Intelligence",
                   "type": "division",
-                  "href": "/wowintelligence"
+                  "href": "/intelligence"
                 },
                 {
                   "id": "wowSocial",
                   "label": "WOW Social",
                   "type": "division",
-                  "href": "/wowsocial"
+                  "href": "/social"
                 },
                 {
                   "id": "wowAccelerate",
                   "label": "WOW Accelerate",
                   "type": "division",
-                  "href": "/wowaccelerate"
+                  "href": "/accelerate"
                 },
                 {
                   "id": "wowWebsites",
                   "label": "WOW Websites",
                   "type": "division",
-                  "href": "/wowwebsites"
+                  "href": "/websites"
                 },
                 {
                   "id": "wowImpact",
                   "label": "WOW Impact",
                   "type": "division",
-                  "href": "/wowimpact"
+                  "href": "/impact"
                 },
                 {
                   "id": "wowHost",
                   "label": "WOW Host",
                   "type": "division",
-                  "href": "/wowhost"
+                  "href": "/host"
                 },
                 {
                   "id": "wowHub",
                   "label": "WOW Hub",
                   "type": "division",
-                  "href": "/wowhub"
+                  "href": "/hub"
                 },
                 {
                   "id": "wowEvents",
                   "label": "WOW Events",
                   "type": "division",
-                  "href": "/wowevents"
+                  "href": "/events"
                 }
               ]
             },

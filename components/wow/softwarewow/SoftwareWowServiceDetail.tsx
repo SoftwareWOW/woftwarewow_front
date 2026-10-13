@@ -41,7 +41,7 @@ export default function SoftwareWowServiceDetail({ service }: SoftwareWowService
               <ButtonComponent href="/contact" variant="primary">
                 Start a Project
               </ButtonComponent>
-              <ButtonComponent href="/softwarewow#services" variant="secondary">
+              <ButtonComponent href="/software#services" variant="secondary">
                 All Services
               </ButtonComponent>
             </ButtonComponentList>
@@ -106,7 +106,7 @@ export default function SoftwareWowServiceDetail({ service }: SoftwareWowService
             {otherServices.map((item) => (
               <RevealWrapper key={item.slug}>
                 <Link
-                  href={`/softwarewow/services/${item.slug}`}
+                  href={`/software/services/${item.slug}`}
                   className="group flex h-full flex-col gap-2 border border-black/10 bg-backgroundBody p-5 transition-colors hover:border-black/25 dark:border-white/10 dark:bg-dark dark:hover:border-white/25 md:p-6"
                 >
                   <p className="text-lg font-medium text-secondary group-hover:underline dark:text-backgroundBody">

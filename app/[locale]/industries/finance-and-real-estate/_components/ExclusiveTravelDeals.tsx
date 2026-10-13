@@ -24,7 +24,7 @@ const teams: {
     heading: 'Digital Experiences',
     description: 'Professional websites built around credibility, usability, and conversion.',
     image: '/images/wow/Hero/devision/Website%201.jpg',
-    href: '/wowwebsites',
+    href: '/websites',
   },
   {
     title: (
@@ -36,7 +36,7 @@ const teams: {
     heading: 'Visibility & Acquisition',
     description: 'SEO, advertising, CRM, content, campaigns, and lead generation.',
     image: '/images/wow/Hero/devision/Image-copy-scaled.jpeg',
-    href: '/wowmarketing',
+    href: '/marketing',
   },
   {
     title: (
@@ -48,7 +48,7 @@ const teams: {
     heading: 'Sales & Revenue',
     description: 'CRM, funnels, lead management, follow-up, and revenue systems.',
     image: '/images/wow/Hero/devision/Accelerate.jpg',
-    href: '/wowaccelerate',
+    href: '/accelerate',
   },
   {
     title: (
@@ -60,7 +60,7 @@ const teams: {
     heading: 'AI & Automation',
     description: 'Automate workflows, communication, business processes, and insights.',
     image: '/images/wow/Hero/devision/Intelligence.jpg',
-    href: '/wowintelligence',
+    href: '/intelligence',
   },
   {
     title: (
@@ -72,7 +72,7 @@ const teams: {
     heading: 'Brand & Creative',
     description: 'Identity, marketing materials, presentations, and visual communication.',
     image: '/images/wow/Hero/devision/Design%201.jpg',
-    href: '/wowdesign',
+    href: '/design',
   },
   {
     title: (
@@ -84,7 +84,7 @@ const teams: {
     heading: 'Custom Technology',
     description: 'Platforms, portals, integrations, applications, and internal systems.',
     image: '/images/wow/Hero/devision/Mockup%202%20Dark.png',
-    href: '/softwarewow',
+    href: '/software',
   },
 ]
 

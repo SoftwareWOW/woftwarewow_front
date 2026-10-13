@@ -39,7 +39,7 @@ function buildRedirectionUrl(origin: string | null | undefined, locale: Locale):
 
   if (!base) return null
 
-  return `${base}/${locale}/wowhub`
+  return `${base}/${locale}/hub`
 }
 
 function getNewsletterConfig(): BrevoConfig | null {

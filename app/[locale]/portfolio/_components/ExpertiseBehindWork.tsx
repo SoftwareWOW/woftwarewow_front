@@ -18,7 +18,7 @@ const divisions: {
 }[] = [
   {
     id: '01',
-    href: '/softwarewow',
+    href: '/software',
     title: (
       <>
         Software<WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW!</WowText>
@@ -29,7 +29,7 @@ const divisions: {
   },
   {
     id: '02',
-    href: '/wowmarketing',
+    href: '/marketing',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}
@@ -41,7 +41,7 @@ const divisions: {
   },
   {
     id: '03',
-    href: '/wowdesign',
+    href: '/design',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}
@@ -53,7 +53,7 @@ const divisions: {
   },
   {
     id: '04',
-    href: '/wowwebsites',
+    href: '/websites',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}
@@ -65,7 +65,7 @@ const divisions: {
   },
   {
     id: '05',
-    href: '/wowsocial',
+    href: '/social',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}
@@ -77,7 +77,7 @@ const divisions: {
   },
   {
     id: '06',
-    href: '/wowintelligence',
+    href: '/intelligence',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}
@@ -89,7 +89,7 @@ const divisions: {
   },
   {
     id: '07',
-    href: '/wowaccelerate',
+    href: '/accelerate',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}
@@ -101,7 +101,7 @@ const divisions: {
   },
   {
     id: '08',
-    href: '/wowhost',
+    href: '/host',
     title: (
       <>
         <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>{' '}

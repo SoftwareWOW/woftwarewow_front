@@ -62,7 +62,7 @@ const LearningTopics = ({
 
       <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-14">
         <ButtonComponentList>
-          <ButtonComponent href="/wowhub" variant="primary">
+          <ButtonComponent href="/hub" variant="primary">
             Browse All Learning
           </ButtonComponent>
         </ButtonComponentList>

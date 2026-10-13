@@ -2,37 +2,37 @@ export const capabilityCards = [
   {
     title: 'Software & SaaS',
     description: 'Custom software, platforms, web apps, mobile apps, and integrations.',
-    href: '/softwarewow',
+    href: '/software',
     image: '/images/wow/nav/cards/software%26technology.png',
   },
   {
     title: 'Websites',
     description: 'Strategy, UX/UI, development, eCommerce, and ongoing improvement.',
-    href: '/wowwebsites',
+    href: '/websites',
     image: '/images/wow/nav/cards/Website.png',
   },
   {
     title: 'Brand & Design',
     description: 'Brand identity, graphic design, digital creative, and visual systems.',
-    href: '/wowdesign',
+    href: '/design',
     image: '/images/wow/nav/cards/Design.png',
   },
   {
     title: 'Marketing & Growth',
     description: 'SEO, paid media, campaigns, content, email, and growth strategy.',
-    href: '/wowmarketing',
+    href: '/marketing',
     image: '/images/wow/nav/cards/Marketing.png',
   },
   {
     title: 'AI & Automation',
     description: 'AI assistants, workflow automation, integrations, and business intelligence.',
-    href: '/wowintelligence',
+    href: '/intelligence',
     image: '/images/wow/nav/cards/Intelligent.png',
   },
   {
     title: 'Hosting & Infrastructure',
     description: 'Hosting, cloud, domains, email, deployment, and technical support.',
-    href: '/wowhost',
+    href: '/host',
     image: '/images/wow/nav/cards/Host.png',
   },
 ] as const

@@ -171,7 +171,7 @@ export function ConnectPanel() {
         <div className="hidden h-12 w-px bg-[#1515151A] dark:bg-[#EDF0F51A] lg:block 2xl:h-16" />
 
         <Link
-          href="/wowhub"
+          href="/hub"
           target="_blank"
           rel="noopener noreferrer"
           className="text-center font-outfit text-[clamp(1.35rem,3.2vw,2rem)] leading-none 2xl:text-[clamp(1.75rem,4vw,2.75rem)]"

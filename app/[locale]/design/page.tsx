@@ -1,19 +1,20 @@
 import DivisionPlaceholderPage from '@/components/wow/divisions/DivisionPlaceholderPage'
 import type { Locale } from '@/i18n/config'
-import type { Metadata } from 'next'
+import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 
 type Props = {
   params: Promise<{ locale: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params
-  return {
-    title: 'WOW Design | WOW Superagency',
-    description: 'Product, brand, and experience design that makes digital feel premium and human.',
-    alternates: { canonical: `/${locale}/wowdesign` },
-  }
+  return divisionPageMetadata(
+    locale,
+    '/design',
+    'WOW Design | WOW Superagency',
+    'Product, brand, and experience design that makes digital feel premium and human.',
+  )
 }
 
 export default async function WowDesignPage({ params }: Props) {

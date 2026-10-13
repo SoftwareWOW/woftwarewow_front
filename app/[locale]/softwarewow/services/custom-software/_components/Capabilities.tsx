@@ -25,13 +25,13 @@ const topRow: Capability[] = [
     title: 'Web Applications',
     description: 'Custom browser-based systems and platforms.',
     icon: <DrivenCopywritingIcon />,
-    href: '/softwarewow/services/web-applications',
+    href: '/software/services/web-applications',
   },
   {
     title: 'Mobile Applications',
     description: 'Connected mobile experiences for customers and teams.',
     icon: <BrandMessagingIcon />,
-    href: '/softwarewow/services/mobile-app-development',
+    href: '/software/services/mobile-app-development',
   },
   {
     title: 'APIs & Integrations',
@@ -58,7 +58,7 @@ const bottomRow: Capability[] = [
     title: 'AI Integration',
     description: 'Add intelligent features where they create practical value.',
     icon: <DigitalContentIcon />,
-    href: '/softwarewow/services/ai-automation',
+    href: '/software/services/ai-automation',
   },
 ]
 

@@ -8,7 +8,7 @@ import SoftwareWoWIndustry from '@/components/wow/softwarewow/SoftwareWoWIndustr
 import WhyChoiceUs from '@/components/wow/softwarewow/WhyChoiceUs'
 import WoWProces from '@/components/wow/softwarewow/WoWProces'
 import type { Locale } from '@/i18n/config'
-import type { Metadata } from 'next'
+import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import { setRequestLocale } from 'next-intl/server'
 import SoftwareWoWProjects from '@/components/wow/softwarewow/SoftwareWoWProjects'
 import Technologies from '@/components/wow/softwarewow/Technologies'
@@ -19,16 +19,14 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params
 
   return {
     title: 'SoftwareWOW! | Custom Software, Apps & Digital Products',
     description:
       'Custom software, mobile apps, and digital products built to scale with your business — not against it.',
-    alternates: {
-      canonical: `/${locale}/softwarewow`,
-    },
+    alternates: localizedAlternates(locale, '/software'),
   }
 }
 

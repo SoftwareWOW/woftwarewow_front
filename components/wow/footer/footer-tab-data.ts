@@ -25,7 +25,7 @@ export const resourceColumns = [
   {
     title: 'Learn',
     links: [
-      { label: 'Resources', href: '/wowhub', iconId: 'educationTraining' },
+      { label: 'Resources', href: '/hub', iconId: 'educationTraining' },
       { label: 'Guides', href: '/about/strategy-centre', iconId: 'caseStudies' },
       { label: 'FAQs', href: '/faq', iconId: 'helpSupport' },
       { label: 'Think Tank', href: '/thinktank', iconId: 'thinkTank' },
@@ -46,17 +46,17 @@ export const resourceColumns = [
 }>
 
 export const exploreDivisions = [
-  { title: 'SoftwareWOW!', subtitle: 'Software, SaaS & apps', href: '/softwarewow', divisionId: 'softwareWow', iconId: 'softwareTechnology' },
-  { title: 'WOW Marketing', subtitle: 'Marketing, SEO & PPC', href: '/wowmarketing', divisionId: 'wowMarketing', iconId: 'marketingGrowth' },
-  { title: 'WOW Social', subtitle: 'Social media & community', href: '/wowsocial', divisionId: 'wowSocial', iconId: 'socialCommunity' },
-  { title: 'WOW Accelerate', subtitle: 'Sales & revenue growth', href: '/wowaccelerate', divisionId: 'wowAccelerate', iconId: 'salesRevenue' },
-  { title: 'WOW Intelligence', subtitle: 'AI & automation', href: '/wowintelligence', divisionId: 'wowIntelligence', iconId: 'aiAutomation' },
-  { title: 'WOW Design', subtitle: 'Branding & creative', href: '/wowdesign', divisionId: 'wowDesign', iconId: 'brandingCreative' },
-  { title: 'WOW Websites', subtitle: 'Websites & eCommerce', href: '/wowwebsites', divisionId: 'wowWebsites', iconId: 'retailEcommerce' },
-  { title: 'WOW Impact', subtitle: 'Personal brand & reputation', href: '/wowimpact', divisionId: 'wowImpact', iconId: 'brandAuthorityPackage' },
-  { title: 'WOW Host', subtitle: 'Hosting & infrastructure', href: '/wowhost', divisionId: 'wowHost', iconId: 'hostingInfrastructure' },
-  { title: 'WOW Hub', subtitle: 'Learning & community', href: '/wowhub', divisionId: 'wowHub', iconId: 'learningEvents' },
-  { title: 'WOW Events', subtitle: 'Events & experiences', href: '/wowevents', divisionId: 'wowEvents', iconId: 'recentWorks' },
+  { title: 'SoftwareWOW!', subtitle: 'Software, SaaS & apps', href: '/software', divisionId: 'softwareWow', iconId: 'softwareTechnology' },
+  { title: 'WOW Marketing', subtitle: 'Marketing, SEO & PPC', href: '/marketing', divisionId: 'wowMarketing', iconId: 'marketingGrowth' },
+  { title: 'WOW Social', subtitle: 'Social media & community', href: '/social', divisionId: 'wowSocial', iconId: 'socialCommunity' },
+  { title: 'WOW Accelerate', subtitle: 'Sales & revenue growth', href: '/accelerate', divisionId: 'wowAccelerate', iconId: 'salesRevenue' },
+  { title: 'WOW Intelligence', subtitle: 'AI & automation', href: '/intelligence', divisionId: 'wowIntelligence', iconId: 'aiAutomation' },
+  { title: 'WOW Design', subtitle: 'Branding & creative', href: '/design', divisionId: 'wowDesign', iconId: 'brandingCreative' },
+  { title: 'WOW Websites', subtitle: 'Websites & eCommerce', href: '/websites', divisionId: 'wowWebsites', iconId: 'retailEcommerce' },
+  { title: 'WOW Impact', subtitle: 'Personal brand & reputation', href: '/impact', divisionId: 'wowImpact', iconId: 'brandAuthorityPackage' },
+  { title: 'WOW Host', subtitle: 'Hosting & infrastructure', href: '/host', divisionId: 'wowHost', iconId: 'hostingInfrastructure' },
+  { title: 'WOW Hub', subtitle: 'Learning & community', href: '/hub', divisionId: 'wowHub', iconId: 'learningEvents' },
+  { title: 'WOW Events', subtitle: 'Events & experiences', href: '/events', divisionId: 'wowEvents', iconId: 'recentWorks' },
 ] as const satisfies ReadonlyArray<{
   title: string
   subtitle: string
@@ -66,15 +66,15 @@ export const exploreDivisions = [
 }>
 
 export const serviceCards = [
-  { title: 'Websites & eCommerce', description: 'Sites, landing pages & online stores.', href: '/wowwebsites', iconId: 'retailEcommerce' },
-  { title: 'Marketing & SEO', description: 'SEO, PPC, content & campaigns.', href: '/wowmarketing', iconId: 'marketingGrowth' },
-  { title: 'Software & Apps', description: 'Custom software, SaaS & mobile apps.', href: '/softwarewow', iconId: 'softwareTechnology' },
-  { title: 'AI & Automation', description: 'AI assistants, chatbots & workflows.', href: '/wowintelligence', iconId: 'aiAutomation' },
-  { title: 'Sales & Growth', description: 'Lead generation, funnels & CRM.', href: '/wowaccelerate', iconId: 'salesRevenue' },
-  { title: 'Branding & Design', description: 'Brand identity, UX/UI & creative.', href: '/wowdesign', iconId: 'brandingCreative' },
-  { title: 'Social Media', description: 'Content, paid social & influencers.', href: '/wowsocial', iconId: 'socialCommunity' },
-  { title: 'Hosting & Cloud', description: 'Domains, hosting & infrastructure.', href: '/wowhost', iconId: 'hostingInfrastructure' },
-  { title: 'Training & Events', description: 'Education, resources & experiences.', href: '/wowhub', iconId: 'learningEvents' },
+  { title: 'Websites & eCommerce', description: 'Sites, landing pages & online stores.', href: '/websites', iconId: 'retailEcommerce' },
+  { title: 'Marketing & SEO', description: 'SEO, PPC, content & campaigns.', href: '/marketing', iconId: 'marketingGrowth' },
+  { title: 'Software & Apps', description: 'Custom software, SaaS & mobile apps.', href: '/software', iconId: 'softwareTechnology' },
+  { title: 'AI & Automation', description: 'AI assistants, chatbots & workflows.', href: '/intelligence', iconId: 'aiAutomation' },
+  { title: 'Sales & Growth', description: 'Lead generation, funnels & CRM.', href: '/accelerate', iconId: 'salesRevenue' },
+  { title: 'Branding & Design', description: 'Brand identity, UX/UI & creative.', href: '/design', iconId: 'brandingCreative' },
+  { title: 'Social Media', description: 'Content, paid social & influencers.', href: '/social', iconId: 'socialCommunity' },
+  { title: 'Hosting & Cloud', description: 'Domains, hosting & infrastructure.', href: '/host', iconId: 'hostingInfrastructure' },
+  { title: 'Training & Events', description: 'Education, resources & experiences.', href: '/hub', iconId: 'learningEvents' },
 ] as const satisfies ReadonlyArray<{
   title: string
   description: string
