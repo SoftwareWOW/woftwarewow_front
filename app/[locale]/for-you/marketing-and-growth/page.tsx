@@ -10,7 +10,6 @@ const DEFAULT_HERO = {
   description: 'Attract more customers, convert more opportunities, and grow smarter.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -28,13 +27,13 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const EverythingToGrow = dynamic(() => import('./_components/EverythingToGrow'))
-const ConnectedGrowthSystem = dynamic(() => import('./_components/ConnectedGrowthSystem'))
-const BuiltAroundGoals = dynamic(() => import('./_components/BuiltAroundGoals'))
-const SpecialistTeams = dynamic(() => import('./_components/SpecialistTeams'))
-const GrowthInAction = dynamic(() => import('./_components/GrowthInAction'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import EverythingToGrow from './_components/EverythingToGrow'
+import ConnectedGrowthSystem from './_components/ConnectedGrowthSystem'
+import BuiltAroundGoals from './_components/BuiltAroundGoals'
+import SpecialistTeams from './_components/SpecialistTeams'
+import GrowthInAction from './_components/GrowthInAction'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

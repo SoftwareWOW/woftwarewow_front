@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Build social strategies, content, and campaigns that grow visibility, engagement, and business outcomes.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -28,12 +27,12 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const SocialCapabilities = dynamic(() => import('./_components/SocialCapabilities'))
-const PlatformPresence = dynamic(() => import('./_components/PlatformPresence'))
-const BuildCommunity = dynamic(() => import('./_components/BuildCommunity'))
-const SocialGallery = dynamic(() => import('./_components/SocialGallery'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import SocialCapabilities from './_components/SocialCapabilities'
+import PlatformPresence from './_components/PlatformPresence'
+import BuildCommunity from './_components/BuildCommunity'
+import SocialGallery from './_components/SocialGallery'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

@@ -10,7 +10,6 @@ const DEFAULT_HERO = {
     'Build better shopping experiences, reach more customers, and connect the technology, marketing, and systems behind sustainable eCommerce growth.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -23,15 +22,15 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const RetailGrowthPillars = dynamic(() => import('./_components/RetailGrowthPillars'))
-const CommerceSolutions = dynamic(() => import('./_components/CommerceSolutions'))
-const ClientJourney = dynamic(() => import('./_components/ClientJourney'))
-const SocialGallery = dynamic(() => import('./_components/SocialGallery'))
-const CommerceJourneyPath = dynamic(() => import('./_components/CommerceJourneyPath'))
-const DevisionOverview = dynamic(() => import('@/components/wow/LandascapComponets/DevisionOverview'))
-const RecommendedSolutions = dynamic(() => import('./_components/RecommendedSolutions'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import RetailGrowthPillars from './_components/RetailGrowthPillars'
+import CommerceSolutions from './_components/CommerceSolutions'
+import ClientJourney from './_components/ClientJourney'
+import SocialGallery from './_components/SocialGallery'
+import CommerceJourneyPath from './_components/CommerceJourneyPath'
+import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
+import RecommendedSolutions from './_components/RecommendedSolutions'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

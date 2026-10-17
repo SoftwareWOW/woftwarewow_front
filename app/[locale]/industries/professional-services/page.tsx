@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Build a stronger presence, attract better clients, and create smarter systems around the expertise your business already has.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -22,12 +21,12 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const ProfessionalServiceSolutions = dynamic(() => import('./_components/ProfessionalServiceSolutions'))
-const ClientJourney = dynamic(() => import('./_components/ClientJourney'))
-const ConnectedExpertise = dynamic(() => import('./_components/ConnectedExpertise'))
-const RecommendedSolutions = dynamic(() => import('./_components/RecommendedSolutions'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import ProfessionalServiceSolutions from './_components/ProfessionalServiceSolutions'
+import ClientJourney from './_components/ClientJourney'
+import ConnectedExpertise from './_components/ConnectedExpertise'
+import RecommendedSolutions from './_components/RecommendedSolutions'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

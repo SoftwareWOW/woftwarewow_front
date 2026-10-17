@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -7,9 +6,9 @@ import QuotationForm from './_components/QuotationForm'
 import QuotationHero from './_components/QuotationHero'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const HowItWorks = dynamic(() => import('./_components/HowItWorks'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import HowItWorks from './_components/HowItWorks'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

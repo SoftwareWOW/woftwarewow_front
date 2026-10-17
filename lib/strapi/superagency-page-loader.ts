@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { cache } from 'react';
 import { getSuperagencyPage } from '@/lib/strapi/fetchers/pages';
 import { getSuperagencyTeamMembers } from '@/lib/strapi/fetchers/team-members';
+import { mergeLocalizedPageMedia } from '@/lib/strapi/merge-localized-page-media';
 import {
   mapHeroAboutSection,
   mapImageGallery,
@@ -123,7 +124,16 @@ export const loadSuperagencyPage = cache(async function loadSuperagencyPage(
     getSuperagencyPage(slug, locale),
     getSuperagencyTeamMembers(locale),
   ]);
-  const raw = normalizeSuperagencyPageRaw(fetched);
+  let raw = normalizeSuperagencyPageRaw(fetched);
+
+  // fr-CA (and any non-default locale) often has translated text but empty media.
+  // Keep localized copy and fill missing images from en-US.
+  if (raw && locale !== 'en-US') {
+    const fallbackRaw = normalizeSuperagencyPageRaw(await getSuperagencyPage(slug, 'en-US'));
+    if (fallbackRaw) {
+      raw = mergeLocalizedPageMedia(raw, fallbackRaw);
+    }
+  }
 
   if (process.env.NODE_ENV === 'development') {
     const populatedFields =

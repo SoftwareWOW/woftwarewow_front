@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Build custom software, apps, SaaS, modernization, and automation designed around your business.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -27,11 +26,11 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const BuiltForTheFit = dynamic(() => import('./_components/BuiltForTheFit'))
-const TechLaunchPath = dynamic(() => import('./_components/TechLaunchPath'))
-const OurApproach = dynamic(() => import('./_components/OurApproach'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import BuiltForTheFit from './_components/BuiltForTheFit'
+import TechLaunchPath from './_components/TechLaunchPath'
+import OurApproach from './_components/OurApproach'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

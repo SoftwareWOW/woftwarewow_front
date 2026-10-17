@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -13,12 +12,12 @@ import OnePartner from './_components/OnePartner'
 import WhyUsHero from './_components/WhyUsHero'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const WhatMakesUsDifferent = dynamic(() => import('./_components/WhatMakesUsDifferent'))
-const SuperagencyAdvantage = dynamic(() => import('./_components/SuperagencyAdvantage'))
-const BuiltAroundBusiness = dynamic(() => import('./_components/BuiltAroundBusiness'))
-const StrategyToResults = dynamic(() => import('./_components/StrategyToResults'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import WhatMakesUsDifferent from './_components/WhatMakesUsDifferent'
+import SuperagencyAdvantage from './_components/SuperagencyAdvantage'
+import BuiltAroundBusiness from './_components/BuiltAroundBusiness'
+import StrategyToResults from './_components/StrategyToResults'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

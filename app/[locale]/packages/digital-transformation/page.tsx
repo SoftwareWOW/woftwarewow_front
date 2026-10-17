@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Modernize how your business works — connected systems, automation and a clearer digital setup.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -28,12 +27,12 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const TransformationPlan = dynamic(() => import('./_components/TransformationPlan'))
-const BeforeAfterGap = dynamic(() => import('./_components/BeforeAfterGap'))
-const TransformationPriorities = dynamic(() => import('./_components/TransformationPriorities'))
-const ModernizationPath = dynamic(() => import('./_components/ModernizationPath'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import TransformationPlan from './_components/TransformationPlan'
+import BeforeAfterGap from './_components/BeforeAfterGap'
+import TransformationPriorities from './_components/TransformationPriorities'
+import ModernizationPath from './_components/ModernizationPath'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

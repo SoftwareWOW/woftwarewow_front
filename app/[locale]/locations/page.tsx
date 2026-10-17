@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'locations' as const
@@ -21,9 +20,9 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const LocationsPresence = dynamic(() => import('./_components/LocationsPresence'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import LocationsPresence from './_components/LocationsPresence'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -7,10 +6,10 @@ import AffiliateHero from './_components/AffiliateHero'
 import PartnerPaths from './_components/PartnerPaths'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const AffiliateJourney = dynamic(() => import('./_components/AffiliateJourney'))
-const AffiliateBenefits = dynamic(() => import('./_components/AffiliateBenefits'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import AffiliateJourney from './_components/AffiliateJourney'
+import AffiliateBenefits from './_components/AffiliateBenefits'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

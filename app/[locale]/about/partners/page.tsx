@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -13,12 +12,12 @@ import PartnersHero from './_components/PartnersHero'
 // 4. Why We Partner — Home-23 WhyChooseUsV7
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const PartnerCategories = dynamic(() => import('./_components/PartnerCategories'))
-const WhyWePartner = dynamic(() => import('./_components/WhyWePartner'))
-const WaysToPartner = dynamic(() => import('./_components/WaysToPartner'))
-const MutualGrowth = dynamic(() => import('./_components/MutualGrowth'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import PartnerCategories from './_components/PartnerCategories'
+import WhyWePartner from './_components/WhyWePartner'
+import WaysToPartner from './_components/WaysToPartner'
+import MutualGrowth from './_components/MutualGrowth'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

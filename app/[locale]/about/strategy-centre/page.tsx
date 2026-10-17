@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 // 8. Build Your Growth Strategy — WOW WowGrowthCta
 import type { Locale } from '@/i18n/config'
@@ -16,13 +15,13 @@ import StrategyHero from './_components/StrategyHero'
 import WowGrowthFramework from './_components/WowGrowthFramework'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const StrategicExpertise = dynamic(() => import('./_components/StrategicExpertise'))
-const HowWeBuildStrategy = dynamic(() => import('./_components/HowWeBuildStrategy'))
-const BuiltAroundYourBusiness = dynamic(() => import('./_components/BuiltAroundYourBusiness'))
-const GrowthStrategies = dynamic(() => import('@/components/wow/LandascapComponets/GrowthStrategies'))
-const StrategyInAction = dynamic(() => import('./_components/StrategyInAction'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import StrategicExpertise from './_components/StrategicExpertise'
+import HowWeBuildStrategy from './_components/HowWeBuildStrategy'
+import BuiltAroundYourBusiness from './_components/BuiltAroundYourBusiness'
+import GrowthStrategies from '@/components/wow/LandascapComponets/GrowthStrategies'
+import StrategyInAction from './_components/StrategyInAction'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

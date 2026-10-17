@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'We help finance and real estate businesses strengthen their presence, attract better opportunities, and build smarter systems for sustainable growth.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -22,15 +21,15 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const ExperiencePillars = dynamic(() => import('./_components/ExperiencePillars'))
-const SocialGallery = dynamic(() => import('./_components/SocialGallery'))
-const GuestSolutions = dynamic(() => import('./_components/GuestSolutions'))
-const ClientJourney = dynamic(() => import('./_components/ClientJourney'))
-const LeadToCustomer = dynamic(() => import('./_components/LeadToCustomer'))
-const ExclusiveTravelDeals = dynamic(() => import('./_components/ExclusiveTravelDeals'))
-const TravelBlogs = dynamic(() => import('./_components/TravelBlogs'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import ExperiencePillars from './_components/ExperiencePillars'
+import SocialGallery from './_components/SocialGallery'
+import GuestSolutions from './_components/GuestSolutions'
+import ClientJourney from './_components/ClientJourney'
+import LeadToCustomer from './_components/LeadToCustomer'
+import ExclusiveTravelDeals from './_components/ExclusiveTravelDeals'
+import TravelBlogs from './_components/TravelBlogs'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

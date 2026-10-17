@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import CompanyGallery from '@/components/careerpage/CompanyGallery'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Metadata } from 'next'
@@ -21,11 +20,11 @@ import {
 import { setRequestLocale } from 'next-intl/server'
 
 
-const Jobs = dynamic(() => import('./_components/Jobs'))
-const Communities = dynamic(() => import('./_components/Comunities'))
-const CareerRfq = dynamic(() => import('./_components/CareerRfq'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import Jobs from './_components/Jobs'
+import Communities from './_components/Comunities'
+import CareerRfq from './_components/CareerRfq'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 const PAGE_SLUG = 'career' as const
 
 export const revalidate = 60

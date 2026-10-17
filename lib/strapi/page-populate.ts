@@ -74,8 +74,10 @@ const PAGE_TECHNOLOGIES_POPULATE = {
 
 /** Explicit populate for /meet — hero, seo, FAQ items. */
 export const MEET_PAGE_POPULATE = {
-  hero: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
   seo: { populate: '*' },
+  whyMeetWithUs: { populate: PAGE_TECHNOLOGIES_POPULATE },
+  meetingInformation: { populate: PAGE_TECHNOLOGIES_POPULATE },
   meetFaq: { populate: FAQ_SECTION_POPULATE },
 };
 
@@ -136,11 +138,12 @@ const PAGE_PROJECTS_SECTION_POPULATE = {
 
 /** Explicit populate for /portfolio — featured + explore projects, impact steps. */
 export const PORTFOLIO_PAGE_POPULATE = {
-  hero: { populate: '*' },
+  hero: { populate: HERO_IMAGES_POPULATE },
   seo: { populate: '*' },
   featuredWork: { populate: PAGE_PROJECTS_SECTION_POPULATE },
   exploreWork: { populate: PAGE_PROJECTS_SECTION_POPULATE },
   howWeCreateImpact: { populate: PAGE_PROCESS_POPULATE },
+  expertiseBehindWork: { populate: PAGE_TECHNOLOGIES_POPULATE },
 };
 
 /** Explicit populate for /portfolio/recent — hero, seo, optional explore section. */
@@ -250,6 +253,7 @@ export const BUILD_AND_LAUNCH_PAGE_POPULATE = {
       groups: true,
     },
   },
+  launchPath: { populate: PAGE_PROCESS_POPULATE },
   packageImage: {
     populate: {
       images: { populate: { image: true } },

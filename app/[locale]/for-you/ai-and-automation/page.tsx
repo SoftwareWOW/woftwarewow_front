@@ -10,7 +10,6 @@ const DEFAULT_HERO = {
     'Automate repetitive work, improve customer experiences and give your team smarter tools with practical AI solutions built around how your business actually operates.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 import type { Locale } from '@/i18n/config'
@@ -28,13 +27,13 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const AiGallery = dynamic(() => import('./_components/AiGallery'))
-const AiCapabilities = dynamic(() => import('./_components/AiCapabilities'))
-const AutomationInAction = dynamic(() => import('./_components/AutomationInAction'))
-const Marquee = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
-const AiWithPurpose = dynamic(() => import('./_components/AiWithPurpose'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import AiGallery from './_components/AiGallery'
+import AiCapabilities from './_components/AiCapabilities'
+import AutomationInAction from './_components/AutomationInAction'
+import Marquee from '@/components/wow/LandascapComponets/Marquee'
+import AiWithPurpose from './_components/AiWithPurpose'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from './_components/PageHero'
 import HeroAbout from '@/components/homepage-07/HeroAbout'
@@ -18,13 +17,13 @@ import type {
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 
-const SkewMarquee = dynamic(() => import('@/components/shared/SkewMarquee'))
-const TechStack = dynamic(() => import('./_components/TechStack'))
-const Team = dynamic(() => import('@/components/aboutpage/Team'))
-const Marquee = dynamic(() => import('@/components/wow/shared/Marquee'))
-const SolutionToChallenges = dynamic(() => import('@/components/wow/LandascapComponets/SolutionToChallench'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import SkewMarquee from '@/components/shared/SkewMarquee'
+import TechStack from './_components/TechStack'
+import Team from '@/components/aboutpage/Team'
+import Marquee from '@/components/wow/shared/Marquee'
+import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 const PAGE_SLUG = 'about' as const
 
 export const revalidate = 60

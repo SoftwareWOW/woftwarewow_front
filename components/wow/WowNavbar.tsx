@@ -12,7 +12,6 @@ import {
 } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { useTheme } from 'next-themes'
-import dynamic from 'next/dynamic'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/utils/cn'
@@ -20,18 +19,10 @@ import LanguageSwitcher from './LanguageSwitcher'
 import { navbarSuperagencyLogoClass } from './nav/nav-brand-assets'
 import { WowSuperagencyLogo } from './nav/WowSuperagencyLogo'
 import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-styles'
+import WowMegaMenuPanel from './nav/WowMegaMenuPanel'
 import WowMobileBottomNav from './nav/WowMobileBottomNav'
+import WowMobileMenuSheet from './nav/WowMobileMenuSheet'
 import { mobileNavInsetClass } from './nav/mobile-nav-shell'
-
-const WowMegaMenuPanel = dynamic(() => import('./nav/WowMegaMenuPanel'), {
-  ssr: false,
-  loading: () => null,
-})
-
-const WowMobileMenuSheet = dynamic(() => import('./nav/WowMobileMenuSheet'), {
-  ssr: false,
-  loading: () => null,
-})
 
 const actionBtnClass =
   'group flex shrink-0 items-center justify-center rounded-radius-sm bg-primary p-4 text-white transition-all duration-300 ease-out hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 size-[52px] md:size-[56px] lg:size-[65px] xl:size-[79px] md:p-4 lg:p-5'
@@ -437,15 +428,13 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
         />
       </motion.div>
 
-      {mobileMenuId ? (
-        <WowMobileMenuSheet
-          item={mobileItem}
-          navbar={navbar}
-          onClose={() => {
-            setMobileMenuId(null)
-          }}
-        />
-      ) : null}
+      <WowMobileMenuSheet
+        item={mobileItem}
+        navbar={navbar}
+        onClose={() => {
+          setMobileMenuId(null)
+        }}
+      />
 
       <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />
     </>

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'portfolio-recent' as const
@@ -20,8 +19,8 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const RecentWorkCta = dynamic(() => import('./_components/RecentWorkCta'))
 
+import RecentWorkCta from './_components/RecentWorkCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import BlogHero, { type BlogHeroPost } from '@/app/[locale]/blog/_components/BlogHero'
 
 import type { Locale } from '@/i18n/config'
@@ -12,10 +11,10 @@ import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import BlogInsight from './_components/BlogInsight'
 
-const Marquess = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
-const BlogCaseStudies = dynamic(() => import('./_components/BlogCaseStudies'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import Marquess from '@/components/wow/LandascapComponets/Marquee'
+import BlogCaseStudies from './_components/BlogCaseStudies'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 export const revalidate = 60
 
 export interface BlogType {

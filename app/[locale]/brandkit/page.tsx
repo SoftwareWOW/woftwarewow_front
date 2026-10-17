@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -8,11 +7,11 @@ import BrandKitLogos from './_components/BrandKitLogo'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
-const BrandSystem = dynamic(() => import('./_components/BrandSystem'))
-const BrandVisualStyle = dynamic(() => import('./_components/BrandVisualStyle'))
-const BrandUsageGuidelines = dynamic(() => import('./_components/BrandUsageGuidelines'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import BrandSystem from './_components/BrandSystem'
+import BrandVisualStyle from './_components/BrandVisualStyle'
+import BrandUsageGuidelines from './_components/BrandUsageGuidelines'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

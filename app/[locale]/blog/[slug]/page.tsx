@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import {
@@ -14,8 +13,8 @@ import BlogDetailsContent from '../_components/BlogDetailsContent'
 import BlogDetailsHero from '../_components/BlogDetailsHero'
 
 
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 export const revalidate = 60
 export const dynamicParams = true
 

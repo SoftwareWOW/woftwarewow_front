@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import { getThinkTankCalComUrl } from '@/lib/calcom/config'
 import type { Locale } from '@/i18n/config'
@@ -8,12 +7,12 @@ import ThinkTankHero from './_components/ThinkTankHero'
 import WhyThinkTank from './_components/WhyThinkTank'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const ThinkTankSessionInfo = dynamic(() => import('./_components/ThinkTankSessionInfo'))
-const ThinkTankBooking = dynamic(() => import('./_components/ThinkTankBooking'))
-const BeforeWeMeet = dynamic(() => import('./_components/BeforeWeMeet'))
-const ThinkTankFaq = dynamic(() => import('./_components/ThinkTankFaq'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import ThinkTankSessionInfo from './_components/ThinkTankSessionInfo'
+import ThinkTankBooking from './_components/ThinkTankBooking'
+import BeforeWeMeet from './_components/BeforeWeMeet'
+import ThinkTankFaq from './_components/ThinkTankFaq'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

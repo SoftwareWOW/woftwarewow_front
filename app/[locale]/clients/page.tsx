@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'clients' as const
@@ -20,9 +19,9 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const ClientStories = dynamic(() => import('./_components/ClientStories'))
-const ClientsCta = dynamic(() => import('./_components/ClientsCta'))
 
+import ClientStories from './_components/ClientStories'
+import ClientsCta from './_components/ClientsCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

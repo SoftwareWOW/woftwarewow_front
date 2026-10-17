@@ -861,6 +861,17 @@ export function inferCmsTypeFromSectionValue(
   if ('avatars' in section || 'teamImage' in section) return 'page-career-community';
   if ('jobs' in section) return 'page-career-jobs';
   if ('steps' in section) return 'page-process';
+  if ('groups' in section) return 'page-rfq-accordion';
+
+  if (Array.isArray(section.items) && section.items[0] && typeof section.items[0] === 'object') {
+    const firstItem = section.items[0] as Record<string, unknown>;
+    if ('question' in firstItem || 'answer' in firstItem) return 'page-faq';
+  }
+
+  if ('services' in section || ('items' in section && 'image' in section)) {
+    return 'page-technologies';
+  }
+  if ('items' in section) return 'page-technologies';
 
   return null;
 }
@@ -1220,10 +1231,6 @@ function fieldsFromRegistry(
   identifier: string,
   sections: Array<{ sectionKey: string; cms: CmsSectionType }>,
 ): PageField[] {
-  if (FIELD_OVERRIDES[identifier]) {
-    return FIELD_OVERRIDES[identifier]!;
-  }
-
   const fields: PageField[] = [];
 
   for (const section of sections) {
@@ -1236,7 +1243,17 @@ function fieldsFromRegistry(
     });
   }
 
-  return fields;
+  const overrides = FIELD_OVERRIDES[identifier];
+  if (!overrides?.length) {
+    return fields;
+  }
+
+  // Merge overrides on top of registry-derived fields (do not replace the whole list).
+  const byName = new Map(fields.map((field) => [field.name, field]));
+  for (const override of overrides) {
+    byName.set(override.name, override);
+  }
+  return Array.from(byName.values());
 }
 
 export const SUPERAGENCY_PAGE_MANIFESTS: SuperagencyPageManifest[] =

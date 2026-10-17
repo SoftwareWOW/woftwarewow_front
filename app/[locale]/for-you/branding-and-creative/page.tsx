@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Identity, design, and creative systems that make your business unmistakable across every touchpoint.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -28,12 +27,12 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const BrandCapabilities = dynamic(() => import('./_components/BrandCapabilities'))
-const BuiltToBeUsed = dynamic(() => import('./_components/BuiltToBeUsed'))
-const OurTools = dynamic(() => import('./_components/OurTools'))
-const BrandVisibility = dynamic(() => import('./_components/BrandVisibility'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import BrandCapabilities from './_components/BrandCapabilities'
+import BuiltToBeUsed from './_components/BuiltToBeUsed'
+import OurTools from './_components/OurTools'
+import BrandVisibility from './_components/BrandVisibility'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

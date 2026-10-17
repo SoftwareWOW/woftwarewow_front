@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -27,11 +26,11 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const WhatsIncluded = dynamic(() => import('./_components/WhatsIncluded'))
-const LaunchJourney = dynamic(() => import('./_components/LaunchJourney'))
-const SpecialistTeams = dynamic(() => import('./_components/SpecialistTeams'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import WhatsIncluded from './_components/WhatsIncluded'
+import LaunchJourney from './_components/LaunchJourney'
+import SpecialistTeams from './_components/SpecialistTeams'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

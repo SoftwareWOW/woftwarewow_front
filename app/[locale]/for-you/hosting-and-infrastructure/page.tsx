@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Hosting, domains, security, and cloud infrastructure that keep your business online, protected, and ready to scale.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -27,12 +26,12 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const InfrastructureSolutions = dynamic(() => import('./_components/InfrastructureSolutions'))
-const BuiltForBusiness = dynamic(() => import('./_components/BuiltForBusiness'))
-const Marquee = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
-const HostingThatFits = dynamic(() => import('./_components/HostingThatFits'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import InfrastructureSolutions from './_components/InfrastructureSolutions'
+import BuiltForBusiness from './_components/BuiltForBusiness'
+import Marquee from '@/components/wow/LandascapComponets/Marquee'
+import HostingThatFits from './_components/HostingThatFits'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

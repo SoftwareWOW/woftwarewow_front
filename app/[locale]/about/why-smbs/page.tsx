@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -14,13 +13,13 @@ import SmbGallery from './_components/SmbGallery'
 import WhySmbsHero from './_components/WhySmbsHero'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
-const TheReality = dynamic(() => import('./_components/TheReality'))
-const TheGap = dynamic(() => import('./_components/TheGap'))
-const ElevateSmb = dynamic(() => import('./_components/ElevateSmb'))
-const WhySuperagency = dynamic(() => import('./_components/WhySuperagency'))
-const BuiltToGrow = dynamic(() => import('./_components/BuiltToGrow'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import TheReality from './_components/TheReality'
+import TheGap from './_components/TheGap'
+import ElevateSmb from './_components/ElevateSmb'
+import WhySuperagency from './_components/WhySuperagency'
+import BuiltToGrow from './_components/BuiltToGrow'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

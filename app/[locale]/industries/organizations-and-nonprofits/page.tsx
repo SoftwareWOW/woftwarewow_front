@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'We help organizations strengthen their presence, reach more people, simplify operations, and build the digital systems behind lasting impact.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -22,14 +21,14 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const MissionJourney = dynamic(() => import('./_components/MissionJourney'))
-const OurPortfolio = dynamic(() => import('./_components/OurPortfolio'))
-const MissionSolutions = dynamic(() => import('./_components/MissionSolutions'))
-const ImpactJourney = dynamic(() => import('./_components/ImpactJourney'))
-const ConnectedExpertise = dynamic(() => import('./_components/ConnectedExpertise'))
-const RecommendedSolutions = dynamic(() => import('./_components/RecommendedSolutions'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import MissionJourney from './_components/MissionJourney'
+import OurPortfolio from './_components/OurPortfolio'
+import MissionSolutions from './_components/MissionSolutions'
+import ImpactJourney from './_components/ImpactJourney'
+import ConnectedExpertise from './_components/ConnectedExpertise'
+import RecommendedSolutions from './_components/RecommendedSolutions'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

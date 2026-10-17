@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import { getCalComUrl } from '@/lib/calcom/config'
 import type { Locale } from '@/i18n/config'
@@ -13,11 +12,11 @@ import MeetHero from './_components/MeetHero'
 import WhyMeetWithUs from './_components/WhyMeetWithUs'
 
 
-const MeetingInformation = dynamic(() => import('./_components/MeetingInformation'))
-const CalComSection = dynamic(() => import('./_components/CalComSection'))
-const MeetFaq = dynamic(() => import('./_components/MeetFaq'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import MeetingInformation from './_components/MeetingInformation'
+import CalComSection from './_components/CalComSection'
+import MeetFaq from './_components/MeetFaq'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 const PAGE_SLUG = 'meet' as const
 
 export const revalidate = 60

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import Marquee from '@/components/wow/LandascapComponets/Marquee'
 import SocialHero from '@/components/wow/wowsocial/SocialHero'
@@ -7,8 +6,8 @@ import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 
 
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Less manual work. More time for what matters — practical AI automation for growing businesses.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionary'
@@ -34,13 +33,13 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const AiPackageCard = dynamic(() => import('./_components/AiPackageCard'))
-const AutomationTools = dynamic(() => import('./_components/AutomationTools'))
-const WowSuperAgencyClient = dynamic(() => import('@/components/wow/sections/WowSuperAgencyClient'))
-const FromIdeaToAutomation = dynamic(() => import('./_components/FromIdeaToAutomation'))
-const AutomationFaq = dynamic(() => import('./_components/AutomationFaq'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import AiPackageCard from './_components/AiPackageCard'
+import AutomationTools from './_components/AutomationTools'
+import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
+import FromIdeaToAutomation from './_components/FromIdeaToAutomation'
+import AutomationFaq from './_components/AutomationFaq'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

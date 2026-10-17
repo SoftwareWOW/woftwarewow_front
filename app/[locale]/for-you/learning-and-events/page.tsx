@@ -11,7 +11,6 @@ const DEFAULT_HERO = {
     'Training, workshops, webinars, and event experiences that help teams and audiences learn, connect, and grow.',
 }
 
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -22,11 +21,11 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const LearningTopics = dynamic(() => import('./_components/LearningTopics'))
-const UpcomingEvents = dynamic(() => import('./_components/UpcomingEvents'))
-const EventUpdatesCta = dynamic(() => import('./_components/EventUpdatesCta'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import LearningTopics from './_components/LearningTopics'
+import UpcomingEvents from './_components/UpcomingEvents'
+import EventUpdatesCta from './_components/EventUpdatesCta'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'partners' as const
@@ -21,10 +20,10 @@ import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections 
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 
 
-const HowWePartner = dynamic(() => import('./_components/HowWePartner'))
-const WhyPartnerWithWow = dynamic(() => import('./_components/WhyPartnerWithWow'))
-const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
+import HowWePartner from './_components/HowWePartner'
+import WhyPartnerWithWow from './_components/WhyPartnerWithWow'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }
