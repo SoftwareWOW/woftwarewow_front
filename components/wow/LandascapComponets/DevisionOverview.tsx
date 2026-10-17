@@ -284,7 +284,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
 
         <div
           ref={contentRef}
-          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-end gap-4 px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
+          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-stretch gap-4 px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
           aria-label="WOW Superagency divisions"
           onPointerMove={handleCardPointerMove}
           onPointerLeave={handleCardPointerLeave}
@@ -298,7 +298,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative block w-[min(88vw,calc(100vw-2.5rem))] max-w-[440px] shrink-0 rounded-radius-sm border-t-2 transition-transform duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px] ${
+                className={`group relative flex w-[min(88vw,calc(100vw-2.5rem))] max-w-[440px] shrink-0 rounded-radius-sm border-t-2 transition-transform duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b7cff] focus-visible:ring-offset-2 sm:w-[380px] md:w-[420px] lg:w-[460px] xl:w-[600px] ${
                   isActive ? 'z-10 scale-[1.02] border-white' : 'z-0 scale-100 border-transparent'
                 }`}
                 onFocus={() => setHoveredId(item.id)}
@@ -309,7 +309,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
-                  className={`relative flex min-h-[260px] flex-col overflow-hidden rounded-radius-sm p-6 transition-colors duration-500 sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
+                  className={`relative flex h-full min-h-[260px] w-full flex-col overflow-hidden rounded-radius-sm p-6 transition-colors duration-500 sm:min-h-[280px] sm:p-7 md:min-h-[300px] md:p-8 lg:min-h-[320px] lg:p-9 xl:min-h-[340px] ${
                     isActive
                       ? 'bg-white dark:bg-[#121212]'
                       : 'bg-white/80 dark:bg-[#121212]/90'
@@ -324,7 +324,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
                   </p>
 
                   <div
-                    className={`flex justify-end transition-all duration-300 ${
+                    className={`mt-auto flex justify-end transition-all duration-300 ${
                       isActive
                         ? 'scale-100 opacity-100'
                         : 'pointer-events-none scale-90 opacity-0'
