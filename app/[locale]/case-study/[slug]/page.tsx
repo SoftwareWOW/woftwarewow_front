@@ -6,7 +6,12 @@ import { getDictionary } from '@/i18n/dictionary'
 import { normalizeCaseStudyData } from '@/lib/case-study/normalizeCaseStudyData'
 import type { CaseStudyItem } from '@/lib/case-study/types'
 import { getCaseStudySlugs } from '@/lib/strapi/fetchers/case-study'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { loadCaseStudyBySlug } from '@/lib/strapi/load-case-study'
+import {
+  mapStrapiTestimonialExtras,
+  mapStrapiTestimonials,
+} from '@/lib/strapi/mappers/superagency'
 import getMarkDownContent from '@/utils/GetMarkDownContent'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import type { Metadata } from 'next'
@@ -76,12 +81,21 @@ const CaseStudyDetailsPage = async ({ params }: PageProps) => {
 
   const typedLocale = locale as Locale
   const dictionary = await getDictionary(typedLocale)
-  const cms = await loadCaseStudyBySlug(slug, typedLocale)
+  const [cms, homepageCms] = await Promise.all([
+    loadCaseStudyBySlug(slug, typedLocale),
+    getSuperagencyHomepage(typedLocale),
+  ])
   const study = cms?.study ?? loadMarkdownCaseStudy(slug)
 
   if (!study) {
     notFound()
   }
+
+  const superAgencyClient = mapStrapiTestimonials(
+    homepageCms.testimonials,
+    dictionary.superAgencyClient,
+  )
+  const testimonialExtras = mapStrapiTestimonialExtras(homepageCms.testimonials)
 
   return (
     <LayoutOne>
@@ -111,7 +125,19 @@ const CaseStudyDetailsPage = async ({ params }: PageProps) => {
           highlights={study.highlights}
         />
         <CaseStudySuccessMetrics metrics={study.successMetrics} />
-        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        <WowSuperAgencyClient
+          superAgencyClient={superAgencyClient}
+          clientImages={
+            Object.keys(testimonialExtras.clientImages).length
+              ? testimonialExtras.clientImages
+              : undefined
+          }
+          reviewCaseStudies={
+            Object.keys(testimonialExtras.reviewCaseStudies).length
+              ? testimonialExtras.reviewCaseStudies
+              : undefined
+          }
+        />
         <div className="mb-3">
           <WowGrowthCta
             accentText="Ready to"

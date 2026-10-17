@@ -2,19 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import type { CaseStudyHighlight, CaseStudyTestimonial } from '@/lib/case-study/types'
 import { cn } from '@/utils/cn'
-import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { caseStudySectionClass, caseStudySectionInnerClass } from './caseStudySectionSpacing'
-
-interface WorkType {
-  slug: string
-  content: string
-  [key: string]: unknown
-}
-
-const caseStudies: WorkType[] = getMarkDownData('data/marketing/project').reverse()
 
 type CaseStudyHighlightsProps = {
   testimonial?: CaseStudyTestimonial
@@ -49,23 +40,20 @@ function HighlightLink({
 
 const CaseStudyHighlights = ({ testimonial, highlights }: CaseStudyHighlightsProps) => {
   const items =
-    highlights?.length ?
-      highlights.map((item, index) => ({
+    highlights
+      ?.filter((item) => Boolean(item.image?.trim()))
+      .map((item, index) => ({
         key: `${item.image}-${index}`,
         image: item.image,
         alt: item.alt ?? 'Project highlight',
         href: item.href,
         quote: item.quote ?? testimonial?.quote,
         author: item.author ?? testimonial?.author,
-      }))
-    : caseStudies.map((item) => ({
-        key: item.slug,
-        image: item.image as string,
-        alt: (item.title as string) ?? 'Project highlight',
-        href: `/marketing/project/${item.slug}`,
-        quote: testimonial?.quote,
-        author: testimonial?.author,
-      }))
+      })) ?? []
+
+  if (!items.length) {
+    return null
+  }
 
   return (
     <section className={caseStudySectionClass}>
