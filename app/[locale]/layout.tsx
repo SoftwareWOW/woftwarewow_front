@@ -2,7 +2,6 @@ import CursorPointer from '@/components/animation/CursorPointer'
 import SmoothScrollProvider from '@/components/shared/SmoothScroll'
 import WowLayout from '@/components/wow/WowLayout'
 import { isRtlLocale, type Locale } from '@/i18n/config'
-import { getDictionary } from '@/i18n/dictionary'
 import { routing } from '@/i18n/routing'
 import { outfit, seasons } from '@/utils/fonts'
 import { ThemeModeProvider } from '@/utils/Providers'
@@ -10,7 +9,7 @@ import type { Metadata } from 'next'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import '../../scss/main.scss'
 
 type Props = {
@@ -43,22 +42,19 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const messages = await getMessages()
   const typedLocale = locale as Locale
-  const dictionary = await getDictionary(typedLocale)
   const dir = isRtlLocale(typedLocale) ? 'rtl' : 'ltr'
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body className={`${outfit.variable} ${seasons.variable} antialiased`}>
-        <Suspense fallback={<div>{dictionary.common.loading}</div>}>
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <SmoothScrollProvider>
-              <ThemeModeProvider>
-                <CursorPointer />
-                <WowLayout>{children}</WowLayout>
-              </ThemeModeProvider>
-            </SmoothScrollProvider>
-          </NextIntlClientProvider>
-        </Suspense>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <SmoothScrollProvider>
+            <ThemeModeProvider>
+              <CursorPointer />
+              <WowLayout>{children}</WowLayout>
+            </ThemeModeProvider>
+          </SmoothScrollProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

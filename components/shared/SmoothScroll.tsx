@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ReactLenis, useLenis } from 'lenis/react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { ReactNode, useEffect, useRef } from 'react'
+import { ReactNode, Suspense, useEffect, useRef } from 'react'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -14,17 +14,24 @@ interface SmoothScrollingProps {
   children: ReactNode
 }
 
-function LenisScrollEffects({ children }: Readonly<{ children: ReactNode }>) {
+/** Isolated so useSearchParams does not suspend the whole app shell. */
+function LenisRouteReset() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const lenis = useLenis()
   const lenisRef = useRef(lenis)
-
   lenisRef.current = lenis
 
   useEffect(() => {
     lenisRef.current?.scrollTo(0, { immediate: true })
   }, [pathname, searchParams])
+
+  return null
+}
+
+function LenisScrollEffects({ children }: Readonly<{ children: ReactNode }>) {
+  const pathname = usePathname()
+  const lenis = useLenis()
 
   useEffect(() => {
     if (!lenis) return
@@ -97,7 +104,14 @@ function LenisScrollEffects({ children }: Readonly<{ children: ReactNode }>) {
     }
   }, [lenis])
 
-  return children
+  return (
+    <>
+      <Suspense fallback={null}>
+        <LenisRouteReset />
+      </Suspense>
+      {children}
+    </>
+  )
 }
 
 const SmoothScrollProvider = ({ children }: Readonly<SmoothScrollingProps>) => {
