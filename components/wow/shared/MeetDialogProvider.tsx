@@ -2,12 +2,17 @@
 
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import CalComUnavailable from '@/components/wow/meet/CalComUnavailable'
-import MeetBookingWizard from '@/components/wow/meet/MeetBookingWizard'
 import { getCalComUrl } from '@/lib/calcom/config'
 import { cn } from '@/lib/utils'
 import { useLenis } from 'lenis/react'
 import { X } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import { createContext, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
+
+const MeetBookingWizard = dynamic(() => import('@/components/wow/meet/MeetBookingWizard'), {
+  ssr: false,
+  loading: () => null,
+})
 
 type MeetDialogContextValue = {
   open: () => void
@@ -101,7 +106,7 @@ export function MeetDialogProvider({ children }: { children: ReactNode }) {
             className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-5 pt-2 sm:px-6 sm:pb-6 sm:pt-3 md:px-8 [-webkit-overflow-scrolling:touch]"
           >
             <DialogTitle className="sr-only">Book a Strategy Session</DialogTitle>
-            {calLink ? <MeetBookingWizard calLink={calLink} /> : <CalComUnavailable />}
+            {open ? (calLink ? <MeetBookingWizard calLink={calLink} /> : <CalComUnavailable />) : null}
           </div>
         </DialogContent>
       </Dialog>

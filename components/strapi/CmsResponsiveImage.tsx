@@ -29,6 +29,7 @@ export default function CmsResponsiveImage({
   width,
   height,
   fill,
+  priority,
   ...rest
 }: CmsResponsiveImageProps) {
   const src = image?.src ?? fallbackSrc;
@@ -45,11 +46,21 @@ export default function CmsResponsiveImage({
   const canUseNextImage =
     isLocalAssetSrc(src) || isAllowedNextImageSrc(src) || Boolean(loader);
 
+  const nativeLoading = priority ? 'eager' : 'lazy';
+  const nativeFetchPriority = priority ? 'high' : undefined;
+
   if (!canUseNextImage) {
     if (fill) {
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={resolvedAlt} className={rest.className} />
+        <img
+          src={src}
+          alt={resolvedAlt}
+          className={rest.className}
+          loading={nativeLoading}
+          decoding="async"
+          {...(nativeFetchPriority ? { fetchPriority: nativeFetchPriority } : {})}
+        />
       );
     }
     return (
@@ -60,6 +71,9 @@ export default function CmsResponsiveImage({
         width={resolvedWidth}
         height={resolvedHeight}
         className={rest.className}
+        loading={nativeLoading}
+        decoding="async"
+        {...(nativeFetchPriority ? { fetchPriority: nativeFetchPriority } : {})}
       />
     );
   }
@@ -72,6 +86,7 @@ export default function CmsResponsiveImage({
         fill
         sizes={sizes}
         loader={loader}
+        priority={priority}
         {...rest}
       />
     );
@@ -80,7 +95,14 @@ export default function CmsResponsiveImage({
   if (!resolvedWidth || !resolvedHeight) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={resolvedAlt} className={rest.className} />
+      <img
+        src={src}
+        alt={resolvedAlt}
+        className={rest.className}
+        loading={nativeLoading}
+        decoding="async"
+        {...(nativeFetchPriority ? { fetchPriority: nativeFetchPriority } : {})}
+      />
     );
   }
 
@@ -92,6 +114,7 @@ export default function CmsResponsiveImage({
       height={resolvedHeight}
       sizes={sizes}
       loader={loader}
+      priority={priority}
       {...rest}
     />
   );

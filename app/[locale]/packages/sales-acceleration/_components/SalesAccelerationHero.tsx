@@ -68,7 +68,8 @@ const SalesAccelerationHero = ({
                 width={image0.width ?? 512}
                 height={image0.height ?? 640}
                 className="h-auto w-full rounded-radius-sm object-cover"
-              />
+              priority
+            />
             </RevealWrapper>
           ) : null}
         </div>

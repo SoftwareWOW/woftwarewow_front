@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'partners' as const
@@ -11,16 +12,18 @@ const DEFAULT_HERO = {
   description: 'We collaborate with trusted technology, platform, and industry partners to create stronger solutions for growing businesses.',
 }
 
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import HowWePartner from './_components/HowWePartner'
 import PartnerNetwork from './_components/PartnerNetwork'
 import PartnersHero from './_components/PartnersHero'
-import WhyPartnerWithWow from './_components/WhyPartnerWithWow'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const HowWePartner = dynamic(() => import('./_components/HowWePartner'))
+const WhyPartnerWithWow = dynamic(() => import('./_components/WhyPartnerWithWow'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

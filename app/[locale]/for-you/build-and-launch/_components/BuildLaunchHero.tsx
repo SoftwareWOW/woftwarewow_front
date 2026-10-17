@@ -81,6 +81,7 @@ const BuildLaunchHero = ({
               width={image0.width ?? 480}
               height={image0.height ?? 360}
               className="w-full object-cover"
+              priority
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">

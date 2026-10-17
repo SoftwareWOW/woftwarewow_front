@@ -1,21 +1,24 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 6. Built for Mutual Growth — Home-25 WhatWeOffer
-import MutualGrowth from './_components/MutualGrowth'
 // 3. Technology & Platform Partners — Home-16 ServicesV14
-import PartnerCategories from './_components/PartnerCategories'
 // 2. Our Partner Ecosystem — Home-03 Clients (dual marquee)
 import PartnerEcosystem from './_components/PartnerEcosystem'
 // 1. Hero — Better together with trusted collaborators
 import PartnersHero from './_components/PartnersHero'
 // 5. Ways to Partner With WOW — Home-15 ElevateBrand
-import WaysToPartner from './_components/WaysToPartner'
 // 4. Why We Partner — Home-23 WhyChooseUsV7
-import WhyWePartner from './_components/WhyWePartner'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+const PartnerCategories = dynamic(() => import('./_components/PartnerCategories'))
+const WhyWePartner = dynamic(() => import('./_components/WhyWePartner'))
+const WaysToPartner = dynamic(() => import('./_components/WaysToPartner'))
+const MutualGrowth = dynamic(() => import('./_components/MutualGrowth'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
+
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

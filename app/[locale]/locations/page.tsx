@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'locations' as const
@@ -11,15 +12,17 @@ const DEFAULT_HERO = {
   description: 'A connected Superagency working across markets, industries, and time zones.',
 }
 
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import LocationsHero from './_components/LocationsHero'
 import LocationsHeroAbout from './_components/LocationsHeroAbout'
-import LocationsPresence from './_components/LocationsPresence'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const LocationsPresence = dynamic(() => import('./_components/LocationsPresence'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

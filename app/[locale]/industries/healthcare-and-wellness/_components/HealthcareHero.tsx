@@ -65,6 +65,7 @@ const HealthcareHero = ({
               width={image0.width ?? 410}
               height={image0.height ?? 540}
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
+              priority
             />
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">

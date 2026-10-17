@@ -5,6 +5,7 @@ import {
   loadSuperagencyHomepageDevFallback,
 } from '@/lib/strapi/dev-fallback';
 import { getStrapiFetchConcurrency, runInBatches } from '@/lib/strapi/fetch-concurrency';
+import { cache } from 'react';
 import type {
   StrapiSuperagencyEcosystem,
   StrapiSuperagencyFooter,
@@ -58,7 +59,7 @@ const PROJECT_POPULATE = { thumbnail: true };
 const TESTIMONIAL_POPULATE = { userImg: true, caseStudyMedia: true };
 const PARTNER_LOGO_POPULATE = { logo: true, darkLogo: true };
 
-export async function getSuperagencyLayout(locale: Locale) {
+export const getSuperagencyLayout = cache(async function getSuperagencyLayout(locale: Locale) {
   const [header, footer] = await Promise.all([
     fetchSingleType<StrapiSuperagencyHeader>('superagency-header', {
       locale,
@@ -88,9 +89,11 @@ export async function getSuperagencyLayout(locale: Locale) {
   }
 
   return { header, footer };
-}
+});
 
-export async function getSuperagencyHomepage(locale: Locale): Promise<SuperagencyHomepageData> {
+export const getSuperagencyHomepage = cache(async function getSuperagencyHomepage(
+  locale: Locale,
+): Promise<SuperagencyHomepageData> {
   const batchSize = getStrapiFetchConcurrency();
   const [
     hero,
@@ -247,4 +250,4 @@ export async function getSuperagencyHomepage(locale: Locale): Promise<Superagenc
   }
 
   return data;
-}
+});

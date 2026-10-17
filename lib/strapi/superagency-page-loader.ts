@@ -1,5 +1,6 @@
 import type { Locale } from '@/i18n/config';
 import type { Metadata } from 'next';
+import { cache } from 'react';
 import { getSuperagencyPage } from '@/lib/strapi/fetchers/pages';
 import { getSuperagencyTeamMembers } from '@/lib/strapi/fetchers/team-members';
 import {
@@ -114,7 +115,7 @@ function normalizeSuperagencyPageRaw(
   return page;
 }
 
-export async function loadSuperagencyPage(
+export const loadSuperagencyPage = cache(async function loadSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<LoadedSuperagencyPage> {
@@ -163,7 +164,7 @@ export async function loadSuperagencyPage(
       mapPageTeamMembers(section) ?? globalTeamMembers,
     field,
   };
-}
+});
 
 export function buildSuperagencyPageMetadata(
   cms: LoadedSuperagencyPage,

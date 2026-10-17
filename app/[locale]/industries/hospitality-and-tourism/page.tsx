@@ -10,21 +10,24 @@ const DEFAULT_HERO = {
     'We help hospitality and tourism brands attract more guests, strengthen their digital presence, and create smoother experiences from discovery to return.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import Marquess from '@/components/wow/LandascapComponets/Marquee'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import ConnectedExpertise from './_components/ConnectedExpertise'
-import GuestJourney from './_components/GuestJourney'
-import GuestSolutions from './_components/GuestSolutions'
 import HospitalityHero from './_components/HospitalityHero'
 import HospitalityHeroAbout from './_components/HospitalityHeroAbout'
-import RecommendedSolutions from './_components/RecommendedSolutions'
-import WhatMattersMost from './_components/WhatMattersMost'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const WhatMattersMost = dynamic(() => import('./_components/WhatMattersMost'))
+const Marquess = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
+const GuestSolutions = dynamic(() => import('./_components/GuestSolutions'))
+const GuestJourney = dynamic(() => import('./_components/GuestJourney'))
+const ConnectedExpertise = dynamic(() => import('./_components/ConnectedExpertise'))
+const RecommendedSolutions = dynamic(() => import('./_components/RecommendedSolutions'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

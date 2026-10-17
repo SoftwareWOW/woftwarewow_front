@@ -11,25 +11,28 @@ const DEFAULT_HERO = {
     'Modernize how your business works — connected systems, automation and a clearer digital setup.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 4. Before / After — AutomationInAction
-import BeforeAfterGap from './_components/BeforeAfterGap'
 // 1. Hero — BrandingCreativeHero / Home-04 HeroV11
 import DigitalTransformationHero from './_components/DigitalTransformationHero'
 // 6. Path — LaunchPath / ServiceProces
-import ModernizationPath from './_components/ModernizationPath'
 // 5. Priorities — SpecialistTeams / Home-15 ElevateBrand
-import TransformationPriorities from './_components/TransformationPriorities'
 // 3. Transformation Plan — RevenueCapabilities / Home-24 ServicesV16
-import TransformationPlan from './_components/TransformationPlan'
 // 2. The Gap — LearnYourWay / HostingThatFits
 import TheGap from './_components/TheGap'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const TransformationPlan = dynamic(() => import('./_components/TransformationPlan'))
+const BeforeAfterGap = dynamic(() => import('./_components/BeforeAfterGap'))
+const TransformationPriorities = dynamic(() => import('./_components/TransformationPriorities'))
+const ModernizationPath = dynamic(() => import('./_components/ModernizationPath'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

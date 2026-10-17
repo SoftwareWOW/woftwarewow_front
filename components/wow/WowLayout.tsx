@@ -1,4 +1,4 @@
-import AIAssistant from '@/components/ai/AIAssistant'
+import LazyAIAssistant from '@/components/ai/LazyAIAssistant'
 import { AIChatProvider } from '@/components/ai/AIChatController'
 import SuperagencyChrome from '@/components/wow/SuperagencyChrome'
 import { getDictionary } from '@/i18n/dictionary'
@@ -40,7 +40,7 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
               >
                 {children}
               </SuperagencyChrome>
-              <AIAssistant />
+              <LazyAIAssistant />
             </div>
           </AIChatProvider>
         </MeetDialogProvider>

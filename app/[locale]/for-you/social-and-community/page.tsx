@@ -11,25 +11,28 @@ const DEFAULT_HERO = {
     'Build social strategies, content, and campaigns that grow visibility, engagement, and business outcomes.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 5. Build Community — SoftwareWOW WoWProces
-import BuildCommunity from './_components/BuildCommunity'
 // 4. Platform Presence — Home-14 / WowProcess tab pattern
-import PlatformPresence from './_components/PlatformPresence'
 // 3. Social Capabilities — Home-13 ServicesV12
-import SocialCapabilities from './_components/SocialCapabilities'
 // 1. Hero — Home-24 HeroV24
 import SocialCommunityHero from './_components/SocialCommunityHero'
 // 6. Gallery — Home-11 InstagramGallery
-import SocialGallery from './_components/SocialGallery'
 // 2. Process — Home-07 ProcessV4
 import SocialProcess from './_components/SocialProcess'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const SocialCapabilities = dynamic(() => import('./_components/SocialCapabilities'))
+const PlatformPresence = dynamic(() => import('./_components/PlatformPresence'))
+const BuildCommunity = dynamic(() => import('./_components/BuildCommunity'))
+const SocialGallery = dynamic(() => import('./_components/SocialGallery'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

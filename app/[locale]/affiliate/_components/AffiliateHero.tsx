@@ -41,6 +41,8 @@ const AffiliateHero = ({
         className="absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0"
       >
         <img
+                loading="eager"
+                fetchPriority="high"
           src="/images/hero-gradient-background.png"
           alt=""
           id="hero-gradient"

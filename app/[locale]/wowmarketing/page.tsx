@@ -1,22 +1,25 @@
-import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
-import Faq from '@/components/wow/LandascapComponets/Faq'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import dynamic from 'next/dynamic'
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiDivisions, mapStrapiPartnerLogos } from '@/lib/strapi/mappers/superagency'
 import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import MarketingApproachGrid from './_components/MarketingApproachGrid'
-import MarketingFrameworkSection from './_components/MarketingFrameworkSection'
-import MarketingGrowthPartnerSection from './_components/MarketingGrowthPartnerSection'
 import MarketingHero from './_components/MarketingHero'
-import MarketingHoldbackSection from './_components/MarketingHoldbackSection'
-import MarketingIndustriesCarousel from './_components/MarketingIndustriesCarousel'
 import MarketingPlatformsIntro from './_components/MarketingPlatformsIntro'
-import MarketingProcessSection from './_components/MarketingProcessSection'
-import MarketingServicesGrid from './_components/MarketingServicesGrid'
 import { MARKETING_CTA, MARKETING_FAQS } from './_components/marketing-content'
+
+
+const MarketingHoldbackSection = dynamic(() => import('./_components/MarketingHoldbackSection'))
+const MarketingApproachGrid = dynamic(() => import('./_components/MarketingApproachGrid'))
+const MarketingServicesGrid = dynamic(() => import('./_components/MarketingServicesGrid'))
+const MarketingFrameworkSection = dynamic(() => import('./_components/MarketingFrameworkSection'))
+const MarketingProcessSection = dynamic(() => import('./_components/MarketingProcessSection'))
+const MarketingGrowthPartnerSection = dynamic(() => import('./_components/MarketingGrowthPartnerSection'))
+const MarketingIndustriesCarousel = dynamic(() => import('./_components/MarketingIndustriesCarousel'))
+const DevisionOverview = dynamic(() => import('@/components/wow/LandascapComponets/DevisionOverview'))
+const Faq = dynamic(() => import('@/components/wow/LandascapComponets/Faq'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 export const revalidate = 60
 

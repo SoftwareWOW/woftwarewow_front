@@ -81,7 +81,8 @@ const EducationHero = ({
                   width={image.width ?? 665}
                   height={image.height ?? 440}
                   className="h-auto w-full object-cover sm:max-h-[280px] lg:max-h-[320px] xl:max-h-[380px]"
-                />
+              priority
+            />
               </RevealWrapper>
             ))}
           </div>

@@ -20,6 +20,7 @@ import {
 import type { StrapiBlogPage } from '@/lib/strapi/types/blog';
 import { mapStrapiSeo } from '@/lib/strapi/mappers/page-sections';
 import type { Metadata } from 'next';
+import { cache } from 'react';
 
 export type LoadedBlogPage = {
   cms: StrapiBlogPage | null;
@@ -29,7 +30,9 @@ export type LoadedBlogPage = {
   caseStudies: BlogCaseStudyCarouselItem[];
 };
 
-export async function loadBlogPageData(locale: Locale): Promise<LoadedBlogPage> {
+export const loadBlogPageData = cache(async function loadBlogPageData(
+  locale: Locale,
+): Promise<LoadedBlogPage> {
   const [cms, posts, categories, projects] = await Promise.all([
     getBlogPage(locale),
     getBlogPostFeed(locale),
@@ -55,7 +58,7 @@ export async function loadBlogPageData(locale: Locale): Promise<LoadedBlogPage> 
     categories: mappedCategories,
     caseStudies: mappedCaseStudies,
   };
-}
+});
 
 export function buildBlogPageMetadata(
   cms: StrapiBlogPage | null,

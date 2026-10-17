@@ -10,18 +10,21 @@ const DEFAULT_HERO = {
   description: 'Systems to increase sales velocity and close more deals.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import AccelerationJourney from './_components/AccelerationJourney'
-import ConnectedExpertise from './_components/ConnectedExpertise'
 import SalesAccelerationHero from './_components/SalesAccelerationHero'
 import SalesGaps from './_components/SalesGaps'
-import WhatsIncluded from './_components/WhatsIncluded'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const WhatsIncluded = dynamic(() => import('./_components/WhatsIncluded'))
+const AccelerationJourney = dynamic(() => import('./_components/AccelerationJourney'))
+const ConnectedExpertise = dynamic(() => import('./_components/ConnectedExpertise'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -11,9 +11,8 @@ const DEFAULT_HERO = {
     'Less manual work. More time for what matters — practical AI automation for growing businesses.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
 import type { Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Metadata } from 'next'
@@ -21,13 +20,9 @@ import { setRequestLocale } from 'next-intl/server'
 // 1. Hero — Home-18 HeroV18
 import AiAutomationHero from './_components/AiAutomationHero'
 // 3. Package card — HostingThatFits / image 3
-import AiPackageCard from './_components/AiPackageCard'
 // 7. FAQ — Home Faq
-import AutomationFaq from './_components/AutomationFaq'
 // 4. Integrations — OurTools / Home-06 ClientV4
-import AutomationTools from './_components/AutomationTools'
 // 6. Path — ModernizationPath / LaunchPath
-import FromIdeaToAutomation from './_components/FromIdeaToAutomation'
 // 2. Start with the repetitive — SolutionToChallenges
 import StartWithTheRepetitive from './_components/StartWithTheRepetitive'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
@@ -37,6 +32,14 @@ import {
 } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const AiPackageCard = dynamic(() => import('./_components/AiPackageCard'))
+const AutomationTools = dynamic(() => import('./_components/AutomationTools'))
+const WowSuperAgencyClient = dynamic(() => import('@/components/wow/sections/WowSuperAgencyClient'))
+const FromIdeaToAutomation = dynamic(() => import('./_components/FromIdeaToAutomation'))
+const AutomationFaq = dynamic(() => import('./_components/AutomationFaq'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

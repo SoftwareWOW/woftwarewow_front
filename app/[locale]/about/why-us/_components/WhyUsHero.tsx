@@ -89,7 +89,8 @@ const WhyUsHero = ({
                 width={primaryImage.width ?? 480}
                 height={primaryImage.height ?? 360}
                 className="w-full object-cover rounded-radius-sm"
-              />
+              priority
+            />
             </RevealWrapper>
           )}
           {secondaryImage && (

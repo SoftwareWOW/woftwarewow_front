@@ -37,6 +37,8 @@ function SideImageSlot({
     >
       {image?.src ? (
         <img
+                loading="eager"
+                fetchPriority="high"
           src={image.src}
           alt={image.alt ?? ''}
           className={`${sideSlotClassName} object-cover`}

@@ -41,8 +41,20 @@ const Marquee: React.FC<MarqueeProps> = ({ logos: logosProp }) => {
                 key={item.id}
                 className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark"
               >
-                <img src={item.logo} alt={item.alt} className="inline-block dark:hidden" />
-                <img src={item.darkLogo} alt={item.alt} className="hidden dark:inline-block" />
+                <img
+                  src={item.logo}
+                  alt={item.alt}
+                  className="inline-block dark:hidden"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src={item.darkLogo}
+                  alt={item.alt}
+                  className="hidden dark:inline-block"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             ))}
           </div>

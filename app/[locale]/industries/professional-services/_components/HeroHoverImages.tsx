@@ -63,6 +63,7 @@ const HeroHoverImages = ({ images }: HeroHoverImagesProps) => {
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
               className="rounded-radius-md object-cover"
+              priority
             />
           </figure>
         ))}

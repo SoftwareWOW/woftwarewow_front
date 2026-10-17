@@ -11,23 +11,26 @@ const DEFAULT_HERO = {
     'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 2. Launch foundations — Home-16 ServicesV14
 import LaunchFoundations from './_components/LaunchFoundations'
 // 4. Launch journey — Home-20 ProcessV9
-import LaunchJourney from './_components/LaunchJourney'
 // 5. Specialist teams — Home-15 ElevateBrand
-import SpecialistTeams from './_components/SpecialistTeams'
 // 1. Hero — Home-19 HeroV19
 import StartupLaunchHero from './_components/StartupLaunchHero'
 // 3. What's included — Home-12 WhyChooseUs
-import WhatsIncluded from './_components/WhatsIncluded'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const WhatsIncluded = dynamic(() => import('./_components/WhatsIncluded'))
+const LaunchJourney = dynamic(() => import('./_components/LaunchJourney'))
+const SpecialistTeams = dynamic(() => import('./_components/SpecialistTeams'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

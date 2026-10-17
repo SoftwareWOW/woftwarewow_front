@@ -1,12 +1,7 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import Marquee from '@/components/wow/shared/Marquee'
 import PageHero from './_components/PageHero'
 import HeroAbout from '@/components/homepage-07/HeroAbout'
-import SkewMarquee from '@/components/shared/SkewMarquee'
-import TechStack from './_components/TechStack'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
-import Team from '@/components/aboutpage/Team'
 import type { Locale } from '@/i18n/config'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import { resolveTeamSection } from '@/lib/strapi/fetchers/team-members'
@@ -22,6 +17,13 @@ import type {
 } from '@/lib/strapi/types/pages'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
+
+const SkewMarquee = dynamic(() => import('@/components/shared/SkewMarquee'))
+const TechStack = dynamic(() => import('./_components/TechStack'))
+const Team = dynamic(() => import('@/components/aboutpage/Team'))
+const Marquee = dynamic(() => import('@/components/wow/shared/Marquee'))
+const SolutionToChallenges = dynamic(() => import('@/components/wow/LandascapComponets/SolutionToChallench'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 const PAGE_SLUG = 'about' as const
 

@@ -18,6 +18,8 @@ const WebApplicationsHero = () => {
         aria-hidden
       >
         <img
+                loading="eager"
+                fetchPriority="high"
           src="/images/hero-gradient-background.png"
           alt=""
           id="hero-gradient"

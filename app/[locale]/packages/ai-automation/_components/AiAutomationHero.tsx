@@ -74,7 +74,8 @@ const AiAutomationHero = ({
                 width={heroImage.width ?? 512}
                 height={heroImage.height ?? 512}
                 className="h-auto w-full rounded-radius-sm object-cover"
-              />
+              priority
+            />
             </RevealWrapper>
           ) : null}
         </div>

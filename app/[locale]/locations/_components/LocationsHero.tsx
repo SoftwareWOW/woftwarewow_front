@@ -125,6 +125,8 @@ const LocationsHero = ({
 
       <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
         <img
+                loading="eager"
+                fetchPriority="high"
           src={images?.[0]?.src ?? HERO_IMAGES[0]}
           alt=""
           className="h-[110px] w-[85px] object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"

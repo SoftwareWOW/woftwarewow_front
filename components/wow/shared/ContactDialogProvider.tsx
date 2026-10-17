@@ -4,8 +4,13 @@ import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui
 import { cn } from '@/lib/utils'
 import { useLenis } from 'lenis/react'
 import { X } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import WowContactForm from './WowContactForm'
+
+const WowContactForm = dynamic(() => import('./WowContactForm'), {
+  ssr: false,
+  loading: () => null,
+})
 
 type ContactDialogContextValue = {
   open: () => void
@@ -98,7 +103,7 @@ export function ContactDialogProvider({ children }: { children: ReactNode }) {
             data-lenis-prevent
             className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-6 pt-5 sm:px-8 sm:pb-8 sm:pt-6 [-webkit-overflow-scrolling:touch]">
             <DialogTitle className="sr-only">Let&apos;s Discuss Your Project</DialogTitle>
-            <WowContactForm onSubmitted={handleSubmitted} />
+            {open ? <WowContactForm onSubmitted={handleSubmitted} /> : null}
           </div>
         </DialogContent>
       </Dialog>

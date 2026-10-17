@@ -71,7 +71,8 @@ const StartupLaunchHero = ({
                   width={image0.width ?? 480}
                   height={image0.height ?? 360}
                   className="max-sm:w-full rounded-radius-sm"
-                />
+              priority
+            />
               </RevealWrapper>
             ) : null}
             {image1?.src ? (

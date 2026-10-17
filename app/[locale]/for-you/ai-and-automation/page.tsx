@@ -10,27 +10,30 @@ const DEFAULT_HERO = {
     'Automate repetitive work, improve customer experiences and give your team smarter tools with practical AI solutions built around how your business actually operates.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 5. Automation in action — Why SMBs TheGap
-import AutomationInAction from './_components/AutomationInAction'
 // 4. AI Capabilities — Home-13 ServicesV12
-import AiCapabilities from './_components/AiCapabilities'
 // 3. Gallery — Home-13 AboutHoverImages
-import AiGallery from './_components/AiGallery'
 // 1. Hero — Home-12 HeroV12
 import AiAutomationHero from './_components/AiAutomationHero'
 // 7. AI with a purpose — BuildCommunity numbered columns
-import AiWithPurpose from './_components/AiWithPurpose'
 // 2. Start with the work — SolutionToChallenges
 import StartWithTheWork from './_components/StartWithTheWork'
-import Marquee from '@/components/wow/LandascapComponets/Marquee'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const AiGallery = dynamic(() => import('./_components/AiGallery'))
+const AiCapabilities = dynamic(() => import('./_components/AiCapabilities'))
+const AutomationInAction = dynamic(() => import('./_components/AutomationInAction'))
+const Marquee = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
+const AiWithPurpose = dynamic(() => import('./_components/AiWithPurpose'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

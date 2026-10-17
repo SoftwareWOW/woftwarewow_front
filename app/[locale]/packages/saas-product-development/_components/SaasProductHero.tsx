@@ -105,7 +105,8 @@ const SaasProductHero = ({
                       ? 'h-auto w-full max-h-[min(52vh,560px)] object-contain object-center xl:max-h-[600px] xl:object-right'
                       : 'h-auto w-full rounded-radius-md object-contain md:h-[540px] md:w-[410px]'
                   }
-                />
+              priority
+            />
               </RevealWrapper>
             ))}
           </div>

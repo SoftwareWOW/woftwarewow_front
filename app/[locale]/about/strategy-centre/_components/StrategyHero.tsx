@@ -74,7 +74,8 @@ const StrategyHero = ({
             width={heroImage.width ?? 520}
             height={heroImage.height ?? 640}
             className="h-auto max-h-[min(70vh,520px)] w-full max-w-[520px] object-contain lg:max-w-none"
-          />
+              priority
+            />
         </RevealWrapper>
       </div>
     </section>

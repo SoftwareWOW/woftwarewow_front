@@ -125,7 +125,8 @@ const LearningEventsHero = ({
             width={mainHeroImage.width ?? 560}
             height={mainHeroImage.height ?? 640}
             className="h-auto w-full rounded-radius-md object-cover"
-          />
+              priority
+            />
         </RevealWrapper>
       </RevealWrapper>
     </section>

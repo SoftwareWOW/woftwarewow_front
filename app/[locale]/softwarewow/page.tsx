@@ -1,18 +1,21 @@
 
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import dynamic from 'next/dynamic'
 import SoftwareServices from '@/components/wow/softwarewow/SoftwareServices'
 
 import SoftwareWowHero from '@/components/wow/softwarewow/SoftwareWowHero'
-import SoftwareWoWIndustry from '@/components/wow/softwarewow/SoftwareWoWIndustry'
 
-import WhyChoiceUs from '@/components/wow/softwarewow/WhyChoiceUs'
-import WoWProces from '@/components/wow/softwarewow/WoWProces'
 import type { Locale } from '@/i18n/config'
 import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import { setRequestLocale } from 'next-intl/server'
-import SoftwareWoWProjects from '@/components/wow/softwarewow/SoftwareWoWProjects'
-import Technologies from '@/components/wow/softwarewow/Technologies'
-import SoftwareRfq from '@/components/wow/softwarewow/SoftwareRfq'
+
+
+const WhyChoiceUs = dynamic(() => import('@/components/wow/softwarewow/WhyChoiceUs'))
+const SoftwareWoWProjects = dynamic(() => import('@/components/wow/softwarewow/SoftwareWoWProjects'))
+const WoWProces = dynamic(() => import('@/components/wow/softwarewow/WoWProces'))
+const SoftwareWoWIndustry = dynamic(() => import('@/components/wow/softwarewow/SoftwareWoWIndustry'))
+const Technologies = dynamic(() => import('@/components/wow/softwarewow/Technologies'))
+const SoftwareRfq = dynamic(() => import('@/components/wow/softwarewow/SoftwareRfq'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 export const revalidate = 60
 type Props = {

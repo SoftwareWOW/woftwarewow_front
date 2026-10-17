@@ -132,7 +132,9 @@ const AiAutomationHero = () => {
       </div>
       <div className="absolute -left-[4.5%] top-[42%] hidden md:block" ref={heroImage1Ref}>
         <figure className="overflow-hidden rounded-radius-md">
-          <img src="/images/hero-img/hero-img-05.png" alt="" className="reveal-me rounded-radius-md" />
+          <img
+                loading="eager"
+                fetchPriority="high" src="/images/hero-img/hero-img-05.png" alt="" className="reveal-me rounded-radius-md" />
         </figure>
       </div>
       <div className="absolute -right-[5%] top-[12%] hidden md:block" ref={heroImage2Ref}>

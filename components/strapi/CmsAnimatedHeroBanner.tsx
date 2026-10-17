@@ -57,6 +57,8 @@ export default function CmsAnimatedHeroBanner({
         sizes={CMS_IMAGE_SIZES.heroBanner}
         displayWidth={1200}
         className={className}
+        loading="eager"
+        fetchPriority="high"
       />
     </figure>
   );

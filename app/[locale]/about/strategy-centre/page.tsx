@@ -1,25 +1,28 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import GrowthStrategies from '@/components/wow/LandascapComponets/GrowthStrategies'
 // 8. Build Your Growth Strategy — WOW WowGrowthCta
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiGrowthArticles } from '@/lib/strapi/mappers/superagency'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 5. Strategies Built Around Your Business — Home-12 WhyChooseUs
-import BuiltAroundYourBusiness from './_components/BuiltAroundYourBusiness'
 // 4. How We Build Your Strategy — Home-19 ProcessV10
-import HowWeBuildStrategy from './_components/HowWeBuildStrategy'
 // 3. Our Strategic Expertise — Home-18 OurExpertise
-import StrategicExpertise from './_components/StrategicExpertise'
 // 1. Hero — Strategy That Drives Growth — Home-21 Hero21
 import StrategyHero from './_components/StrategyHero'
 // 7. Strategy in Action — Home-24 ProjectCaseStudies
-import StrategyInAction from './_components/StrategyInAction'
 // 2. The WOW Growth Framework — Home-15 BrandingProcess
 import WowGrowthFramework from './_components/WowGrowthFramework'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+const StrategicExpertise = dynamic(() => import('./_components/StrategicExpertise'))
+const HowWeBuildStrategy = dynamic(() => import('./_components/HowWeBuildStrategy'))
+const BuiltAroundYourBusiness = dynamic(() => import('./_components/BuiltAroundYourBusiness'))
+const GrowthStrategies = dynamic(() => import('@/components/wow/LandascapComponets/GrowthStrategies'))
+const StrategyInAction = dynamic(() => import('./_components/StrategyInAction'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
+
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

@@ -3,8 +3,8 @@ const PAGE_SLUG = 'business-growth' as const
 
 export const revalidate = 60
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -13,13 +13,16 @@ import BusinessGrowthHero from './_components/BusinessGrowthHero'
 // 2. Built for Growth — Home-04 AboutV4
 import BuiltForGrowth from './_components/BuiltForGrowth'
 // 4. Connected Growth — Home-07 ProcessV4
-import ConnectedGrowth from './_components/ConnectedGrowth'
 // 3. Growth pieces — Home-04 ServicesV5
-import GrowthPieces from './_components/GrowthPieces'
 // 5. How it works — AiWithPurpose
-import HowItWorks from './_components/HowItWorks'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const GrowthPieces = dynamic(() => import('./_components/GrowthPieces'))
+const ConnectedGrowth = dynamic(() => import('./_components/ConnectedGrowth'))
+const HowItWorks = dynamic(() => import('./_components/HowItWorks'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

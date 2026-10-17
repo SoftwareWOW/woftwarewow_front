@@ -13,6 +13,9 @@ export type StrapiResponsiveImgProps = {
   /** Used to pick the default `src` when `srcSet` is present. */
   displayWidth?: number;
   className?: string;
+  loading?: 'lazy' | 'eager';
+  fetchPriority?: 'high' | 'low' | 'auto';
+  decoding?: 'async' | 'auto' | 'sync';
 };
 
 function resolveImage(
@@ -27,7 +30,17 @@ function resolveImage(
 /** Native `<img>` with Strapi `srcSet` — supports refs (GSAP / hover swap). */
 const StrapiResponsiveImg = forwardRef<HTMLImageElement, StrapiResponsiveImgProps>(
   function StrapiResponsiveImg(
-    { image, fallbackSrc, alt, sizes, displayWidth = 640, className },
+    {
+      image,
+      fallbackSrc,
+      alt,
+      sizes,
+      displayWidth = 640,
+      className,
+      loading = 'lazy',
+      fetchPriority,
+      decoding = 'async',
+    },
     ref,
   ) {
     const resolved = resolveImage(image, fallbackSrc);
@@ -44,6 +57,9 @@ const StrapiResponsiveImg = forwardRef<HTMLImageElement, StrapiResponsiveImgProp
         {...(srcSet ? { srcSet, sizes } : {})}
         alt={alt ?? resolved.alt ?? ''}
         className={className}
+        loading={loading}
+        decoding={decoding}
+        {...(fetchPriority ? { fetchPriority } : {})}
       />
     );
   },

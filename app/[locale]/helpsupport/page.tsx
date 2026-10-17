@@ -1,11 +1,14 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import HelpHero from './_components/HelpHero'
 import SupportCategories from './_components/SupportCategories'
-import SupportContact from './_components/SupportContact'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+const SupportContact = dynamic(() => import('./_components/SupportContact'))
+
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

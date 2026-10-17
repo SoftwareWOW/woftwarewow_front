@@ -76,6 +76,7 @@ const SocialCommunityHero = ({
               width={410}
               height={540}
               className="h-auto w-full object-cover md:h-[540px] md:w-[410px]"
+              priority
             />
           </figure>
           <figure className="overflow-hidden rounded-radius-md">

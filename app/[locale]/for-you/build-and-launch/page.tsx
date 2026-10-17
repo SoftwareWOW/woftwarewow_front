@@ -11,19 +11,22 @@ const DEFAULT_HERO = {
     'Turn your business, product or digital idea into something real—with the strategy, brand, technology and launch support you need in one place.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import BuildAndLaunchRfq from './_components/BuildAndLaunchRfq'
 import BuildLaunchHero from './_components/BuildLaunchHero'
 import BuildLaunchOurServices from './_components/BuildLaunchOurServices'
-import LaunchPath from './_components/LaunchPath'
-import StartupPackage from './_components/StartupPackage'
 import type { CmsOurServicesCarouselSection } from '@/lib/strapi/mappers/page-sections'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const BuildAndLaunchRfq = dynamic(() => import('./_components/BuildAndLaunchRfq'))
+const LaunchPath = dynamic(() => import('./_components/LaunchPath'))
+const StartupPackage = dynamic(() => import('./_components/StartupPackage'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

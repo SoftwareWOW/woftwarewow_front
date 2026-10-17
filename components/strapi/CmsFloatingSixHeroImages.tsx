@@ -77,6 +77,7 @@ export default function CmsFloatingSixHeroImages({
               sizes={CMS_IMAGE_SIZES.decorativeThumb}
               displayWidth={slotWidths[index]}
               className={imgClassNames[index]}
+              loading="eager"
             />
           </figure>
         ) : null,

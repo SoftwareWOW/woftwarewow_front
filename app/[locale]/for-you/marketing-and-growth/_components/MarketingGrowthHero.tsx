@@ -106,7 +106,8 @@ const MarketingGrowthHero = ({
                 width={mainImage.width ?? 400}
                 height={mainImage.height ?? 520}
                 className="h-auto w-full object-cover"
-              />
+              priority
+            />
             </figure>
           </RevealWrapper>
         </div>

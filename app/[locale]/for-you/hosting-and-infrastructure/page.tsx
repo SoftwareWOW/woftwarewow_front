@@ -11,24 +11,27 @@ const DEFAULT_HERO = {
     'Hosting, domains, security, and cloud infrastructure that keep your business online, protected, and ready to scale.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import Marquee from '@/components/wow/LandascapComponets/Marquee'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 4. Built for Business — ElevateBrandV2 / SalesJourneyGap
-import BuiltForBusiness from './_components/BuiltForBusiness'
 // 2. Digital Foundations — BrandCapabilities / WhyChooseUs
 import DigitalFoundations from './_components/DigitalFoundations'
 // 1. Hero — Home-19 HeroV19
 import HostingInfraHero from './_components/HostingInfraHero'
 // 6. Hosting That Fits — PricingV4
-import HostingThatFits from './_components/HostingThatFits'
 // 3. Infrastructure Solutions — RevenueCapabilities flip cards
-import InfrastructureSolutions from './_components/InfrastructureSolutions'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const InfrastructureSolutions = dynamic(() => import('./_components/InfrastructureSolutions'))
+const BuiltForBusiness = dynamic(() => import('./_components/BuiltForBusiness'))
+const Marquee = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
+const HostingThatFits = dynamic(() => import('./_components/HostingThatFits'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

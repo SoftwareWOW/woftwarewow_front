@@ -11,21 +11,24 @@ const DEFAULT_HERO = {
     'From first idea to market-ready business, we bring strategy, brand, technology, marketing, and growth together.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import FromIdeaToGrowth from './_components/FromIdeaToGrowth'
-import StartupJourney from './_components/StartupJourney'
-import StartupPackages from './_components/StartupPackages'
-import StartupSolutions from './_components/StartupSolutions'
 import StartupsEntrepreneursHero from './_components/StartupsEntrepreneursHero'
 import { getSuperagencyDivisions } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const StartupSolutions = dynamic(() => import('./_components/StartupSolutions'))
+const StartupJourney = dynamic(() => import('./_components/StartupJourney'))
+const DevisionOverview = dynamic(() => import('@/components/wow/LandascapComponets/DevisionOverview'))
+const StartupPackages = dynamic(() => import('./_components/StartupPackages'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

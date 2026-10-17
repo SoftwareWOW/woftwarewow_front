@@ -1,4 +1,4 @@
-import GradientCta from '@/components/shared/GradientCta'
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 import TeamDetailsBody from '@/components/shared/TeamDetailsBody'
 import staticTeamMembers from '@/data/teamMemberV2.json'
@@ -13,7 +13,8 @@ import type { CmsTeamMemberDetail } from '@/lib/strapi/mappers/page-sections'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { setRequestLocale } from 'next-intl/server'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 export const revalidate = 60
 

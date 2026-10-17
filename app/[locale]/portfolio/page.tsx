@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'portfolio' as const
@@ -14,14 +15,16 @@ const DEFAULT_HERO = {
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import ExploreWork from './_components/ExploreWork'
-import ExpertiseBehindWork from './_components/ExpertiseBehindWork'
 import FeaturedWork from './_components/FeaturedWork'
-import HowWeCreateImpact from './_components/HowWeCreateImpact'
-import PortfolioCta from './_components/PortfolioCta'
 import PortfolioHero from './_components/PortfolioHero'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const ExploreWork = dynamic(() => import('./_components/ExploreWork'))
+const HowWeCreateImpact = dynamic(() => import('./_components/HowWeCreateImpact'))
+const ExpertiseBehindWork = dynamic(() => import('./_components/ExpertiseBehindWork'))
+const PortfolioCta = dynamic(() => import('./_components/PortfolioCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

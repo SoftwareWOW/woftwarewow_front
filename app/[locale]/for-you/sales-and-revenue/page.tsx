@@ -11,23 +11,26 @@ const DEFAULT_HERO = {
     'Build funnels, CRM systems, and sales enablement that convert leads and scale revenue predictably.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 4. From Lead to Customer — Home-19 ProcessV10
-import LeadToCustomer from './_components/LeadToCustomer'
 // 3. Revenue Capabilities — Home-24 ServicesV16 bento
-import RevenueCapabilities from './_components/RevenueCapabilities'
 // 1. Hero — Home-25 HeroV25
 import SalesRevenueHero from './_components/SalesRevenueHero'
 // 5. Sales Visibility — Home-15 BrandingProcess
-import SalesVisibility from './_components/SalesVisibility'
 // 2. Find the Gap — Home-19 ElevateBrandV2
 import SalesJourneyGap from './_components/SalesJourneyGap'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const RevenueCapabilities = dynamic(() => import('./_components/RevenueCapabilities'))
+const LeadToCustomer = dynamic(() => import('./_components/LeadToCustomer'))
+const SalesVisibility = dynamic(() => import('./_components/SalesVisibility'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

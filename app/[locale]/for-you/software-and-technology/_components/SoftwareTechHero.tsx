@@ -65,7 +65,9 @@ const SoftwareTechHero = ({
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[0]}
             className="h-[110px] w-[85px] rounded-sm object-cover lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
-          />
+              loading="eager"
+              fetchPriority="high"
+            />
         </figure>
       ) : null}
       {imagePool[1]?.src ? (

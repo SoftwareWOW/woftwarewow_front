@@ -75,6 +75,8 @@ const CustomSoftwareHero = () => {
             {HERO_IMAGES.map((image) => (
               <RevealWrapper as="figure" key={image.src} className="w-full overflow-hidden rounded-radius-md">
                 <img
+                loading="eager"
+                fetchPriority="high"
                   src={image.src}
                   alt={image.alt}
                   className="h-auto w-full object-cover sm:max-h-[280px] lg:max-h-[320px] xl:max-h-[380px]"

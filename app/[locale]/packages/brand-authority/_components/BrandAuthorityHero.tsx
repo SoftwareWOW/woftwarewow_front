@@ -71,7 +71,8 @@ const BrandAuthorityHero = ({
                   width={image0.width ?? 480}
                   height={image0.height ?? 360}
                   className="rounded-radius-sm max-sm:w-full"
-                />
+              priority
+            />
               </RevealWrapper>
             ) : null}
             {image1?.src ? (

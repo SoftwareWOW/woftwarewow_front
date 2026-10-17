@@ -10,23 +10,26 @@ const DEFAULT_HERO = {
     'We help healthcare and wellness organizations build trusted brands, stronger digital experiences, smarter systems, and sustainable growth.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
-import CareGallery from './_components/CareGallery'
-import CareJourney from './_components/CareJourney'
-import CarePackages from './_components/CarePackages'
-import CareSolutions from './_components/CareSolutions'
-import ExperiencePillars from './_components/ExperiencePillars'
 import HealthcareHero from './_components/HealthcareHero'
 import HealthcareHeroAbout from './_components/HealthcareHeroAbout'
 import { getSuperagencyDivisions } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const ExperiencePillars = dynamic(() => import('./_components/ExperiencePillars'))
+const CareSolutions = dynamic(() => import('./_components/CareSolutions'))
+const CareGallery = dynamic(() => import('./_components/CareGallery'))
+const CareJourney = dynamic(() => import('./_components/CareJourney'))
+const DevisionOverview = dynamic(() => import('@/components/wow/LandascapComponets/DevisionOverview'))
+const CarePackages = dynamic(() => import('./_components/CarePackages'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

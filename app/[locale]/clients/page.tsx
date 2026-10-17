@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 const PAGE_SLUG = 'clients' as const
@@ -13,12 +14,14 @@ const DEFAULT_HERO = {
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import ClientStories from './_components/ClientStories'
-import ClientsCta from './_components/ClientsCta'
 import ClientsHero from './_components/ClientsHero'
 import ClientsMarquee from './_components/ClientsMarquee'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const ClientStories = dynamic(() => import('./_components/ClientStories'))
+const ClientsCta = dynamic(() => import('./_components/ClientsCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -3,22 +3,14 @@ const PAGE_SLUG = 'saas-product-development' as const
 
 export const revalidate = 60
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
 import type { Locale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import FocusFirstRelease from './_components/FocusFirstRelease'
 import FromIdeaToProduct from './_components/FromIdeaToProduct'
-import IdeaToProductPath from './_components/IdeaToProductPath'
-import ProductJourney from './_components/ProductJourney'
-import SaasFaq from './_components/SaasFaq'
-import SaasIntegrations from './_components/SaasIntegrations'
-import SaasPackageCard from './_components/SaasPackageCard'
 import SaasProductHero from './_components/SaasProductHero'
-import SaasTransformPlan from './_components/SaasTransformPlan'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import {
   mapStrapiTestimonialExtras,
@@ -26,6 +18,17 @@ import {
 } from '@/lib/strapi/mappers/superagency'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const SaasPackageCard = dynamic(() => import('./_components/SaasPackageCard'))
+const SaasTransformPlan = dynamic(() => import('./_components/SaasTransformPlan'))
+const IdeaToProductPath = dynamic(() => import('./_components/IdeaToProductPath'))
+const FocusFirstRelease = dynamic(() => import('./_components/FocusFirstRelease'))
+const SaasIntegrations = dynamic(() => import('./_components/SaasIntegrations'))
+const WowSuperAgencyClient = dynamic(() => import('@/components/wow/sections/WowSuperAgencyClient'))
+const ProductJourney = dynamic(() => import('./_components/ProductJourney'))
+const SaasFaq = dynamic(() => import('./_components/SaasFaq'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

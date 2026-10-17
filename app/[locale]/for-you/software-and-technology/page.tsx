@@ -11,23 +11,26 @@ const DEFAULT_HERO = {
     'Build custom software, apps, SaaS, modernization, and automation designed around your business.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 3. Built for the Fit — Why SMBs TheGap
-import BuiltForTheFit from './_components/BuiltForTheFit'
 // 5. Our Approach — Home-25 WhyChooseUsV8
-import OurApproach from './_components/OurApproach'
 // 1. Hero — Home-12 HeroV12
 import SoftwareTechHero from './_components/SoftwareTechHero'
 // 4. Path — Build & Launch LaunchPath
-import TechLaunchPath from './_components/TechLaunchPath'
 // 2. What We Build — Home-16 ServicesV14
 import WhatWeBuild from './_components/WhatWeBuild'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const BuiltForTheFit = dynamic(() => import('./_components/BuiltForTheFit'))
+const TechLaunchPath = dynamic(() => import('./_components/TechLaunchPath'))
+const OurApproach = dynamic(() => import('./_components/OurApproach'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

@@ -4,18 +4,12 @@ import WowEcosystem from '@/components/wow/WowEcosystem'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { setRequestLocale } from 'next-intl/server'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
 import Stats from '@/components/wow/LandascapComponets/Stats'
 import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
-import WowProjects from '@/components/wow/LandascapComponets/WowProjects'
-import HumanTuch from '@/components/wow/LandascapComponets/HumanTuch'
-import Faq from '@/components/wow/LandascapComponets/Faq'
-import GrowthStrategies from '@/components/wow/LandascapComponets/GrowthStrategies'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import Marquee from '@/components/wow/shared/Marquee'
 import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
-import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import {
   mapStrapiDivisions,
@@ -33,6 +27,14 @@ import {
   mapStrapiTestimonialExtras,
   mapStrapiTestimonials,
 } from '@/lib/strapi/mappers/superagency'
+
+const Marquess = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
+const Marquee = dynamic(() => import('@/components/wow/shared/Marquee'))
+const HumanTuch = dynamic(() => import('@/components/wow/LandascapComponets/HumanTuch'))
+const Faq = dynamic(() => import('@/components/wow/LandascapComponets/Faq'))
+const WowProjects = dynamic(() => import('@/components/wow/LandascapComponets/WowProjects'))
+const GrowthStrategies = dynamic(() => import('@/components/wow/LandascapComponets/GrowthStrategies'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 export const revalidate = 60
 

@@ -1,23 +1,26 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 7. Built to Grow — Home-16 ProcessV8
-import BuiltToGrow from './_components/BuiltToGrow'
 // 5. Elevate — Home-15 ElevateBrand
-import ElevateSmb from './_components/ElevateSmb'
 // 2. Gallery — Home-11 InstagramGallery
 import SmbGallery from './_components/SmbGallery'
 // 4. The Gap — Home-23 PricingV5
-import TheGap from './_components/TheGap'
 // 3. The Reality — Home-18 ServicesV15
-import TheReality from './_components/TheReality'
 // 6. Why a Superagency — Home-20 MarqueeV4
-import WhySuperagency from './_components/WhySuperagency'
 // 1. Hero — IndustriesHero
 import WhySmbsHero from './_components/WhySmbsHero'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+const TheReality = dynamic(() => import('./_components/TheReality'))
+const TheGap = dynamic(() => import('./_components/TheGap'))
+const ElevateSmb = dynamic(() => import('./_components/ElevateSmb'))
+const WhySuperagency = dynamic(() => import('./_components/WhySuperagency'))
+const BuiltToGrow = dynamic(() => import('./_components/BuiltToGrow'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
+
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

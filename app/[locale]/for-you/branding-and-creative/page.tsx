@@ -11,25 +11,28 @@ const DEFAULT_HERO = {
     'Identity, design, and creative systems that make your business unmistakable across every touchpoint.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 3. Brand Capabilities — Home-12 WhyChooseUs
-import BrandCapabilities from './_components/BrandCapabilities'
 // 1. Hero — Home-04 HeroV11
 import BrandingCreativeHero from './_components/BrandingCreativeHero'
 // 6. Brand Visibility — SalesVisibility / BrandingProcess
-import BrandVisibility from './_components/BrandVisibility'
 // 4. Built to Be Used — 6-card grid
-import BuiltToBeUsed from './_components/BuiltToBeUsed'
 // 2. Our Capabilities — Home-16 ServicesV14
 import OurCapabilities from './_components/OurCapabilities'
 // 5. Our Tools — Home-06 ClientV4 pattern
-import OurTools from './_components/OurTools'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const BrandCapabilities = dynamic(() => import('./_components/BrandCapabilities'))
+const BuiltToBeUsed = dynamic(() => import('./_components/BuiltToBeUsed'))
+const OurTools = dynamic(() => import('./_components/OurTools'))
+const BrandVisibility = dynamic(() => import('./_components/BrandVisibility'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

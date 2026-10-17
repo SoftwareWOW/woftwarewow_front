@@ -1,13 +1,16 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import AffiliateBenefits from './_components/AffiliateBenefits'
 import AffiliateHero from './_components/AffiliateHero'
-import AffiliateJourney from './_components/AffiliateJourney'
 import PartnerPaths from './_components/PartnerPaths'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+const AffiliateJourney = dynamic(() => import('./_components/AffiliateJourney'))
+const AffiliateBenefits = dynamic(() => import('./_components/AffiliateBenefits'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
+
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

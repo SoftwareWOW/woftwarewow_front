@@ -28,6 +28,8 @@ const HospitalityHero = ({
       aria-labelledby="hospitality-hero-heading"
     >
       <img
+                loading="eager"
+                fetchPriority="high"
         src={heroImage.src}
         alt={heroImage.alt ?? ''}
         aria-hidden

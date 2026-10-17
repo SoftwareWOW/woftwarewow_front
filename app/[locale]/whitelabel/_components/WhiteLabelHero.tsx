@@ -36,7 +36,8 @@ const WhiteLabelHero = ({ title, italicTitle, description, images }: WhiteLabelH
                   fill
                   sizes={CMS_IMAGE_SIZES.halfGrid}
                   className="object-cover"
-                />
+              priority
+            />
               </figure>
             </RevealWrapper>
           ) : null}

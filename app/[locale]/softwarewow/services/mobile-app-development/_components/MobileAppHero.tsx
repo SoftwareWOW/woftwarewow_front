@@ -14,6 +14,8 @@ const MobileAppHero = () => {
     >
       <div id="hero-gradient-wrapper" className="absolute left-0 top-0 -z-10 blur-[65px]" aria-hidden="true">
         <img
+                loading="eager"
+                fetchPriority="high"
           src="/images/hero-gradient-background.png"
           alt=""
           id="hero-gradient"

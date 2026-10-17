@@ -1,14 +1,17 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import HowWePartner from './_components/HowWePartner'
-import PartnerBenefits from './_components/PartnerBenefits'
 import WhiteLabelCapabilities from './_components/WhiteLabelCapabilities'
 import WhiteLabelHero from './_components/WhiteLabelHero'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+
+const HowWePartner = dynamic(() => import('./_components/HowWePartner'))
+const PartnerBenefits = dynamic(() => import('./_components/PartnerBenefits'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
+
 import {
   buildSuperagencyPageMetadata,
   loadSuperagencyPage, resolvePageSections,

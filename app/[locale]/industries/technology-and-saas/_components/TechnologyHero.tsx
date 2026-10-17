@@ -101,7 +101,9 @@ const TechnologyHero = ({
                         ? 'h-[95px] w-[74px] rounded-radius-sm object-contain lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]'
                         : 'h-[90px] w-[130px] rounded-radius-sm object-contain lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]'
             }
-          />
+              loading="eager"
+              fetchPriority="high"
+            />
         </figure>
       ))}
 

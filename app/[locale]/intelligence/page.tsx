@@ -1,14 +1,17 @@
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import BusinessProblems from '@/components/wow/wowintelligence/BusinessProblems'
 import IntelligenceFlowHero from '@/components/wow/wowintelligence/IntelligenceFlowHero'
-import IntelligenceClients from '@/components/wow/wowintelligence/IntelligenceClients'
-import IntelligenceProcess from '@/components/wow/wowintelligence/IntelligenceProcess'
-import OrderProcess from '@/components/wow/wowintelligence/OrderProcess'
-import IntelligenceRfq from '@/components/wow/wowintelligence/IntelligenceRfq'
 import type { Locale } from '@/i18n/config'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
+
+const OrderProcess = dynamic(() => import('@/components/wow/wowintelligence/OrderProcess'))
+const IntelligenceProcess = dynamic(() => import('@/components/wow/wowintelligence/IntelligenceProcess'))
+const IntelligenceClients = dynamic(() => import('@/components/wow/wowintelligence/IntelligenceClients'))
+const IntelligenceRfq = dynamic(() => import('@/components/wow/wowintelligence/IntelligenceRfq'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
+
 type Props = {
   params: Promise<{ locale: string }>
 }

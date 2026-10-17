@@ -61,7 +61,8 @@ const SalesRevenueHero = ({
                 width={800}
                 height={450}
                 className="h-full w-full object-cover"
-              />
+              priority
+            />
             </div>
           </RevealWrapper>
 

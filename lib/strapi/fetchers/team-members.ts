@@ -12,13 +12,14 @@ import {
   type CmsTeamSectionProps,
 } from '@/lib/strapi/mappers/page-sections';
 import type { StrapiPageTeamMembers, StrapiTeamMember } from '@/lib/strapi/types/pages';
+import { cache } from 'react';
 
 const TEAM_MEMBER_POPULATE = {
   image: true,
   socialLinks: true,
 } as const;
 
-export async function getSuperagencyTeamMembers(
+export const getSuperagencyTeamMembers = cache(async function getSuperagencyTeamMembers(
   locale: Locale,
 ): Promise<CmsTeamMember[] | null> {
   const members = await fetchCollection<StrapiTeamMember>('superagency-team-members', {
@@ -28,7 +29,7 @@ export async function getSuperagencyTeamMembers(
   });
 
   return mapPageTeamMembers({ members });
-}
+});
 
 async function hydrateTeamSectionFromCollection(
   section: StrapiPageTeamMembers,

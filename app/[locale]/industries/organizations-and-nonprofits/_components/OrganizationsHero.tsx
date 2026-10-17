@@ -28,6 +28,8 @@ const OrganizationsHero = ({
           <RevealWrapper className="reveal-me relative w-full lg:w-1/2">
             <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-md sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px] xl:min-h-[620px] 2xl:min-h-[700px]">
               <img
+                loading="eager"
+                fetchPriority="high"
                 src={heroImage}
                 alt="Mission-driven organization working with WOW Superagency"
                 className="absolute inset-0 h-full w-full object-cover"

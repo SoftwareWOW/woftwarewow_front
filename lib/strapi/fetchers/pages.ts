@@ -1,5 +1,6 @@
 import type { Locale } from '@/i18n/config';
 import { fetchCollection, fetchSingleType } from '@/lib/strapi/client';
+import { cache } from 'react';
 import {
   ABOUT_PARTNERS_PAGE_POPULATE,
   ABOUT_WHY_US_PAGE_POPULATE,
@@ -66,7 +67,7 @@ async function getSuperagencyPageFull(
   });
 }
 
-export async function getSuperagencyPage(
+export const getSuperagencyPage = cache(async function getSuperagencyPage(
   slug: string,
   locale: Locale,
 ): Promise<StrapiSuperagencyPage | null> {
@@ -183,7 +184,7 @@ export async function getSuperagencyPage(
   });
 
   return safe ?? shallow;
-}
+});
 
 export async function getFooterResourcePage(
   pageKey: string,

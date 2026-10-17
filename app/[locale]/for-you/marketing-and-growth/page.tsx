@@ -10,27 +10,30 @@ const DEFAULT_HERO = {
   description: 'Attract more customers, convert more opportunities, and grow smarter.',
 }
 
+import dynamic from 'next/dynamic'
 import LayoutOne from '@/components/shared/LayoutOne'
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 // 5. Built Around Your Goals — Home-18 OurExpertise
-import BuiltAroundGoals from './_components/BuiltAroundGoals'
 // 4. Connected Growth System — Home-16 ProcessV8
-import ConnectedGrowthSystem from './_components/ConnectedGrowthSystem'
 // 7. Growth in Action — Home-16 ProjectServicesV4
-import GrowthInAction from './_components/GrowthInAction'
 // 1. Hero — Home-16 HeroV16
 import MarketingGrowthHero from './_components/MarketingGrowthHero'
 // 6. Powered by Specialist Teams — Home-16 ServicesV14 card pattern
-import SpecialistTeams from './_components/SpecialistTeams'
 // 3. Everything You Need to Grow — Home-16 ServicesV14
-import EverythingToGrow from './_components/EverythingToGrow'
 // 2. Your Growth Challenges — Home-16 WhyChooseUsV5
 import GrowthChallenges from './_components/GrowthChallenges'
 import { buildSuperagencyPageMetadata, loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { buildPageHero } from '@/lib/strapi/resolve-page-hero'
+
+
+const EverythingToGrow = dynamic(() => import('./_components/EverythingToGrow'))
+const ConnectedGrowthSystem = dynamic(() => import('./_components/ConnectedGrowthSystem'))
+const BuiltAroundGoals = dynamic(() => import('./_components/BuiltAroundGoals'))
+const SpecialistTeams = dynamic(() => import('./_components/SpecialistTeams'))
+const GrowthInAction = dynamic(() => import('./_components/GrowthInAction'))
+const WowGrowthCta = dynamic(() => import('@/components/wow/LandascapComponets/WowGrowthCta'))
 
 type Props = {
   params: Promise<{ locale: string }>

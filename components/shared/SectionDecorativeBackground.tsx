@@ -14,7 +14,14 @@ export default function SectionDecorativeBackground({
 }: SectionDecorativeBackgroundProps) {
   return (
     <div className={wrapperClassName}>
-      <img src={src ?? fallbackSrc} alt="" aria-hidden className={imgClassName} />
+      <img
+        src={src ?? fallbackSrc}
+        alt=""
+        aria-hidden
+        className={imgClassName}
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   );
 }
