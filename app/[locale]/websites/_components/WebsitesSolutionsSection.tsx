@@ -1,9 +1,9 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import pricingBg from '@/public/images/pricing-gradient.png'
 import type { StaticImageData } from 'next/image'
-import Link from 'next/link'
 import { WEBSITES_SOLUTIONS } from './websites-content'
 
 type Plan = {
@@ -66,12 +66,13 @@ export default function WebsitesSolutionsSection() {
 
         <div className="grid grid-cols-1 items-stretch gap-[30px] md:grid-cols-2 xl:grid-cols-3">
           {pricingPlans.map((plan) => {
-            const { title, tagline, description, features, ctaText = defaultCtaText, ctaVariant = 'white', isFeatured, id } = plan
+            const { title, description, features, ctaText = defaultCtaText, ctaVariant = 'white', isFeatured, id } = plan
+            const buttonVariant = ctaVariant === 'primary' ? 'primary' : 'white'
 
             return (
               <RevealWrapper
                 key={id}
-                className="reveal-me relative flex min-h-[510px] w-full flex-col border bg-backgroundBody px-[30px] pb-28 pt-[30px] dark:border-dark dark:bg-dark"
+                className="reveal-me relative flex min-h-[510px] w-full flex-col border bg-backgroundBody px-[30px] pb-[30px] pt-[30px] dark:border-dark dark:bg-dark"
               >
                 {isFeatured ? (
                   <div className="absolute inset-0 h-full w-full bg-cover bg-no-repeat" style={{ backgroundImage: `url(${isFeatured.src})` }} />
@@ -83,7 +84,6 @@ export default function WebsitesSolutionsSection() {
                   </div>
                 </div>
 
-                <h3 className="relative mb-3 text-3xl font-normal leading-tight max-sm:text-2xl md:text-4xl">{tagline}</h3>
                 <p className="relative text-base leading-relaxed text-secondary/70 dark:text-backgroundBody/70">{description}</p>
 
                 <p className="relative mb-3 mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
@@ -98,15 +98,10 @@ export default function WebsitesSolutionsSection() {
                   ))}
                 </ul>
 
-                <div className="absolute bottom-8 w-[calc(100%-60px)]">
-                  <Link href={defaultCtaHref} className={`rv-button rv-button-${ctaVariant} w-full`}>
-                    <div className="rv-button-top !w-full !text-center">
-                      <span className="font-normal">{ctaText}</span>
-                    </div>
-                    <div className="rv-button-bottom !w-full !text-center">
-                      <span className="font-normal">{ctaText}</span>
-                    </div>
-                  </Link>
+                <div className="relative z-10 mt-auto w-full pt-8">
+                  <ButtonComponent href={defaultCtaHref} variant={buttonVariant} fullWidth>
+                    {ctaText}
+                  </ButtonComponent>
                 </div>
               </RevealWrapper>
             )

@@ -74,13 +74,16 @@ export default function WebsitesWhatWeBuildSection() {
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
+        <div className="mb-10 w-full text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">
-              {content.titleBefore} <InstrumentText>{content.titleAccent}</InstrumentText>
+            <h2 className="text-appear mx-auto w-full max-w-none lg:leading-[1.1]">
+              {content.titleBefore}
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
+              <InstrumentText className="block sm:inline">{content.titleAccent}</InstrumentText>
             </h2>
           </TextAppearAnimation>
         </div>

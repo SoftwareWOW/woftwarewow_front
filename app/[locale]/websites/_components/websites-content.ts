@@ -73,22 +73,6 @@ export const WEBSITES_PROBLEM = {
   },
 } as const
 
-export const WEBSITES_BUILT_TO_PERFORM = {
-  eyebrow: 'Built to Perform',
-  title: 'Designed for more than ',
-  accentTitle: 'looks.',
-  description:
-    'Every part of your website should help improve visibility, experience, conversion, and performance.',
-  items: [
-    { title: 'Conversion focused', description: 'Designed to turn more visitors into customers.' },
-    { title: 'SEO ready', description: 'Built with strong foundations for search visibility.' },
-    { title: 'Fast performance', description: 'Optimized for speed across modern devices.' },
-    { title: 'Mobile first', description: 'Built around the way customers browse today.' },
-    { title: 'Secure & reliable', description: 'Supported by dependable hosting and protection.' },
-    { title: 'Built to scale', description: 'Ready to evolve as your business grows.' },
-  ],
-} as const
-
 export const WEBSITES_WHAT_WE_BUILD = {
   eyebrow: 'WHAT WE BUILD',
   titleBefore: 'From Your First Website to Your Next Digital',
@@ -245,8 +229,8 @@ export const WEBSITES_PORTFOLIO = {
   titleAccent: 'Remembering.',
   description:
     'Every business has its own personality, audience, and goals. We create digital experiences that reflect those differences while keeping usability, performance, and business outcomes at the center.',
-  ctaLabel: 'Explore our creative work',
-  ctaHref: '/explore/case-studies',
+  ctaLabel: 'Start your project request',
+  ctaHref: '/quotation',
   projects: [
     {
       category: 'CONSULTING & PROFESSIONAL SERVICES',

@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { WEBSITES_PROBLEM } from './websites-content'
 
 const DotBullet = () => (
-  <span className="mt-2 inline-block size-1.5 shrink-0 rounded-full bg-secondary dark:bg-backgroundBody" aria-hidden />
+  <span className="mt-[0.45em] inline-block size-1.5 shrink-0 rounded-full bg-secondary dark:bg-backgroundBody" aria-hidden />
 )
 
 /** Layout copied from MarketingHoldbackSection — websites-specific content and bullets. */
@@ -27,16 +27,16 @@ export default function WebsitesProblemSection() {
             <InstrumentText>{content.titleAccent}</InstrumentText>
           </h3>
         </TextAppearAnimation>
-
+ <p className="mb-6 text-lg leading-[1.6] tracking-[0.36px] text-[#808080] lg:mb-8">{content.intro}</p>
         <RevealWrapper className="flex flex-col items-stretch gap-x-12 gap-y-10 lg:flex-row lg:gap-x-16">
           <div className="flex flex-col justify-center lg:w-[42%] xl:w-[40%]">
-            <p className="mb-6 text-lg leading-[1.6] tracking-[0.36px] text-[#808080] lg:mb-8">{content.intro}</p>
+           
             <p className="mb-4 text-base font-medium text-secondary dark:text-backgroundBody">{content.listHeader}</p>
-            <ul className="mb-8 [&>*:not(:last-child)]:mb-4 md:[&>*:not(:last-child)]:mb-5">
+            <ul className="mb-8 space-y-2 md:space-y-2.5">
               {content.painPoints.map((item) => (
                 <li
                   key={item.lead}
-                  className="flex list-none items-start gap-4 text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
+                  className="flex list-none items-start gap-3 text-[17px] leading-snug text-secondary/70 dark:text-backgroundBody/70"
                 >
                   <DotBullet />
                   <span>

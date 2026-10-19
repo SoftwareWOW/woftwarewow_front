@@ -3,7 +3,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { WEBSITES_WHY_WOW } from './websites-content'
 
-/** Layout copied from ElevateSmb — websites copy, no header CTA. */
+/** Why WOW Websites — numbered rows with balanced title/description scale on hover. */
 export default function WebsitesWhyWowSection() {
   const content = WEBSITES_WHY_WOW
   const rowItems = content.items.map((item, index) => ({
@@ -33,22 +33,22 @@ export default function WebsitesWhyWowSection() {
           </div>
         </div>
 
-        <div className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:dark:border-dark">
+        <div className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-secondary/10 [&>*:not(:last-child)]:dark:border-backgroundBody/10">
           {rowItems.map((item) => (
             <div
               key={item.id}
-              className="group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:scale-[1.01] hover:backdrop-blur-sm md:pb-10 md:pt-10"
+              className="group grid grid-cols-1 items-start gap-3 py-6 transition-colors duration-300 md:grid-cols-[minmax(2.75rem,3.25rem)_minmax(0,1fr)_minmax(0,24rem)] md:items-center md:gap-x-8 md:py-8 lg:gap-x-12"
             >
               <InstrumentText
                 variant="solid"
-                className="w-8 text-xl leading-[32px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody"
+                className="text-lg leading-none text-secondary/40 transition-colors duration-300 group-hover:text-secondary dark:text-backgroundBody/40 dark:group-hover:text-backgroundBody md:text-xl"
               >
-                0{item.id}
+                0{item.id}.
               </InstrumentText>
-              <h3 className="mt-2 text-2xl font-normal leading-tight tracking-[-2px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody sm:text-[40px] md:w-[520px] md:text-[48px] lg:text-[64px] xl:text-[72px] xl:leading-[1.15] xl:tracking-[-2.88px]">
+              <h3 className="text-3xl font-normal leading-tight tracking-[-0.02em] text-secondary/40 transition-all duration-300 group-hover:text-secondary dark:text-backgroundBody/40 dark:group-hover:text-backgroundBody sm:text-[2rem] md:text-4xl lg:text-5xl lg:leading-[1.1] lg:tracking-[-0.03em]">
                 {item.title}
               </h3>
-              <p className="ml-2.5 self-center text-xs text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[370px] md:text-base md:leading-[1.6] md:tracking-[0.32px]">
+              <p className="text-base leading-relaxed text-secondary/40 transition-colors duration-300 group-hover:text-secondary/90 dark:text-backgroundBody/40 dark:group-hover:text-backgroundBody/90 md:text-right md:text-lg md:leading-[1.6]">
                 {item.description}
               </p>
             </div>

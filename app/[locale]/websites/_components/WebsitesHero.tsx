@@ -9,7 +9,7 @@ export default function WebsitesHero() {
   const hero = WEBSITES_HERO
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 pt-20 transition-colors duration-300 dark:bg-background sm:pt-24 md:px-4 lg:pt-[120px] xl:pt-[110px]">
+    <section className="relative overflow-hidden bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[70px] xl:pt-[80px]">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-[45%] h-[min(80vw,640px)] w-[min(90vw,900px)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl dark:opacity-60"

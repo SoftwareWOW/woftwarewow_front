@@ -45,7 +45,7 @@ export default function WebsitesFrameworkSection() {
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <div className="min-w-0 flex-1 md:order-1">
-            <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
+            <ul className="relative space-y-5 border-secondary dark:border-backgroundBody md:border-l md:space-y-6">
               {steps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">
                   <div
@@ -63,7 +63,7 @@ export default function WebsitesFrameworkSection() {
                   </div>
                   <div className="ml-[30px]">
                     <h3>{step.title}</h3>
-                    <p className="mt-3 max-w-[483px] text-[#808080]">{step.description}</p>
+                    <p className="mt-2 max-w-[483px] text-[#808080]">{step.description}</p>
                   </div>
                 </li>
               ))}
