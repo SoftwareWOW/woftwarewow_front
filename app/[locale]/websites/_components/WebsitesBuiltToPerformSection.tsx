@@ -14,7 +14,34 @@ const DocIcon = () => (
   </svg>
 )
 
-/** Business outcomes grid — copy and layout per websites design (MORE THAN WEB DESIGN). */
+type OutcomeItem = (typeof WEBSITES_OUTCOMES.items)[number]
+
+const OutcomeFlipCard = ({ item, className }: { item: OutcomeItem; className?: string }) => (
+  <RevealWrapper
+    className={`group relative min-h-[410px] w-full overflow-hidden border-b border-[#e5e5e5] dark:border-dark ${className ?? ''}`}
+  >
+    <div>
+      <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+        <span>
+          <DocIcon />
+        </span>
+        <h5 className="mb-4 mt-9 text-4xl leading-[1.2] -tracking-[1.08px]">{item.title}</h5>
+        <p className="text-[#808080] dark:text-backgroundBody/70">{item.description}</p>
+      </div>
+      <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-12 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
+        <span className="inline-flex [&_path]:fill-backgroundBody dark:[&_path]:fill-secondary">
+          <DocIcon />
+        </span>
+        <h5 className="mb-3 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary">
+          {item.title}
+        </h5>
+        <p className="text-backgroundBody dark:text-secondary">{item.description}</p>
+      </div>
+    </div>
+  </RevealWrapper>
+)
+
+/** Business outcomes grid — flip-card hover matches AiCapabilities (ServicesV12). */
 export default function WebsitesBuiltToPerformSection() {
   const content = WEBSITES_OUTCOMES
 
@@ -37,22 +64,11 @@ export default function WebsitesBuiltToPerformSection() {
 
         <div className="grid grid-cols-1 border-t border-[#e5e5e5] dark:border-dark md:grid-cols-3">
           {content.items.map((item, index) => (
-            <RevealWrapper
+            <OutcomeFlipCard
               key={item.title}
-              className={`group flex min-h-[220px] flex-col border-b border-[#e5e5e5] px-[30px] py-10 transition-colors duration-300 hover:bg-[#eef0f3] dark:border-dark md:border-r md:last:border-r-0 dark:hover:bg-[#eef0f3] ${
-                index >= 3 ? 'md:border-b-0' : ''
-              }`}
-            >
-              <span className="mb-6 inline-flex transition-colors duration-300 group-hover:[&_path]:fill-secondary dark:group-hover:[&_path]:fill-secondary">
-                <DocIcon />
-              </span>
-              <h5 className="mb-2.5 text-secondary transition-colors duration-300 group-hover:text-secondary dark:text-backgroundBody dark:group-hover:text-secondary">
-                {item.title}
-              </h5>
-              <p className="text-[#808080] transition-colors duration-300 group-hover:text-secondary/80 dark:text-backgroundBody/70 dark:group-hover:text-secondary/80">
-                {item.description}
-              </p>
-            </RevealWrapper>
+              item={item}
+              className={`md:border-r md:last:border-r-0 ${index >= 3 ? 'md:border-b-0' : ''}`}
+            />
           ))}
         </div>
 
