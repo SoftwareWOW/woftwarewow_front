@@ -2,7 +2,6 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { cn } from '@/utils/cn'
 import type { ReactNode } from 'react'
 import { WEBSITES_WHAT_WE_BUILD } from './websites-content'
 
@@ -33,58 +32,30 @@ const IconBolt = () => (
 
 const SERVICE_ICONS: ReactNode[] = [<IconBars key="bars" />, <IconBolt key="bolt" />, <IconBars key="bars2" />, <IconBolt key="bolt2" />]
 
-function ServiceCard({ title, icon, highlighted, wide }: { title: string; icon: ReactNode; highlighted?: boolean; wide?: boolean }) {
+function ServiceCard({ title, icon }: { title: string; icon: ReactNode }) {
   return (
-    <div
-      className={cn(
-        'group flex min-h-[100px] flex-1 items-center gap-5 rounded-radius-md border px-[30px] py-8 transition-colors duration-300 dark:border-dark md:min-h-[112px]',
-        highlighted
-          ? 'border-primary/40 bg-gradient-to-br from-[#292757] via-[#1a1840] to-[#0f0e24] dark:border-primary/50'
-          : 'hover:border-primary/30',
-        wide && 'lg:min-h-[120px]',
-      )}
-    >
+    <div className="flex min-h-[100px] flex-1 items-center gap-5 rounded-radius-md border px-[30px] py-8 dark:border-dark md:min-h-[112px]">
       <span>{icon}</span>
-      <h5 className={cn('mb-0 text-lg leading-snug', highlighted && 'text-backgroundBody')}>{title}</h5>
+      <h5 className="mb-0 text-lg leading-snug">{title}</h5>
     </div>
   )
 }
 
-function ServiceRow({
-  items,
-  startIndex,
-  wide,
-  highlightIndex,
-  globalStartIndex,
-}: {
-  items: { title: string }[]
-  startIndex: number
-  wide?: boolean
-  highlightIndex: number
-  globalStartIndex: number
-}) {
+function ServiceRow({ items, startIndex, wide }: { items: { title: string }[]; startIndex: number; wide?: boolean }) {
   return (
     <RevealWrapper className="reveal-me flex flex-col gap-[30px] sm:flex-row sm:flex-wrap sm:justify-center">
-      {items.map((item, i) => {
-        const absoluteIndex = globalStartIndex + i
-        return (
-          <div
-            key={item.title}
-            className={
-              wide
-                ? 'w-full sm:w-[calc(50%-15px)] lg:max-w-[480px]'
-                : 'w-full sm:w-[calc(50%-15px)] lg:w-[calc(33.333%-20px)] lg:max-w-[390px]'
-            }
-          >
-            <ServiceCard
-              title={item.title}
-              icon={SERVICE_ICONS[(startIndex + i) % SERVICE_ICONS.length]}
-              highlighted={highlightIndex === absoluteIndex}
-              wide={wide}
-            />
-          </div>
-        )
-      })}
+      {items.map((item, i) => (
+        <div
+          key={item.title}
+          className={
+            wide
+              ? 'w-full sm:w-[calc(50%-15px)] lg:max-w-[480px]'
+              : 'w-full sm:w-[calc(50%-15px)] lg:w-[calc(33.333%-20px)] lg:max-w-[390px]'
+          }
+        >
+          <ServiceCard title={item.title} icon={SERVICE_ICONS[(startIndex + i) % SERVICE_ICONS.length]} />
+        </div>
+      ))}
     </RevealWrapper>
   )
 }
@@ -93,7 +64,6 @@ function ServiceRow({
 export default function WebsitesWhatWeBuildSection() {
   const content = WEBSITES_WHAT_WE_BUILD
   const items = [...content.items]
-  const highlightIndex = content.highlightIndex
 
   const rows = [
     { slice: items.slice(0, 3), wide: false, start: 0 },
@@ -117,14 +87,7 @@ export default function WebsitesWhatWeBuildSection() {
 
         <div className="flex flex-col gap-[30px]">
           {rows.map((row) => (
-            <ServiceRow
-              key={row.start}
-              items={row.slice}
-              startIndex={row.start}
-              wide={row.wide}
-              highlightIndex={highlightIndex}
-              globalStartIndex={row.start}
-            />
+            <ServiceRow key={row.start} items={row.slice} startIndex={row.start} wide={row.wide} />
           ))}
         </div>
       </div>

@@ -93,7 +93,6 @@ export const WEBSITES_WHAT_WE_BUILD = {
   eyebrow: 'WHAT WE BUILD',
   titleBefore: 'From Your First Website to Your Next Digital',
   titleAccent: 'Growth Engine',
-  highlightIndex: 4,
   items: [
     { title: 'Business Websites' },
     { title: 'eCommerce Websites' },
@@ -278,6 +277,12 @@ export const WEBSITES_PORTFOLIO = {
       image: '/images/wow/Hero/devision/Image-copy-scaled.jpeg',
     },
   ],
+} as const
+
+export const WEBSITES_CTA = {
+  accentText: 'Ready to',
+  mainText: 'build your website?',
+  ariaLabel: 'Contact WOW Websites',
 } as const
 
 export const WEBSITES_FAQS = [
