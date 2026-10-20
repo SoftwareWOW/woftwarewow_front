@@ -6,7 +6,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WorkflowDiagram, {
-  type WorkflowRowLayout,
+  buildSixStepSnakeRowLayouts,
   type WorkflowStep,
 } from '@/components/wow/shared/WorkflowDiagram'
 import {
@@ -14,6 +14,7 @@ import {
   Cpu,
   Database,
   MessageCircleQuestion,
+  TrendingUp,
   Users,
   type LucideIcon,
 } from 'lucide-react'
@@ -26,6 +27,7 @@ const iconMap: Record<(typeof INTELLIGENCE_PRACTICAL_AI.workflowSteps)[number]['
   database: Database,
   users: Users,
   calendar: CalendarClock,
+  trending: TrendingUp,
 }
 
 export default function IntelligencePracticalAiHeroSection() {
@@ -39,16 +41,14 @@ export default function IntelligencePracticalAiHeroSection() {
       tone: index % 2 === 0 ? 'primary' : 'accent',
     }))
 
-    const rowLayouts: WorkflowRowLayout[] = [
-      { steps: workflowSteps.slice(0, 3), direction: 'right', turn: 'right' },
-      { steps: [workflowSteps[4]!, workflowSteps[3]!], direction: 'left', turn: null },
-    ]
-
-    return { workflowSteps, rowLayouts }
+    return {
+      workflowSteps,
+      rowLayouts: buildSixStepSnakeRowLayouts(),
+    }
   }, [content.workflowSteps])
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[70px] xl:pt-[80px]">
+    <section className="relative overflow-x-clip bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[70px] xl:pt-[80px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-20"

@@ -34,6 +34,11 @@ export const INTELLIGENCE_PRACTICAL_AI = {
       caption: 'Send follow-up message to customer',
       icon: 'calendar' as const,
     },
+    {
+      title: 'Insights & Growth',
+      caption: 'Learn from outcomes and improve over time',
+      icon: 'trending' as const,
+    },
   ],
 } as const
 

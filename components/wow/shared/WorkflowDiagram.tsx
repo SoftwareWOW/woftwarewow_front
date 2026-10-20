@@ -17,7 +17,8 @@ export type WorkflowStep = {
 }
 
 export type WorkflowRowLayout = {
-  steps: WorkflowStep[]
+  /** Step indices into the `steps` array (stable; avoids reference / indexOf issues). */
+  stepIndices: number[]
   direction: 'left' | 'right'
   turn: 'left' | 'right' | null
 }
@@ -45,7 +46,7 @@ function useReveal<T extends HTMLElement>() {
           }
         })
       },
-      { threshold: 0.3, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0.15, rootMargin: '0px 0px 0px 0px' },
     )
     items.forEach((item) => observer.observe(item))
     return () => observer.disconnect()
@@ -185,6 +186,14 @@ function MobileConnector({ delay = 0 }: { delay?: number }) {
   )
 }
 
+/** 01 → 02 → 03, turn down, then 06 ← 05 ← 04 */
+export function buildSixStepSnakeRowLayouts(_steps?: WorkflowStep[]): WorkflowRowLayout[] {
+  return [
+    { stepIndices: [0, 1, 2], direction: 'right', turn: 'right' },
+    { stepIndices: [5, 4, 3], direction: 'left', turn: null },
+  ]
+}
+
 export type WorkflowDiagramProps = {
   steps: WorkflowStep[]
   rowLayouts: WorkflowRowLayout[]
@@ -205,7 +214,7 @@ export default function WorkflowDiagram({
   const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
-    <div ref={ref} className={`relative mx-auto min-w-0 ${maxWidthClassName} ${className}`}>
+    <div ref={ref} className={`relative mx-auto min-w-0 overflow-visible ${maxWidthClassName} ${className}`}>
       <div className="flex flex-col items-center gap-0 md:hidden">
         {steps.map((step, index) => (
           <Fragment key={`${step.label}-${index}`}>
@@ -219,15 +228,16 @@ export default function WorkflowDiagram({
         {rowLayouts.map((row, rowIndex) => (
           <div key={rowIndex}>
             <div className={`grid ${GRID_COLS} items-start gap-x-1 lg:gap-x-2`}>
-              {row.steps.map((step, i) => {
-                const stepIndex = steps.indexOf(step)
+              {row.stepIndices.map((stepIndex, i) => {
+                const step = steps[stepIndex]
+                if (!step) return null
 
                 return (
                   <Fragment key={`${step.label}-${stepIndex}`}>
-                    <div className="flex justify-center">
+                    <div className="flex min-w-0 justify-center">
                       <Node step={step} index={stepIndex} shown={visible.has(stepIndex)} />
                     </div>
-                    {i < row.steps.length - 1 && (
+                    {i < row.stepIndices.length - 1 && (
                       <Connector delay={stepIndex * 120} direction={row.direction} />
                     )}
                   </Fragment>

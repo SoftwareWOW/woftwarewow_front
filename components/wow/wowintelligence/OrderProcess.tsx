@@ -2,7 +2,7 @@
 'use client'
 
 import WorkflowDiagram, {
-  type WorkflowRowLayout,
+  buildSixStepSnakeRowLayouts,
   type WorkflowStep,
 } from '@/components/wow/shared/WorkflowDiagram'
 
@@ -60,26 +60,7 @@ const steps: WorkflowStep[] = [
   },
 ]
 
-// --------------------------------------------
-// Diagram Layout
-//
-// 01 → 02 → 03
-//           ↓
-// 06 ← 05 ← 04
-// --------------------------------------------
-
-const rowLayouts: WorkflowRowLayout[] = [
-  {
-    steps: steps.slice(0, 3),
-    direction: 'right',
-    turn: 'right',
-  },
-  {
-    steps: [steps[5]!, steps[4]!, steps[3]!],
-    direction: 'left',
-    turn: null,
-  },
-]
+const rowLayouts = buildSixStepSnakeRowLayouts(steps)
 
 // --------------------------------------------
 // Component Props
