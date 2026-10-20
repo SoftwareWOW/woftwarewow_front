@@ -44,6 +44,7 @@ export default async function WowIntelligencePage({ params }: Props) {
       <IntelligenceClients
         eyebrow={INTELLIGENCE_TESTIMONIALS.eyebrow}
         title={INTELLIGENCE_TESTIMONIALS.title}
+        clients={[...INTELLIGENCE_TESTIMONIALS.clients]}
       />
       <IntelligenceFlexibleStartSection />
       <IntelligenceRfq />

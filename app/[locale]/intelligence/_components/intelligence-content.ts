@@ -208,9 +208,61 @@ export const INTELLIGENCE_FLEXIBLE_START = {
   ],
 } as const
 
+/** Client quote length — keep all `reviewText` values equal for marquee card alignment. */
+export const INTELLIGENCE_CLIENT_REVIEW_CHAR_LENGTH = 140
+
+export const INTELLIGENCE_CLIENT_REVIEWS = [
+  {
+    id: 1,
+    reviewText:
+      'WOW Intelligence mapped our best automation opportunities quickly. From day one, their team delivered practical AI our staff uses every day.',
+    authorName: 'Marvin McKinney',
+    authorRole: 'Customer Experience Manager, eCommerce',
+    authorImage: '/images/wow/Hero/client/Michael Carter.png',
+    rating: 5,
+  },
+  {
+    id: 2,
+    reviewText:
+      'Lead scoring moved off spreadsheets into one smart flow. We close more deals with less admin, and reps focus on selling well each day today.',
+    authorName: 'Wade Warren',
+    authorRole: 'Sales Manager, B2B Services',
+    authorImage: '/images/wow/Hero/client/Daniel Foster.png',
+    rating: 5,
+  },
+  {
+    id: 3,
+    reviewText:
+      'They connected CRM, chat, and support into one intelligence layer. Updates sync automatically so teams see the full customer story each day.',
+    authorName: 'Arlene McCoy',
+    authorRole: 'Founder, Bright Path Consulting',
+    authorImage: '/images/wow/Hero/client/Emma Richardson.jpg',
+    rating: 5,
+  },
+  {
+    id: 4,
+    reviewText:
+      'Predictive insights gave leadership visibility we lacked before. Decisions are faster now because recommendations use live data across team.',
+    authorName: 'Sophia Bennett',
+    authorRole: 'COO, Bennett Health Group',
+    authorImage: '/images/wow/Hero/client/Sophia Bennett.png',
+    rating: 4,
+  },
+  {
+    id: 5,
+    reviewText:
+      'Automation removed repetitive tasks that consumed hrs each week. ROI showed in month one, and productivity keeps rising with their team now.',
+    authorName: 'Sarah Johnson',
+    authorRole: 'Founder, Green Earth Services',
+    authorImage: '/images/wow/Hero/client/Avatar.png',
+    rating: 5,
+  },
+] as const
+
 export const INTELLIGENCE_TESTIMONIALS = {
   eyebrow: 'TESTIMONIALS',
   title: 'Client Experiences',
+  clients: INTELLIGENCE_CLIENT_REVIEWS,
 } as const
 
 export const INTELLIGENCE_CTA = {

@@ -48,7 +48,7 @@ export default function IntelligencePracticalAiHeroSection() {
   }, [content.workflowSteps])
 
   return (
-    <section className="relative overflow-x-clip bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[70px] xl:pt-[80px]">
+    <section className="relative overflow-x-clip bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[50px] xl:pt-[60px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-20"

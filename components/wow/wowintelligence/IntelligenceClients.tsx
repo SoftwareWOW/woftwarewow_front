@@ -14,11 +14,12 @@ type ClientReview = {
   rating: number
 }
 
+/** Default copy — intelligence page passes equal-length quotes from `intelligence-content`. */
 const defaultClients: ClientReview[] = [
   {
     id: 1,
     reviewText:
-      'Working with WOW Intelligence was an absolute game changer for our business. From the very first meeting, they understood where automation would actually help.',
+      'WOW Intelligence mapped our best automation opportunities quickly. From day one, their team delivered practical AI our staff uses every day.',
     authorName: 'Marvin McKinney',
     authorRole: 'Customer Experience Manager, eCommerce',
     authorImage: '/images/wow/Hero/client/Michael Carter.png',
@@ -27,7 +28,7 @@ const defaultClients: ClientReview[] = [
   {
     id: 2,
     reviewText:
-      'Lead qualification went from manual spreadsheets to automated scoring. We close more deals with less effort and our team finally has time to sell.',
+      'Lead scoring moved off spreadsheets into one smart flow. We close more deals with less admin, and reps focus on selling well each day today.',
     authorName: 'Wade Warren',
     authorRole: 'Sales Manager, B2B Services',
     authorImage: '/images/wow/Hero/client/Daniel Foster.png',
@@ -36,7 +37,7 @@ const defaultClients: ClientReview[] = [
   {
     id: 3,
     reviewText:
-      'Their team connected our CRM, help desk, and chat into one intelligence layer. Everything stays in sync automatically.',
+      'They connected CRM, chat, and support into one intelligence layer. Updates sync automatically so teams see the full customer story each day.',
     authorName: 'Arlene McCoy',
     authorRole: 'Founder, Bright Path Consulting',
     authorImage: '/images/wow/Hero/client/Emma Richardson.jpg',
@@ -45,7 +46,7 @@ const defaultClients: ClientReview[] = [
   {
     id: 4,
     reviewText:
-      'Predictive analytics gave us visibility we never had before. We make faster decisions backed by real business data.',
+      'Predictive insights gave leadership visibility we lacked before. Decisions are faster now because recommendations use live data across team.',
     authorName: 'Sophia Bennett',
     authorRole: 'COO, Bennett Health Group',
     authorImage: '/images/wow/Hero/client/Sophia Bennett.png',
@@ -54,7 +55,7 @@ const defaultClients: ClientReview[] = [
   {
     id: 5,
     reviewText:
-      'Workflow automation removed hours of repetitive work every week. The ROI was clear within the first month.',
+      'Automation removed repetitive tasks that consumed hrs each week. ROI showed in month one, and productivity keeps rising with their team now.',
     authorName: 'Sarah Johnson',
     authorRole: 'Founder, Green Earth Services',
     authorImage: '/images/wow/Hero/client/Avatar.png',
@@ -111,7 +112,7 @@ const IntelligenceClients = ({
                     </span>
                   ))}
                 </div>
-                <p className="mb-4 line-clamp-5 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
+                <p className="mb-4 min-h-[8.5rem] line-clamp-5 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
                   {item.reviewText}
                 </p>
                 <figcaption className="flex shrink-0 items-center justify-between gap-4">
