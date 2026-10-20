@@ -79,15 +79,13 @@ const IntelligenceRfq = () => {
   }
 
   return (
-    <section className="relative overflow-hidden px-3 md:px-4">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]"
-      >
-        <Image src={gradientBg} alt="" priority={false} />
+    <section className="relative isolate overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      {/* Same gradient backdrop as shared FAQ (home-08) */}
+      <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]">
+        <Image src={gradientBg} alt="gradient-bg" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+      <div className="container relative z-10">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper>
             <SectionLabel className="mb-5">Intelligence FAQ</SectionLabel>
