@@ -117,28 +117,28 @@ export const INTELLIGENCE_HOW_WE_WORK = {
     "We don't begin by forcing an AI product into your business. We first understand what you're trying to improve, then determine the right combination of AI, automation, data, and integration.",
   steps: [
     {
-      step: 'STEP 01',
+      step: 'Step 01',
       title: 'Discover',
       description: 'Understand your business, workflows, systems, bottlenecks, and goals.',
     },
     {
-      step: 'STEP 02',
+      step: 'Step 02',
       title: 'Identify',
       description: 'Find high-value opportunities where AI or automation can make a meaningful difference.',
     },
     {
-      step: 'STEP 03',
+      step: 'Step 03',
       title: 'Design',
       description:
         'Define the solution, workflow, integrations, data requirements, and human involvement.',
     },
     {
-      step: 'STEP 04',
+      step: 'Step 04',
       title: 'Build & Connect',
       description: 'Develop the solution and connect it with the appropriate business systems.',
     },
     {
-      step: 'STEP 05',
+      step: 'Step 05',
       title: 'Test & Improve',
       description: 'Validate workflows and refine the solution as usage, data, and business needs evolve.',
     },

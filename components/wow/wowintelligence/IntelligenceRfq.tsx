@@ -4,9 +4,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { useState } from 'react'
-import gradientBg from '@/public/images/services-gradient-bg-2.png'
+import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const INITIAL_VISIBLE_COUNT = 4
 
@@ -79,29 +79,12 @@ const IntelligenceRfq = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-      </div>
-
+    <section className="relative overflow-hidden px-3 md:px-4">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
-        }}
-      />
-
-      <div className="absolute left-1/2 top-[47%] -z-10 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
-        <Image src={gradientBg} alt="" aria-hidden />
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]"
+      >
+        <Image src={gradientBg} alt="" priority={false} />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1320px]">

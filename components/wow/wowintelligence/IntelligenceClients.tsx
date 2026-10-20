@@ -101,17 +101,17 @@ const IntelligenceClients = ({
               <div
                 key={item.id}
                 className={cn(
-                  'mr-[30px] flex h-[340px] w-[min(24rem,calc(100vw-2rem))] max-w-full flex-col rounded-radius-sm border border-secondary/10 bg-backgroundBody p-[30px] dark:border-dark dark:bg-dark',
+                  'mr-[30px] flex min-h-[300px] w-[min(24rem,calc(100vw-2rem))] max-w-full flex-col rounded-radius-sm border border-secondary/10 bg-backgroundBody p-[30px] dark:border-dark dark:bg-dark',
                 )}
               >
-                <div className="mb-5 flex shrink-0 items-center gap-1">
+                <div className="mb-4 flex shrink-0 items-center gap-1">
                   {Array.from({ length: item.rating }).map((_, idx) => (
                     <span key={idx}>
                       <StarIcon />
                     </span>
                   ))}
                 </div>
-                <p className="mb-6 line-clamp-5 flex-1 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
+                <p className="mb-4 line-clamp-5 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
                   {item.reviewText}
                 </p>
                 <figcaption className="flex shrink-0 items-center justify-between gap-4">
