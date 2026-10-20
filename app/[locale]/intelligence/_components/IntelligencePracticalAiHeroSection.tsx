@@ -51,7 +51,55 @@ function useReveal<T extends HTMLElement>() {
   return { ref, visible }
 }
 
-function WorkflowConnector({ delay = 0 }: { delay?: number }) {
+function useScaleToFit() {
+  const outerRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
+  const [layout, setLayout] = useState({ scale: 1, height: 0 })
+
+  useEffect(() => {
+    const outer = outerRef.current
+    const inner = innerRef.current
+    if (!outer || !inner) return
+
+    const update = () => {
+      const isRow = window.matchMedia('(min-width: 768px)').matches
+      if (!isRow) {
+        setLayout({ scale: 1, height: inner.offsetHeight })
+        return
+      }
+
+      const available = outer.clientWidth
+      const needed = inner.scrollWidth
+      const scale = needed > 0 && available > 0 ? Math.min(1, available / needed) : 1
+      setLayout({ scale, height: inner.offsetHeight * scale })
+    }
+
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(outer)
+    observer.observe(inner)
+    window.addEventListener('resize', update)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
+  return { outerRef, innerRef, scale: layout.scale, height: layout.height }
+}
+
+function WorkflowConnector({ delay = 0, direction = 'horizontal' }: { delay?: number; direction?: 'horizontal' | 'vertical' }) {
+  if (direction === 'vertical') {
+    return (
+      <div className="flex flex-col items-center py-1 md:hidden" aria-hidden>
+        <span
+          className="h-5 w-[2px] animate-flow-dash-march-y bg-[repeating-linear-gradient(180deg,#615CCE_0_8px,transparent_8px_14px)] bg-[length:2px_14px]"
+          style={{ animationDelay: `${delay}ms` }}
+        />
+      </div>
+    )
+  }
+
   return (
     <div
       className="hidden shrink-0 items-center self-center md:flex md:w-8 lg:w-12 xl:w-16"
@@ -106,6 +154,7 @@ function WorkflowCard({
 export default function IntelligencePracticalAiHeroSection() {
   const content = INTELLIGENCE_PRACTICAL_AI
   const { ref, visible } = useReveal<HTMLDivElement>()
+  const { outerRef, innerRef, scale, height } = useScaleToFit()
 
   return (
     <section className="relative overflow-hidden bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[70px] xl:pt-[80px]">
@@ -143,20 +192,41 @@ export default function IntelligencePracticalAiHeroSection() {
           </TextAppearAnimation>
         </div>
 
-        <div ref={ref} className="relative mx-auto max-w-6xl">
-          <div className="flex items-stretch gap-0 overflow-x-auto pb-4 md:justify-center md:overflow-visible md:pb-0">
-            {content.workflowSteps.map((step, index) => (
-              <Fragment key={step.title}>
-                <WorkflowCard
-                  index={index}
-                  title={step.title}
-                  caption={step.caption}
-                  iconKey={step.icon}
-                  shown={visible.has(index)}
-                />
-                {index < content.workflowSteps.length - 1 && <WorkflowConnector delay={index * 120} />}
-              </Fragment>
-            ))}
+        <div ref={ref} className="relative mx-auto min-w-0 max-w-6xl">
+          <div
+            ref={outerRef}
+            className="flex w-full min-w-0 justify-center overflow-hidden"
+            style={{ height: height > 0 ? height : undefined }}
+          >
+            <div
+              style={{
+                transform: scale < 1 ? `scale(${scale})` : undefined,
+                transformOrigin: 'top center',
+              }}
+            >
+              <div
+                ref={innerRef}
+                className="flex flex-col items-center gap-0 md:flex-row md:items-stretch md:justify-center"
+              >
+                {content.workflowSteps.map((step, index) => (
+                  <Fragment key={step.title}>
+                    <WorkflowCard
+                      index={index}
+                      title={step.title}
+                      caption={step.caption}
+                      iconKey={step.icon}
+                      shown={visible.has(index)}
+                    />
+                    {index < content.workflowSteps.length - 1 && (
+                      <>
+                        <WorkflowConnector delay={index * 120} direction="vertical" />
+                        <WorkflowConnector delay={index * 120} direction="horizontal" />
+                      </>
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
