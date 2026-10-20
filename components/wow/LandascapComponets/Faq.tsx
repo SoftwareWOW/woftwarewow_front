@@ -75,11 +75,29 @@ const faqData = [
 
 type FaqProps = {
   faqs?: typeof faqData
+  sectionLabel?: string
+  titleBefore?: string
+  titleAccent?: string
+  description?: string
+  viewAllHref?: string
+  initialActiveId?: number | null
 }
 
-const Faq = ({ faqs: faqsProp }: FaqProps) => {
+const DEFAULT_SECTION_LABEL = 'Expertise'
+const DEFAULT_DESCRIPTION =
+  'Answers to common questions about our services, process, pricing, and how we help businesses grow.'
+
+const Faq = ({
+  faqs: faqsProp,
+  sectionLabel = DEFAULT_SECTION_LABEL,
+  titleBefore,
+  titleAccent,
+  description = DEFAULT_DESCRIPTION,
+  viewAllHref = '/rfq',
+  initialActiveId = null,
+}: FaqProps) => {
   const faqItems = faqsProp ?? faqData
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(initialActiveId)
   const [showAll, setShowAll] = useState(false)
 
   const visibleFaqs = showAll ? faqItems : faqItems.slice(0, INITIAL_VISIBLE_COUNT)
@@ -112,27 +130,37 @@ const Faq = ({ faqs: faqsProp }: FaqProps) => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
-              <SectionLabel className="mb-5">Expertise</SectionLabel>
+              <SectionLabel className="mb-5">{sectionLabel}</SectionLabel>
             </RevealWrapper>
 
             <h2 className="text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-              <InstrumentText className="block font-normal tracking-[-0.06em]">People</InstrumentText>
-              <br />
-              <TextAppearAnimation>
-                <span className="text-appear block font-normal">Asked Us</span>
-              </TextAppearAnimation>
+              {titleBefore && titleAccent ? (
+                <TextAppearAnimation>
+                  <span className="text-appear block font-normal">
+                    {titleBefore} <InstrumentText>{titleAccent}</InstrumentText>
+                  </span>
+                </TextAppearAnimation>
+              ) : (
+                <>
+                  <InstrumentText className="block font-normal tracking-[-0.06em]">People</InstrumentText>
+                  <br />
+                  <TextAppearAnimation>
+                    <span className="text-appear block font-normal">Asked Us</span>
+                  </TextAppearAnimation>
+                </>
+              )}
             </h2>
           </div>
 
           <div className="max-w-[420px] lg:text-right">
             <TextAppearAnimation>
               <p className="text-appear text-base leading-relaxed text-[#808080] transition-colors duration-300 md:text-lg">
-                Answers to common questions about our services, process, pricing, and how we help businesses grow.
+                {description}
               </p>
             </TextAppearAnimation>
                   <RevealWrapper className="mt-6 flex justify-end md:mt-8">
                           <ButtonComponentList>
-                            <ButtonComponent href="/rfq"   variant="white">
+                            <ButtonComponent href={viewAllHref} variant="white">
                         View All FAQ
                             </ButtonComponent>
                           </ButtonComponentList>
