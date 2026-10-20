@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   Inbox,
   BrainCircuit,
@@ -251,26 +251,43 @@ function MobileConnector({ delay = 0 }: { delay?: number }) {
   );
 }
 
-export default function OrderProcess() {
+type OrderProcessProps = {
+  hideHeader?: boolean
+  badge?: string
+  title?: ReactNode
+  description?: string
+}
+
+export default function OrderProcess({
+  hideHeader = false,
+  badge = 'AI Workflow',
+  title = (
+    <>
+      From customer request to{' '}
+      <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">business growth</span>
+    </>
+  ),
+  description = 'Nine automated steps showing how AI supports the entire delivery process — planning, routing, reviewing and advising — without replacing your team.',
+}: OrderProcessProps) {
   const { ref, visible } = useReveal<HTMLDivElement>();
 
   return (
     <section className="relative overflow-hidden px-3 md:px-4">
-      <div className="relative mx-auto max-w-3xl text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-medium tracking-[0.22em] text-muted-foreground uppercase backdrop-blur dark:border-white/10 dark:bg-dark/60 dark:text-dark-100">
-          AI Workflow
-        </span>
-        <h1 className="mt-4 font-display text-3xl leading-[1.08] tracking-tight text-foreground dark:text-backgroundBody sm:mt-5 sm:text-4xl lg:text-5xl xl:text-6xl">
-          From customer request to{' '}
-          <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">business growth</span>
-        </h1>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-dark-100 sm:mt-4 md:text-base">
-          Nine automated steps showing how AI supports the entire delivery process —
-          planning, routing, reviewing and advising — without replacing your team.
-        </p>
-      </div>
+      {!hideHeader && (
+        <div className="relative mx-auto max-w-3xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-medium tracking-[0.22em] text-muted-foreground uppercase backdrop-blur dark:border-white/10 dark:bg-dark/60 dark:text-dark-100">
+            {badge}
+          </span>
+          <h1 className="mt-4 font-display text-3xl leading-[1.08] tracking-tight text-foreground dark:text-backgroundBody sm:mt-5 sm:text-4xl lg:text-5xl xl:text-6xl">
+            {title}
+          </h1>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-dark-100 sm:mt-4 md:text-base">
+            {description}
+          </p>
+        </div>
+      )}
 
-      <div ref={ref} className="relative mx-auto mt-8 max-w-5xl sm:mt-10 lg:mt-12">
+      <div ref={ref} className={`relative mx-auto max-w-5xl ${hideHeader ? 'mt-0' : 'mt-8 sm:mt-10 lg:mt-12'}`}>
         <div className="flex flex-col items-center gap-0 md:hidden">
           {steps.map((step, index) => (
             <Fragment key={step.label}>

@@ -1,35 +1,45 @@
 'use client'
 
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { cn } from '@/utils/cn'
 import Marquee from 'react-fast-marquee'
-import RevealWrapper from '@/components/animation/RevealWrapper'
 
-const clients = [
+type ClientReview = {
+  id: number
+  reviewText: string
+  authorName: string
+  authorRole: string
+  authorImage: string
+  rating: number
+}
+
+const defaultClients: ClientReview[] = [
   {
     id: 1,
     reviewText:
-      'WOW Intelligence cut our customer response time in half. The AI assistant handles inquiries while our team focuses on complex cases.',
-    authorName: 'Michael Carter',
-    authorRole: 'Operations Director, Bright Solutions',
+      'Working with WOW Intelligence was an absolute game changer for our business. From the very first meeting, they understood where automation would actually help.',
+    authorName: 'Marvin McKinney',
+    authorRole: 'Customer Experience Manager, eCommerce',
     authorImage: '/images/wow/Hero/client/Michael Carter.png',
     rating: 5,
   },
   {
     id: 2,
     reviewText:
-      'Lead qualification went from manual spreadsheets to automated scoring. We close more deals with less effort.',
-    authorName: 'Emma Richardson',
-    authorRole: 'Head of Sales, Nova Retail',
-    authorImage: '/images/wow/Hero/client/Emma Richardson.jpg',
+      'Lead qualification went from manual spreadsheets to automated scoring. We close more deals with less effort and our team finally has time to sell.',
+    authorName: 'Wade Warren',
+    authorRole: 'Sales Manager, B2B Services',
+    authorImage: '/images/wow/Hero/client/Daniel Foster.png',
     rating: 5,
   },
   {
     id: 3,
     reviewText:
       'Their team connected our CRM, help desk, and chat into one intelligence layer. Everything stays in sync automatically.',
-    authorName: 'Daniel Foster',
-    authorRole: 'CEO, Foster Logistics',
-    authorImage: '/images/wow/Hero/client/Daniel Foster.png',
+    authorName: 'Arlene McCoy',
+    authorRole: 'Founder, Bright Path Consulting',
+    authorImage: '/images/wow/Hero/client/Emma Richardson.jpg',
     rating: 5,
   },
   {
@@ -63,19 +73,25 @@ function StarIcon() {
   )
 }
 
-const IntelligenceClients = () => {
+type IntelligenceClientsProps = {
+  eyebrow?: string
+  title?: string
+  clients?: ClientReview[]
+}
+
+const IntelligenceClients = ({
+  eyebrow = 'TESTIMONIALS',
+  title = 'Client Experiences',
+  clients = defaultClients,
+}: IntelligenceClientsProps) => {
   return (
-    <section className="relative overflow-hidden px-3 md:px-4">
+    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="mx-auto mb-8 max-w-[1320px] text-center md:mb-14">
-        <RevealWrapper className="rv-badge">
-          <span className="rv-badge-text">Testimonial</span>
+        <RevealWrapper className="mb-3 flex justify-center">
+          <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper>
-          <h2 className="my-3 text-foreground dark:text-backgroundBody">
-            Our respected happy{' '}
-            <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">clients</span>{' '}
-            <span className="font-instrument italic !bg-none !bg-clip-border !text-inherit">say</span>
-          </h2>
+          <h2 className="my-3 text-foreground dark:text-backgroundBody">{title}</h2>
         </RevealWrapper>
       </div>
       <RevealWrapper>
@@ -85,7 +101,7 @@ const IntelligenceClients = () => {
               <div
                 key={item.id}
                 className={cn(
-                  'mr-[30px] flex w-[min(24rem,calc(100vw-2rem))] max-w-full flex-col rounded-radius-sm border p-[30px] shadow-none dark:border-dark',
+                  'mr-[30px] flex h-[340px] w-[min(24rem,calc(100vw-2rem))] max-w-full flex-col rounded-radius-sm border border-secondary/10 bg-backgroundBody p-[30px] dark:border-dark dark:bg-dark',
                 )}
               >
                 <div className="mb-5 flex shrink-0 items-center gap-1">
@@ -95,7 +111,7 @@ const IntelligenceClients = () => {
                     </span>
                   ))}
                 </div>
-                <p className="mb-6 flex-1 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
+                <p className="mb-6 line-clamp-5 flex-1 text-[17px] leading-[1.6] text-foreground dark:text-backgroundBody">
                   {item.reviewText}
                 </p>
                 <figcaption className="flex shrink-0 items-center justify-between gap-4">
@@ -103,7 +119,9 @@ const IntelligenceClients = () => {
                     <h6 className="text-[22px] leading-[1.2] text-foreground dark:text-backgroundBody">
                       {item.authorName}
                     </h6>
-                    <p className="text-[15px] leading-[1.6] text-muted-foreground">{item.authorRole}</p>
+                    <p className="text-[15px] leading-[1.6] text-muted-foreground dark:text-backgroundBody/70">
+                      {item.authorRole}
+                    </p>
                   </div>
                   <img
                     src={item.authorImage}
