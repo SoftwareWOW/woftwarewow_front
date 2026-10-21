@@ -23,7 +23,7 @@ function SalesToolLogo({
   invertInDark?: boolean
 }) {
   return (
-    <div className="mx-3 flex shrink-0 items-center justify-center sm:mx-4 md:mx-5">
+    <div className="mx-6 flex h-14 shrink-0 items-center justify-center sm:mx-5 md:mx-8 md:h-16">
       <span
         className={[
           'inline-flex items-center justify-center',
@@ -35,7 +35,7 @@ function SalesToolLogo({
         <Icon
           icon={icon}
           aria-label={name}
-          className={`h-14 w-auto sm:h-16 md:h-[4.75rem] ${logoMarkClass}`}
+          className={`h-10 max-h-full w-auto max-w-[7.75rem] object-contain sm:h-11 sm:max-w-[8.25rem] md:h-12 md:max-w-[9rem] ${logoMarkClass}`}
         />
       </span>
     </div>
