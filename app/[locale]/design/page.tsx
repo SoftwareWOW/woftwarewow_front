@@ -7,6 +7,8 @@ import DesignHero from './_components/DesignHero'
 import DesignHowWeWorkSection from './_components/DesignHowWeWorkSection'
 import DesignPortfolioSection from './_components/DesignPortfolioSection'
 import DesignServicesSection from './_components/DesignServicesSection'
+import { DESIGN_CTA } from './_components/design-content'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
 import WowEcosystem from '@/components/wow/WowEcosystem'
 import { getDictionary } from '@/i18n/dictionary'
@@ -64,6 +66,13 @@ export default async function WowDesignPage({ params }: Props) {
       <DesignCreativeToolsSection />
       <WowEcosystem ecosystem={ecosystem} />
       <DesignFaqSection />
+      <div className="mb-3">
+        <WowGrowthCta
+          accentText={DESIGN_CTA.accentText}
+          mainText={DESIGN_CTA.mainText}
+          ariaLabel={DESIGN_CTA.ariaLabel}
+        />
+      </div>
     </div>
   )
 }

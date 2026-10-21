@@ -120,27 +120,25 @@ export const DESIGN_APPROACH = {
   titleAccent: 'Identity.',
   description:
     'Every memorable brand starts with an idea. We shape that idea into a visual identity, then bring it to life across the experiences and touchpoints that matter to your customers.',
+  ctaLabel: 'Start a Project',
+  ctaHref: '/meet',
   steps: [
     {
-      number: '01.',
+      id: 1,
       title: 'Imagine',
       description: 'Discover the vision, audience, personality, and creative direction.',
-      titleOpacity: 1,
     },
     {
-      number: '02.',
+      id: 2,
       title: 'Create',
       description: 'Turn the creative direction into a distinctive, cohesive design system.',
-      titleOpacity: 0.7,
     },
     {
-      number: '03.',
+      id: 3,
       title: 'Express',
       description: 'Apply the identity consistently across physical and digital experiences.',
-      titleOpacity: 0.4,
     },
   ],
-  footer: 'One idea. One identity. Endless ways to express it.',
 } as const
 
 export const DESIGN_HOW_WE_WORK = {
@@ -252,15 +250,22 @@ export const DESIGN_CREATIVE_TOOLS = {
     'Great creative work starts with ideas, not software. We use design and production tools suited to the project—from visual identity and digital interfaces to motion and multimedia.',
 } as const
 
+/** Same Iconify ids as branding OurTools — verified in repo. */
 export const DESIGN_CREATIVE_TOOL_ICONS = [
-  { id: 1, name: 'Adobe Photoshop', icon: 'logos:adobe-photoshop' },
+  { id: 1, name: 'Photoshop', icon: 'logos:adobe-photoshop' },
   { id: 2, name: 'Blender', icon: 'logos:blender' },
-  { id: 3, name: 'Adobe After Effects', icon: 'logos:adobe-after-effects', highlight: true },
+  { id: 3, name: 'After Effects', icon: 'logos:adobe-after-effects' },
   { id: 4, name: 'Affinity Designer', icon: 'simple-icons:affinitydesigner' },
   { id: 5, name: 'Figma', icon: 'logos:figma' },
-  { id: 6, name: 'Adobe Illustrator', icon: 'logos:adobe-illustrator' },
+  { id: 6, name: 'Illustrator', icon: 'logos:adobe-illustrator' },
   { id: 7, name: 'CorelDRAW', icon: 'simple-icons:coreldraw' },
 ] as const
+
+export const DESIGN_CTA = {
+  accentText: 'Have an idea?',
+  mainText: "Let's bring it to life.",
+  ariaLabel: 'Start your creative project with WOW Design',
+} as const
 
 export const DESIGN_FAQ_HEADER = {
   sectionLabel: 'FAQ',

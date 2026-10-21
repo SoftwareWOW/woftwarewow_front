@@ -4,57 +4,33 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import { Icon, addCollection } from '@iconify/react'
 import logos from '@iconify-json/logos/icons.json'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
-import Marquee from 'react-fast-marquee'
 import { DESIGN_CREATIVE_TOOL_ICONS } from './design-content'
 
 addCollection(logos)
 addCollection(simpleIcons)
 
-const logoMarkClass =
-  'opacity-85 brightness-0 dark:opacity-95 dark:brightness-0 dark:invert'
-
-function CreativeToolLogo({
-  icon,
-  name,
-  highlight,
-}: {
-  icon: string
-  name: string
-  highlight?: boolean
-}) {
+function CreativeToolLogo({ icon, name }: { icon: string; name: string }) {
   return (
-    <div className="mx-4 flex h-14 shrink-0 items-center justify-center sm:mx-5 md:mx-6 md:h-16">
-      <span
-        className={[
-          'inline-flex items-center justify-center rounded-radius-sm border p-3 transition-colors',
-          highlight
-            ? 'border-primary/40 bg-primary/15 dark:border-primary/50 dark:bg-primary/25'
-            : 'border-black/10 bg-transparent dark:border-white/10',
-        ].join(' ')}
-      >
-        <Icon
-          icon={icon}
-          aria-label={name}
-          className={`h-8 w-auto max-w-[3rem] object-contain sm:h-9 md:h-10 ${highlight ? 'opacity-100' : logoMarkClass}`}
-        />
-      </span>
-    </div>
+    <figure className="flex size-14 shrink-0 items-center justify-center overflow-hidden sm:size-16 md:size-[4.5rem]">
+      <Icon
+        icon={icon}
+        width={44}
+        height={44}
+        aria-label={name}
+        className="max-h-full max-w-full text-secondary dark:text-backgroundBody"
+      />
+    </figure>
   )
 }
 
 export default function DesignCreativeToolsMarquee() {
   return (
-    <RevealWrapper className="relative mt-6 overflow-hidden sm:mt-10">
-      <Marquee pauseOnHover speed={35} gradient={false} autoFill>
+    <RevealWrapper className="relative mt-6 overflow-x-auto overflow-y-hidden sm:mt-10">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-6 px-2 sm:gap-x-10 md:gap-x-12">
         {DESIGN_CREATIVE_TOOL_ICONS.map((tool) => (
-          <CreativeToolLogo
-            key={tool.id}
-            icon={tool.icon}
-            name={tool.name}
-            highlight={'highlight' in tool ? tool.highlight : undefined}
-          />
+          <CreativeToolLogo key={tool.id} icon={tool.icon} name={tool.name} />
         ))}
-      </Marquee>
+      </div>
     </RevealWrapper>
   )
 }

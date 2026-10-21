@@ -1,62 +1,68 @@
-import gradientBg from '@/public/images/gradient-bg.png'
-import Image from 'next/image'
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { DESIGN_APPROACH } from './design-content'
 
+/** Layout: same as about/partners WaysToPartner (Home-15 ElevateBrand — numbered hover rows). */
 export default function DesignApproachSection() {
   const content = DESIGN_APPROACH
 
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
-      <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.2] max-lg:scale-y-[2.8]">
-        <Image src={gradientBg} alt="" aria-hidden="true" />
-      </div>
+    <section>
       <div className="container">
-        <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-14 md:flex-row lg:justify-between">
-          <div className="flex-1 md:self-start">
-            <RevealWrapper className="reveal-me mb-4 md:mb-5">
+        <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-16 md:flex-row md:items-center lg:justify-start">
+          <div className="flex-1">
+            <RevealWrapper className="mb-3">
               <SectionLabel>{content.eyebrow}</SectionLabel>
             </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className="text-appear">
+            <RevealWrapper className="reveal-me">
+              <h2>
                 {content.titleBefore}
                 <InstrumentText>{content.titleAccent}</InstrumentText>
               </h2>
-            </TextAppearAnimation>
+            </RevealWrapper>
           </div>
-          <div className="flex-1 max-md:w-full md:self-end">
-            <TextAppearAnimation>
-              <p className="text-appear max-w-lg text-[#808080] md:place-self-end md:text-right">{content.description}</p>
-            </TextAppearAnimation>
-          </div>
-        </div>
-
-        <div className="border-t border-black/10 dark:border-white/10">
-          {content.steps.map((step) => (
-            <RevealWrapper
-              key={step.number}
-              className="grid grid-cols-1 items-center gap-4 border-b border-black/10 py-8 dark:border-white/10 md:grid-cols-12 md:gap-6 md:py-10 lg:py-12"
-            >
-              <p className="font-instrument text-lg italic text-[#808080] md:col-span-2 md:text-xl">{step.number}</p>
-              <h3
-                className="text-3xl font-normal leading-tight text-secondary transition-opacity dark:text-backgroundBody md:col-span-4 md:text-4xl lg:text-5xl"
-                style={{ opacity: step.titleOpacity }}
-              >
-                {step.title}
-              </h3>
-              <p className="text-base leading-relaxed text-[#808080] md:col-span-6 md:text-right md:text-lg">
-                {step.description}
+          <div className="w-full md:w-80 lg:w-96">
+            <RevealWrapper className="reveal-me">
+              <p className="max-w-lg text-base leading-relaxed text-[#808080] max-md:text-justify md:place-self-end md:text-right">
+                {content.description}
               </p>
             </RevealWrapper>
-          ))}
+            <RevealWrapper className="mt-5 justify-self-end max-md:w-full md:mt-10">
+              <ButtonComponentList
+                className="flex justify-end max-md:justify-center"
+                itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto"
+              >
+                <ButtonComponent href={content.ctaHref} variant="secondary">
+                  {content.ctaLabel}
+                </ButtonComponent>
+              </ButtonComponentList>
+            </RevealWrapper>
+          </div>
         </div>
 
-        <RevealWrapper className="reveal-me mt-10 text-center md:mt-14">
-          <p className="text-base text-[#808080] md:text-lg">{content.footer}</p>
-        </RevealWrapper>
+        <div className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:dark:border-dark">
+          {content.steps.map((item) => (
+            <div
+              key={item.id}
+              className="group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:scale-[1.01] hover:backdrop-blur-sm md:pb-10 md:pt-10"
+            >
+              <InstrumentText
+                variant="solid"
+                className="w-8 text-xl leading-[32px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody"
+              >
+                0 {item.id}
+              </InstrumentText>
+              <h3 className="mt-2 text-2xl font-normal leading-tight tracking-[-2px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody sm:text-[40px] md:w-[520px] md:text-[48px] lg:text-[64px] xl:text-[72px] xl:leading-[1.15] xl:tracking-[-2.88px]">
+                {item.title}
+              </h3>
+              <p className="ml-2.5 self-center text-xs text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[370px] md:text-base md:leading-[1.6] md:tracking-[0.32px]">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

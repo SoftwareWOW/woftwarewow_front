@@ -41,7 +41,11 @@ export default function DesignPortfolioSection() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {content.projects.map((project) => (
-            <RevealWrapper key={project.title} className="reveal-me group relative overflow-hidden rounded-radius-sm">
+            <RevealWrapper
+              key={project.title}
+              as="article"
+              className="reveal-me group relative overflow-hidden rounded-radius-sm"
+            >
               <Link href={project.href} className="block">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-sm">
                   <Image
@@ -56,10 +60,15 @@ export default function DesignPortfolioSection() {
                   <h3 className="text-lg font-normal text-[#0D0D0D] transition-colors duration-300 group-hover:text-primary dark:text-[#F2F2F2] md:text-2xl">
                     {project.title}
                   </h3>
-                  <figure className="relative size-12 shrink-0 overflow-hidden rounded-radius-sm bg-primary md:size-14">
+                  <figure className="relative size-12 shrink-0 cursor-pointer overflow-hidden rounded-radius-sm bg-primary md:size-14">
                     <ArrowUpRight
                       aria-hidden
-                      className="absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 stroke-white text-white md:size-7"
+                      className="absolute left-1/2 top-1/2 size-6 -translate-x-1/2 -translate-y-1/2 !stroke-white !text-white opacity-100 transition-all duration-500 group-hover:-translate-y-8 group-hover:translate-x-6 group-hover:opacity-0 md:size-7"
+                      strokeWidth={2}
+                    />
+                    <ArrowUpRight
+                      aria-hidden
+                      className="absolute size-6 -translate-x-3 translate-y-8 !stroke-white !text-white opacity-0 transition-all duration-500 group-hover:translate-x-[14px] group-hover:translate-y-[14px] group-hover:opacity-100 md:size-7"
                       strokeWidth={2}
                     />
                   </figure>
