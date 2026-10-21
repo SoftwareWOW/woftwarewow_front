@@ -7,19 +7,13 @@ import AccelerateProblemSection from './_components/AccelerateProblemSection'
 import AccelerateFaqSection from './_components/AccelerateFaqSection'
 import AccelerateStatsMarqueeSection from './_components/AccelerateStatsMarqueeSection'
 import { ACCELERATE_CTA, ACCELERATE_SOLUTIONS } from './_components/accelerate-content'
-import Marquee from '@/components/wow/shared/Marquee'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
 import WowEcosystem from '@/components/wow/WowEcosystem'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
-import {
-  mapStrapiEcosystem,
-  mapStrapiPartnerLogos,
-  mapStrapiTestimonialExtras,
-  mapStrapiTestimonials,
-} from '@/lib/strapi/mappers/superagency'
+import { mapStrapiEcosystem, mapStrapiTestimonialExtras, mapStrapiTestimonials } from '@/lib/strapi/mappers/superagency'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 
@@ -49,23 +43,13 @@ export default async function WowAcceleratePage({ params }: Props) {
   const ecosystem = mapStrapiEcosystem(cms.ecosystem, dictionary.ecosystem)
   const superAgencyClient = mapStrapiTestimonials(cms.testimonials, dictionary.superAgencyClient)
   const testimonialExtras = mapStrapiTestimonialExtras(cms.testimonials)
-  const partnerLogos = mapStrapiPartnerLogos(cms.partnerLogos)
 
   const solutions = ACCELERATE_SOLUTIONS
-
-  const logoMarquee = (
-    <Marquee
-      logos={partnerLogos ?? undefined}
-      showSectionLabel={false}
-      showExploreCta={false}
-      minimalLogoCells
-    />
-  )
 
   return (
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <AccelerateHero />
-      <AccelerateStatsMarqueeSection logoMarquee={logoMarquee} />
+      <AccelerateStatsMarqueeSection />
       <AccelerateProblemSection />
       <AuthorityFoundation
         eyebrow={solutions.eyebrow}

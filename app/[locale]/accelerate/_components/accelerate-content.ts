@@ -14,6 +14,19 @@ export const ACCELERATE_HERO = {
   },
 } as const
 
+/** Sales / CRM / automation tools shown in the stats marquee (Iconify ids). */
+export const ACCELERATE_SALES_TOOLS = [
+  { id: 1, name: 'Salesforce', icon: 'logos:salesforce', invertInDark: true },
+  { id: 2, name: 'Zapier', icon: 'simple-icons:zapier' },
+  { id: 3, name: 'Make', icon: 'simple-icons:make' },
+  { id: 4, name: 'n8n', icon: 'simple-icons:n8n' },
+  { id: 5, name: 'monday.com', icon: 'logos:monday' },
+  { id: 6, name: 'Trello', icon: 'simple-icons:trello' },
+  { id: 7, name: 'ClickUp', icon: 'simple-icons:clickup' },
+  { id: 8, name: 'HubSpot', icon: 'logos:hubspot' },
+  { id: 9, name: 'Pipedrive', icon: 'logos:pipedrive' },
+] as const
+
 export const ACCELERATE_STATS = {
   heading: 'Join in the journey',
   bodyParagraph:

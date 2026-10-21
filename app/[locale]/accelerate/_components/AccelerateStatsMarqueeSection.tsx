@@ -2,14 +2,10 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import CounterAnimation from '@/utils/CounterAnimation'
-import type { ReactNode } from 'react'
+import AccelerateSalesToolsMarquee from './AccelerateSalesToolsMarquee'
 import { ACCELERATE_STATS } from './accelerate-content'
 
-type Props = {
-  logoMarquee?: ReactNode
-}
-
-export default function AccelerateStatsMarqueeSection({ logoMarquee }: Props) {
+export default function AccelerateStatsMarqueeSection() {
   const { heading, bodyParagraph, stats } = ACCELERATE_STATS
 
   return (
@@ -47,9 +43,10 @@ export default function AccelerateStatsMarqueeSection({ logoMarquee }: Props) {
               {bodyParagraph}
             </p>
           </RevealWrapper>
+
+          <AccelerateSalesToolsMarquee />
         </div>
       </section>
-      {logoMarquee}
     </>
   )
 }
