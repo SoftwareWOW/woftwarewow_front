@@ -14,11 +14,11 @@ const ProblemSteps = ({ steps }: { steps: readonly string[] }) => (
     {steps.map((step, index) => {
       const isLast = index === steps.length - 1
       return (
-        <div key={step} className="flex w-full items-start gap-3">
+        <div key={step} className="flex w-full flex-row flex-nowrap items-center gap-3">
           {isLast ? (
-            <CircleX aria-hidden className="mt-0.5 size-5 shrink-0 opacity-70 text-secondary dark:text-backgroundBody" strokeWidth={1.5} />
+            <CircleX aria-hidden className="size-5 shrink-0 opacity-70 text-secondary dark:text-backgroundBody" strokeWidth={1.5} />
           ) : (
-            <TriangleAlert aria-hidden className="mt-0.5 size-5 shrink-0 opacity-70 text-secondary dark:text-backgroundBody" strokeWidth={1.5} />
+            <TriangleAlert aria-hidden className="size-5 shrink-0 opacity-70 text-secondary dark:text-backgroundBody" strokeWidth={1.5} />
           )}
           <p className="text-base leading-[1.5] text-secondary/70 dark:text-backgroundBody/70 md:text-[17px]">{step}</p>
         </div>
@@ -28,15 +28,19 @@ const ProblemSteps = ({ steps }: { steps: readonly string[] }) => (
 )
 
 const SolutionSteps = ({ steps }: { steps: readonly string[] }) => (
-  <div className="flex flex-col items-start text-left">
-    {steps.map((step, index) => (
-      <div key={step} className="w-full">
-        <p className="text-base leading-[1.5] text-secondary dark:text-backgroundBody md:text-[17px]">{step}</p>
-        {index < steps.length - 1 && (
-          <ArrowDown aria-hidden className="my-3 size-5 opacity-40 text-secondary dark:text-backgroundBody" strokeWidth={1.5} />
-        )}
-      </div>
-    ))}
+  <div className="flex flex-col items-start gap-3 text-left">
+    {steps.map((step, index) =>
+      index === 0 ? (
+        <p key={step} className="text-base leading-[1.5] text-secondary dark:text-backgroundBody md:text-[17px]">
+          {step}
+        </p>
+      ) : (
+        <div key={step} className="flex w-full flex-row flex-nowrap items-center gap-3">
+          <ArrowDown aria-hidden className="size-5 shrink-0 opacity-40 text-secondary dark:text-backgroundBody" strokeWidth={1.5} />
+          <p className="text-base leading-[1.5] text-secondary dark:text-backgroundBody md:text-[17px]">{step}</p>
+        </div>
+      ),
+    )}
   </div>
 )
 

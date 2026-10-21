@@ -9,9 +9,17 @@ import SectionLabel from './SectionLabel'
 
 type MarqueeProps = {
   logos?: Array<{ id: number; logo: string; darkLogo: string; alt: string }>
+  showSectionLabel?: boolean
+  showExploreCta?: boolean
+  minimalLogoCells?: boolean
 }
 
-const Marquee: React.FC<MarqueeProps> = ({ logos: logosProp }) => {
+const Marquee: React.FC<MarqueeProps> = ({
+  logos: logosProp,
+  showSectionLabel = true,
+  showExploreCta = true,
+  minimalLogoCells = false,
+}) => {
   const logos = logosProp ?? data
   const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
 
@@ -26,9 +34,11 @@ const Marquee: React.FC<MarqueeProps> = ({ logos: logosProp }) => {
   return (
     <section className="relative overflow-hidden px-3 md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
-        <RevealWrapper className="mb-10 flex justify-center lg:mb-20">
-          <SectionLabel>Trusted By Businesses, Partners & Communities</SectionLabel>
-        </RevealWrapper>
+        {showSectionLabel ? (
+          <RevealWrapper className="mb-10 flex justify-center lg:mb-20">
+            <SectionLabel>Trusted By Businesses, Partners & Communities</SectionLabel>
+          </RevealWrapper>
+        ) : null}
 
         <div
           onMouseEnter={handleMouseEnter}
@@ -39,7 +49,11 @@ const Marquee: React.FC<MarqueeProps> = ({ logos: logosProp }) => {
             {logos.map((item) => (
               <div
                 key={item.id}
-                className="z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark"
+                className={
+                  minimalLogoCells
+                    ? 'z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-transparent bg-transparent'
+                    : 'z-50 flex h-24 w-48 flex-shrink-0 items-center justify-center border border-secondary/10 bg-backgroundBody dark:border-backgroundBody/10 dark:bg-dark'
+                }
               >
                 <img
                   src={item.logo}
@@ -60,13 +74,15 @@ const Marquee: React.FC<MarqueeProps> = ({ logos: logosProp }) => {
           </div>
         </div>
 
-        <RevealWrapper className="mt-7 flex justify-center md:mt-14">
-          <ButtonComponentList>
-            <ButtonComponent href="/solutions" variant="white">
-              Explore Our Solutions
-            </ButtonComponent>
-          </ButtonComponentList>
-        </RevealWrapper>
+        {showExploreCta ? (
+          <RevealWrapper className="mt-7 flex justify-center md:mt-14">
+            <ButtonComponentList>
+              <ButtonComponent href="/solutions" variant="white">
+                Explore Our Solutions
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
+        ) : null}
       </div>
     </section>
   )

@@ -1,11 +1,15 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import Marquess from '@/components/wow/LandascapComponets/Marquee'
 import CounterAnimation from '@/utils/CounterAnimation'
+import type { ReactNode } from 'react'
 import { ACCELERATE_STATS } from './accelerate-content'
 
-export default function AccelerateStatsMarqueeSection() {
+type Props = {
+  logoMarquee?: ReactNode
+}
+
+export default function AccelerateStatsMarqueeSection({ logoMarquee }: Props) {
   const { heading, bodyParagraph, stats } = ACCELERATE_STATS
 
   return (
@@ -45,7 +49,7 @@ export default function AccelerateStatsMarqueeSection() {
           </RevealWrapper>
         </div>
       </section>
-      <Marquess />
+      {logoMarquee}
     </>
   )
 }

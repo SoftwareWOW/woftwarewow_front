@@ -256,7 +256,7 @@ export const ACCELERATE_FAQ_HEADER = {
   titleAccent: 'Accelerate?',
   description:
     'Every sales operation is different. We start by understanding your current process before recommending what needs to change.',
-  viewAllHref: '/rfq',
+  viewAllHref: '/faq',
 } as const
 
 export const ACCELERATE_CTA = {
