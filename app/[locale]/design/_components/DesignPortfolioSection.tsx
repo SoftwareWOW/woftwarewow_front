@@ -14,7 +14,7 @@ export default function DesignPortfolioSection() {
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+        <div className="mb-8 flex flex-col gap-8 md:mb-12 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
           <div className="max-w-3xl">
             <RevealWrapper className="mb-3">
               <SectionLabel>{content.eyebrow}</SectionLabel>

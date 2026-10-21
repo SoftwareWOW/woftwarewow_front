@@ -28,7 +28,7 @@ export default function DesignFaqSection() {
   return (
     <section className="relative overflow-hidden px-3 md:px-4">
       <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
               <SectionLabel className="mb-5">{header.sectionLabel}</SectionLabel>

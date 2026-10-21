@@ -12,7 +12,7 @@ export default function DesignChallengeSection() {
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="mb-10 text-center md:mb-16">
+        <div className="mb-8 text-center md:mb-12">
           <RevealWrapper className="mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
@@ -61,7 +61,7 @@ export default function DesignChallengeSection() {
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="reveal-me mt-10 flex justify-center md:mt-14">
+        <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-10">
           <ButtonComponentList>
             <ButtonComponent href={content.ctaHref} variant="white">
               {content.ctaLabel}

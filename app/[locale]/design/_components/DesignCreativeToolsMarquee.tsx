@@ -25,7 +25,7 @@ function CreativeToolLogo({ icon, name }: { icon: string; name: string }) {
 
 export default function DesignCreativeToolsMarquee() {
   return (
-    <RevealWrapper className="relative mt-6 overflow-x-auto overflow-y-hidden sm:mt-10">
+    <RevealWrapper className="relative mt-6 overflow-x-auto overflow-y-hidden md:mt-8">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-6 px-2 sm:gap-x-10 md:gap-x-12">
         {DESIGN_CREATIVE_TOOL_ICONS.map((tool) => (
           <CreativeToolLogo key={tool.id} icon={tool.icon} name={tool.name} />

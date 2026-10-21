@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import HeroHoverImages from '@/app/[locale]/packages/enterprise-infrastructure/_components/HeroHoverImages'
+import DesignHeroHoverImages from './DesignHeroHoverImages'
 import { DESIGN_HERO } from './design-content'
 
 export default function DesignHero() {
@@ -47,7 +47,7 @@ export default function DesignHero() {
           </div>
         </RevealWrapper>
       </div>
-      <HeroHoverImages images={[...hero.images]} />
+      <DesignHeroHoverImages images={[...hero.images]} />
     </section>
   )
 }

@@ -46,27 +46,29 @@ export default async function WowDesignPage({ params }: Props) {
   const testimonialExtras = mapStrapiTestimonialExtras(cms.testimonials)
 
   return (
-    <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+    <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
       <DesignHero />
       <DesignPortfolioSection />
       <DesignChallengeSection />
       <DesignServicesSection />
       <DesignApproachSection />
       <DesignHowWeWorkSection />
-      <WowSuperAgencyClient
-        superAgencyClient={superAgencyClient}
-        clientImages={
-          Object.keys(testimonialExtras.clientImages).length ? testimonialExtras.clientImages : undefined
-        }
-        reviewCaseStudies={
-          Object.keys(testimonialExtras.reviewCaseStudies).length ? testimonialExtras.reviewCaseStudies : undefined
-        }
-      />
+      <div className="-mt-10 sm:-mt-12 md:-mt-16 lg:-mt-20">
+        <WowSuperAgencyClient
+          superAgencyClient={superAgencyClient}
+          clientImages={
+            Object.keys(testimonialExtras.clientImages).length ? testimonialExtras.clientImages : undefined
+          }
+          reviewCaseStudies={
+            Object.keys(testimonialExtras.reviewCaseStudies).length ? testimonialExtras.reviewCaseStudies : undefined
+          }
+        />
+      </div>
       <DesignFlexibleStartSection />
       <DesignCreativeToolsSection />
       <WowEcosystem ecosystem={ecosystem} />
       <DesignFaqSection />
-      <div className="mb-3">
+      <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
         <WowGrowthCta
           accentText={DESIGN_CTA.accentText}
           mainText={DESIGN_CTA.mainText}

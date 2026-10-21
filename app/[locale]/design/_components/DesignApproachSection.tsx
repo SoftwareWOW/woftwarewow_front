@@ -11,7 +11,7 @@ export default function DesignApproachSection() {
   return (
     <section>
       <div className="container">
-        <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-16 md:flex-row md:items-center lg:justify-start">
+        <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-12 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="mb-3">
               <SectionLabel>{content.eyebrow}</SectionLabel>

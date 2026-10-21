@@ -29,7 +29,7 @@ export default function DesignFlexibleStartSection() {
   return (
     <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="mb-7 text-center lg:mb-14">
+        <div className="mb-8 text-center md:mb-12">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{section.eyebrow}</SectionLabel>
           </RevealWrapper>
@@ -96,7 +96,7 @@ export default function DesignFlexibleStartSection() {
           })}
         </div>
 
-        <div className="mt-14 text-center md:mt-20">
+        <div className="mt-10 text-center md:mt-12">
           <TextAppearAnimation>
             <h2 className="text-appear mb-4 text-2xl md:text-3xl lg:text-4xl">
               <InstrumentText>{section.footer.titleAccent}</InstrumentText>

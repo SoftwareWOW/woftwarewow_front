@@ -10,10 +10,10 @@ export default function DesignServicesSection() {
   const content = DESIGN_SERVICES
 
   return (
-    <section className="bg-background pb-14 pt-14 transition-colors duration-300 dark:bg-background md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="mb-8 text-center md:mb-20">
-          <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
+        <div className="mb-8 text-center md:mb-12">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
@@ -54,7 +54,7 @@ export default function DesignServicesSection() {
           ))}
         </div>
 
-        <RevealWrapper className="reveal-me mt-7 flex justify-center md:mt-14">
+        <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-10">
           <ButtonComponentList>
             <ButtonComponent href={content.ctaHref} variant="white">
               {content.ctaLabel}

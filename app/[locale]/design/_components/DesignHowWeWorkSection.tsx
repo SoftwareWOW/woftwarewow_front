@@ -11,7 +11,7 @@ export default function DesignHowWeWorkSection() {
   return (
     <section>
       <div className="container">
-        <div className="mb-10 text-center md:mb-20">
+        <div className="mb-8 text-center md:mb-12">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
@@ -45,7 +45,7 @@ export default function DesignHowWeWorkSection() {
           ))}
         </div>
 
-        <RevealWrapper className="reveal-me mt-7 flex justify-center md:mt-14">
+        <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-10">
           <ButtonComponentList>
             <ButtonComponent href={content.ctaHref} variant="white">
               {content.ctaLabel}
