@@ -20,6 +20,7 @@ import MarketingIndustriesCarousel from './_components/MarketingIndustriesCarous
 import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import Faq from '@/components/wow/LandascapComponets/Faq'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 export const revalidate = 60
 
 type Props = {
@@ -49,6 +50,7 @@ export default async function WowMarketingPage({ params }: Props) {
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <MarketingHero />
       <MarketingPlatformsIntro logos={partnerLogos ?? undefined} />
+      <WowDivisionsMarquee />
       <MarketingHoldbackSection />
       <MarketingApproachGrid />
       <MarketingServicesGrid />

@@ -16,6 +16,7 @@ import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiEcosystem, mapStrapiTestimonialExtras, mapStrapiTestimonials } from '@/lib/strapi/mappers/superagency'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 export const revalidate = 60
 
@@ -50,6 +51,7 @@ export default async function WowAcceleratePage({ params }: Props) {
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <AccelerateHero />
       <AccelerateStatsMarqueeSection />
+      <WowDivisionsMarquee />
       <AccelerateProblemSection />
       <AuthorityFoundation
         eyebrow={solutions.eyebrow}

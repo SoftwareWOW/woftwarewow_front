@@ -19,6 +19,7 @@ import WebsitesSolutionsSection from './_components/WebsitesSolutionsSection'
 import WebsitesWhatWeBuildSection from './_components/WebsitesWhatWeBuildSection'
 import WebsitesWhyWowSection from './_components/WebsitesWhyWowSection'
 import { WEBSITES_CTA, WEBSITES_FAQS } from './_components/websites-content'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -43,8 +44,8 @@ export default async function WowWebsitesPage({ params }: Props) {
   return (
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <WebsitesHero />
-      <Marquess />
        <WebsitesPortfolioSection />
+       <WowDivisionsMarquee />
       <WebsitesProblemSection />
       <WebsitesBuiltToPerformSection />
       <WebsitesWhatWeBuildSection />

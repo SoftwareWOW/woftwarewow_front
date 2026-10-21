@@ -13,6 +13,7 @@ import IntelligencePracticalAiHeroSection from './_components/IntelligencePracti
 import IntelligenceProblemSection from './_components/IntelligenceProblemSection'
 import IntelligenceShowcaseSection from './_components/IntelligenceShowcaseSection'
 import { INTELLIGENCE_CTA, INTELLIGENCE_TESTIMONIALS } from './_components/intelligence-content'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -35,8 +36,8 @@ export default async function WowIntelligencePage({ params }: Props) {
   return (
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <IntelligencePracticalAiHeroSection />
-      <Marquess />
       <IntelligenceProblemSection />
+      <WowDivisionsMarquee />
       <IntelligenceShowcaseSection />
       <IntelligenceAiSolutionsSection />
       <BusinessProblems />
