@@ -118,10 +118,11 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
   const lastScrollProgressRef = useRef<number | null>(null)
   const isScrollAnimatingRef = useRef(false)
   const scrollIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const cardUpdateFrameRef = useRef<number | null>(null)
 
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 80,
-    minWidth: 0,
+    minWidth: 768,
     firstItemFocusRatio: FOCUS_X_RATIO,
     lastItemFocusRatio: FOCUS_X_RATIO,
     onUpdate: (progress, scrollTrigger) => {
@@ -208,9 +209,17 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
     setHoveredId(null)
   }, [])
 
-  useEffect(() => {
-    scrollUpdateRef.current = updateActiveCardFromPosition
+  const scheduleActiveCardUpdate = useCallback(() => {
+    if (cardUpdateFrameRef.current != null) return
+    cardUpdateFrameRef.current = window.requestAnimationFrame(() => {
+      cardUpdateFrameRef.current = null
+      updateActiveCardFromPosition()
+    })
   }, [updateActiveCardFromPosition])
+
+  useEffect(() => {
+    scrollUpdateRef.current = scheduleActiveCardUpdate
+  }, [scheduleActiveCardUpdate])
 
   useEffect(() => {
     updateActiveCardFromPosition()

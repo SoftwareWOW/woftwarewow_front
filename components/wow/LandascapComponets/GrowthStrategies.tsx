@@ -101,6 +101,7 @@ const GrowthStrategies = ({ articles: articlesProp }: GrowthStrategiesProps) => 
             >
               <Link
                 href={article.href}
+                aria-label={`Read article: ${article.title}`}
                 className="relative block w-full shrink-0 overflow-hidden rounded-radius-sm border border-[#e5e5e5] shadow-sm transition-all duration-300 hover:shadow-md dark:border-white/5 dark:shadow-none md:h-full md:w-auto md:self-stretch"
               >
                 <Image

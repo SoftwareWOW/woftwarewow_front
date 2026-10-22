@@ -1,15 +1,12 @@
 import LandingScrollResizeGuard from '@/components/wow/sections/LandingScrollResizeGuard'
 import WowHero from '@/components/wow/sections/WowHero'
-import WowEcosystem from '@/components/wow/WowEcosystem'
+import WowHeroServerHeadline from '@/components/wow/sections/WowHeroServerHeadline'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { setRequestLocale } from 'next-intl/server'
-import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
-import Stats from '@/components/wow/LandascapComponets/Stats'
-import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
-import SolutionToChallenges from '@/components/wow/LandascapComponets/SolutionToChallench'
+import { getSiteUrl } from '@/lib/seo/site-url'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import {
   mapStrapiDivisions,
@@ -28,6 +25,28 @@ import {
   mapStrapiTestimonials,
 } from '@/lib/strapi/mappers/superagency'
 
+function SectionFallback({ minHeight = '320px' }: { minHeight?: string }) {
+  return <div aria-hidden className="w-full" style={{ minHeight }} />
+}
+
+const WowEcosystem = dynamic(() => import('@/components/wow/WowEcosystem'), {
+  loading: () => <SectionFallback minHeight="520px" />,
+})
+const WowSuperAgencyClient = dynamic(
+  () => import('@/components/wow/sections/WowSuperAgencyClient'),
+  { loading: () => <SectionFallback minHeight="480px" /> },
+)
+const Stats = dynamic(() => import('@/components/wow/LandascapComponets/Stats'), {
+  loading: () => <SectionFallback minHeight="360px" />,
+})
+const DevisionOverview = dynamic(
+  () => import('@/components/wow/LandascapComponets/DevisionOverview'),
+  { loading: () => <SectionFallback minHeight="100svh" /> },
+)
+const SolutionToChallenges = dynamic(
+  () => import('@/components/wow/LandascapComponets/SolutionToChallench'),
+  { loading: () => <SectionFallback minHeight="640px" /> },
+)
 const Marquess = dynamic(() => import('@/components/wow/LandascapComponets/Marquee'))
 const Marquee = dynamic(() => import('@/components/wow/shared/Marquee'))
 const HumanTuch = dynamic(() => import('@/components/wow/LandascapComponets/HumanTuch'))
@@ -45,10 +64,19 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const dictionary = await getDictionary(locale as Locale)
+  const siteUrl = getSiteUrl()
 
   return {
     title: dictionary.metadata.title,
     description: dictionary.metadata.description,
+    alternates: {
+      canonical: `${siteUrl}/${locale}`,
+    },
+    openGraph: {
+      title: dictionary.metadata.title,
+      description: dictionary.metadata.description,
+      url: `${siteUrl}/${locale}`,
+    },
   }
 }
 
@@ -78,10 +106,12 @@ const Home = async ({ params }: Props) => {
   return (
     <>
       {typedLocale === 'en-US' ? <LandingScrollResizeGuard /> : null}
+      <WowHeroServerHeadline headline={heroCopy?.headline} lead={heroCopy?.lead} />
       <WowHero
         hero={dictionary.hero}
         copy={heroCopy ?? undefined}
         stabilizeProgressOnViewportChange={typedLocale === 'en-US'}
+        serverHeadline
       />
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <div className="flex flex-col gap-0 lg:contents">

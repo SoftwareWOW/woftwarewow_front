@@ -20,6 +20,8 @@ type WowHeroProps = {
   }
   /** When true, keep hero scrub complete after passing the section on viewport resize (e.g. browser zoom). */
   stabilizeProgressOnViewportChange?: boolean
+  /** When true, intro headline is server-rendered; use a non-heading element for the animated intro layer. */
+  serverHeadline?: boolean
 }
 
 const HERO_COPY = {
@@ -241,12 +243,19 @@ export default function WowHero({
   hero: _hero,
   copy,
   stabilizeProgressOnViewportChange = false,
+  serverHeadline = false,
 }: WowHeroProps) {
   const activeCopy = { ...HERO_COPY, ...copy }
   const heroImage = copy?.heroImage ?? '/images/wow/hero-banner.jpg'
   const { ref, progress } = useShrinkProgress(stabilizeProgressOnViewportChange)
 
   const meetDialog = useMeetDialogOptional()
+
+  useEffect(() => {
+    if (!serverHeadline) return
+    const node = document.getElementById('wow-hero-ssr-headline')
+    node?.remove()
+  }, [serverHeadline])
 
   /* Smoothstep easing */
   const eased =
@@ -426,20 +435,38 @@ export default function WowHero({
             opacity: introOpacity,
           }}
         >
-          <h1
-            className="
-              max-w-4xl
-              break-words
-              font-outfit
-              text-[clamp(1.85rem,8vw,4.5rem)]
-              font-light
-              leading-[1.05]
-              tracking-tight
-              text-white
-            "
-          >
-            {activeCopy.headline}
-          </h1>
+          {serverHeadline ? (
+            <div
+              aria-hidden
+              className="
+                max-w-4xl
+                break-words
+                font-outfit
+                text-[clamp(1.85rem,8vw,4.5rem)]
+                font-light
+                leading-[1.05]
+                tracking-tight
+                text-white
+              "
+            >
+              {activeCopy.headline}
+            </div>
+          ) : (
+            <h1
+              className="
+                max-w-4xl
+                break-words
+                font-outfit
+                text-[clamp(1.85rem,8vw,4.5rem)]
+                font-light
+                leading-[1.05]
+                tracking-tight
+                text-white
+              "
+            >
+              {activeCopy.headline}
+            </h1>
+          )}
 
           <p
             className="

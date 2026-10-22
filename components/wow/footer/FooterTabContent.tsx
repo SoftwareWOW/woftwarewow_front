@@ -24,23 +24,9 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import FooterNewsletterSubscribe from '@/components/wow/footer/FooterNewsletterSubscribe'
 import { Link } from '@/i18n/navigation'
+import { socialBrandIcons } from '@/components/wow/footer/social-brand-icons'
 import { cn } from '@/utils/cn'
-import { Icon, addCollection } from '@iconify/react'
-import simpleIcons from '@iconify-json/simple-icons/icons.json'
 import type { ReactNode } from 'react'
-
-addCollection(simpleIcons)
-
-const socialIconNames = {
-  facebook: 'simple-icons:facebook',
-  instagram: 'simple-icons:instagram',
-  linkedin: 'simple-icons:linkedin',
-  x: 'simple-icons:x',
-  pinterest: 'simple-icons:pinterest',
-  google: 'simple-icons:google',
-  tiktok: 'simple-icons:tiktok',
-  youtube: 'simple-icons:youtube',
-} as const
 
 const panelClass = 'w-full px-3 sm:px-5 2xl:px-10'
 const mutedText = '!text-[#808080]'
@@ -146,23 +132,26 @@ export function ConnectPanel() {
   return (
     <div className={cn(panelClass, 'flex flex-col items-center gap-6 py-3 sm:gap-8 sm:py-4 2xl:gap-12 2xl:py-8')}>
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 2xl:gap-4">
-        {connectSocials.map((social) => (
-          <a
-            key={social.label}
-            href={social.href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={social.label}
-            className={cn(
-              'inline-flex size-8 items-center justify-center rounded-radius-sm border border-[#1515151A] transition-colors sm:size-9 2xl:size-11',
-              'dark:border-[#EDF0F51A]',
-              mutedText,
-              footerItemSurfaceClass,
-            )}
-          >
-            <Icon icon={socialIconNames[social.icon]} className="size-4 sm:size-5 2xl:size-6" />
-          </a>
-        ))}
+        {connectSocials.map((social) => {
+          const SocialIcon = socialBrandIcons[social.icon]
+          return (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={social.label}
+              className={cn(
+                'inline-flex size-8 items-center justify-center rounded-radius-sm border border-[#1515151A] transition-colors sm:size-9 2xl:size-11',
+                'dark:border-[#EDF0F51A]',
+                mutedText,
+                footerItemSurfaceClass,
+              )}
+            >
+              <SocialIcon />
+            </a>
+          )
+        })}
       </div>
 
       <div className="flex w-full flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-center lg:gap-10 2xl:gap-14">

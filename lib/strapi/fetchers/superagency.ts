@@ -46,6 +46,11 @@ const HUMAN_TOUCH_POPULATE = {
 const HERO_POPULATE = { heroImage: true };
 const STATS_POPULATE = { stats: true };
 const DIVISION_POPULATE = { featuredImage: true };
+/** Scalar-only types: omit populate (Strapi 5 rejects populate keys on plain attributes). */
+const NO_RELATIONS_POPULATE = false as const;
+
+const GROWTH_CTA_POPULATE = { content: true };
+const ECOSYSTEM_POPULATE = { content: true };
 
 export async function getSuperagencyDivisions(locale: Locale) {
   return fetchCollection<StrapiSuperagencyDivision>('superagency-divisions', {
@@ -124,7 +129,7 @@ export const getSuperagencyHomepage = cache(async function getSuperagencyHomepag
       () =>
         fetchSingleType<StrapiSuperagencySolutions>('superagency-solutions', {
           locale,
-          populate: '*',
+          populate: NO_RELATIONS_POPULATE,
         }),
       () =>
         fetchSingleType<StrapiSuperagencyHumanTouch>('superagency-human-touch', {
@@ -134,12 +139,12 @@ export const getSuperagencyHomepage = cache(async function getSuperagencyHomepag
       () =>
         fetchSingleType<StrapiSuperagencyGrowthCta>('superagency-growth-cta', {
           locale,
-          populate: '*',
+          populate: GROWTH_CTA_POPULATE,
         }),
       () =>
         fetchSingleType<StrapiSuperagencyEcosystem>('superagency-ecosystem', {
           locale,
-          populate: '*',
+          populate: ECOSYSTEM_POPULATE,
         }),
       () => getSuperagencyDivisions(locale),
       () =>
@@ -157,13 +162,13 @@ export const getSuperagencyHomepage = cache(async function getSuperagencyHomepag
       () =>
         fetchCollection<StrapiSuperagencyFaq>('superagency-faqs', {
           locale,
-          populate: '*',
+          populate: NO_RELATIONS_POPULATE,
           sort: 'order:asc',
         }),
       () =>
         fetchCollection<StrapiSuperagencySolutionCategory>('superagency-solution-categories', {
           locale,
-          populate: '*',
+          populate: NO_RELATIONS_POPULATE,
           sort: 'order:asc',
         }),
       () =>

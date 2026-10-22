@@ -9,6 +9,11 @@ type WowDivisionLogoProps = {
   size?: 'sm' | 'md'
 }
 
+const sizeDimensions = {
+  sm: { height: 15, width: 183 },
+  md: { height: 22, width: 260 },
+} as const
+
 const sizeClasses = {
   sm: 'h-[15px] sm:max-w-[183px]',
   md: 'h-[18px] sm:h-[20px] 2xl:h-[22px] sm:max-w-[220px] 2xl:max-w-[260px]',
@@ -23,11 +28,14 @@ function DivisionLogoImage({
   className?: string
   size: keyof typeof sizeClasses
 }) {
+  const { width, height } = sizeDimensions[size]
   return (
     // eslint-disable-next-line @next/next/no-img-element -- local SVG brand marks; avoids Next image URL edge cases
     <img
       src={src}
       alt=""
+      width={width}
+      height={height}
       className={`w-auto max-w-full object-contain object-left ${sizeClasses[size]} ${className ?? ''}`}
       aria-hidden
       decoding="async"

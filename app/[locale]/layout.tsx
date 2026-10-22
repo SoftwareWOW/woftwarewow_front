@@ -3,6 +3,7 @@ import SmoothScrollProvider from '@/components/shared/SmoothScroll'
 import WowLayout from '@/components/wow/WowLayout'
 import { isRtlLocale, type Locale } from '@/i18n/config'
 import { routing } from '@/i18n/routing'
+import { getSiteUrl } from '@/lib/seo/site-url'
 import { outfit, seasons } from '@/utils/fonts'
 import { ThemeModeProvider } from '@/utils/Providers'
 import type { Metadata } from 'next'
@@ -24,10 +25,33 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const messages = (await import(`@/messages/${locale}.json`)).default
+  const siteUrl = getSiteUrl()
+
+  const languageAlternates = Object.fromEntries(
+    routing.locales.map((loc) => [loc, `${siteUrl}/${loc}`]),
+  )
 
   return {
+    metadataBase: new URL(siteUrl),
     title: messages.metadata.siteName,
     description: messages.metadata.description,
+    alternates: {
+      canonical: `${siteUrl}/${locale}`,
+      languages: languageAlternates,
+    },
+    openGraph: {
+      type: 'website',
+      locale,
+      url: `${siteUrl}/${locale}`,
+      siteName: messages.metadata.siteName,
+      title: messages.metadata.siteName,
+      description: messages.metadata.description,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: messages.metadata.siteName,
+      description: messages.metadata.description,
+    },
   }
 }
 

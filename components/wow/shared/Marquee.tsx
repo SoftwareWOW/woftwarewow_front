@@ -77,8 +77,8 @@ const Marquee: React.FC<MarqueeProps> = ({
         {showExploreCta ? (
           <RevealWrapper className="mt-7 flex justify-center md:mt-14">
             <ButtonComponentList>
-              <ButtonComponent href="/solutions" variant="white">
-                Explore Our Solutions
+              <ButtonComponent href="/services" variant="white">
+                View All Services
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>

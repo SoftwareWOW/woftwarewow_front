@@ -71,12 +71,12 @@ const Stats = ({ intro, stats: statsProp }: StatsProps) => {
       <div className="container relative z-10">
         {/* Description with animation - matching AboutV8 style */}
         <RevealWrapper>
-          <h4
-            className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-[300px] leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#666666] transition-colors duration-700"
+          <p
+            className="mx-auto max-w-4xl text-center font-['Outfit'] text-[clamp(18px,2.5vw,28px)] font-light leading-[1.6] tracking-[0.02em] text-[#333333] dark:text-[#808080] transition-colors duration-700"
             ref={revealRef}
           >
             {introText}
-          </h4>
+          </p>
         </RevealWrapper>
 
         {/* Stats Grid - Reduced gap on small devices */}

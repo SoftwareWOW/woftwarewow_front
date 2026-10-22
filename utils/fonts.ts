@@ -5,11 +5,12 @@ const outfit = Outfit({
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-outfit',
   display: 'swap',
+  preload: true,
 })
 
 const seasons = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
+  weight: ['300','400', '600'],
   style: ['normal', 'italic'],
   variable: '--font-seasons',
   display: 'swap',
