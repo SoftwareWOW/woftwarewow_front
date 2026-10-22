@@ -1,73 +1,26 @@
 'use client'
 
-import type { ComponentType } from 'react'
 import { Icon, addCollection } from '@iconify/react'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
 import { HOST_TOOLS } from './host-content'
 
 addCollection(simpleIcons)
 
-function CloudIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-    </svg>
-  )
-}
-
-function LinuxIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 0 0-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.402.055.536.058.399.116.728.04.97-.249.804-1.118 1.258-1.814 1.654H11.53c-1.059 0-1.914.862-1.914 1.922v.12c-1.015.381-2.056.47-3.093.534-.503.027-.996.04-1.458.106-.69.084-1.368.247-1.942.764-.622.562-1 1.42-1 2.222 0 .847.378 1.635 1 2.2.574.517 1.252.68 1.942.764.462.066.955.079 1.458.106 1.037.064 2.078.153 3.093.534v.12c0 1.06.855 1.922 1.914 1.922h1.572c.696.396 1.565.85 1.814 1.654.076.242.018.571-.04.97-.028.134-.055.337-.055.536 0 .208.042.413.132.602.206.411.551.544.864.68.312.133.598.201.797.4.213.239.403.571.663.839.025.026.051.058.11.135-.123.805.009 1.657.287 2.489.589 1.771 1.831 3.47 2.716 4.521.75 1.067.974 1.928 1.05 3.02.065 1.491-1.056 5.965 3.17 6.298.165.013.325.021.48.021.155 0 .315-.008.48-.021 4.226-.333 3.105-4.807 3.17-6.298.076-1.092.3-1.953 1.05-3.02.885-1.051 2.127-2.75 2.716-4.521.278-.832.41-1.684.287-2.489a.424.424 0 0 0 .11-.135c.26-.268.45-.6.663-.839.199-.199.485-.267.797-.4.313-.136.658-.269.864-.68.09-.189.136-.394.132-.602 0-.199-.027-.402-.055-.536-.058-.399-.116-.728-.04-.97.249-.804 1.118-1.258 1.814-1.654h1.572c1.059 0 1.914-.862 1.914-1.922v-.12c1.015-.381 2.056-.47 3.093-.534.503-.027.996-.04 1.458-.106.69-.084 1.368-.247 1.942-.764.622-.562 1-1.42 1-2.222 0-.847-.378-1.635-1-2.2-.574-.517-1.252-.68-1.942-.764-.462-.066-.955-.079-1.458-.106-1.037-.064-2.078-.153-3.093-.534v-.12c0-1.06-.855-1.922-1.914-1.922h-1.572c-.696-.396-1.565-.85-1.814-1.654-.076-.242-.018-.571.04-.97.028-.134.055-.337.055-.536 0-.208-.042-.413-.132-.602-.206-.411-.551-.544-.864-.68-.312-.133-.598-.201-.797-.4-.213-.239-.403-.571-.663-.839a.424.424 0 0 0-.11-.135c.123-.805-.009-1.657-.287-2.489-.589-1.771-1.831-3.47-2.716-4.521-.75-1.067-.974-1.928-1.05-3.02-.065-1.491 1.056-5.965-3.17-6.298C12.819.008 12.659 0 12.504 0z" />
-    </svg>
-  )
-}
-
-function LockIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
-    </svg>
-  )
-}
-
-function WordPressIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM3.443 12c0-.925.198-1.806.554-2.598l3.051 8.366a7.946 7.946 0 0 1-3.605-5.768zm8.557 8.557c-.901 0-1.77-.122-2.598-.349l2.758-8.012 2.823 7.736a.135.135 0 0 1-.003.035 7.945 7.945 0 0 1-2.98.59zm1.264-12.01a.48.48 0 0 0-.481.403c-.018.099-.471 2.434-.471 2.434l1.253 3.443.763-2.107s.902-2.473.939-2.587a.48.48 0 0 0-.403-.586h-.6zm3.762 1.588l-2.403 6.955c.901.262 1.851.403 2.841.403.988 0 1.937-.14 2.836-.401l-2.403-6.957a7.952 7.952 0 0 0-2.871 0zm4.711 3.234a7.947 7.947 0 0 1-3.604 5.768l3.051-8.366A7.953 7.953 0 0 1 20.557 12z" />
-    </svg>
-  )
-}
-
-const customIcons: Record<string, ComponentType<{ className?: string }>> = {
-  'mdi:cloud-outline': CloudIcon,
-  'mdi:linux': LinuxIcon,
-  'mdi:lock-outline': LockIcon,
-  'mdi:wordpress': WordPressIcon,
-}
-
 export default function HostToolsIcons() {
   const icons = HOST_TOOLS.icons
 
   return (
-    <div className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:mt-14 md:gap-10">
-      {icons.map(({ id, name, icon }) => {
-        const Custom = customIcons[icon]
-        return (
-          <span
-            key={id}
-            className="inline-flex size-12 items-center justify-center text-secondary transition-colors dark:text-backgroundBody sm:size-14"
-            title={name}
-          >
-            {Custom ? (
-              <Custom className="size-8 sm:size-10" />
-            ) : (
-              <Icon icon={icon} className="size-8 sm:size-10" aria-hidden />
-            )}
-            <span className="sr-only">{name}</span>
-          </span>
-        )
-      })}
+    <div className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:mt-14 md:gap-12">
+      {icons.map(({ id, name, icon }) => (
+        <span
+          key={id}
+          className="inline-flex h-12 min-w-12 items-center justify-center sm:h-14 sm:min-w-14"
+          title={name}
+        >
+          <Icon icon={icon} className="h-8 w-auto sm:h-10" aria-hidden />
+          <span className="sr-only">{name}</span>
+        </span>
+      ))}
     </div>
   )
 }

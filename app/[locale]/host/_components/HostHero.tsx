@@ -10,7 +10,7 @@ const HostHero = () => {
   const heroImage = hero.images[0]
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 pt-28 transition-colors duration-300 dark:bg-background sm:pt-32 md:px-4 lg:pt-[140px] xl:pt-[160px]">
+    <section className="relative overflow-hidden bg-background px-3 pt-10 transition-colors duration-300 dark:bg-background sm:pt-10 md:px-4 lg:pt-12 xl:pt-14">
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <RevealWrapper className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-14 xl:gap-16">
           <div className="w-full max-w-[640px] text-center lg:text-left">

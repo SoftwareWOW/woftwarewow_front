@@ -1,6 +1,7 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -33,9 +34,14 @@ export default function HostHostingSolutionsSection() {
   return (
     <section ref={triggerRef} className="service-section relative overflow-hidden">
       <div className="container">
-        <RevealWrapper className="reveal-me mb-6 flex flex-col gap-4 md:mb-8 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="max-w-2xl">{section.title}</h2>
-          <p className="max-w-lg text-base leading-relaxed text-[#808080] lg:text-right">{section.description}</p>
+        <RevealWrapper className="reveal-me mb-6 flex flex-col gap-6 md:mb-8 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <div className="max-w-2xl">
+            <SectionLabel className="mb-4">{section.eyebrow}</SectionLabel>
+            <h2>{section.title}</h2>
+          </div>
+          <p className="max-w-lg text-base leading-relaxed text-[#808080] lg:max-w-[470px] lg:text-right">
+            {section.description}
+          </p>
         </RevealWrapper>
       </div>
       <article

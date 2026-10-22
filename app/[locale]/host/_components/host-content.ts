@@ -282,13 +282,13 @@ export const HOST_TOOLS = {
   bodyParagraph:
     'Hosting should be manageable with tools suited to your website and technical requirements. Depending on the environment, hosting solutions may involve established control panels, web server software, and content management platforms.',
   icons: [
-    { id: 1, name: 'Cloud', icon: 'mdi:cloud-outline' },
+    { id: 1, name: 'Cloud', icon: 'simple-icons:cloudflare' },
     { id: 2, name: 'cPanel', icon: 'simple-icons:cpanel' },
     { id: 3, name: 'Plesk', icon: 'simple-icons:plesk' },
-    { id: 4, name: 'Linux', icon: 'mdi:linux' },
-    { id: 5, name: 'Security', icon: 'mdi:lock-outline' },
+    { id: 4, name: 'Linux', icon: 'simple-icons:linux' },
+    { id: 5, name: 'Security', icon: 'simple-icons:letsencrypt' },
     { id: 6, name: 'Nginx', icon: 'simple-icons:nginx' },
-    { id: 7, name: 'WordPress', icon: 'mdi:wordpress' },
+    { id: 7, name: 'WordPress', icon: 'simple-icons:wordpress' },
   ],
 } as const
 
