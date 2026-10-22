@@ -20,6 +20,7 @@ import SocialPortfolioSection from './_components/SocialPortfolioSection'
 import SocialProcessSection from './_components/SocialProcessSection'
 import SocialServicesSection from './_components/SocialServicesSection'
 import { SOCIAL_CTA } from './_components/social-content'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 const SOCIAL_GALLERY_PAGE_SLUG = 'social-and-community' as const
 
@@ -58,6 +59,7 @@ export default async function WowSocialPage({ params }: Props) {
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
       <SocialHero />
       <SocialPortfolioSection />
+      <WowDivisionsMarquee />
       <SocialChallengeSection />
       <SocialGallery {...(gallerySections.socialGallery ?? {})} />
       <SocialServicesSection />
