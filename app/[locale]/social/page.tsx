@@ -1,13 +1,27 @@
-import LayoutOne from '@/components/shared/LayoutOne'
-import Marquee from '@/components/wow/LandascapComponets/Marquee'
+import SocialGallery from '@/app/[locale]/for-you/social-and-community/_components/SocialGallery'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
+import WowSuperAgencyClient from '@/components/wow/sections/WowSuperAgencyClient'
 import SocialHero from '@/components/wow/wowsocial/SocialHero'
+import WowEcosystem from '@/components/wow/WowEcosystem'
+import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import { mapStrapiEcosystem, mapStrapiTestimonialExtras, mapStrapiTestimonials } from '@/lib/strapi/mappers/superagency'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
+import SocialApproachSection from './_components/SocialApproachSection'
+import SocialChallengeSection from './_components/SocialChallengeSection'
+import SocialClientResultsSection from './_components/SocialClientResultsSection'
+import SocialCreativeToolsSection from './_components/SocialCreativeToolsSection'
+import SocialFaqSection from './_components/SocialFaqSection'
+import SocialFlexibleStartSection from './_components/SocialFlexibleStartSection'
+import SocialPortfolioSection from './_components/SocialPortfolioSection'
+import SocialProcessSection from './_components/SocialProcessSection'
+import SocialServicesSection from './_components/SocialServicesSection'
+import { SOCIAL_CTA, SOCIAL_GALLERY_IMAGES } from './_components/social-content'
 
+export const revalidate = 60
 
-
-import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 type Props = {
   params: Promise<{ locale: string }>
 }
@@ -26,17 +40,45 @@ export default async function WowSocialPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
+  const typedLocale = locale as Locale
+  const dictionary = await getDictionary(typedLocale)
+  const cms = await getSuperagencyHomepage(typedLocale)
+  const ecosystem = mapStrapiEcosystem(cms.ecosystem, dictionary.ecosystem)
+  const superAgencyClient = mapStrapiTestimonials(cms.testimonials, dictionary.superAgencyClient)
+  const testimonialExtras = mapStrapiTestimonialExtras(cms.testimonials)
+
   return (
-    <LayoutOne>
-      <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        <SocialHero />
-         <Marquee />
-        <WowGrowthCta
-          accentText="Ready to"
-          mainText="Grow?"
-          ariaLabel="Contact WOW Superagency"
+    <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
+      <SocialHero />
+      <SocialPortfolioSection />
+      <SocialChallengeSection />
+      <SocialGallery images={SOCIAL_GALLERY_IMAGES} />
+      <SocialServicesSection />
+      <SocialApproachSection />
+      <SocialProcessSection />
+      <SocialClientResultsSection />
+      <div className="-mt-10 sm:-mt-12 md:-mt-16 lg:-mt-20">
+        <WowSuperAgencyClient
+          superAgencyClient={superAgencyClient}
+          clientImages={
+            Object.keys(testimonialExtras.clientImages).length ? testimonialExtras.clientImages : undefined
+          }
+          reviewCaseStudies={
+            Object.keys(testimonialExtras.reviewCaseStudies).length ? testimonialExtras.reviewCaseStudies : undefined
+          }
         />
       </div>
-    </LayoutOne>
+      <SocialFlexibleStartSection />
+      <SocialCreativeToolsSection />
+      <WowEcosystem ecosystem={ecosystem} />
+      <SocialFaqSection />
+      <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
+        <WowGrowthCta
+          accentText={SOCIAL_CTA.accentText}
+          mainText={SOCIAL_CTA.mainText}
+          ariaLabel={SOCIAL_CTA.ariaLabel}
+        />
+      </div>
+    </div>
   )
 }
