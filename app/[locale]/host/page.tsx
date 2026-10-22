@@ -17,6 +17,7 @@ import HostProblemSection from './_components/HostProblemSection'
 import HostProcessSection from './_components/HostProcessSection'
 import HostToolsSection from './_components/HostToolsSection'
 import { HOST_CTA } from './_components/host-content'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 export const revalidate = 60
 
@@ -49,6 +50,7 @@ export default async function WowHostPage({ params }: Props) {
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
       <HostHero />
       <HostHostingSolutionsSection />
+      <WowDivisionsMarquee />
       <HostProblemSection />
       <HostEssentialsServicesSection />
       <HostInfrastructureSection />

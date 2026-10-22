@@ -32,7 +32,7 @@ export default function HostHostingSolutionsSection() {
   const { contentRef, triggerRef } = useHorizontalScroll()
 
   return (
-    <section ref={triggerRef} className="service-section relative overflow-hidden">
+    <section ref={triggerRef} className="service-section relative overflow-x-hidden overflow-y-visible">
       <div className="container">
         <RevealWrapper className="reveal-me mb-6 flex flex-col gap-6 md:mb-8 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-2xl">
@@ -46,7 +46,7 @@ export default function HostHostingSolutionsSection() {
       </div>
       <article
         ref={contentRef}
-        className="service-wrapper reveal-me mt-10 flex flex-col gap-6 overflow-x-hidden max-md:px-5 md:mt-16 md:w-fit md:flex-row md:flex-nowrap md:pl-[20%] md:pr-10"
+        className="service-wrapper mt-10 flex flex-col gap-6 overflow-x-hidden overflow-y-visible max-md:px-5 md:mt-16 md:w-fit md:flex-row md:flex-nowrap md:items-start md:pl-[20%] md:pr-10 md:pb-6"
       >
         <div className="grid max-h-[404px] w-[332px] content-between">
           <p className="text-sm uppercase leading-[1.1] tracking-[3px] text-secondary dark:text-backgroundBody">
@@ -88,8 +88,10 @@ export default function HostHostingSolutionsSection() {
                   <p className="text-base lg:text-lg">{service.description}</p>
                 </div>
               </div>
-              <div className="flex items-end justify-between sm:mt-2">
-                <h4 className="text-[25px] lg:text-[46px] lg:leading-[1.1] lg:tracking-[-1.44px]">{service.title}</h4>
+              <div className="flex items-end justify-between gap-4 pt-4 sm:mt-2">
+                <h4 className="min-w-0 flex-1 text-[25px] leading-[1.15] lg:text-[46px] lg:leading-[1.1] lg:tracking-[-1.44px]">
+                  {service.title}
+                </h4>
                 <span className="text-5xl font-normal leading-[1.1] tracking-[-2px] text-black/10 dark:text-backgroundBody/10 sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:tracking-[-2.88px]">
                   {service.number}
                 </span>
