@@ -1,7 +1,5 @@
 /** Static copy for WOW Social division page. */
 
-import type { CmsGalleryImage } from '@/lib/strapi/mappers/page-sections'
-
 export const SOCIAL_PORTFOLIO = {
   eyebrow: 'SOCIAL MEDIA',
   titleBefore: 'Content Worth ',
@@ -84,14 +82,6 @@ export const SOCIAL_CHALLENGE = {
   ctaLabel: 'Build My Social Strategy',
   ctaHref: '/meet',
 } as const
-
-export const SOCIAL_GALLERY_IMAGES: CmsGalleryImage[] = [
-  { src: '/images/wow/Hero/project/case-study/ccg.png', alt: 'Social campaign creative', href: '/case-study/ccg-breakthrough' },
-  { src: '/images/wow/Hero/project/case-study/yodoner.png', alt: 'Food brand social posts', href: '/case-study/yo-doner' },
-  { src: '/images/wow/Hero/project/case-study/InityInc.png', alt: 'Coaching brand social content', href: '/case-study/inity-inc' },
-  { src: '/images/wow/Hero/devision/Design 2.jpg', alt: 'Brand social creative', href: '/portfolio/recent' },
-  { src: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png', alt: 'Fashion social showcase', href: '/portfolio' },
-]
 
 export const SOCIAL_SERVICES = {
   eyebrow: 'OUR SERVICES',

@@ -7,6 +7,7 @@ import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import { mapStrapiEcosystem, mapStrapiTestimonialExtras, mapStrapiTestimonials } from '@/lib/strapi/mappers/superagency'
+import { loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 import SocialApproachSection from './_components/SocialApproachSection'
@@ -18,7 +19,9 @@ import SocialFlexibleStartSection from './_components/SocialFlexibleStartSection
 import SocialPortfolioSection from './_components/SocialPortfolioSection'
 import SocialProcessSection from './_components/SocialProcessSection'
 import SocialServicesSection from './_components/SocialServicesSection'
-import { SOCIAL_CTA, SOCIAL_GALLERY_IMAGES } from './_components/social-content'
+import { SOCIAL_CTA } from './_components/social-content'
+
+const SOCIAL_GALLERY_PAGE_SLUG = 'social-and-community' as const
 
 export const revalidate = 60
 
@@ -42,7 +45,11 @@ export default async function WowSocialPage({ params }: Props) {
 
   const typedLocale = locale as Locale
   const dictionary = await getDictionary(typedLocale)
-  const cms = await getSuperagencyHomepage(typedLocale)
+  const [cms, galleryPageCms] = await Promise.all([
+    getSuperagencyHomepage(typedLocale),
+    loadSuperagencyPage(SOCIAL_GALLERY_PAGE_SLUG, typedLocale),
+  ])
+  const gallerySections = resolvePageSections(galleryPageCms, SOCIAL_GALLERY_PAGE_SLUG)
   const ecosystem = mapStrapiEcosystem(cms.ecosystem, dictionary.ecosystem)
   const superAgencyClient = mapStrapiTestimonials(cms.testimonials, dictionary.superAgencyClient)
   const testimonialExtras = mapStrapiTestimonialExtras(cms.testimonials)
@@ -52,7 +59,7 @@ export default async function WowSocialPage({ params }: Props) {
       <SocialHero />
       <SocialPortfolioSection />
       <SocialChallengeSection />
-      <SocialGallery images={SOCIAL_GALLERY_IMAGES} />
+      <SocialGallery {...(gallerySections.socialGallery ?? {})} />
       <SocialServicesSection />
       <SocialApproachSection />
       <SocialProcessSection />

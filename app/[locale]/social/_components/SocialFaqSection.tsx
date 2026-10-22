@@ -26,8 +26,8 @@ export default function SocialFaqSection() {
   }
 
   return (
-    <section className="relative overflow-hidden px-3 md:px-4">
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
+      <div className="container relative z-10">
         <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
