@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import WowText from '@/components/wow/shared/WowText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import { SOCIAL_CHALLENGE } from './social-content'
@@ -20,6 +21,7 @@ export default function SocialChallengeSection() {
             <h2 className="text-appear mb-3">
               {content.titleBefore}
               <InstrumentText>{content.titleAccent}</InstrumentText>
+              {content.titleAfter}
             </h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me">
@@ -45,8 +47,8 @@ export default function SocialChallengeSection() {
           </RevealWrapper>
 
           <RevealWrapper>
-            <p className="mb-4 bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#f472b6] bg-clip-text text-2xl font-normal text-transparent md:text-3xl">
-              {content.after.label}
+            <p className="mb-4 text-2xl font-normal text-secondary dark:text-backgroundBody md:text-3xl">
+              {content.after.labelBefore} <WowText /> {content.after.labelAfter}
             </p>
             <p className="mb-6 text-sm text-[#808080] md:text-base">{content.after.caption}</p>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-sm">

@@ -32,21 +32,23 @@ export default function SocialClientResultsSection() {
         <div className="grid grid-cols-1 gap-8 border-b border-secondary/10 pb-10 dark:border-backgroundBody/15 sm:grid-cols-3 sm:gap-4 md:gap-6 lg:pb-14">
           {stats.map((stat) => (
             <RevealWrapper key={stat.label} className="stat-item w-full">
-              <div className="flex flex-row items-baseline justify-center gap-3 sm:flex-col sm:items-center sm:text-center">
-                <h3 className="font-instrument text-[clamp(2.5rem,5vw,4rem)] font-normal italic leading-none tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2]">
+              <div className="flex flex-row items-baseline justify-center gap-3 sm:justify-center">
+                <h3 className="font-outfit text-[clamp(2.5rem,5vw,4rem)] font-normal leading-none tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] [&_.counter]:font-outfit [&_.counter]:text-[#0D0D0D] dark:[&_.counter]:text-[#F2F2F2]">
                   {'isDecimal' in stat && stat.isDecimal ? (
-                    <>
+                    <span className="text-[#0D0D0D] dark:text-[#F2F2F2]">
                       {stat.value}
                       {stat.suffix}
-                    </>
+                    </span>
                   ) : (
-                    <>
+                    <span className="text-[#0D0D0D] dark:text-[#F2F2F2]">
                       <CounterAnimation number={stat.value as number} />
                       {stat.suffix}
-                    </>
+                    </span>
                   )}
                 </h3>
-                <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#808080]">{stat.label}</p>
+                <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#0D0D0D] dark:text-[#F2F2F2]">
+                  {stat.label}
+                </p>
               </div>
             </RevealWrapper>
           ))}

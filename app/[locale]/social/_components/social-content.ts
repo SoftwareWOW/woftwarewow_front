@@ -62,7 +62,8 @@ export const SOCIAL_PORTFOLIO = {
 export const SOCIAL_CHALLENGE = {
   eyebrow: 'THE CHALLENGE',
   titleBefore: 'Posting More ',
-  titleAccent: 'Isn’t the Same as Growing More.',
+  titleAccent: 'Isn’t the Same',
+  titleAfter: ' as Growing More.',
   description:
     'A busy social feed doesn’t automatically create an engaged audience. Without a clear strategy, consistent creative direction, and meaningful engagement, even great content can get lost in the scroll.',
   before: {
@@ -73,7 +74,8 @@ export const SOCIAL_CHALLENGE = {
     alt: 'Disorganized social feed examples without strategy',
   },
   after: {
-    label: 'With WOW Social',
+    labelBefore: 'With',
+    labelAfter: 'Social',
     caption:
       'Purposeful content, consistent storytelling, audience engagement, campaign planning, and ongoing performance optimization.',
     image: '/images/wow/Hero/devision/Mockup 2 Dark.png',
