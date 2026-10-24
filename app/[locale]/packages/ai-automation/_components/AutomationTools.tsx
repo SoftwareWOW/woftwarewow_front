@@ -45,7 +45,7 @@ const AutomationTools = ({
             <SectionLabel>Our Tools</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto mb-5 max-w-5xl text-[clamp(1rem,1.714vw,1.75rem)] font-normal leading-relaxed">
+            <h2 className="text-appear mx-auto mb-5 max-w-5xl text-[clamp(1rem,1.714vw,1.75rem)] font-light leading-relaxed">
               {title}
             </h2>
           </TextAppearAnimation>

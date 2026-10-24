@@ -75,7 +75,7 @@ const HumanTouch = ({
                         <RevealWrapper>
                           <SectionLabel className="mb-5">{sectionLabel}</SectionLabel>
                         </RevealWrapper>
-            <h2 className="max-w-[720px] text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+            <h2 className="max-w-[720px] text-[48px] font-light leading-[1.05] tracking-[-0.055em] text-[#000000] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
               {title ? (
                 <span className="text-appear">{title}</span>
               ) : (

@@ -17,7 +17,7 @@ export default function WowExpertise() {
       <div className="mx-auto max-w-[1170px]">
         <div className="mb-12 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <TextAppearAnimation>
-            <h2 className="text-appear text-[clamp(2rem,4vw,3rem)] font-medium uppercase tracking-wide">OUR EXPERTISE</h2>
+            <h2 className="text-appear text-[clamp(2rem,4vw,3rem)] font-light uppercase tracking-wide">OUR EXPERTISE</h2>
           </TextAppearAnimation>
           <RevealWrapper className="max-w-[470px]">
             <p className="text-base text-colorText dark:text-dark-100">

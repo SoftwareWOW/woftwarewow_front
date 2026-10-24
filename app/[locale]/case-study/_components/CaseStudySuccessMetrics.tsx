@@ -105,7 +105,7 @@ const CaseStudySuccessMetrics = ({ metrics }: CaseStudySuccessMetricsProps) => {
         <RevealWrapper>
           <h2
             className={cn(
-              'text-center text-[28px] font-normal leading-tight sm:text-[32px] lg:text-left lg:text-[36px]',
+              'text-center text-[28px] font-light leading-tight sm:text-[32px] lg:text-left lg:text-[36px]',
               textColorClass,
             )}>
             Success Metrics

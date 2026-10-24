@@ -56,7 +56,7 @@ const CareerDetailsOverview = ({ career, content }: CareerDetailsOverviewProps) 
       <div className={careerSectionInnerClass}>
         <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(240px,30%)] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_320px] xl:gap-12 2xl:grid-cols-[minmax(0,1fr)_360px] 2xl:gap-16">
           <RevealWrapper className="min-w-0">
-            <h2 className="text-[24px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:text-[28px] md:text-[32px] lg:text-[34px] xl:text-[36px]">
+            <h2 className="text-[24px] font-light leading-tight text-secondary dark:text-backgroundBody sm:text-[28px] md:text-[32px] lg:text-[34px] xl:text-[36px]">
               Job Overview
             </h2>
 

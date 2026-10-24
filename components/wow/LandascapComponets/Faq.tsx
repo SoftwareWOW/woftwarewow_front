@@ -133,7 +133,7 @@ const Faq = ({
               <SectionLabel className="mb-5">{sectionLabel}</SectionLabel>
             </RevealWrapper>
 
-            <h2 className="text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+            <h2 className="text-[48px] font-light leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
               {titleBefore && titleAccent ? (
                 <TextAppearAnimation>
                   <span className="text-appear block font-normal">

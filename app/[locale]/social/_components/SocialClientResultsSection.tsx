@@ -18,7 +18,7 @@ export default function SocialClientResultsSection() {
               <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <RevealWrapper>
-              <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-normal leading-[1.1] tracking-[-0.03em] text-secondary dark:text-backgroundBody">
+              <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-light leading-[1.1] tracking-[-0.03em] text-secondary dark:text-backgroundBody">
                 {titleBefore}{' '}
                 <InstrumentText className="block sm:inline">{titleAccent}</InstrumentText>
               </h2>

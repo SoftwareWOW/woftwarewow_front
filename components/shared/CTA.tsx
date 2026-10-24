@@ -18,7 +18,7 @@ const CTA: FC<CTAProps> = ({ children, showContactForm = false, headingClass = '
         <RevealWrapper>
           <h2
             className={cn(
-              'text-center font-normal xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]',
+              'text-center font-light xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]',
               headingClass,
             )}>
             {children}

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
@@ -210,7 +210,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
 
   const nodeFontSize = (s?: 'sm' | 'md' | 'lg', mobile = false) => {
     if (mobile) {
-      // 🔥 INCREASED MOBILE FONT SIZES
+      // ðŸ”¥ INCREASED MOBILE FONT SIZES
       if (s === 'lg') return 'clamp(14px, 3.8cqw, 26px)'
       if (s === 'sm') return 'clamp(12px, 3cqw, 18px)'
       return 'clamp(13px, 3.4cqw, 22px)'
@@ -229,7 +229,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
       </RevealWrapper>
 
       <div className="mb-8 w-full max-w-4xl text-center max-md:mb-5 sm:mb-12 lg:mb-16">
-        <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-normal leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
+        <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-light leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
           <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
             {ecosystem.heading.highlight}
@@ -319,7 +319,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 zIndex: 3,
               }}
               animate={{
-                // 🔥 INCREASED MOBILE SCALE VALUES
+                // ðŸ”¥ INCREASED MOBILE SCALE VALUES
                 scale: active ? (isMobile ? 1.5 : 1.5) : isMobile ? 0.9 : 0.75,
                 opacity: active ? 1 : 0.5,
               }}

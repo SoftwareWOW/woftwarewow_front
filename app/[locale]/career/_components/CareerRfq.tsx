@@ -56,7 +56,7 @@ const CareerRfq = ({ items }: CareerRfqProps = {}) => {
             </RevealWrapper>
 
             <TextAppearAnimation>
-              <h2 className="text-appear text-[48px] font-medium leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[40px] md:text-[50px] lg:text-[58px] xl:text-[64px]">
+              <h2 className="text-appear text-[48px] font-light leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[40px] md:text-[50px] lg:text-[58px] xl:text-[64px]">
                 <span className="block font-outfit font-[300px]">Frequently Asked Questions</span> 
               </h2>
             </TextAppearAnimation>

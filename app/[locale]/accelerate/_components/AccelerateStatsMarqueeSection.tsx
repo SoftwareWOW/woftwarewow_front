@@ -14,7 +14,7 @@ export default function AccelerateStatsMarqueeSection() {
         <div className="container relative z-10">
           <div className="flex flex-col gap-10 border-b border-secondary/10 pb-10 dark:border-backgroundBody/15 lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:pb-14">
             <RevealWrapper>
-              <h2 className="max-w-md text-[clamp(2rem,4vw,3.25rem)] font-normal leading-[1.1] tracking-[-0.03em] text-secondary dark:text-backgroundBody">
+              <h2 className="max-w-md text-[clamp(2rem,4vw,3.25rem)] font-light leading-[1.1] tracking-[-0.03em] text-secondary dark:text-backgroundBody">
                 {heading}
               </h2>
             </RevealWrapper>

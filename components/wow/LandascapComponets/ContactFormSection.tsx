@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
@@ -16,13 +16,13 @@ const interestOptions = [
   'Other / Not Sure Yet',
 ]
 
-const budgetOptions = ['Under $5k', '$5k – $15k', '$15k – $30k', '$30k – $75k', '$75k+']
+const budgetOptions = ['Under $5k', '$5k â€“ $15k', '$15k â€“ $30k', '$30k â€“ $75k', '$75k+']
 
 const ContactFormSection = () => {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([
     'Web Development & Websites',
   ])
-  const [selectedBudget, setSelectedBudget] = useState('$5k – $15k')
+  const [selectedBudget, setSelectedBudget] = useState('$5k â€“ $15k')
   const [isInterestsOpen, setIsInterestsOpen] = useState(false)
   const [isBudgetOpen, setIsBudgetOpen] = useState(false)
 
@@ -76,7 +76,7 @@ const ContactFormSection = () => {
               </RevealWrapper>
 
               <TextAppearAnimation>
-                <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-normal leading-[1.15] text-[#000000] dark:text-[#F2F2F2]">
+                <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-light leading-[1.15] text-[#000000] dark:text-[#F2F2F2]">
                   Let&apos;s Build Something{' '}
                   <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
                     Great Together
@@ -87,7 +87,7 @@ const ContactFormSection = () => {
               <RevealWrapper className="mt-4">
                 <p className="text-base leading-relaxed text-[#555555] dark:text-[#999999] md:text-lg">
                   Tell us where you are today and where you want to go. We&apos;ll recommend the smartest path forward
-                  — with clarity, not pressure.
+                  â€” with clarity, not pressure.
                 </p>
               </RevealWrapper>
             </div>

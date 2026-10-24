@@ -1,4 +1,4 @@
-import getMarkDownData from '@/utils/GetMarkDownData'
+﻿import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
@@ -19,7 +19,7 @@ const ProjectServicesV3 = () => {
         <div className="mb-20 flex flex-col justify-center gap-x-10 gap-y-3 sm:gap-y-7 md:mb-28 lg:flex-row lg:items-end lg:justify-between xl:mb-32">
           <div>
             <TextAppearAnimation>
-              <h2 className="text-appear text-[46px] font-normal leading-[1.1] md:text-7xl md:tracking-[-2.88px] xl:text-[96px]">
+              <h2 className="text-appear text-[46px] font-light leading-[1.1] md:text-7xl md:tracking-[-2.88px] xl:text-[96px]">
                 <span className="font-instrument italic">Proud</span>
                 <br />
                 Case Studies

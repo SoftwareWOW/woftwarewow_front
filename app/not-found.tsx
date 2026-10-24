@@ -1,4 +1,4 @@
-import RevealWrapper from '@/components/animation/RevealWrapper'
+﻿import RevealWrapper from '@/components/animation/RevealWrapper'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import Link from 'next/link'
 
@@ -14,7 +14,7 @@ const NotFound = () => {
         <div className="container">
           <RevealWrapper className="flex flex-col items-center justify-center">
             <h1 className="font-instrument text-[180px] md:text-[490px] md:leading-[1.05]">404</h1>
-            <h2 className="mb-8 mt-8 text-[36px] font-normal leading-[1.1] max-lg:leading-[1.33] md:mb-[50px] lg:text-[87px] lg:tracking-[-2.83px]">
+            <h2 className="mb-8 mt-8 text-[36px] font-light leading-[1.1] max-lg:leading-[1.33] md:mb-[50px] lg:text-[87px] lg:tracking-[-2.83px]">
               Page not Found
             </h2>
             <Link href="/" className="rv-button rv-button-primary">

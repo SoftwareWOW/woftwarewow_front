@@ -91,7 +91,7 @@ const WowGrowthFramework = ({
                 key={step.id}
                 className={isLeftColumn ? 'border-r px-[30px] py-[50px] dark:border-dark' : 'px-[30px] py-[50px]'}
               >
-                <h2 className="font-instrument text-5xl font-normal italic leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px]">
+                <h2 className="font-instrument text-5xl font-light italic leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px]">
                   {step.id}
                 </h2>
                 <h5 className="mb-6 mt-4">{step.title}</h5>

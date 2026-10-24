@@ -289,7 +289,7 @@ const WowSuperAgencyClient = ({
               inline-block
               font-['Outfit']
               text-[clamp(32px,6vw,64px)]
-              font-normal
+              font-light
               leading-[1.05]
               tracking-[-0.035em]
               text-[#000000]

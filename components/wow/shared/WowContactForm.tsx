@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react'
 import ButtonComponent from './ButtonComponent'
@@ -88,7 +88,7 @@ const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowC
       }
 
       showToast(
-        'Thank you! Your request was sent. Check your email for a confirmation — we will reply as soon as possible.',
+        'Thank you! Your request was sent. Check your email for a confirmation â€” we will reply as soon as possible.',
         'success',
       )
       resetForm()
@@ -110,7 +110,7 @@ const WowContactForm = ({ className = '', onSubmitted, showHeader = true }: WowC
     >
       {showHeader && (
         <div className="text-center md:col-span-full">
-          <h2 className="font-instrument text-[clamp(28px,5vw,40px)] font-normal leading-[1.15] tracking-[-0.02em] text-secondary dark:text-backgroundBody">
+          <h2 className="font-instrument text-[clamp(28px,5vw,40px)] font-light leading-[1.15] tracking-[-0.02em] text-secondary dark:text-backgroundBody">
             Let&apos;s Discuss Your <span className="italic">Project</span>
           </h2>
           <p className="mx-auto mt-4 max-w-[540px] text-base leading-[1.6] text-[#808080] dark:text-dark-100 md:text-lg">

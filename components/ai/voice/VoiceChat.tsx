@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import type { VoiceHistoryMessage, VoiceStatus } from '@/lib/voice'
 import { X } from 'lucide-react'
@@ -33,7 +33,7 @@ export default function VoiceChat({
     <div className="flex h-full min-h-0 flex-1 flex-col overflow-hidden bg-backgroundBody dark:bg-dark">
       <div className="flex shrink-0 items-start justify-between gap-3 border-b border-[#1515151A] px-5 py-4 dark:border-[#EDF0F51A]">
         <div className="min-w-0">
-          <h2 className="truncate font-seasons text-lg font-normal tracking-[-0.02em] text-secondary dark:text-backgroundBody">
+          <h2 className="truncate font-seasons text-lg font-light tracking-[-0.02em] text-secondary dark:text-backgroundBody">
             Voice conversation
           </h2>
           <p className="mt-1 text-sm text-muted dark:text-dark-100">WOW Superagency AI</p>

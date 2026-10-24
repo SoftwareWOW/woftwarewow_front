@@ -160,7 +160,7 @@ const pillBase = `
   rounded-radius-md
   px-5
   py-4
-  text-[10px]
+  text-[14px]
   font-medium
   uppercase
   tracking-[0.16em]
@@ -171,7 +171,7 @@ const pillBase = `
   focus-visible:ring-white/40
   sm:px-8
   sm:py-5
-  sm:text-[11px]
+  sm:text-[14px]
   sm:tracking-[0.22em]
   md:px-12
   md:py-6

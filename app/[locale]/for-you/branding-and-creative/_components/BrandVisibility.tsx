@@ -47,7 +47,7 @@ const BrandVisibility = ({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation02>
-            <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
+            <h2 className="text-appear max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
               More than a <InstrumentText>good-looking</InstrumentText> logo.
             </h2>
           </TextAppearAnimation02>
@@ -74,7 +74,7 @@ const BrandVisibility = ({
                 index % 2 === 0 ? 'sm:border-r' : ''
               } ${index < 2 ? 'border-b dark:border-b-dark' : ''}`}
             >
-              <h2 className="font-instrument text-4xl font-normal italic leading-tight tracking-[-1px] uppercase sm:text-5xl md:text-[55px] lg:text-[64px] xl:leading-[1.15]">
+              <h2 className="font-instrument text-4xl font-light italic leading-tight tracking-[-1px] uppercase sm:text-5xl md:text-[55px] lg:text-[64px] xl:leading-[1.15]">
                 {item.title}
               </h2>
               <h5 className="mb-4 mt-4">{item.headline}</h5>

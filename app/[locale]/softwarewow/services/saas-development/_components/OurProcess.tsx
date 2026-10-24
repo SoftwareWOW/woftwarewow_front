@@ -39,7 +39,7 @@ const OurProcess = () => {
             <SectionLabel>Our Process</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation02>
-            <h2 className="text-appear max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
+            <h2 className="text-appear max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
               From roadmap to <InstrumentText>release.</InstrumentText>
             </h2>
           </TextAppearAnimation02>
@@ -60,7 +60,7 @@ const OurProcess = () => {
               key={step.title}
               className={`${index % 2 === 0 ? 'border-r dark:border-dark' : ''} px-[30px] py-[50px]`}
             >
-              <h2 className="font-instrument text-5xl font-normal italic leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px]">
+              <h2 className="font-instrument text-5xl font-light italic leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px]">
                 {step.number}
               </h2>
               <h5 className="mb-6 mt-4">{step.title}</h5>

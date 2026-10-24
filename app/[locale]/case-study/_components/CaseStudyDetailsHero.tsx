@@ -128,7 +128,7 @@ const CaseStudyDetailsHero = ({
             <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
               <div className="flex max-w-2xl flex-col items-center gap-3 sm:flex-row sm:gap-5 sm:text-left">
                 <div>
-                  <h2 className="text-2xl font-medium text-white sm:text-3xl lg:text-4xl">
+                  <h2 className="text-2xl font-light text-white sm:text-3xl lg:text-4xl">
                     {study.title}
                   </h2>
 

@@ -66,7 +66,7 @@ const StartupPackage = ({
             <RevealWrapper className="reveal-me">
               <h2
                 id="startup-package-heading"
-                className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
+                className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-light leading-[1.15] tracking-[-0.03em]"
               >
                 {title}
                 <br />

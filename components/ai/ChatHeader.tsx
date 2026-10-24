@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { X } from 'lucide-react'
 
@@ -15,7 +15,7 @@ export default function ChatHeader({ onClose }: ChatHeaderProps) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-40" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
           </span>
-          <h2 className="truncate font-seasons text-lg font-normal tracking-[-0.02em] text-secondary dark:text-backgroundBody">
+          <h2 className="truncate font-seasons text-lg font-light tracking-[-0.02em] text-secondary dark:text-backgroundBody">
             AI Assistant
           </h2>
         </div>

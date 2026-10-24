@@ -14,7 +14,7 @@ const CaseStudyBusinessGoals = ({ goals, image }: CaseStudyBusinessGoalsProps) =
       <RevealWrapper>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,36%)] lg:gap-12 xl:gap-16">
           <div>
-            <h2 className="text-[28px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:text-[32px] lg:text-[36px]">
+            <h2 className="text-[28px] font-light leading-tight text-secondary dark:text-backgroundBody sm:text-[32px] lg:text-[36px]">
               Business Goals
             </h2>
             <ul className="mt-8 space-y-4 lg:mt-10">

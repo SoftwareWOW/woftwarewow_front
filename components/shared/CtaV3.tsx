@@ -1,4 +1,4 @@
-import ContactForm from './ContactForm'
+﻿import ContactForm from './ContactForm'
 import CtaImageSlider from './CtaImageSlider'
 
 const CtaV3 = () => {
@@ -6,7 +6,7 @@ const CtaV3 = () => {
     <section className="pb-[70px] pt-14 md:pt-16 lg:pb-[120px] lg:pt-[88px] xl:pt-[100px]">
       <div className="container">
         <div className="reveal-me">
-          <h2 className="text-center font-normal xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]">
+          <h2 className="text-center font-light xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]">
             Let's
             <CtaImageSlider
               slides={[

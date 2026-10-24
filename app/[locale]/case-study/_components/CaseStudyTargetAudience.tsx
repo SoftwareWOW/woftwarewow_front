@@ -10,7 +10,7 @@ const CaseStudyTargetAudience = ({ audiences }: CaseStudyTargetAudienceProps) =>
   <section className={caseStudySectionClass}>
     <div className={caseStudySectionInnerClass}>
       <RevealWrapper>
-        <h2 className="text-[28px] font-normal leading-tight text-secondary dark:text-backgroundBody sm:text-[32px] lg:text-[36px]">
+        <h2 className="text-[28px] font-light leading-tight text-secondary dark:text-backgroundBody sm:text-[32px] lg:text-[36px]">
           Target Audience
         </h2>
         <div className="mt-8 space-y-8 lg:mt-10 lg:space-y-10">

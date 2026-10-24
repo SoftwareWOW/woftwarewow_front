@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { usePathname, useRouter } from '@/i18n/navigation'
 import type { Locale } from '@/i18n/config'
@@ -69,7 +69,7 @@ export default function LanguageSwitcher({ open, onOpenChange, dictionary }: Lan
 
             <div className="mb-5 flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-xl font-normal text-secondary dark:text-backgroundBody">{dictionary.title}</h2>
+                <h2 className="text-xl font-light text-secondary dark:text-backgroundBody">{dictionary.title}</h2>
                 <p className="mt-2 text-sm text-colorText dark:text-dark-100">{dictionary.description}</p>
               </div>
               <Dialog.Close asChild>

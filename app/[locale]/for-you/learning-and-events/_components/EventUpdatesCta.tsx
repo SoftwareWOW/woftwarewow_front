@@ -20,7 +20,7 @@ const EventUpdatesCta = ({
       />
 
       <RevealWrapper className="relative z-10 mx-auto max-w-[800px] text-center">
-        <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-normal leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2]">
+        <h2 className="text-[clamp(1.75rem,4vw,3.5rem)] font-light leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2]">
           <InstrumentText variant="solid">{title}</InstrumentText>
         </h2>
 

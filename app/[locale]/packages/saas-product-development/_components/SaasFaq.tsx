@@ -56,7 +56,7 @@ const SaasFaq = ({ eyebrow, title, items }: Props = {}) => {
             ) : null}
             {title ? (
               <TextAppearAnimation>
-                <h2 className="text-appear text-[48px] font-normal leading-[1.05] tracking-[-0.055em] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
+                <h2 className="text-appear text-[48px] font-light leading-[1.05] tracking-[-0.055em] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
                   {title}
                 </h2>
               </TextAppearAnimation>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { BlogType } from '@/app/[locale]/blog/page'
 import RevealWrapper from '@/components/animation/RevealWrapper'
@@ -94,7 +94,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
           <div className="relative max-w-[560px]">
            
             <TextAppearAnimation>
-              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-light leading-[1.05] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 <span className="font-instrument italic">Insights</span>
                 <br />
                 <span>we share</span>
@@ -104,7 +104,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
 
           <RevealWrapper className="relative max-w-[420px] lg:pb-2 lg:text-right">
             <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">
-              Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
+              Practical ideas on marketing, technology, AI, and business growth â€” written for owners who want clarity,
               not jargon.
             </p>
           </RevealWrapper>

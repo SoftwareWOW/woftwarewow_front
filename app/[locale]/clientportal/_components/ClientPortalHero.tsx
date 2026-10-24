@@ -95,7 +95,7 @@ const ClientPortalHero = ({
 
         <RevealWrapper className="reveal-me w-full max-w-[480px] flex-1 xl:max-w-[520px]">
           <div className="rounded-radius-md border border-[#1515151A] bg-backgroundBody p-6 dark:border-[#EDF0F51A] dark:bg-dark sm:p-8 md:p-10">
-            <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-normal leading-[1.2] tracking-[-0.02em]">
+            <h2 className="text-[clamp(1.5rem,2.5vw,2rem)] font-light leading-[1.2] tracking-[-0.02em]">
               Log in to your account!
             </h2>
             <p className="mt-2 text-base text-[#808080]">Enter your Full Details</p>

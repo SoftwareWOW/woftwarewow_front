@@ -94,7 +94,7 @@ const BlogInsight: FC<BlogsProps> = ({ Blogs, categories }) => {
           <div className="relative max-w-[560px]">
            
             <TextAppearAnimation>
-              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-normal leading-[1.2] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+              <h2 className="text-appear relative text-[clamp(2.75rem,6vw,4.5rem)] font-light leading-[1.2] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                 <span className="font-instrument italic">Insights</span>
                 That Help
                 <br />

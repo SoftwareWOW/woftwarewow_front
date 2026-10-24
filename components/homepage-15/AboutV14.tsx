@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import useReveal from '@/hooks/useReveal'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
@@ -14,7 +14,7 @@ const AboutV14 = () => {
             <span className="rv-badge-text">About us</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear text-[38px] font-normal leading-[1.3] md:text-[47px] md:leading-[1.2] lg:text-[54px] lg:leading-[1.17] lg:tracking-[-2.16px] xl:text-[64px]">
+            <h2 className="text-appear text-[38px] font-light leading-[1.3] md:text-[47px] md:leading-[1.2] lg:text-[54px] lg:leading-[1.17] lg:tracking-[-2.16px] xl:text-[64px]">
               Building purpose- driven brands with in
               <i className="font-instrument italic">strategy &amp; Creativity</i>
             </h2>
@@ -22,8 +22,8 @@ const AboutV14 = () => {
         </div>
         <RevealWrapper className="max-w-full md:max-w-sm lg:max-w-md xl:max-w-3xl">
           <h5 ref={revealRef} className="text-secondary/70 dark:text-backgroundBody/70 md:text-right">
-            At Rivor Branding, we think a brand is way more than just a logo—it’s all about the experience, the
-            connection, and the promise you make. We’re here to help businesses find their voice, create their identity,
+            At Rivor Branding, we think a brand is way more than just a logoâ€”itâ€™s all about the experience, the
+            connection, and the promise you make. Weâ€™re here to help businesses find their voice, create their identity,
             and come up with a strategy that sets them up for lasting success.
           </h5>
           <RevealWrapper as="ul" className="mt-7 justify-self-end max-md:w-full md:mt-10">

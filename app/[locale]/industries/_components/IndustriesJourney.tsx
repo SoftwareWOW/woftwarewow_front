@@ -42,7 +42,7 @@ const IndustriesJourney = ({
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="mx-auto max-w-[1320px] border-y border-[#1515151A] py-10 transition-colors duration-300 dark:border-white/10 md:py-14 lg:py-16">
         <RevealWrapper className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
-          <h2 className="max-w-[420px] text-[clamp(1.75rem,3.5vw,3rem)] font-normal leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">{header.title}</h2>
+          <h2 className="max-w-[420px] text-[clamp(1.75rem,3.5vw,3rem)] font-light leading-[1.15] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">{header.title}</h2>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10 md:gap-14 lg:gap-16 xl:gap-20">
             {mergedItems.map((stat) => (

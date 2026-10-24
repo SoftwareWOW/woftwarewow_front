@@ -164,7 +164,7 @@ const BlogItemsCarousel: FC<BlogItemsCarouselProps> = ({
         {showHeader && (
           <RevealWrapper className="mb-10 text-center md:mb-14">
             <SectionLabel className="mx-auto mb-5">{sectionLabel}</SectionLabel>
-            <h2 className="mb-4 font-normal leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+            <h2 className="mb-4 font-light leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
               {heading}
             </h2>
             <p className="mx-auto max-w-[540px] text-base leading-relaxed text-[#808080] transition-colors duration-300">

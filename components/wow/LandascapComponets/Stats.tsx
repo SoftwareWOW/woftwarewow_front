@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import useReveal from '@/hooks/useReveal'
 import CounterAnimation from '@/utils/CounterAnimation'
@@ -42,7 +42,7 @@ const Stats = ({ intro, stats: statsProp }: StatsProps) => {
   const statsData = statsProp ?? achievementStats
   const introText =
     intro ??
-    'WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem — helping businesses scale with less complexity and more confidence.'
+    'WOW Superagency unites technology, marketing, AI, websites, software, and growth services in one coordinated ecosystem â€” helping businesses scale with less complexity and more confidence.'
   const { revealRef } = useReveal()
 
   return (
@@ -86,7 +86,7 @@ const Stats = ({ intro, stats: statsProp }: StatsProps) => {
               <div className="relative flex h-full min-h-[200px] flex-col items-center justify-start p-4 transition-colors duration-300 sm:min-h-[240px] sm:p-6 md:min-h-[280px] md:p-8">
                
                 <div className="flex items-baseline gap-1">
-                  <h2 className="font-['Outfit'] text-[clamp(32px,4vw,56px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
+                  <h2 className="font-['Outfit'] text-[clamp(32px,4vw,56px)] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
                     <CounterAnimation number={stat.value} /> {stat.suffix}
                   </h2>
                 </div>

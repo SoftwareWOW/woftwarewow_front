@@ -1,4 +1,4 @@
-import gradientBg from '@/public/images/gradient-bg.png'
+﻿import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'
 import CtaImageSlider from './CtaImageSlider'
 
@@ -25,7 +25,7 @@ const GradientCta = () => {
       </div>
       <div className="container">
         <div className="reveal-me">
-          <h2 className="text-center font-normal xl:text-[96px] xl:leading-[1.4] xl:tracking-[-2.88px]">
+          <h2 className="text-center font-light xl:text-[96px] xl:leading-[1.4] xl:tracking-[-2.88px]">
             Let's chat!
             <CtaImageSlider
               slides={[
