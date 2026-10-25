@@ -75,34 +75,39 @@ export default function ImpactWorkSection() {
           </div>
         </RevealWrapper>
 
-        <RevealWrapper className="grid grid-cols-1 items-stretch justify-items-center gap-6 gap-y-10 md:grid-cols-2">
-          {filteredCards.map((item, index) => (
-            <RevealWrapper key={item.id} className="group mx-auto flex w-full flex-col xl:max-w-[370px]">
-              <Link href={item.href}>
-                <figure className="mb-6 overflow-hidden rounded-radius-sm xl:aspect-[370/399]">
+        <div className="grid w-full grid-cols-1 gap-6 gap-y-10 md:grid-cols-2 md:gap-8 lg:gap-10">
+          {filteredCards.map((item) => (
+            <RevealWrapper
+              key={item.id}
+              className="group flex w-full min-w-0 flex-col overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-background dark:border-white/10"
+            >
+              <Link href={item.href} className="block w-full">
+                <figure className="aspect-[16/10] w-full overflow-hidden sm:aspect-[5/3]">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="h-full w-full object-cover transition-all duration-500 hover:scale-125"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
                 </figure>
               </Link>
 
-              <div className="blog-title">
+              <div className="blog-title flex flex-1 flex-col p-5 sm:p-6 md:p-7">
                 <Link href={item.href}>
                   <h3 className="text-[27px] leading-tight tracking-tight md:text-3xl lg:text-4xl">{item.title}</h3>
                 </Link>
                 <p className="mb-2 mt-3 text-lg font-normal leading-[1.4] tracking-[0.4px] text-[#808080] md:mt-5">
                   {item.description}
                 </p>
-                <p className="mb-5 text-base text-[#808080] md:mb-10">{item.bullets}</p>
-                <ButtonComponent href={item.href} variant={index === 0 ? 'primary' : 'white'}>
-                  READ MORE
-                </ButtonComponent>
+                <p className="mb-5 text-base text-[#808080] md:mb-8">{item.bullets}</p>
+                <div className="mt-auto">
+                  <ButtonComponent href={item.href} variant="white">
+                    READ MORE
+                  </ButtonComponent>
+                </div>
               </div>
             </RevealWrapper>
           ))}
-        </RevealWrapper>
+        </div>
       </div>
     </section>
   )

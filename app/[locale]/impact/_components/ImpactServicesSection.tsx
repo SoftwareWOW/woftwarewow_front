@@ -34,14 +34,14 @@ export default function ImpactServicesSection() {
               key={item.index}
               className="underline-hover-effect reveal-me group relative flex w-full flex-col items-center lg:flex-row"
             >
-              <figure className="-z-30 w-full max-w-[870px] overflow-hidden rounded-radius-md">
-                <Link href={item.href} className="block" aria-label={`View ${item.title}`}>
+              <figure className="relative -z-30 aspect-[870/580] w-full max-w-[870px] overflow-hidden rounded-radius-md">
+                <Link href={item.href} className="relative block h-full w-full" aria-label={`View ${item.title}`}>
                   <Image
                     src={item.image}
-                    width={870}
-                    height={580}
-                    className="h-full w-full rounded-radius-md transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                     alt={item.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 870px"
+                    className="rounded-radius-md object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                   />
                 </Link>
               </figure>
