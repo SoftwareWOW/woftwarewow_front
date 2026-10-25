@@ -4,7 +4,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import ServicesV10Card from '@/components/homepage-11/ServicesV10Card'
+import HubExploreTopicCard from './HubExploreTopicCard'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import { HUB_EXPLORE } from './hub-content'
 
@@ -40,7 +40,7 @@ export default function HubExploreSection() {
         className="video-section service-wrapper mt-10 flex w-fit flex-col gap-6 overflow-x-hidden overflow-y-visible pl-[5%] pr-[30px] max-md:gap-y-10 max-md:px-5 md:mt-16 md:flex-row md:flex-nowrap md:items-start md:pb-6"
       >
         {section.topics.map((topic) => (
-          <ServicesV10Card
+          <HubExploreTopicCard
             key={topic.slug}
             title={topic.title}
             description={topic.description}

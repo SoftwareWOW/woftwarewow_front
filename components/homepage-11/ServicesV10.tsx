@@ -1,9 +1,9 @@
 'use client'
 
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
+import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
-import ServicesV10Card from './ServicesV10Card'
 
 const data = [
   {
@@ -77,14 +77,22 @@ const ServicesV10 = () => {
             ref={contentRef}
             className="video-section service-wrapper flex w-fit flex-col gap-6 overflow-x-hidden pl-[5%] pr-[30px] max-md:gap-y-10 md:flex-row md:flex-nowrap">
             {data.map((item) => (
-              <ServicesV10Card
-                key={item.id}
-                title={item.title}
-                description={item.description}
-                image={item.image}
-                href="https://www.youtube.com/watch?v=HszQAizu-So"
-                linkTarget="_blank"
-              />
+              <div key={item.id} className="group w-[370px] cursor-fancy">
+                <figure className="hero-video-container overflow-hidden">
+                  <Link
+                    target="_blank"
+                    href="https://www.youtube.com/watch?v=HszQAizu-So"
+                    className="hero-video block cursor-fancy">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-auto w-full transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+                </figure>
+                <h3 className="mb-2.5 mt-[30px] text-2xl leading-[1.1] tracking-normal md:text-[32px]">{item.title}</h3>
+                <p className="max-w-[95%] text-base leading-[1.6] tracking-[0.32px]">{item.description}</p>
+              </div>
             ))}
           </div>
         </div>
