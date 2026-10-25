@@ -65,7 +65,7 @@ const WowGrowthFramework = ({
             <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <HeadingWithInstrument
-            className="max-w-4xl text-[38px] font-normal leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]"
+            className="max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]"
             before={header.title}
             accent={header.accentTitle ?? ''}
           />

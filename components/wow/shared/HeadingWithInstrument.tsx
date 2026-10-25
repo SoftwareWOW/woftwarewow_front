@@ -32,11 +32,12 @@ export default function HeadingWithInstrument({
 }: HeadingWithInstrumentProps) {
   return (
     <TextAppearAnimation>
-      <Tag className={cn('text-appear [&_.line]:!overflow-visible', className)}>
+      <Tag className={cn('text-appear font-light [&_.line]:!overflow-visible', className)}>
         {before}{' '}
         <span
           className={cn(
             variant === 'gradient' ? instrumentAccentGradientClassName : instrumentAccentSolidClassName,
+            'font-light',
             accentClassName,
           )}
         >

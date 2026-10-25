@@ -74,7 +74,7 @@ const GrowthStrategies = ({ articles: articlesProp }: GrowthStrategiesProps) => 
             <div>
          
           <HeadingWithInstrument
-            className="max-w-[640px] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
+            className="max-w-[640px] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
             before="Insights, Trends &"
             accent="Growth Strategies"
           />

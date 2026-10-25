@@ -136,16 +136,16 @@ const Faq = ({
             <h2 className="text-[48px] font-light leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
               {titleBefore && titleAccent ? (
                 <TextAppearAnimation>
-                  <span className="text-appear block font-normal">
+                  <span className="text-appear block font-light">
                     {titleBefore} <InstrumentText>{titleAccent}</InstrumentText>
                   </span>
                 </TextAppearAnimation>
               ) : (
                 <>
-                  <InstrumentText className="block font-normal tracking-[-0.06em]">People</InstrumentText>
+                  <InstrumentText className="block font-light tracking-[-0.06em]">People</InstrumentText>
                   <br />
                   <TextAppearAnimation>
-                    <span className="text-appear block font-normal">Asked Us</span>
+                    <span className="text-appear block font-light">Asked Us</span>
                   </TextAppearAnimation>
                 </>
               )}
