@@ -8,27 +8,21 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'
 import { useState } from 'react'
-import {
-  EVENTS_FAQ_DEFAULT_OPEN_ID,
-  EVENTS_FAQ_HEADER,
-  EVENTS_FAQS,
-} from './events-content'
+import { EVENTS_FAQ_HEADER, EVENTS_FAQS } from './events-content'
 
 export default function EventsFaqSection() {
   const faqItems = EVENTS_FAQS
   const header = EVENTS_FAQ_HEADER
-  const [activeIndex, setActiveIndex] = useState<number | null>(
-    faqItems.findIndex((f) => f.id === EVENTS_FAQ_DEFAULT_OPEN_ID),
-  )
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 transition-colors duration-300 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="absolute left-1/2 top-1/2 -z-30 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]">
-        <Image src={gradientBg} alt="" aria-hidden />
+    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]">
+        <Image src={gradientBg} alt="" aria-hidden priority={false} />
       </div>
 
       <div className="container relative z-10">
@@ -66,9 +60,12 @@ export default function EventsFaqSection() {
           {faqItems.map((item, index) => (
             <div
               key={item.id}
-              className={`faq-body-transition overflow-hidden rounded-radius-sm border bg-backgroundBody duration-[400ms] dark:border-white/10 dark:bg-dark ${
-                activeIndex === index ? 'border-black pb-10 dark:border-white' : 'border-transparent pb-0'
+              className={`faq-body-transition overflow-hidden border bg-backgroundBody duration-[400ms] dark:bg-dark ${
+                activeIndex === index ? 'pb-10' : 'pb-0'
               }`}
+              style={{
+                borderColor: activeIndex === index ? 'black' : 'transparent',
+              }}
             >
               <div
                 className={`relative cursor-pointer py-5 max-md:px-5 md:px-10 md:py-[35px] ${

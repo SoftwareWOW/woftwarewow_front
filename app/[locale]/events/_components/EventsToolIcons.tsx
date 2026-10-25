@@ -1,31 +1,34 @@
 'use client'
 
 import { Icon, addCollection } from '@iconify/react'
+import logos from '@iconify-json/logos/icons.json'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
 
 addCollection(simpleIcons)
+addCollection(logos)
 
-const iconClass = 'size-8 sm:size-9'
-
+/** Brand-colored event platform logos (Iconify simple-icons / logos). */
 const tools = [
-  { name: 'Zoom', node: <Icon icon="simple-icons:zoom" className={iconClass} aria-hidden /> },
-  { name: 'Microsoft Teams', node: <Icon icon="simple-icons:microsoftteams" className={iconClass} aria-hidden /> },
-  { name: 'Hopin', node: <Icon icon="simple-icons:hopin" className={iconClass} aria-hidden /> },
-  { name: 'Eventbrite', node: <Icon icon="simple-icons:eventbrite" className={iconClass} aria-hidden /> },
-  { name: 'Whova', node: <Icon icon="simple-icons:whova" className={iconClass} aria-hidden /> },
-  { name: 'Slido', node: <Icon icon="simple-icons:slido" className={iconClass} aria-hidden /> },
+  { name: 'Zoom', icon: 'simple-icons:zoom' },
+  { name: 'Microsoft Teams', icon: 'logos:microsoft-teams' },
+  { name: 'Hopin', icon: 'simple-icons:hopin' },
+  { name: 'Eventbrite', icon: 'simple-icons:eventbrite' },
+  { name: 'Whova', icon: 'simple-icons:whova' },
+  { name: 'Slido', icon: 'simple-icons:slido' },
 ] as const
 
 export default function EventsToolIcons() {
   return (
-    <div className="mt-10 flex flex-wrap items-center justify-center gap-0 divide-x divide-[#1515151A] dark:divide-[#EDF0F51A] md:mt-14">
-      {tools.map(({ name, node }) => (
+    <div className="mt-10 flex w-full flex-wrap items-center justify-center md:mt-14">
+      {tools.map(({ name, icon }, index) => (
         <span
           key={name}
-          className="inline-flex size-16 items-center justify-center px-4 text-secondary transition-colors dark:text-backgroundBody sm:size-20 sm:px-6"
+          className={`inline-flex h-14 min-w-[100px] flex-1 items-center justify-center px-4 sm:h-16 sm:min-w-[120px] sm:px-6 md:flex-none md:min-w-[140px] ${
+            index > 0 ? 'border-l border-[#1515151A] dark:border-[#EDF0F51A]' : ''
+          }`}
           title={name}
         >
-          {node}
+          <Icon icon={icon} className="h-9 w-auto max-w-[120px] sm:h-10" aria-hidden />
           <span className="sr-only">{name}</span>
         </span>
       ))}

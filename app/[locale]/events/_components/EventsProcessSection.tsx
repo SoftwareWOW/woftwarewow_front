@@ -1,3 +1,5 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
@@ -10,24 +12,26 @@ export default function EventsProcessSection() {
   const content = EVENTS_PROCESS
 
   return (
-    <section className="relative mx-auto max-w-[1600px] bg-background px-5 transition-colors duration-300 dark:bg-background">
+    <section className="relative mx-auto max-w-[1600px] overflow-hidden px-5">
       <div className="flex flex-col items-center justify-between lg:flex-row">
-        <div>
+        <div className="relative z-0 min-w-0 flex-1 py-8 lg:py-12">
           <HeroGradientAnimation />
-          <RevealWrapper className="reveal-me mb-3">
+          <RevealWrapper className="reveal-me relative mb-3">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation02>
-            <h2 className="text-appear max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
+            <h2 className="text-appear relative max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
               {content.titleBefore}
               <InstrumentText>{content.titleAccent}</InstrumentText>
             </h2>
           </TextAppearAnimation02>
           <TextAppearAnimation02>
-            <p className="text-appear max-w-xl text-lg leading-[1.6] tracking-[0.36px] text-[#808080]">{content.description}</p>
+            <p className="text-appear relative max-w-xl text-lg leading-[1.6] tracking-[0.36px] text-[#808080]">
+              {content.description}
+            </p>
           </TextAppearAnimation02>
 
-          <RevealWrapper className="reveal-me mt-7 md:mt-14">
+          <RevealWrapper className="reveal-me relative mt-7 md:mt-14">
             <ButtonComponentList className="flex justify-start">
               <ButtonComponent href={content.ctaHref} variant="white">
                 {content.ctaLabel}
@@ -36,11 +40,11 @@ export default function EventsProcessSection() {
           </RevealWrapper>
         </div>
 
-        <div className="mt-10 grid w-full max-w-2xl grid-cols-2 gap-y-[26px] lg:mt-0 lg:max-w-none lg:flex-1">
+        <div className="relative z-10 mt-10 grid w-full max-w-2xl grid-cols-2 gap-y-[26px] lg:mt-0 lg:max-w-none lg:flex-1">
           {content.steps.map((item, index) => (
             <RevealWrapper
               key={item.title}
-              className={`px-[30px] py-[50px]${index % 2 === 0 ? ' border-r border-black/10 dark:border-white/10' : ''}`}
+              className={`px-[30px] py-[50px]${index % 2 === 0 ? ' border-r border-black/10 dark:border-dark' : ''}`}
             >
               <h2 className="font-instrument text-5xl font-light italic leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px]">
                 {index + 1}
