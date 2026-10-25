@@ -17,6 +17,7 @@ import EventsServicesSection from './_components/EventsServicesSection'
 import EventsToolsSection from './_components/EventsToolsSection'
 import EventsWorkSection from './_components/EventsWorkSection'
 import { EVENTS_CTA } from './_components/events-content'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 export const revalidate = 60
 
@@ -47,6 +48,7 @@ export default async function WowEventsPage({ params }: Props) {
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
       <EventsHero />
       <EventsWorkSection />
+      <WowDivisionsMarquee />
       <EventsChallengeSection />
       <EventsServicesSection />
       <EventsApproachSection />
