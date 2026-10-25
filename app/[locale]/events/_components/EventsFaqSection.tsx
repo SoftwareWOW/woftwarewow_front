@@ -20,12 +20,15 @@ export default function EventsFaqSection() {
   }
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]">
-        <Image src={gradientBg} alt="" aria-hidden priority={false} />
+    <section className="relative isolate overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 scale-x-[2.8] scale-y-[3.4] sm:scale-y-[1.6] md:scale-x-[1.9] md:scale-y-[1.5] lg:scale-x-[1.7] lg:scale-y-[1.5] xl:scale-y-[1.4] 2xl:scale-y-[1]"
+      >
+        <Image src={gradientBg} alt="gradient-bg" priority={false} />
       </div>
 
-      <div className="container relative z-10">
+      <div className="container relative z-[1]">
         <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
@@ -64,7 +67,7 @@ export default function EventsFaqSection() {
                 activeIndex === index ? 'pb-10' : 'pb-0'
               }`}
               style={{
-                borderColor: activeIndex === index ? 'black' : 'transparent',
+                borderColor: activeIndex === index ? 'black' : 'transparent ',
               }}
             >
               <div
@@ -86,7 +89,7 @@ export default function EventsFaqSection() {
                   {item.question}
                 </h3>
                 <div
-                  className={`accordion-header-icon absolute right-5 top-1/2 -translate-y-1/2 transition-transform duration-[400ms] md:right-10 ${
+                  className={`accordion-header-icon transition-transform duration-[400ms] ${
                     activeIndex === index ? 'rotate-180' : 'rotate-0'
                   }`}
                 />

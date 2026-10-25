@@ -55,7 +55,9 @@ export default async function WowEventsPage({ params }: Props) {
       <EventsPackagesSection />
       <EventsToolsSection />
       <WowEcosystem ecosystem={ecosystem} />
-      <EventsFaqSection />
+      <div className="relative z-0 min-w-0 overflow-visible">
+        <EventsFaqSection />
+      </div>
       <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
         <WowGrowthCta
           accentText={EVENTS_CTA.accentText}
