@@ -356,5 +356,3 @@ export const IMPACT_FAQS = [
       'Speaking and media support can include positioning, media kits, interview preparation, and presentation coaching aligned with your personal brand.',
   },
 ] as const
-
-export const IMPACT_FAQ_DEFAULT_OPEN_ID = 5

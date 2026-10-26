@@ -6,12 +6,12 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
-import { DESIGN_FAQ_DEFAULT_OPEN_ID, DESIGN_FAQ_HEADER, DESIGN_FAQS } from './design-content'
+import { DESIGN_FAQ_HEADER, DESIGN_FAQS } from './design-content'
 
 export default function DesignFaqSection() {
   const faqItems = DESIGN_FAQS
   const header = DESIGN_FAQ_HEADER
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(DESIGN_FAQ_DEFAULT_OPEN_ID)
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {
     const columns: Array<Array<(typeof DESIGN_FAQS)[number]>> = [[], [], []]

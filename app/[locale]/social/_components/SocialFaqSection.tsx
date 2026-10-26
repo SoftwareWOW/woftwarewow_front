@@ -6,12 +6,12 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
-import { SOCIAL_FAQ_DEFAULT_OPEN_ID, SOCIAL_FAQ_HEADER, SOCIAL_FAQS } from './social-content'
+import { SOCIAL_FAQ_HEADER, SOCIAL_FAQS } from './social-content'
 
 export default function SocialFaqSection() {
   const faqItems = SOCIAL_FAQS
   const header = SOCIAL_FAQ_HEADER
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(SOCIAL_FAQ_DEFAULT_OPEN_ID)
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {
     const columns: Array<Array<(typeof SOCIAL_FAQS)[number]>> = [[], [], []]

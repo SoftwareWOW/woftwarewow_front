@@ -291,8 +291,6 @@ export const HUB_FAQS = [
   },
 ] as const
 
-export const HUB_FAQ_DEFAULT_OPEN_ID = 5
-
 export const HUB_CTA = {
   accentText: 'Have an idea?',
   mainText: "Let's get it launched.",

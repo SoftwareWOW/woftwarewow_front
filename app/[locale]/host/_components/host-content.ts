@@ -345,5 +345,3 @@ export const HOST_FAQS = [
       'Backup and recovery options can be discussed during planning so file, database, and configuration restoration aligns with your risk and uptime requirements.',
   },
 ] as const
-
-export const HOST_FAQ_DEFAULT_OPEN_ID = 5

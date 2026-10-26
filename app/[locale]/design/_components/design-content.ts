@@ -314,5 +314,3 @@ export const DESIGN_FAQS = [
       'Timelines depend on scope—essentials may take a few weeks; full identity and multi-channel systems take longer. We outline a realistic schedule after discovery.',
   },
 ] as const
-
-export const DESIGN_FAQ_DEFAULT_OPEN_ID = 5

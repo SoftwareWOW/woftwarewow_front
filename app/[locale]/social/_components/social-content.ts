@@ -331,5 +331,3 @@ export const SOCIAL_FAQS = [
       'Yes. We can support creator collaborations, UGC-style campaigns, and influencer partnerships as part of a broader social strategy.',
   },
 ] as const
-
-export const SOCIAL_FAQ_DEFAULT_OPEN_ID = 5

@@ -6,12 +6,12 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
-import { HUB_FAQ_DEFAULT_OPEN_ID, HUB_FAQ_HEADER, HUB_FAQS } from './hub-content'
+import { HUB_FAQ_HEADER, HUB_FAQS } from './hub-content'
 
 export default function HubFaqSection() {
   const faqItems = HUB_FAQS
   const header = HUB_FAQ_HEADER
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(HUB_FAQ_DEFAULT_OPEN_ID)
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {
     const columns: Array<Array<(typeof HUB_FAQS)[number]>> = [[], [], []]

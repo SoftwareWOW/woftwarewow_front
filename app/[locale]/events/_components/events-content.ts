@@ -360,5 +360,3 @@ export const EVENTS_FAQS = [
       'Marketing integration can be included in broader engagements—such as communications, registration flows, and post-event content—when it fits your project scope.',
   },
 ] as const
-
-export const EVENTS_FAQ_DEFAULT_OPEN_ID = 1

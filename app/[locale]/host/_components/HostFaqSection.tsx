@@ -6,12 +6,12 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
-import { HOST_FAQ_DEFAULT_OPEN_ID, HOST_FAQ_HEADER, HOST_FAQS } from './host-content'
+import { HOST_FAQ_HEADER, HOST_FAQS } from './host-content'
 
 export default function HostFaqSection() {
   const faqItems = HOST_FAQS
   const header = HOST_FAQ_HEADER
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(HOST_FAQ_DEFAULT_OPEN_ID)
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {
     const columns: Array<Array<(typeof HOST_FAQS)[number]>> = [[], [], []]
