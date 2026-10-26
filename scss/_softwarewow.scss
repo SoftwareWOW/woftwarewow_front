@@ -1,4 +1,50 @@
 @layer components {
+  /** SoftwareWOW bento hero copy — 64px title & 20px body at 1400px viewport. */
+  .softwarewow-hero-title {
+    font-size: clamp(1.5rem, 4.571428571vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: clamp(-0.04em, -0.171428571vw, -0.02em);
+  }
+
+  .softwarewow-hero-description {
+    font-size: clamp(0.875rem, 1.428571429vw, 1.25rem);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .softwarewow-hero__stage {
+    min-height: clamp(16.25rem, 42.857142857vw, 43.75rem);
+  }
+
+  .softwarewow-hero__text-wrap {
+    max-width: min(100%, 94%);
+
+    @media (min-width: 768px) {
+      max-width: min(100%, 78%);
+    }
+
+    @media (min-width: 1024px) {
+      max-width: min(100%, 82%);
+    }
+
+    @media (min-width: 1280px) {
+      max-width: min(100%, 920px);
+    }
+  }
+
+  .softwarewow-hero__text-panel {
+    padding: clamp(1rem, 3.428571429vw, 1.5rem) clamp(1.25rem, 3.428571429vw, 3rem)
+      clamp(1.25rem, 2.571428571vw, 2.75rem);
+  }
+
+  .softwarewow-hero__description {
+    @apply mt-4 max-w-full md:mt-5;
+
+    @media (min-width: 768px) {
+      max-width: min(100%, 520px);
+    }
+  }
+
   .softwarewow-ecosystem {
     --wow-1: #615cce;
     --wow-2: #9671ac;
