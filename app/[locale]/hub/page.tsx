@@ -11,6 +11,9 @@ import HubCommunitySection from './_components/HubCommunitySection'
 import HubExploreSection from './_components/HubExploreSection'
 import HubFaqSection from './_components/HubFaqSection'
 import HubHero from './_components/HubHero'
+import HubHowItWorksSection from './_components/HubHowItWorksSection'
+import HubLearningOptionsSection from './_components/HubLearningOptionsSection'
+import HubLearningPathwaysSection from './_components/HubLearningPathwaysSection'
 import HubProgramsSection from './_components/HubProgramsSection'
 import { HUB_CTA } from './_components/hub-content'
 
@@ -45,6 +48,9 @@ export default async function WowHubPage({ params }: Props) {
       <HubExploreSection />
       <HubChallengeSection />
       <HubProgramsSection />
+      <HubLearningPathwaysSection />
+      <HubHowItWorksSection />
+      <HubLearningOptionsSection />
       <HubCommunitySection />
       <WowEcosystem ecosystem={ecosystem} />
       <HubFaqSection />

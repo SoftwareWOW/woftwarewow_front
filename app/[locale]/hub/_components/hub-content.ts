@@ -127,6 +127,95 @@ export const HUB_PROGRAMS = {
   ],
 } as const
 
+export const HUB_LEARNING_PATHWAYS = {
+  eyebrow: 'LEARNING PATHWAYS',
+  titleBefore: 'Your Goals Are Different. ',
+  titleAccent: 'Your Learning Should Be Too.',
+  description: '',
+  items: [
+    { title: 'Grow My Business', href: '/meet' },
+    { title: 'Develop creative skills', href: '/meet' },
+    { title: 'Social Media Marketing', href: '/meet' },
+    { title: 'Improve Sales skills', href: '/meet' },
+    { title: 'Explore Technology & AI', href: '/meet' },
+  ],
+} as const
+
+export const HUB_HOW_IT_WORKS = {
+  eyebrow: 'HOW IT WORKS',
+  titleBefore: 'Learning That Fits Into ',
+  titleAccent: 'Real Life.',
+  steps: [
+    {
+      id: 1,
+      title: 'Find Your Topic',
+      description: 'Explore the skills, subjects, and learning experiences that interest you.',
+    },
+    {
+      id: 2,
+      title: 'Build Your Understanding',
+      description: 'Follow practical lessons, demonstrations, and expert guidance.',
+    },
+    {
+      id: 3,
+      title: 'Put It Into Action',
+      description: "Use exercises, projects, and resources to apply what you've learned.",
+    },
+    {
+      id: 4,
+      title: 'Keep Moving Forward',
+      description: 'Reflect on your work, discover the next skill, and continue developing.',
+    },
+  ],
+} as const
+
+export const HUB_LEARNING_OPTIONS = {
+  eyebrow: 'LEARNING OPTIONS',
+  titleBefore: 'Start Small. Learn More. ',
+  titleAccent: 'Keep Growing.',
+  description:
+    'Learning should have different entry points. Explore useful resources, join focused programs, or choose a more connected learning experience when available.',
+  plans: [
+    {
+      id: 1,
+      badge: 'EXPLORE',
+      title: 'Free Resources',
+      description:
+        'Discover introductory guides, useful articles, checklists, and selected educational materials.',
+      ctaLabel: 'Explore Free Resources',
+      ctaHref: '/meet',
+      ctaVariant: 'white' as const,
+    },
+    {
+      id: 2,
+      badge: 'DEVELOP',
+      title: 'Courses & Workshops',
+      description:
+        'Go deeper with structured lessons, focused workshops, and practical learning experiences.',
+      ctaLabel: 'Explore Programs',
+      ctaHref: '/meet',
+      ctaVariant: 'primary' as const,
+      isFeatured: true,
+    },
+    {
+      id: 3,
+      badge: 'CONNECT',
+      title: 'WOW Hub Membership',
+      description:
+        'A proposed ongoing learning experience bringing together selected resources, community participation, and member activities.',
+      ctaLabel: 'Learn About Membership',
+      ctaHref: '/meet',
+      ctaVariant: 'white' as const,
+    },
+  ],
+  footer: {
+    titleAccent: 'Not sure where to start?',
+    description: 'Begin with a topic that interests you, and explore the learning format that suits your goals.',
+    ctaLabel: 'Find My Learning Path',
+    ctaHref: '/meet',
+  },
+} as const
+
 export const HUB_COMMUNITY = {
   eyebrow: 'OUR COMMUNITY',
   titleBefore: 'Good Ideas Grow When ',
