@@ -2,7 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { HUB_PROGRAMS } from './hub-content'
+import { HUB_PROGRAMS, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 const DocIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={42} height={50} viewBox="0 0 42 50" fill="none" aria-hidden>
@@ -51,9 +51,9 @@ export default function HubProgramsSection() {
   const content = HUB_PROGRAMS
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
-      <div className="container">
-        <div className="mb-10 text-center md:mb-16">
+    <section className={HUB_SECTION_SHELL}>
+      <div className={HUB_SECTION_INNER}>
+        <div className="text-center">
           <RevealWrapper className="mb-5 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>

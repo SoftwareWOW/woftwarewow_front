@@ -4,15 +4,15 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import pricingBg from '@/public/images/pricing-gradient.png'
-import { HUB_LEARNING_OPTIONS } from './hub-content'
+import { HUB_LEARNING_OPTIONS, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 export default function HubLearningOptionsSection() {
   const section = HUB_LEARNING_OPTIONS
 
   return (
-    <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
-      <div className="container">
-        <div className="mb-8 text-center md:mb-12">
+    <section className={`overflow-hidden ${HUB_SECTION_SHELL}`}>
+      <div className={HUB_SECTION_INNER}>
+        <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{section.eyebrow}</SectionLabel>
           </RevealWrapper>
@@ -66,14 +66,14 @@ export default function HubLearningOptionsSection() {
           })}
         </div>
 
-        <div className="mt-10 text-center md:mt-12">
+        <div className="text-center">
           <TextAppearAnimation>
             <h2 className="text-appear mb-4 text-2xl md:text-3xl lg:text-4xl">
               <InstrumentText>{section.footer.titleAccent}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me">
-            <p className="mx-auto mb-8 max-w-2xl text-base text-[#808080] md:text-lg">{section.footer.description}</p>
+            <p className="mx-auto mb-6 max-w-2xl text-base text-[#808080] md:text-lg">{section.footer.description}</p>
           </RevealWrapper>
           <RevealWrapper className="reveal-me flex justify-center">
             <ButtonComponentList className="w-full max-w-xl">

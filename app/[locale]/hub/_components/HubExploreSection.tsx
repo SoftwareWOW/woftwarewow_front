@@ -5,18 +5,15 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import HubExploreTopicCard from './HubExploreTopicCard'
-import { HUB_EXPLORE } from './hub-content'
+import { HUB_EXPLORE, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 export default function HubExploreSection() {
   const section = HUB_EXPLORE
 
   return (
-    <section
-      id={section.id}
-      className="scroll-mt-28 relative bg-background pb-14 pt-14 transition-colors duration-300 dark:bg-background md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]"
-    >
-      <div className="container">
-        <RevealWrapper className="reveal-me mb-6 flex flex-col gap-6 md:mb-8 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+    <section id={section.id} className={`scroll-mt-28 ${HUB_SECTION_SHELL}`}>
+      <div className={HUB_SECTION_INNER}>
+        <RevealWrapper className="reveal-me flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-2xl">
             <SectionLabel className="mb-4">{section.eyebrow}</SectionLabel>
             <TextAppearAnimation>
@@ -31,7 +28,7 @@ export default function HubExploreSection() {
           </p>
         </RevealWrapper>
 
-        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 md:mt-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {section.topics.map((topic) => (
             <HubExploreTopicCard
               key={topic.slug}

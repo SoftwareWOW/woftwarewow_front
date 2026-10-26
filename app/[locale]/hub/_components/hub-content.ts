@@ -1,5 +1,10 @@
 /** Static copy for WOW Hub division page. */
 
+/** Vertical rhythm between hub blocks comes from `page.tsx` flex `gap-*` only — no section py/my. */
+export const HUB_SECTION_SHELL =
+  'bg-background transition-colors duration-300 dark:bg-background'
+export const HUB_SECTION_INNER = 'container flex flex-col gap-6'
+
 const HERO_IMG = '/images/wow/Hero/devision/Education.jpg'
 const EXP_01 = '/images/wow/Hero/devision/Design 1.jpg'
 const EXP_02 = '/images/wow/Hero/devision/Design 2.jpg'

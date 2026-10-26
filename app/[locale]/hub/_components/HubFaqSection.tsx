@@ -6,7 +6,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
-import { HUB_FAQ_HEADER, HUB_FAQS } from './hub-content'
+import { HUB_FAQ_HEADER, HUB_FAQS, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 export default function HubFaqSection() {
   const faqItems = HUB_FAQS
@@ -26,9 +26,9 @@ export default function HubFaqSection() {
   }
 
   return (
-    <section className="relative overflow-hidden px-3 md:px-4">
-      <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
+    <section className={`relative overflow-hidden ${HUB_SECTION_SHELL}`}>
+      <div className={`${HUB_SECTION_INNER} relative z-10`}>
+        <div className="flex flex-col items-start justify-center gap-x-10 gap-y-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
               <SectionLabel className="mb-5">{header.sectionLabel}</SectionLabel>

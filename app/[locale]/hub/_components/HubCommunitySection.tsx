@@ -4,7 +4,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
-import { HUB_COMMUNITY } from './hub-content'
+import { HUB_COMMUNITY, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 const IconBars = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none" aria-hidden className="shrink-0">
@@ -49,9 +49,9 @@ export default function HubCommunitySection() {
   const content = HUB_COMMUNITY
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
-      <div className="container">
-        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
+    <section className={HUB_SECTION_SHELL}>
+      <div className={HUB_SECTION_INNER}>
+        <div className="mx-auto max-w-3xl text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
@@ -76,19 +76,19 @@ export default function HubCommunitySection() {
             />
           ))}
         </RevealWrapper>
-      </div>
 
-      <RevealWrapper className="reveal-me relative mx-auto mt-12 w-full max-w-[1400px] px-3 md:mt-16 md:px-4">
-        <figure className="relative h-[clamp(240px,51.14vw,714px)] w-full overflow-hidden rounded-radius-md">
-          <Image
-            src={content.bannerImage}
-            alt={content.bannerAlt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1400px) 100vw, 1400px"
-          />
-        </figure>
-      </RevealWrapper>
+        <RevealWrapper className="reveal-me">
+          <figure className="relative h-[clamp(240px,51.14vw,714px)] w-full overflow-hidden rounded-radius-md">
+            <Image
+              src={content.bannerImage}
+              alt={content.bannerAlt}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1130px) 100vw, 1130px"
+            />
+          </figure>
+        </RevealWrapper>
+      </div>
     </section>
   )
 }

@@ -2,15 +2,15 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { HUB_CHALLENGE } from './hub-content'
+import { HUB_CHALLENGE, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 export default function HubChallengeSection() {
   const content = HUB_CHALLENGE
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
-      <div className="container">
-        <div className="mb-10 text-center md:mb-16">
+    <section className={HUB_SECTION_SHELL}>
+      <div className={HUB_SECTION_INNER}>
+        <div className="text-center">
           <RevealWrapper className="mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>

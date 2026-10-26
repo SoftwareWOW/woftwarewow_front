@@ -4,7 +4,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
-import { HUB_LEARNING_PATHWAYS } from './hub-content'
+import { HUB_LEARNING_PATHWAYS, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 const IconBars = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={61} height={60} viewBox="0 0 61 60" fill="none" aria-hidden className="shrink-0">
@@ -57,9 +57,9 @@ export default function HubLearningPathwaysSection() {
   const bottomRow = content.items.slice(3)
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
-      <div className="container">
-        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
+    <section className={HUB_SECTION_SHELL}>
+      <div className={HUB_SECTION_INNER}>
+        <div className="mx-auto max-w-3xl text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>

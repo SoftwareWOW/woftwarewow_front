@@ -1,15 +1,15 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { HUB_HOW_IT_WORKS } from './hub-content'
+import { HUB_HOW_IT_WORKS, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
 export default function HubHowItWorksSection() {
   const content = HUB_HOW_IT_WORKS
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
-      <div className="container">
-        <div className="mb-8 md:mb-12">
+    <section className={HUB_SECTION_SHELL}>
+      <div className={HUB_SECTION_INNER}>
+        <div>
           <RevealWrapper className="mb-3">
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
