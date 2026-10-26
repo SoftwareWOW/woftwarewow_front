@@ -15,6 +15,28 @@
       @apply inline-block px-[17px] py-2 text-xs font-medium uppercase tracking-[0.96px] text-black dark:text-backgroundBody;
     }
   }
+
+  /** Social-style approach row title: 64px at 1400px viewport, scales below, capped above. */
+  .wow-approach-step-title {
+    @apply mt-2 font-normal text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[520px];
+    font-size: clamp(1.5rem, 4.571428571vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
+  }
+
+  .wow-approach-step-title-wide {
+    @apply mt-2 font-normal text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[730px];
+    font-size: clamp(1.5rem, 4.571428571vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
+  }
+
+  .wow-approach-step-title-narrow {
+    @apply mt-2 font-normal text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[430px];
+    font-size: clamp(1.5rem, 4.571428571vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
+  }
 }
 
 @layer base {

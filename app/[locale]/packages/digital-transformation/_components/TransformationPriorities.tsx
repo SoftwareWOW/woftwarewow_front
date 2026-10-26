@@ -80,7 +80,7 @@ const TransformationPriorities = ({
                 <span className="w-8 font-instrument text-xl italic leading-[32px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody">
                   {item.id}.
                 </span>
-                <h3 className="mt-2 text-nowrap text-2xl font-normal uppercase leading-tight tracking-[-2px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody sm:text-[55px] md:w-[430px] md:text-[67px] lg:text-[84px] xl:text-[88px] xl:leading-[1.15] xl:tracking-[-2.88px]">
+                <h3 className="wow-approach-step-title-narrow text-nowrap uppercase">
                   {item.title}
                 </h3>
               </div>
