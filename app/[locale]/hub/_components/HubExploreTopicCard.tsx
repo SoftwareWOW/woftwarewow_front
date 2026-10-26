@@ -12,10 +12,9 @@ export type HubExploreTopicCardProps = {
 
 export default function HubExploreTopicCard({ title, description, image, href }: HubExploreTopicCardProps) {
   return (
-    <div className="group w-[370px] shrink-0">
+    <div className="group mx-auto w-full max-w-[370px]">
       <figure
-        className="overflow-hidden rounded-radius-sm"
-        style={{ width: CARD_WIDTH_PX, height: IMAGE_HEIGHT_PX }}
+        className="aspect-[370/399] w-full overflow-hidden rounded-radius-sm"
       >
         <Link href={href} className="block h-full w-full cursor-pointer">
           {/* eslint-disable-next-line @next/next/no-img-element */}
