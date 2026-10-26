@@ -54,9 +54,11 @@ export default async function WowHubPage({ params }: Props) {
       <HubCommunitySection />
       <WowEcosystem ecosystem={ecosystem} />
       <HubFaqSection />
-      <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
-        <WowGrowthCta accentText={HUB_CTA.accentText} mainText={HUB_CTA.mainText} ariaLabel={HUB_CTA.ariaLabel} />
-      </div>
+      <WowGrowthCta
+        accentText={HUB_CTA.accentText}
+        mainText={HUB_CTA.mainText}
+        ariaLabel={HUB_CTA.ariaLabel}
+      />
     </div>
   )
 }
