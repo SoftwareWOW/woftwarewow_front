@@ -15,23 +15,30 @@ const DocIcon = () => (
 
 type ProgramItem = (typeof HUB_PROGRAMS.items)[number]
 
+/** 30px at 1400px viewport; scales down on smaller screens, capped at 30px above 1400px. */
+const programCardPadding = 'p-[clamp(1rem,2.143vw,1.875rem)]'
+
 const ProgramFlipCard = ({ item, className }: { item: ProgramItem; className?: string }) => (
   <RevealWrapper
-    className={`group relative min-h-[410px] w-full overflow-hidden border-b border-[#e5e5e5] dark:border-dark ${className ?? ''}`}
+    className={`group relative w-full overflow-hidden border-b border-[#e5e5e5] dark:border-dark ${className ?? ''}`}
   >
-    <div>
-      <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+    <div className="relative">
+      <div
+        className={`relative flex flex-col ${programCardPadding} transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0`}
+      >
         <span>
           <DocIcon />
         </span>
-        <h5 className="mb-4 mt-9 text-3xl leading-[1.2] -tracking-[1.08px] md:text-4xl">{item.title}</h5>
+        <h5 className="mb-3 mt-6 text-3xl leading-[1.2] -tracking-[1.08px] md:mt-8 md:text-4xl">{item.title}</h5>
         <p className="text-[#808080] dark:text-backgroundBody/70">{item.description}</p>
       </div>
-      <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-12 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
+      <div
+        className={`absolute inset-0 z-10 flex translate-y-full flex-col bg-secondary ${programCardPadding} transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody`}
+      >
         <span className="inline-flex [&_path]:fill-backgroundBody dark:[&_path]:fill-secondary">
           <DocIcon />
         </span>
-        <h5 className="mb-3 mt-9 text-3xl leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary md:text-4xl">
+        <h5 className="mb-3 mt-6 text-3xl leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary md:mt-8 md:text-4xl">
           {item.title}
         </h5>
         <p className="text-backgroundBody dark:text-secondary">{item.description}</p>
