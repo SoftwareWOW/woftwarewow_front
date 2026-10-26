@@ -16,6 +16,7 @@ import HubLearningOptionsSection from './_components/HubLearningOptionsSection'
 import HubLearningPathwaysSection from './_components/HubLearningPathwaysSection'
 import HubProgramsSection from './_components/HubProgramsSection'
 import { HUB_CTA } from './_components/hub-content'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 export const revalidate = 60
 
@@ -46,6 +47,7 @@ export default async function WowHubPage({ params }: Props) {
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
       <HubHero />
       <HubExploreSection />
+      <WowDivisionsMarquee />
       <HubChallengeSection />
       <HubProgramsSection />
       <HubLearningPathwaysSection />
