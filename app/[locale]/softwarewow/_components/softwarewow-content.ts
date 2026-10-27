@@ -1,3 +1,5 @@
+import pricingBg from '@/public/images/pricing-gradient.png'
+
 /** Static copy for SoftwareWOW division page. */
 
 export const SOFTWAREWOW_PORTFOLIO = {
@@ -263,51 +265,130 @@ export const SOFTWAREWOW_TESTIMONIALS = {
 
 export const SOFTWAREWOW_PLATFORMS = {
   intro:
-    'We select platforms and technologies based on your requirements, integrations, scalability, management needs, and long-term plans.',
-  logos: [
-    { id: 1, logo: '/images/wow/Hero/marqee/Vector.svg', darkLogo: '/images/wow/Hero/marqee/Vector.svg', alt: 'Technology partner' },
-    { id: 2, logo: '/images/wow/Hero/marqee/Vector(1).svg', darkLogo: '/images/wow/Hero/marqee/Vector(1).svg', alt: 'Technology partner' },
-    { id: 3, logo: '/images/wow/Hero/marqee/Vector(2).svg', darkLogo: '/images/wow/Hero/marqee/Vector(2).svg', alt: 'Technology partner' },
-    { id: 4, logo: '/images/wow/Hero/marqee/Vector(3).svg', darkLogo: '/images/wow/Hero/marqee/Vector(3).svg', alt: 'Technology partner' },
-    { id: 5, logo: '/images/wow/Hero/marqee/Vector.svg', darkLogo: '/images/wow/Hero/marqee/Vector.svg', alt: 'Technology partner' },
-    { id: 6, logo: '/images/wow/Hero/marqee/Vector(1).svg', darkLogo: '/images/wow/Hero/marqee/Vector(1).svg', alt: 'Technology partner' },
-    { id: 7, logo: '/images/wow/Hero/marqee/Vector(2).svg', darkLogo: '/images/wow/Hero/marqee/Vector(2).svg', alt: 'Technology partner' },
-  ],
+    'We select platforms and technologies based on your requirements, content, integrations, scalability, management needs, and long-term plans.',
 } as const
 
+/** Iconify ids — static grid (Design / Social creative-tools pattern). */
+export const SOFTWAREWOW_PLATFORM_ICONS = [
+  { id: 1, name: 'WordPress', icon: 'logos:wordpress-icon' },
+  { id: 2, name: 'Shopify', icon: 'logos:shopify' },
+  { id: 3, name: 'Microsoft Azure', icon: 'logos:microsoft-azure' },
+  { id: 4, name: 'Google', icon: 'logos:google-icon' },
+  { id: 5, name: 'Webflow', icon: 'simple-icons:webflow' },
+  { id: 6, name: 'WooCommerce', icon: 'logos:woo' },
+  { id: 7, name: 'Figma', icon: 'logos:figma' },
+] as const
+
 export const SOFTWAREWOW_SOLUTIONS = {
-  eyebrow: 'SOLUTIONS',
-  title: 'Different Ideas. Endless Possibilities.',
+  eyebrow: 'WORK WITH US',
+  title: 'Start Where Your Project Needs You To.',
   description:
-    'Not every business needs the same software. The right solution depends on what you\'re trying to achieve, who will use it, and what problem it needs to solve.',
-  cards: [
+    'Some ideas need clarity before development. Others are ready to build. And some software needs an experienced team to improve what\'s already there.',
+  cta: { label: 'Learn More', href: '/meet' },
+  plans: [
     {
       id: 1,
-      title: 'Manage My Business',
-      description: 'Bring tasks, records, workflows, and operational information into one accessible environment.',
+      title: 'Product Discovery',
+      tagline: 'Best for businesses that need to validate ideas and plan their software before development.',
+      description:
+        'Best for businesses that need to validate ideas and plan their software before development.',
+      features: [
+        'Business requirements',
+        'Product research & analysis',
+        'User journeys & workflows',
+        'Features & scope definition',
+        'Development roadmap',
+      ],
+      ctaVariant: 'white' as const,
     },
     {
       id: 2,
-      title: 'Serve My Customers',
-      description: 'Give customers a simpler way to access information, manage requests, and interact with your business.',
+      title: 'Software Development',
+      tagline: 'Best for businesses ready to turn their ideas into fully functional, scalable software.',
+      description:
+        'Best for businesses ready to turn their ideas into fully functional, scalable software.',
+      features: [
+        'Requirements & planning',
+        'UI/UX design',
+        'Custom software development',
+        'Database & API integrations',
+        'Quality assurance & testing',
+        'Deployment & launch',
+      ],
+      ctaVariant: 'primary' as const,
+      isFeatured: pricingBg,
     },
     {
       id: 3,
-      title: 'Launch a Digital Product',
-      description: 'Transform a product idea into a usable application with a defined set of core features.',
-    },
-    {
-      id: 4,
-      title: 'Connect My Tools',
-      description: 'Reduce duplicated work by connecting important applications and moving information between them.',
-    },
-    {
-      id: 5,
-      title: 'Create a Mobile Experience',
-      description: 'Put relevant functionality into an experience designed for people using their phones.',
+      title: 'Ongoing Development',
+      tagline:
+        'Best for businesses with existing software that needs continuous improvements, support, and new capabilities.',
+      description:
+        'Best for businesses with existing software that needs continuous improvements, support, and new capabilities.',
+      features: [
+        'Software maintenance & support',
+        'Bug fixes & troubleshooting',
+        'Performance optimization',
+        'Feature enhancements',
+        'Security & system updates',
+        'Third-party integrations',
+        'Continuous development',
+      ],
+      ctaVariant: 'white' as const,
     },
   ],
 } as const
+
+export const SOFTWAREWOW_FAQS = [
+  {
+    id: 1,
+    question: 'What kinds of software does SoftwareWOW! build?',
+    answer:
+      'We design and engineer custom web apps, mobile apps, SaaS products, internal tools, APIs, and digital platforms — from MVP to production systems that scale with your business.',
+  },
+  {
+    id: 2,
+    question: 'How long does a typical software project take?',
+    answer:
+      'Timelines depend on scope and complexity. A focused MVP often takes 6–12 weeks, while larger platforms can run several months. After discovery, we share a clear roadmap with milestones and delivery dates.',
+  },
+  {
+    id: 3,
+    question: 'How do you estimate cost for custom software?',
+    answer:
+      'Most projects are fixed-bid once requirements, scope, and deliverables are clear. We start with a discovery conversation to understand goals, then provide a transparent estimate before engineering begins.',
+  },
+  {
+    id: 4,
+    question: 'Do you handle both design and development?',
+    answer:
+      'Yes. Our team covers product design, UI/UX, frontend, backend, cloud infrastructure, and quality assurance — so you get one accountable partner from concept through launch.',
+  },
+  {
+    id: 5,
+    question: 'Will we own the code and intellectual property?',
+    answer:
+      'Yes. Upon project completion and payment, you own the source code and related IP we create for your product, unless a different arrangement is agreed in writing upfront.',
+  },
+  {
+    id: 6,
+    question: 'Can you modernize or extend an existing product?',
+    answer:
+      'Absolutely. We audit legacy codebases, refactor for performance and security, migrate stacks when needed, and add new features without disrupting what already works.',
+  },
+  {
+    id: 7,
+    question: 'What technologies do you work with?',
+    answer:
+      'We use modern stacks such as Next.js, React, Node.js, NestJS, TypeScript, cloud platforms, and AI tooling — choosing what best fits your product goals, team, and long-term maintainability.',
+  },
+  {
+    id: 8,
+    question: 'How do we get started?',
+    answer:
+      'Book a call or reach out through our contact form. We will discuss your goals, recommend an approach, and outline next steps — discovery, proposal, and a kickoff plan tailored to your product.',
+  },
+] as const
 
 export const SOFTWAREWOW_CTA = {
   accentText: 'Ready to',

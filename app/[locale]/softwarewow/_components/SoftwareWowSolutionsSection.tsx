@@ -1,62 +1,111 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { Layers } from 'lucide-react'
+import pricingBg from '@/public/images/pricing-gradient.png'
+import type { StaticImageData } from 'next/image'
 import { SOFTWAREWOW_SOLUTIONS } from './softwarewow-content'
 
-const cardClassName =
-  'relative flex h-full min-h-[220px] flex-col rounded-radius-md border border-secondary/15 bg-background px-[30px] py-8 transition-colors duration-300 dark:border-dark dark:bg-dark md:min-h-[240px] md:py-10'
+type Plan = {
+  id: number
+  title: string
+  tagline: string
+  description: string
+  features: string[]
+  ctaText?: string
+  ctaVariant?: string
+  isFeatured?: StaticImageData
+}
 
+const CheckmarkIcon = () => (
+  <span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="inline dark:hidden" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z"
+        fill="currentColor"
+      />
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="hidden dark:inline" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+)
+
+/** Layout matches WebsitesSolutionsSection — Work With Us copy. */
 export default function SoftwareWowSolutionsSection() {
   const section = SOFTWAREWOW_SOLUTIONS
-  const topRow = section.cards.slice(0, 3)
-  const bottomRow = section.cards.slice(3)
+  const pricingPlans: Plan[] = section.plans.map((plan) => ({
+    id: plan.id,
+    title: plan.title,
+    tagline: plan.tagline,
+    description: plan.description,
+    features: [...plan.features],
+    ctaVariant: plan.ctaVariant,
+    isFeatured: 'isFeatured' in plan && plan.isFeatured ? pricingBg : undefined,
+  }))
+  const defaultCtaText = section.cta.label
+  const defaultCtaHref = section.cta.href
 
   return (
     <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="relative mb-10 text-center md:mb-16">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-0 h-[280px] w-[min(100%,720px)] -translate-x-1/2 opacity-0 dark:opacity-100"
-            style={{
-              background:
-                'radial-gradient(ellipse 80% 70% at 50% 30%, color-mix(in srgb, #615cce 35%, transparent) 0%, transparent 70%)',
-            }}
-          />
-          <RevealWrapper className="reveal-me relative mb-3 flex justify-center">
+        <div className="mb-7 text-center lg:mb-14">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{section.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear relative mb-3 text-center">{section.title}</h2>
+            <h2 className="text-appear mb-3 text-center">{section.title}</h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear relative mx-auto max-w-3xl text-[#808080]">{section.description}</p>
+            <p className="text-appear mx-auto max-w-3xl text-[#808080]">{section.description}</p>
           </TextAppearAnimation>
         </div>
 
-        <div className="grid grid-cols-1 gap-[30px] md:grid-cols-3">
-          {topRow.map((card) => (
-            <RevealWrapper key={card.id} className={`reveal-me ${cardClassName}`}>
-              <span className="mb-6 inline-flex size-12 items-center justify-center rounded-radius-sm border border-secondary/15 dark:border-backgroundBody/20">
-                <Layers aria-hidden className="size-6 text-secondary dark:text-backgroundBody" strokeWidth={1.25} />
-              </span>
-              <h3 className="mb-3 text-2xl leading-tight md:text-[1.75rem]">{card.title}</h3>
-              <p className="text-base leading-relaxed text-[#808080] dark:text-backgroundBody/70">{card.description}</p>
-            </RevealWrapper>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 items-stretch gap-[30px] md:grid-cols-2 xl:grid-cols-3">
+          {pricingPlans.map((plan) => {
+            const { title, description, features, ctaText = defaultCtaText, ctaVariant = 'white', isFeatured, id } = plan
+            const buttonVariant = ctaVariant === 'primary' ? 'primary' : 'white'
 
-        <div className="mx-auto mt-[30px] grid max-w-4xl grid-cols-1 gap-[30px] md:grid-cols-2">
-          {bottomRow.map((card) => (
-            <RevealWrapper key={card.id} className={`reveal-me ${cardClassName}`}>
-              <span className="mb-6 inline-flex size-12 items-center justify-center rounded-radius-sm border border-secondary/15 dark:border-backgroundBody/20">
-                <Layers aria-hidden className="size-6 text-secondary dark:text-backgroundBody" strokeWidth={1.25} />
-              </span>
-              <h3 className="mb-3 text-2xl leading-tight md:text-[1.75rem]">{card.title}</h3>
-              <p className="text-base leading-relaxed text-[#808080] dark:text-backgroundBody/70">{card.description}</p>
-            </RevealWrapper>
-          ))}
+            return (
+              <RevealWrapper
+                key={id}
+                className="reveal-me relative flex min-h-[510px] w-full flex-col border bg-backgroundBody px-[30px] pb-[30px] pt-[30px] dark:border-dark dark:bg-dark"
+              >
+                {isFeatured ? (
+                  <div className="absolute inset-0 h-full w-full bg-cover bg-no-repeat" style={{ backgroundImage: `url(${isFeatured.src})` }} />
+                ) : null}
+
+                <div className="relative mb-3 flex justify-end">
+                  <div className="rv-badge">
+                    <span className="rv-badge-text uppercase">{title}</span>
+                  </div>
+                </div>
+
+                <p className="relative text-base leading-relaxed text-secondary/70 dark:text-backgroundBody/70">{description}</p>
+
+                <p className="relative mb-3 mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
+                  Include:
+                </p>
+                <ul className="relative [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-3">
+                  {features.map((feature) => (
+                    <li key={feature} className="flex list-none gap-[10px] text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70">
+                      <CheckmarkIcon />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="relative z-10 mt-auto w-full pt-8">
+                  <ButtonComponent href={defaultCtaHref} variant={buttonVariant} fullWidth>
+                    {ctaText}
+                  </ButtonComponent>
+                </div>
+              </RevealWrapper>
+            )
+          })}
         </div>
       </div>
     </section>
