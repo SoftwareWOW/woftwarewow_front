@@ -4,7 +4,7 @@ import ButtonComponent from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import pricingBg from '@/public/images/pricing-gradient.png'
 import type { StaticImageData } from 'next/image'
-import { SOFTWAREWOW_SOLUTIONS } from './softwarewow-content'
+import { SOFTWAREWOW_SECTION_SHELL, SOFTWAREWOW_SOLUTIONS } from './softwarewow-content'
 
 type Plan = {
   id: number
@@ -50,7 +50,7 @@ export default function SoftwareWowSolutionsSection() {
   const defaultCtaHref = section.cta.href
 
   return (
-    <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
+    <section className={`${SOFTWAREWOW_SECTION_SHELL} overflow-hidden`}>
       <div className="container">
         <div className="mb-7 text-center lg:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

@@ -8,7 +8,7 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
-import { SOFTWAREWOW_PORTFOLIO } from './softwarewow-content'
+import { SOFTWAREWOW_PORTFOLIO, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
 export default function SoftwareWowPortfolioSection() {
   const content = SOFTWAREWOW_PORTFOLIO
@@ -19,7 +19,7 @@ export default function SoftwareWowPortfolioSection() {
   const hasMore = content.projects.length > content.initialVisibleCount
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
           <div className="max-w-3xl">

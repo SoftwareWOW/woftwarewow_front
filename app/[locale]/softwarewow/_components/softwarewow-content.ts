@@ -2,6 +2,10 @@ import pricingBg from '@/public/images/pricing-gradient.png'
 
 /** Static copy for SoftwareWOW division page. */
 
+/** Vertical rhythm between blocks comes from `page.tsx` flex `gap-*` only — no section py/my. */
+export const SOFTWAREWOW_SECTION_SHELL =
+  'bg-background transition-colors duration-300 dark:bg-background'
+
 export const SOFTWAREWOW_PORTFOLIO = {
   eyebrow: 'OUR WORK',
   titleBefore: 'Ideas Turned Into Real',

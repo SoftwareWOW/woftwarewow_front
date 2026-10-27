@@ -8,7 +8,7 @@ import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { SOFTWAREWOW_INDUSTRIES } from './softwarewow-content'
+import { SOFTWAREWOW_INDUSTRIES, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
 export default function SoftwareWowIndustriesCarousel() {
   const content = SOFTWAREWOW_INDUSTRIES
@@ -84,7 +84,7 @@ export default function SoftwareWowIndustriesCarousel() {
   }, [updateSlider])
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
@@ -101,7 +101,7 @@ export default function SoftwareWowIndustriesCarousel() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden pt-10 pb-28">
+      <div className="relative overflow-hidden pt-6 pb-16 md:pt-8 md:pb-20">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
@@ -112,7 +112,7 @@ export default function SoftwareWowIndustriesCarousel() {
         />
 
         <div className="relative flex min-h-[480px] items-center justify-center sm:min-h-[520px] md:min-h-[560px]">
-          <div className="relative flex w-full max-w-[1320px] items-center justify-center">
+          <div className="container relative flex w-full items-center justify-center">
             <div className="relative flex h-full w-full items-center justify-center overflow-visible">
               {slides.map((slide, index) => (
                 <div

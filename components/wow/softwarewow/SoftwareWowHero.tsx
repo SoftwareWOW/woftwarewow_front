@@ -26,8 +26,8 @@ export default function SoftwareWowHero() {
   const notchDark = '#0D0D0D'
 
   return (
-    <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody px-3 pt-12 transition-colors duration-300 dark:bg-dark sm:px-4 sm:pt-12 md:pt-16 lg:overflow-visible lg:pt-20">
-      <div className="relative mx-auto w-full max-w-[1320px]">
+    <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody pt-10 transition-colors duration-300 dark:bg-dark sm:pt-10 md:pt-12 lg:overflow-visible lg:pt-14">
+      <div className="container relative">
         <div className={`softwarewow-hero__outer-frame ${panelBg}`}>
           {/* Mobile heading */}
           <h1 className="softwarewow-hero-title px-[clamp(1rem,3.428571429vw,1.5rem)] pb-3 pt-[clamp(1rem,3.428571429vw,1.5rem)] font-normal text-secondary md:hidden dark:text-backgroundBody">

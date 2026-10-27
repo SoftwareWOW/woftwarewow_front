@@ -6,7 +6,7 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { Dictionary } from '@/i18n/types'
 import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
-import { SOFTWAREWOW_TESTIMONIALS } from './softwarewow-content'
+import { SOFTWAREWOW_SECTION_SHELL, SOFTWAREWOW_TESTIMONIALS } from './softwarewow-content'
 
 const CLIENT_IMAGES: Record<string, string> = {
   'Michael Carter': '/images/wow/Hero/client/Michael Carter.png',
@@ -31,13 +31,13 @@ export default function SoftwareWowTestimonialsSection({
   if (!reviews.length) return null
 
   return (
-    <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className={`${SOFTWAREWOW_SECTION_SHELL} overflow-hidden`}>
       <div className="container">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
           <SectionLabel>{content.eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mb-10 mt-3 text-center lg:mb-20">{content.title}</h2>
+          <h2 className="text-appear mb-8 mt-3 text-center md:mb-10">{content.title}</h2>
         </TextAppearAnimation>
       </div>
 

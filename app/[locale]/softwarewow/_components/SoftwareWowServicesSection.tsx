@@ -7,7 +7,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
-import { SOFTWAREWOW_SERVICES } from './softwarewow-content'
+import { SOFTWAREWOW_SECTION_SHELL, SOFTWAREWOW_SERVICES } from './softwarewow-content'
 
 export default function SoftwareWowServicesSection() {
   const content = SOFTWAREWOW_SERVICES
@@ -16,7 +16,7 @@ export default function SoftwareWowServicesSection() {
   const hasMore = content.items.length > content.initialVisibleCount
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

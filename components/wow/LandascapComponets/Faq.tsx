@@ -81,6 +81,8 @@ type FaqProps = {
   description?: string
   viewAllHref?: string
   initialActiveId?: number | null
+  sectionClassName?: string
+  innerClassName?: string
 }
 
 const DEFAULT_SECTION_LABEL = 'Expertise'
@@ -95,6 +97,8 @@ const Faq = ({
   description = DEFAULT_DESCRIPTION,
   viewAllHref = '/rfq',
   initialActiveId = null,
+  sectionClassName = 'relative overflow-hidden px-3 md:px-4',
+  innerClassName = 'relative z-10 mx-auto max-w-[1320px]',
 }: FaqProps) => {
   const faqItems = faqsProp ?? faqData
   const [activeAccordion, setActiveAccordion] = useState<number | null>(initialActiveId)
@@ -125,8 +129,8 @@ const Faq = ({
   }
 
   return (
-    <section className="relative overflow-hidden px-3 md:px-4">
-      <div className="relative z-10 mx-auto max-w-[1320px]">
+    <section className={sectionClassName}>
+      <div className={innerClassName}>
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>

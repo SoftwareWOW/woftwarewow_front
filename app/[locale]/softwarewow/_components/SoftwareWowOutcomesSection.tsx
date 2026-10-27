@@ -3,7 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { SOFTWAREWOW_OUTCOMES } from './softwarewow-content'
+import { SOFTWAREWOW_OUTCOMES, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
 const DocIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={42} height={50} viewBox="0 0 42 50" fill="none" aria-hidden>
@@ -45,7 +45,7 @@ export default function SoftwareWowOutcomesSection() {
   const content = SOFTWAREWOW_OUTCOMES
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="mb-5 flex justify-center">

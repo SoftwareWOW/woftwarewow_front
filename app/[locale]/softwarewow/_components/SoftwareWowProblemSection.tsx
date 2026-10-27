@@ -4,7 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { Check, CircleX } from 'lucide-react'
-import { SOFTWAREWOW_CHALLENGE } from './softwarewow-content'
+import { SOFTWAREWOW_CHALLENGE, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
 const cardClassName =
   'relative rounded-radius-md border border-secondary/15 bg-background px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-background md:pt-12'
@@ -35,7 +35,7 @@ export default function SoftwareWowProblemSection() {
   const content = SOFTWAREWOW_CHALLENGE
 
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
+    <section className={`${SOFTWAREWOW_SECTION_SHELL} relative overflow-hidden`}>
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

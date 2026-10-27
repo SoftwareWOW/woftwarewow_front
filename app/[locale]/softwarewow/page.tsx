@@ -50,7 +50,7 @@ export default async function SoftwareWowPage({ params }: Props) {
   const testimonialExtras = mapStrapiTestimonialExtras(cms.testimonials)
 
   return (
-    <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+    <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <SoftwareWowHero />
       <SoftwareWowPortfolioSection />
       <SoftwareWowProblemSection />

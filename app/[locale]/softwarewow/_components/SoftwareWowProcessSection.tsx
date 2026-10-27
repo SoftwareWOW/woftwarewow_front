@@ -2,13 +2,13 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { SOFTWAREWOW_PROCESS } from './softwarewow-content'
+import { SOFTWAREWOW_PROCESS, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
 export default function SoftwareWowProcessSection() {
   const content = SOFTWAREWOW_PROCESS
 
   return (
-    <section className="bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">

@@ -4,7 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
-import { SOFTWAREWOW_FRAMEWORK } from './softwarewow-content'
+import { SOFTWAREWOW_FRAMEWORK, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
 export default function SoftwareWowFrameworkSection() {
   const content = SOFTWAREWOW_FRAMEWORK
@@ -15,7 +15,7 @@ export default function SoftwareWowFrameworkSection() {
   }))
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-3xl">

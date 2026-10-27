@@ -1,7 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { SOFTWAREWOW_WHY } from './softwarewow-content'
+import { SOFTWAREWOW_SECTION_SHELL, SOFTWAREWOW_WHY } from './softwarewow-content'
 
 export default function SoftwareWowWhySection() {
   const content = SOFTWAREWOW_WHY
@@ -12,7 +12,7 @@ export default function SoftwareWowWhySection() {
   }))
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">
         <div className="mb-12 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-16 md:flex-row md:items-start lg:justify-start">
           <div className="flex-1">

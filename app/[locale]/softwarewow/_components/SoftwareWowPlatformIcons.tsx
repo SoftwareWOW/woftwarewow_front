@@ -26,7 +26,7 @@ function PlatformLogo({ icon, name }: { icon: string; name: string }) {
 export default function SoftwareWowPlatformIcons() {
   return (
     <RevealWrapper className="relative mt-6 md:mt-10">
-      <div className="mx-auto grid max-w-5xl grid-cols-3 place-items-center gap-x-4 gap-y-8 px-2 sm:grid-cols-4 sm:gap-x-6 md:grid-cols-7 md:gap-x-3 lg:gap-x-6">
+      <div className="grid w-full grid-cols-3 place-items-center gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-x-6 md:grid-cols-7 md:gap-x-3 lg:gap-x-6">
         {SOFTWAREWOW_PLATFORM_ICONS.map((tool) => (
           <PlatformLogo key={tool.id} icon={tool.icon} name={tool.name} />
         ))}
