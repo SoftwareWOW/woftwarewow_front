@@ -21,6 +21,7 @@ import SoftwareWowTestimonialsSection from './_components/SoftwareWowTestimonial
 import SoftwareWowWhySection from './_components/SoftwareWowWhySection'
 import { SOFTWAREWOW_CTA } from './_components/softwarewow-content'
 import SoftwareRfq from '@/components/wow/softwarewow/SoftwareRfq'
+import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 export const revalidate = 60
 
@@ -53,6 +54,7 @@ export default async function SoftwareWowPage({ params }: Props) {
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <SoftwareWowHero />
       <SoftwareWowPortfolioSection />
+      <WowDivisionsMarquee />
       <SoftwareWowProblemSection />
       <SoftwareWowServicesSection />
       <SoftwareWowOutcomesSection />
