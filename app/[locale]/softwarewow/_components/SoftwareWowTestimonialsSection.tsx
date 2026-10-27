@@ -49,14 +49,23 @@ export default function SoftwareWowTestimonialsSection({
               return (
                 <div
                   key={review.id}
-                  className="w-96 border p-[30px] first:ml-[30px] dark:border-dark max-md:min-h-[237px] md:max-h-[237px] md:w-[470px]"
+                  className="flex w-96 min-h-[237px] flex-col border p-[30px] first:ml-[30px] dark:border-dark md:w-[470px]"
                 >
                   <p className="text-[17px] leading-normal tracking-normal">{review.title}</p>
                   <div className="mt-[29px] flex items-center gap-4">
-                    <Image src={imageSrc} width={64} height={64} quality={90} alt={review.userName || 'Review author'} />
-                    <div>
+                    <figure className="relative size-16 shrink-0 overflow-hidden rounded-full">
+                      <Image
+                        src={imageSrc}
+                        alt={review.userName || 'Review author'}
+                        fill
+                        quality={90}
+                        className="object-cover"
+                        sizes="64px"
+                      />
+                    </figure>
+                    <div className="min-w-0 flex-1">
                       <h3 className="text-xl font-medium leading-[1.2] tracking-wide">{review.userName}</h3>
-                      <p className="mt-[3.5px] text-base font-light leading-5">{review.position}</p>
+                      <p className="mt-[3.5px] text-base font-light leading-snug">{review.position}</p>
                     </div>
                   </div>
                 </div>
