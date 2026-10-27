@@ -1,6 +1,7 @@
+import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
-import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
+import { mapStrapiEcosystem } from '@/lib/strapi/mappers/superagency'
 import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -18,8 +19,8 @@ import MarketingFrameworkSection from './_components/MarketingFrameworkSection'
 import MarketingProcessSection from './_components/MarketingProcessSection'
 import MarketingGrowthPartnerSection from './_components/MarketingGrowthPartnerSection'
 import MarketingIndustriesCarousel from './_components/MarketingIndustriesCarousel'
-import DevisionOverview from '@/components/wow/LandascapComponets/DevisionOverview'
 import Faq from '@/components/wow/LandascapComponets/Faq'
+import WowEcosystem from '@/components/wow/WowEcosystem'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 export const revalidate = 60
@@ -43,8 +44,9 @@ export default async function WowMarketingPage({ params }: Props) {
   setRequestLocale(locale as Locale)
 
   const typedLocale = locale as Locale
+  const dictionary = await getDictionary(typedLocale)
   const cms = await getSuperagencyHomepage(typedLocale)
-  const divisions = mapStrapiDivisions(cms.divisions)
+  const ecosystem = mapStrapiEcosystem(cms.ecosystem, dictionary.ecosystem)
   return (
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <MarketingHero />
@@ -58,7 +60,7 @@ export default async function WowMarketingPage({ params }: Props) {
        <MarketingFrameworkSection />
       <MarketingGrowthPartnerSection />
       <MarketingIndustriesCarousel />
-      <DevisionOverview divisions={divisions ?? undefined} />
+      <WowEcosystem ecosystem={ecosystem} />
       <Faq faqs={[...MARKETING_FAQS]} />
       <div className="mb-3">
         <WowGrowthCta
