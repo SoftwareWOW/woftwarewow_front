@@ -1,11 +1,12 @@
 import type { Locale } from '@/i18n/config'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
-import { mapStrapiDivisions, mapStrapiPartnerLogos } from '@/lib/strapi/mappers/superagency'
+import { mapStrapiDivisions } from '@/lib/strapi/mappers/superagency'
 import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import MarketingHero from './_components/MarketingHero'
 import MarketingPlatformsIntro from './_components/MarketingPlatformsIntro'
+import MarketingPortfolioSection from './_components/MarketingPortfolioSection'
 import { MARKETING_CTA, MARKETING_FAQS } from './_components/marketing-content'
 
 
@@ -44,18 +45,17 @@ export default async function WowMarketingPage({ params }: Props) {
   const typedLocale = locale as Locale
   const cms = await getSuperagencyHomepage(typedLocale)
   const divisions = mapStrapiDivisions(cms.divisions)
-  const partnerLogos = mapStrapiPartnerLogos(cms.partnerLogos)
-
   return (
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <MarketingHero />
-      <MarketingPlatformsIntro logos={partnerLogos ?? undefined} />
+      <MarketingPlatformsIntro />
+      <MarketingPortfolioSection />
       <WowDivisionsMarquee />
       <MarketingHoldbackSection />
       <MarketingApproachGrid />
       <MarketingServicesGrid />
-      <MarketingFrameworkSection />
       <MarketingProcessSection />
+       <MarketingFrameworkSection />
       <MarketingGrowthPartnerSection />
       <MarketingIndustriesCarousel />
       <DevisionOverview divisions={divisions ?? undefined} />

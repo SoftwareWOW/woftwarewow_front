@@ -15,6 +15,52 @@ export const MARKETING_HERO = {
 export const MARKETING_PLATFORMS_INTRO =
   'We leverage industry-leading marketing platforms and analytics tools to build campaigns that deliver measurable growth.'
 
+/** Iconify ids — marketing stack (static logo grid). */
+export const MARKETING_PLATFORM_ICONS = [
+  { id: 1, name: 'HubSpot', icon: 'simple-icons:hubspot' },
+  { id: 2, name: 'LinkedIn', icon: 'simple-icons:linkedin' },
+  { id: 3, name: 'Meta', icon: 'simple-icons:meta' },
+  { id: 4, name: 'Mailchimp', icon: 'simple-icons:mailchimp' },
+  { id: 5, name: 'ActiveCampaign', icon: 'logos:active-campaign-icon' },
+  { id: 6, name: 'WordPress', icon: 'logos:wordpress-icon' },
+  { id: 7, name: 'Amazon', icon: 'simple-icons:amazon' },
+  { id: 8, name: 'Canva', icon: 'simple-icons:canva' },
+] as const
+
+export const MARKETING_PORTFOLIO = {
+  eyebrow: 'OUR WORK',
+  titleLine1: 'Creative That Connects.',
+  titleLine2: 'Marketing That Moves',
+  titleAccent: 'Businesses Forward.',
+  description:
+    'Great campaigns start with a clear objective and become powerful when the right message, creative execution, and marketing channels work together.',
+  ctaLabel: 'Explore Our Marketing Work',
+  ctaHref: '/portfolio',
+  featured: {
+    category: 'CONSULTING & PROFESSIONAL SERVICES',
+    year: '2026',
+    title: 'CCG Breakthrough',
+    href: '/case-study/ccg-breakthrough',
+    image: '/images/wow/Hero/project/case-study/ccg.png',
+  },
+  projects: [
+    {
+      category: 'RESTAURANT & HOSPITALITY',
+      year: '2020',
+      title: 'DaVinci Lounge',
+      href: '/case-study/davinci-lounge',
+      image: '/images/wow/Hero/project/case-study/davinci.png',
+    },
+    {
+      category: 'BUSINESS & PROFESSIONAL SERVICES',
+      year: '2025',
+      title: 'Sonic Group Inc.',
+      href: '/case-study/sonic-group-inc',
+      image: '/images/wow/Hero/project/case-study/smartek.png',
+    },
+  ],
+} as const
+
 export const MARKETING_HOLDBACK = {
   eyebrow: 'Is your marketing holding you back?',
   titleBefore: 'Marketing Should Grow Your Business',
