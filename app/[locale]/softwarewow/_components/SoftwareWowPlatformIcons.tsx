@@ -11,13 +11,13 @@ addCollection(simpleIcons)
 
 function PlatformLogo({ icon, name }: { icon: string; name: string }) {
   return (
-    <figure className="flex size-14 shrink-0 items-center justify-center overflow-hidden sm:size-16 md:size-[4.5rem]">
+    <figure className="flex h-14 w-[4.5rem] shrink-0 items-center justify-center sm:h-16 sm:w-20 md:h-[4.5rem] md:w-[5rem]">
       <Icon
         icon={icon}
         width={44}
         height={44}
         aria-label={name}
-        className="max-h-full max-w-full text-secondary dark:text-backgroundBody"
+        className="max-h-[44px] max-w-[44px] text-secondary dark:text-backgroundBody"
       />
     </figure>
   )
@@ -25,8 +25,8 @@ function PlatformLogo({ icon, name }: { icon: string; name: string }) {
 
 export default function SoftwareWowPlatformIcons() {
   return (
-    <RevealWrapper className="relative mt-6 overflow-x-auto overflow-y-hidden md:mt-10">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-6 px-2 sm:gap-x-10 md:gap-x-12">
+    <RevealWrapper className="relative mt-6 md:mt-10">
+      <div className="mx-auto grid max-w-5xl grid-cols-3 place-items-center gap-x-4 gap-y-8 px-2 sm:grid-cols-4 sm:gap-x-6 md:grid-cols-7 md:gap-x-3 lg:gap-x-6">
         {SOFTWAREWOW_PLATFORM_ICONS.map((tool) => (
           <PlatformLogo key={tool.id} icon={tool.icon} name={tool.name} />
         ))}

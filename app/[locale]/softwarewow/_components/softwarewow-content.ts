@@ -275,7 +275,7 @@ export const SOFTWAREWOW_PLATFORM_ICONS = [
   { id: 3, name: 'Microsoft Azure', icon: 'logos:microsoft-azure' },
   { id: 4, name: 'Google', icon: 'logos:google-icon' },
   { id: 5, name: 'Webflow', icon: 'simple-icons:webflow' },
-  { id: 6, name: 'WooCommerce', icon: 'logos:woo' },
+  { id: 6, name: 'WooCommerce', icon: 'logos:woocommerce-icon' },
   { id: 7, name: 'Figma', icon: 'logos:figma' },
 ] as const
 
@@ -391,7 +391,7 @@ export const SOFTWAREWOW_FAQS = [
 ] as const
 
 export const SOFTWAREWOW_CTA = {
-  accentText: 'Ready to',
-  mainText: 'Grow?',
-  ariaLabel: 'Contact SoftwareWOW',
+  accentText: 'Have an idea?',
+  mainText: "Let's get it launched.",
+  ariaLabel: 'Contact SoftwareWOW about your software idea',
 } as const
