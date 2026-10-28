@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useGSAP } from '@gsap/react'
@@ -5,9 +6,12 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef } from 'react'
 
+gsap.registerPlugin(useGSAP, ScrollTrigger)
+
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-  ScrollTrigger.config({ ignoreMobileResize: true })
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+  })
 }
 
 interface HorizontalScrollOptions {
@@ -17,44 +21,57 @@ interface HorizontalScrollOptions {
   start?: string
   markers?: boolean
   scrub?: number | boolean
-  onAnimationCreated?: (animation: gsap.core.Tween, scrollTrigger: ScrollTrigger) => void
-  onUpdate?: (progress: number, scrollTrigger: ScrollTrigger) => void
+  onAnimationCreated?: (
+    animation: gsap.core.Tween,
+    scrollTrigger: ScrollTrigger
+  ) => void
+  onUpdate?: (
+    progress: number,
+    scrollTrigger: ScrollTrigger
+  ) => void
   onPinReady?: () => void
   extraScroll?: number
-  /** Minimum viewport width (px) to enable horizontal pin. Use 0 to enable on all devices. */
   minWidth?: number
-  /** Keep pinned section width capped and centered on large screens. */
   maxPinWidth?: number
-  /** Scroll until the last item's center reaches this viewport width ratio (0–1). */
   lastItemFocusRatio?: number
-  /** Align the first item's center to this viewport width ratio (0–1) at scroll start. */
   firstItemFocusRatio?: number
 }
 
-const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
+export default function useHorizontalScroll(
+  options: HorizontalScrollOptions = {}
+) {
   const contentRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
-  const onUpdateRef = useRef(options.onUpdate)
-  const onAnimationCreatedRef = useRef(options.onAnimationCreated)
-  const onPinReadyRef = useRef(options.onPinReady)
+
+  const callbacksRef = useRef({
+    onUpdate: options.onUpdate,
+    onAnimationCreated: options.onAnimationCreated,
+    onPinReady: options.onPinReady,
+  })
 
   useEffect(() => {
-    onUpdateRef.current = options.onUpdate
-    onAnimationCreatedRef.current = options.onAnimationCreated
-    onPinReadyRef.current = options.onPinReady
-  }, [options.onUpdate, options.onAnimationCreated, options.onPinReady])
+    callbacksRef.current = {
+      onUpdate: options.onUpdate,
+      onAnimationCreated: options.onAnimationCreated,
+      onPinReady: options.onPinReady,
+    }
+  }, [
+    options.onUpdate,
+    options.onAnimationCreated,
+    options.onPinReady,
+  ])
 
   const {
-    offset = 60,
-    duration = 2,
+    offset = 0,
+    duration = 1,
     ease = 'none',
     start = 'top top',
     markers = false,
-    scrub = 1,
-    extraScroll = 370,
-    minWidth = 600,
+    scrub = 0.8,
+    extraScroll = 0,
+    minWidth = 0,
     maxPinWidth,
-    lastItemFocusRatio,
+    lastItemFocusRatio = 0.5,
     firstItemFocusRatio,
   } = options
 
@@ -65,156 +82,250 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
 
       if (!content || !trigger) return
 
-      const initHorizontalScroll = () => {
-        const getViewportWidth = () => {
-          if (maxPinWidth) {
-            const parentWidth = trigger.parentElement?.clientWidth ?? window.innerWidth
-            return Math.min(maxPinWidth, parentWidth)
-          }
-          return trigger.clientWidth
-        }
+      const mm = gsap.matchMedia()
 
-        const getFocusX = (ratio: number, viewportWidth: number) => viewportWidth * ratio
+      mm.add(
+        `(min-width: ${Math.max(0, minWidth)}px)`,
+        () => {
+          const getViewportWidth = () => {
+            const width =
+              trigger.clientWidth || window.innerWidth
 
-        const getStartX = () => {
-          const viewportWidth = getViewportWidth()
-          const firstChild = content.firstElementChild as HTMLElement | null
-
-          if (firstChild && firstItemFocusRatio != null) {
-            const firstCenter = firstChild.offsetLeft + firstChild.offsetWidth / 2
-            return getFocusX(firstItemFocusRatio, viewportWidth) - firstCenter
+            return maxPinWidth
+              ? Math.min(width, maxPinWidth)
+              : width
           }
 
-          return 0
-        }
+          const getStartX = () => {
+            // Keep the first card at its natural
+            // left padding position.
+            // This prevents mobile clipping.
+            if (firstItemFocusRatio == null) {
+              return 0
+            }
 
-        const getEndX = () => {
-          const contentWidth = content.scrollWidth
-          const viewportWidth = getViewportWidth()
-          let distance = contentWidth - viewportWidth
+            const first =
+              content.firstElementChild as HTMLElement | null
 
-          if (lastItemFocusRatio != null) {
-            const lastChild = content.lastElementChild as HTMLElement | null
+            if (!first) return 0
 
-            if (lastChild) {
-              const lastCenter = lastChild.offsetLeft + lastChild.offsetWidth / 2
-              const focusX = getFocusX(lastItemFocusRatio, viewportWidth)
-              distance = Math.max(distance, lastCenter - focusX)
+            const firstCenter =
+              first.offsetLeft + first.offsetWidth / 2
+
+            const focusX =
+              getViewportWidth() * firstItemFocusRatio
+
+            // Never move the first card off-screen.
+            return Math.max(
+              0,
+              focusX - firstCenter
+            )
+          }
+
+          const getEndX = () => {
+            const last =
+              content.lastElementChild as HTMLElement | null
+
+            if (!last) return getStartX()
+
+            const viewportWidth = getViewportWidth()
+
+            const contentWidth = content.scrollWidth
+
+            const maxDistance = Math.max(
+              0,
+              contentWidth - viewportWidth
+            )
+
+            if (maxDistance <= 0) {
+              return getStartX()
+            }
+
+            // Align the LAST CARD CENTER to the
+            // selected viewport focus position.
+            const lastCenter =
+              last.offsetLeft + last.offsetWidth / 2
+
+            const focusX =
+              viewportWidth * lastItemFocusRatio
+
+            const targetDistance =
+              lastCenter -
+              focusX +
+              offset +
+              extraScroll
+
+            const distance = gsap.utils.clamp(
+              0,
+              maxDistance,
+              targetDistance
+            )
+
+            return Math.min(
+              getStartX(),
+              -distance
+            )
+          }
+
+          const getDistance = () =>
+            Math.abs(getEndX() - getStartX())
+
+          gsap.set(content, {
+            x: getStartX(),
+            force3D: true,
+          })
+
+          let scrollTrigger:
+            | ScrollTrigger
+            | undefined
+
+          const notifyPosition = () => {
+            if (!scrollTrigger) return
+
+            callbacksRef.current.onUpdate?.(
+              scrollTrigger.progress,
+              scrollTrigger
+            )
+          }
+
+          const animation = gsap.fromTo(
+            content,
+            {
+              x: getStartX,
+            },
+            {
+              x: getEndX,
+              duration,
+              ease,
+              immediateRender: false,
+              force3D: true,
+              onUpdate: notifyPosition,
+            }
+          )
+
+          scrollTrigger = ScrollTrigger.create({
+            trigger,
+            start,
+
+            end: () =>
+              `+=${Math.max(getDistance(), 1)}`,
+
+            animation,
+            pin: true,
+            pinSpacing: true,
+            scrub,
+            markers,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+
+            onUpdate: notifyPosition,
+
+            onRefresh: () => {
+              notifyPosition()
+              callbacksRef.current.onPinReady?.()
+            },
+
+            onToggle: () => {
+              notifyPosition()
+              callbacksRef.current.onPinReady?.()
+            },
+          })
+
+          callbacksRef.current.onAnimationCreated?.(
+            animation,
+            scrollTrigger
+          )
+
+          notifyPosition()
+          callbacksRef.current.onPinReady?.()
+
+          let refreshFrame = 0
+
+          const refresh = () => {
+            cancelAnimationFrame(refreshFrame)
+
+            refreshFrame = requestAnimationFrame(() => {
+              ScrollTrigger.refresh()
+            })
+          }
+
+          // Observe the content's actual width.
+          // Do not observe the pinned element itself:
+          // GSAP temporarily changes its dimensions.
+          const resizeObserver = new ResizeObserver(
+            refresh
+          )
+
+          resizeObserver.observe(content)
+
+          let previousWidth = window.innerWidth
+
+          const handleResize = () => {
+            if (window.innerWidth !== previousWidth) {
+              previousWidth = window.innerWidth
+              refresh()
             }
           }
 
-          distance += offset + extraScroll
+          window.addEventListener(
+            'resize',
+            handleResize,
+            { passive: true }
+          )
 
-          return distance > 0 ? -(distance) : getStartX()
+          window.addEventListener(
+            'orientationchange',
+            refresh
+          )
+
+          const initialFrame =
+            requestAnimationFrame(refresh)
+
+          return () => {
+            cancelAnimationFrame(initialFrame)
+            cancelAnimationFrame(refreshFrame)
+
+            resizeObserver.disconnect()
+
+            window.removeEventListener(
+              'resize',
+              handleResize
+            )
+
+            window.removeEventListener(
+              'orientationchange',
+              refresh
+            )
+
+            scrollTrigger?.kill()
+            animation.kill()
+
+            gsap.set(content, {
+              clearProps: 'transform',
+            })
+          }
         }
+      )
 
-        const getScrollDistance = () => Math.abs(getEndX() - getStartX())
-
-        const syncPinnedLayout = (scrollTrigger: ScrollTrigger) => {
-          if (!maxPinWidth || !scrollTrigger.isActive) return
-
-          const parentRect = trigger.parentElement?.getBoundingClientRect()
-          const availableWidth = parentRect?.width ?? window.innerWidth
-          const width = Math.min(maxPinWidth, availableWidth)
-          const left = parentRect
-            ? parentRect.left + (parentRect.width - width) / 2
-            : (window.innerWidth - width) / 2
-
-          gsap.set(trigger, {
-            width,
-            maxWidth: maxPinWidth,
-            left,
-          })
-        }
-
-        const animation = gsap.fromTo(
-          content,
-          { x: getStartX },
-          {
-            x: getEndX,
-            duration,
-            ease,
-          },
-        )
-
-        gsap.set(content, { x: getStartX() })
-
-        const scrollTrigger = ScrollTrigger.create({
-          trigger,
-          scroller: document.documentElement,
-          start,
-          end: () => {
-            const distance = getScrollDistance()
-            return distance > 0 ? `+=${distance + getViewportWidth() * 0.1}` : '+=1'
-          },
-          pin: true,
-          pinSpacing: true,
-          animation,
-          scrub,
-          invalidateOnRefresh: true,
-          markers,
-          anticipatePin: 1,
-          pinType: 'transform',
-          onUpdate: (self) => {
-            onUpdateRef.current?.(self.progress, self)
-            syncPinnedLayout(self)
-          },
-          onRefreshInit: () => {
-            onPinReadyRef.current?.()
-          },
-          onRefresh: (self) => {
-            gsap.set(content, { x: getStartX() })
-            animation.vars.x = getEndX()
-            syncPinnedLayout(self)
-            onPinReadyRef.current?.()
-          },
-          onToggle: (self) => {
-            syncPinnedLayout(self)
-            onPinReadyRef.current?.()
-          },
-        })
-
-        onUpdateRef.current?.(scrollTrigger.progress, scrollTrigger)
-        onAnimationCreatedRef.current?.(animation, scrollTrigger)
-        onPinReadyRef.current?.()
-
-        const refreshScrollTrigger = () => {
-          ScrollTrigger.refresh()
-        }
-
-        const handleOrientationChange = () => {
-          window.setTimeout(refreshScrollTrigger, 350)
-        }
-
-        window.addEventListener('resize', refreshScrollTrigger)
-        window.addEventListener('orientationchange', handleOrientationChange)
-
-        requestAnimationFrame(refreshScrollTrigger)
-
-        return () => {
-          animation.kill()
-          scrollTrigger.kill()
-          window.removeEventListener('resize', refreshScrollTrigger)
-          window.removeEventListener('orientationchange', handleOrientationChange)
-        }
-      }
-
-      const mm = gsap.matchMedia()
-
-      if (minWidth <= 0) {
-        return initHorizontalScroll()
-      }
-
-      mm.add(`(min-width: ${minWidth}px)`, initHorizontalScroll)
-
-      return () => {
-        mm.revert()
-      }
+      return () => mm.revert()
     },
     {
-      dependencies: [offset, duration, ease, start, markers, scrub, extraScroll, minWidth, maxPinWidth, lastItemFocusRatio, firstItemFocusRatio],
       scope: triggerRef,
-    },
+      dependencies: [
+        offset,
+        duration,
+        ease,
+        start,
+        markers,
+        scrub,
+        extraScroll,
+        minWidth,
+        maxPinWidth,
+        lastItemFocusRatio,
+        firstItemFocusRatio,
+      ],
+      revertOnUpdate: true,
+    }
   )
 
   return {
@@ -222,5 +333,3 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
     triggerRef,
   }
 }
-
-export default useHorizontalScroll
