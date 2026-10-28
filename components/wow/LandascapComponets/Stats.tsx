@@ -46,7 +46,7 @@ const Stats = ({ intro, stats: statsProp }: StatsProps) => {
   const { revealRef } = useReveal()
 
   return (
-    <section className="about relative bg-background transition-colors duration-300">
+    <section className="about wow-brand-surface relative bg-background transition-colors duration-300">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden opacity-0 dark:opacity-20">
         <div
@@ -86,7 +86,7 @@ const Stats = ({ intro, stats: statsProp }: StatsProps) => {
               <div className="relative flex h-full min-h-[200px] flex-col items-center justify-start p-4 transition-colors duration-300 sm:min-h-[240px] sm:p-6 md:min-h-[280px] md:p-8">
                
                 <div className="flex items-baseline gap-1">
-                  <h2 className="font-['Outfit'] text-[clamp(32px,4vw,56px)] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
+                  <h2 className="font-outfit text-[clamp(32px,4vw,56px)] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300 [&_.counter]:font-light">
                     <CounterAnimation number={stat.value} /> {stat.suffix}
                   </h2>
                 </div>

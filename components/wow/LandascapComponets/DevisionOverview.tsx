@@ -333,7 +333,7 @@ function DevisionOverviewContent({
 
   return (
     <section
-      className={`relative w-full min-w-0 ${DIVISIONS_SECTION_BG}`}
+      className={`wow-brand-surface divisions-overview relative w-full min-w-0 ${DIVISIONS_SECTION_BG}`}
     >
       {/* VIEWPORT-HEIGHT SECTION */}
       <div
@@ -395,8 +395,9 @@ function DevisionOverviewContent({
                 <h2
                   id="divisions-heading"
                   className="
-                    text-appear text-left
+                    text-appear text-left font-outfit font-light
                     text-[#1a1a1a] dark:text-[#1a1a1a]
+                    [&_.word]:font-light
                     dark:[&_.word]:text-[#1a1a1a]
                     dark:[&_.font-instrument_.word]:!text-transparent
                     !text-[clamp(1.85rem,min(4.6vw,7svh),5.5rem)]
@@ -407,7 +408,7 @@ function DevisionOverviewContent({
                   Eleven Divisions.
                   <br />
                   One Growth{' '}
-                  <span className="font-instrument italic">
+                  <span className="font-instrument font-light italic">
                     Ecosystem.
                   </span>
                 </h2>
@@ -540,7 +541,7 @@ function DevisionOverviewContent({
                 >
                   <h3
                     className="
-                      pr-2 font-bold
+                      pr-2 font-outfit font-light
                       leading-[1.12]
                       tracking-[-0.025em]
                       text-[#1a1a1a] dark:text-white
@@ -552,7 +553,7 @@ function DevisionOverviewContent({
 
                   <p
                     className="
-                      mt-3 flex-1
+                      mt-3 flex-1 font-outfit font-light
                       text-[#777777] dark:text-[#888888]
                       text-[clamp(0.875rem,1.25vw,1.35rem)]
                       leading-[1.5]

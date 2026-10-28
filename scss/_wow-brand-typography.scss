@@ -47,3 +47,14 @@
     @apply font-light;
   }
 }
+
+.about.wow-brand-surface,
+.divisions-overview.wow-brand-surface {
+  h2,
+  h3,
+  p,
+  .counter,
+  .text-appear .word {
+    @apply font-outfit font-light;
+  }
+}

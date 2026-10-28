@@ -62,7 +62,7 @@ const CounterAnimation = ({ number, duration = 2000 }: NumberTypes) => {
   }, [isCounting, number, duration, count])
 
   return (
-    <span className="counter" ref={counterRef}>
+    <span className="counter font-light" ref={counterRef}>
       {count.toLocaleString()}{' '}
     </span>
   )
