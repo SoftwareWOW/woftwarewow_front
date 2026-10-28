@@ -65,9 +65,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
 
       if (!content || !trigger) return
 
-      const mm = gsap.matchMedia()
-
-      mm.add(`(min-width: ${minWidth}px)`, () => {
+      const initHorizontalScroll = () => {
         const getViewportWidth = () => {
           if (maxPinWidth) {
             const parentWidth = trigger.parentElement?.clientWidth ?? window.innerWidth
@@ -143,6 +141,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
 
         const scrollTrigger = ScrollTrigger.create({
           trigger,
+          scroller: document.documentElement,
           start,
           end: () => {
             const distance = getScrollDistance()
@@ -155,6 +154,7 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
           invalidateOnRefresh: true,
           markers,
           anticipatePin: 1,
+          pinType: 'transform',
           onUpdate: (self) => {
             onUpdateRef.current?.(self.progress, self)
             syncPinnedLayout(self)
@@ -197,7 +197,15 @@ const useHorizontalScroll = (options: HorizontalScrollOptions = {}) => {
           window.removeEventListener('resize', refreshScrollTrigger)
           window.removeEventListener('orientationchange', handleOrientationChange)
         }
-      })
+      }
+
+      const mm = gsap.matchMedia()
+
+      if (minWidth <= 0) {
+        return initHorizontalScroll()
+      }
+
+      mm.add(`(min-width: ${minWidth}px)`, initHorizontalScroll)
 
       return () => {
         mm.revert()

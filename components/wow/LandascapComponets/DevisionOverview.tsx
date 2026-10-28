@@ -5,6 +5,8 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { renderWowInTitle } from '@/components/wow/shared/WowText'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -97,6 +99,40 @@ function renderDivisionTitle(title: string) {
   return renderWowInTitle(title)
 }
 
+function DivisionPreviewImages({
+  items,
+  activeBgId,
+  containerClassName,
+  imageClassName,
+  sizes,
+}: {
+  items: DevisionOverviewItem[]
+  activeBgId: number
+  containerClassName: string
+  imageClassName: string
+  sizes: string
+}) {
+  return (
+    <div aria-hidden className={containerClassName}>
+      {items.map((item) =>
+        item.bgImage ?
+          <Image
+            key={item.id}
+            src={item.bgImage}
+            alt=""
+            fill
+            className={`${imageClassName} ${
+              activeBgId === item.id ? 'opacity-100' : 'opacity-0'
+            }`}
+            sizes={sizes}
+            priority={item.id <= 2}
+          />
+        : null,
+      )}
+    </div>
+  )
+}
+
 export type DevisionOverviewItem = {
   id: number
   title: string
@@ -122,7 +158,7 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
 
   const { contentRef, triggerRef } = useHorizontalScroll({
     extraScroll: 80,
-    minWidth: 768,
+    minWidth: 0,
     firstItemFocusRatio: FOCUS_X_RATIO,
     lastItemFocusRatio: FOCUS_X_RATIO,
     onUpdate: (progress, scrollTrigger) => {
@@ -235,21 +271,35 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
     }
   }, [updateActiveCardFromPosition])
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    const refresh = () => ScrollTrigger.refresh()
+    const t1 = requestAnimationFrame(refresh)
+    const t2 = window.setTimeout(refresh, 400)
+    const t3 = window.setTimeout(refresh, 1200)
+
+    return () => {
+      cancelAnimationFrame(t1)
+      window.clearTimeout(t2)
+      window.clearTimeout(t3)
+    }
+  }, [divisionsData.length])
+
   const activeBgId = hoveredId ?? activeCardId
 
   return (
-    <section className={`relative w-full max-w-full overflow-x-clip ${DIVISIONS_SECTION_BG}`}>
+    <section className={`relative w-full max-w-full ${DIVISIONS_SECTION_BG}`}>
       <div
         ref={triggerRef}
-        className={`service-section relative z-10 flex min-h-[100svh] w-full max-w-full flex-col overflow-x-clip ${DIVISIONS_SECTION_BG}`}
+        className={`service-section relative z-10 flex min-h-[100svh] w-full max-w-full flex-col max-md:justify-between md:overflow-x-clip ${DIVISIONS_SECTION_BG}`}
         aria-labelledby="divisions-heading"
       >
         <div aria-hidden className={`absolute inset-0 ${DIVISIONS_SECTION_BG}`} />
 
         {/* Header Section */}
-        <div className="relative z-10 px-5 pt-24 sm:px-10 md:px-16 md:pt-28 lg:px-20 lg:pt-32">
-          <div className="mx-auto flex w-full max-w-[1320px] items-start justify-between gap-6">
-            <div className="max-w-3xl">
+        <div className="relative z-10 shrink-0 px-5 pt-16 sm:px-10 sm:pt-24 md:px-16 md:pt-28 lg:px-20 lg:pt-32">
+          <div className="mx-auto w-full max-w-[1320px] md:flex md:flex-row md:items-center md:justify-between md:gap-8 lg:gap-12">
+            <div className="max-w-3xl shrink-0 md:max-w-[min(100%,520px)] lg:max-w-[min(100%,520px)]">
               <RevealWrapper>
                 <SectionLabel className="mb-4 dark:bg-[#15151533] dark:text-[#0D0D0D] md:mb-5">
                   Divisions Overview
@@ -266,34 +316,31 @@ const DevisionOverview = ({ divisions: divisionsProp }: DevisionOverviewProps) =
                   <span className="font-instrument italic">Ecosystem.</span>
                 </h2>
               </TextAppearAnimation>
+
+              <div className="mt-5 flex justify-center md:hidden">
+                <DivisionPreviewImages
+                  items={divisionsData}
+                  activeBgId={activeBgId}
+                  containerClassName="relative h-24 w-24 sm:h-28 sm:w-28"
+                  imageClassName="object-contain object-center transition-opacity duration-700"
+                  sizes="112px"
+                />
+              </div>
             </div>
 
-            <div
-              aria-hidden
-              className="relative hidden h-28 w-28 shrink-0 sm:block md:h-36 md:w-36 lg:h-44 lg:w-44 xl:h-52 xl:w-52"
-            >
-              {divisionsData.map((item) =>
-                item.bgImage ?
-                  <Image
-                    key={item.id}
-                    src={item.bgImage}
-                    alt=""
-                    fill
-                    className={`object-contain transition-opacity duration-700 ${
-                      activeBgId === item.id ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    sizes="(max-width: 768px) 112px, (max-width: 1280px) 176px, 208px"
-                    priority={item.id <= 2}
-                  />
-                : null,
-              )}
-            </div>
+            <DivisionPreviewImages
+              items={divisionsData}
+              activeBgId={activeBgId}
+              containerClassName="relative hidden min-h-[13rem] flex-1 self-stretch md:block lg:min-h-[15rem] xl:min-h-[17rem] 2xl:min-h-[19rem]"
+              imageClassName="object-contain object-right transition-opacity duration-700"
+              sizes="(max-width: 1320px) 45vw, 600px"
+            />
           </div>
         </div>
 
         <div
           ref={contentRef}
-          className="service-wrapper relative z-10 mt-auto flex w-max flex-nowrap items-stretch gap-4 px-5 pb-8 pe-[max(5rem,18vw)] pt-6 sm:gap-5 sm:px-10 sm:pb-10 md:gap-6 md:px-16 md:pb-12 lg:px-20 lg:pb-14"
+          className="service-wrapper relative z-10 flex w-max max-w-none shrink-0 flex-nowrap items-stretch gap-4 overflow-x-clip px-5 pb-6 pe-[max(5rem,18vw)] pt-2 sm:gap-5 sm:px-10 sm:pb-8 md:mt-auto md:pb-12 md:pt-6 md:gap-6 md:px-16 lg:px-20 lg:pb-14"
           aria-label="WOW Superagency divisions"
           onPointerMove={handleCardPointerMove}
           onPointerLeave={handleCardPointerLeave}
