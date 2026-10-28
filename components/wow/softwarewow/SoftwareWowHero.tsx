@@ -30,7 +30,7 @@ export default function SoftwareWowHero() {
       <div className="container relative">
         <div className={`softwarewow-hero__outer-frame ${panelBg}`}>
           {/* Mobile heading */}
-          <h1 className="softwarewow-hero-title px-[clamp(1rem,3.428571429vw,1.5rem)] pb-3 pt-[clamp(1rem,3.428571429vw,1.5rem)] font-normal text-secondary md:hidden dark:text-backgroundBody">
+          <h1 className="softwarewow-hero-title px-[clamp(1rem,3.428571429vw,1.5rem)] pb-3 pt-[clamp(1rem,3.428571429vw,1.5rem)] font-light text-secondary md:hidden dark:text-backgroundBody">
             <TextAppearAnimation>
               {HERO_TITLE}
             </TextAppearAnimation>
@@ -90,7 +90,7 @@ export default function SoftwareWowHero() {
                 />
 
                 <TextAppearAnimation>
-                  <h1 className="softwarewow-hero-title font-normal text-secondary dark:text-backgroundBody">
+                  <h1 className="softwarewow-hero-title font-light text-secondary dark:text-backgroundBody">
                     {HERO_TITLE}{' '}
                     <InstrumentText className="font-instrument italic [font-size:inherit] [line-height:inherit]">
                       {HERO_TITLE_HIGHLIGHT}

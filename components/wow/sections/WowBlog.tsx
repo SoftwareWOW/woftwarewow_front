@@ -56,7 +56,7 @@ export default function WowBlog() {
               </div>
               <div className="relative z-10 mx-2 rounded-radius-sm bg-secondary p-6 text-white dark:bg-dark-200">
                 <span className="inline-block rounded bg-white/10 px-3 py-1 text-xs uppercase tracking-wider">{post.tag}</span>
-                <h3 className="mt-4 text-lg font-medium leading-snug">{post.title}</h3>
+                <h3 className="mt-4 text-lg font-light leading-snug">{post.title}</h3>
                 <Link href="/blog" className="mt-6 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white">
                   Read more
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>

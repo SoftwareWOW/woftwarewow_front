@@ -31,7 +31,7 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
       <ContactDialogProvider>
         <MeetDialogProvider>
           <AIChatProvider>
-            <div className="relative w-full max-w-full overflow-x-clip">
+            <div className="wow-brand-surface relative w-full max-w-full overflow-x-clip">
               <SuperagencyChrome
                 navbar={navbar}
                 navigation={navigation}

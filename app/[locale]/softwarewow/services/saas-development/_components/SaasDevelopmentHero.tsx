@@ -16,7 +16,7 @@ const SaasDevelopmentHero = () => {
         <div className="container">
           <RevealWrapper className="text-center">
             <SectionLabel className="mb-5">SaaS Development</SectionLabel>
-            <h1 id="saas-hero-heading" className="font-semibold">
+            <h1 id="saas-hero-heading" className="font-light">
               Build a SaaS product
               <br />
               <InstrumentText>ready to scale.</InstrumentText>

@@ -91,11 +91,11 @@ const Stats = ({ intro, stats: statsProp }: StatsProps) => {
                   </h2>
                 </div>
 
-                <p className="mt-2 text-center font-['Outfit'] text-[clamp(13px,1.2vw,18px)] font-normal text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
+                <p className="mt-2 text-center font-['Outfit'] text-[clamp(13px,1.2vw,18px)] font-light text-[#0D0D0D] dark:text-[#F2F2F2] transition-colors duration-300">
                   {stat.label}
                 </p>
 
-                <p className="mt-2 line-clamp-3 text-center font-['Outfit'] text-[clamp(10px,0.9vw,14px)] font-normal leading-[1.5] text-[#666666] dark:text-[#888888] transition-colors duration-300 sm:mt-3">
+                <p className="mt-2 line-clamp-3 text-center font-['Outfit'] text-[clamp(10px,0.9vw,14px)] font-light leading-[1.5] text-[#666666] dark:text-[#888888] transition-colors duration-300 sm:mt-3">
                   {stat.description}
                 </p>
               </div>

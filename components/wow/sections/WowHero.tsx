@@ -161,7 +161,7 @@ const pillBase = `
   px-5
   py-4
   text-[14px]
-  font-medium
+  font-light
   uppercase
   tracking-[0.16em]
   transition-opacity

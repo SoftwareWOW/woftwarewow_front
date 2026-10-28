@@ -8,7 +8,7 @@ export default function WowRatingSection() {
     <section className="px-4 py-10 sm:px-8">
       <div className="mx-auto max-w-[1260px]">
         <RevealWrapper className="mb-10 flex flex-col items-center justify-between gap-6 rounded-radius-sm border border-secondary/10 bg-white px-4 py-4 dark:border-dark dark:bg-dark-200 md:flex-row md:px-6">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-medium uppercase tracking-[2px] text-colorText sm:gap-6 dark:text-dark-100">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-light uppercase tracking-[2px] text-colorText sm:gap-6 dark:text-dark-100">
             <span>Discuss Your Project</span>
             <span>Ask Question</span>
             <span>See Portfolio</span>
@@ -43,14 +43,14 @@ export default function WowRatingSection() {
                 <Image src={src} alt="" fill className="object-cover" sizes="40px" />
               </div>
             ))}
-            <div className="relative -ml-3 flex size-10 items-center justify-center rounded-full border-2 border-white bg-primary text-xs font-semibold text-white dark:border-dark-200">
+            <div className="relative -ml-3 flex size-10 items-center justify-center rounded-full border-2 border-white bg-primary text-xs font-light text-white dark:border-dark-200">
               +
             </div>
           </div>
           <div className="text-center sm:text-left">
             <p className="text-sm text-colorText dark:text-dark-100">Trusted by over 160+ businesses.</p>
             <div className="mt-1 flex items-center justify-center gap-2 sm:justify-start">
-              <span className="text-lg font-semibold">4.5</span>
+              <span className="text-lg font-light">4.5</span>
               <div className="flex gap-0.5 text-primary" aria-label="4.5 out of 5 stars">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg key={i} width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden>

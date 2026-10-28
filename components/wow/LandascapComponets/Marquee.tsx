@@ -13,7 +13,7 @@ const Marquess = () => {
           <div className="flex items-center justify-between py-2.5 pb-5">
             {topContent?.map((content, idx) => (
               <div className="mr-5 flex items-center gap-6" key={`id is${idx}`}>
-                <span className="text-nowrap text-5xl font-medium leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]">
+                <span className="text-nowrap text-5xl font-light leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]">
                   {content}
                 </span>
                 <span className="mt-5">
@@ -35,7 +35,7 @@ const Marquess = () => {
           <div className="flex items-center justify-between py-2.5">
             {bottomContent?.map((content, idx) => (
               <div className="mr-5 flex items-center gap-6" key={`id is${idx}`}>
-                <span className="text-nowrap text-5xl font-medium leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]">
+                <span className="text-nowrap text-5xl font-light leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]">
                   {content}
                 </span>
                 <span className="mt-5">

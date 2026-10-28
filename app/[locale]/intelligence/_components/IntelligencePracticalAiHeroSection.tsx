@@ -72,7 +72,7 @@ export default function IntelligencePracticalAiHeroSection() {
             <SectionLabel>{content.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h1 className="text-appear mx-auto max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-normal leading-[1.12] tracking-[-0.03em]">
+            <h1 className="text-appear mx-auto max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-light leading-[1.12] tracking-[-0.03em]">
               {content.titleBefore} <InstrumentText>{content.titleAccent}</InstrumentText>
             </h1>
           </TextAppearAnimation>

@@ -88,7 +88,7 @@ export const IntelligenceCore = forwardRef<HTMLDivElement>(function Intelligence
         <span className="inline-flex size-12 items-center justify-center rounded-full border border-[color-mix(in_oklab,var(--neon-violet)_24%,transparent)] bg-[color-mix(in_oklab,var(--neon-violet)_10%,transparent)] text-primary">
           <BrainCircuit className="size-6" strokeWidth={1.5} />
         </span>
-        <h3 className="font-display flex items-baseline gap-1 text-base font-semibold tracking-tight text-foreground sm:text-lg">
+        <h3 className="font-display flex items-baseline gap-1 text-base font-light tracking-tight text-foreground sm:text-lg">
           <WowText className="text-base sm:text-lg">WOW</WowText>
           <span>Intelligence</span>
         </h3>

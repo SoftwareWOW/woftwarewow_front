@@ -175,9 +175,9 @@ const Capabilities = () => {
                   }}
                   aria-expanded={isActive}
                 >
-                  <h3 className="flex flex-col gap-x-10 gap-y-3 font-outfit text-[25px] font-[500px] leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:font-medium md:leading-[1.2] lg:text-3xl">
+                  <h3 className="flex flex-col gap-x-10 gap-y-3 font-outfit text-[25px] font-light leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:font-light md:leading-[1.2] lg:text-3xl">
                     <span>{capability.title}</span>
-                    <span className="mt-2 pr-[2px] text-base font-normal text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                    <span className="mt-2 pr-[2px] text-base font-light text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                       {capability.subtitle}
                     </span>
                   </h3>

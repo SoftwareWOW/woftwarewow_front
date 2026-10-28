@@ -58,7 +58,7 @@ export default function WowProcessSection() {
                 {isActive ? (
                   <>
                     <div className="mb-6 flex items-start justify-between gap-4">
-                      <h3 className="text-xl font-medium leading-tight md:text-3xl">{tab.title}</h3>
+                      <h3 className="text-xl font-light leading-tight md:text-3xl">{tab.title}</h3>
                       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden>
                         <path d="M5 16H27M18 7L27 16L18 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                       </svg>
@@ -68,7 +68,7 @@ export default function WowProcessSection() {
                     )}
                   </>
                 ) : (
-                  <h3 className="text-lg font-medium md:text-2xl">{tab.label}</h3>
+                  <h3 className="text-lg font-light md:text-2xl">{tab.label}</h3>
                 )}
               </RevealWrapper>
             )

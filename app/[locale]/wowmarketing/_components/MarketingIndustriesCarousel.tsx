@@ -137,7 +137,7 @@ export default function MarketingIndustriesCarousel() {
                       </figure>
 
                       <div className="absolute inset-x-4 bottom-0 translate-y-[4%] rounded-radius-md bg-[#1a1a1a] px-5 py-5 sm:inset-x-5 sm:px-6 sm:py-6">
-                        <h5 className="text-lg font-normal leading-snug text-[#F2F2F2] sm:text-xl">{slide.title}</h5>
+                        <h5 className="text-lg font-light leading-snug text-[#F2F2F2] sm:text-xl">{slide.title}</h5>
                         <div className="mt-2 flex items-end gap-3 sm:mt-3 sm:gap-4">
                           <p className="min-w-0 flex-1 text-sm leading-relaxed text-[#F2F2F2]/70 sm:text-[15px]">
                             {slide.description}

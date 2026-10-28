@@ -128,7 +128,7 @@ export default function FooterNewsletterSubscribe() {
           type="submit"
           disabled={isSubmitting || !consent}
           aria-busy={isSubmitting}
-          className="inline-flex h-10 shrink-0 items-center justify-center rounded-radius-sm bg-primary px-5 font-outfit text-[10px] font-medium uppercase tracking-[0.08em] text-white transition-opacity hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:h-11 sm:px-6 sm:text-xs 2xl:h-14 2xl:px-8 2xl:text-sm">
+          className="inline-flex h-10 shrink-0 items-center justify-center rounded-radius-sm bg-primary px-5 font-outfit text-[10px] font-light uppercase tracking-[0.08em] text-white transition-opacity hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:h-11 sm:px-6 sm:text-xs 2xl:h-14 2xl:px-8 2xl:text-sm">
           {isSubmitting ? 'Subscribing…' : 'Subscribe'}
         </button>
       </form>

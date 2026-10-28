@@ -237,7 +237,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           {ecosystem.heading.part2}
         </h2>
 
-        <p className="mx-auto mt-8 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-normal leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-8">
+        <p className="mx-auto mt-8 max-w-[754px] font-['Outfit'] text-[clamp(14px,1.8vw,18px)] font-light leading-[1.6] tracking-[0.02em] text-[#808080] dark:text-[#808080] sm:mt-8">
           {ecosystem.description}
         </p>
       </div>
@@ -378,7 +378,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 transition={{
                   layout: { type: 'spring', stiffness: 420, damping: 34 },
                 }}
-                className={`relative flex items-center justify-center overflow-hidden rounded-md font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                className={`relative flex items-center justify-center overflow-hidden rounded-md font-light outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
                   isMobile ? 'min-h-[36px]' : 'min-h-[34px] sm:min-h-[44px] md:min-h-[52px]'
                 } ${
                   active

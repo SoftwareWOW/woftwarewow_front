@@ -106,7 +106,7 @@ export default function LanguageSwitcher({ open, onOpenChange, dictionary }: Lan
                         : 'border-secondary/10 hover:border-primary/30 hover:bg-black/[0.02] dark:border-dark dark:hover:bg-white/[0.03]'
                     } ${isPending ? 'cursor-wait opacity-80' : ''}`}>
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-secondary dark:text-backgroundBody">{option.name}</p>
+                      <p className="text-sm font-light text-secondary dark:text-backgroundBody">{option.name}</p>
                       <p className="mt-0.5 text-xs uppercase tracking-wider text-colorText dark:text-dark-100">
                         {option.code}
                       </p>

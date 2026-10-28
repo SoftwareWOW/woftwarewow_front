@@ -70,7 +70,7 @@ export default function AccelerateFlexibleStartSection() {
 
                 <p className="relative text-base leading-relaxed text-secondary/70 dark:text-backgroundBody/70">{plan.description}</p>
 
-                <p className="relative mb-3 mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
+                <p className="relative mb-3 mt-8 text-sm font-light uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
                   Include:
                 </p>
                 <ul className="relative [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-3">

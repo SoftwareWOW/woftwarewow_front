@@ -34,10 +34,10 @@ export default function DesignHowWeWorkSection() {
                 </span>
               </div>
               <div className="group mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center transition-colors duration-300 hover:bg-primary dark:border-dark">
-                <h6 className="text-2xl font-normal leading-[1.1] text-black transition-colors duration-300 group-hover:text-white dark:text-white">
+                <h6 className="text-2xl font-light leading-[1.1] text-black transition-colors duration-300 group-hover:text-white dark:text-white">
                   {title}
                 </h6>
-                <p className="text-base font-normal leading-[1.3] text-black/70 transition-colors duration-300 group-hover:text-white dark:text-backgroundBody/70">
+                <p className="text-base font-light leading-[1.3] text-black/70 transition-colors duration-300 group-hover:text-white dark:text-backgroundBody/70">
                   {description}
                 </p>
               </div>

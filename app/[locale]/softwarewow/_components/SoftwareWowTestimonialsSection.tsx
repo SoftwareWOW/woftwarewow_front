@@ -64,7 +64,7 @@ export default function SoftwareWowTestimonialsSection({
                       />
                     </figure>
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-xl font-medium leading-[1.2] tracking-wide">{review.userName}</h3>
+                      <h3 className="text-xl font-light leading-[1.2] tracking-wide">{review.userName}</h3>
                       <p className="mt-[3.5px] text-base font-light leading-snug">{review.position}</p>
                     </div>
                   </div>

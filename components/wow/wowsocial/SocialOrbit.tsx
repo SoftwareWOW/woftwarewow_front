@@ -223,7 +223,7 @@ export function SocialOrbit() {
 
       <div className="absolute left-1/2 top-1/2 z-20 aspect-square w-[26%] -translate-x-1/2 -translate-y-1/2 sm:w-[24%]">
         <SocialNodeCard shape="circle" className="size-full px-2 text-center sm:px-3">
-          <h3 className="flex items-baseline justify-center gap-1 whitespace-nowrap text-[clamp(0.75rem,2.4vw,1.15rem)] font-semibold leading-none tracking-tight">
+          <h3 className="flex items-baseline justify-center gap-1 whitespace-nowrap text-[clamp(0.75rem,2.4vw,1.15rem)] font-light leading-none tracking-tight">
             <WowText className="text-[clamp(0.75rem,2.4vw,1.15rem)]">WOW</WowText>
             <span className="text-foreground dark:text-backgroundBody">Social</span>
           </h3>

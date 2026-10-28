@@ -39,10 +39,10 @@ export default function WowExpertise() {
                   : 'border border-secondary/10 bg-white text-secondary dark:border-dark dark:bg-dark-200'
               }`}>
               <div className="mb-6 flex size-12 items-center justify-center rounded-full border border-current/20">
-                <span className="text-lg font-semibold">!</span>
+                <span className="text-lg font-light">!</span>
               </div>
               <div>
-                <h3 className="text-xl font-medium leading-tight md:text-3xl">{item.title}</h3>
+                <h3 className="text-xl font-light leading-tight md:text-3xl">{item.title}</h3>
                 <p className={`mt-3 text-sm ${item.featured ? 'text-white/70' : 'text-colorText dark:text-dark-100'}`}>
                   {item.subtitle}
                 </p>

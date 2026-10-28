@@ -51,7 +51,7 @@ export default function WowDetailCard({
           </div>
 
           <div className="flex flex-col gap-[13px]">
-            <p className="text-lg font-medium leading-none text-black 2xl:text-xl dark:text-backgroundBody">
+            <p className="text-lg font-light leading-none text-black 2xl:text-xl dark:text-backgroundBody">
               {title}
             </p>
 

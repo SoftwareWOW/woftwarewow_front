@@ -418,7 +418,7 @@ const WowSuperAgencyClient = ({
                                   max-w-[650px]
                                   font-['Outfit']
                                   text-[clamp(20px,2.15vw,29px)]
-                                  font-normal
+                                  font-light
                                   leading-[1.32]
                                   tracking-[-0.02em]
                                   text-[#202020]
@@ -473,7 +473,7 @@ const WowSuperAgencyClient = ({
                                     truncate
                                     font-['Outfit']
                                     text-[18px]
-                                    font-medium
+                                    font-light
                                     leading-tight
                                     text-[#202020]
 
@@ -491,7 +491,7 @@ const WowSuperAgencyClient = ({
                                     truncate
                                     font-['Outfit']
                                     text-[13px]
-                                    font-normal
+                                    font-light
                                     leading-tight
                                     text-[#777777]
 

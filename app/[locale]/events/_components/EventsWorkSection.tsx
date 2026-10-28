@@ -67,7 +67,7 @@ export default function EventsWorkSection() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveCategory(category.slug)}
-                  className={`relative flex-1 px-2 py-3.5 text-center text-[10px] font-medium uppercase tracking-[0.12em] transition-colors duration-300 sm:px-3 sm:py-4 sm:text-[11px] md:text-xs ${
+                  className={`relative flex-1 px-2 py-3.5 text-center text-[10px] font-light uppercase tracking-[0.12em] transition-colors duration-300 sm:px-3 sm:py-4 sm:text-[11px] md:text-xs ${
                     isActive
                       ? 'bg-primary text-white'
                       : 'bg-background text-[#0D0D0D] hover:bg-[#8b7cff]/10 dark:text-[#F2F2F2] dark:hover:bg-white/5'
@@ -100,7 +100,7 @@ export default function EventsWorkSection() {
                 <Link href={item.href}>
                   <h3 className="text-[27px] leading-tight tracking-tight md:text-3xl lg:text-4xl">{item.title}</h3>
                 </Link>
-                <p className="mb-2 mt-3 text-lg font-normal leading-[1.4] tracking-[0.4px] text-[#808080] md:mt-5">
+                <p className="mb-2 mt-3 text-lg font-light leading-[1.4] tracking-[0.4px] text-[#808080] md:mt-5">
                   {item.description}
                 </p>
                 <p className="mb-5 text-base text-[#808080] md:mb-8">{item.bullets}</p>

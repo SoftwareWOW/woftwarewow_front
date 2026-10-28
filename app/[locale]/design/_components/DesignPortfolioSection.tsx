@@ -57,7 +57,7 @@ export default function DesignPortfolioSection() {
                   />
                 </div>
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 rounded-radius-sm border border-white/20 bg-backgroundBody/95 px-4 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-dark-200/95 sm:bottom-6 sm:left-6 sm:right-6 sm:px-5 sm:py-4">
-                  <h3 className="text-lg font-normal text-[#0D0D0D] transition-colors duration-300 group-hover:text-primary dark:text-[#F2F2F2] md:text-2xl">
+                  <h3 className="text-lg font-light text-[#0D0D0D] transition-colors duration-300 group-hover:text-primary dark:text-[#F2F2F2] md:text-2xl">
                     {project.title}
                   </h3>
                   <figure className="relative size-12 shrink-0 cursor-pointer overflow-hidden rounded-radius-sm bg-primary md:size-14">

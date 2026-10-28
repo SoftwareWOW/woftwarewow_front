@@ -41,7 +41,7 @@ export const FlowCard = forwardRef<HTMLDivElement, Props>(function FlowCard(
         <Icon className="size-[18px]" strokeWidth={1.75} />
       </span>
       <span className="min-w-0">
-        <span className="block text-sm leading-snug font-semibold text-balance text-foreground lg:truncate">
+        <span className="block text-sm leading-snug font-light text-balance text-foreground lg:truncate">
           {title}
         </span>
         <span className="mt-0.5 block text-xs leading-snug text-muted-foreground lg:truncate">

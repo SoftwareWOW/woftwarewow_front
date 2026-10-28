@@ -33,7 +33,7 @@ export default function SocialClientResultsSection() {
           {stats.map((stat) => (
             <RevealWrapper key={stat.label} className="stat-item w-full">
               <div className="flex flex-row items-baseline justify-center gap-3 sm:justify-center">
-                <h3 className="font-outfit text-[clamp(2.5rem,5vw,4rem)] font-normal leading-none tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] [&_.counter]:font-outfit [&_.counter]:text-[#0D0D0D] dark:[&_.counter]:text-[#F2F2F2]">
+                <h3 className="font-outfit text-[clamp(2.5rem,5vw,4rem)] font-light leading-none tracking-[-0.02em] text-[#0D0D0D] dark:text-[#F2F2F2] [&_.counter]:font-outfit [&_.counter]:text-[#0D0D0D] dark:[&_.counter]:text-[#F2F2F2]">
                   {'isDecimal' in stat && stat.isDecimal ? (
                     <span className="text-[#0D0D0D] dark:text-[#F2F2F2]">
                       {stat.value}
@@ -46,7 +46,7 @@ export default function SocialClientResultsSection() {
                     </span>
                   )}
                 </h3>
-                <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#0D0D0D] dark:text-[#F2F2F2]">
+                <p className="text-xs font-light uppercase tracking-[0.14em] text-[#0D0D0D] dark:text-[#F2F2F2]">
                   {stat.label}
                 </p>
               </div>

@@ -21,7 +21,7 @@ export default function WebsitesHero() {
       <div className="container relative z-10">
         <div className="mb-10 text-center md:mb-14 lg:mb-16">
           <TextAppearAnimation>
-            <h1 className="text-appear mx-auto max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-normal leading-[1.12] tracking-[-0.03em]">
+            <h1 className="text-appear mx-auto max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-light leading-[1.12] tracking-[-0.03em]">
               {hero.titleBefore}
               <br />
               <InstrumentText>{hero.titleAccent}</InstrumentText>

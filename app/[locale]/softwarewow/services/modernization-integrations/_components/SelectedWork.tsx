@@ -57,7 +57,7 @@ const SelectedWork = () => {
               </figure>
 
               <div className="z-30 w-full overflow-hidden rounded-radius-md border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
-                <p className="mb-3.5 text-sm font-normal uppercase leading-6 tracking-[3px] text-black dark:text-white">
+                <p className="mb-3.5 text-sm font-light uppercase leading-6 tracking-[3px] text-black dark:text-white">
                   {item.client} · {item.industry}
                 </p>
                 <div className="blog-title mb-6 lg:mb-8">
@@ -70,7 +70,7 @@ const SelectedWork = () => {
                 <p className="mb-3 text-sm uppercase tracking-[0.96px] text-secondary/70 dark:text-backgroundBody/70">
                   {item.serviceTags.join(' · ')}
                 </p>
-                <p className="mb-8 text-base font-normal leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70 lg:mb-10">
+                <p className="mb-8 text-base font-light leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70 lg:mb-10">
                   {item.description}
                 </p>
                 <ButtonComponent href={`/case-study/${item.slug}`} variant="white">

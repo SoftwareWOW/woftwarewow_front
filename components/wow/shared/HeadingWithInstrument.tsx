@@ -7,6 +7,7 @@ import {
   instrumentAccentGradientClassName,
   instrumentAccentSolidClassName,
 } from './InstrumentText'
+import { WOW_FONT_WEIGHT } from './WowTypography'
 
 type HeadingWithInstrumentProps = {
   /** Plain title text before the italic accent */
@@ -32,12 +33,12 @@ export default function HeadingWithInstrument({
 }: HeadingWithInstrumentProps) {
   return (
     <TextAppearAnimation>
-      <Tag className={cn('text-appear font-light [&_.line]:!overflow-visible', className)}>
+      <Tag className={cn('text-appear', WOW_FONT_WEIGHT, '[&_.line]:!overflow-visible', className)}>
         {before}{' '}
         <span
           className={cn(
             variant === 'gradient' ? instrumentAccentGradientClassName : instrumentAccentSolidClassName,
-            'font-light',
+            WOW_FONT_WEIGHT,
             accentClassName,
           )}
         >

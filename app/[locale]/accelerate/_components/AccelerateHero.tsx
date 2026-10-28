@@ -25,7 +25,7 @@ export default function AccelerateHero() {
             <SectionLabel>{hero.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h1 className="text-appear mx-auto max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-normal leading-[1.12] tracking-[-0.03em]">
+            <h1 className="text-appear mx-auto max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-light leading-[1.12] tracking-[-0.03em]">
               {hero.titleBefore} <InstrumentText>{hero.titleAccent}</InstrumentText>
             </h1>
           </TextAppearAnimation>

@@ -31,7 +31,7 @@ const MobileAppHero = () => {
           <RevealWrapper
             as="h1"
             id="mobile-apps-hero-heading"
-            className="reveal-me text-[clamp(2rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em]"
+            className="reveal-me text-[clamp(2rem,4.571vw,5.5rem)] font-light leading-[1.15] tracking-[-0.03em]"
           >
             Mobile experiences built to move with your <InstrumentText>users.</InstrumentText>
           </RevealWrapper>

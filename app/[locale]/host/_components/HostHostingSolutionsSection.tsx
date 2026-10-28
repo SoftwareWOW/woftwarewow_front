@@ -92,7 +92,7 @@ export default function HostHostingSolutionsSection() {
                 <h4 className="min-w-0 flex-1 text-[25px] leading-[1.15] lg:text-[46px] lg:leading-[1.1] lg:tracking-[-1.44px]">
                   {service.title}
                 </h4>
-                <span className="text-5xl font-normal leading-[1.1] tracking-[-2px] text-black/10 dark:text-backgroundBody/10 sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:tracking-[-2.88px]">
+                <span className="text-5xl font-light leading-[1.1] tracking-[-2px] text-black/10 dark:text-backgroundBody/10 sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:tracking-[-2.88px]">
                   {service.number}
                 </span>
               </div>

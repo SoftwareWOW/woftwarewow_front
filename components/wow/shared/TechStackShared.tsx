@@ -218,7 +218,7 @@ export function TechCard({
       className="group relative flex h-full cursor-default flex-col items-center justify-center overflow-hidden rounded-radius-md border border-black/10 bg-backgroundBody p-4 text-center outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:border-white/10 dark:bg-dark-200 sm:p-5"
     >
       <TechIcon icon={icon} color={color} invertInDark={invertInDark} />
-      <span className="mt-3 text-sm font-semibold text-secondary transition-colors duration-300 dark:text-[#F2F2F2] sm:text-base">
+      <span className="mt-3 text-sm font-light text-secondary transition-colors duration-300 dark:text-[#F2F2F2] sm:text-base">
         {name}
       </span>
       {hint && (

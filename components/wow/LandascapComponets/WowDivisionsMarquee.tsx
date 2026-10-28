@@ -15,7 +15,7 @@ const sparkleIcon = (
 )
 
 const labelClassName =
-  'text-nowrap text-5xl font-medium leading-tight tracking-[-2px] text-secondary dark:text-[#F2F2F2] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]'
+  'text-nowrap text-5xl font-light leading-tight tracking-[-2px] text-secondary dark:text-[#F2F2F2] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]'
 
 type WowDivisionsMarqueeProps = {
   /** Division display titles (e.g. "WOW Design"). Defaults to all ecosystem divisions. */

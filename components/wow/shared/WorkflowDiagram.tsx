@@ -91,12 +91,12 @@ function Node({
             strokeWidth={1.5}
           />
         </div>
-        <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-radius-sm bg-primary text-[10px] font-semibold text-primary-foreground sm:h-6 sm:w-6 sm:text-[11px]">
+        <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-radius-sm bg-primary text-[10px] font-light text-primary-foreground sm:h-6 sm:w-6 sm:text-[11px]">
           {index + 1}
         </span>
       </div>
 
-      <p className="mt-2 text-[11px] font-semibold leading-tight text-foreground dark:text-backgroundBody sm:mt-2.5 sm:text-xs lg:text-sm">
+      <p className="mt-2 text-[11px] font-light leading-tight text-foreground dark:text-backgroundBody sm:mt-2.5 sm:text-xs lg:text-sm">
         {step.label}
       </p>
       <p className="mt-0.5 line-clamp-2 text-[10px] leading-snug text-muted-foreground dark:text-dark-100 sm:text-[11px]">
@@ -254,7 +254,7 @@ export default function WorkflowDiagram({
           <div className="mt-8 flex justify-center sm:mt-10">
             <div className="flex items-center gap-3 rounded-radius-sm border border-border bg-card/70 px-5 py-3 backdrop-blur dark:border-white/10 dark:bg-dark/70 sm:px-6 sm:py-4">
               <CheckCircle2 className="h-5 w-5 text-primary sm:h-6 sm:w-6" strokeWidth={1.6} />
-              <p className="text-sm font-semibold text-foreground dark:text-backgroundBody sm:text-base">
+              <p className="text-sm font-light text-foreground dark:text-backgroundBody sm:text-base">
                 Workflow <span className="text-accent">Completed</span>
               </p>
             </div>

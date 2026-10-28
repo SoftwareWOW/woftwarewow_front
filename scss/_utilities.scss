@@ -12,27 +12,27 @@
   .rv-badge {
     @apply inline-block rounded-radius-lg bg-[#17171717] dark:bg-[#ededed33];
     &-text {
-      @apply inline-block px-[17px] py-2 text-xs font-medium uppercase tracking-[0.96px] text-black dark:text-backgroundBody;
+      @apply inline-block px-[17px] py-2 text-xs font-light uppercase tracking-[0.96px] text-black dark:text-backgroundBody;
     }
   }
 
   /** Social-style approach row title: 64px at 1400px viewport, scales below, capped above. */
   .wow-approach-step-title {
-    @apply mt-2 font-normal text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[520px];
+    @apply mt-2 font-light text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[520px];
     font-size: clamp(1.5rem, 4.571428571vw, 4rem);
     line-height: 1.15;
     letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
   }
 
   .wow-approach-step-title-wide {
-    @apply mt-2 font-normal text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[730px];
+    @apply mt-2 font-light text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[730px];
     font-size: clamp(1.5rem, 4.571428571vw, 4rem);
     line-height: 1.15;
     letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
   }
 
   .wow-approach-step-title-narrow {
-    @apply mt-2 font-normal text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[430px];
+    @apply mt-2 font-light text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[430px];
     font-size: clamp(1.5rem, 4.571428571vw, 4rem);
     line-height: 1.15;
     letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
@@ -53,7 +53,7 @@
   }
 
   h1 {
-    @apply text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px];
+    @apply text-5xl font-light leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px];
   }
 
   h2 {
@@ -61,29 +61,29 @@
   }
 
   h3 {
-    @apply text-[27px] font-normal leading-tight lg:text-[42px] lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[56px];
+    @apply text-[27px] font-light leading-tight lg:text-[42px] lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[56px];
   }
 
   h4 {
-    @apply text-[25px] font-normal lg:text-5xl lg:leading-[1.2];
+    @apply text-[25px] font-light lg:text-5xl lg:leading-[1.2];
   }
 
   h5 {
-    @apply text-[22px] font-normal lg:text-4xl lg:leading-[1.2] lg:-tracking-[1.08px];
+    @apply text-[22px] font-light lg:text-4xl lg:leading-[1.2] lg:-tracking-[1.08px];
   }
 
   h6 {
-    @apply text-xl font-normal lg:text-[32px] lg:leading-[1.05];
+    @apply text-xl font-light lg:text-[32px] lg:leading-[1.05];
   }
 
   p {
-    @apply text-base font-normal text-colorText dark:text-backgroundBody/70 md:text-lg lg:text-xl lg:leading-[1.4];
+    @apply text-base font-light text-colorText dark:text-backgroundBody/70 md:text-lg lg:text-xl lg:leading-[1.4];
   }
   em {
     @apply not-italic;
   }
   a {
-    @apply inline-block text-sm font-medium leading-[1.1] text-black dark:text-backgroundBody;
+    @apply inline-block text-sm font-light leading-[1.1] text-black dark:text-backgroundBody;
   }
 }
 

@@ -66,12 +66,12 @@ export default function SocialFlexibleStartSection() {
                   </div>
                 </div>
 
-                <h3 className="relative mb-3 text-2xl font-normal leading-tight md:text-3xl">{plan.title}</h3>
+                <h3 className="relative mb-3 text-2xl font-light leading-tight md:text-3xl">{plan.title}</h3>
                 <p className="relative text-base leading-relaxed text-secondary/70 dark:text-backgroundBody/70">
                   {plan.description}
                 </p>
 
-                <p className="relative mb-3 mt-8 text-sm font-medium uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
+                <p className="relative mb-3 mt-8 text-sm font-light uppercase tracking-wide text-secondary/70 dark:text-backgroundBody/70">
                   Include:
                 </p>
                 <ul className="relative [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-3">

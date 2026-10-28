@@ -37,7 +37,7 @@ const CustomSoftwareHero = () => {
               <TextAppearAnimation>
                 <h1
                   id="custom-software-hero-heading"
-                  className="text-appear text-[clamp(2rem,4.8vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.02em]"
+                  className="text-appear text-[clamp(2rem,4.8vw,5.5rem)] font-light leading-[1.15] tracking-[-0.02em]"
                 >
                   Software built around your <InstrumentText>business.</InstrumentText>
                 </h1>

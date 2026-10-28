@@ -38,7 +38,7 @@ const WowSwiperSlideContent: FC<SwiperSlideContentProps> = ({
           </svg>
         </span>
 
-        <p className="mb-8 flex-1 font-outfit text-base font-normal leading-[1.5] text-[#1a1a1a] transition-colors duration-300 dark:text-white md:mb-10 md:text-xl lg:text-[22px]">
+        <p className="mb-8 flex-1 font-outfit text-base font-light leading-[1.5] text-[#1a1a1a] transition-colors duration-300 dark:text-white md:mb-10 md:text-xl lg:text-[22px]">
           {title}
         </p>
 

@@ -51,7 +51,7 @@ export default function HubLearningOptionsSection() {
                   </div>
                 </div>
 
-                <h3 className="relative mb-3 text-2xl font-normal leading-tight md:text-3xl">{plan.title}</h3>
+                <h3 className="relative mb-3 text-2xl font-light leading-tight md:text-3xl">{plan.title}</h3>
                 <p className="relative text-base leading-relaxed text-secondary/70 dark:text-backgroundBody/70">
                   {plan.description}
                 </p>

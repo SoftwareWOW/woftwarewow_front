@@ -86,7 +86,7 @@ const HumanTouch = ({
                       Powered.{' '}
                     </span>
                   </TextAppearAnimation>
-                  <InstrumentText className="font-normal tracking-[-0.06em]">Human</InstrumentText>
+                  <InstrumentText className="font-light tracking-[-0.06em]">Human</InstrumentText>
                   <TextAppearAnimation>
                     <span className="text-appear">
                       <br />
@@ -109,7 +109,7 @@ const HumanTouch = ({
               </div>
 
               <figcaption>
-                <p className="text-sm font-medium text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+                <p className="text-sm font-light text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                   {founderName}
                 </p>
                 <span className="text-xs text-[#8b7cff] dark:text-[#b794f4]">

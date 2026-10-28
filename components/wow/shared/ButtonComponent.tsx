@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ReactNode } from 'react'
 import { useContactDialogOptional } from './ContactDialogProvider'
 import { useMeetDialogOptional } from './MeetDialogProvider'
+import { WOW_FONT_WEIGHT } from './WowTypography'
 
 type ButtonComponentVariant = 'primary' | 'secondary' | 'white' | 'primary2'
 type ButtonComponentSize = 'default' | 'sm' | 'sm-v2'
@@ -56,6 +57,7 @@ export default function ButtonComponent({
 
   const classes = [
     'rv-button',
+    WOW_FONT_WEIGHT,
     variantClasses[variant],
     sizeClasses[size],
     fullWidth ? '!inline-flex !w-full max-md:!w-full' : 'inline-flex w-fit max-w-full',

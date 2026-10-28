@@ -45,7 +45,7 @@ export default function WebsitesWhyWowSection() {
               >
                 0{item.id}.
               </InstrumentText>
-              <h3 className="text-3xl font-normal leading-tight tracking-[-0.02em] text-secondary/40 transition-all duration-300 group-hover:text-secondary dark:text-backgroundBody/40 dark:group-hover:text-backgroundBody sm:text-[2rem] md:text-4xl lg:text-5xl lg:leading-[1.1] lg:tracking-[-0.03em]">
+              <h3 className="text-3xl font-light leading-tight tracking-[-0.02em] text-secondary/40 transition-all duration-300 group-hover:text-secondary dark:text-backgroundBody/40 dark:group-hover:text-backgroundBody sm:text-[2rem] md:text-4xl lg:text-5xl lg:leading-[1.1] lg:tracking-[-0.03em]">
                 {item.title}
               </h3>
               <p className="text-base leading-relaxed text-secondary/40 transition-colors duration-300 group-hover:text-secondary/90 dark:text-backgroundBody/40 dark:group-hover:text-backgroundBody/90 md:text-right md:text-lg md:leading-[1.6]">

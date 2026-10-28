@@ -117,7 +117,7 @@ const GrowthStrategies = ({ articles: articlesProp }: GrowthStrategiesProps) => 
                 <SectionLabel className="mb-3">{article.date}</SectionLabel>
 
                 <Link href={article.href}>
-                  <h3 className="mb-2 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-normal leading-[1.25] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:hover:text-[#b794f4]">
+                  <h3 className="mb-2 max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-light leading-[1.25] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:hover:text-[#b794f4]">
                     {article.title}
                   </h3>
                 </Link>

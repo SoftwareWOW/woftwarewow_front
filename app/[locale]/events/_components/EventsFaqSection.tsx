@@ -85,7 +85,7 @@ export default function EventsFaqSection() {
                 tabIndex={0}
                 aria-expanded={activeIndex === index}
               >
-                <h3 className="text-xl font-normal max-lg:pr-[33px] sm:text-[23px] sm:font-medium md:text-[25px] md:leading-[25.2px] md:tracking-wide">
+                <h3 className="text-xl font-light max-lg:pr-[33px] sm:text-[23px] sm:font-light md:text-[25px] md:leading-[25.2px] md:tracking-wide">
                   {item.question}
                 </h3>
                 <div
