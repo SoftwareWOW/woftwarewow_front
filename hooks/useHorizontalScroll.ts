@@ -9,9 +9,7 @@ import { useEffect, useRef } from 'react'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 if (typeof window !== 'undefined') {
-  ScrollTrigger.config({
-    ignoreMobileResize: true,
-  })
+  ScrollTrigger.config({ ignoreMobileResize: true })
 }
 
 interface HorizontalScrollOptions {
@@ -21,20 +19,21 @@ interface HorizontalScrollOptions {
   start?: string
   markers?: boolean
   scrub?: number | boolean
-  onAnimationCreated?: (
-    animation: gsap.core.Tween,
-    scrollTrigger: ScrollTrigger
-  ) => void
-  onUpdate?: (
-    progress: number,
-    scrollTrigger: ScrollTrigger
-  ) => void
-  onPinReady?: () => void
   extraScroll?: number
   minWidth?: number
   maxPinWidth?: number
-  lastItemFocusRatio?: number
   firstItemFocusRatio?: number
+  lastItemFocusRatio?: number
+  refreshKey?: string
+  onAnimationCreated?: (
+    animation: gsap.core.Tween,
+    trigger: ScrollTrigger
+  ) => void
+  onUpdate?: (
+    progress: number,
+    trigger: ScrollTrigger
+  ) => void
+  onPinReady?: () => void
 }
 
 export default function useHorizontalScroll(
@@ -45,20 +44,20 @@ export default function useHorizontalScroll(
 
   const callbacksRef = useRef({
     onUpdate: options.onUpdate,
-    onAnimationCreated: options.onAnimationCreated,
     onPinReady: options.onPinReady,
+    onAnimationCreated: options.onAnimationCreated,
   })
 
   useEffect(() => {
     callbacksRef.current = {
       onUpdate: options.onUpdate,
-      onAnimationCreated: options.onAnimationCreated,
       onPinReady: options.onPinReady,
+      onAnimationCreated: options.onAnimationCreated,
     }
   }, [
     options.onUpdate,
-    options.onAnimationCreated,
     options.onPinReady,
+    options.onAnimationCreated,
   ])
 
   const {
@@ -71,8 +70,9 @@ export default function useHorizontalScroll(
     extraScroll = 0,
     minWidth = 0,
     maxPinWidth,
-    lastItemFocusRatio = 0.5,
     firstItemFocusRatio,
+    lastItemFocusRatio = 0.5,
+    refreshKey = '',
   } = options
 
   useGSAP(
@@ -87,7 +87,7 @@ export default function useHorizontalScroll(
       mm.add(
         `(min-width: ${Math.max(0, minWidth)}px)`,
         () => {
-          const getViewportWidth = () => {
+          const viewportWidth = () => {
             const width =
               trigger.clientWidth || window.innerWidth
 
@@ -97,29 +97,23 @@ export default function useHorizontalScroll(
           }
 
           const getStartX = () => {
-            // Keep the first card at its natural
-            // left padding position.
-            // This prevents mobile clipping.
-            if (firstItemFocusRatio == null) {
-              return 0
-            }
-
             const first =
               content.firstElementChild as HTMLElement | null
 
-            if (!first) return 0
+            if (
+              !first ||
+              firstItemFocusRatio == null
+            ) {
+              return 0
+            }
 
-            const firstCenter =
+            const center =
               first.offsetLeft + first.offsetWidth / 2
 
-            const focusX =
-              getViewportWidth() * firstItemFocusRatio
+            const target =
+              viewportWidth() * firstItemFocusRatio
 
-            // Never move the first card off-screen.
-            return Math.max(
-              0,
-              focusX - firstCenter
-            )
+            return Math.max(0, target - center)
           }
 
           const getEndX = () => {
@@ -128,43 +122,33 @@ export default function useHorizontalScroll(
 
             if (!last) return getStartX()
 
-            const viewportWidth = getViewportWidth()
+            const width = viewportWidth()
 
-            const contentWidth = content.scrollWidth
-
-            const maxDistance = Math.max(
+            const maximumScroll = Math.max(
               0,
-              contentWidth - viewportWidth
+              content.scrollWidth - width
             )
 
-            if (maxDistance <= 0) {
+            if (maximumScroll <= 0) {
               return getStartX()
             }
 
-            // Align the LAST CARD CENTER to the
-            // selected viewport focus position.
             const lastCenter =
               last.offsetLeft + last.offsetWidth / 2
 
-            const focusX =
-              viewportWidth * lastItemFocusRatio
-
-            const targetDistance =
+            const requiredScroll =
               lastCenter -
-              focusX +
+              width * lastItemFocusRatio +
               offset +
               extraScroll
 
             const distance = gsap.utils.clamp(
               0,
-              maxDistance,
-              targetDistance
+              maximumScroll,
+              requiredScroll
             )
 
-            return Math.min(
-              getStartX(),
-              -distance
-            )
+            return Math.min(getStartX(), -distance)
           }
 
           const getDistance = () =>
@@ -175,11 +159,9 @@ export default function useHorizontalScroll(
             force3D: true,
           })
 
-          let scrollTrigger:
-            | ScrollTrigger
-            | undefined
+          let scrollTrigger: ScrollTrigger | undefined
 
-          const notifyPosition = () => {
+          const notify = () => {
             if (!scrollTrigger) return
 
             callbacksRef.current.onUpdate?.(
@@ -188,45 +170,40 @@ export default function useHorizontalScroll(
             )
           }
 
+          // Update on the actual animation frames,
+          // including smooth scrub movement.
           const animation = gsap.fromTo(
             content,
-            {
-              x: getStartX,
-            },
+            { x: getStartX },
             {
               x: getEndX,
-              duration,
               ease,
+              duration,
               immediateRender: false,
               force3D: true,
-              onUpdate: notifyPosition,
+              onUpdate: notify,
             }
           )
 
           scrollTrigger = ScrollTrigger.create({
             trigger,
             start,
-
             end: () =>
               `+=${Math.max(getDistance(), 1)}`,
-
-            animation,
             pin: true,
             pinSpacing: true,
+            animation,
             scrub,
             markers,
             invalidateOnRefresh: true,
             anticipatePin: 1,
-
-            onUpdate: notifyPosition,
-
+            onUpdate: notify,
             onRefresh: () => {
-              notifyPosition()
+              notify()
               callbacksRef.current.onPinReady?.()
             },
-
             onToggle: () => {
-              notifyPosition()
+              notify()
               callbacksRef.current.onPinReady?.()
             },
           })
@@ -236,7 +213,7 @@ export default function useHorizontalScroll(
             scrollTrigger
           )
 
-          notifyPosition()
+          notify()
           callbacksRef.current.onPinReady?.()
 
           let refreshFrame = 0
@@ -246,21 +223,18 @@ export default function useHorizontalScroll(
 
             refreshFrame = requestAnimationFrame(() => {
               ScrollTrigger.refresh()
+              notify()
             })
           }
 
-          // Observe the content's actual width.
-          // Do not observe the pinned element itself:
-          // GSAP temporarily changes its dimensions.
-          const resizeObserver = new ResizeObserver(
-            refresh
-          )
-
-          resizeObserver.observe(content)
+          // Watch layout changes without continuously
+          // refreshing during horizontal transforms.
+          const observer = new ResizeObserver(refresh)
+          observer.observe(content)
 
           let previousWidth = window.innerWidth
 
-          const handleResize = () => {
+          const onResize = () => {
             if (window.innerWidth !== previousWidth) {
               previousWidth = window.innerWidth
               refresh()
@@ -269,7 +243,7 @@ export default function useHorizontalScroll(
 
           window.addEventListener(
             'resize',
-            handleResize,
+            onResize,
             { passive: true }
           )
 
@@ -278,18 +252,18 @@ export default function useHorizontalScroll(
             refresh
           )
 
-          const initialFrame =
+          const firstFrame =
             requestAnimationFrame(refresh)
 
           return () => {
-            cancelAnimationFrame(initialFrame)
+            cancelAnimationFrame(firstFrame)
             cancelAnimationFrame(refreshFrame)
 
-            resizeObserver.disconnect()
+            observer.disconnect()
 
             window.removeEventListener(
               'resize',
-              handleResize
+              onResize
             )
 
             window.removeEventListener(
@@ -321,15 +295,13 @@ export default function useHorizontalScroll(
         extraScroll,
         minWidth,
         maxPinWidth,
-        lastItemFocusRatio,
         firstItemFocusRatio,
+        lastItemFocusRatio,
+        refreshKey,
       ],
       revertOnUpdate: true,
     }
   )
 
-  return {
-    contentRef,
-    triggerRef,
-  }
+  return { contentRef, triggerRef }
 }

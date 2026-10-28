@@ -10,6 +10,7 @@ import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import {
   useCallback,
@@ -17,6 +18,8 @@ import {
   useRef,
   useState,
 } from 'react'
+
+import type { PointerEvent } from 'react'
 
 const DIVISION_BG_BASE = '/images/wow/Hero/devision'
 
@@ -118,93 +121,86 @@ const divisions: DevisionOverviewItem[] = [
   },
 ]
 
-function renderDivisionTitle(title: string) {
-  return renderWowInTitle(title)
-}
-
 function DivisionPreviewImages({
   items,
   activeBgId,
   className = '',
+  desktop = false,
 }: {
   items: DevisionOverviewItem[]
   activeBgId: number
   className?: string
+  desktop?: boolean
 }) {
   return (
     <div
       aria-hidden="true"
-      className={`relative isolate ${className}`}
+      className={`relative isolate min-h-0 min-w-0 ${className}`}
     >
-      {items.map((item) =>
-        item.bgImage ? (
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`
+            pointer-events-none absolute inset-0
+            transition-opacity duration-500 ease-in-out
+            ${
+              activeBgId === item.id
+                ? 'z-10 opacity-100'
+                : 'z-0 opacity-0'
+            }
+          `}
+        >
           <Image
-            key={item.id}
             src={item.bgImage}
             alt=""
             fill
             priority={item.id <= 2}
-            sizes="(max-width: 767px) 180px, (max-width: 1280px) 320px, 540px"
-            className={`
-              absolute inset-0
-              h-full w-full
-              object-contain object-center
-              transition-opacity duration-500
-              ease-in-out
-              ${
-                activeBgId === item.id
-                  ? 'opacity-100'
-                  : 'opacity-0'
-              }
-            `}
+            sizes={
+              desktop
+                ? '(max-width: 1023px) 42vw, (max-width: 1535px) 45vw, 720px'
+                : '(max-width: 767px) 220px, 180px'
+            }
+            className="object-contain object-center"
           />
-        ) : null
-      )}
+        </div>
+      ))}
     </div>
   )
 }
 
-const DevisionOverview = ({
-  divisions: divisionsProp,
-}: DevisionOverviewProps) => {
-  const divisionsData = divisionsProp ?? divisions
-
+function DevisionOverviewContent({
+  divisionsData,
+  pathname,
+}: {
+  divisionsData: DevisionOverviewItem[]
+  pathname: string
+}) {
   const [hoveredId, setHoveredId] =
     useState<number | null>(null)
 
   const [activeCardId, setActiveCardId] =
-    useState<number>(divisionsData[0]?.id ?? 1)
+    useState(divisionsData[0]?.id ?? 1)
 
   const cardRefs =
     useRef<Record<number, HTMLElement | null>>({})
 
-  const sectionElementRef =
-    useRef<HTMLDivElement | null>(null)
-
-  const updateFrameRef =
-    useRef<number | null>(null)
-
+  const updateFrameRef = useRef<number | null>(null)
   const scrollProgressRef = useRef(0)
-
   const isScrollingRef = useRef(false)
 
   const idleTimerRef =
     useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  const sectionElementRef =
+    useRef<HTMLDivElement | null>(null)
+
   const updateActiveCardFromPosition = useCallback(() => {
     const section = sectionElementRef.current
 
-    if (!section || divisionsData.length === 0) {
-      return
-    }
+    if (!section || divisionsData.length === 0) return
 
     const rect = section.getBoundingClientRect()
     const isMobile = window.innerWidth < 768
-
-    // On laptops, start by highlighting the
-    // left-hand card and gradually move the
-    // focus toward the center near the end.
-    // On mobile, focus stays at the center.
     const progress = scrollProgressRef.current
 
     const endBlend = Math.max(
@@ -216,25 +212,18 @@ const DevisionOverview = ({
       ? 0.5
       : 0.22 + endBlend * 0.28
 
-    const focusX =
-      rect.left + rect.width * focusRatio
+    const focusX = rect.left + rect.width * focusRatio
 
     let closestId = divisionsData[0].id
     let closestDistance = Infinity
 
     for (const item of divisionsData) {
       const card = cardRefs.current[item.id]
-
       if (!card) continue
 
       const cardRect = card.getBoundingClientRect()
-
-      const centerX =
-        cardRect.left + cardRect.width / 2
-
-      const distance = Math.abs(
-        centerX - focusX
-      )
+      const centerX = cardRect.left + cardRect.width / 2
+      const distance = Math.abs(centerX - focusX)
 
       if (distance < closestDistance) {
         closestDistance = distance
@@ -243,35 +232,26 @@ const DevisionOverview = ({
     }
 
     setActiveCardId((previous) =>
-      previous === closestId
-        ? previous
-        : closestId
+      previous === closestId ? previous : closestId
     )
   }, [divisionsData])
 
-  const scheduleActiveCardUpdate =
-    useCallback(() => {
-      if (updateFrameRef.current !== null) return
+  const scheduleActiveCardUpdate = useCallback(() => {
+    if (updateFrameRef.current !== null) return
 
-      updateFrameRef.current = requestAnimationFrame(
-        () => {
-          updateFrameRef.current = null
-          updateActiveCardFromPosition()
-        }
-      )
-    }, [updateActiveCardFromPosition])
+    updateFrameRef.current = requestAnimationFrame(() => {
+      updateFrameRef.current = null
+      updateActiveCardFromPosition()
+    })
+  }, [updateActiveCardFromPosition])
 
   const handleScrollUpdate = useCallback(
     (progress: number) => {
       scrollProgressRef.current = progress
-
       scheduleActiveCardUpdate()
 
       isScrollingRef.current = true
-
-      setHoveredId((previous) =>
-        previous === null ? previous : null
-      )
+      setHoveredId(null)
 
       if (idleTimerRef.current) {
         clearTimeout(idleTimerRef.current)
@@ -291,42 +271,31 @@ const DevisionOverview = ({
       extraScroll: 0,
       duration: 1,
       scrub: 0.8,
-
-      // No firstItemFocusRatio:
-      // First card stays at its natural position.
       lastItemFocusRatio: 0.5,
-
-      onUpdate: (progress) => {
-        handleScrollUpdate(progress)
-      },
-
-      onPinReady: () => {
-        scheduleActiveCardUpdate()
-      },
+      refreshKey: pathname,
+      onUpdate: handleScrollUpdate,
+      onPinReady: scheduleActiveCardUpdate,
     })
 
   useEffect(() => {
     sectionElementRef.current = triggerRef.current
-
     scheduleActiveCardUpdate()
   }, [triggerRef, scheduleActiveCardUpdate])
 
   useEffect(() => {
-    const handleResize = () => {
-      scheduleActiveCardUpdate()
-    }
+    const onResize = () => scheduleActiveCardUpdate()
 
-    window.addEventListener(
-      'resize',
-      handleResize,
-      { passive: true }
+    window.addEventListener('resize', onResize, {
+      passive: true,
+    })
+
+    const frame = requestAnimationFrame(
+      scheduleActiveCardUpdate
     )
 
     return () => {
-      window.removeEventListener(
-        'resize',
-        handleResize
-      )
+      cancelAnimationFrame(frame)
+      window.removeEventListener('resize', onResize)
 
       if (updateFrameRef.current !== null) {
         cancelAnimationFrame(updateFrameRef.current)
@@ -339,13 +308,13 @@ const DevisionOverview = ({
   }, [scheduleActiveCardUpdate])
 
   const handleCardPointerMove = useCallback(
-    (event: React.PointerEvent<HTMLDivElement>) => {
+    (event: PointerEvent<HTMLDivElement>) => {
       if (event.pointerType === 'touch') return
       if (isScrollingRef.current) return
 
-      const card = (
-        event.target as Element
-      ).closest('[data-card-id]')
+      const card = (event.target as Element).closest(
+        '[data-card-id]'
+      )
 
       if (!card) return
 
@@ -364,67 +333,56 @@ const DevisionOverview = ({
 
   return (
     <section
-      className={`
-        relative w-full min-w-0
-        ${DIVISIONS_SECTION_BG}
-      `}
+      className={`relative w-full min-w-0 ${DIVISIONS_SECTION_BG}`}
     >
-      {/* PINNED SECTION */}
+      {/* VIEWPORT-HEIGHT SECTION */}
       <div
         ref={triggerRef}
         aria-labelledby="divisions-heading"
         className={`
           service-section
           relative flex w-full min-w-0
-          flex-col justify-between
+          h-[100svh] min-h-[540px]
+          flex-col
           overflow-visible
-          min-h-[100svh]
           ${DIVISIONS_SECTION_BG}
         `}
       >
-        {/* HEADER */}
+        {/* HEADER FILLS REMAINING HEIGHT */}
         <div
           className="
-            relative z-10
-            w-full shrink-0
-
-            px-5 pt-8
-            sm:px-8 sm:pt-10
-            md:px-10 md:pt-10
-            lg:px-12 lg:pt-12
-            xl:px-16 xl:pt-14
-            2xl:px-20 2xl:pt-20
+            relative z-20
+            flex min-h-0 flex-1
+            w-full
+            px-5 pt-6
+            sm:px-8 sm:pt-8
+            md:px-10 md:pt-8
+            lg:px-12 lg:pt-10
+            xl:px-16 xl:pt-12
+            2xl:px-20 2xl:pt-14
           "
         >
           <div
             className="
-              mx-auto flex
+              mx-auto grid h-full min-h-0
               w-full max-w-[1440px]
-              flex-col
-              md:flex-row
+              grid-cols-1
+              grid-rows-[auto_minmax(0,1fr)]
+              gap-3
+
+              md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]
+              md:grid-rows-1
               md:items-center
-              md:justify-between
-              gap-4
-              sm:gap-6
+              md:gap-4
               lg:gap-8
             "
           >
             {/* HEADING */}
-            <div
-              className="
-                relative z-20
-                w-full shrink-0
-                md:w-[58%]
-                lg:w-[56%]
-                xl:w-[55%]
-              "
-            >
+            <div className="relative z-20 min-w-0">
               <RevealWrapper>
                 <SectionLabel
                   className="
-                    mb-3
-                    sm:mb-4
-                    lg:mb-5
+                    mb-2 sm:mb-3 lg:mb-4
                     dark:bg-[#15151533]
                     dark:text-[#0D0D0D]
                   "
@@ -437,15 +395,12 @@ const DevisionOverview = ({
                 <h2
                   id="divisions-heading"
                   className="
-                    text-appear
-                    text-left
-                    text-[#1a1a1a]
-                    dark:text-[#1a1a1a]
+                    text-appear text-left
+                    text-[#1a1a1a] dark:text-[#1a1a1a]
                     dark:[&_.word]:text-[#1a1a1a]
                     dark:[&_.font-instrument_.word]:!text-transparent
-
-                    !text-[clamp(2rem,4.7vw,5.75rem)]
-                    !leading-[1.13]
+                    !text-[clamp(1.85rem,min(4.6vw,7svh),5.5rem)]
+                    !leading-[1.12]
                     tracking-[-0.035em]
                   "
                 >
@@ -459,56 +414,47 @@ const DevisionOverview = ({
               </TextAppearAnimation>
             </div>
 
-            {/* DESKTOP IMAGE */}
-            <div
-              className="
-                relative hidden
-                md:flex
-                w-full
-                md:w-[42%]
-                lg:w-[44%]
-                xl:w-[45%]
-                min-w-0
-                items-center justify-center
-                overflow-visible
-              "
-            >
-              <DivisionPreviewImages
-                items={divisionsData}
-                activeBgId={activeBgId}
-                className="
-                  w-full
-                  h-[clamp(150px,22vh,360px)]
-                  xl:h-[clamp(190px,26vh,420px)]
-                "
-              />
-            </div>
-
-            {/* MOBILE IMAGE */}
+            {/* IMAGE USES ONLY AVAILABLE SPACE */}
             <div
               className="
                 relative flex
-                w-full justify-center
-                overflow-visible
-                md:hidden
+                h-full min-h-0 min-w-0
+                items-center justify-center
+                md:justify-end
               "
             >
+              {/* MOBILE IMAGE */}
               <DivisionPreviewImages
                 items={divisionsData}
                 activeBgId={activeBgId}
                 className="
-                  h-[clamp(90px,17svh,150px)]
-                  w-[180px]
+                  h-full w-[180px]
+                  max-h-[150px]
                   sm:w-[220px]
+                  md:hidden
+                "
+              />
+
+              {/* DESKTOP IMAGE */}
+              <DivisionPreviewImages
+                items={divisionsData}
+                activeBgId={activeBgId}
+                desktop
+                className="
+                  hidden md:block
+                  h-full w-full
+                  max-h-full
+                  min-h-0
                 "
               />
             </div>
           </div>
         </div>
 
-        {/* HORIZONTAL CARDS */}
+        {/* CARD STRIP - HEIGHT RESERVED FIRST */}
         <div
           ref={contentRef}
+          dir="ltr"
           aria-label="WOW Superagency divisions"
           onPointerMove={handleCardPointerMove}
           onPointerLeave={() => setHoveredId(null)}
@@ -521,22 +467,19 @@ const DevisionOverview = ({
 
             gap-4
             pl-5 pr-[50vw]
-            pb-6 pt-4
-
+            pb-4 pt-3
             sm:pl-8 sm:gap-5
-            md:mt-auto md:pl-10
-            md:pb-7 md:pt-4
-            lg:pl-12 lg:gap-5 lg:pb-8
-            xl:pl-16 xl:gap-6 xl:pb-10
-            2xl:pl-20 2xl:pb-12
+            md:pl-10 md:pb-5
+            lg:pl-12 lg:gap-5
+            xl:pl-16 xl:gap-6
+            2xl:pl-20
 
             overflow-visible
             will-change-transform
           "
         >
           {divisionsData.map((item) => {
-            const isActive =
-              activeBgId === item.id
+            const isActive = activeBgId === item.id
 
             return (
               <Link
@@ -547,8 +490,7 @@ const DevisionOverview = ({
                 onFocus={() => setHoveredId(item.id)}
                 onBlur={() => setHoveredId(null)}
                 className={`
-                  group relative flex
-                  shrink-0
+                  group relative flex shrink-0
 
                   w-[min(85vw,340px)]
                   sm:w-[340px]
@@ -556,11 +498,8 @@ const DevisionOverview = ({
                   xl:w-[clamp(360px,32vw,510px)]
                   2xl:w-[clamp(450px,33vw,590px)]
 
-                  rounded-radius-sm
-                  border-t-2
-                  transition-transform
-                  duration-500
-
+                  rounded-radius-sm border-t-2
+                  transition-transform duration-500
                   focus:outline-none
                   focus-visible:ring-2
                   focus-visible:ring-[#8b7cff]
@@ -577,25 +516,20 @@ const DevisionOverview = ({
                     cardRefs.current[item.id] = el
                   }}
                   data-card-id={item.id}
+                  dir="auto"
                   className={`
-                    relative flex
-                    h-full w-full flex-col
+                    relative flex w-full flex-col
                     rounded-radius-sm
 
-                    min-h-[210px]
-                    sm:min-h-[240px]
-                    md:min-h-[clamp(220px,34vh,310px)]
-                    xl:min-h-[clamp(260px,38vh,360px)]
+                    h-[clamp(200px,33svh,280px)]
+                    md:h-[clamp(210px,35svh,310px)]
+                    xl:h-[clamp(240px,37svh,340px)]
 
-                    p-5
-                    sm:p-6
-                    md:p-6
-                    lg:p-7
-                    xl:p-8
-                    2xl:p-9
+                    p-5 sm:p-6
+                    md:p-6 lg:p-7
+                    xl:p-8 2xl:p-9
 
-                    transition-colors
-                    duration-500
+                    transition-colors duration-500
 
                     ${
                       isActive
@@ -604,28 +538,23 @@ const DevisionOverview = ({
                     }
                   `}
                 >
-                  {/* CARD TITLE */}
                   <h3
                     className="
-                      pr-2
-                      font-bold
-                      tracking-[-0.025em]
+                      pr-2 font-bold
                       leading-[1.12]
-                      text-[#1a1a1a]
-                      dark:text-white
-                      text-[clamp(1.55rem,2.4vw,3rem)]
+                      tracking-[-0.025em]
+                      text-[#1a1a1a] dark:text-white
+                      text-[clamp(1.4rem,2.4vw,3rem)]
                     "
                   >
-                    {renderDivisionTitle(item.title)}
+                    {renderWowInTitle(item.title)}
                   </h3>
 
-                  {/* DESCRIPTION */}
                   <p
                     className="
                       mt-3 flex-1
-                      text-[#777777]
-                      dark:text-[#888888]
-                      text-[clamp(0.9rem,1.25vw,1.35rem)]
+                      text-[#777777] dark:text-[#888888]
+                      text-[clamp(0.875rem,1.25vw,1.35rem)]
                       leading-[1.5]
                     "
                   >
@@ -635,10 +564,8 @@ const DevisionOverview = ({
                   {/* ACTIVE CARD ARROW */}
                   <div
                     className={`
-                      mt-4
-                      flex justify-end
+                      mt-3 flex justify-end
                       transition-all duration-300
-
                       ${
                         isActive
                           ? 'scale-100 opacity-100'
@@ -649,26 +576,17 @@ const DevisionOverview = ({
                   >
                     <span
                       className="
-                        flex shrink-0
-                        items-center justify-center
-                        rounded-radius-sm
-                        bg-[#8b7cff]
-                        text-white
-
-                        size-11
-                        sm:size-12
-                        lg:size-14
-                        xl:size-16
+                        flex shrink-0 items-center
+                        justify-center rounded-radius-sm
+                        bg-[#8b7cff] text-white
+                        size-10 sm:size-11
+                        lg:size-12 xl:size-14
                       "
                     >
                       <ArrowUpRight
                         className="
-                          size-6
-                          sm:size-7
-                          xl:size-8
-                          shrink-0
-                          text-white
-                          stroke-white
+                          size-5 shrink-0 stroke-white
+                          sm:size-6 xl:size-7
                         "
                         strokeWidth={2}
                       />
@@ -681,6 +599,20 @@ const DevisionOverview = ({
         </div>
       </div>
     </section>
+  )
+}
+
+const DevisionOverview = ({
+  divisions: divisionsProp,
+}: DevisionOverviewProps) => {
+  const pathname = usePathname()
+
+  return (
+    <DevisionOverviewContent
+      key={pathname ?? 'default'}
+      pathname={pathname ?? ''}
+      divisionsData={divisionsProp ?? divisions}
+    />
   )
 }
 
