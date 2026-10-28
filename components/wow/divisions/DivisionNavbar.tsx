@@ -379,7 +379,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
           {hasMegaNav && navigation && activeMenuId && (
             <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
               <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark">
-                <div className="relative h-[calc(100vh-120px)] overflow-hidden">
+                <div className="relative overflow-hidden">
                   {navigation.items.map((item) => {
                     const isActive = activeMenuId === item.id
                     const itemIndex = navigation.items.findIndex((i) => i.id === item.id)
@@ -389,7 +389,11 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
                     return (
                       <motion.div
                         key={item.id}
-                        className="absolute inset-0"
+                        className={
+                          isActive
+                            ? 'relative z-10 w-full'
+                            : 'pointer-events-none absolute left-0 right-0 top-0 -z-10 h-0 overflow-hidden'
+                        }
                         initial={false}
                         animate={{
                           opacity: isActive ? 1 : 0,
