@@ -7,9 +7,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MARKETING_PORTFOLIO } from './marketing-content'
 
+/** Design targets at 1400px viewport width; scale with vw and clamp for smaller/larger screens. */
+const PORTFOLIO_FEATURED_IMAGE_HEIGHT = 'h-[clamp(12.5rem,41.786vw,585px)]'
+const PORTFOLIO_SECONDARY_IMAGE_HEIGHT = 'h-[clamp(10rem,30.929vw,433px)]'
+
 function ProjectCard({
   project,
   className,
+  imageHeightClass,
+  imageSizes,
 }: {
   project: {
     category: string
@@ -19,6 +25,8 @@ function ProjectCard({
     image: string
   }
   className?: string
+  imageHeightClass: string
+  imageSizes: string
 }) {
   return (
     <RevealWrapper className={`reveal-me group ${className ?? ''}`}>
@@ -31,13 +39,13 @@ function ProjectCard({
               background: 'radial-gradient(circle at 50% 60%, rgba(99, 91, 255, 0.35) 0%, transparent 65%)',
             }}
           />
-          <div className="relative aspect-[16/10] w-full">
+          <div className={`relative w-full ${imageHeightClass}`}>
             <Image
               src={project.image}
               alt={project.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes={imageSizes}
             />
           </div>
         </figure>
@@ -45,9 +53,7 @@ function ProjectCard({
           <span>{project.category}</span>
           <span>{project.year}</span>
         </div>
-        <h3 className="border-b border-secondary/20 pb-2 text-2xl leading-tight dark:border-backgroundBody/20 md:text-3xl lg:text-4xl">
-          {project.title}
-        </h3>
+        <h3 className="text-2xl leading-tight md:text-3xl lg:text-4xl">{project.title}</h3>
       </Link>
     </RevealWrapper>
   )
@@ -87,10 +93,19 @@ export default function MarketingPortfolioSection() {
         </div>
 
         <div className="flex flex-col gap-10 md:gap-14">
-          <ProjectCard project={content.featured} />
+          <ProjectCard
+            project={content.featured}
+            imageHeightClass={PORTFOLIO_FEATURED_IMAGE_HEIGHT}
+            imageSizes="(max-width: 1400px) 100vw, 1400px"
+          />
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-8 md:gap-y-14">
             {content.projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
+              <ProjectCard
+                key={project.title}
+                project={project}
+                imageHeightClass={PORTFOLIO_SECONDARY_IMAGE_HEIGHT}
+                imageSizes="(max-width: 768px) 100vw, (max-width: 1400px) 50vw, 700px"
+              />
             ))}
           </div>
         </div>
