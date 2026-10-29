@@ -1,8 +1,12 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import { WOW_DIVISION_MARQUEE_TITLES } from '@/components/wow/data/wow-division-titles'
-import { renderWowInTitle } from '@/components/wow/shared/WowText'
+import {
+  divisionIdFromMarqueeTitle,
+  WOW_DIVISION_MARQUEE_TITLES,
+} from '@/components/wow/data/wow-division-titles'
+import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
+import type { DivisionId } from '@/i18n/division-paths'
 import Marquee from 'react-fast-marquee'
 
 const sparkleIcon = (
@@ -14,31 +18,54 @@ const sparkleIcon = (
   </svg>
 )
 
-const labelClassName =
-  'text-nowrap text-5xl font-light leading-tight tracking-[-2px] text-secondary dark:text-[#F2F2F2] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.1] xl:tracking-[-2.88px]'
+/** Scales header division SVGs to former marquee title height */
+const logoScaleClassName =
+  'inline-flex shrink-0 items-center text-[clamp(2.5rem,8vw,6rem)] leading-none sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl'
+
+const logoImageClassName =
+  'h-[1em] w-auto max-w-[min(100%,14em)] object-contain object-left'
+
+type MarqueeEntry = {
+  divisionId: DivisionId
+  label: string
+}
 
 type WowDivisionsMarqueeProps = {
   /** Division display titles (e.g. "WOW Design"). Defaults to all ecosystem divisions. */
   divisions?: readonly string[]
 }
 
+function toMarqueeEntries(titles: readonly string[]): MarqueeEntry[] {
+  return titles.flatMap((title) => {
+    const divisionId = divisionIdFromMarqueeTitle(title)
+    if (!divisionId) return []
+    return [{ divisionId, label: title }]
+  })
+}
+
 function MarqueeRow({
-  titles,
+  entries,
   direction = 'left',
   rowClassName,
 }: {
-  titles: readonly string[]
+  entries: readonly MarqueeEntry[]
   direction?: 'left' | 'right'
   rowClassName?: string
 }) {
-  const loop = [...titles, ...titles]
+  const loop = [...entries, ...entries]
 
   return (
     <Marquee direction={direction} pauseOnHover gradient={false} speed={45}>
       <div className={`flex items-center justify-between py-2.5 ${rowClassName ?? ''}`}>
-        {loop.map((title, idx) => (
-          <div className="mr-5 flex items-center gap-6" key={`${title}-${idx}`}>
-            <span className={labelClassName}>{renderWowInTitle(title, 'text-[1em] xl:text-[1em]')}</span>
+        {loop.map((entry, idx) => (
+          <div className="mr-5 flex items-center gap-6" key={`${entry.divisionId}-${idx}`}>
+            <span className={logoScaleClassName} aria-label={entry.label}>
+              <WowDivisionLogo
+                divisionId={entry.divisionId}
+                variant="menu"
+                className={logoImageClassName}
+              />
+            </span>
             <span className="mt-5 shrink-0">{sparkleIcon}</span>
           </div>
         ))}
@@ -47,20 +74,21 @@ function MarqueeRow({
   )
 }
 
-/** Dual-row scrolling marquee of WOW divisions — same layout as Marquess, gradient WOW + sparkle separators. */
+/** Dual-row scrolling marquee of division brand logos (same assets as header) + sparkle separators. */
 export default function WowDivisionsMarquee({ divisions = WOW_DIVISION_MARQUEE_TITLES }: WowDivisionsMarqueeProps) {
-  const mid = Math.ceil(divisions.length / 2)
-  const topRow = divisions.slice(0, mid)
-  const bottomRow = divisions.slice(mid)
+  const entries = toMarqueeEntries(divisions)
+  const mid = Math.ceil(entries.length / 2)
+  const topRow = entries.slice(0, mid)
+  const bottomRow = entries.slice(mid)
 
   return (
     <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background" aria-label="WOW Superagency divisions">
       <RevealWrapper>
-        <MarqueeRow titles={topRow} rowClassName="pb-5" />
+        <MarqueeRow entries={topRow} rowClassName="pb-5" />
       </RevealWrapper>
 
       <RevealWrapper className="border-t border-black/10 dark:border-dark">
-        <MarqueeRow titles={bottomRow.length ? bottomRow : topRow} direction="right" />
+        <MarqueeRow entries={bottomRow.length ? bottomRow : topRow} direction="right" />
       </RevealWrapper>
     </section>
   )

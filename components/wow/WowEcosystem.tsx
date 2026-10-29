@@ -256,7 +256,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
             <motion.path
               d={pathD}
               fill="none"
-              className="stroke-[#171717] dark:stroke-white"
+              className="stroke-[#0D0D0D] dark:stroke-white"
               strokeWidth={isMobile ? 2.5 : 3}
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -270,7 +270,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
 
             <motion.circle
               r={isMobile ? 3 : 4}
-              className="fill-white dark:fill-[#171717]"
+              className="fill-white dark:fill-[#0D0D0D]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{
@@ -360,7 +360,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 } ${
                   active
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-white/90 text-[#1a1530]/45 dark:bg-white dark:text-[#171717]/45'
+                    : 'bg-[#151515] text-white dark:bg-white dark:text-[#171717]/45'
                 }`}
                 style={{
                   flex: active ? 2.4 : 0.65,
@@ -391,7 +391,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
-                      className="flex size-full items-center justify-center text-base font-light text-[#1a1530]/45 dark:text-[#171717]/45 sm:text-lg"
+                      className="flex size-full items-center justify-center text-base font-light text-white dark:text-[#171717]/45 sm:text-lg"
                       aria-hidden
                     >
                       +
