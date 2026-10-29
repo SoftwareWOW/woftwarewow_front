@@ -16,11 +16,11 @@ const PartnersHero = ({
   images,
 }: CmsHeroComponentProps) => {
   const image0 = images?.[0] ?? {
-    src: '/images/wow/nav/cards/software%26technology.png',
+    src: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
     alt: 'Technology partners collaborating',
   }
   const image1 = images?.[1] ?? {
-    src: '/images/wow/nav/cards/Accelerate.png',
+    src: '/images/wow/LandingPageNaveBare/Accelerate%202.svg',
     alt: 'Growth and partnership collaboration',
   }
 

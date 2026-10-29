@@ -3,19 +3,19 @@ export const capabilityCards = [
     title: 'Software & SaaS',
     description: 'Custom software, platforms, web apps, mobile apps, and integrations.',
     href: '/software',
-    image: '/images/wow/nav/cards/software%26technology.png',
+    image: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
   },
   {
     title: 'Websites',
     description: 'Strategy, UX/UI, development, eCommerce, and ongoing improvement.',
     href: '/websites',
-    image: '/images/wow/nav/cards/Website.png',
+    image: '/images/wow/LandingPageNaveBare/Website%201%202.svg',
   },
   {
     title: 'Brand & Design',
     description: 'Brand identity, graphic design, digital creative, and visual systems.',
     href: '/design',
-    image: '/images/wow/nav/cards/Design.png',
+    image: '/images/wow/LandingPageNaveBare/ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc%202.svg',
   },
   {
     title: 'Marketing & Growth',
@@ -27,13 +27,13 @@ export const capabilityCards = [
     title: 'AI & Automation',
     description: 'AI assistants, workflow automation, integrations, and business intelligence.',
     href: '/intelligence',
-    image: '/images/wow/nav/cards/Intelligent.png',
+    image: '/images/wow/LandingPageNaveBare/Intelligence%202.svg',
   },
   {
     title: 'Hosting & Infrastructure',
     description: 'Hosting, cloud, domains, email, deployment, and technical support.',
     href: '/host',
-    image: '/images/wow/nav/cards/Host.png',
+    image: '/images/wow/LandingPageNaveBare/Hosting%202.svg',
   },
 ] as const
 

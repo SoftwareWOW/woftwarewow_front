@@ -35,6 +35,7 @@ export default function CmsResponsiveImage({
   const src = image?.src ?? fallbackSrc;
   if (!src) return null;
 
+  const isSvg = src.toLowerCase().endsWith('.svg');
   const resolvedAlt = alt ?? image?.alt ?? '';
   const responsive = image ? hasResponsiveStrapiFormats(image) : false;
   const loader = image && responsive ? createStrapiImageLoader(image) : undefined;
@@ -87,6 +88,7 @@ export default function CmsResponsiveImage({
         sizes={sizes}
         loader={loader}
         priority={priority}
+        unoptimized={isSvg}
         {...rest}
       />
     );
@@ -115,6 +117,7 @@ export default function CmsResponsiveImage({
       sizes={sizes}
       loader={loader}
       priority={priority}
+      unoptimized={isSvg}
       {...rest}
     />
   );

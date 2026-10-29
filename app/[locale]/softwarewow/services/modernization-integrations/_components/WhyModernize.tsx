@@ -13,35 +13,35 @@ const transformations = [
     before: 'Disconnected systems',
     after: 'Connected ecosystem',
     benefit: 'Reduce Complexity',
-    img: '/images/wow/nav/cards/software&technology.png',
+    img: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
   },
   {
     id: 2,
     before: 'Legacy technology',
     after: 'Modern architecture',
     benefit: 'Improve Performance',
-    img: '/images/wow/nav/cards/digital%20transofrmation%201.png',
+    img: '/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg',
   },
   {
     id: 3,
     before: 'Manual handoffs',
     after: 'Integrated workflows',
     benefit: 'Connect Your Tools',
-    img: '/images/wow/nav/cards/AI%20and%20Automation%201.png',
+    img: '/images/wow/LandingPageNaveBare/AI%20and%20Automation%202.svg',
   },
   {
     id: 4,
     before: 'Limited flexibility',
     after: 'Easier to evolve',
     benefit: 'Increase Flexibility',
-    img: '/images/wow/nav/cards/SaaS%20Dev%201.png',
+    img: '/images/wow/LandingPageNaveBare/SaaS%20Dev%202.svg',
   },
   {
     id: 5,
     before: 'Data silos',
     after: 'Connected information',
     benefit: 'Build for What’s Next',
-    img: '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png',
+    img: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
   },
 ]
 
@@ -142,7 +142,7 @@ const WhyModernize = () => {
         <figure className="h-full w-full overflow-hidden rounded-radius-sm">
           <img
             ref={previewImgRef}
-            src="/images/wow/nav/cards/software&technology.png"
+            src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
             alt=""
             aria-hidden
             className="h-full w-full object-cover"

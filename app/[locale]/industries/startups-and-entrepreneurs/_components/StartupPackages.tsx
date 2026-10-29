@@ -15,7 +15,7 @@ const packages = [
     description:
       'Strategy, branding, digital presence, launch support, and essential business systems brought into one coordinated package.',
     href: '/packages/startup-launch',
-    image: '/images/wow/nav/cards/Startup laiunch 1.png',
+    image: '/images/wow/LandingPageNaveBare/Startup%20laiunch%202.svg',
     button: 'View Startup & Launch',
   },
   {
@@ -24,7 +24,7 @@ const packages = [
     description:
       'Build a stronger identity, positioning, and presence that makes a young business look established and trustworthy.',
     href: '/packages/brand-authority',
-    image: '/images/wow/nav/cards/Branding & Creative 1.png',
+    image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
     button: 'Explore Brand Authority',
   },
   {
@@ -33,7 +33,7 @@ const packages = [
     description:
       'Turn your website into more than an online presence with better strategy, conversion, performance, and growth foundations.',
     href: '/packages/website-growth-engine',
-    image: '/images/wow/nav/cards/Website.png',
+    image: '/images/wow/LandingPageNaveBare/Website%201%202.svg',
     button: 'Explore Website Growth Engine',
   },
 ]

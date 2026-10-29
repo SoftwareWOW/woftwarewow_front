@@ -75,8 +75,8 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'partners': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/software&technology.png", "software&technology"),
-      img("/images/wow/nav/cards/Accelerate.png", "Growth and partnership collaboration"),
+      img("/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg", "software&technology"),
+      img("/images/wow/LandingPageNaveBare/Accelerate%202.svg", "Growth and partnership collaboration"),
     ],
   },
   'locations': {
@@ -101,7 +101,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'startups-and-entrepreneurs': {
     layout: 'single',
     images: [
-      img("/images/wow/nav/cards/Startup laiunch 1.png", "Startup laiunch 1"),
+      img("/images/wow/LandingPageNaveBare/Startup%20laiunch%202.svg", "Startup laiunch 1"),
     ],
   },
   'retail-and-ecommerce': {
@@ -124,7 +124,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'finance-and-real-estate': {
     layout: 'single',
     images: [
-      img("/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc 1.png", "sales profit numbers changing on monitor after glo 2026 01 08 02 14 54 utc 1"),
+      img("/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg", "sales profit numbers changing on monitor after glo 2026 01 08 02 14 54 utc 1"),
     ],
   },
   'organizations-and-nonprofits': {
@@ -140,12 +140,12 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'technology-and-saas': {
     layout: 'multi',
     images: [
-      img("/images/wow/nav/cards/digital transofrmation 1.png", "digital transofrmation 1"),
-      img("/images/wow/nav/cards/Intelligent.png", "Intelligent"),
-      img("/images/wow/nav/cards/Accelerate.png", "Accelerate"),
-      img("/images/wow/nav/cards/software&technology.png", "software&technology"),
-      img("/images/wow/nav/cards/AI Automation 1.png", "AI Automation 1"),
-      img("/images/wow/nav/cards/Website.png", "Website"),
+      img("/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg", "digital transofrmation 1"),
+      img("/images/wow/LandingPageNaveBare/Intelligence%202.svg", "Intelligent"),
+      img("/images/wow/LandingPageNaveBare/Accelerate%202.svg", "Accelerate"),
+      img("/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg", "software&technology"),
+      img("/images/wow/LandingPageNaveBare/AI%20Automation%203.svg", "AI Automation 1"),
+      img("/images/wow/LandingPageNaveBare/Website%201%202.svg", "Website"),
     ],
   },
   'build-and-launch': {
@@ -169,7 +169,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'social-and-community': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/Social.png", "Social content and community engagement"),
+      img("/images/wow/LandingPageNaveBare/Social%203.svg", "Social content and community engagement"),
       img("/images/wow/nav/cards/social media start 1.png", "social media start 1"),
     ],
   },
@@ -187,12 +187,12 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'branding-and-creative': {
     layout: 'multi',
     images: [
-      img("/images/wow/nav/cards/Branding & Creative 1.png", "Branding & Creative 1"),
-      img("/images/wow/nav/cards/Design.png", "Design"),
+      img("/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg", "Branding & Creative 1"),
+      img("/images/wow/LandingPageNaveBare/ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc%202.svg", "Design"),
       img("/images/wow/nav/cards/Marketing.png", "Marketing"),
-      img("/images/wow/nav/cards/Website.png", "Website"),
-      img("/images/wow/nav/cards/Social.png", "Social"),
-      img("/images/wow/nav/cards/Impact.png", "Impact"),
+      img("/images/wow/LandingPageNaveBare/Website%201%202.svg", "Website"),
+      img("/images/wow/LandingPageNaveBare/Social%203.svg", "Social"),
+      img("/images/wow/LandingPageNaveBare/Impact%202.svg", "Impact"),
     ],
   },
   'hosting-and-infrastructure': {
@@ -211,26 +211,26 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'startup-launch': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/Startup laiunch 1.png", "Startup laiunch 1"),
-      img("/images/wow/nav/cards/build&lanch.png", "build&lanch"),
+      img("/images/wow/LandingPageNaveBare/Startup%20laiunch%202.svg", "Startup laiunch 1"),
+      img("/images/wow/LandingPageNaveBare/new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc%202.svg", "build&lanch"),
     ],
   },
   'business-growth': {
     layout: 'dual',
     images: [
       img("/images/wow/nav/cards/Business growth 1.png", "Business growth 1"),
-      img("/images/wow/nav/cards/Accelerate.png", "Accelerate"),
+      img("/images/wow/LandingPageNaveBare/Accelerate%202.svg", "Accelerate"),
     ],
   },
   'digital-transformation': {
     layout: 'multi',
     images: [
-      img("/images/wow/nav/cards/digital transofrmation 1.png", "digital transofrmation 1"),
-      img("/images/wow/nav/cards/Intelligent.png", "Intelligent"),
-      img("/images/wow/nav/cards/Accelerate.png", "Accelerate"),
-      img("/images/wow/nav/cards/software&technology.png", "software&technology"),
-      img("/images/wow/nav/cards/AI Automation 1.png", "AI Automation 1"),
-      img("/images/wow/nav/cards/Website.png", "Website"),
+      img("/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg", "digital transofrmation 1"),
+      img("/images/wow/LandingPageNaveBare/Intelligence%202.svg", "Intelligent"),
+      img("/images/wow/LandingPageNaveBare/Accelerate%202.svg", "Accelerate"),
+      img("/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg", "software&technology"),
+      img("/images/wow/LandingPageNaveBare/AI%20Automation%203.svg", "AI Automation 1"),
+      img("/images/wow/LandingPageNaveBare/Website%201%202.svg", "Website"),
     ],
   },
   'ai-automation': {
@@ -243,25 +243,25 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
     layout: 'dual',
     images: [
       img("/images/wow/nav/cards/social media start 1.png", "social media start 1"),
-      img("/images/wow/nav/cards/Branding & Creative 1.png", "Branding & Creative 1"),
+      img("/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg", "Branding & Creative 1"),
     ],
   },
   'saas-product-development': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/SaaS Dev 1.png", "SaaS Dev 1"),
-      img("/images/wow/nav/cards/Softwaerwow.png", "Softwaerwow"),
+      img("/images/wow/LandingPageNaveBare/SaaS%20Dev%202.svg", "SaaS Dev 1"),
+      img("/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg", "Softwaerwow"),
     ],
   },
   'website-growth-engine': {
     layout: 'multi',
     images: [
-      img("/images/wow/nav/cards/Website.png", "Website"),
-      img("/images/wow/nav/cards/Websit groeh 1.png", "Websit groeh 1"),
-      img("/images/wow/nav/cards/Host.png", "Host"),
-      img("/images/wow/nav/cards/Design.png", "Design"),
-      img("/images/wow/nav/cards/Accelerate.png", "Accelerate"),
-      img("/images/wow/nav/cards/Intelligent.png", "Intelligent"),
+      img("/images/wow/LandingPageNaveBare/Website%201%202.svg", "Website"),
+      img("/images/wow/LandingPageNaveBare/Website%201%202.svg", "Websit groeh 1"),
+      img("/images/wow/LandingPageNaveBare/Hosting%202.svg", "Host"),
+      img("/images/wow/LandingPageNaveBare/ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc%202.svg", "Design"),
+      img("/images/wow/LandingPageNaveBare/Accelerate%202.svg", "Accelerate"),
+      img("/images/wow/LandingPageNaveBare/Intelligence%202.svg", "Intelligent"),
     ],
   },
   'sales-acceleration': {
@@ -273,9 +273,9 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'enterprise-infrastructure': {
     layout: 'hover',
     images: [
-      img("/images/wow/nav/cards/Host.png", "WOW Host infrastructure and hosting"),
-      img("/images/wow/nav/cards/software&technology.png", "WOW Host infrastructure and hosting"),
-      img("/images/wow/nav/cards/Intelligent.png", "Software and technology systems"),
+      img("/images/wow/LandingPageNaveBare/Hosting%202.svg", "WOW Host infrastructure and hosting"),
+      img("/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg", "WOW Host infrastructure and hosting"),
+      img("/images/wow/LandingPageNaveBare/Intelligence%202.svg", "Software and technology systems"),
     ],
   },
   'meet': {

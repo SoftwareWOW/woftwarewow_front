@@ -45,7 +45,7 @@ export const DESIGN_PORTFOLIO = {
     {
       title: 'Junaid the Tailor',
       href: '/portfolio',
-      image: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png',
+      image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
       alt: 'Junaid the Tailor branding project',
     },
   ],
@@ -87,7 +87,7 @@ export const DESIGN_SERVICES = {
       title: 'Brand Identity & Strategy',
       description:
         'Logo design · Visual identity · Brand guidelines · Rebranding · Brand applications',
-      image: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png',
+      image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
       alt: 'Brand identity and strategy',
     },
     {

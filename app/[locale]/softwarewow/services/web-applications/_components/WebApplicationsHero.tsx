@@ -60,7 +60,7 @@ const WebApplicationsHero = () => {
             className="reveal-me w-full max-w-md shrink-0 overflow-hidden rounded-radius-sm lg:max-w-lg"
           >
             <img
-              src="/images/wow/nav/cards/Softwaerwow.png"
+              src="/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg"
               alt="SoftwareWOW web application interface"
               className="h-auto w-full rounded-radius-sm object-cover"
             />

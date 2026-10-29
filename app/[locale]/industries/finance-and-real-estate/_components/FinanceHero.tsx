@@ -23,7 +23,7 @@ const FinanceHero = ({
   images,
 }: PageHeroProps) => {
   const heroImage = images?.[0] ?? {
-    src: '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png',
+    src: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
     alt: 'Finance and real estate growth dashboard',
   }
   return (

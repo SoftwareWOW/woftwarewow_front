@@ -25,22 +25,22 @@ const DEFAULT_PORTFOLIOIMAGES = [
   },
   {
     id: 4,
-    src: '/images/wow/nav/cards/pexels-akoonie-35088940%201.png',
+    src: '/images/wow/LandingPageNaveBare/pexels-akoonie-35088940%202.svg',
     alt: 'Community engagement',
   },
   {
     id: 5,
-    src: '/images/wow/nav/cards/Impact.png',
+    src: '/images/wow/LandingPageNaveBare/Impact%202.svg',
     alt: 'Social impact work',
   },
   {
     id: 6,
-    src: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png',
+    src: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
     alt: 'Brand storytelling',
   },
   {
     id: 7,
-    src: '/images/wow/nav/cards/pexels-cottonbro-8088441%201.png',
+    src: '/images/wow/LandingPageNaveBare/pexels-cottonbro-8088441%202.svg',
     alt: 'Volunteer community',
   },
   {
@@ -55,7 +55,7 @@ const DEFAULT_PORTFOLIOIMAGES = [
   },
   {
     id: 10,
-    src: '/images/wow/nav/cards/Social.png',
+    src: '/images/wow/LandingPageNaveBare/Social%203.svg',
     alt: 'Social community growth',
   },
 ]

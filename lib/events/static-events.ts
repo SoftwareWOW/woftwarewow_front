@@ -43,7 +43,7 @@ export const STATIC_EVENT_DETAILS: Record<string, EventDetail> = {
     location: 'Online',
     description:
       'A practical session for business owners and teams looking to understand where AI can actually save time, improve operations and create value.',
-    thumbnail: '/images/wow/nav/cards/Intelligent.png',
+    thumbnail: '/images/wow/LandingPageNaveBare/Intelligence%202.svg',
     alt: 'AI for small business workshop',
     format: 'WORKSHOP',
     time: '10:00 AM – 1:00 PM',

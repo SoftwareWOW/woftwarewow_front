@@ -21,7 +21,7 @@ const packages = [
     description:
       'Strengthen your positioning, credibility, identity, and professional presence in a trust-driven market.',
     href: '/packages/brand-authority',
-    image: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png',
+    image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
   },
   {
     number: '03',
@@ -29,7 +29,7 @@ const packages = [
     description:
       'Create a stronger digital experience designed to build trust, generate inquiries, and support conversion.',
     href: '/packages/website-growth-engine',
-    image: '/images/wow/nav/cards/Websit%20groeh%201.png',
+    image: '/images/wow/LandingPageNaveBare/Website%201%202.svg',
   },
 ]
 

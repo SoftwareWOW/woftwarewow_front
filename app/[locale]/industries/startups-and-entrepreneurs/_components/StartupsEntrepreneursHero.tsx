@@ -23,7 +23,7 @@ const StartupsEntrepreneursHero = ({
   images,
 }: PageHeroProps) => {
   const heroImage = images?.[0] ?? {
-    src: '/images/wow/nav/cards/Startup%20laiunch%201.png',
+    src: '/images/wow/LandingPageNaveBare/Startup%20laiunch%202.svg',
     alt: 'Founders building a startup with WOW Superagency',
   }
   return (

@@ -15,9 +15,9 @@ import { useRef } from 'react'
 
 const SLOT_DISPLAY_WIDTHS = [124, 120, 188] as const
 const SLOT_FALLBACKS = [
-  '/images/wow/nav/cards/software%26technology.png',
-  '/images/wow/nav/cards/Intelligent.png',
-  '/images/wow/nav/cards/Website.png',
+  '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
+  '/images/wow/LandingPageNaveBare/Intelligence%202.svg',
+  '/images/wow/LandingPageNaveBare/Website%201%202.svg',
 ] as const
 
 /** Layout: Branding-style floating hero images (3 slots) + Home-12 centered copy. */

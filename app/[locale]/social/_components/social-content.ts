@@ -53,7 +53,7 @@ export const SOCIAL_PORTFOLIO = {
       year: '2026',
       category: 'SHORT_FORM_VIDEOS',
       href: '/portfolio',
-      image: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png',
+      image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
       alt: 'Junaid The Tailor social presence',
     },
   ],

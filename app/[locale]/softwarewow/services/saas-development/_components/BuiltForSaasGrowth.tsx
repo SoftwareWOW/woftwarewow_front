@@ -9,31 +9,31 @@ const points = [
   {
     title: 'Multi-Tenant Architecture',
     description: 'Built to support multiple customers efficiently.',
-    image: '/images/wow/nav/cards/SaaS%20Dev%201.png',
+    image: '/images/wow/LandingPageNaveBare/SaaS%20Dev%202.svg',
     alt: 'Multi-tenant SaaS product interface',
   },
   {
     title: 'Subscriptions & Billing',
     description: 'Support recurring plans and customer account management.',
-    image: '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png',
+    image: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
     alt: 'Subscription and billing dashboard',
   },
   {
     title: 'User Management',
     description: 'Flexible roles, permissions, and account access.',
-    image: '/images/wow/nav/cards/Softwaerwow.png',
+    image: '/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg',
     alt: 'User management product interface',
   },
   {
     title: 'Integrations',
     description: 'Connect your product with APIs and third-party platforms.',
-    image: '/images/wow/nav/cards/digital%20transofrmation%201.png',
+    image: '/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg',
     alt: 'Software integrations and connected systems',
   },
   {
     title: 'Scalable Foundation',
     description: 'Architecture designed to evolve as usage grows.',
-    image: '/images/wow/nav/cards/software%26technology.png',
+    image: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
     alt: 'Scalable software architecture',
   },
 ]

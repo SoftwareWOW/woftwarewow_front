@@ -72,7 +72,7 @@ const BuiltForYourBusiness = () => {
 
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
-              src="/images/wow/nav/cards/software%26technology.png"
+              src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
               alt="Custom web application built around business workflows"
               className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
             />

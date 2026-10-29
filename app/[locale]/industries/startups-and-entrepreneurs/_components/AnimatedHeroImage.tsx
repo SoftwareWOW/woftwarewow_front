@@ -9,7 +9,7 @@ type AnimatedHeroImageProps = {
   alt?: string;
 };
 
-const FALLBACK_SRC = '/images/wow/nav/cards/Startup%20laiunch%201.png';
+const FALLBACK_SRC = '/images/wow/LandingPageNaveBare/Startup%20laiunch%202.svg';
 
 /** Layout: Home-06 AnimatedHeroImage — scroll-scale banner. */
 export default function AnimatedHeroImage({

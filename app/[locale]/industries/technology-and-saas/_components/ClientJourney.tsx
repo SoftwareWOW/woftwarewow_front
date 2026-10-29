@@ -45,7 +45,7 @@ const ClientJourney = ({
 }: ClientJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
-  const fallbackImage = '/images/wow/nav/cards/software%26technology.png'
+  const fallbackImage = '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg'
 
   return (
     <section>

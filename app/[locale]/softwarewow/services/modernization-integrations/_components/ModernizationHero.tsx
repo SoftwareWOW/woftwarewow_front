@@ -9,11 +9,11 @@ import { useEffect, useRef, useState } from 'react'
 
 const HERO_IMAGES = [
   {
-    src: '/images/wow/nav/cards/software&technology.png',
+    src: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
     alt: 'Connected systems and technology stack',
   },
   {
-    src: '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png',
+    src: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
     alt: 'Modern operations dashboard',
   },
 ]

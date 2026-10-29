@@ -10,7 +10,7 @@ type AnimatedHeroImageProps = {
 };
 
 const FALLBACK_SRC =
-  '/images/wow/nav/cards/sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc%201.png';
+  '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg';
 
 /** Layout: Home-06 AnimatedHeroImage — scroll-scale banner. */
 export default function AnimatedHeroImage({

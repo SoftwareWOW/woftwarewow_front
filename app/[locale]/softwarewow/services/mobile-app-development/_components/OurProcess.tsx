@@ -42,7 +42,7 @@ const OurProcess = () => {
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:w-[min(100%,420px)] md:shrink-0">
             <img
-              src="/images/wow/nav/cards/software%26technology.png"
+              src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
               alt="Mobile app development process"
               className="h-full min-h-[320px] w-full rounded-radius-md object-cover md:absolute md:inset-0 md:min-h-0"
             />

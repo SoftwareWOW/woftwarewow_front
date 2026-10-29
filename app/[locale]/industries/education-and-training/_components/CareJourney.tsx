@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { useRef } from 'react'
 import type { CmsProcessSection, CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 
 interface JourneyItem {
   id: number
@@ -16,7 +17,7 @@ interface JourneyItem {
   img: string
 }
 
-const card = (file: string) => `/images/wow/nav/cards/${encodeURIComponent(file)}`
+const card = legacyNavCardSrc
 
 const hoverImages = [
   '/images/wow/Hero/devision/Education.jpg',

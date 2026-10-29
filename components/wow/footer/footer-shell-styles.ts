@@ -82,11 +82,19 @@ export const footerCardPanelFillClass = 'flex h-full min-h-0 w-full flex-col'
 /** Top-aligned panels (Resources / Connect / Ask). */
 export const footerPanelTopAlignClass = 'flex h-full min-h-0 w-full flex-col justify-start'
 
+/** Figma footer shell — soft purple glow (top orb + bottom center), base fill unchanged. */
+export const footerShellGradientOverlayClass = cn(
+  'before:pointer-events-none before:absolute before:inset-0 before:z-0 before:rounded-radius-md before:content-[""]',
+  'before:bg-[radial-gradient(ellipse_92%_78%_at_50%_100%,rgba(149,146,222,0.34)_0%,rgba(217,216,243,0.42)_38%,transparent_70%),radial-gradient(ellipse_48%_36%_at_50%_0%,rgba(149,146,222,0.24)_0%,transparent_50%)]',
+  'dark:before:bg-[radial-gradient(ellipse_92%_78%_at_50%_100%,rgba(137,120,255,0.26)_0%,rgba(41,39,87,0.1)_40%,transparent_70%),radial-gradient(ellipse_48%_36%_at_50%_0%,rgba(183,148,244,0.18)_0%,transparent_50%)]',
+)
+
 export const footerShellContainerClass = cn(
   'relative flex w-full min-h-0 flex-col items-center rounded-radius-md border py-3 sm:py-4 2xl:py-[30px]',
   'max-h-[920px]:2xl:py-4 max-h-[920px]:py-2.5',
   footerBandGapClass,
   footerSectionBgClass,
+  footerShellGradientOverlayClass,
   'border-[#1515151A] dark:border-[#EDF0F51A]',
 )
 

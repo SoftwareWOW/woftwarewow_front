@@ -34,7 +34,7 @@ const HowWePartner = ({
         title: step.title,
         description: step.description ?? DEFAULT_PARTNERSTEPS[i].description,
       }))
-  const fallbackImage = '/images/wow/nav/cards/software%26technology.png'
+  const fallbackImage = '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg'
 
   return (
     <section>

@@ -18,8 +18,8 @@ const HERO_FILES = [
       description:
         'Turn your idea into a launch-ready business with the essential brand, digital, marketing, and technology foundations in one package.',
     },
-    img0: { src: '/images/wow/nav/cards/Startup%20laiunch%201.png', alt: 'Startup launch foundations and collaboration' },
-    img1: { src: '/images/wow/nav/cards/build%26lanch.png', alt: 'Building and launching a new business' },
+    img0: { src: '/images/wow/LandingPageNaveBare/Startup%20laiunch%202.svg', alt: 'Startup launch foundations and collaboration' },
+    img1: { src: '/images/wow/LandingPageNaveBare/new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc%202.svg', alt: 'Building and launching a new business' },
   },
   {
     file: 'app/[locale]/packages/business-growth/_components/BusinessGrowthHero.tsx',
@@ -102,7 +102,7 @@ const HERO_FILES = [
       description:
         'Identify repetitive tasks, build smart workflows, and use AI to save time, reduce errors, and scale operations.',
     },
-    img0: { src: '/images/wow/nav/cards/AI%20Automation%201.png', alt: 'AI automation' },
+    img0: { src: '/images/wow/LandingPageNaveBare/AI%20Automation%203.svg', alt: 'AI automation' },
     img1: { src: '/images/wow/nav/cards/AI%20Automation%202.png', alt: 'Automated workflows' },
   },
   {

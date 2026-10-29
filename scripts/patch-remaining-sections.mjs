@@ -86,13 +86,13 @@ const HowWePartner = ({
 }: HowWePartnerProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, description }, { eyebrow, title, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_PARTNERSTEPS, steps)
-  const imageSrc = cmsImageSrc(image, '/images/wow/nav/cards/software%26technology.png')
+  const imageSrc = cmsImageSrc(image, '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg')
 `,
   );
   c = c.replace('<SectionLabel>HOW IT WORKS</SectionLabel>', '<SectionLabel>{header.eyebrow}</SectionLabel>');
   c = c.replace('<h2 className="text-appear mx-auto max-w-[770px]">Built Around Your Client Relationship.</h2>', '<h2 className="text-appear mx-auto max-w-[770px]">{header.title}</h2>');
   c = c.replace('partnerSteps.map', 'mergedSteps.map');
-  c = c.replace('src="/images/wow/nav/cards/software%26technology.png"', 'src={imageSrc ?? \'\'}');
+  c = c.replace('src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"', 'src={imageSrc ?? \'\'}');
   fs.writeFileSync(f, c);
   console.log('WhitelabelHowWePartner');
 }

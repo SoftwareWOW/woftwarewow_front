@@ -69,7 +69,7 @@ const WhyCustomSoftware = () => {
           </div>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
-              src="/images/wow/nav/cards/software&technology.png"
+              src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
               alt="Custom software built around business workflows"
               className="h-full w-full rounded-radius-md object-cover"
             />

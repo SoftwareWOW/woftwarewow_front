@@ -88,7 +88,7 @@ export const SOFTWAREWOW_SERVICES = {
       id: 1,
       title: 'Custom Software Development',
       description: 'Business applications · Internal tools · Custom platforms',
-      image: '/images/wow/nav/cards/Branding%20%26%20Creative%201.png',
+      image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
       alt: 'Custom software development',
     },
     {

@@ -1,3 +1,4 @@
+import { landingNavImage } from './landing-nav-images'
 import type { LucideIcon } from 'lucide-react'
 import {
   Award,
@@ -147,11 +148,10 @@ export const mobileBottomNavIcons = {
 
 export type MobileBottomNavIconId = keyof typeof mobileBottomNavIcons
 
-const landingNavBase = '/images/wow/LandingPageNaveBare'
 const cardsBase = '/images/wow/nav/cards'
 
 function landingNav(filename: string) {
-  return `${landingNavBase}/${encodeURIComponent(filename)}`
+  return landingNavImage(filename)
 }
 
 function cardImage(filename: string) {

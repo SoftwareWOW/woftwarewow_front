@@ -15,31 +15,31 @@ const DEFAULT_CAPABILITY_CARDS = [
     title: 'WOW Host',
     description: 'Hosting, cloud & infrastructure',
     href: '/contact',
-    image: '/images/wow/nav/cards/Host.png',
+    image: '/images/wow/LandingPageNaveBare/Hosting%202.svg',
   },
   {
     title: 'SoftwareWOW',
     description: 'Applications & system integrations',
     href: '/contact',
-    image: '/images/wow/nav/cards/Softwaerwow.png',
+    image: '/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg',
   },
   {
     title: 'WOW Intelligence',
     description: 'AI & business automation',
     href: '/contact',
-    image: '/images/wow/nav/cards/Intelligent.png',
+    image: '/images/wow/LandingPageNaveBare/Intelligence%202.svg',
   },
   {
     title: 'WOW Websites',
     description: 'Web platforms',
     href: '/contact',
-    image: '/images/wow/nav/cards/Website.png',
+    image: '/images/wow/LandingPageNaveBare/Website%201%202.svg',
   },
   {
     title: 'WOW Accelerate',
     description: 'CRM & growth systems',
     href: '/contact',
-    image: '/images/wow/nav/cards/Accelerate.png',
+    image: '/images/wow/LandingPageNaveBare/Accelerate%202.svg',
   },
 ] as const
 

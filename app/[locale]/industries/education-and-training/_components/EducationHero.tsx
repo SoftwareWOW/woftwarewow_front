@@ -8,10 +8,11 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage } from '@/lib/strapi/cms-image'
 import Marquee from 'react-fast-marquee'
+import { landingNav } from '@/components/wow/nav/landing-nav-images'
 
 const DEFAULT_HERO_IMAGES = [
   '/images/wow/Hero/devision/Education.jpg',
-  `/images/wow/nav/cards/${encodeURIComponent('learningevent.png')}`,
+  landingNav.learningEvents,
 ]
 
 /** Layout: Home-15 HeroV15 — split headline + stacked mockups + marquee. */

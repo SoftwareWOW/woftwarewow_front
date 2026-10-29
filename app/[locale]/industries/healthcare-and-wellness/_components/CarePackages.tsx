@@ -14,7 +14,7 @@ const packages = [
     description:
       'Improve structure, usability, performance, conversion paths, and the overall experience people have with your organization online.',
     href: '/packages/website-growth-engine',
-    image: '/images/wow/nav/cards/Website.png',
+    image: '/images/wow/LandingPageNaveBare/Website%201%202.svg',
     button: 'Explore Website Growth Engine',
   },
   {
@@ -22,7 +22,7 @@ const packages = [
     title: 'Brand Authority',
     description: 'Build stronger credibility, positioning, identity, and consistency across your organization.',
     href: '/packages/brand-authority',
-    image: '/images/wow/nav/cards/Branding & Creative 1.png',
+    image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
     button: 'Explore Brand Authority',
   },
   {
@@ -30,7 +30,7 @@ const packages = [
     title: 'AI Automation',
     description: 'Simplify repetitive workflows, communication, and internal processes with smarter automation.',
     href: '/packages/ai-automation',
-    image: '/images/wow/nav/cards/AI Automation 1.png',
+    image: '/images/wow/LandingPageNaveBare/AI%20Automation%203.svg',
     button: 'Explore AI Automation',
   },
 ]

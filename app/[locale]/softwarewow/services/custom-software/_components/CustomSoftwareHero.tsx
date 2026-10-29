@@ -15,7 +15,7 @@ const HERO_IMAGES = [
     alt: 'Custom software product interface',
   },
   {
-    src: '/images/wow/nav/cards/Softwaerwow.png',
+    src: '/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg',
     alt: 'Custom software dashboard',
   },
 ]

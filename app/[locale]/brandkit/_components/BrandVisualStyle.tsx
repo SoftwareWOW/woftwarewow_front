@@ -30,7 +30,7 @@ const BrandVisualStyle = ({
     if (!cms) return item
     return { ...item, title: cms.title || item.title }
   })
-  const fallbackImage = '/images/wow/nav/cards/software%26technology.png'
+  const fallbackImage = '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg'
 
   return (
     <section>

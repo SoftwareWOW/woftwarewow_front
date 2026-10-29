@@ -68,7 +68,7 @@ const Capabilities = () => {
 
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md md:w-1/2">
             <img
-              src="/images/wow/nav/cards/Softwaerwow.png"
+              src="/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg"
               alt="Mobile app capabilities"
               className="h-full min-h-[320px] w-full object-cover md:min-h-[480px]"
             />

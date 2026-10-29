@@ -56,7 +56,7 @@ const MobileAppHero = () => {
         <div className="flex w-full flex-1 flex-col gap-5 md:flex-row" aria-label="Mobile app development imagery">
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/Softwaerwow.png"
+              src="/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg"
               alt="SoftwareWOW mobile application interface"
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
@@ -65,7 +65,7 @@ const MobileAppHero = () => {
           </RevealWrapper>
           <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
             <img
-              src="/images/wow/nav/cards/software%26technology.png"
+              src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
               alt="Mobile product experience"
               className="h-auto w-full rounded-radius-md object-cover md:h-[540px] md:w-[410px]"
               width={410}
