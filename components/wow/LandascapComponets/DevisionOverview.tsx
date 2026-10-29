@@ -4,7 +4,8 @@
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import { renderWowInTitle } from '@/components/wow/shared/WowText'
+import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
+import { divisionIdFromHref } from '@/i18n/division-paths'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 
 import { ArrowUpRight } from 'lucide-react'
@@ -399,7 +400,6 @@ function DevisionOverviewContent({
                     text-[#1a1a1a] dark:text-[#1a1a1a]
                     [&_.word]:font-light
                     dark:[&_.word]:text-[#1a1a1a]
-                    dark:[&_.font-instrument_.word]:!text-transparent
                     !text-[clamp(1.85rem,min(4.6vw,7svh),5.5rem)]
                     !leading-[1.12]
                     tracking-[-0.035em]
@@ -481,6 +481,7 @@ function DevisionOverviewContent({
         >
           {divisionsData.map((item) => {
             const isActive = activeBgId === item.id
+            const divisionId = divisionIdFromHref(item.href)
 
             return (
               <Link
@@ -544,11 +545,18 @@ function DevisionOverviewContent({
                       pr-2 font-outfit font-light
                       leading-[1.12]
                       tracking-[-0.025em]
-                      text-[#1a1a1a] dark:text-white
                       text-[clamp(1.4rem,2.4vw,3rem)]
                     "
                   >
-                    {renderWowInTitle(item.title)}
+                    {divisionId ? (
+                      <WowDivisionLogo
+                        divisionId={divisionId}
+                        variant="menu"
+                        className="h-[1em] w-auto max-w-[min(100%,16em)] object-contain object-left"
+                      />
+                    ) : (
+                      item.title
+                    )}
                   </h3>
 
                   <p

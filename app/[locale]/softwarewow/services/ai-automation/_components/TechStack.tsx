@@ -63,14 +63,7 @@ const TechStack = () => {
           >
             Powered by industry-leading{' '}
             <span
-              className="font-instrument italic"
-              style={{
-                background: WOW_GRADIENT,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
+              className="font-instrument italic text-inherit"
             >
               technology
             </span>

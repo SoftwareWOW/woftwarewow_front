@@ -3,21 +3,17 @@
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { cn } from '@/lib/utils'
 import type { ElementType, ReactNode } from 'react'
-import {
-  instrumentAccentGradientClassName,
-  instrumentAccentSolidClassName,
-} from './InstrumentText'
+import { instrumentAccentClassName } from './InstrumentText'
 import { WOW_FONT_WEIGHT } from './WowTypography'
 
 type HeadingWithInstrumentProps = {
   /** Plain title text before the italic accent */
   before: ReactNode
-  /** Italic Instrument accent (gradient by default) */
+  /** Italic Instrument accent (inherits heading color) */
   accent: ReactNode
   as?: ElementType
   className?: string
   accentClassName?: string
-  variant?: 'solid' | 'gradient'
 }
 
 /**
@@ -29,18 +25,13 @@ export default function HeadingWithInstrument({
   as: Tag = 'h2',
   className,
   accentClassName,
-  variant = 'gradient',
 }: HeadingWithInstrumentProps) {
   return (
     <TextAppearAnimation>
       <Tag className={cn('text-appear', WOW_FONT_WEIGHT, '[&_.line]:!overflow-visible', className)}>
         {before}{' '}
         <span
-          className={cn(
-            variant === 'gradient' ? instrumentAccentGradientClassName : instrumentAccentSolidClassName,
-            WOW_FONT_WEIGHT,
-            accentClassName,
-          )}
+          className={cn(instrumentAccentClassName, WOW_FONT_WEIGHT, accentClassName)}
         >
           {accent}
         </span>

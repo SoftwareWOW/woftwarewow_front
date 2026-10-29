@@ -173,7 +173,7 @@ const ChallengeSolution = ({
             <TextAppearAnimation>
               <h2 className="text-appear flex-1 text-[#0D0D0D] dark:text-[#F2F2F2]">
                 Real Challenges. <br />
-                <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                <span className="font-instrument italic text-inherit">
                   Real Results.
                 </span>
               </h2>

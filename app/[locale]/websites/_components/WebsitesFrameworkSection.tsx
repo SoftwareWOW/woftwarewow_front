@@ -54,7 +54,7 @@ export default function WebsitesFrameworkSection() {
                     }`}
                   >
                     <span
-                      className={`inline-block bg-gradient-to-r bg-clip-text text-xl font-light text-black text-transparent dark:bg-gradient-to-r dark:from-white dark:to-[#BDBDBD] dark:bg-clip-text dark:text-[#FFF] dark:text-transparent ${
+                      className={`inline-block text-xl font-light text-inherit ${
                         index === 0 ? 'from-backgroundBody to-gray-400' : 'from-white to-gray-400'
                       }`}
                     >

@@ -30,7 +30,7 @@ const StepItem = ({ step }: { step: Step }) => (
   <RevealWrapper className="relative flex flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24">
     <span
       aria-hidden
-      className="pointer-events-none absolute left-1/2 top-0 z-0 -translate-x-1/2 select-none bg-gradient-to-b from-[#86858599] to-white bg-clip-text text-[clamp(5rem,22vw,11.25rem)] font-black leading-none text-transparent dark:to-[#15151599]"
+      className="pointer-events-none absolute left-1/2 top-0 z-0 -translate-x-1/2 select-none text-[clamp(5rem,22vw,11.25rem)] font-black leading-none text-secondary/15 dark:text-backgroundBody/10"
     >
       {step.number}
     </span>

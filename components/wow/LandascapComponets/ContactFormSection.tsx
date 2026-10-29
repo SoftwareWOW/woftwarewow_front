@@ -78,7 +78,7 @@ const ContactFormSection = () => {
               <TextAppearAnimation>
                 <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-light leading-[1.15] text-[#000000] dark:text-[#F2F2F2]">
                   Let&apos;s Build Something{' '}
-                  <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                  <span className="font-instrument italic text-inherit">
                     Great Together
                   </span>
                 </h2>

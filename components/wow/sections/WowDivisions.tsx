@@ -724,7 +724,7 @@ export default function WowDivisions() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}>
         <h4 className="mb-3 text-xl font-bold sm:text-2xl">
-          <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+          <span className="font-instrument italic text-inherit">
             All Divisions. One Mission.
           </span>
         </h4>

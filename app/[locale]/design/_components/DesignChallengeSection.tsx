@@ -45,7 +45,7 @@ export default function DesignChallengeSection() {
           </RevealWrapper>
 
           <RevealWrapper>
-            <p className="mb-4 bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#f472b6] bg-clip-text text-2xl font-light text-transparent md:text-3xl">
+            <p className="mb-4 text-2xl font-light text-inherit md:text-3xl">
               {content.after.label}
             </p>
             <p className="mb-6 text-sm text-[#808080] md:text-base">{content.after.caption}</p>

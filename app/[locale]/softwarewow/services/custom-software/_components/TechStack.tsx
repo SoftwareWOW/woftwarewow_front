@@ -50,14 +50,7 @@ const TechStack = () => {
           <h2 id="tech-heading" className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
             Powered by industry-leading{' '}
             <span
-              className="font-instrument italic"
-              style={{
-                background: WOW_GRADIENT,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
+              className="font-instrument italic text-inherit"
             >
               technology
             </span>

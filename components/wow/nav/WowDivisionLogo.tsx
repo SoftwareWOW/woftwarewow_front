@@ -7,6 +7,8 @@ type WowDivisionLogoProps = {
   /** Menu items: keep Standard logos in light mode, White logos in dark mode (incl. dark hover) */
   variant?: 'theme' | 'menu'
   size?: 'sm' | 'md'
+  /** Optional sizing override (e.g. `h-[1em]` to match surrounding text). */
+  className?: string
 }
 
 const sizeDimensions = {
@@ -36,7 +38,7 @@ function DivisionLogoImage({
       alt=""
       width={width}
       height={height}
-      className={`w-auto max-w-full object-contain object-left ${sizeClasses[size]} ${className ?? ''}`}
+      className={`w-auto max-w-full object-contain object-left ${className ?? sizeClasses[size]}`}
       aria-hidden
       decoding="async"
     />
@@ -47,6 +49,7 @@ export function WowDivisionLogo({
   divisionId,
   variant: _variant = 'theme',
   size = 'sm',
+  className,
 }: WowDivisionLogoProps) {
   const lightSrc = divisionBrandLogos.light[divisionId as DivisionId]
   const darkSrc = divisionBrandLogos.dark[divisionId as DivisionId]
@@ -55,10 +58,12 @@ export function WowDivisionLogo({
     return null
   }
 
+  const sizing = className ?? sizeClasses[size]
+
   return (
     <>
-      <DivisionLogoImage src={lightSrc} size={size} className="dark:hidden" />
-      <DivisionLogoImage src={darkSrc} size={size} className="hidden dark:block" />
+      <DivisionLogoImage src={lightSrc} size={size} className={`dark:hidden ${sizing}`} />
+      <DivisionLogoImage src={darkSrc} size={size} className={`hidden dark:block ${sizing}`} />
     </>
   )
 }

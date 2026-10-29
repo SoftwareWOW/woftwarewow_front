@@ -98,7 +98,7 @@ const StrategyToResults = ({
               {displaySteps.map((step) => (
                 <li key={step.id} className="relative max-w-max px-6 md:px-10">
                   <div className="absolute left-0 top-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:-left-[52px] lg:px-6 lg:py-8">
-                    <span className="inline-block bg-gradient-to-r from-backgroundBody to-gray-400 bg-clip-text text-xl font-semibold text-transparent dark:from-white dark:to-[#BDBDBD]">
+                    <span className="inline-block text-xl font-semibold text-inherit">
                       {step.id}
                     </span>
                   </div>

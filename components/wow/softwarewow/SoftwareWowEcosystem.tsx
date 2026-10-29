@@ -183,7 +183,7 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
             </span>
             <h2 className="mt-5 text-3xl font-light tracking-tight text-secondary dark:text-backgroundBody sm:text-5xl">
               One engine.{' '}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'var(--wow-gradient)' }}>
+              <span className="font-instrument italic text-inherit">
                 Twelve capabilities.
               </span>
             </h2>

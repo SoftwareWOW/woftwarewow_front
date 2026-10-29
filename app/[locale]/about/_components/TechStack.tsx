@@ -90,14 +90,7 @@ const TechStack = ({
           >
             {header.title}{' '}
             <span
-              className="font-instrument italic"
-              style={{
-                background: WOW_GRADIENT,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
+              className="font-instrument italic text-inherit"
             >
               {header.accentTitle}
             </span>

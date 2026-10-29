@@ -106,7 +106,7 @@ const BeforeAfterGap = ({
           </div>
 
           <div className={`${cardClassName} border-0 lg:pl-8`}>
-            <h6 className="mb-8 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-2xl font-normal uppercase tracking-[0.04em] text-transparent md:mb-10 md:text-3xl">
+            <h6 className="mb-8 text-2xl font-normal uppercase tracking-[0.04em] text-inherit md:mb-10 md:text-3xl">
               After
             </h6>
             <ComparisonList steps={afterSteps} variant="after" />

@@ -28,7 +28,7 @@ export default function HostProcessSection() {
             >
               <span
                 aria-hidden
-                className="pointer-events-none absolute left-1/2 top-0 z-0 -translate-x-1/2 select-none bg-gradient-to-b from-[#86858599] to-white bg-clip-text font-black leading-none text-transparent dark:to-[#15151599] text-[clamp(5rem,22vw,11.25rem)]"
+                className="pointer-events-none absolute left-1/2 top-0 z-0 -translate-x-1/2 select-none font-black leading-none text-secondary/15 dark:text-backgroundBody/10 text-[clamp(5rem,22vw,11.25rem)]"
               >
                 {step.number}
               </span>

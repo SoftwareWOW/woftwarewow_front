@@ -5,7 +5,9 @@ import { useEffect, useMemo, useState } from 'react'
 import type { Dictionary } from '@/i18n/types'
 import RevealWrapper from '../animation/RevealWrapper'
 import SectionLabel from './shared/SectionLabel'
-import WowText, { WOW_GRADIENT } from './shared/WowText'
+import { ecosystemNodeIdToDivisionId } from '@/i18n/division-paths'
+import { WowDivisionLogo } from './nav/WowDivisionLogo'
+import { WOW_GRADIENT } from './shared/WowText'
 
 type NodeId =
   | 'websites'
@@ -231,7 +233,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
       <div className="mb-8 w-full max-w-4xl text-center max-md:mb-5 sm:mb-12 lg:mb-16">
         <h2 className="font-['Outfit'] text-[clamp(32px,6vw,64px)] font-light leading-[1.1] tracking-[-0.03em] text-[#000000] dark:text-[#F2F2F2]">
           {ecosystem.heading.part1}{' '}
-          <span className="font-['Ogg_TRIAL'] italic text-[#b794f4] dark:text-[#b794f4]">
+          <span className="font-instrument italic text-inherit">
             {ecosystem.heading.highlight}
           </span>{' '}
           {ecosystem.heading.part2}
@@ -306,7 +308,11 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
 
         {currentLayout.map((n) => {
           const active = activeSet.has(n.id)
-          const nodeCopy = ecosystem.nodes[n.id as keyof typeof ecosystem.nodes]
+          const divisionId = ecosystemNodeIdToDivisionId[n.id]
+
+          if (!divisionId) {
+            return null
+          }
 
           return (
             <motion.div
@@ -328,28 +334,18 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                 ease: [0.65, 0, 0.35, 1],
               }}
             >
-              <span
-                className="inline-block rounded-md bg-background px-2.5 py-1 font-bold leading-none tracking-tight dark:bg-background"
+              <div
+                className="inline-flex items-center rounded-md bg-background px-2.5 py-1 leading-none dark:bg-background"
                 style={{
                   fontSize: nodeFontSize(n.size, isMobile),
                 }}
               >
-                {n.id === 'softwarewow' ? (
-                  <>
-                    <span className="text-black dark:text-[#F2F2F2]">{nodeCopy.prefix}</span>{' '}
-                    <WowText className="font-bold leading-none tracking-tight">
-                      {nodeCopy.label}
-                    </WowText>
-                  </>
-                ) : (
-                  <>
-                    <WowText className="font-bold leading-none tracking-tight">
-                      {nodeCopy.prefix}
-                    </WowText>{' '}
-                    <span className="text-black dark:text-[#F2F2F2]">{nodeCopy.label}</span>
-                  </>
-                )}
-              </span>
+                <WowDivisionLogo
+                  divisionId={divisionId}
+                  variant="menu"
+                  className="h-[1em] w-auto max-w-[12em] object-contain object-left"
+                />
+              </div>
             </motion.div>
           )
         })}

@@ -3,7 +3,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent from '@/components/wow/shared/ButtonComponent'
-import { WOW_GRADIENT } from '@/components/wow/shared/WowText'
 import { SoftwareWowEcosystem } from '@/components/wow/softwarewow/SoftwareWowEcosystem'
 import Image from 'next/image'
 
@@ -22,7 +21,7 @@ const IntelligenceHero = () => {
           <TextAppearAnimation>
             <h1 className="max-w-xl text-[clamp(2rem,5vw,3.25rem)] font-light leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
               This is where intelligence becomes{' '}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: WOW_GRADIENT }}>
+              <span className="font-instrument italic text-inherit">
                 advantage.
               </span>
             </h1>

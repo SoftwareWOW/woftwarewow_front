@@ -60,7 +60,7 @@ export default function EventsChallengeSection() {
           </div>
 
           <div className={cardClassName}>
-            <h6 className="mb-6 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-2xl font-light uppercase tracking-[0.04em] text-transparent md:text-3xl">
+            <h6 className="mb-6 text-2xl font-light uppercase tracking-[0.04em] text-inherit md:text-3xl">
               {content.withAiLabel}
             </h6>
             <SolutionSteps steps={content.withSteps} />
