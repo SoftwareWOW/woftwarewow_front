@@ -34,7 +34,7 @@ type WowFooterShellProps = {
   defaultTabId?: string
   showAskTab?: boolean
   copyright: string
-  watermark: ReactNode
+  watermark?: ReactNode
   renderPanel: (tabId: string) => ReactNode
   tablistLabel?: string
 }
@@ -205,13 +205,15 @@ export default function WowFooterShell({
             </div>
           </div>
 
-          <div
-            aria-hidden
-            className="footer-wow-watermark pointer-events-none mt-1 flex w-full max-w-full shrink-0 justify-center overflow-hidden select-none pb-0 sm:mt-1.5 2xl:mt-2"
-            data-footer-watermark
-          >
-            {watermark}
-          </div>
+          {watermark ? (
+            <div
+              aria-hidden
+              className="footer-wow-watermark pointer-events-none mt-1 flex w-full max-w-full shrink-0 justify-center overflow-hidden select-none pb-0 sm:mt-1.5 2xl:mt-2"
+              data-footer-watermark
+            >
+              {watermark}
+            </div>
+          ) : null}
         </div>
       </div>
     </footer>
