@@ -60,8 +60,8 @@ export default function WowMegaMenuPanel({
       onWheel={handleWheel}
       className={
         noOuterShell
-          ? 'h-full max-h-[calc(100vh-120px)] max-w-full overflow-x-auto overflow-y-auto overscroll-contain'
-          : 'animate-mega-menu-in mx-auto mt-2 max-h-[calc(100vh-120px)] max-w-full overflow-x-auto overflow-y-auto overscroll-contain rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark'
+          ? 'h-auto max-h-[calc(100vh-120px)] max-w-full overflow-x-auto overflow-y-auto overscroll-contain'
+          : 'animate-mega-menu-in mx-auto mt-2 h-auto max-h-[calc(100vh-120px)] max-w-full overflow-x-auto overflow-y-auto overscroll-contain rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark'
       }
       style={{
         padding: `${desktop.paddingY}px clamp(16px, 3vw, ${desktop.paddingX}px)`,

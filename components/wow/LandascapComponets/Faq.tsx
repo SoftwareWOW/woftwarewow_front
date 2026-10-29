@@ -186,7 +186,7 @@ const Faq = ({
                     data-active={activeAccordion === faq.id ? true : false}
                     onClick={() => toggleAccordion(faq.id)}
                   >
-                    <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
+                    <h3 className="text-[23px] font-light tracking-normal md:text-[25px] md:leading-[34.2px]">
                       {faq.question}
                     </h3>
                     <div

@@ -4,7 +4,4 @@ p {
   }
 }
 
-.font-instrument,
-.font-seasons {
-  @apply bg-brand-gradient bg-clip-text text-transparent;
-}
+/* Instrument / Seasons display fonts — no gradient fill; color inherits from parent headings. */

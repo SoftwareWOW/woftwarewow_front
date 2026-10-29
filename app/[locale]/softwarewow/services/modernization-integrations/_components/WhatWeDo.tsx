@@ -60,8 +60,8 @@ const RowBody = ({
 }) => (
   <>
     <div className="group relative z-10 flex cursor-pointer items-center justify-between px-5 py-10 md:px-10 md:py-[60px]">
-      <h3 className="relative z-10 flex flex-col gap-x-32 gap-y-3 text-[25px] font-normal leading-[25.2px] md:flex-row md:items-center md:text-4xl md:leading-[1.2] lg:text-[42px] xl:text-5xl">
-        <span className="font-medium">{title}</span>
+      <h3 className="relative z-10 flex flex-col gap-x-32 gap-y-3 text-[25px] font-light leading-[25.2px] md:flex-row md:items-center md:text-4xl md:leading-[1.2] lg:text-[42px] xl:text-5xl">
+        <span className="font-light">{title}</span>
         <p className="mt-2 max-w-lg pr-[2px] text-base md:text-xl md:leading-[1.4] md:tracking-[0.4px]">{description}</p>
       </h3>
 

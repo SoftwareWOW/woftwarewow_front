@@ -36,7 +36,7 @@ export default function DesignFaqSection() {
 
             <h2 className="text-[48px] font-light leading-[1.05] tracking-[-0.055em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
               <TextAppearAnimation>
-                <span className="text-appear block font-normal">
+                <span className="text-appear block font-light">
                   {header.titleBefore} <InstrumentText>{header.titleAccent}</InstrumentText>
                 </span>
               </TextAppearAnimation>
@@ -73,7 +73,7 @@ export default function DesignFaqSection() {
                     data-active={activeAccordion === faq.id ? true : false}
                     onClick={() => toggleAccordion(faq.id)}
                   >
-                    <h3 className="text-[23px] font-normal tracking-normal md:text-[25px] md:leading-[34.2px]">
+                    <h3 className="text-[23px] font-light tracking-normal md:text-[25px] md:leading-[34.2px]">
                       {faq.question}
                     </h3>
                     <div

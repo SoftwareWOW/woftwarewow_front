@@ -52,7 +52,7 @@ export default function WowFaq() {
                   isOpen && faq.answer ? 'sm:col-span-1 lg:row-span-2' : ''
                 }`}>
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-lg font-medium leading-snug">{faq.question}</h3>
+                  <h3 className="text-lg font-light leading-snug">{faq.question}</h3>
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-backgroundBody text-lg dark:bg-dark">
                     {isOpen ? '−' : '+'}
                   </span>

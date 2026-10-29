@@ -312,16 +312,16 @@ html body[data-scroll-locked] {
   }
 
   h3 {
-    @apply mb-3.5 mt-9 text-[27px] font-normal leading-tight md:mb-5 md:mt-[60px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[42px];
+    @apply mb-3.5 mt-9 text-[27px] font-light leading-tight md:mb-5 md:mt-[60px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[42px];
   }
   strong {
-    @apply font-medium;
+    @apply font-light;
   }
 }
 
 .project-details2-body {
   h3 {
-    @apply mb-3.5 mt-9 text-[27px] font-normal leading-tight md:mb-5 md:mt-[60px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[42px];
+    @apply mb-3.5 mt-9 text-[27px] font-light leading-tight md:mb-5 md:mt-[60px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[42px];
   }
 
   p {
@@ -332,13 +332,13 @@ html body[data-scroll-locked] {
     @apply mt-9 md:mt-20;
   }
   strong {
-    @apply font-medium;
+    @apply font-light;
   }
 }
 
 .legal-policy-body {
   h2 {
-    @apply mb-4 mt-10 scroll-mt-28 font-outfit text-xl font-normal leading-tight text-secondary first:mt-0 dark:text-backgroundBody md:mb-5 md:mt-14 md:text-2xl lg:text-[28px] lg:leading-[1.25];
+    @apply mb-4 mt-10 scroll-mt-28 font-outfit text-xl font-light leading-tight text-secondary first:mt-0 dark:text-backgroundBody md:mb-5 md:mt-14 md:text-2xl lg:text-[28px] lg:leading-[1.25];
   }
 
 }
@@ -349,13 +349,13 @@ html body[data-scroll-locked] {
   }
 
   p:first-child {
-    @apply text-lg font-medium text-secondary dark:text-backgroundBody md:text-xl;
+    @apply text-lg font-light text-secondary dark:text-backgroundBody md:text-xl;
   }
 }
 
 .blog-details-body {
   h3 {
-    @apply mb-3.5 text-2xl font-normal leading-tight md:mb-5 md:mt-[60px] md:text-[27px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[39px] [&:not(:first-child)]:mt-9;
+    @apply mb-3.5 text-2xl font-light leading-tight md:mb-5 md:mt-[60px] md:text-[27px] lg:text-4xl lg:leading-[1.2] lg:tracking-[-1.68px] xl:text-[39px] [&:not(:first-child)]:mt-9;
   }
 
   p {
@@ -381,12 +381,12 @@ html body[data-scroll-locked] {
     @apply my-9 lg:my-[60px];
   }
   strong {
-    @apply font-medium;
+    @apply font-light;
   }
 }
 .career-details-body {
   h3 {
-    @apply mb-3.5 text-2xl font-normal leading-tight md:mb-5 md:text-[27px] lg:text-[35px] lg:leading-[1.2] lg:tracking-[-1.68px] [&:not(:first-child)]:mt-9 [&:not(:first-child)]:md:mt-[60px];
+    @apply mb-3.5 text-2xl font-light leading-tight md:mb-5 md:text-[27px] lg:text-[35px] lg:leading-[1.2] lg:tracking-[-1.68px] [&:not(:first-child)]:mt-9 [&:not(:first-child)]:md:mt-[60px];
   }
 
   p {
@@ -412,7 +412,7 @@ html body[data-scroll-locked] {
     @apply my-9 rounded-radius-md lg:my-[60px];
   }
   strong {
-    @apply font-medium;
+    @apply font-light;
   }
 }
 
@@ -655,7 +655,7 @@ html body[data-scroll-locked] {
 
 // --------------------
 .interest-btn {
-  @apply inline-block cursor-pointer border px-3 py-2 text-center text-base font-medium transition-all duration-300 ease-in-out hover:bg-gray-100 dark:border-dark dark:hover:bg-slate-900 md:px-[42px] md:py-5;
+  @apply inline-block cursor-pointer border px-3 py-2 text-center text-base font-light transition-all duration-300 ease-in-out hover:bg-gray-100 dark:border-dark dark:hover:bg-slate-900 md:px-[42px] md:py-5;
 }
 
 .checkbox-wrapper input[type='checkbox']:checked + .interest-btn {

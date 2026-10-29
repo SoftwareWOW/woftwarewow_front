@@ -33,7 +33,7 @@ const WebApplicationsHero = () => {
             <SectionLabel className="mb-5">Web Application Development</SectionLabel>
             <h1
               id="web-apps-hero-heading"
-              className="mb-6 mt-5 text-[clamp(1.75rem,4.571vw,5.5rem)] font-normal leading-[1.15] tracking-[-0.03em] sm:mt-10 md:mb-10"
+              className="mb-6 mt-5 text-[clamp(1.75rem,4.571vw,5.5rem)] font-light leading-[1.15] tracking-[-0.03em] sm:mt-10 md:mb-10"
             >
               Web applications built around your <InstrumentText>business.</InstrumentText>
             </h1>

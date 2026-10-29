@@ -175,15 +175,15 @@ export function SoftwareWowEcosystem({ variant = 'section' }: SoftwareWowEcosyst
             transition={{ duration: 0.6 }}
           >
             <span
-              className="inline-flex items-center gap-2 rounded-full border border-secondary/15 px-3 py-1 text-xs font-medium text-colorText dark:border-dark dark:text-dark-100"
+              className="inline-flex items-center gap-2 rounded-full border border-secondary/15 px-3 py-1 text-xs font-light text-colorText dark:border-dark dark:text-dark-100"
               style={{ borderColor: 'color-mix(in oklab, var(--wow-1) 40%, transparent)' }}
             >
               <Sparkles className="h-3.5 w-3.5" style={{ color: 'var(--wow-1)' }} />
               SoftwareWOW! Ecosystem
             </span>
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-secondary dark:text-backgroundBody sm:text-5xl">
+            <h2 className="mt-5 text-3xl font-light tracking-tight text-secondary dark:text-backgroundBody sm:text-5xl">
               One engine.{' '}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'var(--wow-gradient)' }}>
+              <span className="font-instrument italic text-inherit">
                 Twelve capabilities.
               </span>
             </h2>
@@ -277,7 +277,7 @@ function ServiceLabel({ service, isHero = false }: { service: Service; isHero?: 
     <motion.p
       whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className={`cursor-default select-none whitespace-nowrap text-center text-[10px] font-semibold leading-none tracking-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-[11px] ${
+      className={`cursor-default select-none whitespace-nowrap text-center text-[10px] font-light leading-none tracking-tight text-secondary transition-colors hover:text-primary dark:text-backgroundBody dark:hover:text-primary-50 sm:text-[11px] ${
         isHero ? 'md:text-xs lg:text-sm' : 'md:text-sm md:font-bold lg:text-base'
       }`}
     >

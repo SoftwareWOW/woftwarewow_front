@@ -99,7 +99,7 @@ export default function OrderProcess({
       {!hideHeader && (
         <div className="relative mx-auto max-w-3xl text-center">
           {/* Section Badge */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-dark/60 dark:text-dark-100">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-light uppercase tracking-[0.22em] text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-dark/60 dark:text-dark-100">
             {badge}
           </span>
 

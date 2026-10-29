@@ -53,14 +53,14 @@ export default function EventsChallengeSection() {
 
         <RevealWrapper className="reveal-me mt-10 grid justify-center gap-6 md:mt-16 lg:grid-cols-2 lg:gap-8">
           <div className={cardClassName}>
-            <h6 className="mb-6 text-2xl font-normal uppercase tracking-[0.04em] text-secondary dark:text-backgroundBody md:text-3xl">
+            <h6 className="mb-6 text-2xl font-light uppercase tracking-[0.04em] text-secondary dark:text-backgroundBody md:text-3xl">
               {content.withoutAiLabel}
             </h6>
             <ProblemSteps steps={content.withoutSteps} />
           </div>
 
           <div className={cardClassName}>
-            <h6 className="mb-6 bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-2xl font-normal uppercase tracking-[0.04em] text-transparent md:text-3xl">
+            <h6 className="mb-6 text-2xl font-light uppercase tracking-[0.04em] text-inherit md:text-3xl">
               {content.withAiLabel}
             </h6>
             <SolutionSteps steps={content.withSteps} />

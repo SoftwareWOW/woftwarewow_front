@@ -84,7 +84,7 @@ const ModernizationHero = () => {
           <RevealWrapper
             as="h1"
             id="modernization-hero-heading"
-            className="reveal-me text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            className="reveal-me text-5xl font-light leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
           >
             Modernize what works.
             <br className="hidden lg:block" /> <InstrumentText>Connect what matters.</InstrumentText>

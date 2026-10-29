@@ -118,7 +118,7 @@ const IntelligenceFlowHero = () => {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h1 className="font-display mt-5 text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">
+          <h1 className="font-display mt-5 text-3xl font-light tracking-tight text-balance text-foreground sm:text-5xl">
             Every business signal in. Intelligent action out.
           </h1>
           <p className="mt-4 text-sm text-muted-foreground sm:text-base">
@@ -137,7 +137,7 @@ const IntelligenceFlowHero = () => {
 
           <div className="relative grid w-full min-w-0 gap-4 sm:gap-6 lg:grid-cols-[1fr_minmax(280px,340px)_1fr] lg:items-center lg:gap-6">
             <div className="order-1 flex w-full min-w-0 flex-col gap-4 lg:order-1">
-              <p className="mb-1 text-center text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase lg:text-left">
+              <p className="mb-1 text-center text-[0.6875rem] font-light tracking-[0.16em] text-muted-foreground uppercase lg:text-left">
                 Business inputs
               </p>
               <div className="grid w-full min-w-0 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-1">
@@ -164,7 +164,7 @@ const IntelligenceFlowHero = () => {
             <FlowRail className="order-4" />
 
             <div className="order-5 flex w-full min-w-0 flex-col gap-4 lg:order-3">
-              <p className="mb-1 text-center text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase lg:text-right">
+              <p className="mb-1 text-center text-[0.6875rem] font-light tracking-[0.16em] text-muted-foreground uppercase lg:text-right">
                 AI outputs
               </p>
               <div className="grid w-full min-w-0 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-1">

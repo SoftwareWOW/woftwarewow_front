@@ -47,7 +47,7 @@ export default function EventsServicesSection() {
               </figure>
 
               <div className="z-30 w-full rounded-radius-sm border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
-                <p className="mb-3.5 text-sm font-normal uppercase leading-6 tracking-[3px] text-black dark:text-white">
+                <p className="mb-3.5 text-sm font-light uppercase leading-6 tracking-[3px] text-black dark:text-white">
                   {item.index}
                 </p>
                 <div className="blog-title mb-3.5 lg:mb-5">
@@ -58,7 +58,7 @@ export default function EventsServicesSection() {
                   </Link>
                   <p className="mt-3 text-lg text-[#808080]">{item.tagline}</p>
                 </div>
-                <p className="mb-10 text-base font-normal leading-[25.6px] tracking-[0.32px] text-[#808080]">
+                <p className="mb-10 text-base font-light leading-[25.6px] tracking-[0.32px] text-[#808080]">
                   {item.description}
                 </p>
 

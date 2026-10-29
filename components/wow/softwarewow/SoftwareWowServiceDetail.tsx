@@ -27,7 +27,7 @@ export default function SoftwareWowServiceDetail({ service }: SoftwareWowService
             <SectionLabel>Services</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h1 className="max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-semibold leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
+            <h1 className="max-w-4xl text-[clamp(2rem,4.5vw,3.75rem)] font-light leading-[1.12] tracking-tight text-secondary dark:text-backgroundBody">
               {service.headline}
             </h1>
           </TextAppearAnimation>
@@ -83,7 +83,7 @@ export default function SoftwareWowServiceDetail({ service }: SoftwareWowService
                   key={item}
                   className="border-b border-black/10 pb-4 last:border-b-0 dark:border-white/10"
                 >
-                  <p className="mb-1 text-sm font-medium text-black/40 dark:text-dark-100">
+                  <p className="mb-1 text-sm font-light text-black/40 dark:text-dark-100">
                     {String(index + 1).padStart(2, '0')}
                   </p>
                   <p className="text-lg leading-snug text-secondary dark:text-backgroundBody">
@@ -109,7 +109,7 @@ export default function SoftwareWowServiceDetail({ service }: SoftwareWowService
                   href={`/software/services/${item.slug}`}
                   className="group flex h-full flex-col gap-2 border border-black/10 bg-backgroundBody p-5 transition-colors hover:border-black/25 dark:border-white/10 dark:bg-dark dark:hover:border-white/25 md:p-6"
                 >
-                  <p className="text-lg font-medium text-secondary group-hover:underline dark:text-backgroundBody">
+                  <p className="text-lg font-light text-secondary group-hover:underline dark:text-backgroundBody">
                     {item.title}
                   </p>
                   <p className="text-sm leading-relaxed text-colorText dark:text-dark-100">

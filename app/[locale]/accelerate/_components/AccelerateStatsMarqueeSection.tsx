@@ -24,12 +24,12 @@ export default function AccelerateStatsMarqueeSection() {
                 <RevealWrapper key={stat.description} className="stat-item w-full">
                   <div className="relative flex h-full flex-col items-start justify-start sm:items-center sm:text-center">
                     <div className="flex items-baseline gap-1">
-                      <h3 className="font-['Outfit'] text-[clamp(32px,4vw,56px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+                      <h3 className="font-['Outfit'] text-[clamp(32px,4vw,56px)] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
                         <CounterAnimation number={stat.value} />
                         {stat.suffix}
                       </h3>
                     </div>
-                    <p className="mt-2 line-clamp-4 text-left font-['Outfit'] text-[clamp(12px,1vw,15px)] font-normal leading-[1.5] text-[#666666] dark:text-[#888888] sm:text-center">
+                    <p className="mt-2 line-clamp-4 text-left font-['Outfit'] text-[clamp(12px,1vw,15px)] font-light leading-[1.5] text-[#666666] dark:text-[#888888] sm:text-center">
                       {stat.description}
                     </p>
                   </div>

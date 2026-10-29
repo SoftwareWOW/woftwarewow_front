@@ -15,7 +15,7 @@ export default function MarketingHero() {
           <div className="w-full max-w-[640px] text-center lg:text-left">
       
 
-            <h1 className="text-[clamp(2rem,5vw,4rem)] font-normal leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+            <h1 className="text-[clamp(2rem,5vw,4rem)] font-light leading-[1.1] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
               {hero.titleBefore}{' '}
               <InstrumentText>{hero.titleAccent}</InstrumentText>
             </h1>

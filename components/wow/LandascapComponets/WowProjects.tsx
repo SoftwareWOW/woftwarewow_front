@@ -183,7 +183,7 @@ const WowProjects = ({ projects: projectsProp }: WowProjectsProps) => {
               <div className="absolute bottom-4 left-4 right-4 max-w-[calc(100%-2rem)] rounded-radius-sm border border-white/20 bg-backgroundBody/95 p-3 backdrop-blur-sm transition-all duration-300 hover:bg-backgroundBody/100 dark:border-white/10 dark:bg-dark-200/95 dark:hover:bg-dark-200/100 sm:p-4 md:bottom-8 md:left-8 md:max-w-[535px] md:p-6 lg:bottom-10 lg:left-10 lg:p-8">
                 <div className="project-title mb-2 md:mb-3">
                   <Link href={project.href}>
-                    <h3 className="text-base font-normal text-[#0D0D0D] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4] sm:text-lg md:text-3xl lg:text-4xl">
+                    <h3 className="text-base font-light text-[#0D0D0D] transition-colors duration-300 group-hover:text-[#8b7cff] dark:text-[#F2F2F2] dark:group-hover:text-[#b794f4] sm:text-lg md:text-3xl lg:text-4xl">
                       {project.title}
                     </h3>
                   </Link>

@@ -41,7 +41,7 @@ export default function WowFeaturedWork() {
                 />
                 <Link
                   href="/portfolio-agency/case-study"
-                  className="absolute bottom-4 right-4 flex items-center gap-2 rounded bg-white/90 px-3 py-2 text-xs font-medium opacity-0 transition group-hover:opacity-100 dark:bg-dark-200/90 dark:text-backgroundBody">
+                  className="absolute bottom-4 right-4 flex items-center gap-2 rounded bg-white/90 px-3 py-2 text-xs font-light opacity-0 transition group-hover:opacity-100 dark:bg-dark-200/90 dark:text-backgroundBody">
                   View
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                     <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -52,7 +52,7 @@ export default function WowFeaturedWork() {
                 <span>{project.type}</span>
                 <span className="text-2xl font-light text-secondary dark:text-backgroundBody">{project.year}</span>
               </div>
-              <h3 className="mt-2 text-xl font-medium md:text-2xl">{project.title}</h3>
+              <h3 className="mt-2 text-xl font-light md:text-2xl">{project.title}</h3>
             </RevealWrapper>
           ))}
         </div>

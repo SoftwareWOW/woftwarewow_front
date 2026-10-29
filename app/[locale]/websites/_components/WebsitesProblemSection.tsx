@@ -31,7 +31,7 @@ export default function WebsitesProblemSection() {
         <RevealWrapper className="flex flex-col items-stretch gap-x-12 gap-y-10 lg:flex-row lg:gap-x-16">
           <div className="flex flex-col justify-center lg:w-[42%] xl:w-[40%]">
            
-            <p className="mb-4 text-base font-medium text-secondary dark:text-backgroundBody">{content.listHeader}</p>
+            <p className="mb-4 text-base font-light text-secondary dark:text-backgroundBody">{content.listHeader}</p>
             <ul className="mb-8 space-y-2 md:space-y-2.5">
               {content.painPoints.map((item) => (
                 <li
@@ -40,7 +40,7 @@ export default function WebsitesProblemSection() {
                 >
                   <DotBullet />
                   <span>
-                    <strong className="font-semibold text-secondary dark:text-backgroundBody">{item.lead}</strong>
+                    <strong className="font-light text-secondary dark:text-backgroundBody">{item.lead}</strong>
                     {item.rest}
                   </span>
                 </li>

@@ -32,10 +32,10 @@ export default function SuperagencyChrome({
   }
 
   return (
-    <>
+    <div className="wow-brand-surface">
       <WowNavbar navbar={navbar} navigation={navigation} languageSwitcher={languageSwitcher} />
       <main className={stickyFooterMainClass}>{children}</main>
       <WowFooter footer={footer} />
-    </>
+    </div>
   )
 }

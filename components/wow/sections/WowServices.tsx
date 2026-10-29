@@ -37,7 +37,7 @@ export default function WowServices() {
               <div className="flex gap-5">
                 <span className="text-4xl font-light text-primary md:text-5xl">{service.num}</span>
                 <div>
-                  <h3 className="text-xl font-medium md:text-2xl">{service.title}</h3>
+                  <h3 className="text-xl font-light md:text-2xl">{service.title}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-colorText dark:text-dark-100">{service.desc}</p>
                 </div>
               </div>

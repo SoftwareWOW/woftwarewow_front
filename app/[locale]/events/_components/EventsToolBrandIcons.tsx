@@ -10,14 +10,14 @@ export function HopinToolMark() {
         <circle cx="10.5" cy="18" r="3" fill="#fff" fillOpacity="0.9" />
         <circle cx="21.5" cy="18" r="3" fill="#fff" fillOpacity="0.9" />
       </svg>
-      <span className="text-[1.05rem] font-semibold tracking-tight text-[#7955FF]">hopin</span>
+      <span className="text-[1.05rem] font-light tracking-tight text-[#7955FF]">hopin</span>
     </span>
   )
 }
 
 export function WhovaToolMark() {
   return (
-    <span className="whitespace-nowrap font-serif text-[1.35rem] font-semibold italic tracking-tight text-[#0D0D0D] dark:text-[#F2F2F2]">
+    <span className="whitespace-nowrap font-serif text-[1.35rem] font-light italic tracking-tight text-[#0D0D0D] dark:text-[#F2F2F2]">
       Whova
     </span>
   )

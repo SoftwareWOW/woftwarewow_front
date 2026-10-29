@@ -26,14 +26,14 @@ type WowContactFormProps = {
 }
 
 const labelClassName =
-  'text-lg font-normal leading-[1.2] tracking-[-0.02em] text-[#666666] dark:text-dark-100 md:text-xl'
+  'text-lg font-light leading-[1.2] tracking-[-0.02em] text-[#666666] dark:text-dark-100 md:text-xl'
 
 const inputClassName =
   'w-full rounded-radius-sm border border-[#1515151A] bg-backgroundBody px-5 py-4 text-base leading-[1.4] tracking-[0.02em] text-secondary placeholder:text-[#808080] focus:border-[#1515151A] focus:outline-none focus:bg-[#D9D8F3] dark:focus:bg-[#1F1F1F] dark:border-[#EDF0F51A] dark:bg-dark dark:text-backgroundBody dark:placeholder:text-dark-100 md:text-lg'
 
 const chipClassName = (selected: boolean) =>
   [
-    'inline-flex cursor-pointer items-center justify-center rounded-radius-sm border border-[#1515151A] px-4 py-3 text-sm font-medium transition-all duration-300 dark:border-[#EDF0F51A] md:px-8 md:py-4 md:text-base',
+    'inline-flex cursor-pointer items-center justify-center rounded-radius-sm border border-[#1515151A] px-4 py-3 text-sm font-light transition-all duration-300 dark:border-[#EDF0F51A] md:px-8 md:py-4 md:text-base',
     selected
       ? 'border-transparent bg-[#9592DE] text-white dark:border-transparent dark:bg-[#292757] dark:text-white'
       : 'bg-backgroundBody text-secondary hover:border-primary/30 dark:bg-dark dark:text-backgroundBody dark:hover:border-[#EDF0F533]',

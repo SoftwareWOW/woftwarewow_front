@@ -19,7 +19,7 @@ export default async function DivisionSiteLayout({ divisionId, children }: Divis
   const dictionary = await getDictionary(locale)
 
   return (
-    <div className="relative w-full max-w-full overflow-x-clip">
+    <div className="wow-brand-surface relative w-full max-w-full overflow-x-clip">
       <DivisionNavbar
         config={config}
         navbar={dictionary.navbar}

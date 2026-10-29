@@ -63,7 +63,7 @@ export default function SocialPortfolioSection() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveCategory(category.slug)}
-                  className={`relative flex-1 px-3 py-3.5 text-center text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-300 sm:px-4 sm:py-4 sm:text-xs md:text-[13px] ${
+                  className={`relative flex-1 px-3 py-3.5 text-center text-[11px] font-light uppercase tracking-[0.14em] transition-colors duration-300 sm:px-4 sm:py-4 sm:text-xs md:text-[13px] ${
                     isActive
                       ? 'bg-primary text-white'
                       : 'bg-background text-[#0D0D0D] hover:bg-[#8b7cff]/10 dark:text-[#F2F2F2] dark:hover:bg-white/5'
@@ -89,11 +89,11 @@ export default function SocialPortfolioSection() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
-                <div className="mt-4 flex items-center justify-between gap-3 text-[11px] font-medium uppercase tracking-[0.12em] text-[#808080] sm:text-xs">
+                <div className="mt-4 flex items-center justify-between gap-3 text-[11px] font-light uppercase tracking-[0.12em] text-[#808080] sm:text-xs">
                   <span>{project.industryLabel}</span>
                   <span>{project.year}</span>
                 </div>
-                <h3 className="mt-2 text-[clamp(1.5rem,3vw,2.25rem)] font-normal leading-tight tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 group-hover:text-primary dark:text-[#F2F2F2]">
+                <h3 className="mt-2 text-[clamp(1.5rem,3vw,2.25rem)] font-light leading-tight tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 group-hover:text-primary dark:text-[#F2F2F2]">
                   {project.title}
                 </h3>
               </Link>

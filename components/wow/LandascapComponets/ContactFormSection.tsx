@@ -69,7 +69,7 @@ const ContactFormSection = () => {
             <div className="text-center">
               <RevealWrapper>
                 <span className="rv-badge mb-6 inline-block border border-[#e5e5e5] px-4 py-1.5 dark:border-white/10">
-                  <span className="rv-badge-text text-sm font-medium uppercase tracking-[0.15em] text-[#8b7cff] dark:text-[#b794f4]">
+                  <span className="rv-badge-text text-sm font-light uppercase tracking-[0.15em] text-[#8b7cff] dark:text-[#b794f4]">
                     Start the Conversation
                   </span>
                 </span>
@@ -78,7 +78,7 @@ const ContactFormSection = () => {
               <TextAppearAnimation>
                 <h2 className="text-appear font-seasons text-[clamp(2rem,5vw,3.5rem)] font-light leading-[1.15] text-[#000000] dark:text-[#F2F2F2]">
                   Let&apos;s Build Something{' '}
-                  <span className="font-instrument italic bg-gradient-to-r from-[#8b7cff] via-[#b794f4] to-[#f4a8b8] bg-clip-text text-transparent">
+                  <span className="font-instrument italic text-inherit">
                     Great Together
                   </span>
                 </h2>
@@ -99,7 +99,7 @@ const ContactFormSection = () => {
             >
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                <label htmlFor="name" className="text-sm font-light text-[#555555] dark:text-[#999999] md:text-base">
                   Your Name *
                 </label>
                 <input
@@ -114,7 +114,7 @@ const ContactFormSection = () => {
 
               {/* Email Field */}
               <div>
-                <label htmlFor="email" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                <label htmlFor="email" className="text-sm font-light text-[#555555] dark:text-[#999999] md:text-base">
                   Email Address *
                 </label>
                 <input
@@ -129,7 +129,7 @@ const ContactFormSection = () => {
 
               {/* Interests Dropdown */}
               <div>
-                <label className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                <label className="text-sm font-light text-[#555555] dark:text-[#999999] md:text-base">
                   What are you looking for? *
                 </label>
                 <div className="relative mt-2">
@@ -180,7 +180,7 @@ const ContactFormSection = () => {
 
               {/* Budget Dropdown */}
               <div>
-                <label className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                <label className="text-sm font-light text-[#555555] dark:text-[#999999] md:text-base">
                   Estimated Budget (USD) *
                 </label>
                 <div className="relative mt-2">
@@ -228,7 +228,7 @@ const ContactFormSection = () => {
 
               {/* Message Field */}
               <div>
-                <label htmlFor="message" className="text-sm font-medium text-[#555555] dark:text-[#999999] md:text-base">
+                <label htmlFor="message" className="text-sm font-light text-[#555555] dark:text-[#999999] md:text-base">
                   Tell Us About Your Goals *
                 </label>
                 <textarea

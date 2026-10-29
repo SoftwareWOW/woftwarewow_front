@@ -34,13 +34,13 @@ export default function WowTestimonials() {
                     <Image src="/images/agent/01.jpg" alt="" fill className="object-cover" sizes="56px" />
                   </div>
                   <div>
-                    <p className="font-medium">{item.name}</p>
+                    <p className="font-light">{item.name}</p>
                     <p className="text-sm text-colorText dark:text-dark-100">{item.role}</p>
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed text-colorText dark:text-dark-100">&ldquo;{item.quote}&rdquo;</p>
                 <div className="mt-4 flex items-center justify-between border-t border-secondary/10 pt-4 text-xs text-colorText dark:border-dark dark:text-dark-100">
-                  <WowText className="text-xs font-semibold" />
+                  <WowText className="text-xs font-light" />
                   <span>Feb 03, 2026</span>
                 </div>
               </RevealWrapper>

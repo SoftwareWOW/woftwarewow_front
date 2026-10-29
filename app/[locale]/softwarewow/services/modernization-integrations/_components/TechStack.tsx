@@ -58,14 +58,7 @@ const TechStack = () => {
           <h2 id="tech-heading" className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
             Powered by industry-leading{' '}
             <span
-              className="font-instrument italic"
-              style={{
-                background: WOW_GRADIENT,
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                color: 'transparent',
-              }}
+              className="font-instrument italic text-inherit"
             >
               technology
             </span>
@@ -92,7 +85,7 @@ const TechStack = () => {
                   aria-controls={`${tabsId}-${cat.id}`}
                   id={`${tabsId}-tab-${cat.id}`}
                   onClick={() => setActiveId(cat.id)}
-                  className="relative shrink-0 snap-start rounded-full px-4 py-2 text-sm font-medium text-[#808080] outline-none transition-colors duration-200 hover:text-secondary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:hover:text-[#F2F2F2] aria-selected:text-secondary dark:aria-selected:text-[#F2F2F2]"
+                  className="relative shrink-0 snap-start rounded-full px-4 py-2 text-sm font-light text-[#808080] outline-none transition-colors duration-200 hover:text-secondary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:hover:text-[#F2F2F2] aria-selected:text-secondary dark:aria-selected:text-[#F2F2F2]"
                 >
                   {isActive && (
                     <motion.span

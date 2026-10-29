@@ -36,14 +36,14 @@ export default function IntelligenceAiSolutionsSection() {
               <h3 className="mb-3 text-2xl leading-tight text-secondary transition-colors duration-300 group-hover:text-white dark:text-backgroundBody md:text-3xl">
                 {pillar.title}
               </h3>
-              <p className="mb-4 text-base font-medium text-secondary transition-colors duration-300 group-hover:text-white/95 dark:text-backgroundBody">
+              <p className="mb-4 text-base font-light text-secondary transition-colors duration-300 group-hover:text-white/95 dark:text-backgroundBody">
                 {pillar.leadIn}
               </p>
               <p className="mb-8 flex-1 text-base leading-relaxed text-[#808080] transition-colors duration-300 group-hover:text-white/90 dark:text-backgroundBody/70">
                 {pillar.body}
               </p>
               <div className="mt-auto">
-                <p className="mb-2 text-xs font-medium uppercase tracking-wide text-secondary/60 transition-colors duration-300 group-hover:text-white/85 dark:text-backgroundBody/50">
+                <p className="mb-2 text-xs font-light uppercase tracking-wide text-secondary/60 transition-colors duration-300 group-hover:text-white/85 dark:text-backgroundBody/50">
                   Potential applications
                 </p>
                 <p className="text-sm leading-relaxed text-[#808080] transition-colors duration-300 group-hover:text-white/85 dark:text-backgroundBody/65">

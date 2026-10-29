@@ -62,7 +62,7 @@ const SelectedWork = () => {
               </p>
             </Link>
             <p className="mt-3 text-sm text-[#808080]">{item.serviceTags.join(' · ')}</p>
-            <p className="mt-3 text-base font-normal leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70">
+            <p className="mt-3 text-base font-light leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70">
               {item.description}
             </p>
             <div className="mt-6">

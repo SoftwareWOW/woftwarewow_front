@@ -1,0 +1,60 @@
+/** Superagency, division sites, and shared WOW UI — Outfit weight 300. */
+.wow-brand-surface {
+  @apply font-light;
+
+  :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    label,
+    button,
+    a,
+    li,
+    span,
+    input,
+    textarea,
+    select,
+    th,
+    td,
+    figcaption,
+    small,
+    strong,
+    em
+  ) {
+    @apply font-light;
+  }
+
+  .text-appear,
+  .text-appear-2,
+  .text-appear .word,
+  .text-appear-2 .word {
+    @apply font-light;
+  }
+
+  .rv-button-top span,
+  .rv-button-bottom span,
+  .rv-badge-text {
+    @apply font-light;
+  }
+
+  .font-normal,
+  .font-medium,
+  .font-semibold {
+    @apply font-light;
+  }
+}
+
+.about.wow-brand-surface,
+.divisions-overview.wow-brand-surface {
+  h2,
+  h3,
+  p,
+  .counter,
+  .text-appear .word {
+    @apply font-outfit font-light;
+  }
+}

@@ -18,7 +18,7 @@ const WhyChoiceUs = () => {
             </h2>
           </RevealWrapper>
           <TextAppearAnimation>
-            <p className="text-appear mt-3 text-lg font-normal text-black/70 dark:text-backgroundBody/70">
+            <p className="text-appear mt-3 text-lg font-light text-black/70 dark:text-backgroundBody/70">
               We engineer custom software, apps, and digital products built to scale with your business — not against it.
             </p>
           </TextAppearAnimation>
@@ -41,7 +41,7 @@ const WhyChoiceUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">Engineering-first team</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               Senior developers building reliable, scalable software from the ground up.
             </p>
           </div>
@@ -66,7 +66,7 @@ const WhyChoiceUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">Full-stack delivery</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               From discovery and design to development, deployment, and ongoing support.
             </p>
           </div>
@@ -86,7 +86,7 @@ const WhyChoiceUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">Built to scale</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               Architecture and code designed to grow with your business, not hold it back.
             </p>
           </div>
@@ -132,7 +132,7 @@ const WhyChoiceUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">Connected ecosystem</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               Twelve capabilities — AI, cloud, mobile, DevOps, and more — under one roof.
             </p>
           </div>

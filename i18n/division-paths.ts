@@ -78,6 +78,28 @@ export const divisionIdBySlug: Record<DivisionSiteSlug, DivisionId> = {
   events: 'wowEvents',
 }
 
+/** Resolve division brand id from a locale-less href like `/software`. */
+export function divisionIdFromHref(href: string): DivisionId | null {
+  const slug = href.replace(/^\/+/, '').split('/')[0]?.toLowerCase()
+  if (!slug) return null
+  return divisionIdBySlug[slug as DivisionSiteSlug] ?? null
+}
+
+/** Ecosystem diagram node ids → division brand ids. */
+export const ecosystemNodeIdToDivisionId: Record<string, DivisionId> = {
+  softwarewow: 'softwareWow',
+  marketing: 'wowMarketing',
+  design: 'wowDesign',
+  intelligence: 'wowIntelligence',
+  social: 'wowSocial',
+  accelerate: 'wowAccelerate',
+  websites: 'wowWebsites',
+  impact: 'wowImpact',
+  host: 'wowHost',
+  hub: 'wowHub',
+  events: 'wowEvents',
+}
+
 /**
  * WOW Marketing division page lives under `wowmarketing` in the app router
  * because `marketing/` is used by legacy template demo routes (blog, project, services).

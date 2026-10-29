@@ -17,7 +17,7 @@ const IntelligenceWhyChooseUs = () => {
             </h2>
           </RevealWrapper>
           <TextAppearAnimation>
-            <p className="text-appear mt-3 text-lg font-normal text-black/70 dark:text-backgroundBody/70">
+            <p className="text-appear mt-3 text-lg font-light text-black/70 dark:text-backgroundBody/70">
               We design AI solutions and automation that sharpen decisions, reduce manual work, and
               accelerate results — without replacing your team.
             </p>
@@ -41,7 +41,7 @@ const IntelligenceWhyChooseUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">AI-first approach</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               Custom assistants, analytics, and automations built around your workflows and data.
             </p>
           </div>
@@ -66,7 +66,7 @@ const IntelligenceWhyChooseUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">Human-in-the-loop</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               AI supports your team — planning, routing, and reviewing — while people stay in control.
             </p>
           </div>
@@ -86,7 +86,7 @@ const IntelligenceWhyChooseUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">End-to-end delivery</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               From discovery and data strategy to deployment, monitoring, and continuous improvement.
             </p>
           </div>
@@ -110,7 +110,7 @@ const IntelligenceWhyChooseUs = () => {
               </svg>
             </span>
             <h5 className="mb-3 mt-6">Connected ecosystem</h5>
-            <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
+            <p className="text-base font-light leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
               Intelligence connects with software, marketing, design, and growth — all under one roof.
             </p>
           </div>

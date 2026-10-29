@@ -14,7 +14,7 @@ const wowGradientStyle = {
 
 const variantClasses = {
   brand:
-    "inline-block overflow-visible pr-[0.12em] font-['Outfit'] font-extrabold leading-[0.95] tracking-[-0.06em] transition-transform duration-300 hover:scale-[1.02]",
+    "inline-block overflow-visible pr-[0.12em] font-['Outfit'] font-light leading-[0.95] tracking-[-0.06em] transition-transform duration-300 hover:scale-[1.02]",
   watermark: 'inline-block overflow-visible opacity-20 dark:opacity-10',
 } as const
 
@@ -28,7 +28,7 @@ export function renderWowInTitle(title: string, className?: string) {
   if (/^softwarewow/i.test(title.replace(/[^a-z]/gi, ''))) {
     return (
       <>
-        <span className="font-extrabold tracking-[-0.06em] text-secondary group-hover:text-black dark:text-[#F2F2F2] dark:group-hover:!text-white">Software</span>
+        <span className="font-light tracking-[-0.06em] text-secondary group-hover:text-black dark:text-[#F2F2F2] dark:group-hover:!text-white">Software</span>
         <WowText className={className}>WOW!</WowText>
       </>
     )

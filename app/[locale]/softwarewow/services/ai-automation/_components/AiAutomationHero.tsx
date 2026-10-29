@@ -101,7 +101,7 @@ const AiAutomationHero = () => {
         <RevealWrapper className="reveal-me">
           <h1
             id="ai-automation-service-heading"
-            className="text-center text-[clamp(2rem,4.571vw,4rem)] font-normal leading-[1.15] tracking-[-0.03em]"
+            className="text-center text-[clamp(2rem,4.571vw,4rem)] font-light leading-[1.15] tracking-[-0.03em]"
           >
             Put AI to work in your <InstrumentText>business.</InstrumentText>
           </h1>

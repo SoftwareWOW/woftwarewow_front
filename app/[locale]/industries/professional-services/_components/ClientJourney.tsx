@@ -77,7 +77,7 @@ const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image 
                     }`}
                   >
                     <span
-                      className={`inline-block bg-gradient-to-r bg-clip-text text-xl font-semibold text-black text-transparent dark:bg-gradient-to-r dark:from-white dark:to-[#BDBDBD] dark:bg-clip-text dark:text-[#FFF] dark:text-transparent ${
+                      className={`inline-block text-xl font-semibold text-inherit ${
                         index === 0 ? 'from-backgroundBody to-gray-400' : 'from-white to-gray-400'
                       }`}
                     >

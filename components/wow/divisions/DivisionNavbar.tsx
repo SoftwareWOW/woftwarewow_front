@@ -270,7 +270,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
                         onMouseEnter={() => openMegaMenu(item.id)}
                         onFocus={() => openMegaMenu(item.id)}
                         onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                        className={`group/nav-pill flex items-center justify-center gap-1 whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-normal uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:gap-[6px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-8 xl:py-[24px] xl:text-sm xl:tracking-[2.1px] ${
+                        className={`group/nav-pill flex items-center justify-center gap-1 whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-light uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:gap-[6px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-8 xl:py-[24px] xl:text-sm xl:tracking-[2.1px] ${
                           isActive ? navPillActiveClass : navPillInactiveClass
                         }`}
                         aria-expanded={isActive}
@@ -303,7 +303,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
                   <li key={item.id} className="shrink">
                     <Link
                       href={item.href}
-                      className={`group/nav-pill flex items-center justify-center whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-normal uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-6 xl:py-[22px] xl:text-sm ${navPillInactiveClass}`}
+                      className={`group/nav-pill flex items-center justify-center whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-light uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-6 xl:py-[22px] xl:text-sm ${navPillInactiveClass}`}
                     >
                       {item.label}
                     </Link>
@@ -379,7 +379,7 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
           {hasMegaNav && navigation && activeMenuId && (
             <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
               <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark">
-                <div className="relative h-[calc(100vh-120px)] overflow-hidden">
+                <div className="relative overflow-hidden">
                   {navigation.items.map((item) => {
                     const isActive = activeMenuId === item.id
                     const itemIndex = navigation.items.findIndex((i) => i.id === item.id)
@@ -389,7 +389,11 @@ export default function DivisionNavbar({ config, navbar, languageSwitcher }: Div
                     return (
                       <motion.div
                         key={item.id}
-                        className="absolute inset-0"
+                        className={
+                          isActive
+                            ? 'relative z-10 w-full'
+                            : 'pointer-events-none absolute left-0 right-0 top-0 -z-10 h-0 overflow-hidden'
+                        }
                         initial={false}
                         animate={{
                           opacity: isActive ? 1 : 0,

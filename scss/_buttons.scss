@@ -13,7 +13,7 @@
     @apply inline-flex w-fit min-h-[48px] min-w-0 items-center justify-center gap-1.5 rounded-radius-sm border px-5 py-3.5 text-[13px] leading-none transition duration-300 sm:min-h-[52px] sm:gap-2 sm:px-6 sm:py-4 sm:text-[13px] md:min-h-[56px] md:gap-2.5 md:px-7 md:py-5 md:text-[14px] lg:min-h-[72px] lg:px-8 lg:py-6 lg:text-[14px] 2xl:min-h-[79px] 2xl:gap-[10px] 2xl:px-8 2xl:py-8;
 
     span {
-      @apply inline-block font-normal uppercase tracking-normal transition duration-300;
+      @apply inline-block font-light uppercase tracking-normal transition duration-300;
     }
   }
 
@@ -84,7 +84,7 @@
       @apply z-10 border border-[#edf0f51a] bg-secondary dark:border-secondary/10 dark:bg-backgroundBody;
 
       span {
-        @apply font-normal text-backgroundBody dark:text-secondary;
+        @apply font-light text-backgroundBody dark:text-secondary;
       }
     }
 
@@ -92,7 +92,7 @@
       @apply z-[9] border border-secondary bg-backgroundBody dark:border-colorText dark:bg-secondary;
 
       span {
-        @apply font-normal text-secondary dark:text-backgroundBody;
+        @apply font-light text-secondary dark:text-backgroundBody;
       }
     }
   }

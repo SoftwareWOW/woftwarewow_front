@@ -38,7 +38,7 @@ const WowGrowthCta = ({
       <div className={innerLayout}>
         <RevealWrapper
           as="h2"
-          className="reveal-me min-w-0 flex-1 text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
+          className="reveal-me min-w-0 flex-1 text-[46px] font-light leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
         >
           <InstrumentText className="max-md:mr-4 lg:text-[100px]">{accentText}</InstrumentText>
 
