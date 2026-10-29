@@ -7,8 +7,6 @@ import RevealWrapper from '../animation/RevealWrapper'
 import SectionLabel from './shared/SectionLabel'
 import { ecosystemNodeIdToDivisionId } from '@/i18n/division-paths'
 import { WowDivisionLogo } from './nav/WowDivisionLogo'
-import { WOW_GRADIENT } from './shared/WowText'
-
 type NodeId =
   | 'websites'
   | 'host'
@@ -254,56 +252,39 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
           preserveAspectRatio="xMidYMid meet"
           style={{ zIndex: 1 }}
         >
-          <defs>
-            <linearGradient id="wow-gradient" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#615CC7" />
-              <stop offset="25%" stopColor="#6F62BF" />
-              <stop offset="50%" stopColor="#9671AC" />
-              <stop offset="75%" stopColor="#D38B8E" />
-              <stop offset="100%" stopColor="#DB8E8B" />
-            </linearGradient>
-          </defs>
+          <motion.g key={activeFlow}>
+            <motion.path
+              d={pathD}
+              fill="none"
+              className="stroke-[#171717] dark:stroke-white"
+              strokeWidth={isMobile ? 2.5 : 3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.85 }}
+              transition={{
+                duration: 0.6,
+                ease: [0.65, 0, 0.35, 1],
+              }}
+            />
 
-          <AnimatePresence mode="popLayout">
-            <motion.g key={activeFlow}>
-              <motion.path
-                key={`path-${activeFlow}`}
-                d={pathD}
-                fill="none"
-                stroke="url(#wow-gradient)"
-                strokeWidth={isMobile ? 2.5 : 3}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity={0.6}
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.6 }}
-                exit={{ pathLength: 0, opacity: 0 }}
-                transition={{
-                  duration: 0.6,
-                  ease: [0.65, 0, 0.35, 1],
-                }}
+            <motion.circle
+              r={isMobile ? 3 : 4}
+              className="fill-white dark:fill-[#171717]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.2,
+              }}
+            >
+              <animateMotion
+                dur="2.4s"
+                repeatCount="indefinite"
+                rotate="auto"
+                path={pathD}
               />
-
-              <motion.circle
-                r={isMobile ? 3 : 4}
-                fill="#8b7cff"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 0.2,
-                }}
-              >
-                <animateMotion
-                  key={`${activeFlow}-particle`}
-                  dur="2.4s"
-                  repeatCount="indefinite"
-                  rotate="auto"
-                  path={pathD}
-                />
-              </motion.circle>
-            </motion.g>
-          </AnimatePresence>
+            </motion.circle>
+          </motion.g>
         </svg>
 
         {currentLayout.map((n) => {
@@ -378,12 +359,11 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                   isMobile ? 'min-h-[36px]' : 'min-h-[34px] sm:min-h-[44px] md:min-h-[52px]'
                 } ${
                   active
-                    ? 'text-white dark:text-white '
-                    : 'bg-white/90 text-[#1a1530]/45'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-white/90 text-[#1a1530]/45 dark:bg-white dark:text-[#171717]/45'
                 }`}
                 style={{
                   flex: active ? 2.4 : 0.65,
-                  background: active ? WOW_GRADIENT : undefined,
                 }}
               >
                 <AnimatePresence mode="popLayout" initial={false}>
@@ -411,7 +391,7 @@ export default function WowEcosystem({ ecosystem }: WowEcosystemProps) {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
-                      className="flex size-full items-center justify-center text-base text-black font-light sm:text-lg"
+                      className="flex size-full items-center justify-center text-base font-light text-[#1a1530]/45 dark:text-[#171717]/45 sm:text-lg"
                       aria-hidden
                     >
                       +
