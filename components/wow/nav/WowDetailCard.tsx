@@ -26,6 +26,7 @@ export default function WowDetailCard({
 }: WowDetailCardProps) {
   const imageSrcResolved =
     imageSrc ?? navCardImages[image as keyof typeof navCardImages] ?? navCardImages.default
+  const isSvg = imageSrcResolved.toLowerCase().endsWith('.svg')
 
   return (
     <div className="group/detail-card relative w-[280px] shrink-0 rounded-radius-sm bg-white p-5 lg:w-[340px] 2xl:w-[426px] dark:bg-dark">
@@ -43,6 +44,7 @@ export default function WowDetailCard({
               fill
               className="object-cover"
               sizes="(max-width: 1430px) 360px, 426px"
+              unoptimized={isSvg}
             />
 
             <div className="pointer-events-none absolute left-0 top-0 z-[2] h-[82px] w-[120px] rounded-br-[20px] bg-white dark:bg-dark" />

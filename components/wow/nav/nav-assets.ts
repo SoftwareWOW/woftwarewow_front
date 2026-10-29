@@ -147,7 +147,12 @@ export const mobileBottomNavIcons = {
 
 export type MobileBottomNavIconId = keyof typeof mobileBottomNavIcons
 
+const landingNavBase = '/images/wow/LandingPageNaveBare'
 const cardsBase = '/images/wow/nav/cards'
+
+function landingNav(filename: string) {
+  return `${landingNavBase}/${encodeURIComponent(filename)}`
+}
 
 function cardImage(filename: string) {
   return `${cardsBase}/${encodeURIComponent(filename)}`
@@ -158,55 +163,105 @@ export const navCardImages = {
   exploreDefault: cardImage('explore-default.jpg'),
 
   // Company — Divisions
-  softwareWow: cardImage('Softwaerwow.png'),
+  softwareWow: landingNav('Softwarewow 1 1.svg'),
   wowMarketing: cardImage('Marketing.png'),
-  wowDesign: cardImage('Design.png'),
-  wowIntelligence: cardImage('Intelligent.png'),
-  wowSocial: cardImage('Social.png'),
-  wowAccelerate: cardImage('Accelerate.png'),
-  wowWebsites: cardImage('Website.png'),
-  wowImpact: cardImage('Impact.png'),
-  wowHost: cardImage('Host.png'),
+  wowDesign: landingNav(
+    'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
+  ),
+  wowIntelligence: landingNav('Intelligence 2.svg'),
+  wowSocial: landingNav('Social 3.svg'),
+  wowAccelerate: landingNav('Accelerate 2.svg'),
+  wowWebsites: landingNav('Website 1 2.svg'),
+  wowImpact: landingNav('Impact 2.svg'),
+  wowHost: landingNav('Hosting 2.svg'),
   wowHub: cardImage('Hub.png'),
-  wowEvents: cardImage('Event.png'),
+  wowEvents: landingNav('Events 3.svg'),
+
+  // Company — About
+  aboutUs: landingNav('About Us 1.svg'),
+  strategyCentre: landingNav('Strategy Center 1.svg'),
+  teamExperts: landingNav('Teams & Experts 1.svg'),
+  whySmbs: landingNav('Why Smbs 1.svg'),
+  partners: landingNav('Partner 1.svg'),
+  whyUs: landingNav('Why us 1.svg'),
 
   // For You — Solutions
-  buildLaunch: cardImage('build&lanch.png'),
-  softwareTechnology: cardImage('software&technology.png'),
-  marketingGrowth: cardImage('Marketing.png'),
-  socialCommunity: cardImage('socail&comunity.png'),
-  salesRevenue: cardImage(
-    'sales-profit-numbers-changing-on-monitor-after-glo-2026-01-08-02-14-54-utc 1.png',
+  buildLaunch: landingNav(
+    'new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc 2.svg',
   ),
-  aiAutomation: cardImage('AI and Automation 1.png'),
-  brandingCreative: cardImage('Branding & Creative 1.png'),
-  hostingInfrastructure: cardImage('Host.png'),
-  learningEvents: cardImage('learningevent.png'),
+  softwareTechnology: landingNav(
+    'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
+  ),
+  marketingGrowth: cardImage('Marketing.png'),
+  socialCommunity: landingNav('Social 2 1.svg'),
+  salesRevenue: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  aiAutomation: landingNav('AI and Automation 2.svg'),
+  brandingCreative: landingNav('Branding & Creative 2.svg'),
+  hostingInfrastructure: landingNav('Hosting 2.svg'),
+  learningEvents: landingNav(
+    'rear-view-of-audience-in-the-conference-hall-or-se-2026-01-05-06-35-37-utc 2.svg',
+  ),
 
   // For You — Packages
-  startupLaunchPackage: cardImage('Startup laiunch 1.png'),
+  startupLaunchPackage: landingNav('Startup laiunch 2.svg'),
   businessGrowthPackage: cardImage('Business growth 1.png'),
-  digitalTransformationPackage: cardImage('digital transofrmation 1.png'),
-  aiAutomationPackage: cardImage('AI Automation 1.png'),
-  saasProductDevelopmentPackage: cardImage('SaaS Dev 1.png'),
+  digitalTransformationPackage: landingNav('digital transofrmation 2.svg'),
+  aiAutomationPackage: landingNav('AI Automation 3.svg'),
+  saasProductDevelopmentPackage: landingNav('SaaS Dev 2.svg'),
   brandAuthorityPackage: cardImage('social media start 1.png'),
-  websiteGrowthEnginePackage: cardImage('Websit groeh 1.png'),
+  websiteGrowthEnginePackage: landingNav('Website 1 2.svg'),
   salesAccelerationPackage: cardImage('Sales Acceleration 1.png'),
-  enterpriseInfrastructurePackage: cardImage(
-    'closeup-of-coiled-metal-spring-with-sufficiently-h-2026-01-08-22-22-51-utc 1.png',
+  enterpriseInfrastructurePackage: landingNav(
+    'data-servers-close-up-2026-01-08-06-54-55-utc 2.svg',
   ),
 
   // Explore — Discover
   portfolio: cardImage('pexels-cottonbro-4069290 1.png'),
   recentWorks: cardImage('pexels-fauxels-3183132 1.png'),
-  clients: cardImage('pexels-akoonie-35088940 1.png'),
-  partnerNetwork: cardImage('pexels-polina-tankilevitch-5386217 1.png'),
+  clients: landingNav('pexels-akoonie-35088940 2.svg'),
+  partnerNetwork: landingNav('Partner 1.svg'),
   locations: cardImage('pexels-karola-g-6255984 1.png'),
 
   // Explore — Industries
+  startupsEntrepreneurs: landingNav(
+    'new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc 2.svg',
+  ),
+  professionalServices: landingNav(
+    'woman-using-laptop-with-technology-background-disp-2026-03-19-02-04-49-utc 1.svg',
+  ),
+  retailEcommerce: landingNav('pexels-cottonbro-8088441 2.svg'),
+  healthcareWellness: landingNav(
+    'hands-in-unity-teamwork-with-a-robotic-limb-2026-01-08-00-16-05-utc 1.svg',
+  ),
   hospitalityTourism: cardImage('pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png'),
-  retailEcommerce: cardImage('pexels-cottonbro-8088441 1.png'),
-  healthcareWellness: cardImage('pexels-pixabay-35208 1.png'),
+  financeRealEstate: cardImage('explore-default.jpg'),
+  organizationsNonprofits: landingNav(
+    'multiracial-business-team-gathering-hands-in-unity-2026-01-09-11-41-19-utc 2.svg',
+  ),
+  educationTraining: landingNav('Education 2.svg'),
+  technologySaas: landingNav('SaaS Dev 2.svg'),
+
+  // More
+  meet: landingNav('Meet 1.svg'),
+  thinkTank: landingNav(
+    'notes-with-words-and-female-hand-on-light-backgrou-2026-03-24-21-39-26-utc 1.svg',
+  ),
+  quotation: cardImage('explore-default.jpg'),
+  clientPortal: cardImage('explore-default.jpg'),
+  whiteLabel: cardImage('explore-default.jpg'),
+  affiliate: cardImage('explore-default.jpg'),
+  insights: landingNav(
+    'notes-with-words-and-female-hand-on-light-backgrou-2026-03-24-21-39-26-utc 1.svg',
+  ),
+  careers: landingNav(
+    'multiracial-business-team-gathering-hands-in-unity-2026-01-09-11-41-19-utc 2.svg',
+  ),
+  helpSupport: cardImage('explore-default.jpg'),
+  brandKit: landingNav(
+    'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
+  ),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages
