@@ -1,5 +1,6 @@
 'use client'
 
+import type { DivisionChromeFooter } from '@/components/wow/divisions/division-chrome'
 import FooterAskWow from '@/components/wow/FooterAskWow'
 import { FooterActionCard, FooterTextLink } from '@/components/wow/footer/FooterActionCard'
 import {
@@ -26,13 +27,16 @@ import FooterNewsletterSubscribe from '@/components/wow/footer/FooterNewsletterS
 import { Link } from '@/i18n/navigation'
 import { socialBrandIcons } from '@/components/wow/footer/social-brand-icons'
 import { cn } from '@/utils/cn'
+import Image from 'next/image'
 import type { ReactNode } from 'react'
 
 const panelClass = 'w-full px-3 sm:px-5 2xl:px-10'
 const mutedText = '!text-[#808080]'
 const headingText = 'text-secondary dark:text-[#F2F2F2]'
 
-function ResourcesPanel() {
+function ResourcesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFooter }) {
+  const brand = divisionChrome?.resourcesBrand
+
   return (
     <div
       className={cn(
@@ -41,20 +45,41 @@ function ResourcesPanel() {
       )}
     >
       <div className="flex flex-col gap-2 sm:col-span-2 sm:gap-3 lg:col-span-1">
-        <WowSuperagencyLogo />
+        {brand ? (
+          <Link href={brand.homeHref} className="inline-block max-w-full">
+            <Image
+              className="h-6 w-auto max-w-full dark:hidden sm:h-7 2xl:h-8"
+              src={brand.logo.light}
+              alt={brand.logoAlt}
+              width={220}
+              height={28}
+              unoptimized
+            />
+            <Image
+              className="hidden h-6 w-auto max-w-full dark:block sm:h-7 2xl:h-8"
+              src={brand.logo.dark}
+              alt={brand.logoAlt}
+              width={220}
+              height={28}
+              unoptimized
+            />
+          </Link>
+        ) : (
+          <WowSuperagencyLogo />
+        )}
         <p className={cn('max-w-[280px] font-outfit text-xs font-light leading-[1.5] sm:text-sm 2xl:text-base 2xl:leading-[1.6]', mutedText)}>
-          This is where ambitions become achievements.
+          {brand?.tagline ?? 'This is where ambitions become achievements.'}
         </p>
         <p className={cn('font-outfit text-xs font-light leading-[1.5] sm:text-sm 2xl:text-base 2xl:leading-[1.6]', mutedText)}>
-          90 Burnhamthorpe Rd West, 1400
+          {brand?.addressLines[0] ?? '90 Burnhamthorpe Rd West, 1400'}
           <br />
-          Mississauga, ON L5B 3C3 🇨🇦
+          {brand?.addressLines[1] ?? 'Mississauga, ON L5B 3C3 🇨🇦'}
         </p>
         <a
-          href="tel:+18337638969"
+          href={brand?.phoneHref ?? 'tel:+18337638969'}
           className={cn('font-outfit text-xs font-light leading-[1.5] transition-colors hover:!text-primary sm:text-sm 2xl:text-base', mutedText)}
         >
-          +1 (833) SOFT-WOW
+          {brand?.phone ?? '+1 (833) SOFT-WOW'}
         </a>
       </div>
 
@@ -90,10 +115,12 @@ function ExplorePanel() {
   )
 }
 
-function ServicesPanel() {
+function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFooter }) {
+  const cards = divisionChrome?.serviceCards ?? serviceCards
+
   return (
     <div className={cn(panelClass, footerActionCardGridClass)}>
-      {serviceCards.map((service) => (
+      {cards.map((service) => (
         <FooterActionCard
           key={service.title}
           href={service.href}
@@ -175,18 +202,24 @@ export function ConnectPanel() {
 
 const footerStretchTabIds = new Set<FooterTabId>(['explore', 'services', 'contact'])
 
-export default function FooterTabContent({ tab }: { tab: FooterTabId }) {
+export default function FooterTabContent({
+  tab,
+  divisionChrome,
+}: {
+  tab: FooterTabId
+  divisionChrome?: DivisionChromeFooter
+}) {
   let panel: ReactNode
 
   switch (tab) {
     case 'resources':
-      panel = <ResourcesPanel />
+      panel = <ResourcesPanel divisionChrome={divisionChrome} />
       break
     case 'explore':
       panel = <ExplorePanel />
       break
     case 'services':
-      panel = <ServicesPanel />
+      panel = <ServicesPanel divisionChrome={divisionChrome} />
       break
     case 'contact':
       panel = <ContactPanel />

@@ -95,6 +95,7 @@ export default function WowMegaMenuPanel({
                   ) : (
                     <WowMenuItem
                       iconId={entry.id}
+                      iconSrc={'iconSrc' in entry && typeof entry.iconSrc === 'string' ? entry.iconSrc : undefined}
                       label={entry.label}
                       description={'description' in entry ? entry.description : undefined}
                       href={entry.href}

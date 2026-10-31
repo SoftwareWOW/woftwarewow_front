@@ -1,4 +1,3 @@
-import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import {
   divisionBrandLogos,
   divisionHrefs,
@@ -35,7 +34,7 @@ export type DivisionSiteConfig = {
   phoneHref: string
   addressLines: [string, string]
   navItems: DivisionNavItem[]
-  /** Parent-shaped mega-nav. When set, DivisionNavbar uses pills + mega panel + mobile sheet. */
+  /** Optional mega-nav override (default: link pills from `navItems` via division-chrome). */
   navigation?: NavigationData
   cta: { label: string; href: string }
   footerSections: DivisionFooterSection[]
@@ -88,8 +87,8 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
       [
         { id: 'services', label: 'Services', href: '/software#services' },
         { id: 'solutions', label: 'Solutions', href: '/software#solutions' },
-        { id: 'work', label: 'Work', href: '/portfolio' },
-        { id: 'company', label: 'Company', href: '/about' },
+        { id: 'work', label: 'Our Work', href: '/portfolio' },
+        { id: 'about', label: 'About', href: '/about' },
       ],
       [
         {
@@ -126,7 +125,6 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
       ],
       'Start a Project',
     ),
-    navigation: softwareWowNavigation,
     copyright: `© ${new Date().getFullYear()} SoftwareWOW. A brand by WOW Superagency.`,
   },
   wowMarketing: baseConfig(

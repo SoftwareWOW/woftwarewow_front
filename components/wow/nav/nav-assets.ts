@@ -64,6 +64,17 @@ export const navMenuIcons = {
 
   // SoftwareWOW — Services
   customSoftware: Code2,
+  customSoftwareDevelopment: Code2,
+  webMobileApplications: Smartphone,
+  businessSystemsAutomation: Workflow,
+  productDesignPrototyping: Palette,
+  integrationsModernization: RefreshCw,
+  softwareSupportImprovement: HelpCircle,
+  manageMyBusiness: Briefcase,
+  serveMyCustomers: Users,
+  launchDigitalProduct: Rocket,
+  connectMyTools: Network,
+  createMobileExperience: Smartphone,
   saasDevelopment: Cloud,
   webApplications: LayoutGrid,
   mobileApps: Smartphone,
@@ -262,6 +273,27 @@ export const navCardImages = {
   brandKit: landingNav(
     'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
   ),
+
+  // SoftwareWOW division mega-menu
+  customSoftwareDevelopment: landingNav('Softwarewow 1 1.svg'),
+  webMobileApplications: landingNav('Website 1 2.svg'),
+  businessSystemsAutomation: landingNav('AI and Automation 2.svg'),
+  productDesignPrototyping: landingNav(
+    'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
+  ),
+  integrationsModernization: landingNav('digital transofrmation 2.svg'),
+  softwareSupportImprovement: landingNav('Hosting 2.svg'),
+  manageMyBusiness: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  serveMyCustomers: landingNav('Social 2 1.svg'),
+  launchDigitalProduct: landingNav(
+    'new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc 2.svg',
+  ),
+  connectMyTools: landingNav(
+    'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
+  ),
+  createMobileExperience: landingNav('Website 1 2.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

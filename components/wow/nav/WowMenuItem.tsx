@@ -2,6 +2,7 @@
 
 import { Link } from '@/i18n/navigation'
 import { ChevronRight } from 'lucide-react'
+import Image from 'next/image'
 import { MenuItemIcon } from './MenuItemIcon'
 import { divisionHrefs, type DivisionId } from './nav-brand-assets'
 import { WowDivisionLogo } from './WowDivisionLogo'
@@ -11,6 +12,7 @@ type MenuVariant = 'desktop' | 'mobile'
 
 type WowMenuItemProps = {
   iconId: string
+  iconSrc?: string
   label: string
   description?: string
   href?: string
@@ -24,6 +26,7 @@ type WowMenuItemProps = {
 
 export function WowMenuItem({
   iconId,
+  iconSrc,
   label,
   description,
   href,
@@ -41,7 +44,11 @@ export function WowMenuItem({
   const content = (
     <>
       <div className={`flex size-[28px] shrink-0 items-center justify-center rounded-radius-sm border-[0.5px] p-[8px] ${navItemIconBoxClass}`}>
-        <MenuItemIcon iconId={iconId} className={navItemIconClass} />
+        {iconSrc ? (
+          <Image src={iconSrc} alt="" width={16} height={16} className="size-4 object-contain" unoptimized />
+        ) : (
+          <MenuItemIcon iconId={iconId} className={navItemIconClass} />
+        )}
       </div>
       <div className={`relative min-w-0 flex-1 ${showChevron ? 'pe-[22px]' : ''}`}>
         <div className="flex flex-col gap-[6px]">

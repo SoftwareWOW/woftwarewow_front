@@ -1,5 +1,13 @@
 'use client'
 
+import {
+  divisionLinkItems,
+  divisionMenuItems,
+  isDivisionNavLinkItem,
+  type DivisionBrandProps,
+} from '@/components/wow/divisions/division-chrome'
+import DivisionMobileBottomNav from '@/components/wow/divisions/DivisionMobileBottomNav'
+import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
 import { Link, usePathname } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import {
@@ -12,10 +20,12 @@ import {
 } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { useTheme } from 'next-themes'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/utils/cn'
 import LanguageSwitcher from './LanguageSwitcher'
+import type { NavigationData } from './nav/navigation-types'
 import { navbarSuperagencyLogoClass } from './nav/nav-brand-assets'
 import { WowSuperagencyLogo } from './nav/WowSuperagencyLogo'
 import { navPillActiveClass, navPillInactiveClass } from './nav/nav-interaction-styles'
@@ -30,13 +40,31 @@ const actionBtnClass =
 const iconClass =
   'size-7 !text-white !stroke-white transition-transform duration-300 ease-out group-hover:rotate-[180deg] md:size-8 lg:size-9 xl:size-10'
 
+export type WowNavbarBrand = 'superagency' | DivisionBrandProps
+
 type WowNavbarProps = {
   navbar: Dictionary['navbar']
-  navigation: Dictionary['navigation']
+  navigation: Dictionary['navigation'] | NavigationData
   languageSwitcher: Dictionary['languageSwitcher']
+  brand?: WowNavbarBrand
+  /** Link-only pills for mobile when division has no mega menu. */
+  mobileLinkNavItems?: ReadonlyArray<{ id: string; label: string; href: string }>
+  hasMegaMenu?: boolean
 }
 
-export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowNavbarProps) {
+export default function WowNavbar({
+  navbar,
+  navigation,
+  languageSwitcher,
+  brand = 'superagency',
+  mobileLinkNavItems,
+  hasMegaMenu: hasMegaMenuProp,
+}: WowNavbarProps) {
+  const navData = navigation as NavigationData
+  const menuItems = useMemo(() => divisionMenuItems(navData), [navData])
+  const topLinkItems = useMemo(() => divisionLinkItems(navData), [navData])
+  const useMegaMenu = hasMegaMenuProp ?? menuItems.length > 0
+  const contactDialog = useContactDialogOptional()
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null)
   const [mobileMenuId, setMobileMenuId] = useState<string | null>(null)
   const [actionMenuOpen, setActionMenuOpen] = useState(false)
@@ -238,7 +266,12 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
   const languageIcon = <Globe aria-hidden className={iconClass} strokeWidth={1.5} />
   const messagesIcon = <MessageCircle aria-hidden className={iconClass} strokeWidth={1.5} />
 
-  const mobileItem = navigation.items.find((item) => item.id === mobileMenuId) ?? null
+  const mobileItem = menuItems.find((item) => item.id === mobileMenuId) ?? null
+
+  const pillClass = (active: boolean) =>
+    `group/nav-pill flex items-center justify-center gap-1 whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-light uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:gap-[6px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-8 xl:py-[24px] xl:text-sm xl:tracking-[2.1px] ${
+      active ? navPillActiveClass : navPillInactiveClass
+    }`
 
   return (
     <>
@@ -261,19 +294,55 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
         >
           <nav
             className="relative flex w-full min-w-0 items-center justify-between gap-2 rounded-radius-sm bg-white p-[10px] dark:bg-[#1F1F1F] "
-            aria-label={navbar.mainNavigation}
+            aria-label={brand === 'superagency' ? navbar.mainNavigation : `${brand.logoAlt} navigation`}
           >
-            <Link
-              href="/"
-              className="relative z-[1001] flex min-w-0 max-w-[min(100%,16.8125rem)] flex-1 items-center overflow-hidden ps-2 sm:max-w-none md:max-w-[16.8125rem] md:shrink-0 md:flex-none md:overflow-visible md:ps-3 lg:ps-5"
-            >
-              <WowSuperagencyLogo
-                className={cn(navbarSuperagencyLogoClass, 'max-md:max-w-[calc(100vw-100px)]')}
-              />
-            </Link>
+            {brand === 'superagency' ? (
+              <Link
+                href="/"
+                className="relative z-[1001] flex min-w-0 max-w-[min(100%,16.8125rem)] flex-1 items-center overflow-hidden ps-2 sm:max-w-none md:max-w-[16.8125rem] md:shrink-0 md:flex-none md:overflow-visible md:ps-3 lg:ps-5"
+              >
+                <WowSuperagencyLogo
+                  className={cn(navbarSuperagencyLogoClass, 'max-md:max-w-[calc(100vw-100px)]')}
+                />
+              </Link>
+            ) : (
+              <Link
+                href={brand.homeHref}
+                className="relative z-[1001] flex min-w-0 shrink items-center ps-2 md:w-[150px] md:ps-3 lg:w-[200px] lg:ps-5"
+              >
+                <Image
+                  className="h-[20px] w-auto max-w-[calc(100vw-96px)] dark:hidden"
+                  src={brand.logo.light}
+                  alt={brand.logoAlt}
+                  width={200}
+                  height={24}
+                  unoptimized
+                  priority
+                />
+                <Image
+                  className="hidden h-[20px] w-auto max-w-[calc(100vw-96px)] dark:block"
+                  src={brand.logo.dark}
+                  alt={brand.logoAlt}
+                  width={200}
+                  height={24}
+                  unoptimized
+                  priority
+                />
+              </Link>
+            )}
 
             <ul className="hidden min-w-0 flex-1 items-center justify-center md:flex md:gap-0 lg:gap-1 xl:gap-0">
-              {navigation.items.map((item) => {
+              {navData.items.map((item) => {
+                if (isDivisionNavLinkItem(item)) {
+                  return (
+                    <li key={item.id} className="shrink">
+                      <Link href={item.href} className={pillClass(false)}>
+                        {item.label}
+                      </Link>
+                    </li>
+                  )
+                }
+
                 const isActive = activeMenuId === item.id
 
                 return (
@@ -283,9 +352,7 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                       onMouseEnter={() => openMegaMenu(item.id)}
                       onFocus={() => openMegaMenu(item.id)}
                       onClick={() => (isActive ? closeMegaMenu() : openMegaMenu(item.id))}
-                      className={`group/nav-pill flex items-center justify-center gap-1 whitespace-nowrap rounded-radius-sm px-2.5 py-4 font-outfit text-[10px] font-light uppercase tracking-[1px] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:px-3 md:py-[18px] lg:gap-[6px] lg:px-5 lg:py-5 lg:text-xs lg:tracking-[1.4px] xl:px-8 xl:py-[24px] xl:text-sm xl:tracking-[2.1px] ${
-                        isActive ? navPillActiveClass : navPillInactiveClass
-                      }`}
+                      className={pillClass(isActive)}
                       aria-expanded={isActive}
                       aria-haspopup="true"
                     >
@@ -358,7 +425,15 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
                     {languageIcon}
                   </button>
 
-                  <button type="button" className={actionBtnClass} aria-label={navbar.openMessages}>
+                  <button
+                    type="button"
+                    className={actionBtnClass}
+                    aria-label={navbar.openMessages}
+                    onClick={() => {
+                      setActionMenuOpen(false)
+                      contactDialog?.open()
+                    }}
+                  >
                     {messagesIcon}
                   </button>
                 </div>
@@ -366,14 +441,14 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
             </div>
           </nav>
 
-          {activeMenuId && (
+          {useMegaMenu && activeMenuId && menuItems.some((item) => item.id === activeMenuId) && (
             <div className="hidden md:block" onMouseEnter={clearCloseTimer}>
               <div className="animate-mega-menu-in mx-auto mt-2 max-w-full overflow-hidden rounded-radius-sm bg-white 2xl:max-w-[1370px] dark:bg-dark">
                 <div className="relative overflow-hidden">
-                  {navigation.items.map((item) => {
+                  {menuItems.map((item) => {
                     const isActive = activeMenuId === item.id
-                    const itemIndex = navigation.items.findIndex((i) => i.id === item.id)
-                    const activeIndex = navigation.items.findIndex((i) => i.id === activeMenuId)
+                    const itemIndex = menuItems.findIndex((i) => i.id === item.id)
+                    const activeIndex = menuItems.findIndex((i) => i.id === activeMenuId)
                     const direction = activeIndex > itemIndex ? 1 : -1
 
                     return (
@@ -422,23 +497,38 @@ export default function WowNavbar({ navbar, navigation, languageSwitcher }: WowN
           ease: [0.16, 1, 0.3, 1],
         }}
       >
-        <WowMobileBottomNav
-          items={navigation.items}
-          activeId={mobileMenuId}
-          onSelect={(id) => {
-            setMobileMenuId(id || null)
-            setNavbarHidden(false)
-          }}
-        />
+        {useMegaMenu ? (
+          <WowMobileBottomNav
+            items={menuItems}
+            activeId={mobileMenuId}
+            onSelect={(id) => {
+              setMobileMenuId(id || null)
+              setNavbarHidden(false)
+            }}
+          />
+        ) : (
+          <DivisionMobileBottomNav
+            items={
+              mobileLinkNavItems ??
+              topLinkItems.map((item) => ({
+                id: item.id,
+                label: item.label,
+                href: item.href,
+              }))
+            }
+          />
+        )}
       </motion.div>
 
-      <WowMobileMenuSheet
-        item={mobileItem}
-        navbar={navbar}
-        onClose={() => {
-          setMobileMenuId(null)
-        }}
-      />
+      {useMegaMenu ? (
+        <WowMobileMenuSheet
+          item={mobileItem}
+          navbar={navbar}
+          onClose={() => {
+            setMobileMenuId(null)
+          }}
+        />
+      ) : null}
 
       <LanguageSwitcher open={languageOpen} onOpenChange={setLanguageOpen} dictionary={languageSwitcher} />
     </>

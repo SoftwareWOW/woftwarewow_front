@@ -1,7 +1,7 @@
-import DivisionFooter from '@/components/wow/divisions/DivisionFooter'
-import DivisionNavbar from '@/components/wow/divisions/DivisionNavbar'
-import { getDivisionSiteConfig } from '@/components/wow/divisions/division-site-config'
+import { getDivisionChrome } from '@/components/wow/divisions/division-chrome'
 import { stickyFooterMainClass } from '@/components/wow/footer-layout'
+import WowFooter from '@/components/wow/WowFooter'
+import WowNavbar from '@/components/wow/WowNavbar'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
@@ -14,19 +14,22 @@ type DivisionSiteLayoutProps = {
 }
 
 export default async function DivisionSiteLayout({ divisionId, children }: DivisionSiteLayoutProps) {
-  const config = getDivisionSiteConfig(divisionId)
+  const chrome = getDivisionChrome(divisionId)
   const locale = (await getLocale()) as Locale
   const dictionary = await getDictionary(locale)
 
   return (
     <div className="wow-brand-surface relative w-full max-w-full overflow-x-clip">
-      <DivisionNavbar
-        config={config}
+      <WowNavbar
+        brand={chrome.brand}
+        navigation={chrome.navigation}
         navbar={dictionary.navbar}
         languageSwitcher={dictionary.languageSwitcher}
+        hasMegaMenu={chrome.hasMegaMenu}
+        mobileLinkNavItems={chrome.linkNavItems}
       />
       <main className={stickyFooterMainClass}>{children}</main>
-      <DivisionFooter config={config} />
+      <WowFooter footer={dictionary.footer} divisionChrome={chrome.footer} />
     </div>
   )
 }
