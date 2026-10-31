@@ -207,9 +207,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Intelligence',
     'AI assistants, analytics, and automation that sharpen decisions and reduce manual work.',
     [
-      { id: 'solutions', label: 'Solutions', href: '/intelligence#solutions' },
-      { id: 'process', label: 'Process', href: '/intelligence#process' },
-      { id: 'clients', label: 'Clients', href: '/intelligence#clients' },
+      { id: 'aiSolutions', label: 'AI Solutions', href: '/intelligence#ai-solutions' },
+      { id: 'useCases', label: 'Use Cases', href: '/intelligence#use-cases' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

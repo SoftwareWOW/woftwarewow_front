@@ -15,6 +15,7 @@ import {
   FolderOpen,
   Globe,
   GraduationCap,
+  Headphones,
   Handshake,
   Heart,
   HeartPulse,
@@ -120,6 +121,15 @@ export const navMenuIcons = {
   multilingualWebsites: Globe,
   conversionOptimization: LineChart,
   websiteOptimization: Zap,
+
+  // WOW Intelligence — AI Solutions & Use Cases
+  aiAssistantsChatbots: Bot,
+  intelligentAutomation: Workflow,
+  businessIntelligencePredictiveInsights: LineChart,
+  useCaseSales: TrendingUp,
+  useCaseMarketing: Megaphone,
+  useCaseCustomerService: Headphones,
+  useCaseOperations: Briefcase,
 
   // For You — Solutions
   buildLaunch: Rocket,
@@ -371,6 +381,19 @@ export const navCardImages = {
     'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
   ),
   websiteOptimization: landingNav('Hosting 2.svg'),
+
+  // WOW Intelligence division mega-menu
+  aiAssistantsChatbots: landingNav('Intelligence 2.svg'),
+  intelligentAutomation: landingNav('AI and Automation 2.svg'),
+  businessIntelligencePredictiveInsights: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  useCaseSales: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  useCaseMarketing: landingNav('Branding & Creative 2.svg'),
+  useCaseCustomerService: landingNav('Social 2 1.svg'),
+  useCaseOperations: landingNav('AI Automation 3.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

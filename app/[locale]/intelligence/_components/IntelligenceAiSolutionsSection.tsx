@@ -8,7 +8,10 @@ export default function IntelligenceAiSolutionsSection() {
   const content = INTELLIGENCE_AI_SOLUTIONS
 
   return (
-    <section className="overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="ai-solutions"
+      className="scroll-mt-28 overflow-hidden bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container">
         <div className="mb-10 text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

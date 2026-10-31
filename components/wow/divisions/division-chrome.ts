@@ -3,6 +3,7 @@ import {
   type DivisionNavItem,
   type DivisionSiteConfig,
 } from '@/components/wow/divisions/division-site-config'
+import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
@@ -205,6 +206,30 @@ export const wowWebsitesFooterServiceCards: ReadonlyArray<DivisionFooterServiceC
   },
 ] as const
 
+export const wowIntelligenceFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'AI Assistants & Chatbots',
+    description:
+      'Deliver instant, intelligent conversations that improve customer experiences and save time.',
+    href: '/intelligence#ai-solutions',
+    iconId: 'aiAssistantsChatbots',
+  },
+  {
+    title: 'Intelligent Automation',
+    description:
+      'Automate repetitive tasks and streamline workflows with AI-powered business solutions.',
+    href: '/intelligence#ai-solutions',
+    iconId: 'intelligentAutomation',
+  },
+  {
+    title: 'Business Intelligence & Predictive Insights',
+    description:
+      'Transform business data into actionable insights and smarter future-focused decisions.',
+    href: '/intelligence#ai-solutions',
+    iconId: 'businessIntelligencePredictiveInsights',
+  },
+] as const
+
 function buildLinkOnlyNavigation(navItems: DivisionNavItem[]): NavigationData {
   return {
     detailPanels: { default: defaultDetailPanel },
@@ -254,6 +279,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowWebsites') {
     return 'This is where websites become growth engines.'
   }
+  if (config.id === 'wowIntelligence') {
+    return 'This is where intelligence becomes advantage.'
+  }
   return config.tagline
 }
 
@@ -272,7 +300,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
         ? (wowMarketingNavigation as NavigationData)
         : divisionId === 'wowWebsites'
           ? (wowWebsitesNavigation as NavigationData)
-          : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+          : divisionId === 'wowIntelligence'
+            ? (wowIntelligenceNavigation as NavigationData)
+            : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -281,7 +311,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
         ? wowMarketingFooterServiceCards
         : divisionId === 'wowWebsites'
           ? wowWebsitesFooterServiceCards
-          : footerCardsFromConfig(config)
+          : divisionId === 'wowIntelligence'
+            ? wowIntelligenceFooterServiceCards
+            : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 
