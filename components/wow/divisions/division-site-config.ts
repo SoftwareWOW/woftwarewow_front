@@ -319,8 +319,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'High-performing websites engineered for clarity, conversion, and continuous growth.',
     [
       { id: 'services', label: 'Services', href: '/websites#services' },
-      { id: 'process', label: 'Process', href: '/websites#process' },
-      { id: 'work', label: 'Work', href: '/websites#work' },
+      { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
+      { id: 'packages', label: 'Packages', href: '/packages/website-growth-engine' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

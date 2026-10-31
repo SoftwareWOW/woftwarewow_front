@@ -4,6 +4,7 @@ import {
   type DivisionSiteConfig,
 } from '@/components/wow/divisions/division-site-config'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
+import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import type { NavMenuIconId } from '@/components/wow/nav/nav-assets'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
@@ -153,6 +154,57 @@ export const wowMarketingFooterServiceCards: ReadonlyArray<DivisionFooterService
   },
 ] as const
 
+export const wowWebsitesFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Business Websites',
+    description: 'Build your professional online presence.',
+    href: '/websites#services',
+    iconId: 'businessWebsites',
+  },
+  {
+    title: 'eCommerce Websites',
+    description: 'Sell online. Grow your revenue.',
+    href: '/websites#services',
+    iconId: 'ecommerceWebsites',
+  },
+  {
+    title: 'Website Redesigns',
+    description: 'Refresh your website. Elevate results.',
+    href: '/websites#services',
+    iconId: 'websiteRedesigns',
+  },
+  {
+    title: 'Landing Pages',
+    description: 'Turn more visitors into leads.',
+    href: '/websites#services',
+    iconId: 'landingPages',
+  },
+  {
+    title: 'Accessible Web Experiences',
+    description: 'Make your website accessible to everyone.',
+    href: '/websites#services',
+    iconId: 'accessibleWebExperiences',
+  },
+  {
+    title: 'Multilingual Websites',
+    description: 'Reach customers in more languages.',
+    href: '/websites#services',
+    iconId: 'multilingualWebsites',
+  },
+  {
+    title: 'Conversion Optimization',
+    description: 'Turn more clicks into customers.',
+    href: '/websites#services',
+    iconId: 'conversionOptimization',
+  },
+  {
+    title: 'Website Optimization',
+    description: 'Improve speed, performance, and usability.',
+    href: '/websites#services',
+    iconId: 'websiteOptimization',
+  },
+] as const
+
 function buildLinkOnlyNavigation(navItems: DivisionNavItem[]): NavigationData {
   return {
     detailPanels: { default: defaultDetailPanel },
@@ -199,6 +251,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowMarketing') {
     return 'This is where strategy becomes growth.'
   }
+  if (config.id === 'wowWebsites') {
+    return 'This is where websites become growth engines.'
+  }
   return config.tagline
 }
 
@@ -215,14 +270,18 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
       ? (softwareWowNavigation as NavigationData)
       : divisionId === 'wowMarketing'
         ? (wowMarketingNavigation as NavigationData)
-        : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+        : divisionId === 'wowWebsites'
+          ? (wowWebsitesNavigation as NavigationData)
+          : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
       ? softwareWowFooterServiceCards
       : divisionId === 'wowMarketing'
         ? wowMarketingFooterServiceCards
-        : footerCardsFromConfig(config)
+        : divisionId === 'wowWebsites'
+          ? wowWebsitesFooterServiceCards
+          : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

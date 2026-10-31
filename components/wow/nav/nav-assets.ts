@@ -13,6 +13,7 @@ import {
   Cpu,
   FileText,
   FolderOpen,
+  Globe,
   GraduationCap,
   Handshake,
   Heart,
@@ -109,6 +110,16 @@ export const navMenuIcons = {
   productLaunchGoToMarket: Rocket,
   customerRetentionEngagement: Heart,
   marketingPerformanceOptimization: LineChart,
+
+  // WOW Websites — Services
+  businessWebsites: LayoutGrid,
+  ecommerceWebsites: ShoppingBag,
+  websiteRedesigns: RefreshCw,
+  landingPages: Megaphone,
+  accessibleWebExperiences: HeartPulse,
+  multilingualWebsites: Globe,
+  conversionOptimization: LineChart,
+  websiteOptimization: Zap,
 
   // For You — Solutions
   buildLaunch: Rocket,
@@ -344,6 +355,22 @@ export const navCardImages = {
     'friends-looking-at-their-mobile-phone-on-winter-da-2026-01-07-00-16-22-utc 2.svg',
   ),
   marketingPerformanceOptimization: landingNav('Intelligence 2.svg'),
+
+  // WOW Websites division mega-menu
+  businessWebsites: landingNav('Website 1 2.svg'),
+  ecommerceWebsites: landingNav('pexels-cottonbro-8088441 2.svg'),
+  websiteRedesigns: landingNav('digital transofrmation 2.svg'),
+  landingPages: landingNav(
+    'new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc 2.svg',
+  ),
+  accessibleWebExperiences: landingNav(
+    'hands-in-unity-teamwork-with-a-robotic-limb-2026-01-08-00-16-05-utc 1.svg',
+  ),
+  multilingualWebsites: landingNav('Education 2.svg'),
+  conversionOptimization: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  websiteOptimization: landingNav('Hosting 2.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

@@ -72,7 +72,10 @@ export default function WebsitesWhatWeBuildSection() {
   ]
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="services"
+      className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container">
         <div className="mb-10 w-full text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
