@@ -23,7 +23,10 @@ export default function MarketingGrowthPartnerSection() {
   const content = MARKETING_GROWTH_PARTNER
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="solutions"
+      className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container">
         {content.eyebrow ? (
           <RevealWrapper className="reveal-me mb-2">

@@ -133,8 +133,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'Brand, campaigns, and growth systems that help businesses get discovered and chosen.',
     [
       { id: 'services', label: 'Services', href: '/marketing#services' },
-      { id: 'approach', label: 'Approach', href: '/marketing#approach' },
-      { id: 'work', label: 'Work', href: '/marketing#work' },
+      { id: 'solutions', label: 'Solutions', href: '/marketing#solutions' },
+      { id: 'caseStudies', label: 'Case Studies', href: '/case-study' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

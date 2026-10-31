@@ -90,6 +90,26 @@ export const navMenuIcons = {
   // SoftwareWOW — Work
   caseStudies: FileText,
 
+  // WOW Marketing — Services
+  searchEngineOptimization: TrendingUp,
+  payPerClickAdvertising: Target,
+  socialMediaMarketing: Share2,
+  contentMarketing: FileText,
+  emailMarketing: Mail,
+  marketingAutomationService: Workflow,
+  leadGenerationService: Users,
+  analyticsReporting: LineChart,
+  localSeo: MapPin,
+  digitalStrategy: Compass,
+
+  // WOW Marketing — Solutions
+  brandAwarenessVisibility: Megaphone,
+  leadGenerationCustomerAcquisition: Target,
+  ecommerceSalesGrowth: ShoppingBag,
+  productLaunchGoToMarket: Rocket,
+  customerRetentionEngagement: Heart,
+  marketingPerformanceOptimization: LineChart,
+
   // For You — Solutions
   buildLaunch: Rocket,
   softwareTechnology: Code2,
@@ -294,6 +314,36 @@ export const navCardImages = {
     'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
   ),
   createMobileExperience: landingNav('Website 1 2.svg'),
+
+  // WOW Marketing division mega-menu
+  searchEngineOptimization: landingNav(
+    'woman-using-laptop-with-technology-background-disp-2026-03-19-02-04-49-utc 1.svg',
+  ),
+  payPerClickAdvertising: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  socialMediaMarketing: landingNav('Social 2 1.svg'),
+  contentMarketing: landingNav(
+    'notes-with-words-and-female-hand-on-light-backgrou-2026-03-24-21-39-26-utc 1.svg',
+  ),
+  emailMarketing: cardImage('explore-default.jpg'),
+  marketingAutomationService: landingNav('AI Automation 3.svg'),
+  leadGenerationService: landingNav('pexels-akoonie-35088940 2.svg'),
+  analyticsReporting: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  localSeo: landingNav('Why Smbs 1.svg'),
+  digitalStrategy: landingNav('Strategy Center 1.svg'),
+  brandAwarenessVisibility: landingNav('Branding & Creative 2.svg'),
+  leadGenerationCustomerAcquisition: landingNav('Partner 1.svg'),
+  ecommerceSalesGrowth: landingNav('pexels-cottonbro-8088441 2.svg'),
+  productLaunchGoToMarket: landingNav(
+    'new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc 2.svg',
+  ),
+  customerRetentionEngagement: landingNav(
+    'friends-looking-at-their-mobile-phone-on-winter-da-2026-01-07-00-16-22-utc 2.svg',
+  ),
+  marketingPerformanceOptimization: landingNav('Intelligence 2.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

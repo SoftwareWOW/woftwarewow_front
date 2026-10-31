@@ -45,7 +45,7 @@ const divisionMobileNavIcons: Record<string, LucideIcon> = {
 }
 
 type DivisionMobileBottomNavProps = {
-  items: DivisionNavItem[]
+  items: ReadonlyArray<DivisionNavItem>
 }
 
 function hashFromHref(href: string) {

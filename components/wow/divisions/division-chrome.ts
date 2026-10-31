@@ -3,6 +3,7 @@ import {
   type DivisionNavItem,
   type DivisionSiteConfig,
 } from '@/components/wow/divisions/division-site-config'
+import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import type { NavMenuIconId } from '@/components/wow/nav/nav-assets'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
@@ -89,6 +90,69 @@ export const softwareWowFooterServiceCards: ReadonlyArray<DivisionFooterServiceC
   },
 ] as const
 
+export const wowMarketingFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Search Engine Optimization',
+    description: 'Rank higher. Get discovered.',
+    href: '/marketing#services',
+    iconId: 'searchEngineOptimization',
+  },
+  {
+    title: 'Pay-Per-Click Advertising',
+    description: 'Reach ready buyers. Maximize ROI.',
+    href: '/marketing#services',
+    iconId: 'payPerClickAdvertising',
+  },
+  {
+    title: 'Social Media Marketing',
+    description: 'Grow your audience. Build your brand.',
+    href: '/marketing#services',
+    iconId: 'socialMediaMarketing',
+  },
+  {
+    title: 'Content Marketing',
+    description: 'Create value. Earn attention.',
+    href: '/marketing#services',
+    iconId: 'contentMarketing',
+  },
+  {
+    title: 'Email Marketing',
+    description: 'Stay connected. Drive action.',
+    href: '/marketing#services',
+    iconId: 'emailMarketing',
+  },
+  {
+    title: 'Marketing Automation',
+    description: 'Work smarter. Scale faster.',
+    href: '/marketing#services',
+    iconId: 'marketingAutomationService',
+  },
+  {
+    title: 'Lead Generation',
+    description: 'Capture interest. Fuel growth.',
+    href: '/marketing#services',
+    iconId: 'leadGenerationService',
+  },
+  {
+    title: 'Analytics & Reporting',
+    description: 'Measure what matters. Decide with data.',
+    href: '/marketing#services',
+    iconId: 'analyticsReporting',
+  },
+  {
+    title: 'Local SEO',
+    description: 'Show up locally. Win nearby.',
+    href: '/marketing#services',
+    iconId: 'localSeo',
+  },
+  {
+    title: 'Digital Strategy',
+    description: 'Plan clearly. Grow intentionally.',
+    href: '/marketing#services',
+    iconId: 'digitalStrategy',
+  },
+] as const
+
 function buildLinkOnlyNavigation(navItems: DivisionNavItem[]): NavigationData {
   return {
     detailPanels: { default: defaultDetailPanel },
@@ -132,6 +196,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'softwareWow') {
     return 'This is where ideas become technologies.'
   }
+  if (config.id === 'wowMarketing') {
+    return 'This is where strategy becomes growth.'
+  }
   return config.tagline
 }
 
@@ -146,15 +213,18 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
   const navigation =
     divisionId === 'softwareWow'
       ? (softwareWowNavigation as NavigationData)
-      : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+      : divisionId === 'wowMarketing'
+        ? (wowMarketingNavigation as NavigationData)
+        : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
       ? softwareWowFooterServiceCards
-      : footerCardsFromConfig(config)
+      : divisionId === 'wowMarketing'
+        ? wowMarketingFooterServiceCards
+        : footerCardsFromConfig(config)
 
-  const hasMegaMenu =
-    divisionId === 'softwareWow' || Boolean(config.navigation && divisionMenuItems(navigation).length > 0)
+  const hasMegaMenu = divisionMenuItems(navigation).length > 0
 
   return {
     brand,
@@ -175,20 +245,22 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
   }
 }
 
+export type DivisionNavLinkItem = NavigationData['items'][number] & {
+  navKind: 'link'
+  href: string
+}
+
 export function isDivisionNavLinkItem(
-  item: NavigationData['items'][number] & { navKind?: 'link' | 'menu'; href?: string },
-): boolean {
-  return item.navKind === 'link' && Boolean(item.href)
+  item: NavigationData['items'][number],
+): item is DivisionNavLinkItem {
+  const withKind = item as { navKind?: string; href?: string }
+  return withKind.navKind === 'link' && Boolean(withKind.href)
 }
 
 export function divisionMenuItems(navigation: NavigationData) {
-  return navigation.items.filter(
-    (item) => !isDivisionNavLinkItem(item as NavigationData['items'][number] & { navKind?: 'link' | 'menu' }),
-  )
+  return navigation.items.filter((item) => !isDivisionNavLinkItem(item))
 }
 
-export function divisionLinkItems(navigation: NavigationData) {
-  return navigation.items.filter((item) =>
-    isDivisionNavLinkItem(item as NavigationData['items'][number] & { navKind?: 'link' | 'menu' }),
-  ) as Array<NavigationData['items'][number] & { navKind: 'link'; href: string }>
+export function divisionLinkItems(navigation: NavigationData): DivisionNavLinkItem[] {
+  return navigation.items.filter(isDivisionNavLinkItem)
 }
