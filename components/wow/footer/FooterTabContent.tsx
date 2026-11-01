@@ -2,7 +2,11 @@
 
 import type { DivisionChromeFooter } from '@/components/wow/divisions/division-chrome'
 import FooterAskWow from '@/components/wow/FooterAskWow'
-import { FooterActionCard, FooterTextLink } from '@/components/wow/footer/FooterActionCard'
+import {
+  FooterActionCard,
+  FooterTextLink,
+  footerResourceColumnTitleClass,
+} from '@/components/wow/footer/FooterActionCard'
 import {
   connectSocials,
   contactCards,
@@ -19,7 +23,6 @@ import {
   footerExploreCardGridClass,
   footerPanelTopAlignClass,
 } from '@/components/wow/footer/footer-shell-styles'
-import { footerItemSurfaceClass, footerSectionBgClass } from '@/components/wow/footer/footer-shell-styles'
 import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
 import { WowSuperagencyLogo } from '@/components/wow/nav/WowSuperagencyLogo'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
@@ -33,7 +36,6 @@ import type { ReactNode } from 'react'
 
 const panelClass = 'w-full px-3 sm:px-5 2xl:px-10'
 const mutedText = '!text-[#808080]'
-const headingText = 'text-secondary dark:text-[#F2F2F2]'
 
 function ResourcesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFooter }) {
   const brand = divisionChrome?.resourcesBrand
@@ -86,7 +88,7 @@ function ResourcesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoo
 
       {resourceColumns.map((column) => (
         <div key={column.title} className="flex flex-col gap-2 sm:gap-3 2xl:gap-4">
-          <p className={cn('font-outfit text-sm font-light sm:text-base 2xl:text-xl', headingText)}>{column.title}</p>
+          <p className={footerResourceColumnTitleClass}>{column.title}</p>
           <ul className="flex flex-col gap-0.5 2xl:gap-1">
             {column.links.map((link) => (
               <li key={link.label}>
@@ -162,7 +164,7 @@ function ContactPanel() {
 export function ConnectPanel() {
   return (
     <div className={cn(panelClass, 'flex flex-col items-center gap-6 py-3 sm:gap-8 sm:py-4 2xl:gap-12 2xl:py-8')}>
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 2xl:gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 min-[1400px]:gap-8">
         {connectSocials.map((social) => {
           const SocialIcon = socialBrandIcons[social.icon]
           return (
@@ -173,13 +175,11 @@ export function ConnectPanel() {
               rel="noreferrer"
               aria-label={social.label}
               className={cn(
-                'inline-flex size-8 items-center justify-center rounded-radius-sm border border-[#1515151A] transition-colors sm:size-9 2xl:size-11',
-                'dark:border-[#EDF0F51A]',
+                'inline-flex shrink-0 items-center justify-center bg-transparent transition-opacity hover:opacity-80',
                 mutedText,
-                footerItemSurfaceClass,
               )}
             >
-              <SocialIcon />
+              <SocialIcon className="size-10 sm:size-12 md:size-14 lg:size-16 xl:size-20 min-[1400px]:size-[85px] min-[1800px]:size-[92px]" />
             </a>
           )
         })}

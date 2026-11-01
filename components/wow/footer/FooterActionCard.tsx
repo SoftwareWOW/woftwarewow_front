@@ -293,6 +293,34 @@ export function FooterActionCard({
   )
 }
 
+/** Resources tab column titles — Figma @ 1400px: 32px. */
+export const footerResourceColumnTitleClass = cn(
+  'font-outfit font-light leading-tight text-secondary dark:text-[#F2F2F2]',
+  'text-lg sm:text-xl md:text-2xl lg:text-[28px]',
+  'min-[1400px]:text-[32px] min-[1800px]:text-[36px]',
+)
+
+const footerResourceLinkRowClass = cn(
+  'group inline-flex w-full items-center gap-2 py-1 sm:gap-2.5 sm:py-1.5 min-[1400px]:gap-3',
+)
+
+/** Resources tab link icons — plain glyph @ 1400px: 20×20px. */
+const footerResourceLinkIconClass = cn(
+  'shrink-0 !fill-none',
+  'size-4 sm:size-[18px] md:size-5',
+  'min-[1400px]:size-5 min-[1800px]:size-[22px]',
+  'stroke-secondary dark:stroke-[#F2F2F2]',
+  'group-hover:stroke-black dark:group-hover:!stroke-white',
+  '[&_*]:!fill-none',
+)
+
+/** Resources tab link labels — Figma @ 1400px: 20px. */
+const footerResourceLinkLabelClass = cn(
+  'min-w-0 flex-1 font-outfit font-light leading-snug text-secondary dark:text-[#F2F2F2]',
+  'text-sm sm:text-base md:text-lg',
+  'min-[1400px]:text-xl min-[1800px]:text-[22px]',
+)
+
 export function FooterTextLink({
   href,
   iconId,
@@ -303,24 +331,9 @@ export function FooterTextLink({
   label: string
 }) {
   return (
-    <FooterNavLink href={href} className={rowShellClass}>
-      <span
-        className={cn(
-          'inline-flex size-7 shrink-0 items-center justify-center rounded-radius-sm border p-1.5 sm:size-8 2xl:p-2',
-          footerIconBoxClass,
-        )}
-      >
-        <MenuItemIcon iconId={iconId} className={cn('size-3.5 sm:size-4', footerIconClass)} />
-      </span>
-      <span
-        className={cn(
-          'min-w-0 flex-1 font-outfit text-[13px] font-light sm:text-sm 2xl:text-base',
-          navItemLabelClass,
-          'text-secondary dark:text-[#F2F2F2]',
-        )}
-      >
-        {label}
-      </span>
+    <FooterNavLink href={href} className={footerResourceLinkRowClass}>
+      <MenuItemIcon iconId={iconId} className={footerResourceLinkIconClass} />
+      <span className={footerResourceLinkLabelClass}>{label}</span>
     </FooterNavLink>
   )
 }
