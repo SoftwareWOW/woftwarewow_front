@@ -6,6 +6,7 @@ import {
 import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelerate-navigation'
 import { wowDesignNavigation } from '@/components/wow/divisions/wow-design-navigation'
 import { wowHostNavigation } from '@/components/wow/divisions/wow-host-navigation'
+import { wowImpactNavigation } from '@/components/wow/divisions/wow-impact-navigation'
 import { wowSocialNavigation } from '@/components/wow/divisions/wow-social-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
@@ -347,6 +348,37 @@ export const wowHostFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard>
   },
 ] as const
 
+export const wowImpactFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Personal Branding',
+    description:
+      'Build an authentic personal brand that showcases your expertise and sets you apart.',
+    href: '/impact#services',
+    iconId: 'personalBranding',
+  },
+  {
+    title: 'Thought Leadership',
+    description:
+      'Establish your authority, share valuable insights, and become a trusted industry voice.',
+    href: '/impact#services',
+    iconId: 'thoughtLeadership',
+  },
+  {
+    title: 'Reputation & Visibility',
+    description:
+      'Strengthen your credibility, grow your visibility, and shape how the world sees you.',
+    href: '/impact#services',
+    iconId: 'reputationVisibility',
+  },
+  {
+    title: 'Speaking & Media Presence',
+    description:
+      'Communicate confidently, expand your reach, and make a lasting impression across public platforms.',
+    href: '/impact#services',
+    iconId: 'speakingMediaPresence',
+  },
+] as const
+
 export const wowSocialFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
   {
     title: 'Social Media Strategy & Management',
@@ -435,6 +467,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowHost') {
     return 'This is where hosting becomes strength.'
   }
+  if (config.id === 'wowImpact') {
+    return 'This is where stories become influence.'
+  }
   return config.tagline
 }
 
@@ -463,7 +498,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                   ? (wowSocialNavigation as NavigationData)
                   : divisionId === 'wowHost'
                     ? (wowHostNavigation as NavigationData)
-                    : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+                    : divisionId === 'wowImpact'
+                      ? (wowImpactNavigation as NavigationData)
+                      : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -482,7 +519,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                   ? wowSocialFooterServiceCards
                   : divisionId === 'wowHost'
                     ? wowHostFooterServiceCards
-                    : footerCardsFromConfig(config)
+                    : divisionId === 'wowImpact'
+                      ? wowImpactFooterServiceCards
+                      : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

@@ -357,9 +357,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Impact',
     'Purpose-driven digital solutions that help organizations create measurable community impact.',
     [
-      { id: 'programs', label: 'Programs', href: '/impact#programs' },
-      { id: 'approach', label: 'Approach', href: '/impact#approach' },
-      { id: 'stories', label: 'Stories', href: '/impact#stories' },
+      { id: 'services', label: 'Services', href: '/impact#services' },
+      { id: 'successStories', label: 'Success Stories', href: '/case-study' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

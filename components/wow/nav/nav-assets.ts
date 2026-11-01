@@ -168,6 +168,12 @@ export const navMenuIcons = {
   hostProfessionalEmail: Mail,
   hostProtectOnline: Shield,
 
+  // WOW Impact — Services
+  personalBranding: Award,
+  thoughtLeadership: Lightbulb,
+  reputationVisibility: TrendingUp,
+  speakingMediaPresence: Megaphone,
+
   // For You — Solutions
   buildLaunch: Rocket,
   softwareTechnology: Code2,
@@ -475,6 +481,12 @@ export const navCardImages = {
   hostDigitalIdentity: landingNav('Website 1 2.svg'),
   hostProfessionalEmail: landingNav('woman-using-laptop-with-technology-background-disp-2026-03-19-02-04-49-utc 1.svg'),
   hostProtectOnline: landingNav('Partner 1.svg'),
+
+  // WOW Impact division mega-menu
+  personalBranding: landingNav('Impact 2.svg'),
+  thoughtLeadership: landingNav('Why Smbs 1.svg'),
+  reputationVisibility: landingNav('Education 2.svg'),
+  speakingMediaPresence: landingNav('Events 3.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages
