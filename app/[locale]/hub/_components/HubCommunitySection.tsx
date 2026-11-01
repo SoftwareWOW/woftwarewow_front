@@ -49,7 +49,7 @@ export default function HubCommunitySection() {
   const content = HUB_COMMUNITY
 
   return (
-    <section className={HUB_SECTION_SHELL}>
+    <section id="community" className={`scroll-mt-28 ${HUB_SECTION_SHELL}`}>
       <div className={HUB_SECTION_INNER}>
         <div className="mx-auto max-w-3xl text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

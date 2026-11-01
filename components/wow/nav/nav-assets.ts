@@ -185,6 +185,18 @@ export const navMenuIcons = {
   eventsServicesNetworkingCommunity: Handshake,
   eventsServicesHybridVirtual: Share2,
 
+  // WOW Hub — Courses & Community
+  hubCoursesMarketingGrowth: LineChart,
+  hubCoursesDesignCreativity: Palette,
+  hubCoursesTechnologyAi: Bot,
+  hubCoursesSalesBusiness: Briefcase,
+  hubCoursesLeadershipBranding: Award,
+  hubCoursesCommunityCollaboration: UsersRound,
+  hubCommunityAskDiscuss: HelpCircle,
+  hubCommunityLiveSessions: GraduationCap,
+  hubCommunityMeetConnect: Handshake,
+  hubCommunityShareWork: Share2,
+
   // For You — Solutions
   buildLaunch: Rocket,
   softwareTechnology: Code2,
@@ -511,6 +523,20 @@ export const navCardImages = {
   eventsServicesBrandLaunches: landingNav('Branding & Creative 2.svg'),
   eventsServicesNetworkingCommunity: landingNav('Partner 1.svg'),
   eventsServicesHybridVirtual: landingNav('Website 1 2.svg'),
+
+  // WOW Hub division mega-menu
+  hubCoursesMarketingGrowth: landingNav('Social 2.svg'),
+  hubCoursesDesignCreativity: landingNav(
+    'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
+  ),
+  hubCoursesTechnologyAi: landingNav('AI and Automation 2.svg'),
+  hubCoursesSalesBusiness: landingNav('Accelerate 2.svg'),
+  hubCoursesLeadershipBranding: landingNav('Impact 2.svg'),
+  hubCoursesCommunityCollaboration: landingNav('Partner 1.svg'),
+  hubCommunityAskDiscuss: landingNav('Why Smbs 1.svg'),
+  hubCommunityLiveSessions: landingNav('Education 2.svg'),
+  hubCommunityMeetConnect: landingNav('Social 2 1.svg'),
+  hubCommunityShareWork: landingNav('Branding & Creative 2.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

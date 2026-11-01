@@ -7,6 +7,7 @@ import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelera
 import { wowDesignNavigation } from '@/components/wow/divisions/wow-design-navigation'
 import { wowHostNavigation } from '@/components/wow/divisions/wow-host-navigation'
 import { wowEventsNavigation } from '@/components/wow/divisions/wow-events-navigation'
+import { wowHubNavigation } from '@/components/wow/divisions/wow-hub-navigation'
 import { wowImpactNavigation } from '@/components/wow/divisions/wow-impact-navigation'
 import { wowSocialNavigation } from '@/components/wow/divisions/wow-social-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
@@ -349,6 +350,51 @@ export const wowHostFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard>
   },
 ] as const
 
+export const wowHubFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Marketing & Growth',
+    description:
+      'Learn practical marketing skills and strategies to grow brands, audiences, and businesses.',
+    href: '/hub#explore',
+    iconId: 'hubCoursesMarketingGrowth',
+  },
+  {
+    title: 'Design & Creativity',
+    description:
+      'Develop creative skills and bring your ideas to life through effective design.',
+    href: '/hub#explore',
+    iconId: 'hubCoursesDesignCreativity',
+  },
+  {
+    title: 'Technology & AI',
+    description:
+      'Explore emerging technologies and discover practical ways to use AI in everyday work.',
+    href: '/hub#explore',
+    iconId: 'hubCoursesTechnologyAi',
+  },
+  {
+    title: 'Sales & Business',
+    description:
+      'Build essential sales and business skills to turn ideas into sustainable growth.',
+    href: '/hub#explore',
+    iconId: 'hubCoursesSalesBusiness',
+  },
+  {
+    title: 'Leadership & Personal Branding',
+    description:
+      'Develop leadership confidence, strengthen your personal brand, and grow your professional influence.',
+    href: '/hub#explore',
+    iconId: 'hubCoursesLeadershipBranding',
+  },
+  {
+    title: 'Community & Collaboration',
+    description:
+      'Learn to collaborate, share knowledge, and build meaningful professional relationships.',
+    href: '/hub#explore',
+    iconId: 'hubCoursesCommunityCollaboration',
+  },
+] as const
+
 export const wowEventsFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
   {
     title: 'Conferences & Summits',
@@ -512,6 +558,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowEvents') {
     return 'This is where connections become opportunities.'
   }
+  if (config.id === 'wowHub') {
+    return 'This is where curiosity becomes mastery.'
+  }
   return config.tagline
 }
 
@@ -544,7 +593,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                       ? (wowImpactNavigation as NavigationData)
                       : divisionId === 'wowEvents'
                         ? (wowEventsNavigation as NavigationData)
-                        : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+                        : divisionId === 'wowHub'
+                          ? (wowHubNavigation as NavigationData)
+                          : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -567,7 +618,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                       ? wowImpactFooterServiceCards
                       : divisionId === 'wowEvents'
                         ? wowEventsFooterServiceCards
-                        : footerCardsFromConfig(config)
+                        : divisionId === 'wowHub'
+                          ? wowHubFooterServiceCards
+                          : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

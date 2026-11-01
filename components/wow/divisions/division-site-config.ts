@@ -430,9 +430,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Hub',
     'The connected workspace for clients, partners, and teams across the WOW ecosystem.',
     [
-      { id: 'features', label: 'Features', href: '/hub#features' },
-      { id: 'access', label: 'Access', href: '/hub#access' },
-      { id: 'support', label: 'Support', href: '/hub#support' },
+      { id: 'courses', label: 'Courses', href: '/hub#explore' },
+      { id: 'programs', label: 'Programs', href: '/hub#programs' },
+      { id: 'community', label: 'Community', href: '/hub#community' },
     ],
     [
       {

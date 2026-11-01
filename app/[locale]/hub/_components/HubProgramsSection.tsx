@@ -51,7 +51,7 @@ export default function HubProgramsSection() {
   const content = HUB_PROGRAMS
 
   return (
-    <section className={HUB_SECTION_SHELL}>
+    <section id="programs" className={`scroll-mt-28 ${HUB_SECTION_SHELL}`}>
       <div className={HUB_SECTION_INNER}>
         <div className="text-center">
           <RevealWrapper className="mb-5 flex justify-center">
