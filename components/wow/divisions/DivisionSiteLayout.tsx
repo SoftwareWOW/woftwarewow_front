@@ -1,5 +1,9 @@
 import { getDivisionChrome } from '@/components/wow/divisions/division-chrome'
-import { stickyFooterMainClass } from '@/components/wow/footer-layout'
+import {
+  divisionFixedNavbarOffsetClass,
+  stickyFooterMainClass,
+} from '@/components/wow/footer-layout'
+import { cn } from '@/lib/utils'
 import WowFooter from '@/components/wow/WowFooter'
 import WowNavbar from '@/components/wow/WowNavbar'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
@@ -28,7 +32,7 @@ export default async function DivisionSiteLayout({ divisionId, children }: Divis
         hasMegaMenu={chrome.hasMegaMenu}
         mobileLinkNavItems={chrome.linkNavItems}
       />
-      <main className={stickyFooterMainClass}>{children}</main>
+      <main className={cn(stickyFooterMainClass, divisionFixedNavbarOffsetClass)}>{children}</main>
       <WowFooter footer={dictionary.footer} divisionChrome={chrome.footer} />
     </div>
   )
