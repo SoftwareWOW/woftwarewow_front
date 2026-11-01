@@ -70,7 +70,7 @@ export default async function WowImpactPage({ params }: Props) {
       <ImpactChannelsSection />
       <WowEcosystem ecosystem={ecosystem} />
       <ImpactFaqSection />
-      <div className="mb-3">
+   <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
         <WowGrowthCta
           accentText={IMPACT_CTA.accentText}
           mainText={IMPACT_CTA.mainText}
