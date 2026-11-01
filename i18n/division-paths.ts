@@ -34,6 +34,24 @@ export const legacyDivisionSlugToCanonical: Record<string, string> = {
   wowevents: 'events',
 }
 
+/** Locale-less app href with at most one `#fragment` (prevents `#solutions#solutions` in the bar). */
+export function normalizeAppHref(href: string): string {
+  const raw = href.trim()
+  if (!raw || /^(https?:|tel:|mailto:)/i.test(raw)) return raw
+
+  if (raw.startsWith('#')) {
+    const fragment = raw.slice(1).split('#').filter(Boolean)[0] ?? ''
+    return fragment ? `#${fragment}` : raw
+  }
+
+  const hashAt = raw.indexOf('#')
+  if (hashAt === -1) return raw
+
+  const path = raw.slice(0, hashAt)
+  const fragment = raw.slice(hashAt + 1).split('#').filter(Boolean)[0] ?? ''
+  return fragment ? `${path}#${fragment}` : path
+}
+
 /** Map a CMS or legacy href to the current canonical division path. */
 export function normalizeDivisionHref(href: string | null | undefined): string {
   const raw = href?.trim()
@@ -41,7 +59,8 @@ export function normalizeDivisionHref(href: string | null | undefined): string {
 
   const [pathPart, hashPart] = raw.split('#')
   const path = pathPart?.trim() ?? ''
-  const hash = hashPart ? `#${hashPart}` : ''
+  const fragment = hashPart?.split('#').filter(Boolean)[0] ?? ''
+  const hash = fragment ? `#${fragment}` : ''
 
   if (!path.startsWith('/')) return raw
 

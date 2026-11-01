@@ -1,5 +1,6 @@
 'use client'
 
+import { WowNavLink } from '@/components/wow/nav/WowNavLink'
 import { Link } from '@/i18n/navigation'
 import { ChevronRight } from 'lucide-react'
 import Image from 'next/image'
@@ -82,9 +83,9 @@ export function WowMenuItem({
 
   if (href) {
     return (
-      <Link href={href} onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
+      <WowNavLink href={href} onClick={onClick} onMouseEnter={onMouseEnter} className={className}>
         {content}
-      </Link>
+      </WowNavLink>
     )
   }
 

@@ -8,6 +8,7 @@ import {
 } from '@/components/wow/divisions/division-chrome'
 import DivisionMobileBottomNav from '@/components/wow/divisions/DivisionMobileBottomNav'
 import { useContactDialogOptional } from '@/components/wow/shared/ContactDialogProvider'
+import { WowNavLink } from '@/components/wow/nav/WowNavLink'
 import { Link, usePathname } from '@/i18n/navigation'
 import type { Dictionary } from '@/i18n/types'
 import {
@@ -338,14 +339,14 @@ export default function WowNavbar({
                 if (isDivisionNavLinkItem(item)) {
                   return (
                     <li key={item.id} className="shrink">
-                      <Link
+                      <WowNavLink
                         href={item.href}
                         className={pillClass(false)}
                         onMouseEnter={closeMegaMenu}
                         onFocus={closeMegaMenu}
                       >
                         {item.label}
-                      </Link>
+                      </WowNavLink>
                     </li>
                   )
                 }

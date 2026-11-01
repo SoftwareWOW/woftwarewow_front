@@ -16,7 +16,7 @@ export default function SoftwareWowServicesSection() {
   const hasMore = content.items.length > content.initialVisibleCount
 
   return (
-    <section className={SOFTWAREWOW_SECTION_SHELL}>
+    <section id="services" className={`${SOFTWAREWOW_SECTION_SHELL} scroll-mt-28`}>
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

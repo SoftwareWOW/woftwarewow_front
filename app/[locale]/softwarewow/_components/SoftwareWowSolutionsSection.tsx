@@ -50,7 +50,7 @@ export default function SoftwareWowSolutionsSection() {
   const defaultCtaHref = section.cta.href
 
   return (
-    <section className={`${SOFTWAREWOW_SECTION_SHELL} overflow-hidden`}>
+    <section id="solutions" className={`${SOFTWAREWOW_SECTION_SHELL} scroll-mt-28 overflow-hidden`}>
       <div className="container">
         <div className="mb-7 text-center lg:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

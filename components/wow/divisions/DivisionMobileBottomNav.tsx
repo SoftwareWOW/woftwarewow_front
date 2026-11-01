@@ -6,7 +6,8 @@ import {
   mobileBottomNavActiveClass,
   mobileBottomNavInactiveClass,
 } from '@/components/wow/nav/nav-interaction-styles'
-import { Link, usePathname } from '@/i18n/navigation'
+import { WowNavLink } from '@/components/wow/nav/WowNavLink'
+import { usePathname } from '@/i18n/navigation'
 import type { LucideIcon } from 'lucide-react'
 import {
   Briefcase,
@@ -75,7 +76,7 @@ export default function DivisionMobileBottomNav({ items }: DivisionMobileBottomN
         const isActive = itemHash ? activeHash === itemHash : false
 
         return (
-          <Link
+          <WowNavLink
             key={item.id}
             href={item.href}
             onClick={() => {
@@ -96,7 +97,7 @@ export default function DivisionMobileBottomNav({ items }: DivisionMobileBottomN
               }`}
               strokeWidth={2}
             />
-          </Link>
+          </WowNavLink>
         )
       })}
     </nav>

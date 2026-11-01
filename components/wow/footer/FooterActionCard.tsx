@@ -4,6 +4,7 @@ import { MenuItemIcon } from '@/components/wow/nav/MenuItemIcon'
 import { isDivisionHref } from '@/components/wow/nav/nav-brand-assets'
 import { footerItemSurfaceClass } from '@/components/wow/footer/footer-shell-styles'
 import { navItemDescriptionClass, navItemLabelClass } from '@/components/wow/nav/nav-interaction-styles'
+import { WowNavLink } from '@/components/wow/nav/WowNavLink'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { ArrowUpRight } from 'lucide-react'
@@ -197,15 +198,17 @@ function FooterNavLink({ href, onClick, className, children }: FooterNavLinkProp
 
   const division = isDivisionHref(href)
 
+  const LinkComponent = division ? Link : WowNavLink
+
   return (
-    <Link
+    <LinkComponent
       href={href}
       onClick={onClick}
       className={className}
       {...(division ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
       {children}
-    </Link>
+    </LinkComponent>
   )
 }
 
