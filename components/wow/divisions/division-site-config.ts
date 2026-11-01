@@ -393,8 +393,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Host',
     'Reliable hosting, infrastructure, and support for modern digital products and platforms.',
     [
-      { id: 'services', label: 'Services', href: '/host#services' },
-      { id: 'plans', label: 'Plans', href: '/host#plans' },
+      { id: 'hosting', label: 'Hosting', href: '/host#services' },
+      { id: 'domains', label: 'Domains', href: '/for-you/hosting-and-infrastructure' },
+      { id: 'solutions', label: 'Solutions', href: '/host#solutions' },
       { id: 'support', label: 'Support', href: '/host#support' },
     ],
     [

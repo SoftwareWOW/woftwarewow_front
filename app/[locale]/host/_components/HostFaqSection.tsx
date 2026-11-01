@@ -26,7 +26,10 @@ export default function HostFaqSection() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="support"
+      className="scroll-mt-28 relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container relative z-10">
         <div className="mb-8 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-12 lg:flex-row lg:items-end lg:justify-between">
           <div>

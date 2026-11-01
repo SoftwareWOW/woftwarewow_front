@@ -5,6 +5,7 @@ import {
 } from '@/components/wow/divisions/division-site-config'
 import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelerate-navigation'
 import { wowDesignNavigation } from '@/components/wow/divisions/wow-design-navigation'
+import { wowHostNavigation } from '@/components/wow/divisions/wow-host-navigation'
 import { wowSocialNavigation } from '@/components/wow/divisions/wow-social-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
@@ -315,6 +316,37 @@ export const wowDesignFooterServiceCards: ReadonlyArray<DivisionFooterServiceCar
   },
 ] as const
 
+export const wowHostFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Shared Web Hosting',
+    description:
+      'Get your website online with affordable, secure hosting built for everyday reliability.',
+    href: '/host#services',
+    iconId: 'sharedWebHosting',
+  },
+  {
+    title: 'VPS Hosting',
+    description:
+      'Enjoy dedicated resources, greater flexibility, and more control over your hosting environment.',
+    href: '/host#services',
+    iconId: 'vpsHosting',
+  },
+  {
+    title: 'Dedicated Servers',
+    description:
+      'Power demanding websites and applications with exclusive resources and complete server control.',
+    href: '/host#services',
+    iconId: 'dedicatedServers',
+  },
+  {
+    title: 'Cloud Hosting',
+    description:
+      'Scale your online operations with flexible cloud infrastructure designed for performance and reliability.',
+    href: '/host#services',
+    iconId: 'cloudHosting',
+  },
+] as const
+
 export const wowSocialFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
   {
     title: 'Social Media Strategy & Management',
@@ -400,6 +432,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowSocial') {
     return 'This is where content becomes community.'
   }
+  if (config.id === 'wowHost') {
+    return 'This is where hosting becomes strength.'
+  }
   return config.tagline
 }
 
@@ -426,7 +461,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                 ? (wowDesignNavigation as NavigationData)
                 : divisionId === 'wowSocial'
                   ? (wowSocialNavigation as NavigationData)
-                  : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+                  : divisionId === 'wowHost'
+                    ? (wowHostNavigation as NavigationData)
+                    : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -443,7 +480,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                 ? wowDesignFooterServiceCards
                 : divisionId === 'wowSocial'
                   ? wowSocialFooterServiceCards
-                  : footerCardsFromConfig(config)
+                  : divisionId === 'wowHost'
+                    ? wowHostFooterServiceCards
+                    : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

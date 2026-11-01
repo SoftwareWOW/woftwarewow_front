@@ -70,7 +70,7 @@ export default async function WowHostPage({ params }: Props) {
       <HostToolsSection />
       <WowEcosystem ecosystem={ecosystem} />
       <HostFaqSection />
-      <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
+      <div className="mb-3">
         <WowGrowthCta accentText={HOST_CTA.accentText} mainText={HOST_CTA.mainText} ariaLabel={HOST_CTA.ariaLabel} />
       </div>
     </div>

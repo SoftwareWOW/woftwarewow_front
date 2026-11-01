@@ -38,6 +38,7 @@ import {
   RefreshCw,
   Rocket,
   Server,
+  Shield,
   Share2,
   ShoppingBag,
   Smartphone,
@@ -157,6 +158,15 @@ export const navMenuIcons = {
   socialMediaStrategyManagement: LineChart,
   socialInfluencerContentCreation: Megaphone,
   paidSocialAdvertisingCommunityManagement: UsersRound,
+
+  // WOW Host — Hosting & Solutions
+  sharedWebHosting: Server,
+  vpsHosting: Cpu,
+  dedicatedServers: LayoutGrid,
+  cloudHosting: Cloud,
+  hostDigitalIdentity: Globe,
+  hostProfessionalEmail: Mail,
+  hostProtectOnline: Shield,
 
   // For You — Solutions
   buildLaunch: Rocket,
@@ -454,6 +464,17 @@ export const navCardImages = {
   socialMediaStrategyManagement: landingNav('Social 2.svg'),
   socialInfluencerContentCreation: landingNav('Social 3.svg'),
   paidSocialAdvertisingCommunityManagement: landingNav('Social 2 1.svg'),
+
+  // WOW Host division mega-menu
+  sharedWebHosting: landingNav('Hosting 2.svg'),
+  vpsHosting: landingNav('data-servers-close-up-2026-01-08-06-54-55-utc 2.svg'),
+  dedicatedServers: landingNav(
+    'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
+  ),
+  cloudHosting: landingNav('AI and Automation 2.svg'),
+  hostDigitalIdentity: landingNav('Website 1 2.svg'),
+  hostProfessionalEmail: landingNav('woman-using-laptop-with-technology-background-disp-2026-03-19-02-04-49-utc 1.svg'),
+  hostProtectOnline: landingNav('Partner 1.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

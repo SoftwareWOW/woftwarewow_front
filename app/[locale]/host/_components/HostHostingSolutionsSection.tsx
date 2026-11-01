@@ -32,7 +32,11 @@ export default function HostHostingSolutionsSection() {
   const { contentRef, triggerRef } = useHorizontalScroll()
 
   return (
-    <section ref={triggerRef} className="service-section relative overflow-x-hidden overflow-y-visible">
+    <section
+      ref={triggerRef}
+      id="services"
+      className="service-section scroll-mt-28 relative overflow-x-hidden overflow-y-visible"
+    >
       <div className="container">
         <RevealWrapper className="reveal-me mb-6 flex flex-col gap-6 md:mb-8 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-2xl">
