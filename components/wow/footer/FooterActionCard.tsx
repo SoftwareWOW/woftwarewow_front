@@ -30,6 +30,29 @@ const cardRowLayoutClass = cn(
   'items-center gap-2 px-2.5 py-2 sm:gap-2.5 sm:px-3 sm:py-2.5 2xl:gap-4 2xl:px-5 2xl:py-5',
 )
 
+/** Services tab cards (iconStyle plain) — Figma @ ~1400px: 24px title, 16px body, 60px icon, 20px pad, 24px gap. */
+const cardServiceRowLayoutClass = cn(
+  'items-center gap-3 p-3',
+  'sm:gap-3.5 sm:p-3.5',
+  'md:gap-4 md:p-4',
+  'lg:gap-5 lg:p-[18px]',
+  'xl:gap-6 xl:p-5',
+  'min-[1400px]:gap-6 min-[1400px]:p-5',
+)
+
+const footerServiceTitleClass = cn(
+  'block font-outfit font-light leading-tight text-secondary dark:text-[#F2F2F2]',
+  'text-[15px] sm:text-base md:text-lg lg:text-xl xl:text-[22px] min-[1400px]:text-2xl min-[1400px]:leading-[1.15]',
+  navItemLabelClass,
+)
+
+const footerServiceDescriptionClass = cn(
+  'mt-1 block font-outfit font-light !text-[#808080]',
+  'text-[11px] leading-snug sm:mt-1.5 sm:text-xs md:text-[13px] lg:text-sm xl:text-[15px]',
+  'min-[1400px]:mt-2 min-[1400px]:text-base min-[1400px]:leading-[1.5]',
+  navItemDescriptionClass,
+)
+
 const cardContactLayoutClass = cn(
   'flex-col items-stretch justify-between gap-3 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-4 2xl:gap-6 2xl:p-8',
 )
@@ -85,12 +108,19 @@ function FooterIconBox({ iconId, icon }: { iconId?: string; icon?: ReactNode }) 
   )
 }
 
-function FooterPlainIcon({ iconId }: { iconId: string }) {
+function FooterPlainIcon({ iconId, variant = 'default' }: { iconId: string; variant?: 'default' | 'service' }) {
+  const sizeClass =
+    variant === 'service'
+      ? cn(
+          'size-9 shrink-0 sm:size-10 md:size-11 lg:size-12 xl:size-14 min-[1400px]:size-[60px]',
+        )
+      : cn('size-5 shrink-0 sm:size-6 2xl:size-7')
+
   return (
     <MenuItemIcon
       iconId={iconId}
       className={cn(
-        'size-5 shrink-0 sm:size-6 2xl:size-7',
+        sizeClass,
         'stroke-secondary text-secondary group-hover:stroke-black group-hover:text-black',
         'dark:stroke-[#F2F2F2] dark:text-[#F2F2F2] dark:group-hover:!stroke-white dark:group-hover:!text-white',
       )}
@@ -148,12 +178,16 @@ export function FooterActionCard({
   iconStyle?: 'none' | 'boxed' | 'plain'
 }) {
   const isContactCard = showArrow
+  const isServiceCard = iconStyle === 'plain' && !isContactCard
 
   return (
     <FooterNavLink
       href={href}
       onClick={onClick}
-      className={cn(cardShellClass, isContactCard ? cardContactLayoutClass : cardRowLayoutClass)}
+      className={cn(
+        cardShellClass,
+        isContactCard ? cardContactLayoutClass : isServiceCard ? cardServiceRowLayoutClass : cardRowLayoutClass,
+      )}
     >
       {isContactCard ? (
         <>
@@ -189,25 +223,29 @@ export function FooterActionCard({
       ) : (
         <>
           {iconStyle === 'boxed' && (iconId || icon) ? <FooterIconBox iconId={iconId} icon={icon} /> : null}
-          {iconStyle === 'plain' && iconId ? <FooterPlainIcon iconId={iconId} /> : null}
+          {iconStyle === 'plain' && iconId ? (
+            <FooterPlainIcon iconId={iconId} variant={isServiceCard ? 'service' : 'default'} />
+          ) : null}
           <span className="min-w-0 flex-1">
             <span
-              className={cn(
-                'block font-outfit text-[13px] font-light leading-tight sm:text-sm 2xl:text-lg',
-                navItemLabelClass,
-                'text-secondary dark:text-[#F2F2F2]',
-              )}
+              className={
+                isServiceCard
+                  ? footerServiceTitleClass
+                  : cn(
+                      'block font-outfit text-[13px] font-light leading-tight sm:text-sm 2xl:text-lg',
+                      navItemLabelClass,
+                      'text-secondary dark:text-[#F2F2F2]',
+                    )
+              }
             >
               {title}
             </span>
             {description ? (
-              <span
-                className={cn(
+              <span className={isServiceCard ? footerServiceDescriptionClass : cn(
                   'mt-0.5 block font-outfit text-[11px] font-light leading-snug sm:text-xs 2xl:text-sm',
                   navItemDescriptionClass,
                   '!text-[#808080]',
-                )}
-              >
+                )}>
                 {description}
               </span>
             ) : null}

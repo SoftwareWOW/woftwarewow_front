@@ -22,7 +22,15 @@ import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { useFooterPanelMinHeight } from '@/components/wow/footer/useFooterPanelMinHeight'
 import { House, Sparkles } from 'lucide-react'
-import { useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent,
+  type ReactNode,
+} from 'react'
 
 export type FooterTabDefinition = {
   id: string
@@ -52,6 +60,32 @@ export default function WowFooterShell({
   useFooterScrollChain(footerRef)
   const meetDialog = useMeetDialogOptional()
   const [activeTab, setActiveTab] = useState(defaultTabId)
+  const tablistRowRef = useRef<HTMLDivElement>(null)
+  const [tablistRowWidth, setTablistRowWidth] = useState<number | null>(null)
+
+  useEffect(() => {
+    const row = tablistRowRef.current
+    if (!row) return
+
+    const updateWidth = () => {
+      setTablistRowWidth(row.getBoundingClientRect().width)
+    }
+
+    updateWidth()
+    const observer = new ResizeObserver(updateWidth)
+    observer.observe(row)
+    window.addEventListener('resize', updateWidth)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateWidth)
+    }
+  }, [showAskTab, tabs])
+
+  const shellStyle: CSSProperties | undefined =
+    tablistRowWidth != null && tablistRowWidth > 0
+      ? ({ ['--footer-tablist-width' as string]: `${tablistRowWidth}px` } as CSSProperties)
+      : undefined
 
   const measureTabIds = useMemo(() => {
     const ids: string[] = []
@@ -76,7 +110,7 @@ export default function WowFooterShell({
     <footer ref={footerRef} className={stickyFooterClass}>
       <div className="relative bg-background px-3 pt-2 pb-0 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 2xl:px-10 2xl:pt-5">
         <div className="relative z-10 mx-auto w-full max-w-[1440px]">
-          <div className={footerShellContainerClass} data-footer-shell>
+          <div className={footerShellContainerClass} data-footer-shell style={shellStyle}>
             <div
               ref={measureRef}
               aria-hidden
@@ -93,10 +127,16 @@ export default function WowFooterShell({
               role="tablist"
               aria-label={tablistLabel}
               className={cn(
-                'flex w-full max-w-full shrink-0 flex-wrap items-center justify-center gap-1.5 px-3 sm:gap-2.5 sm:px-4 2xl:gap-5 2xl:px-6',
+                'flex w-full max-w-full shrink-0 justify-center px-3 sm:px-4 2xl:px-6',
                 'min-h-9 sm:min-h-10 2xl:min-h-[79px] max-h-[920px]:2xl:min-h-10',
               )}
             >
+              <div
+                ref={tablistRowRef}
+                className={cn(
+                  'inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 2xl:gap-5',
+                )}
+              >
               {showAskTab ? (
                 <button
                   type="button"
@@ -138,6 +178,7 @@ export default function WowFooterShell({
                   </button>
                 )
               })}
+              </div>
             </div>
 
             <div className={footerMiddleSectionClass}>

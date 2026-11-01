@@ -14,6 +14,7 @@ import {
 import {
   footerCardPanelFillClass,
   footerServiceGridClassForCount,
+  footerServicePanelCenterClass,
   footerContactCardGridClass,
   footerExploreCardGridClass,
   footerPanelTopAlignClass,
@@ -120,7 +121,8 @@ function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoot
   const gridClass = footerServiceGridClassForCount(cards.length)
 
   return (
-    <div className={cn(panelClass, gridClass)}>
+    <div className={cn(panelClass, footerServicePanelCenterClass)}>
+      <div className={gridClass}>
       {cards.map((service) => (
         <FooterActionCard
           key={service.title}
@@ -131,6 +133,7 @@ function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoot
           description={service.description}
         />
       ))}
+      </div>
     </div>
   )
 }
