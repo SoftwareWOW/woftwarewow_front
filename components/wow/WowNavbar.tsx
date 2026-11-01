@@ -309,6 +309,8 @@ export default function WowNavbar({
               <Link
                 href={brand.homeHref}
                 className="relative z-[1001] flex min-w-0 shrink items-center ps-2 md:w-[150px] md:ps-3 lg:w-[200px] lg:ps-5"
+                onMouseEnter={closeMegaMenu}
+                onFocus={closeMegaMenu}
               >
                 <Image
                   className="h-[20px] w-auto max-w-[calc(100vw-96px)] dark:hidden"
@@ -336,7 +338,12 @@ export default function WowNavbar({
                 if (isDivisionNavLinkItem(item)) {
                   return (
                     <li key={item.id} className="shrink">
-                      <Link href={item.href} className={pillClass(false)}>
+                      <Link
+                        href={item.href}
+                        className={pillClass(false)}
+                        onMouseEnter={closeMegaMenu}
+                        onFocus={closeMegaMenu}
+                      >
                         {item.label}
                       </Link>
                     </li>

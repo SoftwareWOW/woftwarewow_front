@@ -12,8 +12,8 @@ import {
   type FooterTabId,
 } from '@/components/wow/footer/footer-tab-data'
 import {
-  footerActionCardGridClass,
   footerCardPanelFillClass,
+  footerServiceGridClassForCount,
   footerContactCardGridClass,
   footerExploreCardGridClass,
   footerPanelTopAlignClass,
@@ -117,9 +117,10 @@ function ExplorePanel() {
 
 function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFooter }) {
   const cards = divisionChrome?.serviceCards ?? serviceCards
+  const gridClass = footerServiceGridClassForCount(cards.length)
 
   return (
-    <div className={cn(panelClass, footerActionCardGridClass)}>
+    <div className={cn(panelClass, gridClass)}>
       {cards.map((service) => (
         <FooterActionCard
           key={service.title}

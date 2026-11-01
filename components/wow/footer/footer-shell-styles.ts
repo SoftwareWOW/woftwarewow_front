@@ -106,6 +106,100 @@ export const footerActionCardGridClass = cn(
   'lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:gap-4 2xl:gap-4',
 )
 
+const footerServiceGridBase = cn(
+  'grid h-full min-h-0 w-full flex-1 items-stretch gap-2 sm:gap-2.5 lg:gap-4 2xl:gap-4',
+)
+
+/** Services tab — layout by card count so the panel fills like Figma (all divisions). */
+export function footerServiceGridClassForCount(count: number): string {
+  if (count <= 0) {
+    return cn(footerServiceGridBase, 'grid-cols-1')
+  }
+  if (count === 1) {
+    return cn(footerServiceGridBase, 'grid-cols-1 lg:auto-rows-fr')
+  }
+  if (count === 2) {
+    return cn(footerServiceGridBase, 'grid-cols-1 sm:grid-cols-2 lg:auto-rows-fr')
+  }
+  if (count === 3) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:auto-rows-fr',
+      '[&>*:nth-child(3)]:lg:col-span-2 [&>*:nth-child(3)]:lg:max-w-[calc(50%-0.5rem)] [&>*:nth-child(3)]:lg:justify-self-center',
+    )
+  }
+  if (count === 4) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:grid-rows-2 lg:auto-rows-fr',
+    )
+  }
+  if (count === 5) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:auto-rows-fr',
+      '[&>*:nth-child(-n+3)]:lg:col-span-2',
+      '[&>*:nth-child(4)]:lg:col-start-2 [&>*:nth-child(4)]:lg:col-span-2',
+      '[&>*:nth-child(5)]:lg:col-start-4 [&>*:nth-child(5)]:lg:col-span-2',
+    )
+  }
+  if (count === 6) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+    )
+  }
+  if (count === 7) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+      '[&>*:nth-child(7)]:lg:col-start-2',
+    )
+  }
+  if (count === 8) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+      '[&>*:nth-child(7)]:lg:col-start-1',
+      '[&>*:nth-child(8)]:lg:col-start-3',
+    )
+  }
+  if (count === 9) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+    )
+  }
+  if (count === 10) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+      '[&>*:nth-child(10)]:lg:col-start-2',
+    )
+  }
+
+  const remainder = count % 3
+  if (remainder === 0) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+    )
+  }
+  if (remainder === 1) {
+    return cn(
+      footerServiceGridBase,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+      `[&>*:nth-child(${count})]:lg:col-start-2`,
+    )
+  }
+  return cn(
+    footerServiceGridBase,
+    'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr',
+    '[&>*:nth-last-child(2)]:lg:col-start-1',
+    '[&>*:nth-last-child(1)]:lg:col-start-3',
+  )
+}
+
 /** Explore divisions — 3 columns, equal row heights in panel slot. */
 export const footerExploreCardGridClass = cn(
   'grid h-full min-h-0 w-full flex-1 grid-cols-1 items-stretch gap-2 sm:grid-cols-2 sm:gap-2.5',
