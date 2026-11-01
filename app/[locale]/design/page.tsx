@@ -70,7 +70,7 @@ export default async function WowDesignPage({ params }: Props) {
       <DesignCreativeToolsSection />
       <WowEcosystem ecosystem={ecosystem} />
       <DesignFaqSection />
-      <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
+      <div className="mb-3">
         <WowGrowthCta
           accentText={DESIGN_CTA.accentText}
           mainText={DESIGN_CTA.mainText}
