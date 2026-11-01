@@ -15,7 +15,10 @@ export default function AccelerateFrameworkSection() {
   }))
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="services"
+      className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container">
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-3xl">

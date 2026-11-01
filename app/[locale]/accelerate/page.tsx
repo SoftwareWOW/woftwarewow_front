@@ -54,6 +54,7 @@ export default async function WowAcceleratePage({ params }: Props) {
       <WowDivisionsMarquee />
       <AccelerateProblemSection />
       <AuthorityFoundation
+        sectionId="solutions"
         eyebrow={solutions.eyebrow}
         title={solutions.title}
         accentTitle={solutions.accentTitle}

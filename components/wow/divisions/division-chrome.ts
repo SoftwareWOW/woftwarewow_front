@@ -3,6 +3,7 @@ import {
   type DivisionNavItem,
   type DivisionSiteConfig,
 } from '@/components/wow/divisions/division-site-config'
+import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelerate-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
@@ -230,6 +231,57 @@ export const wowIntelligenceFooterServiceCards: ReadonlyArray<DivisionFooterServ
   },
 ] as const
 
+export const wowAccelerateFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Lead Generation',
+    description: 'Attract leads. Create opportunities.',
+    href: '/accelerate#services',
+    iconId: 'leadGeneration',
+  },
+  {
+    title: 'Sales Funnel Development',
+    description: 'Turn prospects into paying customers.',
+    href: '/accelerate#services',
+    iconId: 'salesFunnelDevelopment',
+  },
+  {
+    title: 'CRM Setup & Optimization',
+    description: 'Organize contacts. Streamline sales.',
+    href: '/accelerate#services',
+    iconId: 'crmSetupOptimization',
+  },
+  {
+    title: 'Sales Automation',
+    description: 'Automate tasks. Close deals faster.',
+    href: '/accelerate#services',
+    iconId: 'salesAutomation',
+  },
+  {
+    title: 'Sales Analytics & Reporting',
+    description: 'Track performance. Grow smarter.',
+    href: '/accelerate#services',
+    iconId: 'salesAnalyticsReporting',
+  },
+  {
+    title: 'Sales Process Optimization',
+    description: 'Simplify selling. Improve conversions.',
+    href: '/accelerate#services',
+    iconId: 'salesProcessOptimization',
+  },
+  {
+    title: 'Appointment Setting & Outreach',
+    description: 'Start conversations. Book more meetings.',
+    href: '/accelerate#services',
+    iconId: 'appointmentSettingOutreach',
+  },
+  {
+    title: 'Lead Qualification & Nurturing',
+    description: 'Identify, engage, and convert prospects.',
+    href: '/accelerate#services',
+    iconId: 'leadQualificationNurturing',
+  },
+] as const
+
 function buildLinkOnlyNavigation(navItems: DivisionNavItem[]): NavigationData {
   return {
     detailPanels: { default: defaultDetailPanel },
@@ -282,6 +334,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowIntelligence') {
     return 'This is where intelligence becomes advantage.'
   }
+  if (config.id === 'wowAccelerate') {
+    return 'This is where sales become scalable.'
+  }
   return config.tagline
 }
 
@@ -302,7 +357,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
           ? (wowWebsitesNavigation as NavigationData)
           : divisionId === 'wowIntelligence'
             ? (wowIntelligenceNavigation as NavigationData)
-            : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+            : divisionId === 'wowAccelerate'
+              ? (wowAccelerateNavigation as NavigationData)
+              : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -313,7 +370,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
           ? wowWebsitesFooterServiceCards
           : divisionId === 'wowIntelligence'
             ? wowIntelligenceFooterServiceCards
-            : footerCardsFromConfig(config)
+            : divisionId === 'wowAccelerate'
+              ? wowAccelerateFooterServiceCards
+              : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

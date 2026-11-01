@@ -12,6 +12,7 @@ import {
   Compass,
   Cpu,
   FileText,
+  Filter,
   FolderOpen,
   Globe,
   GraduationCap,
@@ -130,6 +131,20 @@ export const navMenuIcons = {
   useCaseMarketing: Megaphone,
   useCaseCustomerService: Headphones,
   useCaseOperations: Briefcase,
+
+  // WOW Accelerate — Services & Solutions
+  leadGeneration: Target,
+  salesFunnelDevelopment: Filter,
+  crmSetupOptimization: Briefcase,
+  salesAutomation: Workflow,
+  salesAnalyticsReporting: LineChart,
+  salesProcessOptimization: RefreshCw,
+  appointmentSettingOutreach: Calendar,
+  leadQualificationNurturing: Users,
+  leadGenerationOutbound: Target,
+  salesFunnelsConversion: Megaphone,
+  crmSalesSystems: LayoutGrid,
+  salesAutomationEnablement: Zap,
 
   // For You — Solutions
   buildLaunch: Rocket,
@@ -394,6 +409,26 @@ export const navCardImages = {
   useCaseMarketing: landingNav('Branding & Creative 2.svg'),
   useCaseCustomerService: landingNav('Social 2 1.svg'),
   useCaseOperations: landingNav('AI Automation 3.svg'),
+
+  // WOW Accelerate division mega-menu
+  leadGeneration: landingNav(
+    'new-modern-rocket-with-smoke-and-blast-successfull-2026-03-10-22-19-55-utc 2.svg',
+  ),
+  salesFunnelDevelopment: landingNav('Startup laiunch 2.svg'),
+  crmSetupOptimization: landingNav('Partner 1.svg'),
+  salesAutomation: landingNav('AI Automation 3.svg'),
+  salesAnalyticsReporting: landingNav(
+    'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
+  ),
+  salesProcessOptimization: landingNav('digital transofrmation 2.svg'),
+  appointmentSettingOutreach: landingNav('Meet 1.svg'),
+  leadQualificationNurturing: landingNav('pexels-akoonie-35088940 2.svg'),
+  leadGenerationOutbound: cardImage('Sales Acceleration 1.png'),
+  salesFunnelsConversion: landingNav('Website 1 2.svg'),
+  crmSalesSystems: landingNav(
+    'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
+  ),
+  salesAutomationEnablement: landingNav('Accelerate 2.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

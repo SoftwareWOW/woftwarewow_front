@@ -282,9 +282,10 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Accelerate',
     'Launch and growth systems that help startups and teams move from idea to market faster.',
     [
-      { id: 'programs', label: 'Programs', href: '/accelerate#programs' },
-      { id: 'process', label: 'Process', href: '/accelerate#process' },
-      { id: 'outcomes', label: 'Outcomes', href: '/accelerate#outcomes' },
+      { id: 'services', label: 'Services', href: '/accelerate#services' },
+      { id: 'solutions', label: 'Solutions', href: '/accelerate#solutions' },
+      { id: 'caseStudies', label: 'Case Studies', href: '/case-study' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

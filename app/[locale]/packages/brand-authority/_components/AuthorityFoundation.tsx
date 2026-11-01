@@ -67,7 +67,9 @@ const ArrowButton = () => (
   </div>
 )
 
-type Props = Partial<CmsTechnologiesSection>
+type Props = Partial<CmsTechnologiesSection> & {
+  sectionId?: string
+}
 
 /** Home-16 — ServicesV14: bordered cards with arrow hover. */
 const AuthorityFoundation = ({
@@ -76,11 +78,15 @@ const AuthorityFoundation = ({
   accentTitle = 'do best.',
   description = 'Build the foundations that help people recognize, trust, and remember your brand.',
   items,
+  sectionId,
 }: Props = {}) => {
   const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
 
   return (
-    <section>
+    <section
+      id={sectionId}
+      className={sectionId ? 'scroll-mt-28' : undefined}
+    >
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapper className="reveal-me mb-3 flex justify-center">
           <SectionLabel>{eyebrow}</SectionLabel>
