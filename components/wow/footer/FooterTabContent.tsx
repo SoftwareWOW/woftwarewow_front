@@ -163,7 +163,12 @@ function ContactPanel() {
 
 export function ConnectPanel() {
   return (
-    <div className={cn(panelClass, 'flex flex-col items-center gap-6 py-3 sm:gap-8 sm:py-4 2xl:gap-12 2xl:py-8')}>
+    <div
+      className={cn(
+        panelClass,
+        'flex w-full flex-col items-center gap-6 py-3 sm:gap-8 sm:py-4 lg:py-0 2xl:gap-12 2xl:py-0',
+      )}
+    >
       <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 min-[1400px]:gap-8">
         {connectSocials.map((social) => {
           const SocialIcon = socialBrandIcons[social.icon]

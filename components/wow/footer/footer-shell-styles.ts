@@ -83,9 +83,10 @@ export const footerCardPanelFillClass = cn(
   'flex w-full flex-col max-lg:h-auto max-lg:min-h-0 max-lg:flex-none lg:h-full lg:min-h-0',
 )
 
-/** Top-aligned panels (Resources / Connect / Ask). */
+/** Lighter tabs (Resources / Connect / Ask) — centered vertically in the lg+ panel slot. */
 export const footerPanelTopAlignClass = cn(
-  'flex w-full flex-col justify-start max-lg:h-auto max-lg:min-h-0 lg:h-full lg:min-h-0',
+  'flex w-full flex-col justify-start max-lg:h-auto max-lg:min-h-0',
+  'lg:h-full lg:min-h-0 lg:justify-center',
 )
 
 /** Figma footer shell — soft purple glow (top orb + bottom center), base fill unchanged. */
