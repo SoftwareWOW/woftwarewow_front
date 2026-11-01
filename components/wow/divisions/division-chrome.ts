@@ -6,6 +6,7 @@ import {
 import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelerate-navigation'
 import { wowDesignNavigation } from '@/components/wow/divisions/wow-design-navigation'
 import { wowHostNavigation } from '@/components/wow/divisions/wow-host-navigation'
+import { wowEventsNavigation } from '@/components/wow/divisions/wow-events-navigation'
 import { wowImpactNavigation } from '@/components/wow/divisions/wow-impact-navigation'
 import { wowSocialNavigation } from '@/components/wow/divisions/wow-social-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
@@ -348,6 +349,44 @@ export const wowHostFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard>
   },
 ] as const
 
+export const wowEventsFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Conferences & Summits',
+    description:
+      'Bring industry leaders together to exchange ideas, inspire innovation, and create opportunities.',
+    href: '/events#experiences',
+    iconId: 'ourEventsConferencesSummits',
+  },
+  {
+    title: 'Brand & Product Launches',
+    description:
+      'Celebrate bold ideas with memorable launches that capture attention and spark excitement.',
+    href: '/events#experiences',
+    iconId: 'ourEventsBrandLaunches',
+  },
+  {
+    title: 'Corporate Experiences',
+    description:
+      'Create engaging corporate experiences that strengthen teams, celebrate milestones, and inspire collaboration.',
+    href: '/events#experiences',
+    iconId: 'ourEventsCorporateExperiences',
+  },
+  {
+    title: 'Networking & Community',
+    description:
+      'Bring people together through meaningful gatherings that build relationships and strengthen communities.',
+    href: '/events#experiences',
+    iconId: 'ourEventsNetworkingCommunity',
+  },
+  {
+    title: 'Hybrid & Virtual Events',
+    description:
+      'Connect audiences everywhere with engaging digital experiences that bring people together.',
+    href: '/events#experiences',
+    iconId: 'ourEventsHybridVirtual',
+  },
+] as const
+
 export const wowImpactFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
   {
     title: 'Personal Branding',
@@ -470,6 +509,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowImpact') {
     return 'This is where stories become influence.'
   }
+  if (config.id === 'wowEvents') {
+    return 'This is where connections become opportunities.'
+  }
   return config.tagline
 }
 
@@ -500,7 +542,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                     ? (wowHostNavigation as NavigationData)
                     : divisionId === 'wowImpact'
                       ? (wowImpactNavigation as NavigationData)
-                      : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+                      : divisionId === 'wowEvents'
+                        ? (wowEventsNavigation as NavigationData)
+                        : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -521,7 +565,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
                     ? wowHostFooterServiceCards
                     : divisionId === 'wowImpact'
                       ? wowImpactFooterServiceCards
-                      : footerCardsFromConfig(config)
+                      : divisionId === 'wowEvents'
+                        ? wowEventsFooterServiceCards
+                        : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

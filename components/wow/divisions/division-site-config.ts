@@ -466,8 +466,10 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'WOW Events',
     'Experiences and events that bring brands, communities, and ideas together.',
     [
-      { id: 'experiences', label: 'Experiences', href: '/events#experiences' },
+      { id: 'ourEvents', label: 'Our Events', href: '/events#experiences' },
       { id: 'services', label: 'Services', href: '/events#services' },
+      { id: 'pastEvents', label: 'Past Events', href: '/portfolio/recent' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

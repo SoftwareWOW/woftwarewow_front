@@ -24,7 +24,10 @@ export default function EventsWorkSection() {
   }, [activeCategory, content.cards])
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="experiences"
+      className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container">
         <div className="mb-8 flex flex-col gap-8 md:mb-12 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
           <div className="max-w-3xl">

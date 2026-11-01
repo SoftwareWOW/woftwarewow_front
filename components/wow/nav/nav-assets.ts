@@ -174,6 +174,17 @@ export const navMenuIcons = {
   reputationVisibility: TrendingUp,
   speakingMediaPresence: Megaphone,
 
+  // WOW Events — Our Events & Services
+  ourEventsConferencesSummits: Calendar,
+  ourEventsBrandLaunches: Megaphone,
+  ourEventsCorporateExperiences: Building2,
+  ourEventsNetworkingCommunity: UsersRound,
+  ourEventsHybridVirtual: Globe,
+  eventsServicesConferencesCorporate: Briefcase,
+  eventsServicesBrandLaunches: Sparkles,
+  eventsServicesNetworkingCommunity: Handshake,
+  eventsServicesHybridVirtual: Share2,
+
   // For You — Solutions
   buildLaunch: Rocket,
   softwareTechnology: Code2,
@@ -487,6 +498,19 @@ export const navCardImages = {
   thoughtLeadership: landingNav('Why Smbs 1.svg'),
   reputationVisibility: landingNav('Education 2.svg'),
   speakingMediaPresence: landingNav('Events 3.svg'),
+
+  // WOW Events division mega-menu
+  ourEventsConferencesSummits: landingNav('Events 3.svg'),
+  ourEventsBrandLaunches: landingNav('Events 2 1.svg'),
+  ourEventsCorporateExperiences: landingNav('Education 2.svg'),
+  ourEventsNetworkingCommunity: landingNav('Social 2.svg'),
+  ourEventsHybridVirtual: landingNav('AI and Automation 2.svg'),
+  eventsServicesConferencesCorporate: landingNav(
+    'rear-view-of-audience-in-the-conference-hall-or-se-2026-01-05-06-35-37-utc 2.svg',
+  ),
+  eventsServicesBrandLaunches: landingNav('Branding & Creative 2.svg'),
+  eventsServicesNetworkingCommunity: landingNav('Partner 1.svg'),
+  eventsServicesHybridVirtual: landingNav('Website 1 2.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages
