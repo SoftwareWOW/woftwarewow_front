@@ -4,6 +4,7 @@ import {
   type DivisionSiteConfig,
 } from '@/components/wow/divisions/division-site-config'
 import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelerate-navigation'
+import { wowDesignNavigation } from '@/components/wow/divisions/wow-design-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
@@ -282,6 +283,37 @@ export const wowAccelerateFooterServiceCards: ReadonlyArray<DivisionFooterServic
   },
 ] as const
 
+export const wowDesignFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Brand Identity & Strategy',
+    description:
+      'Build a distinctive brand identity that inspires trust and leaves a lasting impression.',
+    href: '/design#services',
+    iconId: 'brandIdentityStrategy',
+  },
+  {
+    title: 'Graphic & Marketing Design',
+    description:
+      'Create impactful visuals that capture attention, communicate your message, and strengthen your brand.',
+    href: '/design#services',
+    iconId: 'graphicMarketingDesign',
+  },
+  {
+    title: 'UI/UX & Digital Design',
+    description:
+      'Design intuitive, engaging digital experiences that make every interaction feel effortless.',
+    href: '/design#services',
+    iconId: 'uiUxDigitalDesign',
+  },
+  {
+    title: 'Video, Motion & Creative Content',
+    description:
+      'Bring your brand to life with compelling visuals, motion, and creative storytelling.',
+    href: '/design#services',
+    iconId: 'videoMotionCreativeContent',
+  },
+] as const
+
 function buildLinkOnlyNavigation(navItems: DivisionNavItem[]): NavigationData {
   return {
     detailPanels: { default: defaultDetailPanel },
@@ -337,6 +369,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowAccelerate') {
     return 'This is where sales become scalable.'
   }
+  if (config.id === 'wowDesign') {
+    return 'This is where imagination becomes design.'
+  }
   return config.tagline
 }
 
@@ -359,7 +394,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
             ? (wowIntelligenceNavigation as NavigationData)
             : divisionId === 'wowAccelerate'
               ? (wowAccelerateNavigation as NavigationData)
-              : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+              : divisionId === 'wowDesign'
+                ? (wowDesignNavigation as NavigationData)
+                : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -372,7 +409,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
             ? wowIntelligenceFooterServiceCards
             : divisionId === 'wowAccelerate'
               ? wowAccelerateFooterServiceCards
-              : footerCardsFromConfig(config)
+              : divisionId === 'wowDesign'
+                ? wowDesignFooterServiceCards
+                : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 

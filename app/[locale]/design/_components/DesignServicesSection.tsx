@@ -10,7 +10,10 @@ export default function DesignServicesSection() {
   const content = DESIGN_SERVICES
 
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background">
+    <section
+      id="services"
+      className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background"
+    >
       <div className="container">
         <div className="mb-8 text-center md:mb-12">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">

@@ -7,6 +7,7 @@ import {
   Briefcase,
   Building2,
   Calendar,
+  Clapperboard,
   Cloud,
   Code2,
   Compass,
@@ -145,6 +146,12 @@ export const navMenuIcons = {
   salesFunnelsConversion: Megaphone,
   crmSalesSystems: LayoutGrid,
   salesAutomationEnablement: Zap,
+
+  // WOW Design — Services
+  brandIdentityStrategy: SwatchBook,
+  graphicMarketingDesign: Palette,
+  uiUxDigitalDesign: LayoutGrid,
+  videoMotionCreativeContent: Clapperboard,
 
   // For You — Solutions
   buildLaunch: Rocket,
@@ -429,6 +436,14 @@ export const navCardImages = {
     'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
   ),
   salesAutomationEnablement: landingNav('Accelerate 2.svg'),
+
+  // WOW Design division mega-menu
+  brandIdentityStrategy: landingNav('Branding & Creative 2.svg'),
+  graphicMarketingDesign: landingNav(
+    'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
+  ),
+  uiUxDigitalDesign: landingNav('Website 1 2.svg'),
+  videoMotionCreativeContent: cardImage('explore-default.jpg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

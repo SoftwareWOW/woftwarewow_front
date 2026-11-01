@@ -171,8 +171,8 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'Product, brand, and experience design that makes digital feel premium and human.',
     [
       { id: 'services', label: 'Services', href: '/design#services' },
-      { id: 'process', label: 'Process', href: '/design#process' },
-      { id: 'work', label: 'Work', href: '/design#work' },
+      { id: 'portfolio', label: 'Portfolio', href: '/portfolio' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {
