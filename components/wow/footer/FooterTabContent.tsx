@@ -179,7 +179,7 @@ export function ConnectPanel() {
                 mutedText,
               )}
             >
-              <SocialIcon className="size-10 sm:size-12 md:size-14 lg:size-16 xl:size-20 min-[1400px]:size-[85px] min-[1800px]:size-[92px]" />
+              <SocialIcon className="size-7 sm:size-8 md:size-9 lg:size-10 xl:size-11 min-[1400px]:size-[45px] min-[1800px]:size-12" />
             </a>
           )
         })}
