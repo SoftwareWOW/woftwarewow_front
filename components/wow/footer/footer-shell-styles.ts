@@ -115,18 +115,27 @@ export const footerActionCardGridClass = cn(
 
 /** Centers the Services card cluster in the tab panel on lg+; mobile stacks from the top. */
 export const footerServicePanelCenterClass = cn(
-  'flex w-full flex-col max-lg:justify-start lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center',
+  'flex w-full min-w-0 max-w-full flex-col max-lg:justify-start lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center',
+  'lg:px-2 xl:px-4 2xl:px-6',
 )
 
-/** Grid width matches measured footer tab row (--footer-tablist-width from WowFooterShell). */
-const footerServiceGridBase = cn(
-  'grid w-full max-w-full items-stretch gap-3 sm:gap-3.5 md:gap-4 lg:mx-auto lg:gap-5 xl:gap-6 min-[1400px]:gap-6',
+const footerServiceGridGaps = cn(
+  'grid min-w-0 w-full max-w-full items-stretch gap-3 sm:gap-3.5 md:gap-4 lg:mx-auto lg:gap-5 xl:gap-6 min-[1400px]:gap-6',
+)
+
+/** Up to 4 cards: cluster width matches footer tab row (--footer-tablist-width). */
+const footerServiceGridTabAligned = cn(
+  footerServiceGridGaps,
   'lg:w-[var(--footer-tablist-width,100%)] lg:max-w-[var(--footer-tablist-width,100%)]',
 )
 
+/** 5+ cards: use full tab panel width so cards are not squeezed to tab-button width. */
+const footerServiceGridWide = footerServiceGridGaps
+
 const footerServiceCols2 = 'lg:grid-cols-2'
-const footerServiceCols3 = 'lg:grid-cols-3'
-const footerServiceCols6 = 'lg:grid-cols-6'
+/** Laptop: 2 columns; xl+: 3 columns (wide grids only). */
+const footerServiceColsResponsive = 'lg:grid-cols-2 xl:grid-cols-3'
+const footerServiceCols6 = 'xl:grid-cols-6'
 const footerServiceHalfRowMax = cn(
   'lg:max-w-[calc((var(--footer-tablist-width,100%)-1.25rem)/2)]',
   'xl:max-w-[calc((var(--footer-tablist-width,100%)-1.5rem)/2)]',
@@ -136,17 +145,17 @@ const footerServiceHalfRowMax = cn(
 /** Services tab — layout by card count; cluster centered with gaps/padding unchanged. */
 export function footerServiceGridClassForCount(count: number): string {
   if (count <= 0) {
-    return cn(footerServiceGridBase, 'grid-cols-1')
+    return cn(footerServiceGridTabAligned, 'grid-cols-1')
   }
   if (count === 1) {
-    return cn(footerServiceGridBase, 'grid-cols-1', footerServiceHalfRowMax, 'lg:justify-items-center')
+    return cn(footerServiceGridTabAligned, 'grid-cols-1', footerServiceHalfRowMax, 'lg:justify-items-center')
   }
   if (count === 2) {
-    return cn(footerServiceGridBase, 'grid-cols-1 sm:grid-cols-2', footerServiceCols2)
+    return cn(footerServiceGridTabAligned, 'grid-cols-1 sm:grid-cols-2', footerServiceCols2)
   }
   if (count === 3) {
     return cn(
-      footerServiceGridBase,
+      footerServiceGridTabAligned,
       'grid-cols-1 sm:grid-cols-2',
       footerServiceCols2,
       '[&>*:nth-child(3)]:lg:col-span-2 [&>*:nth-child(3)]:lg:justify-self-center',
@@ -157,71 +166,71 @@ export function footerServiceGridClassForCount(count: number): string {
   }
   if (count === 4) {
     return cn(
-      footerServiceGridBase,
+      footerServiceGridTabAligned,
       'grid-cols-1 sm:grid-cols-2',
       footerServiceCols2,
     )
   }
   if (count === 5) {
     return cn(
-      footerServiceGridBase,
-      'grid-cols-1 sm:grid-cols-2',
+      footerServiceGridWide,
+      'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2',
       footerServiceCols6,
-      '[&>*:nth-child(-n+3)]:lg:col-span-2',
-      '[&>*:nth-child(4)]:lg:col-start-2 [&>*:nth-child(4)]:lg:col-span-2',
-      '[&>*:nth-child(5)]:lg:col-start-4 [&>*:nth-child(5)]:lg:col-span-2',
+      '[&>*:nth-child(-n+3)]:xl:col-span-2',
+      '[&>*:nth-child(4)]:xl:col-start-2 [&>*:nth-child(4)]:xl:col-span-2',
+      '[&>*:nth-child(5)]:xl:col-start-4 [&>*:nth-child(5)]:xl:col-span-2',
     )
   }
   if (count === 6) {
-    return cn(footerServiceGridBase, 'grid-cols-1 sm:grid-cols-2', footerServiceCols3)
+    return cn(footerServiceGridWide, 'grid-cols-1 sm:grid-cols-2', footerServiceColsResponsive)
   }
   if (count === 7) {
     return cn(
-      footerServiceGridBase,
+      footerServiceGridWide,
       'grid-cols-1 sm:grid-cols-2',
-      footerServiceCols3,
-      '[&>*:nth-child(7)]:lg:col-start-2',
+      footerServiceColsResponsive,
+      '[&>*:nth-child(7)]:xl:col-start-2',
     )
   }
   if (count === 8) {
     return cn(
-      footerServiceGridBase,
+      footerServiceGridWide,
       'grid-cols-1 sm:grid-cols-2',
-      footerServiceCols3,
-      '[&>*:nth-child(7)]:lg:col-start-1',
-      '[&>*:nth-child(8)]:lg:col-start-3',
+      footerServiceColsResponsive,
+      '[&>*:nth-child(7)]:xl:col-start-1',
+      '[&>*:nth-child(8)]:xl:col-start-3',
     )
   }
   if (count === 9) {
-    return cn(footerServiceGridBase, 'grid-cols-1 sm:grid-cols-2', footerServiceCols3)
+    return cn(footerServiceGridWide, 'grid-cols-1 sm:grid-cols-2', footerServiceColsResponsive)
   }
   if (count === 10) {
     return cn(
-      footerServiceGridBase,
+      footerServiceGridWide,
       'grid-cols-1 sm:grid-cols-2',
-      footerServiceCols3,
-      '[&>*:nth-child(10)]:lg:col-start-2',
+      footerServiceColsResponsive,
+      '[&>*:nth-child(10)]:xl:col-start-2',
     )
   }
 
   const remainder = count % 3
   if (remainder === 0) {
-    return cn(footerServiceGridBase, 'grid-cols-1 sm:grid-cols-2', footerServiceCols3)
+    return cn(footerServiceGridWide, 'grid-cols-1 sm:grid-cols-2', footerServiceColsResponsive)
   }
   if (remainder === 1) {
     return cn(
-      footerServiceGridBase,
+      footerServiceGridWide,
       'grid-cols-1 sm:grid-cols-2',
-      footerServiceCols3,
-      `[&>*:nth-child(${count})]:lg:col-start-2`,
+      footerServiceColsResponsive,
+      `[&>*:nth-child(${count})]:xl:col-start-2`,
     )
   }
   return cn(
-    footerServiceGridBase,
+    footerServiceGridWide,
     'grid-cols-1 sm:grid-cols-2',
-    footerServiceCols3,
-    '[&>*:nth-last-child(2)]:lg:col-start-1',
-    '[&>*:nth-last-child(1)]:lg:col-start-3',
+    footerServiceColsResponsive,
+    '[&>*:nth-last-child(2)]:xl:col-start-1',
+    '[&>*:nth-last-child(1)]:xl:col-start-3',
   )
 }
 

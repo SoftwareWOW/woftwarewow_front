@@ -21,7 +21,7 @@ const footerIconClass = cn(
 )
 
 const cardShellClass = cn(
-  'group box-border flex h-full min-h-0 w-full self-stretch rounded-radius-sm border text-left transition-colors',
+  'group box-border flex h-full min-h-0 min-w-0 w-full max-w-full self-stretch rounded-radius-sm border text-left transition-colors',
   'border-[#1515151A] dark:border-[#EDF0F51A]',
   footerItemSurfaceClass,
 )
@@ -32,22 +32,22 @@ const cardRowLayoutClass = cn(
 
 /** Services tab cards (iconStyle plain) — Figma @ ~1400px: 24px title, 16px body, 60px icon, 20px pad, 24px gap. */
 const cardServiceRowLayoutClass = cn(
-  'items-center gap-3 p-3',
+  'flex-row items-start gap-3 p-3',
   'sm:gap-3.5 sm:p-3.5',
-  'md:gap-4 md:p-4',
-  'lg:gap-5 lg:p-[18px]',
+  'md:items-center md:gap-4 md:p-4',
+  'lg:gap-4 lg:p-4',
   'xl:gap-6 xl:p-5',
   'min-[1400px]:gap-6 min-[1400px]:p-5',
 )
 
 const footerServiceTitleClass = cn(
-  'block font-outfit font-light leading-tight text-secondary dark:text-[#F2F2F2]',
-  'text-[15px] sm:text-base md:text-lg lg:text-xl xl:text-[22px] min-[1400px]:text-2xl min-[1400px]:leading-[1.15]',
+  'block break-words font-outfit font-light leading-tight text-secondary dark:text-[#F2F2F2]',
+  'text-[15px] sm:text-base md:text-lg lg:text-lg xl:text-xl min-[1400px]:text-2xl min-[1400px]:leading-[1.15]',
   navItemLabelClass,
 )
 
 const footerServiceDescriptionClass = cn(
-  'mt-1 block font-outfit font-light !text-[#808080]',
+  'mt-1 block break-words font-outfit font-light !text-[#808080]',
   'text-[11px] leading-snug sm:mt-1.5 sm:text-xs md:text-[13px] lg:text-sm xl:text-[15px]',
   'min-[1400px]:mt-2 min-[1400px]:text-base min-[1400px]:leading-[1.5]',
   navItemDescriptionClass,
