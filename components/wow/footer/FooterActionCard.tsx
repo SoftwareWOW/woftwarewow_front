@@ -53,26 +53,21 @@ const footerServiceDescriptionClass = cn(
   navItemDescriptionClass,
 )
 
-/** Contact tab — Figma @ 1400px: 36px title, 16px body, 60px icon, 80px arrow; scales below/above. */
+/** Contact tab — Figma @ 1400px: 36px title, 16px body, 60px plain icon, 80px arrow; scales below/above. */
 const cardContactLayoutClass = cn(
-  'flex-col items-stretch justify-between gap-3 p-3',
-  'sm:flex-row sm:items-stretch sm:justify-between sm:gap-4 sm:p-4',
-  'lg:gap-5 lg:p-5 xl:gap-6 xl:p-6',
-  'min-[1400px]:gap-6 min-[1400px]:p-8',
+  'flex-col items-stretch gap-3 p-3 sm:gap-4 sm:p-4 lg:gap-5 lg:p-5 xl:gap-6 xl:p-6 min-[1400px]:gap-6 min-[1400px]:p-8',
 )
 
 const footerContactTitleClass = cn(
   'block font-outfit font-light leading-[1.15] text-secondary dark:text-[#F2F2F2]',
   'text-xl sm:text-2xl md:text-[26px] lg:text-[30px] xl:text-[34px]',
   'min-[1400px]:text-[36px] min-[1800px]:text-[40px]',
-  navItemLabelClass,
 )
 
 const footerContactDescriptionClass = cn(
   'mt-1 block font-outfit font-light leading-[1.5] !text-[#808080]',
   'text-xs sm:text-sm md:text-[14px] lg:text-[15px]',
   'min-[1400px]:mt-2 min-[1400px]:text-base min-[1800px]:text-[17px]',
-  navItemDescriptionClass,
 )
 
 const rowShellClass = cn(
@@ -81,20 +76,20 @@ const rowShellClass = cn(
 )
 
 const footerContactArrowBoxClass = cn(
-  'relative inline-flex shrink-0 items-center justify-center self-end overflow-hidden rounded-radius-sm border',
+  'relative ml-auto inline-flex shrink-0 items-center justify-center overflow-hidden rounded-radius-sm border',
+  'border-[#1515151A] bg-transparent dark:border-[#EDF0F51A]',
   'size-11 min-h-11 min-w-11 sm:size-12 sm:min-h-12 sm:min-w-12',
   'md:size-14 md:min-h-14 md:min-w-14 lg:size-16 lg:min-h-16 lg:min-w-16',
   'xl:size-[72px] xl:min-h-[72px] xl:min-w-[72px]',
   'min-[1400px]:size-[80px] min-[1400px]:min-h-[80px] min-[1400px]:min-w-[80px]',
   'min-[1800px]:size-[88px] min-[1800px]:min-h-[88px] min-[1800px]:min-w-[88px]',
-  'sm:self-start',
-  footerIconBoxClass,
 )
 
 const footerContactArrowIconClass = cn(
   'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
   'size-4 sm:size-[18px] md:size-5 lg:size-6 xl:size-7 min-[1400px]:size-8 min-[1800px]:size-9',
-  footerIconClass,
+  '!fill-none stroke-secondary dark:stroke-[#F2F2F2]',
+  'group-hover:stroke-black dark:group-hover:!stroke-white',
 )
 
 function FooterContactArrow() {
@@ -122,39 +117,36 @@ function FooterContactArrow() {
   )
 }
 
-const footerContactIconBoxClass = cn(
-  'inline-flex shrink-0 items-center justify-center rounded-radius-sm border',
-  'size-10 min-h-10 min-w-10 p-2 sm:size-11 sm:min-h-11 sm:min-w-11 sm:p-2.5',
-  'md:size-12 md:min-h-12 md:min-w-12 md:p-2.5',
-  'lg:size-14 lg:min-h-14 lg:min-w-14 lg:p-3',
-  'xl:size-[52px] xl:min-h-[52px] xl:min-w-[52px]',
-  'min-[1400px]:size-[60px] min-[1400px]:min-h-[60px] min-[1400px]:min-w-[60px] min-[1400px]:p-3',
-  'min-[1800px]:size-[66px] min-[1800px]:min-h-[66px] min-[1800px]:min-w-[66px]',
-  footerIconBoxClass,
+/** Plain glyph only — no border/background (Figma contact cards). */
+const footerContactPlainIconClass = cn(
+  'size-10 sm:size-11 md:size-12 lg:size-14 xl:size-[52px]',
+  'min-[1400px]:size-[60px] min-[1800px]:size-[66px]',
+  '!fill-none stroke-secondary dark:stroke-[#F2F2F2]',
+  'group-hover:stroke-black dark:group-hover:!stroke-white',
+  '[&_*]:!fill-none',
 )
 
-const footerContactIconGlyphClass = cn(
-  'size-5 sm:size-[22px] md:size-6 lg:size-7 xl:size-8 min-[1400px]:size-9 min-[1800px]:size-10',
-  footerIconClass,
-)
+function FooterContactPlainIcon({ iconId, icon }: { iconId?: string; icon?: ReactNode }) {
+  if (icon) {
+    return (
+      <span className="inline-flex shrink-0 items-center justify-center bg-transparent">{icon}</span>
+    )
+  }
+  if (!iconId) return null
+  return (
+    <span className="inline-flex shrink-0 items-center justify-center bg-transparent">
+      <MenuItemIcon iconId={iconId} className={footerContactPlainIconClass} />
+    </span>
+  )
+}
 
 function FooterIconBox({
   iconId,
   icon,
-  variant = 'default',
 }: {
   iconId?: string
   icon?: ReactNode
-  variant?: 'default' | 'contact'
 }) {
-  if (variant === 'contact') {
-    return (
-      <span className={footerContactIconBoxClass}>
-        {iconId ? <MenuItemIcon iconId={iconId} className={footerContactIconGlyphClass} /> : icon}
-      </span>
-    )
-  }
-
   return (
     <span
       className={cn(
@@ -249,20 +241,22 @@ export function FooterActionCard({
       )}
     >
       {isContactCard ? (
-        <>
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 sm:gap-4 lg:gap-5 min-[1400px]:gap-6">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 sm:gap-4 lg:gap-5 min-[1400px]:gap-6">
+          <div className="flex w-full items-start justify-between gap-3 sm:gap-4">
             {iconStyle === 'boxed' && (iconId || icon) ? (
-              <FooterIconBox iconId={iconId} icon={icon} variant="contact" />
-            ) : null}
-            <span className="min-w-0">
-              <span className={footerContactTitleClass}>{title}</span>
-              {description ? (
-                <span className={footerContactDescriptionClass}>{description}</span>
-              ) : null}
-            </span>
+              <FooterContactPlainIcon iconId={iconId} icon={icon} />
+            ) : (
+              <span className="shrink-0" aria-hidden />
+            )}
+            <FooterContactArrow />
           </div>
-          <FooterContactArrow />
-        </>
+          <span className="min-w-0">
+            <span className={footerContactTitleClass}>{title}</span>
+            {description ? (
+              <span className={footerContactDescriptionClass}>{description}</span>
+            ) : null}
+          </span>
+        </div>
       ) : (
         <>
           {iconStyle === 'boxed' && (iconId || icon) ? <FooterIconBox iconId={iconId} icon={icon} /> : null}
