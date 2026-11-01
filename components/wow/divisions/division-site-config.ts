@@ -246,8 +246,9 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
     'Social strategy, content, and community systems that build presence and engagement.',
     [
       { id: 'services', label: 'Services', href: '/social#services' },
-      { id: 'approach', label: 'Approach', href: '/social#approach' },
-      { id: 'work', label: 'Work', href: '/social#work' },
+      { id: 'ourWork', label: 'Our Work', href: '/portfolio' },
+      { id: 'packages', label: 'Packages', href: '/packages/brand-authority' },
+      { id: 'about', label: 'About', href: '/about' },
     ],
     [
       {

@@ -81,7 +81,7 @@ export default async function WowSocialPage({ params }: Props) {
       <SocialCreativeToolsSection />
       <WowEcosystem ecosystem={ecosystem} />
       <SocialFaqSection />
-      <div className="-mb-5 sm:-mb-10 md:-mb-15 lg:-mb-20">
+      <div className="mb-3">
         <WowGrowthCta
           accentText={SOCIAL_CTA.accentText}
           mainText={SOCIAL_CTA.mainText}

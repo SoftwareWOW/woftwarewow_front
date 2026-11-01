@@ -153,6 +153,11 @@ export const navMenuIcons = {
   uiUxDigitalDesign: LayoutGrid,
   videoMotionCreativeContent: Clapperboard,
 
+  // WOW Social — Services
+  socialMediaStrategyManagement: LineChart,
+  socialInfluencerContentCreation: Megaphone,
+  paidSocialAdvertisingCommunityManagement: UsersRound,
+
   // For You — Solutions
   buildLaunch: Rocket,
   softwareTechnology: Code2,
@@ -444,6 +449,11 @@ export const navCardImages = {
   ),
   uiUxDigitalDesign: landingNav('Website 1 2.svg'),
   videoMotionCreativeContent: cardImage('explore-default.jpg'),
+
+  // WOW Social division mega-menu
+  socialMediaStrategyManagement: landingNav('Social 2.svg'),
+  socialInfluencerContentCreation: landingNav('Social 3.svg'),
+  paidSocialAdvertisingCommunityManagement: landingNav('Social 2 1.svg'),
 } as const
 
 export type NavCardImageId = keyof typeof navCardImages

@@ -5,6 +5,7 @@ import {
 } from '@/components/wow/divisions/division-site-config'
 import { wowAccelerateNavigation } from '@/components/wow/divisions/wow-accelerate-navigation'
 import { wowDesignNavigation } from '@/components/wow/divisions/wow-design-navigation'
+import { wowSocialNavigation } from '@/components/wow/divisions/wow-social-navigation'
 import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intelligence-navigation'
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
@@ -314,6 +315,30 @@ export const wowDesignFooterServiceCards: ReadonlyArray<DivisionFooterServiceCar
   },
 ] as const
 
+export const wowSocialFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
+  {
+    title: 'Social Media Strategy & Management',
+    description:
+      'Build a stronger social presence with strategic planning, consistent management, and audience-focused campaigns.',
+    href: '/social#services',
+    iconId: 'socialMediaStrategyManagement',
+  },
+  {
+    title: 'Social & Influencer Content Creation',
+    description:
+      'Capture attention and grow engagement through creative content and authentic influencer collaborations.',
+    href: '/social#services',
+    iconId: 'socialInfluencerContentCreation',
+  },
+  {
+    title: 'Paid Social Advertising & Community Management',
+    description:
+      'Grow your reach, drive conversions, and build stronger communities through targeted social campaigns.',
+    href: '/social#services',
+    iconId: 'paidSocialAdvertisingCommunityManagement',
+  },
+] as const
+
 function buildLinkOnlyNavigation(navItems: DivisionNavItem[]): NavigationData {
   return {
     detailPanels: { default: defaultDetailPanel },
@@ -372,6 +397,9 @@ function resourcesTaglineFor(config: DivisionSiteConfig): string {
   if (config.id === 'wowDesign') {
     return 'This is where imagination becomes design.'
   }
+  if (config.id === 'wowSocial') {
+    return 'This is where content becomes community.'
+  }
   return config.tagline
 }
 
@@ -396,7 +424,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
               ? (wowAccelerateNavigation as NavigationData)
               : divisionId === 'wowDesign'
                 ? (wowDesignNavigation as NavigationData)
-                : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
+                : divisionId === 'wowSocial'
+                  ? (wowSocialNavigation as NavigationData)
+                  : config.navigation ?? buildLinkOnlyNavigation(config.navItems)
 
   const serviceCards =
     divisionId === 'softwareWow'
@@ -411,7 +441,9 @@ export function getDivisionChrome(divisionId: DivisionId): DivisionChrome {
               ? wowAccelerateFooterServiceCards
               : divisionId === 'wowDesign'
                 ? wowDesignFooterServiceCards
-                : footerCardsFromConfig(config)
+                : divisionId === 'wowSocial'
+                  ? wowSocialFooterServiceCards
+                  : footerCardsFromConfig(config)
 
   const hasMegaMenu = divisionMenuItems(navigation).length > 0
 
