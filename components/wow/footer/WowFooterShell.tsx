@@ -95,9 +95,20 @@ export default function WowFooterShell({
   }, [showAskTab, tabs])
 
   const { measureRef, panelMinHeight } = useFooterPanelMinHeight(measureTabIds)
+  const [lockPanelHeight, setLockPanelHeight] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const update = () => setLockPanelHeight(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   const tabPanelStyle: CSSProperties | undefined =
-    panelMinHeight > 0 ? { minHeight: panelMinHeight, height: panelMinHeight } : undefined
+    lockPanelHeight && panelMinHeight > 0
+      ? { minHeight: panelMinHeight, height: panelMinHeight }
+      : undefined
 
   const handleAccessClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href === '/meet' && meetDialog) {
@@ -108,13 +119,13 @@ export default function WowFooterShell({
 
   return (
     <footer ref={footerRef} className={stickyFooterClass}>
-      <div className="relative bg-background px-3 pt-2 pb-0 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 2xl:px-10 2xl:pt-5">
+      <div className="relative bg-background px-3 pt-2 pb-2 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 sm:pb-2.5 lg:pb-0 2xl:px-10 2xl:pt-5">
         <div className="relative z-10 mx-auto w-full max-w-[1440px]">
           <div className={footerShellContainerClass} data-footer-shell style={shellStyle}>
             <div
               ref={measureRef}
               aria-hidden
-              className="pointer-events-none invisible absolute left-0 top-0 -z-10 h-0 w-full overflow-hidden opacity-0"
+              className="pointer-events-none invisible absolute left-0 top-0 -z-10 hidden h-0 w-full overflow-hidden opacity-0 lg:block"
             >
               {measureTabIds.map((tabId) => (
                 <div key={tabId} data-footer-panel-measure className="absolute left-0 top-0 w-full max-w-full">

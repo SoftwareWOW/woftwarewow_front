@@ -47,19 +47,21 @@ export const footerTabActiveClass = cn(
   'dark:hover:border-primary dark:hover:bg-[#292757]',
 )
 
-/** Tab panel slot — height locked to tallest tab (WowFooterShell). */
+/** Tab panel slot — height locked to tallest tab on lg+; mobile sizes to content. */
 export const footerTabPanelClass = cn(
-  'row-start-1 flex min-h-0 w-full max-w-full flex-col overflow-x-hidden overflow-y-auto',
-  '[&>*]:h-full [&>*]:min-h-0 [&>*]:w-full [&>*]:max-w-full',
+  'row-start-1 flex w-full max-w-full flex-col overflow-x-hidden max-lg:min-h-0 max-lg:overflow-y-visible',
+  'lg:min-h-0 lg:overflow-y-auto',
+  'max-lg:[&>*]:h-auto max-lg:[&>*]:min-h-0 lg:[&>*]:h-full lg:[&>*]:min-h-0',
+  '[&>*]:w-full [&>*]:max-w-full',
 )
 
 /** Vertical gap between tab row ↔ content ↔ access row (keep in sync with shell gap). */
 export const footerBandGapClass =
-  'gap-2.5 sm:gap-4 2xl:gap-[30px] max-h-[920px]:2xl:gap-4 max-h-[920px]:gap-2'
+  'gap-2 sm:gap-2.5 lg:gap-4 2xl:gap-[30px] max-h-[920px]:2xl:gap-4 max-h-[920px]:gap-2'
 
-/** Tab content + pinned access row; panel row height is stable across tab switches. */
+/** Tab content + pinned access row; stable panel slot height on lg+ only. */
 export const footerMiddleSectionClass = cn(
-  'grid w-full min-w-0 grid-rows-[minmax(0,1fr)_auto]',
+  'grid w-full min-w-0 grid-rows-[auto_auto] lg:grid-rows-[minmax(0,1fr)_auto]',
   footerBandGapClass,
 )
 
@@ -76,11 +78,15 @@ export const footerAccessTabClass = cn(
   footerItemSurfaceClass,
 )
 
-/** Stretch card grids to fill the panel slot (Explore / Services / Contact). */
-export const footerCardPanelFillClass = 'flex h-full min-h-0 w-full flex-col'
+/** Stretch card grids to fill the panel slot on lg+ (Explore / Services / Contact). */
+export const footerCardPanelFillClass = cn(
+  'flex w-full flex-col max-lg:h-auto max-lg:min-h-0 max-lg:flex-none lg:h-full lg:min-h-0',
+)
 
 /** Top-aligned panels (Resources / Connect / Ask). */
-export const footerPanelTopAlignClass = 'flex h-full min-h-0 w-full flex-col justify-start'
+export const footerPanelTopAlignClass = cn(
+  'flex w-full flex-col justify-start max-lg:h-auto max-lg:min-h-0 lg:h-full lg:min-h-0',
+)
 
 /** Figma footer shell — soft purple glow (top orb + bottom center), base fill unchanged. */
 export const footerShellGradientOverlayClass = cn(
@@ -90,7 +96,8 @@ export const footerShellGradientOverlayClass = cn(
 )
 
 export const footerShellContainerClass = cn(
-  'relative flex w-full min-h-0 flex-col items-center rounded-radius-md border py-3 sm:py-4 2xl:py-[30px]',
+  'relative flex w-full min-h-0 flex-col items-center rounded-radius-md border',
+  'pt-2.5 pb-2 sm:pt-3 sm:pb-2.5 lg:py-4 2xl:py-[30px]',
   'max-h-[920px]:2xl:py-4 max-h-[920px]:py-2.5',
   footerBandGapClass,
   footerSectionBgClass,
@@ -106,9 +113,9 @@ export const footerActionCardGridClass = cn(
   'lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(0,1fr))] lg:gap-4 2xl:gap-4',
 )
 
-/** Centers the Services card cluster in the tab panel (desktop); mobile stays full width. */
+/** Centers the Services card cluster in the tab panel on lg+; mobile stacks from the top. */
 export const footerServicePanelCenterClass = cn(
-  'flex w-full min-h-0 flex-1 items-center justify-center',
+  'flex w-full flex-col max-lg:justify-start lg:min-h-0 lg:flex-1 lg:items-center lg:justify-center',
 )
 
 /** Grid width matches measured footer tab row (--footer-tablist-width from WowFooterShell). */
@@ -218,16 +225,19 @@ export function footerServiceGridClassForCount(count: number): string {
   )
 }
 
-/** Explore divisions — 3 columns, equal row heights in panel slot. */
+/** Explore divisions — 3 columns, equal row heights in panel slot on lg+. */
 export const footerExploreCardGridClass = cn(
-  'grid h-full min-h-0 w-full flex-1 grid-cols-1 items-stretch gap-2 sm:grid-cols-2 sm:gap-2.5',
-  'lg:grid-cols-3 lg:auto-rows-fr lg:gap-4 2xl:gap-4',
+  'grid w-full max-w-full grid-cols-1 items-stretch gap-2 sm:grid-cols-2 sm:gap-2.5',
+  'max-lg:h-auto max-lg:min-h-0 max-lg:flex-none',
+  'lg:h-full lg:min-h-0 lg:flex-1 lg:grid-cols-3 lg:auto-rows-fr lg:gap-4 2xl:gap-4',
 )
 
-/** Contact cards — 2×2 grid fills panel slot when active. */
+/** Contact cards — 2×2 grid fills panel slot when active (lg+). */
 export const footerContactCardGridClass = cn(
-  'grid h-full min-h-0 w-full flex-1 grid-cols-1 grid-rows-[repeat(4,minmax(0,1fr))] items-stretch gap-2',
-  'sm:grid-cols-2 sm:grid-rows-[repeat(2,minmax(0,1fr))] sm:gap-2.5 2xl:gap-4',
+  'grid w-full max-w-full grid-cols-1 items-stretch gap-2',
+  'max-lg:h-auto max-lg:min-h-0 max-lg:flex-none max-lg:auto-rows-auto',
+  'sm:grid-cols-2 sm:gap-2.5 lg:h-full lg:min-h-0 lg:flex-1',
+  'lg:grid-rows-[repeat(2,minmax(0,1fr))] 2xl:gap-4',
 )
 
 export const footerMutedText = '!text-[#808080]'
