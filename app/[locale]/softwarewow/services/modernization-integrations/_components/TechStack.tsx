@@ -18,6 +18,14 @@ const HIDDEN_CATEGORY_IDS = new Set([
 
 const modernizationTechCategories = techCategories.filter((cat) => !HIDDEN_CATEGORY_IDS.has(cat.id))
 
+const BACKEND_HINT_OVERRIDES: Record<string, string> = {
+  'Node.js': 'Server-side application development.',
+  NestJS: 'Structured backend application architecture.',
+  'Express.js': 'Flexible API and backend services.',
+  GraphQL: 'Flexible application data queries and APIs.',
+  'REST API': 'Standardized communication between applications and services.',
+}
+
 /** Layout: about/TechStack UI — integration categories (does not change About or TechStackShared). */
 const TechStack = () => {
   const defaultCategory =
@@ -54,17 +62,19 @@ const TechStack = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <SectionLabel className="mb-6">Our Stack</SectionLabel>
+          <SectionLabel className="mb-6">Our Technology</SectionLabel>
           <h2 id="tech-heading" className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-            Powered by industry-leading{' '}
+            Modern tools.{' '}
             <span
               className="font-instrument italic text-inherit"
             >
-              technology
+              Built around your systems.
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#808080] transition-colors duration-300 sm:text-lg">
-            Proven tools we use to modernize, connect, and extend the systems your business already depends on.
+            The right technology depends on what you&apos;re working with today and where you want to go next. We use
+            established frameworks, integration approaches, and infrastructure technologies to connect, improve, and
+            extend existing software.
           </p>
         </motion.div>
 
@@ -133,7 +143,9 @@ const TechStack = () => {
                 >
                   <TechCard
                     name={item.name}
-                    hint={item.hint}
+                    hint={
+                      active.id === 'backend' ? (BACKEND_HINT_OVERRIDES[item.name] ?? item.hint) : item.hint
+                    }
                     icon={item.icon}
                     color={item.color}
                     invertInDark={item.invertInDark}

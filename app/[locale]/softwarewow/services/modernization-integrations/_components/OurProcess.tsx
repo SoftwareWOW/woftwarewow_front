@@ -8,22 +8,26 @@ const processSteps = [
   {
     step: '01',
     title: 'Assess',
-    description: 'Understand your existing systems, dependencies, challenges, and priorities.',
+    description:
+      'We review your existing applications, integrations, dependencies, and technical challenges to identify opportunities for improvement.',
   },
   {
     step: '02',
     title: 'Plan',
-    description: 'Define the modernization or integration approach and technical roadmap.',
+    description:
+      'We define the right modernization approach, prioritize improvements, and create a roadmap aligned with your business needs.',
   },
   {
     step: '03',
     title: 'Modernize & Connect',
-    description: 'Upgrade, integrate, migrate, and test the required systems.',
+    description:
+      'We upgrade applications, develop integrations, migrate components where appropriate, and test the solution against agreed requirements.',
   },
   {
     step: '04',
-    title: 'Optimize',
-    description: 'Monitor the solution and continue improving performance and reliability.',
+    title: 'Optimize & Evolve',
+    description:
+      'We monitor performance, address issues, and continue improving the systems as your technology and business requirements change.',
   },
 ]
 
@@ -38,9 +42,15 @@ const OurProcess = () => {
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
-              Modernize without unnecessary <InstrumentText>disruption.</InstrumentText>
+              Move forward without <InstrumentText>starting over.</InstrumentText>
             </h2>
           </TextAppearAnimation>
+          <RevealWrapper className="reveal-me mx-auto mt-3 max-w-3xl">
+            <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+              Every modernization project begins with understanding what you already have, what needs to change, and how
+              to move forward with manageable risk.
+            </p>
+          </RevealWrapper>
         </div>
 
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">

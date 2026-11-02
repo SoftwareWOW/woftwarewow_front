@@ -30,7 +30,7 @@ const ModernizationHero = () => {
       const text = textRef.current
       if (!text) return
 
-      const originalText = 'Modernize what works. Connect what matters. '
+      const originalText = 'Integrations and modernization for connected systems. '
       const chars = originalText.trim().split('')
       const angleStep = 360 / chars.length
 
@@ -79,19 +79,19 @@ const ModernizationHero = () => {
       <div className="mx-auto flex max-w-[1600px] flex-col justify-between gap-x-5 gap-y-10 px-4 md:px-[30px] lg:flex-row">
         <div className="md:flex-1">
           <RevealWrapper className="reveal-me mb-5">
-            <SectionLabel>Modernization & Integrations</SectionLabel>
+            <SectionLabel>Integrations &amp; Modernization</SectionLabel>
           </RevealWrapper>
           <RevealWrapper
             as="h1"
             id="modernization-hero-heading"
             className="reveal-me text-5xl font-light leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
           >
-            Modernize what works.
-            <br className="hidden lg:block" /> <InstrumentText>Connect what matters.</InstrumentText>
+            Make your technology work
+            <br className="hidden lg:block" /> <InstrumentText>better together.</InstrumentText>
           </RevealWrapper>
           <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
-            Upgrade legacy software, connect disconnected systems, and create a technology foundation that’s easier to
-            maintain, integrate, and evolve.
+            Modernize outdated applications, connect disconnected platforms, and unlock more value from the systems your
+            business already relies on. We help you move forward without rebuilding everything from scratch.
           </RevealWrapper>
           <RevealWrapperV2 className="reveal-me-2 mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
@@ -101,7 +101,7 @@ const ModernizationHero = () => {
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/portfolio" variant="secondary" size="sm">
-                View Our Work
+                Explore Our Work
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapperV2>

@@ -11,36 +11,36 @@ const transformations = [
   {
     id: 1,
     before: 'Disconnected systems',
-    after: 'Connected ecosystem',
+    after: 'A more connected technology ecosystem',
     benefit: 'Reduce Complexity',
     img: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
   },
   {
     id: 2,
-    before: 'Legacy technology',
-    after: 'Modern architecture',
+    before: 'Aging technology',
+    after: 'Modern, maintainable architecture',
     benefit: 'Improve Performance',
     img: '/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg',
   },
   {
     id: 3,
     before: 'Manual handoffs',
-    after: 'Integrated workflows',
-    benefit: 'Connect Your Tools',
+    after: 'Connected business processes',
+    benefit: 'Streamline Workflows',
     img: '/images/wow/LandingPageNaveBare/AI%20and%20Automation%202.svg',
   },
   {
     id: 4,
-    before: 'Limited flexibility',
-    after: 'Easier to evolve',
+    before: 'Rigid applications',
+    after: 'Systems designed to evolve',
     benefit: 'Increase Flexibility',
     img: '/images/wow/LandingPageNaveBare/SaaS%20Dev%202.svg',
   },
   {
     id: 5,
-    before: 'Data silos',
-    after: 'Connected information',
-    benefit: 'Build for What’s Next',
+    before: 'Scattered information',
+    after: 'More accessible business data',
+    benefit: 'Connect Your Data',
     img: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
   },
 ]
@@ -120,15 +120,16 @@ const WhyModernize = () => {
             </RevealWrapper>
             <TextAppearAnimation02>
               <h2 className="text-appear-2">
-                Your technology shouldn’t hold your business <InstrumentText>back.</InstrumentText>
+                Keep what works. <InstrumentText>Improve what doesn&apos;t.</InstrumentText>
               </h2>
             </TextAppearAnimation02>
           </div>
           <div className="max-md:w-full md:max-w-80 lg:max-w-[470px]">
             <TextAppearAnimation02>
               <p className="max-w-lg max-md:text-justify md:place-self-end md:text-right">
-                Modernization helps remove technical limitations while preserving the systems, processes, and
-                investments that still create value.
+                Outdated systems and disconnected tools can create unnecessary complexity, slow down teams, and limit
+                what your business can do next. We help you remove those barriers while protecting the value of your
+                existing technology investments.
               </p>
             </TextAppearAnimation02>
           </div>

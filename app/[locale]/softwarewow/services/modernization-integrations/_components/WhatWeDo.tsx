@@ -3,35 +3,38 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import Link from 'next/link'
 import { ReactNode } from 'react'
 
 const solutions = [
   {
-    title: 'Legacy Modernization',
-    description: 'Upgrade aging applications and technology for better performance and maintainability.',
+    title: 'Legacy System Modernization',
+    description:
+      'Give aging software new life with improvements to architecture, performance, usability, and maintainability.',
     image: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
   },
   {
     title: 'System Integrations',
-    description: 'Connect business applications so information moves where it needs to.',
+    description:
+      'Connect the applications your business depends on to reduce disconnected workflows and improve information flow.',
     image: '/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg',
   },
   {
-    title: 'API Development',
-    description: 'Build secure APIs that allow applications, services, and data to work together.',
+    title: 'API Development & Integration',
+    description:
+      'Build secure, reliable connections that allow your applications, platforms, and services to communicate.',
     image: '/images/wow/LandingPageNaveBare/SaaS%20Dev%202.svg',
   },
   {
     title: 'Cloud Modernization',
-    description: 'Prepare and migrate applications for modern cloud environments.',
+    description:
+      'Update and prepare existing applications for modern cloud environments, with scalability and operational needs in mind.',
     image: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
   },
   {
-    title: 'Workflow Integration',
-    description: 'Connect systems and automate handoffs across business processes.',
+    title: 'Workflow & Data Integration',
+    description:
+      'Connect processes and information across systems to reduce manual handoffs and keep operations moving.',
     image: '/images/wow/LandingPageNaveBare/AI%20and%20Automation%202.svg',
-    href: '/software/business-systems-automation',
   },
 ]
 
@@ -109,13 +112,13 @@ const WhatWeDo = () => {
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear">
-              Make your existing technology work <InstrumentText>better.</InstrumentText>
+              Better connections. <InstrumentText>Stronger foundations.</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
             <p className="text-appear mx-auto mt-3 max-w-2xl">
-              From aging applications to disconnected platforms, we help businesses improve the systems they depend on
-              without starting from zero.
+              Your technology should work as one connected ecosystem, not a collection of isolated tools. We modernize
+              existing applications, improve system connectivity, and create foundations that support what&apos;s next.
             </p>
           </TextAppearAnimation>
         </div>
@@ -125,14 +128,6 @@ const WhatWeDo = () => {
           {solutions.map((solution, index) => {
             const isLast = index === solutions.length - 1
             const body = <RowBody title={solution.title} description={solution.description} image={solution.image} />
-
-            if (solution.href) {
-              return (
-                <Link href={solution.href} key={solution.title} className="block">
-                  <RowChrome isLast={isLast}>{body}</RowChrome>
-                </Link>
-              )
-            }
 
             return (
               <RowChrome key={solution.title} isLast={isLast}>

@@ -19,10 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
   return {
-    title: 'Modernization & Integrations | SoftwareWOW!',
+    title: 'Integrations & Modernization | SoftwareWOW!',
     description:
-      'Upgrade legacy software, connect disconnected systems, and create a technology foundation that’s easier to maintain, integrate, and evolve.',
+      'Modernize outdated applications, connect disconnected platforms, and unlock more value from the systems your business already relies on.',
     keywords: [
+      'integrations',
       'legacy modernization',
       'system integrations',
       'API development',
@@ -30,13 +31,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'SoftwareWOW',
     ],
     openGraph: {
-      title: 'Modernization & Integrations | SoftwareWOW!',
+      title: 'Integrations & Modernization | SoftwareWOW!',
       description:
-        'Upgrade legacy software, connect disconnected systems, and create a technology foundation that’s easier to maintain, integrate, and evolve.',
+        'Move forward without rebuilding everything — modernize, connect, and extend the technology your business depends on.',
       type: 'website',
     },
     alternates: {
-      canonical: `/${locale}/software/services/modernization-integrations`,
+      canonical: `/${locale}/software/integrations-modernization`,
     },
   }
 }

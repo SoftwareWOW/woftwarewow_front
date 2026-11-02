@@ -15,18 +15,18 @@ const capabilities = [
   {
     id: 1,
     title: 'API Development & Integration',
-    subtitle: 'Connect applications and services through purpose-built APIs.',
+    subtitle: 'Create secure, structured connections that help applications and services exchange information reliably.',
     items: [
-      'Secure API design',
-      'Application-to-application connections',
-      'Services and data working together',
+      'Secure API design and implementation',
+      'Application-to-application connectivity',
+      'Reliable data exchange between services',
       'Documented, maintainable endpoints',
     ],
   },
   {
     id: 2,
-    title: 'Third-Party Integrations',
-    subtitle: 'Connect external platforms and services with your software.',
+    title: 'Third-Party Platform Integrations',
+    subtitle: 'Connect external software and services with your existing applications to create more consistent workflows.',
     items: [
       'External platform connections',
       'Service-to-service data flow',
@@ -37,7 +37,8 @@ const capabilities = [
   {
     id: 3,
     title: 'CRM & ERP Integrations',
-    subtitle: 'Improve the flow of information across core business systems.',
+    subtitle:
+      'Improve the flow of customer, financial, and operational information across your core business platforms.',
     items: [
       'Core business system connections',
       'Customer and operations data in sync',
@@ -47,19 +48,21 @@ const capabilities = [
   },
   {
     id: 4,
-    title: 'Cloud Modernization',
-    subtitle: 'Move or adapt applications for modern infrastructure.',
+    title: 'Cloud & Infrastructure Modernization',
+    subtitle:
+      'Update deployment environments and infrastructure to support more reliable, flexible application operations.',
     items: [
-      'Prepare applications for the cloud',
-      'Migrate existing systems',
-      'Adapt architecture for modern hosting',
+      'Prepare applications for modern hosting',
+      'Migrate existing systems where appropriate',
+      'Adapt architecture for cloud environments',
       'Improve reliability and scale',
     ],
   },
   {
     id: 5,
     title: 'Application Modernization',
-    subtitle: 'Improve existing software architecture, interfaces, and maintainability.',
+    subtitle:
+      'Improve existing software through architecture updates, interface enhancements, and technical improvements.',
     items: [
       'Upgrade aging application architecture',
       'Improve interfaces and usability',
@@ -69,13 +72,13 @@ const capabilities = [
   },
   {
     id: 6,
-    title: 'Data Integration',
-    subtitle: 'Connect information across systems and reduce isolated data.',
+    title: 'Data Integration & Migration',
+    subtitle: 'Connect, organize, and move business information between systems with attention to accuracy and continuity.',
     items: [
       'Connect information across platforms',
-      'Reduce isolated data stores',
+      'Organize and migrate business data',
       'Smoother reporting and operations',
-      'A foundation for future capabilities',
+      'Continuity through system changes',
     ],
   },
 ]
@@ -131,12 +134,13 @@ const Capabilities = () => {
               <SectionLabel className="mb-5">Capabilities</SectionLabel>
             </RevealWrapper>
             <h2 className="text-appear max-lg:leading-[1.33] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-              Connect the technology behind your <InstrumentText className="lg:text-[65px]">business.</InstrumentText>
+              Connect what you have. <InstrumentText className="lg:text-[65px]">Build what&apos;s next.</InstrumentText>
             </h2>
           </div>
           <div className="flex-1 max-md:w-full md:self-end">
             <p className="text-appear max-w-lg text-[#808080] transition-colors duration-300 dark:text-[#808080] md:justify-self-end md:text-right">
-              APIs, third-party platforms, CRM & ERP, cloud, applications, and data — connected without a full rewrite.
+              From APIs and business platforms to cloud infrastructure and data, we bring together the technical
+              capabilities needed to modernize your systems without unnecessary complexity.
             </p>
             <RevealWrapper className="mt-6 flex justify-end md:mt-8">
               <ButtonComponentList>
