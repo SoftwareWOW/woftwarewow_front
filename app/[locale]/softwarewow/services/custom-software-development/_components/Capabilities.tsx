@@ -58,7 +58,7 @@ const bottomRow: Capability[] = [
     title: 'AI Integration',
     description: 'Add intelligent features where they create practical value.',
     icon: <DigitalContentIcon />,
-    href: '/software/services/ai-automation',
+    href: '/software/business-systems-automation',
   },
 ]
 

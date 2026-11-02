@@ -99,7 +99,11 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
             { id: 'saasDevelopment', label: 'SaaS Development', href: '/software/services/saas-development' },
             { id: 'webApplications', label: 'Web Applications', href: '/software/web-applications' },
             { id: 'mobileApps', label: 'Mobile Apps', href: '/software/mobile-applications' },
-            { id: 'aiAutomation', label: 'AI & Automation', href: '/software/services/ai-automation' },
+            {
+              id: 'aiAutomation',
+              label: 'Business Systems & Automation',
+              href: '/software/business-systems-automation',
+            },
             { id: 'modernizationIntegrations', label: 'Modernization & Integrations', href: '/software/services/modernization-integrations' },
           ],
         },

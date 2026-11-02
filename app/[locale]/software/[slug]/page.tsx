@@ -29,8 +29,8 @@ async function loadServicePageModule(serviceSegment: string): Promise<ServicePag
       return import('../../softwarewow/services/web-applications/page')
     case 'mobile-applications':
       return import('../../softwarewow/services/mobile-applications/page')
-    case 'ai-automation':
-      return import('../../softwarewow/services/ai-automation/page')
+    case 'business-systems-automation':
+      return import('../../softwarewow/services/business-systems-automation/page')
     case 'product-design-prototyping':
       return import('../../softwarewow/services/product-design-prototyping/page')
     case 'modernization-integrations':

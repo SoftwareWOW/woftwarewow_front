@@ -31,7 +31,7 @@ const solutions = [
     title: 'Workflow Integration',
     description: 'Connect systems and automate handoffs across business processes.',
     image: '/images/wow/LandingPageNaveBare/AI%20and%20Automation%202.svg',
-    href: '/software/services/ai-automation',
+    href: '/software/business-systems-automation',
   },
 ]
 

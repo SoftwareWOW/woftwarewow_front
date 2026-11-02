@@ -27,7 +27,7 @@ export const SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES: SoftwareWowMegaNavServiceRout
   {
     navId: 'businessSystemsAutomation',
     slug: 'business-systems-automation',
-    serviceSegment: 'ai-automation',
+    serviceSegment: 'business-systems-automation',
   },
   {
     navId: 'productDesignPrototyping',

@@ -3,8 +3,8 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import AiAutomationHero from './_components/AiAutomationHero'
 import BuiltForBusiness from './_components/BuiltForBusiness'
+import BusinessSystemsAutomationHero from './_components/BusinessSystemsAutomationHero'
 import Capabilities from './_components/Capabilities'
 import OurProcess from './_components/OurProcess'
 import SelectedWork from './_components/SelectedWork'
@@ -41,35 +41,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function AiAutomationServicePage({ params }: Props) {
+export default async function BusinessSystemsAutomationServicePage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* 1. Hero — for-you/ai-and-automation/AiAutomationHero (Home-12 HeroV12) */}
-        <AiAutomationHero />
-
-        {/* 2. What We Build — homepage-18/ServicesV15 */}
+        <BusinessSystemsAutomationHero />
         <WhatWeBuild />
-
-        {/* 3. Built for Business — homepage-16/WhyChooseUsV5 */}
         <BuiltForBusiness />
-
-        {/* 4. Our Process — homepage-16/ProcessV8 */}
         <OurProcess />
-
-        {/* 5. Capabilities — homepage-17/WhyChooseUsV6 */}
         <Capabilities />
-
-        {/* 6. Technology — about/TechStack UI, AI-focused categories (local filter) */}
         <TechStack />
-
-        {/* 7. Selected Work — wow/LandascapComponets/WowProjects + See More */}
         <SelectedWork />
-
-        {/* 8. Ready to Automate? — shared WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to"
           mainText="Work Smarter?"

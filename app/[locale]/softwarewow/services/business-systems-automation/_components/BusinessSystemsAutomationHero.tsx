@@ -9,7 +9,7 @@ import gsap from 'gsap'
 import { useEffect, useRef, useState } from 'react'
 
 /** Layout: Home-12 HeroV12 — centered hero + floating images + dual CTAs. */
-const AiAutomationHero = () => {
+const BusinessSystemsAutomationHero = () => {
   const heroImage1Ref = useRef<HTMLDivElement>(null)
   const heroImage2Ref = useRef<HTMLDivElement>(null)
   const heroImage3Ref = useRef<HTMLDivElement>(null)
@@ -91,7 +91,7 @@ const AiAutomationHero = () => {
   return (
     <section
       className="relative overflow-hidden pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-[200px]"
-      aria-labelledby="ai-automation-service-heading"
+      aria-labelledby="business-systems-automation-hero-heading"
     >
       <div className="container">
         <HeroGradientAnimationV2 />
@@ -100,7 +100,7 @@ const AiAutomationHero = () => {
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h1
-            id="ai-automation-service-heading"
+            id="business-systems-automation-hero-heading"
             className="text-center text-[clamp(2rem,4.571vw,4rem)] font-light leading-[1.15] tracking-[-0.03em]"
           >
             Smarter systems. <InstrumentText>Smoother operations.</InstrumentText>
@@ -135,8 +135,12 @@ const AiAutomationHero = () => {
       <div className="absolute -left-[4.5%] top-[42%] hidden md:block" ref={heroImage1Ref}>
         <figure className="overflow-hidden rounded-radius-md">
           <img
-                loading="eager"
-                fetchPriority="high" src="/images/hero-img/hero-img-05.png" alt="" className="reveal-me rounded-radius-md" />
+            loading="eager"
+            fetchPriority="high"
+            src="/images/hero-img/hero-img-05.png"
+            alt=""
+            className="reveal-me rounded-radius-md"
+          />
         </figure>
       </div>
       <div className="absolute -right-[5%] top-[12%] hidden md:block" ref={heroImage2Ref}>
@@ -153,4 +157,4 @@ const AiAutomationHero = () => {
   )
 }
 
-export default AiAutomationHero
+export default BusinessSystemsAutomationHero

@@ -100,12 +100,12 @@ export const SOFTWARE_WOW_NAV_SERVICES: SoftwareWowNavService[] = [
     ctaMain: 'a mobile app?',
   },
   {
-    slug: 'ai-automation',
-    title: 'AI & Automation',
-    headline: 'AI & Automation With Impact.',
+    slug: 'business-systems-automation',
+    title: 'Business Systems & Automation',
+    headline: 'Business Systems That Work Together.',
     description:
-      'Practical AI that removes busywork and improves response times — assistants, workflows, and data pipelines with measurable ROI.',
-    summary: 'Practical AI that removes busywork.',
+      'Custom systems and automated workflows that connect operations, reduce manual work, and help teams work smarter every day.',
+    summary: 'Connected systems and practical automation.',
     includes: [
       'Workflow automation',
       'Assistants',

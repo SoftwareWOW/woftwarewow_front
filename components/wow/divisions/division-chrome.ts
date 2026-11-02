@@ -76,7 +76,7 @@ export const softwareWowFooterServiceCards: ReadonlyArray<DivisionFooterServiceC
   {
     title: 'Business Systems & Automation',
     description: 'Streamline operations, automate tasks, and work smarter.',
-    href: '/software/services/ai-automation',
+    href: '/software/business-systems-automation',
     iconId: 'businessSystems',
   },
   {

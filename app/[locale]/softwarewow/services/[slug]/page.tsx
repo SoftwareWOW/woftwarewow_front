@@ -17,7 +17,7 @@ export function generateStaticParams() {
     (slug) =>
       slug !== 'web-applications' &&
       slug !== 'mobile-applications' &&
-      slug !== 'ai-automation' &&
+      slug !== 'business-systems-automation' &&
       slug !== 'saas-development' &&
       slug !== 'custom-software-development' &&
       slug !== 'modernization-integrations',
