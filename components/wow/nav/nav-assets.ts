@@ -82,7 +82,6 @@ export const navMenuIcons = {
   connectMyTools: Network,
   createMobileExperience: Smartphone,
   saasDevelopment: Cloud,
-  webApplications: LayoutGrid,
   mobileApps: Smartphone,
   modernizationIntegrations: RefreshCw,
 

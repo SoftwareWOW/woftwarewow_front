@@ -1,4 +1,5 @@
 import { softwareWowMegaNavHref } from '@/data/softwareWowMegaNavRoutes'
+import { softwareWowSolutionHref } from '@/data/softwareWowNavSolutions'
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
 
 const panel = (
@@ -295,7 +296,7 @@ export const softwareWowNavigation = {
                 label: 'Manage My Business',
                 description: 'Simplify daily operations with smarter business tools.',
                 type: 'link' as const,
-                href: softwareWowMegaNavHref('manageMyBusiness'),
+                href: softwareWowSolutionHref('manageMyBusiness'),
                 detailPanel: 'default',
               },
               {
@@ -303,7 +304,7 @@ export const softwareWowNavigation = {
                 label: 'Serve My Customers',
                 description: 'Deliver better customer experiences with tailored solutions.',
                 type: 'link' as const,
-                href: softwareWowMegaNavHref('serveMyCustomers'),
+                href: softwareWowSolutionHref('serveMyCustomers'),
                 detailPanel: 'default',
               },
               {
@@ -311,7 +312,7 @@ export const softwareWowNavigation = {
                 label: 'Launch a Digital Product',
                 description: 'Bring your product idea to life, from concept to launch.',
                 type: 'link' as const,
-                href: softwareWowMegaNavHref('launchDigitalProduct'),
+                href: softwareWowSolutionHref('launchDigitalProduct'),
                 detailPanel: 'default',
               },
               {
@@ -319,7 +320,7 @@ export const softwareWowNavigation = {
                 label: 'Connect My Tools',
                 description: 'Make your existing tools work together seamlessly.',
                 type: 'link' as const,
-                href: softwareWowMegaNavHref('connectMyTools'),
+                href: softwareWowSolutionHref('connectMyTools'),
                 detailPanel: 'default',
               },
               {
@@ -327,7 +328,7 @@ export const softwareWowNavigation = {
                 label: 'Create a Mobile Experience',
                 description: 'Engage your customers with a mobile app built for them.',
                 type: 'link' as const,
-                href: softwareWowMegaNavHref('createMobileExperience'),
+                href: softwareWowSolutionHref('createMobileExperience'),
                 detailPanel: 'default',
               },
             ],
@@ -344,31 +345,31 @@ export const softwareWowNavigation = {
                 id: 'manageMyBusiness',
                 label: 'Manage My Business',
                 description: 'Simplify daily operations with smarter business tools.',
-                href: softwareWowMegaNavHref('manageMyBusiness'),
+                href: softwareWowSolutionHref('manageMyBusiness'),
               },
               {
                 id: 'serveMyCustomers',
                 label: 'Serve My Customers',
                 description: 'Deliver better customer experiences with tailored solutions.',
-                href: softwareWowMegaNavHref('serveMyCustomers'),
+                href: softwareWowSolutionHref('serveMyCustomers'),
               },
               {
                 id: 'launchDigitalProduct',
                 label: 'Launch a Digital Product',
                 description: 'Bring your product idea to life, from concept to launch.',
-                href: softwareWowMegaNavHref('launchDigitalProduct'),
+                href: softwareWowSolutionHref('launchDigitalProduct'),
               },
               {
                 id: 'connectMyTools',
                 label: 'Connect My Tools',
                 description: 'Make your existing tools work together seamlessly.',
-                href: softwareWowMegaNavHref('connectMyTools'),
+                href: softwareWowSolutionHref('connectMyTools'),
               },
               {
                 id: 'createMobileExperience',
                 label: 'Create a Mobile Experience',
                 description: 'Engage your customers with a mobile app built for them.',
-                href: softwareWowMegaNavHref('createMobileExperience'),
+                href: softwareWowSolutionHref('createMobileExperience'),
               },
             ],
           },

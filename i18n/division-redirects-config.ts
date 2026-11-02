@@ -62,8 +62,8 @@ export function getDivisionRedirects(): Redirect[] {
 
     for (const solution of SOFTWARE_WOW_NAV_SOLUTIONS) {
       rules.push({
-        source: `/${locale}/software/solutions/${solution.slug}`,
-        destination: `/${locale}/software/${solution.slug}`,
+        source: `/${locale}/software/${solution.slug}`,
+        destination: `/${locale}/software/solutions/${solution.slug}`,
         permanent: true,
       })
     }

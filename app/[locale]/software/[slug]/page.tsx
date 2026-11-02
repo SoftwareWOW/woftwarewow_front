@@ -1,11 +1,10 @@
 import {
   SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES,
   getSoftwareWowMegaNavServiceRouteBySlug,
+  getSoftwareWowMegaNavSolutionRouteBySlug,
 } from '@/data/softwareWowMegaNavRoutes'
-import {
-  SOFTWARE_WOW_NAV_SOLUTION_SLUGS,
-  getSoftwareWowNavSolution,
-} from '@/data/softwareWowNavSolutions'
+import type { Locale } from '@/i18n/config'
+import { redirect } from '@/i18n/navigation'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -43,11 +42,9 @@ async function loadServicePageModule(serviceSegment: string): Promise<ServicePag
 }
 
 export function generateStaticParams() {
-  const serviceSlugs = SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES.map((route) => ({
+  return SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES.map((route) => ({
     slug: route.slug,
   }))
-  const solutionSlugs = SOFTWARE_WOW_NAV_SOLUTION_SLUGS.map((slug) => ({ slug }))
-  return [...serviceSlugs, ...solutionSlugs]
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -61,16 +58,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const solutionMod = await import('../../softwarewow/solutions/[slug]/page')
-  if (solutionMod.generateMetadata && getSoftwareWowNavSolution(slug)) {
-    return solutionMod.generateMetadata({ params: Promise.resolve({ locale, slug }) })
-  }
-
   return { title: 'Not Found | SoftwareWOW!' }
 }
 
 export default async function SoftwarePublicSlugPage({ params }: Props) {
   const { locale, slug } = await params
+
+  const solutionRoute = getSoftwareWowMegaNavSolutionRouteBySlug(slug)
+  if (solutionRoute) {
+    redirect({
+      href: `/software/solutions/${solutionRoute.slug}`,
+      locale: locale as Locale,
+    })
+  }
 
   const serviceRoute = getSoftwareWowMegaNavServiceRouteBySlug(slug)
   if (serviceRoute) {
@@ -78,11 +78,6 @@ export default async function SoftwarePublicSlugPage({ params }: Props) {
     if (!mod) notFound()
     const Page = mod.default
     return Page({ params: Promise.resolve({ locale }) })
-  }
-
-  if (getSoftwareWowNavSolution(slug)) {
-    const solutionMod = await import('../../softwarewow/solutions/[slug]/page')
-    return solutionMod.default({ params: Promise.resolve({ locale, slug }) })
   }
 
   notFound()

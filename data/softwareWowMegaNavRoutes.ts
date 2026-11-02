@@ -1,4 +1,4 @@
-import { SOFTWARE_WOW_NAV_SOLUTIONS } from './softwareWowNavSolutions'
+import { SOFTWARE_WOW_NAV_SOLUTIONS, softwareWowSolutionHref } from './softwareWowNavSolutions'
 
 /** Public slug under `/software/{slug}` for mega-menu service items. */
 export type SoftwareWowMegaNavServiceRoute = {
@@ -6,6 +6,14 @@ export type SoftwareWowMegaNavServiceRoute = {
   slug: string
   /** App route folder under `softwarewow/services/`. */
   serviceSegment: string
+}
+
+/** Public slug under `/software/solutions/{slug}` for mega-menu solution items. */
+export type SoftwareWowMegaNavSolutionRoute = {
+  navId: string
+  slug: string
+  /** Public route folder under `software/solutions/`. */
+  solutionSegment: string
 }
 
 export const SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES: SoftwareWowMegaNavServiceRoute[] = [
@@ -46,6 +54,13 @@ export const SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES: SoftwareWowMegaNavServiceRout
   },
 ]
 
+export const SOFTWARE_WOW_MEGA_NAV_SOLUTION_ROUTES: SoftwareWowMegaNavSolutionRoute[] =
+  SOFTWARE_WOW_NAV_SOLUTIONS.map((solution) => ({
+    navId: solution.navId,
+    slug: solution.slug,
+    solutionSegment: solution.slug,
+  }))
+
 const serviceRouteByNavId = new Map(
   SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES.map((route) => [route.navId, route]),
 )
@@ -54,16 +69,21 @@ const serviceRouteBySlug = new Map(
   SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES.map((route) => [route.slug, route]),
 )
 
-const solutionByNavId = new Map(SOFTWARE_WOW_NAV_SOLUTIONS.map((s) => [s.navId, s]))
+const solutionRouteByNavId = new Map(
+  SOFTWARE_WOW_MEGA_NAV_SOLUTION_ROUTES.map((route) => [route.navId, route]),
+)
 
-const solutionBySlug = new Map(SOFTWARE_WOW_NAV_SOLUTIONS.map((s) => [s.slug, s]))
+const solutionRouteBySlug = new Map(
+  SOFTWARE_WOW_MEGA_NAV_SOLUTION_ROUTES.map((route) => [route.slug, route]),
+)
 
 export function softwareWowMegaNavHref(navId: string): string {
   const service = serviceRouteByNavId.get(navId)
   if (service) return `/software/${service.slug}`
 
-  const solution = solutionByNavId.get(navId)
-  if (solution) return `/software/${solution.slug}`
+  if (solutionRouteByNavId.has(navId)) {
+    return softwareWowSolutionHref(navId)
+  }
 
   return '/software'
 }
@@ -82,10 +102,10 @@ export function getSoftwareWowMegaNavRewrites(
     })
   }
 
-  for (const solution of SOFTWARE_WOW_NAV_SOLUTIONS) {
+  for (const route of SOFTWARE_WOW_MEGA_NAV_SOLUTION_ROUTES) {
     rules.push({
-      source: `/${locale}/software/${solution.slug}`,
-      destination: `/${locale}/${softwareAppSegment}/solutions/${solution.slug}`,
+      source: `/${locale}/software/solutions/${route.slug}`,
+      destination: `/${locale}/software/solutions/${route.solutionSegment}`,
     })
   }
 
@@ -93,7 +113,13 @@ export function getSoftwareWowMegaNavRewrites(
 }
 
 export function isSoftwareWowMegaNavPublicSlug(slug: string): boolean {
-  return serviceRouteBySlug.has(slug) || solutionBySlug.has(slug)
+  return serviceRouteBySlug.has(slug) || solutionRouteBySlug.has(slug)
+}
+
+export function getSoftwareWowMegaNavSolutionRouteBySlug(
+  slug: string,
+): SoftwareWowMegaNavSolutionRoute | undefined {
+  return solutionRouteBySlug.get(slug)
 }
 
 export function getSoftwareWowMegaNavServiceRouteBySlug(

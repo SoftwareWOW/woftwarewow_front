@@ -7,6 +7,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import {
   SOFTWARE_WOW_NAV_SOLUTIONS,
+  softwareWowSolutionPublicPath,
   type SoftwareWowNavSolution,
 } from '@/data/softwareWowNavSolutions'
 import { WowNavLink } from '@/components/wow/nav/WowNavLink'
@@ -106,7 +107,7 @@ export default function SoftwareWowSolutionDetail({ solution }: SoftwareWowSolut
             {otherSolutions.map((item) => (
               <RevealWrapper key={item.slug}>
                 <WowNavLink
-                  href={`/software/${item.slug}`}
+                  href={softwareWowSolutionPublicPath(item.slug)}
                   className="group flex h-full flex-col gap-2 border border-black/10 bg-backgroundBody p-5 transition-colors hover:border-black/25 dark:border-white/10 dark:bg-dark dark:hover:border-white/25 md:p-6"
                 >
                   <p className="text-lg font-light text-secondary group-hover:underline dark:text-backgroundBody">
