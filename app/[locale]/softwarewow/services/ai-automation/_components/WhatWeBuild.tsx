@@ -24,37 +24,38 @@ type Solution = {
 
 const solutions: Solution[] = [
   {
-    id: 'ai-assistants',
-    title: 'AI Assistants',
-    description: 'Smart assistants that support teams and customers.',
+    id: 'business-management-systems',
+    title: 'Business Management Systems',
+    description: 'Bring teams, tasks, operations, and essential information together in one purpose-built platform.',
     icon: <BrandMessagingIcon />,
-    href: '/contact',
-  },
-  {
-    id: 'chatbots',
-    title: 'Chatbots',
-    description: 'Automated conversations for support, sales, and service.',
-    icon: <EmailSalesCopyIcon />,
     href: '/contact',
   },
   {
     id: 'workflow-automation',
     title: 'Workflow Automation',
-    description: 'Reduce repetitive tasks across everyday operations.',
+    description: 'Replace repetitive steps and manual handoffs with connected, automated processes.',
     icon: <SeoCopywritingIcon />,
     href: '/contact',
   },
   {
-    id: 'ai-integrations',
-    title: 'AI Integrations',
-    description: 'Connect AI capabilities with the tools you already use.',
+    id: 'crm-business-platforms',
+    title: 'CRM & Business Platforms',
+    description: 'Organize customer relationships, internal activities, and business workflows around your needs.',
+    icon: <EmailSalesCopyIcon />,
+    href: '/contact',
+  },
+  {
+    id: 'system-integrations',
+    title: 'System Integrations',
+    description:
+      'Connect the applications and tools your business already relies on, so information flows more smoothly.',
     icon: <AdvertisingCopyIcon />,
     href: '/contact',
   },
   {
-    id: 'data-insights',
-    title: 'Data & Insights',
-    description: 'Turn business data into clearer, more useful decisions.',
+    id: 'reporting-dashboards',
+    title: 'Reporting & Dashboards',
+    description: 'Turn scattered operational data into clear, accessible views that support better decisions.',
     icon: <DigitalContentIcon />,
     href: '/contact',
   },
@@ -72,9 +73,15 @@ const WhatWeBuild = () => {
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear mt-3">
-                Practical AI. Useful <InstrumentText>automation.</InstrumentText>
+                Built around the way <InstrumentText>you work.</InstrumentText>
               </h2>
             </TextAppearAnimation>
+            <RevealWrapper className="reveal-me mt-3 max-w-2xl">
+              <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+                From everyday operations to complex business processes, we develop connected systems that make work
+                simpler, faster, and easier to manage.
+              </p>
+            </RevealWrapper>
           </div>
           <div className="max-md:w-full md:flex-1">
             <RevealWrapper className="mt-5 justify-self-end max-md:w-full md:mt-10">

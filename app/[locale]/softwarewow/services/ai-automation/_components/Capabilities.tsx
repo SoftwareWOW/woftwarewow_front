@@ -21,36 +21,36 @@ type Capability = {
 
 const topRow: Capability[] = [
   {
-    title: 'AI Assistants',
-    description: 'Internal and customer-facing assistants.',
+    title: 'Custom Business Applications',
+    description: 'Purpose-built software for managing internal operations, processes, and business activities.',
     icon: <DrivenCopywritingIcon />,
   },
   {
-    title: 'Conversational AI',
-    description: 'Chatbots and automated support experiences.',
+    title: 'Workflow & Process Automation',
+    description: 'Automated approvals, notifications, task routing, and recurring operational processes.',
     icon: <PsychologyWritingIcon />,
   },
   {
-    title: 'Process Automation',
-    description: 'Workflow automation for repetitive business tasks.',
+    title: 'CRM & ERP Integrations',
+    description: 'Connect customer, financial, and operational systems to improve information flow.',
     icon: <ScalableSolutionsIcon />,
   },
 ]
 
 const bottomRow: Capability[] = [
   {
-    title: 'CRM & ERP Integration',
-    description: 'Connect AI with existing operational systems.',
+    title: 'APIs & System Connectivity',
+    description: 'Enable applications, platforms, and services to communicate through reliable integrations.',
     icon: <SeoStrategyIcon />,
   },
   {
-    title: 'Data & Analytics',
-    description: 'Use business data to surface actionable insights.',
+    title: 'Data & Reporting',
+    description: 'Centralize business information and create dashboards that make operational performance easier to understand.',
     icon: <DigitalContentIcon />,
   },
   {
-    title: 'Custom AI Features',
-    description: 'Add intelligent functionality to software and digital products.',
+    title: 'AI-Assisted Operations',
+    description: 'Introduce intelligent features where they can support teams, reduce manual effort, and improve workflows.',
     icon: <IndustryKnowledgeIcon />,
   },
 ]
@@ -75,9 +75,15 @@ const Capabilities = () => {
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear lg:leading-[1.1]">
-                Connected intelligence across your <InstrumentText>business.</InstrumentText>
+                Everything connected. <InstrumentText>Everything working together.</InstrumentText>
               </h2>
             </TextAppearAnimation>
+            <RevealWrapper className="reveal-me mt-3 max-w-2xl">
+              <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+                We combine custom development, automation, and integration capabilities to create business systems
+                that are practical, reliable, and built for everyday use.
+              </p>
+            </RevealWrapper>
           </div>
 
           <div className="w-full md:w-[40%] md:max-w-72 md:self-end lg:max-w-[470px]">

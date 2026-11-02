@@ -7,23 +7,23 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 const steps = [
   {
     step: '01',
-    title: 'Identify',
-    description: 'Find the workflows and problems where AI can create value.',
+    title: 'Discover',
+    description: 'Understand your operations, existing tools, workflow challenges, and business priorities.',
   },
   {
     step: '02',
     title: 'Design',
-    description: 'Define the right automation, integrations, and user experience.',
+    description: 'Map processes, define requirements, and plan the right system architecture and user experience.',
   },
   {
     step: '03',
-    title: 'Build',
-    description: 'Develop, connect, test, and refine the solution.',
+    title: 'Build & Connect',
+    description: 'Develop the solution, integrate your tools, automate workflows, and test how everything works together.',
   },
   {
     step: '04',
-    title: 'Improve',
-    description: 'Monitor performance and evolve the automation over time.',
+    title: 'Launch & Improve',
+    description: 'Deploy the system, support your team, and refine performance as your business evolves.',
   },
 ]
 
@@ -38,9 +38,15 @@ const OurProcess = () => {
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
-              From opportunity to <InstrumentText>automation.</InstrumentText>
+              From complex workflows to <InstrumentText>connected systems.</InstrumentText>
             </h2>
           </TextAppearAnimation>
+          <RevealWrapper className="reveal-me mx-auto mt-3 max-w-3xl">
+            <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+              We start by understanding how your business operates, then design and build systems that support the way
+              your teams actually work.
+            </p>
+          </RevealWrapper>
         </div>
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
           {steps.map((item) => (

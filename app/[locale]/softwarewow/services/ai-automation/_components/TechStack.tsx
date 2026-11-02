@@ -9,23 +9,25 @@ import {
   TechCard,
 } from '@/components/wow/shared/TechStackShared'
 
-/** Keep AI-relevant categories for this service page only. */
+/** Business systems stack: frontend through automation — hide unrelated About tabs. */
 const HIDDEN_CATEGORY_IDS = new Set([
   'design',
   'marketing',
   'commerce',
   'communication',
-  'frontend',
   'cms',
 ])
 
-const aiTechCategories = techCategories.filter((cat) => !HIDDEN_CATEGORY_IDS.has(cat.id))
+const businessTechCategories = techCategories.filter((cat) => !HIDDEN_CATEGORY_IDS.has(cat.id))
 
-/** Layout: about/TechStack UI — AI-focused categories (does not change About or TechStackShared). */
+/** Layout: about/TechStack UI — filtered categories for this service page only. */
 const TechStack = () => {
-  const defaultCategory = aiTechCategories.find((c) => c.id === 'ai') ?? aiTechCategories[0]
+  const defaultCategory =
+    businessTechCategories.find((c) => c.id === 'backend') ??
+    businessTechCategories.find((c) => c.id === 'crm') ??
+    businessTechCategories[0]
   const [activeId, setActiveId] = useState(defaultCategory.id)
-  const active = aiTechCategories.find((c) => c.id === activeId) ?? defaultCategory
+  const active = businessTechCategories.find((c) => c.id === activeId) ?? defaultCategory
   const tabsId = useId()
 
   return (
@@ -56,30 +58,31 @@ const TechStack = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <SectionLabel className="mb-6">Our Stack</SectionLabel>
+          <SectionLabel className="mb-6">Our Technology</SectionLabel>
           <h2
             id="tech-heading"
             className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
           >
-            Powered by industry-leading{' '}
+            The right technology for{' '}
             <span
               className="font-instrument italic text-inherit"
             >
-              technology
+              the way you work.
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#808080] transition-colors duration-300 sm:text-lg">
-            Models, automation tools, and integrations we use to put AI to work in real operations.
+            Every business operates differently. We select the technologies, integrations, and infrastructure that fit
+            your existing systems, operational needs, and long-term goals.
           </p>
         </motion.div>
 
         <LayoutGroup id={tabsId}>
           <div
             role="tablist"
-            aria-label="AI and automation technology categories"
+            aria-label="Business systems technology categories"
             className="mx-auto mt-12 flex max-w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-6 px-1 pb-3 sm:mt-14 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
           >
-            {aiTechCategories.map((cat) => {
+            {businessTechCategories.map((cat) => {
               const isActive = cat.id === activeId
               const CatIcon = cat.icon
               return (

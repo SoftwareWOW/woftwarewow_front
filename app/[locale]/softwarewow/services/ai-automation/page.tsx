@@ -19,24 +19,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
   return {
-    title: 'AI & Automation | SoftwareWOW!',
+    title: 'Business Systems & Automation | SoftwareWOW!',
     description:
-      'Automate repetitive work, improve customer experiences, and connect smarter workflows across your business.',
+      'Custom business systems and automated workflows that connect your operations, reduce complexity, and help your teams work smarter.',
     keywords: [
-      'AI automation',
+      'business systems',
       'workflow automation',
-      'AI assistants',
-      'chatbots',
+      'CRM integration',
+      'business automation',
       'SoftwareWOW',
     ],
     openGraph: {
-      title: 'AI & Automation | SoftwareWOW!',
+      title: 'Business Systems & Automation | SoftwareWOW!',
       description:
-        'Practical AI, workflow automation, and smarter systems built around how your business actually operates.',
+        'Connected systems and automated workflows built around how your business actually operates.',
       type: 'website',
     },
     alternates: {
-      canonical: `/${locale}/software/services/ai-automation`,
+      canonical: `/${locale}/software/business-systems-automation`,
     },
   }
 }
@@ -72,8 +72,8 @@ export default async function AiAutomationServicePage({ params }: Props) {
         {/* 8. Ready to Automate? — shared WowGrowthCta */}
         <WowGrowthCta
           accentText="Ready to"
-          mainText="Automate?"
-          ariaLabel="Start an AI and automation project with SoftwareWOW"
+          mainText="Work Smarter?"
+          ariaLabel="Start a business systems and automation project with SoftwareWOW"
         />
       </div>
     </LayoutOne>

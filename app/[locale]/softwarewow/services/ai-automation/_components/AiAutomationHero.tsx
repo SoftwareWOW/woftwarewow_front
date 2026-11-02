@@ -96,19 +96,21 @@ const AiAutomationHero = () => {
       <div className="container">
         <HeroGradientAnimationV2 />
         <RevealWrapper className="mb-3 flex items-center justify-center">
-          <SectionLabel>AI &amp; Automation</SectionLabel>
+          <SectionLabel>Business Systems &amp; Automation</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <h1
             id="ai-automation-service-heading"
             className="text-center text-[clamp(2rem,4.571vw,4rem)] font-light leading-[1.15] tracking-[-0.03em]"
           >
-            Put AI to work in your <InstrumentText>business.</InstrumentText>
+            Smarter systems. <InstrumentText>Smoother operations.</InstrumentText>
           </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <p className="mx-auto mt-3 max-w-3xl text-center text-base leading-relaxed text-[#808080] md:text-lg">
-            Automate repetitive work, improve customer experiences, and connect smarter workflows across your business.
+            Disconnected tools, manual processes, and scattered information slow businesses down. We build custom
+            systems and automated workflows that bring your operations together, reduce complexity, and help your teams
+            work smarter.
           </p>
         </RevealWrapper>
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">

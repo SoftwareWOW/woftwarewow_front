@@ -1,29 +1,28 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 const points = [
   {
-    title: 'Save time',
-    description: 'Reduce manual work across repetitive processes.',
+    title: 'Save Valuable Time',
+    description: 'Automate repetitive tasks and free your team to focus on higher-value work.',
   },
   {
-    title: 'Improve service',
-    description: 'Help customers get faster answers and support.',
+    title: 'Connect Your Operations',
+    description: 'Bring people, processes, and business tools together through more consistent workflows.',
   },
   {
-    title: 'Connect systems',
-    description: 'Create smoother workflows between your existing tools.',
+    title: 'Reduce Manual Errors',
+    description: 'Standardize processes and reduce unnecessary data entry and duplication.',
   },
   {
-    title: 'Support decisions',
-    description: 'Surface useful insights from business data.',
+    title: 'Improve Visibility',
+    description: 'Give teams clearer access to the information they need to manage operations.',
   },
   {
-    title: 'Scale operations',
-    description: 'Build systems that can support growing workloads.',
+    title: 'Grow With Confidence',
+    description: 'Build flexible systems that can adapt as your business and requirements evolve.',
   },
 ]
 
@@ -42,13 +41,6 @@ const BuiltForBusiness = () => {
                 </RevealWrapper>
               ))}
             </div>
-            <RevealWrapper className="mt-7 max-md:w-full md:mt-14">
-              <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-                <ButtonComponent href="/contact" variant="white">
-                  Start a Project
-                </ButtonComponent>
-              </ButtonComponentList>
-            </RevealWrapper>
           </div>
           <RevealWrapper className="md:w-[55%]">
             <div className="mb-3.5">
@@ -56,9 +48,15 @@ const BuiltForBusiness = () => {
             </div>
             <TextAppearAnimation>
               <h2 className="text-appear">
-                Automation where it actually <InstrumentText>matters.</InstrumentText>
+                Less busywork. <InstrumentText>More progress.</InstrumentText>
               </h2>
             </TextAppearAnimation>
+            <RevealWrapper className="reveal-me mt-3 max-w-xl">
+              <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+                Your team should spend less time managing disconnected systems and more time moving the business
+                forward. We design technology that removes unnecessary friction from everyday operations.
+              </p>
+            </RevealWrapper>
           </RevealWrapper>
         </div>
       </div>
