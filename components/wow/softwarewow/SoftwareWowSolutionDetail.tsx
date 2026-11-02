@@ -106,7 +106,7 @@ export default function SoftwareWowSolutionDetail({ solution }: SoftwareWowSolut
             {otherSolutions.map((item) => (
               <RevealWrapper key={item.slug}>
                 <WowNavLink
-                  href={`/software/solutions/${item.slug}`}
+                  href={`/software/${item.slug}`}
                   className="group flex h-full flex-col gap-2 border border-black/10 bg-backgroundBody p-5 transition-colors hover:border-black/25 dark:border-white/10 dark:bg-dark dark:hover:border-white/25 md:p-6"
                 >
                   <p className="text-lg font-light text-secondary group-hover:underline dark:text-backgroundBody">

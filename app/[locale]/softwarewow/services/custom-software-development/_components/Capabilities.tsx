@@ -25,13 +25,13 @@ const topRow: Capability[] = [
     title: 'Web Applications',
     description: 'Custom browser-based systems and platforms.',
     icon: <DrivenCopywritingIcon />,
-    href: '/software/services/web-applications',
+    href: '/software/web-applications',
   },
   {
     title: 'Mobile Applications',
     description: 'Connected mobile experiences for customers and teams.',
     icon: <BrandMessagingIcon />,
-    href: '/software/services/mobile-app-development',
+    href: '/software/mobile-applications',
   },
   {
     title: 'APIs & Integrations',

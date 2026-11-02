@@ -132,5 +132,5 @@ export function getSoftwareWowNavSolution(slug: string): SoftwareWowNavSolution 
 
 export function softwareWowSolutionHref(navId: string): string {
   const solution = SOFTWARE_WOW_NAV_SOLUTIONS.find((item) => item.navId === navId)
-  return solution ? `/software/solutions/${solution.slug}` : '/software#solutions'
+  return solution ? `/software/${solution.slug}` : '/software#solutions'
 }

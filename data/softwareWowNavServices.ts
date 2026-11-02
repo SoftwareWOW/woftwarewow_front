@@ -12,7 +12,7 @@ export type SoftwareWowNavService = {
 
 export const SOFTWARE_WOW_NAV_SERVICES: SoftwareWowNavService[] = [
   {
-    slug: 'custom-software',
+    slug: 'custom-software-development',
     title: 'Custom Software',
     headline: 'Custom Software That Fits.',
     description:
@@ -78,7 +78,7 @@ export const SOFTWARE_WOW_NAV_SERVICES: SoftwareWowNavService[] = [
     ctaMain: 'that performs?',
   },
   {
-    slug: 'mobile-app-development',
+    slug: 'mobile-applications',
     title: 'Mobile Apps',
     headline: 'Mobile Apps People Use.',
     description:

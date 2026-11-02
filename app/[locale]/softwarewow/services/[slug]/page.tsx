@@ -16,10 +16,10 @@ export function generateStaticParams() {
   return SOFTWARE_WOW_NAV_SERVICE_SLUGS.filter(
     (slug) =>
       slug !== 'web-applications' &&
-      slug !== 'mobile-app-development' &&
+      slug !== 'mobile-applications' &&
       slug !== 'ai-automation' &&
       slug !== 'saas-development' &&
-      slug !== 'custom-software' &&
+      slug !== 'custom-software-development' &&
       slug !== 'modernization-integrations',
   ).map((slug) => ({
     slug,

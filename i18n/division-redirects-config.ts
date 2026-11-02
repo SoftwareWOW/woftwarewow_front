@@ -1,3 +1,4 @@
+import { SOFTWARE_WOW_NAV_SOLUTIONS } from '../data/softwareWowNavSolutions'
 import {
   legacyDivisionSlugToCanonical,
   MARKETING_DIVISION_APP_SEGMENT,
@@ -58,6 +59,36 @@ export function getDivisionRedirects(): Redirect[] {
         permanent: true,
       })
     }
+
+    for (const solution of SOFTWARE_WOW_NAV_SOLUTIONS) {
+      rules.push({
+        source: `/${locale}/software/solutions/${solution.slug}`,
+        destination: `/${locale}/software/${solution.slug}`,
+        permanent: true,
+      })
+    }
+
+    rules.push({
+      source: `/${locale}/software/services/custom-software`,
+      destination: `/${locale}/software/custom-software-development`,
+      permanent: true,
+    })
+    rules.push({
+      source: `/${locale}/software/services/mobile-app-development`,
+      destination: `/${locale}/software/mobile-applications`,
+      permanent: true,
+    })
+    rules.push({
+      source: `/${locale}/software/services/web-applications`,
+      destination: `/${locale}/software/web-applications`,
+      permanent: true,
+    })
+    rules.push({
+      source: `/${locale}/software/web-mobile-applications`,
+      destination: `/${locale}/software/web-applications`,
+      permanent: true,
+    })
+
   }
 
   return rules
@@ -72,14 +103,7 @@ export function getDivisionRewrites(): Rewrite[] {
       destination: `/${locale}/${MARKETING_DIVISION_APP_SEGMENT}`,
     })
 
-    rules.push({
-      source: `/${locale}/software`,
-      destination: `/${locale}/${SOFTWARE_DIVISION_APP_SEGMENT}`,
-    })
-    rules.push({
-      source: `/${locale}/software/:path*`,
-      destination: `/${locale}/${SOFTWARE_DIVISION_APP_SEGMENT}/:path*`,
-    })
+    // `/software` and `/software/{slug}` are real App Router routes under `app/[locale]/software/`.
   }
 
   return rules

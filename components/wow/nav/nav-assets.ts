@@ -70,7 +70,8 @@ export const navMenuIcons = {
   // SoftwareWOW — Services
   customSoftware: Code2,
   customSoftwareDevelopment: Code2,
-  webMobileApplications: Smartphone,
+  webApplications: Globe,
+  mobileApplications: Smartphone,
   businessSystemsAutomation: Workflow,
   productDesignPrototyping: Palette,
   integrationsModernization: RefreshCw,
@@ -383,7 +384,8 @@ export const navCardImages = {
 
   // SoftwareWOW division mega-menu
   customSoftwareDevelopment: landingNav('Softwarewow 1 1.svg'),
-  webMobileApplications: landingNav('Website 1 2.svg'),
+  webApplications: landingNav('Website 1 2.svg'),
+  mobileApplications: landingNav('Softwarewow 1 1.svg'),
   businessSystemsAutomation: landingNav('AI and Automation 2.svg'),
   productDesignPrototyping: landingNav(
     'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
