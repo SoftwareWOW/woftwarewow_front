@@ -50,7 +50,7 @@ export default async function ProductDesignPrototypingServicePage({ params }: Pr
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* 1. Hero — for-you/build-and-launch/BuildLaunchHero (Home-19) */}
+        {/* 1. Hero — custom-software-development/CustomSoftwareHero (split + marquee + mockups) */}
         <ProductDesignHero />
 
         {/* 2. What We Design — homepage-16/ServicesV14 (image cards) */}

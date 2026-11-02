@@ -1,103 +1,94 @@
 'use client'
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import HeroGradientAnimation from '@/components/shared/HeroGradientAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import Image from 'next/image'
+import Marquee from 'react-fast-marquee'
 
 const HERO_IMAGES = [
   {
-    src: '/images/wow/Hero/devision/Design 1.jpg',
-    alt: 'Product design workspace and interface exploration',
+    src: '/images/wow/Hero/devision/Mockup 2 Dark.png',
+    alt: 'Polished product interface mockup',
   },
   {
-    src: '/images/wow/Hero/devision/Mockup 2 Dark.png',
-    alt: 'Polished digital product mockup',
+    src: '/images/wow/LandingPageNaveBare/Client Portal 2.svg',
+    alt: 'Interactive product prototype screens',
   },
 ]
 
-/** Layout: for-you/build-and-launch/BuildLaunchHero (Home-19) — split headline + dual media, no circle logo. */
+/** Layout: custom-software-development/CustomSoftwareHero — split headline, marquee, stacked mockups. */
 const ProductDesignHero = () => {
   return (
-    <section
-      className="relative overflow-hidden pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-14"
+    <RevealWrapper
+      as="section"
+      className="relative overflow-x-hidden pb-10 pt-6 sm:pt-8 md:pb-14 md:pt-10 lg:pt-12 xl:pb-16 xl:pt-14"
       aria-labelledby="product-design-hero-heading"
     >
-      <div
-        id="hero-gradient-wrapper"
-        className="absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0"
-      >
-        <img
-          loading="eager"
-          fetchPriority="high"
-          src="/images/hero-gradient-background.png"
-          alt=""
-          aria-hidden
-          id="hero-gradient"
-          className="-top-[10%] left-0 scale-50"
-        />
-      </div>
-
-      <div className="mx-auto flex max-w-[1600px] flex-col justify-between gap-x-5 gap-y-10 px-4 md:px-[30px] lg:flex-row">
-        <div className="md:flex-1">
-          <RevealWrapper className="reveal-me mb-5">
-            <SectionLabel>Product Design &amp; Prototyping</SectionLabel>
-          </RevealWrapper>
-          <RevealWrapper
-            as="h1"
-            id="product-design-hero-heading"
-            className="reveal-me text-5xl font-light leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
-          >
-            Great products start with
-            <br className="hidden lg:block" /> <InstrumentText>better thinking.</InstrumentText>
-          </RevealWrapper>
-          <RevealWrapper className="reveal-me mt-3 max-w-xl">
-            <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+      <div className="relative">
+        <div className="mx-auto flex max-w-[1600px] flex-col items-stretch justify-between gap-y-10 px-4 md:px-[30px] lg:flex-row lg:items-center lg:gap-x-12 xl:gap-x-16">
+          <div className="flex w-full min-w-0 flex-col lg:max-w-[50%] xl:max-w-[610px]">
+            <div className="relative mb-3">
+              <HeroGradientAnimation />
+              <SectionLabel className="mb-5">Product Design &amp; Prototyping</SectionLabel>
+              <TextAppearAnimation>
+                <h1
+                  id="product-design-hero-heading"
+                  className="text-appear text-[clamp(2rem,4.8vw,5.5rem)] font-light leading-[1.15] tracking-[-0.02em]"
+                >
+                  Great products start with <InstrumentText>better thinking.</InstrumentText>
+                </h1>
+              </TextAppearAnimation>
+            </div>
+            <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">
               From early concepts to interactive prototypes, we turn complex ideas into intuitive digital experiences.
               We help you define, design, and validate your product before full development begins.
-            </p>
-          </RevealWrapper>
-          <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-10 lg:mt-14">
-            <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Start a Project
-              </ButtonComponent>
-            </ButtonComponentList>
-            <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/portfolio" variant="secondary">
-                Explore Our Work
-              </ButtonComponent>
-            </ButtonComponentList>
-          </RevealWrapper>
-        </div>
+            </RevealWrapper>
 
-        <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
-          <RevealWrapper
-            as="figure"
-            className="reveal-me relative mt-0 overflow-hidden rounded-radius-md sm:mt-[78px]"
-          >
-            <Image
-              src={HERO_IMAGES[0].src}
-              alt={HERO_IMAGES[0].alt}
-              width={480}
-              height={360}
-              className="h-auto w-full object-cover"
-              priority
-            />
-          </RevealWrapper>
-          <RevealWrapper as="figure" className="reveal-me overflow-hidden rounded-radius-md">
-            <Image
-              src={HERO_IMAGES[1].src}
-              alt={HERO_IMAGES[1].alt}
-              width={480}
-              height={360}
-              className="h-auto w-full object-cover"
-            />
-          </RevealWrapper>
+            <RevealWrapperV2 className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-9 lg:mt-10">
+              <ButtonComponentList className="flex" itemClassName="block">
+                <ButtonComponent href="/contact" variant="primary">
+                  Start a Project
+                </ButtonComponent>
+              </ButtonComponentList>
+              <ButtonComponentList className="flex" itemClassName="block">
+                <ButtonComponent href="/portfolio" variant="secondary">
+                  Explore Our Work
+                </ButtonComponent>
+              </ButtonComponentList>
+            </RevealWrapperV2>
+            <div className="relative mt-8 w-full xl:mt-12">
+              <div className="absolute left-0 top-0 z-40 h-full w-[5%] bg-gradient-to-r from-backgroundBody to-transparent dark:from-dark-gradient" />
+              <div className="marquee-container">
+                <Marquee>
+                  <h2 className="text-stroke text-nowrap py-4 pr-3 font-instrument italic lg:py-6">
+                    From Idea to Interface — Design That Works
+                  </h2>
+                </Marquee>
+              </div>
+            </div>
+          </div>
+          <div className="flex w-full min-w-0 flex-col gap-4 lg:w-[42%] xl:w-[46%]">
+            {HERO_IMAGES.map((image) => (
+              <RevealWrapper as="figure" key={image.src} className="w-full overflow-hidden rounded-radius-md">
+                <img
+                  loading="eager"
+                  fetchPriority="high"
+                  src={image.src}
+                  alt={image.alt}
+                  className="h-auto w-full object-cover sm:max-h-[280px] lg:max-h-[320px] xl:max-h-[380px]"
+                  width={665}
+                  height={440}
+                />
+              </RevealWrapper>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </RevealWrapper>
   )
 }
 
