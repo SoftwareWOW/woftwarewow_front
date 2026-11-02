@@ -36,7 +36,7 @@ const OurProcess = () => {
   return (
     <section>
       <div className="container">
-        <div className="mb-10 text-center md:mb-20">
+        <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>Our Process</SectionLabel>
           </RevealWrapper>
@@ -73,7 +73,7 @@ const OurProcess = () => {
           ))}
         </div>
 
-        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+        <RevealWrapper className="reveal-me flex justify-center max-md:w-full">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
             <ButtonComponent href="/contact" variant="primary">
               Start a Project

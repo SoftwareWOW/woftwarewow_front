@@ -82,7 +82,7 @@ const TechStack = () => {
           <div
             role="tablist"
             aria-label="Modernization and integration technology categories"
-            className="mx-auto mt-12 flex max-w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-6 px-1 pb-3 sm:mt-14 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
+            className="mx-auto flex max-w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-6 px-1 pb-3 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
           >
             {modernizationTechCategories.map((cat) => {
               const isActive = cat.id === activeId
@@ -118,7 +118,6 @@ const TechStack = () => {
           role="tabpanel"
           id={`${tabsId}-${active.id}`}
           aria-labelledby={`${tabsId}-tab-${active.id}`}
-          className="mt-10 sm:mt-14"
         >
           <AnimatePresence mode="wait">
             <motion.ul

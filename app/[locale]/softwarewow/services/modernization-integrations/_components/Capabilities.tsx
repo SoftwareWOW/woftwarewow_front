@@ -102,7 +102,7 @@ const Capabilities = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
       <div className="absolute inset-0 opacity-0 dark:opacity-20">
         <div
           className="absolute inset-0"
@@ -127,8 +127,8 @@ const Capabilities = () => {
         <Image src={gradientBg} alt="" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-2 md:mb-20 md:flex-row lg:justify-between">
+      <div className="container relative z-10">
+        <div className="flex flex-col items-start justify-center gap-x-10 gap-y-2 md:flex-row lg:justify-between">
           <div className="flex-1">
             <RevealWrapper>
               <SectionLabel className="mb-5">Capabilities</SectionLabel>
@@ -234,7 +234,7 @@ const Capabilities = () => {
           })}
         </RevealWrapper>
 
-        <RevealWrapper className="mx-auto mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 md:mt-14">
+        <RevealWrapper className="mx-auto flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
           {capabilities.length > INITIAL_VISIBLE_COUNT && (
             <ButtonComponentList>
               <ButtonComponent type="button" variant="white" onClick={handleToggleShowAll} ariaExpanded={showAll}>

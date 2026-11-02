@@ -106,7 +106,7 @@ const WhatWeDo = () => {
   return (
     <section>
       <div className="container">
-        <div className="mb-10 text-center md:mb-20">
+        <div className="text-center">
           <RevealWrapper className="mb-3 flex justify-center">
             <SectionLabel>What We Do</SectionLabel>
           </RevealWrapper>
@@ -116,14 +116,14 @@ const WhatWeDo = () => {
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-3 max-w-2xl">
+            <p className="text-appear mx-auto mt-3 max-w-[770px]">
               Your technology should work as one connected ecosystem, not a collection of isolated tools. We modernize
               existing applications, improve system connectivity, and create foundations that support what&apos;s next.
             </p>
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="mx-auto w-full max-w-[1170px]">
+        <RevealWrapper className="w-full">
           <div className="overflow-hidden rounded-radius-md">
           {solutions.map((solution, index) => {
             const isLast = index === solutions.length - 1
@@ -138,7 +138,7 @@ const WhatWeDo = () => {
           </div>
         </RevealWrapper>
 
-        <RevealWrapper className="mt-14 flex justify-center">
+        <RevealWrapper className="flex justify-center">
           <ButtonComponentList itemClassName="max-md:w-full">
             <ButtonComponent href="/contact" variant="white" fullWidth>
               Start a Project

@@ -5,6 +5,7 @@ import {
   type PortfolioProject,
 } from '@/app/[locale]/portfolio/_data/projects'
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
@@ -35,13 +36,13 @@ const projects: PortfolioProject[] = FEATURED_SLUGS.map((slug) => projectBySlug.
   (project): project is PortfolioProject => Boolean(project),
 )
 
-/** Layout: homepage-24/ProjectCaseStudies — overlay case-study cards + Explore More. */
+/** Layout: portfolio/FeaturedWork — spacing between sections comes from the page wrapper only. */
 const SelectedWork = () => {
   return (
     <section>
       <div className="container">
-        <div className="mb-10 text-center lg:mb-20">
-          <RevealWrapper className="mb-3 flex justify-center">
+        <div className="text-center">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>Selected Work</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
@@ -50,62 +51,60 @@ const SelectedWork = () => {
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-3 max-w-3xl text-[#808080]">
+            <p className="text-appear mx-auto mt-3 max-w-[770px] text-base leading-relaxed text-[#808080]">
               Explore projects where thoughtful technology, improved digital experiences, and modern development
               approaches have helped businesses strengthen their online foundations.
             </p>
           </TextAppearAnimation>
         </div>
 
-        <div className="mb-[60px] space-y-[30px]">
-          {projects.map((item) => {
-            const copy = featuredCopy[item.slug as (typeof FEATURED_SLUGS)[number]]
-            const description = copy ? `${copy.headline} ${copy.summary}` : item.description
+        <div className="flex flex-col">
+          {projects.map((project, index) => {
+            const copy = featuredCopy[project.slug as (typeof FEATURED_SLUGS)[number]]
+            const description = copy ? `${copy.headline} ${copy.summary}` : project.description
 
             return (
-              <RevealWrapper
-                key={item.slug}
-                className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row"
+              <RevealWrapperV2
+                key={project.slug}
+                className={`reveal-me group flex flex-col gap-8 lg:items-center lg:gap-10 ${
+                  index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'
+                }`}
               >
-                <figure className="relative -z-30 h-[240px] w-full max-w-[870px] overflow-hidden rounded-radius-md sm:h-[280px] md:h-[320px] lg:h-[360px]">
-                  <Link href={`/case-study/${item.slug}`} className="block h-full w-full rounded-radius-md">
+                <Link href={`/case-study/${project.slug}`} className="block flex-1 overflow-hidden rounded-radius-md">
+                  <figure className="overflow-hidden">
                     <img
-                      src={item.image}
-                      className="absolute inset-0 block h-full w-full object-cover object-center transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
-                      alt={item.alt}
+                      src={project.image}
+                      alt={project.alt}
+                      className="aspect-[16/10] w-full object-cover transition-all duration-500 group-hover:scale-105"
                     />
-                  </Link>
-                </figure>
+                  </figure>
+                </Link>
 
-                <div className="z-30 w-full overflow-hidden rounded-radius-md border border-black/10 bg-backgroundBody p-[30px] dark:border-white/10 dark:bg-dark max-md:-mt-5 lg:absolute lg:right-0 lg:max-w-[570px]">
-                  <p className="mb-3.5 text-sm font-light uppercase leading-6 tracking-[3px] text-black dark:text-white">
-                    {item.client} · {item.industry}
+                <div className="flex flex-1 flex-col justify-center lg:max-w-md xl:max-w-lg">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#808080]">
+                    {project.client} · {project.industry}
                   </p>
-                  <div className="blog-title mb-6 lg:mb-8">
-                    <Link href={`/case-study/${item.slug}`}>
-                      <h3 className="text[25px] md:text-3xl lg:text-4xl lg:leading-[1.2] lg:tracking-[-0.72px]">
-                        {item.title}
-                      </h3>
-                    </Link>
+                  <h3 className="mt-3 text-3xl md:text-4xl lg:text-[44px] lg:leading-[1.15]">{project.title}</h3>
+                  <p className="mt-3 flex flex-wrap gap-2 text-sm text-[#808080]">
+                    {project.serviceTags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+                  <div className="mt-6">
+                    <ButtonComponent href={`/case-study/${project.slug}`} variant="secondary" size="sm">
+                      View Case Study
+                    </ButtonComponent>
                   </div>
-                  <p className="mb-3 text-sm uppercase tracking-[0.96px] text-secondary/70 dark:text-backgroundBody/70">
-                    {item.serviceTags.join(' · ')}
-                  </p>
-                  <p className="mb-8 text-base font-light leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70 lg:mb-10">
-                    {description}
-                  </p>
-                  <ButtonComponent href={`/case-study/${item.slug}`} variant="white">
-                    View Case Study
-                  </ButtonComponent>
                 </div>
-              </RevealWrapper>
+              </RevealWrapperV2>
             )
           })}
         </div>
 
         <RevealWrapper className="flex justify-center">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/portfolio" variant="white" fullWidth>
+            <ButtonComponent href="/portfolio" variant="primary" fullWidth>
               Explore More Work
             </ButtonComponent>
           </ButtonComponentList>

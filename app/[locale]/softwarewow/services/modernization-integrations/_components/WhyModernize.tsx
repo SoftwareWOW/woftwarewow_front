@@ -113,7 +113,7 @@ const WhyModernize = () => {
   return (
     <section className="relative overflow-hidden">
       <div className="container">
-        <div className="mb-16 flex flex-col items-start justify-center gap-x-6 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
+        <div className="flex flex-col items-start justify-center gap-x-6 gap-y-3 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="mb-3">
               <SectionLabel>Why Modernize</SectionLabel>
@@ -134,27 +134,11 @@ const WhyModernize = () => {
             </TextAppearAnimation02>
           </div>
         </div>
-      </div>
 
-      <div
-        ref={previewRef}
-        className="pointer-events-none fixed left-1/2 top-1/4 z-20 h-[200px] w-[200px] origin-center rotate-[20deg] scale-0"
-      >
-        <figure className="h-full w-full overflow-hidden rounded-radius-sm">
-          <img
-            ref={previewImgRef}
-            src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
-            alt=""
-            aria-hidden
-            className="h-full w-full object-cover"
-          />
-        </figure>
-      </div>
-
-      <div
-        ref={tableRef}
-        className="reveal-me mx-auto border-t text-sm max-xl:overflow-auto max-md:px-5 lg:max-w-4xl xl:max-w-6xl 2xl:max-w-[1380px]"
-      >
+        <div
+          ref={tableRef}
+          className="reveal-me w-full border-t text-sm max-xl:overflow-auto"
+        >
         {transformations.map((item) => (
           <div
             key={item.id}
@@ -175,6 +159,22 @@ const WhyModernize = () => {
             </div>
           </div>
         ))}
+        </div>
+      </div>
+
+      <div
+        ref={previewRef}
+        className="pointer-events-none fixed left-1/2 top-1/4 z-20 h-[200px] w-[200px] origin-center rotate-[20deg] scale-0"
+      >
+        <figure className="h-full w-full overflow-hidden rounded-radius-sm">
+          <img
+            ref={previewImgRef}
+            src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"
+            alt=""
+            aria-hidden
+            className="h-full w-full object-cover"
+          />
+        </figure>
       </div>
     </section>
   )
