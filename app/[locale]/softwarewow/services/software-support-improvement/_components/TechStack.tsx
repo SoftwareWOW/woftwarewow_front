@@ -6,16 +6,25 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { WOW_GRADIENT } from '@/components/wow/shared/WowText'
 import { TechCard, techCategories } from '@/components/wow/shared/TechStackShared'
 
-/** Keep SaaS-relevant categories for this service page only. */
+/** Support & improvement stack categories for this service page only. */
 const HIDDEN_CATEGORY_IDS = new Set(['design', 'marketing', 'communication', 'ai', 'cms'])
 
-const saasTechCategories = techCategories.filter((cat) => !HIDDEN_CATEGORY_IDS.has(cat.id))
+const supportTechCategories = techCategories.filter((cat) => !HIDDEN_CATEGORY_IDS.has(cat.id))
 
-/** Layout: about/TechStack UI — SaaS-focused categories (does not change About or TechStackShared). */
+const FRONTEND_HINT_OVERRIDES: Record<string, string> = {
+  'Next.js': 'Application framework maintenance and optimization.',
+  React: 'Component updates and interface improvements.',
+  TypeScript: 'Maintainable and type-safe application development.',
+  'Tailwind CSS': 'Consistent interface styling and updates.',
+  'Framer Motion': 'Interface animation maintenance and refinement.',
+  GSAP: 'Advanced animation and interaction improvements.',
+}
+
+/** Layout: about/TechStack UI — filtered categories (does not change About or TechStackShared). */
 const TechStack = () => {
-  const defaultCategory = saasTechCategories.find((c) => c.id === 'frontend') ?? saasTechCategories[0]
+  const defaultCategory = supportTechCategories.find((c) => c.id === 'frontend') ?? supportTechCategories[0]
   const [activeId, setActiveId] = useState(defaultCategory.id)
-  const active = saasTechCategories.find((c) => c.id === activeId) ?? defaultCategory
+  const active = supportTechCategories.find((c) => c.id === activeId) ?? defaultCategory
   const tabsId = useId()
 
   return (
@@ -46,27 +55,29 @@ const TechStack = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <SectionLabel className="mb-6">Our Stack</SectionLabel>
+          <SectionLabel className="mb-6">Our Technology</SectionLabel>
           <h2 id="tech-heading" className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
-            Powered by industry-leading{' '}
+            The right expertise to{' '}
             <span
               className="font-instrument italic text-inherit"
             >
-              technology
+              keep things moving.
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#808080] transition-colors duration-300 sm:text-lg">
-            Frontend, backend, billing, and cloud tools we use to build SaaS products ready to scale.
+            Every application has its own architecture, dependencies, and technical requirements. We work with modern
+            development tools and infrastructure technologies to maintain, troubleshoot, and improve the systems your
+            business depends on.
           </p>
         </motion.div>
 
         <LayoutGroup id={tabsId}>
           <div
             role="tablist"
-            aria-label="SaaS technology categories"
+            aria-label="Software support technology categories"
             className="mx-auto mt-12 flex max-w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-px-6 px-1 pb-3 sm:mt-14 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0"
           >
-            {saasTechCategories.map((cat) => {
+            {supportTechCategories.map((cat) => {
               const isActive = cat.id === activeId
               const CatIcon = cat.icon
               return (
@@ -120,7 +131,9 @@ const TechStack = () => {
                 >
                   <TechCard
                     name={item.name}
-                    hint={item.hint}
+                    hint={
+                      active.id === 'frontend' ? (FRONTEND_HINT_OVERRIDES[item.name] ?? item.hint) : item.hint
+                    }
                     icon={item.icon}
                     color={item.color}
                     invertInDark={item.invertInDark}

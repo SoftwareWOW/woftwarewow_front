@@ -22,43 +22,44 @@ type Capability = {
 
 const topRow: Capability[] = [
   {
-    id: 'product-ux',
+    id: 'maintenance',
     icon: <DrivenCopywritingIcon />,
-    title: 'Product & UX',
-    description: 'User journeys, dashboards, onboarding, and product interfaces.',
+    title: 'Application Maintenance',
+    description: 'Ongoing software updates, dependency management, and technical maintenance.',
   },
   {
-    id: 'auth-roles',
+    id: 'troubleshooting',
     icon: <BrandMessagingIcon />,
-    title: 'Authentication & Roles',
-    description: 'Secure accounts, teams, permissions, and access controls.',
+    title: 'Troubleshooting & Bug Fixes',
+    description: 'Investigation, debugging, and resolution of functional and technical issues.',
   },
   {
-    id: 'billing',
+    id: 'performance',
     icon: <ScalableSolutionsIcon />,
-    title: 'Billing & Subscriptions',
-    description: 'Recurring plans, upgrades, and payment integrations.',
+    title: 'Performance & Optimization',
+    description: 'Application performance reviews, code improvements, and technical bottleneck resolution.',
   },
 ]
 
 const bottomRow: Capability[] = [
   {
-    id: 'apis',
+    id: 'security',
     icon: <AdvertisingCopyIcon />,
-    title: 'APIs & Integrations',
-    description: 'Connect external tools, services, and business systems.',
+    title: 'Security & Stability',
+    description: 'Security updates, vulnerability remediation, and improvements to application reliability.',
   },
   {
-    id: 'cloud',
+    id: 'features',
     icon: <IndustryKnowledgeIcon />,
-    title: 'Cloud & Infrastructure',
-    description: 'Reliable deployment and scalable application environments.',
+    title: 'Feature Development',
+    description: 'New capabilities, workflow enhancements, and improvements to existing functionality.',
   },
   {
-    id: 'analytics',
+    id: 'monitoring',
     icon: <DigitalContentIcon />,
-    title: 'Analytics & Admin',
-    description: 'Management tools, reporting, and product visibility.',
+    title: 'Monitoring & Technical Support',
+    description:
+      'Application monitoring, issue investigation, and ongoing technical assistance based on agreed support arrangements.',
   },
 ]
 
@@ -82,9 +83,15 @@ const Capabilities = () => {
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear lg:leading-[1.1]">
-                Everything behind a modern <InstrumentText>SaaS product.</InstrumentText>
+                Everything your software needs to <InstrumentText>stay ahead.</InstrumentText>
               </h2>
             </TextAppearAnimation>
+            <RevealWrapper className="reveal-me mt-3 max-w-2xl">
+              <p className="text-base leading-relaxed text-[#808080] md:text-lg">
+                From technical maintenance to product evolution, we bring together the expertise needed to support and
+                improve your existing applications.
+              </p>
+            </RevealWrapper>
           </div>
           <div className="w-full md:w-[40%] md:max-w-72 md:self-end lg:max-w-[470px]">
             <RevealWrapper className="reveal-me mt-5 justify-self-end max-md:w-full md:mt-10">

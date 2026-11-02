@@ -8,23 +8,24 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 const steps = [
   {
     number: '1',
-    title: 'Define',
-    description: 'Clarify users, product goals, features, and business model.',
+    title: 'Assess',
+    description: 'Review your existing application, technical environment, known issues, and business priorities.',
   },
   {
     number: '2',
-    title: 'Design',
-    description: 'Shape the product experience, architecture, and workflows.',
+    title: 'Prioritize',
+    description:
+      'Identify the most important fixes, updates, and improvements based on impact, urgency, and available resources.',
   },
   {
     number: '3',
-    title: 'Build',
-    description: 'Develop, integrate, test, and prepare the product for launch.',
+    title: 'Improve',
+    description: 'Implement updates, resolve issues, optimize performance, and test changes before release.',
   },
   {
     number: '4',
-    title: 'Scale',
-    description: 'Improve the platform as customers, usage, and requirements grow.',
+    title: 'Maintain',
+    description: 'Monitor application health, address emerging needs, and plan ongoing improvements as requirements evolve.',
   },
 ]
 
@@ -40,11 +41,17 @@ const OurProcess = () => {
           </RevealWrapper>
           <TextAppearAnimation02>
             <h2 className="text-appear max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
-              From roadmap to <InstrumentText>release.</InstrumentText>
+              Continuous care. <InstrumentText>Meaningful improvement.</InstrumentText>
             </h2>
           </TextAppearAnimation02>
           <TextAppearAnimation02>
-            <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">Define → Design → Build → Scale</p>
+            <p className="text-appear max-w-xl text-lg leading-[1.6] tracking-[0.36px]">
+              We take a structured approach to understanding your software, prioritizing what matters, and delivering
+              improvements with minimal unnecessary disruption.
+            </p>
+          </TextAppearAnimation02>
+          <TextAppearAnimation02>
+            <p className="text-appear mt-3 text-lg leading-[1.6] tracking-[0.36px]">Assess → Prioritize → Improve → Maintain</p>
           </TextAppearAnimation02>
 
           <RevealWrapper className="mt-7 md:mt-14">

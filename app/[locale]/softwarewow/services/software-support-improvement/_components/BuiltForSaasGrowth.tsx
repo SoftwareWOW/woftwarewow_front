@@ -7,34 +7,34 @@ import Image from 'next/image'
 
 const points = [
   {
-    title: 'Multi-Tenant Architecture',
-    description: 'Built to support multiple customers efficiently.',
+    title: 'Greater Reliability',
+    description: 'Maintain application stability and address issues before they become larger operational problems.',
     image: '/images/wow/LandingPageNaveBare/SaaS%20Dev%202.svg',
-    alt: 'Multi-tenant SaaS product interface',
+    alt: 'Application reliability and system monitoring',
   },
   {
-    title: 'Subscriptions & Billing',
-    description: 'Support recurring plans and customer account management.',
+    title: 'Better Performance',
+    description: 'Identify inefficiencies and improve how your software responds to everyday demands.',
     image: '/images/wow/LandingPageNaveBare/trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc%202.svg',
-    alt: 'Subscription and billing dashboard',
+    alt: 'Performance monitoring dashboard',
   },
   {
-    title: 'User Management',
-    description: 'Flexible roles, permissions, and account access.',
+    title: 'Stronger Security',
+    description: 'Keep software components updated and address security risks as technologies change.',
     image: '/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg',
-    alt: 'User management product interface',
+    alt: 'Secure software maintenance',
   },
   {
-    title: 'Integrations',
-    description: 'Connect your product with APIs and third-party platforms.',
+    title: 'Improved User Experience',
+    description: 'Refine interfaces, workflows, and functionality around how people actually use your software.',
     image: '/images/wow/LandingPageNaveBare/digital%20transofrmation%202.svg',
-    alt: 'Software integrations and connected systems',
+    alt: 'Improved application user experience',
   },
   {
-    title: 'Scalable Foundation',
-    description: 'Architecture designed to evolve as usage grows.',
+    title: 'Long-Term Flexibility',
+    description: 'Make your applications easier to maintain, enhance, and adapt as your business grows.',
     image: '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
-    alt: 'Scalable software architecture',
+    alt: 'Flexible software evolution',
   },
 ]
 
@@ -45,12 +45,19 @@ const BuiltForSaasGrowth = () => {
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
-            <SectionLabel>Built for Scale</SectionLabel>
+            <SectionLabel>Built for the Long Run</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mx-auto max-w-[770px]">
-              Designed for more than the <InstrumentText>first release.</InstrumentText>
+              Reliable today. <InstrumentText>Ready for tomorrow.</InstrumentText>
             </h2>
+          </TextAppearAnimation>
+          <TextAppearAnimation>
+            <p className="text-appear mx-auto mt-3 max-w-[770px] text-base leading-relaxed text-[#808080]">
+              Software needs change. Users expect more, technologies evolve, and new business priorities emerge. We help
+              you stay ahead with ongoing technical care and improvements that keep your applications useful,
+              dependable, and easier to evolve.
+            </p>
           </TextAppearAnimation>
         </div>
         <div className="[&>*:not(:last-child)]:mb-4">

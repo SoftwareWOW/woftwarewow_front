@@ -20,31 +20,32 @@ type Solution = {
 
 const topRow: Solution[] = [
   {
-    title: 'MVP SaaS Products',
-    description: 'Launch a focused first version and validate the product.',
+    title: 'Software Maintenance',
+    description: 'Keep your applications up to date with ongoing fixes, technical updates, and routine maintenance.',
     icon: <DrivenCopywritingIcon />,
   },
   {
-    title: 'Multi-Tenant Platforms',
-    description: 'Build products designed to serve multiple customers securely.',
+    title: 'Bug Fixes & Troubleshooting',
+    description: 'Identify and resolve software issues that affect functionality, reliability, and user experience.',
     icon: <ScalableSolutionsIcon />,
   },
   {
-    title: 'Subscription Platforms',
-    description: 'Create recurring-use products with billing and account management.',
+    title: 'Performance Optimization',
+    description: 'Improve application speed, responsiveness, and efficiency by addressing technical bottlenecks.',
     icon: <PsychologyWritingIcon />,
   },
 ]
 
 const bottomRow: Solution[] = [
   {
-    title: 'B2B SaaS',
-    description: 'Software built around business workflows and customer needs.',
+    title: 'Security & Updates',
+    description:
+      'Maintain dependencies, address identified vulnerabilities, and strengthen application security over time.',
     icon: <SeoStrategyIcon />,
   },
   {
-    title: 'SaaS Modernization',
-    description: 'Improve existing products for better performance and scale.',
+    title: 'Features & Enhancements',
+    description: 'Extend existing software with new functionality, improved workflows, and better user experiences.',
     icon: <IndustryKnowledgeIcon />,
   },
 ]
@@ -56,14 +57,20 @@ const WhatWeBuild = () => {
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="mb-3 flex justify-center">
-            <SectionLabel>What We Build</SectionLabel>
+            <SectionLabel>What We Do</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3 max-sm:text-[28px]">
-              From product idea to
+              Keep it running.
               <br />
-              <InstrumentText>scalable platform.</InstrumentText>
+              <InstrumentText>Keep it improving.</InstrumentText>
             </h2>
+          </TextAppearAnimation>
+          <TextAppearAnimation>
+            <p className="text-appear mx-auto mt-3 max-w-[770px] text-base leading-relaxed text-[#808080]">
+              From everyday maintenance to meaningful product enhancements, we help you protect your software investment
+              and keep your applications performing as your business evolves.
+            </p>
           </TextAppearAnimation>
         </div>
         <article>

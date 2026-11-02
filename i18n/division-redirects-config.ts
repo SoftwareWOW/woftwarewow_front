@@ -89,6 +89,11 @@ export function getDivisionRedirects(): Redirect[] {
       permanent: true,
     })
     rules.push({
+      source: `/${locale}/software/services/saas-development`,
+      destination: `/${locale}/software/software-support-improvement`,
+      permanent: true,
+    })
+    rules.push({
       source: `/${locale}/software/web-mobile-applications`,
       destination: `/${locale}/software/web-applications`,
       permanent: true,

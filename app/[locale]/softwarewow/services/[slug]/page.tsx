@@ -18,7 +18,7 @@ export function generateStaticParams() {
       slug !== 'web-applications' &&
       slug !== 'mobile-applications' &&
       slug !== 'business-systems-automation' &&
-      slug !== 'saas-development' &&
+      slug !== 'software-support-improvement' &&
       slug !== 'custom-software-development' &&
       slug !== 'modernization-integrations',
   ).map((slug) => ({
