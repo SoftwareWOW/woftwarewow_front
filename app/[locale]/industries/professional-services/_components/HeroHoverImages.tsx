@@ -1,20 +1,21 @@
 'use client'
 
 import RevealWrapperV2 from '@/components/animation/RevealWrapperV2'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 
 const DEFAULT_IMAGES = [
   {
-    src: '/images/wow/nav/cards/pexels-fauxels-3183132 1.png',
+    src: legacyNavCardSrc('pexels-fauxels-3183132 1.png'),
     alt: 'Professional services team collaboration',
   },
   {
-    src: '/images/wow/nav/cards/Business growth 1.png',
+    src: legacyNavCardSrc('Business growth 1.png'),
     alt: 'Business growth for professional firms',
   },
   {
-    src: '/images/wow/nav/cards/Hub.png',
+    src: legacyNavCardSrc('Hub.png'),
     alt: 'Connected professional services ecosystem',
   },
 ]

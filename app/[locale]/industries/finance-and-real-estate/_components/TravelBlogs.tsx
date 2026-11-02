@@ -4,6 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import type { CmsPackageListSection } from '@/lib/strapi/mappers/page-sections'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergePackageListItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 const packages = [
@@ -13,7 +14,7 @@ const packages = [
     description:
       'Strengthen your lead generation, CRM, follow-up, automation, funnels, and sales processes.',
     href: '/packages/sales-acceleration',
-    image: '/images/wow/nav/cards/Sales%20Acceleration%201.png',
+    image: legacyNavCardSrc('Sales Acceleration 1.png'),
   },
   {
     number: '02',

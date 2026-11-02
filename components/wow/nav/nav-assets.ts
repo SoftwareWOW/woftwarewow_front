@@ -282,7 +282,7 @@ export const navCardImages = {
 
   // Company — Divisions
   softwareWow: landingNav('Softwarewow 1 1.svg'),
-  wowMarketing: cardImage('Marketing.png'),
+  wowMarketing: landingNav('Marketing & Growth.svg'),
   wowDesign: landingNav(
     'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
   ),
@@ -292,7 +292,7 @@ export const navCardImages = {
   wowWebsites: landingNav('Website 1 2.svg'),
   wowImpact: landingNav('Impact 2.svg'),
   wowHost: landingNav('Hosting 2.svg'),
-  wowHub: cardImage('Hub.png'),
+  wowHub: landingNav('WOW Hub.svg'),
   wowEvents: landingNav('Events 3.svg'),
 
   // Company — About
@@ -310,7 +310,7 @@ export const navCardImages = {
   softwareTechnology: landingNav(
     'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',
   ),
-  marketingGrowth: cardImage('Marketing.png'),
+  marketingGrowth: landingNav('Marketing & Growth.svg'),
   socialCommunity: landingNav('Social 2 1.svg'),
   salesRevenue: landingNav(
     'trading-workplace-with-monitor-and-laptop-with-sto-2026-01-08-22-10-11-utc 2.svg',
@@ -324,23 +324,23 @@ export const navCardImages = {
 
   // For You — Packages
   startupLaunchPackage: landingNav('Startup laiunch 2.svg'),
-  businessGrowthPackage: cardImage('Business growth 1.png'),
+  businessGrowthPackage: landingNav('Business growth.svg'),
   digitalTransformationPackage: landingNav('digital transofrmation 2.svg'),
   aiAutomationPackage: landingNav('AI Automation 3.svg'),
   saasProductDevelopmentPackage: landingNav('SaaS Dev 2.svg'),
-  brandAuthorityPackage: cardImage('social media start 1.png'),
+  brandAuthorityPackage: landingNav('Brand Authority.svg'),
   websiteGrowthEnginePackage: landingNav('Website 1 2.svg'),
-  salesAccelerationPackage: cardImage('Sales Acceleration 1.png'),
+  salesAccelerationPackage: landingNav('Sales Acceleration 3.svg'),
   enterpriseInfrastructurePackage: landingNav(
     'data-servers-close-up-2026-01-08-06-54-55-utc 2.svg',
   ),
 
   // Explore — Discover
-  portfolio: cardImage('pexels-cottonbro-4069290 1.png'),
-  recentWorks: cardImage('pexels-fauxels-3183132 1.png'),
+  portfolio: landingNav('Portfolio 1.svg'),
+  recentWorks: landingNav('Recent work 1.svg'),
   clients: landingNav('pexels-akoonie-35088940 2.svg'),
   partnerNetwork: landingNav('Partner 1.svg'),
-  locations: cardImage('pexels-karola-g-6255984 1.png'),
+  locations: landingNav('Locations 1.svg'),
 
   // Explore — Industries
   startupsEntrepreneurs: landingNav(
@@ -353,8 +353,8 @@ export const navCardImages = {
   healthcareWellness: landingNav(
     'hands-in-unity-teamwork-with-a-robotic-limb-2026-01-08-00-16-05-utc 1.svg',
   ),
-  hospitalityTourism: cardImage('pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png'),
-  financeRealEstate: cardImage('explore-default.jpg'),
+  hospitalityTourism: landingNav('Tourism 1.svg'),
+  financeRealEstate: landingNav('Finance & Real estate.svg'),
   organizationsNonprofits: landingNav(
     'multiracial-business-team-gathering-hands-in-unity-2026-01-09-11-41-19-utc 2.svg',
   ),
@@ -366,17 +366,17 @@ export const navCardImages = {
   thinkTank: landingNav(
     'notes-with-words-and-female-hand-on-light-backgrou-2026-03-24-21-39-26-utc 1.svg',
   ),
-  quotation: cardImage('explore-default.jpg'),
-  clientPortal: cardImage('explore-default.jpg'),
-  whiteLabel: cardImage('explore-default.jpg'),
-  affiliate: cardImage('explore-default.jpg'),
+  quotation: landingNav('Quotation request 2.svg'),
+  clientPortal: landingNav('Client Portal 2.svg'),
+  whiteLabel: landingNav('White Label 2.svg'),
+  affiliate: landingNav('affiliate and refereal 2.svg'),
   insights: landingNav(
     'notes-with-words-and-female-hand-on-light-backgrou-2026-03-24-21-39-26-utc 1.svg',
   ),
   careers: landingNav(
     'multiracial-business-team-gathering-hands-in-unity-2026-01-09-11-41-19-utc 2.svg',
   ),
-  helpSupport: cardImage('explore-default.jpg'),
+  helpSupport: landingNav('Help and support.svg'),
   brandKit: landingNav(
     'ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc 2.svg',
   ),
@@ -474,7 +474,7 @@ export const navCardImages = {
   salesProcessOptimization: landingNav('digital transofrmation 2.svg'),
   appointmentSettingOutreach: landingNav('Meet 1.svg'),
   leadQualificationNurturing: landingNav('pexels-akoonie-35088940 2.svg'),
-  leadGenerationOutbound: cardImage('Sales Acceleration 1.png'),
+  leadGenerationOutbound: landingNav('Sales Acceleration 3.svg'),
   salesFunnelsConversion: landingNav('Website 1 2.svg'),
   crmSalesSystems: landingNav(
     'engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc 2.svg',

@@ -21,7 +21,7 @@ export const capabilityCards = [
     title: 'Marketing & Growth',
     description: 'SEO, paid media, campaigns, content, email, and growth strategy.',
     href: '/marketing',
-    image: '/images/wow/nav/cards/Marketing.png',
+    image: '/images/wow/LandingPageNaveBare/Marketing%20%26%20Growth.svg',
   },
   {
     title: 'AI & Automation',

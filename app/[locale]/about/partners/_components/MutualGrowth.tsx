@@ -1,4 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
@@ -13,7 +14,7 @@ const gains = [
 ]
 
 const DEFAULT_IMAGE: CmsHeroImage = {
-  src: '/images/wow/nav/cards/pexels-fauxels-3183132 1.png',
+  src: legacyNavCardSrc('pexels-fauxels-3183132 1.png'),
   alt: 'Built for mutual growth',
 }
 

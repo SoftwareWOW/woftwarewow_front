@@ -93,9 +93,9 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'professional-services': {
     layout: 'hover',
     images: [
-      img("/images/wow/nav/cards/pexels-fauxels-3183132 1.png", "Professional services team collaboration"),
-      img("/images/wow/nav/cards/Business growth 1.png", "Professional services team collaboration"),
-      img("/images/wow/nav/cards/Hub.png", "Business growth for professional firms"),
+      img("/images/wow/LandingPageNaveBare/Recent%20work%201.svg", "Professional services team collaboration"),
+      img("/images/wow/LandingPageNaveBare/Business%20growth.svg", "Professional services team collaboration"),
+      img("/images/wow/LandingPageNaveBare/WOW%20Hub.svg", "Business growth for professional firms"),
     ],
   },
   'startups-and-entrepreneurs': {
@@ -112,8 +112,8 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'healthcare-and-wellness': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/pexels-fauxels-3183132 1.png", "pexels fauxels 3183132 1"),
-      img("/images/wow/nav/cards/pexels-cottonbro-4069290 1.png", "pexels cottonbro 4069290 1"),
+      img("/images/wow/LandingPageNaveBare/Recent%20work%201.svg", "pexels fauxels 3183132 1"),
+      img("/images/wow/LandingPageNaveBare/Portfolio%201.svg", "pexels cottonbro 4069290 1"),
     ],
   },
   'hospitality-and-tourism': {
@@ -170,7 +170,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
     layout: 'dual',
     images: [
       img("/images/wow/LandingPageNaveBare/Social%203.svg", "Social content and community engagement"),
-      img("/images/wow/nav/cards/social media start 1.png", "social media start 1"),
+      img("/images/wow/LandingPageNaveBare/Brand%20Authority.svg", "social media start 1"),
     ],
   },
   'ai-and-automation': {
@@ -181,7 +181,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'sales-and-revenue': {
     layout: 'single',
     images: [
-      img("/images/wow/nav/cards/Sales Acceleration 1.png", "Sales Acceleration 1"),
+      img("/images/wow/LandingPageNaveBare/Sales%20Acceleration%203.svg", "Sales Acceleration 1"),
     ],
   },
   'branding-and-creative': {
@@ -189,7 +189,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
     images: [
       img("/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg", "Branding & Creative 1"),
       img("/images/wow/LandingPageNaveBare/ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc%202.svg", "Design"),
-      img("/images/wow/nav/cards/Marketing.png", "Marketing"),
+      img("/images/wow/LandingPageNaveBare/Marketing%20%26%20Growth.svg", "Marketing"),
       img("/images/wow/LandingPageNaveBare/Website%201%202.svg", "Website"),
       img("/images/wow/LandingPageNaveBare/Social%203.svg", "Social"),
       img("/images/wow/LandingPageNaveBare/Impact%202.svg", "Impact"),
@@ -218,7 +218,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'business-growth': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/Business growth 1.png", "Business growth 1"),
+      img("/images/wow/LandingPageNaveBare/Business%20growth.svg", "Business growth 1"),
       img("/images/wow/LandingPageNaveBare/Accelerate%202.svg", "Accelerate"),
     ],
   },
@@ -242,7 +242,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'brand-authority': {
     layout: 'dual',
     images: [
-      img("/images/wow/nav/cards/social media start 1.png", "social media start 1"),
+      img("/images/wow/LandingPageNaveBare/Brand%20Authority.svg", "social media start 1"),
       img("/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg", "Branding & Creative 1"),
     ],
   },
@@ -267,7 +267,7 @@ export const HERO_IMAGE_MANIFEST: Record<string, HeroImageManifestEntry> = {
   'sales-acceleration': {
     layout: 'single',
     images: [
-      img("/images/wow/nav/cards/Sales Acceleration 1.png", "Sales Acceleration 1"),
+      img("/images/wow/LandingPageNaveBare/Sales%20Acceleration%203.svg", "Sales Acceleration 1"),
     ],
   },
   'enterprise-infrastructure': {

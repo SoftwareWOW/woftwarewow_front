@@ -1,9 +1,11 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 
-const HERO_IMAGE =
-  '/images/wow/nav/cards/pexels-akaaljotsingh-anandpuria-156395437-10703306%201.png'
+const HERO_IMAGE = legacyNavCardSrc(
+  'pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png',
+)
 
 type PageHeroProps = {
   badgeTitle?: string

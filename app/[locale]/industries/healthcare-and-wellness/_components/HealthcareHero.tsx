@@ -3,6 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
 /** Layout: SaaS SaasProductHero / Home-24 HeroV24 — split headline + dual tall images. */
@@ -14,11 +15,11 @@ const HealthcareHero = ({
   images,
 }: CmsHeroComponentProps) => {
   const image0 = images?.[0] ?? {
-    src: '/images/wow/nav/cards/pexels-fauxels-3183132%201.png',
+    src: legacyNavCardSrc('pexels-fauxels-3183132 1.png'),
     alt: 'Healthcare and wellness team collaborating',
   }
   const image1 = images?.[1] ?? {
-    src: '/images/wow/nav/cards/pexels-cottonbro-4069290%201.png',
+    src: legacyNavCardSrc('pexels-cottonbro-4069290 1.png'),
     alt: 'Wellness professionals reviewing a care plan',
   }
 

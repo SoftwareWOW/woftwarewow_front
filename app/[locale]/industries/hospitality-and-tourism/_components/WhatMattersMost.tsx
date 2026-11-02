@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
@@ -41,7 +42,9 @@ const WhatMattersMost = ({
 }: WhatMattersMostProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedItems = mergeFeatureItems(DEFAULT_POINTS, items)
-  const fallbackImage = '/images/wow/nav/cards/pexels-akaaljotsingh-anandpuria-156395437-10703306%201.png'
+  const fallbackImage = legacyNavCardSrc(
+    'pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png',
+  )
 
   return (
     <section>

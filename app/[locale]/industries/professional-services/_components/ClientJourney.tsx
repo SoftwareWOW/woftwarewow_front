@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroImage, CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
@@ -33,7 +34,7 @@ type ClientJourneyProps = Partial<CmsProcessSection> & { image?: CmsHeroImage | 
 const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image }: ClientJourneyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
-  const fallbackImage = '/images/wow/nav/cards/pexels-cottonbro-4069290 1.png'
+  const fallbackImage = legacyNavCardSrc('pexels-cottonbro-4069290 1.png')
 
   return (
     <section>

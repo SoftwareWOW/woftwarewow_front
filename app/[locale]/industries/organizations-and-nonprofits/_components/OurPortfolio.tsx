@@ -4,18 +4,19 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Marquee from 'react-fast-marquee'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsHeroImage, CmsProjectCard } from '@/lib/strapi/mappers/page-sections'
 
 const DEFAULT_PORTFOLIOIMAGES = [
   {
     id: 1,
-    src: '/images/wow/nav/cards/pexels-fauxels-3183132%201.png',
+    src: legacyNavCardSrc('pexels-fauxels-3183132 1.png'),
     alt: 'Community collaboration',
   },
   {
     id: 2,
-    src: '/images/wow/nav/cards/pexels-cottonbro-4069290%201.png',
+    src: legacyNavCardSrc('pexels-cottonbro-4069290 1.png'),
     alt: 'Mission-driven team',
   },
   {
@@ -45,12 +46,12 @@ const DEFAULT_PORTFOLIOIMAGES = [
   },
   {
     id: 8,
-    src: '/images/wow/nav/cards/Hub.png',
+    src: legacyNavCardSrc('Hub.png'),
     alt: 'Community hub',
   },
   {
     id: 9,
-    src: '/images/wow/nav/cards/pexels-akaaljotsingh-anandpuria-156395437-10703306%201.png',
+    src: legacyNavCardSrc('pexels-akaaljotsingh-anandpuria-156395437-10703306 1.png'),
     alt: 'Organization outreach',
   },
   {
