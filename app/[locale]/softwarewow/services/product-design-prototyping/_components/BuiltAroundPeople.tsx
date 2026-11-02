@@ -123,7 +123,7 @@ const BuiltAroundPeople = () => {
       </div>
 
       <div className="container mt-12 md:mt-16">
-        <div className="flex flex-col-reverse gap-y-8 md:flex-row md:gap-14 lg:gap-16 xl:gap-x-20">
+        <div className="flex flex-col-reverse gap-y-8 md:flex-row md:items-stretch md:gap-14 lg:gap-16 xl:gap-x-20">
           <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
             {benefits.map((benefit) => (
               <RevealWrapper key={benefit.title} className="reveal-me py-3.5 pr-5 lg:py-5">
@@ -132,12 +132,14 @@ const BuiltAroundPeople = () => {
               </RevealWrapper>
             ))}
           </div>
-          <RevealWrapper as="figure" className="reveal-me md:w-1/2">
-            <img
-              src="/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg"
-              alt="Design artifacts across wireframes, prototypes, and final UI"
-              className="w-full rounded-radius-md object-cover"
-            />
+          <RevealWrapper as="figure" className="reveal-me min-h-[280px] md:w-1/2 md:min-h-0 md:self-stretch">
+            <div className="relative h-full min-h-[280px] overflow-hidden rounded-radius-md md:min-h-0">
+              <img
+                src="/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg"
+                alt="Design artifacts across wireframes, prototypes, and final UI"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
           </RevealWrapper>
         </div>
       </div>
