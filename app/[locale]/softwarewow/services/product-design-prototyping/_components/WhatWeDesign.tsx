@@ -60,13 +60,11 @@ const WhatWeDesign = () => {
           </div>
         </div>
 
-        <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] md:grid-cols-2 2xl:grid-cols-3">
-          {designAreas.map((area, index) => (
+        <div className="mx-auto flex max-w-[1600px] flex-wrap justify-center gap-[30px]">
+          {designAreas.map((area) => (
             <RevealWrapper
               key={area.title}
-              className={`reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px] ${
-                index === designAreas.length - 1 ? 'md:col-span-2 2xl:col-span-1' : ''
-              }`}
+              className="reveal-me group w-full border px-6 py-9 dark:border-dark sm:max-w-[520px] md:w-[calc(50%-15px)] md:max-w-none lg:px-[30px] lg:py-[50px] xl:w-[calc(33.333%-20px)] xl:max-w-[480px]"
             >
               <figure className="mb-6 overflow-hidden rounded-radius-sm">
                 <img
