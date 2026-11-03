@@ -1,1 +1,3 @@
-export { default, generateMetadata, revalidate } from '../softwarewow/page'
+export const revalidate = 60
+
+export { default, generateMetadata } from '../softwarewow/page'
