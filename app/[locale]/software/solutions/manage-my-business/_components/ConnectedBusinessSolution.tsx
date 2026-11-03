@@ -6,23 +6,23 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 const capabilities = [
   {
     title: 'Centralized Operations',
-    description: 'Manage essential business activities through connected tools and interfaces.',
+    description: 'Run key activities from one connected place.',
   },
   {
     title: 'Smarter Workflows',
-    description: 'Reduce repetitive work with automated tasks, notifications, and approvals.',
+    description: 'Automate tasks, notifications, and approvals.',
   },
   {
     title: 'Customer Management',
-    description: 'Keep customer information and interactions organized and accessible.',
+    description: 'Keep customer data organized and accessible.',
   },
   {
     title: 'Real-Time Visibility',
-    description: 'Give teams clearer views of tasks, activity, and business performance.',
+    description: 'See tasks, activity, and performance clearly.',
   },
   {
     title: 'Connected Applications',
-    description: 'Help your existing platforms exchange information more effectively.',
+    description: 'Help your platforms share information.',
   },
 ]
 
@@ -61,7 +61,7 @@ const ConnectedBusinessSolution = () => {
             <h3 className="mb-3 text-[25px] font-light leading-[1.2] lg:text-3xl">Everything works better together</h3>
             <ul className="list-inside list-disc space-y-2">
               {capabilities.map((item) => (
-                <li key={item.title} className="text-[#808080]">
+                <li key={item.title} className="text-[#808080] lg:text-xl">
                   <span className="text-[#0D0D0D] dark:text-[#F2F2F2]">{item.title}</span> — {item.description}
                 </li>
               ))}
