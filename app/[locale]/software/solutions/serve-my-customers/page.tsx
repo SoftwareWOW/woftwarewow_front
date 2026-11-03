@@ -51,13 +51,13 @@ export default async function ServeMyCustomersSolutionPage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* 1. Hero — homepage-24/HeroV24 */}
+        {/* 1. Hero — homepage-20/HeroV20 */}
         <ServeMyCustomersHero />
 
-        {/* 2. The Challenge — homepage-11/WhyRivor */}
+        {/* 2. The Challenge — homepage-08/ServicesV7 */}
         <TheChallenge />
 
-        {/* 3. The Solution — homepage-08/AboutV6 */}
+        {/* 3. The Solution — homepage-13/AboutV12 */}
         <TheSolution />
 
         {/* 4. What We Can Build — homepage-25/ClientSuccessStoriesV2 */}
