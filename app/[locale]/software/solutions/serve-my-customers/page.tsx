@@ -51,7 +51,7 @@ export default async function ServeMyCustomersSolutionPage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* 1. Hero — homepage-20/HeroV20 */}
+        {/* 1. Hero — homepage-08/HeroV8 */}
         <ServeMyCustomersHero />
 
         {/* 2. The Challenge — homepage-24/ServicesV16 */}

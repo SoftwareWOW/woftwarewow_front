@@ -1,8 +1,5 @@
-'use client'
-
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import { WowNavLink } from '@/components/wow/nav/WowNavLink'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
@@ -56,12 +53,6 @@ const challenges: {
   { title: 'Limited Self-Service', description: 'Customers rely on teams for simple tasks.', icon: DocumentIcon },
 ]
 
-const ButtonArrow = ({ className }: IconProps) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={13} height={12} viewBox="0 0 13 12" fill="none" aria-hidden>
-    <path d="M1 12.5L13 0.5M13 0.5H3.25M13 0.5V10.25" className={className} strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
-
 /** Layout: homepage-24/ServicesV16 */
 const TheChallenge = () => {
   return (
@@ -106,21 +97,7 @@ const TheChallenge = () => {
                 <h3 className="mb-3 mt-9 text-[25px] font-light leading-[1.2] text-backgroundBody dark:text-secondary lg:text-3xl">
                   {title}
                 </h3>
-                <p className="mb-10 text-backgroundBody dark:text-secondary lg:text-xl">{description}</p>
-                <WowNavLink href="/contact" className="rv-button rv-button-sm-v2 rv-button-secondary-v2">
-                  <div className="rv-button-top flex items-center gap-2">
-                    <span className="text-nowrap">Start a Project</span>
-                    <span>
-                      <ButtonArrow className="stroke-backgroundBody dark:stroke-secondary" />
-                    </span>
-                  </div>
-                  <div className="rv-button-bottom flex items-center">
-                    <span className="text-nowrap">Start a Project</span>
-                    <span>
-                      <ButtonArrow className="stroke-secondary dark:stroke-backgroundBody" />
-                    </span>
-                  </div>
-                </WowNavLink>
+                <p className="text-backgroundBody dark:text-secondary lg:text-xl">{description}</p>
               </div>
             </RevealWrapper>
           ))}

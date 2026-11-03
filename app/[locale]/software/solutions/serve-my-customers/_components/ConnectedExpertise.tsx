@@ -78,7 +78,7 @@ const ConnectedExpertise = () => {
             <RevealWrapper key={item.title} className="reveal-me block">
               <WowNavLink
                 href={item.href}
-                className="block overflow-hidden rounded-radius-md border border-secondary/10 bg-white transition-all duration-300 dark:border-backgroundBody/10 dark:bg-dark"
+                className="block overflow-hidden rounded-radius-md border bg-backgroundBody transition-all duration-300 dark:border-dark dark:bg-dark"
               >
                 <div className="group relative z-10 flex items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-8">
                   <div
