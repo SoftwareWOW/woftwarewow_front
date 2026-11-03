@@ -1,12 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import {
-  ArrowIcon,
-  BrandMessagingIcon,
-  DigitalContentIcon,
-  SeoCopywritingIcon,
-  ThoughtLeadershipIcon,
-} from '@/components/homepage-18/Icons'
+import { ArrowIcon, BrandMessagingIcon, DigitalContentIcon, ThoughtLeadershipIcon } from '@/components/homepage-18/Icons'
 import { WowNavLink } from '@/components/wow/nav/WowNavLink'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
@@ -23,12 +17,6 @@ const services = [
     description: 'Design and validate app experiences.',
     href: '/software/product-design-prototyping',
     icon: <BrandMessagingIcon />,
-  },
-  {
-    title: 'Custom Software Development',
-    description: 'Develop tailored features and functionality.',
-    href: '/software/custom-software-development',
-    icon: <SeoCopywritingIcon />,
   },
   {
     title: 'Integrations & Modernization',
@@ -56,13 +44,10 @@ const ConnectedExpertise = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-[30px] md:grid-cols-2 xl:grid-cols-4">
+        <div className="flex flex-col gap-[30px] md:flex-row md:flex-wrap lg:flex-nowrap">
           {services.map((service) => (
-            <RevealWrapper
-              key={service.href}
-              className="reveal-me group rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
-            >
-              <WowNavLink href={service.href} className="block">
+            <RevealWrapper key={service.href} className="reveal-me group w-full lg:flex-1">
+              <WowNavLink href={service.href} className="block rounded-radius-md border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]">
                 <span>{service.icon}</span>
                 <h3 className="mb-2 mt-4 text-[25px] font-light leading-[1.2] lg:mb-3 lg:mt-6 lg:text-3xl">
                   {service.title}

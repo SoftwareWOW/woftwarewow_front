@@ -57,7 +57,7 @@ export default async function CreateMobileExperienceSolutionPage({ params }: Pro
         {/* 2. The Challenge — homepage-23/WhyChooseUsV7 */}
         <TheChallenge />
 
-        {/* 3. The Solution — homepage-23/SolutionV3 */}
+        {/* 3. The Solution — homepage-13/AboutV12 */}
         <TheSolution />
 
         {/* 4. What We Can Build — homepage-15/OurWorkV2 */}
