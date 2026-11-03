@@ -49,16 +49,6 @@ const LightningIcon = () => (
   </svg>
 )
 
-const LineChartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={60} height={60} viewBox="0 0 60 60" fill="none" aria-hidden>
-    <rect width={60} height={60} className="fill-backgroundBody dark:fill-secondary" />
-    <path
-      d="M9.61413 20.7855C9.25894 20.9986 9.14377 21.4593 9.35688 21.8144C9.56999 22.1696 10.0307 22.2848 10.3859 22.0717L9.61413 20.7855ZM24.2857 12.8571L24.7357 12.2571C24.4918 12.0742 24.1613 12.0571 23.8998 12.214L24.2857 12.8571ZM35.7143 21.4286L35.2643 22.0286C35.5379 22.2338 35.9157 22.2279 36.1828 22.0142L35.7143 21.4286ZM50.4685 10.5857C50.792 10.3269 50.8444 9.85493 50.5857 9.53148C50.3269 9.20803 49.8549 9.15559 49.5315 9.41435L50.4685 10.5857ZM46.3929 50C46.3929 50.4142 46.7286 50.75 47.1429 50.75C47.5571 50.75 47.8929 50.4142 47.8929 50H46.3929ZM47.8929 27.1429C47.8929 26.7286 47.5571 26.3929 47.1429 26.3929C46.7286 26.3929 46.3929 26.7286 46.3929 27.1429H47.8929ZM23.5357 50C23.5357 50.4142 23.8715 50.75 24.2857 50.75C24.6999 50.75 25.0357 50.4142 25.0357 50H23.5357ZM25.0357 27.1429C25.0357 26.7286 24.6999 26.3929 24.2857 26.3929C23.8715 26.3929 23.5357 26.7286 23.5357 27.1429H25.0357ZM34.9643 50C34.9643 50.4142 35.3001 50.75 35.7143 50.75C36.1285 50.75 36.4643 50.4142 36.4643 50H34.9643ZM36.4643 35.7143C36.4643 35.3001 36.1285 34.9643 35.7143 34.9643C35.3001 34.9643 34.9643 35.3001 34.9643 35.7143H36.4643ZM12.1071 50C12.1071 50.4142 12.4429 50.75 12.8571 50.75C13.2714 50.75 13.6071 50.4142 13.6071 50H12.1071ZM13.6071 35.7143C13.6071 35.3001 13.2714 34.9643 12.8571 34.9643C12.4429 34.9643 12.1071 35.3001 12.1071 35.7143H13.6071ZM10.3859 22.0717L24.6716 13.5003L23.8998 12.214L9.61413 20.7855L10.3859 22.0717ZM23.8357 13.4571L35.2643 22.0286L36.1643 20.8286L24.7357 12.2571L23.8357 13.4571ZM36.1828 22.0142L50.4685 10.5857L49.5315 9.41435L35.2458 20.8429L36.1828 22.0142ZM47.8929 50V27.1429H46.3929V50H47.8929ZM25.0357 50V27.1429H23.5357V50H25.0357ZM36.4643 50V35.7143H34.9643V50H36.4643ZM13.6071 50V35.7143H12.1071V50H13.6071Z"
-      className="fill-secondary dark:fill-backgroundBody"
-    />
-  </svg>
-)
-
 const expertise: { title: string; description: string; href: string; icon: ReactNode }[] = [
   {
     title: 'Integrations & Modernization',
@@ -78,12 +68,6 @@ const expertise: { title: string; description: string; href: string; icon: React
     href: '/software/custom-software-development',
     icon: <LightningIcon />,
   },
-  {
-    title: 'AI & Automation',
-    description: 'Add intelligent capabilities to connected workflows.',
-    href: '/for-you/ai-and-automation',
-    icon: <LineChartIcon />,
-  },
 ]
 
 /** Layout: homepage-19/OurExpertiseV2 */
@@ -101,11 +85,11 @@ const ConnectedExpertise = () => {
             </h2>
           </TextAppearAnimation>
         </div>
-        <div className="flex flex-col gap-[30px] md:flex-row md:flex-wrap xl:flex-nowrap">
+        <div className="flex flex-col gap-[30px] md:flex-row md:flex-wrap lg:flex-nowrap">
           {expertise.map((item) => (
             <RevealWrapper
               key={item.href}
-              className="reveal-me md:w-[calc(50%-15px)] xl:w-auto xl:flex-1"
+              className="reveal-me w-full md:w-[calc(50%-15px)] lg:w-auto lg:flex-1"
             >
               <WowNavLink
                 href={item.href}

@@ -2,7 +2,6 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import IntegrationHub from './IntegrationHub'
 
 const benefits = [
   { number: '01', label: 'Connected Data' },
@@ -17,9 +16,6 @@ const TheSolution = () => {
   return (
     <section className="relative overflow-hidden">
       <div className="container">
-        <RevealWrapper className="reveal-me">
-          <IntegrationHub />
-        </RevealWrapper>
         <div className="mt-6 text-center md:mt-10">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>The Solution</SectionLabel>
