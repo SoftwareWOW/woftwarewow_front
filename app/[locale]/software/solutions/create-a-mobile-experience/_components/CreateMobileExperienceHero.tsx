@@ -46,7 +46,7 @@ const CreateMobileExperienceHero = () => {
 
   return (
     <section
-      className="relative overflow-hidden pt-[137px] md:pt-[160px] xl:pt-[180px]"
+      className="relative overflow-hidden pt-[50px] md:pt-[60px] xl:pt-[70px]"
       aria-labelledby="create-mobile-experience-hero-heading"
     >
       <div
@@ -91,26 +91,10 @@ const CreateMobileExperienceHero = () => {
         </div>
         <div className="flex flex-col gap-5 sm:flex-row md:flex-1">
           <figure className="relative mt-[78px]">
-            <div className="absolute -left-0 -top-[12%] mx-auto flex h-[120px] w-[120px] items-center justify-center rounded-full before:absolute before:h-[140px] before:w-[140px] before:rounded-full before:bg-white before:content-[''] dark:before:bg-secondary lg:-left-[12%]">
-              <figure className="relative z-50">
-                <img src="/images/icons/text-circle-logo.png" alt="" className="inline dark:hidden" role="presentation" />
-                <img
-                  src="/images/icons/text-circle-dark-logo.png"
-                  alt=""
-                  className="hidden dark:inline"
-                  role="presentation"
-                />
-              </figure>
-              <div
-                ref={textRef}
-                className="text-2 h-[120px] w-[120px] rounded-full bg-secondary text-[10px] text-backgroundBody dark:bg-backgroundBody dark:text-secondary"
-                aria-hidden="true"
-              />
-            </div>
-            <img src="/images/hero-img/startup-hero-1.jpg" alt="Mobile product design preview" className="max-sm:w-full" />
+            <img src="/images/hero-img/startup-hero-1.jpg" alt="Mobile product design preview" className="max-sm:w-full rounded-radius-sm" />
           </figure>
           <figure>
-            <img src="/images/hero-img/startup-hero-2.jpg" alt="Team collaborating on a mobile app" className="max-sm:w-full" />
+            <img src="/images/hero-img/startup-hero-2.jpg" alt="Team collaborating on a mobile app" className="max-sm:w-full rounded-radius-sm" />
           </figure>
         </div>
       </div>
