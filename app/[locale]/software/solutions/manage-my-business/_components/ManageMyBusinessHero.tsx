@@ -7,7 +7,7 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 const ManageMyBusinessHero = () => {
   return (
     <section
-      className="relative overflow-hidden pb-14 pt-[137px] md:pb-16 md:pt-[160px] lg:pb-[88px] xl:pb-[112px] xl:pt-[220px]"
+      className="relative overflow-x-clip px-3 pt-10 sm:pt-10 md:px-4 lg:pt-[50px] xl:pt-[60px]"
       aria-labelledby="manage-my-business-hero-heading"
     >
       <div className="absolute left-0 top-0 -z-10 blur-[65px]" aria-hidden="true">
@@ -19,12 +19,12 @@ const ManageMyBusinessHero = () => {
           <RevealWrapper
             as="h1"
             id="manage-my-business-hero-heading"
-            className="reveal-me text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            className="reveal-me text-[clamp(1.85rem,8vw,4.5rem)] font-light leading-[1.05] tracking-tight"
           >
             Run your business. <br className="hidden md:block" />
             Not your <InstrumentText>software.</InstrumentText>
           </RevealWrapper>
-          <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl">
+          <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-[#808080]">
             Bring your operations, people, and everyday workflows together. We create connected business systems that
             simplify how you work, give you clearer visibility, and help your business move forward.
           </RevealWrapper>

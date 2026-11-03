@@ -92,19 +92,19 @@ const challenges = [
 /** Layout: homepage-24/WhyChooseUsV8 */
 const TheChallenge = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section>
       <div className="container">
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>The Challenge</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">
+            <h2 className="text-appear">
               Your business shouldn&apos;t feel this <InstrumentText>complicated.</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mt-3 text-lg font-normal text-black/70 dark:text-backgroundBody/70">
+            <p className="text-appear mt-3 text-[#808080]">
               As businesses grow, everyday work can become scattered across spreadsheets, messages, applications, and
               manual processes. Important information gets harder to find, and teams spend more time managing tools
               than getting work done.
@@ -119,10 +119,8 @@ const TheChallenge = () => {
               className="col-span-12 flex-1 rounded-radius-md border px-[30px] py-10 dark:border-dark lg:col-span-6"
             >
               <span>{item.icon}</span>
-              <h5 className="mb-3 mt-6">{item.title}</h5>
-              <p className="text-base font-normal leading-[25.6px] text-black/70 dark:text-backgroundBody/70">
-                {item.description}
-              </p>
+              <h3 className="mb-3 mt-6 text-[25px] font-light leading-[1.2] lg:text-3xl">{item.title}</h3>
+              <p className="text-[#808080]">{item.description}</p>
             </div>
           ))}
         </RevealWrapper>

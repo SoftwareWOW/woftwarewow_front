@@ -91,47 +91,47 @@ const LearnMoreArrow = ({ className }: IconProps) => (
 /** Layout: homepage-24/ServicesV16 */
 const ConnectedExpertise = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section>
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
           <div className="flex-1 md:self-start">
             <SectionLabel className="mb-3">Connected Expertise</SectionLabel>
             <TextAppearAnimation>
-              <h2 className="text-appear lg:leading-[1.21]">
+              <h2 className="text-appear">
                 Everything you need to work <InstrumentText>smarter.</InstrumentText>
               </h2>
             </TextAppearAnimation>
           </div>
           <div className="w-full md:max-w-72 md:self-end lg:max-w-[470px]">
             <TextAppearAnimation>
-              <p className="text-appear max-w-lg md:place-self-end md:text-right">
+              <p className="text-appear max-w-lg text-[#808080] md:place-self-end md:text-right">
                 One business. Multiple capabilities. Connect your goals to the SoftwareWOW services that deliver them.
               </p>
             </TextAppearAnimation>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="flex flex-wrap justify-center gap-5">
           {services.map(({ id, title, description, icon: Icon, href }) => (
             <RevealWrapper
               key={id}
-              className="reveal-me group relative min-h-[460px] w-full overflow-hidden rounded-radius-md border dark:border-dark"
+              className="reveal-me group relative min-h-[410px] w-full overflow-hidden rounded-radius-md border dark:border-dark md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
             >
               <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
                 <span>
                   <Icon className="fill-secondary dark:fill-backgroundBody" />
                 </span>
-                <h5 className="mb-4 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] max-sm:text-2xl">{title}</h5>
-                <p>{description}</p>
+                <h3 className="mb-4 mt-9 text-[25px] font-light leading-[1.2] lg:text-3xl">{title}</h3>
+                <p className="text-[#808080]">{description}</p>
               </div>
 
               <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-12 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
                 <span>
                   <Icon className="fill-backgroundBody dark:fill-secondary" />
                 </span>
-                <h5 className="mb-3 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary max-sm:text-2xl">
+                <h3 className="mb-3 mt-9 text-[25px] font-light leading-[1.2] text-backgroundBody dark:text-secondary lg:text-3xl">
                   {title}
-                </h5>
+                </h3>
                 <p className="mb-10 text-backgroundBody dark:text-secondary">{description}</p>
                 <WowNavLink href={href} className="rv-button rv-button-sm-v2 rv-button-secondary-v2">
                   <div className="rv-button-top flex items-center gap-2">

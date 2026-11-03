@@ -48,16 +48,13 @@ const WhatWeCanBuild = () => {
   const { contentRef, triggerRef } = useHorizontalScroll()
 
   return (
-    <section
-      ref={triggerRef}
-      className="service-section relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]"
-    >
+    <section ref={triggerRef} className="service-section relative overflow-hidden">
       <div className="container">
         <SectionLabel className="mb-3">What We Can Build</SectionLabel>
         <h2>
           The right systems for the way you <InstrumentText>work.</InstrumentText>
         </h2>
-        <p className="mt-3 max-w-[770px]">
+        <p className="mt-3 max-w-[770px] text-[#808080]">
           Every business operates differently. We design and develop solutions that fit your processes, priorities, and
           existing technology.
         </p>
@@ -90,11 +87,11 @@ const WhatWeCanBuild = () => {
               <figure className="overflow-hidden rounded-radius-sm max-md:w-full md:w-[270px] md:shrink-0">
                 <img src={item.image} alt={item.alt} className="aspect-square h-auto w-full object-cover" />
               </figure>
-              <p className="text-base lg:text-lg">{item.description}</p>
+              <p className="text-[#808080]">{item.description}</p>
             </div>
-            <div className="flex items-end justify-between sm:mt-2">
-              <h4 className="text-[25px] lg:text-[46px] lg:leading-[1.1] lg:tracking-[-1.44px]">{item.title}</h4>
-              <span className="text-5xl font-normal leading-[1.1] tracking-[-2px] text-black/10 dark:text-backgroundBody/10 sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:tracking-[-2.88px]">
+            <div className="mt-6 flex items-end justify-between">
+              <h3 className="text-[25px] font-light leading-[1.2] lg:text-3xl">{item.title}</h3>
+              <span className="text-[25px] font-light leading-[1.2] text-black/10 dark:text-backgroundBody/10 lg:text-3xl">
                 {item.number}
               </span>
             </div>

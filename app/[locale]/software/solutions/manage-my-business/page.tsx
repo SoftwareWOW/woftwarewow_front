@@ -60,7 +60,7 @@ export default async function ManageMyBusinessSolutionPage({ params }: Props) {
         {/* 4. What We Can Build — homepage-22/OurServices */}
         <WhatWeCanBuild />
 
-        {/* 5. The Difference — homepage-04/TestimonialV5 */}
+        {/* 5. The Difference — homepage-12/WhyChooseUs */}
         <TheDifference />
 
         {/* 6. Our Approach — homepage-24/ProcessV11 */}

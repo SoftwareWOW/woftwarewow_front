@@ -30,7 +30,7 @@ const processSteps = [
 /** Layout: homepage-24/ProcessV11 */
 const OurApproach = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section>
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
@@ -42,7 +42,7 @@ const OurApproach = () => {
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-2xl">
+            <p className="text-appear mx-auto max-w-2xl text-[#808080]">
               We don&apos;t begin by pushing a particular platform. We start with your business and identify the
               systems and improvements that will create practical value.
             </p>
@@ -58,10 +58,8 @@ const OurApproach = () => {
                     {step}
                   </span>
                 </div>
-                <h6 className="text-2xl font-normal leading-[1.1] text-black dark:text-white">{title}</h6>
-                <p className="text-base font-normal leading-[1.3] text-black/70 dark:text-backgroundBody/70">
-                  {description}
-                </p>
+                <h3 className="text-[25px] font-light leading-[1.2] lg:text-3xl">{title}</h3>
+                <p className="text-[#808080]">{description}</p>
               </div>
             </RevealWrapper>
           ))}

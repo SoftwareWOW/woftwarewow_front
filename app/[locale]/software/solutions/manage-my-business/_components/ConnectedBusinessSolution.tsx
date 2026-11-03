@@ -29,8 +29,26 @@ const capabilities = [
 /** Layout: homepage-24/WhatWeOffer */
 const ConnectedBusinessSolution = () => {
   return (
-    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section>
       <div className="container">
+        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-16">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
+            <SectionLabel>The Solution</SectionLabel>
+          </RevealWrapper>
+          <TextAppearAnimation>
+            <h2 className="text-appear">
+              One connected way to <InstrumentText>run your business.</InstrumentText>
+            </h2>
+          </TextAppearAnimation>
+          <TextAppearAnimation>
+            <p className="text-appear mt-3 text-[#808080]">
+              Imagine your teams, information, and processes working together instead of operating in separate
+              systems. We help you create a more connected business environment through software tailored to your
+              operations.
+            </p>
+          </TextAppearAnimation>
+        </div>
+
         <div className="grid grid-cols-12 items-stretch gap-y-16 lg:gap-x-16">
           <RevealWrapper as="figure" className="reveal-me col-span-12 overflow-hidden rounded-radius-md lg:col-span-6">
             <img
@@ -39,39 +57,15 @@ const ConnectedBusinessSolution = () => {
               className="h-full w-full object-cover"
             />
           </RevealWrapper>
-          <RevealWrapper className="reveal-me col-span-12 space-y-7 lg:col-span-6">
-            <div className="space-y-2">
-              <SectionLabel>The Solution</SectionLabel>
-              <TextAppearAnimation>
-                <h2 className="text-appear lg:leading-[1.1]">
-                  One connected way to <InstrumentText>run your business.</InstrumentText>
-                </h2>
-              </TextAppearAnimation>
-              <TextAppearAnimation>
-                <p className="text-appear text-base font-normal text-black/70 dark:text-backgroundBody/70 md:text-lg md:leading-[28.8px] md:tracking-[0.36px]">
-                  Imagine your teams, information, and processes working together instead of operating in separate
-                  systems. We help you create a more connected business environment through software tailored to your
-                  operations.
-                </p>
-              </TextAppearAnimation>
-            </div>
-            <div>
-              <TextAppearAnimation>
-                <p className="text-appear mb-3 text-3xl font-normal text-black dark:text-white md:text-4xl md:leading-10 md:tracking-[-1.08px]">
-                  Everything works better together
-                </p>
-              </TextAppearAnimation>
-              <RevealWrapper as="ul" className="reveal-me list-inside list-disc space-y-0.5">
-                {capabilities.map((item) => (
-                  <li
-                    key={item.title}
-                    className="text-base font-normal leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70"
-                  >
-                    <span className="text-black dark:text-white">{item.title}</span> — {item.description}
-                  </li>
-                ))}
-              </RevealWrapper>
-            </div>
+          <RevealWrapper className="reveal-me col-span-12 self-center lg:col-span-6">
+            <h3 className="mb-3 text-[25px] font-light leading-[1.2] lg:text-3xl">Everything works better together</h3>
+            <ul className="list-inside list-disc space-y-2">
+              {capabilities.map((item) => (
+                <li key={item.title} className="text-[#808080]">
+                  <span className="text-[#0D0D0D] dark:text-[#F2F2F2]">{item.title}</span> — {item.description}
+                </li>
+              ))}
+            </ul>
           </RevealWrapper>
         </div>
       </div>
