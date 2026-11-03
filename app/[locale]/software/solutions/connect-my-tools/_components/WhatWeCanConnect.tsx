@@ -34,9 +34,14 @@ const connections = [
   },
 ]
 
+/** Matches fixed WowNavbar clearance (see divisionFixedNavbarOffsetClass ~5.5rem). */
+const PINNED_NAV_OFFSET_PX = 100
+
 /** Layout: homepage-11/ServicesV10 */
 const WhatWeCanConnect = () => {
-  const { contentRef, triggerRef } = useHorizontalScroll()
+  const { contentRef, triggerRef } = useHorizontalScroll({
+    start: `top top+=${PINNED_NAV_OFFSET_PX}`,
+  })
 
   return (
     <section className="relative overflow-hidden">
@@ -51,7 +56,7 @@ const WhatWeCanConnect = () => {
             </h2>
           </TextAppearAnimation>
         </div>
-        <div ref={triggerRef} className="pt-10">
+        <div ref={triggerRef} className="bg-backgroundBody pt-10 dark:bg-dark">
           <div
             ref={contentRef}
             className="flex w-fit flex-col gap-6 overflow-x-hidden pl-[5%] pr-[30px] max-md:gap-y-10 md:flex-row md:flex-nowrap"
