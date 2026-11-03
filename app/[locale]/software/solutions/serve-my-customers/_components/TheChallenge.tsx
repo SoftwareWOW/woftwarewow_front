@@ -80,9 +80,9 @@ const TheChallenge = () => {
           {challenges.map(({ title, description, icon: Icon }) => (
             <RevealWrapper
               key={title}
-              className="reveal-me group relative min-h-[410px] w-full overflow-hidden rounded-radius-md border dark:border-dark md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
+              className="reveal-me group relative w-full overflow-hidden rounded-radius-md border dark:border-dark md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
             >
-              <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+              <div className="relative h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
                 <span>
                   <Icon className="fill-secondary dark:fill-backgroundBody" />
                 </span>
@@ -90,11 +90,11 @@ const TheChallenge = () => {
                 <p className="text-[#808080] lg:text-xl">{description}</p>
               </div>
 
-              <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-12 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
+              <div className="absolute inset-0 z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-10 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
                 <span>
                   <Icon className="fill-backgroundBody dark:fill-secondary" />
                 </span>
-                <h3 className="mb-3 mt-9 text-[25px] font-light leading-[1.2] text-backgroundBody dark:text-secondary lg:text-3xl">
+                <h3 className="mb-4 mt-9 text-[25px] font-light leading-[1.2] text-backgroundBody dark:text-secondary lg:text-3xl">
                   {title}
                 </h3>
                 <p className="text-backgroundBody dark:text-secondary lg:text-xl">{description}</p>

@@ -16,13 +16,13 @@ const cornerImages = [
   {
     src: '/images/wow/LandingPageNaveBare/Client%20Portal%202.svg',
     alt: 'Customer portal interface',
-    position: 'left-0 top-0',
+    position: 'left-0 top-20',
     from: { x: -100 },
   },
   {
     src: '/images/wow/LandingPageNaveBare/friends-looking-at-their-mobile-phone-on-winter-da-2026-01-07-00-16-22-utc%202.svg',
     alt: 'Customers using a mobile app',
-    position: 'right-0 top-0',
+    position: 'right-0 top-20',
     from: { x: 100 },
   },
   {
@@ -63,7 +63,7 @@ const ServeMyCustomersHero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-20 flex w-full items-center justify-center overflow-x-clip px-3 pt-10 sm:pt-10 md:px-4 lg:pt-[50px] xl:min-h-[720px] xl:pt-[60px]"
+      className="relative z-20 flex w-full items-center justify-center overflow-x-clip px-3 pt-10 sm:pt-10 md:px-4 lg:pt-[50px] xl:min-h-[800px] xl:pt-[60px]"
       aria-labelledby="serve-my-customers-hero-heading"
     >
       <div className="absolute inset-0 z-0 mx-auto hidden max-w-[1600px] px-6 md:px-14 xl:block">
