@@ -48,25 +48,25 @@ export default async function ManageMyBusinessSolutionPage({ params }: Props) {
   return (
     <LayoutOne>
       <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-        {/* 1. Hero — custom-software-development/CustomSoftwareHero (split + mockups) */}
+        {/* 1. Hero — homepage-24/HeroV24 */}
         <ManageMyBusinessHero />
 
-        {/* 2. The Challenge — homepage-17/WhyChooseUsV6 (compact icon cards) */}
+        {/* 2. The Challenge — homepage-24/WhyChooseUsV8 */}
         <TheChallenge />
 
-        {/* 3. The Solution — business-systems-automation/BusinessSystemsAutomationHero (connected dashboard) */}
+        {/* 3. The Solution — homepage-24/WhatWeOffer */}
         <ConnectedBusinessSolution />
 
-        {/* 4. What We Can Build — product-design-prototyping/WhatWeDesign (ServicesV14) */}
+        {/* 4. What We Can Build — homepage-22/OurServices */}
         <WhatWeCanBuild />
 
-        {/* 5. The Difference — for-you/ai-and-automation/AutomationInAction (Before/After carousel) */}
+        {/* 5. The Difference — homepage-04/TestimonialV5 */}
         <TheDifference />
 
-        {/* 6. Our Approach — business-systems-automation/OurProcess (ProcessV8) */}
+        {/* 6. Our Approach — homepage-24/ProcessV11 */}
         <OurApproach />
 
-        {/* 7. Connected Expertise — web-applications/WhatWeBuild (linked service cards) */}
+        {/* 7. Connected Expertise — homepage-24/ServicesV16 */}
         <ConnectedExpertise />
 
         {/* 8. Ready to run a smarter business? — shared WowGrowthCta */}

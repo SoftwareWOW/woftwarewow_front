@@ -2,7 +2,6 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import Image from 'next/image'
 
 const capabilities = [
   {
@@ -27,74 +26,53 @@ const capabilities = [
   },
 ]
 
-const satelliteLabels = ['Operations', 'Customers', 'Workflows', 'Insights'] as const
-
-/** Layout: business-systems-automation/BusinessSystemsAutomationHero — connected dashboard ecosystem. */
+/** Layout: homepage-24/WhatWeOffer */
 const ConnectedBusinessSolution = () => {
   return (
-    <section className="relative overflow-hidden">
+    <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
-        <div className="mb-10 flex flex-col items-start gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
-          <div className="md:max-w-[55%]">
-            <RevealWrapper className="mb-3">
+        <div className="grid grid-cols-12 items-stretch gap-y-16 lg:gap-x-16">
+          <RevealWrapper as="figure" className="reveal-me col-span-12 overflow-hidden rounded-radius-md lg:col-span-6">
+            <img
+              src="/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg"
+              alt="Connected business dashboard showing operations, customers, workflows, and insights"
+              className="h-full w-full object-cover"
+            />
+          </RevealWrapper>
+          <RevealWrapper className="reveal-me col-span-12 space-y-7 lg:col-span-6">
+            <div className="space-y-2">
               <SectionLabel>The Solution</SectionLabel>
-            </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className="text-appear">
-                One connected way to <InstrumentText>run your business.</InstrumentText>
-              </h2>
-            </TextAppearAnimation>
-            <RevealWrapper className="reveal-me mt-3 max-w-2xl">
-              <p className="text-base leading-relaxed text-[#808080] md:text-lg">
-                Imagine your teams, information, and processes working together instead of operating in separate
-                systems. We help you create a more connected business environment through software tailored to your
-                operations.
-              </p>
-            </RevealWrapper>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
-          <RevealWrapper className="reveal-me relative mx-auto w-full max-w-[640px] shrink-0 lg:mx-0 lg:w-[48%]">
-            <div className="relative aspect-[4/3] w-full">
-              <figure className="relative h-full w-full overflow-hidden rounded-radius-md border dark:border-dark">
-                <Image
-                  src="/images/wow/LandingPageNaveBare/Softwarewow%201%201.svg"
-                  alt="Connected business platform dashboard"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 48vw"
-                />
-              </figure>
-              {satelliteLabels.map((label, index) => (
-                <div
-                  key={label}
-                  className="absolute rounded-radius-sm border bg-backgroundBody px-3 py-2 text-xs font-light shadow-md dark:border-dark dark:bg-dark"
-                  style={{
-                    top: index % 2 === 0 ? `${12 + index * 8}%` : 'auto',
-                    bottom: index % 2 === 1 ? `${10 + index * 6}%` : 'auto',
-                    left: index < 2 ? `${index * 4}%` : 'auto',
-                    right: index >= 2 ? `${(index - 2) * 6}%` : 'auto',
-                  }}
-                >
-                  {label}
-                </div>
-              ))}
+              <TextAppearAnimation>
+                <h2 className="text-appear lg:leading-[1.1]">
+                  One connected way to <InstrumentText>run your business.</InstrumentText>
+                </h2>
+              </TextAppearAnimation>
+              <TextAppearAnimation>
+                <p className="text-appear text-base font-normal text-black/70 dark:text-backgroundBody/70 md:text-lg md:leading-[28.8px] md:tracking-[0.36px]">
+                  Imagine your teams, information, and processes working together instead of operating in separate
+                  systems. We help you create a more connected business environment through software tailored to your
+                  operations.
+                </p>
+              </TextAppearAnimation>
+            </div>
+            <div>
+              <TextAppearAnimation>
+                <p className="text-appear mb-3 text-3xl font-normal text-black dark:text-white md:text-4xl md:leading-10 md:tracking-[-1.08px]">
+                  Everything works better together
+                </p>
+              </TextAppearAnimation>
+              <RevealWrapper as="ul" className="reveal-me list-inside list-disc space-y-0.5">
+                {capabilities.map((item) => (
+                  <li
+                    key={item.title}
+                    className="text-base font-normal leading-[25.6px] tracking-[0.32px] text-black/70 dark:text-backgroundBody/70"
+                  >
+                    <span className="text-black dark:text-white">{item.title}</span> — {item.description}
+                  </li>
+                ))}
+              </RevealWrapper>
             </div>
           </RevealWrapper>
-
-          <ul className="flex flex-1 flex-col gap-4 md:gap-5">
-            {capabilities.map((item) => (
-              <RevealWrapper
-                key={item.title}
-                as="li"
-                className="reveal-me border px-5 py-5 dark:border-dark md:px-8 md:py-6"
-              >
-                <h6 className="mb-1.5 text-lg font-light">{item.title}</h6>
-                <p className="text-base leading-relaxed text-[#808080]">{item.description}</p>
-              </RevealWrapper>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
