@@ -90,7 +90,7 @@ const TheChallenge = () => {
                 <p className="text-[#808080] lg:text-xl">{description}</p>
               </div>
 
-              <div className="absolute inset-0 z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-10 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
+              <div className="absolute inset-0 z-10 h-full w-full flex-1 translate-y-full bg-secondary opacity-0 group-hover:opacity-100 px-[30px] py-10 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
                 <span>
                   <Icon className="fill-backgroundBody dark:fill-secondary" />
                 </span>
