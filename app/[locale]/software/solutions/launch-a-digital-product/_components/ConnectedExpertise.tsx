@@ -64,27 +64,27 @@ const ConnectedExpertise = () => {
               <div className="absolute inset-0 z-10 h-full w-full translate-y-full bg-secondary p-8 opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100 dark:bg-secondary">
                 <WowNavLink href={item.href} className="block h-full" aria-label={item.title}>
                   <div className="mb-[55px] flex items-center justify-between gap-1">
-                    <h3 className="translate-y-5 text-[25px] font-light leading-[1.2] text-primary opacity-0 transition-all delay-[240ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-backgroundBody lg:text-3xl">
+                    <h3 className="translate-y-5 text-[25px] font-light leading-[1.2] text-white opacity-0 transition-all delay-[240ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-white lg:text-3xl">
                       {item.title}
                     </h3>
                     <span className="shrink-0 translate-x-20 transition-all duration-1000 group-hover:translate-x-0">
                       <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} viewBox="0 0 32 32" fill="none" aria-hidden>
                         <path
                           d="M5 16H27"
-                          className="stroke-primary dark:stroke-backgroundBody"
+                          className="stroke-white"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M18 7L27 16L18 25"
-                          className="stroke-primary dark:stroke-backgroundBody"
+                          className="stroke-white"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                       </svg>
                     </span>
                   </div>
-                  <p className="translate-y-5 text-backgroundBody/70 opacity-0 transition-all delay-[340ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-backgroundBody/70 lg:text-xl">
+                  <p className="translate-y-5 text-white opacity-0 transition-all delay-[340ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-white lg:text-xl">
                     {item.description}
                   </p>
                 </WowNavLink>
