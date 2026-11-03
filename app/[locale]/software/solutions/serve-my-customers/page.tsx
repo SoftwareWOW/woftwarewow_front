@@ -54,7 +54,7 @@ export default async function ServeMyCustomersSolutionPage({ params }: Props) {
         {/* 1. Hero — homepage-20/HeroV20 */}
         <ServeMyCustomersHero />
 
-        {/* 2. The Challenge — homepage-08/ServicesV7 */}
+        {/* 2. The Challenge — homepage-24/ServicesV16 */}
         <TheChallenge />
 
         {/* 3. The Solution — homepage-13/AboutV12 */}
@@ -69,7 +69,7 @@ export default async function ServeMyCustomersSolutionPage({ params }: Props) {
         {/* 6. Our Approach — homepage-06/ProcessV5 */}
         <OurApproach />
 
-        {/* 7. Connected Expertise — homepage-24/ServicesV16 */}
+        {/* 7. Connected Expertise — homepage-08/ServicesV7 */}
         <ConnectedExpertise />
 
         {/* 8. Ready to serve your customers better? — shared WowGrowthCta */}
