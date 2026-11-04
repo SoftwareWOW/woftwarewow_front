@@ -15,6 +15,7 @@ import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import { softwareWowMegaNavHref } from '@/data/softwareWowMegaNavRoutes'
+import { wowMarketingMegaNavHref } from '@/data/wowMarketingMegaNavRoutes'
 import type { NavMenuIconId } from '@/components/wow/nav/nav-assets'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
@@ -110,61 +111,61 @@ export const wowMarketingFooterServiceCards: ReadonlyArray<DivisionFooterService
   {
     title: 'Search Engine Optimization',
     description: 'Rank higher. Get discovered.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('searchEngineOptimization'),
     iconId: 'searchEngineOptimization',
   },
   {
     title: 'Pay-Per-Click Advertising',
     description: 'Reach ready buyers. Maximize ROI.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('payPerClickAdvertising'),
     iconId: 'payPerClickAdvertising',
   },
   {
     title: 'Social Media Marketing',
     description: 'Grow your audience. Build your brand.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('socialMediaMarketing'),
     iconId: 'socialMediaMarketing',
   },
   {
     title: 'Content Marketing',
     description: 'Create value. Earn attention.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('contentMarketing'),
     iconId: 'contentMarketing',
   },
   {
     title: 'Email Marketing',
     description: 'Stay connected. Drive action.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('emailMarketing'),
     iconId: 'emailMarketing',
   },
   {
     title: 'Marketing Automation',
     description: 'Work smarter. Scale faster.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('marketingAutomationService'),
     iconId: 'marketingAutomationService',
   },
   {
     title: 'Lead Generation',
     description: 'Capture interest. Fuel growth.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('leadGenerationService'),
     iconId: 'leadGenerationService',
   },
   {
     title: 'Analytics & Reporting',
     description: 'Measure what matters. Decide with data.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('analyticsReporting'),
     iconId: 'analyticsReporting',
   },
   {
     title: 'Local SEO',
     description: 'Show up locally. Win nearby.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('localSeo'),
     iconId: 'localSeo',
   },
   {
     title: 'Digital Strategy',
     description: 'Plan clearly. Grow intentionally.',
-    href: '/marketing#services',
+    href: wowMarketingMegaNavHref('digitalStrategy'),
     iconId: 'digitalStrategy',
   },
 ] as const

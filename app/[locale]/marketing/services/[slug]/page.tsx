@@ -1,3 +1,4 @@
+import { WowMarketingServiceRoute } from '@/app/[locale]/marketing/_lib/wowMarketingOfferingRoute'
 import WhyChooseUsV6 from '@/components/homepage-17/WhyChooseUsV6'
 import ServiceContent from '@/components/services-page/ServiceContent'
 import ServicesHero from '@/components/services-page/ServicesHero'
@@ -6,19 +7,71 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import FaqV2 from '@/components/shared/FaqV2'
 import LayoutOne from '@/components/shared/LayoutOne'
 import { ServicesType } from '@/components/shared/ServicesV8'
+import {
+  WOW_MARKETING_NAV_SERVICE_SLUGS,
+  getWowMarketingNavService,
+} from '@/data/wowMarketingNavContent'
+import { isWowMarketingServiceSegment } from '@/data/wowMarketingMegaNavRoutes'
+import type { Locale } from '@/i18n/config'
 import getMarkDownContent from '@/utils/GetMarkDownContent'
 import getMarkDownData from '@/utils/GetMarkDownData'
+import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 
-export async function generateStaticParams() {
-  const services: ServicesType[] = getMarkDownData('data/servicesV3')
-  return services.map((service) => ({
-    slug: service.slug,
-  }))
+type Props = {
+  params: Promise<{ locale: string; slug: string }>
 }
 
-const ServiceDetails = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const slug = (await params).slug
-  const service = getMarkDownContent('data/servicesV3/', slug)
+export async function generateStaticParams() {
+  const legacy: ServicesType[] = getMarkDownData('data/servicesV3')
+  const slugs = new Set<string>([
+    ...legacy.map((service) => service.slug),
+    ...WOW_MARKETING_NAV_SERVICE_SLUGS,
+  ])
+  return [...slugs].map((slug) => ({ slug }))
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params
+
+  if (isWowMarketingServiceSegment(slug)) {
+    const service = getWowMarketingNavService(slug)
+    if (!service) return { title: 'Service Not Found | WOW Marketing' }
+    return {
+      title: `${service.title} | WOW Marketing`,
+      description: service.description,
+      alternates: { canonical: `/${locale}/marketing/services/${slug}` },
+    }
+  }
+
+  try {
+    const service = getMarkDownContent('data/servicesV3/', slug)
+    const postServices = service.data
+    return {
+      title: postServices?.title ?? 'Service',
+      description: postServices?.description,
+    }
+  } catch {
+    return { title: 'Service Not Found' }
+  }
+}
+
+const ServiceDetails = async ({ params }: Props) => {
+  const { locale, slug } = await params
+  setRequestLocale(locale as Locale)
+
+  if (isWowMarketingServiceSegment(slug)) {
+    return WowMarketingServiceRoute({ params })
+  }
+
+  let service
+  try {
+    service = getMarkDownContent('data/servicesV3/', slug)
+  } catch {
+    notFound()
+  }
+
   const postServices = service.data
 
   return (
@@ -33,7 +86,7 @@ const ServiceDetails = async ({ params }: { params: Promise<{ slug: string }> })
       <WhyChooseUsV6 />
       <FaqV2 titleChange />
       <CTA>
-        Let's chat!
+        Let&apos;s chat!
         <CtaImageSlider
           slides={[
             { id: '1', img: '/images/agent/01.jpg' },

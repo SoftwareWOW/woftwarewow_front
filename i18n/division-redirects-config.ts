@@ -1,6 +1,10 @@
 import { SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES } from '../data/softwareWowMegaNavRoutes'
 import { SOFTWARE_WOW_NAV_SOLUTIONS } from '../data/softwareWowNavSolutions'
 import {
+  WOW_MARKETING_MEGA_NAV_SERVICE_ROUTES,
+  WOW_MARKETING_MEGA_NAV_SOLUTION_ROUTES,
+} from '../data/wowMarketingMegaNavRoutes'
+import {
   legacyDivisionSlugToCanonical,
   MARKETING_DIVISION_APP_SEGMENT,
   SOFTWARE_DIVISION_APP_SEGMENT,
@@ -121,6 +125,20 @@ export function getDivisionRewrites(): Rewrite[] {
       source: `/${locale}/marketing`,
       destination: `/${locale}/${MARKETING_DIVISION_APP_SEGMENT}`,
     })
+
+    for (const route of WOW_MARKETING_MEGA_NAV_SERVICE_ROUTES) {
+      rules.push({
+        source: `/${locale}/marketing/services/${route.serviceSegment}`,
+        destination: `/${locale}/${MARKETING_DIVISION_APP_SEGMENT}/services/${route.serviceSegment}`,
+      })
+    }
+
+    for (const route of WOW_MARKETING_MEGA_NAV_SOLUTION_ROUTES) {
+      rules.push({
+        source: `/${locale}/marketing/solutions/${route.solutionSegment}`,
+        destination: `/${locale}/${MARKETING_DIVISION_APP_SEGMENT}/solutions/${route.solutionSegment}`,
+      })
+    }
 
     // `/software` and `/software/{slug}` are real App Router routes under `app/[locale]/software/`.
   }
