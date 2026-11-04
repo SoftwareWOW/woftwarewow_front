@@ -14,6 +14,7 @@ import { wowIntelligenceNavigation } from '@/components/wow/divisions/wow-intell
 import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing-navigation'
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
+import { softwareWowMegaNavHref } from '@/data/softwareWowMegaNavRoutes'
 import type { NavMenuIconId } from '@/components/wow/nav/nav-assets'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
@@ -64,38 +65,44 @@ export const softwareWowFooterServiceCards: ReadonlyArray<DivisionFooterServiceC
   {
     title: 'Custom Software Development',
     description: 'Tailored software built around your unique business needs.',
-    href: '/software/services/custom-software-development',
-    iconId: 'customSoftware',
+    href: softwareWowMegaNavHref('customSoftwareDevelopment'),
+    iconId: 'customSoftwareDevelopment',
   },
   {
-    title: 'Web & Mobile Applications',
-    description: 'Powerful, user-friendly apps for web and mobile.',
-    href: '/software/services/web-applications',
+    title: 'Web Application',
+    description: 'Powerful, user-friendly web apps for teams and customers.',
+    href: softwareWowMegaNavHref('webApplications'),
     iconId: 'webApplications',
+  },
+  {
+    title: 'Mobile Application',
+    description: 'Native-quality mobile experiences for iOS and Android.',
+    href: softwareWowMegaNavHref('mobileApplications'),
+    iconId: 'mobileApplications',
   },
   {
     title: 'Business Systems & Automation',
     description: 'Streamline operations, automate tasks, and work smarter.',
-    href: '/software/services/business-systems-automation',
-    iconId: 'businessSystems',
+    href: softwareWowMegaNavHref('businessSystemsAutomation'),
+    iconId: 'businessSystemsAutomation',
   },
   {
     title: 'Product Design & Prototyping',
     description: 'Turn your ideas into intuitive, ready-to-build designs.',
-    href: '/design',
-    iconId: 'brandingCreative',
+    href: softwareWowMegaNavHref('productDesignPrototyping'),
+    iconId: 'productDesignPrototyping',
   },
   {
     title: 'Integrations & Modernization',
     description: 'Connect your systems and upgrade outdated technology.',
-    href: '/software/services/modernization-integrations',
-    iconId: 'modernizationIntegrations',
+    href: softwareWowMegaNavHref('integrationsModernization'),
+    iconId: 'integrationsModernization',
   },
   {
     title: 'Software Support & Improvement',
     description: 'Keep your software secure, reliable, and evolving.',
-    href: '/software/services/software-support-improvement',
-    iconId: 'helpSupport',
+    href: softwareWowMegaNavHref('softwareSupportImprovement'),
+    iconId: 'softwareSupportImprovement',
   },
 ] as const
 
