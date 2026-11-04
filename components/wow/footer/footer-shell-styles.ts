@@ -124,6 +124,12 @@ const footerServiceGridGaps = cn(
   'grid min-w-0 w-full max-w-full items-stretch gap-3 sm:gap-3.5 md:gap-4 lg:mx-auto lg:gap-5 xl:gap-6 min-[1400px]:gap-6',
 )
 
+/** Seven cards — same as six-card grid, one step less gap at xl+ only. */
+const footerServiceGridGapsSeven = cn(
+  footerServiceGridGaps,
+  'xl:gap-5 min-[1400px]:gap-5',
+)
+
 /** Up to 4 cards: cluster width matches footer tab row (--footer-tablist-width). */
 const footerServiceGridTabAligned = cn(
   footerServiceGridGaps,
@@ -187,7 +193,7 @@ export function footerServiceGridClassForCount(count: number): string {
   }
   if (count === 7) {
     return cn(
-      footerServiceGridWide,
+      footerServiceGridGapsSeven,
       'grid-cols-1 sm:grid-cols-2',
       footerServiceColsResponsive,
       '[&>*:nth-child(7)]:xl:col-start-2',

@@ -121,6 +121,7 @@ function ExplorePanel() {
 function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFooter }) {
   const cards = divisionChrome?.serviceCards ?? serviceCards
   const gridClass = footerServiceGridClassForCount(cards.length)
+  const serviceDensity = cards.length === 7 ? 'seven' : 'default'
 
   return (
     <div className={cn(panelClass, footerServicePanelCenterClass)}>
@@ -131,6 +132,7 @@ function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoot
           href={service.href}
           iconId={service.iconId}
           iconStyle="plain"
+          serviceDensity={serviceDensity}
           title={service.title}
           description={service.description}
         />
