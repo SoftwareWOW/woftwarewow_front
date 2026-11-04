@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { WowNavLink } from '@/components/wow/nav/WowNavLink'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
@@ -8,22 +9,22 @@ const expertise = [
   {
     title: 'Product Design & Prototyping',
     description: 'Shape and validate your product experience.',
-    href: '/software/product-design-prototyping',
+    href: softwareWowServiceHref('product-design-prototyping'),
   },
   {
     title: 'Custom Software Development',
     description: 'Build around your unique requirements.',
-    href: '/software/custom-software-development',
+    href: softwareWowServiceHref('custom-software-development'),
   },
   {
     title: 'Web Applications',
     description: 'Develop connected browser-based products.',
-    href: '/software/web-applications',
+    href: softwareWowServiceHref('web-applications'),
   },
   {
     title: 'Mobile App Development',
     description: 'Create intuitive mobile experiences.',
-    href: '/software/mobile-applications',
+    href: softwareWowServiceHref('mobile-applications'),
   },
 ]
 

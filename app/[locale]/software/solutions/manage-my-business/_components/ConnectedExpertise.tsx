@@ -3,6 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { WowNavLink } from '@/components/wow/nav/WowNavLink'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
@@ -57,28 +58,28 @@ const services: {
     title: 'Business Systems & Automation',
     description: 'Build custom operational platforms and automate everyday processes.',
     icon: OperationsIcon,
-    href: '/software/business-systems-automation',
+    href: softwareWowServiceHref('business-systems-automation'),
   },
   {
     id: 'custom-software',
     title: 'Custom Software Development',
     description: 'Create software designed around your unique business requirements.',
     icon: DocumentIcon,
-    href: '/software/custom-software-development',
+    href: softwareWowServiceHref('custom-software-development'),
   },
   {
     id: 'integrations',
     title: 'Integrations & Modernization',
     description: 'Connect existing platforms and improve outdated applications.',
     icon: NetworkIcon,
-    href: '/software/integrations-modernization',
+    href: softwareWowServiceHref('integrations-modernization'),
   },
   {
     id: 'support',
     title: 'Software Support & Improvement',
     description: 'Maintain, optimize, and enhance the software your teams rely on.',
     icon: GrowthIcon,
-    href: '/software/software-support-improvement',
+    href: softwareWowServiceHref('software-support-improvement'),
   },
 ]
 

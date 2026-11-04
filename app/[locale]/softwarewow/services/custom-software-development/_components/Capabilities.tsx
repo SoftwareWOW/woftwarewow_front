@@ -11,6 +11,7 @@ import {
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import type { ReactNode } from 'react'
 
 type Capability = {
@@ -25,13 +26,13 @@ const topRow: Capability[] = [
     title: 'Web Applications',
     description: 'Custom browser-based systems and platforms.',
     icon: <DrivenCopywritingIcon />,
-    href: '/software/web-applications',
+    href: softwareWowServiceHref('web-applications'),
   },
   {
     title: 'Mobile Applications',
     description: 'Connected mobile experiences for customers and teams.',
     icon: <BrandMessagingIcon />,
-    href: '/software/mobile-applications',
+    href: softwareWowServiceHref('mobile-applications'),
   },
   {
     title: 'APIs & Integrations',
@@ -58,7 +59,7 @@ const bottomRow: Capability[] = [
     title: 'AI Integration',
     description: 'Add intelligent features where they create practical value.',
     icon: <DigitalContentIcon />,
-    href: '/software/business-systems-automation',
+    href: softwareWowServiceHref('business-systems-automation'),
   },
 ]
 

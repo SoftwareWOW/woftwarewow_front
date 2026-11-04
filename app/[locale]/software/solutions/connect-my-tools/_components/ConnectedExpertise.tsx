@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { WowNavLink } from '@/components/wow/nav/WowNavLink'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
@@ -53,19 +54,19 @@ const expertise: { title: string; description: string; href: string; icon: React
   {
     title: 'Integrations & Modernization',
     description: 'Connect platforms and improve existing systems.',
-    href: '/software/integrations-modernization',
+    href: softwareWowServiceHref('integrations-modernization'),
     icon: <StarIcon />,
   },
   {
     title: 'Business Systems & Automation',
     description: 'Simplify processes and automate workflows.',
-    href: '/software/business-systems-automation',
+    href: softwareWowServiceHref('business-systems-automation'),
     icon: <BarsIcon />,
   },
   {
     title: 'Custom Software Development',
     description: 'Build tailored integrations and applications.',
-    href: '/software/custom-software-development',
+    href: softwareWowServiceHref('custom-software-development'),
     icon: <LightningIcon />,
   },
 ]

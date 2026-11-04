@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import { ArrowIcon, BrandMessagingIcon, DigitalContentIcon, ThoughtLeadershipIcon } from '@/components/homepage-18/Icons'
 import { WowNavLink } from '@/components/wow/nav/WowNavLink'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
@@ -9,19 +10,19 @@ const services = [
   {
     title: 'Mobile App Development',
     description: 'Build intuitive mobile applications.',
-    href: '/software/mobile-applications',
+    href: softwareWowServiceHref('mobile-applications'),
     icon: <DigitalContentIcon />,
   },
   {
     title: 'Product Design & Prototyping',
     description: 'Design and validate app experiences.',
-    href: '/software/product-design-prototyping',
+    href: softwareWowServiceHref('product-design-prototyping'),
     icon: <BrandMessagingIcon />,
   },
   {
     title: 'Integrations & Modernization',
     description: 'Connect apps with existing systems.',
-    href: '/software/integrations-modernization',
+    href: softwareWowServiceHref('integrations-modernization'),
     icon: <ThoughtLeadershipIcon />,
   },
 ]

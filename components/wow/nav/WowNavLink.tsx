@@ -1,6 +1,7 @@
 'use client'
 
 import { Link, usePathname } from '@/i18n/navigation'
+import { resolveSoftwareWowPublicHref } from '@/data/softwareWowMegaNavRoutes'
 import { normalizeAppHref } from '@/i18n/division-paths'
 import type { ComponentProps, MouseEvent } from 'react'
 
@@ -13,7 +14,7 @@ export function WowNavLink({ href, onClick, ...rest }: WowNavLinkProps) {
     return <Link href={href} onClick={onClick} {...rest} />
   }
 
-  const normalized = normalizeAppHref(href)
+  const normalized = resolveSoftwareWowPublicHref(normalizeAppHref(href))
   const hashIndex = normalized.indexOf('#')
   const path = hashIndex >= 0 ? normalized.slice(0, hashIndex) : normalized
   const fragment = hashIndex >= 0 ? normalized.slice(hashIndex + 1) : ''

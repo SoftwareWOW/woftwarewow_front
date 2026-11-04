@@ -77,9 +77,38 @@ const solutionRouteBySlug = new Map(
   SOFTWARE_WOW_MEGA_NAV_SOLUTION_ROUTES.map((route) => [route.slug, route]),
 )
 
+/** Rewrites legacy `/software/{service-slug}` hrefs to `/software/services/{segment}`. */
+export function resolveSoftwareWowPublicHref(href: string): string {
+  const hashIndex = href.indexOf('#')
+  const path = hashIndex >= 0 ? href.slice(0, hashIndex) : href
+  const hash = hashIndex >= 0 ? href.slice(hashIndex) : ''
+
+  const match = path.match(/^\/software\/([a-z0-9-]+)$/)
+  if (!match) return href
+
+  const slug = match[1]!
+  if (slug === 'services' || slug === 'solutions') return href
+
+  const route = serviceRouteBySlug.get(slug)
+  if (!route) return href
+
+  return `/software/services/${route.serviceSegment}${hash}`
+}
+
+/** Canonical public URL for a SoftwareWOW service page. */
+export function softwareWowServiceHref(publicSlug: string): string {
+  const route = getSoftwareWowMegaNavServiceRouteBySlug(publicSlug)
+  if (route) return `/software/services/${route.serviceSegment}`
+
+  const bySegment = SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES.find((r) => r.serviceSegment === publicSlug)
+  if (bySegment) return `/software/services/${bySegment.serviceSegment}`
+
+  return `/software/services/${publicSlug}`
+}
+
 export function softwareWowMegaNavHref(navId: string): string {
   const service = serviceRouteByNavId.get(navId)
-  if (service) return `/software/${service.slug}`
+  if (service) return `/software/services/${service.serviceSegment}`
 
   if (solutionRouteByNavId.has(navId)) {
     return softwareWowSolutionHref(navId)

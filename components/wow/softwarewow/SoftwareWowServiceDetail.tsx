@@ -9,6 +9,7 @@ import {
   SOFTWARE_WOW_NAV_SERVICES,
   type SoftwareWowNavService,
 } from '@/data/softwareWowNavServices'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import { Link } from '@/i18n/navigation'
 import { Check } from 'lucide-react'
 
@@ -106,7 +107,7 @@ export default function SoftwareWowServiceDetail({ service }: SoftwareWowService
             {otherServices.map((item) => (
               <RevealWrapper key={item.slug}>
                 <Link
-                  href={`/software/services/${item.slug}`}
+                  href={softwareWowServiceHref(item.slug)}
                   className="group flex h-full flex-col gap-2 border border-black/10 bg-backgroundBody p-5 transition-colors hover:border-black/25 dark:border-white/10 dark:bg-dark dark:hover:border-white/25 md:p-6"
                 >
                   <p className="text-lg font-light text-secondary group-hover:underline dark:text-backgroundBody">

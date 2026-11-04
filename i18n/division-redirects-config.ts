@@ -1,3 +1,4 @@
+import { SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES } from '../data/softwareWowMegaNavRoutes'
 import { SOFTWARE_WOW_NAV_SOLUTIONS } from '../data/softwareWowNavSolutions'
 import {
   legacyDivisionSlugToCanonical,
@@ -68,34 +69,42 @@ export function getDivisionRedirects(): Redirect[] {
       })
     }
 
+    for (const service of SOFTWARE_WOW_MEGA_NAV_SERVICE_ROUTES) {
+      rules.push({
+        source: `/${locale}/software/${service.slug}`,
+        destination: `/${locale}/software/services/${service.serviceSegment}`,
+        permanent: true,
+      })
+    }
+
     rules.push({
       source: `/${locale}/software/services/custom-software`,
-      destination: `/${locale}/software/custom-software-development`,
+      destination: `/${locale}/software/services/custom-software-development`,
       permanent: true,
     })
     rules.push({
       source: `/${locale}/software/services/mobile-app-development`,
-      destination: `/${locale}/software/mobile-applications`,
-      permanent: true,
-    })
-    rules.push({
-      source: `/${locale}/software/services/web-applications`,
-      destination: `/${locale}/software/web-applications`,
+      destination: `/${locale}/software/services/mobile-applications`,
       permanent: true,
     })
     rules.push({
       source: `/${locale}/software/services/ai-automation`,
-      destination: `/${locale}/software/business-systems-automation`,
+      destination: `/${locale}/software/services/business-systems-automation`,
       permanent: true,
     })
     rules.push({
       source: `/${locale}/software/services/saas-development`,
-      destination: `/${locale}/software/software-support-improvement`,
+      destination: `/${locale}/software/services/software-support-improvement`,
       permanent: true,
     })
     rules.push({
       source: `/${locale}/software/web-mobile-applications`,
-      destination: `/${locale}/software/web-applications`,
+      destination: `/${locale}/software/services/web-applications`,
+      permanent: true,
+    })
+    rules.push({
+      source: `/${locale}/software/services/integrations-modernization`,
+      destination: `/${locale}/software/services/modernization-integrations`,
       permanent: true,
     })
 

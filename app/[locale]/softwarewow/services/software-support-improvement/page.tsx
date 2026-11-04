@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
     },
     alternates: {
-      canonical: `/${locale}/software/software-support-improvement`,
+      canonical: `/${locale}/software/services/software-support-improvement`,
     },
   }
 }

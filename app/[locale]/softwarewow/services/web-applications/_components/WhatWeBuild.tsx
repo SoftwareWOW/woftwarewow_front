@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { softwareWowServiceHref } from '@/data/softwareWowMegaNavRoutes'
 import { Link } from '@/i18n/navigation'
 import type { ReactNode } from 'react'
 
@@ -92,7 +93,7 @@ const solutions: Solution[] = [
   {
     title: 'SaaS Applications',
     description: 'Scalable web products built for recurring-use business models.',
-    href: '/software/software-support-improvement',
+    href: softwareWowServiceHref('software-support-improvement'),
     icon: (
       <IconFrame>
         <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24" fill="none" aria-hidden>

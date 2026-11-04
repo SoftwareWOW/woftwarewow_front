@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
     },
     alternates: {
-      canonical: `/${locale}/software/mobile-applications`,
+      canonical: `/${locale}/software/services/mobile-applications`,
     },
   }
 }

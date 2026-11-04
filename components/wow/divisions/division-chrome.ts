@@ -64,19 +64,19 @@ export const softwareWowFooterServiceCards: ReadonlyArray<DivisionFooterServiceC
   {
     title: 'Custom Software Development',
     description: 'Tailored software built around your unique business needs.',
-    href: '/software/custom-software-development',
+    href: '/software/services/custom-software-development',
     iconId: 'customSoftware',
   },
   {
     title: 'Web & Mobile Applications',
     description: 'Powerful, user-friendly apps for web and mobile.',
-    href: '/software/web-applications',
+    href: '/software/services/web-applications',
     iconId: 'webApplications',
   },
   {
     title: 'Business Systems & Automation',
     description: 'Streamline operations, automate tasks, and work smarter.',
-    href: '/software/business-systems-automation',
+    href: '/software/services/business-systems-automation',
     iconId: 'businessSystems',
   },
   {
@@ -94,7 +94,7 @@ export const softwareWowFooterServiceCards: ReadonlyArray<DivisionFooterServiceC
   {
     title: 'Software Support & Improvement',
     description: 'Keep your software secure, reliable, and evolving.',
-    href: '/software/software-support-improvement',
+    href: '/software/services/software-support-improvement',
     iconId: 'helpSupport',
   },
 ] as const
