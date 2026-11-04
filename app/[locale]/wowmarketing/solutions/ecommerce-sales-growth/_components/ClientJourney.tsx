@@ -1,0 +1,104 @@
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import { legacyNavCardSrc } from '@/components/wow/nav/landing-nav-images'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+
+const DEFAULT_STEPS = [
+  {
+    number: '01',
+    title: 'Bring Customers In',
+    description: 'SEO, advertising, social, content, campaigns, and digital visibility.',
+  },
+  {
+    number: '02',
+    title: 'Make Buying Easier',
+    description: 'Better storefronts, UX, product journeys, payments, and conversion optimization.',
+  },
+  {
+    number: '03',
+    title: 'Keep Customers Coming Back',
+    description: 'Email, CRM, remarketing, loyalty, personalization, and customer engagement.',
+  },
+  {
+    number: '04',
+    title: 'Grow Without the Chaos',
+    description: 'Automation, integrations, analytics, custom systems, and stronger infrastructure.',
+  },
+]
+
+/** Layout: Home-07 ProcessV4 — image height matches steps. */
+type ClientJourneyProps = Partial<CmsProcessSection>
+
+const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image }: ClientJourneyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+  const fallbackImage = legacyNavCardSrc('pexels-cottonbro-4069290 1.png')
+
+  return (
+    <section>
+      <div className="container">
+        <div className="mb-8 text-center md:mb-20">
+          <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
+            <SectionLabel>The Commerce Journey</SectionLabel>
+          </RevealWrapper>
+          <div className="mx-auto w-full max-w-[770px]">
+            <TextAppearAnimation>
+              <h2 className="text-appear w-full">Growth Doesn&apos;t End at Checkout.</h2>
+            </TextAppearAnimation>
+          </div>
+          <div className="mx-auto w-full max-w-2xl">
+            <TextAppearAnimation>
+              <p className="text-appear mt-4 w-full text-[#808080]">
+                Strong commerce businesses continuously attract, convert, understand, and retain customers. We help
+                strengthen every stage of that cycle.
+              </p>
+            </TextAppearAnimation>
+          </div>
+        </div>
+
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
+          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
+            <CmsResponsiveImage
+              image={image}
+              fallbackSrc={fallbackImage}
+              alt={image?.alt ?? 'Commerce journey from first visit to repeat purchase'}
+              fill
+              sizes={CMS_IMAGE_SIZES.column420}
+              className="rounded-radius-md object-cover"
+            />
+          </figure>
+
+          <div className="min-w-0 flex-1">
+            <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
+              {mergedSteps.map((step, index) => (
+                <li key={step.number} className="relative max-w-max px-10">
+                  <div
+                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
+                      index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
+                    }`}
+                  >
+                    <span
+                      className={`inline-block text-xl font-semibold text-inherit ${
+                        index === 0 ? 'from-backgroundBody to-gray-400' : 'from-white to-gray-400'
+                      }`}
+                    >
+                      {step.number}
+                    </span>
+                  </div>
+                  <div className="ml-[30px]">
+                    <h3>{step.title}</h3>
+                    <p className="mt-3 max-w-[483px] text-[#808080]">{step.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </RevealWrapper>
+      </div>
+    </section>
+  )
+}
+
+export default ClientJourney

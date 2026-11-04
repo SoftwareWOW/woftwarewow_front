@@ -62,7 +62,7 @@ const ServiceDetails = async ({ params }: Props) => {
   setRequestLocale(locale as Locale)
 
   if (isWowMarketingServiceSegment(slug)) {
-    return WowMarketingServiceRoute({ params })
+    return WowMarketingServiceRoute({ params: Promise.resolve({ locale, slug }) })
   }
 
   let service

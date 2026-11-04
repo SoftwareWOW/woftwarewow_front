@@ -1,0 +1,88 @@
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeProcessSteps, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+
+const DEFAULT_PROCESSSTEPS = [
+  {
+    step: 'Step 01',
+    title: 'Discovery',
+    description: 'Understand your business, goals, customers, and growth opportunities.',
+  },
+  {
+    step: 'Step 02',
+    title: 'Strategy Blueprint',
+    description: 'Define priorities and build a clear roadmap for measurable growth.',
+  },
+  {
+    step: 'Step 03',
+    title: 'Execution',
+    description: 'Turn the strategy into coordinated actions across the right channels.',
+  },
+  {
+    step: 'Step 04',
+    title: 'Optimization',
+    description: 'Measure results, improve performance, and scale what works.',
+  },
+]
+
+type HowWeBuildStrategyProps = Partial<CmsProcessSection>
+
+const HowWeBuildStrategy = ({
+  eyebrow = 'Process',
+  title = 'How we build your',
+  accentTitle = 'strategy',
+  description,
+  steps,
+}: HowWeBuildStrategyProps = {}) => {
+  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+  const mergedSteps = mergeProcessSteps(DEFAULT_PROCESSSTEPS, steps)
+
+
+  return (
+    <section>
+      <div className="container">
+        <div className="mb-10 text-center md:mb-20">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
+            <SectionLabel>{header.eyebrow}</SectionLabel>
+          </RevealWrapper>
+          <HeadingWithInstrument
+            className="mb-3 text-center"
+            before={header.title}
+            accent={header.accentTitle ?? ''}
+          />
+        </div>
+
+        <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
+          {mergedSteps.map(({ step, title, description }, index) => (
+            <RevealWrapper key={step} className="reveal-me w-full grow pt-6 sm:w-[48%] xl:grow">
+              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center dark:border-dark">
+                <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
+                  <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-secondary">
+                    {step}
+                  </span>
+                </div>
+                <h6 className="text-2xl font-normal leading-[1.1] text-black dark:text-white">{title}</h6>
+                <p className="text-base font-normal leading-[1.3] text-black/70 dark:text-backgroundBody/70">
+                  {description}
+                </p>
+              </div>
+            </RevealWrapper>
+          ))}
+        </div>
+
+        <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
+          <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <ButtonComponent href="/meet" variant="primary">
+              Start Your Journey
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
+      </div>
+    </section>
+  )
+}
+
+export default HowWeBuildStrategy
