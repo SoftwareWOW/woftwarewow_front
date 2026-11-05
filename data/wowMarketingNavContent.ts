@@ -48,14 +48,16 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     slug: 'social-media-marketing',
     kind: 'service',
     title: 'Social Media Marketing',
-    headline: 'Social Media Marketing That Builds Momentum.',
+    headline: 'Show up. Stand out. Connect.',
     description:
-      'Grow your audience, strengthen engagement, and turn social media into a powerful marketing channel.',
+      'Grow your brand with social media strategy, content creation, paid social advertising, community management, and performance optimization.',
     includes: [
-      'Social media marketing strategy',
-      'Paid social advertising',
-      'Campaign planning & execution',
-      'Audience engagement & growth',
+      'Social Media Strategy',
+      'Content Creation & Planning',
+      'Paid Social Advertising',
+      'Community Management',
+      'Influencer & Creator Collaborations',
+      'Analytics & Optimization',
     ],
   },
   {

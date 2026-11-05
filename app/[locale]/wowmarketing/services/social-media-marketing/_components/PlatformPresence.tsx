@@ -7,38 +7,34 @@ import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems } from '@/lib/st
 const DEFAULT_PLATFORMS = [
   {
     name: 'Facebook',
-    description: 'Meet people where they already gather with useful updates and conversation-led content.',
+    description: 'Build community, share updates, and stay connected with your audience.',
     features: [
-      'Best for: Local reach · Groups · Community building',
-      'Content: Posts · Stories · Live · Events',
-      'Approach: Community groups and conversation-led content',
+      'Best for: Communities · Local reach · Engagement',
+      'Formats: Posts · Stories · Video · Events',
     ],
   },
   {
     name: 'Instagram',
-    description: 'Create a recognizable visual presence while balancing useful, engaging and promotional content.',
+    description: 'Turn visual storytelling into memorable brand experiences.',
     features: [
-      'Best for: Brand building · Community · Visual storytelling',
-      'Content: Reels · Carousels · Stories · Static content',
-      'Approach: Useful, engaging and promotional content in balance',
+      'Best for: Brand awareness · Discovery · Engagement',
+      'Formats: Reels · Carousels · Stories · Posts',
     ],
   },
   {
     name: 'TikTok',
-    description: 'Lead with native creative that earns attention first — then connect viewers back to your brand.',
+    description: 'Capture attention with authentic, creative, short-form content.',
     features: [
-      'Best for: Discovery · Culture · Short-form reach',
-      'Content: Short video · Trends · Series · Native edits',
-      'Approach: Native creative that earns attention first',
+      'Best for: Discovery · Reach · Creative storytelling',
+      'Formats: Short videos · Trends · Content series',
     ],
   },
   {
     name: 'LinkedIn',
-    description: 'Share expertise and proof that builds trust with decision-makers and professional audiences.',
+    description: 'Build credibility and connect with professional audiences.',
     features: [
-      'Best for: Authority · B2B · Thought leadership',
-      'Content: Posts · Carousels · Articles · Video',
-      'Approach: Expertise and proof that builds professional trust',
+      'Best for: B2B · Authority · Thought leadership',
+      'Formats: Posts · Articles · Carousels · Video',
     ],
   },
 ]
@@ -48,10 +44,11 @@ const PlatformPresence = ({
   eyebrow = 'Social Capabilities',
   title = 'Everything behind a',
   accentTitle = 'stronger social',
+  titleSuffix = ' presence.',
   description = 'From deciding what to say to getting it in front of the right people.',
   items,
   image,
-}: Partial<CmsTechnologiesSection> = {}) => {
+}: Partial<CmsTechnologiesSection> & { titleSuffix?: string } = {}) => {
   const displayPlatforms = mergeFeatureItems(
     DEFAULT_PLATFORMS.map((platform) => ({ ...platform, title: platform.name })),
     items,
@@ -73,8 +70,8 @@ const PlatformPresence = ({
             <RevealWrapper className="reveal-me">
               <h2>
                 {title}
-                <InstrumentText> {accentTitle} </InstrumentText>
-                presence.
+                <InstrumentText> {accentTitle}</InstrumentText>
+                {titleSuffix}
               </h2>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-4">

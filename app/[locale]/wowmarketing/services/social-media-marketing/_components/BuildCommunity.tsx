@@ -8,22 +8,22 @@ const DEFAULT_STEPS = [
   {
     number: '1',
     title: 'Listen',
-    description: 'Understand what your audience cares about.',
+    description: 'Understand your audience and what matters to them.',
   },
   {
     number: '2',
-    title: 'Engage',
-    description: 'Create reasons for people to interact.',
+    title: 'Create',
+    description: 'Share content worth noticing and discussing.',
   },
   {
     number: '3',
-    title: 'Respond',
-    description: 'Keep conversations active and human.',
+    title: 'Engage',
+    description: 'Turn interactions into real conversations.',
   },
   {
     number: '4',
-    title: 'Strengthen',
-    description: 'Turn repeated interaction into lasting connection.',
+    title: 'Grow',
+    description: 'Build stronger connections over time.',
   },
 ]
 
@@ -32,8 +32,9 @@ const BuildCommunity = ({
   eyebrow = 'Build Community',
   title = 'Followers are numbers.',
   description = 'Relationships are an asset.',
+  subtitle,
   steps,
-}: Partial<CmsProcessSection> = {}) => {
+}: Partial<CmsProcessSection> & { subtitle?: string } = {}) => {
   const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
 
   return (
@@ -50,6 +51,11 @@ const BuildCommunity = ({
               {description}
             </h2>
           </RevealWrapper>
+          {subtitle ? (
+            <RevealWrapper className="reveal-me mt-4">
+              <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{subtitle}</p>
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:gap-x-10 xl:grid-cols-4">
