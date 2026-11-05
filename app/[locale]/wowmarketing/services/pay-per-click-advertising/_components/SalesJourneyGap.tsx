@@ -32,20 +32,31 @@ const DEFAULT_STAGES = [
   },
 ]
 
+type JourneyStage = { id: string; title: string; description: string }
+
 /** Layout: Home-19 ElevateBrandV2 — split header + large numbered row list. */
 const SalesJourneyGap = ({
+  eyebrow = 'Find the Gap',
+  title = 'Growth can stall anywhere in the sales journey.',
   body = "More leads alone won't fix a broken sales process. We look at where opportunities are being lost — and what can improve them.",
-}: Partial<CmsHeroAboutSection> = {}) => {
+  stages,
+}: Partial<CmsHeroAboutSection> & {
+  eyebrow?: string
+  title?: string
+  stages?: JourneyStage[]
+} = {}) => {
+  const displayStages = stages?.length ? stages : DEFAULT_STAGES
+
   return (
     <section>
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="reveal-me mb-3">
-              <SectionLabel>Find the Gap</SectionLabel>
+              <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation02>
-              <h2 className="text-appear-2">Growth can stall anywhere in the sales journey.</h2>
+              <h2 className="text-appear-2">{title}</h2>
             </TextAppearAnimation02>
           </div>
           <div className="w-full md:w-80 lg:w-96">
@@ -58,7 +69,7 @@ const SalesJourneyGap = ({
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
-          {DEFAULT_STAGES.map((stage) => (
+          {displayStages.map((stage) => (
             <div
               key={stage.id}
               className="ease-[cubic-bezier(0.4, 0, 0.2, 1)] group flex transform items-start justify-between gap-5 pb-5 pt-5 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.010] hover:backdrop-blur-sm md:pb-10 md:pt-10">

@@ -31,14 +31,16 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     slug: 'pay-per-click-advertising',
     kind: 'service',
     title: 'Pay-Per-Click Advertising',
-    headline: 'Pay-Per-Click Advertising That Converts.',
+    headline: 'Reach the right people. Drive real results.',
     description:
-      'Reach the right audience, drive conversions, and maximize returns with targeted paid advertising.',
+      'Reach the right audience with PPC advertising, Google Ads management, targeted campaigns, conversion tracking, and ongoing optimization from WOW Marketing.',
     includes: [
-      'Google Ads campaign management',
-      'Search & display advertising',
-      'Audience targeting & remarketing',
-      'Conversion tracking & optimization',
+      'Google Ads Management',
+      'Search & Display Advertising',
+      'Audience Targeting & Remarketing',
+      'Ad Creative & Copywriting',
+      'Landing Page Optimization',
+      'Conversion Tracking & Analytics',
     ],
   },
   {
