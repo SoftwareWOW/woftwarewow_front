@@ -49,7 +49,7 @@ const MarketingGrowthHero = ({
 
   return (
     <section
-      className="relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover pt-[107px] md:pt-[130px] xl:pt-[180px]"
+      className="relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="marketing-growth-heading"
     >
       <div id="hero-gradient-wrapper" className="absolute left-0 top-0 -z-10 h-full w-full blur-[85px] md:blur-[80px]">
