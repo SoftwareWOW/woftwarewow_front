@@ -14,14 +14,16 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     slug: 'search-engine-optimization',
     kind: 'service',
     title: 'Search Engine Optimization',
-    headline: 'Search Engine Optimization That Drives Qualified Traffic.',
+    headline: 'Get found. Get chosen.',
     description:
-      'Improve search visibility, attract qualified visitors, and grow your business through smarter SEO strategies.',
+      'Improve your search visibility with technical SEO, keyword strategy, content optimization, and ongoing SEO performance reporting from WOW Marketing.',
     includes: [
-      'Keyword research & strategy',
-      'On-page & technical SEO',
-      'Content & website optimization',
-      'Search performance monitoring',
+      'SEO Strategy & Research',
+      'Technical SEO',
+      'On-Page SEO',
+      'SEO Content Strategy',
+      'Authority & Off-Page SEO',
+      'SEO Reporting & Optimization',
     ],
   },
   {
