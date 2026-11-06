@@ -11,7 +11,12 @@ const BusinessGrowthHero = ({
   italicTitle,
   description,
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Get the Growth Package',
+  secondaryCtaLabel = "See What's Included",
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+}) => {
   const image0 = images?.[0]
   const image1 = images?.[1]
 
@@ -68,12 +73,12 @@ const BusinessGrowthHero = ({
           <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="primary">
-                Get the Growth Package
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="secondary">
-                See What&apos;s Included
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>

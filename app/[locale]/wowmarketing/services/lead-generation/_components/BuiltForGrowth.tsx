@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
@@ -21,7 +22,15 @@ const CheckIcon = () => (
 type Props = Partial<CmsTechnologiesSection>
 
 /** Home-04 — AboutV4: badge + headline + image + copy column (checklist content). */
-const BuiltForGrowth = ({ eyebrow, title, description, image, items }: Props = {}) => {
+const BuiltForGrowth = ({
+  eyebrow,
+  title,
+  accentTitle,
+  description,
+  image,
+  items,
+  checklistHeading = 'This package could be right for you if:',
+}: Props & { accentTitle?: string; checklistHeading?: string } = {}) => {
   const fitItems = items?.map((item) => item.title).filter(Boolean) ?? []
   const hasImage = Boolean(image?.src)
   const introParagraph = description?.split('\n\n')[0]?.trim()
@@ -43,6 +52,12 @@ const BuiltForGrowth = ({ eyebrow, title, description, image, items }: Props = {
           <TextAppearAnimation>
             <h3 className="text-appear mb-8 text-3xl leading-tight sm:text-[34px] md:text-[44px] lg:mb-[52px] lg:text-[54px] xl:text-[64px] xl:leading-[1.1]">
               {title}
+              {accentTitle ? (
+                <>
+                  <br className="hidden sm:block" />
+                  <InstrumentText>{accentTitle}</InstrumentText>
+                </>
+              ) : null}
             </h3>
           </TextAppearAnimation>
         ) : null}
@@ -67,7 +82,7 @@ const BuiltForGrowth = ({ eyebrow, title, description, image, items }: Props = {
           <div className={hasImage ? 'lg:w-1/2' : 'w-full'}>
             {fitItems.length ? (
               <>
-                <h5 className="mb-8">This package could be right for you if:</h5>
+                <h5 className="mb-8">{checklistHeading}</h5>
                 <ul className="[&>*:not(:last-child)]:mb-4 md:[&>*:not(:last-child)]:mb-5">
                   {fitItems.map((item) => (
                     <li

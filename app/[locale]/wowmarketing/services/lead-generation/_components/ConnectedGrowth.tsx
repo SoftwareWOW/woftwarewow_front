@@ -1,12 +1,20 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
 type Props = Partial<CmsProcessSection>
 
 /** Copied from Home-07 ProcessV4 — local copy, not imported from origin. */
-const ConnectedGrowth = ({ eyebrow, title, description, steps, image }: Props = {}) => {
+const ConnectedGrowth = ({
+  eyebrow,
+  title,
+  accentTitle,
+  description,
+  steps,
+  image,
+}: Props & { accentTitle?: string } = {}) => {
   const hasImage = Boolean(image?.src)
   const displaySteps =
     steps?.map((step, index) => ({
@@ -30,7 +38,15 @@ const ConnectedGrowth = ({ eyebrow, title, description, steps, image }: Props = 
           ) : null}
           {title ? (
             <TextAppearAnimation>
-              <h2 className="text-appear mx-auto max-w-[770px]">{title}</h2>
+              <h2 className="text-appear mx-auto max-w-[770px]">
+                {title}
+                {accentTitle ? (
+                  <>
+                    {' '}
+                    <InstrumentText>{accentTitle}</InstrumentText>
+                  </>
+                ) : null}
+              </h2>
             </TextAppearAnimation>
           ) : null}
           {description ? (

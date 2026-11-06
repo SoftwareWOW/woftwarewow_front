@@ -10,7 +10,15 @@ import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 type Props = Partial<CmsTechnologiesSection>
 
 /** Home-04 — ServicesV5: accordion rows closed by default, expand on hover only. */
-const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
+const GrowthPieces = ({
+  eyebrow,
+  title,
+  accentTitle,
+  description,
+  items,
+  ctaLabel = 'Get Started with Business Growth',
+  showFooterTagline = true,
+}: Props & { accentTitle?: string; ctaLabel?: string; showFooterTagline?: boolean } = {}) => {
   const displayItems =
     items
       ?.map((item) => ({
@@ -35,7 +43,15 @@ const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
           ) : null}
           {title ? (
             <TextAppearAnimation>
-              <h2 className="text-appear">{title}</h2>
+              <h2 className="text-appear">
+                {title}
+                {accentTitle ? (
+                  <>
+                    {' '}
+                    <InstrumentText>{accentTitle}</InstrumentText>
+                  </>
+                ) : null}
+              </h2>
             </TextAppearAnimation>
           ) : null}
           {description ? (
@@ -104,13 +120,19 @@ const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
           </RevealWrapper>
         ) : null}
 
-        <RevealWrapper className="mt-14 flex flex-col items-center justify-between gap-6 md:flex-row">
-          <p className="font-instrument text-2xl italic md:text-[32px]">
-            Ready to put these pieces to <InstrumentText>work together?</InstrumentText>
-          </p>
+        <RevealWrapper
+          className={`mt-14 flex flex-col items-center gap-6 md:flex-row ${
+            showFooterTagline ? 'justify-between' : 'justify-center'
+          }`}
+        >
+          {showFooterTagline ? (
+            <p className="font-instrument text-2xl italic md:text-[32px]">
+              Ready to put these pieces to <InstrumentText>work together?</InstrumentText>
+            </p>
+          ) : null}
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Get Started with Business Growth
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

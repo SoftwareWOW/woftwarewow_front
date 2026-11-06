@@ -112,7 +112,7 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     title: 'Lead Generation',
     headline: 'Lead Generation That Fills Your Pipeline.',
     description:
-      'Attract qualified prospects, capture their interest, and turn more opportunities into potential customers.',
+      'Attract qualified prospects with targeted lead generation campaigns, landing pages, lead capture, nurturing, and conversion optimization.',
     includes: [
       'Lead generation campaigns',
       'Landing pages & conversion funnels',
