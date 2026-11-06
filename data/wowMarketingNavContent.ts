@@ -95,8 +95,9 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     slug: 'marketing-automation',
     kind: 'service',
     title: 'Marketing Automation',
-    headline: 'Marketing Automation That Scales Personalization.',
-    description: 'Automate repetitive marketing tasks and personalize customer journeys.',
+    headline: 'Less manual work. More meaningful connections.',
+    description:
+      'Automate marketing workflows, lead nurturing, CRM integrations, and personalized customer journeys.',
     includes: [
       'Automated marketing workflows',
       'Lead nurturing sequences',

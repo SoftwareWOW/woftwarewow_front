@@ -28,7 +28,12 @@ const AiAutomationHero = ({
   description =
     'Use AI and automation to remove repetitive work, improve efficiency, and create smarter business systems.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCta = { label: 'Explore AI Opportunities', href: '/contact' },
+  secondaryCta = { label: 'See What We Automate', href: '/contact' },
+}: CmsHeroComponentProps & {
+  primaryCta?: { label: string; href: string }
+  secondaryCta?: { label: string; href: string }
+}) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -123,13 +128,13 @@ const AiAutomationHero = ({
             className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4"
           >
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Explore AI Opportunities
+              <ButtonComponent href={primaryCta.href} variant="primary">
+                {primaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="secondary">
-                See What We Automate
+              <ButtonComponent href={secondaryCta.href} variant="secondary">
+                {secondaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
           </div>
