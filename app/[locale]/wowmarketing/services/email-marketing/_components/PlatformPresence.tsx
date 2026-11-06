@@ -6,39 +6,35 @@ import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems } from '@/lib/st
 
 const DEFAULT_PLATFORMS = [
   {
-    name: 'Facebook',
-    description: 'Meet people where they already gather with useful updates and conversation-led content.',
+    name: 'Welcome Emails',
+    description: 'Make a great first impression and introduce your brand.',
     features: [
-      'Best for: Local reach · Groups · Community building',
-      'Content: Posts · Stories · Live · Events',
-      'Approach: Community groups and conversation-led content',
+      'Best for: New subscribers · First impressions',
+      'Content: Introductions · Offers · Getting started',
     ],
   },
   {
-    name: 'Instagram',
-    description: 'Create a recognizable visual presence while balancing useful, engaging and promotional content.',
+    name: 'Newsletters',
+    description: 'Share updates, insights, and content worth reading.',
     features: [
-      'Best for: Brand building · Community · Visual storytelling',
-      'Content: Reels · Carousels · Stories · Static content',
-      'Approach: Useful, engaging and promotional content in balance',
+      'Best for: Engagement · Brand awareness',
+      'Content: News · Articles · Tips',
     ],
   },
   {
-    name: 'TikTok',
-    description: 'Lead with native creative that earns attention first — then connect viewers back to your brand.',
+    name: 'Promotional Emails',
+    description: 'Turn timely offers and announcements into action.',
     features: [
-      'Best for: Discovery · Culture · Short-form reach',
-      'Content: Short video · Trends · Series · Native edits',
-      'Approach: Native creative that earns attention first',
+      'Best for: Campaigns · Sales · Conversions',
+      'Content: Offers · Launches · Promotions',
     ],
   },
   {
-    name: 'LinkedIn',
-    description: 'Share expertise and proof that builds trust with decision-makers and professional audiences.',
+    name: 'Lifecycle Emails',
+    description: 'Stay connected at key moments in the customer journey.',
     features: [
-      'Best for: Authority · B2B · Thought leadership',
-      'Content: Posts · Carousels · Articles · Video',
-      'Approach: Expertise and proof that builds professional trust',
+      'Best for: Nurturing · Retention · Re-engagement',
+      'Content: Follow-ups · Reminders · Win-back',
     ],
   },
 ]
@@ -48,10 +44,11 @@ const PlatformPresence = ({
   eyebrow = 'Social Capabilities',
   title = 'Everything behind a',
   accentTitle = 'stronger social',
+  titleSuffix = ' presence.',
   description = 'From deciding what to say to getting it in front of the right people.',
   items,
   image,
-}: Partial<CmsTechnologiesSection> = {}) => {
+}: Partial<CmsTechnologiesSection> & { titleSuffix?: string } = {}) => {
   const displayPlatforms = mergeFeatureItems(
     DEFAULT_PLATFORMS.map((platform) => ({ ...platform, title: platform.name })),
     items,
@@ -73,8 +70,8 @@ const PlatformPresence = ({
             <RevealWrapper className="reveal-me">
               <h2>
                 {title}
-                <InstrumentText> {accentTitle} </InstrumentText>
-                presence.
+                {accentTitle ? <InstrumentText> {accentTitle} </InstrumentText> : null}
+                {titleSuffix}
               </h2>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-4">

@@ -80,8 +80,9 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     slug: 'email-marketing',
     kind: 'service',
     title: 'Email Marketing',
-    headline: 'Email Marketing That Keeps Customers Close.',
-    description: 'Build stronger customer relationships with targeted email campaigns.',
+    headline: 'Better emails. Stronger relationships.',
+    description:
+      'Build stronger customer relationships with email strategy, newsletters, segmentation, automation, and optimization.',
     includes: [
       'Email campaign strategy',
       'Newsletter design & management',

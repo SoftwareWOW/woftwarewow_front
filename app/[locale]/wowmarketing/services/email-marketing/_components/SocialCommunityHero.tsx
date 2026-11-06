@@ -12,7 +12,8 @@ const SocialCommunityHero = ({
   description =
     'Create stronger social visibility, meaningful engagement, and community experiences that support brand growth.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Talk to a Social Expert',
+}: CmsHeroComponentProps & { primaryCtaLabel?: string }) => {
   const useStaticHeroImages = !images?.length
   const image0 = useStaticHeroImages
     ? { src: '/images/hero-img/social-hero-1.jpg', alt: 'Social media presence' }
@@ -62,7 +63,7 @@ const SocialCommunityHero = ({
           <RevealWrapper className="reveal-me mt-7 md:mt-9 lg:mt-14">
             <ButtonComponentList>
               <ButtonComponent href="/contact" variant="primary" size="sm">
-                Talk to a Social Expert
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>
