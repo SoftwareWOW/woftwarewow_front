@@ -41,8 +41,6 @@ export default async function Page({ params }: Props) {
   } = CONTENT
 
   const { primaryCta, secondaryCta, ...heroProps } = hero
-  const { ctaLabel: foundationCtaLabel, ctaHref: foundationCtaHref, ...authorityFoundationProps } =
-    authorityFoundation
   const { ctaLabel, ctaHref, ...whatsIncludedProps } = whatsIncluded
   const { showWowPrefix, ...specialistProps } = specialistExpertisePackage
 
@@ -54,11 +52,7 @@ export default async function Page({ params }: Props) {
         primaryCta={primaryCta}
         secondaryCta={secondaryCta}
       />
-      <AuthorityFoundation
-        {...authorityFoundationProps}
-        ctaLabel={foundationCtaLabel}
-        ctaHref={foundationCtaHref}
-      />
+      <AuthorityFoundation {...authorityFoundation} />
       <WhatsIncluded {...whatsIncludedProps} ctaLabel={ctaLabel} ctaHref={ctaHref} />
       <AuthorityJourney {...authorityJourney} />
       <SpecialistExpertise {...specialistProps} showWowPrefix={showWowPrefix} />

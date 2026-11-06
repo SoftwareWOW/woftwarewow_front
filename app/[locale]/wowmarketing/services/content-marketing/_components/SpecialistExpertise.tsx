@@ -4,7 +4,7 @@ import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
-import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
 const DEFAULT_ITEMS = [
@@ -37,7 +37,6 @@ const SpecialistExpertise = ({
     ...DEFAULT_ITEMS[index],
     name: item.title,
     description: item.description ?? DEFAULT_ITEMS[index].description,
-    previewImage: items?.[index]?.image,
   }))
 
   return (
@@ -55,15 +54,13 @@ const SpecialistExpertise = ({
               </h2>
             </TextAppearAnimation02>
           </div>
-          {description ? (
-            <div className="w-full md:w-80 lg:w-96">
-              <TextAppearAnimation>
-                <p className="text-appear max-w-lg text-[#808080] max-md:text-justify md:place-self-end md:text-right">
-                  {description}
-                </p>
-              </TextAppearAnimation>
-            </div>
-          ) : null}
+          <div className="w-full md:w-80 lg:w-96">
+            <TextAppearAnimation>
+              <p className="text-appear max-w-lg text-[#808080] max-md:text-justify md:place-self-end md:text-right">
+                {description}
+              </p>
+            </TextAppearAnimation>
+          </div>
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:dark:border-dark">
@@ -75,28 +72,15 @@ const SpecialistExpertise = ({
               <span className="w-8 font-instrument text-xl italic leading-[32px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody">
                 0{item.id}
               </span>
-              <h3 className="wow-approach-step-title-wide flex min-w-0 flex-1 items-center gap-3 text-nowrap max-md:text-wrap">
-                {item.previewImage?.src ? (
-                  <span className="relative hidden size-12 shrink-0 overflow-hidden rounded-radius-sm sm:block md:size-14">
-                    <CmsResponsiveImage
-                      image={item.previewImage}
-                      alt={item.previewImage.alt ?? item.name}
-                      fill
-                      sizes={CMS_IMAGE_SIZES.decorativeThumb}
-                      className="object-cover"
-                    />
-                  </span>
-                ) : null}
-                <span className="flex items-baseline gap-[0.25em]">
-                  {showWowPrefix ? (
-                    <>
-                      <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>
-                      {item.name}
-                    </>
-                  ) : (
-                    item.name
-                  )}
-                </span>
+              <h3 className="wow-approach-step-title-wide flex items-baseline gap-[0.25em] text-nowrap">
+                {showWowPrefix ? (
+                  <>
+                    <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText>
+                    {item.name}
+                  </>
+                ) : (
+                  item.name
+                )}
               </h3>
               <p className="ml-2.5 self-center text-xs text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[370px] md:text-base md:leading-[1.6] md:tracking-[0.32px]">
                 {item.description}

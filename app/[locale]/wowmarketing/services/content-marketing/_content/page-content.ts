@@ -50,8 +50,6 @@ export const CONTENT = {
         description: 'Reach your audience across the right channels.',
       },
     ],
-    ctaLabel: 'Explore Our Content Services',
-    ctaHref: '/contact',
   },
   whatsIncluded: {
     eyebrow: 'WHAT WE DELIVER',
@@ -116,36 +114,12 @@ export const CONTENT = {
     accentTitle: 'Many ways to connect.',
     description: '',
     items: [
-      {
-        title: 'Blog & Articles',
-        description: 'Inform, educate, and attract readers.',
-        image: { src: '/images/wow/blog/Blog card 1.jpg', alt: 'Blog and article content preview' },
-      },
-      {
-        title: 'Website Content',
-        description: 'Turn website visits into meaningful action.',
-        image: { src: '/images/wow/Hero/Growth/image (3).png', alt: 'Website content preview' },
-      },
-      {
-        title: 'Social Content',
-        description: 'Create posts worth sharing and discussing.',
-        image: { src: CONTENT_HERO_IMAGE_2, alt: 'Social content preview' },
-      },
-      {
-        title: 'Video & Visuals',
-        description: 'Tell stories that capture attention.',
-        image: { src: '/images/wow/blog/blogheroimage.jpg', alt: 'Video and visual content preview' },
-      },
-      {
-        title: 'Email Content',
-        description: 'Keep your audience informed and engaged.',
-        image: { src: '/images/wow/blog/Blog card 2.jpg', alt: 'Email content preview' },
-      },
-      {
-        title: 'Guides & Resources',
-        description: 'Share knowledge that builds lasting trust.',
-        image: { src: '/images/wow/blog/Blog card 4.jpg', alt: 'Guides and resources preview' },
-      },
+      { title: 'Blog & Articles', description: 'Inform, educate, and attract readers.' },
+      { title: 'Website Content', description: 'Turn website visits into meaningful action.' },
+      { title: 'Social Content', description: 'Create posts worth sharing and discussing.' },
+      { title: 'Video & Visuals', description: 'Tell stories that capture attention.' },
+      { title: 'Email Content', description: 'Keep your audience informed and engaged.' },
+      { title: 'Guides & Resources', description: 'Share knowledge that builds lasting trust.' },
     ],
     showWowPrefix: false,
   },

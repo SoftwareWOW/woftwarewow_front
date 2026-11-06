@@ -52,9 +52,9 @@ const WhatsIncluded = ({
           ) : null}
         </div>
 
-        <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
+        <div className="flex flex-col-reverse gap-y-8 md:grid md:grid-cols-2 md:items-stretch md:gap-x-[30px]">
           {displayItems.length ? (
-            <div className="md:w-1/2 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
+            <div className="min-h-0 [&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
               {displayItems.map((item) => (
                 <RevealWrapper key={item.title} className="reveal-me py-3.5 pr-[30px] lg:py-[30px]">
                   <h5>{item.title}</h5>
@@ -67,14 +67,19 @@ const WhatsIncluded = ({
           ) : null}
 
           {hasImage ? (
-            <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] overflow-hidden rounded-radius-sm md:w-1/2">
-              <CmsResponsiveImage
-                image={image}
-                alt={image?.alt ?? 'Brand authority package essentials'}
-                fill
-                sizes={CMS_IMAGE_SIZES.halfGrid}
-                className="rounded-radius-sm object-contain"
-              />
+            <RevealWrapper
+              as="figure"
+              className="reveal-me relative min-h-[280px] w-full md:min-h-0 md:h-full"
+            >
+              <div className="absolute inset-0 overflow-hidden rounded-radius-md [clip-path:inset(0_round_var(--radius-md))]">
+                <CmsResponsiveImage
+                  image={image}
+                  alt={image?.alt ?? 'Brand authority package essentials'}
+                  fill
+                  sizes={CMS_IMAGE_SIZES.halfGrid}
+                  className="object-cover"
+                />
+              </div>
             </RevealWrapper>
           ) : null}
         </div>

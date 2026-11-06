@@ -61,7 +61,7 @@ const AuthorityJourney = ({
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
           {mergedSteps.map((item) => (
             <RevealWrapper key={item.id} className="w-full grow pt-6 sm:w-[48%] xl:grow">
-              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center dark:border-dark">
+              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between rounded-radius-sm border px-5 pb-[42px] pt-10 text-center dark:border-dark">
                 <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody/20">
                   <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-backgroundBody">
                     Step {item.id.toString().padStart(2, '0')}
