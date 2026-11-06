@@ -24,7 +24,7 @@ const BrandAuthorityHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pt-[137px] md:pt-[160px] xl:pt-[180px]"
+      className="relative overflow-hidden pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="brand-authority-heading"
     >
       <div className="pointer-events-none absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0">
