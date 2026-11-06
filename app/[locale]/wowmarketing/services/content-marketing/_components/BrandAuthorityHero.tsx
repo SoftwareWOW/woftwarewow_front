@@ -4,6 +4,8 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 
+type CtaLink = { label: string; href: string }
+
 /** Home-19 — HeroV19: split headline + dual media + dual CTAs. */
 const BrandAuthorityHero = ({
   badgeTitle = 'Brand Authority Package',
@@ -11,7 +13,12 @@ const BrandAuthorityHero = ({
   italicTitle = 'authority.',
   description,
   images,
-}: CmsHeroComponentProps) => {
+  primaryCta = { label: 'Build Your Authority', href: '/contact' },
+  secondaryCta = { label: 'Talk to an Expert', href: '/meet' },
+}: CmsHeroComponentProps & {
+  primaryCta?: CtaLink
+  secondaryCta?: CtaLink
+}) => {
   const image0 = images?.[0]
   const image1 = images?.[1]
 
@@ -49,13 +56,13 @@ const BrandAuthorityHero = ({
 
           <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Build Your Authority
+              <ButtonComponent href={primaryCta.href} variant="primary">
+                {primaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/meet" variant="secondary">
-                Talk to an Expert
+              <ButtonComponent href={secondaryCta.href} variant="secondary">
+                {secondaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>

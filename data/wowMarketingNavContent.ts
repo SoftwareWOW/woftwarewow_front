@@ -65,9 +65,9 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     slug: 'content-marketing',
     kind: 'service',
     title: 'Content Marketing',
-    headline: 'Content Marketing That Earns Trust.',
+    headline: 'Content that connects. Stories that convert.',
     description:
-      'Attract, educate, and convert your audience with valuable content that builds trust and drives action.',
+      'Attract and engage your audience with content strategy, SEO content, storytelling, and distribution.',
     includes: [
       'Content strategy & planning',
       'Blog & article creation',

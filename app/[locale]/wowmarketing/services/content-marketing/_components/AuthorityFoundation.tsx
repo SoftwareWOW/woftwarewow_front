@@ -3,6 +3,7 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import Link from 'next/link'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
@@ -69,6 +70,8 @@ const ArrowButton = () => (
 
 type Props = Partial<CmsTechnologiesSection> & {
   sectionId?: string
+  ctaLabel?: string
+  ctaHref?: string
 }
 
 /** Home-16 — ServicesV14: bordered cards with arrow hover. */
@@ -79,6 +82,8 @@ const AuthorityFoundation = ({
   description = 'Build the foundations that help people recognize, trust, and remember your brand.',
   items,
   sectionId,
+  ctaLabel,
+  ctaHref = '/contact',
 }: Props = {}) => {
   const mergedItems = mergeFeatureItems(DEFAULT_ITEMS, items)
 
@@ -116,6 +121,16 @@ const AuthorityFoundation = ({
           </RevealWrapper>
         ))}
       </div>
+
+      {ctaLabel ? (
+        <RevealWrapper className="mt-14 flex justify-center">
+          <ButtonComponentList className="flex" itemClassName="block">
+            <ButtonComponent href={ctaHref} variant="primary">
+              {ctaLabel}
+            </ButtonComponent>
+          </ButtonComponentList>
+        </RevealWrapper>
+      ) : null}
     </section>
   )
 }

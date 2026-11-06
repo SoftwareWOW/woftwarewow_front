@@ -5,10 +5,21 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-type Props = Partial<CmsTechnologiesSection>
+type Props = Partial<CmsTechnologiesSection> & {
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 /** Home-12 — WhyChooseUs: centered header + list + image + CTA. */
-const WhatsIncluded = ({ eyebrow, title, description, items, image }: Props = {}) => {
+const WhatsIncluded = ({
+  eyebrow,
+  title,
+  description,
+  items,
+  image,
+  ctaLabel = 'Build Your Authority',
+  ctaHref = '/contact',
+}: Props = {}) => {
   const displayItems =
     items?.map((item) => ({
       title: item.title,
@@ -70,8 +81,8 @@ const WhatsIncluded = ({ eyebrow, title, description, items, image }: Props = {}
 
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList className="flex" itemClassName="block">
-            <ButtonComponent href="/contact" variant="primary">
-              Build Your Authority
+            <ButtonComponent href={ctaHref} variant="primary">
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>
