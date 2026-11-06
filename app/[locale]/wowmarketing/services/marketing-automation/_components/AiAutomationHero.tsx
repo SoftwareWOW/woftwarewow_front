@@ -52,7 +52,7 @@ const AiAutomationHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pb-16 pt-[120px] sm:pt-[135px] md:pb-20 md:pt-[150px] lg:pb-28 lg:pt-44 xl:pb-[160px] xl:pt-[200px]"
+      className="relative overflow-hidden pb-16 pt-[30px] md:pb-20 md:pt-[40px] lg:pb-28 xl:pb-[160px] xl:pt-[50px]"
       aria-labelledby="ai-automation-heading"
     >
       {imagePool[0]?.src ? (

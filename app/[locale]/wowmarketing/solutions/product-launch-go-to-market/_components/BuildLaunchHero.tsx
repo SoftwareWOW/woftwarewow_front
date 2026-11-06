@@ -31,7 +31,7 @@ const BuildLaunchHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pt-28 md:pt-[160px] xl:pt-[180px]"
+      className="relative overflow-hidden pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="build-launch-heading"
     >
       <SectionDecorativeBackground src={backgroundImage?.src} />

@@ -21,7 +21,7 @@ const BusinessGrowthHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pt-[100px] md:pt-[110px] xl:pt-[130px]"
+      className="relative overflow-hidden pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="business-growth-heading"
     >
       {/* Home-19 HeroV19 gradient */}

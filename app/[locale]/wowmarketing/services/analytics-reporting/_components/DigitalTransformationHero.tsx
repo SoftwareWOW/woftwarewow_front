@@ -24,7 +24,7 @@ const DigitalTransformationHero = ({
   return (
     <RevealWrapper
       as="section"
-      className="relative overflow-hidden pb-16 pt-[130px] md:pb-20 md:pt-[160px] lg:pb-28 xl:pb-[160px] xl:pt-[200px]"
+      className="relative overflow-hidden pb-16 pt-[30px] md:pb-20 md:pt-[40px] lg:pb-28 xl:pb-[160px] xl:pt-[50px]"
       aria-labelledby="digital-transformation-heading"
     >
       <HeroGradientAnimation />

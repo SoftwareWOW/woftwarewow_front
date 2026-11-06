@@ -30,7 +30,7 @@ const StrategyHero = ({
 
   return (
     <section
-      className="relative overflow-hidden bg-background pb-16 pt-28 transition-colors duration-300 dark:bg-[#0A0A0A] md:pb-20 md:pt-[160px] lg:pb-24 lg:pt-[180px]"
+      className="relative overflow-hidden bg-background pb-16 pt-[30px] transition-colors duration-300 dark:bg-[#0A0A0A] md:pb-20 md:pt-[40px] lg:pb-24 xl:pt-[50px]"
       aria-labelledby="strategy-centre-hero-heading"
     >
       <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-10 px-4 md:px-[30px] lg:flex-row lg:items-center lg:justify-between lg:gap-16">

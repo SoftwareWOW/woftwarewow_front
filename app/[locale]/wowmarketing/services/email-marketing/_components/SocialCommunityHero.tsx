@@ -24,7 +24,7 @@ const SocialCommunityHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pt-[137px] md:pt-[160px] xl:pt-[220px]"
+      className="relative overflow-hidden pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="social-community-heading"
     >
       <div id="hero-gradient-wrapper" className="absolute left-0 top-0 -z-10 blur-[65px]" aria-hidden="true">

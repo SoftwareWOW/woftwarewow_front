@@ -9,7 +9,7 @@ export default function MarketingHero() {
   const hero = MARKETING_HERO
 
   return (
-    <section className="relative overflow-hidden bg-background px-3 pt-20 transition-colors duration-300 dark:bg-background sm:pt-24 md:px-4 lg:pt-[120px] xl:pt-[110px]">
+    <section className="relative overflow-hidden bg-background px-3 pt-[30px] transition-colors duration-300 dark:bg-background md:px-4 md:pt-[40px] xl:pt-[50px]">
       <div className="relative z-10 mx-auto max-w-[1320px]">
         <RevealWrapper className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-14 xl:gap-16">
           <div className="w-full max-w-[640px] text-center lg:text-left">

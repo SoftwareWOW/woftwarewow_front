@@ -70,22 +70,22 @@ export const CONTENT = {
     description: 'Closer to your customers.',
     steps: [
       {
-        number: '01',
+        number: '1',
         title: 'Welcome',
         description: 'Make every new subscriber feel valued.',
       },
       {
-        number: '02',
+        number: '2',
         title: 'Engage',
         description: 'Share content that keeps interest alive.',
       },
       {
-        number: '03',
+        number: '3',
         title: 'Nurture',
         description: 'Guide subscribers toward their next step.',
       },
       {
-        number: '04',
+        number: '4',
         title: 'Reconnect',
         description: 'Bring inactive audiences back into the conversation.',
       },

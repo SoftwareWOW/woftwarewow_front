@@ -28,7 +28,7 @@ const RetailEcommerceHero = ({
         <HeroGradientAnimation />
       </div>
 
-      <div className="container pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-48">
+      <div className="container pt-[30px] md:pt-[40px] xl:pt-[50px]">
         <RevealWrapper>
           <div className="mb-4">
             <SectionLabel>{badgeTitle}</SectionLabel>

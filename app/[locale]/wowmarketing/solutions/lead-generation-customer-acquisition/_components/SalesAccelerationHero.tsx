@@ -17,7 +17,7 @@ const SalesAccelerationHero = ({
   const image0 = images?.[0]
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-[90px] md:pb-[90px] md:pt-[100px] lg:pb-[110px] lg:pt-[120px]">
+    <section className="relative overflow-hidden pb-14 pt-[30px] md:pb-[90px] md:pt-[40px] lg:pb-[110px] xl:pt-[50px]">
       <div
         id="hero-gradient-wrapper"
         className="h-fw-full absolute top-1/2 -z-10 w-full -translate-y-1/2 scale-75 blur-[90px]"

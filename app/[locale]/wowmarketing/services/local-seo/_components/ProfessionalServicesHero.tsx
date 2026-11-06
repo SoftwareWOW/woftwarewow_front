@@ -23,7 +23,7 @@ const ProfessionalServicesHero = ({
 }: PageHeroProps) => {
   return (
     <section
-      className="overflow-hidden pt-[120px] sm:pt-[135px] md:pt-[150px] lg:pt-44 xl:pt-48"
+      className="overflow-hidden pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="professional-services-heading"
     >
       <div className="relative">
