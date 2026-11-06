@@ -126,7 +126,8 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     kind: 'service',
     title: 'Analytics & Reporting',
     headline: 'Analytics & Reporting You Can Act On.',
-    description: 'Turn marketing data into insights that drive better decisions.',
+    description:
+      'Make smarter marketing decisions with performance dashboards, conversion tracking, campaign attribution, customer insights, and analytics reporting.',
     includes: [
       'Marketing performance dashboards',
       'Conversion & event tracking',
