@@ -61,7 +61,7 @@ const AiAutomationHero = ({
       aria-labelledby="ai-automation-heading"
     >
       {imagePool[0]?.src ? (
-        <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
+        <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden overflow-hidden rounded-radius-sm md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
           <StrapiResponsiveImg
             ref={setImageRef(0)}
             image={imagePool[0]}
@@ -69,14 +69,14 @@ const AiAutomationHero = ({
             alt={imagePool[0].alt ?? ''}
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[0]}
-            className="h-[110px] w-[85px] rounded-sm object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
+            className="h-[110px] w-[85px] rounded-radius-sm object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
               loading="eager"
               fetchPriority="high"
             />
         </figure>
       ) : null}
       {imagePool[1]?.src ? (
-        <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
+        <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden overflow-hidden rounded-radius-sm md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
           <StrapiResponsiveImg
             ref={setImageRef(1)}
             image={imagePool[1]}
@@ -84,12 +84,12 @@ const AiAutomationHero = ({
             alt={imagePool[1].alt ?? ''}
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[1]}
-            className="h-[100px] w-[82px] rounded-sm object-contain lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
+            className="h-[100px] w-[82px] rounded-radius-sm object-contain lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
           />
         </figure>
       ) : null}
       {imagePool[2]?.src ? (
-        <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
+        <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden overflow-hidden rounded-radius-sm md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
           <StrapiResponsiveImg
             ref={setImageRef(2)}
             image={imagePool[2]}
@@ -97,7 +97,7 @@ const AiAutomationHero = ({
             alt={imagePool[2].alt ?? ''}
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[2]}
-            className="h-[90px] w-[130px] rounded-sm object-contain lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
+            className="h-[90px] w-[130px] rounded-radius-sm object-contain lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
           />
         </figure>
       ) : null}
