@@ -84,16 +84,19 @@ const StrategyHero = ({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper as="figure" className="reveal-me flex w-full justify-center lg:w-auto lg:flex-1 lg:justify-end">
+        <RevealWrapper
+          as="figure"
+          className="reveal-me flex w-full justify-center overflow-hidden rounded-radius-md lg:w-auto lg:flex-1 lg:justify-end"
+        >
           <CmsResponsiveImage
             image={heroImage}
             alt={heroImage.alt ?? 'WOW Strategy Centre'}
             sizes={CMS_IMAGE_SIZES.sideColumn}
             width={heroImage.width ?? 520}
             height={heroImage.height ?? 640}
-            className="h-auto max-h-[min(70vh,520px)] w-full max-w-[520px] object-contain lg:max-w-none"
-              priority
-            />
+            className="h-auto max-h-[min(70vh,520px)] w-full max-w-[520px] rounded-radius-md object-cover lg:max-w-none"
+            priority
+          />
         </RevealWrapper>
       </div>
     </section>
