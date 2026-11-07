@@ -142,7 +142,7 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     title: 'Local SEO',
     headline: 'Local SEO That Puts You on the Map.',
     description:
-      'Boost your local visibility and attract nearby customers actively searching for businesses like yours.',
+      'Attract nearby customers with local SEO, Google Business Profile optimization, Google Maps visibility, local listings, and review strategies.',
     includes: [
       'Google Business Profile optimization',
       'Local keyword targeting',
@@ -156,7 +156,8 @@ export const WOW_MARKETING_NAV_SERVICES: WowMarketingOffering[] = [
     kind: 'service',
     title: 'Digital Strategy',
     headline: 'Digital Strategy Aligned With Your Goals.',
-    description: 'Build a smarter marketing roadmap aligned with your goals.',
+    description:
+      'Build a smarter digital marketing roadmap with audience research, channel strategy, campaign planning, performance measurement, and growth optimization.',
     includes: [
       'Digital marketing audits',
       'Audience & competitor research',

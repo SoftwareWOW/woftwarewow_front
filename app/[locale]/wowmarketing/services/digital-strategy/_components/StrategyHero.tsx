@@ -16,6 +16,10 @@ type StrategyHeroProps = {
   italicTitle?: string
   description?: string
   images?: CmsHeroImage[]
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
 }
 
 /** Split hero — copy left, featured image right (not a background). */
@@ -25,6 +29,10 @@ const StrategyHero = ({
   italicTitle = 'Clear. Measurable. Built to scale.',
   description = 'Discover how WOW plans, executes, and measures digital growth for SMBs — with clarity, measurable outcomes, and a coordinated roadmap across every division.',
   images,
+  primaryCtaLabel = 'Book Strategy Session',
+  secondaryCtaLabel = 'Explore Our Approach',
+  primaryCtaHref = '/meet',
+  secondaryCtaHref = '#growth-framework',
 }: StrategyHeroProps) => {
   const heroImage = images?.[0] ?? DEFAULT_IMAGE
 
@@ -44,10 +52,13 @@ const StrategyHero = ({
               id="strategy-centre-hero-heading"
               className="text-[clamp(2rem,4.571vw,4.5rem)] font-normal leading-[1.12] tracking-[-0.03em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
             >
-              {title}{' '}
-              <span className="whitespace-nowrap">Growth –</span>
-              <br />
-              <InstrumentText variant="solid">{italicTitle}</InstrumentText>
+              {title}
+              {italicTitle ? (
+                <>
+                  <br />
+                  <InstrumentText variant="solid">{italicTitle}</InstrumentText>
+                </>
+              ) : null}
             </h1>
           </RevealWrapper>
 
@@ -55,13 +66,20 @@ const StrategyHero = ({
             <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
           </RevealWrapper>
 
-          <RevealWrapper className="reveal-me mt-7 md:mt-10 lg:mt-12">
+          <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-10 lg:mt-12">
             <ButtonComponent
-              href="/meet"
+              href={primaryCtaHref}
+              variant="primary"
+              className="dark:!border-white/20"
+            >
+              {primaryCtaLabel}
+            </ButtonComponent>
+            <ButtonComponent
+              href={secondaryCtaHref}
               variant="secondary"
               className="dark:!border-white/20 dark:!bg-transparent dark:!text-[#F2F2F2]"
             >
-              Book Strategy Session
+              {secondaryCtaLabel}
             </ButtonComponent>
           </RevealWrapper>
         </div>

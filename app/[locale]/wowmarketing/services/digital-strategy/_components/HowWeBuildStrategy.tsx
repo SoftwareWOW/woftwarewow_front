@@ -28,7 +28,10 @@ const DEFAULT_PROCESSSTEPS = [
   },
 ]
 
-type HowWeBuildStrategyProps = Partial<CmsProcessSection>
+type HowWeBuildStrategyProps = Partial<CmsProcessSection> & {
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 const HowWeBuildStrategy = ({
   eyebrow = 'Process',
@@ -36,6 +39,8 @@ const HowWeBuildStrategy = ({
   accentTitle = 'strategy',
   description,
   steps,
+  ctaLabel = 'Start Your Journey',
+  ctaHref = '/meet',
 }: HowWeBuildStrategyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_PROCESSSTEPS, steps)
@@ -75,8 +80,8 @@ const HowWeBuildStrategy = ({
 
         <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/meet" variant="primary">
-              Start Your Journey
+            <ButtonComponent href={ctaHref} variant="primary">
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

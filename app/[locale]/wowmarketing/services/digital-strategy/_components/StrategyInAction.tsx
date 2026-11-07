@@ -25,7 +25,15 @@ type DisplayProject = {
   href: string
 }
 
-type StrategyInActionProps = { projects?: CmsProjectCard[] | null }
+type StrategyInActionProps = {
+  projects?: CmsProjectCard[] | null
+  eyebrow?: string
+  titleBefore?: string
+  titleAccent?: string
+  description?: string
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 function mapCmsProjects(projects: CmsProjectCard[]): DisplayProject[] {
   return projects.map((project, index) => {
@@ -60,7 +68,15 @@ function mapFallbackProjects(items: CaseStudyType[]): DisplayProject[] {
   }))
 }
 
-const StrategyInAction = ({ projects }: StrategyInActionProps = {}) => {
+const StrategyInAction = ({
+  projects,
+  eyebrow = 'Strategy in Action',
+  titleBefore = 'Challenge to results,',
+  titleAccent = 'proven',
+  description: _description,
+  ctaLabel = 'Read More Case Studies',
+  ctaHref = '/case-study',
+}: StrategyInActionProps = {}) => {
   const displayProjects = projects?.length ? mapCmsProjects(projects) : mapFallbackProjects(caseStudies)
 
   return (
@@ -68,16 +84,17 @@ const StrategyInAction = ({ projects }: StrategyInActionProps = {}) => {
       <div className="container">
         <div className="mb-10 text-center lg:mb-20">
           <RevealWrapper className="mb-5 flex justify-center">
-            <SectionLabel>Strategy in Action</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
-          <HeadingWithInstrument className="text-center" before="Challenge to results," accent="proven" />
+          <HeadingWithInstrument className="text-center" before={titleBefore} accent={titleAccent} />
         </div>
 
         <div className="mb-[60px] space-y-[30px]">
           {displayProjects.map((item) => (
             <RevealWrapper
               key={item.slug}
-              className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row">
+              className="reveal-me underline-hover-effect group relative flex flex-col items-center lg:flex-row"
+            >
               <figure className="relative -z-30 h-[240px] w-full max-w-[870px] overflow-hidden rounded-radius-md sm:h-[280px] md:h-[320px] lg:h-[360px]">
                 <Link href={item.href} className="block h-full w-full rounded-radius-md">
                   <img
@@ -115,8 +132,8 @@ const StrategyInAction = ({ projects }: StrategyInActionProps = {}) => {
         </div>
         <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/case-study" variant="white">
-              Read More Case Studies
+            <ButtonComponent href={ctaHref} variant="white">
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

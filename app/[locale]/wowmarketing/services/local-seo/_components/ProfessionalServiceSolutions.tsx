@@ -78,46 +78,64 @@ const IconPeople = () => (
   </svg>
 )
 
-const solutions: { title: string; description: string; items: string[]; icon: ReactNode }[] = [
+const ICONS: ReactNode[] = [<IconBars key="bars" />, <IconBolt key="bolt" />, <IconChart key="chart" />, <IconPeople key="people" />]
+
+const DEFAULT_ITEMS = [
   {
     title: 'Brand & Authority',
     description:
       'Build a professional identity and market position that communicates expertise before the first conversation even happens.',
-    items: ['Brand strategy', 'Visual identity', 'Positioning', 'Creative design'],
-    icon: <IconBars />,
+    detailLine: 'Brand strategy · Visual identity · Positioning · Creative design',
   },
   {
     title: 'Websites & Digital Experience',
     description: 'Create a digital presence that clearly communicates what you do, builds trust, and turns visitors into inquiries.',
-    items: ['Website design', 'Development', 'UX & conversion', 'Content structure'],
-    icon: <IconBolt />,
+    detailLine: 'Website design · Development · UX & conversion · Content structure',
   },
   {
     title: 'Marketing & Lead Generation',
     description: 'Increase visibility and attract prospects who are actively looking for the expertise you provide.',
-    items: ['SEO', 'Content marketing', 'Paid campaigns', 'Social media'],
-    icon: <IconChart />,
+    detailLine: 'SEO · Content marketing · Paid campaigns · Social media',
   },
   {
     title: 'Sales & Automation',
     description: 'Improve how leads are captured, followed up with, qualified, and converted into clients.',
-    items: ['CRM systems', 'Lead automation', 'Sales funnels', 'AI workflows'],
-    icon: <IconPeople />,
+    detailLine: 'CRM systems · Lead automation · Sales funnels · AI workflows',
   },
 ]
 
-/** Layout: Home-23 WhyChooseUsV7 — 2-column bordered icon cards + origin SVGs + bottom CTA. */
-type ProfessionalServiceSolutionsProps = Partial<CmsTechnologiesSection>
+type SolutionItem = { title: string; description: string; detailLine?: string }
+
+/** Layout: Home-23 WhyChooseUsV7 — 2-column bordered icon cards + bottom CTA. */
+type ProfessionalServiceSolutionsProps = Partial<CmsTechnologiesSection> & {
+  items?: SolutionItem[]
+  ctaLabel?: string
+  ctaAriaLabel?: string
+}
 
 const ProfessionalServiceSolutions = ({
   eyebrow = 'Professional Service Solutions',
   title = 'Built Around How You',
   accentTitle = 'Win Clients.',
-  description,
+  description =
+    'Connect your brand, digital presence, marketing, sales, and operations into a stronger client acquisition system.',
   items,
+  ctaLabel = 'Explore All Services',
+  ctaAriaLabel,
 }: ProfessionalServiceSolutionsProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = (items ?? [])
+  const mergedItems: SolutionItem[] =
+    items && items.length >= 4
+      ? (items as SolutionItem[]).map((it, i) => ({
+          title: it.title,
+          description: it.description ?? '',
+          detailLine: it.detailLine ?? DEFAULT_ITEMS[i]?.detailLine,
+        }))
+      : mergeFeatureItems(DEFAULT_ITEMS, items).map((item, i) => ({
+          title: item.title,
+          description: item.description ?? DEFAULT_ITEMS[i]?.description ?? '',
+          detailLine: DEFAULT_ITEMS[i]?.detailLine,
+        }))
 
   return (
     <section id="solutions">
@@ -127,40 +145,36 @@ const ProfessionalServiceSolutions = ({
             <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">{header.title}<InstrumentText>{header.accentTitle}</InstrumentText></h2>
+            <h2 className="text-appear lg:leading-[1.1]">
+              {header.title}
+              {header.accentTitle ? <InstrumentText>{header.accentTitle}</InstrumentText> : null}
+            </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mt-4 text-[#808080]">
-              Connect your brand, digital presence, marketing, sales, and operations into a stronger client acquisition
-              system.
-            </p>
+            <p className="text-appear mt-4 text-[#808080]">{header.description}</p>
           </TextAppearAnimation>
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
-          {solutions.map((item) => (
+          {mergedItems.map((item, index) => (
             <div
               key={item.title}
               className="col-span-12 flex-1 rounded-radius-sm border border-[#e5e5e5] px-[30px] py-10 dark:border-white/10 lg:col-span-6"
             >
-              <span>{item.icon}</span>
+              <span>{ICONS[index % ICONS.length]}</span>
               <h5 className="mb-2.5 mt-5">{item.title}</h5>
               <p className="text-base font-normal leading-[25.6px] text-[#808080]">{item.description}</p>
-              <ul className="mt-5 space-y-2">
-                {item.items.map((line) => (
-                  <li key={line} className="text-base leading-[25.6px] text-[#808080]">
-                    {line}
-                  </li>
-                ))}
-              </ul>
+              {item.detailLine ? (
+                <p className="mt-5 text-base leading-[25.6px] text-[#808080]">{item.detailLine}</p>
+              ) : null}
             </div>
           ))}
         </RevealWrapper>
 
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList className="flex" itemClassName="block">
-            <ButtonComponent href="/contact" variant="primary">
-              Explore All Services
+            <ButtonComponent href="/contact" variant="primary" aria-label={ctaAriaLabel}>
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

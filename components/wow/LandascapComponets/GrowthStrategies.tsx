@@ -38,10 +38,24 @@ const articles = [
 ]
 
 type GrowthStrategiesProps = {
+  eyebrow?: string
+  titleBefore?: string
+  titleAccent?: string
+  description?: string
+  ctaLabel?: string
+  ctaHref?: string
   articles?: typeof articles
 }
 
-const GrowthStrategies = ({ articles: articlesProp }: GrowthStrategiesProps) => {
+const GrowthStrategies = ({
+  eyebrow = 'Insights',
+  titleBefore = 'Insights, Trends &',
+  titleAccent = 'Growth Strategies',
+  description = 'Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity, not jargon.',
+  ctaLabel = 'View All Articles',
+  ctaHref = '/blog',
+  articles: articlesProp,
+}: GrowthStrategiesProps) => {
   const articlesData = articlesProp ?? articles
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
@@ -67,29 +81,25 @@ const GrowthStrategies = ({ articles: articlesProp }: GrowthStrategiesProps) => 
       />
 
       <div className="relative z-10 mx-auto max-w-[1320px]">
-           <RevealWrapper>
-              <SectionLabel className="mb-5">Insights</SectionLabel>
-                                  </RevealWrapper>
+        <RevealWrapper>
+          <SectionLabel className="mb-5">{eyebrow}</SectionLabel>
+        </RevealWrapper>
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-         
-          <HeadingWithInstrument
-            className="max-w-[640px] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
-            before="Insights, Trends &"
-            accent="Growth Strategies"
-          />
- </div>
+          <div>
+            <HeadingWithInstrument
+              className="max-w-[640px] font-light leading-[1.1] tracking-[-0.02em] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]"
+              before={titleBefore}
+              accent={titleAccent}
+            />
+          </div>
           <RevealWrapper className="max-w-[420px] lg:text-right">
-            <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">
-              Practical ideas on marketing, technology, AI, and business growth — written for owners who want clarity,
-              not jargon.
-            </p>
-       
-              <div className="mt-6 flex justify-end md:mt-8">
-                <ButtonComponent href="/blog" variant="secondary" >
-                View All Articles
+            <p className="text-base leading-relaxed text-[#808080] transition-colors duration-300">{description}</p>
+
+            <div className="mt-6 flex justify-end md:mt-8">
+              <ButtonComponent href={ctaHref} variant="secondary">
+                {ctaLabel}
               </ButtonComponent>
-              </div>
+            </div>
           </RevealWrapper>
         </div>
 

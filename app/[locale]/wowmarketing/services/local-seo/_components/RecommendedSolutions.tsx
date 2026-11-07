@@ -28,30 +28,41 @@ const DEFAULT_PACKAGES = [
   },
 ]
 
-/** Layout: Home-19 OurExpertiseV2 — 3-card row with WowProjects arrow on hover. */
-type RecommendedSolutionsProps = Partial<CmsTechnologiesSection>
+type PackageItem = (typeof DEFAULT_PACKAGES)[number]
+
+/** Layout: Home-19 OurExpertiseV2 — card row with arrow on hover. */
+type RecommendedSolutionsProps = Partial<CmsTechnologiesSection> & {
+  items?: PackageItem[]
+}
 
 const RecommendedSolutions = ({ eyebrow, title, accentTitle, description, items }: RecommendedSolutionsProps = {}) => {
-  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = mergeFeatureItems(DEFAULT_PACKAGES, items)
+  const header = mergeSectionHeader(
+    {
+      eyebrow: 'Recommended Solutions',
+      title: 'Built to Strengthen Your Business.',
+      accentTitle: '',
+      description:
+        'Explore packages that combine the capabilities professional service firms commonly need to attract, convert, and grow.',
+    },
+    { eyebrow, title, accentTitle, description },
+  )
+  const mergedItems: PackageItem[] = mergeFeatureItems(DEFAULT_PACKAGES, items)
 
   return (
     <section>
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Recommended Solutions</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3">
-              Built to Strengthen Your <InstrumentText>Business.</InstrumentText>
+              {header.title}
+              {header.accentTitle ? <InstrumentText>{header.accentTitle}</InstrumentText> : null}
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear text-[#808080]">
-              Explore packages that combine the capabilities professional service firms commonly need to attract,
-              convert, and grow.
-            </p>
+            <p className="text-appear text-[#808080]">{header.description}</p>
           </TextAppearAnimation>
         </div>
         <article>
@@ -59,7 +70,7 @@ const RecommendedSolutions = ({ eyebrow, title, accentTitle, description, items 
             {mergedItems.map((item) => (
               <Link
                 key={item.number}
-                href={item.href}
+                href={item.href ?? '/contact'}
                 className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border px-[30px] py-10 dark:border-dark"
               >
                 <span className="font-instrument text-5xl italic leading-none">{item.number}</span>

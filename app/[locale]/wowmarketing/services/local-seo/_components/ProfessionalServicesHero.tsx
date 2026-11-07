@@ -10,6 +10,9 @@ type PageHeroProps = {
   italicTitle?: string
   description?: string
   images?: { src: string; alt?: string }[]
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  secondaryCtaHref?: string
 }
 
 /** Layout: Home-13 HeroV13 — centered headline + dual CTAs + hover-expand images. */
@@ -20,6 +23,9 @@ const ProfessionalServicesHero = ({
   description =
     'Build a stronger presence, attract better clients, and create smarter systems around the expertise your business already has.',
   images,
+  primaryCtaLabel = 'Grow Your Business',
+  secondaryCtaLabel = 'Explore Solutions',
+  secondaryCtaHref = '#solutions',
 }: PageHeroProps) => {
   return (
     <section
@@ -29,8 +35,8 @@ const ProfessionalServicesHero = ({
       <div className="relative">
         <div className="h-fw-full absolute left-1/2 top-1/2 -z-10 w-full -translate-x-1/2 -translate-y-1/2 scale-75 blur-[60px]">
           <img
-                loading="eager"
-                fetchPriority="high"
+            loading="eager"
+            fetchPriority="high"
             src="/images/hero-gradient-bg.png"
             alt=""
             aria-hidden
@@ -51,12 +57,12 @@ const ProfessionalServicesHero = ({
           <div className="mt-14 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="primary">
-                Grow Your Business
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="#solutions" variant="secondary">
-                Explore Solutions
+              <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </div>

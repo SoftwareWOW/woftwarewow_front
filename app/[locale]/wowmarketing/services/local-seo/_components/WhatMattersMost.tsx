@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
@@ -34,7 +35,8 @@ const WhatMattersMost = ({
   eyebrow = 'What Matters Most',
   title = 'Your Expertise Deserves a Stronger Business Around It.',
   accentTitle = '',
-  description,
+  description =
+    'We help professional service firms strengthen the way they are discovered, trusted, chosen, and experienced.',
   items,
   image,
 }: WhatMattersMostProps = {}) => {
@@ -50,14 +52,21 @@ const WhatMattersMost = ({
             <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mt-3">{header.title}</h2>
+            <h2 className="text-appear mt-3">
+              {header.title}
+              {header.accentTitle ? (
+                <>
+                  <br className="hidden sm:block" />
+                  <InstrumentText>{header.accentTitle}</InstrumentText>
+                </>
+              ) : null}
+            </h2>
           </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear mt-3 text-[#808080]">
-              We help professional service firms strengthen the way they are discovered, trusted, chosen, and
-              experienced.
-            </p>
-          </TextAppearAnimation>
+          {header.description ? (
+            <TextAppearAnimation>
+              <p className="text-appear mt-3 text-[#808080]">{header.description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
           <div className="md:w-1/2 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-[#e5e5e5] dark:[&>*:not(:last-child)]:border-white/10">
