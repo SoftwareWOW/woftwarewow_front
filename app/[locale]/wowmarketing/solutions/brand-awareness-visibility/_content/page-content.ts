@@ -28,7 +28,7 @@ export const CONTENT = {
     title: 'Brand Awareness & Visibility',
     italicTitle: 'Be Seen. Be Remembered. Be Chosen.',
     description:
-      'Put your brand in front of the right people with strategic campaigns across search, social media, content, and paid advertising. Build recognition, expand your reach, and create lasting visibility.',
+      'Reach the right audience through search, social media, content, and paid campaigns. Build recognition and grow your digital presence.',
     images: heroImages,
     primaryCtaLabel: 'Grow Your Visibility',
     secondaryCtaLabel: 'Explore Our Capabilities',
@@ -40,27 +40,26 @@ export const CONTENT = {
     title: 'Get Noticed by the Right Audience',
     accentTitle: '',
     description:
-      'Visibility is more than simply being online. We combine strategy, creative content, and targeted marketing to help your business reach new audiences and build a recognizable presence.',
+      'We combine strategy, creative content, and targeted marketing to expand your reach and strengthen brand recognition.',
     items: [
       {
         title: 'Brand Awareness Campaigns',
         headline: 'Make a lasting first impression.',
         description:
-          'Introduce your business to new audiences through coordinated campaigns designed to increase exposure, communicate your value, and strengthen brand recognition.',
+          'Reach new audiences with coordinated campaigns that showcase your brand and strengthen recognition.',
         href: '/contact',
       },
       {
         title: 'SEO & Content Marketing',
         headline: 'Be found when it matters.',
         description:
-          'Improve your visibility in search results with relevant content, strategic keywords, and optimized website pages that help potential customers discover your business.',
+          'Improve search visibility through relevant content, strategic keywords, and optimized website pages.',
         href: '/contact',
       },
       {
         title: 'Social Media Advertising',
         headline: 'Reach beyond your followers.',
-        description:
-          'Expand your audience with targeted social advertising, compelling creative, and campaigns designed to put your brand in front of potential customers.',
+        description: 'Connect with new audiences through targeted social ads and compelling campaign creative.',
         href: '/contact',
       },
     ],
@@ -69,76 +68,71 @@ export const CONTENT = {
     eyebrow: 'Built for Discovery',
     title: 'A Connected Visibility Strategy',
     description:
-      "Strong brand visibility doesn't happen through a single channel. We connect research, content, advertising, and optimization to help your business stay visible and recognizable wherever your audience discovers you.",
-    closingLine:
-      'Not just more exposure. A stronger presence that people recognize and remember.',
+      'We connect research, content, advertising, and optimization to keep your brand visible across the channels your audience uses.',
+    closingLine: 'Not just more exposure. A brand people recognize and remember.',
     showCtas: false,
     image: { src: SIDE_IMAGE, alt: 'Connected visibility strategy' },
     items: [
       {
         title: 'Audience Research',
-        description: 'Understand your ideal customers, their interests, and the digital channels they use.',
+        description: 'Understand your ideal customers, their interests, and where they spend time online.',
       },
       {
         title: 'Campaign Strategy',
-        description: 'Build coordinated marketing campaigns with clear objectives, messaging, and audience targeting.',
+        description: 'Plan campaigns with clear goals, consistent messaging, and precise targeting.',
       },
       {
         title: 'Search Visibility',
-        description: 'Improve discoverability through search optimization, relevant content, and stronger online presence.',
+        description: 'Improve discoverability through SEO, relevant content, and search optimization.',
       },
       {
         title: 'Social Media Presence',
-        description: 'Build recognition with consistent social content, engaging visuals, and strategic publishing.',
+        description: 'Build recognition through consistent content, engaging visuals, and publishing.',
       },
       {
         title: 'Paid Awareness',
-        description: 'Extend your reach through targeted advertising campaigns across relevant digital platforms.',
+        description: 'Expand your reach with targeted advertising across relevant digital platforms.',
       },
       {
         title: 'Performance Optimization',
-        description:
-          'Monitor reach, impressions, engagement, and campaign performance to improve your visibility strategy.',
+        description: 'Track reach, engagement, and campaign results to continuously improve performance.',
       },
     ],
   },
   brandVisibility: {
     eyebrow: 'Brand Visibility',
-    title: 'More Than Just Being Seen.',
-    titleUsesInstrument: false,
-    description:
-      'Getting noticed is the first step. Building recognition takes consistent messaging, compelling creative, and a presence across the channels your customers use.',
-    secondaryDescription:
-      'We help your business turn individual impressions into a connected brand experience.',
+    title: 'From Visibility to',
+    accentTitle: 'Recognition.',
+    frameworkTagline:
+      'We follow a focused process to help your brand reach the right people and build lasting recognition.',
     ctaLabel: 'Start Growing Your Reach',
     ctaHref: '/contact',
     steps: [
       {
-        title: 'Targeted',
-        headline: 'Reach the Right People.',
-        description: 'Connect with audiences based on relevant interests, behaviors, and search intent.',
+        title: 'Discover',
+        headline: 'Know Your Audience.',
+        description: 'Identify your ideal customers, their interests, and the channels they use.',
       },
       {
-        title: 'Recognizable',
-        headline: 'Make Every Impression Count.',
-        description:
-          'Use consistent messaging and creative to help audiences recognize your brand across different channels.',
+        title: 'Strategize',
+        headline: 'Plan Your Visibility.',
+        description: 'Create a clear campaign strategy with the right message, channels, and targeting.',
       },
       {
-        title: 'Multi-Channel',
-        headline: 'Be Where Your Audience Is.',
-        description: 'Build visibility across search engines, social media, content, and paid advertising.',
+        title: 'Amplify',
+        headline: 'Expand Your Reach.',
+        description: 'Launch coordinated content and advertising campaigns to connect with new audiences.',
       },
       {
-        title: 'Measurable',
-        headline: "Know What's Working.",
-        description: 'Track meaningful visibility metrics and refine campaigns based on performance insights.',
+        title: 'Optimize',
+        headline: 'Build Lasting Impact.',
+        description: 'Monitor campaign performance and refine your approach to strengthen brand recognition.',
       },
     ],
   },
   cta: {
     accentText: 'Ready to Get Your Brand Noticed?',
     mainText: '',
-    ariaLabel: "Let's Grow Your Visibility",
+    ariaLabel: 'Grow Your Brand Visibility',
   },
 }
