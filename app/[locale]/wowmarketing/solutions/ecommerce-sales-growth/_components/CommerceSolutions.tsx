@@ -108,15 +108,27 @@ const solutions: { title: string; description: string; items: string[]; icon: Re
 /** Layout: Home-23 WhyChooseUsV7 — 2-column bordered icon cards + origin SVGs + bottom CTA. */
 type CommerceSolutionsProps = Partial<CmsTechnologiesSection>
 
+type SolutionCard = { title: string; description?: string; items?: string[] }
+
 const CommerceSolutions = ({
   eyebrow = 'Commerce Solutions',
   title = 'Built Around the Way',
   accentTitle = 'People',
   description,
   items,
-}: CommerceSolutionsProps = {}) => {
+  ctaLabel = 'Explore All Services',
+}: CommerceSolutionsProps & { ctaLabel?: string } = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedItems = (items ?? [])
+  const displaySolutions = mergeFeatureItems(
+    solutions.map((s) => ({ title: s.title, description: s.description })),
+    items,
+  ).map((item, index) => ({
+    ...solutions[index],
+    title: item.title,
+    description: item.description ?? solutions[index].description,
+    items:
+      (items?.[index] as SolutionCard | undefined)?.items ?? solutions[index].items,
+  }))
 
   return (
     <section>
@@ -126,18 +138,20 @@ const CommerceSolutions = ({
             <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.1]">{header.title}<InstrumentText>{header.accentTitle}</InstrumentText></h2>
+            <h2 className="text-appear lg:leading-[1.1]">
+              {header.title}
+              {header.accentTitle ? <InstrumentText>{header.accentTitle}</InstrumentText> : null}
+            </h2>
           </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear mt-4 text-[#808080]">
-              Connect your storefront, marketing, customer experience, and operations into one stronger commerce
-              system.
-            </p>
-          </TextAppearAnimation>
+          {header.description ? (
+            <TextAppearAnimation>
+              <p className="text-appear mt-4 text-[#808080]">{header.description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
 
         <RevealWrapper className="reveal-me grid grid-cols-12 gap-[30px]">
-          {solutions.map((item) => (
+          {displaySolutions.map((item) => (
             <div
               key={item.title}
               className="col-span-12 flex-1 rounded-radius-sm border border-[#e5e5e5] px-[30px] py-10 dark:border-white/10 lg:col-span-6"
@@ -159,7 +173,7 @@ const CommerceSolutions = ({
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList className="flex" itemClassName="block">
             <ButtonComponent href="/contact" variant="primary">
-              Explore All Services
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

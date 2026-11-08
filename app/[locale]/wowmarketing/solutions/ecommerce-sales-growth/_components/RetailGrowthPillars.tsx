@@ -57,8 +57,8 @@ const RetailGrowthPillars = ({
           <div className="flex-1 max-md:w-full md:self-end">
             <TextAppearAnimation>
               <p className="text-appear max-w-lg text-[#808080] md:place-self-end md:text-right">
-                Connect your brand, digital presence, marketing, sales, and operations into a stronger client
-                acquisition system.
+                {header.description ??
+                  'Connect your brand, digital presence, marketing, sales, and operations into a stronger client acquisition system.'}
               </p>
             </TextAppearAnimation>
           </div>

@@ -203,9 +203,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'ecommerce-sales-growth',
     kind: 'solution',
     title: 'eCommerce & Sales Growth',
-    headline: 'eCommerce & Sales Growth That Scales Revenue.',
+    headline: 'Attract. Convert. Sell More.',
     description:
-      'Drive more online sales, improve conversions, and grow revenue with performance-focused eCommerce marketing.',
+      'Grow online sales with eCommerce marketing, conversion optimization, customer retention, and connected commerce solutions from WOW Marketing.',
     includes: [
       'eCommerce advertising campaigns',
       'Shopping & product ads',

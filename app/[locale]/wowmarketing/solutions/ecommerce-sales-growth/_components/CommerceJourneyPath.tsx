@@ -36,9 +36,18 @@ const CommerceJourneyPath = ({
   accentTitle = '',
   description,
   steps,
-}: CommerceJourneyPathProps = {}) => {
+  ctaLabel = 'Build Your Growth Engine',
+}: CommerceJourneyPathProps & { ctaLabel?: string } = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
-  const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+  const cmsSteps = steps as Array<{ number?: string; title: string; description?: string }> | undefined
+  const mergedSteps =
+    cmsSteps?.length === 4
+      ? cmsSteps.map((step, index) => ({
+          number: step.number ?? DEFAULT_STEPS[index]?.number ?? String(index + 1).padStart(2, '0'),
+          title: step.title,
+          description: step.description ?? DEFAULT_STEPS[index]?.description ?? '',
+        }))
+      : mergeProcessSteps(DEFAULT_STEPS, steps)
 
 
   return (
@@ -50,7 +59,7 @@ const CommerceJourneyPath = ({
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">
-              Growth Doesn&apos;t End at Checkout.
+              {header.title}
             </h2>
           </RevealWrapper>
         </div>
@@ -71,15 +80,16 @@ const CommerceJourneyPath = ({
           </div>
         </RevealWrapper>
 
-        <RevealWrapper as="p" className="reveal-me mx-auto mt-10 max-w-2xl text-center text-[#808080] md:mt-14">
-          Strong commerce businesses continuously attract, convert, understand, and retain customers. We help strengthen
-          every stage of that cycle.
-        </RevealWrapper>
+        {header.description ? (
+          <RevealWrapper as="p" className="reveal-me mx-auto mt-10 max-w-2xl text-center text-[#808080] md:mt-14">
+            {header.description}
+          </RevealWrapper>
+        ) : null}
 
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="white">
-              Build Your Growth Engine
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

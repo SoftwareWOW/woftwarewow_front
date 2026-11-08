@@ -40,19 +40,24 @@ const RecommendedSolutions = ({ eyebrow, title, accentTitle, description, items 
       <div className="container">
         <div className="mb-8 text-center md:mb-14">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Recommended Solutions</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear my-3">
-              Built to Move Commerce <InstrumentText>Forward.</InstrumentText>
+              {header.title}
+              {header.accentTitle ? (
+                <>
+                  {' '}
+                  <InstrumentText>{header.accentTitle}</InstrumentText>
+                </>
+              ) : null}
             </h2>
           </TextAppearAnimation>
-          <TextAppearAnimation>
-            <p className="text-appear text-[#808080]">
-              Explore connected packages designed around the digital, sales, and operational challenges growing
-              retailers face.
-            </p>
-          </TextAppearAnimation>
+          {header.description ? (
+            <TextAppearAnimation>
+              <p className="text-appear text-[#808080]">{header.description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
         <article>
           <RevealWrapper className="reveal-me flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
