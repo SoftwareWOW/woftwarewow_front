@@ -10,8 +10,8 @@ import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-/** Match header marks; slightly below full `em` scale. */
-const ROW_LOGO_CLASS = 'h-[0.85em] w-auto max-w-[min(100%,14em)] object-contain object-left'
+/** Match header marks; scaled down for row layout. */
+const ROW_LOGO_CLASS = 'h-[0.6em] w-auto max-w-[min(100%,10em)] object-contain object-left'
 
 const teams: {
   id: string
