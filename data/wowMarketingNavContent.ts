@@ -175,7 +175,7 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     title: 'Brand Awareness & Visibility',
     headline: 'Brand Awareness & Visibility That Expands Reach.',
     description:
-      'Get your brand noticed, expand your reach, and build a stronger presence across digital channels.',
+      "Grow your brand's visibility with strategic SEO, content marketing, social media, and paid advertising campaigns from WOW Marketing.",
     includes: [
       'Brand visibility campaigns',
       'SEO & content marketing',

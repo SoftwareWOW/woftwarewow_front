@@ -5,14 +5,25 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
-/** Layout: Home-12 WhyChooseUs — centered header + list + image + dual CTAs. */
+type BrandCapabilitiesProps = Partial<CmsTechnologiesSection> & {
+  closingLine?: string
+  showCtas?: boolean
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+}
+
+/** Layout: Home-12 WhyChooseUs — centered header + list + image + optional CTAs. */
 const BrandCapabilities = ({
   eyebrow = 'Brand Capabilities',
   title = 'From strategy to every expression of your brand.',
   description,
   items,
   image,
-}: Partial<CmsTechnologiesSection> = {}) => {
+  closingLine,
+  showCtas = true,
+  primaryCtaLabel = 'Build Your Brand',
+  secondaryCtaLabel = 'Talk to a Branding Expert',
+}: BrandCapabilitiesProps = {}) => {
   const displayCapabilities =
     items?.map((item, index) => ({
       number: String(index + 1).padStart(2, '0'),
@@ -24,6 +35,8 @@ const BrandCapabilities = ({
   if (!displayCapabilities.length && !hasSideImage) {
     return null
   }
+
+  const fallbackImage = '/images/wow/Hero/Growth/image (3).png'
 
   return (
     <section>
@@ -63,27 +76,36 @@ const BrandCapabilities = ({
             <RevealWrapper as="figure" className="reveal-me relative min-h-[320px] overflow-hidden rounded-radius-md md:min-h-[480px] md:w-1/2">
               <CmsResponsiveImage
                 image={image}
-                alt={image?.alt ?? 'Brand capabilities and identity system'}
+                fallbackSrc={fallbackImage}
+                alt={image?.alt ?? 'Brand capabilities and visibility strategy'}
                 fill
                 sizes={CMS_IMAGE_SIZES.halfGrid}
-                className="object-cover"
+                className="rounded-radius-md object-cover"
               />
             </RevealWrapper>
           ) : null}
         </div>
 
-        <RevealWrapper className="mt-10 flex justify-center gap-3 max-md:flex-col max-md:items-center md:mt-14 md:gap-4">
-          <ButtonComponentList className="flex" itemClassName="block">
-            <ButtonComponent href="/contact" variant="primary">
-              Build Your Brand
-            </ButtonComponent>
-          </ButtonComponentList>
-          <ButtonComponentList className="flex" itemClassName="block">
-            <ButtonComponent href="/contact" variant="secondary">
-              Talk to a Branding Expert
-            </ButtonComponent>
-          </ButtonComponentList>
-        </RevealWrapper>
+        {closingLine ? (
+          <RevealWrapper className="reveal-me mt-10 text-center md:mt-14">
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-[#808080] md:text-xl">{closingLine}</p>
+          </RevealWrapper>
+        ) : null}
+
+        {showCtas ? (
+          <RevealWrapper className="mt-10 flex justify-center gap-3 max-md:flex-col max-md:items-center md:mt-14 md:gap-4">
+            <ButtonComponentList className="flex" itemClassName="block">
+              <ButtonComponent href="/contact" variant="primary">
+                {primaryCtaLabel}
+              </ButtonComponent>
+            </ButtonComponentList>
+            <ButtonComponentList className="flex" itemClassName="block">
+              <ButtonComponent href="/contact" variant="secondary">
+                {secondaryCtaLabel}
+              </ButtonComponent>
+            </ButtonComponentList>
+          </RevealWrapper>
+        ) : null}
       </div>
     </section>
   )

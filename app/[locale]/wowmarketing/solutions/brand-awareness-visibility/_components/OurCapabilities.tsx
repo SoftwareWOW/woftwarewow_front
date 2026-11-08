@@ -7,7 +7,14 @@ import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import Link from 'next/link'
 
-const DEFAULT_STAGES = [
+type CapabilityStage = {
+  title: string
+  headline: string
+  description: string
+  href: string
+}
+
+const DEFAULT_STAGES: CapabilityStage[] = [
   {
     title: 'Start',
     headline: "I'm building a new brand.",
@@ -36,8 +43,21 @@ const OurCapabilities = ({
   description =
     'Our specialized divisions work together to help businesses launch, grow, automate, and scale with confidence.',
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
-  const displayStages = mergeFeatureItems(DEFAULT_STAGES, items)
+}: Partial<CmsTechnologiesSection> & { items?: (CapabilityStage & { headline?: string })[] } = {}) => {
+  const displayStages: CapabilityStage[] =
+    items?.length === 3
+      ? items.map((it, i) => ({
+          title: it.title,
+          headline: (it as CapabilityStage).headline ?? DEFAULT_STAGES[i]?.headline ?? '',
+          description: it.description ?? DEFAULT_STAGES[i]?.description ?? '',
+          href: (it as CapabilityStage).href ?? '/contact',
+        }))
+      : mergeFeatureItems(DEFAULT_STAGES, items).map((stage, i) => ({
+          title: stage.title,
+          headline: DEFAULT_STAGES[i]?.headline ?? '',
+          description: stage.description ?? DEFAULT_STAGES[i]?.description ?? '',
+          href: DEFAULT_STAGES[i]?.href ?? '/contact',
+        }))
 
   return (
     <section>
@@ -47,7 +67,13 @@ const OurCapabilities = ({
         </RevealWrapper>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            {title} <InstrumentText>{accentTitle}</InstrumentText>
+            {title}
+            {accentTitle ? (
+              <>
+                {' '}
+                <InstrumentText>{accentTitle}</InstrumentText>
+              </>
+            ) : null}
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>

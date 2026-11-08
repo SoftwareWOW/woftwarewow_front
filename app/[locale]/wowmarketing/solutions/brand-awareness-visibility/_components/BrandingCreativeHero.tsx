@@ -17,7 +17,16 @@ const BrandingCreativeHero = ({
   description =
     'Create stronger identity, clearer messaging, and creative assets that help your business stand out and connect.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Build Your Brand',
+  secondaryCtaLabel = 'Explore Our Capabilities',
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/contact',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -52,13 +61,13 @@ const BrandingCreativeHero = ({
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
           <div ref={heroButtonRef} className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Build Your Brand
+              <ButtonComponent href={primaryCtaHref} variant="primary">
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="secondary">
-                Explore Our Capabilities
+              <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </div>
