@@ -42,7 +42,8 @@ const BuildLaunchOurServices = ({
   services,
   title,
   accentTitle,
-}: { services?: ServiceItem[] } & Partial<CmsTechnologiesSection>) => {
+  sidebarLabel = 'Our services',
+}: { services?: ServiceItem[]; sidebarLabel?: string } & Partial<CmsTechnologiesSection>) => {
   const servicesData = services ?? []
   const { contentRef, triggerRef } = useHorizontalScroll()
 
@@ -66,7 +67,7 @@ const BuildLaunchOurServices = ({
       >
         <div className="grid max-h-[404px] w-[332px] content-between">
           <p className="text-sm uppercase leading-[1.1] tracking-[3px] text-secondary dark:text-backgroundBody">
-            Our services
+            {sidebarLabel}
           </p>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" width={97} height={96} viewBox="0 0 97 96" fill="none" aria-hidden>

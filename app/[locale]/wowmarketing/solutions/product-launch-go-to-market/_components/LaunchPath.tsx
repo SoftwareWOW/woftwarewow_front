@@ -30,7 +30,8 @@ const DEFAULT_STEPS = [
 const LaunchPath = ({
   title = 'A clear path from idea to launch.',
   steps,
-}: Partial<CmsProcessSection> = {}) => {
+  ctaLabel = 'Start Your Project',
+}: Partial<CmsProcessSection> & { ctaLabel?: string } = {}) => {
   const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
 
   return (
@@ -66,7 +67,7 @@ const LaunchPath = ({
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Start Your Project
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

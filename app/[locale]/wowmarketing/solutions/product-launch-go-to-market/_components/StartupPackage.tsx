@@ -33,13 +33,20 @@ const CheckIcon = () => (
 const StartupPackage = ({
   eyebrow = 'Ready-Made Starting Point',
   title = 'Need the essentials?',
+  accentTitle = 'Start here.',
   description =
     'Our Startup Launch Package brings together the core foundations needed to take a new business from idea to a professional market presence.',
   features,
   image,
   backgroundImage,
   cta,
-}: Partial<CmsPackageOfferSection> = {}) => {
+  secondaryCtaLabel = 'Request a Custom Solution',
+  secondaryCtaHref = '/contact',
+}: Partial<CmsPackageOfferSection> & {
+  accentTitle?: string
+  secondaryCtaLabel?: string
+  secondaryCtaHref?: string
+} = {}) => {
   const hasSideImage = Boolean(image?.src)
   const packageItems = mergeFeatureItems(DEFAULT_FEATURES, features)
   const primaryHref = cta?.href ?? '/contact'
@@ -70,7 +77,7 @@ const StartupPackage = ({
               >
                 {title}
                 <br />
-                <InstrumentText>Start here.</InstrumentText>
+                {accentTitle ? <InstrumentText>{accentTitle}</InstrumentText> : null}
               </h2>
             </RevealWrapper>
 
@@ -99,8 +106,8 @@ const StartupPackage = ({
                 </ButtonComponent>
               </ButtonComponentList>
               <ButtonComponentList className="flex w-full sm:w-auto" itemClassName="block w-full sm:w-auto">
-                <ButtonComponent href="/contact" variant="secondary" fullWidth>
-                  Request a Custom Solution
+                <ButtonComponent href={secondaryCtaHref} variant="secondary" fullWidth>
+                  {secondaryCtaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapper>

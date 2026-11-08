@@ -218,9 +218,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'product-launch-go-to-market',
     kind: 'solution',
     title: 'Product Launch & Go-to-Market',
-    headline: 'Product Launch & Go-to-Market With Confidence.',
+    headline: 'Make your entrance. Make an impact.',
     description:
-      'Launch with confidence, reach your ideal audience, and turn new ideas into market opportunities.',
+      'Launch your product with go-to-market strategy, audience targeting, campaign planning, launch marketing, and performance optimization.',
     includes: [
       'Go-to-market strategy & planning',
       'Launch campaigns & promotions',

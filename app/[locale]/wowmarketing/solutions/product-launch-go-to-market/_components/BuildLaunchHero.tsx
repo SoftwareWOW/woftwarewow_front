@@ -14,7 +14,16 @@ const BuildLaunchHero = ({
     'Turn your business, product or digital idea into something real—with the strategy, brand, technology and launch support you need in one place.',
   images,
   backgroundImage,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Start Your Launch',
+  secondaryCtaLabel = 'See What We Can Build',
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/services',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const useStaticHeroImages = !images?.length
   const image0 = useStaticHeroImages
     ? {
@@ -61,13 +70,13 @@ const BuildLaunchHero = ({
 
           <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-10 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Start Your Launch
+              <ButtonComponent href={primaryCtaHref} variant="primary">
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/services" variant="secondary">
-                See What We Can Build
+              <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>
