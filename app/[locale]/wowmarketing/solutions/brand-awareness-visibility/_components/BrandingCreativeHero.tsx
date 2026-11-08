@@ -43,15 +43,15 @@ const BrandingCreativeHero = ({
         <RevealWrapper className="mb-3 flex items-center justify-center">
           <SectionLabel>{badgeTitle}</SectionLabel>
         </RevealWrapper>
-        <RevealWrapper className="reveal-me">
+        <RevealWrapper className="reveal-me text-center">
           <h1
-              id="startup-launch-heading"
-              className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
-            >
-              {title}
-              <br className="hidden lg:block" />
-              {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
-            </h1>
+            id="startup-launch-heading"
+            className="mx-auto text-center text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+          >
+            {title}
+            <br className="hidden lg:block" />
+            {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+          </h1>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
           <p className="mx-auto mt-3 max-w-xl text-center text-base leading-relaxed text-[#808080] md:max-w-2xl md:text-lg">
