@@ -190,7 +190,7 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     title: 'Lead Generation & Customer Acquisition',
     headline: 'Lead Generation & Customer Acquisition That Converts.',
     description:
-      'Attract the right prospects, generate quality leads, and turn more opportunities into paying customers.',
+      'Attract the right prospects, generate quality leads, and turn more opportunities into paying customers with WOW Marketing.',
     includes: [
       'Targeted lead generation campaigns',
       'Landing pages & conversion funnels',
