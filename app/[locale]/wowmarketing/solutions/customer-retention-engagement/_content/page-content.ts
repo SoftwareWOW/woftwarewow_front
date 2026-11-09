@@ -111,22 +111,22 @@ export const CONTENT = {
     description: 'Into lasting loyalty.',
     steps: [
       {
-        number: '01',
+        number: '1',
         title: 'Welcome',
         description: 'Make a great first impression.',
       },
       {
-        number: '02',
+        number: '2',
         title: 'Engage',
         description: 'Stay relevant with meaningful communication.',
       },
       {
-        number: '03',
+        number: '3',
         title: 'Reward',
         description: 'Recognize loyalty and encourage repeat business.',
       },
       {
-        number: '04',
+        number: '4',
         title: 'Reconnect',
         description: 'Bring customers back with timely experiences.',
       },
