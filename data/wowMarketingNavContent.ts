@@ -248,9 +248,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'marketing-performance-optimization',
     kind: 'solution',
     title: 'Marketing Performance & Optimization',
-    headline: 'Marketing Performance & Optimization That Improves ROI.',
+    headline: 'Better performance. Bigger impact.',
     description:
-      'Improve campaign results, optimize marketing spend, and achieve better returns through continuous performance improvements.',
+      'Improve marketing results with campaign optimization, conversion rate optimization, budget efficiency, audience targeting, and performance analytics.',
     includes: [
       'Marketing performance audits',
       'Campaign & conversion optimization',

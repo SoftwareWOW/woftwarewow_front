@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { ReactNode } from 'react'
@@ -113,7 +114,8 @@ const BuiltToPerform = ({
   description =
     'Every part of your website should help improve visibility, experience, conversion, and performance.',
   items,
-}: Props = {}) => {
+  ctaLabel = 'Improve Your Performance',
+}: Props & { ctaLabel?: string } = {}) => {
   const defaultItems = [...DEFAULT_TOP_ITEMS, ...DEFAULT_BOTTOM_ITEMS]
   const mergedItems = mergeFeatureItems(
     defaultItems.map(({ title: t, description: d }) => ({ title: t, description: d })),
@@ -158,6 +160,14 @@ const BuiltToPerform = ({
           <FlipCard key={card.title} card={card} widthClass={cardWidth} />
         ))}
       </div>
+
+      <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-14">
+        <ButtonComponentList>
+          <ButtonComponent href="/contact" variant="primary">
+            {ctaLabel}
+          </ButtonComponent>
+        </ButtonComponentList>
+      </RevealWrapper>
     </section>
   )
 }
