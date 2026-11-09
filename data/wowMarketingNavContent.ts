@@ -233,9 +233,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'customer-retention-engagement',
     kind: 'solution',
     title: 'Customer Retention & Engagement',
-    headline: 'Customer Retention & Engagement That Lasts.',
+    headline: 'Keep them close. Keep them coming back.',
     description:
-      'Strengthen customer relationships, encourage repeat business, and build lasting loyalty through personalized marketing.',
+      'Build customer loyalty with personalized marketing, retention campaigns, email automation, customer journeys, and re-engagement strategies.',
     includes: [
       'Customer retention campaigns',
       'Email marketing & automation',
