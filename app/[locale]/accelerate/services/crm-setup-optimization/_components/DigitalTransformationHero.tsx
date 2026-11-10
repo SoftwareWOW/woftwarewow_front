@@ -17,7 +17,12 @@ const DigitalTransformationHero = ({
   description =
     'Modernize how your business works — connected systems, automation and a clearer digital setup.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Start Your Transformation',
+  secondaryCtaLabel = "See What's Included",
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+}) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -56,12 +61,12 @@ const DigitalTransformationHero = ({
           <div ref={heroButtonRef} className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="primary">
-                Start Your Transformation
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
               <ButtonComponent href="/contact" variant="secondary">
-                See What&apos;s Included
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </div>

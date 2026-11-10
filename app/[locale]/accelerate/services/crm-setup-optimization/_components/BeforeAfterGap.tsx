@@ -1,4 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
@@ -64,23 +65,29 @@ const ComparisonList = ({ steps, variant }: { steps: string[]; variant: 'before'
   </ul>
 )
 
-type Props = Partial<CmsTechnologiesSection>
+type Props = Partial<CmsTechnologiesSection> & {
+  accentTitle?: string
+  closingLine?: string
+}
 
 /** Layout: AutomationInAction — two comparison cards with X / check lists. */
 const BeforeAfterGap = ({
   eyebrow = 'The Gap',
   title = "More providers shouldn't mean more problems.",
+  accentTitle,
   description =
     'But for many growing businesses, getting the right expertise means managing an increasingly fragmented network.',
   items,
+  closingLine = "Digital transformation isn't about adding more technology. It's about making the business work better with it.",
 }: Props = {}) => {
   const defaultItems = [
     ...DEFAULT_BEFORE_STEPS.map((step) => ({ title: step, description: '' })),
     ...DEFAULT_AFTER_STEPS.map((step) => ({ title: step, description: '' })),
   ]
   const mergedItems = mergeFeatureItems(defaultItems, items)
-  const beforeSteps = mergedItems.slice(0, DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
-  const afterSteps = mergedItems.slice(DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+  const half = Math.floor(mergedItems.length / 2)
+  const beforeSteps = mergedItems.slice(0, half).map((item) => item.title)
+  const afterSteps = mergedItems.slice(half).map((item) => item.title)
 
   return (
     <section className="relative overflow-hidden">
@@ -90,11 +97,21 @@ const BeforeAfterGap = ({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-5 md:mb-8">{title}</h2>
+            <h2 className="mx-auto mb-5 md:mb-8">
+              {title}
+              {accentTitle ? (
+                <>
+                  {' '}
+                  <InstrumentText>{accentTitle}</InstrumentText>
+                </>
+              ) : null}
+            </h2>
           </RevealWrapper>
-          <RevealWrapper className="reveal-me">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
-          </RevealWrapper>
+          {description ? (
+            <RevealWrapper className="reveal-me">
+              <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
+            </RevealWrapper>
+          ) : null}
         </div>
 
         <RevealWrapper className="reveal-me mt-10 grid justify-center md:mt-16 lg:grid-cols-2">
@@ -114,10 +131,7 @@ const BeforeAfterGap = ({
         </RevealWrapper>
 
         <RevealWrapper className="reveal-me mt-14 md:mt-20">
-          <p className="mx-auto max-w-4xl text-center text-2xl leading-snug md:text-4xl md:leading-[1.3]">
-            Digital transformation isn&apos;t about adding more technology. It&apos;s about making the business work
-            better with it.
-          </p>
+          <p className="mx-auto max-w-4xl text-center text-2xl leading-snug md:text-4xl md:leading-[1.3]">{closingLine}</p>
         </RevealWrapper>
       </div>
     </section>

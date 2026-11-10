@@ -1,4 +1,4 @@
-import { CONTENT } from './_content/page-content'
+import { CONTENT, CRM_SETUP_OPTIMIZATION_PAGE_METADATA } from './_content/page-content'
 import DigitalTransformationHero from './_components/DigitalTransformationHero'
 import TheGap from './_components/TheGap'
 import TransformationPlan from './_components/TransformationPlan'
@@ -6,7 +6,6 @@ import BeforeAfterGap from './_components/BeforeAfterGap'
 import TransformationPriorities from './_components/TransformationPriorities'
 import ModernizationPath from './_components/ModernizationPath'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import { buildOfferingMetadata } from '@/app/[locale]/accelerate/_lib/buildOfferingMetadata'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -15,21 +14,40 @@ type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return buildOfferingMetadata(locale, 'crm-setup-optimization', 'service')
+  return {
+    title: CRM_SETUP_OPTIMIZATION_PAGE_METADATA.title,
+    description: CRM_SETUP_OPTIMIZATION_PAGE_METADATA.description,
+    openGraph: {
+      title: CRM_SETUP_OPTIMIZATION_PAGE_METADATA.title,
+      description: CRM_SETUP_OPTIMIZATION_PAGE_METADATA.description,
+      type: 'website',
+    },
+    alternates: {
+      canonical: `/${locale}/accelerate/services/crm-setup-optimization`,
+    },
+  }
 }
 
 export default async function Page({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const { cta } = CONTENT
+  const { hero, theGap, transformationPlan, beforeAfterGap, transformationPriorities, modernizationPath, cta } =
+    CONTENT
+  const { primaryCtaLabel, secondaryCtaLabel, images, ...heroProps } = hero
+
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-      <DigitalTransformationHero {...CONTENT.hero} />
-      <TheGap {...CONTENT.theGap} />
-      <TransformationPlan {...CONTENT.transformationPlan} />
-      <BeforeAfterGap {...CONTENT.beforeAfterGap} />
-      <TransformationPriorities {...CONTENT.transformationPriorities} />
-      <ModernizationPath {...CONTENT.modernizationPath} />
+      <DigitalTransformationHero
+        {...heroProps}
+        images={images}
+        primaryCtaLabel={primaryCtaLabel}
+        secondaryCtaLabel={secondaryCtaLabel}
+      />
+      <TheGap {...theGap} />
+      <TransformationPlan {...transformationPlan} />
+      <BeforeAfterGap {...beforeAfterGap} />
+      <TransformationPriorities {...transformationPriorities} />
+      <ModernizationPath {...modernizationPath} />
       <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
     </div>
   )
