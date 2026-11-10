@@ -1,0 +1,98 @@
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
+import { ArrowDown } from 'lucide-react'
+
+const DEFAULT_BEFORE_STEPS = [
+  'A customer sends an enquiry',
+  'Someone checks the inbox',
+  'Information is copied into CRM',
+  'Someone decides who should respond',
+  'Follow-up is written manually',
+  'Team remembers to follow up again',
+]
+
+const DEFAULT_AFTER_STEPS = [
+  'A customer sends an enquiry',
+  'AI identifies the request',
+  'CRM updates automatically',
+  'Lead is routed to the right person',
+  'Response is prepared or triggered',
+  'Follow-up workflow continues automatically',
+]
+
+const cardClassName =
+  'relative rounded-radius-md border border-secondary/15 bg-background px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-background md:pt-12'
+
+const WorkflowSteps = ({ steps }: { steps: string[] }) => (
+  <div className="flex flex-col items-start text-left">
+    {steps.map((step, index) => (
+      <div key={step} className="w-full">
+        <p className="text-base leading-[1.5] text-secondary/70  md:text-[17px]">
+          {step}
+        </p>
+        {index < steps.length - 1 && (
+          <ArrowDown aria-hidden className="my-3 size-5 opacity-40" strokeWidth={1.5} />
+        )}
+      </div>
+    ))}
+  </div>
+)
+
+/** Layout: Before/After automation workflow — dark comparison cards with left-aligned arrow steps. */
+const AutomationInAction = ({
+  eyebrow = 'Automation in action',
+  title = 'Turn repetitive processes into smarter',
+  accentTitle = 'workflows.',
+  description =
+    'Connect the steps that happen repeatedly so information and actions can move automatically.',
+  items,
+}: Partial<CmsTechnologiesSection> = {}) => {
+  const defaultItems = [
+    ...DEFAULT_BEFORE_STEPS.map((step) => ({ title: step, description: '' })),
+    ...DEFAULT_AFTER_STEPS.map((step) => ({ title: step, description: '' })),
+  ]
+  const mergedItems = mergeFeatureItems(defaultItems, items)
+  const beforeSteps = mergedItems.slice(0, DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+  const afterSteps = mergedItems.slice(DEFAULT_BEFORE_STEPS.length).map((item) => item.title)
+
+  return (
+    <section className="relative overflow-hidden">
+      <div className="container">
+        <div className="text-center">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
+            <SectionLabel>{eyebrow}</SectionLabel>
+          </RevealWrapper>
+          <RevealWrapper className="reveal-me">
+            <h2 className="mx-auto mb-5  md:mb-8">
+              {title} <InstrumentText>{accentTitle}</InstrumentText>
+            </h2>
+          </RevealWrapper>
+          <RevealWrapper className="reveal-me">
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
+          </RevealWrapper>
+        </div>
+
+        <RevealWrapper className="reveal-me mt-10 grid justify-center gap-6 md:mt-16 lg:grid-cols-2 lg:gap-8">
+          <div className={cardClassName}>
+            <h6 className="mb-8 text-2xl font-normal uppercase tracking-[0.04em] text-secondary dark:text-white md:mb-10 md:text-3xl">
+              Before
+            </h6>
+            <WorkflowSteps steps={beforeSteps} />
+          </div>
+
+          <div className={cardClassName}>
+            <h6 className="mb-8 text-2xl font-normal uppercase tracking-[0.04em] text-inherit md:mb-10 md:text-3xl">
+              After
+            </h6>
+            <WorkflowSteps steps={afterSteps} />
+          </div>
+        </RevealWrapper>
+      </div>
+    </section>
+  )
+}
+
+export default AutomationInAction

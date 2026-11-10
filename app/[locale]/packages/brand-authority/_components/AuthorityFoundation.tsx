@@ -103,18 +103,21 @@ const AuthorityFoundation = ({
       </div>
 
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {mergedItems.map((item) => (
+        {mergedItems.map((item) => {
+          const itemHref = (item as { href?: string }).href ?? '/contact'
+          return (
           <RevealWrapper
             key={item.title}
             className="reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
           >
-            <Link href="/contact" className="block">
+            <Link href={itemHref} className="block">
               <h5 className="mb-2 lg:mb-3">{item.title}</h5>
               <p className="mb-20 text-base leading-relaxed text-[#808080] lg:mb-[106px]">{item.description}</p>
               <ArrowButton />
             </Link>
           </RevealWrapper>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

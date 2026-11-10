@@ -16,6 +16,8 @@ import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-n
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import { softwareWowMegaNavHref } from '@/data/softwareWowMegaNavRoutes'
 import { wowMarketingMegaNavHref } from '@/data/wowMarketingMegaNavRoutes'
+import { wowAccelerateMegaNavHref } from '@/data/wowAccelerateMegaNavRoutes'
+import { WOW_ACCELERATE_NAV_SERVICES } from '@/data/wowAccelerateNavContent'
 import type { NavMenuIconId } from '@/components/wow/nav/nav-assets'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
@@ -245,56 +247,13 @@ export const wowIntelligenceFooterServiceCards: ReadonlyArray<DivisionFooterServ
   },
 ] as const
 
-export const wowAccelerateFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
-  {
-    title: 'Lead Generation',
-    description: 'Attract leads. Create opportunities.',
-    href: '/accelerate#services',
-    iconId: 'leadGeneration',
-  },
-  {
-    title: 'Sales Funnel Development',
-    description: 'Turn prospects into paying customers.',
-    href: '/accelerate#services',
-    iconId: 'salesFunnelDevelopment',
-  },
-  {
-    title: 'CRM Setup & Optimization',
-    description: 'Organize contacts. Streamline sales.',
-    href: '/accelerate#services',
-    iconId: 'crmSetupOptimization',
-  },
-  {
-    title: 'Sales Automation',
-    description: 'Automate tasks. Close deals faster.',
-    href: '/accelerate#services',
-    iconId: 'salesAutomation',
-  },
-  {
-    title: 'Sales Analytics & Reporting',
-    description: 'Track performance. Grow smarter.',
-    href: '/accelerate#services',
-    iconId: 'salesAnalyticsReporting',
-  },
-  {
-    title: 'Sales Process Optimization',
-    description: 'Simplify selling. Improve conversions.',
-    href: '/accelerate#services',
-    iconId: 'salesProcessOptimization',
-  },
-  {
-    title: 'Appointment Setting & Outreach',
-    description: 'Start conversations. Book more meetings.',
-    href: '/accelerate#services',
-    iconId: 'appointmentSettingOutreach',
-  },
-  {
-    title: 'Lead Qualification & Nurturing',
-    description: 'Identify, engage, and convert prospects.',
-    href: '/accelerate#services',
-    iconId: 'leadQualificationNurturing',
-  },
-] as const
+export const wowAccelerateFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> =
+  WOW_ACCELERATE_NAV_SERVICES.map((service) => ({
+    title: service.title,
+    description: service.navDescription ?? service.headline,
+    href: wowAccelerateMegaNavHref(service.navId),
+    iconId: service.navId as DivisionFooterServiceCard['iconId'],
+  }))
 
 export const wowDesignFooterServiceCards: ReadonlyArray<DivisionFooterServiceCard> = [
   {

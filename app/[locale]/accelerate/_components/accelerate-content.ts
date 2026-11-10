@@ -1,4 +1,17 @@
+import { WOW_ACCELERATE_NAV_SERVICES, WOW_ACCELERATE_NAV_SOLUTIONS } from '@/data/wowAccelerateNavContent'
+import { wowAccelerateServiceHref, wowAccelerateSolutionHref } from '@/data/wowAccelerateMegaNavRoutes'
+
 /** Static copy for WOW Accelerate — replace hero/framework images under public/images/wow/accelerate/ when ready. */
+
+export const ACCELERATE_SERVICES = {
+  eyebrow: 'SERVICES',
+  titleBefore: 'Everything your sales engine needs to',
+  titleAccent: 'perform',
+  items: WOW_ACCELERATE_NAV_SERVICES.map((service) => ({
+    title: service.title,
+    href: wowAccelerateServiceHref(service.slug),
+  })),
+} as const
 
 export const ACCELERATE_HERO = {
   eyebrow: 'BUILD A BETTER SALES ENGINE',
@@ -84,28 +97,11 @@ export const ACCELERATE_SOLUTIONS = {
   accentTitle: 'Growth',
   description:
     'From generating opportunities to managing pipelines and automating follow-up, we help strengthen the systems your team relies on to turn interest into revenue.',
-  items: [
-    {
-      title: 'Lead Generation & Outbound',
-      description:
-        'Create more opportunities with the right prospects. Prospecting · Lead research · Outreach strategy · Campaigns · Lead qualification',
-    },
-    {
-      title: 'Sales Funnels & Conversion',
-      description:
-        'Create a clearer path from interest to action. Funnel strategy · Lead capture · Conversion paths · Offers · Follow-up sequences',
-    },
-    {
-      title: 'CRM & Sales Systems',
-      description:
-        'Give your team one clear view of every opportunity. CRM setup · Pipeline design · Lead stages · Data organization · Integrations · Reporting',
-    },
-    {
-      title: 'Sales Automation & Enablement',
-      description:
-        'Spend less time managing sales—and more time selling. Follow-up automation · Lead routing · Notifications · Sequences · Sales workflows · Enablement resources',
-    },
-  ],
+  items: WOW_ACCELERATE_NAV_SOLUTIONS.map((solution) => ({
+    title: solution.title,
+    description: solution.description,
+    href: wowAccelerateSolutionHref(solution.slug),
+  })),
 } as const
 
 export const ACCELERATE_FRAMEWORK = {

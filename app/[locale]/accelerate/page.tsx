@@ -2,6 +2,7 @@ import AuthorityFoundation from '@/app/[locale]/packages/brand-authority/_compon
 import AccelerateFlexibleStartSection from './_components/AccelerateFlexibleStartSection'
 import AccelerateFrameworkSection from './_components/AccelerateFrameworkSection'
 import AccelerateHero from './_components/AccelerateHero'
+import AccelerateServicesGrid from './_components/AccelerateServicesGrid'
 import AccelerateHowWeWorkSection from './_components/AccelerateHowWeWorkSection'
 import AccelerateProblemSection from './_components/AccelerateProblemSection'
 import AccelerateFaqSection from './_components/AccelerateFaqSection'
@@ -53,6 +54,7 @@ export default async function WowAcceleratePage({ params }: Props) {
       <AccelerateStatsMarqueeSection />
       <WowDivisionsMarquee />
       <AccelerateProblemSection />
+      <AccelerateServicesGrid />
       <AuthorityFoundation
         sectionId="solutions"
         eyebrow={solutions.eyebrow}

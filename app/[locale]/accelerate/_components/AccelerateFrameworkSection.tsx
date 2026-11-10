@@ -16,7 +16,7 @@ export default function AccelerateFrameworkSection() {
 
   return (
     <section
-      id="services"
+      id="revenue-framework"
       className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background"
     >
       <div className="container">
