@@ -29,6 +29,7 @@ const DEFAULT_STEPS = [
 ]
 
 type Props = Partial<CmsProcessSection>
+type JourneyStep = { number?: string; title: string; description?: string }
 
 /** Layout: LaunchPath / ServiceProces — horizontal numbered timeline + CTA. */
 const WebsiteJourney = ({
@@ -36,9 +37,11 @@ const WebsiteJourney = ({
   title = 'From strategy to ',
   accentTitle = 'growth.',
   steps,
-}: Props = {}) => {
+  ctaLabel = 'Build Your Website',
+}: Props & { ctaLabel?: string } = {}) => {
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
     ...DEFAULT_STEPS[index],
+    number: (steps?.[index] as JourneyStep | undefined)?.number ?? DEFAULT_STEPS[index].number,
     title: step.title,
     description: step.description,
   }))
@@ -77,7 +80,7 @@ const WebsiteJourney = ({
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Build Your Website
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

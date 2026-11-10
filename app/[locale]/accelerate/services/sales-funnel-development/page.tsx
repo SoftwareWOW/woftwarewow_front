@@ -1,11 +1,9 @@
-import { CONTENT } from './_content/page-content'
+import { CONTENT, SALES_FUNNEL_DEVELOPMENT_PAGE_METADATA } from './_content/page-content'
 import WebsiteGrowthHero from './_components/WebsiteGrowthHero'
 import BuiltToPerform from './_components/BuiltToPerform'
-import WhatsIncluded from './_components/WhatsIncluded'
 import WebsiteJourney from './_components/WebsiteJourney'
 import SpecialistExpertise from './_components/SpecialistExpertise'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import { buildOfferingMetadata } from '@/app/[locale]/accelerate/_lib/buildOfferingMetadata'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -14,20 +12,47 @@ type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return buildOfferingMetadata(locale, 'sales-funnel-development', 'service')
+  return {
+    title: SALES_FUNNEL_DEVELOPMENT_PAGE_METADATA.title,
+    description: SALES_FUNNEL_DEVELOPMENT_PAGE_METADATA.description,
+    openGraph: {
+      title: SALES_FUNNEL_DEVELOPMENT_PAGE_METADATA.title,
+      description: SALES_FUNNEL_DEVELOPMENT_PAGE_METADATA.description,
+      type: 'website',
+    },
+    alternates: {
+      canonical: `/${locale}/accelerate/services/sales-funnel-development`,
+    },
+  }
 }
 
 export default async function Page({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const { cta } = CONTENT
+
+  const { cta, hero, builtToPerform, websiteJourney, specialistExpertise } = CONTENT
+  const {
+    primaryCtaLabel,
+    secondaryCtaLabel,
+    primaryCtaHref,
+    secondaryCtaHref,
+    ...heroProps
+  } = hero
+  const { ctaLabel: performCtaLabel, ...builtToPerformProps } = builtToPerform
+  const { ctaLabel: journeyCtaLabel, ...journeyProps } = websiteJourney
+
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-      <WebsiteGrowthHero {...CONTENT.hero} />
-      <BuiltToPerform {...CONTENT.builtToPerform} />
-      <WhatsIncluded {...CONTENT.whatsIncluded} />
-      <WebsiteJourney {...CONTENT.websiteJourney} />
-      <SpecialistExpertise {...CONTENT.specialistExpertise} />
+      <WebsiteGrowthHero
+        {...heroProps}
+        primaryCtaLabel={primaryCtaLabel}
+        secondaryCtaLabel={secondaryCtaLabel}
+        primaryCtaHref={primaryCtaHref}
+        secondaryCtaHref={secondaryCtaHref}
+      />
+      <BuiltToPerform {...builtToPerformProps} ctaLabel={performCtaLabel} />
+      <WebsiteJourney {...journeyProps} ctaLabel={journeyCtaLabel} />
+      <SpecialistExpertise {...specialistExpertise} />
       <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
     </div>
   )
