@@ -14,7 +14,16 @@ const AiAutomationHero = ({
   description =
     'Less manual work. More time for what matters — practical AI automation for growing businesses.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Automate My Business',
+  secondaryCtaLabel = "See What's Included",
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/contact',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const heroImage = images?.[0]
 
   return (
@@ -54,13 +63,13 @@ const AiAutomationHero = ({
             ) : null}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-14">
               <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/contact" variant="primary">
-                  Automate My Business
+                <ButtonComponent href={primaryCtaHref} variant="primary">
+                  {primaryCtaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
               <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/contact" variant="secondary">
-                  See What&apos;s Included
+                <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                  {secondaryCtaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
             </div>

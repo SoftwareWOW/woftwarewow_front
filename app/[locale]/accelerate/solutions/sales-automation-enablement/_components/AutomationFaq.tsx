@@ -3,6 +3,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { useMemo, useState } from 'react'
 import type { CmsFaqItem } from '@/lib/strapi/mappers/page-sections'
@@ -46,18 +47,39 @@ const DEFAULT_ITEMS = [
   },
 ]
 
-type Props = { items?: CmsFaqItem[] }
+type Props = {
+  items?: CmsFaqItem[]
+  eyebrow?: string
+  title?: string
+  accentTitle?: string
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 /** Layout: Home Faq — 3-column accordion grid, closed by default. */
-const AutomationFaq = ({ items }: Props = {}) => {
-  const faqData = DEFAULT_ITEMS.map((faq, index) => {
-    const cms = items?.[index]
-    return {
-      ...faq,
-      question: cms?.question || faq.question,
-      answer: cms?.answer ?? faq.answer,
-    }
-  })
+const AutomationFaq = ({
+  items,
+  eyebrow = 'Questions, answered',
+  title = 'Everything you need to know',
+  accentTitle = 'before you automate.',
+  ctaLabel = 'View All FAQ',
+  ctaHref = '/rfq',
+}: Props = {}) => {
+  const faqData =
+    items?.length ?
+      items.map((faq, index) => ({
+        id: index + 1,
+        question: faq.question ?? '',
+        answer: faq.answer ?? '',
+      }))
+    : DEFAULT_ITEMS.map((faq, index) => {
+        const cms = items?.[index]
+        return {
+          ...faq,
+          question: cms?.question || faq.question,
+          answer: cms?.answer ?? faq.answer,
+        }
+      })
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null)
 
   const faqColumns = useMemo(() => {
@@ -78,19 +100,25 @@ const AutomationFaq = ({ items }: Props = {}) => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <RevealWrapper>
-              <SectionLabel className="mb-5">Questions, answered</SectionLabel>
+              <SectionLabel className="mb-5">{eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear text-[48px] font-light leading-[1.05] tracking-[-0.055em] sm:text-[64px] md:text-[76px] lg:text-[58px] xl:text-[72px]">
-                Before you automate.
+                {title}
+                {accentTitle ? (
+                  <>
+                    <br className="hidden md:block" />
+                    <InstrumentText>{accentTitle}</InstrumentText>
+                  </>
+                ) : null}
               </h2>
             </TextAppearAnimation>
           </div>
 
           <RevealWrapper className="flex justify-start lg:justify-end">
             <ButtonComponentList>
-              <ButtonComponent href="/rfq" variant="white">
-                View All FAQ
+              <ButtonComponent href={ctaHref} variant="white">
+                {ctaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>

@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
@@ -33,8 +34,10 @@ type Props = Partial<CmsProcessSection>
 const FromIdeaToAutomation = ({
   eyebrow = 'From Idea to Automation',
   title = 'We handle the complicated part.',
+  accentTitle,
   steps,
-}: Props = {}) => {
+  ctaLabel = 'Book an Automation Discovery Call',
+}: Props & { accentTitle?: string; ctaLabel?: string } = {}) => {
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
     ...DEFAULT_STEPS[index],
     title: step.title,
@@ -49,7 +52,15 @@ const FromIdeaToAutomation = ({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">{title}</h2>
+            <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">
+              {title}
+              {accentTitle ? (
+                <>
+                  {' '}
+                  <InstrumentText>{accentTitle}</InstrumentText>
+                </>
+              ) : null}
+            </h2>
           </RevealWrapper>
         </div>
 
@@ -72,7 +83,7 @@ const FromIdeaToAutomation = ({
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="white">
-              Book an Automation Discovery Call
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

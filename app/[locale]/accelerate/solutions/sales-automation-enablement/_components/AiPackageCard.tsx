@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import pricingBg from '@/public/images/pricing-gradient.png'
 import { cmsImageSrc, mergeFeatureItems } from '@/lib/strapi/cms-section-props'
@@ -35,14 +36,21 @@ type Props = Partial<CmsPackageOfferSection>
 const AiPackageCard = ({
   eyebrow = 'Hosting That Fits',
   title = 'Start with what you need. Scale when you need more.',
+  accentTitle,
   description =
     "Different businesses need different levels of infrastructure. We'll help match the setup to your requirements.",
+  packageTitle = 'AI Automation Package',
   price = '$1,399',
   billingNote = 'Typical timeline: 1-2 Weeks',
+  showPricing = true,
   features,
   cta,
   backgroundImage,
-}: Props = {}) => {
+}: Props & {
+  accentTitle?: string
+  packageTitle?: string
+  showPricing?: boolean
+} = {}) => {
   const mergedFeatures = mergeFeatureItems(
     DEFAULT_FEATURES.map((item) => ({ title: item, description: '' })),
     features,
@@ -58,7 +66,15 @@ const AiPackageCard = ({
               <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
-              <h2 className="text-appear mb-3 max-w-xl">{title}</h2>
+              <h2 className="text-appear mb-3 max-w-xl">
+                {title}
+                {accentTitle ? (
+                  <>
+                    <br className="hidden sm:block" />
+                    <InstrumentText>{accentTitle}</InstrumentText>
+                  </>
+                ) : null}
+              </h2>
             </TextAppearAnimation>
             <TextAppearAnimation>
               <p className="text-appear max-w-lg text-[#808080]">{description}</p>
@@ -74,11 +90,15 @@ const AiPackageCard = ({
 
             <div className="relative flex flex-1 flex-col">
               <h3 className="mb-5 text-lg font-normal uppercase tracking-[0.06em] md:text-xl">
-                AI Automation Package
+                {packageTitle}
               </h3>
 
-              <SectionLabel className="mb-3">Investment starting from</SectionLabel>
-              <p className="mb-8 text-[42px] font-normal leading-none tracking-[-0.02em] md:text-5xl">{price}</p>
+              {showPricing ? (
+                <>
+                  <SectionLabel className="mb-3">Investment starting from</SectionLabel>
+                  <p className="mb-8 text-[42px] font-normal leading-none tracking-[-0.02em] md:text-5xl">{price}</p>
+                </>
+              ) : null}
 
               <p className="mb-4 text-sm font-medium uppercase tracking-[0.08em]">What&apos;s included</p>
               <ul className="mb-6 [&>*:not(:last-child)]:mb-3">
@@ -90,9 +110,11 @@ const AiPackageCard = ({
                 ))}
               </ul>
 
-              <p className="mb-8 text-sm font-medium uppercase tracking-[0.08em] text-[#808080]">
-                {billingNote}
-              </p>
+              {showPricing ? (
+                <p className="mb-8 text-sm font-medium uppercase tracking-[0.08em] text-[#808080]">
+                  {billingNote}
+                </p>
+              ) : null}
 
               <div className="mt-auto w-full">
                 <ButtonComponentList className="flex w-full" itemClassName="block w-full">
