@@ -28,7 +28,7 @@ const AiAutomationHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pb-14 pt-[80px] md:pb-[90px] md:pt-[90px] lg:pb-[110px] lg:pt-[120px]"
+      className="relative overflow-hidden pb-14 pt-[40px] md:pb-[90px] md:pt-[50px] lg:pb-[110px] lg:pt-[60px]"
       aria-labelledby="ai-automation-package-heading"
     >
       <div

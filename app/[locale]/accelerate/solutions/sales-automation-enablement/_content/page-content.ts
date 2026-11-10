@@ -43,24 +43,6 @@ export const CONTENT = {
     accentTitle: 'Working better together.',
     description:
       'Connect your CRM, email, calendars, and sales platforms to simplify workflows and keep your team focused on selling.',
-    items: [
-      {
-        title: 'CRM Integration',
-        description: 'Keep customer records and deal activity connected.',
-      },
-      {
-        title: 'Outreach Automation',
-        description: 'Streamline prospect communication and follow-ups.',
-      },
-      {
-        title: 'Sales Enablement Tools',
-        description: 'Give your team easy access to sales resources.',
-      },
-      {
-        title: 'Performance Tracking',
-        description: 'Monitor activities, pipeline progress, and results.',
-      },
-    ],
   },
   fromIdeaToAutomation: {
     eyebrow: 'OUR PROCESS',
