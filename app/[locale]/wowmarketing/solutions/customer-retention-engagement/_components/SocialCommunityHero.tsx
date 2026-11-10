@@ -12,7 +12,16 @@ const SocialCommunityHero = ({
   description =
     'Create stronger social visibility, meaningful engagement, and community experiences that support brand growth.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Talk to a Social Expert',
+  secondaryCtaLabel,
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/contact',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const useStaticHeroImages = !images?.length
   const image0 = useStaticHeroImages
     ? { src: '/images/hero-img/social-hero-1.jpg', alt: 'Social media presence' }
@@ -51,20 +60,25 @@ const SocialCommunityHero = ({
               {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
             </h1>
           </RevealWrapper>
-          <RevealWrapper className="reveal-me mt-3">
-            {description ? (
+          {description ? (
             <RevealWrapper className="reveal-me mt-3">
               <p className="max-w-xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
             </RevealWrapper>
           ) : null}
-          </RevealWrapper>
 
-          <RevealWrapper className="reveal-me mt-7 md:mt-9 lg:mt-14">
-            <ButtonComponentList>
-              <ButtonComponent href="/contact" variant="primary" size="sm">
-                Talk to a Social Expert
+          <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
+            <ButtonComponentList className="flex" itemClassName="block">
+              <ButtonComponent href={primaryCtaHref} variant="primary" size="sm">
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
+            {secondaryCtaLabel ? (
+              <ButtonComponentList className="flex" itemClassName="block">
+                <ButtonComponent href={secondaryCtaHref} variant="secondary" size="sm">
+                  {secondaryCtaLabel}
+                </ButtonComponent>
+              </ButtonComponentList>
+            ) : null}
           </RevealWrapper>
         </div>
 

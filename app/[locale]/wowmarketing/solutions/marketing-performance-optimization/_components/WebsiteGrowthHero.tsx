@@ -16,7 +16,16 @@ const WebsiteGrowthHero = ({
   italicTitle = 'growth.',
   description = 'A website designed to attract and convert.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Build Your Website',
+  secondaryCtaLabel = 'Talk to an Expert',
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/contact',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -33,10 +42,10 @@ const WebsiteGrowthHero = ({
         <RevealWrapper className="mb-3 flex items-center justify-center">
           <SectionLabel>{badgeTitle}</SectionLabel>
         </RevealWrapper>
-        <RevealWrapper className="reveal-me">
+        <RevealWrapper className="reveal-me text-center">
           <h1
             id="website-growth-heading"
-            className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
+            className="mx-auto text-center text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
           >
             {title}
             <br className="hidden lg:block" />
@@ -53,13 +62,13 @@ const WebsiteGrowthHero = ({
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
           <div ref={heroButtonRef} className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Build Your Website
+              <ButtonComponent href={primaryCtaHref} variant="primary">
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/meet" variant="secondary">
-                Talk to an Expert
+              <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </div>

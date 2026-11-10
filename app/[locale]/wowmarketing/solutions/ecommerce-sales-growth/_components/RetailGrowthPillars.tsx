@@ -57,8 +57,8 @@ const RetailGrowthPillars = ({
           <div className="flex-1 max-md:w-full md:self-end">
             <TextAppearAnimation>
               <p className="text-appear max-w-lg text-[#808080] md:place-self-end md:text-right">
-                Connect your brand, digital presence, marketing, sales, and operations into a stronger client
-                acquisition system.
+                {header.description ??
+                  'Connect your brand, digital presence, marketing, sales, and operations into a stronger client acquisition system.'}
               </p>
             </TextAppearAnimation>
           </div>
@@ -70,7 +70,7 @@ const RetailGrowthPillars = ({
               key={pillar.title}
               className="group col-span-full min-h-[400px] bg-backgroundBody px-7 pb-4 pt-7 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:px-10 md:pb-16 md:pt-10 lg:col-span-4 xl:col-span-3"
             >
-              <h4 className="pb-3 leading-[1.2] transition-colors duration-300 group-hover:text-white dark:group-hover:text-white md:mb-4">
+              <h4 className="pb-3 text-xl font-light leading-[1.25] tracking-[-0.02em] transition-colors duration-300 sm:text-[22px] md:text-2xl lg:text-[26px] xl:text-[28px] xl:leading-[1.2] group-hover:text-white dark:group-hover:text-white md:mb-4">
                 {pillar.title}
               </h4>
               <p className="text-[17px] italic leading-[25.5px] text-[#000000b3] transition-colors duration-300 group-hover:text-white/85 dark:text-dark-100 dark:group-hover:text-white/85">

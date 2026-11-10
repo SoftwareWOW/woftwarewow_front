@@ -44,14 +44,17 @@ const DEFAULT_PLATFORMS = [
 ]
 
 /** Layout: Home-14 ServicesV13 cards — header matches social capabilities mock. */
+type PresenceItem = { features?: string[] }
+
 const PlatformPresence = ({
   eyebrow = 'Social Capabilities',
   title = 'Everything behind a',
   accentTitle = 'stronger social',
+  titleSuffix = ' presence.',
   description = 'From deciding what to say to getting it in front of the right people.',
   items,
   image,
-}: Partial<CmsTechnologiesSection> = {}) => {
+}: Partial<CmsTechnologiesSection> & { titleSuffix?: string } = {}) => {
   const displayPlatforms = mergeFeatureItems(
     DEFAULT_PLATFORMS.map((platform) => ({ ...platform, title: platform.name })),
     items,
@@ -59,6 +62,8 @@ const PlatformPresence = ({
     ...DEFAULT_PLATFORMS[index],
     name: platform.title,
     description: platform.description ?? DEFAULT_PLATFORMS[index].description,
+    features:
+      (items?.[index] as PresenceItem | undefined)?.features ?? DEFAULT_PLATFORMS[index].features,
   }))
   const hasSideImage = Boolean(image?.src)
 
@@ -73,8 +78,8 @@ const PlatformPresence = ({
             <RevealWrapper className="reveal-me">
               <h2>
                 {title}
-                <InstrumentText> {accentTitle} </InstrumentText>
-                presence.
+                {accentTitle ? <InstrumentText> {accentTitle} </InstrumentText> : null}
+                {titleSuffix}
               </h2>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-4">
@@ -103,8 +108,8 @@ const PlatformPresence = ({
             key={platform.name}
             className="group relative h-[500px] w-full overflow-hidden shadow-none sm:w-[calc(50%-10px)] lg:w-[360px]"
           >
-            <div className="absolute flex h-full w-full translate-y-0 items-center justify-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
-              <h5 className="max-sm:text-3xl">{platform.name}</h5>
+            <div className="absolute flex h-full w-full translate-y-0 items-center justify-center px-4 text-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+              <h5 className="w-full text-center max-sm:text-3xl">{platform.name}</h5>
             </div>
             <div className="absolute z-10 h-full w-full translate-y-full border-t border-primary bg-secondary p-8 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-secondary">
               <div className="mb-[55px] flex items-center justify-between gap-1">

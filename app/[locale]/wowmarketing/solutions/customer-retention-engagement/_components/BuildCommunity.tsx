@@ -28,13 +28,19 @@ const DEFAULT_STEPS = [
 ]
 
 /** Layout: SoftwareWOW WoWProces — numbered community steps, responsive. */
+type JourneyStep = { number?: string; title: string; description?: string }
+
 const BuildCommunity = ({
   eyebrow = 'Build Community',
   title = 'Followers are numbers.',
   description = 'Relationships are an asset.',
   steps,
-}: Partial<CmsProcessSection> = {}) => {
-  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+  ctaLabel = 'Start Building Community',
+}: Partial<CmsProcessSection> & { ctaLabel?: string } = {}) => {
+  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
+    ...step,
+    number: (steps?.[index] as JourneyStep | undefined)?.number ?? step.number,
+  }))
 
   return (
     <section>
@@ -75,7 +81,7 @@ const BuildCommunity = ({
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Start Building Community
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

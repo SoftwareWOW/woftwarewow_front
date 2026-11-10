@@ -175,7 +175,7 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     title: 'Brand Awareness & Visibility',
     headline: 'Brand Awareness & Visibility That Expands Reach.',
     description:
-      'Get your brand noticed, expand your reach, and build a stronger presence across digital channels.',
+      "Grow your brand's visibility with strategic SEO, content marketing, social media, and paid advertising campaigns from WOW Marketing.",
     includes: [
       'Brand visibility campaigns',
       'SEO & content marketing',
@@ -190,7 +190,7 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     title: 'Lead Generation & Customer Acquisition',
     headline: 'Lead Generation & Customer Acquisition That Converts.',
     description:
-      'Attract the right prospects, generate quality leads, and turn more opportunities into paying customers.',
+      'Attract the right prospects, generate quality leads, and turn more opportunities into paying customers with WOW Marketing.',
     includes: [
       'Targeted lead generation campaigns',
       'Landing pages & conversion funnels',
@@ -203,9 +203,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'ecommerce-sales-growth',
     kind: 'solution',
     title: 'eCommerce & Sales Growth',
-    headline: 'eCommerce & Sales Growth That Scales Revenue.',
+    headline: 'Attract. Convert. Sell More.',
     description:
-      'Drive more online sales, improve conversions, and grow revenue with performance-focused eCommerce marketing.',
+      'Grow online sales with eCommerce marketing, conversion optimization, customer retention, and connected commerce solutions from WOW Marketing.',
     includes: [
       'eCommerce advertising campaigns',
       'Shopping & product ads',
@@ -218,9 +218,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'product-launch-go-to-market',
     kind: 'solution',
     title: 'Product Launch & Go-to-Market',
-    headline: 'Product Launch & Go-to-Market With Confidence.',
+    headline: 'Make your entrance. Make an impact.',
     description:
-      'Launch with confidence, reach your ideal audience, and turn new ideas into market opportunities.',
+      'Launch your product with go-to-market strategy, audience targeting, campaign planning, launch marketing, and performance optimization.',
     includes: [
       'Go-to-market strategy & planning',
       'Launch campaigns & promotions',
@@ -233,9 +233,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'customer-retention-engagement',
     kind: 'solution',
     title: 'Customer Retention & Engagement',
-    headline: 'Customer Retention & Engagement That Lasts.',
+    headline: 'Keep them close. Keep them coming back.',
     description:
-      'Strengthen customer relationships, encourage repeat business, and build lasting loyalty through personalized marketing.',
+      'Build customer loyalty with personalized marketing, retention campaigns, email automation, customer journeys, and re-engagement strategies.',
     includes: [
       'Customer retention campaigns',
       'Email marketing & automation',
@@ -248,9 +248,9 @@ export const WOW_MARKETING_NAV_SOLUTIONS: WowMarketingOffering[] = [
     slug: 'marketing-performance-optimization',
     kind: 'solution',
     title: 'Marketing Performance & Optimization',
-    headline: 'Marketing Performance & Optimization That Improves ROI.',
+    headline: 'Better performance. Bigger impact.',
     description:
-      'Improve campaign results, optimize marketing spend, and achieve better returns through continuous performance improvements.',
+      'Improve marketing results with campaign optimization, conversion rate optimization, budget efficiency, audience targeting, and performance analytics.',
     includes: [
       'Marketing performance audits',
       'Campaign & conversion optimization',

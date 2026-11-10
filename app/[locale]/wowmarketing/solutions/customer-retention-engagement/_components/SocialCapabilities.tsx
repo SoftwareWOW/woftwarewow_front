@@ -146,9 +146,11 @@ const SocialCapabilities = ({
   eyebrow = 'Social Capabilities',
   title = 'Everything behind a',
   accentTitle = 'stronger social',
+  titleSuffix = ' presence.',
   description = 'From deciding what to say to getting it in front of the right people.',
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
+  ctaLabel = 'Build Your Social Presence',
+}: Partial<CmsTechnologiesSection> & { titleSuffix?: string; ctaLabel?: string } = {}) => {
   const displayCapabilities = mergeFeatureItems(DEFAULT_CAPABILITIES, items).map((item, index) => ({
     ...DEFAULT_CAPABILITIES[index],
     title: item.title,
@@ -164,8 +166,8 @@ const SocialCapabilities = ({
         <RevealWrapper className="reveal-me">
           <h2 className="mb-3">
             {title}
-            <InstrumentText> {accentTitle} </InstrumentText>
-            presence.
+            {accentTitle ? <InstrumentText> {accentTitle} </InstrumentText> : null}
+            {titleSuffix}
           </h2>
         </RevealWrapper>
         <RevealWrapper className="reveal-me">
@@ -189,7 +191,7 @@ const SocialCapabilities = ({
       <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-14">
         <ButtonComponentList>
           <ButtonComponent href="/contact" variant="secondary">
-            Build Your Social Presence
+            {ctaLabel}
           </ButtonComponent>
         </ButtonComponentList>
       </RevealWrapper>
