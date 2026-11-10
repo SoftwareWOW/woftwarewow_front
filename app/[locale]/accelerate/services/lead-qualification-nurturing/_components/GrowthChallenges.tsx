@@ -35,7 +35,8 @@ const GrowthChallenges = ({
   accentTitle = 'stuck',
   description = "If these sound familiar, you don't need more disconnected tactics — you need a connected growth system.",
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
+  ctaLabel = 'Talk Through Your Challenges',
+}: Partial<CmsTechnologiesSection> & { ctaLabel?: string } = {}) => {
   const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
 
   return (
@@ -54,7 +55,7 @@ const GrowthChallenges = ({
             <RevealWrapper className="reveal-me mt-7 max-md:w-full md:mt-14">
               <ButtonComponentList>
                 <ButtonComponent href="/contact" variant="secondary">
-                  Talk Through Your Challenges
+                  {ctaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapper>

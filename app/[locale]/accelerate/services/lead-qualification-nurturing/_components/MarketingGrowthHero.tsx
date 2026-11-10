@@ -22,6 +22,14 @@ const STATIC_HERO_MAIN_IMAGE = {
   alt: 'Marketing and growth overview',
 }
 
+type CtaLink = { label: string; href: string }
+
+type MarketingGrowthHeroProps = CmsHeroComponentProps & {
+  primaryCta?: CtaLink
+  secondaryCta?: CtaLink
+  showTrustAvatars?: boolean
+}
+
 /** Layout: Home-16 HeroV16 — split headline + trust avatars + main hero image (CMS). */
 const MarketingGrowthHero = ({
   badgeTitle = 'Marketing & Growth',
@@ -30,7 +38,10 @@ const MarketingGrowthHero = ({
   description =
     'Build stronger visibility, better campaigns, and smarter systems that help your business attract, convert, and retain customers.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCta = { label: 'Talk to a Growth Expert', href: '/contact' },
+  secondaryCta,
+  showTrustAvatars = true,
+}: MarketingGrowthHeroProps) => {
   const cmsMain = images?.[0]
   const mainImage = cmsMain?.src
     ? cmsMain
@@ -38,7 +49,7 @@ const MarketingGrowthHero = ({
 
   return (
     <section
-      className="relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover pt-[107px] md:pt-[130px] xl:pt-[180px]"
+      className="relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="marketing-growth-heading"
     >
       <div id="hero-gradient-wrapper" className="absolute left-0 top-0 -z-10 h-full w-full blur-[85px] md:blur-[80px]">
@@ -73,33 +84,42 @@ const MarketingGrowthHero = ({
               </RevealWrapper>
             ) : null}
             <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
-              <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/contact" variant="primary">
-                  Talk to a Growth Expert
+              <ButtonComponentList className="flex flex-wrap gap-3" itemClassName="block">
+                <ButtonComponent href={primaryCta.href} variant="primary">
+                  {primaryCta.label}
                 </ButtonComponent>
+                {secondaryCta ? (
+                  <ButtonComponent href={secondaryCta.href} variant="secondary">
+                    {secondaryCta.label}
+                  </ButtonComponent>
+                ) : null}
               </ButtonComponentList>
             </RevealWrapper>
           </div>
 
           <RevealWrapper className="reveal-me w-full lg:w-[34%]">
-            <div className="flex items-center gap-x-5 lg:flex-col xl:flex-row">
-              <div className="my-3 flex [&>*:not(:first-child)]:-ml-4">
-                {HERO_AVATARS.map((src) => (
-                  <img
-                    key={src}
-                    src={encodeURI(src)}
-                    alt=""
-                    className="size-12 shrink-0 rounded-full border-2 border-secondary object-cover md:size-[60px]"
-                  />
-                ))}
+            {showTrustAvatars ? (
+              <div className="flex items-center gap-x-5 lg:flex-col xl:flex-row">
+                <div className="my-3 flex [&>*:not(:first-child)]:-ml-4">
+                  {HERO_AVATARS.map((src) => (
+                    <img
+                      key={src}
+                      src={encodeURI(src)}
+                      alt=""
+                      className="size-12 shrink-0 rounded-full border-2 border-secondary object-cover md:size-[60px]"
+                    />
+                  ))}
+                </div>
+                <p className="text-[17px] leading-[1.4] text-[#808080]">
+                  Trusted by growing
+                  <br />
+                  businesses worldwide
+                </p>
               </div>
-              <p className="text-[17px] leading-[1.4] text-[#808080]">
-                Trusted by growing
-                <br />
-                businesses worldwide
-              </p>
-            </div>
-            <figure className="relative mt-5 h-full w-full overflow-hidden rounded-radius-md md:mt-[30px]">
+            ) : null}
+            <figure
+              className={`relative h-full w-full overflow-hidden rounded-radius-md ${showTrustAvatars ? 'mt-5 md:mt-[30px]' : ''}`}
+            >
               <CmsResponsiveImage
                 image={mainImage}
                 sizes={CMS_IMAGE_SIZES.sideColumn}

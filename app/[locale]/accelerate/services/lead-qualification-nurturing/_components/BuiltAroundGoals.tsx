@@ -36,7 +36,8 @@ const BuiltAroundGoals = ({
   description =
     'Solutions adapted to your business goals, customers, industry, growth stage and resources — not one-size packages.',
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
+  ctaLabel = 'Get Your Growth Plan',
+}: Partial<CmsTechnologiesSection> & { ctaLabel?: string } = {}) => {
   const displayItems = mergeFeatureItems(DEFAULT_ITEMS, items)
 
   return (
@@ -72,7 +73,7 @@ const BuiltAroundGoals = ({
         <RevealWrapper className="reveal-me mt-8 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="secondary">
-              Get Your Growth Plan
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

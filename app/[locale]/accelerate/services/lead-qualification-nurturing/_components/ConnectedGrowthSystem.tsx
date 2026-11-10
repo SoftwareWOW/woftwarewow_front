@@ -39,6 +39,13 @@ const DEFAULT_STEPS = [
   },
 ]
 
+type FrameworkStage = {
+  id: number
+  step: string
+  title: string
+  items: string[]
+}
+
 /** Layout: Home-16 ProcessV8 — stage cards extended to 5 growth stages. */
 const ConnectedGrowthSystem = ({
   eyebrow = 'A Connected Growth System',
@@ -46,8 +53,19 @@ const ConnectedGrowthSystem = ({
   accentTitle = 'Grow',
   description = 'Awareness, acquisition, conversion and retention working together — not as separate services.',
   steps,
-}: Partial<CmsProcessSection> = {}) => {
-  const displayStages = mergeProcessSteps(DEFAULT_STEPS, steps)
+  frameworkStages,
+  footerTagline,
+  ctaLabel = 'Talk to a Growth Expert',
+}: Partial<CmsProcessSection> & {
+  frameworkStages?: FrameworkStage[]
+  /** Omit for default WOW tagline; `null` hides the tagline. */
+  footerTagline?: string | null
+  ctaLabel?: string
+} = {}) => {
+  const showDefaultFooter = footerTagline === undefined
+  const displayStages = frameworkStages?.length
+    ? frameworkStages
+    : mergeProcessSteps(DEFAULT_STEPS, steps)
 
   return (
     <section>
@@ -92,16 +110,23 @@ const ConnectedGrowthSystem = ({
           ))}
         </div>
 
-        <RevealWrapper className="reveal-me mt-10 text-center md:mt-14">
-          <p className="text-lg font-normal text-secondary dark:text-backgroundBody md:text-xl">
-            One connected growth system. Specialist expertise at every stage — powered by <WowText>WOW</WowText>.
-          </p>
-        </RevealWrapper>
+        {showDefaultFooter ? (
+          <RevealWrapper className="reveal-me mt-10 text-center md:mt-14">
+            <p className="text-lg font-normal text-secondary dark:text-backgroundBody md:text-xl">
+              One connected growth system. Specialist expertise at every stage — powered by{' '}
+              <WowText>WOW</WowText>.
+            </p>
+          </RevealWrapper>
+        ) : footerTagline ? (
+          <RevealWrapper className="reveal-me mt-10 text-center md:mt-14">
+            <p className="text-lg font-normal text-secondary dark:text-backgroundBody md:text-xl">{footerTagline}</p>
+          </RevealWrapper>
+        ) : null}
 
         <RevealWrapper className="mt-7 flex justify-center md:mt-10">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Talk to a Growth Expert
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>
