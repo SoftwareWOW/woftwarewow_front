@@ -1,6 +1,7 @@
 const WOW_ACCELERATE = '/images/wow/Hero/devision/Accelerate.jpg'
-const WOW_GROWTH_1 = '/images/wow/Hero/Growth/image (1).png'
-const WOW_GROWTH_2 = '/images/wow/Hero/Growth/image (2).png'
+const WOW_GROWTH_1 = '/images/wow/Hero/Growth/image%20(1).png'
+const WOW_GROWTH_2 = '/images/wow/Hero/Growth/image%20(2).png'
+const WOW_ACCELERATE_MARK = '/images/wow/LandingPageNaveBare/Accelerate%202.svg'
 const WOW_INTEL = '/images/wow/LandingPageNaveBare/Intelligence%202.svg'
 
 const img = (src: string, alt: string) => ({ src, alt })
@@ -21,7 +22,8 @@ export const CONTENT = {
     images: [
       img(WOW_ACCELERATE, 'CRM and sales systems'),
       img(WOW_INTEL, 'Sales technology and CRM'),
-      img(WOW_GROWTH_1, 'Connected sales workflows'),
+      img(WOW_ACCELERATE_MARK, 'WOW Accelerate sales systems'),
+      img(WOW_GROWTH_2, 'Connected sales workflows'),
     ],
     primaryCtaLabel: 'Build Your Sales System',
     primaryCtaHref: '/contact',

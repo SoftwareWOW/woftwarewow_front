@@ -13,11 +13,26 @@ import {
 } from '@/lib/strapi/cms-section-props'
 import { useRef } from 'react'
 
-const SLOT_DISPLAY_WIDTHS = [124, 120, 188] as const
+const SLOT_DISPLAY_WIDTHS = [124, 120, 105, 188] as const
 const SLOT_FALLBACKS = [
   '/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg',
   '/images/wow/LandingPageNaveBare/Intelligence%202.svg',
+  '/images/wow/LandingPageNaveBare/Accelerate%202.svg',
   '/images/wow/LandingPageNaveBare/Website%201%202.svg',
+] as const
+
+const SLOT_CLASS_NAMES = [
+  'pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]',
+  'pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]',
+  'pointer-events-none absolute bottom-[6%] left-[8%] z-0 hidden md:block lg:bottom-[8%] lg:left-[14%] xl:left-[18%]',
+  'pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]',
+] as const
+
+const SLOT_IMG_CLASS_NAMES = [
+  'h-[110px] w-[85px] rounded-sm object-cover lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]',
+  'h-[100px] w-[82px] rounded-sm object-cover lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]',
+  'h-[95px] w-[74px] rounded-sm object-cover lg:h-[120px] lg:w-[92px] xl:h-[136px] xl:w-[105px]',
+  'h-[90px] w-[130px] rounded-sm object-cover lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]',
 ] as const
 
 /** Layout: Branding-style floating hero images (3 slots) + Home-12 centered copy. */
@@ -40,14 +55,15 @@ const SoftwareTechHero = ({
   const imagePool = useFloatingHeroImageSwap(
     images,
     SLOT_FALLBACKS,
-    3,
+    4,
     heroButtonRef,
     imagesRef,
     SLOT_DISPLAY_WIDTHS,
     [
       { x: '-50%', y: '-8%' },
       { x: '50%', y: '-8%' },
-      { x: '0%', y: '-8%' },
+      { x: '-50%', y: '8%' },
+      { x: '50%', y: '8%' },
     ],
   )
 
@@ -57,50 +73,26 @@ const SoftwareTechHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pb-16 pt-[120px] sm:pt-[135px] md:pb-20 md:pt-[150px] lg:pb-28 lg:pt-44 xl:pb-[160px] xl:pt-[200px]"
+      className="relative overflow-hidden pb-16 pt-[40px] sm:pt-[45px] md:pb-20 md:pt-[50px] lg:pb-28 lg:pt-14 xl:pb-[160px] xl:pt-[60px]"
       aria-labelledby="software-tech-heading"
     >
-      {imagePool[0]?.src ? (
-        <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
-          <StrapiResponsiveImg
-            ref={setImageRef(0)}
-            image={imagePool[0]}
-            fallbackSrc={SLOT_FALLBACKS[0]}
-            alt={imagePool[0].alt ?? ''}
-            sizes={CMS_IMAGE_SIZES.decorativeThumb}
-            displayWidth={SLOT_DISPLAY_WIDTHS[0]}
-            className="h-[110px] w-[85px] rounded-sm object-cover lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
-              loading="eager"
-              fetchPriority="high"
+      {[0, 1, 2, 3].map((index) =>
+        imagePool[index]?.src ? (
+          <figure key={index} className={SLOT_CLASS_NAMES[index]}>
+            <StrapiResponsiveImg
+              ref={setImageRef(index)}
+              image={imagePool[index]}
+              fallbackSrc={SLOT_FALLBACKS[index]}
+              alt={imagePool[index]?.alt ?? ''}
+              sizes={CMS_IMAGE_SIZES.decorativeThumb}
+              displayWidth={SLOT_DISPLAY_WIDTHS[index]}
+              className={SLOT_IMG_CLASS_NAMES[index]}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : undefined}
             />
-        </figure>
-      ) : null}
-      {imagePool[1]?.src ? (
-        <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
-          <StrapiResponsiveImg
-            ref={setImageRef(1)}
-            image={imagePool[1]}
-            fallbackSrc={SLOT_FALLBACKS[1]}
-            alt={imagePool[1].alt ?? ''}
-            sizes={CMS_IMAGE_SIZES.decorativeThumb}
-            displayWidth={SLOT_DISPLAY_WIDTHS[1]}
-            className="h-[100px] w-[82px] rounded-sm object-cover lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
-          />
-        </figure>
-      ) : null}
-      {imagePool[2]?.src ? (
-        <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
-          <StrapiResponsiveImg
-            ref={setImageRef(2)}
-            image={imagePool[2]}
-            fallbackSrc={SLOT_FALLBACKS[2]}
-            alt={imagePool[2].alt ?? ''}
-            sizes={CMS_IMAGE_SIZES.decorativeThumb}
-            displayWidth={SLOT_DISPLAY_WIDTHS[2]}
-            className="h-[90px] w-[130px] rounded-sm object-cover lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
-          />
-        </figure>
-      ) : null}
+          </figure>
+        ) : null,
+      )}
 
       <div className="container relative z-10">
         <HeroGradientAnimationV2 />
