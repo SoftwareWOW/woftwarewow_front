@@ -74,7 +74,14 @@ const nextConfig: NextConfig = {
     remotePatterns: getStrapiImageRemotePatterns(),
   },
   async redirects() {
-    return getDivisionRedirects()
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/images/wow/wowlogo.png',
+        permanent: false,
+      },
+      ...getDivisionRedirects(),
+    ]
   },
   async rewrites() {
     return getDivisionRewrites()

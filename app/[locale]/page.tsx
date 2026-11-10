@@ -5,7 +5,10 @@ import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
+import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { routing } from '@/i18n/routing'
 import { getSiteUrl } from '@/lib/seo/site-url'
 import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
 import {
@@ -63,7 +66,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const dictionary = await getDictionary(locale as Locale)
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
+  const dictionary = await getDictionary(locale)
   const siteUrl = getSiteUrl()
 
   return {
@@ -82,10 +90,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Home = async ({ params }: Props) => {
   const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
   setRequestLocale(locale as Locale)
 
   const typedLocale = locale as Locale
-  const dictionary = await getDictionary(typedLocale)
+  const dictionary = await getDictionary(locale)
   const cms = await getSuperagencyHomepage(typedLocale)
 
   const heroCopy = mapStrapiHeroCopy(cms.hero)

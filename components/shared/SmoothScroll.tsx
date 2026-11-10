@@ -115,8 +115,14 @@ function LenisScrollEffects({ children }: Readonly<{ children: ReactNode }>) {
 }
 
 const SmoothScrollProvider = ({ children }: Readonly<SmoothScrollingProps>) => {
+  const pathname = usePathname()
+
   return (
-    <ReactLenis root options={{ duration: 1.1, autoRaf: false, syncTouch: true, touchMultiplier: 1 }}>
+    <ReactLenis
+      key={pathname}
+      root
+      options={{ duration: 1.1, autoRaf: false, syncTouch: true, touchMultiplier: 1 }}
+    >
       <LenisScrollEffects>{children}</LenisScrollEffects>
     </ReactLenis>
   )
