@@ -31,6 +31,8 @@ const DEFAULT_POINTS = [
 
 type BuiltAroundYourBusinessProps = Partial<CmsProcessSection> & {
   image?: CmsHeroImage | null
+  ctaLabel?: string
+  ctaHref?: string
 }
 
 const DEFAULT_IMAGE = {
@@ -45,6 +47,8 @@ const BuiltAroundYourBusiness = ({
   description,
   steps,
   image,
+  ctaLabel = 'Book a Strategy Session',
+  ctaHref = '/meet',
 }: BuiltAroundYourBusinessProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_POINTS, steps)
@@ -62,11 +66,11 @@ const BuiltAroundYourBusiness = ({
             before={header.title}
             accent={header.accentTitle ?? ''}
           />
-          <TextAppearAnimation>
-            <p className="text-appear">
-              Tailored by goals, industry, market, customer, maturity, and budget
-            </p>
-          </TextAppearAnimation>
+          {header.description ? (
+            <TextAppearAnimation>
+              <p className="text-appear">{header.description}</p>
+            </TextAppearAnimation>
+          ) : null}
         </div>
         <div className="flex flex-col-reverse gap-x-[30px] gap-y-8 md:flex-row">
           <div className="md:w-1/2 [&>*]:border-b">
@@ -87,8 +91,8 @@ const BuiltAroundYourBusiness = ({
         </div>
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList>
-            <ButtonComponent href="/meet" variant="primary">
-              Book a Strategy Session
+            <ButtonComponent href={ctaHref} variant="primary">
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

@@ -40,7 +40,11 @@ const DEFAULT_STEPS = [
   },
 ]
 
-type WowGrowthFrameworkProps = Partial<CmsProcessSection>
+type WowGrowthFrameworkProps = Partial<CmsProcessSection> & {
+  frameworkTagline?: string
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 const WowGrowthFramework = ({
   eyebrow = 'Framework',
@@ -48,6 +52,9 @@ const WowGrowthFramework = ({
   accentTitle = 'Framework',
   description,
   steps,
+  frameworkTagline = 'Discover → Strategize → Implement → Measure → Optimize → Scale',
+  ctaLabel = 'Book a Strategy Session',
+  ctaHref = '/meet',
 }: WowGrowthFrameworkProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
@@ -69,15 +76,15 @@ const WowGrowthFramework = ({
             before={header.title}
             accent={header.accentTitle ?? ''}
           />
-          <TextAppearAnimation02>
-            <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">
-              Discover → Strategize → Implement → Measure → Optimize → Scale
-            </p>
-          </TextAppearAnimation02>
+          {frameworkTagline ? (
+            <TextAppearAnimation02>
+              <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">{frameworkTagline}</p>
+            </TextAppearAnimation02>
+          ) : null}
 
           <div className="mt-7 md:mt-14">
-            <ButtonComponent href="/meet" variant="white">
-              Book a Strategy Session
+            <ButtonComponent href={ctaHref} variant="white">
+              {ctaLabel}
             </ButtonComponent>
           </div>
         </div>
@@ -92,7 +99,7 @@ const WowGrowthFramework = ({
                 className={isLeftColumn ? 'border-r px-[30px] py-[50px] dark:border-dark' : 'px-[30px] py-[50px]'}
               >
                 <h2 className="font-instrument text-5xl font-light italic leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] lg:text-[84px] xl:text-8xl xl:leading-[1.15] xl:tracking-[-2.88px]">
-                  {step.id}
+                  {String(index + 1).padStart(2, '0')}
                 </h2>
                 <h5 className="mb-6 mt-4">{step.title}</h5>
                 <p className="text-base">{step.description}</p>

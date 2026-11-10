@@ -28,7 +28,10 @@ const DEFAULT_PROCESSSTEPS = [
   },
 ]
 
-type HowWeBuildStrategyProps = Partial<CmsProcessSection>
+type HowWeBuildStrategyProps = Partial<CmsProcessSection> & {
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 const HowWeBuildStrategy = ({
   eyebrow = 'Process',
@@ -36,6 +39,8 @@ const HowWeBuildStrategy = ({
   accentTitle = 'strategy',
   description,
   steps,
+  ctaLabel = 'Start Your Journey',
+  ctaHref = '/meet',
 }: HowWeBuildStrategyProps = {}) => {
   const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
   const mergedSteps = mergeProcessSteps(DEFAULT_PROCESSSTEPS, steps)
@@ -58,7 +63,7 @@ const HowWeBuildStrategy = ({
         <div className="flex justify-center gap-[30px] max-xl:flex-wrap">
           {mergedSteps.map(({ step, title, description }, index) => (
             <RevealWrapper key={step} className="reveal-me w-full grow pt-6 sm:w-[48%] xl:grow">
-              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between border px-5 pb-[42px] pt-10 text-center dark:border-dark">
+              <div className="relative mx-auto grid min-h-[300px] grid-cols-1 content-between rounded-radius-sm border px-5 pb-[42px] pt-10 text-center dark:border-dark">
                 <div className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-radius-lg bg-secondary px-4 pb-2 pt-2.5 dark:bg-backgroundBody">
                   <span className="text-xs uppercase leading-[1.2] tracking-[0.96px] text-backgroundBody dark:text-secondary">
                     {step}
@@ -75,8 +80,8 @@ const HowWeBuildStrategy = ({
 
         <RevealWrapper className="reveal-me mt-7 justify-self-center max-md:w-full md:mt-14">
           <ButtonComponentList itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <ButtonComponent href="/meet" variant="primary">
-              Start Your Journey
+            <ButtonComponent href={ctaHref} variant="primary">
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

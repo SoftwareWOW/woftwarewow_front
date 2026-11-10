@@ -12,7 +12,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import HeadingWithInstrument from '@/components/wow/shared/HeadingWithInstrument'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
-import { mergeSectionHeader } from '@/lib/strapi/cms-section-props'
+import { mergeFeatureItems, mergeSectionHeader } from '@/lib/strapi/cms-section-props'
 
 interface ExpertiseCardProps {
   id: string
@@ -31,54 +31,69 @@ const ExpertiseCard: FC<ExpertiseCardProps> = ({ icon, title, description }) => 
   )
 }
 
-const TOP_ROW_EXPERTISE: ExpertiseCardProps[] = [
+const DEFAULT_EXPERTISE: Omit<ExpertiseCardProps, 'icon'>[] = [
   {
     id: 'business',
-    icon: <ScalableSolutionsIcon />,
     title: 'Business',
     description: 'Growth models, priorities, and operating decisions that keep ambition grounded in reality.',
   },
   {
     id: 'brand',
-    icon: <PsychologyWritingIcon />,
     title: 'Brand',
     description: 'Positioning, messaging, and identity systems that make your offer unmistakable.',
   },
   {
     id: 'marketing',
-    icon: <DrivenCopywritingIcon />,
     title: 'Marketing',
     description: 'Channel strategy and campaigns designed to attract demand and convert it into revenue.',
   },
-]
-
-const BOTTOM_ROW_EXPERTISE: ExpertiseCardProps[] = [
   {
     id: 'technology-ai',
-    icon: <SeoStrategyIcon />,
     title: 'Technology & AI',
     description: 'Digital foundations and intelligent systems that support scale without complexity.',
   },
   {
     id: 'sales-growth',
-    icon: <IndustryKnowledgeIcon />,
     title: 'Sales & Growth',
     description: 'Funnels, offers, and revenue systems that turn strategy into measurable commercial results.',
   },
 ]
 
-type StrategicExpertiseProps = Partial<CmsTechnologiesSection>
+const ICONS = [
+  <ScalableSolutionsIcon key="s" />,
+  <PsychologyWritingIcon key="p" />,
+  <DrivenCopywritingIcon key="d" />,
+  <SeoStrategyIcon key="seo" />,
+  <IndustryKnowledgeIcon key="i" />,
+]
+
+type StrategicExpertiseProps = Partial<CmsTechnologiesSection> & {
+  ctaLabel?: string
+  ctaHref?: string
+}
 
 const StrategicExpertise: FC<StrategicExpertiseProps> = ({
   eyebrow = 'Strategic Expertise',
   title = 'Our strategic',
   accentTitle = 'expertise',
   description = 'Five strategic areas that shape every roadmap — before specialist divisions execute the work.',
+  items,
+  ctaLabel = "Let's Talk",
+  ctaHref = '/meet',
 }) => {
   const header = mergeSectionHeader(
     { eyebrow, title, accentTitle, description },
     { eyebrow, title, accentTitle, description },
   )
+  const merged = mergeFeatureItems(DEFAULT_EXPERTISE, items)
+  const cards: ExpertiseCardProps[] = merged.map((item, index) => ({
+    id: DEFAULT_EXPERTISE[index]?.id ?? `expertise-${index}`,
+    icon: ICONS[index % ICONS.length],
+    title: item.title,
+    description: item.description ?? DEFAULT_EXPERTISE[index]?.description ?? '',
+  }))
+  const topRow = cards.slice(0, 3)
+  const bottomRow = cards.slice(3, 5)
 
   return (
     <section>
@@ -103,8 +118,8 @@ const StrategicExpertise: FC<StrategicExpertiseProps> = ({
                 className="flex justify-end max-md:justify-center"
                 itemClassName="mx-auto block w-full text-center md:inline-block md:w-auto"
               >
-                <ButtonComponent href="/meet" variant="primary">
-                  Let&apos;s Talk
+                <ButtonComponent href={ctaHref} variant="primary">
+                  {ctaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
             </RevealWrapper>
@@ -113,7 +128,7 @@ const StrategicExpertise: FC<StrategicExpertiseProps> = ({
 
         <article>
           <RevealWrapper className="reveal-me mb-[30px] flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            {TOP_ROW_EXPERTISE.map((expertise) => (
+            {topRow.map((expertise) => (
               <ExpertiseCard
                 key={expertise.id}
                 id={expertise.id}
@@ -125,7 +140,7 @@ const StrategicExpertise: FC<StrategicExpertiseProps> = ({
           </RevealWrapper>
 
           <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row">
-            {BOTTOM_ROW_EXPERTISE.map((expertise) => (
+            {bottomRow.map((expertise) => (
               <RevealWrapper
                 key={expertise.id}
                 className="reveal-me min-h-[322px] flex-1 border px-[30px] py-20 dark:border-dark"
