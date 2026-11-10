@@ -3,7 +3,7 @@ import ProfessionalServicesHero from './_components/ProfessionalServicesHero'
 import WhatMattersMost from './_components/WhatMattersMost'
 import ProfessionalServiceSolutions from './_components/ProfessionalServiceSolutions'
 import ClientJourney from './_components/ClientJourney'
-import ConnectedExpertise from './_components/ConnectedExpertise'
+import WowEcosystemExpertiseSection from '@/components/wow/sections/WowEcosystemExpertiseSection'
 import RecommendedSolutions from './_components/RecommendedSolutions'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -46,7 +46,7 @@ export default async function Page({ params }: Props) {
       <WhatMattersMost {...sections.whatMattersMost} />
       <ProfessionalServiceSolutions {...sections.professionalServiceSolutions} />
       <ClientJourney {...sections.clientJourney} />
-      <ConnectedExpertise {...sections.connectedExpertise} />
+      <WowEcosystemExpertiseSection {...sections.connectedExpertise} />
       <RecommendedSolutions {...sections.recommendedSolutions} />
       <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
     </div>

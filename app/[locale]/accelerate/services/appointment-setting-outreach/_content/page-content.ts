@@ -1,3 +1,5 @@
+import type { WowEcosystemExpertiseRow } from '@/components/wow/sections/WowEcosystemExpertiseSection'
+
 const WOW_CARD = '/images/wow/nav/cards/pexels-pixabay-35208 1.png'
 const WOW_HERO_A = '/images/wow/Hero/devision/Accelerate.jpg'
 const WOW_HERO_B = '/images/wow/Hero/Growth/image (2).png'
@@ -126,41 +128,41 @@ export const CONTENT = {
     rows: [
       {
         id: '01',
-        title: 'WOW Accelerate',
+        divisionId: 'wowAccelerate',
         heading: 'Sales Outreach',
         description: 'Prospecting, appointment setting, and follow-ups.',
       },
       {
         id: '02',
-        title: 'WOW Marketing',
+        divisionId: 'wowMarketing',
         heading: 'Audience Targeting',
         description: 'Campaign insights and customer acquisition.',
       },
       {
         id: '03',
-        title: 'WOW Intelligence',
+        divisionId: 'wowIntelligence',
         heading: 'Smart Automation',
         description: 'Workflow automation and lead intelligence.',
       },
       {
         id: '04',
-        title: 'WOW Design',
+        divisionId: 'wowDesign',
         heading: 'Sales Messaging',
         description: 'Clear, compelling outreach and sales materials.',
       },
       {
         id: '05',
-        title: 'WOW Websites',
+        divisionId: 'wowWebsites',
         heading: 'Conversion Experiences',
         description: 'Landing pages and appointment booking journeys.',
       },
       {
         id: '06',
-        title: 'WOW Social',
+        divisionId: 'wowSocial',
         heading: 'Social Engagement',
         description: 'Professional networking and relationship building.',
       },
-    ],
+    ] satisfies WowEcosystemExpertiseRow[],
   },
   recommendedSolutions: {
     eyebrow: 'SOLUTIONS FOR YOUR SALES PIPELINE',
