@@ -37,11 +37,20 @@ const DEFAULT_PROCESS_STEPS = [
 const LeadToCustomer = ({
   eyebrow = 'From Lead to Customer',
   title = 'Make every stage work',
+  accentTitle,
   description =
     'Connect prospecting, CRM, follow-up and reporting into a sales process your team can actually use.',
   steps,
-}: Partial<CmsProcessSection> = {}) => {
-  const processSteps = mergeProcessSteps(DEFAULT_PROCESS_STEPS, steps)
+  processSteps: processStepsOverride,
+  ctaLabel = 'Accelerate Your Sales',
+}: Partial<CmsProcessSection> & {
+  accentTitle?: string
+  processSteps?: typeof DEFAULT_PROCESS_STEPS
+  ctaLabel?: string
+} = {}) => {
+  const processSteps = processStepsOverride?.length
+    ? processStepsOverride
+    : mergeProcessSteps(DEFAULT_PROCESS_STEPS, steps)
 
   return (
     <section>
@@ -53,7 +62,13 @@ const LeadToCustomer = ({
           <TextAppearAnimation>
             <h2 className="text-appear mb-3">
               {title}
-              <i className="font-instrument"> together.</i>
+              {accentTitle !== undefined ? (
+                accentTitle ? (
+                  <i className="font-instrument"> {accentTitle}</i>
+                ) : null
+              ) : (
+                <i className="font-instrument"> together.</i>
+              )}
             </h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me">
@@ -82,7 +97,7 @@ const LeadToCustomer = ({
         <RevealWrapper className="reveal-me mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Accelerate Your Sales
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

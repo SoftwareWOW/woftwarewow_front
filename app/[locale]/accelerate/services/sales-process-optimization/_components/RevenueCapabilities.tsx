@@ -5,10 +5,13 @@ import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { ReactNode } from 'react'
 
-type CapabilityCard = {
+export type CapabilityCardContent = {
   title: string
   headline: string
   description: string
+}
+
+type CapabilityCard = CapabilityCardContent & {
   icon: ReactNode
 }
 
@@ -93,14 +96,32 @@ const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: stri
   </RevealWrapper>
 )
 
-/** Layout: Home-24 ServicesV16 — hover-flip cards, 3+2 grid. */
+const DEFAULT_ICON_POOL = [...DEFAULT_TOP_ROW_CARDS, ...DEFAULT_BOTTOM_ROW_CARDS, DEFAULT_TOP_ROW_CARDS[0]]
+
+/** Layout: Home-24 ServicesV16 — hover-flip cards, 3+2 or 3+3 grid. */
 const RevenueCapabilities = ({
   eyebrow = 'Revenue Capabilities',
   title = 'Build the systems behind',
+  accentTitle = 'better sales.',
   description = 'From deciding what to say to getting it in front of the right people.',
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
+  capabilityCards,
+}: Partial<CmsTechnologiesSection> & {
+  accentTitle?: string
+  capabilityCards?: CapabilityCardContent[]
+} = {}) => {
   const allDefaults = [...DEFAULT_TOP_ROW_CARDS, ...DEFAULT_BOTTOM_ROW_CARDS]
+  const useSixCardLayout = capabilityCards?.length === 6
+  const useFiveCardLayout = capabilityCards?.length === 5
+
+  const contentCards: CapabilityCard[] | null =
+    useSixCardLayout || useFiveCardLayout
+      ? capabilityCards!.map((card, index) => ({
+          ...card,
+          icon: DEFAULT_ICON_POOL[index]?.icon ?? DEFAULT_TOP_ROW_CARDS[0].icon,
+        }))
+      : null
+
   const merged = mergeFeatureItems(allDefaults, items)
   const topRowCards = merged.slice(0, DEFAULT_TOP_ROW_CARDS.length).map((card, index) => ({
     ...DEFAULT_TOP_ROW_CARDS[index],
@@ -113,6 +134,17 @@ const RevenueCapabilities = ({
     description: card.description ?? DEFAULT_BOTTOM_ROW_CARDS[index].description,
   }))
 
+  const topRow = contentCards ? contentCards.slice(0, 3) : topRowCards
+  const bottomRow = contentCards
+    ? useFiveCardLayout
+      ? contentCards.slice(3, 5)
+      : contentCards.slice(3, 6)
+    : bottomRowCards
+  const bottomWidthClass =
+    useSixCardLayout || !contentCards
+      ? 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[390px]'
+      : 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]'
+
   return (
     <section>
       <div className="container">
@@ -123,7 +155,7 @@ const RevenueCapabilities = ({
           <TextAppearAnimation>
             <h2 className="text-appear mb-3 lg:leading-[1.21]">
               {title}
-              <span className="font-instrument italic"> better sales.</span>
+              {accentTitle ? <span className="font-instrument italic"> {accentTitle}</span> : null}
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
@@ -133,7 +165,7 @@ const RevenueCapabilities = ({
       </div>
 
       <div className={gridRowClass}>
-        {topRowCards.map((card) => (
+        {topRow.map((card) => (
           <FlipCard
             key={card.title}
             card={card}
@@ -144,8 +176,8 @@ const RevenueCapabilities = ({
 
       <div
         className={`${gridRowClass} max-xl:justify-center max-xl:[&>*:first-child]:border-r max-xl:[&>*:nth-child(2)]:border-r max-2xl:[&>*:nth-child(3)]:border-r-0 lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}>
-        {bottomRowCards.map((card) => (
-          <FlipCard key={card.title} card={card} widthClass="md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]" />
+        {bottomRow.map((card) => (
+          <FlipCard key={card.title} card={card} widthClass={bottomWidthClass} />
         ))}
       </div>
     </section>
