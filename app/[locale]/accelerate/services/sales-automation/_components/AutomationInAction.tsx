@@ -48,8 +48,10 @@ const AutomationInAction = ({
   accentTitle = 'workflows.',
   description =
     'Connect the steps that happen repeatedly so information and actions can move automatically.',
+  beforeLabel = 'Before',
+  afterLabel = 'After',
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
+}: Partial<CmsTechnologiesSection> & { beforeLabel?: string; afterLabel?: string } = {}) => {
   const defaultItems = [
     ...DEFAULT_BEFORE_STEPS.map((step) => ({ title: step, description: '' })),
     ...DEFAULT_AFTER_STEPS.map((step) => ({ title: step, description: '' })),
@@ -78,14 +80,14 @@ const AutomationInAction = ({
         <RevealWrapper className="reveal-me mt-10 grid justify-center gap-6 md:mt-16 lg:grid-cols-2 lg:gap-8">
           <div className={cardClassName}>
             <h6 className="mb-8 text-2xl font-normal uppercase tracking-[0.04em] text-secondary dark:text-white md:mb-10 md:text-3xl">
-              Before
+              {beforeLabel}
             </h6>
             <WorkflowSteps steps={beforeSteps} />
           </div>
 
           <div className={cardClassName}>
             <h6 className="mb-8 text-2xl font-normal uppercase tracking-[0.04em] text-inherit md:mb-10 md:text-3xl">
-              After
+              {afterLabel}
             </h6>
             <WorkflowSteps steps={afterSteps} />
           </div>

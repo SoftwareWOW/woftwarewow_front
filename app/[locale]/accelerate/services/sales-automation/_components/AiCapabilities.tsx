@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
@@ -154,8 +155,10 @@ const FlipCard = ({ service }: { service: AiService }) => (
 const AiCapabilities = ({
   eyebrow = 'AI Capabilities',
   title = 'Practical AI. Built for real work.',
+  accentTitle = '',
+  titleSuffix = '',
   items,
-}: Partial<CmsTechnologiesSection> = {}) => {
+}: Partial<CmsTechnologiesSection> & { accentTitle?: string; titleSuffix?: string } = {}) => {
   const allDefaults = [...DEFAULT_SLICE_ONE, ...DEFAULT_SLICE_TWO]
   const merged = mergeFeatureItems(allDefaults, items)
   const sliceOne = merged.slice(0, DEFAULT_SLICE_ONE.length).map((service, index) => ({
@@ -177,7 +180,11 @@ const AiCapabilities = ({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear lg:leading-[1.20]">{title}</h2>
+            <h2 className="text-appear lg:leading-[1.20]">
+              {title}
+              {accentTitle ? <InstrumentText> {accentTitle}</InstrumentText> : null}
+              {titleSuffix}
+            </h2>
           </TextAppearAnimation>
         </div>
       </div>

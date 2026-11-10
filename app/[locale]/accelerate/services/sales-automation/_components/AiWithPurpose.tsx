@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
@@ -26,11 +27,16 @@ const DEFAULT_STEPS = [
 /** Layout: BuildCommunity — 3 numbered columns with faded background numbers. */
 const AiWithPurpose = ({
   eyebrow = 'AI with a purpose',
-  title = 'Automate what makes sense. Keep people where they matter.',
+  title = 'Automate what makes sense.',
+  accentTitle = 'Keep people where they matter.',
   description = 'AI should make the business work better—not add another layer of complexity.',
   steps,
-}: Partial<CmsProcessSection> = {}) => {
-  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
+  ctaLabel = 'Explore AI Opportunities',
+}: Partial<CmsProcessSection> & { accentTitle?: string; ctaLabel?: string } = {}) => {
+  const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps).map((step, index) => ({
+    ...step,
+    number: (steps?.[index] as { number?: string } | undefined)?.number ?? step.number,
+  }))
 
   return (
     <section>
@@ -40,7 +46,15 @@ const AiWithPurpose = ({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto ">{title}</h2>
+            <h2 className="mx-auto">
+              {title}
+              {accentTitle ? (
+                <>
+                  <br />
+                  <InstrumentText>{accentTitle}</InstrumentText>
+                </>
+              ) : null}
+            </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me mt-5">
             <p className="mx-auto  text-base leading-relaxed text-[#808080]">{description}</p>
@@ -70,7 +84,7 @@ const AiWithPurpose = ({
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Explore AI Opportunities
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

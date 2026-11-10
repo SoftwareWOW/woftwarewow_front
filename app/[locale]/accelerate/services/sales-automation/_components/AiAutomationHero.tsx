@@ -28,7 +28,12 @@ const AiAutomationHero = ({
   description =
     'Use AI and automation to remove repetitive work, improve efficiency, and create smarter business systems.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCta = { label: 'Explore AI Opportunities', href: '/contact' },
+  secondaryCta = { label: 'See What We Automate', href: '/contact' },
+}: CmsHeroComponentProps & {
+  primaryCta?: { label: string; href: string }
+  secondaryCta?: { label: string; href: string }
+}) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -52,11 +57,11 @@ const AiAutomationHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pb-16 pt-[120px] sm:pt-[135px] md:pb-20 md:pt-[150px] lg:pb-28 lg:pt-44 xl:pb-[160px] xl:pt-[200px]"
+      className="relative overflow-hidden pb-16 pt-[30px] md:pb-20 md:pt-[40px] lg:pb-28 xl:pb-[160px] xl:pt-[50px]"
       aria-labelledby="ai-automation-heading"
     >
       {imagePool[0]?.src ? (
-        <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
+        <figure className="pointer-events-none absolute left-[2%] top-[14%] z-0 hidden overflow-hidden rounded-radius-sm md:block lg:left-[6%] lg:top-[16%] xl:left-[10%]">
           <StrapiResponsiveImg
             ref={setImageRef(0)}
             image={imagePool[0]}
@@ -64,14 +69,14 @@ const AiAutomationHero = ({
             alt={imagePool[0].alt ?? ''}
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[0]}
-            className="h-[110px] w-[85px] rounded-sm object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
+            className="h-[110px] w-[85px] rounded-radius-sm object-contain lg:h-[140px] lg:w-[108px] xl:h-[160px] xl:w-[124px]"
               loading="eager"
               fetchPriority="high"
             />
         </figure>
       ) : null}
       {imagePool[1]?.src ? (
-        <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
+        <figure className="pointer-events-none absolute right-[2%] top-[12%] z-0 hidden overflow-hidden rounded-radius-sm md:block lg:right-[6%] lg:top-[14%] xl:right-[10%]">
           <StrapiResponsiveImg
             ref={setImageRef(1)}
             image={imagePool[1]}
@@ -79,12 +84,12 @@ const AiAutomationHero = ({
             alt={imagePool[1].alt ?? ''}
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[1]}
-            className="h-[100px] w-[82px] rounded-sm object-contain lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
+            className="h-[100px] w-[82px] rounded-radius-sm object-contain lg:h-[128px] lg:w-[105px] xl:h-[148px] xl:w-[120px]"
           />
         </figure>
       ) : null}
       {imagePool[2]?.src ? (
-        <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
+        <figure className="pointer-events-none absolute bottom-[4%] right-[4%] z-0 hidden overflow-hidden rounded-radius-sm md:block lg:bottom-[6%] lg:right-[6%] xl:right-[8%]">
           <StrapiResponsiveImg
             ref={setImageRef(2)}
             image={imagePool[2]}
@@ -92,7 +97,7 @@ const AiAutomationHero = ({
             alt={imagePool[2].alt ?? ''}
             sizes={CMS_IMAGE_SIZES.decorativeThumb}
             displayWidth={SLOT_DISPLAY_WIDTHS[2]}
-            className="h-[90px] w-[130px] rounded-sm object-contain lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
+            className="h-[90px] w-[130px] rounded-radius-sm object-contain lg:h-[112px] lg:w-[164px] xl:h-[128px] xl:w-[188px]"
           />
         </figure>
       ) : null}
@@ -123,13 +128,13 @@ const AiAutomationHero = ({
             className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4"
           >
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Explore AI Opportunities
+              <ButtonComponent href={primaryCta.href} variant="primary">
+                {primaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="secondary">
-                See What We Automate
+              <ButtonComponent href={secondaryCta.href} variant="secondary">
+                {secondaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
           </div>
