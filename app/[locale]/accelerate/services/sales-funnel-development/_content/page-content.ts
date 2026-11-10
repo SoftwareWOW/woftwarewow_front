@@ -1,3 +1,5 @@
+import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
+
 const WOW_HERO = [
   { src: '/images/wow/Hero/devision/Accelerate.jpg', alt: 'Sales funnel development' },
   { src: '/images/wow/Hero/Growth/image (2).png', alt: 'Funnel conversion path' },
@@ -94,12 +96,12 @@ export const CONTENT = {
     description:
       'Bring the right expertise together to create a smoother path from prospect to customer.',
     items: [
-      { title: 'Accelerate', description: 'Sales funnels & conversion' },
-      { title: 'Marketing', description: 'Traffic & lead generation' },
-      { title: 'Websites', description: 'Landing pages & experiences' },
-      { title: 'Design', description: 'Creative & conversion design' },
-      { title: 'Intelligence', description: 'Automation & lead insights' },
-      { title: 'Host', description: 'Reliable funnel infrastructure' },
+      { title: 'Accelerate', description: 'Sales funnels & conversion', divisionId: 'wowAccelerate' satisfies DivisionId },
+      { title: 'Marketing', description: 'Traffic & lead generation', divisionId: 'wowMarketing' satisfies DivisionId },
+      { title: 'Websites', description: 'Landing pages & experiences', divisionId: 'wowWebsites' satisfies DivisionId },
+      { title: 'Design', description: 'Creative & conversion design', divisionId: 'wowDesign' satisfies DivisionId },
+      { title: 'Intelligence', description: 'Automation & lead insights', divisionId: 'wowIntelligence' satisfies DivisionId },
+      { title: 'Host', description: 'Reliable funnel infrastructure', divisionId: 'wowHost' satisfies DivisionId },
     ],
   },
   cta: {

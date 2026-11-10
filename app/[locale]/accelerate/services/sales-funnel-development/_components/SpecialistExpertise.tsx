@@ -4,18 +4,24 @@ import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import WowText from '@/components/wow/shared/WowText'
+import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
+import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import Link from 'next/link'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
-const DEFAULT_ITEMS = [
-  { name: 'Websites', description: 'Website strategy & development' },
-  { name: 'Design', description: 'UX/UI & creative' },
-  { name: 'Marketing', description: 'SEO & acquisition' },
-  { name: 'Host', description: 'Hosting & infrastructure' },
-  { name: 'Accelerate', description: 'Conversion & funnels' },
-  { name: 'Intelligence', description: 'AI & personalization' },
+const CARD_LOGO_CLASS = 'h-7 w-auto max-w-[min(100%,14rem)] object-contain object-left lg:h-8'
+
+const DEFAULT_ITEMS: { name: string; description: string; divisionId?: DivisionId }[] = [
+  { name: 'Websites', description: 'Website strategy & development', divisionId: 'wowWebsites' },
+  { name: 'Design', description: 'UX/UI & creative', divisionId: 'wowDesign' },
+  { name: 'Marketing', description: 'SEO & acquisition', divisionId: 'wowMarketing' },
+  { name: 'Host', description: 'Hosting & infrastructure', divisionId: 'wowHost' },
+  { name: 'Accelerate', description: 'Conversion & funnels', divisionId: 'wowAccelerate' },
+  { name: 'Intelligence', description: 'AI & personalization', divisionId: 'wowIntelligence' },
 ]
+
+type ContentItem = { title: string; description?: string; divisionId?: DivisionId }
 
 const ArrowButton = () => (
   <div className="flex items-center justify-center overflow-hidden rounded-radius-sm border p-8 transition-colors duration-[400ms] ease-team-bezier group-hover:bg-secondary dark:border-dark dark:group-hover:bg-backgroundBody max-lg:size-16 lg:h-24 lg:w-[92px]">
@@ -68,11 +74,15 @@ const SpecialistExpertise = ({
   const mergedItems = mergeFeatureItems(
     DEFAULT_ITEMS.map(({ name, description: desc }) => ({ title: name, description: desc })),
     items,
-  ).map((item, index) => ({
-    ...DEFAULT_ITEMS[index],
-    name: item.title,
-    description: item.description ?? DEFAULT_ITEMS[index].description,
-  }))
+  ).map((item, index) => {
+    const cmsItem = items?.[index] as ContentItem | undefined
+    return {
+      ...DEFAULT_ITEMS[index],
+      name: item.title,
+      description: item.description ?? DEFAULT_ITEMS[index].description,
+      divisionId: cmsItem?.divisionId ?? DEFAULT_ITEMS[index].divisionId,
+    }
+  })
 
   return (
     <section>
@@ -98,8 +108,14 @@ const SpecialistExpertise = ({
             className="reveal-me group border px-6 py-9 dark:border-dark lg:px-[30px] lg:py-[50px]"
           >
             <Link href="/contact" className="block">
-              <h5 className="mb-2 lg:mb-3">
-                <WowText className="text-2xl lg:text-3xl">WOW</WowText> {team.name}
+              <h5 className="mb-2 lg:mb-3" aria-label={`WOW ${team.name}`}>
+                {team.divisionId ? (
+                  <WowDivisionLogo divisionId={team.divisionId} className={CARD_LOGO_CLASS} />
+                ) : (
+                  <>
+                    <WowText className="text-2xl lg:text-3xl">WOW</WowText> {team.name}
+                  </>
+                )}
               </h5>
               <p className="mb-20 text-base leading-relaxed text-[#808080] lg:mb-[106px]">{team.description}</p>
               <ArrowButton />
