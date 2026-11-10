@@ -1,21 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
-import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsHeroAboutSection } from '@/lib/strapi/mappers/page-sections'
-
-const needCustom = [
-  'Your team relies heavily on spreadsheets or manual processes.',
-  "Your current tools don't communicate with each other.",
-  "Existing software doesn't fit your workflow.",
-  'Legacy systems are slowing the business down.',
-]
-
-const wantTo = [
-  'Turn an idea into a software product.',
-  'Automate repetitive processes.',
-  'Create a better customer experience.',
-  'Build technology that can scale with the business.',
-]
 
 const CheckIcon = () => (
   <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full border border-secondary/40 dark:border-backgroundBody/40">
@@ -34,20 +20,45 @@ const CheckIcon = () => (
 const cardClassName =
   'relative rounded-radius-md border px-[30px] pb-[30px] pt-8 shadow-none dark:border-dark md:pt-16'
 
+type Props = Partial<CmsHeroAboutSection> & {
+  eyebrow?: string
+  title?: string
+  accentTitle?: string
+  needHeading?: string
+  wantHeading?: string
+  needItems?: string[]
+  wantItems?: string[]
+  closingLine?: string
+}
+
 /** Layout: Why SMBs TheGap — dual bordered columns with checks on both sides. */
 const BuiltForTheFit = ({
-  body = "Sometimes existing tools work perfectly. Sometimes they create more work than they remove.",
-}: Partial<CmsHeroAboutSection> = {}) => {
+  eyebrow = 'Built for the Fit',
+  title = "Your business shouldn't have to work around its software.",
+  accentTitle,
+  body = 'Sometimes existing tools work perfectly. Sometimes they create more work than they remove.',
+  needHeading = 'You may need a custom solution if…',
+  wantHeading = 'Or if you want to…',
+  needItems = [],
+  wantItems = [],
+  closingLine,
+}: Props = {}) => {
   return (
     <section className="relative overflow-hidden">
       <div className="container">
         <div className="text-center">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
-            <SectionLabel>Built for the Fit</SectionLabel>
+            <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
             <h2 className="mx-auto mb-5 md:mb-8">
-              Your business shouldn&apos;t have to work around its software.
+              {title}
+              {accentTitle ? (
+                <>
+                  <br className="hidden sm:block" />
+                  <InstrumentText>{accentTitle}</InstrumentText>
+                </>
+              ) : null}
             </h2>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
@@ -59,10 +70,10 @@ const BuiltForTheFit = ({
           <div className={cardClassName}>
             <div>
               <h6 className="mb-8 text-sm font-normal uppercase tracking-[0.08em] max-md:text-base">
-                You may need a custom solution if…
+                {needHeading}
               </h6>
               <ul className="[&>*:not(:last-child)]:mb-4 md:[&>*:not(:last-child)]:mb-5">
-                {needCustom.map((item) => (
+                {needItems.map((item) => (
                   <li
                     key={item}
                     className="flex list-none items-start gap-4 text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
@@ -78,10 +89,10 @@ const BuiltForTheFit = ({
           <div className={cardClassName}>
             <div>
               <h6 className="mb-8 text-sm font-normal uppercase tracking-[0.08em] max-md:text-base">
-                Or if you want to…
+                {wantHeading}
               </h6>
               <ul className="[&>*:not(:last-child)]:mb-4 md:[&>*:not(:last-child)]:mb-5">
-                {wantTo.map((item) => (
+                {wantItems.map((item) => (
                   <li
                     key={item}
                     className="flex list-none items-start gap-4 text-[17px] leading-[1.5] text-secondary/70 dark:text-backgroundBody/70"
@@ -94,6 +105,14 @@ const BuiltForTheFit = ({
             </div>
           </div>
         </RevealWrapper>
+
+        {closingLine ? (
+          <RevealWrapper className="reveal-me mt-10 text-center md:mt-14">
+            <p className="mx-auto max-w-2xl text-lg leading-[1.6] tracking-[0.36px] text-secondary dark:text-backgroundBody">
+              {closingLine}
+            </p>
+          </RevealWrapper>
+        ) : null}
       </div>
     </section>
   )

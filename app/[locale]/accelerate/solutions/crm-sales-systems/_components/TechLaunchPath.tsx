@@ -1,5 +1,6 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
@@ -31,8 +32,10 @@ const DEFAULT_STEPS = [
 const TechLaunchPath = ({
   eyebrow = 'From Idea to Launch',
   title = 'Clear from first idea to final release.',
+  accentTitle,
   steps,
-}: Partial<CmsProcessSection> = {}) => {
+  ctaLabel = 'Start Your Project',
+}: Partial<CmsProcessSection> & { accentTitle?: string; ctaLabel?: string } = {}) => {
   const displaySteps = mergeProcessSteps(DEFAULT_STEPS, steps)
 
   return (
@@ -43,7 +46,15 @@ const TechLaunchPath = ({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">{title}</h2>
+            <h2 className="max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">
+              {title}
+              {accentTitle ? (
+                <>
+                  <br className="hidden sm:block" />
+                  <InstrumentText>{accentTitle}</InstrumentText>
+                </>
+              ) : null}
+            </h2>
           </RevealWrapper>
         </div>
 
@@ -66,7 +77,7 @@ const TechLaunchPath = ({
         <RevealWrapper className="mt-7 flex justify-center md:mt-14">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Start Your Project
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

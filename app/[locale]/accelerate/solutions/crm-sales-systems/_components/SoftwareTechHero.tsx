@@ -28,7 +28,12 @@ const SoftwareTechHero = ({
   description =
     'Design and build software, apps, and digital products that solve real problems and support long-term growth.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Talk to a Technology Expert',
+  primaryCtaHref = '/contact',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  primaryCtaHref?: string
+}) => {
   const heroButtonRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<Array<HTMLImageElement | null>>([])
 
@@ -120,8 +125,8 @@ const SoftwareTechHero = ({
         <RevealWrapper className="mt-10 flex justify-center md:mt-14">
           <div ref={heroButtonRef}>
             <ButtonComponentList>
-              <ButtonComponent href="/contact" variant="primary">
-                Talk to a Technology Expert
+              <ButtonComponent href={primaryCtaHref} variant="primary">
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </div>
