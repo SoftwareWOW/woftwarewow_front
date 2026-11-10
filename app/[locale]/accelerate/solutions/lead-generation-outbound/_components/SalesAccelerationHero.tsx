@@ -13,11 +13,20 @@ const SalesAccelerationHero = ({
   italicTitle = 'faster.',
   description = 'Systems to increase sales velocity and close more deals.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Accelerate Your Sales',
+  secondaryCtaLabel = 'Talk to an Expert',
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/meet',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const image0 = images?.[0]
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-[90px] md:pb-[90px] md:pt-[100px] lg:pb-[110px] lg:pt-[120px]">
+    <section className="relative overflow-hidden pb-14 pt-[30px] md:pb-[90px] md:pt-[40px] lg:pb-[110px] xl:pt-[50px]">
       <div
         id="hero-gradient-wrapper"
         className="h-fw-full absolute top-1/2 -z-10 w-full -translate-y-1/2 scale-75 blur-[90px]"
@@ -48,13 +57,13 @@ const SalesAccelerationHero = ({
             ) : null}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-14">
               <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/contact" variant="primary">
-                  Accelerate Your Sales
+                <ButtonComponent href={primaryCtaHref} variant="primary">
+                  {primaryCtaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
               <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/meet" variant="secondary">
-                  Talk to an Expert
+                <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                  {secondaryCtaLabel}
                 </ButtonComponent>
               </ButtonComponentList>
             </div>

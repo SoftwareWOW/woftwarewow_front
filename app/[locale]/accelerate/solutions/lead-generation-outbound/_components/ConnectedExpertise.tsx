@@ -1,66 +1,58 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import WowText from '@/components/wow/shared/WowText'
-import type { ReactNode } from 'react'
+import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
+import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
 import { mergeFeatureItems } from '@/lib/strapi/cms-section-props'
 import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 
+/** Match header marks; scaled down for row layout. */
+const ROW_LOGO_CLASS = 'h-[0.6em] w-auto max-w-[min(100%,10em)] object-contain object-left'
+
 const teams: {
   id: string
-  title: ReactNode
+  divisionId: DivisionId
+  label: string
   description: string
 }[] = [
   {
     id: '01',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Accelerate
-      </>
-    ),
+    divisionId: 'wowAccelerate',
+    label: 'WOW Accelerate',
     description: 'Sales systems & funnels',
   },
   {
     id: '02',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Marketing
-      </>
-    ),
+    divisionId: 'wowMarketing',
+    label: 'WOW Marketing',
     description: 'Demand generation',
   },
   {
     id: '03',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Intelligence
-      </>
-    ),
+    divisionId: 'wowIntelligence',
+    label: 'WOW Intelligence',
     description: 'AI & automation',
   },
   {
     id: '04',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Websites
-      </>
-    ),
+    divisionId: 'wowWebsites',
+    label: 'WOW Websites',
     description: 'Landing pages & conversion',
   },
   {
     id: '05',
-    title: (
-      <>
-        <WowText className="text-[1em] leading-[inherit] tracking-[inherit]">WOW</WowText> Social
-      </>
-    ),
+    divisionId: 'wowSocial',
+    label: 'WOW Social',
     description: 'Social acquisition',
   },
   {
     id: '06',
-    title: 'SoftwareWOW',
+    divisionId: 'softwareWow',
+    label: 'SoftwareWOW!',
     description: 'Custom integrations when needed',
   },
 ]
@@ -118,8 +110,11 @@ const ConnectedExpertise = ({
               <span className="w-8 font-instrument text-xl italic leading-[32px] text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody">
                 {item.id}
               </span>
-              <h3 className="wow-approach-step-title-wide flex items-baseline gap-[0.25em] text-nowrap">
-                {item.title}
+              <h3
+                aria-label={item.label}
+                className="mt-2 flex items-center text-2xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:w-[730px] md:text-[67px] lg:text-[84px] xl:text-[88px] xl:leading-[1.15] xl:tracking-[-2.88px]"
+              >
+                <WowDivisionLogo divisionId={item.divisionId} className={ROW_LOGO_CLASS} />
               </h3>
               <p className="ml-2.5 self-center text-xs text-secondary/70 transition-colors duration-300 ease-in-out group-hover:text-secondary dark:text-backgroundBody/70 dark:group-hover:text-backgroundBody md:w-[370px] md:text-base md:leading-[1.6] md:tracking-[0.32px]">
                 {item.description}
