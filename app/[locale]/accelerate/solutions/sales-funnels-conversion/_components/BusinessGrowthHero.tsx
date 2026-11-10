@@ -1,3 +1,5 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
@@ -11,7 +13,16 @@ const BusinessGrowthHero = ({
   italicTitle,
   description,
   images,
-}: CmsHeroComponentProps) => {
+  primaryCtaLabel = 'Improve Your Conversions',
+  secondaryCtaLabel = 'Talk to an Expert',
+  primaryCtaHref = '/contact',
+  secondaryCtaHref = '/meet',
+}: CmsHeroComponentProps & {
+  primaryCtaLabel?: string
+  secondaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaHref?: string
+}) => {
   const image0 = images?.[0]
   const image1 = images?.[1]
 
@@ -21,10 +32,9 @@ const BusinessGrowthHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pt-[100px] md:pt-[110px] xl:pt-[130px]"
+      className="relative overflow-hidden pt-[30px] md:pt-[40px] xl:pt-[50px]"
       aria-labelledby="business-growth-heading"
     >
-      {/* Home-19 HeroV19 gradient */}
       <div className="pointer-events-none absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0">
         <img
           src="/images/hero-gradient-background.png"
@@ -67,13 +77,13 @@ const BusinessGrowthHero = ({
 
           <RevealWrapper className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="primary">
-                Get the Growth Package
+              <ButtonComponent href={primaryCtaHref} variant="primary">
+                {primaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/contact" variant="secondary">
-                See What&apos;s Included
+              <ButtonComponent href={secondaryCtaHref} variant="secondary">
+                {secondaryCtaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>
@@ -89,8 +99,8 @@ const BusinessGrowthHero = ({
                   width={image0.width ?? 480}
                   height={image0.height ?? 360}
                   className="max-sm:w-full rounded-radius-sm"
-              priority
-            />
+                  priority
+                />
               </RevealWrapper>
             ) : null}
             {image1?.src ? (

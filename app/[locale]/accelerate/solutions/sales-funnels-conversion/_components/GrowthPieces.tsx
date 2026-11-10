@@ -10,7 +10,13 @@ import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
 type Props = Partial<CmsTechnologiesSection>
 
 /** Home-04 — ServicesV5: accordion rows closed by default, expand on hover only. */
-const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
+const GrowthPieces = ({
+  eyebrow,
+  title,
+  description,
+  items,
+  ctaLabel = 'Start Improving Conversions',
+}: Props & { ctaLabel?: string } = {}) => {
   const displayItems =
     items
       ?.map((item) => ({
@@ -110,7 +116,7 @@ const GrowthPieces = ({ eyebrow, title, description, items }: Props = {}) => {
           </p>
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Get Started with Business Growth
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

@@ -1,11 +1,13 @@
-import { CONTENT } from './_content/page-content'
+import {
+  CONTENT,
+  SALES_FUNNELS_CONVERSION_PAGE_METADATA,
+} from './_content/page-content'
 import BusinessGrowthHero from './_components/BusinessGrowthHero'
 import BuiltForGrowth from './_components/BuiltForGrowth'
 import GrowthPieces from './_components/GrowthPieces'
 import ConnectedGrowth from './_components/ConnectedGrowth'
 import HowItWorks from './_components/HowItWorks'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
-import { buildOfferingMetadata } from '@/app/[locale]/accelerate/_lib/buildOfferingMetadata'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
@@ -14,20 +16,54 @@ type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return buildOfferingMetadata(locale, 'sales-funnels-conversion', 'solution')
+  return {
+    title: SALES_FUNNELS_CONVERSION_PAGE_METADATA.title,
+    description: SALES_FUNNELS_CONVERSION_PAGE_METADATA.description,
+    openGraph: {
+      title: SALES_FUNNELS_CONVERSION_PAGE_METADATA.title,
+      description: SALES_FUNNELS_CONVERSION_PAGE_METADATA.description,
+      type: 'website',
+    },
+    alternates: {
+      canonical: `/${locale}/accelerate/solutions/sales-funnels-conversion`,
+    },
+  }
 }
 
 export default async function Page({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
-  const { cta } = CONTENT
+
+  const { cta, hero, builtForGrowth, growthPieces, connectedGrowth, howItWorks } = CONTENT
+  const {
+    primaryCtaLabel,
+    secondaryCtaLabel,
+    primaryCtaHref,
+    secondaryCtaHref,
+    images,
+    ...heroProps
+  } = hero
+
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-      <BusinessGrowthHero {...CONTENT.hero} images={CONTENT.hero.images} />
-      <BuiltForGrowth {...CONTENT.builtForGrowth} />
-      <GrowthPieces {...CONTENT.growthPieces} />
-      <ConnectedGrowth {...CONTENT.connectedGrowth} />
-      <HowItWorks {...CONTENT.howItWorks} />
+      <BusinessGrowthHero
+        {...heroProps}
+        images={images}
+        primaryCtaLabel={primaryCtaLabel}
+        secondaryCtaLabel={secondaryCtaLabel}
+        primaryCtaHref={primaryCtaHref}
+        secondaryCtaHref={secondaryCtaHref}
+      />
+      <BuiltForGrowth {...builtForGrowth} />
+      <GrowthPieces
+        eyebrow={growthPieces.eyebrow}
+        title={growthPieces.title}
+        description={growthPieces.description}
+        items={growthPieces.items}
+        ctaLabel={growthPieces.ctaLabel}
+      />
+      <ConnectedGrowth {...connectedGrowth} />
+      <HowItWorks {...howItWorks} />
       <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
     </div>
   )
