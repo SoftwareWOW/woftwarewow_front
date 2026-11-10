@@ -28,10 +28,18 @@ const DEFAULT_VISIBILITY_ITEMS = [
 /** Layout: Home-15 BrandingProcess — split heading + 2×2 numbered grid. */
 const SalesVisibility = ({
   eyebrow = 'Sales Visibility',
+  title = "A clearer view of what's working in",
+  accentTitle = 'your sales engine.',
   description =
     'We help teams see pipeline health, activity and outcomes — so sales decisions are based on reality, not guesswork.',
   steps,
-}: Partial<CmsProcessSection> = {}) => {
+  ctaLabel = 'Start Now',
+  featureImage,
+}: Partial<CmsProcessSection> & {
+  accentTitle?: string
+  ctaLabel?: string
+  featureImage?: { src: string; alt?: string }
+} = {}) => {
   const visibilityItems = mergeProcessSteps(DEFAULT_VISIBILITY_ITEMS, steps)
 
   return (
@@ -44,18 +52,25 @@ const SalesVisibility = ({
           </RevealWrapper>
           <TextAppearAnimation02>
             <h2 className="text-appear max-w-4xl text-[38px] font-light leading-[1.3] md:text-[55px] md:leading-[1.2] lg:text-[62px] xl:text-[72px] xl:tracking-[-2.16px]">
-              A clearer view of what&apos;s working in
-              <i className="font-instrument"> your sales engine.</i>
+              {title}
+              <i className="font-instrument"> {accentTitle}</i>
             </h2>
           </TextAppearAnimation02>
           <TextAppearAnimation02>
             <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">{description}</p>
           </TextAppearAnimation02>
 
+          {featureImage?.src ? (
+            <RevealWrapper className="reveal-me mt-8 max-w-xl overflow-hidden rounded-radius-md border dark:border-dark md:mt-10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={featureImage.src} alt={featureImage.alt ?? ''} className="h-auto w-full object-cover" />
+            </RevealWrapper>
+          ) : null}
+
           <RevealWrapper className="reveal-me mt-7 md:mt-14">
             <ButtonComponentList className="flex justify-start">
               <ButtonComponent href="/contact" variant="white">
-                Start Now
+                {ctaLabel}
               </ButtonComponent>
             </ButtonComponentList>
           </RevealWrapper>

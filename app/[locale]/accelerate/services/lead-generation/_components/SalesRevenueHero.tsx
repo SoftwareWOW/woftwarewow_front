@@ -9,6 +9,14 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
 import { useState } from 'react'
 
+type CtaLink = { label: string; href: string }
+
+type SalesRevenueHeroProps = CmsHeroComponentProps & {
+  primaryCta?: CtaLink
+  secondaryCta?: CtaLink
+  enableVideoModal?: boolean
+}
+
 /** Layout: Home-25 HeroV25 — video left + headline + dual CTAs. */
 const SalesRevenueHero = ({
   badgeTitle = 'Sales & Revenue',
@@ -17,7 +25,10 @@ const SalesRevenueHero = ({
   description =
     'Build stronger sales systems, better follow-up, and clearer conversion paths that help your business grow revenue.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCta = { label: 'Accelerate Your Sales', href: '/contact' },
+  secondaryCta = { label: 'Explore Solutions', href: '/services' },
+  enableVideoModal = true,
+}: SalesRevenueHeroProps) => {
   const useStaticHeroImages = !images?.length
   const image0 = useStaticHeroImages
     ? { src: '/images/hero-img/sales-hero-1.jpg', alt: 'Sales and revenue' }
@@ -29,14 +40,16 @@ const SalesRevenueHero = ({
   const [open, setOpen] = useState(false)
 
   return (
-    <section className="video-section relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover object-center pt-[107px] dark:bg-none md:pt-[100px] xl:pt-[120px]">
+    <section className="video-section relative overflow-hidden bg-[url('/images/hero-img/hero-gradient-bg.png')] bg-cover bg-no-repeat object-cover object-center pt-[30px] dark:bg-none md:pt-[40px] xl:pt-[50px]">
       <div className="hero-video-container mx-auto max-w-[1600px] px-4 md:px-[30px]">
         <div className="flex flex-col items-center gap-x-20 gap-y-14 lg:flex-row lg:items-stretch">
           <RevealWrapper className="reveal-me group relative w-full lg:flex lg:w-1/2 lg:flex-col">
             <div
-              onClick={() => setOpen(true)}
-              className="hero-video relative h-full min-h-[280px] flex-1 cursor-pointer overflow-hidden rounded-radius-md lg:min-h-0"
-              aria-label="Watch our video">
+              onClick={enableVideoModal ? () => setOpen(true) : undefined}
+              className={`hero-video relative h-full min-h-[280px] flex-1 overflow-hidden rounded-radius-md lg:min-h-0${enableVideoModal ? ' cursor-pointer' : ''}`}
+              aria-label={enableVideoModal ? 'Watch our video' : undefined}
+            >
+              {enableVideoModal ? (
               <div className="absolute bottom-10 left-11 z-10 cursor-pointer xl:bottom-10" id="play-icon">
                 <div className="flex size-10 items-center justify-center rounded-full bg-secondary/50 pl-0.5 bg-blend-lighten transition-all duration-300 ease-in-out group-hover:scale-110 dark:bg-backgroundBody/50">
                   <svg
@@ -55,6 +68,7 @@ const SalesRevenueHero = ({
                   </svg>
                 </div>
               </div>
+              ) : null}
               <CmsResponsiveImage
                 image={image0}
                 sizes={CMS_IMAGE_SIZES.halfGrid}
@@ -90,21 +104,21 @@ const SalesRevenueHero = ({
             </RevealWrapper>
 
             <RevealWrapperV2 className="reveal-me mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 lg:mt-14">
-              <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/contact" variant="primary">
-                  Accelerate Your Sales
+              <ButtonComponentList className="flex flex-wrap gap-3" itemClassName="block">
+                <ButtonComponent href={primaryCta.href} variant="primary">
+                  {primaryCta.label}
                 </ButtonComponent>
-              </ButtonComponentList>
-              <ButtonComponentList className="flex" itemClassName="block">
-                <ButtonComponent href="/services" variant="secondary">
-                  Explore Solutions
-                </ButtonComponent>
+                {secondaryCta ? (
+                  <ButtonComponent href={secondaryCta.href} variant="secondary">
+                    {secondaryCta.label}
+                  </ButtonComponent>
+                ) : null}
               </ButtonComponentList>
             </RevealWrapperV2>
           </div>
         </div>
       </div>
-      <VideoModal open={open} setOpen={setOpen} />
+      {enableVideoModal ? <VideoModal open={open} setOpen={setOpen} /> : null}
     </section>
   )
 }
