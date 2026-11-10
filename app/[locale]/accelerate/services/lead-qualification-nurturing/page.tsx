@@ -35,7 +35,7 @@ export default async function Page({ params }: Props) {
   const { hero, growthChallenges, everythingToGrow, connectedGrowthSystem, builtAroundGoals, specialistTeams, cta } =
     CONTENT
 
-  const { primaryCta, showTrustAvatars, ...heroProps } = hero
+  const { primaryCta, ...heroProps } = hero
 
   const { frameworkStages, footerTagline, ctaLabel: frameworkCtaLabel, ...frameworkHeader } = connectedGrowthSystem
 
@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
-      <MarketingGrowthHero {...heroProps} primaryCta={primaryCta} showTrustAvatars={showTrustAvatars} />
+      <MarketingGrowthHero {...heroProps} primaryCta={primaryCta} />
       <GrowthChallenges {...growthChallenges} />
       <EverythingToGrow {...everythingToGrow} />
       <ConnectedGrowthSystem

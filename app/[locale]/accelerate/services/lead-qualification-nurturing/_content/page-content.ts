@@ -17,7 +17,6 @@ export const CONTENT = {
       'Identify promising prospects, keep them engaged, and turn genuine interest into sales-ready opportunities.',
     images: [{ src: HERO_IMAGE, alt: 'Lead qualification and nurturing' }],
     primaryCta: { label: 'Qualify Your Leads', href: '/contact' },
-    showTrustAvatars: false,
   },
   growthChallenges: {
     eyebrow: 'THE CHALLENGE',
