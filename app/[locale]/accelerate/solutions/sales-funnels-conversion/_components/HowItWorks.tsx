@@ -1,12 +1,19 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import type { CmsProcessSection } from '@/lib/strapi/mappers/page-sections'
 
 type Props = Partial<CmsProcessSection>
 
 /** Layout: AiWithPurpose / BuildCommunity — 3 numbered columns with faded background numbers. */
-const HowItWorks = ({ eyebrow, title, accentTitle, steps }: Props = {}) => {
+const HowItWorks = ({
+  eyebrow,
+  title,
+  accentTitle,
+  steps,
+  ctaLabel = 'Build Your Conversion Strategy',
+}: Props & { ctaLabel?: string } = {}) => {
   const displaySteps =
     steps?.map((step, index) => ({
       number: String(index + 1),
@@ -34,7 +41,7 @@ const HowItWorks = ({ eyebrow, title, accentTitle, steps }: Props = {}) => {
                 {accentTitle ? (
                   <>
                     <br className="hidden md:block" />
-                    {accentTitle}
+                    <InstrumentText>{accentTitle}</InstrumentText>
                   </>
                 ) : null}
               </h2>
@@ -69,7 +76,7 @@ const HowItWorks = ({ eyebrow, title, accentTitle, steps }: Props = {}) => {
         <RevealWrapper className="mt-14 flex justify-center">
           <ButtonComponentList>
             <ButtonComponent href="/contact" variant="primary">
-              Start Your Growth Plan
+              {ctaLabel}
             </ButtonComponent>
           </ButtonComponentList>
         </RevealWrapper>

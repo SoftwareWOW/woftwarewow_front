@@ -13,10 +13,11 @@ type Props = Partial<CmsTechnologiesSection>
 const GrowthPieces = ({
   eyebrow,
   title,
+  accentTitle,
   description,
   items,
   ctaLabel = 'Start Improving Conversions',
-}: Props & { ctaLabel?: string } = {}) => {
+}: Props & { accentTitle?: string; ctaLabel?: string } = {}) => {
   const displayItems =
     items
       ?.map((item) => ({
@@ -41,7 +42,15 @@ const GrowthPieces = ({
           ) : null}
           {title ? (
             <TextAppearAnimation>
-              <h2 className="text-appear">{title}</h2>
+              <h2 className="text-appear">
+                {title}
+                {accentTitle ? (
+                  <>
+                    {' '}
+                    <InstrumentText>{accentTitle}</InstrumentText>
+                  </>
+                ) : null}
+              </h2>
             </TextAppearAnimation>
           ) : null}
           {description ? (

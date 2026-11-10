@@ -55,13 +55,7 @@ export default async function Page({ params }: Props) {
         secondaryCtaHref={secondaryCtaHref}
       />
       <BuiltForGrowth {...builtForGrowth} />
-      <GrowthPieces
-        eyebrow={growthPieces.eyebrow}
-        title={growthPieces.title}
-        description={growthPieces.description}
-        items={growthPieces.items}
-        ctaLabel={growthPieces.ctaLabel}
-      />
+      <GrowthPieces {...growthPieces} />
       <ConnectedGrowth {...connectedGrowth} />
       <HowItWorks {...howItWorks} />
       <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
