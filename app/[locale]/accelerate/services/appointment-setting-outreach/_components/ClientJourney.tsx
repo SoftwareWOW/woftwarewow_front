@@ -31,8 +31,25 @@ const DEFAULT_STEPS = [
 /** Layout: Home-07 ProcessV4 — image height matches steps. */
 type ClientJourneyProps = Partial<CmsProcessSection> & { image?: CmsHeroImage | null }
 
-const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image }: ClientJourneyProps = {}) => {
-  const header = mergeSectionHeader({ eyebrow, title, accentTitle, description }, { eyebrow, title, accentTitle, description })
+const ClientJourney = ({
+  eyebrow = 'The Client Journey',
+  title,
+  accentTitle,
+  description,
+  steps,
+  image,
+}: ClientJourneyProps = {}) => {
+  const header = mergeSectionHeader(
+    {
+      eyebrow,
+      title: title ?? 'Turn Expertise Into a Client Growth Engine.',
+      accentTitle: accentTitle ?? '',
+      description:
+        description ??
+        'Great expertise alone does not guarantee growth. We help build the journey that takes someone from discovering your business to becoming a confident, qualified client.',
+    },
+    { eyebrow, title, accentTitle, description },
+  )
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, steps)
   const fallbackImage = legacyNavCardSrc('pexels-cottonbro-4069290 1.png')
 
@@ -41,18 +58,21 @@ const ClientJourney = ({ eyebrow, title, accentTitle, description, steps, image 
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
-            <SectionLabel>The Client Journey</SectionLabel>
+            <SectionLabel>{header.eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
             <h2 className="text-appear mx-auto max-w-[770px]">
-              Turn Expertise Into a Client Growth <InstrumentText>Engine.</InstrumentText>
+              {header.title}
+              {header.accentTitle ? (
+                <>
+                  {' '}
+                  <InstrumentText>{header.accentTitle}</InstrumentText>
+                </>
+              ) : null}
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">
-              Great expertise alone does not guarantee growth. We help build the journey that takes someone from
-              discovering your business to becoming a confident, qualified client.
-            </p>
+            <p className="text-appear mx-auto mt-4 max-w-2xl text-[#808080]">{header.description}</p>
           </TextAppearAnimation>
         </div>
 
