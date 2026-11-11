@@ -48,11 +48,18 @@ export default function PowerOfMotionSection({
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <div className="min-w-0 flex-1 md:order-1">
-            <ul className="relative space-y-5 border-secondary dark:border-backgroundBody md:border-l md:space-y-6">
+            <ul className="relative space-y-5 md:space-y-6">
               {steps.map((step, index) => (
                 <li key={step.id} className="relative max-w-max px-10">
+                  {index < steps.length - 1 ? (
+                    <span
+                      aria-hidden
+                      className="absolute -left-px top-11 z-0 hidden w-px bg-secondary md:block lg:top-14 dark:bg-backgroundBody"
+                      style={{ height: 'calc(100% + 1.5rem)' }}
+                    />
+                  ) : null}
                   <div
-                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
+                    className={`absolute left-0 z-10 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
                       index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
                     }`}
                   >
