@@ -52,7 +52,7 @@ const LearningEventsHero = ({
 
   return (
     <section
-      className="relative overflow-hidden pt-24 md:pt-[100px] xl:pt-[120px]"
+      className="relative overflow-hidden pt-10 md:pt-[50px] xl:pt-[60px]"
       aria-labelledby={headingId}
     >
       <div className="pointer-events-none absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0">

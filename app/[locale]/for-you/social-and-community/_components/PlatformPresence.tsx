@@ -66,6 +66,7 @@ const PlatformPresence = ({
       (items?.[index] as PresenceItem | undefined)?.features ?? DEFAULT_PLATFORMS[index].features,
   }))
   const hasSideImage = Boolean(image?.src)
+  const isSvgImage = image?.src?.toLowerCase().includes('.svg')
 
   return (
     <section className="relative overflow-hidden">
@@ -88,14 +89,16 @@ const PlatformPresence = ({
           </div>
 
           {hasSideImage ? (
-            <RevealWrapper className="reveal-me relative w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md">
+            <RevealWrapper
+              className={`reveal-me relative w-full max-w-sm shrink-0 overflow-hidden rounded-radius-md lg:max-w-md ${isSvgImage ? 'min-h-[280px] lg:min-h-[360px]' : ''}`}
+            >
               <CmsResponsiveImage
                 image={image}
                 alt={image?.alt ?? 'Social insights on mobile'}
                 sizes={CMS_IMAGE_SIZES.sideColumn}
                 width={image?.width ?? 400}
                 height={image?.height ?? 520}
-                className="h-auto w-full object-cover"
+                className={`h-auto w-full ${isSvgImage ? 'max-h-[420px] object-contain object-center' : 'object-cover'}`}
               />
             </RevealWrapper>
           ) : null}
@@ -108,8 +111,10 @@ const PlatformPresence = ({
             key={platform.name}
             className="group relative h-[500px] w-full overflow-hidden shadow-none sm:w-[calc(50%-10px)] lg:w-[360px]"
           >
-            <div className="absolute flex h-full w-full translate-y-0 items-center justify-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
-              <h5 className="max-sm:text-3xl">{platform.name}</h5>
+            <div className="absolute flex h-full w-full translate-y-0 items-center justify-center px-6 text-center opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+              <h5 className="mx-auto max-w-[16rem] text-balance text-center leading-[1.25] sm:max-w-[18rem] lg:max-w-[14rem] max-sm:text-3xl">
+                {platform.name}
+              </h5>
             </div>
             <div className="absolute z-10 h-full w-full translate-y-full border-t border-primary bg-secondary p-8 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-secondary">
               <div className="mb-[55px] flex items-center justify-between gap-1">

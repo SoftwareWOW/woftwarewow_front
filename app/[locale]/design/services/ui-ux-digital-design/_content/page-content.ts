@@ -31,7 +31,7 @@ export const CONTENT = {
     description:
       'From understanding your users to designing complete digital interfaces, we create experiences that balance functionality, clarity, and visual appeal.',
     image: {
-      src: '/images/wow/LandingPageNaveBare/ux-graphic-designer-planing-application-process-d-2026-03-11-00-50-35-utc%202.svg',
+      src: '/images/wow/LandingPageNaveBare/ux-graphic-designer-planning-application-process-d-2026-03-11-00-50-35-utc%202.svg',
       alt: 'Hand holding smartphone with digital interface preview',
     },
     items: [
