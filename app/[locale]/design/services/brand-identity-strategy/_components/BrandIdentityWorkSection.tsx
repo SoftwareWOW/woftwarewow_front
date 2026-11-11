@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,6 +17,7 @@ type Project = {
 type BrandIdentityWorkSectionProps = {
   eyebrow: string
   title: string
+  titleAccent?: string
   description: string
   ctaLabel: string
   ctaHref: string
@@ -60,6 +62,7 @@ function ProjectCard({ project }: { project: Project }) {
 export default function BrandIdentityWorkSection({
   eyebrow,
   title,
+  titleAccent,
   description,
   ctaLabel,
   ctaHref,
@@ -74,7 +77,15 @@ export default function BrandIdentityWorkSection({
               <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
-              <h2 className="text-appear">{title}</h2>
+              <h2 className="text-appear">
+                {title}
+                {titleAccent ? (
+                  <>
+                    <br />
+                    <InstrumentText>{titleAccent}</InstrumentText>
+                  </>
+                ) : null}
+              </h2>
             </TextAppearAnimation>
           </div>
           <div className="w-full max-w-md lg:pt-2">

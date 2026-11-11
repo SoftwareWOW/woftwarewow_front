@@ -34,10 +34,12 @@ const SalesVisibility = ({
     'We help teams see pipeline health, activity and outcomes — so sales decisions are based on reality, not guesswork.',
   steps,
   ctaLabel = 'Start Now',
+  ctaHref = '/contact',
   featureImage,
 }: Partial<CmsProcessSection> & {
   accentTitle?: string
   ctaLabel?: string
+  ctaHref?: string
   featureImage?: { src: string; alt?: string }
 } = {}) => {
   const visibilityItems = mergeProcessSteps(DEFAULT_VISIBILITY_ITEMS, steps)
@@ -56,9 +58,11 @@ const SalesVisibility = ({
               <i className="font-instrument"> {accentTitle}</i>
             </h2>
           </TextAppearAnimation02>
-          <TextAppearAnimation02>
-            <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">{description}</p>
-          </TextAppearAnimation02>
+          {description ? (
+            <TextAppearAnimation02>
+              <p className="text-appear text-lg leading-[1.6] tracking-[0.36px]">{description}</p>
+            </TextAppearAnimation02>
+          ) : null}
 
           {featureImage?.src ? (
             <RevealWrapper className="reveal-me mt-8 max-w-xl overflow-hidden rounded-radius-md border dark:border-dark md:mt-10">
@@ -69,7 +73,7 @@ const SalesVisibility = ({
 
           <RevealWrapper className="reveal-me mt-7 md:mt-14">
             <ButtonComponentList className="flex justify-start">
-              <ButtonComponent href="/contact" variant="white">
+              <ButtonComponent href={ctaHref} variant="white">
                 {ctaLabel}
               </ButtonComponent>
             </ButtonComponentList>
