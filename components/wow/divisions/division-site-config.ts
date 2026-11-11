@@ -191,9 +191,26 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'product', label: 'Product Design', href: '/design#services' },
-          { id: 'brand', label: 'Brand Design', href: '/design#services' },
-          { id: 'ux', label: 'UX / UI', href: '/design#services' },
+          {
+            id: 'brandIdentityStrategy',
+            label: 'Brand Identity & Strategy',
+            href: '/design/services/brand-identity-strategy',
+          },
+          {
+            id: 'graphicMarketingDesign',
+            label: 'Graphic & Marketing Design',
+            href: '/design/services/graphic-marketing-design',
+          },
+          {
+            id: 'uiUxDigitalDesign',
+            label: 'UI/UX & Digital Design',
+            href: '/design/services/ui-ux-digital-design',
+          },
+          {
+            id: 'videoMotionCreativeContent',
+            label: 'Video, Motion & Creative',
+            href: '/design/services/video-motion-creative-content',
+          },
         ],
       },
       {

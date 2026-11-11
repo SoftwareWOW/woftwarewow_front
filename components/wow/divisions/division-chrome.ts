@@ -15,6 +15,7 @@ import { wowMarketingNavigation } from '@/components/wow/divisions/wow-marketing
 import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-navigation'
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import { softwareWowMegaNavHref } from '@/data/softwareWowMegaNavRoutes'
+import { wowDesignMegaNavHref } from '@/data/wowDesignMegaNavRoutes'
 import { wowMarketingMegaNavHref } from '@/data/wowMarketingMegaNavRoutes'
 import { wowAccelerateMegaNavHref } from '@/data/wowAccelerateMegaNavRoutes'
 import { WOW_ACCELERATE_NAV_SERVICES } from '@/data/wowAccelerateNavContent'
@@ -260,28 +261,28 @@ export const wowDesignFooterServiceCards: ReadonlyArray<DivisionFooterServiceCar
     title: 'Brand Identity & Strategy',
     description:
       'Build a distinctive brand identity that inspires trust and leaves a lasting impression.',
-    href: '/design#services',
+    href: wowDesignMegaNavHref('brandIdentityStrategy'),
     iconId: 'brandIdentityStrategy',
   },
   {
     title: 'Graphic & Marketing Design',
     description:
       'Create impactful visuals that capture attention, communicate your message, and strengthen your brand.',
-    href: '/design#services',
+    href: wowDesignMegaNavHref('graphicMarketingDesign'),
     iconId: 'graphicMarketingDesign',
   },
   {
     title: 'UI/UX & Digital Design',
     description:
       'Design intuitive, engaging digital experiences that make every interaction feel effortless.',
-    href: '/design#services',
+    href: wowDesignMegaNavHref('uiUxDigitalDesign'),
     iconId: 'uiUxDigitalDesign',
   },
   {
     title: 'Video, Motion & Creative Content',
     description:
       'Bring your brand to life with compelling visuals, motion, and creative storytelling.',
-    href: '/design#services',
+    href: wowDesignMegaNavHref('videoMotionCreativeContent'),
     iconId: 'videoMotionCreativeContent',
   },
 ] as const

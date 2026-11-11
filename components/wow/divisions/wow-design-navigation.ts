@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowDesignMegaNavHref } from '@/data/wowDesignMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,19 +14,12 @@ const panel = (
   image: 'default' as const,
 })
 
-const serviceHref = '/design#services'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
+  href: wowDesignMegaNavHref(id),
   detailPanel: id,
 })
 
@@ -101,25 +95,21 @@ export const wowDesignNavigation = {
                 'brandIdentityStrategy',
                 'Brand Identity & Strategy',
                 'Build a brand that stands out.',
-                serviceHref,
               ),
               link(
                 'graphicMarketingDesign',
                 'Graphic & Marketing Design',
                 'Creative visuals. Lasting impressions.',
-                serviceHref,
               ),
               link(
                 'uiUxDigitalDesign',
                 'UI/UX & Digital Design',
                 'Design better digital experiences.',
-                serviceHref,
               ),
               link(
                 'videoMotionCreativeContent',
                 'Video, Motion & Creative Content',
                 'Bring your stories to life.',
-                serviceHref,
               ),
             ],
           },
@@ -135,25 +125,25 @@ export const wowDesignNavigation = {
                 id: 'brandIdentityStrategy',
                 label: 'Brand Identity & Strategy',
                 description: 'Build a brand that stands out.',
-                href: serviceHref,
+                href: wowDesignMegaNavHref('brandIdentityStrategy'),
               },
               {
                 id: 'graphicMarketingDesign',
                 label: 'Graphic & Marketing Design',
                 description: 'Creative visuals. Lasting impressions.',
-                href: serviceHref,
+                href: wowDesignMegaNavHref('graphicMarketingDesign'),
               },
               {
                 id: 'uiUxDigitalDesign',
                 label: 'UI/UX & Digital Design',
                 description: 'Design better digital experiences.',
-                href: serviceHref,
+                href: wowDesignMegaNavHref('uiUxDigitalDesign'),
               },
               {
                 id: 'videoMotionCreativeContent',
                 label: 'Video, Motion & Creative Content',
                 description: 'Bring your stories to life.',
-                href: serviceHref,
+                href: wowDesignMegaNavHref('videoMotionCreativeContent'),
               },
             ],
           },
