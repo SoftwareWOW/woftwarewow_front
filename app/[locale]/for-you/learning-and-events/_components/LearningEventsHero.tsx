@@ -2,7 +2,10 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { SocialOrbit } from '@/components/wow/wowsocial/SocialOrbit'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage, type CmsHeroComponentProps } from '@/lib/strapi/cms-section-props'
+
+type CtaLink = { label: string; href: string }
 
 const TEAM_HERO_IMAGE_BASE = '/images/wow/Hero/career/team'
 
@@ -20,7 +23,15 @@ const STATIC_HERO_MAIN_IMAGE = {
   alt: 'Learning and events',
 }
 
-/** Layout: Home-05 HeroV5 — two-column hero with social proof + dual CTAs. */
+type LearningEventsHeroProps = CmsHeroComponentProps & {
+  primaryCta?: CtaLink
+  secondaryCta?: CtaLink
+  trustLineHighlight?: string
+  visual?: 'image' | 'orbit'
+  headingId?: string
+}
+
+/** Layout: Home-05 HeroV5 — two-column hero with social proof + dual CTAs (prop-driven). */
 const LearningEventsHero = ({
   badgeTitle = 'Learning & Events',
   title = 'Learn, connect, and',
@@ -28,7 +39,12 @@ const LearningEventsHero = ({
   description =
     'Access workshops, events, and learning experiences designed to help businesses build skills and make better decisions.',
   images,
-}: CmsHeroComponentProps) => {
+  primaryCta = { label: 'Explore Learning', href: '/hub' },
+  secondaryCta = { label: 'View Events', href: '/events' },
+  trustLineHighlight = '100+',
+  visual = 'image',
+  headingId = 'learning-events-heading',
+}: LearningEventsHeroProps) => {
   const cmsMain = images?.[0]
   const mainHeroImage = cmsMain?.src
     ? cmsMain
@@ -37,7 +53,7 @@ const LearningEventsHero = ({
   return (
     <section
       className="relative overflow-hidden pt-24 md:pt-[100px] xl:pt-[120px]"
-      aria-labelledby="learning-events-heading"
+      aria-labelledby={headingId}
     >
       <div className="pointer-events-none absolute left-0 top-0 -z-10 blur-[65px] md:-top-[10%] lg:-left-[17%] 2xl:left-0">
         <img src="/images/hero-gradient-background.png" alt="" aria-hidden className="-top-[10%] left-0 scale-50" />
@@ -48,7 +64,7 @@ const LearningEventsHero = ({
           <SectionLabel className="mb-4">{badgeTitle}</SectionLabel>
 
           <h1
-              id="learning-events-heading"
+              id={headingId}
               className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
             >
               {title}
@@ -98,7 +114,7 @@ const LearningEventsHero = ({
             </div>
 
             <p className="text-base leading-[1.2] text-secondary dark:text-backgroundBody">
-              <span className="text-primary">Trusted by 100+</span>
+              <span className="text-primary">Trusted by {trustLineHighlight}</span>
               <br />
               Clients Across the Globe
             </p>
@@ -106,28 +122,38 @@ const LearningEventsHero = ({
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row lg:mt-14">
             <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/hub" variant="primary">
-                Explore Learning
+              <ButtonComponent href={primaryCta.href} variant="primary">
+                {primaryCta.label}
               </ButtonComponent>
             </ButtonComponentList>
-            <ButtonComponentList className="flex" itemClassName="block">
-              <ButtonComponent href="/events" variant="secondary">
-                View Events
-              </ButtonComponent>
-            </ButtonComponentList>
+            {secondaryCta ? (
+              <ButtonComponentList className="flex" itemClassName="block">
+                <ButtonComponent href={secondaryCta.href} variant="secondary">
+                  {secondaryCta.label}
+                </ButtonComponent>
+              </ButtonComponentList>
+            ) : null}
           </div>
         </div>
 
-        <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
-          <CmsResponsiveImage
-            image={mainHeroImage}
-            sizes={CMS_IMAGE_SIZES.sideColumn}
-            width={mainHeroImage.width ?? 560}
-            height={mainHeroImage.height ?? 640}
-            className="h-auto w-full rounded-radius-md object-cover"
+        {visual === 'orbit' ? (
+          <RevealWrapper className="reveal-me flex w-full min-w-0 flex-1 items-center justify-center xl:justify-end">
+            <div className="w-full max-w-[min(100%,560px)] lg:max-w-[min(100%,880px)]">
+              <SocialOrbit />
+            </div>
+          </RevealWrapper>
+        ) : (
+          <RevealWrapper as="figure" className="reveal-me w-full max-w-[520px] shrink-0 xl:max-w-[560px]">
+            <CmsResponsiveImage
+              image={mainHeroImage}
+              sizes={CMS_IMAGE_SIZES.sideColumn}
+              width={mainHeroImage.width ?? 560}
+              height={mainHeroImage.height ?? 640}
+              className="h-auto w-full rounded-radius-md object-cover"
               priority
             />
-        </RevealWrapper>
+          </RevealWrapper>
+        )}
       </RevealWrapper>
     </section>
   )
