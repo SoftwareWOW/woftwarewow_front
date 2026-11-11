@@ -7,9 +7,26 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import HubExploreTopicCard from './HubExploreTopicCard'
 import { HUB_EXPLORE, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
-export default function HubExploreSection() {
-  const section = HUB_EXPLORE
+export type HubExploreSectionContent = {
+  id?: string
+  eyebrow: string
+  titleBefore: string
+  titleAccent?: string
+  description: string
+  topics: ReadonlyArray<{
+    slug: string
+    title: string
+    description: string
+    coverImage: string
+    href: string
+  }>
+}
 
+type HubExploreSectionProps = {
+  section?: HubExploreSectionContent
+}
+
+export default function HubExploreSection({ section = HUB_EXPLORE }: HubExploreSectionProps) {
   return (
     <section id={section.id} className={`scroll-mt-28 ${HUB_SECTION_SHELL}`}>
       <div className={HUB_SECTION_INNER}>
@@ -19,7 +36,7 @@ export default function HubExploreSection() {
             <TextAppearAnimation>
               <h2 className="text-appear">
                 {section.titleBefore}
-                <InstrumentText>{section.titleAccent}</InstrumentText>
+                {section.titleAccent ? <InstrumentText>{section.titleAccent}</InstrumentText> : null}
               </h2>
             </TextAppearAnimation>
           </div>

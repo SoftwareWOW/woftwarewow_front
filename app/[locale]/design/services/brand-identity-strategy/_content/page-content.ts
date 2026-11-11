@@ -52,30 +52,35 @@ export const CONTENT = {
     titleAccent: 'Impression.',
     description:
       'A strong brand creates familiarity, builds confidence, and communicates who you are before a conversation even begins.',
-    pillars: [
+    topics: [
       {
+        slug: 'be-recognizable',
         title: 'Be Recognizable',
         description: 'Build a distinctive identity that makes your business easier to remember.',
-        image: '/images/wow/Hero/project/case-study/ccg.png',
-        alt: 'Brand identity in public — recognizable presence',
+        coverImage: '/images/wow/Hero/project/case-study/ccg.png',
+        href: '/portfolio',
       },
       {
+        slug: 'stay-consistent',
         title: 'Stay Consistent',
         description: 'Create a unified brand experience across every customer touchpoint.',
-        image: '/images/wow/Hero/devision/Design 2.jpg',
-        alt: 'Consistent brand design across touchpoints',
+        coverImage: '/images/wow/Hero/devision/Design 2.jpg',
+        href: '/portfolio',
       },
       {
+        slug: 'inspire-confidence',
         title: 'Inspire Confidence',
         description: 'Present your business with the clarity and professionalism your audience expects.',
-        image: '/images/wow/Hero/devision/Mockup 2 Dark.png',
-        alt: 'Professional brand presentation on digital devices',
+        coverImage: '/images/wow/Hero/devision/Mockup 2 Dark.png',
+        href: '/portfolio',
       },
       {
+        slug: 'grow-with-purpose',
         title: 'Grow With Purpose',
-        description: 'Build a flexible visual foundation that supports future campaigns, products, and experiences.',
-        image: '/images/wow/Hero/devision/Design 1.jpg',
-        alt: 'Brand applications across products and channels',
+        description:
+          'Build a flexible visual foundation that supports future campaigns, products, and experiences.',
+        coverImage: '/images/wow/Hero/devision/Design 1.jpg',
+        href: '/portfolio',
       },
     ],
   },
