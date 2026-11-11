@@ -22,8 +22,17 @@ type CreativeToolkitProps = {
   tools: ReadonlyArray<Tool>
 }
 
+function toolkitGridColsClass(count: number): string {
+  if (count <= 3) return 'grid-cols-2 sm:grid-cols-3'
+  if (count === 4) return 'grid-cols-2 sm:grid-cols-4'
+  if (count === 5) return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'
+  if (count === 6) return 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6'
+  return 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-7'
+}
+
 /** Layout: accelerate AutomationTools — bordered icon grid. */
 export default function CreativeToolkit({ eyebrow, headline, description, tools }: CreativeToolkitProps) {
+  const gridCols = toolkitGridColsClass(tools.length)
   return (
     <section>
       <div className="container">
@@ -39,7 +48,7 @@ export default function CreativeToolkit({ eyebrow, headline, description, tools 
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="mx-auto grid w-fit grid-cols-2 border-l border-t dark:border-dark sm:grid-cols-4 lg:grid-cols-7">
+        <RevealWrapper className={`mx-auto grid w-fit border-l border-t dark:border-dark ${gridCols}`}>
           {tools.map((tool) => (
             <figure
               key={tool.name}
