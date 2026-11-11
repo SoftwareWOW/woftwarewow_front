@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowSocialMegaNavHref } from '@/data/wowSocialMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,19 +14,12 @@ const panel = (
   image: 'default' as const,
 })
 
-const serviceHref = '/social#services'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
+  href: wowSocialMegaNavHref(id),
   detailPanel: id,
 })
 
@@ -91,19 +85,16 @@ export const wowSocialNavigation = {
                 'socialMediaStrategyManagement',
                 'Social Media Strategy & Management',
                 'Plan smarter. Grow your presence.',
-                serviceHref,
               ),
               link(
                 'socialInfluencerContentCreation',
                 'Social & Influencer Content Creation',
                 'Create content that connects.',
-                serviceHref,
               ),
               link(
                 'paidSocialAdvertisingCommunityManagement',
                 'Paid Social Advertising & Community Management',
                 'Reach more people. Build engagement.',
-                serviceHref,
               ),
             ],
           },
@@ -119,19 +110,19 @@ export const wowSocialNavigation = {
                 id: 'socialMediaStrategyManagement',
                 label: 'Social Media Strategy & Management',
                 description: 'Plan smarter. Grow your presence.',
-                href: serviceHref,
+                href: wowSocialMegaNavHref('socialMediaStrategyManagement'),
               },
               {
                 id: 'socialInfluencerContentCreation',
                 label: 'Social & Influencer Content Creation',
                 description: 'Create content that connects.',
-                href: serviceHref,
+                href: wowSocialMegaNavHref('socialInfluencerContentCreation'),
               },
               {
                 id: 'paidSocialAdvertisingCommunityManagement',
                 label: 'Paid Social Advertising & Community Management',
                 description: 'Reach more people. Build engagement.',
-                href: serviceHref,
+                href: wowSocialMegaNavHref('paidSocialAdvertisingCommunityManagement'),
               },
             ],
           },

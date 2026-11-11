@@ -92,10 +92,11 @@ export const SOCIAL_SERVICES = {
   description:
     'From the first content idea to the conversations that follow, WOW Social brings strategy, creativity, advertising, and community management together to help your business build a stronger social presence.',
   ctaLabel: 'Explore All Social Services',
-  ctaHref: '/services',
+  ctaHref: '/social/services/social-media-strategy-management',
   items: [
     {
       id: 1,
+      href: '/social/services/social-media-strategy-management',
       title: 'Social Media Strategy & Management',
       description:
         'Channel strategy • Content calendars • Publishing • Account management • Reporting',
@@ -104,6 +105,7 @@ export const SOCIAL_SERVICES = {
     },
     {
       id: 2,
+      href: '/social/services/social-influencer-content-creation',
       title: 'Social & Influencer Content Creation',
       description:
         'Reels • Short-form video • Social graphics • Creator campaigns • UGC-style content',
@@ -112,6 +114,7 @@ export const SOCIAL_SERVICES = {
     },
     {
       id: 3,
+      href: '/social/services/paid-social-advertising-community-management',
       title: 'Paid Social Advertising & Community Management',
       description:
         'Campaign setup • Audience targeting • Ad creative • Community engagement • Performance optimization',

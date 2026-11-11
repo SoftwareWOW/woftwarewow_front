@@ -284,9 +284,21 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
         id: 'services',
         title: 'Services',
         links: [
-          { id: 'strategy', label: 'Social Strategy', href: '/social#services' },
-          { id: 'content', label: 'Content', href: '/social#services' },
-          { id: 'community', label: 'Community', href: '/social#services' },
+          {
+            id: 'strategy',
+            label: 'Social Strategy',
+            href: '/social/services/social-media-strategy-management',
+          },
+          {
+            id: 'content',
+            label: 'Content',
+            href: '/social/services/social-influencer-content-creation',
+          },
+          {
+            id: 'community',
+            label: 'Community',
+            href: '/social/services/paid-social-advertising-community-management',
+          },
         ],
       },
       {

@@ -4,6 +4,7 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
+import Link from 'next/link'
 import { SOCIAL_SERVICES } from './social-content'
 
 export default function SocialServicesSection() {
@@ -38,7 +39,9 @@ export default function SocialServicesSection() {
             >
               <div className="flex-1 pl-5 max-lg:py-6 max-md:pr-5 lg:pl-10">
                 <div className="blog-title mb-6">
-                  <h3 className="text-[27px] md:text-4xl md:leading-[1.2] md:tracking-[-0.72px]">{item.title}</h3>
+                  <Link href={item.href}>
+                    <h3 className="text-[27px] md:text-4xl md:leading-[1.2] md:tracking-[-0.72px]">{item.title}</h3>
+                  </Link>
                 </div>
                 <p className="border-t pt-2 dark:border-dark md:pt-5">{item.description}</p>
               </div>

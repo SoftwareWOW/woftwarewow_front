@@ -1,0 +1,112 @@
+import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import SectionLabel from '@/components/wow/shared/SectionLabel'
+import Link from 'next/link'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
+import type { CmsTechnologiesSection } from '@/lib/strapi/mappers/page-sections'
+
+type Props = Partial<CmsTechnologiesSection>
+
+/**
+ * Layout copy: packages/business-growth GrowthPieces (Home-04 ServicesV5).
+ * Footer CTA omitted — only three sections on this page.
+ */
+const SocialGrowthPiecesSection = ({ eyebrow, title, description, items }: Props = {}) => {
+  const displayItems =
+    items
+      ?.map((item) => ({
+        title: item.title,
+        description: item.description ?? '',
+        image: item.image,
+      }))
+      .filter((item) => item.title) ?? []
+
+  if (!displayItems.length && !title) {
+    return null
+  }
+
+  return (
+    <section>
+      <div className="container">
+        <div className="mb-10 text-center md:mb-20">
+          {eyebrow ? (
+            <RevealWrapper className="reveal-me mb-3 flex justify-center">
+              <SectionLabel>{eyebrow}</SectionLabel>
+            </RevealWrapper>
+          ) : null}
+          {title ? (
+            <TextAppearAnimation>
+              <h2 className="text-appear">{title}</h2>
+            </TextAppearAnimation>
+          ) : null}
+          {description ? (
+            <TextAppearAnimation>
+              <p className="text-appear mx-auto mt-3 max-w-2xl text-[#808080]">{description}</p>
+            </TextAppearAnimation>
+          ) : null}
+        </div>
+
+        {displayItems.length ? (
+          <RevealWrapper className="mx-auto w-full max-w-[1170px]">
+            {displayItems.map((piece, index) => (
+              <Link href="/contact" key={piece.title} className="block">
+                <div
+                  className={`group relative overflow-hidden border-x border-t bg-backgroundBody dark:border-dark dark:bg-dark ${
+                    index === displayItems.length - 1 ? 'border-b' : ''
+                  }`}
+                >
+                  <div className="group relative z-10 flex cursor-pointer items-center justify-between px-5 py-10 md:px-10 md:py-[60px]">
+                    <h3 className="relative z-10 flex flex-col gap-x-32 gap-y-3 text-[25px] font-normal leading-[25.2px] md:flex-row md:items-center md:text-4xl md:leading-[1.2] lg:text-[42px] xl:text-5xl">
+                      <span className="font-medium">{piece.title}</span>
+                      {piece.description ? (
+                        <p className="mt-2 max-w-lg pr-[2px] text-base text-[#808080] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                          {piece.description}
+                        </p>
+                      ) : null}
+                    </h3>
+
+                    <div className="shrink-0 rounded-radius-sm transform transition-transform duration-500 ease-in-out group-hover:rotate-90">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden>
+                        <path
+                          d="M5 16H27"
+                          className="stroke-black dark:stroke-white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M18 7L27 16L18 25"
+                          className="stroke-black dark:stroke-white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {piece.image?.src ? (
+                    <div className="overflow-hidden">
+                      <figure className="h-0 -translate-y-4 transform opacity-0 transition-all duration-700 ease-in-out group-hover:h-[110px] group-hover:translate-y-0 group-hover:opacity-100 md:group-hover:h-[160px] lg:group-hover:h-[230px]">
+                        <CmsResponsiveImage
+                          image={piece.image}
+                          alt={piece.title}
+                          sizes={CMS_IMAGE_SIZES.wideSection}
+                          width={piece.image.width ?? 1170}
+                          height={piece.image.height ?? 230}
+                          className="rounded-radius-sm object-cover px-5 pb-5 pt-4 transition-all duration-700 ease-in-out md:px-10 md:pb-10"
+                        />
+                      </figure>
+                    </div>
+                  ) : null}
+                </div>
+              </Link>
+            ))}
+          </RevealWrapper>
+        ) : null}
+      </div>
+    </section>
+  )
+}
+
+export default SocialGrowthPiecesSection

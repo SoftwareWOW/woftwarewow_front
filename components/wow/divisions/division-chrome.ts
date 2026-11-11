@@ -16,6 +16,7 @@ import { wowWebsitesNavigation } from '@/components/wow/divisions/wow-websites-n
 import { softwareWowNavigation } from '@/components/wow/divisions/softwarewow-navigation'
 import { softwareWowMegaNavHref } from '@/data/softwareWowMegaNavRoutes'
 import { wowDesignMegaNavHref } from '@/data/wowDesignMegaNavRoutes'
+import { wowSocialMegaNavHref } from '@/data/wowSocialMegaNavRoutes'
 import { wowMarketingMegaNavHref } from '@/data/wowMarketingMegaNavRoutes'
 import { wowAccelerateMegaNavHref } from '@/data/wowAccelerateMegaNavRoutes'
 import { WOW_ACCELERATE_NAV_SERVICES } from '@/data/wowAccelerateNavContent'
@@ -437,21 +438,21 @@ export const wowSocialFooterServiceCards: ReadonlyArray<DivisionFooterServiceCar
     title: 'Social Media Strategy & Management',
     description:
       'Build a stronger social presence with strategic planning, consistent management, and audience-focused campaigns.',
-    href: '/social#services',
+    href: wowSocialMegaNavHref('socialMediaStrategyManagement'),
     iconId: 'socialMediaStrategyManagement',
   },
   {
     title: 'Social & Influencer Content Creation',
     description:
       'Capture attention and grow engagement through creative content and authentic influencer collaborations.',
-    href: '/social#services',
+    href: wowSocialMegaNavHref('socialInfluencerContentCreation'),
     iconId: 'socialInfluencerContentCreation',
   },
   {
     title: 'Paid Social Advertising & Community Management',
     description:
       'Grow your reach, drive conversions, and build stronger communities through targeted social campaigns.',
-    href: '/social#services',
+    href: wowSocialMegaNavHref('paidSocialAdvertisingCommunityManagement'),
     iconId: 'paidSocialAdvertisingCommunityManagement',
   },
 ] as const
