@@ -1,6 +1,6 @@
 import LearningEventsHero from '@/app/[locale]/for-you/learning-and-events/_components/LearningEventsHero'
+import PlatformPresence from '@/app/[locale]/for-you/social-and-community/_components/PlatformPresence'
 import BuiltAroundPeople from '@/app/[locale]/softwarewow/services/product-design-prototyping/_components/BuiltAroundPeople'
-import WhatWeDesign from '@/app/[locale]/softwarewow/services/product-design-prototyping/_components/WhatWeDesign'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -34,7 +34,7 @@ export default async function UiUxDigitalDesignPage({ params }: Props) {
 
   const {
     hero,
-    whatWeDesign,
+    platformPresence,
     designedAroundPeople,
     creativeProcess,
     creativeToolkit,
@@ -44,7 +44,7 @@ export default async function UiUxDigitalDesignPage({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-      {/* 1. Hero — Home-05 HeroV5 + WOW Social SocialOrbit */}
+      {/* 1. Hero — Home-05 HeroV5 */}
       <LearningEventsHero
         badgeTitle={hero.badgeTitle}
         title={hero.title}
@@ -54,18 +54,18 @@ export default async function UiUxDigitalDesignPage({ params }: Props) {
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
         visual={hero.visual}
+        images={[...hero.images]}
         headingId={hero.headingId}
       />
-      {/* 2. What we design — Home-16 ServicesV14 + ProcessV10 card row */}
-      <WhatWeDesign
-        eyebrow={whatWeDesign.eyebrow}
-        titleBefore={whatWeDesign.titleBefore}
-        titleAccent={whatWeDesign.titleAccent}
-        description={whatWeDesign.description}
-        areas={[...whatWeDesign.areas]}
-        layout={whatWeDesign.layout}
-        defaultActiveIndex={whatWeDesign.defaultActiveIndex}
-        featureImage={whatWeDesign.featureImage}
+      {/* 2. What we design — for-you/social-and-community §4 PlatformPresence (Home-14 ServicesV13) */}
+      <PlatformPresence
+        eyebrow={platformPresence.eyebrow}
+        title={platformPresence.title}
+        accentTitle={platformPresence.accentTitle}
+        titleSuffix={platformPresence.titleSuffix}
+        description={platformPresence.description}
+        image={platformPresence.image}
+        items={[...platformPresence.items]}
       />
       {/* 3. Designed around people — Home-13 AboutHoverImages + WhyChooseUs borders */}
       <BuiltAroundPeople

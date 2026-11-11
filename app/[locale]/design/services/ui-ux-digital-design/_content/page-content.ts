@@ -14,39 +14,64 @@ export const CONTENT = {
     trustLineHighlight: '50+',
     primaryCta: { label: 'START YOUR DESIGN PROJECT', href: '/meet' },
     secondaryCta: { label: 'EXPLORE OUR WORK', href: '/portfolio' },
-    visual: 'orbit' as const,
+    visual: 'image' as const,
+    images: [
+      {
+        src: '/images/wow/Hero/devision/Mockup 2 Dark.png',
+        alt: 'Digital product interface mockup',
+      },
+    ],
     headingId: 'ui-ux-digital-design-hero-heading',
   },
-  whatWeDesign: {
+  platformPresence: {
     eyebrow: 'WHAT WE DESIGN',
-    titleBefore: 'Every Interaction, Thoughtfully ',
-    titleAccent: 'Designed.',
+    title: 'Every Interaction, Thoughtfully',
+    accentTitle: 'Designed.',
+    titleSuffix: '',
     description:
       'From understanding your users to designing complete digital interfaces, we create experiences that balance functionality, clarity, and visual appeal.',
-    layout: 'tabs' as const,
-    defaultActiveIndex: 1,
-    featureImage: {
+    image: {
       src: '/images/wow/LandingPageNaveBare/ux-graphic-designer-planing-application-process-d-2026-03-11-00-50-35-utc%202.svg',
       alt: 'Hand holding smartphone with digital interface preview',
     },
-    areas: [
+    items: [
       {
         title: 'UX Research & Strategy',
         description: 'Explore user needs and behaviors to guide meaningful product and experience decisions.',
+        features: [
+          'Focus: User needs, goals, and behavior patterns',
+          'Output: Research insights and strategic direction',
+          'Approach: Decisions grounded in real audience context',
+        ],
       },
       {
         title: 'User Flows & Wireframing',
         description:
           'Plan intuitive navigation, meaningful interactions, and clear user journeys before visual design begins.',
+        features: [
+          'Focus: Journeys, information architecture, and screen structure',
+          'Output: Wireframes and flows ready for visual design',
+          'Approach: Clarity before polish',
+        ],
       },
       {
         title: 'Interface & Visual Design',
         description: 'Create polished interfaces and consistent visual systems designed around real interactions.',
+        features: [
+          'Focus: Layout, typography, color, and interaction patterns',
+          'Output: UI screens aligned with brand and usability',
+          'Approach: Visual design that supports how people use the product',
+        ],
       },
       {
         title: 'Interactive Prototypes & Design Systems',
         description:
           'Bring interfaces to life with prototypes and reusable systems that keep experiences consistent.',
+        features: [
+          'Focus: Clickable prototypes and shared components',
+          'Output: Design systems and dev-ready specifications',
+          'Approach: Consistency from prototype through handoff',
+        ],
       },
     ],
   },

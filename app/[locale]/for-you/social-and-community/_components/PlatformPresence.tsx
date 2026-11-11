@@ -44,14 +44,17 @@ const DEFAULT_PLATFORMS = [
 ]
 
 /** Layout: Home-14 ServicesV13 cards — header matches social capabilities mock. */
+type PresenceItem = { features?: string[] }
+
 const PlatformPresence = ({
   eyebrow = 'Social Capabilities',
   title = 'Everything behind a',
   accentTitle = 'stronger social',
+  titleSuffix = ' presence.',
   description = 'From deciding what to say to getting it in front of the right people.',
   items,
   image,
-}: Partial<CmsTechnologiesSection> = {}) => {
+}: Partial<CmsTechnologiesSection> & { titleSuffix?: string } = {}) => {
   const displayPlatforms = mergeFeatureItems(
     DEFAULT_PLATFORMS.map((platform) => ({ ...platform, title: platform.name })),
     items,
@@ -59,6 +62,8 @@ const PlatformPresence = ({
     ...DEFAULT_PLATFORMS[index],
     name: platform.title,
     description: platform.description ?? DEFAULT_PLATFORMS[index].description,
+    features:
+      (items?.[index] as PresenceItem | undefined)?.features ?? DEFAULT_PLATFORMS[index].features,
   }))
   const hasSideImage = Boolean(image?.src)
 
@@ -73,8 +78,8 @@ const PlatformPresence = ({
             <RevealWrapper className="reveal-me">
               <h2>
                 {title}
-                <InstrumentText> {accentTitle} </InstrumentText>
-                presence.
+                {accentTitle ? <InstrumentText> {accentTitle} </InstrumentText> : null}
+                {titleSuffix}
               </h2>
             </RevealWrapper>
             <RevealWrapper className="reveal-me mt-4">
