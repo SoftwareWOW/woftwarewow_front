@@ -37,41 +37,27 @@ export const CONTENT = {
     items: [
       {
         title: 'UX Research & Strategy',
-        description: 'Explore user needs and behaviors to guide meaningful product and experience decisions.',
-        features: [
-          'Focus: User needs, goals, and behavior patterns',
-          'Output: Research insights and strategic direction',
-          'Approach: Decisions grounded in real audience context',
-        ],
+        description:
+          'Explore user needs and behaviors to guide meaningful product and experience decisions.',
+        features: [],
       },
       {
         title: 'User Flows & Wireframing',
         description:
           'Plan intuitive navigation, meaningful interactions, and clear user journeys before visual design begins.',
-        features: [
-          'Focus: Journeys, information architecture, and screen structure',
-          'Output: Wireframes and flows ready for visual design',
-          'Approach: Clarity before polish',
-        ],
+        features: [],
       },
       {
         title: 'Interface & Visual Design',
-        description: 'Create polished interfaces and consistent visual systems designed around real interactions.',
-        features: [
-          'Focus: Layout, typography, color, and interaction patterns',
-          'Output: UI screens aligned with brand and usability',
-          'Approach: Visual design that supports how people use the product',
-        ],
+        description:
+          'Create polished interfaces and consistent visual systems designed around real interactions.',
+        features: [],
       },
       {
         title: 'Interactive Prototypes & Design Systems',
         description:
           'Bring interfaces to life with prototypes and reusable systems that keep experiences consistent.',
-        features: [
-          'Focus: Clickable prototypes and shared components',
-          'Output: Design systems and dev-ready specifications',
-          'Approach: Consistency from prototype through handoff',
-        ],
+        features: [],
       },
     ],
   },

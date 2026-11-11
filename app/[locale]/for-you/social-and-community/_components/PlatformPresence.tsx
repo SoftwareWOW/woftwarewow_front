@@ -58,13 +58,17 @@ const PlatformPresence = ({
   const displayPlatforms = mergeFeatureItems(
     DEFAULT_PLATFORMS.map((platform) => ({ ...platform, title: platform.name })),
     items,
-  ).map((platform, index) => ({
-    ...DEFAULT_PLATFORMS[index],
-    name: platform.title,
-    description: platform.description ?? DEFAULT_PLATFORMS[index].description,
-    features:
-      (items?.[index] as PresenceItem | undefined)?.features ?? DEFAULT_PLATFORMS[index].features,
-  }))
+  ).map((platform, index) => {
+    const cmsItem = items?.[index] as PresenceItem | undefined
+    const cmsFeatures = cmsItem?.features
+
+    return {
+      ...DEFAULT_PLATFORMS[index],
+      name: platform.title,
+      description: platform.description ?? DEFAULT_PLATFORMS[index].description,
+      features: cmsFeatures !== undefined ? cmsFeatures : DEFAULT_PLATFORMS[index].features,
+    }
+  })
   const hasSideImage = Boolean(image?.src)
   const isSvgImage = image?.src?.toLowerCase().includes('.svg')
 
@@ -116,9 +120,9 @@ const PlatformPresence = ({
                 {platform.name}
               </h5>
             </div>
-            <div className="absolute z-10 h-full w-full translate-y-full border-t border-primary bg-secondary p-8 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-secondary">
-              <div className="mb-[55px] flex items-center justify-between gap-1">
-                <h5 className="translate-y-5 text-primary opacity-0 transition-all delay-[240ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-backgroundBody max-sm:text-3xl">
+            <div className="absolute z-10 flex h-full w-full translate-y-full flex-col overflow-hidden border-t border-primary bg-secondary p-6 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-secondary sm:p-8">
+              <div className="mb-4 flex shrink-0 items-start justify-between gap-2 sm:mb-6">
+                <h5 className="translate-y-5 text-left text-xl leading-snug text-primary opacity-0 transition-all delay-[240ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-backgroundBody sm:text-2xl lg:text-[1.75rem]">
                   {platform.name}
                 </h5>
                 <span className="translate-x-20 transition-all duration-1000 group-hover:translate-x-0" aria-hidden>
@@ -138,19 +142,21 @@ const PlatformPresence = ({
                   </svg>
                 </span>
               </div>
-              <p className="translate-y-5 text-backgroundBody/70 opacity-0 transition-all delay-[340ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-backgroundBody/70">
+              <p className="translate-y-5 text-sm leading-relaxed text-backgroundBody/70 opacity-0 transition-all delay-[340ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 dark:text-backgroundBody/70 sm:text-base">
                 {platform.description}
               </p>
-              <ul className="mt-6 translate-y-5 pl-4 opacity-0 transition-all delay-[440ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100">
-                {platform.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="list-disc text-base leading-relaxed text-backgroundBody/70 dark:text-backgroundBody/70"
-                  >
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              {platform.features.length > 0 ? (
+                <ul className="mt-4 max-h-[180px] translate-y-5 overflow-y-auto pl-4 opacity-0 transition-all delay-[440ms] duration-[800ms] group-hover:translate-y-0 group-hover:opacity-100 sm:mt-6">
+                  {platform.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="list-disc text-sm leading-relaxed text-backgroundBody/70 dark:text-backgroundBody/70 sm:text-base"
+                    >
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
           </RevealWrapper>
         ))}
