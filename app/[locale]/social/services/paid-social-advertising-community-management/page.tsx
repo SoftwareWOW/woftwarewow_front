@@ -38,15 +38,15 @@ export default async function PaidSocialAdvertisingCommunityManagementPage({ par
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-      {/* 1. Hero — Home-19 HeroV19 */}
+      {/* 1. Hero — Home-15 HeroV15 (EducationHero) */}
       <PaidSocialHero
-        badgeTitle={hero.badgeTitle}
         title={hero.title}
         italicTitle={hero.italicTitle}
         description={hero.description}
         images={[...hero.images]}
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
+        marqueeText={hero.marqueeText}
         headingId={hero.headingId}
       />
       {/* 2. What we manage — Home-24 ServicesV16 */}

@@ -6,9 +6,9 @@ export const PAID_SOCIAL_ADVERTISING_COMMUNITY_MANAGEMENT_PAGE_METADATA = {
 
 export const CONTENT = {
   hero: {
-    badgeTitle: 'PAID SOCIAL ADVERTISING & COMMUNITY MANAGEMENT',
     title: 'Reach the Right People. Spark Real ',
     italicTitle: 'Connections.',
+    marqueeText: 'Turn Attention Into Lasting Engagement',
     description:
       'Turn social attention into meaningful opportunities with targeted advertising, compelling campaigns, and active community engagement that brings your brand closer to its audience.',
     primaryCta: { label: 'LAUNCH MY CAMPAIGN', href: '/meet' },
