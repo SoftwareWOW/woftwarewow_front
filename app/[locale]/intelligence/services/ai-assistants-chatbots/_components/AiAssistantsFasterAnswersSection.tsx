@@ -1,7 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import AiAssistantsChatDemoPanel from './AiAssistantsChatDemoPanel'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
 type Benefit = { title: string; description: string }
 
@@ -10,16 +10,16 @@ type AiAssistantsFasterAnswersSectionProps = {
   title: string
   description: string
   benefits: ReadonlyArray<Benefit>
-  chatMessages: ReadonlyArray<{ role: 'user' | 'assistant'; content: string }>
+  image: { src: string; alt: string; width?: number; height?: number }
 }
 
-/** Layout copy: homepage-13 BuiltAroundPeople — centered header, benefits + chat panel. */
+/** Layout copy: homepage-13 BuiltAroundPeople — benefits list + side image. */
 export default function AiAssistantsFasterAnswersSection({
   eyebrow,
   title,
   description,
   benefits,
-  chatMessages,
+  image,
 }: AiAssistantsFasterAnswersSectionProps) {
   return (
     <section>
@@ -45,8 +45,17 @@ export default function AiAssistantsFasterAnswersSection({
               </RevealWrapper>
             ))}
           </div>
-          <RevealWrapper className="reveal-me md:w-1/2 md:min-h-[420px] md:self-stretch">
-            <AiAssistantsChatDemoPanel messages={chatMessages} />
+          <RevealWrapper as="figure" className="reveal-me min-h-[280px] md:w-1/2 md:min-h-0 md:self-stretch">
+            <div className="relative h-full min-h-[280px] overflow-hidden rounded-radius-md md:min-h-[420px]">
+              <CmsResponsiveImage
+                image={image}
+                alt={image.alt}
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                width={image.width ?? 665}
+                height={image.height ?? 440}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
           </RevealWrapper>
         </div>
       </div>

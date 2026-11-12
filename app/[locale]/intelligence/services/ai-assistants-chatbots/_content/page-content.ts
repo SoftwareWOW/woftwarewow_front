@@ -98,19 +98,10 @@ export const CONTENT = {
         description: 'Pass relevant context to your team when human support is needed.',
       },
     ],
-    chatMessages: [
-      { role: 'user' as const, content: 'Can you help me choose the right service?' },
-      {
-        role: 'assistant' as const,
-        content:
-          "Of course. Tell me what you're trying to achieve, and I'll help you explore your options.",
-      },
-      { role: 'user' as const, content: 'I want to automate customer enquiries.' },
-      {
-        role: 'assistant' as const,
-        content: 'An AI customer assistant could help. Would you like me to connect you with our team?',
-      },
-    ],
+    image: {
+      src: '/images/wow/LandingPageNaveBare/Client Portal 2.svg',
+      alt: 'Illustrative AI assistant chat interface',
+    },
   },
   implementation: {
     eyebrow: 'OUR IMPLEMENTATION APPROACH',

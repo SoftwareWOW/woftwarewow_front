@@ -66,7 +66,7 @@ export default async function AiAssistantsChatbotsPage({ params }: Props) {
         title={fasterAnswers.title}
         description={fasterAnswers.description}
         benefits={[...fasterAnswers.benefits]}
-        chatMessages={[...fasterAnswers.chatMessages]}
+        image={fasterAnswers.image}
       />
       {/* 5. Implementation — packages FromIdeaToAutomation */}
       <AiAssistantsImplementationSection
