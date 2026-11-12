@@ -31,7 +31,7 @@ export default function InfluencerSocialWorkSection({
   viewMoreLabel,
 }: InfluencerSocialWorkSectionProps) {
   return (
-    <section className="z-20 pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="z-20">
       <div className="container">
         <div className="mb-10 text-center md:mb-20">
           <RevealWrapper className="rv-badge reveal-me mb-3">
@@ -74,15 +74,23 @@ export default function InfluencerSocialWorkSection({
                   </div>
                 </Link>
                 <div className="absolute bottom-[22px]">
-                  <Link href={project.href} className="rv-button rv-button-primary2 w-full md:w-auto">
+                  <Link
+                    href={project.href}
+                    className="rv-button rv-button-primary2 w-full md:w-auto [&_.rv-button-bottom_span]:!text-white"
+                  >
                     <div className="rv-button-top flex items-center !text-center">
                       <span className="pr-1">VIEW PROJECT</span>
                       <img className="inline dark:hidden" src="/images/icons/top-arrow.svg" alt="" aria-hidden />
                       <img className="hidden dark:inline" src="/images/icons/top-arrow-dark.svg" alt="" aria-hidden />
                     </div>
                     <div className="rv-button-bottom flex items-center !text-center">
-                      <span className="pr-1">VIEW PROJECT</span>
-                      <img className="inline" src="/images/icons/top-arrow.svg" alt="" aria-hidden />
+                      <span className="pr-1 !text-white">VIEW PROJECT</span>
+                      <img
+                        className="inline brightness-0 invert"
+                        src="/images/icons/top-arrow.svg"
+                        alt=""
+                        aria-hidden
+                      />
                     </div>
                   </Link>
                 </div>
