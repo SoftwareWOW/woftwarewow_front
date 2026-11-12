@@ -16,7 +16,7 @@ type AiAssistantsTeamLimitsSectionProps = {
   items: ReadonlyArray<Pillar>
 }
 
-/** Layout copy: Home-19 OurExpertiseV2 (education RecommendedSolutions) — split header, static primary card. */
+/** Layout copy: Home-19 OurExpertiseV2 (education RecommendedSolutions) — primary fill on hover only. */
 export default function AiAssistantsTeamLimitsSection({
   eyebrow,
   title,
@@ -47,27 +47,18 @@ export default function AiAssistantsTeamLimitsSection({
 
         <article>
           <RevealWrapper className="reveal-me flex flex-col gap-[30px] max-lg:flex-wrap md:flex-row">
-            {items.map((item, index) => {
-              const isPrimary = index === 0
-              return (
-                <article
-                  key={item.number}
-                  className={`flex min-h-[280px] flex-1 flex-col rounded-radius-md border px-[30px] py-10 ${
-                    isPrimary
-                      ? 'border-primary bg-primary text-white dark:border-primary'
-                      : 'border-[#e5e5e5] dark:border-dark'
-                  }`}
-                >
-                  <span
-                    className={`font-instrument text-5xl italic leading-none ${isPrimary ? 'text-white' : 'text-secondary dark:text-backgroundBody'}`}
-                  >
-                    {item.number}
-                  </span>
-                  <h5 className={`mb-2.5 mt-8 ${isPrimary ? 'text-white' : ''}`}>{item.title}</h5>
-                  <p className={isPrimary ? 'text-white/85' : 'text-[#808080]'}>{item.description}</p>
-                </article>
-              )
-            })}
+            {items.map((item) => (
+              <article
+                key={item.number}
+                className="group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 transition-colors duration-300 hover:border-primary hover:bg-primary dark:border-dark"
+              >
+                <span className="font-instrument text-5xl italic leading-none transition-colors duration-300 group-hover:text-white">
+                  {item.number}
+                </span>
+                <h5 className="mb-2.5 mt-8 transition-colors duration-300 group-hover:text-white">{item.title}</h5>
+                <p className="text-[#808080] transition-colors duration-300 group-hover:text-white/85">{item.description}</p>
+              </article>
+            ))}
           </RevealWrapper>
         </article>
       </div>

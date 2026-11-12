@@ -54,7 +54,7 @@ export default async function AiAssistantsChatbotsPage({ params }: Props) {
         description={teamLimits.description}
         items={[...teamLimits.items]}
       />
-      {/* 3. AI solution — Home-19 ElevateBrandV2 */}
+      {/* 3. AI solution — WOW Social SocialApproachSection */}
       <AiAssistantsSolutionRowsSection
         eyebrow={aiSolution.eyebrow}
         title={aiSolution.title}

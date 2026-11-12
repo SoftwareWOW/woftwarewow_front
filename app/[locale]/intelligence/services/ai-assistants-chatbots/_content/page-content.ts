@@ -49,27 +49,27 @@ export const CONTENT = {
     title: 'An AI Assistant That Works With Your Business.',
     steps: [
       {
-        id: '01',
+        id: 1,
         title: 'Intelligent Conversations',
         description: 'Respond to common questions through natural, helpful interactions.',
       },
       {
-        id: '02',
+        id: 2,
         title: 'Business Knowledge',
         description: 'Use approved documents, FAQs, and business information to inform answers.',
       },
       {
-        id: '03',
+        id: 3,
         title: 'Lead Qualification',
         description: 'Collect relevant inquiry details and help identify potential opportunities.',
       },
       {
-        id: '04',
+        id: 4,
         title: 'System Integrations',
         description: 'Connect with supported CRM platforms, workflows, and business tools.',
       },
       {
-        id: '05',
+        id: 5,
         title: 'Human Handoff',
         description: 'Route complex or sensitive conversations to the appropriate team member.',
       },
