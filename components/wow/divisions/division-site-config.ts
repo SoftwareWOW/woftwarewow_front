@@ -3,6 +3,7 @@ import {
   divisionHrefs,
   type DivisionId,
 } from '@/components/wow/nav/nav-brand-assets'
+import { wowIntelligenceMegaNavHref } from '@/data/wowIntelligenceMegaNavRoutes'
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
 
 export type DivisionNavItem = {
@@ -245,9 +246,21 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
         id: 'solutions',
         title: 'Solutions',
         links: [
-          { id: 'ai', label: 'AI Assistants', href: '/intelligence#solutions' },
-          { id: 'automation', label: 'Automation', href: '/intelligence#solutions' },
-          { id: 'analytics', label: 'Analytics', href: '/intelligence#solutions' },
+          {
+            id: 'aiAssistantsChatbots',
+            label: 'AI Assistants & Chatbots',
+            href: wowIntelligenceMegaNavHref('aiAssistantsChatbots'),
+          },
+          {
+            id: 'intelligentAutomation',
+            label: 'Intelligent Automation',
+            href: wowIntelligenceMegaNavHref('intelligentAutomation'),
+          },
+          {
+            id: 'businessIntelligencePredictiveInsights',
+            label: 'Business Intelligence & Predictive Insights',
+            href: wowIntelligenceMegaNavHref('businessIntelligencePredictiveInsights'),
+          },
         ],
       },
       {

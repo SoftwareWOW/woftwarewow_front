@@ -19,6 +19,7 @@ import { wowDesignMegaNavHref } from '@/data/wowDesignMegaNavRoutes'
 import { wowSocialMegaNavHref } from '@/data/wowSocialMegaNavRoutes'
 import { wowMarketingMegaNavHref } from '@/data/wowMarketingMegaNavRoutes'
 import { wowAccelerateMegaNavHref } from '@/data/wowAccelerateMegaNavRoutes'
+import { wowIntelligenceMegaNavHref } from '@/data/wowIntelligenceMegaNavRoutes'
 import { WOW_ACCELERATE_NAV_SERVICES } from '@/data/wowAccelerateNavContent'
 import type { NavMenuIconId } from '@/components/wow/nav/nav-assets'
 import type { DivisionId } from '@/components/wow/nav/nav-brand-assets'
@@ -230,21 +231,21 @@ export const wowIntelligenceFooterServiceCards: ReadonlyArray<DivisionFooterServ
     title: 'AI Assistants & Chatbots',
     description:
       'Deliver instant, intelligent conversations that improve customer experiences and save time.',
-    href: '/intelligence#ai-solutions',
+    href: wowIntelligenceMegaNavHref('aiAssistantsChatbots'),
     iconId: 'aiAssistantsChatbots',
   },
   {
     title: 'Intelligent Automation',
     description:
       'Automate repetitive tasks and streamline workflows with AI-powered business solutions.',
-    href: '/intelligence#ai-solutions',
+    href: wowIntelligenceMegaNavHref('intelligentAutomation'),
     iconId: 'intelligentAutomation',
   },
   {
     title: 'Business Intelligence & Predictive Insights',
     description:
       'Transform business data into actionable insights and smarter future-focused decisions.',
-    href: '/intelligence#ai-solutions',
+    href: wowIntelligenceMegaNavHref('businessIntelligencePredictiveInsights'),
     iconId: 'businessIntelligencePredictiveInsights',
   },
 ] as const

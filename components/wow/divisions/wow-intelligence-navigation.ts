@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowIntelligenceMegaNavHref } from '@/data/wowIntelligenceMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,21 +14,13 @@ const panel = (
   image: 'default' as const,
 })
 
-const aiSolutionsHref = '/intelligence#ai-solutions'
-const useCasesHref = '/intelligence#use-cases'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
-  detailPanel: 'default' as const,
+  href: wowIntelligenceMegaNavHref(id),
+  detailPanel: id,
 })
 
 /** WOW Intelligence mega-nav — Figma-aligned AI solutions, use cases, and detail panels. */
@@ -132,19 +125,12 @@ export const wowIntelligenceNavigation = {
                 'aiAssistantsChatbots',
                 'AI Assistants & Chatbots',
                 'Smarter conversations. Faster support.',
-                aiSolutionsHref,
               ),
-              link(
-                'intelligentAutomation',
-                'Intelligent Automation',
-                'Automate tasks. Work smarter.',
-                aiSolutionsHref,
-              ),
+              link('intelligentAutomation', 'Intelligent Automation', 'Automate tasks. Work smarter.'),
               link(
                 'businessIntelligencePredictiveInsights',
                 'Business Intelligence & Predictive Insights',
                 'Turn data into smarter decisions.',
-                aiSolutionsHref,
               ),
             ],
           },
@@ -160,19 +146,19 @@ export const wowIntelligenceNavigation = {
                 id: 'aiAssistantsChatbots',
                 label: 'AI Assistants & Chatbots',
                 description: 'Smarter conversations. Faster support.',
-                href: aiSolutionsHref,
+                href: wowIntelligenceMegaNavHref('aiAssistantsChatbots'),
               },
               {
                 id: 'intelligentAutomation',
                 label: 'Intelligent Automation',
                 description: 'Automate tasks. Work smarter.',
-                href: aiSolutionsHref,
+                href: wowIntelligenceMegaNavHref('intelligentAutomation'),
               },
               {
                 id: 'businessIntelligencePredictiveInsights',
                 label: 'Business Intelligence & Predictive Insights',
                 description: 'Turn data into smarter decisions.',
-                href: aiSolutionsHref,
+                href: wowIntelligenceMegaNavHref('businessIntelligencePredictiveInsights'),
               },
             ],
           },
@@ -192,25 +178,10 @@ export const wowIntelligenceNavigation = {
             id: 'useCasesList',
             title: null,
             items: [
-              link('useCaseSales', 'Sales', 'Sell smarter. Close more deals.', useCasesHref),
-              link(
-                'useCaseMarketing',
-                'Marketing',
-                'Smarter campaigns. Better results.',
-                useCasesHref,
-              ),
-              link(
-                'useCaseCustomerService',
-                'Customer Service',
-                'Faster support. Happier customers.',
-                useCasesHref,
-              ),
-              link(
-                'useCaseOperations',
-                'Operations',
-                'Simplify workflows. Boost efficiency.',
-                useCasesHref,
-              ),
+              link('useCaseSales', 'Sales', 'Sell smarter. Close more deals.'),
+              link('useCaseMarketing', 'Marketing', 'Smarter campaigns. Better results.'),
+              link('useCaseCustomerService', 'Customer Service', 'Faster support. Happier customers.'),
+              link('useCaseOperations', 'Operations', 'Simplify workflows. Boost efficiency.'),
             ],
           },
         ],
@@ -225,25 +196,25 @@ export const wowIntelligenceNavigation = {
                 id: 'useCaseSales',
                 label: 'Sales',
                 description: 'Sell smarter. Close more deals.',
-                href: useCasesHref,
+                href: wowIntelligenceMegaNavHref('useCaseSales'),
               },
               {
                 id: 'useCaseMarketing',
                 label: 'Marketing',
                 description: 'Smarter campaigns. Better results.',
-                href: useCasesHref,
+                href: wowIntelligenceMegaNavHref('useCaseMarketing'),
               },
               {
                 id: 'useCaseCustomerService',
                 label: 'Customer Service',
                 description: 'Faster support. Happier customers.',
-                href: useCasesHref,
+                href: wowIntelligenceMegaNavHref('useCaseCustomerService'),
               },
               {
                 id: 'useCaseOperations',
                 label: 'Operations',
                 description: 'Simplify workflows. Boost efficiency.',
-                href: useCasesHref,
+                href: wowIntelligenceMegaNavHref('useCaseOperations'),
               },
             ],
           },
