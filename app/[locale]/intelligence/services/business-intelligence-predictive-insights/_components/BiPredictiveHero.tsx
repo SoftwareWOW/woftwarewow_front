@@ -72,9 +72,8 @@ export default function BiPredictiveHero({
               <CmsResponsiveImage
                 image={media}
                 sizes={CMS_IMAGE_SIZES.heroDual}
-                width={1320}
-                height={743}
-                className="h-full w-full object-contain object-center"
+                fill
+                className="object-cover"
                 priority
               />
             </figure>

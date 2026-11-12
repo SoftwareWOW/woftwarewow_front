@@ -47,7 +47,10 @@ export default function BiPredictiveDecisionsSection({
               </RevealWrapper>
             ))}
           </div>
-          <RevealWrapper as="figure" className="reveal-me min-h-[280px] md:w-1/2 md:min-h-0 md:self-stretch">
+          <RevealWrapper
+            as="figure"
+            className="reveal-me min-h-[280px] overflow-hidden rounded-radius-md md:w-1/2 md:min-h-0 md:self-stretch"
+          >
             <div className="relative h-full min-h-[280px] overflow-hidden rounded-radius-md md:min-h-[420px]">
               <CmsResponsiveImage
                 image={image}
@@ -55,7 +58,7 @@ export default function BiPredictiveDecisionsSection({
                 sizes={CMS_IMAGE_SIZES.halfGrid}
                 width={image.width ?? 665}
                 height={image.height ?? 440}
-                className="absolute inset-0 h-full w-full rounded-radius-md object-contain object-center"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           </RevealWrapper>
