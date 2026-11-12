@@ -55,7 +55,7 @@ export default function BiPredictiveDecisionsSection({
                 sizes={CMS_IMAGE_SIZES.halfGrid}
                 width={image.width ?? 665}
                 height={image.height ?? 440}
-                className="absolute inset-0 h-full w-full object-contain object-center"
+                className="absolute inset-0 h-full w-full rounded-radius-md object-contain object-center"
               />
             </div>
           </RevealWrapper>

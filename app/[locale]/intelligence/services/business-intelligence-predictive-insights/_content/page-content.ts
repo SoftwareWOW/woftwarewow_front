@@ -53,25 +53,30 @@ export const CONTENT = {
     description:
       'We bring your business information together and turn it into accessible insights that support clearer decisions and better planning.',
     sectionId: 'intelligence-that-works',
-    capabilities: [
+    capabilityCards: [
       {
         title: 'Data Integration',
+        headline: '',
         description: 'Connect information from relevant business systems.',
       },
       {
         title: 'Intelligent Dashboards',
+        headline: '',
         description: 'See important performance indicators in one place.',
       },
       {
         title: 'Predictive Analytics',
+        headline: '',
         description: 'Explore potential trends and future outcomes.',
       },
       {
         title: 'Customer Intelligence',
+        headline: '',
         description: 'Identify patterns in customer behavior and engagement.',
       },
       {
         title: 'Automated Reporting',
+        headline: '',
         description: 'Keep essential business reports organized and accessible.',
       },
     ],

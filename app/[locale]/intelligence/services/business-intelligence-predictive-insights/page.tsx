@@ -55,13 +55,13 @@ export default async function BusinessIntelligencePredictiveInsightsPage({ param
         description={challenge.description}
         items={[...challenge.items]}
       />
-      {/* 3. Capabilities — homepage-15/WhyChooseUsV4 */}
+      {/* 3. Capabilities — social/PaidSocialWhatWeManageSection (intelligent-automation) */}
       <BiPredictiveIntelligenceSection
         eyebrow={intelligence.eyebrow}
         titleBefore={intelligence.titleBefore}
         titleAccent={intelligence.titleAccent}
         description={intelligence.description}
-        capabilities={[...intelligence.capabilities]}
+        capabilityCards={[...intelligence.capabilityCards]}
         sectionId={intelligence.sectionId}
       />
       {/* 4. Decisions — homepage-13 BuiltAroundPeople */}
