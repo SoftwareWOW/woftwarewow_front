@@ -80,7 +80,7 @@ export default async function SocialInfluencerContentCreationPage({ params }: Pr
         description={designToolkit.description}
         tools={[...designToolkit.tools]}
       />
-      {/* 6. Our work — Home-20 PortfolioV6 */}
+      {/* 6. Our work — Home-20 BlogPostsV7 */}
       <InfluencerSocialWorkSection
         eyebrow={ourWork.eyebrow}
         titleBefore={ourWork.titleBefore}

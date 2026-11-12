@@ -1,17 +1,13 @@
+import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
-import SectionLabel from '@/components/wow/shared/SectionLabel'
-import Image from 'next/image'
-import Link from 'next/link'
 
 type Project = {
   category: string
   title: string
   href: string
   image: string
-  showProjectButton?: boolean
 }
 
 type InfluencerSocialWorkSectionProps = {
@@ -24,9 +20,7 @@ type InfluencerSocialWorkSectionProps = {
   viewMoreLabel: string
 }
 
-const CARD_IMAGE_HEIGHT = 'h-[clamp(10rem,28vw,400px)]'
-
-/** Layout copy: Home-20 PortfolioV6 — WOW tokens, 3-col grid per influencer Figma. */
+/** Layout copy: Home-20 BlogPostsV7 — horizontal blog cards + bottom CTA. */
 export default function InfluencerSocialWorkSection({
   eyebrow,
   titleBefore,
@@ -37,71 +31,76 @@ export default function InfluencerSocialWorkSection({
   viewMoreLabel,
 }: InfluencerSocialWorkSectionProps) {
   return (
-    <section className="bg-background transition-colors duration-300 dark:bg-background" aria-labelledby="influencer-social-work-heading">
+    <section className="z-20 pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
-        <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-          <div className="max-w-3xl">
-            <RevealWrapper className="mb-3">
-              <SectionLabel>{eyebrow}</SectionLabel>
-            </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 id="influencer-social-work-heading" className="text-appear">
-                {titleBefore}
-                <InstrumentText>{titleAccent}</InstrumentText>
-              </h2>
-            </TextAppearAnimation>
-          </div>
-          <div className="w-full max-w-md lg:pt-2">
-            <RevealWrapper className="reveal-me">
-              <p className="text-base leading-relaxed text-[#808080] md:text-right md:text-lg">{description}</p>
-            </RevealWrapper>
-          </div>
+        <div className="mb-10 text-center md:mb-20">
+          <RevealWrapper className="rv-badge reveal-me mb-3">
+            <span className="rv-badge-text">{eyebrow}</span>
+          </RevealWrapper>
+          <TextAppearAnimation>
+            <h2 className="text-appear">
+              {titleBefore}
+              <InstrumentText>{titleAccent}</InstrumentText>
+            </h2>
+          </TextAppearAnimation>
+          <RevealWrapper className="reveal-me mt-4">
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
+          </RevealWrapper>
         </div>
-
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <div className="flex items-start justify-center overflow-hidden max-lg:flex-wrap max-lg:gap-y-5 md:space-x-[30px]">
           {projects.map((project) => (
-            <RevealWrapper key={project.title} className="reveal-me group flex flex-col">
-              <Link href={project.href} className="block">
-                <figure className={`relative mb-5 overflow-hidden rounded-radius-md bg-dark/5 dark:bg-dark ${CARD_IMAGE_HEIGHT}`}>
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 z-[1] opacity-60"
-                    style={{
-                      background: 'radial-gradient(circle at 50% 60%, rgba(99, 91, 255, 0.35) 0%, transparent 65%)',
-                    }}
-                  />
-                  <Image
+            <div
+              key={project.title}
+              className="blog-card group relative min-h-[553px] w-full cursor-pointer border p-2.5 dark:border-dark max-lg:max-w-[400px] md:w-[calc(33.333%-20px)] md:min-w-0 md:hover:w-[450px]"
+            >
+              <Link href={project.href} className="w-full">
+                <figure className="h-[238px] overflow-hidden">
+                  <img
                     src={project.image}
                     alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                   />
-                  <span className="absolute left-4 top-4 z-[2] rounded-radius-sm border border-secondary/20 bg-backgroundBody/90 px-3 py-1 text-xs font-medium uppercase tracking-[0.12em] text-secondary dark:border-backgroundBody/25 dark:bg-dark/90 dark:text-backgroundBody">
-                    {project.category}
-                  </span>
                 </figure>
-                <h3 className="text-2xl leading-tight md:text-3xl lg:text-4xl">{project.title}</h3>
               </Link>
-              {project.showProjectButton ? (
-                <div className="mt-6">
-                  <ButtonComponentList>
-                    <ButtonComponent href={project.href} variant="secondary">
-                      VIEW PROJECT
-                    </ButtonComponent>
-                  </ButtonComponentList>
+              <div className="px-2.5">
+                <Link href={project.href} className="w-full">
+                  <div className="rv-badge mt-7">
+                    <span className="rv-badge-text">{project.category}</span>
+                  </div>
+                  <div className="blog-title mb-[30px] mt-3.5">
+                    <h3 className="text[25px] md:text-3xl lg:text-[32px] lg:leading-[1.2] lg:tracking-[-0.72px]">
+                      {project.title}
+                    </h3>
+                  </div>
+                </Link>
+                <div className="absolute bottom-[22px]">
+                  <Link href={project.href} className="rv-button rv-button-primary2 w-full md:w-auto">
+                    <div className="rv-button-top flex items-center !text-center">
+                      <span className="pr-1">VIEW PROJECT</span>
+                      <img className="inline dark:hidden" src="/images/icons/top-arrow.svg" alt="" aria-hidden />
+                      <img className="hidden dark:inline" src="/images/icons/top-arrow-dark.svg" alt="" aria-hidden />
+                    </div>
+                    <div className="rv-button-bottom flex items-center !text-center">
+                      <span className="pr-1">VIEW PROJECT</span>
+                      <img className="inline" src="/images/icons/top-arrow.svg" alt="" aria-hidden />
+                    </div>
+                  </Link>
                 </div>
-              ) : null}
-            </RevealWrapper>
+              </div>
+            </div>
           ))}
         </div>
-
-        <RevealWrapper className="reveal-me mt-10 flex justify-center md:mt-14">
-          <ButtonComponentList>
-            <ButtonComponent href={viewMoreHref} variant="secondary">
-              {viewMoreLabel}
-            </ButtonComponent>
-          </ButtonComponentList>
+        <RevealWrapper as="ul" className="reveal-me mx-auto mt-[56px] flex list-none justify-center">
+          <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
+            <Link href={viewMoreHref} className="rv-button rv-button-white block md:inline-block">
+              <div className="rv-button-top">
+                <span>{viewMoreLabel}</span>
+              </div>
+              <div className="rv-button-bottom">
+                <span>{viewMoreLabel}</span>
+              </div>
+            </Link>
+          </li>
         </RevealWrapper>
       </div>
     </section>
