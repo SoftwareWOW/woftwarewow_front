@@ -1,9 +1,13 @@
 import LearningEventsHero from '@/app/[locale]/for-you/learning-and-events/_components/LearningEventsHero'
+import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
+import ManagementProcessSection from './_components/ManagementProcessSection'
 import SocialDifferenceSection from './_components/SocialDifferenceSection'
 import SocialGrowthPiecesSection from './_components/SocialGrowthPiecesSection'
+import SocialToolkitSection from './_components/SocialToolkitSection'
+import SocialWorkSection from './_components/SocialWorkSection'
 import { CONTENT, SOCIAL_MEDIA_STRATEGY_MANAGEMENT_PAGE_METADATA } from './_content/page-content'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -28,7 +32,7 @@ export default async function SocialMediaStrategyManagementPage({ params }: Prop
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const { hero, growthPieces, theDifference } = CONTENT
+  const { hero, growthPieces, theDifference, managementProcess, socialToolkit, ourWork, cta } = CONTENT
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
@@ -66,6 +70,31 @@ export default async function SocialMediaStrategyManagementPage({ params }: Prop
         ctaLabel={theDifference.ctaLabel}
         ctaHref={theDifference.ctaHref}
       />
+      {/* 4. Process — wowmarketing BuildCommunity (WoWProces numbers) */}
+      <ManagementProcessSection
+        eyebrow={managementProcess.eyebrow}
+        titleBefore={managementProcess.titleBefore}
+        titleAccent={managementProcess.titleAccent}
+        description={managementProcess.description}
+        steps={[...managementProcess.steps]}
+      />
+      {/* 5. Toolkit — accelerate AutomationTools (CreativeToolkit) */}
+      <SocialToolkitSection
+        eyebrow={socialToolkit.eyebrow}
+        headline={socialToolkit.headline}
+        description={socialToolkit.description}
+        tools={[...socialToolkit.tools]}
+      />
+      {/* 6. Work — websites WebsitesPortfolioSection */}
+      <SocialWorkSection
+        eyebrow={ourWork.eyebrow}
+        titleBefore={ourWork.titleBefore}
+        titleAccent={ourWork.titleAccent}
+        description={ourWork.description}
+        projects={[...ourWork.projects]}
+      />
+      {/* 7. CTA — WowGrowthCta */}
+      <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
     </div>
   )
 }

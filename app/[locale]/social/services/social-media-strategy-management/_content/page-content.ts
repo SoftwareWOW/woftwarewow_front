@@ -96,4 +96,70 @@ export const CONTENT = {
     ctaLabel: "Let's Talk About Your Social Goals",
     ctaHref: '/meet',
   },
+  managementProcess: {
+    eyebrow: 'OUR MANAGEMENT PROCESS',
+    titleBefore: 'From Strategy to ',
+    titleAccent: 'Every Post.',
+    description:
+      'A clear, collaborative process that keeps your social media organized, consistent, and aligned with your business.',
+    steps: [
+      {
+        number: '1',
+        title: 'Discover & Strategize',
+        description:
+          'We review your existing presence, understand your audience and goals, and establish a practical content direction.',
+      },
+      {
+        number: '2',
+        title: 'Plan & Manage',
+        description:
+          'We coordinate the content calendar, approvals, scheduling, and publishing across agreed platforms.',
+      },
+      {
+        number: '3',
+        title: 'Measure & Improve',
+        description: 'We review engagement and performance, share insights, and refine the approach over time.',
+      },
+    ],
+  },
+  socialToolkit: {
+    eyebrow: 'OUR SOCIAL TOOLKIT',
+    headline: 'Tools That Power Your Workflow.',
+    description:
+      'We use trusted design and platform tools to plan, create, schedule, and measure social content with your team.',
+    tools: [
+      { name: 'Canva', icon: 'simple-icons:canva' },
+      { name: 'LinkedIn', icon: 'simple-icons:linkedin' },
+      { name: 'Meta', icon: 'simple-icons:meta' },
+      { name: 'Vercel', icon: 'simple-icons:vercel' },
+    ],
+  },
+  ourWork: {
+    eyebrow: 'OUR SOCIAL WORK',
+    titleBefore: 'Social Presence, ',
+    titleAccent: 'Put Into Practice.',
+    description:
+      'Explore how structured planning, consistent content, and clear creative direction come together across different businesses.',
+    projects: [
+      {
+        category: 'CONSULTING & PROFESSIONAL SERVICES',
+        year: '2020',
+        title: 'CCG Breakthrough',
+        href: '/case-study/ccg-breakthrough',
+        image: '/images/wow/Hero/project/case-study/ccg.png',
+      },
+      {
+        category: 'FASHION & APPAREL',
+        year: '2025',
+        title: 'Junaid The Tailor',
+        href: '/portfolio',
+        image: '/images/wow/LandingPageNaveBare/Branding%20%26%20Creative%202.svg',
+      },
+    ],
+  },
+  cta: {
+    accentText: 'Ready to grow?',
+    mainText: "Let's get social.",
+    ariaLabel: 'Start a social media strategy and management project with WOW Social',
+  },
 } as const
