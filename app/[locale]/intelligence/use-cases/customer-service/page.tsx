@@ -56,7 +56,7 @@ export default async function IntelligenceCustomerServiceUseCasePage({ params }:
         description={challenge.description}
         capabilityCards={[...challenge.capabilityCards]}
       />
-      {/* 3. Powered — for-you/social-and-community SocialProcess (image right) */}
+      {/* 3. Powered — wowmarketing MarketingFrameworkSection (/marketing §9) */}
       <CustomerServiceUseCasePoweredSection
         eyebrow={powered.eyebrow}
         titleBefore={powered.titleBefore}
