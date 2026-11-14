@@ -92,7 +92,6 @@ export default async function IntelligenceMarketingUseCasePage({ params }: Props
         accentText={cta.accentText}
         mainText={cta.mainText}
         ariaLabel={cta.ariaLabel}
-        sectionClassName="!pb-0"
       />
     </div>
   )
