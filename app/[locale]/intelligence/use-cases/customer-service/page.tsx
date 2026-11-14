@@ -73,7 +73,7 @@ export default async function IntelligenceCustomerServiceUseCasePage({ params }:
         description={experience.description}
         pillars={[...experience.pillars]}
       />
-      {/* 5. Approach — Home-19 ProcessV10 (LeadToCustomer) */}
+      {/* 5. Approach — packages/ai-automation FromIdeaToAutomation */}
       <CustomerServiceUseCaseApproachSection
         eyebrow={approach.eyebrow}
         titleBefore={approach.titleBefore}

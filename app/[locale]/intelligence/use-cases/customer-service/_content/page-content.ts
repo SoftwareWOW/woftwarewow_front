@@ -88,10 +88,10 @@ export const CONTENT = {
     description:
       'We understand your support needs, connect the right AI capabilities, and refine the experience around real customer enquiries.',
     steps: [
-      { step: 'Step 01', title: 'Understand', description: 'Review common enquiries and support challenges.' },
-      { step: 'Step 02', title: 'Design', description: 'Define responses, routing, and human handoffs.' },
-      { step: 'Step 03', title: 'Implement', description: 'Configure, integrate, and test the solution.' },
-      { step: 'Step 04', title: 'Improve', description: 'Review conversations and refine performance.' },
+      { number: '01', title: 'Understand', description: 'Review common enquiries and support challenges.' },
+      { number: '02', title: 'Design', description: 'Define responses, routing, and human handoffs.' },
+      { number: '03', title: 'Implement', description: 'Configure, integrate, and test the solution.' },
+      { number: '04', title: 'Improve', description: 'Review conversations and refine performance.' },
     ],
   },
   cta: {
