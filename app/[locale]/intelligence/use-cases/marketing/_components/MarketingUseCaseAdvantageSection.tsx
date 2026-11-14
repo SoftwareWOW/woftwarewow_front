@@ -50,7 +50,7 @@ export default function MarketingUseCaseAdvantageSection({
           {pillars.map((pillar) => (
             <div
               key={pillar.title}
-              className="group col-span-full min-h-[400px] bg-backgroundBody px-7 pb-4 pt-7 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:px-10 md:pb-16 md:pt-10 lg:col-span-4 xl:col-span-3"
+              className="group col-span-full min-h-[400px] bg-backgroundBody px-7 py-10 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:px-10 md:py-16 lg:col-span-4 xl:col-span-3"
             >
               <h4 className="pb-3 text-xl font-light leading-[1.25] tracking-[-0.02em] transition-colors duration-300 sm:text-[22px] md:text-2xl lg:text-[26px] xl:text-[28px] xl:leading-[1.2] group-hover:text-white dark:group-hover:text-white md:mb-4">
                 {pillar.title}

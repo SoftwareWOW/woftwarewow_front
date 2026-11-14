@@ -15,7 +15,7 @@ type MarketingUseCaseInActionSectionProps = {
 }
 
 const cardClassName =
-  'group flex-1 rounded-radius-md border px-[30px] py-10 transition-colors duration-300 ease-in-out hover:bg-backgroundBody dark:border-dark dark:hover:bg-secondary'
+  'group flex min-h-[280px] flex-1 flex-col rounded-radius-md border border-[#e5e5e5] px-[30px] py-10 transition-colors duration-300 hover:border-primary hover:bg-primary dark:border-dark'
 
 /** Layout copy: Home-14 WhyChooseUsV3 (MissionJourney cards) — three-column row. */
 export default function MarketingUseCaseInActionSection({ eyebrow, title, items }: MarketingUseCaseInActionSectionProps) {
@@ -34,15 +34,11 @@ export default function MarketingUseCaseInActionSection({ eyebrow, title, items 
         <RevealWrapper className="reveal-me flex flex-col gap-[30px] md:flex-row">
           {items.map((item) => (
             <div key={item.number} className={cardClassName}>
-              <span className="font-instrument text-5xl italic leading-none text-secondary transition-colors duration-300 group-hover:text-secondary dark:text-backgroundBody dark:group-hover:text-backgroundBody">
+              <span className="font-instrument text-5xl italic leading-none transition-colors duration-300 group-hover:text-white">
                 {item.number}
               </span>
-              <h5 className="mb-2.5 mt-5 transition-colors duration-300 group-hover:text-secondary dark:group-hover:text-backgroundBody">
-                {item.title}
-              </h5>
-              <p className="text-base leading-[1.6] text-[#808080] transition-colors duration-300 group-hover:text-secondary/70 dark:group-hover:text-backgroundBody/70">
-                {item.description}
-              </p>
+              <h5 className="mb-2.5 mt-8 transition-colors duration-300 group-hover:text-white">{item.title}</h5>
+              <p className="text-[#808080] transition-colors duration-300 group-hover:text-white/85">{item.description}</p>
             </div>
           ))}
         </RevealWrapper>

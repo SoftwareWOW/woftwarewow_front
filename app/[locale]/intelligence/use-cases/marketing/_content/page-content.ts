@@ -9,11 +9,6 @@ const HERO_MEDIA = {
   alt: 'AI-powered marketing dashboards across devices',
 } as const
 
-const POWERED_IMAGE = {
-  src: '/images/wow/LandingPageNaveBare/AI and Automation 2.svg',
-  alt: 'Marketing analytics and campaign tools on laptop and mobile',
-} as const
-
 export const CONTENT = {
   hero: {
     badgeTitle: 'AI FOR MARKETING',
@@ -58,11 +53,15 @@ export const CONTENT = {
   },
   powered: {
     eyebrow: 'AI-POWERED MARKETING',
-    title: 'Make Every Campaign More Intelligent.',
+    titleBefore: 'Make Every Campaign More Intelligent.',
+    titleAccent: '',
     description:
       'We bring AI into your marketing workflows to support smarter targeting, faster execution, and clearer performance insights.',
     sectionId: 'ai-powered-marketing',
-    image: POWERED_IMAGE,
+    image: {
+      src: '/images/wow/LandingPageNaveBare/AI and Automation 2.svg',
+      alt: 'Marketing analytics and campaign tools on laptop and mobile',
+    },
     steps: [
       { id: '01', title: 'Audience Intelligence', description: 'Understand segments and customer behavior.' },
       { id: '02', title: 'AI Content Support', description: 'Assist with ideas, drafts, and variations.' },
