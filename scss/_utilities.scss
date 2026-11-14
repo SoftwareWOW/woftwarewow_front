@@ -37,6 +37,14 @@
     line-height: 1.15;
     letter-spacing: clamp(-0.05em, -0.205714286vw, -0.045em);
   }
+
+  /** ProcessV4 timeline step title: 48px at 1400px viewport, scales on smaller screens, capped at 48px. */
+  .wow-process-step-title {
+    @apply font-light;
+    font-size: clamp(1.5rem, 3.4285714286vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: clamp(-0.02em, -0.12vw, -0.035em);
+  }
 }
 
 @layer base {

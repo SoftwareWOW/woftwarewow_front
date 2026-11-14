@@ -40,9 +40,14 @@ export default function MarketingUseCasePoweredSection({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">
+            <h2 className="text-appear mx-auto max-w-4xl">
               {titleBefore}
-              {titleAccent ? <InstrumentText>{titleAccent}</InstrumentText> : null}
+              {titleAccent ? (
+                <>
+                  <br />
+                  <InstrumentText>{titleAccent}</InstrumentText>
+                </>
+              ) : null}
             </h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me mt-4">
@@ -62,7 +67,7 @@ export default function MarketingUseCasePoweredSection({
           </figure>
 
           <div className="min-w-0 flex-1">
-            <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l md:space-y-10 lg:space-y-12">
+            <ul className="relative space-y-5 border-secondary dark:border-backgroundBody md:border-l md:space-y-6 lg:space-y-7">
               {steps.map((step, index) => (
                 <li key={step.id} className="relative max-w-max px-10">
                   <div
@@ -73,7 +78,7 @@ export default function MarketingUseCasePoweredSection({
                     <span className="inline-block text-xl font-semibold text-inherit">{step.id}</span>
                   </div>
                   <div className="ml-[30px]">
-                    <h3>{step.title}</h3>
+                    <h3 className="wow-process-step-title">{step.title}</h3>
                     <p className="mt-3 max-w-[483px] text-base leading-relaxed text-[#808080]">{step.description}</p>
                   </div>
                 </li>

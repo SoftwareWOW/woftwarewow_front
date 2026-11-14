@@ -53,8 +53,8 @@ export const CONTENT = {
   },
   powered: {
     eyebrow: 'AI-POWERED MARKETING',
-    titleBefore: 'Make Every Campaign More Intelligent.',
-    titleAccent: '',
+    titleBefore: 'Make Every Campaign More',
+    titleAccent: 'Intelligent.',
     description:
       'We bring AI into your marketing workflows to support smarter targeting, faster execution, and clearer performance insights.',
     sectionId: 'ai-powered-marketing',
