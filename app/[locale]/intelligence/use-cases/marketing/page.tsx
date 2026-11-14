@@ -56,7 +56,7 @@ export default async function IntelligenceMarketingUseCasePage({ params }: Props
         description={challenge.description}
         capabilityCards={[...challenge.capabilityCards]}
       />
-      {/* 3. Powered — intelligent-automation WhatWeAutomate (PaidSocialBeyondClickSection) */}
+      {/* 3. Powered — for-you/social-and-community SocialProcess (Home-07 ProcessV4) */}
       <MarketingUseCasePoweredSection
         eyebrow={powered.eyebrow}
         titleBefore={powered.titleBefore}

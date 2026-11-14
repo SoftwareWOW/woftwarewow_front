@@ -68,7 +68,7 @@ export default async function IntelligentAutomationPage({ params }: Props) {
         manualSteps={[...impact.manualSteps]}
         connectedSteps={[...impact.connectedSteps]}
       />
-      {/* 4. What we automate — PaidSocialBeyondClickSection */}
+      {/* 4. What we automate — for-you/social-and-community SocialProcess (Home-07 ProcessV4) */}
       <IntelligentAutomationWhatWeAutomateSection
         eyebrow={whatWeAutomate.eyebrow}
         titleBefore={whatWeAutomate.titleBefore}

@@ -20,7 +20,7 @@ type IntelligentAutomationWhatWeAutomateSectionProps = {
   sectionId?: string
 }
 
-/** Layout copy: social/PaidSocialBeyondClickSection. */
+/** Layout copy: for-you/social-and-community SocialProcess (Home-07 ProcessV4). */
 export default function IntelligentAutomationWhatWeAutomateSection({
   eyebrow,
   titleBefore,
@@ -30,18 +30,20 @@ export default function IntelligentAutomationWhatWeAutomateSection({
   image,
   sectionId,
 }: IntelligentAutomationWhatWeAutomateSectionProps) {
+  const isSvg = image.src.toLowerCase().endsWith('.svg')
+
   return (
     <section
       id={sectionId}
       className="scroll-mt-24 bg-background transition-colors duration-300 dark:bg-background"
     >
       <div className="container">
-        <div className="mb-10 text-center md:mb-16">
-          <RevealWrapper className="reveal-me mb-5">
+        <div className="mb-8 text-center md:mb-20">
+          <RevealWrapper className="reveal-me mb-5 flex justify-center md:mb-8">
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-4xl">
+            <h2 className="text-appear mx-auto max-w-[770px]">
               {titleBefore}
               {titleAccent ? <InstrumentText>{titleAccent}</InstrumentText> : null}
             </h2>
@@ -51,38 +53,31 @@ export default function IntelligentAutomationWhatWeAutomateSection({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
+        <RevealWrapper className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-12 lg:gap-16">
+          <figure className="relative mx-auto h-[240px] w-full max-w-[570px] shrink-0 overflow-hidden rounded-radius-md sm:h-[320px] md:mx-0 md:h-auto md:w-[570px] md:min-h-[320px] lg:min-h-[400px]">
             <Image
               src={image.src}
               alt={image.alt}
               fill
-              className="rounded-radius-md object-cover"
-              sizes="(max-width: 768px) 100vw, 420px"
+              sizes="(max-width: 768px) 100vw, 570px"
+              className={`rounded-radius-md ${isSvg ? 'object-contain' : 'object-cover'}`}
             />
           </figure>
 
           <div className="min-w-0 flex-1">
-            <ul className="relative space-y-5 md:space-y-6">
+            <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l md:space-y-10 lg:space-y-12">
               {steps.map((step, index) => (
                 <li key={step.id} className="relative max-w-max px-10">
-                  {index < steps.length - 1 ? (
-                    <span
-                      aria-hidden
-                      className="absolute -left-px top-11 z-0 hidden w-px bg-secondary md:block lg:top-14 dark:bg-backgroundBody"
-                      style={{ height: 'calc(100% + 1.5rem)' }}
-                    />
-                  ) : null}
                   <div
-                    className={`absolute left-0 z-10 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
+                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
                       index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
                     }`}
                   >
-                    <span className="inline-block text-xl font-light text-inherit">{step.id}</span>
+                    <span className="inline-block text-xl font-semibold text-inherit">{step.id}</span>
                   </div>
                   <div className="ml-[30px]">
                     <h3>{step.title}</h3>
-                    <p className="mt-2 max-w-[483px] text-[#808080]">{step.description}</p>
+                    <p className="mt-3 max-w-[483px] text-base leading-relaxed text-[#808080]">{step.description}</p>
                   </div>
                 </li>
               ))}
