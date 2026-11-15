@@ -56,7 +56,7 @@ export default async function IntelligenceOperationsUseCasePage({ params }: Prop
         description={challenge.description}
         capabilityCards={[...challenge.capabilityCards]}
       />
-      {/* 3. Powered — intelligent-automation WhatWeAutomate (Home-07 ProcessV4) */}
+      {/* 3. Powered — §2 Challenge header + marketing WhatWeAutomate (ProcessV4) */}
       <OperationsUseCasePoweredSection
         eyebrow={powered.eyebrow}
         titleBefore={powered.titleBefore}
