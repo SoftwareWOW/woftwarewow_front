@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import WowText from '@/components/wow/shared/WowText'
 import { ArrowDown } from 'lucide-react'
 
 const WorkflowSteps = ({
@@ -86,8 +87,10 @@ export default function OperationsUseCaseAdvantageSection({
             </div>
 
             <div className="flex h-full min-h-0 flex-col lg:pl-10 xl:pl-16">
-              <h3 className="bg-gradient-to-r from-[#615CCE] to-[#FF9191] bg-clip-text text-4xl font-light uppercase leading-[1.15] tracking-[-0.02em] text-transparent md:text-5xl lg:text-[56px]">
-                {connectedTitle}
+              <h3 className="text-4xl font-light uppercase leading-[1.15] tracking-[-0.02em] md:text-5xl lg:text-[56px]">
+                <WowText className="text-[1em] font-light uppercase leading-[inherit] tracking-[-0.02em]">
+                  {connectedTitle}
+                </WowText>
               </h3>
               {afterSublabel ? (
                 <p className="mt-3 text-base text-secondary dark:text-backgroundBody md:text-lg">{afterSublabel}</p>
