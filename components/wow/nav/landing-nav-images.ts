@@ -1,8 +1,15 @@
 /** Mega-menu / nav detail art — SVGs in `public/images/wow/LandingPageNaveBare`. */
 export const LANDING_NAV_BASE = '/images/wow/LandingPageNaveBare'
 
+/** Division-specific mega-menu detail art in `public/images/wow/divisions_nav_bar`. */
+export const DIVISION_NAV_BAR_BASE = '/images/wow/divisions_nav_bar'
+
 export function landingNavImage(filename: string): string {
   return `${LANDING_NAV_BASE}/${encodeURIComponent(filename)}`
+}
+
+export function divisionNavBarImage(...pathSegments: string[]): string {
+  return `${DIVISION_NAV_BAR_BASE}/${pathSegments.map((segment) => encodeURIComponent(segment)).join('/')}`
 }
 
 /** Replaces legacy `/images/wow/nav/cards/*` files that now have SVG equivalents. */

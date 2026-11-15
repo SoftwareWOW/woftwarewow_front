@@ -1,3 +1,4 @@
+import { divisionNavBarImageByNavId } from '@/data/divisionNavBarImageMap'
 import { landingNavImage } from './landing-nav-images'
 import type { LucideIcon } from 'lucide-react'
 import {
@@ -543,5 +544,9 @@ export const navCardImages = {
 export type NavCardImageId = keyof typeof navCardImages
 
 export function getNavCardImage(id: string): string {
-  return navCardImages[id as NavCardImageId] ?? navCardImages.default
+  return (
+    divisionNavBarImageByNavId[id] ??
+    navCardImages[id as NavCardImageId] ??
+    navCardImages.default
+  )
 }
