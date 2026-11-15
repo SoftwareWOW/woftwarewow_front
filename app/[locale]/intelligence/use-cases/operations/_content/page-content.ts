@@ -52,14 +52,14 @@ export const CONTENT = {
   },
   powered: {
     eyebrow: 'INTELLIGENT OPERATIONS',
-    titleBefore: 'Connect Your Processes. Simplify Your ',
-    titleAccent: 'Work.',
+    titleBefore: 'Connect Your Processes.',
+    titleAccent: 'Simplify Your Work.',
     description:
       'We introduce AI and automation into the processes your team uses every day, helping information move efficiently and routine work happen with less manual intervention.',
     sectionId: 'intelligent-operations',
     image: {
-      src: '/images/wow/LandingPageNaveBare/Client Portal 2.svg',
-      alt: 'Operational dashboards and workflows across devices',
+      src: '/images/wow/Hero/devision/Intelligence.jpg',
+      alt: 'Team member reviewing operational workflows on a laptop',
     },
     steps: [
       { id: '01', title: 'Task Automation', description: 'Automate recurring activities and routine updates.' },
@@ -71,15 +71,13 @@ export const CONTENT = {
   },
   advantage: {
     eyebrow: 'THE OPERATIONS ADVANTAGE',
-    titleBefore: 'Less Friction. Better Flow.',
-    titleAccent: '',
-    titleSuffix: '',
+    title: 'Less Friction. Better Flow.',
     description:
       'When routine processes run more efficiently, your team gains clarity, consistency, and time to focus on higher-value work.',
-    withoutAiLabel: 'BEFORE AI',
-    withAiLabel: 'WITH AI',
-    withoutSteps: ['Manual Updates', 'Scattered Requests', 'Slow Approvals', 'Unclear Progress'],
-    withSteps: ['Automated Updates', 'Organized Requests', 'Faster Routing', 'Clearer Visibility'],
+    manualTitle: 'BEFORE AI',
+    connectedTitle: 'WITH AI',
+    manualSteps: ['Manual Updates', 'Scattered Requests', 'Slow Approvals', 'Unclear Progress'],
+    connectedSteps: ['Automated Updates', 'Organized Requests', 'Faster Routing', 'Clearer Visibility'],
   },
   approach: {
     eyebrow: 'OUR APPROACH',

@@ -16,7 +16,7 @@ type OperationsUseCaseApproachSectionProps = {
   steps: ReadonlyArray<Step>
 }
 
-/** Layout copy: packages/ai-automation FromIdeaToAutomation (sales use case / intelligent-automation implementation). */
+/** Layout copy: intelligent-automation IntelligentAutomationImplementationSection (FromIdeaToAutomation). */
 export default function OperationsUseCaseApproachSection({
   eyebrow,
   titleBefore,

@@ -1,63 +1,60 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
-import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { ArrowDown } from 'lucide-react'
 
-const cardClassName =
-  'relative rounded-radius-md border border-secondary/15 bg-background px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-background md:pt-12'
-
 const WorkflowSteps = ({
   steps,
-  contextLine,
+  muted,
 }: {
   steps: readonly string[]
-  contextLine?: string
+  muted?: boolean
 }) => (
-  <div className="flex flex-col items-start text-left">
-    {contextLine ? (
-      <p className="mb-4 text-base font-light text-secondary dark:text-backgroundBody md:text-lg">{contextLine}</p>
-    ) : null}
-    {steps.map((step, index) => (
-      <div key={step} className="w-full">
-        <p className="text-base leading-[1.5] text-secondary/70 dark:text-backgroundBody/70 md:text-[17px]">{step}</p>
-        {index < steps.length - 1 && (
-          <ArrowDown
-            aria-hidden
-            className="my-3 size-5 opacity-40 text-secondary dark:text-backgroundBody"
-            strokeWidth={1.5}
-          />
-        )}
-      </div>
+  <ul className="flex flex-col gap-4 md:gap-5">
+    {steps.map((step) => (
+      <li key={step} className="flex list-none items-start gap-3 text-left md:gap-4">
+        <ArrowDown
+          aria-hidden
+          className="mt-1 size-5 shrink-0 text-secondary/45 dark:text-backgroundBody/45"
+          strokeWidth={1.5}
+        />
+        <p
+          className={`min-w-0 flex-1 text-base leading-[1.5] md:text-[17px] ${
+            muted
+              ? 'text-secondary/55 dark:text-backgroundBody/55'
+              : 'text-secondary/80 dark:text-backgroundBody/85'
+          }`}
+        >
+          {step}
+        </p>
+      </li>
     ))}
-  </div>
+  </ul>
 )
 
 type OperationsUseCaseAdvantageSectionProps = {
   eyebrow: string
-  titleBefore: string
-  titleAccent: string
-  titleSuffix: string
+  title: string
   description: string
-  withoutAiLabel: string
-  withAiLabel: string
-  withoutSteps: readonly string[]
-  withSteps: readonly string[]
-  contextLine?: string
+  manualTitle: string
+  connectedTitle: string
+  beforeSublabel?: string
+  afterSublabel?: string
+  manualSteps: readonly string[]
+  connectedSteps: readonly string[]
 }
 
-/** Layout copy: intelligence/IntelligenceProblemSection — ArrowDown before/after comparison cards. */
+/** Layout copy: intelligent-automation IntelligentAutomationImpactSection. */
 export default function OperationsUseCaseAdvantageSection({
   eyebrow,
-  titleBefore,
-  titleAccent,
-  titleSuffix,
+  title,
   description,
-  withoutAiLabel,
-  withAiLabel,
-  withoutSteps,
-  withSteps,
-  contextLine,
+  manualTitle,
+  connectedTitle,
+  beforeSublabel,
+  afterSublabel,
+  manualSteps,
+  connectedSteps,
 }: OperationsUseCaseAdvantageSectionProps) {
   return (
     <section className="relative overflow-hidden bg-background transition-colors duration-300 dark:bg-background">
@@ -67,35 +64,38 @@ export default function OperationsUseCaseAdvantageSection({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto mb-5 md:mb-8">
-              {titleBefore}
-              {titleAccent ? (
-                <>
-                  {' '}
-                  <InstrumentText>{titleAccent}</InstrumentText>
-                </>
-              ) : null}
-              {titleSuffix ? ` ${titleSuffix}` : null}
-            </h2>
+            <h2 className="text-appear mx-auto mb-5 md:mb-8">{title}</h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me">
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="reveal-me mt-10 grid justify-center gap-6 md:mt-16 lg:grid-cols-2 lg:gap-8">
-          <div className={cardClassName}>
-            <h6 className="mb-8 text-2xl font-light uppercase tracking-[0.04em] text-secondary dark:text-backgroundBody md:mb-10 md:text-3xl">
-              {withoutAiLabel}
-            </h6>
-            <WorkflowSteps steps={withoutSteps} contextLine={contextLine} />
-          </div>
+        <RevealWrapper className="reveal-me mt-12 md:mt-20 lg:mt-24">
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-0">
+            <div className="flex h-full min-h-0 flex-col lg:border-r lg:border-[#e5e5e5] lg:pr-10 xl:pr-16 dark:lg:border-white/15">
+              <h3 className="text-4xl font-light uppercase leading-[1.15] tracking-[-0.02em] text-secondary dark:text-backgroundBody md:text-5xl lg:text-[56px]">
+                {manualTitle}
+              </h3>
+              {beforeSublabel ? (
+                <p className="mt-3 text-base text-secondary dark:text-backgroundBody md:text-lg">{beforeSublabel}</p>
+              ) : null}
+              <div className="mt-10 flex flex-1 flex-col md:mt-12">
+                <WorkflowSteps steps={manualSteps} muted />
+              </div>
+            </div>
 
-          <div className={cardClassName}>
-            <h6 className="mb-8 text-2xl font-light uppercase tracking-[0.04em] text-inherit md:mb-10 md:text-3xl">
-              {withAiLabel}
-            </h6>
-            <WorkflowSteps steps={withSteps} contextLine={contextLine} />
+            <div className="flex h-full min-h-0 flex-col lg:pl-10 xl:pl-16">
+              <h3 className="bg-gradient-to-r from-[#615CCE] to-[#FF9191] bg-clip-text text-4xl font-light uppercase leading-[1.15] tracking-[-0.02em] text-transparent md:text-5xl lg:text-[56px]">
+                {connectedTitle}
+              </h3>
+              {afterSublabel ? (
+                <p className="mt-3 text-base text-secondary dark:text-backgroundBody md:text-lg">{afterSublabel}</p>
+              ) : null}
+              <div className="mt-10 flex flex-1 flex-col md:mt-12">
+                <WorkflowSteps steps={connectedSteps} />
+              </div>
+            </div>
           </div>
         </RevealWrapper>
       </div>

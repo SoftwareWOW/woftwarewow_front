@@ -56,7 +56,7 @@ export default async function IntelligenceOperationsUseCasePage({ params }: Prop
         description={challenge.description}
         capabilityCards={[...challenge.capabilityCards]}
       />
-      {/* 3. Powered — wowmarketing MarketingFrameworkSection (/marketing §9) */}
+      {/* 3. Powered — intelligent-automation WhatWeAutomate (Home-07 ProcessV4) */}
       <OperationsUseCasePoweredSection
         eyebrow={powered.eyebrow}
         titleBefore={powered.titleBefore}
@@ -66,19 +66,17 @@ export default async function IntelligenceOperationsUseCasePage({ params }: Prop
         image={powered.image}
         sectionId={powered.sectionId}
       />
-      {/* 4. Advantage — intelligence/IntelligenceProblemSection (ArrowDown comparison) */}
+      {/* 4. Advantage — intelligent-automation IntelligentAutomationImpactSection */}
       <OperationsUseCaseAdvantageSection
         eyebrow={advantage.eyebrow}
-        titleBefore={advantage.titleBefore}
-        titleAccent={advantage.titleAccent}
-        titleSuffix={advantage.titleSuffix}
+        title={advantage.title}
         description={advantage.description}
-        withoutAiLabel={advantage.withoutAiLabel}
-        withAiLabel={advantage.withAiLabel}
-        withoutSteps={[...advantage.withoutSteps]}
-        withSteps={[...advantage.withSteps]}
+        manualTitle={advantage.manualTitle}
+        connectedTitle={advantage.connectedTitle}
+        manualSteps={[...advantage.manualSteps]}
+        connectedSteps={[...advantage.connectedSteps]}
       />
-      {/* 5. Approach — packages/ai-automation FromIdeaToAutomation */}
+      {/* 5. Approach — intelligent-automation Implementation (FromIdeaToAutomation) */}
       <OperationsUseCaseApproachSection
         eyebrow={approach.eyebrow}
         titleBefore={approach.titleBefore}

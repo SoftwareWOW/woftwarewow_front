@@ -20,7 +20,7 @@ type OperationsUseCasePoweredSectionProps = {
   sectionId?: string
 }
 
-/** Layout copy: wowmarketing MarketingFrameworkSection (/marketing §9). */
+/** Layout copy: intelligent-automation IntelligentAutomationWhatWeAutomateSection (Home-07 ProcessV4). */
 export default function OperationsUseCasePoweredSection({
   eyebrow,
   titleBefore,
@@ -43,7 +43,7 @@ export default function OperationsUseCasePoweredSection({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">
+            <h2 className="text-appear mx-auto max-w-4xl">
               {titleBefore}
               {titleAccent ? (
                 <>
@@ -58,9 +58,19 @@ export default function OperationsUseCasePoweredSection({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <div className="min-w-0 flex-1 md:order-1">
-            <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
+        <RevealWrapper className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-12 lg:gap-16">
+          <figure className="relative mx-auto h-[240px] w-full max-w-[570px] shrink-0 overflow-hidden rounded-radius-md sm:h-[320px] md:mx-0 md:h-auto md:w-[570px] md:min-h-[320px] lg:min-h-[400px]">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 570px"
+              className={`rounded-radius-md ${isSvg ? 'object-contain' : 'object-cover'}`}
+            />
+          </figure>
+
+          <div className="min-w-0 flex-1">
+            <ul className="relative space-y-5 border-secondary dark:border-backgroundBody md:border-l md:space-y-6 lg:space-y-7">
               {steps.map((step, index) => (
                 <li key={step.id} className="relative max-w-max px-10">
                   <div
@@ -68,32 +78,16 @@ export default function OperationsUseCasePoweredSection({
                       index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
                     }`}
                   >
-                    <span
-                      className={`inline-block text-xl font-light text-inherit ${
-                        index === 0 ? 'from-backgroundBody to-gray-400' : 'from-white to-gray-400'
-                      }`}
-                    >
-                      {step.id}
-                    </span>
+                    <span className="inline-block text-xl font-semibold text-inherit">{step.id}</span>
                   </div>
                   <div className="ml-[30px]">
-                    <h3>{step.title}</h3>
-                    <p className="mt-3 max-w-[483px] text-[#808080]">{step.description}</p>
+                    <h3 className="wow-process-step-title">{step.title}</h3>
+                    <p className="mt-3 max-w-[483px] text-base leading-relaxed text-[#808080]">{step.description}</p>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
-
-          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className={`rounded-radius-md ${isSvg ? 'object-contain' : 'object-cover'}`}
-              sizes="(max-width: 768px) 100vw, 420px"
-            />
-          </figure>
         </RevealWrapper>
       </div>
     </section>

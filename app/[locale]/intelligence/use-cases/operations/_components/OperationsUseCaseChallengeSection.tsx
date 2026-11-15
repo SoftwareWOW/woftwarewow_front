@@ -69,7 +69,7 @@ type OperationsUseCaseChallengeSectionProps = {
   capabilityCards: ReadonlyArray<OperationsChallengeCapabilityCard>
 }
 
-/** Layout copy: social/PaidSocialWhatWeManageSection — 2×2 flip cards. */
+/** Layout copy: intelligent-automation IntelligentAutomationChallengeSection (PaidSocialWhatWeManage). */
 export default function OperationsUseCaseChallengeSection({
   eyebrow,
   titleBefore,
