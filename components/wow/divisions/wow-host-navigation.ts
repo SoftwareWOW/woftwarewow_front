@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowHostMegaNavHref } from '@/data/wowHostMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,20 +14,12 @@ const panel = (
   image: 'default' as const,
 })
 
-const hostingHref = '/host#services'
-const solutionsHref = '/host#solutions'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
+  href: wowHostMegaNavHref(id),
   detailPanel: id,
 })
 
@@ -132,20 +125,17 @@ export const wowHostNavigation = {
                 'sharedWebHosting',
                 'Shared Web Hosting',
                 'Affordable hosting. Reliable performance.',
-                hostingHref,
               ),
-              link('vpsHosting', 'VPS Hosting', 'More power. Greater control.', hostingHref),
+              link('vpsHosting', 'VPS Hosting', 'More power. Greater control.'),
               link(
                 'dedicatedServers',
                 'Dedicated Servers',
                 'Maximum power. Complete control.',
-                hostingHref,
               ),
               link(
                 'cloudHosting',
                 'Cloud Hosting',
                 'Flexible hosting. Effortless scalability.',
-                hostingHref,
               ),
             ],
           },
@@ -161,25 +151,25 @@ export const wowHostNavigation = {
                 id: 'sharedWebHosting',
                 label: 'Shared Web Hosting',
                 description: 'Affordable hosting. Reliable performance.',
-                href: hostingHref,
+                href: wowHostMegaNavHref('sharedWebHosting'),
               },
               {
                 id: 'vpsHosting',
                 label: 'VPS Hosting',
                 description: 'More power. Greater control.',
-                href: hostingHref,
+                href: wowHostMegaNavHref('vpsHosting'),
               },
               {
                 id: 'dedicatedServers',
                 label: 'Dedicated Servers',
                 description: 'Maximum power. Complete control.',
-                href: hostingHref,
+                href: wowHostMegaNavHref('dedicatedServers'),
               },
               {
                 id: 'cloudHosting',
                 label: 'Cloud Hosting',
                 description: 'Flexible hosting. Effortless scalability.',
-                href: hostingHref,
+                href: wowHostMegaNavHref('cloudHosting'),
               },
             ],
           },
@@ -216,19 +206,16 @@ export const wowHostNavigation = {
                 'hostDigitalIdentity',
                 'Your Name. Your Digital Identity.',
                 'Find and secure your perfect domain.',
-                solutionsHref,
               ),
               link(
                 'hostProfessionalEmail',
                 'Professional Email for Your Business.',
                 'Build trust with branded business email.',
-                solutionsHref,
               ),
               link(
                 'hostProtectOnline',
                 'Protect What Keeps You Online.',
                 'Secure your website, data, and business.',
-                solutionsHref,
               ),
             ],
           },
@@ -244,19 +231,19 @@ export const wowHostNavigation = {
                 id: 'hostDigitalIdentity',
                 label: 'Your Name. Your Digital Identity.',
                 description: 'Find and secure your perfect domain.',
-                href: solutionsHref,
+                href: wowHostMegaNavHref('hostDigitalIdentity'),
               },
               {
                 id: 'hostProfessionalEmail',
                 label: 'Professional Email for Your Business.',
                 description: 'Build trust with branded business email.',
-                href: solutionsHref,
+                href: wowHostMegaNavHref('hostProfessionalEmail'),
               },
               {
                 id: 'hostProtectOnline',
                 label: 'Protect What Keeps You Online.',
                 description: 'Secure your website, data, and business.',
-                href: solutionsHref,
+                href: wowHostMegaNavHref('hostProtectOnline'),
               },
             ],
           },

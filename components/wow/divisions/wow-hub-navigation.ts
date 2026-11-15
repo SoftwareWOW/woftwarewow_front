@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowHubMegaNavHref } from '@/data/wowHubMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,20 +14,12 @@ const panel = (
   image: 'default' as const,
 })
 
-const coursesHref = '/hub#explore'
-const communityHref = '/hub#community'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
+  href: wowHubMegaNavHref(id),
   detailPanel: id,
 })
 
@@ -162,37 +155,31 @@ export const wowHubNavigation = {
                 'hubCoursesMarketingGrowth',
                 'Marketing & Growth',
                 'Learn strategies. Grow smarter.',
-                coursesHref,
               ),
               link(
                 'hubCoursesDesignCreativity',
                 'Design & Creativity',
                 'Unlock creativity. Build new skills.',
-                coursesHref,
               ),
               link(
                 'hubCoursesTechnologyAi',
                 'Technology & AI',
                 'Explore technology. Master AI.',
-                coursesHref,
               ),
               link(
                 'hubCoursesSalesBusiness',
                 'Sales & Business',
                 'Sell smarter. Build better businesses.',
-                coursesHref,
               ),
               link(
                 'hubCoursesLeadershipBranding',
                 'Leadership & Personal Branding',
                 'Lead confidently. Build your influence.',
-                coursesHref,
               ),
               link(
                 'hubCoursesCommunityCollaboration',
                 'Community & Collaboration',
                 'Learn together. Grow together.',
-                coursesHref,
               ),
             ],
           },
@@ -208,37 +195,37 @@ export const wowHubNavigation = {
                 id: 'hubCoursesMarketingGrowth',
                 label: 'Marketing & Growth',
                 description: 'Learn strategies. Grow smarter.',
-                href: coursesHref,
+                href: wowHubMegaNavHref('hubCoursesMarketingGrowth'),
               },
               {
                 id: 'hubCoursesDesignCreativity',
                 label: 'Design & Creativity',
                 description: 'Unlock creativity. Build new skills.',
-                href: coursesHref,
+                href: wowHubMegaNavHref('hubCoursesDesignCreativity'),
               },
               {
                 id: 'hubCoursesTechnologyAi',
                 label: 'Technology & AI',
                 description: 'Explore technology. Master AI.',
-                href: coursesHref,
+                href: wowHubMegaNavHref('hubCoursesTechnologyAi'),
               },
               {
                 id: 'hubCoursesSalesBusiness',
                 label: 'Sales & Business',
                 description: 'Sell smarter. Build better businesses.',
-                href: coursesHref,
+                href: wowHubMegaNavHref('hubCoursesSalesBusiness'),
               },
               {
                 id: 'hubCoursesLeadershipBranding',
                 label: 'Leadership & Personal Branding',
                 description: 'Lead confidently. Build your influence.',
-                href: coursesHref,
+                href: wowHubMegaNavHref('hubCoursesLeadershipBranding'),
               },
               {
                 id: 'hubCoursesCommunityCollaboration',
                 label: 'Community & Collaboration',
                 description: 'Learn together. Grow together.',
-                href: coursesHref,
+                href: wowHubMegaNavHref('hubCoursesCommunityCollaboration'),
               },
             ],
           },
@@ -275,25 +262,21 @@ export const wowHubNavigation = {
                 'hubCommunityAskDiscuss',
                 'Ask & Discuss',
                 'Ask questions. Share ideas.',
-                communityHref,
               ),
               link(
                 'hubCommunityLiveSessions',
                 'Live Sessions',
                 'Join live. Learn together.',
-                communityHref,
               ),
               link(
                 'hubCommunityMeetConnect',
                 'Meet & Connect',
                 'Meet people. Build connections.',
-                communityHref,
               ),
               link(
                 'hubCommunityShareWork',
                 'Share Your Work',
                 'Showcase ideas. Inspire others.',
-                communityHref,
               ),
             ],
           },
@@ -309,25 +292,25 @@ export const wowHubNavigation = {
                 id: 'hubCommunityAskDiscuss',
                 label: 'Ask & Discuss',
                 description: 'Ask questions. Share ideas.',
-                href: communityHref,
+                href: wowHubMegaNavHref('hubCommunityAskDiscuss'),
               },
               {
                 id: 'hubCommunityLiveSessions',
                 label: 'Live Sessions',
                 description: 'Join live. Learn together.',
-                href: communityHref,
+                href: wowHubMegaNavHref('hubCommunityLiveSessions'),
               },
               {
                 id: 'hubCommunityMeetConnect',
                 label: 'Meet & Connect',
                 description: 'Meet people. Build connections.',
-                href: communityHref,
+                href: wowHubMegaNavHref('hubCommunityMeetConnect'),
               },
               {
                 id: 'hubCommunityShareWork',
                 label: 'Share Your Work',
                 description: 'Showcase ideas. Inspire others.',
-                href: communityHref,
+                href: wowHubMegaNavHref('hubCommunityShareWork'),
               },
             ],
           },

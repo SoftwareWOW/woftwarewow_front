@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowEventsMegaNavHref } from '@/data/wowEventsMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,20 +14,12 @@ const panel = (
   image: 'default' as const,
 })
 
-const ourEventsHref = '/events#experiences'
-const servicesHref = '/events#services'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
+  href: wowEventsMegaNavHref(id),
   detailPanel: id,
 })
 
@@ -152,31 +145,26 @@ export const wowEventsNavigation = {
                 'ourEventsConferencesSummits',
                 'Conferences & Summits',
                 'Big ideas. Meaningful connections.',
-                ourEventsHref,
               ),
               link(
                 'ourEventsBrandLaunches',
                 'Brand & Product Launches',
                 'Make every launch unforgettable.',
-                ourEventsHref,
               ),
               link(
                 'ourEventsCorporateExperiences',
                 'Corporate Experiences',
                 'Bring teams together. Inspire success.',
-                ourEventsHref,
               ),
               link(
                 'ourEventsNetworkingCommunity',
                 'Networking & Community',
                 'Connect people. Build communities.',
-                ourEventsHref,
               ),
               link(
                 'ourEventsHybridVirtual',
                 'Hybrid & Virtual Events',
                 'Connect audiences beyond boundaries.',
-                ourEventsHref,
               ),
             ],
           },
@@ -192,31 +180,31 @@ export const wowEventsNavigation = {
                 id: 'ourEventsConferencesSummits',
                 label: 'Conferences & Summits',
                 description: 'Big ideas. Meaningful connections.',
-                href: ourEventsHref,
+                href: wowEventsMegaNavHref('ourEventsConferencesSummits'),
               },
               {
                 id: 'ourEventsBrandLaunches',
                 label: 'Brand & Product Launches',
                 description: 'Make every launch unforgettable.',
-                href: ourEventsHref,
+                href: wowEventsMegaNavHref('ourEventsBrandLaunches'),
               },
               {
                 id: 'ourEventsCorporateExperiences',
                 label: 'Corporate Experiences',
                 description: 'Bring teams together. Inspire success.',
-                href: ourEventsHref,
+                href: wowEventsMegaNavHref('ourEventsCorporateExperiences'),
               },
               {
                 id: 'ourEventsNetworkingCommunity',
                 label: 'Networking & Community',
                 description: 'Connect people. Build communities.',
-                href: ourEventsHref,
+                href: wowEventsMegaNavHref('ourEventsNetworkingCommunity'),
               },
               {
                 id: 'ourEventsHybridVirtual',
                 label: 'Hybrid & Virtual Events',
                 description: 'Connect audiences beyond boundaries.',
-                href: ourEventsHref,
+                href: wowEventsMegaNavHref('ourEventsHybridVirtual'),
               },
             ],
           },
@@ -240,25 +228,21 @@ export const wowEventsNavigation = {
                 'eventsServicesConferencesCorporate',
                 'Conferences & Corporate Events',
                 'Professional events. Exceptional experiences.',
-                servicesHref,
               ),
               link(
                 'eventsServicesBrandLaunches',
                 'Brand & Product Launches',
                 'Launch boldly. Leave an impression.',
-                servicesHref,
               ),
               link(
                 'eventsServicesNetworkingCommunity',
                 'Networking & Community Events',
                 'Create connections that matter.',
-                servicesHref,
               ),
               link(
                 'eventsServicesHybridVirtual',
                 'Hybrid & Virtual Experiences',
                 'Seamless experiences. Anywhere, anytime.',
-                servicesHref,
               ),
             ],
           },
@@ -274,25 +258,25 @@ export const wowEventsNavigation = {
                 id: 'eventsServicesConferencesCorporate',
                 label: 'Conferences & Corporate Events',
                 description: 'Professional events. Exceptional experiences.',
-                href: servicesHref,
+                href: wowEventsMegaNavHref('eventsServicesConferencesCorporate'),
               },
               {
                 id: 'eventsServicesBrandLaunches',
                 label: 'Brand & Product Launches',
                 description: 'Launch boldly. Leave an impression.',
-                href: servicesHref,
+                href: wowEventsMegaNavHref('eventsServicesBrandLaunches'),
               },
               {
                 id: 'eventsServicesNetworkingCommunity',
                 label: 'Networking & Community Events',
                 description: 'Create connections that matter.',
-                href: servicesHref,
+                href: wowEventsMegaNavHref('eventsServicesNetworkingCommunity'),
               },
               {
                 id: 'eventsServicesHybridVirtual',
                 label: 'Hybrid & Virtual Experiences',
                 description: 'Seamless experiences. Anywhere, anytime.',
-                href: servicesHref,
+                href: wowEventsMegaNavHref('eventsServicesHybridVirtual'),
               },
             ],
           },

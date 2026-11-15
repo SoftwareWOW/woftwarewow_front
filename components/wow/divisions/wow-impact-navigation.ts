@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowImpactMegaNavHref } from '@/data/wowImpactMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,19 +14,12 @@ const panel = (
   image: 'default' as const,
 })
 
-const serviceHref = '/impact#services'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
+  href: wowImpactMegaNavHref(id),
   detailPanel: id,
 })
 
@@ -101,25 +95,21 @@ export const wowImpactNavigation = {
                 'personalBranding',
                 'Personal Branding',
                 'Build your identity. Stand out.',
-                serviceHref,
               ),
               link(
                 'thoughtLeadership',
                 'Thought Leadership',
                 'Share expertise. Inspire influence.',
-                serviceHref,
               ),
               link(
                 'reputationVisibility',
                 'Reputation & Visibility',
                 'Build trust. Grow recognition.',
-                serviceHref,
               ),
               link(
                 'speakingMediaPresence',
                 'Speaking & Media Presence',
                 'Amplify your voice and impact.',
-                serviceHref,
               ),
             ],
           },
@@ -135,25 +125,25 @@ export const wowImpactNavigation = {
                 id: 'personalBranding',
                 label: 'Personal Branding',
                 description: 'Build your identity. Stand out.',
-                href: serviceHref,
+                href: wowImpactMegaNavHref('personalBranding'),
               },
               {
                 id: 'thoughtLeadership',
                 label: 'Thought Leadership',
                 description: 'Share expertise. Inspire influence.',
-                href: serviceHref,
+                href: wowImpactMegaNavHref('thoughtLeadership'),
               },
               {
                 id: 'reputationVisibility',
                 label: 'Reputation & Visibility',
                 description: 'Build trust. Grow recognition.',
-                href: serviceHref,
+                href: wowImpactMegaNavHref('reputationVisibility'),
               },
               {
                 id: 'speakingMediaPresence',
                 label: 'Speaking & Media Presence',
                 description: 'Amplify your voice and impact.',
-                href: serviceHref,
+                href: wowImpactMegaNavHref('speakingMediaPresence'),
               },
             ],
           },

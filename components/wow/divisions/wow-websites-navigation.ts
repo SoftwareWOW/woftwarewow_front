@@ -1,4 +1,5 @@
 import type { NavigationData } from '@/components/wow/nav/navigation-types'
+import { wowWebsitesMegaNavHref } from '@/data/wowWebsitesMegaNavRoutes'
 
 const panel = (
   title: string,
@@ -13,20 +14,13 @@ const panel = (
   image: 'default' as const,
 })
 
-const serviceHref = '/websites#services'
-
-const link = (
-  id: string,
-  label: string,
-  description: string,
-  href: string,
-) => ({
+const link = (id: string, label: string, description: string) => ({
   id,
   label,
   description,
   type: 'link' as const,
-  href,
-  detailPanel: 'default' as const,
+  href: wowWebsitesMegaNavHref(id),
+  detailPanel: id,
 })
 
 /** WOW Websites mega-nav — Figma-aligned services and detail panels. */
@@ -141,37 +135,31 @@ export const wowWebsitesNavigation = {
                 'businessWebsites',
                 'Business Websites',
                 'Build your professional online presence.',
-                serviceHref,
               ),
               link(
                 'ecommerceWebsites',
                 'eCommerce Websites',
                 'Create seamless online shopping experiences.',
-                serviceHref,
               ),
               link(
                 'websiteRedesigns',
                 'Website Redesigns',
                 'Transform outdated websites into modern results.',
-                serviceHref,
               ),
               link(
                 'landingPages',
                 'Landing Pages',
                 'Capture attention and drive action.',
-                serviceHref,
               ),
               link(
                 'accessibleWebExperiences',
                 'Accessible Web Experiences',
                 'Build inclusive websites everyone can navigate.',
-                serviceHref,
               ),
               link(
                 'multilingualWebsites',
                 'Multilingual Websites',
                 'Connect with global audiences.',
-                serviceHref,
               ),
             ],
           },
@@ -183,13 +171,11 @@ export const wowWebsitesNavigation = {
                 'conversionOptimization',
                 'Conversion Optimization',
                 'Turn traffic into meaningful actions.',
-                serviceHref,
               ),
               link(
                 'websiteOptimization',
                 'Website Optimization',
                 'Faster, smoother, more reliable experiences.',
-                serviceHref,
               ),
             ],
           },
@@ -205,49 +191,49 @@ export const wowWebsitesNavigation = {
                 id: 'businessWebsites',
                 label: 'Business Websites',
                 description: 'Build your professional online presence.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('businessWebsites'),
               },
               {
                 id: 'ecommerceWebsites',
                 label: 'eCommerce Websites',
                 description: 'Create seamless online shopping experiences.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('ecommerceWebsites'),
               },
               {
                 id: 'websiteRedesigns',
                 label: 'Website Redesigns',
                 description: 'Transform outdated websites into modern results.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('websiteRedesigns'),
               },
               {
                 id: 'landingPages',
                 label: 'Landing Pages',
                 description: 'Capture attention and drive action.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('landingPages'),
               },
               {
                 id: 'accessibleWebExperiences',
                 label: 'Accessible Web Experiences',
                 description: 'Build inclusive websites everyone can navigate.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('accessibleWebExperiences'),
               },
               {
                 id: 'multilingualWebsites',
                 label: 'Multilingual Websites',
                 description: 'Connect with global audiences.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('multilingualWebsites'),
               },
               {
                 id: 'conversionOptimization',
                 label: 'Conversion Optimization',
                 description: 'Turn traffic into meaningful actions.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('conversionOptimization'),
               },
               {
                 id: 'websiteOptimization',
                 label: 'Website Optimization',
                 description: 'Faster, smoother, more reliable experiences.',
-                href: serviceHref,
+                href: wowWebsitesMegaNavHref('websiteOptimization'),
               },
             ],
           },
