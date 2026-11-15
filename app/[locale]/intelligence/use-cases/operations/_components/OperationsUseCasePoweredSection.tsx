@@ -67,17 +67,21 @@ export default function OperationsUseCasePoweredSection({
           </figure>
 
           <div className="min-w-0 flex-1">
-            <ul className="relative space-y-5 border-secondary dark:border-backgroundBody md:border-l md:space-y-6 lg:space-y-7">
+            <ul className="relative space-y-5 md:space-y-6 lg:space-y-7">
               {steps.map((step, index) => (
-                <li key={step.id} className="relative max-w-max px-10">
-                  <div
-                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
-                      index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
-                    }`}
-                  >
-                    <span className="inline-block text-xl font-semibold text-inherit">{step.id}</span>
+                <li key={step.id} className="flex max-w-max items-start gap-6 md:gap-8">
+                  <div className="flex w-16 shrink-0 flex-col items-center self-stretch">
+                    <div className="relative z-10 flex shrink-0 items-center justify-center rounded-full bg-secondary px-3.5 py-5 text-lg font-bold text-white lg:px-6 lg:py-8">
+                      <span className="inline-block text-xl font-semibold text-inherit">{step.id}</span>
+                    </div>
+                    {index < steps.length - 1 ? (
+                      <span
+                        aria-hidden
+                        className="mt-0 w-px min-h-4 flex-1 bg-secondary dark:bg-backgroundBody md:-mb-6 lg:-mb-7"
+                      />
+                    ) : null}
                   </div>
-                  <div className="ml-[30px]">
+                  <div className="min-w-0">
                     <h3 className="wow-process-step-title text-nowrap">{step.title}</h3>
                     <p className="mt-3 max-w-[483px] text-base leading-relaxed text-[#808080]">{step.description}</p>
                   </div>
