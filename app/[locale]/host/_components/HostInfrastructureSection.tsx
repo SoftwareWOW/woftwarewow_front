@@ -1,12 +1,21 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { HOST_INFRASTRUCTURE } from './host-content'
 
 export default function HostInfrastructureSection() {
   const section = HOST_INFRASTRUCTURE
+  const imageSrc = useLandingImage(
+    LANDING_SECTION_KEYS.wowHost.infrastructure,
+    0,
+    section.image.src,
+  )
 
   return (
     <section>
@@ -55,7 +64,7 @@ export default function HostInfrastructureSection() {
 
           <RevealWrapper as="figure" className="reveal-me relative min-h-[280px] md:w-1/2">
             <Image
-              src={section.image.src}
+              src={imageSrc}
               alt={section.image.alt}
               width={640}
               height={480}

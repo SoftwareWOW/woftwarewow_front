@@ -1,13 +1,18 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { HOST_HERO } from './host-content'
 
 const HostHero = () => {
   const hero = HOST_HERO
   const heroImage = hero.images[0]
+  const heroSrc = useLandingImage(LANDING_SECTION_KEYS.wowHost.hero, 0, heroImage.src)
 
   return (
        <section className="relative overflow-hidden bg-background px-3 pt-10 transition-colors duration-300 dark:bg-background sm:pt-10 md:px-4 lg:pt-12 xl:pt-14">
@@ -41,7 +46,7 @@ const HostHero = () => {
 
           <figure className="w-full max-w-[560px] shrink-0 overflow-hidden rounded-2xl bg-[#D9D9D9] dark:bg-[#3A3A3A] lg:max-w-[48%]">
             <Image
-              src={heroImage.src}
+              src={heroSrc}
               alt={heroImage.alt}
               width={720}
               height={720}

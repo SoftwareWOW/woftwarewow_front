@@ -8,11 +8,22 @@ import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import { SOFTWAREWOW_INDUSTRIES, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
-export default function SoftwareWowIndustriesCarousel() {
+type IndustrySlide = (typeof SOFTWAREWOW_INDUSTRIES.slides)[number]
+
+type SoftwareWowIndustriesCarouselProps = {
+  slides?: readonly IndustrySlide[]
+}
+
+export default function SoftwareWowIndustriesCarousel({ slides: slidesFromCms }: SoftwareWowIndustriesCarouselProps) {
+  const imageMap = useDivisionLandingImages()
   const content = SOFTWAREWOW_INDUSTRIES
-  const slides = content.slides
+  const useCmsSlides = Boolean(slidesFromCms)
+  const slides = slidesFromCms ?? content.slides
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -128,7 +139,16 @@ export default function SoftwareWowIndustriesCarousel() {
                     <article className="relative w-full overflow-visible pb-14 sm:pb-16">
                       <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-radius-md [clip-path:inset(0_round_var(--radius-md))]">
                         <Image
-                          src={slide.image}
+                          src={
+                            useCmsSlides
+                              ? slide.image
+                              : resolveLandingImage(
+                                  imageMap,
+                                  LANDING_SECTION_KEYS.softwareWow.industries,
+                                  index,
+                                  slide.image,
+                                )
+                          }
                           alt={slide.title}
                           fill
                           className="rounded-radius-md object-cover"

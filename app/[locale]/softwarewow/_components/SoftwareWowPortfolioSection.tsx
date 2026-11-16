@@ -10,14 +10,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SOFTWAREWOW_PORTFOLIO, SOFTWAREWOW_SECTION_SHELL } from './softwarewow-content'
 
-export default function SoftwareWowPortfolioSection() {
+type PortfolioProject = (typeof SOFTWAREWOW_PORTFOLIO.projects)[number]
+
+type Props = {
+  projects?: readonly PortfolioProject[]
+}
+
+export default function SoftwareWowPortfolioSection({ projects }: Props) {
   const content = SOFTWAREWOW_PORTFOLIO
+  const projectList = projects ?? content.projects
   const [showAll, setShowAll] = useState(false)
   const visibleProjects = showAll
-    ? content.projects
-    : content.projects.slice(0, content.initialVisibleCount)
-  const hasMore = content.projects.length > content.initialVisibleCount
-
+    ? projectList
+    : projectList.slice(0, content.initialVisibleCount)
+  const hasMore = projectList.length > content.initialVisibleCount
   return (
     <section className={SOFTWAREWOW_SECTION_SHELL}>
       <div className="container">

@@ -1,14 +1,17 @@
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
-import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
-import { mapStrapiEcosystem } from '@/lib/strapi/mappers/superagency'
+import { DivisionLandingImageProvider } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { mergeIndustrySlides } from '@/lib/strapi/division-landing/merge-landing-content'
+import { loadDivisionLandingBundles, mergeDivisionPortfolioImages } from '@/lib/strapi/division-landing/prepare-division-landing'
+import { getSuperagencyProjectsForPortfolio } from '@/lib/strapi/fetchers/superagency-projects'
+import { landingContentCards } from '@/lib/strapi/mappers/division-landing'
 import { localizedAlternates } from '@/lib/seo/localized-alternates'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import MarketingHero from './_components/MarketingHero'
 import MarketingPlatformsIntro from './_components/MarketingPlatformsIntro'
 import MarketingPortfolioSection from './_components/MarketingPortfolioSection'
-import { MARKETING_CTA, MARKETING_FAQS } from './_components/marketing-content'
+import { MARKETING_CTA, MARKETING_FAQS, MARKETING_INDUSTRIES, MARKETING_PORTFOLIO } from './_components/marketing-content'
 
 
 
@@ -45,22 +48,36 @@ export default async function WowMarketingPage({ params }: Props) {
 
   const typedLocale = locale as Locale
   const dictionary = await getDictionary(typedLocale)
-  const cms = await getSuperagencyHomepage(typedLocale)
-  const ecosystem = mapStrapiEcosystem(cms.ecosystem, dictionary.ecosystem)
+  const [{ imageMap, content }, cmsProjects] = await Promise.all([
+    loadDivisionLandingBundles('wowMarketing', typedLocale),
+    getSuperagencyProjectsForPortfolio(typedLocale),
+  ])
+  const industrySlides = mergeIndustrySlides(
+    MARKETING_INDUSTRIES.slides,
+    landingContentCards(content, 'industries'),
+  )
+  const portfolioMerged = mergeDivisionPortfolioImages(
+    [MARKETING_PORTFOLIO.featured, ...MARKETING_PORTFOLIO.projects],
+    cmsProjects,
+  )
   return (
+    <DivisionLandingImageProvider imageMap={imageMap}>
     <div className="flex flex-col gap-12 bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       <MarketingHero />
       <MarketingPlatformsIntro />
-      <MarketingPortfolioSection />
+      <MarketingPortfolioSection
+        featured={portfolioMerged[0]}
+        projects={portfolioMerged.slice(1)}
+      />
       <WowDivisionsMarquee />
       <MarketingHoldbackSection />
       <MarketingApproachGrid />
       <MarketingServicesGrid />
+      <MarketingFrameworkSection />
       <MarketingProcessSection />
-       <MarketingFrameworkSection />
       <MarketingGrowthPartnerSection />
-      <MarketingIndustriesCarousel />
-      <WowEcosystem ecosystem={ecosystem} />
+      <MarketingIndustriesCarousel slides={industrySlides} />
+      <WowEcosystem ecosystem={dictionary.ecosystem} />
       <Faq faqs={[...MARKETING_FAQS]} />
       <div className="mb-3">
         <WowGrowthCta
@@ -70,5 +87,6 @@ export default async function WowMarketingPage({ params }: Props) {
         />
       </div>
     </div>
+    </DivisionLandingImageProvider>
   )
 }

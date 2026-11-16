@@ -1,14 +1,28 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
 import Image from 'next/image'
 import Link from 'next/link'
 import { IMPACT_SERVICES } from './impact-content'
 
-export default function ImpactServicesSection() {
+type ServiceItem = (typeof IMPACT_SERVICES.items)[number]
+
+type ImpactServicesSectionProps = {
+  items?: readonly ServiceItem[]
+}
+
+export default function ImpactServicesSection({ items: itemsFromCms }: ImpactServicesSectionProps) {
   const section = IMPACT_SERVICES
+  const imageMap = useDivisionLandingImages()
+  const useCmsItems = Boolean(itemsFromCms)
+  const displayItems = itemsFromCms ?? section.items
 
   return (
     <section id="services" className="scroll-mt-28 bg-background transition-colors duration-300 dark:bg-background">
@@ -29,7 +43,7 @@ export default function ImpactServicesSection() {
         </div>
 
         <div className="mb-[60px] space-y-[30px]">
-          {section.items.map((item) => (
+          {displayItems.map((item, index) => (
             <RevealWrapper
               key={item.index}
               className="underline-hover-effect reveal-me group relative flex w-full flex-col items-center lg:flex-row"
@@ -37,7 +51,16 @@ export default function ImpactServicesSection() {
               <figure className="relative -z-30 aspect-[870/580] w-full max-w-[870px] overflow-hidden rounded-radius-md">
                 <Link href={item.href} className="relative block h-full w-full" aria-label={`View ${item.title}`}>
                   <Image
-                    src={item.image}
+                    src={
+                      useCmsItems
+                        ? item.image
+                        : resolveLandingImage(
+                            imageMap,
+                            LANDING_SECTION_KEYS.wowImpact.services,
+                            index,
+                            item.image,
+                          )
+                    }
                     alt={item.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 870px"

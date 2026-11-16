@@ -7,6 +7,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MARKETING_PORTFOLIO } from './marketing-content'
 
+type MarketingPortfolioProject = {
+  category: string
+  year: string
+  title: string
+  href: string
+  image: string
+}
+
+type MarketingPortfolioSectionProps = {
+  featured?: MarketingPortfolioProject
+  projects?: readonly MarketingPortfolioProject[]
+}
+
 /** Design targets at 1400px viewport width; scale with vw and clamp for smaller/larger screens. */
 const PORTFOLIO_FEATURED_IMAGE_HEIGHT = 'h-[clamp(12.5rem,41.786vw,585px)]'
 const PORTFOLIO_SECONDARY_IMAGE_HEIGHT = 'h-[clamp(10rem,30.929vw,433px)]'
@@ -59,8 +72,13 @@ function ProjectCard({
   )
 }
 
-export default function MarketingPortfolioSection() {
+export default function MarketingPortfolioSection({
+  featured,
+  projects,
+}: MarketingPortfolioSectionProps) {
   const content = MARKETING_PORTFOLIO
+  const featuredProject = featured ?? content.featured
+  const projectList = projects ?? content.projects
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -94,12 +112,12 @@ export default function MarketingPortfolioSection() {
 
         <div className="flex flex-col gap-10 md:gap-14">
           <ProjectCard
-            project={content.featured}
+            project={featuredProject}
             imageHeightClass={PORTFOLIO_FEATURED_IMAGE_HEIGHT}
             imageSizes="(max-width: 1400px) 100vw, 1400px"
           />
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-8 md:gap-y-14">
-            {content.projects.map((project) => (
+            {projectList.map((project) => (
               <ProjectCard
                 key={project.title}
                 project={project}

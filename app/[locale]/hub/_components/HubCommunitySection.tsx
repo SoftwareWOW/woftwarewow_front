@@ -1,7 +1,11 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { HUB_COMMUNITY, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
@@ -47,6 +51,11 @@ function CommunityCard({ title, description, icon }: { title: string; descriptio
 
 export default function HubCommunitySection() {
   const content = HUB_COMMUNITY
+  const bannerSrc = useLandingImage(
+    LANDING_SECTION_KEYS.wowHub.community,
+    0,
+    content.bannerImage,
+  )
 
   return (
     <section id="community" className={`scroll-mt-28 ${HUB_SECTION_SHELL}`}>
@@ -80,7 +89,7 @@ export default function HubCommunitySection() {
         <RevealWrapper className="reveal-me">
           <figure className="relative h-[clamp(240px,51.14vw,714px)] w-full overflow-hidden rounded-radius-md">
             <Image
-              src={content.bannerImage}
+              src={bannerSrc}
               alt={content.bannerAlt}
               fill
               className="object-cover"

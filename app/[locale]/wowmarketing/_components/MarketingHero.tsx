@@ -1,12 +1,17 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { MARKETING_HERO } from './marketing-content'
 
 export default function MarketingHero() {
   const hero = MARKETING_HERO
+  const heroSrc = useLandingImage(LANDING_SECTION_KEYS.wowMarketing.hero, 0, hero.image.src)
 
   return (
     <section className="relative overflow-hidden bg-background px-3 pt-[30px] transition-colors duration-300 dark:bg-background md:px-4 md:pt-[40px] xl:pt-[50px]">
@@ -40,7 +45,7 @@ export default function MarketingHero() {
 
           <figure className="w-full max-w-[560px] shrink-0 overflow-hidden rounded-radius-md bg-[#D9D9D9] dark:bg-[#3A3A3A] lg:max-w-[48%]">
             <Image
-              src={hero.image.src}
+              src={heroSrc}
               alt={hero.image.alt}
               width={720}
               height={720}

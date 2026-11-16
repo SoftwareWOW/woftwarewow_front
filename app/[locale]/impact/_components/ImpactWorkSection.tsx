@@ -7,10 +7,35 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
+import type { CmsLandingWorkExplorer } from '@/lib/strapi/types/division-landing'
 import { IMPACT_WORK } from './impact-content'
 
-export default function ImpactWorkSection() {
-  const content = IMPACT_WORK
+type ImpactWorkSectionProps = {
+  workExplorer?: CmsLandingWorkExplorer
+}
+
+export default function ImpactWorkSection({ workExplorer }: ImpactWorkSectionProps) {
+  const staticContent = IMPACT_WORK
+  const imageMap = useDivisionLandingImages()
+  const useCmsWork = Boolean(workExplorer?.cards.length)
+  const content = useCmsWork
+    ? {
+        ...staticContent,
+        filters: [{ label: 'ALL', slug: 'ALL' as const }, ...workExplorer!.filters],
+        cards: workExplorer!.cards.map((card) => ({
+          id: card.id,
+          category: card.category,
+          title: card.title,
+          description: card.description,
+          bullets: '',
+          href: card.href,
+          image: card.image,
+        })),
+      }
+    : staticContent
   const [activeCategory, setActiveCategory] = useState('ALL')
 
   const filteredCards = useMemo(() => {
@@ -76,7 +101,9 @@ export default function ImpactWorkSection() {
         </RevealWrapper>
 
         <div className="grid w-full grid-cols-1 gap-6 gap-y-10 md:grid-cols-2 md:gap-8 lg:gap-10">
-          {filteredCards.map((item) => (
+          {filteredCards.map((item) => {
+            const cardIndex = content.cards.findIndex((card) => card.id === item.id)
+            return (
             <RevealWrapper
               key={item.id}
               className="group flex w-full min-w-0 flex-col overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-background dark:border-white/10"
@@ -84,7 +111,16 @@ export default function ImpactWorkSection() {
               <Link href={item.href} className="block w-full">
                 <figure className="aspect-[16/10] w-full overflow-hidden sm:aspect-[5/3]">
                   <img
-                    src={item.image}
+                    src={
+                      useCmsWork
+                        ? item.image
+                        : resolveLandingImage(
+                            imageMap,
+                            LANDING_SECTION_KEYS.wowImpact.work,
+                            cardIndex,
+                            item.image,
+                          )
+                    }
                     alt={item.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
@@ -106,7 +142,8 @@ export default function ImpactWorkSection() {
                 </div>
               </div>
             </RevealWrapper>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

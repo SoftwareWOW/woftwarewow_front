@@ -1,13 +1,22 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { EVENTS_APPROACH } from './events-content'
 
 export default function EventsApproachSection() {
   const content = EVENTS_APPROACH
+  const approachSrc = useLandingImage(
+    LANDING_SECTION_KEYS.wowEvents.approach,
+    0,
+    content.image.src,
+  )
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -46,7 +55,7 @@ export default function EventsApproachSection() {
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
             <Image
-              src={content.image.src}
+              src={approachSrc}
               alt={content.image.alt}
               fill
               className="rounded-radius-md object-cover"

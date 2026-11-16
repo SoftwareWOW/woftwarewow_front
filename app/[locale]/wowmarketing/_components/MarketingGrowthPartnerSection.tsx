@@ -1,7 +1,11 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { MARKETING_GROWTH_PARTNER } from './marketing-content'
 
@@ -21,6 +25,11 @@ const CheckIcon = () => (
 
 export default function MarketingGrowthPartnerSection() {
   const content = MARKETING_GROWTH_PARTNER
+  const imageSrc = useLandingImage(
+    LANDING_SECTION_KEYS.wowMarketing.growthPartner,
+    0,
+    content.image.src,
+  )
 
   return (
     <section
@@ -42,7 +51,7 @@ export default function MarketingGrowthPartnerSection() {
         <RevealWrapper className="flex flex-col items-stretch gap-x-12 gap-y-10 lg:flex-row lg:gap-x-16">
           <figure className="relative min-h-[300px] w-full overflow-hidden rounded-radius-md lg:min-h-[420px] lg:flex-1 xl:min-h-[480px]">
             <Image
-              src={content.image.src}
+              src={imageSrc}
               alt={content.image.alt}
               fill
               className="rounded-radius-md object-cover"

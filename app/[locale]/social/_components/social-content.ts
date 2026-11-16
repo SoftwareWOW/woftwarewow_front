@@ -334,3 +334,13 @@ export const SOCIAL_FAQS = [
       'Yes. We can support creator collaborations, UGC-style campaigns, and influencer partnerships as part of a broader social strategy.',
   },
 ] as const
+
+/** Static Social gallery carousel (division landing — not Superagency page CMS). */
+export const SOCIAL_GALLERY_STATIC_IMAGES = [
+  { src: '/images/wow/Hero/devision/Design 1.jpg', alt: 'Social creative showcase', href: '/portfolio' },
+  { src: '/images/wow/Hero/devision/Design 2.jpg', alt: 'Campaign visual grid', href: '/portfolio' },
+  { src: '/images/wow/Hero/devision/Mockup 2 Dark.png', alt: 'Brand mockup in feed', href: '/portfolio' },
+  { src: '/images/wow/Hero/devision/Website 1.jpg', alt: 'Lifestyle brand social', href: '/portfolio' },
+  { src: '/images/wow/Hero/devision/Intelligence.jpg', alt: 'Story-style social content', href: '/portfolio' },
+  { src: '/images/wow/Hero/devision/Image-copy-scaled.jpeg', alt: 'Paid social creative', href: '/portfolio' },
+] as const

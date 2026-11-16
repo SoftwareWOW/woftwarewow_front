@@ -8,8 +8,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { DESIGN_PORTFOLIO } from './design-content'
 
-export default function DesignPortfolioSection() {
+type PortfolioProject = (typeof DESIGN_PORTFOLIO.projects)[number]
+
+type DesignPortfolioSectionProps = {
+  projects?: readonly PortfolioProject[]
+}
+
+export default function DesignPortfolioSection({ projects }: DesignPortfolioSectionProps) {
   const content = DESIGN_PORTFOLIO
+  const projectList = projects ?? content.projects
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -40,7 +47,7 @@ export default function DesignPortfolioSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-          {content.projects.map((project) => (
+          {projectList.map((project) => (
             <RevealWrapper
               key={project.title}
               as="article"

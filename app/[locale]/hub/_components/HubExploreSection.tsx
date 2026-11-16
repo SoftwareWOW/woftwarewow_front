@@ -4,6 +4,9 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
 import HubExploreTopicCard from './HubExploreTopicCard'
 import { HUB_EXPLORE, HUB_SECTION_INNER, HUB_SECTION_SHELL } from './hub-content'
 
@@ -24,9 +27,12 @@ export type HubExploreSectionContent = {
 
 type HubExploreSectionProps = {
   section?: HubExploreSectionContent
+  useCmsTopics?: boolean
 }
 
-export default function HubExploreSection({ section = HUB_EXPLORE }: HubExploreSectionProps) {
+export default function HubExploreSection({ section = HUB_EXPLORE, useCmsTopics = false }: HubExploreSectionProps) {
+  const imageMap = useDivisionLandingImages()
+
   return (
     <section id={section.id} className={`scroll-mt-28 ${HUB_SECTION_SHELL}`}>
       <div className={HUB_SECTION_INNER}>
@@ -46,12 +52,21 @@ export default function HubExploreSection({ section = HUB_EXPLORE }: HubExploreS
         </RevealWrapper>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-          {section.topics.map((topic) => (
+          {section.topics.map((topic, index) => (
             <HubExploreTopicCard
               key={topic.slug}
               title={topic.title}
               description={topic.description}
-              image={topic.coverImage}
+              image={
+                useCmsTopics
+                  ? topic.coverImage
+                  : resolveLandingImage(
+                      imageMap,
+                      LANDING_SECTION_KEYS.wowHub.explore,
+                      index,
+                      topic.coverImage,
+                    )
+              }
               href={topic.href}
             />
           ))}

@@ -1,12 +1,17 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { WEBSITES_HERO } from './websites-content'
 
 export default function WebsitesHero() {
   const hero = WEBSITES_HERO
+  const heroSrc = useLandingImage(LANDING_SECTION_KEYS.wowWebsites.hero, 0, hero.image.src)
 
   return (
     <section className="relative overflow-hidden bg-background px-3 pt-12 transition-colors duration-300 dark:bg-background sm:pt-12 md:px-4 lg:pt-[70px] xl:pt-[80px]">
@@ -44,7 +49,7 @@ export default function WebsitesHero() {
         <RevealWrapper className="reveal-me relative mx-auto max-w-5xl">
           <figure className="relative overflow-hidden rounded-radius-md">
             <Image
-              src={hero.image.src}
+              src={heroSrc}
               alt={hero.image.alt}
               width={1280}
               height={720}

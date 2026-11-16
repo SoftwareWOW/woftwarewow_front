@@ -1,20 +1,25 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import { EVENTS_HERO } from './events-content'
 
 /** Layout: HospitalityHero — full-bleed image hero + dual CTAs. */
 export default function EventsHero() {
   const hero = EVENTS_HERO
   const heroImage = hero.images[0]
+  const heroSrc = useLandingImage(LANDING_SECTION_KEYS.wowEvents.hero, 0, heroImage.src)
 
   return (
     <section className="relative w-full overflow-hidden" aria-labelledby="events-hero-heading">
       <img
         loading="eager"
         fetchPriority="high"
-        src={heroImage.src}
+        src={heroSrc}
         alt={heroImage.alt}
         aria-hidden
         className="absolute inset-0 z-0 h-full w-full object-cover object-center"

@@ -1,14 +1,28 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SOCIAL_SERVICES } from './social-content'
 
-export default function SocialServicesSection() {
+type ServiceItem = (typeof SOCIAL_SERVICES.items)[number]
+
+type SocialServicesSectionProps = {
+  items?: readonly ServiceItem[]
+}
+
+export default function SocialServicesSection({ items: itemsFromCms }: SocialServicesSectionProps) {
   const content = SOCIAL_SERVICES
+  const imageMap = useDivisionLandingImages()
+  const useCmsItems = Boolean(itemsFromCms)
+  const displayItems = itemsFromCms ?? content.items
 
   return (
     <section
@@ -32,7 +46,7 @@ export default function SocialServicesSection() {
         </div>
 
         <div className="[&>*:not(:last-child)]:mb-4">
-          {content.items.map((item) => (
+          {displayItems.map((item, index) => (
             <RevealWrapper
               key={item.id}
               className="group flex flex-col-reverse items-start border dark:border-dark md:flex-row md:items-center md:gap-x-11 md:gap-y-10 md:pr-5 lg:gap-x-[70px] lg:pr-0"
@@ -50,7 +64,16 @@ export default function SocialServicesSection() {
                   <Image
                     width={509}
                     height={295}
-                    src={item.image}
+                    src={
+                      useCmsItems
+                        ? item.image
+                        : resolveLandingImage(
+                            imageMap,
+                            LANDING_SECTION_KEYS.wowSocial.services,
+                            index,
+                            item.image,
+                          )
+                    }
                     alt={item.alt}
                     className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                   />

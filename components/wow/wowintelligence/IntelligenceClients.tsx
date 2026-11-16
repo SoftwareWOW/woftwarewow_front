@@ -2,6 +2,9 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
 import { cn } from '@/utils/cn'
 import Marquee from 'react-fast-marquee'
 
@@ -85,6 +88,8 @@ const IntelligenceClients = ({
   title = 'Client Experiences',
   clients = defaultClients,
 }: IntelligenceClientsProps) => {
+  const imageMap = useDivisionLandingImages()
+
   return (
     <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
       <div className="mx-auto mb-8 max-w-[1320px] text-center md:mb-14">
@@ -98,7 +103,7 @@ const IntelligenceClients = ({
       <RevealWrapper>
         <div className="flex items-center gap-4 md:gap-[30px]">
           <Marquee pauseOnHover speed={50} autoFill>
-            {clients.map((item) => (
+            {clients.map((item, index) => (
               <div
                 key={item.id}
                 className={cn(
@@ -125,7 +130,17 @@ const IntelligenceClients = ({
                     </p>
                   </div>
                   <img
-                    src={item.authorImage}
+                    src={
+                      item.authorImage &&
+                      (item.authorImage.startsWith('http') || item.authorImage.includes('/uploads/'))
+                        ? item.authorImage
+                        : resolveLandingImage(
+                            imageMap,
+                            LANDING_SECTION_KEYS.wowIntelligence.clients,
+                            index,
+                            item.authorImage,
+                          )
+                    }
                     alt={item.authorName}
                     className="size-12 shrink-0 rounded-full object-cover"
                   />

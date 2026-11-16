@@ -8,11 +8,29 @@ import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
 import { MARKETING_INDUSTRIES } from './marketing-content'
 
-export default function MarketingIndustriesCarousel() {
+type IndustrySlide = (typeof MARKETING_INDUSTRIES.slides)[number]
+
+type MarketingIndustriesCarouselProps = {
+  sectionKey?: string
+  /** When true, ignore CMS image map (e.g. shared carousel on WOW Websites landing). */
+  staticImagesOnly?: boolean
+  slides?: readonly IndustrySlide[]
+}
+
+export default function MarketingIndustriesCarousel({
+  sectionKey = LANDING_SECTION_KEYS.wowMarketing.industries,
+  staticImagesOnly = false,
+  slides: slidesFromCms,
+}: MarketingIndustriesCarouselProps) {
+  const imageMap = useDivisionLandingImages()
   const content = MARKETING_INDUSTRIES
-  const slides = content.slides
+  const useCmsSlides = Boolean(slidesFromCms)
+  const slides = slidesFromCms ?? content.slides
   const slideRefs = useRef<(HTMLDivElement | null)[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -128,7 +146,11 @@ export default function MarketingIndustriesCarousel() {
                     <article className="relative w-full overflow-visible pb-14 sm:pb-16">
                       <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-radius-md [clip-path:inset(0_round_var(--radius-md))]">
                         <Image
-                          src={slide.image}
+                          src={
+                            staticImagesOnly || useCmsSlides
+                              ? slide.image
+                              : resolveLandingImage(imageMap, sectionKey, index, slide.image)
+                          }
                           alt={slide.title}
                           fill
                           className="rounded-radius-md object-cover"

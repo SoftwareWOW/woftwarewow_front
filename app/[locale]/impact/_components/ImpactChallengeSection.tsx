@@ -1,13 +1,19 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { IMPACT_CHALLENGE } from './impact-content'
 
 export default function ImpactChallengeSection() {
   const content = IMPACT_CHALLENGE
+  const beforeSrc = useLandingImage(LANDING_SECTION_KEYS.wowImpact.challenge, 0, content.before.image)
+  const afterSrc = useLandingImage(LANDING_SECTION_KEYS.wowImpact.challenge, 1, content.after.image)
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -36,7 +42,7 @@ export default function ImpactChallengeSection() {
             <p className="mb-6 text-sm text-[#808080] md:text-base">{content.before.caption}</p>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-sm">
               <Image
-                src={content.before.image}
+                src={beforeSrc}
                 alt={content.before.alt}
                 fill
                 className="object-cover"
@@ -52,7 +58,7 @@ export default function ImpactChallengeSection() {
             <p className="mb-6 text-sm text-[#808080] md:text-base">{content.after.caption}</p>
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-radius-sm">
               <Image
-                src={content.after.image}
+                src={afterSrc}
                 alt={content.after.alt}
                 fill
                 className="object-cover"

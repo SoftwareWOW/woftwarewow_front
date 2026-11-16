@@ -4,6 +4,8 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 
 const HERO_IMAGE = '/images/wow/hero-banner.jpg'
@@ -21,6 +23,7 @@ const notchGradient = (color: string) =>
   `radial-gradient(circle at 100% 100%, transparent calc(var(--radius-md, 20px) - 0.5px), ${color} calc(var(--radius-md, 20px) + 1px))`
 
 export default function SoftwareWowHero() {
+  const heroSrc = useLandingImage(LANDING_SECTION_KEYS.softwareWow.hero, 0, HERO_IMAGE)
   const panelBg = 'bg-backgroundBody dark:bg-[#0D0D0D]'
   const notchLight = '#ededed'
   const notchDark = '#0D0D0D'
@@ -41,7 +44,7 @@ export default function SoftwareWowHero() {
             <div className="softwarewow-hero__image-layer">
               <div className="softwarewow-hero__image-frame">
                 <Image
-                  src={HERO_IMAGE}
+                  src={heroSrc}
                   alt={HERO_IMAGE_ALT}
                   fill
                   priority

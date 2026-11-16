@@ -1,12 +1,28 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImageList } from '@/lib/strapi/division-landing/resolve-landing-image'
 import DesignHeroHoverImages from './DesignHeroHoverImages'
 import { DESIGN_HERO } from './design-content'
 
 export default function DesignHero() {
   const hero = DESIGN_HERO
+  const imageMap = useDivisionLandingImages()
+  const heroFallbacks = hero.images.map((image) => image.src)
+  const resolvedSrcs = resolveLandingImageList(
+    imageMap,
+    LANDING_SECTION_KEYS.wowDesign.hero,
+    heroFallbacks,
+  )
+  const hoverImages = hero.images.map((image, index) => ({
+    ...image,
+    src: resolvedSrcs[index] ?? image.src,
+  }))
 
   return (
     <section
@@ -47,7 +63,7 @@ export default function DesignHero() {
           </div>
         </RevealWrapper>
       </div>
-      <DesignHeroHoverImages images={[...hero.images]} />
+      <DesignHeroHoverImages images={hoverImages} />
     </section>
   )
 }

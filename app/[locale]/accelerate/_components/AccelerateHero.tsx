@@ -1,13 +1,18 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { ACCELERATE_HERO } from './accelerate-content'
 
 export default function AccelerateHero() {
   const hero = ACCELERATE_HERO
+  const heroSrc = useLandingImage(LANDING_SECTION_KEYS.wowAccelerate.hero, 0, hero.image.src)
 
   return (
     <section className="relative overflow-hidden bg-background px-3 pt-10 transition-colors duration-300 dark:bg-background sm:pt-10 md:px-4 lg:pt-[50px] xl:pt-[60px]">
@@ -46,7 +51,7 @@ export default function AccelerateHero() {
         <RevealWrapper className="reveal-me relative mx-auto max-w-5xl">
           <figure className="relative overflow-hidden rounded-radius-md">
             <Image
-              src={hero.image.src}
+              src={heroSrc}
               alt={hero.image.alt}
               width={1280}
               height={720}

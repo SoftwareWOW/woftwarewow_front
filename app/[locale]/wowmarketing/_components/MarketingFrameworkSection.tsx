@@ -1,12 +1,21 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { MARKETING_FRAMEWORK } from './marketing-content'
 
 export default function MarketingFrameworkSection() {
   const content = MARKETING_FRAMEWORK
+  const frameworkSrc = useLandingImage(
+    LANDING_SECTION_KEYS.wowMarketing.framework,
+    0,
+    content.image.src,
+  )
   const steps = content.steps.map((step) => ({
     number: step.id,
     title: step.title,
@@ -56,7 +65,7 @@ export default function MarketingFrameworkSection() {
 
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
             <Image
-              src={content.image.src}
+              src={frameworkSrc}
               alt={content.image.alt}
               fill
               className="rounded-radius-md object-cover"

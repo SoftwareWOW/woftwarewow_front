@@ -3,9 +3,18 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
 import Image from 'next/image'
 import Link from 'next/link'
 import { HOST_HOSTING_SOLUTIONS } from './host-content'
+
+type HostingService = (typeof HOST_HOSTING_SOLUTIONS.services)[number]
+
+type HostHostingSolutionsSectionProps = {
+  services?: readonly HostingService[]
+}
 
 const WhiteArrowIcon = ({ className }: { className?: string }) => (
   <svg
@@ -27,8 +36,11 @@ const WhiteArrowIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-export default function HostHostingSolutionsSection() {
+export default function HostHostingSolutionsSection({ services: servicesFromCms }: HostHostingSolutionsSectionProps) {
   const section = HOST_HOSTING_SOLUTIONS
+  const imageMap = useDivisionLandingImages()
+  const useCmsServices = Boolean(servicesFromCms)
+  const services = servicesFromCms ?? section.services
   const { contentRef, triggerRef } = useHorizontalScroll()
 
   return (
@@ -67,7 +79,7 @@ export default function HostHostingSolutionsSection() {
             </svg>
           </div>
         </div>
-        {section.services.map((service) => (
+        {services.map((service, index) => (
           <div
             className="group rounded-radius-sm border p-5 dark:border-dark md:w-[740px] md:p-[30px] lg:w-[890px]"
             key={service.slug}
@@ -76,7 +88,16 @@ export default function HostHostingSolutionsSection() {
               <div className="flex w-full flex-col gap-y-7 md:flex-row md:gap-x-12">
                 <figure className="relative size-[270px] shrink-0 overflow-hidden rounded-radius-sm">
                   <Image
-                    src={service.coverImage}
+                    src={
+                      useCmsServices
+                        ? service.coverImage
+                        : resolveLandingImage(
+                            imageMap,
+                            LANDING_SECTION_KEYS.wowHost.hostingSolutions,
+                            index,
+                            service.coverImage,
+                          )
+                    }
                     alt={service.title}
                     fill
                     sizes="270px"

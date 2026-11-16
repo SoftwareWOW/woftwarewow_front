@@ -61,6 +61,9 @@ export type StrapiSuperagencyProject = {
   alt?: string;
   href?: string;
   order?: number;
+  client?: string | null;
+  industry?: string | null;
+  year?: string | number | null;
 };
 
 export type StrapiSuperagencyTestimonial = {

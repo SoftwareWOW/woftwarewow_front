@@ -1,3 +1,5 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
@@ -7,8 +9,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { WEBSITES_PORTFOLIO } from './websites-content'
 
-export default function WebsitesPortfolioSection() {
+type PortfolioProject = (typeof WEBSITES_PORTFOLIO.projects)[number]
+
+type WebsitesPortfolioSectionProps = {
+  projects?: readonly PortfolioProject[]
+}
+
+export default function WebsitesPortfolioSection({ projects }: WebsitesPortfolioSectionProps) {
   const content = WEBSITES_PORTFOLIO
+  const projectList = projects ?? content.projects
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -39,7 +48,7 @@ export default function WebsitesPortfolioSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-8 md:gap-y-14">
-          {content.projects.map((project) => (
+          {projectList.map((project, index) => (
             <RevealWrapper key={project.title} className="reveal-me group">
               <Link href={project.href} className="block">
                 <figure className="relative mb-5 overflow-hidden rounded-radius-md bg-dark/5 dark:bg-dark">
@@ -51,7 +60,13 @@ export default function WebsitesPortfolioSection() {
                     }}
                   />
                   <div className="relative aspect-[16/10] w-full">
-                    <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-500 group-hover:scale-[1.02]" sizes="(max-width: 768px) 100vw, 50vw" />
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                 </figure>
                 <div className="mb-2 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.12em] text-[#808080]">

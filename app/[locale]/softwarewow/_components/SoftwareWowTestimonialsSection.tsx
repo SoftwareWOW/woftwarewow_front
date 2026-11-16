@@ -17,15 +17,11 @@ const CLIENT_IMAGES: Record<string, string> = {
 
 type Props = {
   superAgencyClient: Dictionary['superAgencyClient']
-  clientImages?: Record<string, string>
 }
 
-export default function SoftwareWowTestimonialsSection({
-  superAgencyClient,
-  clientImages: clientImagesProp,
-}: Props) {
+export default function SoftwareWowTestimonialsSection({ superAgencyClient }: Props) {
   const content = SOFTWAREWOW_TESTIMONIALS
-  const clientImages = { ...CLIENT_IMAGES, ...clientImagesProp }
+  const clientImages = CLIENT_IMAGES
   const reviews = superAgencyClient.reviews ?? []
 
   if (!reviews.length) return null

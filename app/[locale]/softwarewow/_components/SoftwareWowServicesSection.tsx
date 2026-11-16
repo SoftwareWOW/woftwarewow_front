@@ -7,13 +7,25 @@ import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/Bu
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
+import { resolveLandingImage } from '@/lib/strapi/division-landing/resolve-landing-image'
+import { useDivisionLandingImages } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import { SOFTWAREWOW_SECTION_SHELL, SOFTWAREWOW_SERVICES } from './softwarewow-content'
 
-export default function SoftwareWowServicesSection() {
+type ServiceItem = (typeof SOFTWAREWOW_SERVICES.items)[number]
+
+type SoftwareWowServicesSectionProps = {
+  items?: readonly ServiceItem[]
+}
+
+export default function SoftwareWowServicesSection({ items: itemsFromCms }: SoftwareWowServicesSectionProps) {
+  const imageMap = useDivisionLandingImages()
   const content = SOFTWAREWOW_SERVICES
+  const useCmsItems = Boolean(itemsFromCms)
   const [showAll, setShowAll] = useState(false)
-  const visibleItems = showAll ? content.items : content.items.slice(0, content.initialVisibleCount)
-  const hasMore = content.items.length > content.initialVisibleCount
+  const allItems = itemsFromCms ?? content.items
+  const visibleItems = showAll ? allItems : allItems.slice(0, content.initialVisibleCount)
+  const hasMore = allItems.length > content.initialVisibleCount
 
   return (
     <section id="services" className={`${SOFTWAREWOW_SECTION_SHELL} scroll-mt-28`}>
@@ -33,7 +45,9 @@ export default function SoftwareWowServicesSection() {
         </div>
 
         <div className="[&>*:not(:last-child)]:mb-4">
-          {visibleItems.map((item) => (
+          {visibleItems.map((item) => {
+            const itemIndex = allItems.findIndex((entry) => entry.id === item.id)
+            return (
             <RevealWrapper
               key={item.id}
               className="group flex flex-col-reverse items-start border dark:border-dark md:flex-row md:items-center md:gap-x-11 md:gap-y-10 md:pr-5 lg:gap-x-[70px] lg:pr-0"
@@ -49,14 +63,24 @@ export default function SoftwareWowServicesSection() {
                   <Image
                     width={509}
                     height={295}
-                    src={item.image}
+                    src={
+                      useCmsItems
+                        ? item.image
+                        : resolveLandingImage(
+                            imageMap,
+                            LANDING_SECTION_KEYS.softwareWow.services,
+                            itemIndex,
+                            item.image,
+                          )
+                    }
                     alt={item.alt}
                     className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                   />
                 </div>
               </figure>
             </RevealWrapper>
-          ))}
+            )
+          })}
         </div>
 
         {hasMore ? (

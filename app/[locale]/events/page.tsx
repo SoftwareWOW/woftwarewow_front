@@ -3,8 +3,10 @@ import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import WowEcosystem from '@/components/wow/WowEcosystem'
 import { getDictionary } from '@/i18n/dictionary'
 import type { Locale } from '@/i18n/config'
-import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
-import { mapStrapiEcosystem } from '@/lib/strapi/mappers/superagency'
+import { DivisionLandingImageProvider } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { mergeServiceItemsWithAlt } from '@/lib/strapi/division-landing/merge-landing-content'
+import { loadDivisionLandingBundles } from '@/lib/strapi/division-landing/prepare-division-landing'
+import { landingContentCards, landingContentWork } from '@/lib/strapi/mappers/division-landing'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 import { setRequestLocale } from 'next-intl/server'
 import EventsApproachSection from './_components/EventsApproachSection'
@@ -16,7 +18,7 @@ import EventsProcessSection from './_components/EventsProcessSection'
 import EventsServicesSection from './_components/EventsServicesSection'
 import EventsToolsSection from './_components/EventsToolsSection'
 import EventsWorkSection from './_components/EventsWorkSection'
-import { EVENTS_CTA } from './_components/events-content'
+import { EVENTS_CTA, EVENTS_SERVICES } from './_components/events-content'
 import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
 export const revalidate = 60
@@ -41,22 +43,27 @@ export default async function WowEventsPage({ params }: Props) {
 
   const typedLocale = locale as Locale
   const dictionary = await getDictionary(typedLocale)
-  const cms = await getSuperagencyHomepage(typedLocale)
-  const ecosystem = mapStrapiEcosystem(cms.ecosystem, dictionary.ecosystem)
+  const { imageMap, content } = await loadDivisionLandingBundles('wowEvents', typedLocale)
+  const workExplorer = landingContentWork(content, 'work')
+  const serviceItems = mergeServiceItemsWithAlt(
+    EVENTS_SERVICES.items,
+    landingContentCards(content, 'services'),
+  )
 
   return (
+    <DivisionLandingImageProvider imageMap={imageMap}>
     <div className="flex w-full min-w-0 flex-col gap-12 overflow-x-clip bg-background transition-colors duration-300 dark:bg-background sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40">
       <EventsHero />
-      <EventsWorkSection />
+      <EventsWorkSection workExplorer={workExplorer} />
       <WowDivisionsMarquee />
       <EventsChallengeSection />
-      <EventsServicesSection />
+      <EventsServicesSection items={serviceItems} />
       <EventsApproachSection />
       <EventsProcessSection />
       <TestimonialV2 />
       <EventsPackagesSection />
       <EventsToolsSection />
-      <WowEcosystem ecosystem={ecosystem} />
+      <WowEcosystem ecosystem={dictionary.ecosystem} />
       <div className="relative z-0 min-w-0 overflow-visible">
         <EventsFaqSection />
       </div>
@@ -68,5 +75,6 @@ export default async function WowEventsPage({ params }: Props) {
         />
       </div>
     </div>
+    </DivisionLandingImageProvider>
   )
 }

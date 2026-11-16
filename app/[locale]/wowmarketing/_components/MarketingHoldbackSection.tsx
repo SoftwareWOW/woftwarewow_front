@@ -1,7 +1,11 @@
+'use client'
+
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { useLandingImage } from '@/lib/strapi/division-landing/DivisionLandingImageContext'
+import { LANDING_SECTION_KEYS } from '@/lib/strapi/division-landing/division-landing-image-manifest'
 import Image from 'next/image'
 import { MARKETING_HOLDBACK } from './marketing-content'
 
@@ -20,6 +24,7 @@ const XIcon = () => (
 
 export default function MarketingHoldbackSection() {
   const content = MARKETING_HOLDBACK
+  const imageSrc = useLandingImage(LANDING_SECTION_KEYS.wowMarketing.holdback, 0, content.image.src)
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -52,7 +57,7 @@ export default function MarketingHoldbackSection() {
           </div>
           <figure className="relative min-h-[300px] w-full overflow-hidden rounded-radius-md lg:min-h-[420px] lg:flex-1 xl:min-h-[480px]">
             <Image
-              src={content.image.src}
+              src={imageSrc}
               alt={content.image.alt}
               fill
               className="rounded-radius-md object-cover"

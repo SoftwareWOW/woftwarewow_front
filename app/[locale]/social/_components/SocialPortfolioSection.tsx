@@ -7,17 +7,30 @@ import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { CmsLandingWorkExplorer } from '@/lib/strapi/types/division-landing'
+import { mapWorkExplorerToSocialPortfolio } from '@/lib/strapi/division-landing/map-social-portfolio-work'
 import { useMemo, useState } from 'react'
 import { SOCIAL_PORTFOLIO } from './social-content'
 
-export default function SocialPortfolioSection() {
+type PortfolioProject = (typeof SOCIAL_PORTFOLIO.projects)[number]
+
+type SocialPortfolioSectionProps = {
+  projects?: readonly PortfolioProject[]
+  workExplorer?: CmsLandingWorkExplorer
+}
+
+export default function SocialPortfolioSection({ projects, workExplorer }: SocialPortfolioSectionProps) {
   const content = SOCIAL_PORTFOLIO
+  const useCmsWork = Boolean(workExplorer?.cards.length)
+  const cmsPortfolio = useCmsWork ? mapWorkExplorerToSocialPortfolio(workExplorer!) : null
+  const filters = cmsPortfolio?.filters ?? content.filters
+  const projectList = cmsPortfolio?.projects ?? projects ?? content.projects
   const [activeCategory, setActiveCategory] = useState('ALL')
 
   const filteredProjects = useMemo(() => {
-    if (activeCategory === 'ALL') return content.projects
-    return content.projects.filter((project) => project.category === activeCategory)
-  }, [activeCategory, content.projects])
+    if (activeCategory === 'ALL') return projectList
+    return projectList.filter((project) => project.category === activeCategory)
+  }, [activeCategory, projectList])
 
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
@@ -54,7 +67,7 @@ export default function SocialPortfolioSection() {
             aria-label="Social portfolio categories"
             className="flex w-full flex-wrap overflow-hidden rounded-radius-sm border border-[#e5e5e5] bg-[#f5f5f5] dark:border-white/10 dark:bg-dark/50 sm:flex-nowrap"
           >
-            {content.filters.map((category, index) => {
+            {filters.map((category, index) => {
               const isActive = activeCategory === category.slug
               return (
                 <button
