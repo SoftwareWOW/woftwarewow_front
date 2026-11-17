@@ -11,7 +11,9 @@ import { setRequestLocale } from 'next-intl/server'
 import MarketingHero from './_components/MarketingHero'
 import MarketingPlatformsIntro from './_components/MarketingPlatformsIntro'
 import MarketingPortfolioSection from './_components/MarketingPortfolioSection'
-import { MARKETING_CTA, MARKETING_FAQS, MARKETING_INDUSTRIES, MARKETING_PORTFOLIO } from './_components/marketing-content'
+import { SOFTWAREWOW_INDUSTRIES } from '@/app/[locale]/softwarewow/_components/softwarewow-content'
+import SoftwareWowIndustriesCarousel from '@/app/[locale]/softwarewow/_components/SoftwareWowIndustriesCarousel'
+import { MARKETING_CTA, MARKETING_FAQS, MARKETING_PORTFOLIO } from './_components/marketing-content'
 
 
 
@@ -21,7 +23,6 @@ import MarketingServicesGrid from './_components/MarketingServicesGrid'
 import MarketingFrameworkSection from './_components/MarketingFrameworkSection'
 import MarketingProcessSection from './_components/MarketingProcessSection'
 import MarketingGrowthPartnerSection from './_components/MarketingGrowthPartnerSection'
-import MarketingIndustriesCarousel from './_components/MarketingIndustriesCarousel'
 import Faq from '@/components/wow/LandascapComponets/Faq'
 import WowEcosystem from '@/components/wow/WowEcosystem'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -48,13 +49,14 @@ export default async function WowMarketingPage({ params }: Props) {
 
   const typedLocale = locale as Locale
   const dictionary = await getDictionary(typedLocale)
-  const [{ imageMap, content }, cmsProjects] = await Promise.all([
+  const [{ imageMap }, softwareWowLanding, cmsProjects] = await Promise.all([
     loadDivisionLandingBundles('wowMarketing', typedLocale),
+    loadDivisionLandingBundles('softwareWow', typedLocale),
     getSuperagencyProjectsForPortfolio(typedLocale),
   ])
   const industrySlides = mergeIndustrySlides(
-    MARKETING_INDUSTRIES.slides,
-    landingContentCards(content, 'industries'),
+    SOFTWAREWOW_INDUSTRIES.slides,
+    landingContentCards(softwareWowLanding.content, 'industries'),
   )
   const portfolioMerged = mergeDivisionPortfolioImages(
     [MARKETING_PORTFOLIO.featured, ...MARKETING_PORTFOLIO.projects],
@@ -76,7 +78,7 @@ export default async function WowMarketingPage({ params }: Props) {
       <MarketingFrameworkSection />
       <MarketingProcessSection />
       <MarketingGrowthPartnerSection />
-      <MarketingIndustriesCarousel slides={industrySlides} />
+      <SoftwareWowIndustriesCarousel slides={industrySlides} />
       <WowEcosystem ecosystem={dictionary.ecosystem} />
       <Faq faqs={[...MARKETING_FAQS]} />
       <div className="mb-3">
