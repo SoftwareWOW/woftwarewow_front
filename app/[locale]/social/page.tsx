@@ -23,6 +23,8 @@ import { landingContentCards, landingContentWork } from '@/lib/strapi/mappers/di
 
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 
+import { loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
+
 import { setRequestLocale } from 'next-intl/server'
 
 import SocialApproachSection from './_components/SocialApproachSection'
@@ -43,7 +45,7 @@ import SocialProcessSection from './_components/SocialProcessSection'
 
 import SocialServicesSection from './_components/SocialServicesSection'
 
-import { SOCIAL_CTA, SOCIAL_GALLERY_STATIC_IMAGES, SOCIAL_PORTFOLIO, SOCIAL_SERVICES } from './_components/social-content'
+import { SOCIAL_CTA, SOCIAL_PORTFOLIO, SOCIAL_SERVICES } from './_components/social-content'
 
 import WowDivisionsMarquee from '@/components/wow/LandascapComponets/WowDivisionsMarquee'
 
@@ -93,10 +95,12 @@ export default async function WowSocialPage({ params }: Props) {
 
   const dictionary = await getDictionary(typedLocale)
 
-  const [{ imageMap, content }, cmsProjects] = await Promise.all([
+  const [{ imageMap, content }, cmsProjects, socialAndCommunityPage] = await Promise.all([
     loadDivisionLandingBundles('wowSocial', typedLocale),
     getSuperagencyProjectsForPortfolio(typedLocale),
+    loadSuperagencyPage('social-and-community', typedLocale),
   ])
+  const socialAndCommunitySections = resolvePageSections(socialAndCommunityPage, 'social-and-community')
 
   const workExplorer = landingContentWork(content, 'work')
   const portfolioProjects = workExplorer
@@ -106,10 +110,6 @@ export default async function WowSocialPage({ params }: Props) {
     SOCIAL_SERVICES.items,
     landingContentCards(content, 'services'),
   )
-
-  const galleryImages = SOCIAL_GALLERY_STATIC_IMAGES.map((item) => ({ ...item }))
-
-
 
   return (
 
@@ -125,7 +125,7 @@ export default async function WowSocialPage({ params }: Props) {
 
       <SocialChallengeSection />
 
-      <SocialGallery images={galleryImages} />
+      <SocialGallery {...(socialAndCommunitySections.socialGallery ?? {})} />
 
       <SocialServicesSection items={serviceItems} />
 
