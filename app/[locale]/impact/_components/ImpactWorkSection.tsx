@@ -30,7 +30,7 @@ export default function ImpactWorkSection({ workExplorer }: ImpactWorkSectionPro
           category: card.category,
           title: card.title,
           description: card.description,
-          bullets: '',
+          bullets: card.bullets ?? '',
           href: card.href,
           image: card.image,
         })),

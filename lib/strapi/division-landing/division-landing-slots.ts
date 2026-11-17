@@ -6,6 +6,7 @@ import type { DivisionId } from '@/i18n/division-paths';
 
 export type LandingContentMode = 'imageSlots' | 'repeatable' | 'workExplorer';
 export type LandingCardKind = 'service' | 'industry' | 'client' | 'hosting';
+export type WorkExplorerVariant = 'superagency' | 'customCards';
 
 export type DivisionImageSlot = {
   attributePath: string;
@@ -25,6 +26,7 @@ export type DivisionLandingSectionDef = {
   cardKind?: LandingCardKind;
   repeatableComponentUid?: string;
   workExplorerComponentUid?: string;
+  workExplorerVariant?: WorkExplorerVariant;
   slots: readonly DivisionImageSlot[];
   legacySlots: readonly DivisionImageSlot[];
 };
@@ -540,11 +542,12 @@ export const DIVISION_LANDING_PAGE_DEFS: readonly DivisionLandingPageDef[] = [
     "sections": [
       {
         "attributeName": "work",
-        "componentDisplayName": "Portfolio — filterable work",
+        "componentDisplayName": "Work — filterable projects",
         "componentUid": "division-landing.wowsocial-work",
         "sectionKey": "wowsocial.work",
         "contentMode": "workExplorer",
         "workExplorerComponentUid": "division-landing.landing-work-explorer",
+        "workExplorerVariant": "superagency",
         "slots": [],
         "legacySlots": []
       },
@@ -749,41 +752,9 @@ export const DIVISION_LANDING_PAGE_DEFS: readonly DivisionLandingPageDef[] = [
         "sectionKey": "wowimpact.work",
         "contentMode": "workExplorer",
         "workExplorerComponentUid": "division-landing.landing-work-explorer",
+        "workExplorerVariant": "customCards",
         "slots": [],
-        "legacySlots": [
-          {
-            "attributePath": "work.project1",
-            "fieldName": "project1",
-            "adminLabel": "Work — project 1",
-            "sectionKey": "wowimpact.work",
-            "index": 0,
-            "staticFallback": "/images/wow/Hero/Human/ali.png"
-          },
-          {
-            "attributePath": "work.project2",
-            "fieldName": "project2",
-            "adminLabel": "Work — project 2",
-            "sectionKey": "wowimpact.work",
-            "index": 1,
-            "staticFallback": "/images/wow/Hero/devision/Design 1.jpg"
-          },
-          {
-            "attributePath": "work.project3",
-            "fieldName": "project3",
-            "adminLabel": "Work — project 3",
-            "sectionKey": "wowimpact.work",
-            "index": 2,
-            "staticFallback": "/images/wow/Hero/devision/Education.jpg"
-          },
-          {
-            "attributePath": "work.project4",
-            "fieldName": "project4",
-            "adminLabel": "Work — project 4",
-            "sectionKey": "wowimpact.work",
-            "index": 3,
-            "staticFallback": "/images/wow/Hero/devision/DSCF0537.jpg"
-          }
-        ]
+        "legacySlots": []
       },
       {
         "attributeName": "challenge",
@@ -1134,49 +1105,9 @@ export const DIVISION_LANDING_PAGE_DEFS: readonly DivisionLandingPageDef[] = [
         "sectionKey": "wowevents.work",
         "contentMode": "workExplorer",
         "workExplorerComponentUid": "division-landing.landing-work-explorer",
+        "workExplorerVariant": "customCards",
         "slots": [],
-        "legacySlots": [
-          {
-            "attributePath": "work.showcase1",
-            "fieldName": "showcase1",
-            "adminLabel": "Work — image 1",
-            "sectionKey": "wowevents.work",
-            "index": 0,
-            "staticFallback": "/images/wow/Hero/devision/Events (1).jpg"
-          },
-          {
-            "attributePath": "work.showcase2",
-            "fieldName": "showcase2",
-            "adminLabel": "Work — image 2",
-            "sectionKey": "wowevents.work",
-            "index": 1,
-            "staticFallback": "/images/wow/Hero/devision/Education.jpg"
-          },
-          {
-            "attributePath": "work.showcase3",
-            "fieldName": "showcase3",
-            "adminLabel": "Work — image 3",
-            "sectionKey": "wowevents.work",
-            "index": 2,
-            "staticFallback": "/images/wow/Hero/devision/Design 1.jpg"
-          },
-          {
-            "attributePath": "work.showcase4",
-            "fieldName": "showcase4",
-            "adminLabel": "Work — image 4",
-            "sectionKey": "wowevents.work",
-            "index": 3,
-            "staticFallback": "/images/wow/Hero/devision/Intelligence.jpg"
-          },
-          {
-            "attributePath": "work.showcase5",
-            "fieldName": "showcase5",
-            "adminLabel": "Work — image 5",
-            "sectionKey": "wowevents.work",
-            "index": 4,
-            "staticFallback": "/images/wow/Hero/devision/C-17.jpg"
-          }
-        ]
+        "legacySlots": []
       },
       {
         "attributeName": "services",

@@ -69,7 +69,9 @@ function mapClientSection(section: StrapiLandingRepeatableSection | null | undef
   return reviews;
 }
 
-function mapWorkExplorer(section: StrapiLandingWorkSection | null | undefined): CmsLandingWorkExplorer | null {
+function mapWorkExplorerFromProjects(
+  section: StrapiLandingWorkSection | null | undefined,
+): CmsLandingWorkExplorer | null {
   const groups = section?.filterGroups ?? [];
   if (!groups.length) return null;
 
@@ -86,7 +88,7 @@ function mapWorkExplorer(section: StrapiLandingWorkSection | null | undefined): 
       label.toUpperCase();
     filters.push({ label, slug });
 
-    const projects = group.projects ?? [];
+    const projects = 'projects' in group ? group.projects ?? [] : [];
     for (const project of projects) {
       const mapped = mapStrapiProjects([project])?.[0];
       if (!mapped) continue;
@@ -113,6 +115,52 @@ function mapWorkExplorer(section: StrapiLandingWorkSection | null | undefined): 
   }
 
   if (!filters.length || !cards.length) return null;
+  return { filters, cards };
+}
+
+function mapWorkExplorerCustomCards(
+  section: StrapiLandingWorkSection | null | undefined,
+): CmsLandingWorkExplorer | null {
+  const groups = section?.filterGroups ?? [];
+  if (!groups.length) return null;
+
+  const filters: CmsLandingWorkExplorer['filters'] = [];
+  const cards: CmsLandingWorkExplorer['cards'] = [];
+  let cardId = 1;
+
+  for (const group of groups) {
+    const label = group.label?.trim();
+    if (!label) continue;
+    const slug =
+      group.filterKey?.trim() ||
+      label.replace(/\s+/g, '_').replace(/[^A-Za-z0-9_]/g, '').toUpperCase() ||
+      label.toUpperCase();
+    filters.push({ label, slug });
+
+    const workCards = 'cards' in group ? group.cards ?? [] : [];
+    for (const raw of workCards) {
+      const title = raw.title?.trim() ?? '';
+      const description = raw.description?.trim() ?? '';
+      const bullets = raw.bullets?.trim() ?? undefined;
+      const href = raw.href?.trim() || '/meet';
+      const image = resolveImageWithAlt(raw.image) ?? '';
+      const alt = raw.image?.alt?.trim() || title;
+      const hasText = Boolean(title || description || bullets);
+      if (!hasText && !image) continue;
+      cards.push({
+        id: cardId++,
+        title,
+        description,
+        bullets,
+        image,
+        alt,
+        href,
+        category: slug,
+      });
+    }
+  }
+
+  if (!cards.length) return null;
   return { filters, cards };
 }
 
@@ -161,7 +209,11 @@ function mapContentFromPageDef(
           : mapRepeatableSection(raw as StrapiLandingRepeatableSection);
       if (items.length) out[section.attributeName] = items;
     } else if (section.contentMode === 'workExplorer') {
-      const work = mapWorkExplorer(raw as StrapiLandingWorkSection);
+      const workSection = raw as StrapiLandingWorkSection;
+      const work =
+        section.workExplorerVariant === 'customCards'
+          ? mapWorkExplorerCustomCards(workSection)
+          : mapWorkExplorerFromProjects(workSection);
       if (work) out[section.attributeName] = work;
     }
   }

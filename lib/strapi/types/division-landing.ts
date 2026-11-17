@@ -28,8 +28,24 @@ export type StrapiPortfolioFilterGroup = {
   projects?: StrapiSuperagencyProject[] | null;
 };
 
+export type StrapiLandingWorkCard = {
+  id?: number;
+  title?: string | null;
+  description?: string | null;
+  bullets?: string | null;
+  href?: string | null;
+  image?: StrapiImageWithAlt | null;
+};
+
+export type StrapiLandingWorkFilterGroup = {
+  id?: number;
+  label?: string | null;
+  filterKey?: string | null;
+  cards?: StrapiLandingWorkCard[] | null;
+};
+
 export type StrapiLandingWorkSection = {
-  filterGroups?: StrapiPortfolioFilterGroup[] | null;
+  filterGroups?: (StrapiPortfolioFilterGroup | StrapiLandingWorkFilterGroup)[] | null;
 };
 
 export type StrapiPageProjectLinks = {
@@ -74,6 +90,7 @@ export type CmsLandingWorkProject = {
   id: number;
   title: string;
   description: string;
+  bullets?: string;
   image: string;
   alt: string;
   href: string;

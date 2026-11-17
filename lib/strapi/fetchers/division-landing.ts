@@ -26,6 +26,17 @@ function sectionPopulate(section: DivisionLandingSectionDef): Record<string, unk
     };
   }
   if (section.contentMode === 'workExplorer') {
+    if (section.workExplorerVariant === 'customCards') {
+      return {
+        populate: {
+          filterGroups: {
+            populate: {
+              cards: { populate: { image: imagePopulate() } },
+            },
+          },
+        },
+      };
+    }
     return {
       populate: {
         filterGroups: {
