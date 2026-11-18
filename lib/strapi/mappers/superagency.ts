@@ -187,6 +187,26 @@ export function mapStrapiTestimonialExtras(testimonials: StrapiSuperagencyTestim
   return { clientImages, reviewCaseStudies };
 }
 
+/** Same props as homepage `WowSuperAgencyClient` (testimonials from superagency homepage CMS). */
+export function buildWowSuperAgencyClientSectionProps(
+  testimonials: StrapiSuperagencyTestimonial[] | null | undefined,
+  fallback: Dictionary['superAgencyClient'],
+) {
+  const list = testimonials ?? [];
+  const superAgencyClient = mapStrapiTestimonials(list, fallback);
+  const testimonialExtras = mapStrapiTestimonialExtras(list);
+
+  return {
+    superAgencyClient,
+    clientImages: Object.keys(testimonialExtras.clientImages).length
+      ? testimonialExtras.clientImages
+      : undefined,
+    reviewCaseStudies: Object.keys(testimonialExtras.reviewCaseStudies).length
+      ? testimonialExtras.reviewCaseStudies
+      : undefined,
+  };
+}
+
 export function mapStrapiFaqs(faqs: SuperagencyHomepageData['faqs']) {
   if (!faqs.length) return null;
   return faqs.map((faq, index) => ({

@@ -23,6 +23,8 @@ import { landingContentCards, landingContentWork } from '@/lib/strapi/mappers/di
 
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import { buildWowSuperAgencyClientSectionProps } from '@/lib/strapi/mappers/superagency'
 import { loadSuperagencyPage, resolvePageSections } from '@/lib/strapi/superagency-page-loader'
 
 import { setRequestLocale } from 'next-intl/server'
@@ -95,11 +97,16 @@ export default async function WowSocialPage({ params }: Props) {
 
   const dictionary = await getDictionary(typedLocale)
 
-  const [{ imageMap, content }, cmsProjects, socialAndCommunityPage] = await Promise.all([
+  const [{ imageMap, content }, cmsProjects, socialAndCommunityPage, homepageCms] = await Promise.all([
     loadDivisionLandingBundles('wowSocial', typedLocale),
     getSuperagencyProjectsForPortfolio(typedLocale),
     loadSuperagencyPage('social-and-community', typedLocale),
+    getSuperagencyHomepage(typedLocale),
   ])
+  const superAgencyClientSection = buildWowSuperAgencyClientSectionProps(
+    homepageCms.testimonials,
+    dictionary.superAgencyClient,
+  )
   const socialAndCommunitySections = resolvePageSections(socialAndCommunityPage, 'social-and-community')
 
   const workExplorer = landingContentWork(content, 'work')
@@ -137,7 +144,7 @@ export default async function WowSocialPage({ params }: Props) {
 
       <div className="-mt-10 sm:-mt-12 md:-mt-16 lg:-mt-20">
 
-        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        <WowSuperAgencyClient {...superAgencyClientSection} />
 
       </div>
 

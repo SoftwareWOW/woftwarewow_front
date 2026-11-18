@@ -14,6 +14,8 @@ import { mergeServiceItemsWithAlt } from '@/lib/strapi/division-landing/merge-la
 import { loadDivisionLandingBundles } from '@/lib/strapi/division-landing/prepare-division-landing'
 import { landingContentCards, landingContentWork } from '@/lib/strapi/mappers/division-landing'
 
+import { getSuperagencyHomepage } from '@/lib/strapi/fetchers/superagency'
+import { buildWowSuperAgencyClientSectionProps } from '@/lib/strapi/mappers/superagency'
 import { divisionPageMetadata } from '@/lib/seo/division-page-metadata'
 
 import { setRequestLocale } from 'next-intl/server'
@@ -86,7 +88,14 @@ export default async function WowImpactPage({ params }: Props) {
 
   const dictionary = await getDictionary(typedLocale)
 
-  const { imageMap, content } = await loadDivisionLandingBundles('wowImpact', typedLocale)
+  const [{ imageMap, content }, homepageCms] = await Promise.all([
+    loadDivisionLandingBundles('wowImpact', typedLocale),
+    getSuperagencyHomepage(typedLocale),
+  ])
+  const superAgencyClientSection = buildWowSuperAgencyClientSectionProps(
+    homepageCms.testimonials,
+    dictionary.superAgencyClient,
+  )
   const workExplorer = landingContentWork(content, 'work')
   const serviceItems = mergeServiceItemsWithAlt(
     IMPACT_SERVICES.items,
@@ -117,7 +126,7 @@ export default async function WowImpactPage({ params }: Props) {
 
       <div className="-mt-10 sm:-mt-12 md:-mt-16 lg:-mt-20">
 
-        <WowSuperAgencyClient superAgencyClient={dictionary.superAgencyClient} />
+        <WowSuperAgencyClient {...superAgencyClientSection} />
 
       </div>
 
