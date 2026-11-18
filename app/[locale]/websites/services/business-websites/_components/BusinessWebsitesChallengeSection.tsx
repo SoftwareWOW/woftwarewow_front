@@ -29,10 +29,24 @@ const gridRowClass =
 
 const twoColWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]'
 
+const cardInset = 'px-[30px] pt-10 pb-10'
+
 const FlipCard = ({ card }: { card: CapabilityCard }) => (
-  <RevealWrapper className={`reveal-me group relative min-h-[410px] w-full overflow-hidden ${twoColWidth}`}>
-    <div>
-      <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
+  <RevealWrapper className={`reveal-me group relative w-full overflow-hidden ${twoColWidth}`}>
+    <div className="relative">
+      {/* In-flow sizer: card height follows copy; bottom inset matches top (pt-10 / pb-10). */}
+      <div className={`${cardInset} invisible pointer-events-none select-none`} aria-hidden>
+        <span className="inline-flex">{card.icon}</span>
+        <h5 className="mb-4 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] max-sm:text-2xl">{card.title}</h5>
+        {card.headline ? (
+          <p className="mb-2 text-lg font-normal leading-snug">{card.headline}</p>
+        ) : null}
+        <p>{card.description}</p>
+      </div>
+
+      <div
+        className={`absolute inset-0 ${cardInset} translate-y-0 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0`}
+      >
         <span className="inline-flex [&_path]:fill-secondary [&_path]:dark:fill-backgroundBody">{card.icon}</span>
         <h5 className="mb-4 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] max-sm:text-2xl">{card.title}</h5>
         {card.headline ? (
@@ -41,7 +55,9 @@ const FlipCard = ({ card }: { card: CapabilityCard }) => (
         <p>{card.description}</p>
       </div>
 
-      <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-10 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
+      <div
+        className={`absolute inset-0 z-10 ${cardInset} translate-y-full bg-secondary transition-all duration-700 group-hover:translate-y-0 dark:bg-backgroundBody`}
+      >
         <span className="inline-flex [&_path]:fill-backgroundBody [&_path]:dark:fill-secondary">{card.icon}</span>
         <h5 className="mb-3 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary max-sm:text-2xl">
           {card.title}
@@ -64,7 +80,7 @@ type BusinessWebsitesChallengeSectionProps = {
   capabilityCards: ReadonlyArray<ChallengeCapabilityCard>
 }
 
-/** Business Websites — challenge flip cards with matching top/bottom padding (py-10). */
+/** Business Websites — challenge flip cards sized to copy; equal pt-10 / pb-10 (no fixed min-height). */
 export default function BusinessWebsitesChallengeSection(props: BusinessWebsitesChallengeSectionProps) {
   const { eyebrow, titleBefore, titleAccent, titleSuffix, description, capabilityCards } = props
   const cards: CapabilityCard[] = capabilityCards.map((card, index) => ({
