@@ -138,11 +138,11 @@ export const CONTENT = {
       'We work with modern, reliable technologies to build fast, secure, and scalable websites. Every project gets the tools that best fit its needs.',
     tools: [
       { name: 'Shopify', icon: 'logos:shopify' },
-      { name: 'WooCommerce', icon: 'logos:woocommerce' },
+      { name: 'WooCommerce', icon: 'logos:woocommerce', wide: true },
       { name: 'Next.js', icon: 'logos:nextjs-icon' },
-      { name: 'Vercel', icon: 'simple-icons:vercel' },
+      { name: 'Vercel', icon: 'simple-icons:vercel', monochrome: true },
       { name: 'Tailwind CSS', icon: 'logos:tailwindcss-icon' },
-      { name: 'Strapi', icon: 'simple-icons:strapi' },
+      { name: 'Strapi', icon: 'logos:strapi-icon' },
     ],
   },
   cta: {

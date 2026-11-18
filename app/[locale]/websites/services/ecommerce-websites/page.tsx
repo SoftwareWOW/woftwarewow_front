@@ -2,7 +2,7 @@ import OperationsUseCasePoweredSection from '@/app/[locale]/intelligence/use-cas
 import ModernizationPath from '@/app/[locale]/packages/digital-transformation/_components/ModernizationPath'
 import PaidSocialHero from '@/app/[locale]/social/services/paid-social-advertising-community-management/_components/PaidSocialHero'
 import BusinessWebsitesChallengeSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesChallengeSection'
-import BusinessWebsitesTechnologiesSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesTechnologiesSection'
+import EcommerceWebsitesTechnologiesSection from './_components/EcommerceWebsitesTechnologiesSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -78,8 +78,8 @@ export default async function EcommerceWebsitesPage({ params }: Props) {
       />
       {/* 5. Process — packages/digital-transformation ModernizationPath (LaunchPath / ServiceProces) */}
       <ModernizationPath title={modernizationPath.title} steps={[...modernizationPath.steps]} />
-      {/* 6. Technologies — business-websites BusinessWebsitesTechnologiesSection */}
-      <BusinessWebsitesTechnologiesSection
+      {/* 6. Technologies — eCommerce centered logo row (simple-icons) */}
+      <EcommerceWebsitesTechnologiesSection
         eyebrow={technologies.eyebrow}
         headlineBefore={technologies.headlineBefore}
         headlineAccent={technologies.headlineAccent}
