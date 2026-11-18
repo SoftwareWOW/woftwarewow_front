@@ -11,10 +11,8 @@ export const CONTENT = {
     italicTitle: 'Website.',
     description:
       'Make a powerful first impression with a modern, professional website built around your business. We combine thoughtful design, seamless functionality, and clear user journeys to turn your online presence into a valuable business asset.',
-    trustLineHighlight: '',
     primaryCta: { label: 'BUILD MY WEBSITE', href: '/meet' },
     secondaryCta: { label: 'EXPLORE OUR WORK', href: '/portfolio' },
-    visual: 'image' as const,
     images: [
       {
         src: '/images/wow/Hero/devision/Website 1.jpg',
@@ -56,8 +54,7 @@ export const CONTENT = {
   whatWeBuild: {
     eyebrow: 'WHAT WE BUILD',
     title: 'Everything a Great Business Website Needs.',
-    description:
-      'From custom design and responsive development to SEO structure and conversion-focused UX, we build websites that represent your business clearly and help visitors take action.',
+    sectionId: 'what-we-build',
     steps: [
       {
         id: 1,
