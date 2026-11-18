@@ -2,7 +2,7 @@ import BusinessWebsitesTechnologiesSection from './_components/BusinessWebsitesT
 import IntelligentAutomationHero from '@/app/[locale]/intelligence/services/intelligent-automation/_components/IntelligentAutomationHero'
 import AiAssistantsFasterAnswersSection from '@/app/[locale]/intelligence/services/ai-assistants-chatbots/_components/AiAssistantsFasterAnswersSection'
 import AiAssistantsInActionSection from '@/app/[locale]/intelligence/services/ai-assistants-chatbots/_components/AiAssistantsInActionSection'
-import IntelligentAutomationChallengeSection from '@/app/[locale]/intelligence/services/intelligent-automation/_components/IntelligentAutomationChallengeSection'
+import BusinessWebsitesChallengeSection from './_components/BusinessWebsitesChallengeSection'
 import SalesUseCasePoweredSection from '@/app/[locale]/intelligence/use-cases/sales/_components/SalesUseCasePoweredSection'
 import MarketingUseCaseApproachSection from '@/app/[locale]/intelligence/use-cases/marketing/_components/MarketingUseCaseApproachSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -56,7 +56,7 @@ export default async function BusinessWebsitesPage({ params }: Props) {
         secondaryCta={hero.secondaryCta}
         headingId={hero.headingId}
       />
-      <IntelligentAutomationChallengeSection
+      <BusinessWebsitesChallengeSection
         eyebrow={challenge.eyebrow}
         titleBefore={challenge.titleBefore}
         titleAccent={challenge.titleAccent}
@@ -86,7 +86,8 @@ export default async function BusinessWebsitesPage({ params }: Props) {
       />
       <BusinessWebsitesTechnologiesSection
         eyebrow={technologies.eyebrow}
-        headline={technologies.headline}
+        headlineBefore={technologies.headlineBefore}
+        headlineAccent={technologies.headlineAccent}
         description={technologies.description}
         tools={[...technologies.tools]}
       />

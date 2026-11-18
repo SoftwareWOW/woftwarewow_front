@@ -2,7 +2,9 @@
 
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import { cn } from '@/utils/cn'
 import { Icon, addCollection } from '@iconify/react'
 import logos from '@iconify-json/logos/icons.json'
 import simpleIcons from '@iconify-json/simple-icons/icons.json'
@@ -17,7 +19,8 @@ type Tool = {
 
 type BusinessWebsitesTechnologiesSectionProps = {
   eyebrow: string
-  headline: string
+  headlineBefore: string
+  headlineAccent: string
   description: string
   tools: ReadonlyArray<Tool>
 }
@@ -25,7 +28,8 @@ type BusinessWebsitesTechnologiesSectionProps = {
 /** Business Websites only — 8 tech logos in one row, no cell borders (CreativeToolkit layout variant). */
 export default function BusinessWebsitesTechnologiesSection({
   eyebrow,
-  headline,
+  headlineBefore,
+  headlineAccent,
   description,
   tools,
 }: BusinessWebsitesTechnologiesSectionProps) {
@@ -37,22 +41,29 @@ export default function BusinessWebsitesTechnologiesSection({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-3 max-w-5xl">{headline}</h2>
+            <h2 className="mx-auto mb-3 max-w-5xl">
+              {headlineBefore}
+              <InstrumentText>{headlineAccent}</InstrumentText>
+            </h2>
           </RevealWrapper>
           <TextAppearAnimation>
             <p className="text-appear mx-auto max-w-3xl text-base leading-relaxed text-[#808080]">{description}</p>
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="reveal-me flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10 lg:flex-nowrap lg:justify-between lg:gap-4 xl:gap-8">
+        <RevealWrapper className="reveal-me mx-auto grid w-full max-w-[1080px] grid-cols-4 place-items-center gap-x-2 gap-y-5 sm:grid-cols-8 sm:gap-x-3 md:gap-x-4 lg:gap-x-5 xl:gap-x-6">
           {tools.map((tool) => (
-            <figure key={tool.name} className="flex shrink-0 items-center justify-center p-1 sm:p-2">
+            <figure key={tool.name} className="flex items-center justify-center">
               <Icon
                 icon={tool.icon}
-                width={40}
-                height={40}
+                width={48}
+                height={48}
                 aria-label={tool.name}
-                className="text-secondary dark:text-backgroundBody sm:h-11 sm:w-11"
+                className={cn(
+                  'h-12 w-12 text-secondary dark:text-backgroundBody',
+                  tool.icon.includes('vercel') && 'dark:invert',
+                  tool.icon.includes('nextjs') && 'dark:invert',
+                )}
               />
             </figure>
           ))}

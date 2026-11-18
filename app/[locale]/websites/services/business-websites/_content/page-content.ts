@@ -147,7 +147,8 @@ export const CONTENT = {
   },
   technologies: {
     eyebrow: 'OUR TECHNOLOGIES',
-    headline: 'Built With the Right Technology.',
+    headlineBefore: 'Built With the Right ',
+    headlineAccent: 'Technology.',
     description:
       'We work with modern, reliable technologies to build fast, secure, and scalable websites. Every project gets the tools that best fit its needs.',
     tools: [
