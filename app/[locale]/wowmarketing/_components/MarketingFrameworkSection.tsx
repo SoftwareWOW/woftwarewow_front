@@ -63,7 +63,7 @@ export default function MarketingFrameworkSection() {
             </ul>
           </div>
 
-          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
+          <figure className="relative min-h-[280px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-0 md:w-[min(100%,420px)] md:shrink-0 md:self-stretch">
             <Image
               src={frameworkSrc}
               alt={content.image.alt}

@@ -56,7 +56,7 @@ export default function OperationsUseCasePoweredSection({
         </div>
 
         <RevealWrapper className="flex flex-col gap-10 md:flex-row md:items-stretch md:gap-12 lg:gap-16">
-          <figure className="relative mx-auto h-[240px] w-full max-w-[570px] shrink-0 overflow-hidden rounded-radius-md sm:h-[320px] md:mx-0 md:h-auto md:w-[570px] md:min-h-[320px] lg:min-h-[400px]">
+          <figure className="relative mx-auto min-h-[280px] w-full max-w-[570px] shrink-0 overflow-hidden rounded-radius-md md:mx-0 md:min-h-0 md:w-[570px] md:self-stretch">
             <Image
               src={image.src}
               alt={image.alt}
@@ -66,7 +66,7 @@ export default function OperationsUseCasePoweredSection({
             />
           </figure>
 
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 md:self-stretch">
             <ul className="relative space-y-5 md:space-y-6 lg:space-y-7">
               {steps.map((step, index) => (
                 <li key={step.id} className="flex max-w-max items-start gap-6 md:gap-8">

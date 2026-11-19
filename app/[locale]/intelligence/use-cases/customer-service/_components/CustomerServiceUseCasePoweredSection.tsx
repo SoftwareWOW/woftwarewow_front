@@ -59,7 +59,7 @@ export default function CustomerServiceUseCasePoweredSection({
         </div>
 
         <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <div className="min-w-0 flex-1 md:order-1">
+          <div className="min-w-0 flex-1 md:order-1 md:self-stretch">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
               {steps.map((step, index) => (
                 <li key={step.id} className="relative max-w-max px-10">
@@ -85,7 +85,7 @@ export default function CustomerServiceUseCasePoweredSection({
             </ul>
           </div>
 
-          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
+          <figure className="relative min-h-[280px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-0 md:w-[min(100%,420px)] md:shrink-0 md:self-stretch">
             <Image
               src={image.src}
               alt={image.alt}

@@ -27,12 +27,13 @@ const ICON_POOL: ReactNode[] = [
 const gridRowClass =
   'flex flex-wrap justify-center px-5 max-xl:justify-center max-lg:gap-5 xl:px-5 max-xl:[&>*:first-child]:border-r dark:max-xl:[&>*:first-child]:border-dark [&>*:last-child]:border-x dark:[&>*:last-child]:border-x-dark [&>*:not(:last-child)]:border-l dark:[&>*:not(:last-child)]:border-l-dark max-xl:[&>*:nth-child(2)]:border-r dark:max-xl:[&>*:nth-child(2)]:border-dark [&>*]:border-y dark:[&>*]:border-y-dark'
 
-const twoColWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]'
+const twoColWidthWide = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]'
+const twoColWidthContained = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)]'
 
 const cardInset = 'px-[30px] pt-10 pb-10'
 
-const FlipCard = ({ card }: { card: CapabilityCard }) => (
-  <RevealWrapper className={`reveal-me group relative w-full ${twoColWidth}`}>
+const FlipCard = ({ card, colWidthClass }: { card: CapabilityCard; colWidthClass: string }) => (
+  <RevealWrapper className={`reveal-me group relative w-full ${colWidthClass}`}>
     <div className="relative overflow-hidden">
       <div className={`${cardInset} invisible pointer-events-none select-none`} aria-hidden>
         <span className="inline-flex">{card.icon}</span>
@@ -77,11 +78,15 @@ type BusinessWebsitesChallengeSectionProps = {
   titleSuffix: string
   description: string
   capabilityCards: ReadonlyArray<ChallengeCapabilityCard>
+  /** Align flip-card grid with `.container` width (service pages with mixed hero widths). */
+  containedGrid?: boolean
 }
 
 /** Business Websites — challenge flip cards sized to copy; equal pt-10 / pb-10. */
 export default function BusinessWebsitesChallengeSection(props: BusinessWebsitesChallengeSectionProps) {
-  const { eyebrow, titleBefore, titleAccent, titleSuffix, description, capabilityCards } = props
+  const { eyebrow, titleBefore, titleAccent, titleSuffix, description, capabilityCards, containedGrid } = props
+  const colWidthClass = containedGrid ? twoColWidthContained : twoColWidthWide
+  const gridClass = containedGrid ? `${gridRowClass} px-0 xl:px-0` : gridRowClass
   const cards: CapabilityCard[] = capabilityCards.map((card, index) => ({
     ...card,
     icon: ICON_POOL[index] ?? ICON_POOL[0],
@@ -109,13 +114,25 @@ export default function BusinessWebsitesChallengeSection(props: BusinessWebsites
         </div>
       </div>
 
-      <div className={gridRowClass}>{topRow.map((card) => <FlipCard key={card.title} card={card} />)}</div>
-
-      <div className={`${gridRowClass} lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}>
-        {bottomRow.map((card) => (
-          <FlipCard key={card.title} card={card} />
-        ))}
-      </div>
+      {containedGrid ? (
+        <div className="container">
+          <div className={gridClass}>{topRow.map((card) => <FlipCard key={card.title} card={card} colWidthClass={colWidthClass} />)}</div>
+          <div className={`${gridClass} lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}>
+            {bottomRow.map((card) => (
+              <FlipCard key={card.title} card={card} colWidthClass={colWidthClass} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={gridClass}>{topRow.map((card) => <FlipCard key={card.title} card={card} colWidthClass={colWidthClass} />)}</div>
+          <div className={`${gridClass} lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}>
+            {bottomRow.map((card) => (
+              <FlipCard key={card.title} card={card} colWidthClass={colWidthClass} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   )
 }

@@ -2,7 +2,7 @@ import AccessibleWebAdvantageSection from '@/app/[locale]/websites/services/acce
 import BusinessWebsitesChallengeSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesChallengeSection'
 import BusinessWebsitesTechnologiesSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesTechnologiesSection'
 import LandingPagesProcessSection from '@/app/[locale]/websites/services/landing-pages/_components/LandingPagesProcessSection'
-import OperationsUseCasePoweredSection from '@/app/[locale]/intelligence/use-cases/operations/_components/OperationsUseCasePoweredSection'
+import CustomerServiceUseCasePoweredSection from '@/app/[locale]/intelligence/use-cases/customer-service/_components/CustomerServiceUseCasePoweredSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -35,7 +35,7 @@ export default async function MultilingualWebsitesPage({ params }: Props) {
   const { hero, challenge, whatWeImprove, advantage, process, technologies, cta } = CONTENT
 
   return (
-    <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+    <div className="flex flex-col gap-12 overflow-x-clip sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
       {/* 1. Hero — Home-19 HeroV19 (packages/business-growth BusinessGrowthHero) */}
       <MultilingualWebsitesHero
         badgeTitle={hero.badgeTitle}
@@ -55,9 +55,10 @@ export default async function MultilingualWebsitesPage({ params }: Props) {
         titleSuffix={challenge.titleSuffix}
         description={challenge.description}
         capabilityCards={[...challenge.capabilityCards]}
+        containedGrid
       />
-      {/* 3. What we improve — ecommerce §3 OperationsUseCasePoweredSection (ProcessV4) */}
-      <OperationsUseCasePoweredSection
+      {/* 3. What we improve — intelligence/use-cases/customer-service §3 CustomerServiceUseCasePoweredSection (MarketingFrameworkSection) */}
+      <CustomerServiceUseCasePoweredSection
         eyebrow={whatWeImprove.eyebrow}
         titleBefore={whatWeImprove.titleBefore}
         titleAccent={whatWeImprove.titleAccent}
