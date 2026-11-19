@@ -21,7 +21,8 @@ import { useMeetDialogOptional } from '@/components/wow/shared/MeetDialogProvide
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/utils/cn'
 import { useFooterPanelMinHeight } from '@/components/wow/footer/useFooterPanelMinHeight'
-import { House, Sparkles } from 'lucide-react'
+import { FooterAskWowTabIcon } from '@/components/wow/footer/FooterAskWowTabIcon'
+import { House } from 'lucide-react'
 import {
   useEffect,
   useMemo,
@@ -161,16 +162,7 @@ export default function WowFooterShell({
                     activeTab === 'ask' ? footerTabActiveClass : footerTabIdleClass,
                   )}
                 >
-                  <Sparkles
-                    className={cn(
-                      'size-4 transition-transform duration-300 group-hover:skew-x-6 sm:size-5 2xl:size-[46px]',
-                      activeTab === 'ask'
-                        ? '!stroke-white !text-white'
-                        : 'stroke-secondary text-secondary dark:stroke-[#F2F2F2] dark:text-[#F2F2F2]',
-                    )}
-                    strokeWidth={1.5}
-                    color={activeTab === 'ask' ? '#ffffff' : undefined}
-                  />
+                  <FooterAskWowTabIcon active={activeTab === 'ask'} />
                 </button>
               ) : null}
 
