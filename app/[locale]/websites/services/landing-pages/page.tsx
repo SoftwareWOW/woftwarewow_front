@@ -1,7 +1,7 @@
 import BiPredictiveHero from '@/app/[locale]/intelligence/services/business-intelligence-predictive-insights/_components/BiPredictiveHero'
-import BiPredictiveIntelligenceSection from '@/app/[locale]/intelligence/services/business-intelligence-predictive-insights/_components/BiPredictiveIntelligenceSection'
 import LandingPagesProcessSection from './_components/LandingPagesProcessSection'
-import BusinessWebsitesChallengeSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesChallengeSection'
+import LandingPagesWhatWeBuildSection from './_components/LandingPagesWhatWeBuildSection'
+import EcommerceWebsitesChallengeSection from '@/app/[locale]/websites/services/ecommerce-websites/_components/EcommerceWebsitesChallengeSection'
 import BusinessWebsitesTechnologiesSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesTechnologiesSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -47,8 +47,8 @@ export default async function LandingPagesPage({ params }: Props) {
         media={hero.media}
         headingId={hero.headingId}
       />
-      {/* 2. Challenge — intelligent-automation Challenge (BusinessWebsitesChallengeSection) */}
-      <BusinessWebsitesChallengeSection
+      {/* 2. Challenge — ecommerce-websites §2 (EcommerceWebsitesChallengeSection) */}
+      <EcommerceWebsitesChallengeSection
         eyebrow={challenge.eyebrow}
         titleBefore={challenge.titleBefore}
         titleAccent={challenge.titleAccent}
@@ -56,8 +56,8 @@ export default async function LandingPagesPage({ params }: Props) {
         description={challenge.description}
         capabilityCards={[...challenge.capabilityCards]}
       />
-      {/* 3. What we build — BiPredictiveIntelligenceSection (3+2 flip cards) */}
-      <BiPredictiveIntelligenceSection
+      {/* 3. What we build — BiPredictiveIntelligenceSection grid, static cards (no icons / hover) */}
+      <LandingPagesWhatWeBuildSection
         eyebrow={whatWeBuild.eyebrow}
         titleBefore={whatWeBuild.titleBefore}
         titleAccent={whatWeBuild.titleAccent}

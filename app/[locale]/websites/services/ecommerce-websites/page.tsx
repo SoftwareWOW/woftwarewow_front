@@ -1,7 +1,7 @@
 import OperationsUseCasePoweredSection from '@/app/[locale]/intelligence/use-cases/operations/_components/OperationsUseCasePoweredSection'
 import ModernizationPath from '@/app/[locale]/packages/digital-transformation/_components/ModernizationPath'
 import PaidSocialHero from '@/app/[locale]/social/services/paid-social-advertising-community-management/_components/PaidSocialHero'
-import BusinessWebsitesChallengeSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesChallengeSection'
+import EcommerceWebsitesChallengeSection from './_components/EcommerceWebsitesChallengeSection'
 import EcommerceWebsitesTechnologiesSection from './_components/EcommerceWebsitesTechnologiesSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
@@ -47,8 +47,8 @@ export default async function EcommerceWebsitesPage({ params }: Props) {
         marqueeText={hero.marqueeText}
         headingId={hero.headingId}
       />
-      {/* 2. Challenge — intelligent-automation IntelligentAutomationChallengeSection (BusinessWebsitesChallengeSection) */}
-      <BusinessWebsitesChallengeSection
+      {/* 2. Challenge — IntelligentAutomationChallengeSection flip grid */}
+      <EcommerceWebsitesChallengeSection
         eyebrow={challenge.eyebrow}
         titleBefore={challenge.titleBefore}
         titleAccent={challenge.titleAccent}
