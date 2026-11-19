@@ -2,6 +2,7 @@ import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
+import WowText from '@/components/wow/shared/WowText'
 
 const cardClassName =
   'relative rounded-radius-md border border-secondary/15 bg-background px-[30px] pb-[30px] pt-8 dark:border-backgroundBody/25 dark:bg-background md:pt-12'
@@ -58,6 +59,8 @@ type SalesUseCaseAdvantageSectionProps = {
   description: string
   beforeLabel: string
   afterLabel: string
+  /** Renders the after column label with `WowText` gradient (e.g. websites performance comparison). */
+  afterLabelWithWowText?: boolean
   beforeSteps: readonly string[]
   afterSteps: readonly string[]
 }
@@ -70,6 +73,7 @@ export default function SalesUseCaseAdvantageSection({
   description,
   beforeLabel,
   afterLabel,
+  afterLabelWithWowText = false,
   beforeSteps,
   afterSteps,
 }: SalesUseCaseAdvantageSectionProps) {
@@ -101,7 +105,11 @@ export default function SalesUseCaseAdvantageSection({
 
           <div className={cardClassName}>
             <h6 className="mb-8 text-2xl font-light uppercase tracking-[0.04em] text-secondary dark:text-backgroundBody md:mb-10 md:text-3xl">
-              {afterLabel}
+              {afterLabelWithWowText ? (
+                <WowText className="text-[1em] leading-[inherit] tracking-[inherit] uppercase">{afterLabel}</WowText>
+              ) : (
+                afterLabel
+              )}
             </h6>
             <ComparisonList steps={afterSteps} variant="after" />
           </div>

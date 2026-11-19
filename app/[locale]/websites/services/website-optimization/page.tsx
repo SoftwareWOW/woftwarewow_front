@@ -74,6 +74,7 @@ export default async function WebsiteOptimizationPage({ params }: Props) {
         description={advantage.description}
         beforeLabel={advantage.beforeLabel}
         afterLabel={advantage.afterLabel}
+        afterLabelWithWowText
         beforeSteps={[...advantage.beforeSteps]}
         afterSteps={[...advantage.afterSteps]}
       />
