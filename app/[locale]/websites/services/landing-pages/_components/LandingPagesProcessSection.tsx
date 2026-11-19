@@ -1,4 +1,5 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { mergeProcessSteps } from '@/lib/strapi/cms-section-props'
 
@@ -10,7 +11,9 @@ type ProcessStep = {
 
 type LandingPagesProcessSectionProps = {
   eyebrow: string
-  title: string
+  title?: string
+  titleBefore?: string
+  titleAccent?: string
   description: string
   steps: ReadonlyArray<ProcessStep>
 }
@@ -26,9 +29,20 @@ const DEFAULT_STEPS = [
 export default function LandingPagesProcessSection({
   eyebrow,
   title,
+  titleBefore,
+  titleAccent,
   description,
   steps,
 }: LandingPagesProcessSectionProps) {
+  const heading =
+    titleBefore != null && titleAccent != null ? (
+      <>
+        {titleBefore}
+        <InstrumentText>{titleAccent}</InstrumentText>
+      </>
+    ) : (
+      title
+    )
   const mergedSteps = mergeProcessSteps(DEFAULT_STEPS, [...steps]).map((step, index) => ({
     ...DEFAULT_STEPS[index],
     title: step.title,
@@ -42,7 +56,7 @@ export default function LandingPagesProcessSection({
           <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <RevealWrapper className="reveal-me mb-5">
-          <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">{title}</h2>
+          <h2 className="text-center max-md:text-3xl md:text-6xl md:leading-[1.2] md:tracking-[-1.68px]">{heading}</h2>
         </RevealWrapper>
         <RevealWrapper className="reveal-me mb-20">
           <p className="mx-auto max-w-2xl text-center text-base leading-relaxed text-[#808080]">{description}</p>

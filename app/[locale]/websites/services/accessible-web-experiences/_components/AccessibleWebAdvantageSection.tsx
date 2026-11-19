@@ -1,6 +1,7 @@
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import TextAppearAnimation02 from '@/components/animation/TextAppearAnimation02'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 
 type AdvantageItem = {
@@ -10,7 +11,10 @@ type AdvantageItem = {
 
 type AccessibleWebAdvantageSectionProps = {
   eyebrow: string
-  title: string
+  /** Full headline when `titleBefore` / `titleAccent` are not used. */
+  title?: string
+  titleBefore?: string
+  titleAccent?: string
   description: string
   items: ReadonlyArray<AdvantageItem>
 }
@@ -19,9 +23,20 @@ type AccessibleWebAdvantageSectionProps = {
 export default function AccessibleWebAdvantageSection({
   eyebrow,
   title,
+  titleBefore,
+  titleAccent,
   description,
   items,
 }: AccessibleWebAdvantageSectionProps) {
+  const heading =
+    titleBefore != null && titleAccent != null ? (
+      <>
+        {titleBefore}
+        <InstrumentText>{titleAccent}</InstrumentText>
+      </>
+    ) : (
+      title
+    )
   return (
     <section>
       <div className="container">
@@ -32,7 +47,7 @@ export default function AccessibleWebAdvantageSection({
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-3 md:mb-20 md:flex-row md:items-center lg:justify-start">
           <div className="flex-1">
             <TextAppearAnimation02>
-              <h2 className="text-appear-2">{title}</h2>
+              <h2 className="text-appear-2">{heading}</h2>
             </TextAppearAnimation02>
           </div>
           <div className="w-full md:w-80 lg:w-96">
