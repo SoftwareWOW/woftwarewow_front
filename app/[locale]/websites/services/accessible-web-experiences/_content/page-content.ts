@@ -13,10 +13,12 @@ export const CONTENT = {
       'Make your website more welcoming, usable, and accessible to everyone. We combine inclusive design, thoughtful development, and accessibility best practices to create digital experiences that help more people engage with your business.',
     primaryCta: { label: 'MAKE MY WEBSITE ACCESSIBLE', href: '/meet' },
     secondaryCta: { label: 'EXPLORE OUR WORK', href: '/portfolio' },
-    media: {
-      src: '/images/wow/Hero/devision/Website 1.jpg',
-      alt: 'Person using a laptop with accessibility-focused web content',
-    },
+    images: [
+      {
+        src: '/images/wow/Hero/devision/Website 1.jpg',
+        alt: 'Person using a laptop with accessibility-focused web content',
+      },
+    ],
     headingId: 'accessible-web-experiences-hero-heading',
   },
   challenge: {

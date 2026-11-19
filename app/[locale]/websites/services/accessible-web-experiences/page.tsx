@@ -2,7 +2,7 @@ import AccessibleWebHero from './_components/AccessibleWebHero'
 import AccessibleWebAdvantageSection from './_components/AccessibleWebAdvantageSection'
 import { CONTENT, ACCESSIBLE_WEB_EXPERIENCES_PAGE_METADATA } from './_content/page-content'
 import OperationsUseCasePoweredSection from '@/app/[locale]/intelligence/use-cases/operations/_components/OperationsUseCasePoweredSection'
-import EcommerceWebsitesChallengeSection from '@/app/[locale]/websites/services/ecommerce-websites/_components/EcommerceWebsitesChallengeSection'
+import BusinessWebsitesChallengeSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesChallengeSection'
 import MarketingUseCaseApproachSection from '@/app/[locale]/intelligence/use-cases/marketing/_components/MarketingUseCaseApproachSection'
 import AiAssistantsSolutionRowsSection from '@/app/[locale]/intelligence/services/ai-assistants-chatbots/_components/AiAssistantsSolutionRowsSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -36,19 +36,19 @@ export default async function AccessibleWebExperiencesPage({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-      {/* 1. Hero — IntelligentAutomationHero split (image left) */}
+      {/* 1. Hero — for-you/sales-and-revenue SalesRevenueHero (Home-25 HeroV25) */}
       <AccessibleWebHero
         badgeTitle={hero.badgeTitle}
         title={hero.title}
         italicTitle={hero.italicTitle}
         description={hero.description}
+        images={[...hero.images]}
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
-        media={hero.media}
         headingId={hero.headingId}
       />
-      {/* 2. Challenge — ecommerce §2 EcommerceWebsitesChallengeSection */}
-      <EcommerceWebsitesChallengeSection
+      {/* 2. Challenge — business-websites §2 BusinessWebsitesChallengeSection */}
+      <BusinessWebsitesChallengeSection
         eyebrow={challenge.eyebrow}
         titleBefore={challenge.titleBefore}
         titleAccent={challenge.titleAccent}
