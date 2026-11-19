@@ -182,10 +182,10 @@ export const CONTENT = {
       'We use analytics, behavioral research, and experimentation tools to understand visitor journeys, evaluate changes, and support continuous conversion improvements.',
     tools: [
       { name: 'Google Analytics 4', icon: 'logos:google-analytics' },
-      { name: 'Hotjar', icon: 'simple-icons:hotjar' },
-      { name: 'VWO', icon: 'simple-icons:vwo' },
-      { name: 'Optimizely', icon: 'simple-icons:optimizely' },
-      { name: 'Google Tag Manager', icon: 'simple-icons:googletagmanager' },
+      { name: 'Hotjar', icon: 'logos:hotjar' },
+      { name: 'VWO', icon: 'logos:vwo', wide: true },
+      { name: 'Optimizely', icon: 'logos:optimizely', wide: true },
+      { name: 'Google Ads', icon: 'logos:google-ads' },
     ],
   },
   cta: {

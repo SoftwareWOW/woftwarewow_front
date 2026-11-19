@@ -1,5 +1,5 @@
 import BusinessWebsitesChallengeSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesChallengeSection'
-import BusinessWebsitesTechnologiesSection from '@/app/[locale]/websites/services/business-websites/_components/BusinessWebsitesTechnologiesSection'
+import EcommerceWebsitesTechnologiesSection from '@/app/[locale]/websites/services/ecommerce-websites/_components/EcommerceWebsitesTechnologiesSection'
 import EcommerceWebsitesGrowthPiecesSection from '@/app/[locale]/websites/services/ecommerce-websites/_components/EcommerceWebsitesGrowthPiecesSection'
 import LandingPagesProcessSection from '@/app/[locale]/websites/services/landing-pages/_components/LandingPagesProcessSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -83,8 +83,8 @@ export default async function ConversionOptimizationPage({ params }: Props) {
         description={process.description}
         steps={[...process.steps]}
       />
-      {/* 6. Technologies — business-websites BusinessWebsitesTechnologiesSection */}
-      <BusinessWebsitesTechnologiesSection
+      {/* 6. Technologies — ecommerce-websites §6 EcommerceWebsitesTechnologiesSection (colored logos:*) */}
+      <EcommerceWebsitesTechnologiesSection
         eyebrow={technologies.eyebrow}
         headlineBefore={technologies.headlineBefore}
         headlineAccent={technologies.headlineAccent}
