@@ -10,6 +10,10 @@ type WowDivisionMarqueeCenterHintProps = {
   hint: MarqueeDivisionHint | null
 }
 
+/** ~300×400 marquee hover card (matches Figma reference). */
+const CARD_CLASS =
+  'flex min-h-[25rem] w-[min(300px,calc(100vw-2rem))] max-w-[300px] flex-col gap-3 overflow-hidden rounded-radius-sm bg-white p-5 shadow-box ring-1 ring-foreground/5 dark:bg-dark'
+
 export default function WowDivisionMarqueeCenterHint({ hint }: WowDivisionMarqueeCenterHintProps) {
   const [mounted, setMounted] = useState(false)
 
@@ -34,21 +38,21 @@ export default function WowDivisionMarqueeCenterHint({ hint }: WowDivisionMarque
           transition={{ duration: 0.15 }}
           className="pointer-events-none fixed inset-0 z-[1200] flex items-center justify-center px-4"
         >
-          <div className="w-[10.5rem] overflow-hidden rounded-radius-sm bg-white p-2 shadow-md ring-1 ring-foreground/10 dark:bg-dark sm:w-[11.5rem]">
-            <div className="relative h-[3.25rem] w-full overflow-hidden rounded-md sm:h-[3.75rem]">
+          <div className={CARD_CLASS}>
+            <div className="relative h-[11rem] w-full shrink-0 overflow-hidden rounded-radius-sm sm:h-[11.5rem]">
               <Image
                 src={hint.imageSrc}
                 alt=""
                 fill
                 className="object-cover"
-                sizes="184px"
+                sizes="300px"
                 unoptimized={isSvg}
               />
             </div>
-            <p className="mt-2 text-center text-[9px] leading-snug text-secondary dark:text-[#F2F2F2] sm:text-[10px]">
+            <p className="text-center font-outfit text-sm font-light leading-snug text-secondary dark:text-[#F2F2F2] sm:text-base">
               {hint.title}
             </p>
-            <p className="mt-1 text-center text-[8px] leading-relaxed text-[#808080] sm:text-[9px]">
+            <p className="text-center font-outfit text-xs font-light leading-relaxed text-[#808080] sm:text-sm sm:leading-relaxed">
               {hint.description}
             </p>
           </div>
