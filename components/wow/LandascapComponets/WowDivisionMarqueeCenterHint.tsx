@@ -10,9 +10,9 @@ type WowDivisionMarqueeCenterHintProps = {
   hint: MarqueeDivisionHint | null
 }
 
-/** ~300×400 marquee hover card (matches Figma reference). */
+/** ~300px marquee hover card; height follows content (no extra bottom gap). */
 const CARD_CLASS =
-  'flex min-h-[25rem] w-[min(300px,calc(100vw-2rem))] max-w-[300px] flex-col gap-3 overflow-hidden rounded-radius-sm bg-white p-5 shadow-box ring-1 ring-foreground/5 dark:bg-dark'
+  'flex w-[min(300px,calc(100vw-2rem))] max-w-[300px] flex-col gap-3 overflow-hidden rounded-radius-sm bg-backgroundBody px-5 pt-5 pb-5 shadow-box ring-1 ring-foreground/5 transition-colors duration-300 dark:bg-dark'
 
 export default function WowDivisionMarqueeCenterHint({ hint }: WowDivisionMarqueeCenterHintProps) {
   const [mounted, setMounted] = useState(false)
