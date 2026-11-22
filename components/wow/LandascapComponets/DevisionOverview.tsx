@@ -5,7 +5,8 @@ import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
-import { divisionIdFromHref } from '@/i18n/division-paths'
+import { divisionIdFromHref, normalizeDivisionHref } from '@/i18n/division-paths'
+import { isAllowedNextImageSrc } from '@/lib/strapi/client'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 
 import { ArrowUpRight } from 'lucide-react'
@@ -16,6 +17,7 @@ import { usePathname } from 'next/navigation'
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -122,6 +124,39 @@ const divisions: DevisionOverviewItem[] = [
   },
 ]
 
+const DEFAULT_DIVISION_BG = divisions[0].bgImage
+
+const FALLBACK_BG_BY_HREF = new Map(
+  divisions.map((item) => [normalizeDivisionHref(item.href), item.bgImage]),
+)
+
+function fallbackBgForItem(item: DevisionOverviewItem, index: number): string {
+  const href = normalizeDivisionHref(item.href)
+  const byHref = FALLBACK_BG_BY_HREF.get(href)
+  if (byHref) return byHref
+
+  const divisionId = divisionIdFromHref(href)
+  if (divisionId) {
+    const match = divisions.find((d) => divisionIdFromHref(d.href) === divisionId)
+    if (match?.bgImage) return match.bgImage
+  }
+
+  return divisions[index % divisions.length]?.bgImage ?? DEFAULT_DIVISION_BG
+}
+
+function withDivisionBgFallback(items: DevisionOverviewItem[]): DevisionOverviewItem[] {
+  return items.map((item, index) => {
+    const href = normalizeDivisionHref(item.href)
+    const raw = item.bgImage?.trim() ?? ''
+    const resolved =
+      raw && isAllowedNextImageSrc(raw) ? raw : fallbackBgForItem(item, index)
+    const bgImage =
+      resolved.trim() && isAllowedNextImageSrc(resolved) ? resolved.trim() : DEFAULT_DIVISION_BG
+
+    return { ...item, href, bgImage }
+  })
+}
+
 function DivisionPreviewImages({
   items,
   activeBgId,
@@ -138,33 +173,38 @@ function DivisionPreviewImages({
       aria-hidden="true"
       className={`relative min-h-0 min-w-0 ${className}`}
     >
-      {items.map((item) => (
-        <div
-          key={item.id}
-          className={`
-            pointer-events-none absolute inset-0 mix-blend-screen
-            transition-opacity duration-500 ease-in-out
-            ${
-              activeBgId === item.id
-                ? 'z-10 opacity-100'
-                : 'z-0 opacity-0'
-            }
-          `}
-        >
-          <Image
-            src={item.bgImage}
-            alt=""
-            fill
-            priority={item.id <= 2}
-            sizes={
-              desktop
-                ? '(max-width: 1023px) 42vw, (max-width: 1535px) 45vw, 720px'
-                : '(max-width: 767px) 220px, 180px'
-            }
-            className="object-contain object-center"
-          />
-        </div>
-      ))}
+      {items.map((item) => {
+        const src = item.bgImage?.trim()
+        if (!src) return null
+
+        return (
+          <div
+            key={item.id}
+            className={`
+              pointer-events-none absolute inset-0 mix-blend-screen
+              transition-opacity duration-500 ease-in-out
+              ${
+                activeBgId === item.id
+                  ? 'z-10 opacity-100'
+                  : 'z-0 opacity-0'
+              }
+            `}
+          >
+            <Image
+              src={src}
+              alt=""
+              fill
+              priority={item.id <= 2}
+              sizes={
+                desktop
+                  ? '(max-width: 1023px) 42vw, (max-width: 1535px) 45vw, 720px'
+                  : '(max-width: 767px) 220px, 180px'
+              }
+              className="object-contain object-center"
+            />
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -176,11 +216,16 @@ function DevisionOverviewContent({
   divisionsData: DevisionOverviewItem[]
   pathname: string
 }) {
+  const resolvedDivisions = useMemo(
+    () => withDivisionBgFallback(divisionsData),
+    [divisionsData],
+  )
+
   const [hoveredId, setHoveredId] =
     useState<number | null>(null)
 
   const [activeCardId, setActiveCardId] =
-    useState(divisionsData[0]?.id ?? 1)
+    useState(resolvedDivisions[0]?.id ?? 1)
 
   const cardRefs =
     useRef<Record<number, HTMLElement | null>>({})
@@ -198,7 +243,7 @@ function DevisionOverviewContent({
   const updateActiveCardFromPosition = useCallback(() => {
     const section = sectionElementRef.current
 
-    if (!section || divisionsData.length === 0) return
+    if (!section || resolvedDivisions.length === 0) return
 
     const rect = section.getBoundingClientRect()
     const isMobile = window.innerWidth < 768
@@ -215,10 +260,10 @@ function DevisionOverviewContent({
 
     const focusX = rect.left + rect.width * focusRatio
 
-    let closestId = divisionsData[0].id
+    let closestId = resolvedDivisions[0].id
     let closestDistance = Infinity
 
-    for (const item of divisionsData) {
+    for (const item of resolvedDivisions) {
       const card = cardRefs.current[item.id]
       if (!card) continue
 
@@ -235,7 +280,7 @@ function DevisionOverviewContent({
     setActiveCardId((previous) =>
       previous === closestId ? previous : closestId
     )
-  }, [divisionsData])
+  }, [resolvedDivisions])
 
   const scheduleActiveCardUpdate = useCallback(() => {
     if (updateFrameRef.current !== null) return
@@ -427,7 +472,7 @@ function DevisionOverviewContent({
             >
               {/* MOBILE IMAGE */}
               <DivisionPreviewImages
-                items={divisionsData}
+                items={resolvedDivisions}
                 activeBgId={activeBgId}
                 className="
                   h-full w-[180px]
@@ -439,7 +484,7 @@ function DevisionOverviewContent({
 
               {/* DESKTOP IMAGE */}
               <DivisionPreviewImages
-                items={divisionsData}
+                items={resolvedDivisions}
                 activeBgId={activeBgId}
                 desktop
                 className="
@@ -480,7 +525,7 @@ function DevisionOverviewContent({
             will-change-transform
           "
         >
-          {divisionsData.map((item) => {
+          {resolvedDivisions.map((item) => {
             const isActive = activeBgId === item.id
             const divisionId = divisionIdFromHref(item.href)
 

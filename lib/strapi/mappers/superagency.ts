@@ -58,13 +58,24 @@ export function mapStrapiDivisions(divisions: StrapiSuperagencyDivision[]) {
       seenTitles.add(key);
       return true;
     })
-    .map((division, index) => ({
-      id: index + 1,
-      title: division.name,
-      description: division.shortDescription ?? '',
-      bgImage: division.featuredImagePath ?? getStrapiMediaUrl(division.featuredImage ?? undefined) ?? '',
-      href: normalizeDivisionHref(division.ctaLink ?? '/'),
-    }));
+    .map((division, index) => {
+      const cmsCandidate =
+        division.featuredImagePath ??
+        getStrapiMediaUrl(division.featuredImage ?? undefined) ??
+        '';
+      const bgImage =
+        cmsCandidate.trim() && isAllowedNextImageSrc(cmsCandidate.trim())
+          ? cmsCandidate.trim()
+          : '';
+
+      return {
+        id: index + 1,
+        title: division.name,
+        description: division.shortDescription ?? '',
+        bgImage,
+        href: normalizeDivisionHref(division.ctaLink ?? '/'),
+      };
+    });
 }
 
 const WOW_PROJECT_IMAGE_WIDTH = 1330;
