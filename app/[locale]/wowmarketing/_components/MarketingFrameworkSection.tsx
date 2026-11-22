@@ -42,7 +42,7 @@ export default function MarketingFrameworkSection() {
               {steps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max pl-10">
                   <div
-                    className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
+                    className={`absolute left-0 flex items-center justify-center rounded-full border-background bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:shadow-[inset_0_0_0_1px_#EDF0F51A] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
                       index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
                     }`}
                   >
