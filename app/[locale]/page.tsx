@@ -126,7 +126,13 @@ const Home = async ({ params }: Props) => {
         stabilizeProgressOnViewportChange={typedLocale === 'en-US'}
         serverHeadline
       />
-      <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
+      <style>{`
+        .home-ecosystem-width .container,
+        .home-ecosystem-width .max-w-\\[1320px\\] {
+          max-width: 80rem;
+        }
+      `}</style>
+      <div className="home-ecosystem-width flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
         <div className="flex flex-col gap-0 lg:contents">
           <WowSuperAgencyClient
             superAgencyClient={superAgencyClient}
