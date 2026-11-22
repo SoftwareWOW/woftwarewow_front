@@ -11,6 +11,7 @@ import {
 } from '@/lib/strapi/mappers/layout'
 import { getLocale } from 'next-intl/server'
 import { ReactNode } from 'react'
+import PageContentWidth from './PageContentWidth'
 import { ContactDialogProvider } from './shared/ContactDialogProvider'
 import { MeetDialogProvider } from './shared/MeetDialogProvider'
 import { ToastProvider } from './shared/ToastProvider'
@@ -38,7 +39,7 @@ export default async function WowLayout({ children }: { children: ReactNode }) {
                 languageSwitcher={dictionary.languageSwitcher}
                 footer={footer}
               >
-                {children}
+                <PageContentWidth>{children}</PageContentWidth>
               </SuperagencyChrome>
               <LazyAIAssistant />
             </div>
