@@ -308,8 +308,9 @@ export default function WowHero({
   const imageTop =
     lerp(0, 40, eased)
 
+  /* Docked image matches the homepage section column (80rem). */
   const imageSide =
-    lerp(0, 4, eased)
+    `calc(max(4%, (100% - 80rem) / 2) * ${eased})`
 
   const imageBottom =
     lerp(0, 1, eased)
@@ -377,7 +378,7 @@ export default function WowHero({
           ['--image-bottom-tablet' as string]: `${tabletImageBottom}dvh`,
           ['--image-top-desktop' as string]: `${imageTop}dvh`,
           ['--image-bottom-desktop' as string]: `${imageBottom}dvh`,
-          ['--image-side' as string]: `${imageSide}vw`,
+          ['--image-side' as string]: imageSide,
           ['--image-radius' as string]: `${imageRadius}px`,
         } as CSSProperties}
       >
@@ -495,13 +496,14 @@ export default function WowHero({
             absolute
             inset-0
             z-[20]
-            px-[6vw]
 
             pt-[max(5.5rem,8vh)]
             md:pt-[max(5.5rem,6vh)]
           "
           style={{
             opacity: dockedOpacity,
+            paddingLeft: 'max(1rem, var(--image-side))',
+            paddingRight: 'max(1rem, var(--image-side))',
             pointerEvents:
               dockedInteractive
                 ? 'auto'
@@ -570,7 +572,6 @@ export default function WowHero({
             absolute
             inset-0
             z-[21]
-            px-[6vw]
             pt-[max(5.5rem,8vh)]
             md:pt-[max(5.5rem,6vh)]
 
@@ -580,6 +581,8 @@ export default function WowHero({
           "
           style={{
             opacity: dockedOpacity,
+            paddingLeft: 'max(1rem, var(--image-side))',
+            paddingRight: 'max(1rem, var(--image-side))',
           }}
         >
           <h2
