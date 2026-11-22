@@ -39,7 +39,7 @@ const OurProcess = () => {
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[30px]">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md min-w-0 flex-1 md:w-auto">
             <img
               src="/images/wow/LandingPageNaveBare/engineer-and-coworker-use-ai-cognitive-computing-o-2026-01-11-10-54-36-utc%202.svg"

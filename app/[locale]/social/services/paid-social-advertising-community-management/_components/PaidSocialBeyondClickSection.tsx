@@ -46,7 +46,7 @@ export default function PaidSocialBeyondClickSection({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[30px]">
           <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] min-w-0 flex-1 md:w-auto lg:min-h-[560px]">
             <Image
               src={image.src}

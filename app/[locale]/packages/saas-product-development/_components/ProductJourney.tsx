@@ -44,7 +44,7 @@ const ProductJourney = ({ eyebrow, title, description, steps, image }: Props = {
           ) : null}
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[30px]">
           <figure className="relative w-full overflow-hidden rounded-radius-md min-w-0 flex-1 md:w-auto">
             {hasCmsImage ? (
               <CmsResponsiveImage

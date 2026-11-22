@@ -54,7 +54,7 @@ export default function AccelerateFrameworkSection() {
           </div>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[30px]">
           <div className="w-full shrink-0 md:w-max md:order-1">
             <ul className="relative space-y-5 border-secondary dark:border-backgroundBody md:border-l md:space-y-6">
               {steps.map((step, index) => (

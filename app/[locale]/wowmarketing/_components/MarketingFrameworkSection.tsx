@@ -36,7 +36,7 @@ export default function MarketingFrameworkSection() {
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[30px]">
           <div className="w-full shrink-0 md:w-max md:order-1">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
               {steps.map((step, index) => (
