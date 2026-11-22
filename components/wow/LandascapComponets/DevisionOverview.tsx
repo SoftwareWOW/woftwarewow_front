@@ -136,13 +136,13 @@ function DivisionPreviewImages({
   return (
     <div
       aria-hidden="true"
-      className={`relative isolate min-h-0 min-w-0 ${className}`}
+      className={`relative min-h-0 min-w-0 ${className}`}
     >
       {items.map((item) => (
         <div
           key={item.id}
           className={`
-            pointer-events-none absolute inset-0
+            pointer-events-none absolute inset-0 mix-blend-screen
             transition-opacity duration-500 ease-in-out
             ${
               activeBgId === item.id
@@ -417,12 +417,13 @@ function DevisionOverviewContent({
 
             {/* IMAGE USES ONLY AVAILABLE SPACE */}
             <div
-              className="
+              className={`
                 relative flex
                 h-full min-h-0 min-w-0
                 items-center justify-center
                 md:justify-end
-              "
+                ${DIVISIONS_SECTION_BG}
+              `}
             >
               {/* MOBILE IMAGE */}
               <DivisionPreviewImages
