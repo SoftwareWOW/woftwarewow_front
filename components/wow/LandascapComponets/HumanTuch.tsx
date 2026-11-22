@@ -98,7 +98,7 @@ const HumanTouch = ({
             </h2>
 
             <RevealWrapper className="reveal-me mt-8 flex items-center gap-5 pb-8">
-              <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-[#8b7cff] shadow-lg shadow-[#8b7cff]/20">
+              <div className="relative size-12 shrink-0 overflow-hidden rounded-radius-sm">
                 <Image
                   src={founderAvatar}
                   alt={founderName}
