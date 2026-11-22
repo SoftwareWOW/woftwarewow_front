@@ -24,9 +24,9 @@ const notchGradient = (color: string) =>
 
 export default function SoftwareWowHero() {
   const heroSrc = useLandingImage(LANDING_SECTION_KEYS.softwareWow.hero, 0, HERO_IMAGE)
-  const panelBg = 'bg-backgroundBody dark:bg-[#0D0D0D]'
+  const panelBg = 'bg-backgroundBody dark:bg-dark'
   const notchLight = '#ededed'
-  const notchDark = '#0D0D0D'
+  const notchDark = '#171717'
 
   return (
     <section className="softwarewow-ecosystem relative overflow-x-clip bg-backgroundBody pt-10 transition-colors duration-300 dark:bg-dark sm:pt-10 md:pt-12 lg:overflow-visible lg:pt-14">
