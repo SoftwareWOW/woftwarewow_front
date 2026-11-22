@@ -66,8 +66,8 @@ const ClientJourney = ({
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] min-w-0 flex-1 md:w-auto lg:min-h-[560px]">
             <CmsResponsiveImage
               image={image}
               fallbackSrc={fallbackImage}
@@ -78,7 +78,7 @@ const ClientJourney = ({
             />
           </figure>
 
-          <div className="min-w-0 flex-1">
+          <div className="w-full shrink-0 md:w-max">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
               {mergedSteps.map((step, index) => (
                 <li key={step.number} className="relative max-w-max px-10">

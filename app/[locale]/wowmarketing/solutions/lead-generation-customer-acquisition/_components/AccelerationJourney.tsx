@@ -43,8 +43,8 @@ const AccelerationJourney = ({ eyebrow, title, accentTitle, steps, image }: Prop
           ) : null}
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <figure className="relative w-full overflow-hidden rounded-radius-md md:w-[min(100%,420px)] md:shrink-0">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+          <figure className="relative w-full overflow-hidden rounded-radius-md min-w-0 flex-1 md:w-auto">
             {hasCmsImage ? (
               <CmsResponsiveImage
                 image={image}
@@ -63,7 +63,7 @@ const AccelerationJourney = ({ eyebrow, title, accentTitle, steps, image }: Prop
           </figure>
 
           {displaySteps.length ? (
-            <div className="min-w-0 flex-1">
+            <div className="w-full shrink-0 md:w-max">
               <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
                 {displaySteps.map((step, index) => (
                   <li key={step.number} className="relative max-w-max px-10">

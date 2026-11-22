@@ -46,18 +46,18 @@ export default function InfluencerContentPurposeSection({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] md:w-[min(100%,420px)] md:shrink-0 lg:min-h-[560px]">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+          <figure className="relative min-h-[320px] w-full overflow-hidden rounded-radius-md md:min-h-[480px] min-w-0 flex-1 md:w-auto lg:min-h-[560px]">
             <Image
               src={image.src}
               alt={image.alt}
               fill
               className="rounded-radius-md object-cover"
-              sizes="(max-width: 768px) 100vw, 420px"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </figure>
 
-          <div className="min-w-0 flex-1">
+          <div className="w-full shrink-0 md:w-max">
             <ul className="relative space-y-5 md:space-y-6">
               {steps.map((step, index) => (
                 <li key={step.id} className="relative max-w-max px-10">

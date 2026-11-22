@@ -58,11 +58,11 @@ export default function CustomerServiceUseCasePoweredSection({
           </RevealWrapper>
         </div>
 
-        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-20">
-          <div className="min-w-0 flex-1 md:order-1 md:self-stretch">
+        <RevealWrapper className="flex flex-col gap-12 md:flex-row md:items-stretch md:gap-[10px]">
+          <div className="w-full shrink-0 md:w-max md:order-1 md:self-stretch">
             <ul className="relative space-y-8 border-secondary dark:border-backgroundBody md:border-l lg:space-y-10">
               {steps.map((step, index) => (
-                <li key={step.id} className="relative max-w-max px-10">
+                <li key={step.id} className="relative max-w-max pl-10">
                   <div
                     className={`absolute left-0 flex items-center justify-center rounded-full border-backgroundBody bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:border-[#151515] md:-left-11 md:border-[18px] lg:px-6 lg:py-8 ${
                       index === 0 ? 'lg:-left-[52px]' : 'lg:-left-[54px]'
@@ -85,13 +85,13 @@ export default function CustomerServiceUseCasePoweredSection({
             </ul>
           </div>
 
-          <figure className="relative min-h-[280px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-0 md:w-[min(100%,420px)] md:shrink-0 md:self-stretch">
+          <figure className="relative min-h-[280px] w-full overflow-hidden rounded-radius-md md:order-2 md:min-h-0 min-w-0 flex-1 md:w-auto md:self-stretch">
             <Image
               src={image.src}
               alt={image.alt}
               fill
               className={`rounded-radius-md ${isSvg ? 'object-contain' : 'object-cover'}`}
-              sizes="(max-width: 768px) 100vw, 420px"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </figure>
         </RevealWrapper>
