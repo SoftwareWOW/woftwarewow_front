@@ -47,6 +47,15 @@ const cardServiceRowLayoutSevenClass = cn(
   'xl:gap-5 xl:p-4 min-[1400px]:gap-5 min-[1400px]:p-4',
 )
 
+/** 10+ services — smaller padding so the grid fits the footer. */
+const cardServiceRowLayoutManyClass = cn(
+  'flex-row items-center gap-2 p-2',
+  'sm:gap-2 sm:p-2.5',
+  'lg:gap-2.5 lg:p-2.5',
+  'xl:gap-3 xl:p-3',
+  'min-[1400px]:gap-3 min-[1400px]:p-3',
+)
+
 const footerServiceTitleClass = cn(
   'block break-words font-outfit font-light leading-tight text-secondary dark:text-[#F2F2F2]',
   'text-[15px] sm:text-base md:text-lg lg:text-lg xl:text-xl min-[1400px]:text-2xl min-[1400px]:leading-[1.15]',
@@ -68,6 +77,18 @@ const footerServiceTitleSevenClass = cn(
 const footerServiceDescriptionSevenClass = cn(
   footerServiceDescriptionClass,
   'min-[1400px]:mt-1.5 min-[1400px]:text-[15px] min-[1400px]:leading-[1.45]',
+)
+
+const footerServiceTitleManyClass = cn(
+  'block break-words font-outfit font-light leading-tight text-secondary dark:text-[#F2F2F2]',
+  'text-[13px] sm:text-sm lg:text-[15px] xl:text-base',
+  navItemLabelClass,
+)
+
+const footerServiceDescriptionManyClass = cn(
+  'mt-0.5 block break-words font-outfit font-light leading-snug !text-[#808080]',
+  'text-[11px] sm:text-xs',
+  navItemDescriptionClass,
 )
 
 /** Contact tab — Figma @ 1400px: 36px title, 16px body, 60px plain icon, 80px arrow; scales below/above. */
@@ -180,20 +201,24 @@ function FooterPlainIcon({
   iconId,
   variant = 'default',
   seven = false,
+  many = false,
 }: {
   iconId: string
   variant?: 'default' | 'service'
   seven?: boolean
+  many?: boolean
 }) {
   const sizeClass =
     variant === 'service'
-      ? seven
-        ? cn(
-            'size-9 shrink-0 sm:size-10 md:size-11 lg:size-12 xl:size-14 min-[1400px]:size-[52px]',
-          )
-        : cn(
-            'size-9 shrink-0 sm:size-10 md:size-11 lg:size-12 xl:size-14 min-[1400px]:size-[60px]',
-          )
+      ? many
+        ? cn('size-7 shrink-0 sm:size-8 lg:size-9 xl:size-10')
+        : seven
+          ? cn(
+              'size-9 shrink-0 sm:size-10 md:size-11 lg:size-12 xl:size-14 min-[1400px]:size-[52px]',
+            )
+          : cn(
+              'size-9 shrink-0 sm:size-10 md:size-11 lg:size-12 xl:size-14 min-[1400px]:size-[60px]',
+            )
       : cn('size-5 shrink-0 sm:size-6 2xl:size-7')
 
   return (
@@ -260,11 +285,12 @@ export function FooterActionCard({
   showArrow?: boolean
   iconStyle?: 'none' | 'boxed' | 'plain'
   /** Slight trim for seven service cards — same look as six, fits the extra row. */
-  serviceDensity?: 'default' | 'seven'
+  serviceDensity?: 'default' | 'seven' | 'many'
 }) {
   const isContactCard = showArrow
   const isServiceCard = iconStyle === 'plain' && !isContactCard
   const serviceSeven = isServiceCard && serviceDensity === 'seven'
+  const serviceMany = isServiceCard && serviceDensity === 'many'
 
   return (
     <FooterNavLink
@@ -275,9 +301,11 @@ export function FooterActionCard({
         isContactCard
           ? cardContactLayoutClass
           : isServiceCard
-            ? serviceSeven
-              ? cardServiceRowLayoutSevenClass
-              : cardServiceRowLayoutClass
+            ? serviceMany
+              ? cardServiceRowLayoutManyClass
+              : serviceSeven
+                ? cardServiceRowLayoutSevenClass
+                : cardServiceRowLayoutClass
             : cardRowLayoutClass,
       )}
     >
@@ -306,15 +334,18 @@ export function FooterActionCard({
               iconId={iconId}
               variant={isServiceCard ? 'service' : 'default'}
               seven={serviceSeven}
+              many={serviceMany}
             />
           ) : null}
           <span className="min-w-0 flex-1">
             <span
               className={
                 isServiceCard
-                  ? serviceSeven
-                    ? footerServiceTitleSevenClass
-                    : footerServiceTitleClass
+                  ? serviceMany
+                    ? footerServiceTitleManyClass
+                    : serviceSeven
+                      ? footerServiceTitleSevenClass
+                      : footerServiceTitleClass
                   : cn(
                       'block font-outfit text-[13px] font-light leading-tight sm:text-sm 2xl:text-lg',
                       navItemLabelClass,
@@ -328,9 +359,11 @@ export function FooterActionCard({
               <span
                 className={
                   isServiceCard
-                    ? serviceSeven
-                      ? footerServiceDescriptionSevenClass
-                      : footerServiceDescriptionClass
+                    ? serviceMany
+                      ? footerServiceDescriptionManyClass
+                      : serviceSeven
+                        ? footerServiceDescriptionSevenClass
+                        : footerServiceDescriptionClass
                     : cn(
                   'mt-0.5 block font-outfit text-[11px] font-light leading-snug sm:text-xs 2xl:text-sm',
                   navItemDescriptionClass,

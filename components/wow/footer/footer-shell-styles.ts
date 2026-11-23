@@ -130,6 +130,12 @@ const footerServiceGridGapsSeven = cn(
   'xl:gap-5 min-[1400px]:gap-5',
 )
 
+/** 10+ services — tighter gaps so four rows fit the footer. */
+const footerServiceGridGapsMany = cn(
+  'grid min-w-0 w-full max-w-full items-stretch gap-2 sm:gap-2 md:gap-2.5',
+  'lg:mx-auto lg:gap-2.5 xl:gap-3 min-[1400px]:gap-3',
+)
+
 /** Up to 4 cards: cluster width matches footer tab row (--footer-tablist-width). */
 const footerServiceGridTabAligned = cn(
   footerServiceGridGaps,
@@ -213,7 +219,7 @@ export function footerServiceGridClassForCount(count: number): string {
   }
   if (count === 10) {
     return cn(
-      footerServiceGridWide,
+      footerServiceGridGapsMany,
       'grid-cols-1 sm:grid-cols-2',
       footerServiceColsResponsive,
       '[&>*:nth-child(10)]:xl:col-start-2',
@@ -221,19 +227,20 @@ export function footerServiceGridClassForCount(count: number): string {
   }
 
   const remainder = count % 3
+  const manyGrid = footerServiceGridGapsMany
   if (remainder === 0) {
-    return cn(footerServiceGridWide, 'grid-cols-1 sm:grid-cols-2', footerServiceColsResponsive)
+    return cn(manyGrid, 'grid-cols-1 sm:grid-cols-2', footerServiceColsResponsive)
   }
   if (remainder === 1) {
     return cn(
-      footerServiceGridWide,
+      manyGrid,
       'grid-cols-1 sm:grid-cols-2',
       footerServiceColsResponsive,
       `[&>*:nth-child(${count})]:xl:col-start-2`,
     )
   }
   return cn(
-    footerServiceGridWide,
+    manyGrid,
     'grid-cols-1 sm:grid-cols-2',
     footerServiceColsResponsive,
     '[&>*:nth-last-child(2)]:xl:col-start-1',

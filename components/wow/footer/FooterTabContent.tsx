@@ -121,7 +121,8 @@ function ExplorePanel() {
 function ServicesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFooter }) {
   const cards = divisionChrome?.serviceCards ?? serviceCards
   const gridClass = footerServiceGridClassForCount(cards.length)
-  const serviceDensity = cards.length === 7 ? 'seven' : 'default'
+  const serviceDensity =
+    cards.length >= 10 ? 'many' : cards.length === 7 ? 'seven' : 'default'
 
   return (
     <div className={cn(panelClass, footerServicePanelCenterClass)}>
