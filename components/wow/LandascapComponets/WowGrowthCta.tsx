@@ -25,6 +25,8 @@ const WowGrowthCta = ({
   const innerLayout =
     innerClassName ??
     'container flex flex-col items-center justify-center gap-y-10 sm:justify-between md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 xl:gap-x-20'
+  // Callers that already set horizontal padding (event detail) keep their own inset.
+  const sectionInset = sectionClassName && /\bpx-/.test(sectionClassName) ? '' : 'xl:px-4'
   const contactDialog = useContactDialogOptional()
 
   const handleOpenContact = () => {
@@ -33,7 +35,7 @@ const WowGrowthCta = ({
 
   return (
     <section
-      className={`relative bg-background pb-5 transition-colors duration-300 dark:bg-background sm:pb-10 md:pb-15 lg:pb-20${sectionClassName ? ` ${sectionClassName}` : ''}`}
+      className={`relative bg-background pb-5 transition-colors duration-300 dark:bg-background sm:pb-10 md:pb-15 lg:pb-20${sectionInset ? ` ${sectionInset}` : ''}${sectionClassName ? ` ${sectionClassName}` : ''}`}
     >
       <div className={innerLayout}>
         <RevealWrapper
