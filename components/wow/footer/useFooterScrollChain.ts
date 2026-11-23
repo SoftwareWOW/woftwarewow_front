@@ -3,13 +3,11 @@
 import { useLenis } from 'lenis/react'
 import { useEffect, type RefObject } from 'react'
 
-const DESKTOP_MQ = '(min-width: 1024px)'
-
 function footerScrollMax(el: HTMLElement) {
   return Math.max(0, el.scrollHeight - el.clientHeight)
 }
 
-/** When the fixed footer overflows, wheel scrolls the footer first, then Lenis (body). */
+/** When the footer overflows, that content scrolls first, then the page. */
 export function useFooterScrollChain(footerRef: RefObject<HTMLElement | null>) {
   const lenis = useLenis()
 
@@ -17,53 +15,74 @@ export function useFooterScrollChain(footerRef: RefObject<HTMLElement | null>) {
     const footer = footerRef.current
     if (!footer) return
 
-    const mq = window.matchMedia(DESKTOP_MQ)
-
-    const onWheel = (event: WheelEvent) => {
-      if (!mq.matches) return
-
+    const consume = (delta: number, pointerInFooter: boolean) => {
       const maxScroll = footerScrollMax(footer)
-      if (maxScroll <= 1) return
+      if (maxScroll <= 1 || delta === 0) return false
 
       const lenisInstance = lenis
       const atPageBottom =
-        lenisInstance != null ? lenisInstance.scroll >= lenisInstance.limit - 4 : false
-      const pointerInFooter = footer.contains(event.target as Node)
+        lenisInstance != null
+          ? lenisInstance.scroll >= lenisInstance.limit - 4
+          : window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 4
 
-      // Mid-page: always scroll the body. Footer wheel only at page bottom (or finishing a footer scroll).
-      if (!atPageBottom && footer.scrollTop <= 0) return
-      if (!atPageBottom && !pointerInFooter) return
+      // Mid-page: scroll the body. Footer content only once the page is at the bottom.
+      if (!atPageBottom && footer.scrollTop <= 0) return false
+      if (!atPageBottom && !pointerInFooter) return false
 
-      const delta = event.deltaY
       const { scrollTop } = footer
       const atFooterTop = scrollTop <= 0
       const atFooterBottom = scrollTop >= maxScroll - 1
 
       if (delta > 0 && !atFooterBottom) {
         footer.scrollTop = Math.min(maxScroll, scrollTop + delta)
-        event.preventDefault()
-        event.stopPropagation()
-        return
+        return true
       }
 
       if (delta < 0 && !atFooterTop) {
         footer.scrollTop = Math.max(0, scrollTop + delta)
-        event.preventDefault()
-        event.stopPropagation()
-        return
+        return true
       }
 
       if (delta < 0 && atFooterTop && atPageBottom && lenisInstance) {
         lenisInstance.scrollTo(lenisInstance.scroll + delta)
-        event.preventDefault()
-        event.stopPropagation()
+        return true
       }
+
+      return false
+    }
+
+    const onWheel = (event: WheelEvent) => {
+      if (!consume(event.deltaY, footer.contains(event.target as Node))) return
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    let lastTouchY = 0
+
+    const onTouchStart = (event: TouchEvent) => {
+      const touch = event.touches[0]
+      if (!touch) return
+      lastTouchY = touch.clientY
+    }
+
+    const onTouchMove = (event: TouchEvent) => {
+      const touch = event.touches[0]
+      if (!touch) return
+      const delta = lastTouchY - touch.clientY
+      lastTouchY = touch.clientY
+      if (!consume(delta, footer.contains(event.target as Node))) return
+      event.preventDefault()
+      event.stopPropagation()
     }
 
     window.addEventListener('wheel', onWheel, { passive: false, capture: true })
+    window.addEventListener('touchstart', onTouchStart, { passive: true, capture: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true })
 
     return () => {
       window.removeEventListener('wheel', onWheel, { capture: true })
+      window.removeEventListener('touchstart', onTouchStart, { capture: true })
+      window.removeEventListener('touchmove', onTouchMove, { capture: true })
     }
   }, [footerRef, lenis])
 }
