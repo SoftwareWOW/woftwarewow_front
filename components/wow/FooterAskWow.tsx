@@ -52,7 +52,7 @@ export default function FooterAskWow() {
       </div>
 
       <AskWowPromptBar
-        className="relative z-[1] max-w-[842px]"
+        className="relative z-[1] max-w-[min(100%,var(--footer-tablist-width,36rem))]"
         value={input}
         onChange={setInput}
         onSubmit={handleSubmit}
