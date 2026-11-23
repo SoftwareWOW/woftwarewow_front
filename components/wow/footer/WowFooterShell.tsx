@@ -122,17 +122,60 @@ export default function WowFooterShell({
     <footer ref={footerRef} className={stickyFooterClass}>
       <style>{`
         @media (max-height: 900px) {
+          footer.footer-scroll-region {
+            top: 20px;
+            height: auto;
+            max-height: none;
+          }
+          footer.footer-scroll-region > .footer-frame {
+            display: flex;
+            height: 100%;
+            min-height: 100%;
+            flex-direction: column;
+            padding-top: 0;
+            padding-bottom: 0;
+          }
+          footer.footer-scroll-region > .footer-frame > .footer-frame-inner {
+            display: flex;
+            min-height: 0;
+            flex: 1 1 auto;
+            flex-direction: column;
+          }
           [data-footer-shell] {
             gap: 0.625rem;
+            height: 100%;
+            min-height: 0;
+            flex: 1 1 auto;
           }
           [data-footer-middle] {
+            display: flex;
+            flex-direction: column;
             gap: 0.625rem;
+            min-height: 0;
+            flex: 1 1 auto;
           }
-          [data-footer-shell] [role="tablist"],
+          [data-footer-shell] [role="tablist"] {
+            min-height: 2.5rem;
+          }
+          [data-footer-shell] [role="tab"]:not([aria-label="Ask WOW"]) {
+            height: 2.5rem;
+            min-height: 2.5rem;
+            max-height: 2.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+          [data-footer-shell] [role="tab"][aria-label="Ask WOW"] {
+            width: 2.5rem;
+            height: 2.5rem;
+            min-width: 2.5rem;
+            min-height: 2.5rem;
+            max-width: 2.5rem;
+            max-height: 2.5rem;
+            padding: 0;
+          }
           [data-footer-access] {
             min-height: 2rem;
           }
-          [data-footer-shell] [role="tab"],
           [data-footer-access] a {
             height: 2rem;
             min-height: 2rem;
@@ -140,7 +183,6 @@ export default function WowFooterShell({
             padding-left: 0.75rem;
             padding-right: 0.75rem;
           }
-          [data-footer-shell] [role="tab"][aria-label="Ask WOW"],
           [data-footer-access] button {
             width: 2rem;
             height: 2rem;
@@ -149,6 +191,18 @@ export default function WowFooterShell({
             max-width: 2rem;
             max-height: 2rem;
             padding: 0;
+          }
+          [data-footer-shell] [role="tabpanel"] {
+            height: auto !important;
+            min-height: 0 !important;
+            flex: 1 1 auto;
+            align-items: center;
+            justify-content: center;
+          }
+          [data-footer-shell] [role="tabpanel"] > * {
+            height: auto !important;
+            min-height: 0 !important;
+            flex: 0 0 auto !important;
           }
           .footer-contact-card {
             padding: 0.75rem;
@@ -171,8 +225,8 @@ export default function WowFooterShell({
           }
         }
       `}</style>
-      <div className="relative bg-background px-3 pt-2 pb-2 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 sm:pb-2.5 lg:pb-0 2xl:px-10 2xl:pt-5">
-        <div className="relative z-10 mx-auto w-full max-w-[1440px]">
+      <div className="footer-frame relative bg-background px-3 pt-2 pb-2 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 sm:pb-2.5 lg:pb-0 2xl:px-10 2xl:pt-5">
+        <div className="footer-frame-inner relative z-10 mx-auto w-full max-w-[1440px]">
           <div className={footerShellContainerClass} data-footer-shell style={shellStyle}>
             <div
               ref={measureRef}
