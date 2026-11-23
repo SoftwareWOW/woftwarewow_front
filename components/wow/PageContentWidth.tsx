@@ -4,8 +4,9 @@ import { ReactNode } from 'react'
 const contentWidthStyle = `
   .wow-content-width .container:not([class*="max-w-"]),
   .wow-content-width .max-w-\\[1320px\\],
-  .wow-content-width .max-w-\\[1600px\\] {
-    max-width: 80rem;
+  .wow-content-width .max-w-\\[1600px\\],
+  .wow-content-width .max-w-screen-xl {
+    max-width: min(80rem, calc(100% - 10rem));
   }
 
   @media (min-width: 1280px) {
