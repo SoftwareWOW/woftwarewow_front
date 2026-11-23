@@ -120,6 +120,57 @@ export default function WowFooterShell({
 
   return (
     <footer ref={footerRef} className={stickyFooterClass}>
+      <style>{`
+        @media (max-height: 900px) {
+          [data-footer-shell] {
+            gap: 0.625rem;
+          }
+          [data-footer-middle] {
+            gap: 0.625rem;
+          }
+          [data-footer-shell] [role="tablist"],
+          [data-footer-access] {
+            min-height: 2rem;
+          }
+          [data-footer-shell] [role="tab"],
+          [data-footer-access] a {
+            height: 2rem;
+            min-height: 2rem;
+            max-height: 2rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+          }
+          [data-footer-shell] [role="tab"][aria-label="Ask WOW"],
+          [data-footer-access] button {
+            width: 2rem;
+            height: 2rem;
+            min-width: 2rem;
+            min-height: 2rem;
+            max-width: 2rem;
+            max-height: 2rem;
+            padding: 0;
+          }
+          .footer-contact-card {
+            padding: 0.75rem;
+            gap: 0.75rem;
+          }
+          .footer-contact-card-body {
+            gap: 0.75rem;
+          }
+          .footer-resources {
+            gap: 0.75rem;
+            padding-top: 0.5rem;
+          }
+          .footer-resources-col {
+            gap: 0.375rem;
+          }
+          .footer-resource-link {
+            gap: 0.5rem;
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+          }
+        }
+      `}</style>
       <div className="relative bg-background px-3 pt-2 pb-2 transition-colors duration-300 dark:bg-[#151515] sm:px-4 sm:pt-3 sm:pb-2.5 lg:pb-0 2xl:px-10 2xl:pt-5">
         <div className="relative z-10 mx-auto w-full max-w-[1440px]">
           <div className={footerShellContainerClass} data-footer-shell style={shellStyle}>
@@ -184,7 +235,7 @@ export default function WowFooterShell({
               </div>
             </div>
 
-            <div className={footerMiddleSectionClass}>
+            <div className={footerMiddleSectionClass} data-footer-middle>
               <div role="tabpanel" className={footerTabPanelClass} style={tabPanelStyle}>
                 {renderPanel(activeTab)}
               </div>

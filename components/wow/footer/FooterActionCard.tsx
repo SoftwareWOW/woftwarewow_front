@@ -72,7 +72,7 @@ const footerServiceDescriptionSevenClass = cn(
 
 /** Contact tab — Figma @ 1400px: 36px title, 16px body, 60px plain icon, 80px arrow; scales below/above. */
 const cardContactLayoutClass = cn(
-  'flex-col items-stretch gap-3 p-3 sm:gap-4 sm:p-4 lg:gap-5 lg:p-5 xl:gap-6 xl:p-6 min-[1400px]:gap-6 min-[1400px]:p-8',
+  'footer-contact-card flex-col items-stretch gap-3 p-3 sm:gap-4 sm:p-4 lg:gap-5 lg:p-5 xl:gap-6 xl:p-6 min-[1400px]:gap-6 min-[1400px]:p-8',
 )
 
 const footerContactTitleClass = cn(
@@ -282,7 +282,7 @@ export function FooterActionCard({
       )}
     >
       {isContactCard ? (
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 sm:gap-4 lg:gap-5 min-[1400px]:gap-6">
+        <div className="footer-contact-card-body flex min-h-0 min-w-0 flex-1 flex-col gap-3 sm:gap-4 lg:gap-5 min-[1400px]:gap-6">
           <div className="flex w-full items-start justify-between gap-3 sm:gap-4">
             {iconStyle === 'boxed' && (iconId || icon) ? (
               <FooterContactPlainIcon iconId={iconId} icon={icon} />
@@ -356,7 +356,7 @@ export const footerResourceColumnTitleClass = cn(
 )
 
 const footerResourceLinkRowClass = cn(
-  'group inline-flex w-full items-center gap-2 py-1 sm:gap-2.5 sm:py-1.5 min-[1400px]:gap-3',
+  'footer-resource-link group inline-flex w-full items-center gap-2 py-1 sm:gap-2.5 sm:py-1.5 min-[1400px]:gap-3',
 )
 
 /** Resources tab link icons — plain glyph @ 1400px: 20×20px. */

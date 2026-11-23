@@ -44,7 +44,7 @@ function ResourcesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoo
     <div
       className={cn(
         panelClass,
-        'grid grid-cols-1 gap-5 pt-3 sm:grid-cols-2 sm:gap-6 sm:pt-4 lg:grid-cols-4 lg:gap-5 2xl:gap-6 2xl:pt-8',
+        'footer-resources grid grid-cols-1 gap-5 pt-3 sm:grid-cols-2 sm:gap-6 sm:pt-4 lg:grid-cols-4 lg:gap-5 2xl:gap-6 2xl:pt-8',
       )}
     >
       <div className="flex flex-col gap-2 sm:col-span-2 sm:gap-3 lg:col-span-1">
@@ -87,7 +87,7 @@ function ResourcesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoo
       </div>
 
       {resourceColumns.map((column) => (
-        <div key={column.title} className="flex flex-col gap-2 sm:gap-3 2xl:gap-4">
+        <div key={column.title} className="footer-resources-col flex flex-col gap-2 sm:gap-3 2xl:gap-4">
           <p className={footerResourceColumnTitleClass}>{column.title}</p>
           <ul className="flex flex-col gap-0.5 2xl:gap-1">
             {column.links.map((link) => (
