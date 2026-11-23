@@ -125,15 +125,40 @@ export default function WowFooterShell({
           border: 0;
           box-shadow: none;
         }
+        @media (max-width: 1800px), (max-height: 900px) {
+          html,
+          body {
+            scrollbar-width: none !important;
+            scrollbar-gutter: auto !important;
+            -ms-overflow-style: none !important;
+          }
+          html::-webkit-scrollbar,
+          body::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+          }
+        }
         @media (max-height: 900px) {
           footer.footer-scroll-region {
             top: 20px;
+            bottom: 0;
             height: auto;
             max-height: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          footer.footer-scroll-region::-webkit-scrollbar,
+          [data-footer-shell] [role="tabpanel"]::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
           }
           footer.footer-scroll-region > .footer-frame {
             display: flex;
-            height: 100%;
+            height: auto;
             min-height: 100%;
             flex-direction: column;
             padding-top: 0;
@@ -141,22 +166,22 @@ export default function WowFooterShell({
           }
           footer.footer-scroll-region > .footer-frame > .footer-frame-inner {
             display: flex;
-            min-height: 0;
-            flex: 1 1 auto;
+            min-height: 100%;
+            flex: 1 0 auto;
             flex-direction: column;
           }
           [data-footer-shell] {
             gap: 0.625rem;
-            height: 100%;
-            min-height: 0;
-            flex: 1 1 auto;
+            height: auto;
+            min-height: 100%;
+            flex: 1 0 auto;
           }
           [data-footer-middle] {
             display: flex;
             flex-direction: column;
             gap: 0.625rem;
             min-height: 0;
-            flex: 1 1 auto;
+            flex: 1 0 auto;
           }
           [data-footer-shell] [role="tablist"] {
             min-height: 2.5rem;
@@ -199,7 +224,8 @@ export default function WowFooterShell({
           [data-footer-shell] [role="tabpanel"] {
             height: auto !important;
             min-height: 0 !important;
-            flex: 1 1 auto;
+            flex: 1 0 auto;
+            overflow: visible;
             align-items: center;
             justify-content: center;
           }
