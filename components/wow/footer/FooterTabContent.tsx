@@ -44,7 +44,7 @@ function ResourcesPanel({ divisionChrome }: { divisionChrome?: DivisionChromeFoo
     <div
       className={cn(
         panelClass,
-        'footer-resources grid grid-cols-1 gap-5 pt-3 sm:grid-cols-2 sm:gap-6 sm:pt-4 lg:grid-cols-4 lg:gap-5 2xl:gap-6 2xl:pt-8',
+        'footer-resources grid w-full grid-cols-1 gap-x-8 gap-y-8 pt-3 sm:grid-cols-2 sm:pt-4 lg:grid-cols-4 lg:gap-x-12 xl:gap-x-14 2xl:gap-x-16 2xl:pt-8',
       )}
     >
       <div className="flex flex-col gap-2 sm:col-span-2 sm:gap-3 lg:col-span-1">

@@ -216,8 +216,9 @@ export default function WowFooterShell({
             gap: 0.75rem;
           }
           .footer-resources {
-            gap: 0.75rem;
             padding-top: 0.5rem;
+            row-gap: 1.5rem;
+            column-gap: 3rem;
           }
           .footer-resources-col {
             gap: 0.375rem;
