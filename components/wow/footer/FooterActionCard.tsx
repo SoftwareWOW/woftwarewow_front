@@ -28,7 +28,7 @@ const cardShellClass = cn(
 )
 
 const cardRowLayoutClass = cn(
-  'items-center gap-2 px-2.5 py-2 sm:gap-2.5 sm:px-3 sm:py-2.5 2xl:gap-4 2xl:px-5 2xl:py-5',
+  'items-center gap-2 px-2.5 py-3.5 sm:gap-2.5 sm:px-3 sm:py-4 lg:py-5 2xl:gap-4 2xl:px-5 2xl:py-5',
 )
 
 /** Services tab cards (iconStyle plain) — Figma @ ~1400px: 24px title, 16px body, 60px icon, 20px pad, 24px gap. */
