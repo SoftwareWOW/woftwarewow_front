@@ -20,13 +20,13 @@ export function FooterAskWowTabIcon({ active, className }: FooterAskWowTabIconPr
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden
-      className={cn(iconSizeClass, active ? 'text-white' : 'text-primary', className)}
+      className={cn(iconSizeClass, active ? '!text-white' : 'text-primary', className)}
     >
       <g transform="translate(0.5 1) scale(0.52)">
-        <path d={SPARKLE_FILL_PATH} fill="currentColor" />
+        <path d={SPARKLE_FILL_PATH} fill="currentColor" className={active ? '!fill-white' : undefined} />
       </g>
       <g transform="translate(12.25 13.5) scale(0.32)">
-        <path d={SPARKLE_FILL_PATH} fill="currentColor" />
+        <path d={SPARKLE_FILL_PATH} fill="currentColor" className={active ? '!fill-white' : undefined} />
       </g>
     </svg>
   )

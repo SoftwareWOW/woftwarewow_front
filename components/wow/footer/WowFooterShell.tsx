@@ -121,6 +121,10 @@ export default function WowFooterShell({
   return (
     <footer ref={footerRef} className={stickyFooterClass}>
       <style>{`
+        [data-footer-access] button[aria-label="Home"] {
+          border: 0;
+          box-shadow: none;
+        }
         @media (max-height: 900px) {
           footer.footer-scroll-region {
             top: 20px;
@@ -301,7 +305,8 @@ export default function WowFooterShell({
                   aria-label="Home"
                   className={cn(
                     footerTabIconButtonClass,
-                    'border-[#1515151A] !text-[#808080] dark:border-[#EDF0F51A]',
+                    '!border-0 shadow-none',
+                    '!text-[#808080]',
                     footerItemSurfaceClass,
                   )}
                 >
