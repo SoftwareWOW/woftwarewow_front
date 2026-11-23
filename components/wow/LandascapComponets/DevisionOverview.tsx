@@ -3,6 +3,7 @@
 
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { WowDivisionLogo } from '@/components/wow/nav/WowDivisionLogo'
 import { divisionIdFromHref, normalizeDivisionHref } from '@/i18n/division-paths'
@@ -452,10 +453,7 @@ function DevisionOverviewContent({
                 >
                   Eleven Divisions.
                   <br />
-                  One Growth{' '}
-                  <span className="font-instrument font-light italic">
-                    Ecosystem.
-                  </span>
+                  One Growth <InstrumentText>Ecosystem.</InstrumentText>
                 </h2>
               </TextAppearAnimation>
             </div>
