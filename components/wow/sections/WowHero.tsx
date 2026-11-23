@@ -350,6 +350,16 @@ export default function WowHero({
       aria-label="Hero"
       className={`relative z-0 h-[240dvh] ${stageBgClass}`}
     >
+      <style>{`
+        .wow-hero-copy {
+          padding-left: max(1rem, var(--image-side));
+        }
+        @media (min-width: 768px) {
+          .wow-hero-copy {
+            padding-left: max(4rem, var(--image-side));
+          }
+        }
+      `}</style>
       {/* ==================================================
           FIXED / PINNED HERO
       ================================================== */}
@@ -499,10 +509,10 @@ export default function WowHero({
 
             pt-[max(5.5rem,8vh)]
             md:pt-[max(5.5rem,6vh)]
+            wow-hero-copy
           "
           style={{
             opacity: dockedOpacity,
-            paddingLeft: 'max(1rem, var(--image-side))',
             paddingRight: 'max(1rem, var(--image-side))',
             pointerEvents:
               dockedInteractive
@@ -528,7 +538,7 @@ export default function WowHero({
 
           <p
             className="
-              mt-5
+              mt-10
               max-w-xl
               font-outfit
               text-sm
@@ -578,10 +588,10 @@ export default function WowHero({
             [clip-path:inset(var(--image-top-mobile)_var(--image-side)_var(--image-bottom-mobile)_var(--image-side)_round_var(--image-radius))]
             md:[clip-path:inset(var(--image-top-tablet)_var(--image-side)_var(--image-bottom-tablet)_var(--image-side)_round_var(--image-radius))]
             xl:[clip-path:inset(var(--image-top-desktop)_var(--image-side)_var(--image-bottom-desktop)_var(--image-side)_round_var(--image-radius))]
+            wow-hero-copy
           "
           style={{
             opacity: dockedOpacity,
-            paddingLeft: 'max(1rem, var(--image-side))',
             paddingRight: 'max(1rem, var(--image-side))',
           }}
         >
@@ -602,7 +612,7 @@ export default function WowHero({
 
           <p
             className="
-              mt-5
+              mt-10
               max-w-xl
               font-outfit
               text-sm
