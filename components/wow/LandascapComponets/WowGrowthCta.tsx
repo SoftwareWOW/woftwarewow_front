@@ -40,9 +40,11 @@ const WowGrowthCta = ({
       <div className={innerLayout}>
         <RevealWrapper
           as="h2"
-          className="reveal-me min-w-0 flex-1 text-[46px] font-light leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]"
+          className="reveal-me min-w-0 flex-1 text-[clamp(1.75rem,5.5vw,6rem)] font-light leading-[1.15] tracking-[-0.03em] sm:leading-[1.1] lg:tracking-[-2.88px]"
         >
-          <InstrumentText className="max-md:mr-4 lg:text-[100px]">{accentText}</InstrumentText>
+          <InstrumentText className="max-md:mr-3 text-[length:inherit] sm:max-md:mr-4 xl:text-[100px]">
+            {accentText}
+          </InstrumentText>
 
           <br className="hidden md:block" />
 
@@ -55,7 +57,7 @@ const WowGrowthCta = ({
           aria-label={ariaLabel}
           className="shrink-0 cursor-pointer border-0 bg-transparent p-0"
         >
-          <RevealWrapper className="reveal-me group h-44 w-44 overflow-hidden rounded-radius-sm bg-secondary p-5 dark:bg-primary lg:h-[230px] lg:w-[230px]">
+          <RevealWrapper className="reveal-me group h-28 w-28 overflow-hidden rounded-radius-sm bg-secondary p-3 dark:bg-primary sm:h-36 sm:w-36 sm:p-4 md:h-44 md:w-44 md:p-5 lg:h-[230px] lg:w-[230px]">
             <figure className="relative h-full w-full rounded-radius-sm bg-primary dark:bg-secondary">
               <Image
                 src={bigArrowIcon}
