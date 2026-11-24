@@ -16,13 +16,22 @@ type Project = {
 
 type BrandIdentityWorkSectionProps = {
   eyebrow: string
-  title: string
+  /** Single-line title (used when titleLine1 is not set). */
+  title?: string
+  /** Optional split title — MarketingPortfolioSection pattern (line1 / line2 + accent / optional line3). */
+  titleLine1?: string
+  titleLine2?: string
   titleAccent?: string
+  titleLine3?: string
   description: string
   ctaLabel: string
   ctaHref: string
   projects: ReadonlyArray<Project>
 }
+
+/** 64px at 1400px viewport; scales down below, capped above. */
+const HEADING_SIZE_CLASS =
+  'text-[length:clamp(1.5rem,4.571428571vw,4rem)] leading-[1.15] tracking-[-0.03em]'
 
 const PORTFOLIO_IMAGE_HEIGHT = 'h-[clamp(10rem,30.929vw,433px)]'
 
@@ -62,12 +71,17 @@ function ProjectCard({ project }: { project: Project }) {
 export default function BrandIdentityWorkSection({
   eyebrow,
   title,
+  titleLine1,
+  titleLine2,
   titleAccent,
+  titleLine3,
   description,
   ctaLabel,
   ctaHref,
   projects,
 }: BrandIdentityWorkSectionProps) {
+  const useSplitTitle = titleLine1 != null
+
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
@@ -77,14 +91,33 @@ export default function BrandIdentityWorkSection({
               <SectionLabel>{eyebrow}</SectionLabel>
             </RevealWrapper>
             <TextAppearAnimation>
-              <h2 className="text-appear">
-                {title}
-                {titleAccent ? (
+              <h2 className={`text-appear ${HEADING_SIZE_CLASS}`}>
+                {useSplitTitle ? (
                   <>
+                    {titleLine1}
                     <br />
-                    <InstrumentText>{titleAccent}</InstrumentText>
+                    {titleLine2 ? `${titleLine2} ` : null}
+                    {titleAccent ? (
+                      <InstrumentText className="whitespace-nowrap">{titleAccent}</InstrumentText>
+                    ) : null}
+                    {titleLine3 ? (
+                      <>
+                        <br />
+                        {titleLine3}
+                      </>
+                    ) : null}
                   </>
-                ) : null}
+                ) : (
+                  <>
+                    {title}
+                    {titleAccent ? (
+                      <>
+                        <br />
+                        <InstrumentText>{titleAccent}</InstrumentText>
+                      </>
+                    ) : null}
+                  </>
+                )}
               </h2>
             </TextAppearAnimation>
           </div>
