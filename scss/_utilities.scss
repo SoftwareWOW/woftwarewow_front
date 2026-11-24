@@ -45,6 +45,14 @@
     line-height: 1.15;
     letter-spacing: clamp(-0.02em, -0.12vw, -0.035em);
   }
+
+  /** Process step title: 32px at 1400px viewport, scales on smaller screens, capped at 32px. */
+  .wow-process-step-title-sm {
+    @apply font-light;
+    font-size: clamp(1.125rem, 2.2857142857vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
 }
 
 @layer base {

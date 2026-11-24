@@ -69,9 +69,7 @@ export default function LandingPagesProcessSection({
                 <span className="relative after:absolute after:-bottom-[37px] after:left-[50%] after:z-10 after:h-5 after:w-5 after:-translate-x-[50%] after:rounded-full after:bg-secondary after:content-[''] dark:after:bg-backgroundBody max-md:text-3xl md:text-[64px] md:leading-[1.2] md:tracking-[-1.92px]">
                   {step.number}
                 </span>
-                <h3 className="mb-5 mt-16 max-md:text-3xl md:text-[56px] md:leading-[1.2] md:tracking-[-1.68px]">
-                  {step.title}
-                </h3>
+                <h3 className="wow-process-step-title-sm mb-5 mt-16">{step.title}</h3>
                 <p className="text-base leading-[1.4] tracking-[0.32px] text-[#808080]">{step.description}</p>
               </RevealWrapper>
             ))}

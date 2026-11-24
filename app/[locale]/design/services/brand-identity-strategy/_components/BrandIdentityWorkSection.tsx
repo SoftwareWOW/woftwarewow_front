@@ -85,46 +85,50 @@ export default function BrandIdentityWorkSection({
   return (
     <section className="bg-background transition-colors duration-300 dark:bg-background">
       <div className="container">
-        <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-          <div className="max-w-3xl">
-            <RevealWrapper className="mb-3">
-              <SectionLabel>{eyebrow}</SectionLabel>
-            </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className={`text-appear ${HEADING_SIZE_CLASS}`}>
-                {useSplitTitle ? (
-                  <>
-                    {titleLine1}
-                    <br />
-                    {titleLine2 ? `${titleLine2} ` : null}
-                    {titleAccent ? (
-                      <InstrumentText className="whitespace-nowrap">{titleAccent}</InstrumentText>
-                    ) : null}
-                    {titleLine3 ? (
-                      <>
-                        <br />
-                        {titleLine3}
-                      </>
-                    ) : null}
-                  </>
-                ) : (
-                  <>
-                    {title}
-                    {titleAccent ? (
-                      <>
-                        <br />
-                        <InstrumentText>{titleAccent}</InstrumentText>
-                      </>
-                    ) : null}
-                  </>
-                )}
-              </h2>
-            </TextAppearAnimation>
-          </div>
-          <div className="w-full max-w-md lg:pt-2">
-            <RevealWrapper className="reveal-me">
-              <p className="text-base leading-relaxed text-[#808080] md:text-lg">{description}</p>
-            </RevealWrapper>
+        <div className="mb-12 lg:mb-16">
+          <RevealWrapper className="mb-3">
+            <SectionLabel>{eyebrow}</SectionLabel>
+          </RevealWrapper>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+            <div className="max-w-3xl">
+              <TextAppearAnimation>
+                <h2 className={`text-appear ${HEADING_SIZE_CLASS}`}>
+                  {useSplitTitle ? (
+                    <>
+                      {titleLine1}
+                      <br />
+                      {titleLine2 ? `${titleLine2} ` : null}
+                      {titleAccent ? (
+                        <InstrumentText className="whitespace-nowrap">{titleAccent}</InstrumentText>
+                      ) : null}
+                      {titleLine3 ? (
+                        <>
+                          <br />
+                          {titleLine3}
+                        </>
+                      ) : null}
+                    </>
+                  ) : (
+                    <>
+                      {title}
+                      {titleAccent ? (
+                        <>
+                          <br />
+                          <InstrumentText>{titleAccent}</InstrumentText>
+                        </>
+                      ) : null}
+                    </>
+                  )}
+                </h2>
+              </TextAppearAnimation>
+            </div>
+            <div className="w-full max-w-md shrink-0">
+              <RevealWrapper className="reveal-me">
+                <p className="text-base leading-relaxed text-[#808080] md:text-lg lg:text-right">
+                  {description}
+                </p>
+              </RevealWrapper>
+            </div>
           </div>
         </div>
 
