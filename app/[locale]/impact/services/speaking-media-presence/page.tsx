@@ -1,13 +1,13 @@
 import BrandIdentityWorkSection from '@/app/[locale]/design/services/brand-identity-strategy/_components/BrandIdentityWorkSection'
-import WhatWeCreateSection from '@/app/[locale]/design/services/video-motion-creative-content/_components/WhatWeCreateSection'
-import SalesJourneyGap from '@/app/[locale]/accelerate/services/sales-process-optimization/_components/SalesJourneyGap'
 import LandingPagesProcessSection from '@/app/[locale]/websites/services/landing-pages/_components/LandingPagesProcessSection'
 import SpeakingMediaPresenceHero from '@/app/[locale]/events/_components/SpeakingMediaPresenceHero'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
+import SpeakingOpportunitiesSection from './_components/SpeakingOpportunitiesSection'
 import SpeakingPowerOfVoiceSection from './_components/SpeakingPowerOfVoiceSection'
+import SpeakingWhatWeSupportSection from './_components/SpeakingWhatWeSupportSection'
 import { CONTENT, SPEAKING_MEDIA_PRESENCE_PAGE_METADATA } from './_content/page-content'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -50,11 +50,10 @@ export default async function SpeakingMediaPresencePage({ params }: Props) {
         headingId="speaking-media-presence-hero-heading"
       />
 
-      {/* 2. What We Support — Home-19 ElevateBrandV2 (accelerate SalesJourneyGap) */}
-      <SalesJourneyGap
+      {/* 2. What We Support — copy of SalesJourneyGap (ElevateBrandV2), centered + compact rows */}
+      <SpeakingWhatWeSupportSection
         eyebrow={whatWeSupport.eyebrow}
         title={whatWeSupport.title}
-        body={whatWeSupport.body}
         stages={[...whatWeSupport.stages]}
       />
 
@@ -75,8 +74,8 @@ export default async function SpeakingMediaPresencePage({ params }: Props) {
         steps={[...process.steps]}
       />
 
-      {/* 5. Speaking & Media Opportunities — design WhatWeCreateSection (2×2 image cards) */}
-      <WhatWeCreateSection
+      {/* 5. Speaking & Media Opportunities — copy of design WhatWeCreateSection (2×2 image cards) */}
+      <SpeakingOpportunitiesSection
         eyebrow={opportunities.eyebrow}
         title={opportunities.title}
         accentTitle={opportunities.accentTitle}

@@ -29,7 +29,9 @@ export default function SpeakingPowerOfVoiceSection({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3">{title}</h2>
+            <h2 className="text-appear mx-auto mb-3 max-w-5xl text-[clamp(1.75rem,3.4vw,3.75rem)] font-light leading-[1.2] tracking-[-0.03em] lg:whitespace-nowrap">
+              {title}
+            </h2>
           </TextAppearAnimation>
           <RevealWrapper className="reveal-me">
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
