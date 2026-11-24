@@ -36,7 +36,7 @@ export default function ImpactChallengeSection() {
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12">
           <RevealWrapper>
-            <p className="mb-4 text-2xl font-light text-secondary dark:text-backgroundBody md:text-3xl">
+            <p className="mb-4 text-2xl font-light text-secondary dark:text-backgroundBody md:text-[1.75rem] min-[1400px]:text-3xl">
               {content.before.label}
             </p>
             <p className="mb-6 text-sm text-[#808080] md:text-base">{content.before.caption}</p>
@@ -52,7 +52,7 @@ export default function ImpactChallengeSection() {
           </RevealWrapper>
 
           <RevealWrapper>
-            <p className="mb-4 text-2xl font-light text-secondary dark:text-backgroundBody md:text-3xl">
+            <p className="mb-4 text-2xl font-light text-secondary dark:text-backgroundBody md:text-[1.75rem] min-[1400px]:text-3xl">
               {content.after.label}
             </p>
             <p className="mb-6 text-sm text-[#808080] md:text-base">{content.after.caption}</p>
