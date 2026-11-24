@@ -64,13 +64,15 @@ const SalesJourneyGap = ({
               </h2>
             </TextAppearAnimation02>
           </div>
-          <div className="w-full md:w-80 lg:w-96">
-            <TextAppearAnimation>
-              <p className="text-appear text-appear-2 max-w-lg max-md:text-justify md:place-self-end md:text-right">
-                {body}
-              </p>
-            </TextAppearAnimation>
-          </div>
+          {body ? (
+            <div className="w-full md:w-80 lg:w-96">
+              <TextAppearAnimation>
+                <p className="text-appear text-appear-2 max-w-lg max-md:text-justify md:place-self-end md:text-right">
+                  {body}
+                </p>
+              </TextAppearAnimation>
+            </div>
+          ) : null}
         </div>
 
         <div className="[&>*:not(:last-child)]:border-b dark:[&>*:not(:last-child)]:border-dark">
