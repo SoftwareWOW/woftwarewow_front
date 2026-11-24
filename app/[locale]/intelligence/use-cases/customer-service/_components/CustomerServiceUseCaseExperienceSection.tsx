@@ -33,15 +33,19 @@ export default function CustomerServiceUseCaseExperienceSection({
           <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
 
-        <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
-          <div className="flex-1 md:self-start">
+        <div className="mb-16 flex flex-col gap-6 lg:mb-24 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+          <div className="max-w-3xl">
             <TextAppearAnimation>
-              <h2 className="text-appear">{title}</h2>
+              <h2 className="text-appear text-[38px] font-light leading-[1.3] md:text-[47px] md:leading-[1.2] lg:text-[54px] lg:leading-[1.24] xl:text-[64px]">
+                {title}
+              </h2>
             </TextAppearAnimation>
           </div>
-          <div className="flex-1 max-md:w-full md:self-end">
+          <div className="w-full max-w-md shrink-0">
             <TextAppearAnimation>
-              <p className="text-appear max-w-lg text-[#808080] md:place-self-end md:text-right">{description}</p>
+              <p className="text-appear text-base leading-relaxed text-[#808080] md:text-lg lg:text-right">
+                {description}
+              </p>
             </TextAppearAnimation>
           </div>
         </div>
@@ -50,7 +54,7 @@ export default function CustomerServiceUseCaseExperienceSection({
           {pillars.map((pillar) => (
             <div
               key={pillar.title}
-              className="group col-span-full flex h-full min-h-0 flex-col justify-start bg-backgroundBody px-7 py-10 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:px-10 md:py-10 lg:col-span-4 xl:col-span-3"
+              className="group col-span-full flex h-full min-h-0 flex-col justify-start bg-backgroundBody px-7 py-10 backdrop-blur transition-all duration-300 ease-in-out hover:bg-primary dark:bg-dark dark:hover:bg-primary max-sm:border-x max-sm:border-t max-sm:border-dark/5 sm:col-span-6 md:px-10 md:py-10 lg:col-span-3"
             >
               <h4 className="pb-3 text-xl font-light leading-[1.25] tracking-[-0.02em] transition-colors duration-300 sm:text-[22px] md:text-2xl lg:text-[26px] xl:text-[28px] xl:leading-[1.2] group-hover:text-white dark:group-hover:text-white md:mb-4">
                 {pillar.title}

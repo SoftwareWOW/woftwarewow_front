@@ -54,6 +54,7 @@ export default async function ReputationVisibilityPage({ params }: Props) {
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
         headingId="reputation-visibility-hero-heading"
+        breakBeforeItalic={false}
       />
 
       {/* 2. What We Strengthen — BiPredictiveIntelligenceSection (3+2 flip cards / hover invert) */}

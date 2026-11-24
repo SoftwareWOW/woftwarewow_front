@@ -10,6 +10,8 @@ type IntelligentAutomationHeroProps = CmsHeroComponentProps & {
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
   headingId?: string
+  /** When false, italic accent stays on the same line as the title (no forced break). */
+  breakBeforeItalic?: boolean
 }
 
 /** Layout copy: Home-19 HeroV19 (BrandAuthorityHero) — single right media. */
@@ -22,6 +24,7 @@ export default function IntelligentAutomationHero({
   primaryCta = { label: 'AUTOMATE MY WORKFLOWS', href: '/meet' },
   secondaryCta = { label: 'SEE HOW IT WORKS', href: '#what-we-automate' },
   headingId = 'intelligent-automation-hero-heading',
+  breakBeforeItalic = true,
 }: IntelligentAutomationHeroProps) {
   const image0 = images?.[0]
 
@@ -50,8 +53,12 @@ export default function IntelligentAutomationHero({
                 className="text-5xl font-normal leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]"
               >
                 {title}
-                <br className="hidden lg:block" />
-                {italicTitle ? <InstrumentText>{italicTitle}</InstrumentText> : null}
+                {breakBeforeItalic ? <br className="hidden lg:block" /> : null}
+                {italicTitle ? (
+                  <InstrumentText className={breakBeforeItalic ? undefined : 'whitespace-nowrap'}>
+                    {italicTitle}
+                  </InstrumentText>
+                ) : null}
               </h1>
             </RevealWrapper>
           ) : null}
