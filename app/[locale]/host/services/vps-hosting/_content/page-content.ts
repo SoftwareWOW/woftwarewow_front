@@ -54,36 +54,35 @@ export const CONTENT = {
   resources: {
     eyebrow: "WHAT'S INCLUDED",
     title: 'The Resources Your Growth Demands.',
-    description:
-      'VPS hosting brings together allocated computing capacity and management tools designed for growing websites and applications.',
-    steps: [
+    body: '',
+    stages: [
       {
-        number: '01',
+        id: '01',
         title: 'Allocated Resources',
         description: 'Access plan-defined CPU, memory, and storage resources for your applications.',
       },
       {
-        number: '02',
+        id: '02',
         title: 'Server Control',
         description: 'Configure supported server settings and software around your requirements.',
       },
       {
-        number: '03',
+        id: '03',
         title: 'Flexible Scaling',
         description: 'Upgrade resources as your applications and workloads grow.',
       },
       {
-        number: '04',
+        id: '04',
         title: 'SSD/NVMe Storage',
         description: 'Use supported high-speed storage options for faster data access.',
       },
       {
-        number: '05',
+        id: '05',
         title: 'Security Controls',
         description: 'Configure appropriate access restrictions, firewalls, and server protections.',
       },
       {
-        number: '06',
+        id: '06',
         title: 'Server Monitoring',
         description: 'Track resource usage and server activity through available management tools.',
       },

@@ -1,3 +1,4 @@
+import SalesJourneyGap from '@/app/[locale]/accelerate/services/sales-process-optimization/_components/SalesJourneyGap'
 import IntelligentAutomationHero from '@/app/[locale]/intelligence/services/intelligent-automation/_components/IntelligentAutomationHero'
 import LandingPagesProcessSection from '@/app/[locale]/websites/services/landing-pages/_components/LandingPagesProcessSection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
@@ -6,7 +7,6 @@ import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import VpsHostingAdvantageSection from './_components/VpsHostingAdvantageSection'
 import VpsHostingChallengeSection from './_components/VpsHostingChallengeSection'
-import VpsHostingResourcesSection from './_components/VpsHostingResourcesSection'
 import VpsHostingTechnologySection from './_components/VpsHostingTechnologySection'
 import { CONTENT, VPS_HOSTING_PAGE_METADATA } from './_content/page-content'
 
@@ -58,13 +58,15 @@ export default async function VpsHostingPage({ params }: Props) {
         pillars={[...challenge.pillars]}
       />
 
-      {/* 3. What's Included / Resources — copy of BiPredictiveProcessSection */}
-      <VpsHostingResourcesSection
-        eyebrow={resources.eyebrow}
-        title={resources.title}
-        description={resources.description}
-        steps={[...resources.steps]}
-      />
+      {/* 3. What's Included / Resources — Home-19 ElevateBrandV2 (accelerate SalesJourneyGap; same as impact thought-leadership §2) */}
+      <div id="whats-included" className="scroll-mt-24">
+        <SalesJourneyGap
+          eyebrow={resources.eyebrow}
+          title={resources.title}
+          body={resources.body}
+          stages={[...resources.stages]}
+        />
+      </div>
 
       {/* 4. The VPS Advantage — copy of StartupJourney / BrandingProcess (2×2 numbered grid) */}
       <VpsHostingAdvantageSection
