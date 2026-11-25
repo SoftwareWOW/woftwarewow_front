@@ -1,165 +1,173 @@
 export const DEDICATED_SERVERS_PAGE_METADATA = {
   title: 'Dedicated Servers | WOW Host',
   description:
-    'Your reputation shapes how people perceive your expertise and professional value. We help you strengthen your digital presence, communicate your credibility, and become more visible to the audiences that matter.',
+    'Experience the freedom of dedicated infrastructure built around your business. Get exclusive access to physical server resources, greater configuration control, and the flexibility to support demanding websites and applications.',
 } as const
 
 export const CONTENT = {
   hero: {
-    badgeTitle: 'REPUTATION & VISIBILITY',
-    title: 'Be Seen for the Right ',
-    italicTitle: 'Reasons.',
+    badgeTitle: 'DEDICATED SERVERS',
+    title: 'Your Server. Your Resources. ',
+    italicTitle: 'Your Rules.',
     description:
-      'Your reputation shapes how people perceive your expertise and professional value. We help you strengthen your digital presence, communicate your credibility, and become more visible to the audiences that matter.',
-    primaryCta: { label: 'Strengthen My Reputation', href: '/meet' },
-    secondaryCta: { label: 'Explore Our Work', href: '/portfolio' },
+      'Experience the freedom of dedicated infrastructure built around your business. Get exclusive access to physical server resources, greater configuration control, and the flexibility to support demanding websites and applications.',
+    primaryCta: { label: 'Explore Dedicated Servers', href: '/meet' },
+    secondaryCta: { label: "See What's Included", href: '#whats-included' },
     images: [
       {
         src: '/images/wow/Hero/devision/Mockup 2 Dark.png',
-        alt: 'Professional reputation and digital visibility across devices',
+        alt: 'Dedicated server infrastructure and application management',
         width: 720,
         height: 640,
       },
     ],
   },
-  whatWeStrengthen: {
-    eyebrow: 'WHAT WE STRENGTHEN',
-    titleBefore: 'Your Reputation, ',
-    titleAccent: 'Thoughtfully Built.',
+  challenge: {
+    eyebrow: 'THE CHALLENGE',
+    titleBefore: 'Serious Workloads Need Serious ',
+    titleAccent: 'Infrastructure.',
     description:
-      'We help align your professional identity, online presence, and communications to create a clearer, more credible impression.',
-    capabilityCards: [
+      'Some applications demand more computing capacity, configuration flexibility, and infrastructure independence than shared or virtual hosting environments can provide.',
+    pillars: [
       {
-        title: 'Reputation Strategy',
-        headline: '',
-        description: 'Define how you want to be perceived and what supports your credibility.',
+        number: '01',
+        title: 'Shared Resources',
+        description: 'Competing workloads can create performance variability in shared infrastructure.',
       },
       {
-        title: 'Online Presence Review',
-        headline: '',
-        description: 'Identify gaps and inconsistencies across your digital presence.',
+        number: '02',
+        title: 'Limited Control',
+        description: 'Virtual environments may restrict certain hardware and system configurations.',
       },
       {
-        title: 'Profile Optimization',
-        headline: '',
-        description: 'Improve professional profiles, biographies, and key information.',
+        number: '03',
+        title: 'Heavy Workloads',
+        description: 'Resource-intensive applications require substantial computing power and memory.',
       },
       {
-        title: 'Professional Visibility',
-        headline: '',
-        description: 'Strengthen your presence across relevant platforms and opportunities.',
-      },
-      {
-        title: 'Communications Guidance',
-        headline: '',
-        description: 'Keep your professional messaging clear, consistent, and appropriate.',
+        number: '04',
+        title: 'Custom Requirements',
+        description: 'Specialized software and infrastructure needs may exceed standard hosting options.',
       },
     ],
   },
-  credibility: {
-    eyebrow: 'THE VALUE OF CREDIBILITY',
-    title: 'A Stronger Presence. A Better Impression.',
+  whatsIncluded: {
+    eyebrow: "WHAT'S INCLUDED",
+    titleBefore: 'The Entire Server. Built ',
+    titleAccent: 'Around You.',
     description:
-      'When your professional presence is clear, consistent, and credible, people can better understand your expertise and the value you bring.',
+      'Dedicated servers provide exclusive physical computing resources and greater flexibility to configure infrastructure around your applications, workloads, and operational requirements.',
+    capabilityCards: [
+      {
+        title: 'Dedicated Hardware',
+        headline: '',
+        description:
+          'Access exclusive physical server resources without sharing the machine with other customers.',
+      },
+      {
+        title: 'Custom Configurations',
+        headline: '',
+        description: 'Choose available processor, memory, and storage options suited to your workload.',
+      },
+      {
+        title: 'Server Control',
+        headline: '',
+        description: 'Manage operating systems, software, and configurations according to your access level.',
+      },
+      {
+        title: 'Storage Options',
+        headline: '',
+        description: 'Select supported storage configurations based on capacity and performance requirements.',
+      },
+      {
+        title: 'Network Connectivity',
+        headline: '',
+        description: 'Connect applications through the bandwidth and networking options in your plan.',
+      },
+      {
+        title: 'Security Controls',
+        headline: '',
+        description: 'Configure firewalls, access restrictions, and available server security measures.',
+      },
+    ],
+  },
+  advantage: {
+    eyebrow: 'THE DEDICATED ADVANTAGE',
+    title: 'More Independence. Greater Possibilities.',
+    description:
+      'Dedicated infrastructure gives demanding applications access to exclusive physical resources, helping businesses achieve greater control over their hosting environment.',
     benefits: [
       {
-        title: 'Build Trust',
-        description: 'Present your experience with clarity and credibility.',
+        title: 'Exclusive Resources',
+        description: 'Use physical computing capacity reserved for your server workloads.',
       },
       {
-        title: 'Stay Consistent',
-        description: 'Align your identity across professional platforms.',
+        title: 'Greater Control',
+        description: 'Configure your environment around specific application and business requirements.',
       },
       {
-        title: 'Gain Visibility',
-        description: 'Become easier to discover by relevant audiences.',
+        title: 'Consistent Capacity',
+        description: 'Avoid competing for the same physical resources with other hosting customers.',
       },
       {
-        title: 'Inspire Confidence',
-        description: 'Make a more professional first impression.',
+        title: 'Infrastructure Freedom',
+        description: 'Support specialized applications and more demanding technical configurations.',
       },
     ],
     image: {
       src: '/images/wow/Hero/devision/Mockup 2 Dark.png',
-      alt: 'Professional presence across devices and brand materials',
+      alt: 'Dedicated infrastructure across devices and server environments',
       width: 665,
       height: 440,
     },
   },
-  approach: {
-    eyebrow: 'OUR APPROACH',
-    title: 'From Perception to Presence.',
+  gettingStarted: {
+    eyebrow: 'GETTING STARTED',
+    titleBefore: 'From Requirements to ',
+    titleAccent: 'Ready.',
     description:
-      'A focused process to understand, strengthen, and maintain your professional reputation.',
+      'A clear path from understanding your requirements to deploying dedicated infrastructure for your applications.',
     steps: [
       {
-        number: '1',
+        step: 'STEP 01',
         title: 'Assess',
-        description: 'Review your current reputation and digital presence.',
+        description: 'Review workloads, software needs, and hardware requirements.',
       },
       {
-        number: '2',
-        title: 'Strengthen',
-        description: 'Improve profiles, positioning, and communications.',
+        step: 'STEP 02',
+        title: 'Select',
+        description: 'Choose available server specifications and management options.',
       },
       {
-        number: '3',
-        title: 'Maintain',
-        description: 'Review consistency and adapt your presence as needed.',
+        step: 'STEP 03',
+        title: 'Configure',
+        description: 'Prepare the server environment, networking, and access settings.',
+      },
+      {
+        step: 'STEP 04',
+        title: 'Deploy',
+        description: 'Install applications, validate functionality, and begin operations.',
       },
     ],
   },
-  digitalFootprint: {
-    eyebrow: 'YOUR DIGITAL FOOTPRINT',
-    title: 'Every Search. Every Profile. Every Impression.',
+  technology: {
+    eyebrow: 'SERVER TECHNOLOGIES',
+    headlineBefore: 'The Technology Behind Your ',
+    headlineAccent: 'Infrastructure.',
     description:
-      "People form impressions through multiple touchpoints. We help ensure your professional presence tells a consistent, credible story wherever you're discovered.",
-    pillars: [
-      {
-        title: 'Search Presence',
-        description: 'How people discover and understand your professional identity.',
-      },
-      {
-        title: 'Professional Profiles',
-        description: 'How your experience and credibility appear across platforms.',
-      },
-      {
-        title: 'Personal Websites',
-        description: 'How your expertise, story, and achievements are presented.',
-      },
-      {
-        title: 'Public Communications',
-        description: 'How your voice and messages reinforce your professional image.',
-      },
-    ],
-  },
-  presenceInPractice: {
-    eyebrow: 'PRESENCE IN PRACTICE',
-    title: 'Credibility Starts With How You Show Up.',
-    description:
-      'Explore how thoughtful professional positioning and a consistent digital presence can strengthen the way people understand your expertise.',
-    ctaLabel: 'View More',
-    ctaHref: '/portfolio',
-    projects: [
-      {
-        category: 'PROFESSIONAL PROFILES · LEADERSHIP POSITIONING',
-        year: '2020',
-        title: 'Executive Presence',
-        href: '/portfolio',
-        image: '/images/wow/Hero/project/case-study/ccg.png',
-      },
-      {
-        category: 'DIGITAL IDENTITY · PROFESSIONAL COMMUNICATIONS',
-        year: '2025',
-        title: 'Founder Visibility',
-        href: '/portfolio',
-        image: '/images/wow/Hero/project/case-study/InityInc.png',
-      },
+      'Dedicated hosting offers flexibility in operating systems, server software, and management technologies to support different business and application requirements.',
+    tools: [
+      { name: 'Ubuntu', icon: 'logos:ubuntu' },
+      { name: 'Nginx', icon: 'logos:nginx' },
+      { name: 'AlmaLinux', icon: 'simple-icons:almalinux' },
+      { name: 'Docker', icon: 'logos:docker-icon' },
+      { name: 'cPanel', icon: 'simple-icons:cpanel' },
+      { name: 'Debian', icon: 'logos:debian' },
     ],
   },
   cta: {
-    accentText: 'Ready to be seen?',
-    mainText: "Let's make an impact.",
+    accentText: 'Need dedicated power?',
+    mainText: "Let's make it yours.",
     ariaLabel: 'Start your dedicated servers project with WOW Host',
   },
 } as const

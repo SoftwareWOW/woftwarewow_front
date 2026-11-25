@@ -1,9 +1,9 @@
-import CreativeProcessSection from '@/app/[locale]/design/services/brand-identity-strategy/_components/CreativeProcessSection'
-import BrandIdentityWorkSection from '@/app/[locale]/design/services/brand-identity-strategy/_components/BrandIdentityWorkSection'
+import MarketingUseCaseApproachSection from '@/app/[locale]/intelligence/use-cases/marketing/_components/MarketingUseCaseApproachSection'
 import BiPredictiveDecisionsSection from '@/app/[locale]/intelligence/services/business-intelligence-predictive-insights/_components/BiPredictiveDecisionsSection'
-import BiPredictiveIntelligenceSection from '@/app/[locale]/intelligence/services/business-intelligence-predictive-insights/_components/BiPredictiveIntelligenceSection'
 import IntelligentAutomationHero from '@/app/[locale]/intelligence/services/intelligent-automation/_components/IntelligentAutomationHero'
-import CustomerServiceUseCaseExperienceSection from '@/app/[locale]/intelligence/use-cases/customer-service/_components/CustomerServiceUseCaseExperienceSection'
+import SharedHostingIncludedSection from '@/app/[locale]/host/services/shared-web-hosting/_components/SharedHostingIncludedSection'
+import VpsHostingChallengeSection from '@/app/[locale]/host/services/vps-hosting/_components/VpsHostingChallengeSection'
+import VpsHostingTechnologySection from '@/app/[locale]/host/services/vps-hosting/_components/VpsHostingTechnologySection'
 import WowGrowthCta from '@/components/wow/LandascapComponets/WowGrowthCta'
 import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
@@ -32,19 +32,11 @@ export default async function DedicatedServersPage({ params }: Props) {
   const { locale } = await params
   setRequestLocale(locale as Locale)
 
-  const {
-    hero,
-    whatWeStrengthen,
-    credibility,
-    approach,
-    digitalFootprint,
-    presenceInPractice,
-    cta,
-  } = CONTENT
+  const { hero, challenge, whatsIncluded, advantage, gettingStarted, technology, cta } = CONTENT
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-      {/* 1. Hero — intelligence IntelligentAutomationHero (Home-19 HeroV19; same as impact reputation-visibility) */}
+      {/* 1. Hero — intelligence IntelligentAutomationHero (Home-19 HeroV19) */}
       <IntelligentAutomationHero
         badgeTitle={hero.badgeTitle}
         title={hero.title}
@@ -57,42 +49,50 @@ export default async function DedicatedServersPage({ params }: Props) {
         breakBeforeItalic={false}
       />
 
-      {/* 2. What We Strengthen — BiPredictiveIntelligenceSection (3+2 flip cards) */}
-      <BiPredictiveIntelligenceSection
-        eyebrow={whatWeStrengthen.eyebrow}
-        titleBefore={whatWeStrengthen.titleBefore}
-        titleAccent={whatWeStrengthen.titleAccent}
-        description={whatWeStrengthen.description}
-        capabilityCards={[...whatWeStrengthen.capabilityCards]}
+      {/* 2. The Challenge — vps VpsHostingChallengeSection (MarketingUseCaseAdvantage numbered pillars) */}
+      <VpsHostingChallengeSection
+        eyebrow={challenge.eyebrow}
+        titleBefore={challenge.titleBefore}
+        titleAccent={challenge.titleAccent}
+        description={challenge.description}
+        pillars={[...challenge.pillars]}
       />
 
-      {/* 3. The Value of Credibility — BiPredictiveDecisionsSection (list left + media right) */}
+      {/* 3. What's Included — shared-web-hosting SharedHostingIncludedSection (BiPredictive 3×2 flip cards) */}
+      <SharedHostingIncludedSection
+        eyebrow={whatsIncluded.eyebrow}
+        titleBefore={whatsIncluded.titleBefore}
+        titleAccent={whatsIncluded.titleAccent}
+        description={whatsIncluded.description}
+        capabilityCards={[...whatsIncluded.capabilityCards]}
+      />
+
+      {/* 4. The Dedicated Advantage — BiPredictiveDecisionsSection (list left + media right) */}
       <BiPredictiveDecisionsSection
-        eyebrow={credibility.eyebrow}
-        title={credibility.title}
-        description={credibility.description}
-        benefits={[...credibility.benefits]}
-        image={credibility.image}
+        eyebrow={advantage.eyebrow}
+        title={advantage.title}
+        description={advantage.description}
+        benefits={[...advantage.benefits]}
+        image={advantage.image}
       />
 
-      {/* 4. Our Approach — design CreativeProcessSection (MarketingProcessSection watermark steps) */}
-      <CreativeProcessSection
-        eyebrow={approach.eyebrow}
-        title={approach.title}
-        description={approach.description}
-        steps={[...approach.steps]}
+      {/* 5. Getting Started — MarketingUseCaseApproachSection (Home-19 ProcessV10 STEP pill cards) */}
+      <MarketingUseCaseApproachSection
+        eyebrow={gettingStarted.eyebrow}
+        titleBefore={gettingStarted.titleBefore}
+        titleAccent={gettingStarted.titleAccent}
+        description={gettingStarted.description}
+        steps={[...gettingStarted.steps]}
       />
 
-      {/* 5. Your Digital Footprint — CustomerServiceUseCaseExperienceSection (Home-02 ProcessV2) */}
-      <CustomerServiceUseCaseExperienceSection
-        eyebrow={digitalFootprint.eyebrow}
-        title={digitalFootprint.title}
-        description={digitalFootprint.description}
-        pillars={[...digitalFootprint.pillars]}
+      {/* 6. Server Technologies — vps VpsHostingTechnologySection (BusinessWebsitesTechnologies logo row) */}
+      <VpsHostingTechnologySection
+        eyebrow={technology.eyebrow}
+        headlineBefore={technology.headlineBefore}
+        headlineAccent={technology.headlineAccent}
+        description={technology.description}
+        tools={[...technology.tools]}
       />
-
-      {/* 6. Presence in Practice — design BrandIdentityWorkSection (MarketingPortfolioSection) */}
-      <BrandIdentityWorkSection {...presenceInPractice} />
 
       {/* 7. General CTA — WowGrowthCta */}
       <WowGrowthCta accentText={cta.accentText} mainText={cta.mainText} ariaLabel={cta.ariaLabel} />
