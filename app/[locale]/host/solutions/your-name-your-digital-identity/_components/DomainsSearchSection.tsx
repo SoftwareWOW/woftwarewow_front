@@ -59,10 +59,10 @@ export default function DomainsSearchSection({
               aria-label="Search domains"
               className="inline-flex size-12 shrink-0 items-center justify-center rounded-radius-sm bg-primary text-white transition-opacity hover:opacity-90"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden className="text-white">
                 <path
                   d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
-                  stroke="currentColor"
+                  stroke="white"
                   strokeWidth="1.75"
                   strokeLinecap="round"
                   strokeLinejoin="round"
