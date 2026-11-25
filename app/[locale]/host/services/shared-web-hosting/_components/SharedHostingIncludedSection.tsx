@@ -34,23 +34,37 @@ const gridRowClass =
 const threeColWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-15px)] xl:w-[395px]'
 
 const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: string }) => (
-  <RevealWrapper className={`reveal-me group relative min-h-[410px] w-full overflow-hidden ${widthClass}`}>
+  <RevealWrapper
+    className={`reveal-me group relative min-h-[min(410px,70vw)] w-full overflow-hidden sm:min-h-[360px] lg:min-h-[410px] ${widthClass}`}
+  >
     <div>
-      <div className="absolute h-full w-full flex-1 translate-y-0 px-[30px] py-10 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0">
-        <span className="inline-flex [&_path]:fill-secondary [&_path]:dark:fill-backgroundBody">{card.icon}</span>
-        <h5 className="mb-4 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] max-sm:text-2xl">{card.title}</h5>
-        {card.headline ? <p className="mb-2 text-lg font-normal leading-snug">{card.headline}</p> : null}
-        <p>{card.description}</p>
-      </div>
-      <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-[30px] py-12 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody">
-        <span className="inline-flex [&_path]:fill-backgroundBody [&_path]:dark:fill-secondary">{card.icon}</span>
-        <h5 className="mb-3 mt-9 text-4xl leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary max-sm:text-2xl">
+      <div className="absolute h-full w-full flex-1 translate-y-0 px-5 py-8 opacity-100 transition-all duration-700 group-hover:-translate-y-full group-hover:opacity-0 sm:px-[30px] sm:py-10">
+        <span className="inline-flex scale-90 sm:scale-100 [&_path]:fill-secondary [&_path]:dark:fill-backgroundBody">
+          {card.icon}
+        </span>
+        <h5 className="mb-3 mt-6 text-[clamp(1.35rem,2.8vw,2.25rem)] leading-[1.2] -tracking-[1.08px] sm:mb-4 sm:mt-9">
           {card.title}
         </h5>
         {card.headline ? (
-          <p className="mb-2 text-lg text-backgroundBody dark:text-secondary">{card.headline}</p>
+          <p className="mb-2 text-[clamp(0.95rem,1.5vw,1.125rem)] font-normal leading-snug">{card.headline}</p>
         ) : null}
-        <p className="text-backgroundBody dark:text-secondary">{card.description}</p>
+        <p className="text-[clamp(0.875rem,1.4vw,1.125rem)] leading-relaxed">{card.description}</p>
+      </div>
+      <div className="absolute z-10 h-full w-full flex-1 translate-y-full bg-secondary px-5 py-8 transition-all duration-700 group-hover:inset-0 group-hover:translate-y-0 dark:bg-backgroundBody sm:px-[30px] sm:py-12">
+        <span className="inline-flex scale-90 sm:scale-100 [&_path]:fill-backgroundBody [&_path]:dark:fill-secondary">
+          {card.icon}
+        </span>
+        <h5 className="mb-2 mt-6 text-[clamp(1.35rem,2.8vw,2.25rem)] leading-[1.2] -tracking-[1.08px] text-backgroundBody dark:text-secondary sm:mb-3 sm:mt-9">
+          {card.title}
+        </h5>
+        {card.headline ? (
+          <p className="mb-2 text-[clamp(0.95rem,1.5vw,1.125rem)] text-backgroundBody dark:text-secondary">
+            {card.headline}
+          </p>
+        ) : null}
+        <p className="text-[clamp(0.875rem,1.4vw,1.125rem)] leading-relaxed text-backgroundBody dark:text-secondary">
+          {card.description}
+        </p>
       </div>
     </div>
   </RevealWrapper>
@@ -82,18 +96,20 @@ export default function SharedHostingIncludedSection({
   return (
     <section id="whats-included" className="scroll-mt-24">
       <div className="container">
-        <div className="mb-16 text-center md:mb-24">
+        <div className="mb-10 text-center md:mb-16 lg:mb-24">
           <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mb-3 lg:leading-[1.21]">
+            <h2 className="text-appear mb-3 text-[clamp(1.75rem,4vw,4rem)] font-light leading-[1.2]">
               {titleBefore}
               <InstrumentText>{titleAccent}</InstrumentText>
             </h2>
           </TextAppearAnimation>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-[770px] text-[#808080]">{description}</p>
+            <p className="text-appear mx-auto max-w-[770px] text-[clamp(0.9375rem,1.5vw,1.25rem)] leading-relaxed text-[#808080]">
+              {description}
+            </p>
           </TextAppearAnimation>
         </div>
       </div>

@@ -5,7 +5,7 @@ import SectionLabel from '@/components/wow/shared/SectionLabel'
 import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
 const CheckIcon = () => (
-  <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary sm:size-6 dark:bg-backgroundBody">
+  <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-secondary sm:size-5 dark:bg-backgroundBody">
     <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none" aria-hidden>
       <path
         d="M2.5 6.5L4.5 8.5L9.5 3.5"
@@ -29,7 +29,7 @@ type SharedHostingAdvantageSectionProps = {
   items: ReadonlyArray<AdvantageItem>
 }
 
-/** Copy of accelerate BuiltForGrowth — image left + checklist with title + description. */
+/** Copy of accelerate BuiltForGrowth — image left + checklist; equal-height row on md+. */
 export default function SharedHostingAdvantageSection({
   eyebrow,
   title,
@@ -45,41 +45,45 @@ export default function SharedHostingAdvantageSection({
           <SectionLabel>{eyebrow}</SectionLabel>
         </RevealWrapper>
         <TextAppearAnimation>
-          <h2 className="text-appear mb-10 text-3xl leading-tight sm:text-[34px] md:text-[44px] lg:mb-16 lg:text-[54px] xl:text-[64px] xl:leading-[1.1]">
+          <h2 className="text-appear mb-6 text-[clamp(1.75rem,4vw,4rem)] font-light leading-[1.2] md:mb-8 lg:mb-12">
             {title}
             <InstrumentText>{accentTitle}</InstrumentText>
           </h2>
         </TextAppearAnimation>
 
-        <RevealWrapper className="flex flex-col gap-x-16 gap-y-12 lg:flex-row lg:items-start">
-          <figure className="relative min-h-[280px] overflow-hidden rounded-radius-sm lg:w-1/2 lg:min-h-[420px]">
-            <CmsResponsiveImage
-              image={image}
-              alt={image.alt}
-              fill
-              sizes={CMS_IMAGE_SIZES.halfGrid}
-              className="rounded-radius-sm object-cover"
-            />
-          </figure>
-          <div className="lg:w-1/2">
-            <p className="mb-8 text-base leading-[1.6] tracking-[0.32px] text-[#808080] md:text-lg">
+        {/* Plain grid (not reveal-me) so both columns share one row height */}
+        <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8 lg:gap-12">
+          <RevealWrapper className="reveal-me relative min-h-[220px] overflow-hidden rounded-radius-sm sm:min-h-[280px] md:min-h-0">
+            <div className="relative h-full min-h-[220px] w-full sm:min-h-[280px] md:absolute md:inset-0 md:min-h-0">
+              <CmsResponsiveImage
+                image={image}
+                alt={image.alt}
+                fill
+                sizes={CMS_IMAGE_SIZES.halfGrid}
+                className="rounded-radius-sm object-cover"
+              />
+            </div>
+          </RevealWrapper>
+
+          <RevealWrapper className="reveal-me flex flex-col justify-center">
+            <p className="mb-4 text-[clamp(0.875rem,1.35vw,1.125rem)] leading-[1.55] tracking-[0.32px] text-[#808080] md:mb-5 lg:mb-6">
               {description}
             </p>
-            <ul className="[&>*:not(:last-child)]:mb-5 md:[&>*:not(:last-child)]:mb-6">
+            <ul className="[&>*:not(:last-child)]:mb-3 md:[&>*:not(:last-child)]:mb-4">
               {items.map((item) => (
-                <li key={item.title} className="flex list-none items-start gap-4">
+                <li key={item.title} className="flex list-none items-start gap-3">
                   <CheckIcon />
                   <div>
-                    <h5 className="text-lg font-light leading-snug md:text-xl">{item.title}</h5>
-                    <p className="mt-1.5 text-base leading-[1.6] tracking-[0.32px] text-[#808080]">
+                    <h5 className="text-[clamp(0.95rem,1.6vw,1.2rem)] font-light leading-snug">{item.title}</h5>
+                    <p className="mt-0.5 text-[clamp(0.8125rem,1.25vw,1rem)] leading-[1.5] tracking-[0.32px] text-[#808080]">
                       {item.description}
                     </p>
                   </div>
                 </li>
               ))}
             </ul>
-          </div>
-        </RevealWrapper>
+          </RevealWrapper>
+        </div>
       </div>
     </section>
   )

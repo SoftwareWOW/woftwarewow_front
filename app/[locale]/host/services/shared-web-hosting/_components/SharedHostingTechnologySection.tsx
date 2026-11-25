@@ -38,17 +38,19 @@ export default function SharedHostingTechnologySection({
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
           <RevealWrapper className="reveal-me">
-            <h2 className="mx-auto mb-3 max-w-5xl">
+            <h2 className="mx-auto mb-3 max-w-5xl text-[clamp(1.75rem,4vw,4rem)] font-light leading-[1.2]">
               {headlineBefore}
               <InstrumentText>{headlineAccent}</InstrumentText>
             </h2>
           </RevealWrapper>
           <TextAppearAnimation>
-            <p className="text-appear mx-auto max-w-3xl text-base leading-relaxed text-[#808080]">{description}</p>
+            <p className="text-appear mx-auto max-w-3xl text-[clamp(0.9375rem,1.5vw,1.25rem)] leading-relaxed text-[#808080]">
+              {description}
+            </p>
           </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="reveal-me mx-auto grid w-full max-w-[900px] grid-cols-3 place-items-center gap-x-4 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
+        <RevealWrapper className="reveal-me mx-auto grid w-full max-w-[900px] grid-cols-3 place-items-center gap-x-3 gap-y-5 sm:grid-cols-6 sm:gap-x-6 sm:gap-y-6">
           {tools.map((tool) => (
             <figure key={tool.name} className="flex items-center justify-center">
               <Icon
@@ -56,7 +58,9 @@ export default function SharedHostingTechnologySection({
                 width={48}
                 height={48}
                 aria-label={tool.name}
-                className={cn('h-12 w-12 text-secondary dark:text-backgroundBody')}
+                className={cn(
+                  'h-8 w-8 text-secondary sm:h-10 sm:w-10 md:h-12 md:w-12 dark:text-backgroundBody',
+                )}
               />
             </figure>
           ))}
