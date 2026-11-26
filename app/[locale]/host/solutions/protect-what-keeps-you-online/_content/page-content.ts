@@ -154,7 +154,7 @@ export const CONTENT = {
       { name: "Let's Encrypt", icon: 'logos:letsencrypt' },
       { name: 'CloudLinux', icon: 'logos:cloudlinux' },
       { name: 'Certbot', icon: 'logos:certbot' },
-      { name: 'Cloudflare', icon: 'logos:cloudflare' },
+      { name: 'Cloudflare', icon: 'logos:cloudflare-icon' },
     ],
   },
   cta: {
