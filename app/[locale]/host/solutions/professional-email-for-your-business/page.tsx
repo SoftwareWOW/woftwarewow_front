@@ -1,4 +1,3 @@
-import IntelligentAutomationHero from '@/app/[locale]/intelligence/services/intelligent-automation/_components/IntelligentAutomationHero'
 import SharedHostingIncludedSection from '@/app/[locale]/host/services/shared-web-hosting/_components/SharedHostingIncludedSection'
 import VpsHostingChallengeSection from '@/app/[locale]/host/services/vps-hosting/_components/VpsHostingChallengeSection'
 import LandingPagesProcessSection from '@/app/[locale]/websites/services/landing-pages/_components/LandingPagesProcessSection'
@@ -7,6 +6,7 @@ import type { Locale } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import BusinessEmailAdvantageSection from './_components/BusinessEmailAdvantageSection'
+import ProfessionalEmailHero from './_components/ProfessionalEmailHero'
 import { CONTENT, PROFESSIONAL_EMAIL_PAGE_METADATA } from './_content/page-content'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -35,8 +35,8 @@ export default async function ProfessionalEmailForYourBusinessPage({ params }: P
 
   return (
     <div className="flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 2xl:gap-[200px]">
-      {/* 1. Hero — intelligence IntelligentAutomationHero (Home-19 HeroV19) */}
-      <IntelligentAutomationHero
+      {/* 1. Hero — copy of websites AccessibleWebHero (SalesRevenueHero / Home-25); padding for division navbar offset */}
+      <ProfessionalEmailHero
         badgeTitle={hero.badgeTitle}
         title={hero.title}
         italicTitle={hero.italicTitle}
@@ -45,7 +45,6 @@ export default async function ProfessionalEmailForYourBusinessPage({ params }: P
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
         headingId="professional-email-hero-heading"
-        breakBeforeItalic={false}
       />
 
       {/* 2. The Challenge — vps VpsHostingChallengeSection (MarketingUseCaseAdvantage numbered pillars) */}
