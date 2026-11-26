@@ -71,7 +71,7 @@ export default function OperationsUseCasePoweredSection({
               {steps.map((step, index) => (
                 <li key={step.id} className="flex max-w-max items-start gap-6 md:gap-8">
                   <div className="flex w-16 shrink-0 flex-col items-center self-stretch">
-                    <div className="relative z-10 flex shrink-0 items-center justify-center rounded-full bg-secondary px-3.5 py-5 text-lg font-bold text-white lg:px-6 lg:py-8">
+                    <div className="relative z-10 flex shrink-0 items-center justify-center rounded-full bg-secondary px-3.5 py-5 text-lg font-bold text-white dark:shadow-[inset_0_0_0_1px_#EDF0F51A] lg:px-6 lg:py-8">
                       <span className="inline-block text-xl font-semibold text-inherit">{step.id}</span>
                     </div>
                     {index < steps.length - 1 ? (
