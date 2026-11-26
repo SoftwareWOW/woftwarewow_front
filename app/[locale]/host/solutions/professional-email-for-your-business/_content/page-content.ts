@@ -96,10 +96,14 @@ export const CONTENT = {
     titleAccent: 'Connect.',
     description:
       'A business email address helps reinforce your brand and creates a more consistent experience whenever customers, partners, or colleagues contact you.',
-    groups: [
+    footerLine: 'Ready to put professional email to',
+    footerAccent: 'work together?',
+    footerCtaLabel: 'Set Up My Business Email',
+    footerCtaHref: '/meet',
+    items: [
       {
         title: 'Strengthen Branding',
-        subtitle: 'Reinforce your business identity through every professional email you send.',
+        description: 'Reinforce your business identity through every professional email you send.',
         image: {
           src: '/images/wow/Hero/devision/Education.jpg',
           alt: 'Team reviewing branded business communications',
@@ -107,7 +111,7 @@ export const CONTENT = {
       },
       {
         title: 'Stay Organized',
-        subtitle: 'Keep business conversations structured with clear mailboxes and folders.',
+        description: 'Keep business conversations structured with clear mailboxes and folders.',
         image: {
           src: '/images/wow/Hero/devision/Design 1.jpg',
           alt: 'Organized email and workspace tools',
@@ -115,7 +119,7 @@ export const CONTENT = {
       },
       {
         title: 'Support Your Team',
-        subtitle: 'Create role-based addresses for different departments and communication needs.',
+        description: 'Create role-based addresses for different departments and communication needs.',
         image: {
           src: '/images/wow/Hero/devision/DSCF0537.jpg',
           alt: 'Team collaborating with shared business email',
@@ -123,7 +127,7 @@ export const CONTENT = {
       },
       {
         title: 'Build Credibility',
-        subtitle: 'Communicate with a recognizable email address connected to your business.',
+        description: 'Communicate with a recognizable email address connected to your business.',
         image: {
           src: '/images/wow/Hero/devision/Intelligence.jpg',
           alt: 'Professional email building customer trust',

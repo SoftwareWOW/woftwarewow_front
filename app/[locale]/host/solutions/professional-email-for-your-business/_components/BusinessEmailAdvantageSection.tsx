@@ -1,17 +1,15 @@
-'use client'
-
 import RevealWrapper from '@/components/animation/RevealWrapper'
+import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
+import ButtonComponent, { ButtonComponentList } from '@/components/wow/shared/ButtonComponent'
 import InstrumentText from '@/components/wow/shared/InstrumentText'
 import SectionLabel from '@/components/wow/shared/SectionLabel'
-import gradientBg from '@/public/images/services-gradient-bg-2.png'
-import { ArrowDown } from 'lucide-react'
-import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link'
+import { CMS_IMAGE_SIZES, CmsResponsiveImage } from '@/lib/strapi/cms-section-props'
 
-type GrowthGroup = {
+type GrowthPiece = {
   title: string
-  subtitle: string
-  image: { src: string; alt: string }
+  description: string
+  image?: { src: string; alt?: string; width?: number; height?: number }
 }
 
 type BusinessEmailAdvantageSectionProps = {
@@ -19,136 +17,107 @@ type BusinessEmailAdvantageSectionProps = {
   titleBefore: string
   titleAccent: string
   description: string
-  groups: ReadonlyArray<GrowthGroup>
+  items: ReadonlyArray<GrowthPiece>
+  footerLine: string
+  footerAccent: string
+  footerCtaLabel: string
+  footerCtaHref: string
 }
 
-/** Copy of social BuiltForGrowthSection — accordion rows expand to reveal image. */
+/** Copy of ecommerce EcommerceWebsitesGrowthPiecesSection (Home-04 ServicesV5). */
 export default function BusinessEmailAdvantageSection({
   eyebrow,
   titleBefore,
   titleAccent,
   description,
-  groups,
+  items,
+  footerLine,
+  footerAccent,
+  footerCtaLabel,
+  footerCtaHref,
 }: BusinessEmailAdvantageSectionProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
-
-  const toggleAccordion = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index)
-  }
-
   return (
-    <section className="relative overflow-hidden bg-background px-3 transition-colors duration-300 dark:bg-background md:px-4">
-      <div className="absolute inset-0 opacity-0 dark:opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px)',
-            backgroundSize: '22px 22px',
-          }}
-        />
-      </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, #ffffff 0%, rgba(0,0,0,0.05)) 100%)',
-        }}
-      />
-
-      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] opacity-60 dark:opacity-40 sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
-        <Image src={gradientBg} alt="" aria-hidden />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[1320px]">
-        <div className="mb-10 text-center md:mb-16">
-          <RevealWrapper className="mb-4 flex justify-center">
+    <section>
+      <div className="container">
+        <div className="mb-10 text-center md:mb-20">
+          <RevealWrapper className="reveal-me mb-3 flex justify-center">
             <SectionLabel>{eyebrow}</SectionLabel>
           </RevealWrapper>
-          <RevealWrapper>
-            <h2 className="text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2]">
+          <TextAppearAnimation>
+            <h2 className="text-appear">
               {titleBefore}
               <InstrumentText>{titleAccent}</InstrumentText>
             </h2>
-          </RevealWrapper>
-          <RevealWrapper className="mt-4">
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#808080]">{description}</p>
-          </RevealWrapper>
+          </TextAppearAnimation>
+          <TextAppearAnimation>
+            <p className="text-appear mx-auto mt-3 max-w-2xl text-[#808080]">{description}</p>
+          </TextAppearAnimation>
         </div>
 
-        <RevealWrapper className="w-full [&>*:not(:last-child)]:mb-6">
-          {groups.map((group, index) => {
-            const isActive = activeIndex === index
-
-            return (
+        <RevealWrapper className="mx-auto w-full max-w-[1170px]">
+          {items.map((piece, index) => (
+            <Link href={footerCtaHref} key={piece.title} className="block">
               <div
-                key={group.title}
-                className={`accordion-item relative w-full rounded-radius-sm border bg-backgroundBody px-5 py-0 duration-300 dark:bg-dark ${
-                  isActive
-                    ? 'open active border-black dark:border-white/10'
-                    : 'border-black/10 dark:border-white/10'
+                className={`group relative overflow-hidden border-x border-t bg-backgroundBody dark:border-dark dark:bg-dark ${
+                  index === items.length - 1 ? 'border-b' : ''
                 }`}
-                data-active={isActive ? true : false}
               >
-                <div
-                  className={`accordion-header group relative flex cursor-pointer items-start justify-between gap-4 py-[35px] ${
-                    isActive ? 'active' : ''
-                  }`}
-                  onClick={() => toggleAccordion(index)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      toggleAccordion(index)
-                    }
-                  }}
-                  aria-expanded={isActive}
-                >
-                  <h3 className="flex min-w-0 flex-1 flex-col gap-y-3 font-outfit text-[25px] font-medium leading-[25.2px] text-[#0D0D0D] transition-colors duration-300 dark:text-[#F2F2F2] md:flex-row md:items-center md:leading-[1.2] lg:text-3xl">
-                    <span className="block shrink-0 md:max-w-[45%]">{group.title}</span>
-                    <span className="block w-full text-base font-normal text-[#808080] transition-colors duration-300 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
-                      {group.subtitle}
-                    </span>
+                <div className="group relative z-10 flex cursor-pointer items-center justify-between px-5 py-10 md:px-10 md:py-[60px]">
+                  <h3 className="relative z-10 flex flex-col gap-x-32 gap-y-3 text-[25px] font-normal leading-[25.2px] md:flex-row md:items-center md:text-4xl md:leading-[1.2] lg:text-[42px] xl:text-5xl">
+                    <span className="font-medium">{piece.title}</span>
+                    <p className="mt-2 max-w-lg pr-[2px] text-base text-[#808080] md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                      {piece.description}
+                    </p>
                   </h3>
-                  <div
-                    className={`flex size-[60px] shrink-0 items-center justify-center rounded-radius-sm bg-primary transition-colors duration-300 group-hover:bg-primary/50 dark:group-hover:bg-[#1F1F1F] md:size-[65px] lg:size-[79px] ${
-                      isActive ? 'bg-primary/50 dark:bg-[#1F1F1F]' : ''
-                    }`}
-                  >
-                    <ArrowDown
-                      aria-hidden
-                      className={`size-10 !stroke-white !text-white transition-transform duration-300 ease-out ${
-                        isActive ? 'rotate-180' : ''
-                      }`}
-                      strokeWidth={2}
-                    />
+
+                  <div className="shrink-0 rounded-radius-sm transform transition-transform duration-500 ease-in-out group-hover:rotate-90">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden>
+                      <path
+                        d="M5 16H27"
+                        className="stroke-black dark:stroke-white"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M18 7L27 16L18 25"
+                        className="stroke-black dark:stroke-white"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </div>
                 </div>
-                <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                  }`}
-                >
+
+                {piece.image?.src ? (
                   <div className="overflow-hidden">
-                    <div className="accordion-body pb-10 duration-300">
-                      <div className="relative aspect-[16/7] w-full overflow-hidden rounded-radius-sm">
-                        <Image
-                          src={group.image.src}
-                          alt={group.image.alt}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 1320px) 100vw, 1320px"
-                        />
-                      </div>
-                    </div>
+                    <figure className="h-0 -translate-y-4 transform opacity-0 transition-all duration-700 ease-in-out group-hover:h-[110px] group-hover:translate-y-0 group-hover:opacity-100 md:group-hover:h-[160px] lg:group-hover:h-[230px]">
+                      <CmsResponsiveImage
+                        image={piece.image}
+                        alt={piece.image.alt ?? piece.title}
+                        sizes={CMS_IMAGE_SIZES.wideSection}
+                        width={piece.image.width ?? 1170}
+                        height={piece.image.height ?? 230}
+                        className="rounded-radius-sm object-cover px-5 pb-5 pt-4 transition-all duration-700 ease-in-out md:px-10 md:pb-10"
+                      />
+                    </figure>
                   </div>
-                </div>
+                ) : null}
               </div>
-            )
-          })}
+            </Link>
+          ))}
+        </RevealWrapper>
+
+        <RevealWrapper className="mt-14 flex flex-col items-center justify-between gap-6 md:flex-row">
+          <p className="font-instrument text-2xl italic md:text-[32px]">
+            {footerLine} <InstrumentText>{footerAccent}</InstrumentText>
+          </p>
+          <ButtonComponentList>
+            <ButtonComponent href={footerCtaHref} variant="primary">
+              {footerCtaLabel}
+            </ButtonComponent>
+          </ButtonComponentList>
         </RevealWrapper>
       </div>
     </section>

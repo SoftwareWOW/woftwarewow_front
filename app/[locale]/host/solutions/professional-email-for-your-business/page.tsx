@@ -66,13 +66,17 @@ export default async function ProfessionalEmailForYourBusinessPage({ params }: P
         capabilityCards={[...whatWeProvide.capabilityCards]}
       />
 
-      {/* 4. Advantage — copy of social BuiltForGrowthSection (SolutionToChallenges accordion + image) */}
+      {/* 4. Advantage — ecommerce EcommerceWebsitesGrowthPiecesSection (Home-04 ServicesV5) */}
       <BusinessEmailAdvantageSection
         eyebrow={advantage.eyebrow}
         titleBefore={advantage.titleBefore}
         titleAccent={advantage.titleAccent}
         description={advantage.description}
-        groups={[...advantage.groups]}
+        items={[...advantage.items]}
+        footerLine={advantage.footerLine}
+        footerAccent={advantage.footerAccent}
+        footerCtaLabel={advantage.footerCtaLabel}
+        footerCtaHref={advantage.footerCtaHref}
       />
 
       {/* 5. Getting Started — websites LandingPagesProcessSection (analytics ModernizationPath 4-step timeline) */}
