@@ -65,6 +65,7 @@ export default async function CorporateExperiencesPage({ params }: Props) {
         description={whatWeCreate.description}
         capabilityCards={[...whatWeCreate.capabilityCards]}
         sectionId={whatWeCreate.sectionId}
+        containedGrid
       />
 
       {/* 4. The People Advantage — intelligence BiPredictiveDecisionsSection (list left + media right) */}

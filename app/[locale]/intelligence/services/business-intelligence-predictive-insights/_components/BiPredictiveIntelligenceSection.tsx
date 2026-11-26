@@ -35,8 +35,10 @@ const ICON_POOL: ReactNode[] = [
 const gridRowClass =
   'flex flex-wrap justify-center px-5 max-xl:justify-center max-lg:gap-5 xl:px-5 max-xl:[&>*:first-child]:border-r dark:max-xl:[&>*:first-child]:border-dark [&>*:last-child]:border-x dark:[&>*:last-child]:border-x-dark [&>*:not(:last-child)]:border-l dark:[&>*:not(:last-child)]:border-l-dark max-xl:[&>*:nth-child(2)]:border-r dark:max-xl:[&>*:nth-child(2)]:border-dark max-xl:[&>*:nth-child(3)]:border-r dark:max-xl:[&>*:nth-child(3)]:border-dark [&>*]:border-y dark:[&>*]:border-y-dark'
 
-const twoColWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]'
-const threeColWidth = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-15px)] xl:w-[395px]'
+const twoColWidthWide = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)] xl:w-[595px]'
+const threeColWidthWide = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-15px)] xl:w-[395px]'
+const twoColWidthContained = 'md:w-[calc(50%-10px)] lg:w-[calc(50%-15px)]'
+const threeColWidthContained = 'md:w-[calc(50%-10px)] lg:w-[calc(33.333%-15px)]'
 
 const FlipCard = ({ card, widthClass }: { card: CapabilityCard; widthClass: string }) => (
   <RevealWrapper className={`reveal-me group relative min-h-[410px] w-full overflow-hidden ${widthClass}`}>
@@ -71,6 +73,8 @@ type BiPredictiveIntelligenceSectionProps = {
   description: string
   capabilityCards: ReadonlyArray<IntelligenceCapabilityCard>
   sectionId?: string
+  /** Align flip-card grid with `.container` width (mixed hero/content pages). */
+  containedGrid?: boolean
 }
 
 /** Layout copy: intelligent-automation Challenge (social/PaidSocialWhatWeManageSection) — 3+2 flip cards. */
@@ -81,6 +85,7 @@ export default function BiPredictiveIntelligenceSection({
   description,
   capabilityCards,
   sectionId,
+  containedGrid = false,
 }: BiPredictiveIntelligenceSectionProps) {
   const cards: CapabilityCard[] = capabilityCards.map((card, index) => ({
     ...card,
@@ -88,6 +93,25 @@ export default function BiPredictiveIntelligenceSection({
   }))
   const topRow = cards.slice(0, 3)
   const bottomRow = cards.slice(3, 5)
+  const threeColWidth = containedGrid ? threeColWidthContained : threeColWidthWide
+  const twoColWidth = containedGrid ? twoColWidthContained : twoColWidthWide
+  const gridClass = containedGrid ? `${gridRowClass} px-0 xl:px-0` : gridRowClass
+
+  const grids = (
+    <>
+      <div className={gridClass}>
+        {topRow.map((card) => (
+          <FlipCard key={card.title} card={card} widthClass={threeColWidth} />
+        ))}
+      </div>
+
+      <div className={`${gridClass} lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}>
+        {bottomRow.map((card) => (
+          <FlipCard key={card.title} card={card} widthClass={twoColWidth} />
+        ))}
+      </div>
+    </>
+  )
 
   return (
     <section id={sectionId} className="scroll-mt-24">
@@ -108,17 +132,7 @@ export default function BiPredictiveIntelligenceSection({
         </div>
       </div>
 
-      <div className={gridRowClass}>
-        {topRow.map((card) => (
-          <FlipCard key={card.title} card={card} widthClass={threeColWidth} />
-        ))}
-      </div>
-
-      <div className={`${gridRowClass} lg:[&>*]:border-b lg:dark:[&>*]:border-b-dark`}>
-        {bottomRow.map((card) => (
-          <FlipCard key={card.title} card={card} widthClass={twoColWidth} />
-        ))}
-      </div>
+      {containedGrid ? <div className="container">{grids}</div> : grids}
     </section>
   )
 }
