@@ -254,7 +254,7 @@ export const wowHostNavigation = {
       id: 'support',
       label: 'Support',
       navKind: 'link' as const,
-      href: '/host#support',
+      href: '/contact',
       desktop: {
         paddingX: 70,
         paddingY: 40,

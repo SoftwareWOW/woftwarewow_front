@@ -450,7 +450,7 @@ export const divisionSiteConfigs: Record<DivisionId, DivisionSiteConfig> = {
       { id: 'hosting', label: 'Hosting', href: '/host#services' },
       { id: 'domains', label: 'Domains', href: '/for-you/hosting-and-infrastructure' },
       { id: 'solutions', label: 'Solutions', href: '/host#solutions' },
-      { id: 'support', label: 'Support', href: '/host#support' },
+      { id: 'support', label: 'Support', href: '/contact' },
     ],
     [
       {
